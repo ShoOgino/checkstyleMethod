@@ -21,7 +21,7 @@
         if ((after < line.length())
             && !Character.isWhitespace(line.charAt(after))
             && !((aAST.getType() == LITERAL_return)
-                 && (aAST.getFirstChild() == null)))
+                 && (aAST.getFirstChild().getType() == TokenTypes.SEMI)))
         {
             log(aAST.getLineNo(), aAST.getColumnNo() + aAST.getText().length(),
                     "ws.notFollowed", new Object[]{aAST.getText()});
