@@ -1,0 +1,12 @@
+    public void testDefaultForIterator()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ParenPadCheck.class);
+        final String[] expected = {
+            "17:34: ')' is preceeded with whitespace.",
+            "20:35: ')' is preceeded with whitespace.",
+        };
+        verify(checkConfig, getPath("InputForWhitespace.java"), expected);
+    }
+

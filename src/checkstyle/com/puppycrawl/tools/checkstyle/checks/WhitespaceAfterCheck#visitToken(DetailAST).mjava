@@ -26,6 +26,17 @@
                 return;
             }
             if (!Character.isWhitespace(charAfter)) {
+                //empty FOR_ITERATOR?
+                if (targetAST.getType() == TokenTypes.SEMI) {
+                    final DetailAST sibling =
+                        (DetailAST) targetAST.getNextSibling();
+                    if ((sibling != null)
+                        && (sibling.getType() == TokenTypes.FOR_ITERATOR)
+                        && (sibling.getChildCount() == 0))
+                    {
+                        return;
+                    }
+                }   
                 log(targetAST.getLineNo(),
                     targetAST.getColumnNo() + targetAST.getText().length(),
                     "ws.notFollowed",

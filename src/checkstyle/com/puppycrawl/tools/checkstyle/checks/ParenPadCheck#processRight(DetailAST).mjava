@@ -7,7 +7,31 @@
         final String line = getLines()[aAST.getLineNo() - 1];
         final int before = aAST.getColumnNo() - 1;
         if (before >= 0) {
-            if ((PadOption.NOSPACE == getAbstractOption())
+            boolean followsEmptyForIterator = false;
+            final DetailAST parent = aAST.getParent();
+            if ((parent != null) 
+                && (parent.getType() == TokenTypes.LITERAL_FOR))
+            {
+                final DetailAST forIterator =
+                    parent.findFirstToken(TokenTypes.FOR_ITERATOR);
+                followsEmptyForIterator = (forIterator.getChildCount() == 0)
+                    && (aAST == forIterator.getNextSibling());
+            }
+            if (followsEmptyForIterator) {
+                return;
+//                if (mPadEmptyForIterator
+//                    && !Character.isWhitespace(line.charAt(before)))
+//                {
+//                    log(aAST.getLineNo(), aAST.getColumnNo(),
+//                        "ws.notPreceeded", ")");
+//                }
+//                else if (!mPadEmptyForIterator
+//                    && Character.isWhitespace(line.charAt(before)))
+//                {
+//                    log(aAST.getLineNo(), before, "ws.preceeded", ")");
+//                }  
+            }
+            else if ((PadOption.NOSPACE == getAbstractOption())
                 && Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line))
             {
