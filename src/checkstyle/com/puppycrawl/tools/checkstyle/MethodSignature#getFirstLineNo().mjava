@@ -1,8 +1,14 @@
     /** @return the first line of the method signature **/
     int getFirstLineNo()
     {
-        return (mModSet.size() > 0)
-            ? mModSet.getFirstLineNo()
-            : mName.getLineNo();
+        if (mModSet.size() > 0) {
+            return mModSet.getFirstLineNo();
+        }
+        else if (mReturnType != null) {
+            return mReturnType.getLineNo();
+        }
+        else {
+            return mName.getLineNo();
+        }
     }
 

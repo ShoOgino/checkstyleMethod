@@ -42,7 +42,9 @@
 
         final String[] jd = getJavadocBefore(aSig.getFirstLineNo() - 1);
         if (jd == null) {
-            log(aSig.getFirstLineNo(), "method is missing a Javadoc comment.");
+            log(aSig.getFirstLineNo(),
+                aSig.getFirstColNo(),
+                "method is missing a Javadoc comment.");
         }
         else {
             final List tags = getMethodTags(jd, aSig.getFirstLineNo() - 1);
