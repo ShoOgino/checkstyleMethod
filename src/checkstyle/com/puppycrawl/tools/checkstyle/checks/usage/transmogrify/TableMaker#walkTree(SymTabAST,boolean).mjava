@@ -46,6 +46,9 @@
 
       case TokenTypes.LITERAL_NEW:
         SymTabAST symtabTree = (SymTabAST)tree;
+        //walk parameters, in case of anonymous inner class
+        walkTree(symtabTree.findFirstToken(TokenTypes.ELIST),
+          makeAnonymousScopes);
         SymTabAST objblock
           = symtabTree.findFirstToken(TokenTypes.OBJBLOCK);
         if (objblock != null) {
