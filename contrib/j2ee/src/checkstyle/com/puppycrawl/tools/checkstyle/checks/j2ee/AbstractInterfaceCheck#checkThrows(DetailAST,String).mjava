@@ -1,27 +1,23 @@
     /**
-     *
-     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.AbstractInterfaceCheck
+     * Checks that every method of an AST has a throws clause for a given
+     * Exception.
+     * @param aAST the AST to check.
+     * @param aException the name of the Exception class.
      */
-    protected void checkMethods(DetailAST aAST)
+    protected void checkThrows(DetailAST aAST, String aException)
     {
-        super.checkMethods(aAST);
-
-        // a home interface must have a findByPrimaryKey method
-        checkFindByPrimaryKey(aAST);
-             
-        // every method must not throw java.rmi.RemoteException
         final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
         if (objBlock != null) {
             DetailAST child = (DetailAST) objBlock.getFirstChild();
             while (child != null) {
                 if (child.getType() == TokenTypes.METHOD_DEF) {
-                    if (Utils.hasThrows(child, "java.rmi.RemoteException")) {
+                    if (!Utils.hasThrows(child, aException)) {
                         final DetailAST nameAST =
                             child.findFirstToken(TokenTypes.IDENT);
                         final String name = nameAST.getText();
                         log(nameAST.getLineNo(), nameAST.getColumnNo(),
-                            "illegalthrows.bean",
-                             new Object[] {name, "java.rmi.RemoteException"});
+                            "missingthrows.bean",
+                             new Object[] {name, aException});
                     }
                 }
                 child = (DetailAST) child.getNextSibling();

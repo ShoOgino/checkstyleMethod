@@ -1,0 +1,18 @@
+    /**
+     * Checks that an AST contains the definition of a findByPrimaryKey
+     * method.
+     * @param aAST the AST to check.
+     */
+    protected void checkFindByPrimaryKey(DetailAST aAST)
+    {
+        if (!Utils.hasPublicMethod(aAST, "findByPrimaryKey", false, 1))
+        {
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            log(
+                aAST.getLineNo(),
+                nameAST.getColumnNo(),
+                "missingmethod.bean",
+                new Object[] {"Home interface", "findByPrimaryKey"});
+        }
+    }
+
