@@ -1,0 +1,15 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        if (mustCheckName(aAST)) {
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            if (!getRegexp().match(nameAST.getText())) {
+                log(nameAST.getLineNo(),
+                    nameAST.getColumnNo(),
+                    "name.invalidPattern",
+                    nameAST.getText(),
+                    getFormat());
+            }
+        }
+    }
+

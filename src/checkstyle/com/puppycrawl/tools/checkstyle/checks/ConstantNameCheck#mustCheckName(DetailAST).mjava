@@ -1,0 +1,24 @@
+    /** @see com.puppycrawl.tools.checkstyle.checks.AbstractNameCheck */
+    protected final boolean mustCheckName(DetailAST aAST)
+    {
+        boolean retVal = false;
+
+        DetailAST modifiersAST = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final boolean isStatic = modifiersAST != null
+            && modifiersAST.branchContains(TokenTypes.LITERAL_STATIC);
+        final boolean isFinal = modifiersAST != null
+            && modifiersAST.branchContains(TokenTypes.FINAL);
+
+        if ((isStatic  && isFinal) || ScopeUtils.inInterfaceBlock(aAST)) {
+            // Handle the serialVersionUID constant which is used for
+            // Serialization. Cannot enforce rules on it. :-)
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            if ((nameAST != null)
+                    && !("serialVersionUID".equals(nameAST.getText()))) {
+                retVal = true;
+            }
+        }
+
+        return retVal;
+    }
+
