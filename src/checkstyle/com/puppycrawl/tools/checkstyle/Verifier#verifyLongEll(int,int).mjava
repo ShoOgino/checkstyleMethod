@@ -1,0 +1,14 @@
+    /**
+     * Verify that the 'L' on a long is uppercase. E.g. 40L, not 40l.
+     * @param aLineNo number of line to check
+     * @param aColNo column where the 'ell' is
+     */
+    void verifyLongEll(int aLineNo, int aColNo)
+    {
+        if (!mConfig.isIgnoreLongEll()
+            && (mLines[aLineNo - 1].charAt(aColNo) == 'l'))
+        {
+            log(aLineNo, aColNo, "Should use uppercase 'L'.");
+        }
+    }
+

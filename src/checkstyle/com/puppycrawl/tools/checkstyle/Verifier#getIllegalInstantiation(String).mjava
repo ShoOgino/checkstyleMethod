@@ -16,10 +16,9 @@
         final Iterator illIter = illegalInsts.iterator();
         while (illIter.hasNext()) {
             final String illegal = (String) illIter.next();
-            final String illegalBase = basename(illegal);
 
             // class from java.lang
-            if (illegal.length() - javaLang.length() == aClassName.length()
+            if (((illegal.length() - javaLang.length()) == aClassName.length())
                 && illegal.endsWith(aClassName)
                 && illegal.startsWith(javaLang))
             {
