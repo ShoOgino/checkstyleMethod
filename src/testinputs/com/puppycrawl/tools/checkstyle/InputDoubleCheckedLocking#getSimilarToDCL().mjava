@@ -1,0 +1,34 @@
+    private static Integer getSimilarToDCL()
+    {
+        // different tests
+        if (one == null)
+        {
+            synchronized (InputDoubleCheckedLocking.class)
+            {
+                if (one == "one")
+                {
+                    one = new Integer(1);
+                }
+            }
+        }
+
+        // no synchronization
+        if (one == null)
+        {
+            if (one == null)
+            {
+                one = new Integer(1);
+            }
+        }
+
+        // no outer test
+        synchronized (InputDoubleCheckedLocking.class)
+        {
+            if (one == null)
+            {
+                one = new Integer(1);
+            }
+        }
+        return one;
+    }
+
