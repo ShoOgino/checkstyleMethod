@@ -1,23 +1,23 @@
-	/**
-	 * Reports aAST as a magic number, includes unary operators as needed.  
-	 * @param aAST the AST node that contains the number to report
-	 */
-	private void reportMagicNumber(DetailAST aAST) 
-	{
-		String text = aAST.getText();
-		final DetailAST parent = aAST.getParent();
-		DetailAST reportAST = aAST;
-		if (parent.getType() == TokenTypes.UNARY_MINUS) {
-		    reportAST = parent;
-		    text = "-" + text;
-		}
-		else if (parent.getType() == TokenTypes.UNARY_PLUS) {
-		    reportAST = parent;
-		    text = "+" + text;
-		}
-		log(reportAST.getLineNo(),
-		    reportAST.getColumnNo(),
-		    "magic.number",
-		    text);
-	}
+    /**
+     * Reports aAST as a magic number, includes unary operators as needed.
+     * @param aAST the AST node that contains the number to report
+     */
+    private void reportMagicNumber(DetailAST aAST)
+    {
+        String text = aAST.getText();
+        final DetailAST parent = aAST.getParent();
+        DetailAST reportAST = aAST;
+        if (parent.getType() == TokenTypes.UNARY_MINUS) {
+            reportAST = parent;
+            text = "-" + text;
+        }
+        else if (parent.getType() == TokenTypes.UNARY_PLUS) {
+            reportAST = parent;
+            text = "+" + text;
+        }
+        log(reportAST.getLineNo(),
+                reportAST.getColumnNo(),
+                "magic.number",
+                text);
+    }
 
