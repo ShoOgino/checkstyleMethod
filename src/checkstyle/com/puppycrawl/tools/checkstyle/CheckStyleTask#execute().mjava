@@ -32,17 +32,26 @@
         try {
             c = createChecker();
 
+            SeverityLevelCounter warningCounter =
+                    new SeverityLevelCounter(SeverityLevel.WARNING);
+            c.addListener(warningCounter);
+
             // Process the files
             final File[] files = scanFileSets();
             final int numErrs = c.process(files);
+            final int numWarnings = warningCounter.getCount();
+            final boolean ok = numErrs <= mMaxErrors
+                    && numWarnings <= mMaxWarnings;
 
             // Handle the return status
-            if ((numErrs > 0) && mFailureProperty != null) {
+            if (!ok && mFailureProperty != null) {
                 getProject().setProperty(mFailureProperty, "true");
             }
 
-            if ((numErrs > 0) && mFailOnViolation) {
-                throw new BuildException("Got " + numErrs + " errors.",
+            if (!ok && mFailOnViolation) {
+                throw new BuildException(
+                        "Got " + numErrs + " errors and "
+                        + numWarnings + " warnings.",
                                          getLocation());
             }
         }
