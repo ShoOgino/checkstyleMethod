@@ -19,7 +19,15 @@
             }
             else if (groupIdx == mLastGroup) {
                 if (mOrdered) {
-                    if (mLastImport.compareTo(name) >= 0) {
+                    boolean shouldFireError = false;
+                    if (mCaseSensitive) {
+                        shouldFireError = (mLastImport.compareTo(name) >= 0);
+                    }
+                    else {
+                        shouldFireError =
+                            (mLastImport.compareToIgnoreCase(name) >= 0);
+                    }
+                    if (shouldFireError) {
                         log(line, "import.ordering", name);
                     }
                 }
