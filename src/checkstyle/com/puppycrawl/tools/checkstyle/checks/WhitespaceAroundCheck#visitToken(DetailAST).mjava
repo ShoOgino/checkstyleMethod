@@ -5,15 +5,16 @@
         final int before = aAST.getColumnNo() - 1;
         final int after = aAST.getColumnNo() + aAST.getText().length();
 
-        // TODO: i18n
         if ((before >= 0) && !Character.isWhitespace(line.charAt(before))) {
-            log(aAST.getLineNo(), "NO LEADING SPACE for " + aAST.getText());
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                    "ws.notPreceeded", new Object[]{aAST.getText()});
         }
 
         if ((after < line.length())
             && !Character.isWhitespace(line.charAt(after)))
         {
-            log(aAST.getLineNo(), "NO TRAILING SPACE for " + aAST.getText());
+            log(aAST.getLineNo(), aAST.getColumnNo() + aAST.getText().length(),
+                    "ws.notFollowed", new Object[]{aAST.getText()});
         }
     }
 

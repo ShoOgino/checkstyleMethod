@@ -1,14 +1,17 @@
-    private static DetailAST getAST(String aFilename, String[] aLines)
+    protected static DetailAST getAST(String aFilename, String[] aLines)
         throws Exception
     {
+        // TODO: try with JavaLexer/JavaRecognizer if Java14 fails
+        // see c.p.t.c.Checker's respone to initial RecognitionException
+
         final Reader r = new BufferedReader(new FileReader(aFilename));
         // Create a scanner that reads from the input stream passed to us
-        JavaLexer lexer = new JavaLexer(r);
+        Java14Lexer lexer = new Java14Lexer(r);
         lexer.setFilename(aFilename);
         lexer.setCommentManager(new CommentManager(aLines));
 
         // Create a parser that reads from the scanner
-        JavaRecognizer parser = new JavaRecognizer(lexer);
+        Java14Recognizer parser = new Java14Recognizer(lexer);
         parser.setFilename(aFilename);
         parser.setASTNodeClass(DetailAST.class.getName());
 

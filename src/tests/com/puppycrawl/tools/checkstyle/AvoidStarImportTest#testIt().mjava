@@ -12,17 +12,8 @@
         final String[] lines = getLines(fname);
         walker.walk(getAST(fname, lines), lines, fname);
         assertEquals(msgs.getMessages().length, 3);
-        assertEquals(msgs.getMessages()[0].getLineNo(), 7);
-        assertEquals(msgs.getMessages()[1].getLineNo(), 9);
-        assertEquals(msgs.getMessages()[2].getLineNo(), 10);
-        assertEquals(
-          "Avoid using the '.*' form of import.",
-          msgs.getMessages()[0].getMessage());
-        assertEquals(
-          "Avoid using the '.*' form of import.",
-          msgs.getMessages()[1].getMessage());
-        assertEquals(
-          "Avoid using the '.*' form of import.",
-          msgs.getMessages()[2].getMessage());
+        verifyMessage(msgs, 0, 7, 1, "Avoid using the '.*' form of import.");
+        verifyMessage(msgs, 1, 9, 1, "Avoid using the '.*' form of import.");
+        verifyMessage(msgs, 2, 10, 1, "Avoid using the '.*' form of import.");
     }
 

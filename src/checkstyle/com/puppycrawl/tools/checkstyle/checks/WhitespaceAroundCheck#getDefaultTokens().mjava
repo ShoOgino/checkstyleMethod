@@ -1,6 +1,50 @@
     public int[] getDefaultTokens()
     {
-        // TODO: add all operators
-        return new int[] {JavaTokenTypes.ASSIGN};
+        return new int[] {
+            QUESTION,          // '?'
+            // COLON,             // ':' TODO: dont flag after "case"
+            ASSIGN,            // '='
+            EQUAL,             // "=="
+            NOT_EQUAL,         // "!="
+            DIV,               // '/'
+            DIV_ASSIGN,        // "/="
+            // PLUS,              //' +' TODO: unaray plus
+            PLUS_ASSIGN,       // "+="
+            // MINUS,             // '-' TODO: unary minus
+            MINUS_ASSIGN,      //"-="
+            STAR,              // '*'
+            STAR_ASSIGN,       // "*="
+            MOD,               // '%'
+            MOD_ASSIGN,        // "%="
+            SR,                // ">>"
+            SR_ASSIGN,         // ">>="
+            BSR,               // ">>>"
+            BSR_ASSIGN,        // ">>>="
+            GE,                // ">="
+            GT,                // ">"
+            SL,                // "<<"
+            SL_ASSIGN,         // "<<="
+            LE,                // "<="
+            LT,                // '<'
+            BXOR,              // '^'
+            BXOR_ASSIGN,       // "^="
+            BOR,               // '|'
+            BOR_ASSIGN,        // "|="
+            LOR,               // "||"
+            BAND,              // '&'
+            BAND_ASSIGN,       // "&="
+            LAND,              // "&&"
+            LITERAL_if,
+            LITERAL_else,
+            LITERAL_for,
+            LITERAL_do,
+            // LITERAL_return,    // TODO: "return;" is OK, return(2) is not
+            LITERAL_try,
+            LITERAL_catch,
+            LITERAL_finally,
+            LITERAL_synchronized,
+            ASSERT                // TODO: why is it not LITERAL_assert?
+                                  // maybe it's a bug in the grammar?
+        };
     }
 
