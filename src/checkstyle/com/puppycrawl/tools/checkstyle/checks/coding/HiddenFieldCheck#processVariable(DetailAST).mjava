@@ -18,9 +18,11 @@
                     final HashSet aFieldsSet = (HashSet) it.next();
                     if (aFieldsSet.contains(name)) {
                         if ((mRegexp == null) || (!getRegexp().match(name))) {
-                            log(nameAST.getLineNo(), nameAST.getColumnNo(),
-                                "hidden.field", name);
-                            break;
+                            if (!isIgnoredSetterParam(aAST, name)) {
+                                log(nameAST.getLineNo(), nameAST.getColumnNo(),
+                                    "hidden.field", name);
+                                break;
+                            }
                         }
                     }
                 }

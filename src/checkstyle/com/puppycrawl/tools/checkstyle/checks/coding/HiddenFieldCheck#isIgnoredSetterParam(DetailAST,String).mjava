@@ -1,0 +1,42 @@
+    /**
+     * Decides whether to ignore an AST node that is the parameter of a
+     * setter method, where the property setter method for field 'xyz' has
+     * name 'setXyz', one parameter named 'xyz', and return type void.
+     * @param aAST the AST to check.
+     * @param aName the name of aAST.
+     * @return true if aAST should be ignored because check property
+     * ignoreSetter is true and aAST is the parameter of a setter method.
+     */
+    private boolean isIgnoredSetterParam(DetailAST aAST, String aName)
+    {
+        if (!(aAST.getType() == TokenTypes.PARAMETER_DEF)
+            || !mIgnoreSetter)
+        {
+            return false;
+        }
+        //single parameter?
+        final DetailAST parametersAST = aAST.getParent();
+        if (parametersAST.getChildCount() != 1)
+        {
+            return false;
+        }
+        //method parameter, not constructor parameter?
+        final DetailAST methodAST = parametersAST.getParent();
+        if (methodAST.getType() != TokenTypes.METHOD_DEF) {
+            return false;
+        }
+        //property setter name?
+        final String expectedName =
+            "set" + aName.substring(0, 1).toUpperCase() + aName.substring(1);
+        final DetailAST methodNameAST
+            = methodAST.findFirstToken(TokenTypes.IDENT);
+        final String methodName = methodNameAST.getText();
+        if (!methodName.equals(expectedName)) {
+            return false;
+        }
+        //void?
+        final DetailAST typeAST
+            = methodAST.findFirstToken(TokenTypes.TYPE);
+        return typeAST.branchContains(TokenTypes.LITERAL_VOID);
+    }
+
