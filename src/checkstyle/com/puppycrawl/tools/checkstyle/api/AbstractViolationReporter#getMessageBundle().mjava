@@ -17,8 +17,6 @@
     protected String getMessageBundle()
     {
         final String className = this.getClass().getName();
-        final int endIndex = className.lastIndexOf('.');
-        final String packageName = className.substring(0, endIndex);
-        return packageName + "." + "messages";
+        return getMessageBundle(className);
     }
 
