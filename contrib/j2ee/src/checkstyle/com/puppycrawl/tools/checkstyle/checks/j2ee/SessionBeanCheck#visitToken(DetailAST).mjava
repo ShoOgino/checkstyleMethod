@@ -6,14 +6,14 @@
         if (Utils.hasImplements(aAST, "javax.ejb.SessionBean")
             && !Utils.isAbstract(aAST))
         {
-            checkBean(aAST, "Session");
+            checkBean(aAST, "Session bean");
             if (!Utils.hasPublicMethod(aAST, "ejbCreate", true)) {
                 final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
                 log(
                     nameAST.getLineNo(),
                     nameAST.getColumnNo(),
                     "missingmethod.bean",
-                    new Object[] {"Session", "ejbCreate"});
+                    new Object[] {"Session bean", "ejbCreate"});
             }
         }
     }

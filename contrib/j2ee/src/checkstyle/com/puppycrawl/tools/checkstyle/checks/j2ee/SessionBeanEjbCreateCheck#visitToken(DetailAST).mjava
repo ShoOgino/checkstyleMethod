@@ -1,0 +1,17 @@
+   /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        if (nameAST.getText().equals("ejbCreate")
+            && Utils.implementsSessionBean(aAST))
+        {
+            checkMethod(aAST);
+            if (!Utils.isVoid(aAST)) {
+                log(nameAST.getLineNo(), nameAST.getColumnNo(),
+                    "nonvoidmethod.bean", "ejbCreate");
+            }
+        }
+    }
+
