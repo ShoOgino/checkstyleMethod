@@ -1,0 +1,17 @@
+    public void testNoHeader()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(HeaderCheck.class.getName());
+        // No header file specified
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputScopeAnonInner.java");
+
+        // TODO: Is this really what we want or should we throw an Exception?
+        // Somehow checking nothing doesn't make too much sense...
+        final String[] expected = {
+        };
+
+        verify(c, fname, expected);
+    }
+

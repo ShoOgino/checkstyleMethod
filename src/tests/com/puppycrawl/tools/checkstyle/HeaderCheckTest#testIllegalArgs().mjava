@@ -1,0 +1,15 @@
+    public void testIllegalArgs()
+            throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(HeaderCheck.class.getName());
+        checkConfig.addProperty("headerFile", getPath("nonexisting.file"));
+        try {
+            createChecker(checkConfig);
+            fail();
+        }
+        catch (CheckstyleException ex) {
+            // expected exception
+        }
+    }
+
