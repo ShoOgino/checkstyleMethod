@@ -1,0 +1,15 @@
+    //Test supression of checks of only one type
+    //Supress only ConstantNameCheck between CS_OFF and CS_ON 
+    public void testOffFormatCheck() throws Exception
+    {
+        final DefaultConfiguration filterConfig = 
+            createFilterConfig(SuppressionCommentFilter.class);
+        filterConfig.addAttribute("offCommentFormat", "CS_OFF");
+        filterConfig.addAttribute("onCommentFormat", "CS_ON");
+        filterConfig.addAttribute("checkFormat", "ConstantNameCheck");
+        final String[] suppressed = {
+            "39:30: Name 's' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+

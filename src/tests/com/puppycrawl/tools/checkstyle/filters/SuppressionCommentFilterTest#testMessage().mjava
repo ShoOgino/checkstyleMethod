@@ -1,0 +1,15 @@
+    public void testMessage()
+            throws Exception
+    {
+        final DefaultConfiguration filterConfig = 
+            createFilterConfig(SuppressionCommentFilter.class);
+        filterConfig.addAttribute("onCommentFormat", "UNUSED ON\\: (\\w+)");
+        filterConfig.addAttribute("offCommentFormat", "UNUSED OFF\\: (\\w+)");
+        filterConfig.addAttribute("checkFormat", "Unused");
+        filterConfig.addAttribute("messageFormat", "^Unused \\w+ '$1'.$");
+        final String[] suppressed = {
+            "47:34: Unused parameter 'aInt'.",
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+

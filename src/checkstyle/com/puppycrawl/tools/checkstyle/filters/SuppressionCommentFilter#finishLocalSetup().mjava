@@ -1,0 +1,13 @@
+    /**
+      * Check that everything was set up properly.
+      * @throws CheckstyleException if a comment format was not set
+      */
+    protected void finishLocalSetup() throws CheckstyleException
+    {
+        if (mOnRegexp.getParenCount() != mOffRegexp.getParenCount()) {
+            throw new CheckstyleException(
+                "onCommentFormat and offCommentFormat"
+                    + " have different paren counts.");
+        }
+    }
+

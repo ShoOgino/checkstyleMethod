@@ -1,0 +1,16 @@
+    //Supress all checks between CS_OFF and CS_ON
+    public void testOffFormat() throws Exception
+    {
+        final DefaultConfiguration filterConfig = 
+            createFilterConfig(SuppressionCommentFilter.class);
+        filterConfig.addAttribute("offCommentFormat", "CS_OFF");
+        filterConfig.addAttribute("onCommentFormat", "CS_ON");
+        final String[] suppressed = {
+            "32:17: Name 'P' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "38:17: Name 'R' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "39:30: Name 's' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+            "42:17: Name 'T' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+

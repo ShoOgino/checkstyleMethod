@@ -1,0 +1,21 @@
+    /** @see Filter */
+    public boolean accept(AuditEvent aEvent)
+    {
+        if (aEvent.getLocalizedMessage() == null) {
+            return true;        // A special event.
+        }
+
+        // Lazy update. If the first event for the current file, update file
+        // contents and tag suppressions
+        final FileContents currentContents = FileContentsHolder.getContents();
+        if (getFileContents() != currentContents) {
+            setFileContents(currentContents);
+            tagSuppressions();
+        }
+        final Tag matchTag = findNearestMatch(aEvent);
+        if ((matchTag != null) && !matchTag.isOn()) {
+            return false;
+        }
+        return true;
+    }
+

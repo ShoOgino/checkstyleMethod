@@ -1,0 +1,16 @@
+    public void testExpansion()
+            throws Exception
+    {
+        final DefaultConfiguration filterConfig = 
+            createFilterConfig(SuppressionCommentFilter.class);
+        filterConfig.addAttribute("offCommentFormat", "CSOFF\\: ([\\w\\|]+)");
+        filterConfig.addAttribute("onCommentFormat", "CSON\\: ([\\w\\|]+)");
+        filterConfig.addAttribute("checkFormat", "$1");
+        final String[] suppressed = {
+            "22:17: Name 'L' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "23:30: Name 'm' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+            "28:30: Name 'n' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+

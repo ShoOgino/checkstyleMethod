@@ -1,0 +1,53 @@
+        /**
+         * Constructs a tag.
+         * @param aLine the line number.
+         * @param aColumn the column number.
+         * @param aText the text of the suppression.
+         * @param aOn <code>true</code> if the tag turns checkstyle reporting.
+         * @throws ConversionException if unable to parse expanded aText.
+         * on.
+         */
+        public Tag(int aLine, int aColumn, String aText, boolean aOn)
+            throws ConversionException
+        {
+            mLine = aLine;
+            mColumn = aColumn;
+            mText = aText;
+            mOn = aOn;
+
+            mTagCheckRegexp = mCheckRegexp;
+            //Expand regexp for check and message
+            //Does not intern REs with Utils.getRE()
+            String format = "";
+            try {
+                if (aOn) {
+                    format =
+                        expandFromComment(aText, mCheckFormat, mOnRegexp);
+                    mTagCheckRegexp = new RE(format);
+                    if (mMessageFormat != null) {
+                        format =
+                            expandFromComment(aText, mMessageFormat, mOnRegexp);
+                        mTagMessageRegexp = new RE(format);
+                    }
+                }
+                else {
+                    format =
+                        expandFromComment(aText, mCheckFormat, mOffRegexp);
+                    mTagCheckRegexp = new RE(format);
+                    if (mMessageFormat != null) {
+                        format =
+                            expandFromComment(
+                                aText,
+                                mMessageFormat,
+                                mOffRegexp);
+                        mTagMessageRegexp = new RE(format);
+                    }
+                }
+            }
+            catch (RESyntaxException e) {
+                throw new ConversionException(
+                    "unable to parse expanded comment " + format,
+                    e);
+            }
+        }
+

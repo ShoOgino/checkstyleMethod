@@ -1,0 +1,26 @@
+        /**
+         * Expand based on a matching comment.
+         * @param aComment the comment.
+         * @param aString the string to expand.
+         * @param aRegexp the parsed expander.
+         * @return the expanded string
+         */
+        private String expandFromComment(
+            String aComment,
+            String aString,
+            RE aRegexp)
+        {
+            // Match primarily for effect.
+            if (!aRegexp.match(aComment)) {
+                ///CLOVER:OFF
+                return aString;
+                ///CLOVER:ON
+            }
+            String result = aString;
+            for (int i = 1; i < aRegexp.getParenCount(); i++) {
+                // $n expands comment match like in RE.subst().
+                result = result.replaceAll("\\$" + i, aRegexp.getParen(i));
+            }
+            return result;
+        }
+
