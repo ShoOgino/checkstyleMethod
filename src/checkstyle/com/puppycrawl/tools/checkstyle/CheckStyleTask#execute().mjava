@@ -13,6 +13,10 @@
                 location);
         }
 
+        // setup the classloader
+        if (mClasspath != null) {
+            mConfig.setClassLoader(new AntClassLoader(project, mClasspath));
+        }
         // Create the checker
         Checker c = null;
         try {
