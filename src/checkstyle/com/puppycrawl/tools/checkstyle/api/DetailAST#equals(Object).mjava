@@ -1,0 +1,15 @@
+    /** @see java.lang.Object#equals(java.lang.Object) */
+    public boolean equals(Object aObj)
+    {
+        if (aObj instanceof DetailAST) {
+            final DetailAST other = (DetailAST) aObj;
+            return (other.getType() == getType())
+                && (other.getText().equals(getText()))
+                && (other.mLineNo == mLineNo)
+                && (other.mColumnNo == mColumnNo);
+        }
+        else {
+            return false;
+        }
+    }
+
