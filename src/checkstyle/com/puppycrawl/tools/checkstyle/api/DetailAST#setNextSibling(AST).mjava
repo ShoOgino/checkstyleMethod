@@ -1,0 +1,12 @@
+    /**
+     * Sets AST's next sibling
+     * @param aAST the new next sibling
+     */
+    public void setNextSibling(AST aAST)
+    {
+        super.setNextSibling(aAST);
+        if (aAST != null && mParent != null) {
+            ((DetailAST) aAST).setParent(mParent);
+        }
+    }
+
