@@ -6,7 +6,7 @@
         while (it.hasNext()) {
             final FullIdent imp = (FullIdent) it.next();
 
-            if (!mReferenced.contains(basename(imp.getText()))) {
+            if (!mReferenced.contains(Utils.baseClassname(imp.getText()))) {
                 log(imp.getLineNo(),
                     imp.getColumnNo(),
                     "import.unused", imp.getText());
