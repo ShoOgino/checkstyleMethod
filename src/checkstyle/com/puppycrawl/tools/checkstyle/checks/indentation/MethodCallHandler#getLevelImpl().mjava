@@ -13,10 +13,7 @@
                 if (areOnSameLine(container.getMainAst(), getMainAst())) {
                     return container.getLevel();
                 }
-                else {
-                    return new IndentLevel(container.getLevel(),
-                                           getBasicOffset());
-                }
+                return new IndentLevel(container.getLevel(), getBasicOffset());
             }
 
             // if we get here, we are the child of the left hand side (name
@@ -39,8 +36,6 @@
         if (lineStart != firstCol) {
             return new IndentLevel(lineStart);
         }
-        else {
-            return super.getLevelImpl();
-        }
+        return super.getLevelImpl();
     }
 
