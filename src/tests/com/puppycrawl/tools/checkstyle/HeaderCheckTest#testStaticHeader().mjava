@@ -4,6 +4,7 @@
         final CheckConfiguration checkConfig = new CheckConfiguration();
         checkConfig.setClassname(HeaderCheck.class.getName());
         checkConfig.addProperty("headerFile", getPath("java.header"));
+        checkConfig.addProperty("ignoreLines", "");
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("inputHeader.java");
         final String[] expected = {
