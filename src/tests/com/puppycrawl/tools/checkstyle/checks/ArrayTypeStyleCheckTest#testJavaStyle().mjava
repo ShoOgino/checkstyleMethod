@@ -1,0 +1,12 @@
+    public void testJavaStyle()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ArrayTypeStyleCheck.class);
+        final String[] expected = {
+            "14:23: Array brackets at illegal position.",
+            "20:44: Array brackets at illegal position.",
+        };
+        verify(checkConfig, getPath("InputArrayTypeStyle.java"), expected);
+    }
+
