@@ -1,0 +1,26 @@
+    public void testDestroy() throws Exception
+    {
+        DebugChecker c= new DebugChecker();
+        DebugAuditAdapter aa = new DebugAuditAdapter();
+        c.addListener(aa);
+        DebugFilter f = new DebugFilter();
+        c.addFilter(f);
+
+        c.destroy(); // should remove al listeners and filters
+
+        // Let's try fire some events
+        c.fireAuditStarted();
+        c.fireAuditFinished();
+        c.fireFileStarted("Some File Name");
+        c.fireFileFinished("Some File Name");
+
+        LocalizedMessage[] msgs = new LocalizedMessage[1];
+        msgs[0] = new LocalizedMessage(0, 0, "a Bundle", "message.key",
+                                       new Object[] {"arg"},
+                                       getClass());
+        c.fireErrors("Some File Name", msgs);
+
+        assertFalse("Checker.destroy() doesn't remove listeners.", aa.wasCalled());
+        assertFalse("Checker.destroy() doesn't remove filters.", f.wasCalled());
+    }
+
