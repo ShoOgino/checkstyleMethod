@@ -1,11 +1,11 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
-    public void visitToken(DetailAST aAST) 
+    public void visitToken(DetailAST aAST)
     {
         final FullIdent name = FullIdent.createFullIdentBelow(aAST);
         if ((name != null) && name.getText().endsWith(".*")) {
             boolean exempt = false;
-            for (int i = 0; i < m_excludes.length && !exempt; i++) {
-                if (name.getText().equals(m_excludes[i])) {
+            for (int i = 0; i < mExcludes.length && !exempt; i++) {
+                if (name.getText().equals(mExcludes[i])) {
                     exempt = true;
                 }
             }
