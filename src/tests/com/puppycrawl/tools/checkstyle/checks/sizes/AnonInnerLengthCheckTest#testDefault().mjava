@@ -1,0 +1,10 @@
+    public void testDefault() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(AnonInnerLengthCheck.class);
+        final String[] expected = {
+            "50:35: Anonymous inner class length is 21 lines (max allowed is 20).",
+        };
+        verify(checkConfig, getPath("InputAnonInnerLength.java"), expected);
+    }
+
