@@ -7,12 +7,7 @@
      */
     protected void log(DetailAST aAST, String aKey, Object[] aArgs)
     {
-        final DetailAST nameAST =
-            (DetailAST) aAST.findFirstToken(TokenTypes.IDENT);
-        log(
-            nameAST.getLineNo(),
-            nameAST.getColumnNo(),
-            aKey,
-            aArgs);
+        final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        log(nameAST.getLineNo(), nameAST.getColumnNo(), aKey, aArgs);
     }
 

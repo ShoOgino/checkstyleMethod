@@ -2,12 +2,10 @@
      * Checks if a given switch terminated by return, throw or,
      * if allowed break, continue.
      * @param aAST loop to check
-     * @param aUseBreak should we consider break as terminator.
      * @param aUseContinue should we consider continue as terminator.
      * @return true if switch is terminated.
      */
-    private boolean checkSwitch(final DetailAST aAST, boolean aUseBreak,
-                                boolean aUseContinue)
+    private boolean checkSwitch(final DetailAST aAST, boolean aUseContinue)
     {
         DetailAST caseGroup = aAST.findFirstToken(TokenTypes.CASE_GROUP);
         boolean isTerminated = (caseGroup != null);
