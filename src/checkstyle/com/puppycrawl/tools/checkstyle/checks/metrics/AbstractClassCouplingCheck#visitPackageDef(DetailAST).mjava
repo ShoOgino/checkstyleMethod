@@ -1,0 +1,11 @@
+    /**
+     * Stores package of current class we check.
+     * @param aPkg package definition.
+     */
+    private void visitPackageDef(DetailAST aPkg)
+    {
+        final FullIdent ident =
+            FullIdent.createFullIdent((DetailAST) aPkg.getFirstChild());
+        mPackageName = ident.getText();
+    }
+

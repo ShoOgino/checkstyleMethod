@@ -1,0 +1,10 @@
+    /**
+     * Restores previous context.
+     * @param aAST expression we leave.
+     */
+    private void leaveExpr(DetailAST aAST)
+    {
+        mContext.checkCount(aAST);
+        mContext = (Context) mContextStack.pop();
+    }
+

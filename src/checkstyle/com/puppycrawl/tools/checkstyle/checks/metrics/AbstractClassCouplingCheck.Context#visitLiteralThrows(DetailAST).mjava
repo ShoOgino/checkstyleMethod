@@ -1,0 +1,16 @@
+        /**
+         * Visits throws clause and collects all exceptions we throw.
+         * @param aThrows throws to process.
+         */
+        public void visitLiteralThrows(DetailAST aThrows)
+        {
+            for (DetailAST childAST = (DetailAST) aThrows.getFirstChild();
+                 childAST != null;
+                 childAST = (DetailAST) childAST.getNextSibling())
+            {
+                if (childAST.getType() != TokenTypes.COMMA) {
+                    addReferencedClassName(childAST);
+                }
+            }
+        }
+

@@ -1,0 +1,25 @@
+    /** {@inheritDoc} */
+    public void visitToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+        case TokenTypes.PACKAGE_DEF:
+            visitPackageDef(aAST);
+            break;
+        case TokenTypes.CLASS_DEF:
+        case TokenTypes.INTERFACE_DEF:
+            visitClassDef(aAST);
+            break;
+        case TokenTypes.TYPE:
+            mContext.visitType(aAST);
+            break;
+        case TokenTypes.LITERAL_NEW:
+            mContext.visitLiteralNew(aAST);
+            break;
+        case TokenTypes.LITERAL_THROWS:
+            mContext.visitLiteralThrows(aAST);
+            break;
+        default:
+            throw new IllegalStateException(aAST.toString());
+        }
+    }
+

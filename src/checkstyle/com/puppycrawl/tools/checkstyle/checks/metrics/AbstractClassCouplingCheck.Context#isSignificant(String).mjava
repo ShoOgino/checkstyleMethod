@@ -1,0 +1,12 @@
+        /**
+         * Checks if given class shouldn't be ignored and not from java.lang.
+         * @param aClassName class to check.
+         * @return true if we should count this class.
+         */
+        private boolean isSignificant(String aClassName)
+        {
+            return aClassName.length() > 0
+                    && !mIgnoredClassNames.contains(aClassName)
+                    && !aClassName.startsWith("java.lang.");
+        }
+

@@ -1,0 +1,13 @@
+        /** Checks if coupling less than allowed or not. */
+        public void checkCoupling()
+        {
+            mReferencedClassNames.remove(mClassName);
+            mReferencedClassNames.remove(mPackageName + "." + mClassName);
+
+            if (mReferencedClassNames.size() > mMax) {
+                log(mLineNo, mColumnNo, getLogMessageId(),
+                    new Integer(mReferencedClassNames.size()),
+                    new Integer(getMax()));
+            }
+        }
+

@@ -1,0 +1,13 @@
+    /** {@inheritDoc} */
+    public void leaveToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+        case TokenTypes.CLASS_DEF:
+        case TokenTypes.INTERFACE_DEF:
+            leaveClassDef();
+            break;
+        default:
+            // Do nothing
+        }
+    }
+
