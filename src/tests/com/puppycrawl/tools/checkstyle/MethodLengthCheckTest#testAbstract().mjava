@@ -1,12 +1,10 @@
-    public void testIt() throws Exception
+    public void testAbstract() throws Exception
     {
         final CheckConfiguration checkConfig = new CheckConfiguration();
         checkConfig.setClassname(MethodLengthCheck.class.getName());
-        checkConfig.addProperty("max", "19");
         final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputSimple.java");
+        final String fname = getPath("InputModifier.java");
         final String[] expected = {
-            "79:5: Method length is 20 lines (max allowed is 19)."
         };
         verify(c, fname, expected);
     }
