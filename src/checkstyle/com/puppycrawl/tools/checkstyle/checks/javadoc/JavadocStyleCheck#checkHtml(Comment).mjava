@@ -3,31 +3,24 @@
      * tag or a close tage that has no previous open tag.  This code was
      * primarily copied from the DocCheck checkHtml method.
      *
-     * @param aAST (Abstract Syntax Tree) the token to process.
-     * @param aComment the source lines that make up the Javadoc comment.
+     * @param aComment the <code>Comment</code> which represents
+     *                 the Javadoc comment.
      */
-    private void checkHtml(DetailAST aAST, String[] aComment)
+    private void checkHtml(Comment aComment)
     {
-        final int lineno = aAST.getLineNo() - aComment.length;
+        final int lineno = aComment.getFirstLineNo();
         final Stack htmlStack = new Stack();
+        final String[] text = aComment.getText();
 
         TagParser parser = null;
-        try {
-            // Can throw NoSuchElementException when tokenizing encounters
-            // "<" at end of aComment[i].
-            parser = new TagParser(aComment, lineno);
-        }
-        catch (NoSuchElementException e) {
-            log(lineno, "javadoc.incompleteTag", new Object[] {aComment[0]});
-            return;
-        }
+        parser = new TagParser(text, lineno);
 
         while (parser.hasNextTag()) {
             final HtmlTag tag = parser.nextTag();
 
             if (tag.isIncompleteTag()) {
                 log(tag.getLineno(), "javadoc.incompleteTag",
-                    new Object[] {aComment[tag.getLineno() - lineno]});
+                    new Object[] {text[tag.getLineno() - lineno]});
                 return;
             }
             if (tag.isClosedTag()) {

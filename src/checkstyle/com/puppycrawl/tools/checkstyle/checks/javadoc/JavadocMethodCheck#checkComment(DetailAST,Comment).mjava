@@ -3,9 +3,9 @@
      * @param aAST the token for the method
      * @param aComment the Javadoc comment
      */
-    private void checkComment(DetailAST aAST, String[] aComment)
+    private void checkComment(DetailAST aAST, Comment aComment)
     {
-        final List tags = getMethodTags(aComment, aAST.getLineNo() - 1);
+        final List tags = getMethodTags(aComment);
         // Check for only one @see tag
         if ((tags.size() != 1)
             || !((JavadocTag) tags.get(0)).isSeeOrInheritDocTag())

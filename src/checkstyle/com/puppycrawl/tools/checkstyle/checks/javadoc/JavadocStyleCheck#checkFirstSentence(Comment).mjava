@@ -5,18 +5,17 @@
      * HTML element, or the end of string. This method ignores {@inheritDoc}
      * comments.
      *
-     * @param aAST (Abstract Syntax Tree) the token to process.
      * @param aComment the source lines that make up the Javadoc comment.
      */
-    private void checkFirstSentence(DetailAST aAST, String[] aComment)
+    private void checkFirstSentence(Comment aComment)
     {
-        final String commentText = getCommentText(aComment);
+        final String commentText = getCommentText(aComment.getText());
 
         if ((commentText.length() != 0)
             && !getEndOfSentenceRE().match(commentText)
             && !"{@inheritDoc}".equals(commentText))
         {
-            log(aAST.getLineNo() - aComment.length, "javadoc.noperiod");
+            log(aComment.getFirstLineNo(), "javadoc.noperiod");
         }
     }
 
