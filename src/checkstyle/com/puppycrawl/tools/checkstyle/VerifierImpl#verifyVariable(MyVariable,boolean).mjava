@@ -21,6 +21,12 @@
         }
         else {
             final MyModifierSet mods = aVar.getModifierSet();
+
+            if (mods.containsPrivate()) {
+                System.out.println("Need to check for " + aVar.getText());
+            }
+
+            // Checks for Javadoc
             if (mods.containsStatic()) {
                 if (mods.containsFinal()) {
                     // Handle the serialVersionUID constant which is used for
