@@ -1,0 +1,24 @@
+//    /**
+//     * @see org.apache.bcel.classfile.Visitor
+//     */
+//    public void visitLocalVariable(LocalVariable aLocalVariable)
+//    {
+//        for (Iterator iter = mVisitors.iterator(); iter.hasNext();) {
+//            IDeepVisitor visitor = (IDeepVisitor) iter.next();
+//            Visitor v = visitor.getClassFileVisitor();
+//            aLocalVariable.accept(v);
+//        }
+//    }
+//
+    /**
+     * @see org.apache.bcel.classfile.Visitor
+     */
+    public void visitLocalVariableTable(LocalVariableTable aTable)
+    {
+        for (Iterator iter = mVisitors.iterator(); iter.hasNext();) {
+            IDeepVisitor visitor = (IDeepVisitor) iter.next();
+            Visitor v = visitor.getClassFileVisitor();
+            aTable.accept(v);
+        }
+    }
+

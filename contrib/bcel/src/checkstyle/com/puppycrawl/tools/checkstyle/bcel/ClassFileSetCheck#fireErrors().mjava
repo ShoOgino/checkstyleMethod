@@ -5,8 +5,16 @@
      */
     private void fireErrors()
     {
-        final LocalizedMessage[] errors = getMessageCollector().getMessages();
-        getMessageCollector().reset();
-        getMessageDispatcher().fireErrors("", errors);
+        Set keys = mMessageMap.keySet();
+        Iterator iter = keys.iterator();
+        while (iter.hasNext()) {
+            String key = (String) iter.next();
+            getMessageDispatcher().fireFileStarted(key);
+            LocalizedMessages localizedMessages = (LocalizedMessages) mMessageMap.get(key);
+            final LocalizedMessage[] errors = localizedMessages.getMessages();
+            localizedMessages.reset();
+            getMessageDispatcher().fireErrors(key, errors);
+            getMessageDispatcher().fireFileFinished(key);
+        }
     }
 

@@ -2,7 +2,13 @@
      * @see org.apache.bcel.classfile.Visitor#visitCode
      */
     public void visitCode(Code aCode)
-    {
+    {   
+        for (Iterator iter = mVisitors.iterator(); iter.hasNext();) {
+            IDeepVisitor visitor = (IDeepVisitor) iter.next();
+            Visitor v = visitor.getClassFileVisitor();
+            aCode.accept(v);
+        }
+        
         // perform a deep visit
         final byte[] code = aCode.getCode();
         final InstructionList list = new InstructionList(code);
