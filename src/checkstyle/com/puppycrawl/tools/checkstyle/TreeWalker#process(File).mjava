@@ -11,7 +11,7 @@
             return;
         }
 
-        mMessages.reset();
+        getMessageCollector().reset();
         try {
             getMessageDispatcher().fireFileStarted(fileName);
             final String[] lines = Utils.getLines(fileName);
@@ -20,37 +20,41 @@
             walk(rootAST, contents);
         }
         catch (FileNotFoundException fnfe) {
-            mMessages.add(new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE,
-                                               "general.fileNotFound", null));
+            getMessageCollector().add(new LocalizedMessage(
+                0, Defn.CHECKSTYLE_BUNDLE,
+                "general.fileNotFound", null));
         }
         catch (IOException ioe) {
-            mMessages.add(new LocalizedMessage(
-                              0, Defn.CHECKSTYLE_BUNDLE,
-                              "general.exception",
-                              new String[] {ioe.getMessage()}));
+            getMessageCollector().add(new LocalizedMessage(
+                0, Defn.CHECKSTYLE_BUNDLE,
+                "general.exception",
+                new String[] {ioe.getMessage()}));
         }
         catch (RecognitionException re) {
-            mMessages.add(new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE,
-                                               "general.exception",
-                                               new String[] {re.getMessage()}));
+            getMessageCollector().add(new LocalizedMessage(
+                0, Defn.CHECKSTYLE_BUNDLE,
+                "general.exception",
+                new String[] {re.getMessage()}));
         }
         catch (TokenStreamException te) {
-            mMessages.add(new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE,
-                                               "general.exception",
-                                               new String[] {te.getMessage()}));
+            getMessageCollector().add(new LocalizedMessage(
+                0, Defn.CHECKSTYLE_BUNDLE,
+                "general.exception",
+                new String[] {te.getMessage()}));
         }
         catch (Throwable err) {
-            mMessages.add(new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE,
-                                               "general.exception",
-                                               new String[] {"" + err}));
+            getMessageCollector().add(new LocalizedMessage(
+                0, Defn.CHECKSTYLE_BUNDLE,
+                "general.exception",
+                new String[] {"" + err}));
         }
 
-        if (mMessages.size() == 0) {
+        if (getMessageCollector().size() == 0) {
             mCache.checkedOk(fileName, timestamp);
         }
         else {
             getMessageDispatcher().fireErrors(
-                fileName, mMessages.getMessages());
+                fileName, getMessageCollector().getMessages());
         }
 
         getMessageDispatcher().fireFileFinished(fileName);

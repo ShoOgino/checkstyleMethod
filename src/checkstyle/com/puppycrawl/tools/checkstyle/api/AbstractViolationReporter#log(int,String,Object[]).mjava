@@ -1,5 +1,5 @@
     /**
-     * Log an error message.
+     * Log a message that has no column information.
      *
      * @param aLine the line number where the error was found
      * @param aKey the message that describes the error
@@ -7,9 +7,5 @@
      *
      * @see java.text.MessageFormat
      */
-    protected final void log(int aLine, String aKey, Object aArgs[])
-    {
-        mMessages.add(new LocalizedMessage(
-                aLine, getMessageBundle(), aKey, aArgs, getSeverityLevel()));
-    }
+    protected abstract void log(int aLine, String aKey, Object aArgs[]);
 

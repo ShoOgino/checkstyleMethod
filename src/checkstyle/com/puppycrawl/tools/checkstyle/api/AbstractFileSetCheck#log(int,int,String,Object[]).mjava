@@ -1,0 +1,13 @@
+    /**
+     * Adds a violation message to the
+     * {@link #getMessageCollector message collector}.
+     * @see AbstractViolationReporter#log(int, int, String, Object[])
+     */
+    protected final void log(int aLineNo, int aColNo,
+        String aKey, Object[] aArgs)
+    {
+        getMessageCollector().add(new LocalizedMessage(
+            aLineNo, aColNo, getMessageBundle(),
+            aKey, aArgs, getSeverityLevel()));
+    }
+
