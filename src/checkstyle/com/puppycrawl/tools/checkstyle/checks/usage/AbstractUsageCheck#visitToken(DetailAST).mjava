@@ -2,8 +2,7 @@
     public void visitToken(DetailAST aAST)
     {
         if (mustCheckReferenceCount(aAST)) {
-            final DetailAST nameAST =
-                (DetailAST) aAST.findFirstToken(TokenTypes.IDENT);
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
             RE regexp = getRegexp();
             if ((regexp == null) || !regexp.match(nameAST.getText())) {
                 ASTManager.getInstance().registerCheckNode(this, nameAST);
