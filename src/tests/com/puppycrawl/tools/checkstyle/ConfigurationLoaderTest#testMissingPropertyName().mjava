@@ -6,8 +6,9 @@
         }
         catch (CheckstyleException ex) {
             assertTrue(
-                "exception error",
-                ex.getMessage().indexOf("missing property name") >= 0);
+                ex.getMessage().endsWith(
+                    "Attribute \"name\" is required and must be specified "
+                        + "for element type \"property\"."));
         }
     }
 

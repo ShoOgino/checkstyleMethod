@@ -6,8 +6,9 @@
         }
         catch (CheckstyleException ex) {
             assertTrue(
-                "exception error",
-                ex.getMessage().indexOf("has no config parent") >= 0);
+                ex.getMessage().endsWith(
+                    "Document root element \"property\", must match DOCTYPE "
+                        + "root \"config\"."));
         }
     }
 
