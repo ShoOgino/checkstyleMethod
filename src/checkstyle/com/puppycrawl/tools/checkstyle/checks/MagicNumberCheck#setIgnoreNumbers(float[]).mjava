@@ -1,0 +1,17 @@
+    /**
+     * Sets the numbers to ignore in the check.
+     * BeanUtils converts numeric token list to float array automatically.
+     * @param aList list of numbers to ignore.
+     */    
+    public void setIgnoreNumbers(float[] aList)
+    {
+        if (aList == null || aList.length == 0) {
+            mIgnoreNumbers = new float[0];
+        }
+        else {
+            mIgnoreNumbers = new float[aList.length];
+            System.arraycopy(aList, 0, mIgnoreNumbers, 0, aList.length);
+            Arrays.sort(mIgnoreNumbers);
+        }
+    }
+

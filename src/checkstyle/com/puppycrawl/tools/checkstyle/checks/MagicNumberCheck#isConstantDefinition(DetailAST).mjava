@@ -1,0 +1,33 @@
+    /**
+     * Decides whether the number of an AST is the RHS of a constant
+     * definition.
+     * @param aAST the AST to check.
+     * @return true if the number of aAST is the RHS of a constant definition.
+     */
+    private boolean isConstantDefinition(DetailAST aAST)
+    {
+        DetailAST parent = aAST.getParent();
+
+        //expression?
+        if ((parent == null) || parent.getType() != TokenTypes.EXPR) {
+            return false;
+        }
+
+        //assignment?
+        parent = parent.getParent();
+        if ((parent == null) || parent.getType() != TokenTypes.ASSIGN) {
+            return false;
+        }
+
+        //variable definition?
+        parent = parent.getParent();
+        if ((parent == null) || parent.getType() != TokenTypes.VARIABLE_DEF) {
+            return false;
+        }
+
+        //final?
+        final DetailAST modifiersAST =
+            parent.findFirstToken(TokenTypes.MODIFIERS);
+        return modifiersAST.branchContains(TokenTypes.FINAL);
+    }
+

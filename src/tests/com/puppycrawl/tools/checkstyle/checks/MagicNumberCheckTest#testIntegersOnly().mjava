@@ -1,0 +1,21 @@
+    public void testIntegersOnly()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(MagicNumberCheck.class);
+        checkConfig.addAttribute("tokens", "NUM_INT, NUM_LONG");
+        final String[] expected = {
+            "41:26: '3' is a magic number.",
+            "43:27: '3' is a magic number.",
+            "43:31: '4' is a magic number.",
+            "45:29: '3' is a magic number.",
+            "47:23: '3' is a magic number.",
+            "50:22: '3' is a magic number.",
+            "50:29: '5' is a magic number.",
+            "50:37: '3' is a magic number.",
+            "54:26: '3' is a magic number.",
+            "55:39: '3' is a magic number.",
+        };
+        verify(checkConfig, getPath("InputMagicNumber.java"), expected);
+    }
+
