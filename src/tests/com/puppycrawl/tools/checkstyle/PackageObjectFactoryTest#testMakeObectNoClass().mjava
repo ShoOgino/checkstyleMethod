@@ -1,0 +1,18 @@
+    public void testMakeObectNoClass()
+        throws CheckstyleException
+    {
+        try {
+            PackageObjectFactory factory =
+                (PackageObjectFactory) PackageObjectFactory.makeObject(
+                    new String [] {},
+                    this.getClass().getClassLoader(),
+                    "NoClass");
+            fail("Instantiated non-existant class");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("CheckstyleException.message",
+                "Unable to instantiate NoClass",
+                ex.getMessage());
+        }
+    }
+
