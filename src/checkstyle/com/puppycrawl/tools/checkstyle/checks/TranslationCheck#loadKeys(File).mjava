@@ -25,7 +25,9 @@
         }
         finally {
             try {
-                inStream.close();
+                if (inStream != null) {
+                    inStream.close();
+                }
             }
             catch (IOException e) {
                 logIOException(e, aFile);

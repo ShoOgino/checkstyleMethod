@@ -10,11 +10,11 @@
      */
     private void checkPropertyFileSets(Map aPropFiles)
     {
-        final Set keySet = aPropFiles.keySet();
+        final Set entrySet = aPropFiles.entrySet();
 
-        for (Iterator iterator = keySet.iterator(); iterator.hasNext();) {
-            final String baseName = (String) iterator.next();
-            final Set files = (Set) aPropFiles.get(baseName);
+        for (Iterator iterator = entrySet.iterator(); iterator.hasNext();) {
+            final Map.Entry entry = (Map.Entry) iterator.next();
+            final Set files = (Set) entry.getValue();
 
             if (files.size() >= 2) {
                 // build a map from files to the keys they contain
