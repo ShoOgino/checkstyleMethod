@@ -1,0 +1,64 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        // nothing to do for Interfaces
+        if (ScopeUtils.inInterfaceBlock(aAST)) {
+            return;
+        }
+
+        // method is ok if it is private or abstract or final
+        DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        if (modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)
+            || modifiers.branchContains(TokenTypes.ABSTRACT)
+            || modifiers.branchContains(TokenTypes.FINAL))
+        {
+            return;
+        }
+
+        // method is ok if it is empty
+        DetailAST implemetation = aAST.findFirstToken(TokenTypes.SLIST);
+        if (implemetation.getFirstChild().getType() == TokenTypes.RCURLY) {
+            return;
+        }
+
+        // check if the containing class can be subclassed
+        DetailAST classDef = findContainingClass(aAST);
+        DetailAST classMods = classDef.findFirstToken(TokenTypes.MODIFIERS);
+        if (classMods.branchContains(TokenTypes.FINAL)) {
+            return;
+        }
+
+        // check if subclassing is prevented by having only private ctors
+        DetailAST objBlock = classDef.findFirstToken(TokenTypes.OBJBLOCK);
+
+        boolean hasDefaultConstructor = true;
+        boolean hasExplNonPrivateCtor = false;
+
+        DetailAST candidate = (DetailAST) objBlock.getFirstChild();
+
+        while (candidate != null) {
+            if (candidate.getType() == TokenTypes.CTOR_DEF) {
+                hasDefaultConstructor = false;
+
+                DetailAST ctorMods =
+                    candidate.findFirstToken(TokenTypes.MODIFIERS);
+                if (!ctorMods.branchContains(TokenTypes.LITERAL_PRIVATE)) {
+                    hasExplNonPrivateCtor = true;
+                    break;
+                }
+            }
+            candidate = (DetailAST) candidate.getNextSibling();
+        }
+
+        if (hasDefaultConstructor || hasExplNonPrivateCtor) {
+            String name = aAST.findFirstToken(TokenTypes.IDENT).getText();
+            // TODO: i18n
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                "Method '" + name + "' is not designed for inheritance "
+                + "- needs to be abstract, final or empty.");
+        }
+
+
+
+    }
+

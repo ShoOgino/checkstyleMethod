@@ -1,0 +1,10 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        // the only place a QUESTION token can occur is in inline conditionals
+        // so no need to do any further tricks here - pretty trivial Check!
+
+        log(aAST.getLineNo(), aAST.getColumnNo(),
+            "Avoid inline conditionals.");
+    }
+

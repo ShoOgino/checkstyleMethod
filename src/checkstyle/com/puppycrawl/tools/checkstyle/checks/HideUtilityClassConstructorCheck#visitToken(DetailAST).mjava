@@ -1,0 +1,44 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
+        DetailAST child = (DetailAST) objBlock.getFirstChild();
+        boolean hasMethod = false;
+        boolean hasNonStaticMethod = false;
+        boolean hasDefaultCtor = true;
+        boolean hasPublicCtor = false;
+
+        while (child != null) {
+            if (child.getType() == TokenTypes.METHOD_DEF) {
+                hasMethod = true;
+                final DetailAST modifiers =
+                    child.findFirstToken(TokenTypes.MODIFIERS);
+                if (!modifiers.branchContains(TokenTypes.LITERAL_STATIC)) {
+                    hasNonStaticMethod = true;
+                }
+            }
+            if (child.getType() == TokenTypes.CTOR_DEF) {
+                hasDefaultCtor = false;
+                final DetailAST modifiers =
+                    child.findFirstToken(TokenTypes.MODIFIERS);
+                if (!modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)
+                    && !modifiers.branchContains(TokenTypes.LITERAL_PROTECTED))
+                {
+                    // treat package visible as public
+                    // for the purpose of this Check
+                    hasPublicCtor = true;
+                }
+
+            }
+            child = (DetailAST) child.getNextSibling();
+        }
+
+        boolean hasAccessibleCtor = (hasDefaultCtor || hasPublicCtor);
+
+        if (hasMethod && !hasNonStaticMethod && hasAccessibleCtor) {
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                "Utility classes should not have "
+                + "a public or default constructor.");
+        }
+    }
+

@@ -1,0 +1,18 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST typeAST = aAST.getParent();
+        if (typeAST.getType() != TokenTypes.TYPE) {
+            return;
+        }
+
+        DetailAST variableAST = (DetailAST) typeAST.getNextSibling();
+        boolean isJavaStyle = (variableAST.getColumnNo() > aAST.getColumnNo());
+
+        if (isJavaStyle != mJavaStyle) {
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                    "Array brackets at illegal position.");
+        }
+
+    }
+

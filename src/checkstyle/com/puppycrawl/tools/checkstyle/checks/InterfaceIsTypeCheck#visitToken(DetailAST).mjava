@@ -1,0 +1,20 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST objBlock =
+                aAST.findFirstToken(TokenTypes.OBJBLOCK);
+        final DetailAST methodDef =
+                objBlock.findFirstToken(TokenTypes.METHOD_DEF);
+        final DetailAST variableDef =
+                objBlock.findFirstToken(TokenTypes.VARIABLE_DEF);
+        boolean methodRequired =
+                !mAllowMarkerInterfaces || variableDef != null;
+
+        if (methodDef == null && methodRequired) {
+            // TODO: i18n
+            log(aAST.getLineNo(), "interfaces should describe a type "
+                    + "and hence have methods.");
+        }
+
+    }
+
