@@ -29,7 +29,7 @@
             fireFileStarted(stripped);
             final String[] lines = Utils.getLines(fileName);
             final FileContents contents = new FileContents(fileName, lines);
-            final DetailAST rootAST = parse(contents);
+            final DetailAST rootAST = TreeWalker.parse(contents);
             mWalker.walk(rootAST, contents, mConfig.getClassLoader());
         }
         catch (FileNotFoundException fnfe) {
