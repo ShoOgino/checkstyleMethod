@@ -1,0 +1,18 @@
+        /**
+         * Set the type of the formatter.
+         * @param aType the type
+         */
+        public void setType(FormatterType aType)
+        {
+            final String val = aType.getValue();
+            if (E_XML.equals(val)) {
+                setClassname(XMLLogger.class.getName());
+            }
+            else if (E_PLAIN.equals(val)) {
+                setClassname(DefaultLogger.class.getName());
+            }
+            else {
+                throw new BuildException("Invalid formatter type: " + val);
+            }
+        }
+

@@ -1,0 +1,30 @@
+    /**
+     * Return the list of listeners set in this task.
+     * @return the list of listeners.
+     * @throws ClassNotFoundException if an error occurs
+     * @throws InstantiationException if an error occurs
+     * @throws IllegalAccessException if an error occurs
+     * @throws IOException if an error occurs
+     */
+    protected AuditListener[] getListeners()
+        throws ClassNotFoundException, InstantiationException,
+        IllegalAccessException, IOException
+    {
+        // @todo should we add a default plain stdout
+        // formatter ?
+        if (mFormatters.size() == 0) {
+            final Formatter f = new Formatter();
+            final FormatterType type = new FormatterType();
+            type.setValue(E_PLAIN);
+            f.setType(type);
+            mFormatters.add(f);
+        }
+
+        final AuditListener[] listeners = new AuditListener[mFormatters.size()];
+        for (int i = 0; i < listeners.length; i++) {
+            final Formatter f = (Formatter) mFormatters.get(i);
+            listeners[i] = f.createListener(this);
+        }
+        return listeners;
+    }
+

@@ -1,0 +1,32 @@
+    /**
+     * returns the list of files (full path name) to process.
+     * @return the list of files included via the filesets.
+     */
+    protected String[] scanFileSets()
+    {
+        final ArrayList list = new ArrayList();
+        if (mFileName != null) {
+            // oops we've got an additional one to process, don't
+            // forget it. No sweat, it's fully resolved via the setter.
+            log("Adding standalone file for audit", Project.MSG_VERBOSE);
+            list.add(mFileName);
+        }
+        for (int i = 0; i < mFileSets.size(); i++) {
+            final FileSet fs = (FileSet) mFileSets.get(i);
+            final DirectoryScanner ds = fs.getDirectoryScanner(project);
+            ds.scan();
+
+            final String[] names = ds.getIncludedFiles();
+            log(i + ") Adding " + names.length + " files from directory " +
+                ds.getBasedir(), Project.MSG_VERBOSE);
+
+            for (int j = 0; j < names.length; j++) {
+                final String pathname =
+                    ds.getBasedir() + File.separator + names[j];
+                list.add(pathname);
+            }
+        }
+
+        return (String[]) list.toArray(new String[0]);
+    }
+

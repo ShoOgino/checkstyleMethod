@@ -1,0 +1,19 @@
+    /**
+     * notify all listeners about the errors in a file.
+     * @param aFileName the audited file
+     * @param aErrors the audit errors from the file
+     */
+    protected void fireErrors(String aFileName, LineText[] aErrors)
+    {
+        for (int i = 0; i < aErrors.length; i++) {
+            final AuditEvent evt =
+                new AuditEvent(this, aFileName, aErrors[i].getLineNo(),
+                               aErrors[i].getText());
+            final Iterator it = mListeners.iterator();
+            while (it.hasNext()) {
+                final AuditListener listener = (AuditListener) it.next();
+                listener.addError(evt);
+            }
+        }
+    }
+

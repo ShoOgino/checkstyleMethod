@@ -1,0 +1,9 @@
+    protected Checker createChecker()
+        throws RESyntaxException
+    {
+        final AuditListener listener = new BriefLogger(mStream);
+        final Checker c = new Checker(mConfig, mStream);
+        c.addListener(listener);
+        return c;
+    }
+

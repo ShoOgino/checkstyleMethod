@@ -1,7 +1,8 @@
     private void verify(Checker aC, String aFilename, String[] aExpected)
         throws Exception
     {
-        final int errs = aC.process(aFilename);
+        mStream.flush();
+        final int errs = aC.process(new String[] {aFilename});
 
         // process each of the lines
         final ByteArrayInputStream bais =

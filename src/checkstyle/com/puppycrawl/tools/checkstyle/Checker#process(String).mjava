@@ -3,15 +3,17 @@
      * @return the number of errors found
      * @param aFileName the name of the file to process
      **/
-    int process(String aFileName)
+    private int process(String aFileName)
     {
-        final long timestamp = new File(aFileName).lastModified();
+        final File f = new File(aFileName);
+        final long timestamp = f.lastModified();
         if (mCache.alreadyChecked(aFileName, timestamp)) {
             return 0;
         }
 
         LineText[] errors;
         try {
+            fireFileStarted(aFileName);
             VerifierSingleton.getInstance().clearMessages();
             VerifierSingleton.getInstance().setLines(getLines(aFileName));
             final AST ast = getAST(aFileName);
@@ -28,8 +30,7 @@
         catch (RecognitionException re) {
             errors = new LineText[] {
                 new LineText(0,
-                             "Got a RecognitionException -" +
-                             re.getMessage())};
+                             "Got a RecognitionException -" + re.getMessage())};
         }
         catch (TokenStreamException te) {
             errors = new LineText[] {
@@ -41,8 +42,10 @@
             mCache.checkedOk(aFileName, timestamp);
         }
         else {
-            displayErrors(aFileName, errors);
+            fireErrors(aFileName, errors);
         }
+
+        fireFileFinished(aFileName);
         return errors.length;
     }
 
