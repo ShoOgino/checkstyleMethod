@@ -1,8 +1,8 @@
     public void testDefault()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(OtherLeftCurlyCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(OtherLeftCurlyCheck.class);
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputLeftCurlyOther.java");
         final String[] expected = {
