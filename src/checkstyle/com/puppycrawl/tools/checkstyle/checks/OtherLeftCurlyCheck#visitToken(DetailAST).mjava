@@ -1,4 +1,4 @@
-    /** @see Check */
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
         final DetailAST startToken = aAST;
@@ -8,6 +8,7 @@
             case JavaTokenTypes.LITERAL_while:
             case JavaTokenTypes.LITERAL_catch:
             case JavaTokenTypes.LITERAL_synchronized:
+            case JavaTokenTypes.LITERAL_for:
                 brace = Utils.getLastSibling(aAST.getFirstChild());
                 break;
             case JavaTokenTypes.LITERAL_try:
