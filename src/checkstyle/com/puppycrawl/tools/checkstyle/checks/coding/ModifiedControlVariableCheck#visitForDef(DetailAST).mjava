@@ -1,0 +1,21 @@
+    /**
+     * Push current variables to the stack.
+     * @param aAST a for definition.
+     */
+    private void visitForDef(DetailAST aAST)
+    {
+        DetailAST forInitAST = aAST.findFirstToken(TokenTypes.FOR_INIT);
+        DetailAST parameterDefAST =
+            forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
+
+        for (; parameterDefAST != null;
+             parameterDefAST = (DetailAST) parameterDefAST.getNextSibling())
+        {
+            if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
+                final DetailAST param =
+                    parameterDefAST.findFirstToken(TokenTypes.IDENT);
+                mCurrentVariables.push(param.getText());
+            }
+        }
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * Pops the variables from the stack.
+     * @param aAST a for definition.
+     */
+    private void leaveForDef(DetailAST aAST)
+    {
+        DetailAST forInitAST = aAST.findFirstToken(TokenTypes.FOR_INIT);
+        DetailAST parameterDefAST =
+            forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
+
+        for (; parameterDefAST != null;
+             parameterDefAST = (DetailAST) parameterDefAST.getNextSibling())
+        {
+            if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
+                mCurrentVariables.pop();
+            }
+        }
+    }
+
