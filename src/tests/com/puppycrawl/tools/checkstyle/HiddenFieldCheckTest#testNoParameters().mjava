@@ -1,9 +1,9 @@
     public void testNoParameters()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(HiddenFieldCheck.class.getName());
-        checkConfig.addProperty("checkParameters", "false");
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(HiddenFieldCheck.class);
+        checkConfig.addAttribute("checkParameters", "false");
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputHiddenField.java");
         final String[] expected = {
