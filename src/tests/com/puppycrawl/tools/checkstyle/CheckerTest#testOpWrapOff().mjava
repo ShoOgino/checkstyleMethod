@@ -1,0 +1,13 @@
+    public void testOpWrapOff()
+        throws Exception
+    {
+        mConfig.setJavadocScope(Scope.NOTHING);
+        mConfig.setIgnoreOpWrap(true);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputOpWrap.java");
+        assertNotNull(c);
+        final String[] expected = {
+        };
+        verify(c, filepath, expected);
+    }
+
