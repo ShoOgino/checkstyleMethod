@@ -1,0 +1,40 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST startToken = aAST;
+        final DetailAST brace;
+
+        switch (aAST.getType()) {
+            case JavaTokenTypes.LITERAL_while:
+            case JavaTokenTypes.LITERAL_catch:
+            case JavaTokenTypes.LITERAL_synchronized:
+                brace = Utils.getLastSibling(aAST.getFirstChild());
+                break;
+            case JavaTokenTypes.LITERAL_try:
+            case JavaTokenTypes.LITERAL_finally:
+            case JavaTokenTypes.LITERAL_do:
+                brace = (DetailAST) aAST.getFirstChild();
+                break;
+            case JavaTokenTypes.LITERAL_else:
+                final DetailAST candidate = (DetailAST) aAST.getFirstChild();
+                if (candidate.getType() == JavaTokenTypes.SLIST) {
+                    brace = candidate;
+                }
+                else {
+                    // silently ignore
+                    brace = null;
+                }
+                break;
+            case JavaTokenTypes.LITERAL_switch:
+            case JavaTokenTypes.LITERAL_if:
+                brace = (DetailAST) aAST.getFirstChild().getNextSibling();
+                break;
+            default:
+                brace = null;
+        }
+
+        if (brace != null) {
+            verifyBrace(brace, startToken);
+        }
+    }
+

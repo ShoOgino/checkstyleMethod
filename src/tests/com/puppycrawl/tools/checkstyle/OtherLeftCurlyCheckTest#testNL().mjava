@@ -1,0 +1,14 @@
+    public void testNL()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(OtherLeftCurlyCheck.class.getName());
+        checkConfig.addProperty("option", LeftCurlyOption.NL.toString());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputLeftCurlyOther.java");
+        final String[] expected = {
+            "26:33: '{' should be on a new line."
+        };
+        verify(c, fname, expected);
+    }
+
