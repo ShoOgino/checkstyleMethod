@@ -1,0 +1,23 @@
+    /**
+     * Checks the C-style comments for todo expressions.
+     * @param aContents the <code>FileContents</code>
+     */
+    private void checkBadComments(FileContents aContents)
+    {
+        final Map allComments = aContents.getCComments();
+        final Iterator allIter = allComments.keySet().iterator();
+        while (allIter.hasNext()) {
+            final Integer key = (Integer) allIter.next();
+            final List lineComments = (List) allComments.get(key);
+            final Iterator lineIter = lineComments.iterator();
+            while (lineIter.hasNext()) {
+                final String[] cmt = (String[]) lineIter.next();
+                for (int i = 0; i < cmt.length; i++) {
+                    if (getRegexp().match(cmt[i])) {
+                        log(key.intValue() + i, "todo.match", getFormat());
+                    }
+                }
+            }
+        }
+    }
+
