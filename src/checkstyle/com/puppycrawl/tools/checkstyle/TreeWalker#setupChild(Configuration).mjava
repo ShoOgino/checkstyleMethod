@@ -1,0 +1,24 @@
+    /**
+     * Instantiates, configures and registers a Check that is specified
+     * in the provided configuration.
+     * @see com.puppycrawl.tools.checkstyle.api.AutomaticBean
+     */
+    public void setupChild(Configuration aChildConf)
+            throws CheckstyleException
+    {
+        // TODO: improve the error handing
+
+        // IMPORTANT! Need to use the same class loader that created this
+        // class. Otherwise can get ClassCastException problems.
+        final String name = aChildConf.getName();
+        final String[] packageNames = getPackageNames();
+        final Check check =
+                (Check) PackageObjectFactory.makeObject(
+                        packageNames, this.getClass().getClassLoader(), name);
+
+        check.contextualize(mChildContext);
+        check.configure(aChildConf);
+
+        registerCheck(check);
+    }
+

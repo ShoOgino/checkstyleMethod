@@ -5,6 +5,12 @@
     private static void initConverters()
     {
         // TODO: is there a smarter way to tell beanutils not to use defaults?
+
+        // If any runtime environment like ANT or an IDE would use beanutils
+        // with different converters we would really be stuck here.
+        // Having to configure a static utility class in this way is really
+        // strange, it seems like a design problem in BeanUtils
+
         boolean[] booleanArray = new boolean[0];
         byte[] byteArray = new byte[0];
         char[] charArray = new char[0];

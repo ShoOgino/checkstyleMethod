@@ -1,0 +1,12 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Configurable */
+    public void finishLocalSetup()
+    {
+        DefaultContext checkContext = new DefaultContext();
+        checkContext.add("classLoader", mClassLoader);
+        checkContext.add("messages", mMessages);
+        // TODO: hmmm.. this looks less than elegant
+        checkContext.add("tabWidth", String.valueOf(mTabWidth));
+
+        mChildContext = checkContext;
+    }
+

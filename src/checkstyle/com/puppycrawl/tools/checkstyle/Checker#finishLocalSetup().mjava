@@ -1,0 +1,12 @@
+    /** @see AutomaticBean */
+    public void finishLocalSetup()
+            throws CheckstyleException
+    {
+        final Locale locale = new Locale(mLocaleLanguage, mLocaleCountry);
+        LocalizedMessage.setLocale(locale);
+
+        final DefaultContext context = new DefaultContext();
+        context.add("classLoader", mLoader);
+        mChildContext = context;
+    }
+

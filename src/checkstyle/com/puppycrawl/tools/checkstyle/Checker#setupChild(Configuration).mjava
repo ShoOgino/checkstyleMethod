@@ -1,0 +1,28 @@
+    /**
+     * Instantiates, configures and registers a FileSetCheck
+     * that is specified in the provided configuration.
+     * @see com.puppycrawl.tools.checkstyle.api.AutomaticBean
+     */
+    protected void setupChild(Configuration aChildConf)
+            throws CheckstyleException
+    {
+        final String name = aChildConf.getName();
+        try {
+            final FileSetCheck fsc =
+                    (FileSetCheck) PackageObjectFactory.makeObject(
+                            getPackageNames(),
+                            getClass().getClassLoader(),
+                            name);
+            fsc.setPackageNames(getPackageNames());
+            fsc.contextualize(mChildContext);
+            fsc.configure(aChildConf);
+            addFileSetCheck(fsc);
+        }
+        catch (Exception ex) {
+            // TODO i18n
+            throw new CheckstyleException(
+                    "cannot initialize filesetcheck with name "
+                    + name + " - " + ex.getMessage());
+        }
+    }
+
