@@ -10,7 +10,7 @@
      * @param aAST the sytax tree to check
      * @return if aAST is a return statment with a boolean literal.
      */
-    private boolean isBooleanLiteralReturnStatement(AST aAST)
+    private static boolean isBooleanLiteralReturnStatement(AST aAST)
     {
         if (aAST == null || aAST.getType() != TokenTypes.LITERAL_RETURN) {
             return false;
@@ -23,9 +23,6 @@
         }
 
         final AST value = expr.getFirstChild();
-
-        final int valueType = value.getType();
-        return ((valueType == TokenTypes.LITERAL_TRUE)
-                || (valueType == TokenTypes.LITERAL_FALSE));
+        return isBooleanLiteralType(value.getType());
     }
 
