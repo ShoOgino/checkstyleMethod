@@ -5,7 +5,10 @@
      */
     public static String getTokenName(int aID)
     {
-        final String name = (String) TOKEN_VALUE_TO_NAME.get(new Integer(aID));
+        if (aID > TOKEN_VALUE_TO_NAME.length - 1) {
+            throw new IllegalArgumentException("given id " + aID);
+        }
+        final String name = TOKEN_VALUE_TO_NAME[aID];
         if (name == null) {
             throw new IllegalArgumentException("given id " + aID);
         }
