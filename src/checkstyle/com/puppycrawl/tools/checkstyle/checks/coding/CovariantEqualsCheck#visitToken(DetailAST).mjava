@@ -1,0 +1,22 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.CLASS_DEF) {
+            //push
+            mClassStack.add(new ClassAttributes());
+        }
+        else {
+            // METHOD_DEF
+            if (!ScopeUtils.inInterfaceBlock(aAST) && isEqualsMethod(aAST)) {
+                final ClassAttributes attrs =
+                    (ClassAttributes) mClassStack.getLast();
+                if (hasObjectParameter(aAST)) {
+                    attrs.setHasEqualsObject();
+                }
+                else {
+                    attrs.addEqualsNode(aAST);
+                }
+            }
+        }
+    }
+

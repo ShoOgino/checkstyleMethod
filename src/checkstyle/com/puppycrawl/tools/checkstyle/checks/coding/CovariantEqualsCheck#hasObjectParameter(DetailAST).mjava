@@ -1,0 +1,25 @@
+    /**
+     * Tests whether a method definition AST has exactly one
+     * parameter of type Object.
+     * @param aAST the method definition AST to test.
+     * Precondition: aAST is a TokenTypes.METHOD_DEF node.
+     * @return true if aAST has exactly one parameter of type Object.
+     */
+    private boolean hasObjectParameter(DetailAST aAST)
+    {
+        // one parameter?
+        final DetailAST paramsNode =
+            aAST.findFirstToken(TokenTypes.PARAMETERS);
+        if (paramsNode.getChildCount() != 1) {
+            return false;
+        }
+
+        // parameter type "Object"?
+        final DetailAST paramNode =
+            paramsNode.findFirstToken(TokenTypes.PARAMETER_DEF);
+        final DetailAST typeNode = paramNode.findFirstToken(TokenTypes.TYPE);
+        final FullIdent fullIdent = FullIdent.createFullIdentBelow(typeNode);
+        final String name = fullIdent.getText();
+        return (name.equals("Object") || name.equals("java.lang.Object"));
+    }
+

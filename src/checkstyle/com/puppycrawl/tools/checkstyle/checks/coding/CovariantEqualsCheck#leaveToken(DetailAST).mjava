@@ -1,0 +1,19 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void leaveToken(DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.CLASS_DEF) {
+            //pop and report equals errors
+            final ClassAttributes attrs =
+                (ClassAttributes) mClassStack.removeLast();
+            final Set equalsNodes = attrs.getEqualsNodes();
+            final Iterator it = equalsNodes.iterator();
+            while (it.hasNext()) {
+                final DetailAST equalsAST = (DetailAST) it.next();
+                final DetailAST nameNode =
+                    equalsAST.findFirstToken(TokenTypes.IDENT);
+                log(nameNode.getLineNo(), nameNode.getColumnNo(),
+                        "covariant.equals");
+            }
+        }
+    }
+
