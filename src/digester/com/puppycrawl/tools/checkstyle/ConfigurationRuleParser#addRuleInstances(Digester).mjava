@@ -7,5 +7,11 @@
         aDigester.addRule(
             "*/config-create-rule", new PatternRule("pattern"));
         aDigester.addSetNext("*/config-create-rule", "add", ruleClassName);
+        
+        aDigester.addFactoryCreate(
+            "*/config", new ConfigRuleFactory());
+        aDigester.addRule(
+            "*/config", new PatternRule("pattern"));
+        aDigester.addSetNext("*/config", "add", ruleClassName);
     }
 
