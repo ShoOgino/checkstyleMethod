@@ -1,0 +1,24 @@
+    /**
+     * Tests whether the scope of a field or method is compatible
+     * with the scope of this check. References for compatible
+     * fields or methods should be checked.
+     * @param aFieldOrMethod the field or method to check.
+     * @return true if the scope of aFieldOrMethod is compatible
+     * with the scope of this check.
+     */
+    private boolean equalScope(FieldOrMethod aFieldOrMethod)
+    {
+        if (aFieldOrMethod.isPrivate()) {
+            return (mScope == Scope.PRIVATE);
+        }
+        else if (aFieldOrMethod.isProtected()) {
+            return (mScope == Scope.PROTECTED);
+        }
+        else if (aFieldOrMethod.isPublic()) {
+            return (mScope == Scope.PUBLIC);
+        }
+        else {
+            return (mScope == Scope.PACKAGE);
+        }
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Determines whether a class name and field or method should be ignored.
+     * @param aClassName the class name.
+     * @param aName the name.
+     * @return true if aClassName and aName should be ignored.
+     */
+    protected boolean ignore(String aClassName, FieldOrMethod aFieldOrMethod)
+    {
+        final String fieldOrMethodName = aFieldOrMethod.getName();
+        return (!equalScope(aFieldOrMethod)
+            || mIgnoreClassNameRegexp.match(aClassName)
+            || mIgnoreNameRegexp.match(fieldOrMethodName));
+    }
+
