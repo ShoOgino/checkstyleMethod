@@ -1,0 +1,18 @@
+    public void visitToken(DetailAST aAST)
+    {
+        final String[] lines = getLines();
+        final String line = lines[aAST.getLineNo() - 1];
+        final int before = aAST.getColumnNo() - 1;
+        final int after = aAST.getColumnNo() + aAST.getText().length();
+
+        if ((before >= 0) && !Character.isWhitespace(line.charAt(before))) {
+            log(aAST.getLineNo(), "NO LEADING SPACE for " + aAST.getText());
+        }
+
+        if ((after < line.length())
+            && !Character.isWhitespace(line.charAt(after)))
+        {
+            log(aAST.getLineNo(), "NO TRAILING SPACE for " + aAST.getText());
+        }
+    }
+

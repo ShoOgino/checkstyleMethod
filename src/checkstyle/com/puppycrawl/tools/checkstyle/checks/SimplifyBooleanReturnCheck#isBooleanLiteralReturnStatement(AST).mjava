@@ -1,0 +1,13 @@
+    private boolean isBooleanLiteralReturnStatement(AST aAST)
+    {
+        if (aAST.getType() != JavaTokenTypes.LITERAL_return)
+            return false;
+
+        AST expr = aAST.getFirstChild();
+        AST value = expr.getFirstChild();
+
+        int valueType = value.getType();
+        return ( valueType == JavaTokenTypes.LITERAL_true
+                || valueType == JavaTokenTypes.LITERAL_false );
+    }
+

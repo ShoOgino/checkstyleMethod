@@ -1,0 +1,10 @@
+    private boolean returnsOnlyBooleanLiteral(AST aAST)
+    {
+        if (isBooleanLiteralReturnStatement(aAST)) {
+            return true;
+        }
+
+        AST firstStmnt = aAST.getFirstChild();
+        return isBooleanLiteralReturnStatement(firstStmnt);
+    }
+

@@ -1,0 +1,12 @@
+    public void finishTree()
+    {
+        // loop over all the imports to see if referenced.
+        final Iterator it = mImports.iterator();
+        while (it.hasNext()) {
+            final String imp = (String) it.next();
+            if (!mReferenced.contains(basename(imp))) {
+                log(666, "unused import " + imp);
+            }
+        }
+    }
+

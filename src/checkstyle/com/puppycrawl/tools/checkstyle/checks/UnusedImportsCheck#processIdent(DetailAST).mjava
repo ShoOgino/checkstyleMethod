@@ -1,0 +1,15 @@
+    private void processIdent(DetailAST aAST)
+    {
+        // TODO: should be a lot smarter in selection. Currently use
+        // same algorithm as real checkstyle
+        final DetailAST parent = aAST.getParent();
+        if (parent.getType() == JavaTokenTypes.DOT) {
+            if (aAST.getNextSibling() != null) {
+                mReferenced.add(aAST.getText());
+            }
+        }
+        else {
+            mReferenced.add(aAST.getText());
+        }
+    }
+

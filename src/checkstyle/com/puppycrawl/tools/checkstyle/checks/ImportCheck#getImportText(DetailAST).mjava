@@ -1,0 +1,14 @@
+    protected String getImportText(DetailAST aAST)
+    {
+        String text = (String) getTokenContext().get(TEXT_KEY);
+        if (text != null) {
+            return text;
+        }
+
+        final StringBuffer buf = new StringBuffer();
+        extractIdent(buf, (DetailAST) aAST.getFirstChild());
+        text = buf.toString();
+        getTokenContext().put(TEXT_KEY, text);
+        return text;
+    }
+

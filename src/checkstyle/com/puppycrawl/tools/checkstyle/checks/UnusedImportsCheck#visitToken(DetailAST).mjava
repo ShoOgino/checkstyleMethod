@@ -1,0 +1,17 @@
+    public void visitToken(DetailAST aAST)
+    {
+        if (aAST.getType() == JavaTokenTypes.IDENT) {
+            if (mCollect) {
+                processIdent(aAST);
+            }
+        }
+        else if (aAST.getType() == JavaTokenTypes.IMPORT) {
+            processImport(aAST);
+        }
+        else if ((aAST.getType() == JavaTokenTypes.CLASS_DEF)
+            || (aAST.getType() == JavaTokenTypes.INTERFACE_DEF))
+        {
+            mCollect = true;
+        }
+    }
+

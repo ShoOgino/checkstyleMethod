@@ -1,0 +1,23 @@
+    public void visitToken(DetailAST aAST)
+    {
+        // paranoia - what an untrusting sole :-)
+        if (aAST.getType() != JavaTokenTypes.LITERAL_if) {
+            throw new IllegalArgumentException("not an if");
+        }
+
+        // don't bother if this is not if then else
+        if (aAST.getChildCount() != 3) {
+            return;
+        }
+
+        AST condition = aAST.getFirstChild();
+        AST thenStatement = condition.getNextSibling();
+        AST elseStatement = thenStatement.getNextSibling();
+
+        if (returnsOnlyBooleanLiteral(thenStatement)
+                && returnsOnlyBooleanLiteral(elseStatement))
+        {
+            log(aAST.getLineNo(), "Remove conditional logic.");
+        }
+    }
+

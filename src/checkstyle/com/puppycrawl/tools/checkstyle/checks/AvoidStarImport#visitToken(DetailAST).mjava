@@ -1,0 +1,8 @@
+    public void visitToken(DetailAST aAST)
+    {
+        final String name = getImportText(aAST);
+        if ((name != null) && name.endsWith(".*")) {
+            log(aAST.getLineNo(), "Avoid STAR import - " + name);
+        }
+    }
+

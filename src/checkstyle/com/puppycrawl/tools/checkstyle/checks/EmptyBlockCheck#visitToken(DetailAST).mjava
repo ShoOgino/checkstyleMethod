@@ -1,0 +1,17 @@
+    public void visitToken(DetailAST aAST)
+    {
+        // defend against users that change the token set in the config file.
+        if (aAST.getType() != JavaTokenTypes.SLIST) {
+            return;
+        }
+
+        if (aAST.getChildCount() == 0) {
+            DetailAST parent = aAST.getParent();
+            String parentText = parent.getText();
+            if (mCheckFor.contains(parentText)) {
+                log(aAST.getLineNo(), "empty " + parentText + " block");
+            }
+        }
+
+    }
+

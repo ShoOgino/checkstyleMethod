@@ -1,0 +1,17 @@
+    public void visitToken(DetailAST aAST)
+    {
+        final List mods = new ArrayList();
+        AST modifier = aAST.getFirstChild();
+        while (modifier != null) {
+            mods.add(modifier);
+            modifier = modifier.getNextSibling();
+        }
+
+        if (!mods.isEmpty()) {
+            final DetailAST error = checkOrderSuggestedByJLS(mods);
+            if (error != null) {
+                log(error.getLineNo(), "OUT OF ORDER " + error.getText());
+            }
+        }
+    }
+
