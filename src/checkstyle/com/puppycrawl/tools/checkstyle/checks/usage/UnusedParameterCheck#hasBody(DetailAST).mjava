@@ -1,0 +1,17 @@
+    /**
+     * Determines whether an AST is a method definition with a body, or is
+     * a constructor definition.
+     * @param aAST the AST to check.
+     * @return if AST has a body.
+     */
+    private boolean hasBody(DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.METHOD_DEF) {
+            return aAST.branchContains(TokenTypes.SLIST);
+        }
+        else if (aAST.getType() == TokenTypes.CTOR_DEF) {
+            return true;
+        }
+        return false;
+    }
+
