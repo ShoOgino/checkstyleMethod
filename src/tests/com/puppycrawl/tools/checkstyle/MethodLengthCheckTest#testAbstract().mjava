@@ -1,7 +1,7 @@
     public void testAbstract() throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(MethodLengthCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(MethodLengthCheck.class);
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputModifier.java");
         final String[] expected = {
