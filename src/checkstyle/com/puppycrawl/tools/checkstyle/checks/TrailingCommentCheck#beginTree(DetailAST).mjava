@@ -11,20 +11,9 @@
         final Iterator linesIter = lines.iterator();
         while (linesIter.hasNext()) {
             final Integer lineNo = (Integer) linesIter.next();
-            // I don't want handle several comments on one line :(
-            // Perhaps I'm wrong :)
-            if (cppComments.containsKey(lineNo)
-                && cComments.containsKey(lineNo)
-                || cComments.containsKey(lineNo)
-                && ((List) cComments.get(lineNo)).size() > 1)
-            {
-                log(lineNo.intValue(), "Too many comments.");
-                continue;
-            }
 
             final String line = getLines()[lineNo.intValue() - 1];
             String lineBefore = "";
-            String lineAfter = "";
             if (cppComments.containsKey(lineNo)) {
                 final TextBlock comment = (TextBlock) cppComments.get(lineNo);
                 lineBefore = line.substring(0, comment.getStartColNo());
@@ -32,14 +21,18 @@
             else if (cComments.containsKey(lineNo)) {
                 final List commentList = (List) cComments.get(lineNo);
                 final TextBlock comment =
-                    (TextBlock) commentList.iterator().next();
+                    (TextBlock) commentList.get(commentList.size() - 1);
                 lineBefore = line.substring(0, comment.getStartColNo());
                 if (comment.getText().length == 1) {
-                    lineAfter = line.substring(comment.getEndColNo() + 1);
+                    String lineAfter =
+                        line.substring(comment.getEndColNo() + 1).trim();
+                    if (!"".equals(lineAfter)) {
+                        // do not check comment which doesn't end line
+                        continue;
+                    }
                 }
             }
-            lineAfter = lineAfter.trim();
-            if (!blankLinePattern.match(lineBefore) || !"".equals(lineAfter)) {
+            if (!blankLinePattern.match(lineBefore)) {
                 log(lineNo.intValue(), "trailing.comments");
             }
         }
