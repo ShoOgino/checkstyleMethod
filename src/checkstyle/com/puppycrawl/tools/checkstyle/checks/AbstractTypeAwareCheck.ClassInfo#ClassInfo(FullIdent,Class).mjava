@@ -1,0 +1,16 @@
+        /**
+         * Creates new instance of of class information object.
+         * @param aName <code>FullIdent</code> associated with new object.
+         * @param aClass <code>Class</code> associated with new object
+         *               or null id class is not loadable.
+         */
+        public ClassInfo(FullIdent aName, Class aClass)
+        {
+            if (aName == null && aClass == null) {
+                throw new NullPointerException(
+                    "ClassInfo's name or class should be non-null");
+            }
+            mName = aName;
+            setClazz(aClass);
+        }
+

@@ -20,36 +20,43 @@
             // Loop looking for matching throw
             final String documentedEx = tag.getArg1();
             boolean found = foundThrows.contains(documentedEx);
+            Class documentedClass = null;
+            if (!found
+                && (mAllowThrowsTagsForSubclasses || mAllowUndeclaredRTE))
+            {
+                documentedClass = resolveClass(documentedEx);
+                if (documentedClass == null) {
+                    log(tag.getLineNo(), "javadoc.classInfo",
+                        "@throws", documentedEx);
+                }
+            }
+
             final ListIterator throwIt = aThrows.listIterator();
             while (!found && throwIt.hasNext()) {
                 final ExceptionInfo ei = (ExceptionInfo) throwIt.next();
-                final FullIdent fi = ei.getFullIdent();
+                final FullIdent fi = ei.getName();
                 final String declaredEx = fi.getText();
                 if (isSameType(declaredEx, documentedEx)) {
                     found = true;
                     ei.setFound();
                     foundThrows.add(documentedEx);
                 }
-                else if (mAllowThrowsTagsForSubclasses) {
-                    final ClassResolver cr = getClassResolver();
-                    try {
-                        final Class documentedClass = cr.resolve(documentedEx);
-                        try {
-                            final Class declaredClass = cr.resolve(declaredEx);
-                            found =
-                                declaredClass.isAssignableFrom(documentedClass);
-                            if (found) {
-                                ei.setFound();
-                            }
-                        }
-                        catch (ClassNotFoundException e) {
-                            log(tag.getLineNo(), "javadoc.classInfo",
+                else if (mAllowThrowsTagsForSubclasses
+                         && documentedClass != null)
+                {
+                    if (ei.isLoadable() && ei.getClazz() == null) {
+                        // if the class is not loaded yet.
+                        // try to load it.
+                        ei.setClazz(resolveClass(declaredEx));
+                        if (!ei.isLoadable()) {
+                            log(fi.getLineNo(), "javadoc.classInfo",
                                 "@throws", declaredEx);
                         }
                     }
-                    catch (ClassNotFoundException e) {
-                        log(tag.getLineNo(), "javadoc.classInfo",
-                                      "@throws", documentedEx);
+
+                    found = isSubclass(documentedClass, ei.getClazz());
+                    if (found) {
+                        ei.setFound();
                     }
                 }
             }
@@ -57,18 +64,8 @@
             // Handle extra JavadocTag.
             if (!found) {
                 boolean reqd = true;
-                if (mAllowUndeclaredRTE) {
-                    final ClassResolver cr = getClassResolver();
-                    try {
-                        final Class clazz = cr.resolve(tag.getArg1());
-                        reqd =
-                            !RuntimeException.class.isAssignableFrom(clazz)
-                                && !Error.class.isAssignableFrom(clazz);
-                    }
-                    catch (ClassNotFoundException e) {
-                        log(tag.getLineNo(), "javadoc.classInfo",
-                                      "@throws", tag.getArg1());
-                    }
+                if (mAllowUndeclaredRTE && documentedClass != null) {
+                    reqd = !isUnchecked(documentedClass);
                 }
 
                 if (reqd) {
@@ -85,7 +82,7 @@
             while (throwIt.hasNext()) {
                 final ExceptionInfo ei = (ExceptionInfo) throwIt.next();
                 if (!ei.isFound()) {
-                    final FullIdent fi = ei.getFullIdent();
+                    final FullIdent fi = ei.getName();
                     log(fi.getLineNo(), fi.getColumnNo(),
                         "javadoc.expectedTag", "@throws", fi.getText());
                 }
