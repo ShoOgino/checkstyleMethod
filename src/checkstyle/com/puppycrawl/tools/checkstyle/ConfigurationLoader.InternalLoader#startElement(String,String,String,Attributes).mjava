@@ -1,0 +1,44 @@
+        /** @see org.xml.sax.helpers.DefaultHandler **/
+        public void startElement(String aNamespaceURI,
+                                 String aLocalName,
+                                 String aQName,
+                                 Attributes aAtts)
+                throws SAXException
+        {
+            // TODO: debug logging for support puposes
+            if (aQName.equals("module")) {
+                //create configuration
+                final String name = aAtts.getValue("name");
+                DefaultConfiguration conf = new DefaultConfiguration(name);
+                if (mConfiguration == null) {
+                    mConfiguration = conf;
+                }
+
+                //add configuration to it's parent
+                if (!mConfigStack.isEmpty()) {
+                    final DefaultConfiguration top =
+                            (DefaultConfiguration) mConfigStack.peek();
+                    top.addChild(conf);
+                }
+
+                mConfigStack.push(conf);
+            }
+            else if (aQName.equals("property")) {
+                //extract name and value
+                final String name = aAtts.getValue("name");
+                final String value;
+                try {
+                    value = replaceProperties(aAtts.getValue("value"),
+                        mOverrideProps);
+                }
+                catch (CheckstyleException ex) {
+                    throw new SAXException(ex.getMessage());
+                }
+
+                //add to attributes of configuration
+                final DefaultConfiguration top =
+                    (DefaultConfiguration) mConfigStack.peek();
+                top.addAttribute(name, value);
+            }
+        }
+
