@@ -4,11 +4,9 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(IllegalImportCheck.class);
         checkConfig.addAttribute("illegalPkgs", "java.io");
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputImport.java");
         final String[] expected = {
             "9:1: Import from illegal package - java.io.*.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputImport.java"), expected);
     }
 
