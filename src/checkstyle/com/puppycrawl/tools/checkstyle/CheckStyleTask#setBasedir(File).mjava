@@ -1,0 +1,10 @@
+    /** @param aBasedir set the base directory **/
+    public void setBasedir(final File aBasedir)
+    {
+        if (!aBasedir.isDirectory()) {
+            throw new BuildException("basedir must specify a directory.",
+                                     location);
+        }
+        mConfig.setBasedir(aBasedir.getAbsolutePath());
+    }
+
