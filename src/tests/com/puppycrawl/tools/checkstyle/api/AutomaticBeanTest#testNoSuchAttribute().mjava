@@ -1,0 +1,15 @@
+    public void testNoSuchAttribute()
+    {
+        mConf.addAttribute("NonExisting", "doesn't matter");
+        try {
+            mTestBean.configure(mConf);
+            fail("AutomaticBean.configure() accepted nonexisting attribute name");
+        }
+        catch (CheckstyleException ex)
+        {
+            // expected exception
+        }
+        assertEquals(mTestBean.mName, null);
+
+    }
+
