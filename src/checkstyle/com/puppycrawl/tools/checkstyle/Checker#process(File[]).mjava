@@ -8,12 +8,12 @@
      */
     public int process(File[] aFiles)
     {
-        int total = 0;
         fireAuditStarted();
         for (int i = 0; i < aFiles.length; i++) {
-            total += process(aFiles[i]);
+            process(aFiles[i]);
         }
+        int errorCount = mCounter.getCount();
         fireAuditFinished();
-        return total;
+        return errorCount;
     }
 

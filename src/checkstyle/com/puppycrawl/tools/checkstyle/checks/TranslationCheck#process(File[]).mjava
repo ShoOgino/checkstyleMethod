@@ -7,11 +7,11 @@
      *
      * @see com.puppycrawl.tools.checkstyle.api.FileSetCheck
      */
-    public int process(File[] files)
+    public void process(File[] files)
     {
         Set dirs = getParentDirs(files);
         Set propertyFiles = getPropertyFiles(dirs);
         final Map propFilesMap = arrangePropertyFiles(propertyFiles);
-        return checkPropertyFileSets(propFilesMap);
+        checkPropertyFileSets(propFilesMap);
     }
 

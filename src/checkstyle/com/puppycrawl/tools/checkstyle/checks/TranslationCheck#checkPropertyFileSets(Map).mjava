@@ -7,11 +7,9 @@
      * which file.
      *
      * @param propFiles the property files organized as Map
-     * @return the number of inconsistencies detected
      */
-    private static int checkPropertyFileSets(Map propFiles)
+    private void checkPropertyFileSets(Map propFiles)
     {
-        int res = 0;
         Set keySet = propFiles.keySet();
 
         for (Iterator iterator = keySet.iterator(); iterator.hasNext();) {
@@ -31,9 +29,8 @@
                 }
 
                 // check the map for consistency
-                res = res + compareKeySets(keys, fileMap);
+                compareKeySets(keys, fileMap);
             }
         }
-        return res;
     }
 

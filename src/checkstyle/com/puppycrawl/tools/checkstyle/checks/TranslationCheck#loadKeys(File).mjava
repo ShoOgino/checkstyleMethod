@@ -3,7 +3,7 @@
      * @param file the property file
      * @return a Set object which holds the loaded keys
      */
-    private static Set loadKeys(File file)
+    private Set loadKeys(File file)
     {
         InputStream inputStream = null;
         Set keys = new HashSet();
@@ -20,19 +20,15 @@
                 keys.add(e.nextElement());
             }
         }
-        catch (FileNotFoundException e) {
-            System.out.println(
-                    "The file " + file.getName() + " could not be found!");
-        }
         catch (IOException e) {
-            System.out.println("IOException occured");
+            logIOException(e, file);
         }
         finally {
             try {
                 inputStream.close();
             }
             catch (IOException e) {
-                System.out.println("IOException occured");
+                logIOException(e, file);
             }
         }
         return keys;

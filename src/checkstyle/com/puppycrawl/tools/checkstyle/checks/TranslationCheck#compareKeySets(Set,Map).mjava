@@ -3,16 +3,16 @@
      * with the specified key set. All missing keys are reported.
      * @param keys the set of keys to compare with
      * @param fileMap a Map from property files to their key sets
-     * @return the number of inconsistencies detected
      */
-    private static int compareKeySets(Set keys, Map fileMap)
+    private void compareKeySets(Set keys, Map fileMap)
     {
         Set fls = fileMap.keySet();
-        int res = 0;
 
         for (Iterator iter = fls.iterator(); iter.hasNext();) {
             File currentFile = (File) iter.next();
-            // TODO: fire file started
+            final MessageDispatcher dispatcher = getMessageDispatcher();
+            final String path = currentFile.getPath();
+            dispatcher.fireFileStarted(path);
             Set currentKeys = (Set) fileMap.get(currentFile);
 
             // Clone the keys so that they are not lost
@@ -22,14 +22,15 @@
             // Remaining elements in the key set are missing in the current file
             if (!keysClone.isEmpty()) {
                 for (Iterator it = keysClone.iterator(); it.hasNext();) {
-                    // TODO: fire errors to reporting system
-                    System.out.println(currentFile.getPath()
-                            + ": key \"" + (String) it.next() + "\" missing");
-                    res++;
+                    Object[] key = new Object[]{it.next()};
+                    LocalizedMessage[] errors = new LocalizedMessage[1];
+                    final String bundle = getClass().getName() + ".messages";
+                    errors[0] = new LocalizedMessage(
+                            0, bundle, "translation.missingKey", key);
+                    getMessageDispatcher().fireErrors(path, errors);
                 }
             }
-            // TODO: fire file finished
+            dispatcher.fireFileFinished(path);
         }
-        return res;
     }
 

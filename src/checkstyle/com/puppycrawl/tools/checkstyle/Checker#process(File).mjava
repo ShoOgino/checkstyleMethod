@@ -1,15 +1,14 @@
     /**
-     * Processes a specified file and prints out all errors found.
-     * @return the number of errors found
+     * Processes a specified file and reports all errors found.
      * @param aFile the file to process
      **/
-    private int process(File aFile)
+    private void process(File aFile)
     {
         // check if already checked and passed the file
         final String fileName = aFile.getPath();
         final long timestamp = aFile.lastModified();
         if (mCache.alreadyChecked(fileName, timestamp)) {
-            return 0;
+            return;
         }
 
         mMessages.reset();
@@ -49,6 +48,5 @@
         }
 
         fireFileFinished(fileName);
-        return mMessages.size();
     }
 
