@@ -1,0 +1,11 @@
+    public void testDefault() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(PackageDeclarationCheck.class);
+
+        String[] expected = {
+            "4: Missing package declaration.",
+        };
+
+        verify(checkConfig, getPath("coding" + File.separator + "InputNoPackage.java"), expected);
+    }
+
