@@ -1,14 +1,13 @@
     public void testNoCheck()
         throws CheckstyleException
     {
-        try
-        {
-            final FilterChain fc =
-                SuppressionsLoader.loadSuppressions(
-                    "src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_no_check.xml");
+        try {
+            SuppressionsLoader.loadSuppressions(
+                "src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_no_check.xml");
         }
         catch (CheckstyleException ex) {
-            assertEquals("unable to parse src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_no_check.xml - Attribute \"checks\" is required and must be specified for element type \"suppress\".",
+            assertEquals(
+                "unable to parse src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_no_check.xml - Attribute \"checks\" is required and must be specified for element type \"suppress\".",
                 ex.getMessage());
         }
     }

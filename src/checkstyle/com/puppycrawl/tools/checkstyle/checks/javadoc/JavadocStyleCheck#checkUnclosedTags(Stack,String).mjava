@@ -1,0 +1,40 @@
+    /**
+     * Checks to see if there are any unclosed tags on the stack.  The token
+     * represents a html tag that has been closed and has a corresponding open
+     * tag on the stack.  Any tags, except single tags, that were opened
+     * (pushed on the stack) after the token are missing a close.
+     *
+     * @param aHtmlStack the stack of opened HTML tags.
+     * @param aToken the current HTML tag name that has been closed.
+     */
+    private void checkUnclosedTags(Stack aHtmlStack, String aToken)
+    {
+        final Stack unclosedTags = new Stack();
+        HtmlTag lastOpenTag = (HtmlTag) aHtmlStack.pop();
+        while (!aToken.equalsIgnoreCase(lastOpenTag.getId())) {
+            // Find unclosed elements. Put them on a stack so the
+            // output order won't be back-to-front.
+            if (isSingleTag(lastOpenTag)) {
+                lastOpenTag = (HtmlTag) aHtmlStack.pop();
+            }
+            else {
+                unclosedTags.push(lastOpenTag);
+                lastOpenTag = (HtmlTag) aHtmlStack.pop();
+            }
+        }
+
+        // Output the unterminated tags, if any
+        String lastFound = ""; // Skip multiples, like <b>..<b>
+        for (int i = 0; i < unclosedTags.size(); i++) {
+            lastOpenTag = (HtmlTag) unclosedTags.get(i);
+            if (lastOpenTag.getId().equals(lastFound)) {
+                continue;
+            }
+            lastFound = lastOpenTag.getId();
+            log(lastOpenTag.getLineno(),
+                lastOpenTag.getPosition(),
+                UNCLOSED_HTML,
+                lastOpenTag);
+        }
+    }
+

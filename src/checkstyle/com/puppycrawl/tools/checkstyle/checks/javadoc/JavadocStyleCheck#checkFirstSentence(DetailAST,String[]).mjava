@@ -1,0 +1,20 @@
+    /**
+     * Checks that the first sentence ends with proper puctuation.  This method
+     * uses a regular expression that checks for the presence of a period,
+     * question mark, or exclaimation mark followed either by whitespace, an
+     * HTML element, or the end of string.
+     *
+     * @param aAST (Abstract Syntax Tree) the token to process.
+     * @param aComment the source lines that make up the Javadoc comment.
+     */
+    private void checkFirstSentence(DetailAST aAST, String[] aComment)
+    {
+        final String commentText = getCommentText(aComment);
+
+        if ((commentText.length() != 0)
+            && !getEndOfSentenceRE().match(commentText))
+        {
+            log(aAST.getLineNo() - aComment.length, "javadoc.noperiod");
+        }
+    }
+

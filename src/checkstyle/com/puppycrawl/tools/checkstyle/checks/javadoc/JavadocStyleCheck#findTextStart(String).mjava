@@ -1,0 +1,28 @@
+    /**
+     * Finds the index of the first non-whitespace character ignoring the
+     * Javadoc comment start and end strings (&#47** and *&#47) as well as any
+     * leading asterisk.
+     * @param aLine the Javadoc comment line of text to scan.
+     * @return the int index relative to 0 for the start of text
+     *         or -1 if not found.
+     */
+    private int findTextStart(String aLine)
+    {
+        int textStart = -1;
+        for (int i = 0; i < aLine.length(); i++) {
+            if (!Character.isWhitespace(aLine.charAt(i))) {
+                if (aLine.regionMatches(i, "/**", 0, 3)) {
+                    i += 2;
+                }
+                else if (aLine.regionMatches(i, "*/", 0, 2)) {
+                    i++;
+                }
+                else if (aLine.charAt(i) != '*') {
+                    textStart = i;
+                    break;
+                }
+            }
+        }
+        return textStart;
+    }
+

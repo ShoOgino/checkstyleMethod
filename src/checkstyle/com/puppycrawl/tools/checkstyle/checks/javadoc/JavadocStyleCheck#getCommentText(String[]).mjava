@@ -1,0 +1,38 @@
+    /**
+     * Returns the comment text from the Javadoc.
+     * @param aComments the lines of Javadoc.
+     * @return a comment text String.
+     */
+    private String getCommentText(String[] aComments)
+    {
+        final StringBuffer buffer = new StringBuffer();
+        boolean foundTag = false;
+
+        for (int i = 0; i < aComments.length; i++) {
+            String line = aComments[i];
+            final int textStart = findTextStart(line);
+
+            if (textStart != -1) {
+                // Look for Javadoc tag that's not a @link since can appear
+                // within the comment text.
+                final int ndx = line.indexOf('@');
+                if ((ndx != -1)
+                    && !line.regionMatches(ndx + 1, "link", 0, "link".length()))
+                {
+                    foundTag = true;
+                    line = line.substring(0, ndx);
+                }
+
+                buffer.append(line.substring(textStart));
+                trimTail(buffer);
+                buffer.append('\n');
+
+                if (foundTag) {
+                    break;
+                }
+            }
+        }
+
+        return buffer.toString().trim();
+    }
+

@@ -1,0 +1,13 @@
+    /**
+     * Returns this HTML tag and trailing text.
+     * Used for displaying a Checkstyle error.
+     * @return the String text of this tag.
+     */
+    public String toString()
+    {
+        final int startOfText = mPosition;
+        final int endOfText =
+            Math.min(startOfText + HtmlTag.MAX_TEXT_LEN, mText.length());
+        return mText.substring(startOfText, endOfText);
+    }
+

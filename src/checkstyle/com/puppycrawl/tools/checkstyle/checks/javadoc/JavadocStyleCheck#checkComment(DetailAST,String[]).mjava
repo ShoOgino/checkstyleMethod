@@ -1,0 +1,23 @@
+    /**
+     * Performs the various checks agains the Javadoc comment.
+     *
+     * @param aAST (Abstract Syntax Tree) the token to process.
+     * @param aComment the source lines that make up the Javadoc comment.
+     *
+     * @see #checkFirstSentence(DetailAST, String[])
+     */
+    private void checkComment(DetailAST aAST, String[] aComment)
+    {
+        if (aComment == null) {
+            return;
+        }
+
+        if (mCheckFirstSentence) {
+            checkFirstSentence(aAST, aComment);
+        }
+
+        if (mCheckHtml) {
+            checkHtml(aAST, aComment);
+        }
+    }
+

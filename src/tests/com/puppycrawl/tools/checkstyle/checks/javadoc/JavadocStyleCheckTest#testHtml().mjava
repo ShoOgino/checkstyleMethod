@@ -1,0 +1,18 @@
+   public void testHtml() throws Exception
+   {
+      final DefaultConfiguration checkConfig = createCheckConfig(JavadocStyleCheck.class);
+      checkConfig.addAttribute("checkFirstSentence", "false");
+      checkConfig.addAttribute("checkHtml", "true");
+      final String[] expected =
+         {
+            "63:11: Unclosed HTML tag found: <b>This guy is missing end of bold tag",
+            "66:7: Extra HTML tag found: </td>Extra tag shouldn't be here",
+            "68:19: Unclosed HTML tag found: <code>dummy.",
+            "75:23: Unclosed HTML tag found: <b>should fail",
+            "82:31: Unclosed HTML tag found: <b>should fail",
+            "89:31: Extra HTML tag found: </code>"
+         };
+
+      verify(checkConfig, getPath("InputJavadocStyleCheck.java"), expected);
+  }
+

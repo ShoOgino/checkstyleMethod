@@ -1,0 +1,27 @@
+    /**
+     * Determines if the given token is an extra HTML tag. This indicates that
+     * a close tag was found that does not have a corresponding open tag.
+     *
+     * @param aToken an HTML tag id for which a close was found.
+     * @param aHtmlStack a Stack of previous open HTML tags.
+     * @return <code>false</code> if a previous open tag was found
+     *         for the token.
+     */
+    private boolean isExtraHtml(String aToken, Stack aHtmlStack)
+    {
+        boolean isExtra = true;
+        for (int i = 0; i < aHtmlStack.size(); i++) {
+            // Loop, looking for tags that are closed.
+            // The loop is needed in case there are unclosed
+            // tags on the stack. In that case, the stack would
+            // not be empty, but this tag would still be extra.
+            HtmlTag td = (HtmlTag) aHtmlStack.elementAt(i);
+            if (aToken.equalsIgnoreCase(td.getId())) {
+                isExtra = false;
+                break;
+            }
+        }
+
+        return isExtra;
+    }
+

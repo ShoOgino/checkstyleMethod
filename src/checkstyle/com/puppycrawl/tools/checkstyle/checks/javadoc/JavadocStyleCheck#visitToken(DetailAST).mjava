@@ -1,0 +1,32 @@
+    /**
+     * Called to process a token.
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        if (!ScopeUtils.inCodeBlock(aAST)) {
+            final DetailAST mods =
+                aAST.findFirstToken(TokenTypes.MODIFIERS);
+            final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
+            final Scope variableScope =
+                ScopeUtils.inInterfaceBlock(aAST)
+                    ? Scope.PUBLIC
+                    : declaredScope;
+
+            if (variableScope.isIn(mScope)) {
+                final Scope surroundingScope =
+                    ScopeUtils.getSurroundingScope(aAST);
+
+                if ((surroundingScope == null)
+                    || surroundingScope.isIn(mScope))
+                {
+                    final FileContents contents = getFileContents();
+                    final String[] cmt =
+                        contents.getJavadocBefore(aAST.getLineNo());
+
+                    checkComment(aAST, cmt);
+                }
+            }
+        }
+    }
+

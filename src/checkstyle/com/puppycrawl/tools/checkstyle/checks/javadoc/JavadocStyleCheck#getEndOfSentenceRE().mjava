@@ -1,0 +1,19 @@
+    /**
+     * Returns a regular expression for matching the end of a sentence.
+     *
+     * @return a regular expression for matching the end of a sentence.
+     */
+    private RE getEndOfSentenceRE()
+    {
+        if (mEndOfSentenceRE == null) {
+            try {
+                mEndOfSentenceRE = new RE("([.?!][ \t\n\r\f<])|([.?!]$)");
+            }
+            catch (RESyntaxException e) {
+                // This should never occur.
+                e.printStackTrace();
+            }
+        }
+        return mEndOfSentenceRE;
+    }
+
