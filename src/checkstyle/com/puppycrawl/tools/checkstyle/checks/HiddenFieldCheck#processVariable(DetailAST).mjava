@@ -11,7 +11,7 @@
                 //local variable or parameter. Does it shadow a field?
                 final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
                 final String name = nameAST.getText();
-                Iterator it = mFieldsStack.iterator();
+                final Iterator it = mFieldsStack.iterator();
                 while (it.hasNext()) {
                     final HashSet aFieldsSet = (HashSet) it.next();
                     if (aFieldsSet.contains(name)) {
@@ -20,12 +20,6 @@
                         break;
                     }
                 }
-            }
-            else {
-                //field. Add its name to the top stack element
-                final String name =
-                    aAST.findFirstToken(TokenTypes.IDENT).getText();
-                ((HashSet) mFieldsStack.getLast()).add(name);
             }
         }
     }
