@@ -5,8 +5,18 @@
         if (openingBrace != null) {
             final DetailAST closingBrace =
                 openingBrace.findFirstToken(TokenTypes.RCURLY);
-            final int length =
+            int length =
                 closingBrace.getLineNo() - openingBrace.getLineNo() + 1;
+
+            if (!mCountEmpty) {
+                final FileContents contents = getFileContents();
+                final int lastLine = closingBrace.getLineNo();
+                for (int i = openingBrace.getLineNo() - 1; i < lastLine; i++) {
+                    if (contents.lineIsBlank(i) || contents.lineIsComment(i)) {
+                        length--;
+                    }
+                }
+            }
             if (length > mMax) {
                 log(aAST.getLineNo(),
                     aAST.getColumnNo(),
