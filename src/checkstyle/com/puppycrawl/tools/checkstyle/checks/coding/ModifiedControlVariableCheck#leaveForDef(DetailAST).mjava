@@ -5,15 +5,21 @@
     private void leaveForDef(DetailAST aAST)
     {
         final DetailAST forInitAST = aAST.findFirstToken(TokenTypes.FOR_INIT);
-        DetailAST parameterDefAST =
-            forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
+        if (forInitAST != null) {
+            DetailAST parameterDefAST =
+                forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
 
-        for (; parameterDefAST != null;
-             parameterDefAST = (DetailAST) parameterDefAST.getNextSibling())
-        {
-            if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
-                mCurrentVariables.pop();
+            for (; parameterDefAST != null;
+                 parameterDefAST = (DetailAST) parameterDefAST.getNextSibling())
+            {
+                if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
+                    mCurrentVariables.pop();
+                }
             }
+        }
+        else {
+            // this is for-each loop, just pop veriables
+            mCurrentVariables.pop();
         }
     }
 

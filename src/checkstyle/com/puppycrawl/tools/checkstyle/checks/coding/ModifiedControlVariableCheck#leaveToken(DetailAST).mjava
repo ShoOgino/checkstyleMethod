@@ -3,7 +3,10 @@
     {
         switch (aAST.getType()) {
         case TokenTypes.FOR_ITERATOR:
-            visitForDef(aAST.getParent());
+            leaveForIter(aAST.getParent());
+            break;
+        case TokenTypes.FOR_EACH_CLAUSE:
+            leaveForEach(aAST);
             break;
         case TokenTypes.LITERAL_FOR:
             leaveForDef(aAST);
