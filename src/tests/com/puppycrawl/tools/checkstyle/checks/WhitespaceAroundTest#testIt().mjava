@@ -3,8 +3,6 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(WhitespaceAroundCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputWhitespace.java");
         final String[] expected = {
             "16:22: '=' is not preceeded with whitespace.",
             "16:23: '=' is not followed by whitespace.",
@@ -42,6 +40,6 @@
             "156:20: ':' is not preceeded with whitespace.",
             "156:21: ':' is not followed by whitespace.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputWhitespace.java"), expected);
     }
 

@@ -3,14 +3,12 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(WhitespaceAroundCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputBraces.java");
         final String[] expected = {
             "41:14: 'while' is not followed by whitespace.",
             "58:12: 'for' is not followed by whitespace.",
             // + ":58:23: ';' is not followed by whitespace.",
             //  + ":58:29: ';' is not followed by whitespace.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputBraces.java"), expected);
     }
 

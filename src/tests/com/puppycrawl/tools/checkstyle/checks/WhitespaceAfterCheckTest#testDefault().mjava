@@ -1,11 +1,9 @@
     public void testDefault() throws Exception
     {
-        final Checker c = createChecker(mCheckConfig);
-        final String fname = getPath("InputSimple.java");
         final String[] expected = {
             "42:40: ',' is not followed by whitespace.",
             "71:30: ',' is not followed by whitespace.",
         };
-        verify(c, fname, expected);
+        verify(mCheckConfig, getPath("InputSimple.java"), expected);
     }
 

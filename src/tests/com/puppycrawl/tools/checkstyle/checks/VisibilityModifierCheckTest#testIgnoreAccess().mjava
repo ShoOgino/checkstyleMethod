@@ -6,11 +6,9 @@
         checkConfig.addAttribute("publicMemberPattern", "^r[A-Z]");
         checkConfig.addAttribute("protectedAllowed", "true");
         checkConfig.addAttribute("packageAllowed", "true");
-        final Checker c = createChecker(checkConfig);
-        final String filepath = getPath("InputInner.java");
         final String[] expected = {
             "17:20: Variable 'fData' must be private and have accessor methods.",
         };
-        verify(c, filepath, expected);
+        verify(checkConfig, getPath("InputInner.java"), expected);
     }
 
