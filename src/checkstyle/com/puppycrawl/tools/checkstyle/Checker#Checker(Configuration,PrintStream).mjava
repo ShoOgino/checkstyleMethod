@@ -4,10 +4,9 @@
      * @param aLog the PrintStream to log messages to
      * @throws RESyntaxException unable to create a regexp object
      **/
-    Checker(Configuration aConfig, PrintStream aLog)
+    public Checker(Configuration aConfig, PrintStream aLog)
         throws RESyntaxException
     {
-        mLog = aLog;
         mCache = new PropertyCacheFile(aConfig.getCacheFile(), aLog);
         final Verifier v = new VerifierImpl(aConfig);
         VerifierSingleton.setInstance(v);
