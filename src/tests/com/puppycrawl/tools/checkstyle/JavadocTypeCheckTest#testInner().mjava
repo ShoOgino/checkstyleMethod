@@ -1,0 +1,15 @@
+    public void testInner() throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(JavadocTypeCheck.class.getName());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputInner.java");
+        final String[] expected =
+        {
+            "14: Missing a Javadoc comment.",
+            "21: Missing a Javadoc comment.",
+            "27: Missing a Javadoc comment.",
+        };
+        verify(c, fname, expected);
+    }
+

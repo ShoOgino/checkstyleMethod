@@ -1,0 +1,16 @@
+    public void testEclipse() throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(JavadocTypeCheck.class.getName());
+        checkConfig.addProperty(
+            "scope",
+            Scope.getInstance("public").getName());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputScopeInnerClasses.java");
+        final String[] expected =
+        {
+            "18: Missing a Javadoc comment.",
+        };
+        verify(c, fname, expected);
+    }
+
