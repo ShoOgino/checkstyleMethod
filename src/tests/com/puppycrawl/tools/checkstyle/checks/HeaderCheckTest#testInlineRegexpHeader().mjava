@@ -1,0 +1,12 @@
+    public void testInlineRegexpHeader()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("header", "^/*$\\n// .*\\n// Created: 2002\\n^//.*\\n^//.*");
+        final String[] expected = {
+            "3: Line does not match expected header line of '// Created: 2002'."
+        };
+        verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
+    }
+

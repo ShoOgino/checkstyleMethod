@@ -1,0 +1,13 @@
+    /**
+     * Called before initializing the header.
+     * @throws ConversionException if header has already been set
+     */
+    private void checkHeaderNotInitialized()
+    {
+        if (mHeaderLines != null) {
+            throw new ConversionException(
+                    "header has already been set - "
+                    + "set either header or headerFile, not both");
+        }
+    }
+

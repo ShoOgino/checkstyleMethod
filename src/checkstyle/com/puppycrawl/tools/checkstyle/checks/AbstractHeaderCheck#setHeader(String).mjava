@@ -1,0 +1,39 @@
+    /**
+     * Set the header to check against. Individual lines in the header
+     * must be separated by '\n' characters.
+     * @param aHeader header content to check against.
+     * @throws ConversionException if the header cannot be interpreted
+     */
+    public void setHeader(String aHeader)
+    {
+        if ((aHeader == null) || (aHeader.trim().length() == 0)) {
+            return;
+        }
+
+        checkHeaderNotInitialized();
+
+        // in JDK 1.4 we'd simply do aHeader.replaceAll("\\\\n", "\n");
+        final RE re = Utils.getRE("\\\\n");
+        final String headerExpandedNewLines = re.subst(aHeader, "\n");
+
+        final Reader headerReader = new StringReader(headerExpandedNewLines);
+        try {
+            loadHeader(headerReader);
+        }
+        catch (IOException ex) {
+            throw new ConversionException(
+                    "unable to load header", ex);
+        }
+        finally {
+            try {
+                headerReader.close();
+            }
+            catch (IOException ex) {
+                // shouldn't happen with StringReader
+                throw new ConversionException(
+                        "unable to close header", ex);
+            }
+        }
+
+    }
+

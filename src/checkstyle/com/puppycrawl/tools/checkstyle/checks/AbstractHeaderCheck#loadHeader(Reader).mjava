@@ -1,0 +1,19 @@
+    /**
+     * Load header to check against from a Reader into mHeaderLines.
+     * @param aHeaderReader delivers the header to check against
+     * @throws IOException if
+     */
+    private void loadHeader(final Reader aHeaderReader) throws IOException
+    {
+        final LineNumberReader lnr = new LineNumberReader(aHeaderReader);
+        final ArrayList lines = new ArrayList();
+        while (true) {
+            final String l = lnr.readLine();
+            if (l == null) {
+                break;
+            }
+            lines.add(l);
+        }
+        mHeaderLines = (String[]) lines.toArray(new String[0]);
+    }
+
