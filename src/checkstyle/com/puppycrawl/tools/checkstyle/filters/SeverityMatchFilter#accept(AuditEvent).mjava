@@ -1,0 +1,12 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Filter */
+    public boolean accept(AuditEvent aEvent)
+    {
+        boolean result = mSeverityLevel.equals(aEvent.getSeverityLevel());
+        if (mAcceptOnMatch) {
+            return result;
+        }
+        else {
+            return !result;
+        }
+    }
+

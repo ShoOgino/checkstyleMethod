@@ -1,0 +1,17 @@
+    /**
+     * Determines whether an Integer matches a CSV integer value.
+     * @param aInt the Integer to check.
+     * @return true if aInt is an Integer that matches a CSV value.
+     */
+    public boolean accept(Integer aInt)
+    {
+        final Iterator it = getFilters().iterator();
+        while (it.hasNext()) {
+            final IntFilter filter = (IntFilter) it.next();
+            if (filter.accept(aInt)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
