@@ -1,0 +1,18 @@
+    /**
+     * Returns the variable name in a VARIABLE_DEF AST.
+     * @param aVariableDefAST an AST where type == VARIABLE_DEF AST.
+     * @return the variable name in aVariableDefAST
+     */
+    private DetailAST getVarNameAST(DetailAST aVariableDefAST)
+    {
+        AST ast = aVariableDefAST.getFirstChild();
+        while (ast != null) {
+            AST nextSibling = ast.getNextSibling();
+            if (ast.getType() == JavaTokenTypes.TYPE) {
+                return (DetailAST) nextSibling;
+            }
+            ast = nextSibling;
+        }
+        return null;
+    }
+

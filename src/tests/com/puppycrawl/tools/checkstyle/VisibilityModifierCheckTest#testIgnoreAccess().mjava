@@ -1,0 +1,16 @@
+    public void testIgnoreAccess()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+                checkConfig.setClassname(VisibilityModifierCheck.class.getName());
+        checkConfig.addProperty("publicMemberPattern", "^r[A-Z]");
+                checkConfig.addProperty("protectedAllowed", "true");
+        checkConfig.addProperty("packageAllowed", "true");
+        final Checker c = createChecker(checkConfig);
+        final String filepath = getPath("InputInner.java");
+        final String[] expected = {
+            "17:20: Variable 'fData' must be private and have accessor methods.",
+        };
+        verify(c, filepath, expected);
+    }
+

@@ -1,0 +1,13 @@
+    public void testStrictJavadoc()
+            throws Exception
+        {
+            Checker c = getChecker();
+            final String filepath = getPath("InputPublicOnly.java");
+            final String[] expected = {
+                "44:9: Variable 'mLen' must be private and have accessor methods.",
+                "45:19: Variable 'mDeer' must be private and have accessor methods.",
+                "46:16: Variable 'aFreddo' must be private and have accessor methods.",
+            };
+            verify(c, filepath, expected);
+        }
+

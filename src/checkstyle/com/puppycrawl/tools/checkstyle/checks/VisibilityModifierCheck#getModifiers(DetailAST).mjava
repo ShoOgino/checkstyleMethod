@@ -1,0 +1,21 @@
+    /**
+     * Returns the set of modifier Strings for a VARIABLE_DEF AST
+     * @param variableDefAST
+     * @return the set of modifier Strings for variableDefAST
+     */
+    private Set getModifiers(DetailAST variableDefAST)
+    {
+        AST modifiersAST = variableDefAST.getFirstChild();
+        if (modifiersAST.getType() != JavaTokenTypes.MODIFIERS) {
+            throw new IllegalStateException("Strange parse tree");
+        }
+        Set retVal = new HashSet();
+        AST modifier = modifiersAST.getFirstChild();
+        while (modifier != null) {
+            retVal.add(modifier.getText());
+            modifier = modifier.getNextSibling();
+        }
+        return retVal;
+
+    }
+

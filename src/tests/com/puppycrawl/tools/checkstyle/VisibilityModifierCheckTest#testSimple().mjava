@@ -1,0 +1,16 @@
+    public void testSimple()
+            throws Exception
+        {
+            Checker c = getChecker();
+            final String filepath = getPath("InputSimple.java");
+            final String[] expected = {
+                "39:19: Variable 'mNumCreated2' must be private and have accessor methods.",
+                "49:23: Variable 'sTest1' must be private and have accessor methods.",
+                "51:26: Variable 'sTest3' must be private and have accessor methods.",
+                "53:16: Variable 'sTest2' must be private and have accessor methods.",
+                "56:9: Variable 'mTest1' must be private and have accessor methods.",
+                "58:16: Variable 'mTest2' must be private and have accessor methods.",
+            };
+            verify(c, filepath, expected);
+        }
+
