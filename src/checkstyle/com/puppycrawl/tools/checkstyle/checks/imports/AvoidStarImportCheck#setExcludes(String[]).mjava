@@ -1,0 +1,17 @@
+    /**
+     * Sets the list of packages to exempt from the check.
+     * @param aExcludes a list of package names where star imports are ok
+     */
+    public void setExcludes(String[] aExcludes) 
+    {
+        m_excludes = new String[aExcludes.length];
+        for (int i = 0; i < aExcludes.length; i++) {
+            m_excludes[i] = aExcludes[i];
+            if (!m_excludes[i].endsWith(".*")) {
+                // force all package names to end with ".*" to disambiguate
+                // "java.io" 
+                m_excludes[i] = m_excludes[i] + ".*";
+            }
+        }
+    }
+

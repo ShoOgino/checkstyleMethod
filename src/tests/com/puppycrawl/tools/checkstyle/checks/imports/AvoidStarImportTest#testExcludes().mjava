@@ -1,0 +1,13 @@
+    public void testExcludes()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(AvoidStarImportCheck.class);
+        checkConfig.addAttribute("excludes", "java.io,java.lang");
+        // allow the java.io/java.lang star imports
+        final String[] expected2 = new String[] {
+            "7: Using the '.*' form of import should be avoided - com.puppycrawl.tools.checkstyle.*."
+        };
+        verify(checkConfig, getPath("InputImport.java"), expected2);
+    }
+
