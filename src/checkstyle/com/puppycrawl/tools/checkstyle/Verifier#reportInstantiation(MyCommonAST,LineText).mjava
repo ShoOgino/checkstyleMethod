@@ -1,0 +1,18 @@
+    /**
+     * Report an object instantiation.
+     *
+     * @param aNewAST the AST of 'new', used for line/column number reporting
+     * @param aTypeName the typename, may or may not be qualified
+     */
+    void reportInstantiation(MyCommonAST aNewAST, LineText aTypeName)
+    {
+        final String typeName = aTypeName.getText();
+        final int lineNo = aNewAST.getLineNo();
+        final int colNo = aNewAST.getColumnNo();
+        if ("java.lang.Boolean".equals(typeName) ||
+            "Boolean".equals(typeName))
+        {
+            log(lineNo, colNo, "Avoid instantiation of java.lang.Boolean");
+        }
+    }
+

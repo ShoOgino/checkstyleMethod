@@ -1,0 +1,17 @@
+    public void testSemantic()
+        throws Exception
+    {
+        mConfig.setJavadocScope(Scope.NOTHING);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputSemantic.java");
+        assertNotNull(c);
+        final String[] expected = {
+            filepath + ":15:21: Avoid instantiation of java.lang.Boolean",
+            filepath + ":20:21: Avoid instantiation of java.lang.Boolean",
+            filepath + ":26:21: Avoid instantiation of java.lang.Boolean",
+            filepath + ":34:9: Empty catch block.",
+            filepath + ":36:9: Empty catch block.",
+        };
+        verify(c, filepath, expected);
+    }
+
