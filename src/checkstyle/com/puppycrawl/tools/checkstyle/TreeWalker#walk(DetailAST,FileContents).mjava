@@ -1,0 +1,14 @@
+    /**
+     * Initiates the walk of an AST.
+     * @param aAST the root AST
+     * @param aContents the contents of the file the AST was generated from
+     */
+    void walk(DetailAST aAST, FileContents aContents)
+    {
+        mMessages.reset();
+        notifyBegin(aContents);
+        aAST.setParent(null);
+        process(aAST);
+        notifyEnd();
+    }
+

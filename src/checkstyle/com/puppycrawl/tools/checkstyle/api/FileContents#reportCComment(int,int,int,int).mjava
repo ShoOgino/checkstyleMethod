@@ -1,0 +1,19 @@
+    /**
+     * Report the location of a C-style comment.
+     * @param aStartLineNo the starting line number
+     * @param aStartColNo the starting column number
+     * @param aEndLineNo the ending line number
+     * @param aEndColNo the ending column number
+     **/
+    public void reportCComment(int aStartLineNo, int aStartColNo,
+                               int aEndLineNo, int aEndColNo)
+    {
+        final String[] cc = extractCComment(aStartLineNo, aStartColNo,
+                                            aEndLineNo, aEndColNo);
+
+        // Remember if possible Javadoc comment
+        if (mLines[aStartLineNo - 1].indexOf("/**", aStartColNo) != -1) {
+            mJavadocComments.put(new Integer(aEndLineNo - 1), cc);
+        }
+    }
+

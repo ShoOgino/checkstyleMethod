@@ -9,7 +9,7 @@
         throws IOException, ANTLRException
     {
         final String[] lines = Utils.getLines(aFileName);
-        final CommentManager cmgr = new CommentManager(lines);
-        return Checker.parse(lines, aFileName, cmgr);
+        final FileContents contents = new FileContents(aFileName, lines);
+        return Checker.parse(contents);
     }
 
