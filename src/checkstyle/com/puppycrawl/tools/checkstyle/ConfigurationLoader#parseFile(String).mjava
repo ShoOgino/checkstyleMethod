@@ -8,6 +8,10 @@
     void parseFile(String aFilename)
         throws FileNotFoundException, IOException, SAXException
     {
-        parseInputSource(new InputSource(new FileReader(aFilename)));
+        final Reader configReader =
+            new BufferedReader(new FileReader(aFilename), TWO_KB);
+        final InputSource inputSource = new InputSource(configReader);
+        parseInputSource(inputSource);
+        configReader.close();
     }
 
