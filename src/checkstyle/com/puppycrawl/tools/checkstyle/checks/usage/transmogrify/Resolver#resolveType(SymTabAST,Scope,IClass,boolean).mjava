@@ -19,13 +19,19 @@
         IClass result = null;
         SymTabAST nameNode = (SymTabAST) expr.getFirstChild();
 
+        // TODO: Checkstyle change.
+        // Do not create references from typecast.
+        // Original transmogrify code is equivalent to
+        // final boolean createReference = referencePhase;
+        // which creates non-existant references for variables.
+        final boolean createReference = false;
         if (nameNode.getType() == TokenTypes.DOT) {
             result =
-                resolveDottedName(nameNode, location, context, referencePhase);
+                resolveDottedName(nameNode, location, context, createReference);
         }
         else {
             result =
-                resolveClassIdent(nameNode, location, context, referencePhase);
+                resolveClassIdent(nameNode, location, context, createReference);
         }
 
         return result;
