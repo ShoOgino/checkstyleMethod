@@ -22,7 +22,7 @@
         while (keyIt.hasNext()) {
             final String key = (String) keyIt.next();
             final String value = (String) mProperties.get(key);
-            PropertyUtils.setSimpleProperty(check, key, value);
+            BeanUtils.copyProperty(check, key, value);
         }
         return check;
     }

@@ -1,0 +1,16 @@
+    /**
+     * Set the lines numbers to ignore in the header check.
+     * @param aList comma separated list of line numbers to ignore in header.
+     */
+    public void setIgnoreLines(int[] aList)
+    {
+        if (aList == null || aList.length == 0) {
+            mIgnoreLines = EMPTY_INT_ARRAY;
+            return;
+        }
+
+        mIgnoreLines = new int[aList.length];
+        System.arraycopy(aList, 0, mIgnoreLines, 0, aList.length);
+        Arrays.sort(mIgnoreLines);
+    }
+
