@@ -2,19 +2,20 @@
         throws Exception
     {
         final Checker c = new Checker(mConfig, mStream);
+        final String filepath = getPath("InputWhitespace.java");
         assertNotNull(c);
         final String[] expected = {
-            "InputWhitespace.java:11: type Javadoc comment is missing an @author tag.",
-            "InputWhitespace.java:14: '=' is not preceeded with whitespace.",
-            "InputWhitespace.java:16: '=' is not proceeded with whitespace.",
-            "InputWhitespace.java:24: '=' is not preceeded with whitespace.",
-            "InputWhitespace.java:25: '=' is not preceeded with whitespace.",
-            "InputWhitespace.java:26: '+=' is not preceeded with whitespace.",
-            "InputWhitespace.java:27: '-' is proceeded with whitespace.",
-            "InputWhitespace.java:27: '-=' is not proceeded with whitespace.",
-            "InputWhitespace.java:28: '++' is preceeded with whitespace.",
-            "InputWhitespace.java:29: '++' is proceeded with whitespace."
+            filepath + ":11: type Javadoc comment is missing an @author tag.",
+            filepath + ":14: '=' is not preceeded with whitespace.",
+            filepath + ":16: '=' is not proceeded with whitespace.",
+            filepath + ":24: '=' is not preceeded with whitespace.",
+            filepath + ":25: '=' is not preceeded with whitespace.",
+            filepath + ":26: '+=' is not preceeded with whitespace.",
+            filepath + ":27: '-' is proceeded with whitespace.",
+            filepath + ":27: '-=' is not proceeded with whitespace.",
+            filepath + ":28: '++' is preceeded with whitespace.",
+            filepath + ":29: '++' is proceeded with whitespace."
         };
-        verify(c, "InputWhitespace.java", expected);
+        verify(c, filepath, expected);
     }
 

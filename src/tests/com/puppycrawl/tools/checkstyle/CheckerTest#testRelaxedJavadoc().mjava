@@ -3,24 +3,25 @@
     {
         mConfig.setRelaxJavadoc(true);
         final Checker c = new Checker(mConfig, mStream);
+        final String filepath = getPath("InputPublicOnly.java");
         assertNotNull(c);
         final String[] expected = {
-            "InputPublicOnly.java:7: type is missing a Javadoc comment.",
-            "InputPublicOnly.java:9: type is missing a Javadoc comment.",
-            "InputPublicOnly.java:11: variable 'CONST' missing Javadoc.",
-            "InputPublicOnly.java:12: method is missing a Javadoc comment.",
-            "InputPublicOnly.java:14: type is missing a Javadoc comment.",
-            "InputPublicOnly.java:34: type is missing a Javadoc comment.",
-            "InputPublicOnly.java:44: variable 'mLen' must be private and have accessor methods.",
-            "InputPublicOnly.java:45: variable 'mDeer' missing Javadoc.",
-            "InputPublicOnly.java:45: variable 'mDeer' must be private and have accessor methods.",
-            "InputPublicOnly.java:46: variable 'aFreddo' missing Javadoc.",
-            "InputPublicOnly.java:46: variable 'aFreddo' must be private and have accessor methods.",
-            "InputPublicOnly.java:59: method is missing a Javadoc comment.",
-            "InputPublicOnly.java:64: method is missing a Javadoc comment.",
-            "InputPublicOnly.java:79: method is missing a Javadoc comment.",
-            "InputPublicOnly.java:84: method is missing a Javadoc comment."
+            filepath + ":7: type is missing a Javadoc comment.",
+            filepath + ":9: type is missing a Javadoc comment.",
+            filepath + ":11: variable 'CONST' missing Javadoc.",
+            filepath + ":12: method is missing a Javadoc comment.",
+            filepath + ":14: type is missing a Javadoc comment.",
+            filepath + ":34: type is missing a Javadoc comment.",
+            filepath + ":44: variable 'mLen' must be private and have accessor methods.",
+            filepath + ":45: variable 'mDeer' missing Javadoc.",
+            filepath + ":45: variable 'mDeer' must be private and have accessor methods.",
+            filepath + ":46: variable 'aFreddo' missing Javadoc.",
+            filepath + ":46: variable 'aFreddo' must be private and have accessor methods.",
+            filepath + ":59: method is missing a Javadoc comment.",
+            filepath + ":64: method is missing a Javadoc comment.",
+            filepath + ":79: method is missing a Javadoc comment.",
+            filepath + ":84: method is missing a Javadoc comment."
         };
-        verify(c, "InputPublicOnly.java", expected);
+        verify(c, filepath, expected);
     }
 

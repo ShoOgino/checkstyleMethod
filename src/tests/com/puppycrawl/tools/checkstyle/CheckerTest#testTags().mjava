@@ -2,29 +2,30 @@
         throws Exception
     {
         final Checker c = new Checker(mConfig, mStream);
+        final String filepath = getPath("InputTags.java");
         assertNotNull(c);
         final String[] expected = {
-            "InputTags.java:8: type is missing a Javadoc comment.",
-            "InputTags.java:11: variable 'mMissingJavadoc' missing Javadoc.",
-            "InputTags.java:14: method is missing a Javadoc comment.",
-            "InputTags.java:18: Unused @param tag for 'unused'.",
-            "InputTags.java:24: Expected an @return tag.",
-            "InputTags.java:33: Expected an @return tag.",
-            "InputTags.java:40: Expected @throws tag for 'Exception'.",
-            "InputTags.java:49: Expected @throws tag for 'Exception'.",
-            "InputTags.java:53: Unused @throws tag for 'WrongException'.",
-            "InputTags.java:55: Expected @throws tag for 'Exception'.",
-            "InputTags.java:55: Expected @throws tag for 'NullPointerException'.",
-            "InputTags.java:60: Expected @param tag for 'aOne'.",
-            "InputTags.java:68: Expected @param tag for 'aOne'.",
-            "InputTags.java:72: Unused @param tag for 'WrongParam'.",
-            "InputTags.java:73: Expected @param tag for 'aOne'.",
-            "InputTags.java:73: Expected @param tag for 'aTwo'.",
-            "InputTags.java:78: Unused @param tag for 'Unneeded'.",
-            "InputTags.java:79: Unused Javadoc tag.",
-            "InputTags.java:87: Duplicate @return tag."
+            filepath + ":8: type is missing a Javadoc comment.",
+            filepath + ":11: variable 'mMissingJavadoc' missing Javadoc.",
+            filepath + ":14: method is missing a Javadoc comment.",
+            filepath + ":18: Unused @param tag for 'unused'.",
+            filepath + ":24: Expected an @return tag.",
+            filepath + ":33: Expected an @return tag.",
+            filepath + ":40: Expected @throws tag for 'Exception'.",
+            filepath + ":49: Expected @throws tag for 'Exception'.",
+            filepath + ":53: Unused @throws tag for 'WrongException'.",
+            filepath + ":55: Expected @throws tag for 'Exception'.",
+            filepath + ":55: Expected @throws tag for 'NullPointerException'.",
+            filepath + ":60: Expected @param tag for 'aOne'.",
+            filepath + ":68: Expected @param tag for 'aOne'.",
+            filepath + ":72: Unused @param tag for 'WrongParam'.",
+            filepath + ":73: Expected @param tag for 'aOne'.",
+            filepath + ":73: Expected @param tag for 'aTwo'.",
+            filepath + ":78: Unused @param tag for 'Unneeded'.",
+            filepath + ":79: Unused Javadoc tag.",
+            filepath + ":87: Duplicate @return tag."
         };
 
-        verify(c, "InputTags.java", expected);
+        verify(c, filepath, expected);
     }
 

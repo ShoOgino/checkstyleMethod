@@ -3,11 +3,12 @@
     {
         mConfig.setIgnoreBraces(true);
         final Checker c = new Checker(mConfig, mStream);
+        final String filepath = getPath("InputBraces.java");
         final String[] expected = {
-            "InputBraces.java:41: ';' is not preceeded with whitespace.",
-            "InputBraces.java:58: ';' is not preceeded with whitespace.",
-            "InputBraces.java:81: ';' is not preceeded with whitespace.",
+            filepath + ":41: ';' is not preceeded with whitespace.",
+            filepath + ":58: ';' is not preceeded with whitespace.",
+            filepath + ":81: ';' is not preceeded with whitespace.",
         };
-        verify(c, "InputBraces.java", expected);
+        verify(c, filepath, expected);
     }
 

@@ -3,10 +3,11 @@
     {
         mConfig.setIgnoreWhitespace(true);
         final Checker c = new Checker(mConfig, mStream);
+        final String filepath = getPath("InputWhitespace.java");
         assertNotNull(c);
         final String[] expected = {
-            "InputWhitespace.java:11: type Javadoc comment is missing an @author tag.",
+            filepath + ":11: type Javadoc comment is missing an @author tag.",
         };
-        verify(c, "InputWhitespace.java", expected);
+        verify(c, filepath, expected);
     }
 

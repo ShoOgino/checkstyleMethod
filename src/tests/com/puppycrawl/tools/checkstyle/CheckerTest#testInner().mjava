@@ -2,17 +2,18 @@
         throws Exception
     {
         final Checker c = new Checker(mConfig, mStream);
+        final String filepath = getPath("InputInner.java");
         assertNotNull(c);
         final String[] expected = {
-            "InputInner.java:14: type is missing a Javadoc comment.",
-            "InputInner.java:17: variable 'fData' missing Javadoc.",
-            "InputInner.java:21: type is missing a Javadoc comment.",
-            "InputInner.java:24: variable 'data' missing Javadoc.",
-            "InputInner.java:24: variable 'data' must match pattern '^[A-Z]([A-Z0-9_]*[A-Z0-9])?$'.",
-            "InputInner.java:27: type is missing a Javadoc comment.",
-            "InputInner.java:30: variable 'rData' missing Javadoc.",
-            "InputInner.java:30: variable 'rData' must be private and have accessor methods."
+            filepath + ":14: type is missing a Javadoc comment.",
+            filepath + ":17: variable 'fData' missing Javadoc.",
+            filepath + ":21: type is missing a Javadoc comment.",
+            filepath + ":24: variable 'data' missing Javadoc.",
+            filepath + ":24: variable 'data' must match pattern '^[A-Z]([A-Z0-9_]*[A-Z0-9])?$'.",
+            filepath + ":27: type is missing a Javadoc comment.",
+            filepath + ":30: variable 'rData' missing Javadoc.",
+            filepath + ":30: variable 'rData' must be private and have accessor methods."
         };
-        verify(c, "InputInner.java", expected);
+        verify(c, filepath, expected);
     }
 
