@@ -1,0 +1,12 @@
+    /**
+     * @return whether the specified file has already been checked ok
+     * @param aFileName the file to check
+     * @param aTimestamp the timestamp of the file to check
+     */
+    boolean alreadyChecked(String aFileName, long aTimestamp)
+    {
+        final String lastChecked = mDetails.getProperty(aFileName);
+        return (lastChecked != null) &&
+            (lastChecked.equals(Long.toString(aTimestamp)));
+    }
+

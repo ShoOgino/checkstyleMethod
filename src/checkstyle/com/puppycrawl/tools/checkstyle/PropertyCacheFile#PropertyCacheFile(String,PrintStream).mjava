@@ -1,0 +1,29 @@
+    /**
+     * Creates a new <code>PropertyCacheFile</code> instance.
+     *
+     * @param aFileName name of properties file that contains details. if the
+                        file does not exist, it will be created
+     * @param aLog where to log errors
+     */
+    PropertyCacheFile(String aFileName, PrintStream aLog)
+    {
+        mLog = aLog;
+        boolean setInActive = true;
+        if (aFileName != null) {
+            try {
+                mDetails.load(new FileInputStream(aFileName));
+                setInActive = false;
+            }
+            catch (FileNotFoundException e) {
+                // Ignore, the cache does not exist
+                setInActive = false;
+            }
+            catch (IOException e) {
+                mLog.println("Unable to open cache file, ignoring.");
+                e.printStackTrace(mLog);
+            }
+        }
+        mDetailsFile = (setInActive) ? null : aFileName;
+        System.out.println("mDetailsFile = " + mDetailsFile);
+    }
+

@@ -1,0 +1,14 @@
+    /** Cleans up the object **/
+    void destroy()
+    {
+        if (mDetailsFile != null) {
+            try {
+                mDetails.store(new FileOutputStream(mDetailsFile), null);
+            }
+            catch (IOException e) {
+                mLog.println("Unable to save cache file");
+                e.printStackTrace(mLog);
+            }
+        }
+    }
+

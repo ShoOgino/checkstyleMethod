@@ -5,6 +5,11 @@
      **/
     int process(String aFileName)
     {
+        final long timestamp = new File(aFileName).lastModified();
+        if (mCache.alreadyChecked(aFileName, timestamp)) {
+            return 0;
+        }
+
         LineText[] errors;
         try {
             VerifierSingleton.getInstance().clearMessages();
@@ -32,7 +37,12 @@
                              "Got a TokenStreamException -" + te.getMessage())};
         }
 
-        displayErrors(aFileName, errors);
+        if (errors.length == 0) {
+            mCache.checkedOk(aFileName, timestamp);
+        }
+        else {
+            displayErrors(aFileName, errors);
+        }
         return errors.length;
     }
 

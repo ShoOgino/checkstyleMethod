@@ -8,6 +8,7 @@
         throws RESyntaxException
     {
         mLog = aLog;
+        mCache = new PropertyCacheFile(aConfig.getCacheFile(), aLog);
         final Verifier v = new VerifierImpl(aConfig);
         VerifierSingleton.setInstance(v);
     }
