@@ -1,0 +1,14 @@
+    public void testDotAllowLineBreaks() throws Exception
+    {
+        checkConfig.addTokens("DOT");
+        checkConfig.addProperty("allowLineBreaks", "yes");
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputWhitespace.java");
+        final String[] expected = {
+            "5:14: '.' is followed by whitespace.",
+            "129:24: '.' is followed by whitespace.",
+            "136:12: '.' is followed by whitespace."
+        };
+        verify(c, fname, expected);
+    }
+

@@ -1,0 +1,22 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+               final String[] lines = getLines();
+        final String line = lines[aAST.getLineNo() - 1];
+        final int before = aAST.getColumnNo() - 1;
+        final int after = aAST.getColumnNo() + aAST.getText().length();
+
+        if ((before < 0) || Character.isWhitespace(line.charAt(before))) {
+            boolean flag = !mAllowLineBreaks;
+            // verify all characters before '.' are whitespace
+            for (int i = 0; !flag && i < before; i++) {
+                if (!Character.isWhitespace(line.charAt(i))) {
+                    flag = true;
+                }
+            }
+            if (flag) {
+                log(aAST.getLineNo(), before, "ws.preceeded", aAST.getText());
+            }
+        }
+    }
+
