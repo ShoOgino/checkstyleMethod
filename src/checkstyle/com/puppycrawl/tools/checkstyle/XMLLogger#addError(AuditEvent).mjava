@@ -1,13 +1,17 @@
     /** @see AuditListener **/
     public void addError(AuditEvent aEvt)
     {
-        mWriter.print("<error" + " line=\"" + aEvt.getLine() + "\"");
-        if (aEvt.getColumn() > 0) {
-            mWriter.print(" column=\"" + aEvt.getColumn() + "\"");
+        if (!SeverityLevel.IGNORE.equals(aEvt.getSeverityLevel())) {
+            mWriter.print("<error" + " line=\"" + aEvt.getLine() + "\"");
+            if (aEvt.getColumn() > 0) {
+                mWriter.print(" column=\"" + aEvt.getColumn() + "\"");
+            }
+            mWriter.print(" severity=\""
+                + aEvt.getSeverityLevel().getName()
+                + "\"");
+            mWriter.println(" message=\""
+                + encode(aEvt.getMessage())
+                + "\"/>");
         }
-        mWriter.print(" severity=\""
-                      + aEvt.getSeverityLevel().getName()
-                      + "\"");
-        mWriter.println(" message=\"" + encode(aEvt.getMessage()) + "\"/>");
     }
 
