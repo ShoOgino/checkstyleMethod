@@ -2,7 +2,7 @@
     private void checkHeader()
     {
         if (mConfig.getHeaderLines().length > mLines.length) {
-            log(1, "header.missing");
+            mMessages.add(1, "header.missing");
         }
         else {
             for (int i = 0; i < mConfig.getHeaderLines().length; i++) {
@@ -19,13 +19,13 @@
                         : headerLine.equals(mLines[i]);
 
                     if (!match) {
-                        log(i + 1, "header.mismatch",
-                            mConfig.getHeaderLines()[i]);
+                        mMessages.add(i + 1, "header.mismatch",
+                                      mConfig.getHeaderLines()[i]);
                         break; // stop checking
                     }
                 }
                 catch (RESyntaxException e) {
-                    log(i + 1, "regexp.parseError", headerLine);
+                    mMessages.add(i + 1, "regexp.parseError", headerLine);
                 }
             }
         }

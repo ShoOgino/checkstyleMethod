@@ -21,8 +21,8 @@
             // verify all characters before '.' are whitespace
             for (int i = 0; i < before; i++) {
                 if (!Character.isWhitespace(line.charAt(i))) {
-                    log(aAST.getLineNo(), aAST.getColumnNo() - 1,
-                        "ws.preceeded", ".");
+                    mMessages.add(aAST.getLineNo(), aAST.getColumnNo() - 1,
+                                  "ws.preceeded", ".");
                     break;
                 }
             }
@@ -35,7 +35,7 @@
         {
             for (int i = after + 1; i < line.length(); i++) {
                 if (!Character.isWhitespace(line.charAt(i))) {
-                    log(aAST.getLineNo(), after, "ws.followed", ".");
+                    mMessages.add(aAST.getLineNo(), after, "ws.followed", ".");
                     break;
                 }
             }

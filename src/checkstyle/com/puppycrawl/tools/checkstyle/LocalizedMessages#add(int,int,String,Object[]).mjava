@@ -6,10 +6,10 @@
      * @param aKey key to locale message format
      * @param aArgs arguments for message
      */
-    private void log(int aLineNo, int aColNo, String aKey, Object[] aArgs)
+    void add(int aLineNo, int aColNo, String aKey, Object[] aArgs)
     {
         final int col = 1 + Utils.lengthExpandedTabs(
-            mLines[aLineNo - 1], aColNo, mConfig.getTabWidth());
-        log(new LocalizedMessage(aLineNo, col, aKey, aArgs));
+            mLines[aLineNo - 1], aColNo, mTabWidth);
+        mMessages.add(new LocalizedMessage(aLineNo, col, aKey, aArgs));
     }
 

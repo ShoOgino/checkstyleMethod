@@ -14,12 +14,14 @@
         if ((mConfig.getRCurly() == RightCurlyOption.SAME)
             && (aBrace.getLineNo() != aStartLine))
         {
-            log(aBrace.getLineNo(), aBrace.getColumnNo(), "line.same", "}");
+            mMessages.add(aBrace.getLineNo(), aBrace.getColumnNo(),
+                          "line.same", "}");
         }
         else if ((mConfig.getRCurly() == RightCurlyOption.ALONE)
                    && (aBrace.getLineNo() == aStartLine))
         {
-            log(aBrace.getLineNo(), aBrace.getColumnNo(), "line.alone", "}");
+            mMessages.add(aBrace.getLineNo(), aBrace.getColumnNo(),
+                          "line.alone", "}");
         }
     }
 

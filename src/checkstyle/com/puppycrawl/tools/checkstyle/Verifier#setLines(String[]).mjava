@@ -5,6 +5,7 @@
     void setLines(String[] aLines)
     {
         mLines = aLines;
+        mMessages.setLines(mLines);
 
         checkHeader();
 
@@ -21,25 +22,25 @@
                 && !(mConfig.isIgnoreImportLength()
                      && line.trim().startsWith("import")))
             {
-                log(i + 1, "maxLineLen",
-                    new Integer(mConfig.getMaxLineLength()));
+                mMessages.add(i + 1, "maxLineLen",
+                              new Integer(mConfig.getMaxLineLength()));
             }
 
             // Check for tabs
             if (!mConfig.isAllowTabs()) {
                 final int tabPosition = mLines[i].indexOf('\t');
                 if (tabPosition != -1) {
-                    log(i + 1, tabPosition, "containsTab");
+                    mMessages.add(i + 1, tabPosition, "containsTab");
                 }
             }
         }
 
         // Check excessive number of lines
         if (mLines.length > mConfig.getMaxFileLength()) {
-            log(1, "maxLen",
-                "file",
-                new Integer(mLines.length),
-                new Integer(mConfig.getMaxFileLength()));
+            mMessages.add(1, "maxLen",
+                          "file",
+                          new Integer(mLines.length),
+                          new Integer(mConfig.getMaxFileLength()));
         }
     }
 

@@ -11,7 +11,8 @@
         final String line = mLines[aAST.getLineNo() - 1];
         final int before = aAST.getColumnNo() - 1;
         if ((before < 0) || Character.isWhitespace(line.charAt(before))) {
-            log(aAST.getLineNo(), before, "ws.preceeded", aAST.getText());
+            mMessages.add(aAST.getLineNo(), before,
+                          "ws.preceeded", aAST.getText());
         }
     }
 

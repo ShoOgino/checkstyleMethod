@@ -30,8 +30,8 @@
 
             // Handle extra JavadocTag
             if (!found) {
-                log(tag.getLineNo(), "javadoc.unusedTag",
-                    "@param", tag.getArg1());
+                mMessages.add(tag.getLineNo(), "javadoc.unusedTag",
+                              "@param", tag.getArg1());
             }
         }
 
@@ -39,8 +39,8 @@
         final ListIterator paramIt = aParams.listIterator();
         while (paramIt.hasNext()) {
             final LineText param = (LineText) paramIt.next();
-            log(param.getLineNo(), param.getColumnNo(),
-                "javadoc.expectedTag", "@param", param.getText());
+            mMessages.add(param.getLineNo(), param.getColumnNo(),
+                          "javadoc.expectedTag", "@param", param.getText());
         }
     }
 

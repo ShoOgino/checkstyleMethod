@@ -8,12 +8,12 @@
         if (!aSig.isConstructor()
             && !mConfig.getMethodRegexp().match(aSig.getName().getText()))
         {
-            log(aSig.getName().getLineNo(),
-                aSig.getName().getColumnNo(),
-                "name.invalidPattern",
-                "method",
-                aSig.getName().getText(),
-                mConfig.getMethodPat());
+            mMessages.add(aSig.getName().getLineNo(),
+                          aSig.getName().getColumnNo(),
+                          "name.invalidPattern",
+                          "method",
+                          aSig.getName().getText(),
+                          mConfig.getMethodPat());
         }
 
         // Always verify the parameters are ok
@@ -26,24 +26,24 @@
 
         // Check for to many parameters
         if (aSig.getParams().size() > mConfig.getMaxParameters()) {
-            log(aSig.getFirstLineNo(),
-                aSig.getFirstColNo(),
-                "maxParam", new Integer(mConfig.getMaxParameters()));
+            mMessages.add(aSig.getFirstLineNo(),
+                          aSig.getFirstColNo(),
+                          "maxParam", new Integer(mConfig.getMaxParameters()));
         }
         // JLS, chapter 9.4 - public in interface is strongly discouraged
         if (!mConfig.isIgnorePublicInInterface() && inInterfaceBlock()
             && aSig.getModSet().containsPublic())
         {
-            log(aSig.getModSet().getFirstLineNo(),
-                aSig.getModSet().getFirstColNo(),
-                "redundantModifier", "public");
+            mMessages.add(aSig.getModSet().getFirstLineNo(),
+                          aSig.getModSet().getFirstColNo(),
+                          "redundantModifier", "public");
         }
 
         // Check for redunant abstract
         if (inInterfaceBlock() && aSig.getModSet().containsAbstract()) {
-            log(aSig.getModSet().getFirstLineNo(),
-                aSig.getModSet().getFirstColNo(),
-                "redundantModifier", "abstract");
+            mMessages.add(aSig.getModSet().getFirstLineNo(),
+                          aSig.getModSet().getFirstColNo(),
+                          "redundantModifier", "abstract");
         }
         // now check the javadoc
         final Scope methodScope = inInterfaceBlock()
@@ -56,9 +56,9 @@
 
         final String[] jd = getJavadocBefore(aSig.getFirstLineNo() - 1);
         if (jd == null) {
-            log(aSig.getFirstLineNo(),
-                aSig.getFirstColNo(),
-                "javadoc.missing", "method");
+            mMessages.add(aSig.getFirstLineNo(),
+                          aSig.getFirstColNo(),
+                          "javadoc.missing", "method");
         }
         else {
             final List tags = getMethodTags(jd, aSig.getFirstLineNo() - 1);
@@ -77,7 +77,8 @@
                 while (it.hasNext()) {
                     final JavadocTag jt = (JavadocTag) it.next();
                     if (!jt.isSeeTag()) {
-                        log(jt.getLineNo(), "javadoc.unusedTagGeneral");
+                        mMessages.add(jt.getLineNo(),
+                                      "javadoc.unusedTagGeneral");
                     }
                 }
             }

@@ -5,9 +5,9 @@
     private void checkParameter(LineText aParam)
     {
         if (!mConfig.getParamRegexp().match(aParam.getText())) {
-            log(aParam.getLineNo(), aParam.getColumnNo(),
-                "name.invalidPattern",
-                "parameter", aParam.getText(), mConfig.getParamPat());
+            mMessages.add(aParam.getLineNo(), aParam.getColumnNo(),
+                          "name.invalidPattern",
+                          "parameter", aParam.getText(), mConfig.getParamPat());
         }
     }
 

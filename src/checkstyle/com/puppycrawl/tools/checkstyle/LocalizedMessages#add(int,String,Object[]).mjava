@@ -3,10 +3,10 @@
      *
      * @param aLineNo line number to associate with the message
      * @param aKey key to locale message format
-     * @param aArg0 first argument
+     * @param aArgs arguments for message
      */
-    private void log(int aLineNo, String aKey, Object aArg0)
+    void add(int aLineNo, String aKey, Object[] aArgs)
     {
-        log(aLineNo, aKey, new Object[] {aArg0});
+        add(new LocalizedMessage(aLineNo, 0, aKey, aArgs));
     }
 
