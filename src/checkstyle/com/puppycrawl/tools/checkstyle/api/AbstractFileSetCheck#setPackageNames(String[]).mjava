@@ -1,0 +1,11 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.PackageNamesClient */
+    public void setPackageNames(String[] aPackageNames)
+        throws CheckstyleException
+    {
+        if (aPackageNames == null) {
+            aPackageNames = PackageNamesLoader.loadPackageNames(
+                this.getClass().getClassLoader());
+        }
+        mPackageNames = aPackageNames;
+    }
+

@@ -1,0 +1,17 @@
+    /**
+     * Returns the default list of package names.
+     * @param aClassLoader the class loader that gets the
+     * default package names.
+     * @return the default list of package names.
+     * @throws CheckstyleException if an error occurs.
+     */
+    public static String[] loadPackageNames(ClassLoader aClassLoader)
+        throws CheckstyleException
+    {
+
+        final InputStream stream =
+            aClassLoader.getResourceAsStream(DEFAULT_PACKAGES);
+        final InputSource source = new InputSource(stream);
+        return loadPackageNames(source, "default map");
+    }
+

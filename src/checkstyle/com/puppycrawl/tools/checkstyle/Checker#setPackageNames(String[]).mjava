@@ -1,0 +1,11 @@
+    /** @see PackageNamesClient */
+    public void setPackageNames(String[] aPackageNames)
+        throws CheckstyleException
+    {
+        if (aPackageNames == null) {
+           aPackageNames =
+            PackageNamesLoader.loadPackageNames(this.getClassLoader());
+        }
+        mPackageNames = aPackageNames;
+    }
+

@@ -16,9 +16,10 @@
             final Configuration config = checkConfigs[i];
             // IMPORTANT! Need to use the same class loader that created this
             // class. Otherwise can get ClassCastException problems.
-            final String className = config.getAttribute("classname");
-            final Check check = createCheck(
-                    this.getClass().getClassLoader(), className);
+            final String name = config.getName();
+            final Check check =
+                    (Check) PackageObjectFactory.makeObject(
+                        mPackageNames, this.getClass().getClassLoader(), name);
 
             check.contextualize(checkContext);
             check.configure(config);

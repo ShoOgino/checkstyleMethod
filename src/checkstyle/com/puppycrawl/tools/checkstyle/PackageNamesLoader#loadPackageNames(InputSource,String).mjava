@@ -1,0 +1,31 @@
+    /**
+     * Returns the list of package names in a specified source.
+     * @param aSource the source for the list.
+     * @param aSourceName the name of the source.
+     * @return the list ofpackage names stored in aSource. 
+     * @throws CheckstyleException if an error occurs.
+     */          
+    private static String[] loadPackageNames(InputSource aSource,
+            String aSourceName)
+        throws CheckstyleException
+    {
+        try {
+            final PackageNamesLoader nameLoader = new PackageNamesLoader();
+            nameLoader.parseInputSource(aSource);
+            return nameLoader.getPackageNames();
+        }
+        catch (FileNotFoundException e) {
+            throw new CheckstyleException("unable to find " + aSourceName);
+        }
+        catch (ParserConfigurationException e) {
+            throw new CheckstyleException("unable to parse " + aSourceName);
+        }
+        catch (SAXException e) {
+            throw new CheckstyleException("unable to parse "
+                    + aSourceName + " - " + e.getMessage());
+        }
+        catch (IOException e) {
+            throw new CheckstyleException("unable to read " + aSourceName);
+        }
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Creates a new <code>PackageNameLoader</code> instance.
+     * @throws ParserConfigurationException if an error occurs
+     * @throws SAXException if an error occurs
+     */
+    private PackageNamesLoader()
+        throws ParserConfigurationException, SAXException
+    {
+        final SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setValidating(false);
+        mParser = factory.newSAXParser().getXMLReader();
+        mParser.setContentHandler(this);
+    }
+

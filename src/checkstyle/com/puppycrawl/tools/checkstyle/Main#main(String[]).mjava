@@ -39,6 +39,20 @@
             e.printStackTrace(System.out);
             System.exit(1);
         }
+        
+        //Load the set of package names
+        String[] packageNames = null;
+        if (line.hasOption("n")) {
+            try {
+                packageNames = PackageNamesLoader.loadPackageNames(
+                    line.getOptionValue("n"));
+            }
+            catch (CheckstyleException e) {
+                System.out.println("Error loading package names file");
+                e.printStackTrace(System.out);
+                System.exit(1);
+            }
+        }
 
         // setup the output stream
         OutputStream out = null;
@@ -99,6 +113,7 @@
         Checker c = null;
         try {
             c = new Checker();
+            c.setPackageNames(packageNames);
             c.configure(config);
             c.addListener(listener);
         }

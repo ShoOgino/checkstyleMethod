@@ -1,0 +1,21 @@
+    /**
+     * Creates a full package name from the package names on the stack.
+     * @return the full name of the current package.
+     */ 
+    private String getPackageName()
+    {
+        if (mPackageStack.isEmpty()) {
+            return "";
+        }
+        final StringBuffer buf = new StringBuffer();
+        final Iterator it = mPackageStack.iterator();
+        while (it.hasNext()) {
+            String subPackage = (String) it.next();
+            if (!subPackage.endsWith(".")) {
+                subPackage += ".";
+            }
+            buf.append(subPackage);
+        }
+        return buf.toString();
+    }
+

@@ -1,0 +1,17 @@
+    /** @see org.xml.sax.helpers.DefaultHandler **/
+    public void startElement(String aNamespaceURI,
+                             String aLocalName,
+                             String aQName,
+                             Attributes aAtts)
+            throws SAXException
+    {
+        if (aQName.equals("package")) {
+            //push package name
+            final String name = (String) aAtts.getValue("name");
+            if (name == null) {
+                throw new SAXException("missing package name");
+            }
+            mPackageStack.push(name);
+        }
+   }
+
