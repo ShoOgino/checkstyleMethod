@@ -1,0 +1,21 @@
+    /**
+     * Returns the number of child nodes one level below this node. That is is
+     * does not recurse down the tree.
+     * @return the number of child nodes
+     */
+    public int getChildCount()
+    {
+        // lazy init
+        if (mChildCount == NOT_INITIALIZED) {
+            mChildCount = 0;
+            AST child = getFirstChild();
+
+            while (child != null) {
+                mChildCount += 1;
+                child = child.getNextSibling();
+            }
+
+        }
+        return mChildCount;
+    }
+
