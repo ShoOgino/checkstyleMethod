@@ -1,13 +1,12 @@
     /**
-     * Returns the first sibling token that makes a specified type.
-     * @param aFrom the token to search from
+     * Returns the first child token that makes a specified type.
      * @param aType the token type to match
      * @return the matching token, or null if no match
      */
-    public static DetailAST findFirstToken(AST aFrom, int aType)
+    public DetailAST findFirstToken(int aType)
     {
         DetailAST retVal = null;
-        for (AST i = aFrom; i != null; i = i.getNextSibling()) {
+        for (AST i = getFirstChild(); i != null; i = i.getNextSibling()) {
             if (i.getType() == aType) {
                 retVal = (DetailAST) i;
                 break;

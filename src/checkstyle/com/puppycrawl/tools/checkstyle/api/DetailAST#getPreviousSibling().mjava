@@ -1,0 +1,22 @@
+    /**
+     * Returns the previous sibling or null if no such sibling exists.
+     * @return the previous sibling or null if no such sibling exists.
+     */
+    public DetailAST getPreviousSibling()
+    {
+        DetailAST parent = getParent();
+        if (parent == null) {
+            return null;
+        }
+
+        AST ast = parent.getFirstChild();
+        while (ast != null) {
+            AST nextSibling = ast.getNextSibling();
+            if (this == nextSibling) {
+                return (DetailAST) ast;
+            }
+            ast = nextSibling;
+        }
+        return null;
+    }
+

@@ -1,13 +1,12 @@
     /**
-     * Returns the number of sibling tokens that are of a specified type.
-     * @param aFrom the token to search from
+     * Returns the number of direct child tokens that have the specified type.
      * @param aType the token type to match
      * @return the number of matching token
      */
-    public static int countTokens(AST aFrom, int aType)
+    public int getChildCount(int aType)
     {
         int count = 0;
-        for (AST i = aFrom; i != null; i = i.getNextSibling()) {
+        for (AST i = getFirstChild(); i != null; i = i.getNextSibling()) {
             if (i.getType() == aType) {
                 count++;
             }

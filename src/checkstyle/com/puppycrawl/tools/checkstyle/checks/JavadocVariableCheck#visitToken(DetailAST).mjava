@@ -2,9 +2,7 @@
     public void visitToken(DetailAST aAST)
     {
         if (!ScopeUtils.inCodeBlock(aAST)) {
-            final DetailAST mods =
-                Utils.findFirstToken(aAST.getFirstChild(),
-                                     TokenTypes.MODIFIERS);
+            final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
             final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
             final Scope variableScope =
                 ScopeUtils.inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
