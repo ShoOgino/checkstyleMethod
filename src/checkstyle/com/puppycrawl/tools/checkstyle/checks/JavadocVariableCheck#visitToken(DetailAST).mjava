@@ -1,15 +1,15 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        if (!inCodeBlock(aAST)) {
+        if (!ScopeUtils.inCodeBlock(aAST)) {
             final DetailAST mods =
                 Utils.findFirstToken(aAST.getFirstChild(),
                                      TokenTypes.MODIFIERS);
-            final Scope declaredScope = getScopeFromMods(mods);
+            final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
             final Scope variableScope =
-                inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
+                ScopeUtils.inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
             if (variableScope.isIn(mScope)) {
-                final Scope surroundingScope = getSurroundingScope(aAST);
+                final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
                 if (surroundingScope.isIn(mScope)) {
                     final FileContents contents = getFileContents();
                     final String[] cmt =
