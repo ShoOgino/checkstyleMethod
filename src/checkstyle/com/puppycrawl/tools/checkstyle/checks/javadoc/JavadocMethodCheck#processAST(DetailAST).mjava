@@ -9,7 +9,9 @@
             final TextBlock cmt = contents.getJavadocBefore(aAST.getLineNo());
 
             if (cmt == null) {
-                log(aAST, "javadoc.missing");
+                if (!mAllowMissingJavadoc) {
+                    log(aAST, "javadoc.missing");
+                }
             }
             else {
                 checkComment(aAST, cmt);
