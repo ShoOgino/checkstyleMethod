@@ -1,0 +1,16 @@
+    /**
+     * @param aFrom String to decode the option from
+     * @return the CatchBlockOption represented by aFrom
+     * @throws BuildException if unable to decode aFrom
+     */
+    private CatchBlockOption extractCatchBlockOption(String aFrom)
+        throws BuildException
+    {
+        final CatchBlockOption opt = CatchBlockOption.decode(aFrom);
+        if (opt == null) {
+            throw new BuildException("Unable to parse '" + aFrom + "'.",
+                                     location);
+        }
+        return opt;
+    }
+
