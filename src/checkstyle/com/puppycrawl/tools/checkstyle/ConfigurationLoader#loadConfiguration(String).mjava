@@ -1,0 +1,32 @@
+    /**
+     * Returns the check configurations in a specified file.
+     * @param aConfigFname name of config file
+     * @return the check configurations
+     * @throws CheckstyleException if an error occurs
+     */
+    public static Configuration loadConfiguration(String aConfigFname)
+        throws CheckstyleException
+    {
+        try {
+            final ConfigurationLoader loader = new ConfigurationLoader();
+            loader.parseFile(aConfigFname);
+            return loader.getConfiguration();
+        }
+        catch (FileNotFoundException e) {
+            throw new CheckstyleException("unable to find " + aConfigFname);
+        }
+        catch (ParserConfigurationException e) {
+            throw new CheckstyleException("unable to parse " + aConfigFname);
+        }
+        catch (SAXException e) {
+            throw new CheckstyleException("unable to parse " + aConfigFname);
+        }
+        catch (IOException e) {
+            throw new CheckstyleException("unable to read " + aConfigFname);
+        }
+        catch (RESyntaxException e) {
+            throw new CheckstyleException(
+                "A regular expression error exists in " + aConfigFname);
+        }
+    }
+

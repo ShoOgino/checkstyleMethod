@@ -1,0 +1,11 @@
+    public void testEmptyProperties()
+        throws Exception
+    {
+        Properties props = new Properties();
+        GlobalProperties globalProps = new GlobalProperties(props, System.out);
+        Configuration config =
+            new Configuration(globalProps, new CheckConfiguration[0]);
+        Properties defaultProps = config.getProperties();
+        assertEquals(4, defaultProps.size());
+    }
+

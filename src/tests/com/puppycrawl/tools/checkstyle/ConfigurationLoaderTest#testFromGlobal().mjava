@@ -1,0 +1,19 @@
+        /** check that a global property doesn't effect a check property.
+     *  and vice versa
+     */
+    public void testFromGlobal()
+        throws Exception
+    {
+        Configuration config =
+            loadConfiguration("fromglobal_configuration.xml");
+                                    
+        CheckConfiguration[] checkConfigs =
+            config.getCheckConfigurations();        
+        RightCurlyCheck rightCurly =
+            (RightCurlyCheck) (checkConfigs[0].
+                createInstance(this.getClass().getClassLoader()));
+        RightCurlyOption option =
+            (RightCurlyOption) rightCurly.getAbstractOption();
+        assertEquals("option", "alone", option.toString());
+    }        
+

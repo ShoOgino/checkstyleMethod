@@ -5,13 +5,30 @@
                              Attributes aAtts)
     {
         mBuf.setLength(0);
-        if ("check".equals(aQName)) {
+        if ("global".equals(aQName)) {
+            isInGlobalElement = true;
+        }
+        else if ("check".equals(aQName)) {
             mCurrent = new CheckConfiguration();
             mCurrent.setClassname(aAtts.getValue("classname"));
         }
         else if ("set-property".equals(aQName)) {
-            mCurrent.addProperty(aAtts.getValue("name"),
-                                 aAtts.getValue("value"));
+            final String name = aAtts.getValue("name");
+            String value = aAtts.getValue("value");
+            
+            if (value == null) {
+                //global?
+                String globalKey = aAtts.getValue("from-global");
+                value = (String) mProps.get(globalKey); 
+            }
+                
+            if (isInGlobalElement) {
+                mProps.setProperty(name, value);
+            }
+            else {
+                mCurrent.addProperty(name, value);
+            }
         }
+
     }
 

@@ -1,0 +1,15 @@
+    /**
+     * Extend default deserialization to initialize the RE member variables.
+     *
+     * @param aStream the ObjectInputStream that contains the serialized data
+     * @throws IOException if an I/O error occurs
+     * @throws ClassNotFoundException if the class of a serialized object
+     *     could not be found
+     */
+    private void readObject(ObjectInputStream aStream)
+        throws IOException, ClassNotFoundException
+    {
+        // initialize the serialized fields
+        aStream.defaultReadObject();
+    }
+
