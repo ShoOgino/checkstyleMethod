@@ -16,7 +16,7 @@
             final Reader sar = new StringArrayReader(aContents.getLines());
             final GeneratedJava14Lexer jl = new GeneratedJava14Lexer(sar);
             jl.setFilename(aContents.getFilename());
-            jl.setFileContents(aContents);
+            jl.setCommentListener(aContents);
 
             final GeneratedJava14Recognizer jr =
                 new SilentJava14Recognizer(jl);
@@ -35,7 +35,7 @@
             final Reader sar = new StringArrayReader(aContents.getLines());
             final GeneratedJavaLexer jl = new GeneratedJavaLexer(sar);
             jl.setFilename(aContents.getFilename());
-            jl.setFileContents(aContents);
+            jl.setCommentListener(aContents);
 
             final GeneratedJavaRecognizer jr = new GeneratedJavaRecognizer(jl);
             jr.setFilename(aContents.getFilename());
