@@ -1,6 +1,11 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        // TODO: implement
+        if (aAST.getType() == JavaTokenTypes.RPAREN) {
+            processRight(aAST);
+        }
+        else {
+            processLeft(aAST);
+        }
     }
 
