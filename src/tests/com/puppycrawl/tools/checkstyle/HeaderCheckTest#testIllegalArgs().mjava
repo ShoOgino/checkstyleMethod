@@ -1,9 +1,9 @@
     public void testIllegalArgs()
             throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(HeaderCheck.class.getName());
-        checkConfig.addProperty("headerFile", getPath("nonexisting.file"));
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(HeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("nonexisting.file"));
         try {
             createChecker(checkConfig);
             fail();

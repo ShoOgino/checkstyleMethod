@@ -1,8 +1,8 @@
     public void testNoHeader()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(HeaderCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(HeaderCheck.class);
         // No header file specified
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputScopeAnonInner.java");

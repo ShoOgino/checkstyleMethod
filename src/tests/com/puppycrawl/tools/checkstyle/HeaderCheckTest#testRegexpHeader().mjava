@@ -1,10 +1,10 @@
     public void testRegexpHeader()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(RegexpHeaderCheck.class.getName());
-        checkConfig.addProperty("headerFile", getPath("regexp.header"));
-        checkConfig.addProperty("ignoreLines", "4,5");
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(HeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header"));
+        checkConfig.addAttribute("ignoreLines", "4,5");
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputScopeAnonInner.java");
         final String[] expected = {

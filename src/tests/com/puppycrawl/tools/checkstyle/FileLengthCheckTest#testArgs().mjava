@@ -1,9 +1,9 @@
     public void testArgs() throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(FileLengthCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(FileLengthCheck.class);
         try {
-            checkConfig.addProperty("max", "abc");
+            checkConfig.addAttribute("max", "abc");
             createChecker(checkConfig);
             fail("Should indicate illegal args");
         }

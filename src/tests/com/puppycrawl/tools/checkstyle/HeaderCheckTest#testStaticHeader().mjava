@@ -1,10 +1,10 @@
     public void testStaticHeader()
             throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(HeaderCheck.class.getName());
-        checkConfig.addProperty("headerFile", getPath("java.header"));
-        checkConfig.addProperty("ignoreLines", "");
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(HeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("java.header"));
+        checkConfig.addAttribute("ignoreLines", "");
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("inputHeader.java");
         final String[] expected = {
