@@ -11,8 +11,7 @@
         DetailAST child = (DetailAST) params.getFirstChild();
         while (child != null) {
             if (child.getType() == TokenTypes.PARAMETER_DEF) {
-                final DetailAST ident
-                    = child.findFirstToken(TokenTypes.IDENT);
+                final DetailAST ident = child.findFirstToken(TokenTypes.IDENT);
                 retVal.add(ident);
             }
             child = (DetailAST) child.getNextSibling();
