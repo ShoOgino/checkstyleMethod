@@ -1,0 +1,18 @@
+    /**
+     * Hex-encodes a byte array.
+     * @param aByteArray the byte array
+     * @return hex encoding of <code>aByteArray</code>
+     */
+    private static String hexEncode(byte[] aByteArray)
+    {
+        final StringBuffer buf = new StringBuffer(2 * aByteArray.length);
+        for (int i = 0; i < aByteArray.length; i++) {
+            final int b = aByteArray[i];
+            final int low = b & 0x0F;
+            final int high = (b >> 4) & 0x0F;
+            buf.append( sHexChars[high] );
+            buf.append( sHexChars[low] );
+        }
+        return buf.toString();
+    }
+

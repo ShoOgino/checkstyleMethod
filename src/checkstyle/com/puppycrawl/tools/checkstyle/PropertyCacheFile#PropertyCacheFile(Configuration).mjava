@@ -1,0 +1,35 @@
+    /**
+     * Creates a new <code>PropertyCacheFile</code> instance.
+     *
+     * @param aCurrentConfig the current configuration, not null
+     */
+    PropertyCacheFile(Configuration aCurrentConfig)
+    {
+        boolean setInActive = true;
+        final String fileName = aCurrentConfig.getCacheFile();
+        if (fileName != null) {
+            try {
+                mDetails.load(new FileInputStream(fileName));
+                String cachedConfigHash = mDetails.getProperty(CONFIG_HASH_KEY);
+                String currentConfigHash = getConfigHashCode(aCurrentConfig);
+                setInActive = false;
+                if (cachedConfigHash == null ||
+                    !cachedConfigHash.equals(currentConfigHash))
+                {
+                    // Detected configuration change - clear cache
+                    mDetails.clear();
+                    mDetails.put(CONFIG_HASH_KEY, currentConfigHash);
+                }
+            }
+            catch (FileNotFoundException e) {
+                // Ignore, the cache does not exist
+                setInActive = false;
+            }
+            catch (IOException e) {
+                System.out.println("Unable to open cache file, ignoring.");
+                e.printStackTrace(System.out);
+            }
+        }
+        mDetailsFile = (setInActive) ? null : fileName;
+    }
+

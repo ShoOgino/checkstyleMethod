@@ -1,0 +1,32 @@
+    /**
+     * Calculates the hashcode for a Configuration.
+     *
+     * @param aConfiguration the Configuration
+     * @return the hashcode for <code>aConfiguration</code>
+     */
+    private String getConfigHashCode(Configuration aConfiguration)
+    {
+        try {
+            // im-memory serialization of Configuration
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject( aConfiguration );
+            oos.flush();
+            oos.close();
+
+            // Instead of hexEncoding baos.toByteArray() directly we
+            // use a message digest here to keep the length of the
+            // hashcode reasonable
+
+            MessageDigest md = MessageDigest.getInstance("SHA");
+            md.update(baos.toByteArray());
+
+            return hexEncode(md.digest());
+        }
+        catch (Exception ex) { // IO, NoSuchAlgorithm
+            ex.printStackTrace();
+            return "ALWAYS FRESH: " + System.currentTimeMillis();
+        }
+    }
+
