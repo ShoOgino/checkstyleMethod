@@ -1,13 +1,12 @@
     public void testMissingConfigName()
     {
         try {
-            final DefaultConfiguration config =
-                (DefaultConfiguration) loadConfiguration(
-                    "missing_config_name.xml");
+            loadConfiguration("missing_config_name.xml");
             fail("missing config name");
         }
         catch (CheckstyleException ex) {
-            assertTrue("exception error",
+            assertTrue(
+                "exception error",
                 ex.getMessage().indexOf("missing config name") >= 0);
         }
     }

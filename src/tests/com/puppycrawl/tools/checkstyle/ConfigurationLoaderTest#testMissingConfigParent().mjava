@@ -1,13 +1,12 @@
     public void testMissingConfigParent()
     {
         try {
-            final DefaultConfiguration config =
-                (DefaultConfiguration) loadConfiguration(
-                    "missing_config_parent.xml");
+            loadConfiguration("missing_config_parent.xml");
             fail("missing config parent");
         }
         catch (CheckstyleException ex) {
-            assertTrue("exception error",
+            assertTrue(
+                "exception error",
                 ex.getMessage().indexOf("has no config parent") >= 0);
         }
     }
