@@ -4,10 +4,11 @@
         final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
 
         if (aAST.getType() == TokenTypes.CLASS_DEF) {
-            final boolean isFinal =
-                (modifiers != null)
+            final boolean isFinal = (modifiers != null)
                     && modifiers.branchContains(TokenTypes.FINAL);
-            mClasses.push(new ClassDesc(isFinal));
+            final boolean isAbstract = (modifiers != null)
+                    && modifiers.branchContains(TokenTypes.ABSTRACT);
+            mClasses.push(new ClassDesc(isFinal, isAbstract));
         }
         else {
             final ClassDesc desc = (ClassDesc) mClasses.peek();

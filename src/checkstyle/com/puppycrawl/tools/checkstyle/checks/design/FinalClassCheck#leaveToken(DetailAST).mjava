@@ -7,6 +7,7 @@
 
         final ClassDesc desc = (ClassDesc) mClasses.pop();
         if (!desc.isDeclaredAsFinal()
+            && !desc.isDeclaredAsAbstract()
             && desc.hasPrivateCtor()
             && !desc.hasNonPrivateCtor())
         {
