@@ -8,6 +8,9 @@
                              MyCommonAST aBrace,
                              LeftCurlyOption aOption)
     {
+        verifyWSAroundBegin(aBrace.getLineNo(),
+                            aBrace.getColumnNo() + 1,
+                            aBrace.getText());
         final String braceLine = mLines[aBrace.getLineNo() - 1];
 
         // calculate the previous line length without trailing whitespace. Need
