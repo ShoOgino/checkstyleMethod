@@ -16,8 +16,7 @@
         }
         //single parameter?
         final DetailAST parametersAST = aAST.getParent();
-        if (parametersAST.getChildCount() != 1)
-        {
+        if (parametersAST.getChildCount() != 1) {
             return false;
         }
         //method parameter, not constructor parameter?
@@ -28,15 +27,14 @@
         //property setter name?
         final String expectedName =
             "set" + aName.substring(0, 1).toUpperCase() + aName.substring(1);
-        final DetailAST methodNameAST
-            = methodAST.findFirstToken(TokenTypes.IDENT);
+        final DetailAST methodNameAST =
+            methodAST.findFirstToken(TokenTypes.IDENT);
         final String methodName = methodNameAST.getText();
         if (!methodName.equals(expectedName)) {
             return false;
         }
         //void?
-        final DetailAST typeAST
-            = methodAST.findFirstToken(TokenTypes.TYPE);
+        final DetailAST typeAST = methodAST.findFirstToken(TokenTypes.TYPE);
         return typeAST.branchContains(TokenTypes.LITERAL_VOID);
     }
 
