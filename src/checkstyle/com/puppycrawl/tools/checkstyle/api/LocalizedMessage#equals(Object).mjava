@@ -1,0 +1,20 @@
+    /** @see Object#equals */
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (!(o instanceof LocalizedMessage)) return false;
+
+        final LocalizedMessage localizedMessage = (LocalizedMessage) o;
+
+        if (mColNo != localizedMessage.mColNo) return false;
+        if (mLineNo != localizedMessage.mLineNo) return false;
+        if (!mKey.equals(localizedMessage.mKey)) return false;
+
+        // ignoring mArgs and mBundle for perf reasons.
+
+        // we currently never load the same error from different bundles or
+        // fire the same error for the same location with different arguments.
+
+        return true;
+    }
+
