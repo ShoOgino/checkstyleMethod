@@ -1,0 +1,11 @@
+    public void testCast() throws Exception
+    {
+        checkConfig.addTokens("TYPECAST");
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputWhitespace.java");
+        final String[] expected = {
+            "88:21: 'cast' is not followed by whitespace.",
+        };
+        verify(c, fname, expected);
+    }
+
