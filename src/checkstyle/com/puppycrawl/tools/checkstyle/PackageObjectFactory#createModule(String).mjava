@@ -4,25 +4,20 @@
      * a classname, creates an instance of the named class. Otherwise, creates
      * an instance of a classname obtained by concatenating the given name
      * to a package name from a given list of package names.
-     * @param aPackages list of package names.
-     * @param aLoader the <code>ClassLoader</code> to create the instance with.
      * @param aName the name of a class.
      * @return the <code>Object</code> created by aLoader.
      * @throws CheckstyleException if an error occurs.
      */
-    public static Object makeObject(String[] aPackages, ClassLoader aLoader,
-        String aName)
+    public Object createModule(String aName)
         throws CheckstyleException
     {
-        final PackageObjectFactory factory = new PackageObjectFactory();
         try {
-            return factory.doMakeObject(aPackages, aLoader, aName);
+            return doMakeObject(aName);
         }
         catch (CheckstyleException ex) {
             //try again with suffix "Check"
             try {
-                return factory.
-                    doMakeObject(aPackages, aLoader, aName + "Check");
+                return doMakeObject(aName + "Check");
             }
             catch (CheckstyleException ex2) {
                 throw new CheckstyleException(

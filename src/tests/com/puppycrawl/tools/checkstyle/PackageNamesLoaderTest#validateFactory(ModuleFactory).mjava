@@ -1,9 +1,13 @@
-    private void validatePackageNames(String[] pkgNames)
+    private void validateFactory(ModuleFactory aModuleFactory)
     {
         String[] checkstylePackages = {
             "com.puppycrawl.tools.checkstyle.",
             "com.puppycrawl.tools.checkstyle.checks."
         };
+
+        PackageObjectFactory factory = (PackageObjectFactory) aModuleFactory;
+        String[] pkgNames = factory.getPackages();
+
         assertEquals("pkgNames.length.", checkstylePackages.length,
             pkgNames.length);
         Set checkstylePackagesSet =

@@ -2,10 +2,8 @@
         throws CheckstyleException
     {
         final PackageObjectFactory factory =
-            (PackageObjectFactory) PackageObjectFactory.makeObject(
-                new String[] {},
-                getClass().getClassLoader(),
-                "com.puppycrawl.tools.checkstyle.PackageObjectFactory");
+                (PackageObjectFactory) mFactory.createModule(
+                        "com.puppycrawl.tools.checkstyle.PackageObjectFactory");
         assertNotNull(factory);
     }
 

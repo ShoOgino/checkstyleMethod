@@ -5,13 +5,13 @@
      * @return the default list of package names.
      * @throws CheckstyleException if an error occurs.
      */
-    public static String[] loadPackageNames(ClassLoader aClassLoader)
+    public static ModuleFactory loadModuleFactory(ClassLoader aClassLoader)
         throws CheckstyleException
     {
 
         final InputStream stream =
             aClassLoader.getResourceAsStream(DEFAULT_PACKAGES);
         final InputSource source = new InputSource(stream);
-        return loadPackageNames(source, "default package names");
+        return loadModuleFactory(source, "default package names");
     }
 

@@ -5,7 +5,7 @@
      *  package file. 
      * @throws CheckstyleException if an error occurs.
      */      
-    public static String[] loadPackageNames(String aFilename)
+    public static ModuleFactory loadModuleFactory(String aFilename)
         throws CheckstyleException
     {
         FileReader reader = null;
@@ -16,6 +16,6 @@
             throw new CheckstyleException("unable to find " + aFilename);
         }
         final InputSource source = new InputSource(reader);
-        return loadPackageNames(source, aFilename);
+        return loadModuleFactory(source, aFilename);
     }
 

@@ -1,11 +1,10 @@
     public void testMakeObectFromList()
         throws CheckstyleException
-    {    
+    {
+        mFactory.addPackage("com.");
         final PackageObjectFactory factory =
-            (PackageObjectFactory) PackageObjectFactory.makeObject(
-                new String [] {"com."},
-                this.getClass().getClassLoader(),
-                "puppycrawl.tools.checkstyle.PackageObjectFactory");
+                (PackageObjectFactory) mFactory.createModule(
+                        "puppycrawl.tools.checkstyle.PackageObjectFactory");
         assertNotNull(factory);
     }
 

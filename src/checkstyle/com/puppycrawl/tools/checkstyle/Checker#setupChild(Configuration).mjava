@@ -8,13 +8,8 @@
     {
         final String name = aChildConf.getName();
         try {
-            final String[] packageNames = getPackageNames();
             final FileSetCheck fsc =
-                    (FileSetCheck) PackageObjectFactory.makeObject(
-                            packageNames,
-                            getClass().getClassLoader(),
-                            name);
-            fsc.setPackageNames(packageNames);
+            (FileSetCheck) mModuleFactory.createModule(name);
             fsc.contextualize(mChildContext);
             fsc.configure(aChildConf);
             addFileSetCheck(fsc);

@@ -7,16 +7,8 @@
             throws CheckstyleException
     {
         // TODO: improve the error handing
-
-        // IMPORTANT! Need to use the same class loader that created this
-        // class. Otherwise can get ClassCastException problems.
         final String name = aChildConf.getName();
-        final String[] packageNames = getPackageNames();
-        final Check c =
-            (Check) PackageObjectFactory.makeObject(
-                packageNames,
-                getClass().getClassLoader(),
-                name);
+        final Check c = (Check) mModuleFactory.createModule(name);
         c.contextualize(mChildContext);
         c.configure(aChildConf);
         c.init();

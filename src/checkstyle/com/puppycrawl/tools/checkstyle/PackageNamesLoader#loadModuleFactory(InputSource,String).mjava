@@ -5,14 +5,14 @@
      * @return the list ofpackage names stored in aSource. 
      * @throws CheckstyleException if an error occurs.
      */          
-    private static String[] loadPackageNames(InputSource aSource,
-                                             String aSourceName)
+    private static ModuleFactory loadModuleFactory(
+            InputSource aSource, String aSourceName)
         throws CheckstyleException
     {
         try {
             final PackageNamesLoader nameLoader = new PackageNamesLoader();
             nameLoader.parseInputSource(aSource);
-            return nameLoader.getPackageNames();
+            return nameLoader.getModuleFactory();
         }
         catch (FileNotFoundException e) {
             throw new CheckstyleException("unable to find " + aSourceName);

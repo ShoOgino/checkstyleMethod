@@ -5,8 +5,14 @@
         final Locale locale = new Locale(mLocaleLanguage, mLocaleCountry);
         LocalizedMessage.setLocale(locale);
 
+        if (mModuleFactory == null) {
+            mModuleFactory = PackageNamesLoader.loadModuleFactory(
+                    this.getClass().getClassLoader());
+        }
+
         final DefaultContext context = new DefaultContext();
         context.add("classLoader", mLoader);
+        context.add("moduleFactory", mModuleFactory);
         mChildContext = context;
     }
 
