@@ -1,0 +1,9 @@
+    protected DefaultConfiguration createCheckerConfig(Configuration aCheckConfig)
+    {
+        final DefaultConfiguration dc = new DefaultConfiguration("root");
+        final DefaultConfiguration twConf = createCheckConfig(TreeWalker.class);
+        dc.addChild(twConf);
+        twConf.addChild(aCheckConfig);
+        return dc;
+    }
+
