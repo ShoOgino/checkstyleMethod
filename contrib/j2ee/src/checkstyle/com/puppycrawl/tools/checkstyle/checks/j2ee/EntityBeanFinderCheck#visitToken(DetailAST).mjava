@@ -1,0 +1,16 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        final String name = nameAST.getText();
+        if (name.startsWith("ejbFind")
+            && Utils.implementsEntityBean(aAST))
+        {
+            checkMethod(aAST);
+            if (Utils.isVoid(aAST)) {
+                log(nameAST.getLineNo(), nameAST.getColumnNo(),
+                    "voidmethod.bean", name);
+            }
+        }
+    }
+

@@ -1,0 +1,14 @@
+    public void testDefault()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(EntityBeanFinderCheck.class);
+        final String[] expected = {
+            "95:33: Method ejbFindSomething has illegal modifier final.",
+            "95:33: Method ejbFindSomething has illegal modifier static.",
+            "95:33: Method ejbFindSomething is not public.",
+            "95:33: Void ejbFindSomething method.",
+        };
+        verify(checkConfig, getPath("InputEntityBean.java"), expected);
+    }
+
