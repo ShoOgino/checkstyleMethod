@@ -8,16 +8,18 @@
         LocalizedMessage.setLocale(locale);
 
         final DefaultContext context = new DefaultContext();
-        context.add("classLoader", this.getClassLoader());
+        context.add("classLoader", mLoader);
         final Configuration[] fileSetChecks = aConfiguration.getChildren();
         for (int i = 0; i < fileSetChecks.length; i++) {
             final Configuration fscConf = fileSetChecks[i];
             final String name = fscConf.getName();
             try {
-                FileSetCheck fsc =
+                final FileSetCheck fsc =
                     (FileSetCheck) PackageObjectFactory.makeObject(
-                        mPackageNames, getClassLoader(), name);
-                fsc.setPackageNames(mPackageNames);
+                        getPackageNames(),
+                        getClass().getClassLoader(),
+                        name);
+                fsc.setPackageNames(getPackageNames());
                 fsc.contextualize(context);
                 fsc.configure(fscConf);
                 addFileSetCheck(fsc);

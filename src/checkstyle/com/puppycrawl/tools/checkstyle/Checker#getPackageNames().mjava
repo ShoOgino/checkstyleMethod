@@ -1,0 +1,11 @@
+    private String[] getPackageNames()
+        throws CheckstyleException
+    {
+        if (mPackageNames == null) {
+            mPackageNames =
+                PackageNamesLoader.loadPackageNames(
+                    getClass().getClassLoader());
+        }
+        return mPackageNames;
+    }
+
