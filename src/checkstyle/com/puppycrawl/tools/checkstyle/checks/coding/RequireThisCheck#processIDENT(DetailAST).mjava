@@ -1,0 +1,45 @@
+    /**
+     * Checks if a given IDENT is method call or field name which
+     * require explicit <code>this</code> qualifier.
+     *
+     * @param aAST IDENT to check.
+     */
+    private void processIDENT(DetailAST aAST)
+    {
+        int parentType = aAST.getParent().getType();
+
+        if (parentType == TokenTypes.METHOD_CALL) {
+            log(aAST, "require.this.method", aAST.getText());
+            return;
+        }
+        if (parentType == TokenTypes.DOT
+            && aAST.getPreviousSibling() != null)
+        {
+            // it's the method name in a method call; no problem
+            return;
+        }
+        if (parentType == TokenTypes.TYPE
+            || parentType == TokenTypes.LITERAL_NEW)
+        {
+            // it's a type name; no problem
+            return;
+        }
+        if (parentType == TokenTypes.VARIABLE_DEF
+            || parentType == TokenTypes.CTOR_DEF
+            || parentType == TokenTypes.METHOD_DEF
+            || parentType == TokenTypes.CLASS_DEF
+            || parentType == TokenTypes.PARAMETER_DEF)
+        {
+            // it's being declared; no problem
+            return;
+        }
+
+        final LexicalFrame declared = this.mFrames.findFrame(aAST.getText());
+        if (declared == null) {
+            log(aAST, "require.this.unfound.variable", aAST.getText());
+        }
+        else if (declared instanceof ClassFrame) {
+            log(aAST, "require.this.variable", aAST.getText());
+        }
+    }
+
