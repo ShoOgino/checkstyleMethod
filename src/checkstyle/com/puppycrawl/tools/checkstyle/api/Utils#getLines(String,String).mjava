@@ -11,9 +11,14 @@
     {
         final ArrayList lines = new ArrayList();
         final FileInputStream fr = new FileInputStream(aFileName);
-        final LineNumberReader lnr =
-              new LineNumberReader(new InputStreamReader(fr, aCharsetName));
-
+        LineNumberReader lnr = null;
+        try {
+            lnr = new LineNumberReader(new InputStreamReader(fr, aCharsetName));
+        }
+        catch (UnsupportedEncodingException ex) {
+            final String message = "unsupported charset: " + ex.getMessage();
+            throw new UnsupportedEncodingException(message);
+        }
         try {
             while (true) {
                 final String l = lnr.readLine();
