@@ -23,7 +23,8 @@
             final ListIterator throwIt = aThrows.listIterator();
             while (!found && throwIt.hasNext()) {
                 final FullIdent fi = (FullIdent) throwIt.next();
-                if (fi.getText().equals(documentedEx)) {
+                final String declaredEx = fi.getText();
+                if (isSameType(declaredEx, documentedEx)) {
                     found = true;
                     throwIt.remove();
                     foundThrows.add(documentedEx);

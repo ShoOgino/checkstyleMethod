@@ -1,0 +1,15 @@
+    /**
+     * Return if two Strings represent the same type, inspecting the
+     * import statements if necessary
+     *
+     * @param aDeclared type declared in throws clause
+     * @param aDocumented type declared in javadoc throws tag
+     * @return true iff type names represent the same type
+     */
+    private boolean isSameType(String aDeclared, String aDocumented)
+    {
+        return aDeclared.equals(aDocumented)
+                || isShortName(aDeclared, aDocumented)
+                || isShortName(aDocumented, aDeclared);
+    }
+
