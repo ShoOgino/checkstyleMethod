@@ -1,0 +1,51 @@
+    /**
+     * Convert the specified input object into an output object of the
+     * specified type.
+     *
+     * @param aType Data type to which this value should be converted
+     * @param aValue The input value to be converted
+     *
+     * @return the converted object
+     *
+     * @throws ConversionException if conversion cannot be performed
+     *  successfully
+     */
+    public Object convert(Class aType, Object aValue)
+        throws ConversionException
+    {
+        // Deal with a null value
+        if (aValue == null) {
+            if (useDefault) {
+                return (defaultValue);
+            }
+            else {
+                throw new ConversionException("No value specified");
+            }
+        }
+
+        // Deal with the no-conversion-needed case
+        if (mModel.getClass() == aValue.getClass()) {
+            return (aValue);
+        }
+
+        // Parse the input value as a String into elements
+        // and convert to the appropriate type
+        try {
+            final List list = parseElements(aValue.toString());
+            final String[] results = new String[list.size()];
+
+            for (int i = 0; i < results.length; i++) {
+                results[i] = (String) list.get(i);
+            }
+            return (results);
+        }
+        catch (Exception e) {
+            if (useDefault) {
+                return (defaultValue);
+            }
+            else {
+                throw new ConversionException(aValue.toString(), e);
+            }
+        }
+    }
+

@@ -2,15 +2,15 @@
      * Implements the Contextualizable interface using bean introspection.
      * @see Contextualizable
      */
-    public void contextualize(Context aContext)
-            throws CheckstyleException
+    public void contextualize(Context aContext) throws CheckstyleException
     {
         // TODO: debug log messages
-
         final String[] attributes = aContext.getAttributeNames();
+
         for (int i = 0; i < attributes.length; i++) {
             final String key = attributes[i];
             final Object value = aContext.get(key);
+
             try {
                 BeanUtils.copyProperty(this, key, value);
             }
@@ -20,8 +20,8 @@
             }
             catch (IllegalAccessException e) {
                 throw new CheckstyleException(
-                        "cannot access " + key + " in "
-                        + this.getClass().getName());
+                    "cannot access " + key + " in "
+                    + this.getClass().getName());
             }
         }
     }

@@ -3,26 +3,27 @@
      * @see Configurable
      */
     public void configure(Configuration aConfiguration)
-            throws CheckstyleException
+        throws CheckstyleException
     {
         // TODO: debug log messages
-
         final String[] attributes = aConfiguration.getAttributeNames();
+
         for (int i = 0; i < attributes.length; i++) {
             final String key = attributes[i];
             final String value = aConfiguration.getAttribute(key);
+
             try {
                 BeanUtils.copyProperty(this, key, value);
             }
             catch (InvocationTargetException e) {
                 throw new CheckstyleException(
-                        "for " + aConfiguration.getName() + " unable to set "
-                        + key + " with " + value);
+                    "for " + aConfiguration.getName() + " unable to set " + key
+                    + " with " + value);
             }
             catch (IllegalAccessException e) {
                 throw new CheckstyleException(
-                        "cannot access " + key + " in "
-                        + this.getClass().getName());
+                    "cannot access " + key + " in "
+                    + this.getClass().getName());
             }
         }
     }
