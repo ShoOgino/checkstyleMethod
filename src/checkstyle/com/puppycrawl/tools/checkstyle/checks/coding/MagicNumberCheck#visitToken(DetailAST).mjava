@@ -1,22 +1,26 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        if (!inIgnoreList(aAST) && !isConstantDefinition(aAST)) {
-            String text = aAST.getText();
-            final DetailAST parent = aAST.getParent();
-            DetailAST reportAST = aAST;
-            if (parent.getType() == TokenTypes.UNARY_MINUS) {
-                reportAST = parent;
-                text = "-" + text;
-            }
-            else if (parent.getType() == TokenTypes.UNARY_PLUS) {
-                reportAST = parent;
-                text = "+" + text;
-            }
-            log(reportAST.getLineNo(),
-                reportAST.getColumnNo(),
-                "magic.number",
-                text);
+        if (inIgnoreList(aAST)) {
+        	return;
         }
+        
+        DetailAST constantDefAST = findContainingConstantDef(aAST);
+        
+    	if (constantDefAST == null) {
+            reportMagicNumber(aAST);
+        }
+    	else {
+    		DetailAST ast = aAST.getParent();
+    		while (ast != constantDefAST) {
+    			int type = ast.getType();
+    			if (Arrays.binarySearch(ALLOWED_PATH_TOKENTYPES, type) < 0) {
+    				reportMagicNumber(aAST);
+    				break;
+    			}
+    				
+    			ast = ast.getParent();
+    		}
+    	}
     }
 

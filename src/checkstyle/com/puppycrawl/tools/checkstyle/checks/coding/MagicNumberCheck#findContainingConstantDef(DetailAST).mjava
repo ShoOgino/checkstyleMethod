@@ -1,0 +1,34 @@
+    /**
+	 * Finds the constant definition that contains aAST.
+	 * @param aAST the AST
+	 * @return the constant def or null if aAST is not 
+	 * contained in a constant definition  
+	 */
+	private DetailAST findContainingConstantDef(DetailAST aAST) {
+		DetailAST varDefAST = aAST;
+        while (varDefAST != null 
+        		&& varDefAST.getType() != TokenTypes.VARIABLE_DEF)
+        {
+        	varDefAST = varDefAST.getParent();
+        }
+        
+        // no containing variable definition?
+        if (varDefAST == null) {
+        	return null;
+        }
+        
+        // implicit constant?
+        if (ScopeUtils.inInterfaceBlock(varDefAST)) {
+        	return varDefAST;
+        }
+        
+        // explicit constant
+        final DetailAST modifiersAST =
+            varDefAST.findFirstToken(TokenTypes.MODIFIERS);
+        if (modifiersAST.branchContains(TokenTypes.FINAL)) {
+        	return varDefAST;
+        }
+
+		return null;
+	}
+
