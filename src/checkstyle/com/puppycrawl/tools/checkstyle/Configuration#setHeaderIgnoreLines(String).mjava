@@ -1,0 +1,20 @@
+    /**
+     * @param aList comma separated list of line numbers to ignore in header.
+     */
+    public void setHeaderIgnoreLines(String aList)
+    {
+        mHeaderIgnoreLineNo.clear();
+
+        if (aList == null)
+        {
+            return;
+        }
+
+        final StringTokenizer tokens = new StringTokenizer(aList, ",");
+        while (tokens.hasMoreTokens())
+        {
+            final String ignoreLine = tokens.nextToken();
+            mHeaderIgnoreLineNo.add(new Integer(ignoreLine));
+        }
+    }
+
