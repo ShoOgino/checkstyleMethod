@@ -1,10 +1,15 @@
     /** @see Verifier **/
     public void verifyNoWSAfter(MyCommonAST aAST)
     {
+        if (mConfig.isIgnoreWhitespace()) {
+            return;
+        }
+
         final String line = mLines[aAST.getLineNo() - 1];
         final int after = aAST.getColumnNo() + aAST.getText().length();
         if ((after >= line.length()) ||
-            Character.isWhitespace(line.charAt(after))) {
+            Character.isWhitespace(line.charAt(after)))
+        {
             log(aAST.getLineNo(),
                 "'" + aAST.getText() + "' is proceeded with whitespace.");
         }
