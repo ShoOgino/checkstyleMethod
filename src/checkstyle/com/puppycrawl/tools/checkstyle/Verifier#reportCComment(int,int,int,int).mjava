@@ -11,11 +11,6 @@
         final String[] cc = extractCComment(aStartLineNo, aStartColNo,
                                             aEndLineNo, aEndColNo);
 
-        // Remember if possible Javadoc comment
-        if (mLines[aStartLineNo - 1].indexOf("/**", aStartColNo) != -1) {
-            mComments.put(new Integer(aEndLineNo - 1), cc);
-        }
-
         // Check for to-do comments
         for (int i = 0; i < cc.length; i++) {
             if (mConfig.getTodoRegexp().match(cc[i])) {
