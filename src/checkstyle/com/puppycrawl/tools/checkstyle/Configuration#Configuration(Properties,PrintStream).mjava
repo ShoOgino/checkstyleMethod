@@ -50,7 +50,6 @@
                                ILLEGAL_INSTANTIATIONS));
         setBooleanProperty(aProps, Defn.IGNORE_WHITESPACE_PROP);
         setBooleanProperty(aProps, Defn.IGNORE_CAST_WHITESPACE_PROP);
-        setBooleanProperty(aProps, Defn.IGNORE_OP_WRAP_PROP);
         setBooleanProperty(aProps, Defn.IGNORE_BRACES_PROP);
         setBooleanProperty(aProps, Defn.IGNORE_LONG_ELL_PROP);
         setBooleanProperty(aProps, Defn.IGNORE_PUBLIC_IN_INTERFACE_PROP);
@@ -78,5 +77,9 @@
                                                PadOption.NOSPACE,
                                                aLog));
         setBasedir(aProps.getProperty(Defn.BASEDIR_PROP));
+        setWrapOpOption(getWrapOpOptionProperty(aProps,
+                                                Defn.WRAP_OP_PROP,
+                                                WrapOpOption.NL,
+                                                aLog));
     }
 
