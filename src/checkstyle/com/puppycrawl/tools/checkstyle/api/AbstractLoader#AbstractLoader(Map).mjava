@@ -11,6 +11,9 @@
         final SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setValidating(true);
         mParser = factory.newSAXParser().getXMLReader();
+
+        //namespace URIs will be available
+        mParser.setFeature(NAMESPACES_FEATURE_ID, true);
         mParser.setContentHandler(this);
         mParser.setEntityResolver(this);
         mParser.setErrorHandler(this);
