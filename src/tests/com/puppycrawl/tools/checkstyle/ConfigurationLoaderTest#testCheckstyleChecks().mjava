@@ -11,15 +11,15 @@
         final Properties atts = new Properties();
         atts.put("tabWidth", "4");
         atts.put("basedir", "basedir");
-        verifyConfigNode(config, "configuration", 3, atts);
+        verifyConfigNode(config, "Checker", 3, atts);
 
         //verify children
         final Configuration[] children = config.getChildren();
         atts.clear();
         verifyConfigNode(
-            (DefaultConfiguration) children[1], "PackageHtmlCheck", 0, atts);
+            (DefaultConfiguration) children[1], "PackageHtml", 0, atts);
         verifyConfigNode(
-            (DefaultConfiguration) children[2], "TranslationCheck", 0, atts);
+            (DefaultConfiguration) children[2], "Translation", 0, atts);
         atts.put("testName", "testValue");
         verifyConfigNode(
             (DefaultConfiguration) children[0],
@@ -38,7 +38,7 @@
         atts.put("format", "System.out.println");
         verifyConfigNode(
             (DefaultConfiguration) grandchildren[grandchildren.length - 1],
-            "GenericIllegalRegexpCheck",
+            "GenericIllegalRegexp",
             0,
             atts);
         atts.clear();
@@ -46,7 +46,7 @@
         atts.put("allowLineBreaks", "true");
         verifyConfigNode(
             (DefaultConfiguration) grandchildren[6],
-            "NoWhitespaceAfterCheck",
+            "NoWhitespaceAfter",
             0,
             atts);
     }
