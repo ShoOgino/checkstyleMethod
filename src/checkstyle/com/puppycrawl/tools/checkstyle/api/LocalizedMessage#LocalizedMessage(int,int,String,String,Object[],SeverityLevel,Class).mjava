@@ -7,14 +7,22 @@
      * @param aKey the key to locate the translation
      * @param aArgs arguments for the translation
      * @param aSeverityLevel severity level for the message
+     * @param aSourceClass the Class that is the source of the message
      */
     public LocalizedMessage(int aLineNo,
                             int aColNo,
                             String aBundle,
                             String aKey,
                             Object[] aArgs,
-                            SeverityLevel aSeverityLevel)
+                            SeverityLevel aSeverityLevel,
+                            Class aSourceClass)
     {
-        this(aLineNo, aColNo, aBundle, aKey, aArgs, aSeverityLevel, "");
+        mLineNo = aLineNo;
+        mColNo = aColNo;
+        mKey = aKey;
+        mArgs = aArgs;
+        mBundle = aBundle;
+        mSeverityLevel = aSeverityLevel;
+        mSourceName = aSourceClass.getName();
     }
 
