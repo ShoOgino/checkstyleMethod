@@ -7,12 +7,12 @@
         final String line = getLines()[aAST.getLineNo() - 1];
         final int after = aAST.getColumnNo() + 1;
         if (after < line.length()) {
-            if ((PadOption.NOSPACE == mOption)
+            if ((PadOption.NOSPACE == getAbstractOption())
                 && (Character.isWhitespace(line.charAt(after))))
             {
                 log(aAST.getLineNo(), after, "ws.followed", "(");
             }
-            else if ((PadOption.SPACE == mOption)
+            else if ((PadOption.SPACE == getAbstractOption())
                      && !Character.isWhitespace(line.charAt(after))
                      && (line.charAt(after) != ')'))
             {
