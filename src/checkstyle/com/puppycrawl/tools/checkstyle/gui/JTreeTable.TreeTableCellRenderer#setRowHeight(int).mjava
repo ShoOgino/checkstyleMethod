@@ -1,0 +1,15 @@
+        /**
+         * Sets the row height of the tree, and forwards the row height to
+         * the table.
+         */
+        public void setRowHeight(int rowHeight)
+        {
+            if (rowHeight > 0) {
+                super.setRowHeight(rowHeight);
+                if (JTreeTable.this != null &&
+                        JTreeTable.this.getRowHeight() != rowHeight) {
+                    JTreeTable.this.setRowHeight(getRowHeight());
+                }
+            }
+        }
+

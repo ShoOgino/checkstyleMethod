@@ -1,0 +1,12 @@
+    public Object getChild(Object parent, int index)
+    {
+        DetailAST ast = (DetailAST) parent;
+        int i = 0;
+        AST child = ast.getFirstChild();
+        while (i < index) {
+            child = child.getNextSibling();
+            i++;
+        }
+        return child;
+    }
+

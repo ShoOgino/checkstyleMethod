@@ -1,0 +1,19 @@
+    public Object getValueAt(Object node, int column)
+    {
+        DetailAST ast = (DetailAST) node;
+        switch (column) {
+            case 0:
+                return null;
+            case 1:
+                // TODO: use token type name as in TreeWalker.TOKEN_VALUE_TO_NAME
+                return String.valueOf(ast.getType());
+            case 2:
+                return new Integer(ast.getLineNo());
+            case 3:
+                return new Integer(ast.getColumnNo());
+            case 4:
+                return ast.getText();
+        }
+        return null;
+    }
+

@@ -1,0 +1,15 @@
+    /**
+     * Invokes fireTableDataChanged after all the pending events have been
+     * processed. SwingUtilities.invokeLater is used to handle this.
+     */
+    protected void delayedFireTableDataChanged()
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                fireTableDataChanged();
+            }
+        });
+    }
+
