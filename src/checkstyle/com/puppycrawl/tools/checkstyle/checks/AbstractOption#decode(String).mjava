@@ -5,8 +5,9 @@
      * @return the <code>PadOption</code> value represented by aStrRep, or
      *         null if none exists.
      */
-    public static AbstractOption decode(String aStrRep)
+    public AbstractOption decode(String aStrRep)
     {
-        return (AbstractOption) STR_TO_OPT.get(aStrRep.trim().toLowerCase());
+        Map strToOpt = getStrToOpt();
+        return (AbstractOption) strToOpt.get(aStrRep.trim().toLowerCase());
     }
 
