@@ -1,0 +1,13 @@
+    private void processLiteralNew(DetailAST aAST)
+    {
+        DetailAST typeNameAST = (DetailAST) aAST.getFirstChild();
+        FullIdent typeIdent = FullIdent.createFullIdent(typeNameAST);
+        final String typeName = typeIdent.getText();
+        final int lineNo = aAST.getLineNo();
+        final int colNo = aAST.getColumnNo();
+        final String fqClassName = getIllegalInstantiation(typeName);
+        if (fqClassName != null) {
+            log(lineNo, colNo, "instantiation.avoid", fqClassName);
+        }
+    }
+

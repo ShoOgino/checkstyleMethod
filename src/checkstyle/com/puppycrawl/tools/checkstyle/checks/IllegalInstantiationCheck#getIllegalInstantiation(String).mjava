@@ -1,0 +1,72 @@
+    /**
+     * Checks illegal instantiations.
+     * @param aClassName instantiated class, may or may not be qualified
+     * @return the fully qualified class name of aClassName
+     * or null if instantiation of aClassName is OK
+     */
+    private String getIllegalInstantiation(String aClassName)
+    {
+        final String javaLang = "java.lang.";
+
+        if (mIllegalClasses.contains(aClassName)) {
+            return aClassName;
+        }
+
+        final int clsNameLen = aClassName.length();
+        final int pkgNameLen = (mPkgName == null) ? 0 : mPkgName.length();
+
+        final Iterator illIter = mIllegalClasses.iterator();
+        while (illIter.hasNext()) {
+            final String illegal = (String) illIter.next();
+            final int illegalLen = illegal.length();
+
+            // class from java.lang
+            if (((illegalLen - javaLang.length()) == clsNameLen)
+                && illegal.endsWith(aClassName)
+                && illegal.startsWith(javaLang))
+            {
+                return illegal;
+            }
+
+            // class from same package
+
+            // the toplevel package (mPkgName == null) is covered by the
+            // "illegalInsts.contains(aClassName)" check above
+
+            // the test is the "no garbage" version of
+            // illegal.equals(mPkgName + "." + aClassName)
+            if (mPkgName != null
+                && clsNameLen == illegalLen - pkgNameLen - 1
+                && illegal.charAt(pkgNameLen) == '.'
+                && illegal.endsWith(aClassName)
+                && illegal.startsWith(mPkgName))
+            {
+                return illegal;
+            }
+            // import statements
+            final Iterator importIter = mImports.iterator();
+            while (importIter.hasNext()) {
+                final FullIdent importLineText = (FullIdent) importIter.next();
+                final String importArg = importLineText.getText();
+                if (importArg.endsWith(".*")) {
+                    final String fqClass =
+                        importArg.substring(0, importArg.length() - 1)
+                        + aClassName;
+                    // assume that illegalInsts only contain existing classes
+                    // or else we might create a false alarm here
+                    if (mIllegalClasses.contains(fqClass)) {
+                        return fqClass;
+                    }
+                }
+                else {
+                    if (basename(importArg).equals(aClassName)
+                        && mIllegalClasses.contains(importArg))
+                    {
+                        return importArg;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+

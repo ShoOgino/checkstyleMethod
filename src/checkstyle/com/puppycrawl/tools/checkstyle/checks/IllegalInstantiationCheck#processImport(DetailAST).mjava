@@ -1,0 +1,10 @@
+    private void processImport(DetailAST aAST)
+    {
+        final FullIdent name = getImportText(aAST);
+        if (name != null) {
+            // Note: different from UnusedImportsCheck.processImport(),
+            // '.*' imports are also added here
+            mImports.add(name);
+        }
+    }
+

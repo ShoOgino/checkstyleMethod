@@ -1,0 +1,16 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+            case JavaTokenTypes.LITERAL_new:
+                processLiteralNew(aAST);
+                break;
+            case JavaTokenTypes.PACKAGE_DEF:
+                processPackageDef(aAST);
+                break;
+            case JavaTokenTypes.IMPORT:
+                processImport(aAST);
+                break;
+        }
+    }
+
