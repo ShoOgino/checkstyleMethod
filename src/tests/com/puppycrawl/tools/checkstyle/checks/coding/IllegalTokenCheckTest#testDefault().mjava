@@ -1,0 +1,13 @@
+    public void testDefault()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(IllegalTokenCheck.class);
+        final String[] expected = {
+            "11:9: Using 'switch' is not allowed.",
+            "14:18: Using '--' is not allowed.",
+            "15:18: Using '++' is not allowed.",
+        };
+        verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
+    }
+

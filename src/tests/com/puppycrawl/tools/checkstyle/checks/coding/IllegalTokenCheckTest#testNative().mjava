@@ -1,0 +1,12 @@
+    public void testNative()
+         throws Exception
+     {
+         final DefaultConfiguration checkConfig =
+             createCheckConfig(IllegalTokenCheck.class);
+         checkConfig.addAttribute("tokens", "LITERAL_NATIVE");
+         final String[] expected = {
+             "20:12: Using 'native' is not allowed.",
+         };
+         verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
+     }
+

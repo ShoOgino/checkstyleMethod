@@ -1,0 +1,23 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public int[] getAcceptableTokens()
+    {
+        // Any tokens set by property 'tokens' are acceptable
+        int[] tokensToCopy = getDefaultTokens();
+        final Set tokenNames = getTokenNames();
+        if (!tokenNames.isEmpty()) {
+            tokensToCopy = new int[tokenNames.size()];
+            int i = 0;
+            final Iterator it = tokenNames.iterator();
+            while (it.hasNext()) {
+                final String name = (String) it.next();
+                tokensToCopy[i] = TokenTypes.getTokenId(name);
+                i++;
+            }
+        }
+        final int[] copy = new int[tokensToCopy.length];
+        System.arraycopy(tokensToCopy, 0, copy, 0, tokensToCopy.length);
+        return copy;
+    }
+
