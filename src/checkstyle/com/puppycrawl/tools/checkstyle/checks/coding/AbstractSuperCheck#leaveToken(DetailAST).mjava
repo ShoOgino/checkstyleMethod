@@ -4,10 +4,11 @@
      */
     public void leaveToken(DetailAST aAST)
     {
-        if (isCloneMethod(aAST)) {
-            final CloneNode cloneNode = (CloneNode) mCloneStack.removeLast();
-            if (!cloneNode.getCallsSuper()) {
-                final DetailAST methodAST = cloneNode.getCloneMethod();
+        if (isOverridingMethod(aAST)) {
+            final MethodNode methodNode =
+                (MethodNode) mMethodStack.removeLast();
+            if (!methodNode.getCallsSuper()) {
+                final DetailAST methodAST = methodNode.getMethod();
                 final DetailAST nameAST =
                     methodAST.findFirstToken(TokenTypes.IDENT);
                 log(nameAST.getLineNo(), nameAST.getColumnNo(),
