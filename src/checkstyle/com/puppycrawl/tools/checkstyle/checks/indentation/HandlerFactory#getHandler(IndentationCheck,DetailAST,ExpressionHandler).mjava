@@ -31,17 +31,19 @@
         }
         ///CLOVER:OFF
         catch (InstantiationException e) {
+            LOG.debug("couldn't instantiate constructor for " + aAst, e);
             throw new RuntimeException("couldn't instantiate constructor for "
-                                       + aAst, e);
+                                       + aAst);
         }
         catch (IllegalAccessException e) {
+            LOG.debug("couldn't access constructor for " + aAst, e);
             throw new RuntimeException("couldn't access constructor for "
-                                       + aAst,
-                                       e);
+                                       + aAst);
         }
         catch (InvocationTargetException e) {
+            LOG.debug("couldn't instantiate constructor for " + aAst, e);
             throw new RuntimeException("couldn't instantiate constructor for "
-                                       + aAst, e);
+                                       + aAst);
         }
         if (expHandler == null) {
             throw new RuntimeException("no handler for type " + type);
