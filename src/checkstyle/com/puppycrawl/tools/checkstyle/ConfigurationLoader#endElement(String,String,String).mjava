@@ -1,0 +1,14 @@
+    /** @see org.xml.sax.helpers.DefaultHandler **/
+    public void endElement(String aNamespaceURI,
+                           String aLocalName,
+                           String aQName)
+    {
+        if ("check".equals(aQName)) {
+            mCheckConfigs.add(mCurrent);
+            mCurrent = null;
+        }
+        else if ("tokens".equals(aQName)) {
+            mCurrent.addTokens(mBuf.toString());
+        }
+    }
+

@@ -1,0 +1,17 @@
+    /** @see org.xml.sax.helpers.DefaultHandler **/
+    public void startElement(String aNamespaceURI,
+                             String aLocalName,
+                             String aQName,
+                             Attributes aAtts)
+    {
+        mBuf.setLength(0);
+        if ("check".equals(aQName)) {
+            mCurrent = new CheckConfiguration();
+            mCurrent.setClassname(aAtts.getValue("classname"));
+        }
+        else if ("set-property".equals(aQName)) {
+            mCurrent.addProperty(aAtts.getValue("name"),
+                                 aAtts.getValue("value"));
+        }
+    }
+
