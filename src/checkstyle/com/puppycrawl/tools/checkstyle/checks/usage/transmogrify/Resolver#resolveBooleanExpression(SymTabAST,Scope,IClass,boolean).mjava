@@ -14,17 +14,9 @@
         boolean referencePhase) {
         IClass result = null;
 
-        SymTabAST leftChild = (SymTabAST) (expression.getFirstChild());
-        // handle Checkstyle grammar
-        while (leftChild.getType() == TokenTypes.LPAREN) {
-            leftChild = (SymTabAST) leftChild.getNextSibling();
-        }
+        SymTabAST leftChild = findLeftChild(expression);
         resolveExpression(leftChild, location, context, referencePhase);
-        SymTabAST rightChild = (SymTabAST) (leftChild.getNextSibling());
-        // handle Checkstyle grammar
-        while (rightChild.getType() == TokenTypes.RPAREN) {
-            rightChild = (SymTabAST) rightChild.getNextSibling();
-        }
+        SymTabAST rightChild = findRightSibling(leftChild);
 
         resolveExpression(rightChild, location, context, referencePhase);
 

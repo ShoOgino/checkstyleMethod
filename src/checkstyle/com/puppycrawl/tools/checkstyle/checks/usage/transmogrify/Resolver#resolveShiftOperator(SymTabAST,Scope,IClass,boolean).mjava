@@ -5,8 +5,8 @@
         boolean referencePhase) {
         IClass result = null;
 
-        SymTabAST leftChild = (SymTabAST) expression.getFirstChild();
-        SymTabAST rightChild = (SymTabAST) leftChild.getNextSibling();
+        SymTabAST leftChild = findLeftChild(expression);
+        SymTabAST rightChild = findRightSibling(leftChild);
 
         result =
             resolveExpression(leftChild, location, context, referencePhase);
