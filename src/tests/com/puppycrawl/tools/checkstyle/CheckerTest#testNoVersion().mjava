@@ -1,0 +1,15 @@
+    public void testNoVersion()
+        throws Exception
+    {
+        mConfig.setWrapOpOption(WrapOpOption.NL);
+        mConfig.setBooleanProperty(Defn.ALLOW_NO_AUTHOR_PROP, true);
+        mConfig.setBooleanProperty(Defn.REQUIRE_VERSION_PROP, true);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputJavadoc.java");
+        assertNotNull(c);
+        final String[] expected = {
+            filepath + ":11: type Javadoc comment is missing an @version tag."
+        };
+        verify(c, filepath, expected);
+    }
+
