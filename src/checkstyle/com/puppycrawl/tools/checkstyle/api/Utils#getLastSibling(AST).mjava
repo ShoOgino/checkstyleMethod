@@ -1,0 +1,11 @@
+    public static DetailAST getLastSibling(final AST aAST)
+    {
+        AST retVal = aAST;
+        AST nextSibling = retVal.getNextSibling();
+        while (nextSibling != null) {
+            retVal = nextSibling;
+            nextSibling = nextSibling.getNextSibling();
+        }
+        return (DetailAST) retVal;
+    }
+

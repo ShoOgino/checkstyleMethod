@@ -5,23 +5,5 @@
      */
     void verifyRCurly(MyCommonAST aBrace, int aStartLine)
     {
-        // check surrounded by whitespace
-        verifyWSAroundBegin(aBrace.getLineNo(),
-                            aBrace.getColumnNo() + 1,
-                            aBrace.getText());
-
-        // Check the actual brace
-        if ((mConfig.getRCurly() == RightCurlyOption.SAME)
-            && (aBrace.getLineNo() != aStartLine))
-        {
-            mMessages.add(aBrace.getLineNo(), aBrace.getColumnNo(),
-                          "line.same", "}");
-        }
-        else if ((mConfig.getRCurly() == RightCurlyOption.ALONE)
-                   && (aBrace.getLineNo() == aStartLine))
-        {
-            mMessages.add(aBrace.getLineNo(), aBrace.getColumnNo(),
-                          "line.alone", "}");
-        }
     }
 

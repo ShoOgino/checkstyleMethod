@@ -1,0 +1,13 @@
+    public void testAlone()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(RightCurlyCheck.class.getName());
+        checkConfig.addProperty("option", RightCurlyOption.ALONE.toString());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputLeftCurlyOther.java");
+        final String[] expected = {
+        };
+        verify(c, fname, expected);
+    }
+

@@ -1,0 +1,39 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        // Attempt to locate the tokens to do the check
+        DetailAST rcurly = null;
+        DetailAST nextToken = null;
+        if (aAST.getType() == JavaTokenTypes.LITERAL_else) {
+            nextToken = aAST;
+            rcurly = Utils.getLastSibling(
+                aAST.getParent().getFirstChild().getNextSibling()
+                .getFirstChild());
+        }
+        else if (aAST.getType() == JavaTokenTypes.LITERAL_catch) {
+            nextToken = (DetailAST) aAST.getNextSibling();
+            rcurly = Utils.getLastSibling(
+                aAST.getFirstChild().getNextSibling().getFirstChild());
+        }
+        else if (aAST.getType() == JavaTokenTypes.LITERAL_try) {
+            nextToken = (DetailAST) aAST.getFirstChild().getNextSibling();
+            rcurly = Utils.getLastSibling(aAST.getFirstChild().getFirstChild());
+        }
+
+        // If have both tokens, perform the check
+        if ((rcurly != null) && (nextToken != null)) {
+            if ((mOption == RightCurlyOption.SAME)
+                && (rcurly.getLineNo() != nextToken.getLineNo()))
+            {
+                log(rcurly.getLineNo(), rcurly.getColumnNo(),
+                    "line.same", "}");
+            }
+            else if ((mOption == RightCurlyOption.ALONE)
+                       && (rcurly.getLineNo() == nextToken.getLineNo()))
+            {
+                log(rcurly.getLineNo(), rcurly.getColumnNo(),
+                    "line.alone", "}");
+            }
+        }
+    }
+
