@@ -1,0 +1,11 @@
+    /**
+     * Called when we start processing class definition.
+     * @param aAST class definition node
+     */
+    private void visitClassDef(DetailAST aAST)
+    {
+        mCheckingStack.push(Boolean.valueOf(mChecking));
+        mChecking =
+            isExceptionClass(aAST.findFirstToken(TokenTypes.IDENT).getText());
+    }
+
