@@ -1,0 +1,16 @@
+    /**
+     * Removes a check and its check nodes. Clears all managed elements if
+     * last check removed.
+     * @param check
+     */
+    public void removeCheck(AbstractUsageCheck aCheck)
+    {
+        mCheckNodes.remove(aCheck);
+        if (mCheckNodes.isEmpty()) {
+            mCompleteTree = null;
+            mMap.clear();
+            mTrees.clear();
+        }
+        
+    }
+
