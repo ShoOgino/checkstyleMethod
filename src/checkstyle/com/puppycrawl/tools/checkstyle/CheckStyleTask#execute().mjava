@@ -13,13 +13,19 @@
                 getLocation());
         }
 
-        final Configuration config = createConfiguration();
+        if (mConfigFile == null) {
+            throw new BuildException("Must specify 'config'.", getLocation());
+        }
 
         // Create the checker
         Checker c = null;
         try {
             try {
-                c = new Checker(config);
+                final Configuration config = createConfiguration();
+                final CheckConfiguration[] checkConfigs =
+                    ConfigurationLoader.loadConfigs(
+                        mConfigFile.getAbsolutePath());
+                c = new Checker(config, checkConfigs);
                 // setup the listeners
                 AuditListener[] listeners = getListeners();
                 for (int i = 0; i < listeners.length; i++) {
@@ -27,12 +33,13 @@
                 }
             }
             catch (Exception e) {
-                throw new BuildException("Unable to create a Checker", e);
+                throw new BuildException(
+                    "Unable to create a Checker: " + e.getMessage(), e);
             }
 
             // Process the files
             final String[] files = scanFileSets();
-            final int numErrs = c.process(files);
+            final int numErrs = c.processNEW(files);
 
             // Handle the return status
             if ((numErrs > 0) && mFailureProperty != null) {
