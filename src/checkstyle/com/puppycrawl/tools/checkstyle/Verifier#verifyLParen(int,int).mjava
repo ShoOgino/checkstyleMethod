@@ -5,7 +5,9 @@
      */
     void verifyLParen(int aLineNo, int aColNo)
     {
-        if (mConfig.isIgnoreWhitespace() || mConfig.isIgnoreParenWhitespace()) {
+        if (mConfig.isIgnoreWhitespace()
+            || (PadOption.IGNORE == mConfig.getParenPadOption()))
+        {
             return;
         }
 
