@@ -6,14 +6,14 @@
         // lazy init
         if (mBranchTokenTypes == null) {
 
-            // TODO improve algorithm to avoid most array creation
+            // TODO: improve algorithm to avoid most array creation
             int[] bag = new int[] { getType() };
 
             // add union of all childs
             DetailAST child = (DetailAST) getFirstChild();
             while (child != null) {
-                int[] childTypes = child.getBranchTokenTypes();
-                int[] savedBag = bag;
+                final int[] childTypes = child.getBranchTokenTypes();
+                final int[] savedBag = bag;
                 bag = new int[savedBag.length + childTypes.length];
                 System.arraycopy(savedBag, 0, bag, 0, savedBag.length);
                 System.arraycopy(childTypes, 0, bag, savedBag.length,
