@@ -1,0 +1,57 @@
+    /**
+     * Returns whether an AST represents a setter method.
+     * @param aAST the AST to check with
+     * @return whether the AST represents a setter method
+     */
+    private boolean isSetterMethod(final DetailAST aAST)
+    {
+        // Check have a method with exactly 7 children which are all that
+        // is allowed in a proper setter method which does not throw any
+        // exceptions.
+        if ((aAST.getType() != TokenTypes.METHOD_DEF)
+            || (aAST.getChildCount() != 7))
+        {
+            return false;
+        }
+
+        // Should I handle only being in a class????
+
+        // Check the name matches format setX...
+        final DetailAST type = aAST.findFirstToken(TokenTypes.TYPE);
+        final String name = type.getNextSibling().getText();
+        if (!name.matches("^set[A-Z].*")) { // Depends on JDK 1.4
+            return false;
+        }
+
+        // Check the return type is void
+        if (type.getChildCount(TokenTypes.LITERAL_VOID) == 0) {
+            return false;
+        }
+
+        // Check that is had only one parameter
+        final DetailAST params = aAST.findFirstToken(TokenTypes.PARAMETERS);
+        if ((params == null)
+            || (params.getChildCount(TokenTypes.PARAMETER_DEF) != 1))
+        {
+            return false;
+        }
+
+        // Now verify that the body consists of:
+        // SLIST -> EXPR -> ASSIGN
+        // SEMI
+        // RCURLY
+        final DetailAST slist = aAST.findFirstToken(TokenTypes.SLIST);
+        if ((slist == null) || (slist.getChildCount() != 3)) {
+            return false;
+        }
+
+        final AST expr = slist.getFirstChild();
+        if ((expr.getType() != TokenTypes.EXPR)
+            || (expr.getFirstChild().getType() != TokenTypes.ASSIGN))
+        {
+            return false;
+        }
+
+        return true;
+    }
+

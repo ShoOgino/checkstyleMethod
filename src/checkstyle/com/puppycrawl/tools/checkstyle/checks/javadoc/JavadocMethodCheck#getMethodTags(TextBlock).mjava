@@ -1,6 +1,7 @@
     /**
      * Returns the tags in a javadoc comment. Only finds throws, exception,
      * param, return and see tags.
+     *
      * @return the tags found
      * @param aComment the Javadoc comment
      */
@@ -38,8 +39,7 @@
                     if (MATCH_JAVADOC_MULTILINE_CONT.match(lines[remIndex])) {
                         remIndex = lines.length;
                         String lFin = MATCH_JAVADOC_MULTILINE_CONT.getParen(1);
-                        if (!lFin.equals(NEXT_TAG)
-                            && !lFin.equals(END_JAVADOC))
+                        if (!lFin.equals(NEXT_TAG) && !lFin.equals(END_JAVADOC))
                         {
                             tags.add(new JavadocTag(currentLine, p1, p2));
                         }
@@ -48,8 +48,8 @@
                 }
             }
             else if (MATCH_JAVADOC_NOARG_MULTILINE_START.match(lines[i])) {
-                final String p1 =
-                    MATCH_JAVADOC_NOARG_MULTILINE_START.getParen(1);
+                final String p1 = MATCH_JAVADOC_NOARG_MULTILINE_START
+                    .getParen(1);
 
                 // Look for the rest of the comment if all we saw was
                 // the tag and the name. Stop when we see '*/' (end of
@@ -60,8 +60,7 @@
                     if (MATCH_JAVADOC_MULTILINE_CONT.match(lines[remIndex])) {
                         remIndex = lines.length;
                         String lFin = MATCH_JAVADOC_MULTILINE_CONT.getParen(1);
-                        if (!lFin.equals(NEXT_TAG)
-                            && !lFin.equals(END_JAVADOC))
+                        if (!lFin.equals(NEXT_TAG) && !lFin.equals(END_JAVADOC))
                         {
                             tags.add(new JavadocTag(currentLine, p1));
                         }

@@ -1,13 +1,10 @@
-    public void testTags()
-        throws Exception
+    public void testTags() throws Exception
     {
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(JavadocMethodCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(JavadocMethodCheck.class);
         final String[] expected = {
             "14:5: Missing a Javadoc comment.",
             "18: Unused @param tag for 'unused'.",
-            "24: Expected an @return tag.",
-            "33: Expected an @return tag.",
+            "24: Expected an @return tag.", "33: Expected an @return tag.",
             "40:16: Expected @throws tag for 'Exception'.",
             "49:16: Expected @throws tag for 'Exception'.",
             "53: Unused @throws tag for 'WrongException'.",
@@ -19,8 +16,7 @@
             "73:23: Expected @param tag for 'aOne'.",
             "73:33: Expected @param tag for 'aTwo'.",
             "78: Unused @param tag for 'Unneeded'.",
-            "79: Unused Javadoc tag.",
-            "87: Duplicate @return tag.",
+            "79: Unused Javadoc tag.", "87: Duplicate @return tag.",
             "109:23: Expected @param tag for 'aOne'.",
             "109:55: Expected @param tag for 'aFour'.",
             "109:66: Expected @param tag for 'aFive'.",
@@ -32,8 +28,7 @@
             "262: Unused @param tag for 'aParam'.",
             "320:9: Missing a Javadoc comment.",
             "329:5: Missing a Javadoc comment.",
-            "333: Unused Javadoc tag.",
-        };
+            "333: Unused Javadoc tag.", };
 
         verify(checkConfig, getPath("InputTags.java"), expected);
     }

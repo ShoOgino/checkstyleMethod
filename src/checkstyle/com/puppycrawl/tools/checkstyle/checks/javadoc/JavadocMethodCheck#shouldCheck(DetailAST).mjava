@@ -1,5 +1,6 @@
     /**
      * Whether we should check this node.
+     *
      * @param aAST a given node.
      * @return whether we should check a given node.
      */
@@ -8,12 +9,13 @@
         final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
         final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
         final Scope scope = ScopeUtils.inInterfaceOrAnnotationBlock(aAST)
-                ? Scope.PUBLIC : declaredScope;
+            ? Scope.PUBLIC
+            : declaredScope;
         final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
 
-        return scope.isIn(mScope) && surroundingScope.isIn(mScope)
-            && ((mExcludeScope == null)
-                || !scope.isIn(mExcludeScope)
+        return scope.isIn(mScope)
+            && surroundingScope.isIn(mScope)
+            && ((mExcludeScope == null) || !scope.isIn(mExcludeScope)
                 || !surroundingScope.isIn(mExcludeScope));
     }
 

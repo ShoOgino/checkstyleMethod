@@ -1,5 +1,6 @@
     /**
      * Checks the Javadoc for a method.
+     *
      * @param aAST the token for the method
      * @param aComment the Javadoc comment
      */
@@ -19,8 +20,7 @@
             // Check for inheritDoc
             boolean hasInheritDocTag = false;
             while (it.hasNext() && !hasInheritDocTag) {
-                hasInheritDocTag |=
-                    ((JavadocTag) it.next()).isInheritDocTag();
+                hasInheritDocTag |= ((JavadocTag) it.next()).isInheritDocTag();
             }
 
             checkParamTags(tags, getParameters(aAST), !hasInheritDocTag);
