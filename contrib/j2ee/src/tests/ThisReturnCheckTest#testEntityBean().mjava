@@ -1,0 +1,11 @@
+    public void testEntityBean()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ThisReturnCheck.class);
+        final String[] expected = {
+            "118:17: Do not return 'this'.",
+        };
+        verify(checkConfig, getPath("InputEntityBean.java"), expected);
+    }
+

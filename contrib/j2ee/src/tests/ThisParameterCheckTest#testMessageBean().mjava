@@ -1,0 +1,11 @@
+    public void testMessageBean()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ThisParameterCheck.class);
+        final String[] expected = {
+            "56:19: Do not pass 'this' as a parameter.",
+        };
+        verify(checkConfig, getPath("InputMessageBean.java"), expected);
+    }
+
