@@ -9,8 +9,10 @@
         boolean setInActive = true;
         final String fileName = aFileName;
         if (fileName != null) {
+            FileInputStream inStream = null;
             try {
-                mDetails.load(new FileInputStream(fileName));
+                inStream = new FileInputStream(fileName);
+                mDetails.load(inStream);
                 String cachedConfigHash = mDetails.getProperty(CONFIG_HASH_KEY);
                 String currentConfigHash = getConfigHashCode(aCurrentConfig);
                 setInActive = false;
@@ -30,6 +32,18 @@
                 // TODO: use logger
                 System.out.println("Unable to open cache file, ignoring.");
                 e.printStackTrace(System.out);
+            }
+            finally {
+                if (inStream != null) {
+                    try {
+                        inStream.close();
+                    }
+                    catch (IOException ex) {
+                        // TODO: use logger
+                        System.out.println("Unable to close cache file.");
+                        ex.printStackTrace(System.out);
+                    }
+                }
             }
         }
         mDetailsFile = (setInActive) ? null : fileName;
