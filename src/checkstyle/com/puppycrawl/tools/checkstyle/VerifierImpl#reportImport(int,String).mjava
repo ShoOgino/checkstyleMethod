@@ -11,15 +11,8 @@
                         "Duplicate import to line " + lt.getLineNo() + ".");
                 }
             }
-
-            // Check for import from java.lang package.
-            if (aType.startsWith("java.lang.")) {
-                log(aLineNo, "Redundant import from the java.lang package.");
-            }
-            else {
-                // Add to list to check for duplicates and usage
-                mImports.add(new LineText(aLineNo, aType));
-            }
+            // Add to list to check for duplicates and usage
+            mImports.add(new LineText(aLineNo, aType));
         }
     }
 

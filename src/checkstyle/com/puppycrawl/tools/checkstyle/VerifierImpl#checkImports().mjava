@@ -5,11 +5,21 @@
             return;
         }
 
-        // Loop checking for unused imports
+        // Loop checking imports
         final Iterator it = mImports.iterator();
         while (it.hasNext()) {
             final LineText imp = (LineText) it.next();
-            if (!mReferenced.contains(basename(imp.getText()))) {
+
+            if (fromPackage(imp.getText(), "java.lang")) {
+                log(imp.getLineNo(),
+                    "Redundant import from the java.lang package.");
+            }
+            else if (fromPackage(imp.getText(), mPkgName)) {
+                log(imp.getLineNo(), "Redundant import from the same package.");
+            }
+            else if (!imp.getText().endsWith(".*") &&
+                     !mReferenced.contains(basename(imp.getText())))
+            {
                 log(imp.getLineNo(), "Unused import - " + imp.getText());
             }
         }

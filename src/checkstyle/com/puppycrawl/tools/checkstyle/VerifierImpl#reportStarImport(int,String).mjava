@@ -3,9 +3,7 @@
     {
         if (!mConfig.isIgnoreImports()) {
             log(aLineNo, "Avoid using the '.*' form of import.");
-            if (aPkg.startsWith("java.lang.")) {
-                log(aLineNo, "Redundant import from the java.lang package.");
-            }
+            mImports.add(new LineText(aLineNo, aPkg));
         }
     }
 
