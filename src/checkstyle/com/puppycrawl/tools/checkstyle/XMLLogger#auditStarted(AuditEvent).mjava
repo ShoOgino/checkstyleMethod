@@ -2,6 +2,12 @@
     public void auditStarted(AuditEvent aEvt)
     {
         mWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        mWriter.println("<checkstyle>");
+
+        final ResourceBundle compilationProperties =
+            ResourceBundle.getBundle("checkstylecompilation");
+        final String version =
+            compilationProperties.getString("checkstyle.compile.version");
+
+        mWriter.println("<checkstyle version=\"" + version + "\">");
     }
 
