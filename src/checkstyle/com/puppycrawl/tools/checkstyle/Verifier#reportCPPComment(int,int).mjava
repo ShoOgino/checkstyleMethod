@@ -1,0 +1,14 @@
+    /**
+     * Report the location of a C-style comment.
+     * @param aStartLineNo the starting line number
+     * @param aStartColNo the starting column number
+     **/
+    void reportCPPComment(int aStartLineNo, int aStartColNo)
+    {
+        final String cmt = mLines[aStartLineNo - 1].substring(aStartColNo);
+        if (mConfig.getTodoRegexp().match(cmt)) {
+            log(aStartLineNo,
+                "Comment matches to-do format '" + mConfig.getTodoPat() + "'.");
+        }
+    }
+

@@ -8,22 +8,25 @@
 
         checkHeader();
 
-        // Iterate over the lines looking for long lines and tabs.
+        // Iterate over the lines looking for:
+        //    - long lines
+        //    - tabs
         for (int i = 0; i < mLines.length; i++) {
             // check for long line, but possibly allow imports
-            String line = mLines[i];
-            int realLength = Utils.lengthExpandedTabs(
+            final String line = mLines[i];
+            final int realLength = Utils.lengthExpandedTabs(
                 line, line.length(), mConfig.getTabWidth());
-            if ((realLength > mConfig.getMaxLineLength()) &&
-                !(mConfig.getIgnoreLineLengthRegexp().match(line)) &&
-                !(mConfig.isIgnoreImportLength() &&
-                  line.trim().startsWith("import")))
+            if ((realLength > mConfig.getMaxLineLength())
+                && !(mConfig.getIgnoreLineLengthRegexp().match(line))
+                && !(mConfig.isIgnoreImportLength()
+                     && line.trim().startsWith("import")))
             {
                 log(i + 1,
                     "line longer than " + mConfig.getMaxLineLength() +
                     " characters");
             }
 
+            // Check for tabs
             if (!mConfig.isAllowTabs()) {
                 final int tabPosition = mLines[i].indexOf('\t');
                 if (tabPosition != -1) {
