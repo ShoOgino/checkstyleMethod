@@ -1,0 +1,15 @@
+    /**
+     * @return whether a specified class is loadable with safeLoad().
+     * @param aName name of the class to check
+     */
+    boolean isLoadable(String aName)
+    {
+        try {
+            safeLoad(aName);
+            return true;
+        }
+        catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
