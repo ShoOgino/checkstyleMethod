@@ -4,18 +4,5 @@
      */
     void reportReference(String aType)
     {
-        mReferenced.add(aType);
-
-        // we might have multiple levels of inner classes,
-        // all of them have to be marked as referenced
-
-        // as an unwanted side effect we also add package names like
-        // "com", "java", etc., but that probably doesn't hurt
-        // and could be fixed by getting more info using the classloader
-        int lastDot = aType.lastIndexOf('.');
-        while (lastDot != -1) {
-            mReferenced.add(aType.substring(0, lastDot));
-            lastDot = aType.lastIndexOf('.', lastDot - 1);
-        }
     }
 

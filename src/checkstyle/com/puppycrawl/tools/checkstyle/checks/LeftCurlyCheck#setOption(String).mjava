@@ -1,5 +1,13 @@
+    /**
+     * Set the option for placement.
+     * @param aFromStr string to decode option
+     * @throws ConversionException if unable to decode
+     */
     public void setOption(String aFromStr)
     {
         mOption = LeftCurlyOption.decode(aFromStr);
+        if (mOption == null) {
+            throw new ConversionException("unable to decode " + aFromStr);
+        }
     }
 

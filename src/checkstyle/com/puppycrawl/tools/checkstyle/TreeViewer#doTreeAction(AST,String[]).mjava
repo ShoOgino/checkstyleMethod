@@ -1,10 +1,17 @@
+    /**
+     * Display the tree for a specified node.
+     * @param t an <code>AST</code> value
+     * @param tokenNames a <code>String[]</code> value
+     */
     public static void doTreeAction(AST t, String[] tokenNames)
     {
-        if ( t==null ) return;
+        if (t == null) {
+            return;
+        }
 
-        ((CommonAST)t).setVerboseStringConversion(true, tokenNames);
+        ((CommonAST) t).setVerboseStringConversion(true, tokenNames);
         ASTFactory factory = new ASTFactory();
-        AST r = factory.create(0,"AST ROOT");
+        AST r = factory.create(0, "AST ROOT");
         r.setFirstChild(t);
         final ASTFrame frame = new ASTFrame("Java AST", r);
         frame.setSize(400, 600);
