@@ -1,0 +1,21 @@
+    /**
+     * Log child indentation error.
+     *
+     * @param aLine           the expression that caused the error
+     * @param aActualLevel   the actual indent level of the expression
+     * @param aExpectedLevel the expected indent level of the expression
+     */
+    protected void logChildError(int aLine,
+                                 int aActualLevel,
+                                 int aExpectedLevel)
+    {
+        Object[] args = new Object[] {
+            mTypeName,
+            new Integer(aActualLevel),
+            new Integer(aExpectedLevel),
+        };
+        mIndentCheck.indentationLog(aLine,
+                                    "indentation.child.error",
+                                    args);
+    }
+

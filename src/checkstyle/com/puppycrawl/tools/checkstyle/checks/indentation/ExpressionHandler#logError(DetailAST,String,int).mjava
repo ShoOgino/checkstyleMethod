@@ -6,12 +6,8 @@
      * @param aActualLevel    the actual indent level of the expression
      */
     protected void logError(DetailAST aAst, String aSubtypeName,
-        int aActualLevel)
+                            int aActualLevel)
     {
-        // TODO: i18n
-        String typeStr = (aSubtypeName == "" ? "" : (" " + aSubtypeName));
-        mIndentCheck.indentationLog(aAst.getLineNo(), mTypeName + typeStr
-            + " at indentation level "
-            + aActualLevel + " not at correct indentation, " + getLevel());
+        logError(aAst, aSubtypeName, aActualLevel, getLevel());
     }
 

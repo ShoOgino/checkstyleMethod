@@ -18,10 +18,7 @@
         if (aMustMatch ? start != aIndentLevel
             : aColNum == start && start < aIndentLevel)
         {
-            // TODO: i18n or use logError
-            mIndentCheck.indentationLog(aLineNum, mTypeName
-                + " child at indentation level " + start
-                + " not at correct indentation, " + aIndentLevel);
+            logChildError(aLineNum, start, aIndentLevel);
         }
     }
 
