@@ -1,19 +1,12 @@
     /** Prints the usage information. **/
     private static void usage()
     {
-        System.out.println(
-            "Usage: java " + Main.class.getName()
-            + " <options> config <file>......");
-        System.out.println("Options");
-        System.out.println(
-            "\t-f <format>\tsets output format. (plain|xml). "
-            + "Default to plain.");
-        System.out.println("\t-o <file>\tsets output file name. "
-                           + "Defaults to stdout");
-        System.out.println("\t-r <dir>\ttraverses the directory for Java"
-                           + " source files.");
-        System.out.println("\t-p <file>\tuses a properties file"
-                           + " instead of the system properties.");
+        HelpFormatter hf = new HelpFormatter();
+        hf.printHelp(
+            "java "
+                + Main.class.getName()
+                + " [options] -c <config.xml> file...",
+            OPTS);
         System.exit(1);
     }
 

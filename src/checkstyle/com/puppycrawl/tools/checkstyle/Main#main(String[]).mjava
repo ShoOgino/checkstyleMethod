@@ -5,47 +5,64 @@
      **/
     public static void main(String[] aArgs)
     {
-        if (aArgs.length == 0) {
+        // parse the parameters
+        final CommandLineParser clp = new PosixParser();
+        CommandLine line = null;
+        try {
+            line = clp.parse(OPTS, aArgs);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
             usage();
         }
+        
+        // setup the properties
+        final Properties props =
+            line.hasOption("p")
+                ? loadProperties(new File(line.getOptionValue("p")))
+                : System.getProperties();
 
-        // be brain dead about arguments parsing
-        String format = "plain";
-        String output = null;
-        Properties props = System.getProperties();
-        final List foundFiles = new ArrayList();
-        final ArrayList files = new ArrayList();
-        for (int i = 0; i < aArgs.length; i++) {
-            if ("-f".equals(aArgs[i])) {
-                format = aArgs[++i];
-            }
-            else if ("-o".equals(aArgs[i])) {
-                output = aArgs[++i];
-            }
-            else if ("-r".equals(aArgs[i])) {
-                traverse(new File(aArgs[++i]), foundFiles);
-            }
-            else if ("-p".equals(aArgs[i])) {
-                props = loadProperties(new File(aArgs[++i]));
-            }
-            else {
-                files.add(aArgs[i]);
-            }
+        // ensure a config file is specified
+        if (!line.hasOption("c")) {
+            System.out.println("Must specify a config XML file.");
+            usage();
+        }
+        
+        // Load the config file
+        CheckConfiguration[] checkConfigs = null;
+        try {
+            checkConfigs =
+                ConfigurationLoader.loadConfigs(line.getOptionValue("c"));
+        }
+        catch (CheckstyleException e) {
+            System.out.println("Error loading configuration file");
+            e.printStackTrace(System.out);
+            System.exit(1);
         }
 
-        // create the appropriate listener
-        OutputStream out = System.out;
+        // setup the output stream
+        OutputStream out = null;
         boolean closeOut = false;
-        if (output != null) {
+        if (line.hasOption("o")) {
+            final String fname = line.getOptionValue("o"); 
             try {
-                out = new FileOutputStream(output);
+                out = new FileOutputStream(fname);
                 closeOut = true;
             }
             catch (FileNotFoundException e) {
-                System.out.println("Could not find file: '" + output + "'");
+                System.out.println("Could not find file: '" + fname + "'");
                 System.exit(1);
             }
         }
+        else {
+            out = System.out;
+            closeOut = false;
+        }
+        
+        // create the appropriate listener
+        final String format =
+            line.hasOption("f") ? line.getOptionValue("f") : "plain";
+        
         AuditListener listener = null;
         if ("xml".equals(format)) {
             listener = new XMLLogger(out, closeOut);
@@ -59,24 +76,26 @@
             usage();
         }
 
-        // Check that I have a config file
+        // Get all the Java files
+        final List files = new ArrayList();
+        if (line.hasOption("r")) {
+            final String[] values = line.getOptionValues("r");
+            for (int i = 0; i < values.length; i++) {
+                traverse(new File(values[i]), files);
+            }
+        }
+ 
+        final String[] remainingArgs = line.getArgs();
+        for (int i = 0; i < remainingArgs.length; i++) {
+            files.add(remainingArgs[i]);
+        } 
+
         if (files.isEmpty()) {
-            System.out.println("Need to specify a config file");
+            System.out.println("Must specify files to process");
             usage();
-        }
+        }         
 
-        // Load the config file
-        final String configFname = (String) files.remove(0);
-        CheckConfiguration[] checkConfigs = null;
-        try {
-            checkConfigs = ConfigurationLoader.loadConfigs(configFname);
-        }
-        catch (CheckstyleException e) {
-            System.out.println("Error loading configuration file");
-            e.printStackTrace(System.out);
-            System.exit(1);
-        }
-
+        // create the checker
         Checker c = null;
         try {
             c = new Checker(new Configuration(props, System.out), checkConfigs);
@@ -89,7 +108,6 @@
             System.exit(1);
         }
 
-        files.addAll(foundFiles);
         final int numErrs =
             c.processNEW((String[]) files.toArray(new String[files.size()]));
         c.destroy();
