@@ -2,8 +2,11 @@
      * Checks a set of tags for matching parameters.
      * @param aTags the tags to check
      * @param aParams the list of parameters to check
+     * @param aReportExpectedTags whether we should report if do
+     *        not find expected tag
      **/
-    private void checkParamTags(List aTags, List aParams)
+    private void checkParamTags(List aTags, List aParams,
+                                boolean aReportExpectedTags)
     {
         // Loop over the tags, checking to see they exist in the params.
         final ListIterator tagIt = aTags.listIterator();
@@ -37,7 +40,7 @@
 
         // Now dump out all parameters without tags :- unless
         // the user has chosen to suppress these problems
-        if (!mAllowMissingParamTags) {
+        if (!mAllowMissingParamTags && aReportExpectedTags) {
             final Iterator paramIt = aParams.iterator();
             while (paramIt.hasNext()) {
                 final DetailAST param = (DetailAST) paramIt.next();

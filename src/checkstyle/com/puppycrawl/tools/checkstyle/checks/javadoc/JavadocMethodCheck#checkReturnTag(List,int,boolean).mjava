@@ -3,8 +3,11 @@
      * supplied list.
      * @param aTags the tags to check
      * @param aLineNo the line number of the expected tag
+     * @param aReportExpectedTags whether we should report if do
+     *        not find expected tag
      **/
-    private void checkReturnTag(List aTags, int aLineNo)
+    private void checkReturnTag(List aTags, int aLineNo,
+                                boolean aReportExpectedTags)
     {
         // Loop over tags finding return tags. After the first one, report an
         // error.
@@ -23,7 +26,7 @@
 
         // Handle there being no @return tags :- unless
         // the user has chosen to suppress these problems
-        if (!found && !mAllowMissingReturnTag) {
+        if (!found && !mAllowMissingReturnTag && aReportExpectedTags) {
             log(aLineNo, "javadoc.return.expected");
         }
     }

@@ -6,23 +6,34 @@
     private void checkComment(DetailAST aAST, TextBlock aComment)
     {
         final List tags = getMethodTags(aComment);
-        // Check for only one @see tag
-        if ((tags.size() != 1)
-            || !((JavadocTag) tags.get(0)).isSeeOrInheritDocTag())
-        {
-            checkParamTags(tags, getParameters(aAST));
-            checkThrowsTags(tags, getThrows(aAST));
-            if (isFunction(aAST)) {
-                checkReturnTag(tags, aAST.getLineNo());
-            }
 
-            // Dump out all unused tags
-            final Iterator it = tags.iterator();
-            while (it.hasNext()) {
-                final JavadocTag jt = (JavadocTag) it.next();
-                if (!jt.isSeeOrInheritDocTag()) {
-                    log(jt.getLineNo(), "javadoc.unusedTagGeneral");
-                }
+        // Check for only one @see or inheritDoc tag
+        if ((tags.size() == 1)
+            && ((JavadocTag) tags.get(0)).isSeeOrInheritDocTag())
+        {
+            return;
+        }
+
+        // Check for inheritDoc
+        boolean hasInheritDocTag = false;
+        Iterator it = tags.iterator();
+        while (it.hasNext() && !hasInheritDocTag) {
+            hasInheritDocTag |=
+                ((JavadocTag) it.next()).isInheritDocTag();
+        }
+
+        checkParamTags(tags, getParameters(aAST), !hasInheritDocTag);
+        checkThrowsTags(tags, getThrows(aAST), !hasInheritDocTag);
+        if (isFunction(aAST)) {
+            checkReturnTag(tags, aAST.getLineNo(), !hasInheritDocTag);
+        }
+
+        // Dump out all unused tags
+        it = tags.iterator();
+        while (it.hasNext()) {
+            final JavadocTag jt = (JavadocTag) it.next();
+            if (!jt.isSeeOrInheritDocTag()) {
+                log(jt.getLineNo(), "javadoc.unusedTagGeneral");
             }
         }
     }

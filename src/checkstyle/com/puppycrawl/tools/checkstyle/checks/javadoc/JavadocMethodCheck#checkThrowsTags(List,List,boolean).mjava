@@ -2,8 +2,11 @@
      * Checks a set of tags for matching throws.
      * @param aTags the tags to check
      * @param aThrows the throws to check
+     * @param aReportExpectedTags whether we should report if do
+     *        not find expected tag
      **/
-    private void checkThrowsTags(List aTags, List aThrows)
+    private void checkThrowsTags(List aTags, List aThrows,
+                                 boolean aReportExpectedTags)
     {
         // Loop over the tags, checking to see they exist in the throws.
         final Set foundThrows = new HashSet(); //used for performance only
@@ -62,7 +65,7 @@
 
         // Now dump out all throws without tags :- unless
         // the user has chosen to suppress these problems
-        if (!mAllowMissingThrowsTags) {
+        if (!mAllowMissingThrowsTags && aReportExpectedTags) {
             final ListIterator throwIt = aThrows.listIterator();
             while (throwIt.hasNext()) {
                 final ExceptionInfo ei = (ExceptionInfo) throwIt.next();
