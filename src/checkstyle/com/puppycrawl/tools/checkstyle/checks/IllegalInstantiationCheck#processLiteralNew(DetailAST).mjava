@@ -5,6 +5,15 @@
     private void processLiteralNew(DetailAST aAST)
     {
         DetailAST typeNameAST = (DetailAST) aAST.getFirstChild();
+
+        AST nameSibling = typeNameAST.getNextSibling();
+        if (nameSibling != null
+                && nameSibling.getType() == TokenTypes.ARRAY_DECLARATOR)
+        {
+            // aAST == "new Boolean[]"
+            return;
+        }
+
         FullIdent typeIdent = FullIdent.createFullIdent(typeNameAST);
         final String typeName = typeIdent.getText();
         final int lineNo = aAST.getLineNo();
