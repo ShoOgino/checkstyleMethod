@@ -1,0 +1,18 @@
+    public void testStringLiteralEquality() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(DescendantTokenCheck.class);
+        checkConfig.addAttribute("tokens", "EQUAL,NOT_EQUAL");
+        checkConfig.addAttribute("limitedTokens", "STRING_LITERAL");
+        checkConfig.addAttribute("maximumNumber", "0");
+        checkConfig.addAttribute("maximumDepth", "1");
+        checkConfig.addAttribute("maximumMessage", "Literal Strings should be compared using equals(), not ''==''.");
+
+        final String[] expected = {
+            "11:18: Literal Strings should be compared using equals(), not '=='.",
+            "16:20: Literal Strings should be compared using equals(), not '=='.",
+            "21:22: Literal Strings should be compared using equals(), not '=='.",
+        };
+        verify(checkConfig, getPath("coding" + File.separator + "InputStringLiteralEquality.java"), expected);
+    }
+
