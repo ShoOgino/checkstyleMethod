@@ -1,7 +1,27 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void beginTree()
     {
-        String[] lines = getLines();
-        log(0, "file has " + lines.length + " lines");
+        System.out.println("HeaderCheck.beginTree");
+        if (mHeaderLines != null) {
+
+            final String[] lines = getLines();
+
+            if (mHeaderLines.length > lines.length) {
+                log(1, "header.missing");
+            }
+            else {
+                for (int i = 0; i < mHeaderLines.length; i++) {
+                    // skip lines we are meant to ignore
+                    if (isIgnoreLine(i + 1)) {
+                        continue;
+                    }
+
+                    if (!isMatch(i)) {
+                        log(i + 1, "header.mismatch", mHeaderLines[i]);
+                        break; // stop checking
+                    }
+                }
+            }
+        }
     }
 
