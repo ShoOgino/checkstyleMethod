@@ -3,8 +3,6 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(EmptyBlockCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputSemantic.java");
         final String[] expected = {
             "52:65: Must have at least one statement.",
             "54:41: Must have at least one statement.",
@@ -16,6 +14,6 @@
             "79:13: Must have at least one statement.",
             "82:17: Must have at least one statement.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
     }
 

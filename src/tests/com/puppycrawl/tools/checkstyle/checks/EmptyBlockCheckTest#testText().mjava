@@ -4,8 +4,6 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(EmptyBlockCheck.class);
         checkConfig.addAttribute("option", BlockOption.TEXT.toString());
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputSemantic.java");
         final String[] expected = {
             "52:65: Empty catch block.",
             "72:52: Empty catch block.",
@@ -13,6 +11,6 @@
             "75:13: Empty try block.",
             "77:17: Empty finally block.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
     }
 
