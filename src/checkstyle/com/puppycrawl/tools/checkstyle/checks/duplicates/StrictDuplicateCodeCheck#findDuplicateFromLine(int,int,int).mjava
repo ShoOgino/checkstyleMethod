@@ -16,6 +16,11 @@
         final int jFileLength = mLineChecksums[aJ].length;
 
         for (int jLine = 0; jLine < jFileLength - mMin; jLine++) {
+
+            if (aI == aJ && aILine == jLine) {
+                continue;
+            }
+
             int equivalent = 0;
             while (aILine + equivalent < iFileLength
                     && jLine + equivalent < jFileLength
@@ -25,9 +30,9 @@
             {
                 equivalent += 1;
             }
-            if ((aI != aJ || aILine != jLine) && equivalent >= mMin) {
-                reportDuplicate(
-                        equivalent, aILine, mFiles[aJ], jLine);
+
+            if ((aI != aJ || aILine < jLine) && equivalent >= mMin) {
+                reportDuplicate(equivalent, aILine, mFiles[aJ], jLine);
                 aILine += equivalent; // skip to end of equivalent section
             }
         }
