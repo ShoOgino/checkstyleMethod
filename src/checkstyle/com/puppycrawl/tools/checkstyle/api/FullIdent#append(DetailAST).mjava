@@ -1,0 +1,18 @@
+    public void append(DetailAST aAST)
+    {
+        mBuffer.append(aAST.getText());
+        if (mLineNo == 0) {
+            mLineNo = aAST.getLineNo();
+        }
+        else if (aAST.getLineNo() > 0) {
+            mLineNo = Math.min(mLineNo, aAST.getLineNo());
+        }
+        // TODO: make a function
+        if (mColNo == 0) {
+            mColNo = aAST.getColumnNo();
+        }
+        else if (aAST.getColumnNo() > 0) {
+            mColNo = Math.min(mColNo, aAST.getColumnNo());
+        }
+    }
+

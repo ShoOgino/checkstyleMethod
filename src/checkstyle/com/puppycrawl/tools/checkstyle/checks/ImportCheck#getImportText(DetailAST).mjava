@@ -4,16 +4,14 @@
      * @param aAST the node containing the import
      * @return a <code>String</code> value
      */
-    protected String getImportText(DetailAST aAST)
+    protected FullIdent getImportText(DetailAST aAST)
     {
-        String text = (String) getTokenContext().get(TEXT_KEY);
+        FullIdent text = (FullIdent) getTokenContext().get(TEXT_KEY);
         if (text != null) {
             return text;
         }
 
-        final StringBuffer buf = new StringBuffer();
-        extractIdent(buf, (DetailAST) aAST.getFirstChild());
-        text = buf.toString();
+        text = FullIdent.createFullIdent((DetailAST) aAST.getFirstChild());
         getTokenContext().put(TEXT_KEY, text);
         return text;
     }

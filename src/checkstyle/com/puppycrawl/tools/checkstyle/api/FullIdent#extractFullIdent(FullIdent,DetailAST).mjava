@@ -1,0 +1,18 @@
+    public static void extractFullIdent(FullIdent aFull, DetailAST aAST)
+    {
+        // A guard to be paranoid
+        if (aAST == null) {
+            return;
+        }
+
+        if (aAST.getType() == JavaTokenTypes.DOT) {
+            extractFullIdent(aFull, (DetailAST) aAST.getFirstChild());
+            aFull.append(".");
+            extractFullIdent(
+                aFull, (DetailAST) aAST.getFirstChild().getNextSibling());
+        }
+        else {
+            aFull.append(aAST);
+        }
+    }
+

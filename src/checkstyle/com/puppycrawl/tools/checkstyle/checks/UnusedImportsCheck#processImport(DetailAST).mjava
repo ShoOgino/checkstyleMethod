@@ -4,8 +4,8 @@
      */
     private void processImport(DetailAST aAST)
     {
-        final String name = getImportText(aAST);
-        if ((name != null) && !name.endsWith(".*")) {
+        final FullIdent name = getImportText(aAST);
+        if ((name != null) && !name.getText().endsWith(".*")) {
             mImports.add(name);
         }
     }

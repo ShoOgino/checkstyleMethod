@@ -4,10 +4,16 @@
         // loop over all the imports to see if referenced.
         final Iterator it = mImports.iterator();
         while (it.hasNext()) {
-            final String imp = (String) it.next();
-            if (!mReferenced.contains(basename(imp))) {
-                log(666, "unused import " + imp);
+            final FullIdent imp = (FullIdent) it.next();
+
+            if (!mReferenced.contains(basename(imp.getText()))) {
+                log(imp.getLineNo(),
+                    imp.getColumnNo(),
+                    "import.unused", imp.getText());
             }
+//            else if (isIllegalImport(imp.getText())) {
+//                mMessages.add(imp.getLineNo(), "import.illegal", imp.getText());
+//            }
         }
     }
 

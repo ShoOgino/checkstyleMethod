@@ -1,0 +1,18 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        if (aAST.getType() == JavaTokenTypes.PACKAGE_DEF) {
+            final DetailAST nameAST = (DetailAST) aAST.getFirstChild();
+            mPkgName = FullIdent.createFullIdent(nameAST).getText();
+        }
+        else {
+            final FullIdent imp = getImportText(aAST);
+            if (fromPackage(imp.getText(), "java.lang")) {
+                log(aAST.getLineNo(), aAST.getColumnNo(), "import.lang");
+            }
+            else if (fromPackage(imp.getText(), mPkgName)) {
+                log(aAST.getLineNo(), aAST.getColumnNo(), "import.same");
+            }
+        }
+    }
+
