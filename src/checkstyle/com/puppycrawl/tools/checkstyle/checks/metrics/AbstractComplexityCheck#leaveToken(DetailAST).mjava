@@ -1,0 +1,14 @@
+    /** {@inheritDoc} */
+    public final void leaveToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+        case TokenTypes.CTOR_DEF:
+        case TokenTypes.METHOD_DEF:
+        case TokenTypes.STATIC_INIT:
+            leaveMethodDef(aAST);
+            break;
+        default:
+            leaveTokenHook(aAST);
+        }
+    }
+

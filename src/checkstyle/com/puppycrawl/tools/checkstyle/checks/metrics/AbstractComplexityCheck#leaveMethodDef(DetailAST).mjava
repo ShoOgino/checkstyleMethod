@@ -1,0 +1,17 @@
+    /**
+     * Process the end of a method definition.
+     *
+     * @param aAST the token representing the method definition
+     */
+    private void leaveMethodDef(DetailAST aAST)
+    {
+        if (mCurrentValue > mMax) {
+            log(aAST.getLineNo(),
+                aAST.getColumnNo(),
+                getMessageID(),
+                new Integer(mCurrentValue),
+                new Integer(mMax));
+        }
+        popValue();
+    }
+
