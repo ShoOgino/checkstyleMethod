@@ -7,7 +7,7 @@
      */
     private boolean inIgnoreList(DetailAST aAST)
     {
-        float value = CheckUtils.parseFloat(aAST.getText(), aAST.getType());
+        double value = CheckUtils.parseDouble(aAST.getText(), aAST.getType());
         final DetailAST parent = aAST.getParent();
         if (parent.getType() == TokenTypes.UNARY_MINUS) {
             value = -1 * value;

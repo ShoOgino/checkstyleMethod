@@ -6,37 +6,8 @@
      * {@link com.puppycrawl.tools.checkstyle.api.TokenTypes}.
      * @return the float value represented by the string argument.
      */
-    public static float parseFloat(String aText, int aType)
+    public static double parseFloat(String aText, int aType)
     {
-        float result = 0;
-        switch (aType) {
-        case TokenTypes.NUM_FLOAT:
-        case TokenTypes.NUM_DOUBLE:
-            result = (float) Double.parseDouble(aText);
-            break;
-        case TokenTypes.NUM_INT:
-        case TokenTypes.NUM_LONG:
-            int radix = BASE_10;
-            if (aText.startsWith("0x") || aText.startsWith("0X")) {
-                radix = BASE_16;
-                aText = aText.substring(2);
-            }
-            else if (aText.charAt(0) == '0') {
-                radix = BASE_8;
-                aText = aText.substring(1);
-            }
-            // Long.parseLong requires that the text ends with neither 'L'
-            // nor 'l'.
-            if ((aText.endsWith("L")) || (aText.endsWith("l"))) {
-                aText = aText.substring(0, aText.length() - 1);
-            }
-            if (aText.length() > 0) {
-                result = (float) Long.parseLong(aText, radix);
-            }
-            break;
-        default:
-            break;
-        }
-        return result;
+        return (float) parseDouble(aText, aType);
     }
 
