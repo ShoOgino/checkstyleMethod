@@ -7,7 +7,9 @@
         throws ConversionException
     {      
         try {
-            mAuthorRE = Utils.getRE("@author\\s+" + aFormat);
+            mAuthorTagRE = Utils.getRE("@author\\s+(.*$)");
+            mAuthorFormat = aFormat;
+            mAuthorFormatRE = Utils.getRE(aFormat);
         }
         catch (RESyntaxException e) {
             throw new ConversionException("unable to parse " + aFormat, e);

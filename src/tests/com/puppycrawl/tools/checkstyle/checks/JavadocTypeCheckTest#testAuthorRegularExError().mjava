@@ -5,7 +5,7 @@
             createCheckConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("authorFormat", "ABC");
         final String[] expected = {
-            "13: Type Javadoc comment is missing an @author tag.",
+            "13: Type Javadoc tag @author must match pattern 'ABC'.",
         };
         verify(checkConfig, getPath("InputJavadoc.java"), expected);
     }

@@ -1,0 +1,28 @@
+    private void checkTag(
+            int aLineNo, String[] aCmt,
+            String aTag, RE aTagRE, RE aFormatRE, String aFormat)
+    {
+        if (aTagRE == null) {
+            return;
+        }
+
+        int tagCount = 0;
+        for (int i = 0; i < aCmt.length; i++) {
+            final String s = aCmt[i];
+            if (aTagRE.match(s)) {
+                tagCount += 1;
+                final int contentStart = aTagRE.getParenStart(1);
+                final String content = s.substring(contentStart);
+                if (!aFormatRE.match(content))
+                {
+                    log(aLineNo, "type.tagFormat", aTag, aFormat);
+                }
+
+            }
+        }
+        if (tagCount == 0) {
+            log(aLineNo, "type.missingTag", aTag);
+        }
+
+    }
+

@@ -9,27 +9,18 @@
             final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
             if ((surroundingScope == null) || surroundingScope.isIn(mScope)) {
                 final FileContents contents = getFileContents();
+                final int lineNo = aAST.getLineNo();
                 final String[] cmt =
-                    contents.getJavadocBefore(aAST.getLineNo());
+                    contents.getJavadocBefore(lineNo);
                 if (cmt == null) {
-                    log(aAST.getLineNo(), "javadoc.missing");
+                    log(lineNo, "javadoc.missing");
                 }
                 else if (ScopeUtils.isOuterMostType(aAST)) {
                     // don't check author/version for inner classes
-                    if ((mAuthorRE != null)
-                        && (mAuthorRE.grep(cmt).length == 0))
-                    {
-                        // TODO: better error message
-                        log(aAST.getLineNo(), "type.missingTag", "@author");
-                    }
-
-                    if ((mVersionRE != null)
-                        && (mVersionRE.grep(cmt).length == 0))
-                    {
-                        // TODO: better error message
-                        log(aAST.getLineNo(), "type.missingTag", "@version");
-                    }
-
+                    checkTag(lineNo, cmt, "@author",
+                            mAuthorTagRE, mAuthorFormatRE, mAuthorFormat);
+                    checkTag(lineNo, cmt, "@version",
+                            mVersionTagRE, mVersionFormatRE, mVersionFormat);
                 }
             }
         }
