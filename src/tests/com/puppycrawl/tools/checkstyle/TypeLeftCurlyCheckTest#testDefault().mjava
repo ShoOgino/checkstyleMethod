@@ -1,8 +1,8 @@
     public void testDefault()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(TypeLeftCurlyCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(TypeLeftCurlyCheck.class);
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputScopeInnerInterfaces.java");
         final String[] expected = {

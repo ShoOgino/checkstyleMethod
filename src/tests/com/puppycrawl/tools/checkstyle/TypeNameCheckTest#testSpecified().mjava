@@ -1,9 +1,9 @@
     public void testSpecified()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(TypeNameCheck.class.getName());
-        checkConfig.addProperty("format", "^inputHe");
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(TypeNameCheck.class);
+        checkConfig.addAttribute("format", "^inputHe");
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("inputHeader.java");
         final String[] expected = {
