@@ -34,7 +34,7 @@
         setMaxFileLength(getIntProperty(
             aProps, aLog, MAX_FILE_LENGTH_PROP, MAX_FILE_LENGTH));
 
-        setAllowTabs(getBooleanProperty(aProps, ALLOW_TABS_PROP, mAllowTabs));
+        setBooleanFlag(aProps, ALLOW_TABS_PROP);
         setTabWidth(getIntProperty(aProps, aLog, TAB_WIDTH_PROP, TAB_WIDTH));
         setBooleanFlag(aProps, ALLOW_PROTECTED_PROP);
         setBooleanFlag(aProps, ALLOW_PACKAGE_PROP);
@@ -55,11 +55,9 @@
         setBooleanFlag(aProps, IGNORE_LONG_ELL_PROP);
         setBooleanFlag(aProps, IGNORE_PUBLIC_IN_INTERFACE_PROP);
         setCacheFile(aProps.getProperty(CACHE_FILE_PROP));
-        setIgnoreImportLength(getBooleanProperty(
-            aProps, IGNORE_IMPORT_LENGTH_PROP, mIgnoreImportLength));
+        setBooleanFlag(aProps, IGNORE_IMPORT_LENGTH_PROP);
         setHeaderIgnoreLines(aProps.getProperty(HEADER_IGNORE_LINE_PROP));
-        setHeaderLinesRegexp(getBooleanProperty(
-            aProps, HEADER_LINES_REGEXP_PROP, mHeaderLinesRegexp));
+        setBooleanFlag(aProps, HEADER_LINES_REGEXP_PROP);
 
         final String fname = aProps.getProperty(HEADER_FILE_PROP);
         if (fname != null) {
