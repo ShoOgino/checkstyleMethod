@@ -8,7 +8,7 @@
         if (!mConfig.getTypeRegexp().match(aType.getText())) {
             mMessages.add(aType.getLineNo(), aType.getColumnNo(),
                           "name.invalidPattern",
-                          "type", aType.getText(), mConfig.getTypePat());
+                          aType.getText(), mConfig.getTypePat());
         }
 
         // Always check that the order of modifiers follows the JLS suggestion
@@ -30,7 +30,7 @@
 
         final String[] jd = getJavadocBefore(lineNo - 1);
         if (jd == null) {
-            mMessages.add(lineNo, "javadoc.missing", "type");
+            mMessages.add(lineNo, "javadoc.missing");
         }
         else if (mInScope.size() == 0) {
             // don't check author/version for inner classes
