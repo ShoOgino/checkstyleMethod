@@ -1,0 +1,15 @@
+    public void testScopeInnerClassesPackage()
+        throws Exception
+    {
+        mConfig.setJavadocScope(Scope.PACKAGE);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputScopeInnerClasses.java");
+        assertNotNull(c);
+        final String[] expected = {
+            filepath + ":18: type is missing a Javadoc comment.",
+            filepath + ":20: type is missing a Javadoc comment.",
+            filepath + ":22: type is missing a Javadoc comment."
+        };
+        verify(c, filepath, expected);
+    }
+

@@ -1,17 +1,13 @@
+    // pre 1.4 relaxed mode is roughly equivalent with check=protected
     public void testRelaxedJavadoc()
         throws Exception
     {
-        mConfig.setRelaxJavadoc(true);
+        mConfig.setJavadocScope(Scope.PROTECTED);
         final Checker c = createChecker();
         final String filepath = getPath("InputPublicOnly.java");
         assertNotNull(c);
         final String[] expected = {
             filepath + ":7: type is missing a Javadoc comment.",
-            filepath + ":9: type is missing a Javadoc comment.",
-            filepath + ":11: variable 'CONST' missing Javadoc.",
-            filepath + ":12: method is missing a Javadoc comment.",
-            filepath + ":14: type is missing a Javadoc comment.",
-            filepath + ":34: type is missing a Javadoc comment.",
             filepath + ":44: variable 'mLen' must be private and have accessor methods.",
             filepath + ":45: variable 'mDeer' missing Javadoc.",
             filepath + ":45: variable 'mDeer' must be private and have accessor methods.",

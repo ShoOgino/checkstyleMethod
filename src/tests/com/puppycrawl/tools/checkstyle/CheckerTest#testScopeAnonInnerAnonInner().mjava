@@ -1,0 +1,15 @@
+    public void testScopeAnonInnerAnonInner()
+        throws Exception
+    {
+        mConfig.setJavadocScope(Scope.ANONINNER);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputScopeAnonInner.java");
+        assertNotNull(c);
+        final String[] expected = {
+            filepath + ":26: method is missing a Javadoc comment.",
+            filepath + ":39: method is missing a Javadoc comment.",
+            filepath + ":53: method is missing a Javadoc comment."
+        };
+        verify(c, filepath, expected);
+    }
+

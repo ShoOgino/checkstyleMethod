@@ -1,0 +1,12 @@
+    public void testScopeAnonInnerPrivate()
+        throws Exception
+    {
+        mConfig.setJavadocScope(Scope.PRIVATE);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputScopeAnonInner.java");
+        assertNotNull(c);
+        final String[] expected = {
+        };
+        verify(c, filepath, expected);
+    }
+
