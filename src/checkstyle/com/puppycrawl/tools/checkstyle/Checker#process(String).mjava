@@ -24,7 +24,7 @@
             stripped = aFileName.substring(basedir.length() + skipSep);
         }
 
-        LineText[] errors;
+        LocalizedMessage[] errors;
         try {
             fireFileStarted(stripped);
             final String[] lines = getLines(aFileName);
@@ -64,21 +64,23 @@
             errors = VerifierSingleton.getInstance().getMessages();
         }
         catch (FileNotFoundException fnfe) {
-            errors = new LineText[] {new LineText(0, "File not found!")};
+            errors = new LocalizedMessage[] {
+                new LocalizedMessage(0, "general.fileNotFound", null)};
         }
         catch (IOException ioe) {
-            errors = new LineText[] {
-                new LineText(0, "Got an IOException -" + ioe.getMessage())};
+            errors = new LocalizedMessage[] {
+                new LocalizedMessage(0, "general.exception",
+                                     new String[] {ioe.getMessage()})};
         }
         catch (RecognitionException re) {
-            errors = new LineText[] {
-                new LineText(0,
-                             "Got a RecognitionException -" + re.getMessage())};
+            errors = new LocalizedMessage[] {
+                new LocalizedMessage(0, "general.exception",
+                                     new String[] {re.getMessage()})};
         }
         catch (TokenStreamException te) {
-            errors = new LineText[] {
-                new LineText(0,
-                             "Got a TokenStreamException -" + te.getMessage())};
+            errors = new LocalizedMessage[] {
+                new LocalizedMessage(0, "general.exception",
+                                     new String[] {te.getMessage()})};
         }
 
         if (errors.length == 0) {

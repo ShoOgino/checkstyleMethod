@@ -1,0 +1,14 @@
+    /** @see java.lang.Comparable **/
+    public int compareTo(Object aOther)
+    {
+        final LocalizedMessage lt = (LocalizedMessage) aOther;
+        if (getLineNo() == lt.getLineNo()) {
+            if (getColumnNo() == lt.getColumnNo()) {
+                return 0;
+            }
+            return (getColumnNo() < lt.getColumnNo()) ? -1 : 1;
+        }
+
+        return (getLineNo() < lt.getLineNo()) ? -1 : 1;
+    }
+

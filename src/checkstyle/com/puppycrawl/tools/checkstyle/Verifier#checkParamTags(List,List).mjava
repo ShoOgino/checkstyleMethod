@@ -30,8 +30,8 @@
 
             // Handle extra JavadocTag
             if (!found) {
-                log(tag.getLineNo(),
-                    "Unused @param tag for '" + tag.getArg1() + "'.");
+                log(tag.getLineNo(), "javadoc.unusedTag",
+                    "@param", tag.getArg1());
             }
         }
 
@@ -40,7 +40,7 @@
         while (paramIt.hasNext()) {
             final LineText param = (LineText) paramIt.next();
             log(param.getLineNo(), param.getColumnNo(),
-                "Expected @param tag for '" + param.getText() + "'.");
+                "javadoc.expectedTag", "@param", param.getText());
         }
     }
 

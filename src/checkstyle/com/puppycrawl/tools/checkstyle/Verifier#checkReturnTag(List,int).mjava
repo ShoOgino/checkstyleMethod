@@ -14,7 +14,7 @@
             final JavadocTag jt = (JavadocTag) it.next();
             if (jt.isReturnTag()) {
                 if (found) {
-                    log(jt.getLineNo(), "Duplicate @return tag.");
+                    log(jt.getLineNo(), "javadoc.return.duplicate");
                 }
                 found = true;
                 it.remove();
@@ -23,7 +23,7 @@
 
         // Handle there being no @return tags
         if (!found) {
-            log(aLineNo, "Expected an @return tag.");
+            log(aLineNo, "javadoc.return.expected");
         }
     }
 

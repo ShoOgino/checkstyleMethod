@@ -1,0 +1,9 @@
+    /** @return the translated message **/
+    String getMessage()
+    {
+        // Very simple approach - wait for performance problems
+        final ResourceBundle bundle = ResourceBundle.getBundle(MESSAGE_BUNDLE);
+        final String pattern = bundle.getString(mKey);
+        return MessageFormat.format(pattern, mArgs);
+    }
+

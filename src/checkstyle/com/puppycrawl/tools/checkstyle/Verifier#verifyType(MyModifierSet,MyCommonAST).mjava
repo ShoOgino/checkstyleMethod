@@ -6,10 +6,9 @@
     void verifyType(MyModifierSet aMods, MyCommonAST aType)
     {
         if (!mConfig.getTypeRegexp().match(aType.getText())) {
-            log(aType.getLineNo(),
-                aType.getColumnNo(),
-                "type name '" + aType.getText()
-                + "' must match pattern '" + mConfig.getTypePat() + "'.");
+            log(aType.getLineNo(), aType.getColumnNo(),
+                "name.invalidPattern",
+                "type", aType.getText(), mConfig.getTypePat());
         }
 
         // Always check that the order of modifiers follows the JLS suggestion
@@ -31,14 +30,14 @@
 
         final String[] jd = getJavadocBefore(lineNo - 1);
         if (jd == null) {
-            log(lineNo, "type is missing a Javadoc comment.");
+            log(lineNo, "javadoc.missing", "type");
         }
         else if (!mConfig.isAllowNoAuthor()
                  && (mInScope.size() == 0)
                  // don't check author for inner classes
                  && (MATCH_JAVADOC_AUTHOR.grep(jd).length == 0))
         {
-            log(lineNo, "type Javadoc comment is missing an @author tag.");
+            log(lineNo, "type.missingAuthorTag");
         }
     }
 

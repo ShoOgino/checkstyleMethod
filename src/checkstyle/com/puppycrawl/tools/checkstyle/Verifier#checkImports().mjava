@@ -11,18 +11,16 @@
             final LineText imp = (LineText) it.next();
 
             if (fromPackage(imp.getText(), "java.lang")) {
-                log(imp.getLineNo(),
-                    "Redundant import from the java.lang package.");
+                log(imp.getLineNo(), "import.lang");
             }
             else if (fromPackage(imp.getText(), mPkgName)) {
-                log(imp.getLineNo(), "Redundant import from the same package.");
+                log(imp.getLineNo(), "import.same");
             }
             else if (!isReferencedImport(imp)) {
-                log(imp.getLineNo(), "Unused import - " + imp.getText());
+                log(imp.getLineNo(), "import.unused", imp.getText());
             }
             else if (isIllegalImport(imp.getText())) {
-                log(imp.getLineNo(),
-                    "Import from illegal package - " + imp.getText());
+                log(imp.getLineNo(), "import.illegal", imp.getText());
             }
         }
     }

@@ -10,8 +10,10 @@
         {
             log(aSig.getName().getLineNo(),
                 aSig.getName().getColumnNo(),
-                "method name '" + aSig.getName().getText()
-                + "' must match pattern '" + mConfig.getMethodPat() + "'.");
+                "name.invalidPattern",
+                "method",
+                aSig.getName().getText(),
+                mConfig.getMethodPat());
         }
 
         // Always verify the parameters are ok
@@ -27,7 +29,7 @@
         if (aSig.getParams().size() > mConfig.getMaxParameters()) {
             log(aSig.getFirstLineNo(),
                 aSig.getFirstColNo(),
-                "More than " + mConfig.getMaxParameters() + " parameters.");
+                "maxParam", new Integer(mConfig.getMaxParameters()));
         }
         // JLS, chapter 9.4 - public in interface is strongly discouraged
         if (!mConfig.isIgnorePublicInInterface() && inInterfaceBlock()
@@ -35,14 +37,14 @@
         {
             log(aSig.getModSet().getFirstLineNo(),
                 aSig.getModSet().getFirstColNo(),
-                "redundant 'public' modifier.");
+                "redundantModifier", "public");
         }
 
         // Check for redunant abstract
         if (inInterfaceBlock() && aSig.getModSet().containsAbstract()) {
             log(aSig.getModSet().getFirstLineNo(),
                 aSig.getModSet().getFirstColNo(),
-                "redundant 'abstract' modifier.");
+                "redundantModifier", "abstract");
         }
         // now check the javadoc
         final Scope methodScope = inInterfaceBlock()
@@ -57,7 +59,7 @@
         if (jd == null) {
             log(aSig.getFirstLineNo(),
                 aSig.getFirstColNo(),
-                "method is missing a Javadoc comment.");
+                "javadoc.missing", "method");
         }
         else {
             final List tags = getMethodTags(jd, aSig.getFirstLineNo() - 1);
@@ -76,7 +78,7 @@
                 while (it.hasNext()) {
                     final JavadocTag jt = (JavadocTag) it.next();
                     if (!jt.isSeeTag()) {
-                        log(jt.getLineNo(), "Unused Javadoc tag.");
+                        log(jt.getLineNo(), "javadoc.unusedTagGeneral");
                     }
                 }
             }

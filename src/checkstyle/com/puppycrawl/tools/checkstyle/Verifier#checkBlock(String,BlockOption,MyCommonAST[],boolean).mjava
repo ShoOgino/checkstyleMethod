@@ -9,9 +9,8 @@
                     MyCommonAST[] aBraces, boolean aNoStmt)
     {
         if (aNoStmt && (aOption == BlockOption.STMT)) {
-            log(aBraces[0].getLineNo(),
-                aBraces[0].getColumnNo(),
-                "Must have at least one statement.");
+            log(aBraces[0].getLineNo(), aBraces[0].getColumnNo(),
+                "block.noStmt");
         }
         else if (aOption == BlockOption.TEXT) {
             if (aBraces[0].getLineNo() == aBraces[1].getLineNo()) {
@@ -20,9 +19,8 @@
                     .substring(aBraces[0].getColumnNo() + 1,
                                aBraces[1].getColumnNo());
                 if (txt.trim().length() == 0) {
-                    log(aBraces[0].getLineNo(),
-                        aBraces[0].getColumnNo(),
-                        "Empty " + aType + " block.");
+                    log(aBraces[0].getLineNo(), aBraces[0].getColumnNo(),
+                        "block.empty", aType);
                 }
             }
             else {
@@ -48,9 +46,8 @@
                     }
 
                     if (isBlank) {
-                        log(aBraces[0].getLineNo(),
-                            aBraces[0].getColumnNo(),
-                            "Empty " + aType + " block.");
+                        log(aBraces[0].getLineNo(), aBraces[0].getColumnNo(),
+                            "block.empty", aType);
                     }
                 }
             }

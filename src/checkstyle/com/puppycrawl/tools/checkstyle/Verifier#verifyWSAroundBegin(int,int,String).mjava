@@ -15,15 +15,13 @@
         final int after = aColNo + aText.length() - 1;
 
         if ((before >= 0) && !Character.isWhitespace(line.charAt(before))) {
-            log(aLineNo, before + 1,
-                "'" + aText + "' is not preceeded with whitespace.");
+            log(aLineNo, before + 1, "ws.notPreceeded", aText);
         }
 
         if ((after < line.length())
             && !Character.isWhitespace(line.charAt(after)))
         {
-            log(aLineNo, after,
-                "'" + aText + "' is not followed by whitespace.");
+            log(aLineNo, after, "ws.notFollowed", aText);
         }
     }
 

@@ -20,9 +20,9 @@
                 final String docFile = packageDoc.toString();
                 fireFileStarted(docFile);
                 if (!packageDoc.exists()) {
-                    final LineText error =
-                        new LineText(0, "missing package documentation file.");
-                    fireErrors(docFile, new LineText[]{error});
+                    final LocalizedMessage error =
+                        new LocalizedMessage(0, "javadoc.packageHtml", null);
+                    fireErrors(docFile, new LocalizedMessage[]{error});
                     packageHtmlErrors++;
                 }
                 fireFileFinished(docFile);

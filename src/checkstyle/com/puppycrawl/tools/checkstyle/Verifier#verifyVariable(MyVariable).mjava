@@ -23,7 +23,7 @@
             && (getJavadocBefore(aVar.getStartLineNo() - 1) == null))
         {
             log(aVar.getLineNo(), aVar.getColumnNo() - 1,
-                "variable '" + aVar.getText() + "' missing Javadoc.");
+                "variable.missingJavadoc", aVar.getText());
         }
 
         // Check correct format
@@ -62,8 +62,7 @@
                     }
                     else {
                         log(aVar.getLineNo(), aVar.getColumnNo() - 1,
-                            "variable '" + aVar.getText()
-                            + "' must be private and have accessor methods.");
+                            "variable.notPrivate", aVar.getText());
                     }
                 }
             }
@@ -85,8 +84,7 @@
                 }
                 else {
                     log(aVar.getLineNo(), aVar.getColumnNo() - 1,
-                        "variable '" + aVar.getText()
-                        + "' must be private and have accessor methods.");
+                        "variable.notPrivate", aVar.getText());
                 }
             }
         }
