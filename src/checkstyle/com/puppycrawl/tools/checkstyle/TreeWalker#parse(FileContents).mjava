@@ -9,17 +9,18 @@
         FileContents aContents)
         throws RecognitionException, TokenStreamException
     {
-        DetailAST rootAST;
+        DetailAST rootAST = null;
 
         try {
-            rootAST = parse(
-                GeneratedJava15Lexer.class, SilentJava15Recognizer.class,
-                aContents);
+            rootAST = parse(aContents, true, true, true);
         }
         catch (RecognitionException exception) {
-            rootAST = parse(
-                GeneratedJavaLexer.class, GeneratedJavaRecognizer.class,
-                aContents);
+            try {
+                rootAST = parse(aContents, true, true, false);
+            }
+            catch (RecognitionException exception2) {
+                rootAST = parse(aContents, false, false, false);
+            }
         }
         return rootAST;
     }
