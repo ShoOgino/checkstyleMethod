@@ -27,14 +27,18 @@
         }
         else if (aOption == LeftCurlyOption.NL) {
             if (!Utils.whitespaceBefore(aBrace.getColumnNo(), braceLine)) {
-                log(aBrace.getLineNo(), "'{' should be on a new line.");
+                log(aBrace.getLineNo(),
+                    aBrace.getColumnNo(),
+                    "'{' should be on a new line.");
             }
         }
         else if (aOption == LeftCurlyOption.EOL) {
             if (Utils.whitespaceBefore(aBrace.getColumnNo(), braceLine)
                 && ((prevLineLen + 2) <= mConfig.getMaxLineLength()))
             {
-                log(aBrace.getLineNo(), "'{' should be on the previous line.");
+                log(aBrace.getLineNo(),
+                    aBrace.getColumnNo(),
+                    "'{' should be on the previous line.");
             }
         }
         else if (aOption == LeftCurlyOption.NLOW) {
@@ -43,15 +47,20 @@
             }
             else if ((aStartLine + 1) == aBrace.getLineNo()) {
                 if (!Utils.whitespaceBefore(aBrace.getColumnNo(), braceLine)) {
-                    log(aBrace.getLineNo(), "'{' should be on a new line.");
+                    log(aBrace.getLineNo(),
+                        aBrace.getColumnNo(),
+                        "'{' should be on a new line.");
                 }
                 else if ((prevLineLen + 2) <= mConfig.getMaxLineLength()) {
                     log(aBrace.getLineNo(),
+                        aBrace.getColumnNo(),
                         "'{' should be on the previous line.");
                 }
             }
             else if (!Utils.whitespaceBefore(aBrace.getColumnNo(), braceLine)) {
-                log(aBrace.getLineNo(), "'{' should be on a new line.");
+                log(aBrace.getLineNo(),
+                    aBrace.getColumnNo(),
+                    "'{' should be on a new line.");
             }
         }
     }

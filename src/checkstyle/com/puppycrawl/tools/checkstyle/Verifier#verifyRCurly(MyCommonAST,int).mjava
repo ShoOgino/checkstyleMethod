@@ -8,12 +8,16 @@
         if ((mConfig.getRCurly() == RightCurlyOption.SAME)
             && (aBrace.getLineNo() != aStartLine))
         {
-            log(aBrace.getLineNo(), "'}' should be on the same line.");
+            log(aBrace.getLineNo(),
+                aBrace.getColumnNo(),
+                "'}' should be on the same line.");
         }
         else if ((mConfig.getRCurly() == RightCurlyOption.ALONE)
                    && (aBrace.getLineNo() == aStartLine))
         {
-            log(aBrace.getLineNo(), "'}' should be alone on a line.");
+            log(aBrace.getLineNo(),
+                aBrace.getColumnNo(),
+                "'}' should be alone on a line.");
         }
     }
 
