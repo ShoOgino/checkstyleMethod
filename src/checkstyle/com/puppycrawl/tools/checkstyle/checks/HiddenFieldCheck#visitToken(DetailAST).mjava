@@ -1,0 +1,21 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+            case TokenTypes.VARIABLE_DEF:               
+                processVariable(aAST);
+                break;
+            case TokenTypes.PARAMETER_DEF:
+                if (mCheckParameters) {               
+                    processVariable(aAST);
+                }
+                break;
+            case TokenTypes.CLASS_DEF:
+                //push
+                mFieldsStack.addLast(new HashSet());
+                break;
+            default:
+                break;
+        }
+    }
+
