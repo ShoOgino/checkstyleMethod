@@ -1,0 +1,26 @@
+    public void testReplacePropertiesReplace()
+        throws CheckstyleException
+    {
+        final String[][] testValues = {
+            {"${a}", "A"},
+            {"x${a}", "xA"},
+            {"${a}x", "Ax"},
+            {"${a}${b}", "AB"},
+            {"x${a}${b}", "xAB"},
+            {"${a}x${b}", "AxB"},
+            {"${a}${b}x", "ABx"},
+            {"x${a}y${b}", "xAyB"},
+            {"${a}x${b}y", "AxBy"},
+            {"x${a}${b}y", "xABy"},
+            {"x${a}y${b}z", "xAyBz"},
+            {"$$", "$"},
+            };
+        final Properties props = initProperties();
+        for (int i = 0; i < testValues.length; i++) {
+            final String value =
+                Utils.replaceProperties(testValues[i][0], props);
+            assertEquals("\"" + testValues[i][0] + "\"",
+                testValues[i][1], value);
+        }
+    }
+

@@ -1,0 +1,13 @@
+    public void testReplacePropertiesSyntaxError()
+    {
+        final Properties props = initProperties();
+        try {
+            final String value = Utils.replaceProperties("${a", props);
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("Syntax error in property: ${a", ex.getMessage());
+            return;
+        }
+        assertTrue(false);
+    }
+

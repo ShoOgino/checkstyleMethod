@@ -1,0 +1,13 @@
+    public void testReplacePropertiesMissingProperty()
+    {
+        final Properties props = initProperties();
+        try {
+            final String value = Utils.replaceProperties("${c}", props);
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("Property ${c} has not been set", ex.getMessage());
+            return;
+        }
+        assertTrue(false);
+    }
+
