@@ -1,10 +1,12 @@
-    public void testLineBreakSingleChar()
+    public void testLineBreakCharArray()
     {
         final StringArrayReader o =
             new StringArrayReader(new String[] {"a", "bc"});
         try {
-            int a = o.read();
-            assertEquals('a', a);
+            char[] a = new char[1];
+            int count = o.read(a, 0, 1);
+            assertEquals(1, count);
+            assertEquals('a', a[0]);
             int nl1 = o.read();
             assertEquals('\n', nl1);
             int b = o.read();
