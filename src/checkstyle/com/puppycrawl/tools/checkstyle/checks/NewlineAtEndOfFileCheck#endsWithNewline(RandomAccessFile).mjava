@@ -1,0 +1,21 @@
+    /**
+     * Checks whether the content provided by the Reader ends with the platform
+     * specific line separator.
+     * @param aRandomAccessFile The reader for the content to check
+     * @return boolean Whether the content ends with a line separator
+     * @throws IOException When an IO error occurred while reading from the
+     *         provided reader
+     */
+    private boolean endsWithNewline(RandomAccessFile aRandomAccessFile)
+        throws IOException
+    {
+        final int len = mLineSeparator.length();
+        if (aRandomAccessFile.length() < len) {
+            return false;
+        }
+        aRandomAccessFile.seek(aRandomAccessFile.length() - len);
+        final byte lastBytes[] = new byte[len];
+        aRandomAccessFile.read(lastBytes);
+        return mLineSeparator.matches(lastBytes);
+    }
+

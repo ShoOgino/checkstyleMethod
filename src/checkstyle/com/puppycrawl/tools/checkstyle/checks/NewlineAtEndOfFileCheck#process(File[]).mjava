@@ -1,0 +1,38 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.FileSetCheck#process
+     */
+    public void process(File[] aFiles)
+    {
+        final File[] files = filter(aFiles);
+        final MessageDispatcher dispatcher = getMessageDispatcher();
+        for (int i = 0; i < files.length; i++) {
+            final File file = files[i];
+            final String path = file.getPath();
+            dispatcher.fireFileStarted(path);
+            RandomAccessFile randomAccessFile = null;
+            try {
+                randomAccessFile = new RandomAccessFile(file, "r");
+                if (!endsWithNewline(randomAccessFile)) {
+                    log(0, "noNewlineAtEOF", path);
+                }
+            }
+            catch (IOException e) {
+                logIOException(e);
+            }
+            finally {
+                if (randomAccessFile != null) {
+                    try {
+                        randomAccessFile.close();
+                    }
+                    catch (IOException e) {
+                        logIOException(e);
+                    }
+                }
+            }
+            final LocalizedMessages messageList = getMessageCollector();
+            final LocalizedMessage[] messages = messageList.getMessages();
+            dispatcher.fireErrors(path, messages);
+            dispatcher.fireFileFinished(path);
+        }
+    }
+

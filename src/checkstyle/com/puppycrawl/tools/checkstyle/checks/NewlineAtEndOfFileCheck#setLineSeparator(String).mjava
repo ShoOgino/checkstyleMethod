@@ -1,0 +1,19 @@
+    /**
+     * Sets the line separator to one of 'crlf', 'lf' or 'cr'.
+     * 
+     * @param aLineSeparator The line separator to set
+     * @throws IllegalArgumentException If the specified line separator is not 
+     *         one of 'crlf', 'lf' or 'cr'
+     */
+    public void setLineSeparator(String aLineSeparator)
+    {
+        AbstractOption option =
+            LineSeparatorOption.SYSTEM.decode(aLineSeparator);
+
+        if (option == null) {
+            throw new ConversionException("unable to parse " + aLineSeparator);
+        }
+
+        mLineSeparator = (LineSeparatorOption) option;
+    }
+

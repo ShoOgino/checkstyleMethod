@@ -1,0 +1,17 @@
+    /**
+     * Helper method to log an IO exception.
+     * @param aEx the exception that occured
+     */
+    private void logIOException(IOException aEx)
+    {
+        String[] args = null;
+        String key = "general.fileNotFound";
+        if (!(aEx instanceof FileNotFoundException)) {
+            args = new String[] {aEx.getMessage()};
+            key = "general.exception";
+        }
+        LocalizedMessage message =
+            new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE, key, args);
+        getMessageCollector().add(message);
+    }
+
