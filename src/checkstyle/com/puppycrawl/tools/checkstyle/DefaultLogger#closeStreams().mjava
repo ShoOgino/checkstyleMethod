@@ -3,19 +3,13 @@
      */
     protected void closeStreams()
     {
+        mInfoWriter.flush();
         if (mCloseInfo) {
-            mInfoWriter.flush();
-        }
-        else {
-            mInfoWriter.flush();
             mInfoWriter.close();
         }
 
+        mErrorWriter.flush();
         if (mCloseError) {
-            mErrorWriter.flush();
-        }
-        else {
-            mErrorWriter.flush();
             mErrorWriter.close();
         }
     }
