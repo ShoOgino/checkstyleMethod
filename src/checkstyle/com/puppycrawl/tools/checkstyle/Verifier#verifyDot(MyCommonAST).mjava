@@ -21,7 +21,9 @@
             // verify all characters before '.' are whitespace
             for (int i = 0; i < before; i++) {
                 if (!Character.isWhitespace(line.charAt(i))) {
-                    log(aAST.getLineNo(), "'.' is preceeded with whitespace.");
+                    log(aAST.getLineNo(),
+                        aAST.getColumnNo(),
+                        "'.' is preceeded with whitespace.");
                     break;
                 }
             }
