@@ -1,6 +1,10 @@
     /** @param aBasedir the base directory to strip off in filenames */
     public void setBasedir(String aBasedir)
     {
-        mBasedir = aBasedir;
+        // we use getAbsolutePath() instead of getCanonicalPath()
+        // because normalize() removes all . and .. so path
+        // will be canonical by default.
+        mBasedir =
+            FileUtils.newFileUtils().normalize(aBasedir).getAbsolutePath();
     }
 
