@@ -1,0 +1,16 @@
+    public void testScopes2() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
+        checkConfig.addAttribute("scope", Scope.PROTECTED.getName());
+        final String[] expected = {
+            "8:5: Missing a Javadoc comment.",
+            "9:5: Missing a Javadoc comment.",
+            "19:9: Missing a Javadoc comment.",
+            "20:9: Missing a Javadoc comment.",
+        };
+        verify(checkConfig,
+               getPath("javadoc" + File.separator +"InputNoJavadoc.java"),
+               expected);
+    }
+

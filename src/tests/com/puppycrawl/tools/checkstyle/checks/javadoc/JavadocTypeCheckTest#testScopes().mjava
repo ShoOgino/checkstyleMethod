@@ -1,0 +1,20 @@
+    public void testScopes() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        final String[] expected = {
+            "1: Missing a Javadoc comment.",
+            "13: Missing a Javadoc comment.",
+            "25: Missing a Javadoc comment.",
+            "37: Missing a Javadoc comment.",
+            "50: Missing a Javadoc comment.",
+            "61: Missing a Javadoc comment.",
+            "73: Missing a Javadoc comment.",
+            "85: Missing a Javadoc comment.",
+            "97: Missing a Javadoc comment.",
+        };
+        verify(checkConfig,
+               getPath("javadoc" + File.separator +"InputNoJavadoc.java"),
+               expected);
+    }
+

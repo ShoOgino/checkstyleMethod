@@ -1,27 +1,20 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
-        final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
-        final Scope typeScope =
-            ScopeUtils.inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
-        if (typeScope.isIn(mScope)) {
-            final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
-            if ((surroundingScope == null) || surroundingScope.isIn(mScope)) {
-                final FileContents contents = getFileContents();
-                final int lineNo = aAST.getLineNo();
-                final TextBlock cmt = contents.getJavadocBefore(lineNo);
-                if (cmt == null) {
-                    log(lineNo, "javadoc.missing");
-                }
-                else if (ScopeUtils.isOuterMostType(aAST)) {
-                    // don't check author/version for inner classes
-                    Vector tags = getJavadocTags(cmt);
-                    checkTag(lineNo, tags, "author",
-                             mAuthorFormatRE, mAuthorFormat);
-                    checkTag(lineNo, tags, "version",
-                             mVersionFormatRE, mVersionFormat);
-                }
+        if (shouldCheck(aAST)) {
+            final FileContents contents = getFileContents();
+            final int lineNo = aAST.getLineNo();
+            final TextBlock cmt = contents.getJavadocBefore(lineNo);
+            if (cmt == null) {
+                log(lineNo, "javadoc.missing");
+            }
+            else if (ScopeUtils.isOuterMostType(aAST)) {
+                // don't check author/version for inner classes
+                Vector tags = getJavadocTags(cmt);
+                checkTag(lineNo, tags, "author",
+                         mAuthorFormatRE, mAuthorFormat);
+                checkTag(lineNo, tags, "version",
+                         mVersionFormatRE, mVersionFormat);
             }
         }
     }

@@ -1,0 +1,23 @@
+    /**
+     * Whether we should check this node.
+     * @param aAST a given node.
+     * @return whether we should check a given node.
+     */
+    private boolean shouldCheck(final DetailAST aAST)
+    {
+        if (ScopeUtils.inCodeBlock(aAST)) {
+            return false;
+        }
+
+        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
+        final Scope scope =
+            ScopeUtils.inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
+        final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
+
+        return scope.isIn(mScope) && surroundingScope.isIn(mScope)
+            && ((mExcludeScope == null)
+                || !scope.isIn(mExcludeScope)
+                || !surroundingScope.isIn(mExcludeScope));
+    }
+

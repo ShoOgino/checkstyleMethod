@@ -4,29 +4,12 @@
      */
     public void visitToken(DetailAST aAST)
     {
-        if (!ScopeUtils.inCodeBlock(aAST)) {
-            final DetailAST mods =
-                aAST.findFirstToken(TokenTypes.MODIFIERS);
-            final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
-            final Scope variableScope =
-                ScopeUtils.inInterfaceBlock(aAST)
-                    ? Scope.PUBLIC
-                    : declaredScope;
+        if (shouldCheck(aAST)) {
+            final FileContents contents = getFileContents();
+            final TextBlock cmt =
+                contents.getJavadocBefore(aAST.getLineNo());
 
-            if (variableScope.isIn(mScope)) {
-                final Scope surroundingScope =
-                    ScopeUtils.getSurroundingScope(aAST);
-
-                if ((surroundingScope == null)
-                    || surroundingScope.isIn(mScope))
-                {
-                    final FileContents contents = getFileContents();
-                    final TextBlock cmt =
-                        contents.getJavadocBefore(aAST.getLineNo());
-
-                    checkComment(cmt);
-                }
-            }
+            checkComment(cmt);
         }
     }
 

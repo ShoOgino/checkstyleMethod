@@ -4,28 +4,15 @@
      */
     protected final void processAST(DetailAST aAST)
     {
-        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
-        final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
-        final Scope targetScope =
-            ScopeUtils.inInterfaceBlock(aAST)
-                ? Scope.PUBLIC
-                : declaredScope;
+        if (shouldCheck(aAST)) {
+            final FileContents contents = getFileContents();
+            final TextBlock cmt = contents.getJavadocBefore(aAST.getLineNo());
 
-        if (targetScope.isIn(mScope)) {
-            final Scope surroundingScope =
-                ScopeUtils.getSurroundingScope(aAST);
-
-            if (surroundingScope.isIn(mScope)) {
-                final FileContents contents = getFileContents();
-                final TextBlock cmt =
-                    contents.getJavadocBefore(aAST.getLineNo());
-
-                if (cmt == null) {
-                    log(aAST, "javadoc.missing");
-                }
-                else {
-                    checkComment(aAST, cmt);
-                }
+            if (cmt == null) {
+                log(aAST, "javadoc.missing");
+            }
+            else {
+                checkComment(aAST, cmt);
             }
         }
     }
