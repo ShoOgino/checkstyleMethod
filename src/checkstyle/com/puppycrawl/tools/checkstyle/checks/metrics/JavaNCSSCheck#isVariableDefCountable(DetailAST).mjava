@@ -1,0 +1,30 @@
+    /**
+     * Checks if a variable definition is countable.
+     *
+     * @param aAST the AST
+     * @return true if the variable definition is countable, false otherwise
+     */
+    private boolean isVariableDefCountable(DetailAST aAST)
+    {
+        boolean countable = false;
+
+        //count variable defs only if they are direct child to a slist or
+        // object block
+        int parentType = aAST.getParent().getType();
+
+        if (TokenTypes.SLIST == parentType
+            || TokenTypes.OBJBLOCK == parentType)
+        {
+            DetailAST prevSibling = aAST.getPreviousSibling();
+
+            //is countable if no previous sibling is found or
+            //the sibling is no COMMA.
+            //This is done because multiple assignment on one line are countes
+            // as 1
+            countable = prevSibling != null ? TokenTypes.COMMA != prevSibling
+                    .getType() : true;
+        }
+
+        return countable;
+    }
+

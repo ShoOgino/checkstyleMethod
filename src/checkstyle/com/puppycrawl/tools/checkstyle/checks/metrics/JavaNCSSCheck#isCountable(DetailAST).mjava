@@ -1,0 +1,24 @@
+    /**
+     * Checks if a token is countable for the ncss metric
+     *
+     * @param aAST
+     *            the AST
+     * @return true if the token is countable
+     */
+    private boolean isCountable(DetailAST aAST)
+    {
+        boolean countable = true;
+
+        int tokenType = aAST.getType();
+
+        //check if an expression is countable
+        if (TokenTypes.EXPR == tokenType) {
+            countable = isExpressionCountable(aAST);
+        }
+        //check if an variable definition is countable
+        else if (TokenTypes.VARIABLE_DEF == tokenType) {
+            countable = isVariableDefCountable(aAST);
+        }
+        return countable;
+    }
+

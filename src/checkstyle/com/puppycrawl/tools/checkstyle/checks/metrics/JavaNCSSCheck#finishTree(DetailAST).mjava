@@ -1,0 +1,15 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void finishTree(DetailAST aRootAST)
+    {
+        //pop counter from the stack
+        Counter counter = (Counter) mCounters.pop();
+
+        int count = counter.getCount();
+        if (count > mFileMax) {
+            log(aRootAST.getLineNo(), aRootAST.getColumnNo(), "ncss.file",
+                    new Integer(count), new Integer(mMethodMax));
+        }
+    }
+
