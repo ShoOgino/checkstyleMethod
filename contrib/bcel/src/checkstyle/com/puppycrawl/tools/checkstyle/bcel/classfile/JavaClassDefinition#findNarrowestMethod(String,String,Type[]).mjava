@@ -1,0 +1,34 @@
+    /**
+     * Finds the narrowest method that is compatible with a method.
+     * An invocation of the given method can be resolved as an invocation
+     * of the narrowest method.
+     * @param aClassName the class for the method.
+     * @param aMethodName the name of the method.
+     * @param aArgTypes the types for the method.
+     * @return the narrowest compatible method.
+     */
+    public MethodDefinition findNarrowestMethod(
+        String aClassName,
+        String aMethodName,
+        Type[] aArgTypes)
+    {
+        MethodDefinition result = null;
+        final String javaClassName = mJavaClass.getClassName();
+        if (Repository.instanceOf(aClassName, javaClassName)) {
+            // check all
+            for (int i = 0; i < mMethodDefs.length; i++) {
+                // TODO: check access privileges
+                if (mMethodDefs[i].isCompatible(aMethodName, aArgTypes)) {
+                    if (result == null) {
+                        result = mMethodDefs[i];
+                    }
+                    //else if (mMethodDefs[i].isAsNarrow(result)) {
+                    else if (result.isCompatible(mMethodDefs[i])) {
+                        result = mMethodDefs[i];
+                    }
+                }
+            }
+        }
+        return result;
+    }
+

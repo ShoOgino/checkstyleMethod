@@ -1,0 +1,23 @@
+    /**
+     * Creates a JavaClassDefinition from a JavaClass.
+     * @param aJavaClass the JavaClass for the definition.
+     */
+    public JavaClassDefinition(JavaClass aJavaClass)
+    {
+        mJavaClass = aJavaClass;
+
+        // store method definitions
+        final Method[] methods = aJavaClass.getMethods();
+        mMethodDefs = new MethodDefinition[methods.length];
+        for (int i = 0; i < methods.length; i++) {
+            mMethodDefs[i] = new MethodDefinition(methods[i]);
+        }
+
+        // store field definitions
+        final Field[] fields = aJavaClass.getFields();
+        mFieldDefs = new HashMap(fields.length);
+        for (int i = 0; i < fields.length; i++) {
+            mFieldDefs.put(fields[i].getName(), new FieldDefinition(fields[i]));
+        }
+    }
+

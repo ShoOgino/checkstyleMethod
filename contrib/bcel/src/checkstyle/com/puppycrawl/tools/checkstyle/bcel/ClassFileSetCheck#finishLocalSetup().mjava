@@ -1,0 +1,11 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Configurable */
+    public void finishLocalSetup()
+    {
+        DefaultContext checkContext = new DefaultContext();
+        checkContext.add("classLoader", mClassLoader);
+        checkContext.add("messages", getMessageCollector());
+        checkContext.add("severity", getSeverity());
+
+        mChildContext = checkContext;
+    }
+

@@ -1,0 +1,12 @@
+    /**
+     * @see org.apache.bcel.classfile.Visitor
+     */
+    public void visitConstantPool(ConstantPool aConstantPool)
+    {
+        for (Iterator iter = mVisitors.iterator(); iter.hasNext();) {
+            IDeepVisitor visitor = (IDeepVisitor) iter.next();
+            Visitor v = visitor.getClassFileVisitor();
+            aConstantPool.accept(v);
+        }
+    }
+

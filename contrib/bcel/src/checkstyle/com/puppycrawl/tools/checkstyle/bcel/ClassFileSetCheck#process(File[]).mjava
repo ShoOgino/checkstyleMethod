@@ -1,0 +1,27 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.FileSetCheck
+     */
+    public void process(File[] aFiles)
+    {
+        registerVisitors();
+
+        // get all the JavaClasses in the files
+        final Set javaClasses = extractJavaClasses(aFiles);
+
+        visitSet(javaClasses);
+
+        // walk each Java class parse tree
+        final JavaClassWalker walker = JavaClassWalker.getInstance();
+        walker.setVisitor(getTreeVisitor());
+        final Iterator it = javaClasses.iterator();
+        while (it.hasNext()) {
+            final JavaClass clazz = (JavaClass) it.next();
+            visitObject(clazz);
+            walker.walk(clazz);
+            leaveObject(clazz);
+        }
+
+        leaveSet(javaClasses);
+        fireErrors();
+    }
+

@@ -1,0 +1,20 @@
+    /**
+     * Determine whether this method definition has a reference from a class or
+     * a superclass.
+     * @param aJavaClass the JavaClass to check against.
+     * @return true if there is a reference to this method definition from a
+     * aJavaClass or a superclass of aJavaClass.
+     */
+    public boolean hasReference(JavaClass aJavaClass)
+    {
+        final Iterator it = getReferences().iterator();
+        while (it.hasNext()) {
+            final InvokeReference invokeRef = (InvokeReference) it.next();
+            final String invokeClassName = invokeRef.getClassName();
+            if (Repository.instanceOf(aJavaClass, invokeClassName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+

@@ -1,0 +1,37 @@
+    /**
+     * Determines whether there is reference to a given Method in this JavaClass
+     * definition or a definition in a superclass.
+     * @param aMethodDef the Method to check.
+     * @param aReferenceDAO reference DAO.
+     * @return true if there is a reference to the method of aMethodDef in
+     * this JavaClass or a superclass.
+     */
+    public boolean hasReference(
+        MethodDefinition aMethodDef,
+        ReferenceDAO aReferenceDAO)
+     {
+         final String methodName = aMethodDef.getName();
+         final Type[] argTypes = aMethodDef.getArgumentTypes();
+        
+         // search the inheritance hierarchy
+         JavaClass currentJavaClass = getJavaClass();
+         while (currentJavaClass != null) {
+             final JavaClassDefinition javaClassDef =
+                 aReferenceDAO.findJavaClassDef(currentJavaClass);
+             if (javaClassDef != null) {
+                 final MethodDefinition methodDef =
+                     javaClassDef.findNarrowestMethod(
+                         getJavaClass().getClassName(),
+                         methodName,
+                         argTypes);
+                 if ((methodDef != null)
+                    && (methodDef.hasReference(getJavaClass())))
+                 {
+                     return true;
+                 }
+             }
+             currentJavaClass = currentJavaClass.getSuperClass();
+         }       
+         return false;
+     }
+

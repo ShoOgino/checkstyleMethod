@@ -1,0 +1,14 @@
+    /**
+     * Deep visit of an InstructionHandle
+     * @param aInstruction the InstructionHandle
+     */
+    private void visitInstructionHandle(InstructionHandle aInstruction)
+    {
+        for (Iterator iter = mVisitors.iterator(); iter.hasNext();) {
+            final IDeepVisitor visitor = (IDeepVisitor) iter.next();
+            org.apache.bcel.generic.Visitor v =
+                visitor.getGenericVisitor();
+            aInstruction.accept(v);
+        }
+    }
+

@@ -1,0 +1,12 @@
+    /**
+     * Notify all listeners about the errors in a file.
+     * Calls <code>MessageDispatcher.fireErrors()</code> with
+     * all logged errors and than clears errors' list.
+     */
+    private void fireErrors()
+    {
+        final LocalizedMessage[] errors = getMessageCollector().getMessages();
+        getMessageCollector().reset();
+        getMessageDispatcher().fireErrors("", errors);
+    }
+

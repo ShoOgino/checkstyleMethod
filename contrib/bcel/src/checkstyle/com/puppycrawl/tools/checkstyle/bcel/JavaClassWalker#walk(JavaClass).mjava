@@ -1,0 +1,12 @@
+    /**
+     * Traverses a JavaClass parse tree and accepts all registered
+     * visitors.
+     * @param aJavaClass the root of the tree.
+     */
+    public void walk(JavaClass aJavaClass)
+    {
+        DescendingVisitor visitor =
+            new DescendingVisitor(aJavaClass, mVisitor);
+        aJavaClass.accept(visitor);
+    }
+

@@ -1,0 +1,15 @@
+   /**
+     * @see org.apache.bcel.classfile.Visitor#visitCode
+     */
+    public void visitCode(Code aCode)
+    {
+        // perform a deep visit
+        final byte[] code = aCode.getCode();
+        final InstructionList list = new InstructionList(code);
+        final Iterator it = list.iterator();
+        for (Iterator iter = list.iterator(); iter.hasNext();) {
+            InstructionHandle instruction = (InstructionHandle) iter.next();
+            visitInstructionHandle(instruction);
+        }
+    }
+

@@ -1,0 +1,8 @@
+    /** @see AbstractReferenceCheck */
+    public boolean ignore(String aClassName, String aMethodName)
+    {
+        return (super.ignore(aClassName, aMethodName)
+            || aMethodName.equals("<init>")
+            || aMethodName.equals("<clinit>"));
+    }
+
