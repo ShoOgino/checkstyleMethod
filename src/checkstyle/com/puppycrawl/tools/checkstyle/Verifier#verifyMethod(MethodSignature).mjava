@@ -6,9 +6,10 @@
     {
         // no need to check constructor names
         if (!aSig.isConstructor() &&
-            !mConfig.getMethodRegexp().match(aSig.getName()))
+            !mConfig.getMethodRegexp().match(aSig.getName().getText()))
         {
-            log(aSig.getLineNo(),
+            log(aSig.getName().getLineNo(),
+                aSig.getName().getColumnNo(),
                 "method name '" + aSig.getName() +
                 "' must match pattern '" + mConfig.getMethodPat() + "'.");
         }
