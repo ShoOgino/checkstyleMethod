@@ -1,0 +1,18 @@
+    /**
+     * Test that the RE deserialization mechanism works for one example.
+     */
+    public void testRegexpDesrialization()
+        throws Exception
+    {
+        Configuration configOrig = new Configuration();
+        configOrig.setTypePat("xyz");
+
+        Configuration configCopy = copyBySerialization(configOrig);
+        assertNotNull(configCopy);
+
+        // test that the general deserialization mechanism for RE fields works
+        RE typeRegexp = configCopy.getTypeRegexp();
+        assertTrue(typeRegexp.match("xyz"));
+        assertTrue(!typeRegexp.match("DefaultCompatibleTypeFormat"));
+    }
+
