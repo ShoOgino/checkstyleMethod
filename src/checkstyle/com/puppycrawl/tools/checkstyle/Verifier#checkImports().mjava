@@ -17,8 +17,8 @@
             else if (fromPackage(imp.getText(), mPkgName)) {
                 log(imp.getLineNo(), "Redundant import from the same package.");
             }
-            else if (!imp.getText().endsWith(".*") &&
-                     !mReferenced.contains(basename(imp.getText())))
+            else if (!imp.getText().endsWith(".*")
+                     && !mReferenced.contains(basename(imp.getText())))
             {
                 log(imp.getLineNo(), "Unused import - " + imp.getText());
             }

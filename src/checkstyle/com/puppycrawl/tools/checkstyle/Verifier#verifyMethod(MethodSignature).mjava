@@ -5,13 +5,13 @@
     void verifyMethod(MethodSignature aSig)
     {
         // no need to check constructor names
-        if (!aSig.isConstructor() &&
-            !mConfig.getMethodRegexp().match(aSig.getName().getText()))
+        if (!aSig.isConstructor()
+            && !mConfig.getMethodRegexp().match(aSig.getName().getText()))
         {
             log(aSig.getName().getLineNo(),
                 aSig.getName().getColumnNo(),
-                "method name '" + aSig.getName().getText() +
-                "' must match pattern '" + mConfig.getMethodPat() + "'.");
+                "method name '" + aSig.getName().getText()
+                + "' must match pattern '" + mConfig.getMethodPat() + "'.");
         }
 
         // Always verify the parameters are ok
@@ -49,8 +49,8 @@
         else {
             final List tags = getMethodTags(jd, aSig.getFirstLineNo() - 1);
             // Check for only one @see tag
-            if ((tags.size() != 1) ||
-                !((JavadocTag) tags.get(0)).isSeeTag())
+            if ((tags.size() != 1)
+                || !((JavadocTag) tags.get(0)).isSeeTag())
             {
                 checkParamTags(tags, aSig.getParams());
                 checkThrowsTags(tags, aSig.getThrows());
