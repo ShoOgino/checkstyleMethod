@@ -6,7 +6,7 @@
     {
         final String stripped = getStrippedFileName(aFileName);
         final AuditEvent evt = new AuditEvent(this, stripped);
-        if (mFilterChain.accept(evt)) {
+        if (mFilters.accept(evt)) {
             final Iterator it = mListeners.iterator();
             while (it.hasNext()) {
                 final AuditListener listener = (AuditListener) it.next();
