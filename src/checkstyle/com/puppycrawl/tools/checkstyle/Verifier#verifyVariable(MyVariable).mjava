@@ -23,13 +23,6 @@
         final Scope variableScope =
             inInterfaceBlock() ? Scope.PUBLIC : declaredScope;
 
-        if (inCheckScope(variableScope)
-            && (getJavadocBefore(aVar.getStartLineNo() - 1) == null))
-        {
-            mMessages.add(aVar.getLineNo(), aVar.getColumnNo() - 1,
-                          "javadoc.missing");
-        }
-
         // Check correct format
         if (inInterfaceBlock()) {
             // The only declarations allowed in interfaces are all static final,

@@ -1,0 +1,23 @@
+    private boolean inCodeBlock(DetailAST aAST)
+    {
+        boolean retVal = false;
+
+        // Loop up looking for a containing code block
+        for (DetailAST token = aAST.getParent();
+             token != null;
+             token = token.getParent())
+        {
+            final int type = token.getType();
+            if ((type == TokenTypes.METHOD_DEF)
+                || (type == TokenTypes.CTOR_DEF)
+                || (type == TokenTypes.INSTANCE_INIT)
+                || (type == TokenTypes.STATIC_INIT))
+            {
+                retVal = true;
+                break;
+            }
+        }
+
+        return retVal;
+    }
+

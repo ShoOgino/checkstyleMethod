@@ -1,0 +1,25 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        if (!inCodeBlock(aAST)) {
+            final DetailAST mods =
+                Utils.findFirstToken(aAST.getFirstChild(),
+                                     TokenTypes.MODIFIERS);
+            final Scope declaredScope = getScopeFromMods(mods);
+            final Scope variableScope =
+                inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
+            if (variableScope.isIn(mScope)) {
+                final Scope surroundingScope = getSurroundingScope(aAST);
+                if (surroundingScope.isIn(mScope)) {
+                    final FileContents contents = getFileContents();
+                    final String[] cmt =
+                        contents.getJavadocBefore(aAST.getLineNo());
+                    if (cmt == null) {
+                        log(aAST.getLineNo(), aAST.getColumnNo(),
+                            "javadoc.missing");
+                    }
+                }
+            }
+        }
+    }
+

@@ -1,0 +1,24 @@
+    private static Scope getScopeFromMods(DetailAST aMods)
+    {
+        Scope retVal = Scope.PACKAGE; // default scope
+        for (AST token = aMods.getFirstChild();
+            token != null;
+            token = token.getNextSibling())
+        {
+            if ("public".equals(token.getText())) {
+                retVal = Scope.PUBLIC;
+                break;
+            }
+            else if ("protected".equals(token.getText())) {
+                retVal = Scope.PROTECTED;
+                break;
+            }
+            else if ("private".equals(token.getText())) {
+                retVal = Scope.PRIVATE;
+                break;
+            }
+        }
+
+        return retVal;
+    }
+

@@ -1,0 +1,22 @@
+    private boolean inInterfaceBlock(DetailAST aAST)
+    {
+        boolean retVal = false;
+
+        // Loop up looking for a containing interface block
+        for (DetailAST token = aAST.getParent();
+             token != null;
+             token = token.getParent())
+        {
+            final int type = token.getType();
+            if (type == TokenTypes.CLASS_DEF) {
+                break; // in a class
+            }
+            else if (type == TokenTypes.INTERFACE_DEF) {
+                retVal = true;
+                break;
+            }
+        }
+
+        return retVal;
+    }
+

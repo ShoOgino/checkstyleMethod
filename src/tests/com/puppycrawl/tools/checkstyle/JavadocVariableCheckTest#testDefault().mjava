@@ -1,0 +1,13 @@
+    public void testDefault()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(JavadocVariableCheck.class.getName());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputTags.java");
+        final String[] expected = {
+            "11:5: Missing a Javadoc comment.",
+        };
+        verify(c, fname, expected);
+    }
+

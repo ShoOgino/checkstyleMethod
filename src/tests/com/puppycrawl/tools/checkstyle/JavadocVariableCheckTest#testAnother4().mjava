@@ -1,0 +1,14 @@
+    public void testAnother4()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(JavadocVariableCheck.class.getName());
+        checkConfig.addProperty("scope", Scope.PUBLIC.getName());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputPublicOnly.java");
+        final String[] expected = {
+            "46:5: Missing a Javadoc comment.",
+        };
+        verify(c, fname, expected);
+    }
+

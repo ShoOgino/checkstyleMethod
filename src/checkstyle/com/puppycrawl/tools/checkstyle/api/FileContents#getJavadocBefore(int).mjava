@@ -1,0 +1,18 @@
+    /**
+     * Returns the Javadoc comment before the specified line. null is none.
+     * @return the Javadoc comment, or <code>null</code> if none
+     * @param aLineNo the line number to check before
+     **/
+    public String[] getJavadocBefore(int aLineNo)
+    {
+        // Lines start at 1 to the callers perspective, so nee to take off 2
+        int lineNo = aLineNo - 2;
+
+        // skip blank lines
+        while ((lineNo > 0) && (lineIsBlank(lineNo) || lineIsComment(lineNo))) {
+            lineNo--;
+        }
+
+        return (String[]) mJavadocComments.get(new Integer(lineNo));
+    }
+
