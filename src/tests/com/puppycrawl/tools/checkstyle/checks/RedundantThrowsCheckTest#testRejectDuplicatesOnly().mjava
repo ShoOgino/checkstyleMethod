@@ -1,0 +1,12 @@
+    public void testRejectDuplicatesOnly() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RedundantThrowsCheck.class);
+        checkConfig.addAttribute("allowSubclasses", "true");
+        checkConfig.addAttribute("allowUnchecked", "true");
+        final String[] expected = {
+            "19:29: Redundant throws: 'java.io.IOException' listed more then one time.",
+        };
+        verify(checkConfig, getPath("InputRedundantThrows.java"), expected);
+    }
+

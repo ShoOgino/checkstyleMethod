@@ -1,0 +1,23 @@
+    /**
+     * Checks exceptions declared in throws for a method or constructor.
+     * @param aAST the tree node for the method or constructor.
+     */
+    private void processMethod(DetailAST aAST) 
+    {
+        final List knownExcs = new LinkedList();
+        final DetailAST throwsAST =
+            aAST.findFirstToken(TokenTypes.LITERAL_THROWS);
+        if (throwsAST != null) {
+            DetailAST child = (DetailAST) throwsAST.getFirstChild();
+            while (child != null) {
+                if ((child.getType() == TokenTypes.IDENT)
+                    || (child.getType() == TokenTypes.DOT))
+                {
+                    final FullIdent fi = FullIdent.createFullIdent(child);
+                    checkException(fi, knownExcs);
+                }
+                child = (DetailAST) child.getNextSibling();
+            }
+        }
+    }
+

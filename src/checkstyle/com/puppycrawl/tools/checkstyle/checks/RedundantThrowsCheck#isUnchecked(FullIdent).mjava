@@ -1,0 +1,25 @@
+    /**
+     * Is exception is unchecked (subclass of <code>RuntimeException</code>
+     * or <code>Error</code>
+     *
+     * @param aException <code>FullIdent</code> of exception to check
+     * @return true  if exception is unchecked
+     *         false if exception is checked
+     */
+    private boolean isUnchecked(FullIdent aException) 
+    {
+        final ClassResolver cr = getClassResolver();
+        try {
+            final Class clazz = cr.resolve(aException.getText());
+            return (RuntimeException.class.isAssignableFrom(clazz)
+                    || Error.class.isAssignableFrom(clazz));
+        }
+        catch (ClassNotFoundException e) {
+            log(aException.getLineNo(), aException.getColumnNo(),
+                "redundant.throws.classInfo",
+                aException.getText());
+        }
+        // return false to prefent from additional errors
+        return false;
+    }
+
