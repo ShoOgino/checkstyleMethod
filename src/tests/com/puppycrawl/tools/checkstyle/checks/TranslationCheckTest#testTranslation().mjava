@@ -1,0 +1,14 @@
+    public void testTranslation()
+         throws Exception
+    {
+        final Configuration checkConfig = createCheckConfig(TranslationCheck.class);
+        final String[] expected = {
+            "0: Key 'only.english' missing."
+        };
+        verify(
+            createChecker(checkConfig),
+            getPath("InputScopeAnonInner.java"),
+            getPath("messages_de.properties"),
+            expected);
+    }
+

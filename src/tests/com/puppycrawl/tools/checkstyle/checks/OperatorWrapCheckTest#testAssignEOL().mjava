@@ -3,11 +3,9 @@
     {
         checkConfig.addAttribute("tokens", "ASSIGN");
         checkConfig.addAttribute("option", OperatorWrapOption.EOL.toString());
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputOpWrap.java");
         final String[] expected = {
             "33:13: '=' should be on the previous line.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputOpWrap.java"), expected);
     }
 

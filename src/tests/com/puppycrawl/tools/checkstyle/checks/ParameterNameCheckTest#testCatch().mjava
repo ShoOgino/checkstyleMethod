@@ -4,10 +4,8 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(ParameterNameCheck.class);
         checkConfig.addAttribute("format", "^NO_WAY_MATEY$");
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputLeftCurlyOther.java");
         final String[] expected = {
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputLeftCurlyOther.java"), expected);
     }
 

@@ -2,13 +2,13 @@
          throws Exception
     {
         Configuration checkConfig = createCheckConfig(PackageHtmlCheck.class);
-        Checker c = createChecker(checkConfig);
-        final String packageHtmlPath = getPath("package.html");
-        final String filepath = getPath("InputScopeAnonInner.java");
-
         final String[] expected = {
             "0: Missing package documentation file.",
         };
-        verify(c, filepath, packageHtmlPath, expected);
+        verify(
+            createChecker(checkConfig),
+            getPath("InputScopeAnonInner.java"),
+            getPath("package.html"),
+            expected);
     }
 
