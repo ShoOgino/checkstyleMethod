@@ -5,6 +5,8 @@
     public final void contextualize(Context aContext)
         throws CheckstyleException
     {
+        BeanUtilsBean beanUtils = createBeanUtilsBean();
+
         // TODO: debug log messages
         final String[] attributes = aContext.getAttributeNames();
 
@@ -13,7 +15,7 @@
             final Object value = aContext.get(key);
 
             try {
-                BeanUtils.copyProperty(this, key, value);
+                beanUtils.copyProperty(this, key, value);
             }
             catch (InvocationTargetException e) {
                 // TODO: log.debug("The bean " + this.getClass()
