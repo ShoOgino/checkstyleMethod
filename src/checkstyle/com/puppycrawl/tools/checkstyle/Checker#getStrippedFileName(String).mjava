@@ -1,0 +1,20 @@
+    /**
+     * Create a stripped down version of a filename.
+     * @param aFileName the original filename
+     * @return the filename where an initial prefix of basedir is stripped
+     */
+    private String getStrippedFileName(final String aFileName)
+    {
+        final String stripped;
+        final String basedir = mConfig.getBasedir();
+        if ((basedir == null) || !aFileName.startsWith(basedir)) {
+            stripped = aFileName;
+        }
+        else {
+            // making the assumption that there is text after basedir
+            final int skipSep = basedir.endsWith(File.separator) ? 0 : 1;
+            stripped = aFileName.substring(basedir.length() + skipSep);
+        }
+        return stripped;
+    }
+

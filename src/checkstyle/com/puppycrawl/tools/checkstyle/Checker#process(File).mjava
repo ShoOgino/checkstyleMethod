@@ -12,21 +12,9 @@
             return 0;
         }
 
-        // Create a stripped down version
-        final String stripped;
-        final String basedir = mConfig.getBasedir();
-        if ((basedir == null) || !fileName.startsWith(basedir)) {
-            stripped = fileName;
-        }
-        else {
-            // making the assumption that there is text after basedir
-            final int skipSep = basedir.endsWith(File.separator) ? 0 : 1;
-            stripped = fileName.substring(basedir.length() + skipSep);
-        }
-
         mMessages.reset();
         try {
-            fireFileStarted(stripped);
+            fireFileStarted(fileName);
             final String[] lines = Utils.getLines(fileName);
             final FileContents contents = new FileContents(fileName, lines);
             final DetailAST rootAST = TreeWalker.parse(contents);
@@ -57,10 +45,10 @@
             mCache.checkedOk(fileName, timestamp);
         }
         else {
-            fireErrors(stripped, mMessages.getMessages());
+            fireErrors(fileName, mMessages.getMessages());
         }
 
-        fireFileFinished(stripped);
+        fireFileFinished(fileName);
         return mMessages.size();
     }
 
