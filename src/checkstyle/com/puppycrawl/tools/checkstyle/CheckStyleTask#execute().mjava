@@ -32,6 +32,14 @@
                 context.add("classloader", loader);
 
                 c = new Checker();
+                
+                //load the set of package names
+                if (mPackageNamesFile != null) {
+                    ModuleFactory moduleFactory =
+                        PackageNamesLoader.loadModuleFactory(
+                        mPackageNamesFile.getAbsolutePath());
+                    c.setModuleFactory(moduleFactory);
+                }
                 c.contextualize(context);
                 c.configure(config);
 
