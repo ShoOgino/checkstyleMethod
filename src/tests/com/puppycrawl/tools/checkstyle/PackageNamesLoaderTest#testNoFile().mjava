@@ -1,0 +1,14 @@
+    public void testNoFile()
+        throws CheckstyleException
+    {
+        try {
+            String[] pkgNames = PackageNamesLoader.loadPackageNames("NoFile");
+            fail("Loaded non-existant file.");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("CheckstyleException.message.",
+                "unable to find NoFile",
+                ex.getMessage());
+        }
+    }
+

@@ -1,0 +1,14 @@
+    private void validatePackageNames(String[] pkgNames)
+    {
+        String[] checkstylePackages = {
+            "com.puppycrawl.tools.checkstyle.",
+            "com.puppycrawl.tools.checkstyle.checks."
+        };
+        assertEquals("pkgNames.length.", checkstylePackages.length,
+            pkgNames.length);
+        Set checkstylePackagesSet =
+            new HashSet(Arrays.asList(checkstylePackages));
+        Set pkgNamesSet = new HashSet(Arrays.asList(pkgNames));
+        assertEquals("names set.", checkstylePackagesSet, pkgNamesSet); 
+    }
+
