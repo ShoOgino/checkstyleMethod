@@ -1,0 +1,31 @@
+    /**
+     * Checks that each java file in the fileset has a package.html sibling.
+     * @param aFiles a set of files
+     * @return the number of missing package.html files
+     */
+    public int process(File[] aFiles)
+    {
+        int missing = 0;
+        Set directories = new HashSet();
+        for (int i = 0; i < aFiles.length; i++) {
+            File file = aFiles[i];
+            if (file.getName().endsWith(".java")) {
+                File dir = file.getParentFile();
+                directories.add(dir); // duplicates are handled automatically
+            }
+        }
+        for (Iterator it = directories.iterator(); it.hasNext();) {
+            File dir = (File) it.next();
+            File packageHtml = new File(dir, "package.html");
+            // TODO: fireFileStarted
+            if (!packageHtml.exists()) {
+                // TODO: log error
+                System.out.println("package.html missing");
+                missing += 1;
+            }
+            // TODO: fireFileFinished
+        }
+
+        return missing;
+    }
+
