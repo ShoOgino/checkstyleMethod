@@ -73,6 +73,10 @@
             closeOut = false;
         }
 
+        // Get the file extension
+        final String javaExtn =
+            "." + (line.hasOption("e") ? line.getOptionValue("e") : "java");
+        
         // create the appropriate listener
         final String format =
             line.hasOption("f") ? line.getOptionValue("f") : "plain";
@@ -95,7 +99,7 @@
         if (line.hasOption("r")) {
             final String[] values = line.getOptionValues("r");
             for (int i = 0; i < values.length; i++) {
-                traverse(new File(values[i]), files);
+                traverse(new File(values[i]), files, javaExtn);
             }
         }
 
