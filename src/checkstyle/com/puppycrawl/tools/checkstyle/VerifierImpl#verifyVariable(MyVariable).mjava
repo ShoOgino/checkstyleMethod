@@ -1,6 +1,10 @@
     /** @see Verifier **/
-    public void verifyVariable(MyVariable aVar, boolean aInInterface)
+    public void verifyVariable(MyVariable aVar)
     {
+        if (inMethodBlock()) {
+            return;
+        }
+
         final Scope declaredScope =
             aVar.getModifierSet().getVisibilityScope();
         final Scope variableScope =
@@ -14,7 +18,7 @@
         }
 
         // Check correct format
-        if (aInInterface) {
+        if (inInterfaceBlock()) {
             // The only declarations allowed in interfaces are all static final,
             // even if not declared that way.
             checkVariable(aVar,
@@ -23,11 +27,6 @@
         }
         else {
             final MyModifierSet mods = aVar.getModifierSet();
-
-            // Logic to detect unused variables
-            //if (mods.containsPrivate()) {
-            //    System.out.println("Need to check for " + aVar.getText());
-            //}
 
             if (mods.containsStatic()) {
                 if (mods.containsFinal()) {

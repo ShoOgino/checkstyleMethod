@@ -3,6 +3,13 @@
                                     MyCommonAST aReturnType,
                                     MethodSignature aSig)
     {
+        // Always verify the parameters are ok
+        for (Iterator it = aSig.getParams().iterator(); it.hasNext();) {
+            verifyParameter((LineText)it.next());
+        }
+
+
+        // now check the javadoc
         final Scope methodScope =
             inInterfaceBlock() ? Scope.PUBLIC : aMods.getVisibilityScope();
 
@@ -18,7 +25,7 @@
 
         final boolean isFunction = (aReturnType == null)
             ? false
-            : !"void".equals(aReturnType.getFirstChild().getText());
+            : !"void".equals(aReturnType.getText().trim());
 
         final String[] jd = getJavadocBefore(lineNo - 1);
         if (jd == null) {

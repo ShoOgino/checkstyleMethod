@@ -24,9 +24,9 @@
         // to implement this we search up the scope stack
         // that all stack elements are also in configScope
 
-        Iterator scopeIterator = mInScope.iterator();
+        final Iterator scopeIterator = mInScope.iterator();
         while (retVal && scopeIterator.hasNext()) {
-            Scope stackScope = (Scope) scopeIterator.next();
+            final Scope stackScope = (Scope) scopeIterator.next();
             retVal = stackScope.isIn(configScope);
         }
         return retVal;
