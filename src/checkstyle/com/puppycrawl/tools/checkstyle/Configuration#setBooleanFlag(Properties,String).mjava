@@ -1,0 +1,18 @@
+    /**
+     * Set a boolean flag from a property set.
+     * @param aProps the properties set to extract flag from
+     * @param aName name of the flag to extract
+     */
+    private void setBooleanFlag(Properties aProps, String aName)
+    {
+        String strRep = aProps.getProperty(aName);
+        if (strRep != null) {
+            strRep = strRep.toLowerCase().trim();
+            if (strRep.equals("true") || strRep.equals("yes")
+                || strRep.equals("on"))
+            {
+                setBooleanFlag(aName, true);
+            }
+        }
+    }
+

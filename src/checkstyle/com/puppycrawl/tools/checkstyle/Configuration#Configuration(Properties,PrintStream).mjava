@@ -36,41 +36,24 @@
 
         setAllowTabs(getBooleanProperty(aProps, ALLOW_TABS_PROP, mAllowTabs));
         setTabWidth(getIntProperty(aProps, aLog, TAB_WIDTH_PROP, TAB_WIDTH));
-        setAllowProtected(
-            getBooleanProperty(aProps, ALLOW_PROTECTED_PROP, mAllowProtected));
-        setAllowPackage(
-            getBooleanProperty(aProps, ALLOW_PACKAGE_PROP, mAllowPackage));
-        setAllowNoAuthor(
-            getBooleanProperty(aProps, ALLOW_NO_AUTHOR_PROP, mAllowNoAuthor));
+        setBooleanFlag(aProps, ALLOW_PROTECTED_PROP);
+        setBooleanFlag(aProps, ALLOW_PACKAGE_PROP);
+        setBooleanFlag(aProps, ALLOW_NO_AUTHOR_PROP);
         setJavadocScope(
             Scope.getInstance(aProps.getProperty(JAVADOC_CHECKSCOPE_PROP,
                                                  Scope.PRIVATE.getName())));
-        setRequirePackageHtml(getBooleanProperty(aProps,
-                                                 REQUIRE_PACKAGE_HTML_PROP,
-                                                 mRequirePackageHtml));
-        setIgnoreImports(
-            getBooleanProperty(aProps, IGNORE_IMPORTS_PROP, mIgnoreImports));
+        setBooleanFlag(aProps, REQUIRE_PACKAGE_HTML_PROP);
+        setBooleanFlag(aProps, IGNORE_IMPORTS_PROP);
         setIllegalImports(
             aProps.getProperty(ILLEGAL_IMPORTS_PROP, ILLEGAL_IMPORTS));
         setIllegalInstantiations(aProps.getProperty(ILLEGAL_INSTANTIATIONS_PROP,
                                                    ILLEGAL_INSTANTIATIONS));
-        setIgnoreWhitespace(getBooleanProperty(aProps,
-                                               IGNORE_WHITESPACE_PROP,
-                                               mIgnoreWhitespace));
-        setIgnoreCastWhitespace(getBooleanProperty(aProps,
-                                                   IGNORE_CAST_WHITESPACE_PROP,
-                                                   mIgnoreCastWhitespace));
-        setIgnoreOpWrap(getBooleanProperty(aProps,
-                                           IGNORE_OP_WRAP_PROP,
-                                           mIgnoreOpWrap));
-        setIgnoreBraces(getBooleanProperty(aProps,
-                                           IGNORE_BRACES_PROP,
-                                           mIgnoreBraces));
-        setIgnoreLongEll(getBooleanProperty(aProps,
-                                            IGNORE_LONG_ELL_PROP,
-                                            mIgnoreLongEll));
-        setIgnorePublicInInterface(getBooleanProperty(
-            aProps, IGNORE_PUBLIC_IN_INTERFACE_PROP, mIgnorePublicInInterface));
+        setBooleanFlag(aProps, IGNORE_WHITESPACE_PROP);
+        setBooleanFlag(aProps, IGNORE_CAST_WHITESPACE_PROP);
+        setBooleanFlag(aProps, IGNORE_OP_WRAP_PROP);
+        setBooleanFlag(aProps, IGNORE_BRACES_PROP);
+        setBooleanFlag(aProps, IGNORE_LONG_ELL_PROP);
+        setBooleanFlag(aProps, IGNORE_PUBLIC_IN_INTERFACE_PROP);
         setCacheFile(aProps.getProperty(CACHE_FILE_PROP));
         setIgnoreImportLength(getBooleanProperty(
             aProps, IGNORE_IMPORT_LENGTH_PROP, mIgnoreImportLength));
