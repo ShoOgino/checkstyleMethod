@@ -14,8 +14,16 @@
         final String line = mLines[aLineNo - 1];
         final int after = aColNo - 1;
         if (after < line.length()) {
-            if (Character.isWhitespace(line.charAt(after))) {
+            if ((PadOption.NOSPACE == mConfig.getParenPadOption())
+                && (Character.isWhitespace(line.charAt(after))))
+            {
                 mMessages.add(aLineNo, after, "ws.followed", "(");
+            }
+            else if ((PadOption.SPACE == mConfig.getParenPadOption())
+                     && !Character.isWhitespace(line.charAt(after))
+                     && (line.charAt(after) != ')'))
+            {
+                mMessages.add(aLineNo, after, "ws.notFollowed", "(");
             }
         }
     }
