@@ -1,0 +1,15 @@
+    public void testAddError()
+        throws IOException
+    {
+        final XMLLogger logger = new XMLLogger(outStream, true); 
+        logger.auditStarted(null);
+        final LocalizedMessage message =
+            new LocalizedMessage( 1, 1, "messages.properties", "key", null);
+        final AuditEvent ev = new AuditEvent(this, "Test.java", message);
+        logger.addError(ev);
+        logger.auditFinished(null);
+        final String[] expectedLines =
+            {"<error line=\"1\" column=\"1\" message=\"key\"/>"};
+        verifyLines(expectedLines);
+    }
+

@@ -1,0 +1,20 @@
+    public void testAddException()
+        throws IOException
+    {
+        final XMLLogger logger = new XMLLogger(outStream, true); 
+        logger.auditStarted(null);
+        final LocalizedMessage message =
+            new LocalizedMessage( 1, 1, "messages.properties", null, null);
+        final AuditEvent ev = new AuditEvent(this, "Test.java", message);
+        logger.addException(ev, new TestThrowable());
+        logger.auditFinished(null);
+        final String[] expectedLines = {
+            "&lt;exception&gt;",
+            "&lt;![CDATA[",
+            "stackTrace]]&gt;",
+            "&lt;/exception&gt;",
+            "",
+        };
+        verifyLines(expectedLines);
+    }
+

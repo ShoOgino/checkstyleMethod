@@ -1,0 +1,18 @@
+    /**
+     * Verify output lines from auditStart to auditEnd.
+     * Take into consideration checkstyle element (first and last lines).
+     * @param strings
+     * @param lines
+     */
+    private void verifyLines(String[] aExpectedLines)
+        throws IOException
+    {
+        final String[] lines = getOutStreamLines();
+        assertEquals("length.", aExpectedLines.length + 2, lines.length);
+        assertEquals("first line.", "<checkstyle>", lines[0]);
+        for (int i = 0; i < aExpectedLines.length; i++) {
+            assertEquals("line " + i + ".", aExpectedLines[i], lines[i + 1]);
+        }
+        assertEquals("last line.", "</checkstyle>", lines[lines.length - 1]);
+    }
+

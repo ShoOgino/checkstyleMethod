@@ -1,0 +1,12 @@
+    public void testFileFinished()
+        throws IOException
+    {
+        final XMLLogger logger = new XMLLogger(outStream, true); 
+        logger.auditStarted(null);
+        final AuditEvent ev = new AuditEvent(this, "Test.java");
+        logger.fileFinished(ev);
+        logger.auditFinished(null);
+        final String[] expectedLines = {"</file>"};
+        verifyLines(expectedLines);
+    }
+
