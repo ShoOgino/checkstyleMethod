@@ -1,6 +1,12 @@
     /** @param aPat pattern for member variables **/
     public void setMemberpattern(String aPat)
     {
-        mProps.setProperty(MEMBER_PATTERN_PROP, aPat);
+        try {
+            mConfig.setMemberPat(aPat);
+        }
+        catch (RESyntaxException ex) {
+            throw new BuildException("Unable to parse memberpattern - " +
+                                     ex.getMessage());
+        }
     }
 

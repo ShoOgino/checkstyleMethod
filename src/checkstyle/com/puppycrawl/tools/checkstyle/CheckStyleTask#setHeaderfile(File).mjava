@@ -1,6 +1,12 @@
     /** @param aName header file name **/
     public void setHeaderfile(File aName)
     {
-        mProps.setProperty(HEADER_FILE_PROP, aName.getAbsolutePath());
+        try {
+            mConfig.setHeaderFile(aName.getAbsolutePath());
+        }
+        catch (IOException ex) {
+            throw new BuildException("Unable to read headerfile - " +
+                                     ex.getMessage());
+        }
     }
 

@@ -1,0 +1,21 @@
+    /**
+     * @param aFileName the header lines to check for
+     * @throws FileNotFoundException if an error occurs
+     * @throws IOException if an error occurs
+     */
+    void setHeaderFile(String aFileName)
+        throws FileNotFoundException, IOException
+    {
+        final LineNumberReader lnr =
+            new LineNumberReader(new FileReader(aFileName));
+        final ArrayList lines = new ArrayList();
+        while (true) {
+            final String l = lnr.readLine();
+            if (l == null) {
+                break;
+            }
+            lines.add(l);
+        }
+        mHeaderLines = (String[]) lines.toArray(new String[] {});
+    }
+

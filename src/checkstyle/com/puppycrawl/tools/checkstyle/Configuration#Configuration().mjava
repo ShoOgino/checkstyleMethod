@@ -1,0 +1,21 @@
+    /**
+     * Creates a new <code>Configuration</code> instance.
+     *
+     * @throws IllegalStateException if an error occurs
+     */
+    Configuration()
+        throws IllegalStateException
+    {
+        try {
+            setParamPat(PARAMETER_PATTERN);
+            setStaticPat(STATIC_PATTERN);
+            setStaticFinalPat(CONST_PATTERN);
+            setMemberPat(MEMBER_PATTERN);
+            setTypePat(TYPE_PATTERN);
+        }
+        catch (RESyntaxException ex) {
+            ex.printStackTrace();
+            throw new IllegalStateException(ex.getMessage());
+        }
+    }
+

@@ -1,8 +1,8 @@
     public void testRelaxedJavadoc()
         throws Exception
     {
-        mProps.setProperty(Checker.RELAX_JAVADOC_PROP, "on");
-        final Checker c = new Checker(mProps, mStream);
+        mConfig.setRelaxJavadoc(true);
+        final Checker c = new Checker(mConfig, mStream);
         assertNotNull(c);
         final String[] expected = {
             "InputPublicOnly.java:7: type is missing a Javadoc comment.",

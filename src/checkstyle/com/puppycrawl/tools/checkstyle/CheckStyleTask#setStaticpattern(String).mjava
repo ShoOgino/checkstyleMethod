@@ -1,6 +1,12 @@
     /** @param aPat pattern for static variables **/
     public void setStaticpattern(String aPat)
     {
-        mProps.setProperty(STATIC_PATTERN_PROP, aPat);
+        try {
+            mConfig.setStaticPat(aPat);
+        }
+        catch (RESyntaxException ex) {
+            throw new BuildException("Unable to parse staticpattern - " +
+                                     ex.getMessage());
+        }
     }
 

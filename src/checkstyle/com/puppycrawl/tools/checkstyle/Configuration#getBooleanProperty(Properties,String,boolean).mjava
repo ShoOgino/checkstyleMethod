@@ -1,0 +1,19 @@
+    /**
+     * @param aProps the properties set to use
+     * @param aName the name of the property to parse
+     * @param aDefault the default value to use.
+     * @return the value of an boolean property. If the property is not defined
+     *    or cannot be parsed, then a default value is returned.
+     */
+    private static boolean getBooleanProperty(Properties aProps,
+                                              String aName,
+                                              boolean aDefault)
+    {
+        boolean retVal = aDefault;
+        final String strRep = aProps.getProperty(aName);
+        if (strRep != null) {
+            retVal = Boolean.valueOf(strRep).booleanValue();
+        }
+        return retVal;
+    }
+

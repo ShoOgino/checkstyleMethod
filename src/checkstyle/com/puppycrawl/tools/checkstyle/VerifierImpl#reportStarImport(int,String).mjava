@@ -1,8 +1,11 @@
     /** @see Verifier **/
     public void reportStarImport(int aLineNo, String aPkg)
     {
-        if (mConfig.isCheckImports()) {
+        if (!mConfig.isIgnoreImports()) {
             log(aLineNo, "Avoid using the '.*' form of import.");
+            if (aPkg.startsWith("java.lang.")) {
+                log(aLineNo, "Redundant import from the java.lang package.");
+            }
         }
     }
 

@@ -1,0 +1,45 @@
+    /**
+     * Creates a new <code>Configuration</code> instance.
+     *
+     * @param aProps where to extract configuration parameters from
+     * @param aLog where to log errors to
+     * @throws RESyntaxException if an error occurs
+     * @throws FileNotFoundException if an error occurs
+     * @throws IOException if an error occurs
+     */
+    Configuration(Properties aProps, PrintStream aLog)
+        throws RESyntaxException, FileNotFoundException, IOException
+    {
+        setParamPat(aProps.getProperty(PARAMETER_PATTERN_PROP,
+                                       PARAMETER_PATTERN));
+        setStaticPat(aProps.getProperty(STATIC_PATTERN_PROP,
+                                        STATIC_PATTERN));
+        setStaticFinalPat(aProps.getProperty(CONST_PATTERN_PROP,
+                                             CONST_PATTERN));
+        setMemberPat(aProps.getProperty(MEMBER_PATTERN_PROP,
+                                        MEMBER_PATTERN));
+        setTypePat(aProps.getProperty(TYPE_PATTERN_PROP,
+                                      TYPE_PATTERN));
+        setMaxLineLength(getIntProperty(
+            aProps, aLog, MAX_LINE_LENGTH_PROP, MAX_LINE_LENGTH));
+
+        setAllowTabs(getBooleanProperty(aProps, ALLOW_TABS_PROP, mAllowTabs));
+        setAllowProtected(
+            getBooleanProperty(aProps, ALLOW_PROTECTED_PROP, mAllowProtected));
+        setAllowNoAuthor(
+            getBooleanProperty(aProps, ALLOW_NO_AUTHOR_PROP, mAllowNoAuthor));
+        setRelaxJavadoc(
+            getBooleanProperty(aProps, RELAX_JAVADOC_PROP, mRelaxJavadoc));
+        setIgnoreImports(
+            getBooleanProperty(aProps, IGNORE_IMPORTS_PROP, mIgnoreImports));
+        setHeaderIgnoreLineNo(
+            getIntProperty(aProps, aLog, HEADER_IGNORE_LINE_PROP,
+                           mHeaderIgnoreLineNo));
+
+        final String fname = aProps.getProperty(HEADER_FILE_PROP);
+        if (fname != null) {
+            setHeaderFile(fname);
+        }
+
+    }
+

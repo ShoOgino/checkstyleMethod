@@ -1,6 +1,12 @@
     /** @param aPat pattern for parameters **/
     public void setParampattern(String aPat)
     {
-        mProps.setProperty(PARAMETER_PATTERN_PROP, aPat);
+        try {
+            mConfig.setParamPat(aPat);
+        }
+        catch (RESyntaxException ex) {
+            throw new BuildException("Unable to parse parampattern - " +
+                                     ex.getMessage());
+        }
     }
 

@@ -1,6 +1,12 @@
     /** @param aPat pattern for constant variables **/
     public void setConstpattern(String aPat)
     {
-        mProps.setProperty(CONST_PATTERN_PROP, aPat);
+        try {
+            mConfig.setStaticFinalPat(aPat);
+        }
+        catch (RESyntaxException ex) {
+            throw new BuildException("Unable to parse constpattern - " +
+                                     ex.getMessage());
+        }
     }
 
