@@ -1,0 +1,19 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        final String text = aAST.getText();
+        if (getRegexp().match(text)) {
+            String message = getMessage();
+            if ("".equals(message)) {
+                message = "illegal.token.text";
+            }
+            log(
+                aAST.getLineNo(),
+                aAST.getColumnNo(),
+                message,
+                getFormat());
+        }
+    }
+
