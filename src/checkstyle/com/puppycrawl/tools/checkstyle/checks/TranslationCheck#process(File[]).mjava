@@ -1,0 +1,17 @@
+    /**
+     * This method searches for property files in the specified file array
+     * and checks whether the key usage is consistent.
+     *
+     * Two property files which have the same prefix should use the same
+     * keys. If this is not the case the missing keys are reported.
+     *
+     * @see FileSetCheck
+     */
+    public int process(File[] files)
+    {
+        Set dirs = getParentDirs(files);
+        Set propertyFiles = getPropertyFiles(dirs);
+        final Map propFilesMap = arrangePropertyFiles(propertyFiles);
+        return checkPropertyFileSets(propFilesMap);
+    }
+

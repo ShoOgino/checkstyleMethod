@@ -1,0 +1,26 @@
+    /**
+     * Arranges a set of property files by their prefix.
+     * The method returns a Map object. The filename prefixes
+     * work as keys each mapped to a set of files.
+     * @param propFiles the set of property files
+     * @return a Map object which holds the arranged property file sets
+     */
+    private static Map arrangePropertyFiles(Set propFiles)
+    {
+        Map propFileMap = new HashMap();
+
+        for (Iterator iterator = propFiles.iterator(); iterator.hasNext();) {
+            File file = (File) iterator.next();
+            String fileName = file.getName();
+            String baseName = extractBaseName(fileName);
+
+            Set fileSet = (Set) propFileMap.get(baseName);
+            if (fileSet == null) {
+                fileSet = new HashSet();
+                propFileMap.put(baseName, fileSet);
+            }
+            fileSet.add(file);
+        }
+        return propFileMap;
+    }
+

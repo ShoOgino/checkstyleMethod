@@ -1,0 +1,36 @@
+    /**
+     * Compares the key sets of the given property files (arranged in a map) with the
+     * specified key set. If a key out of this set misses in any file key set an error
+     * message is written on the standard output.
+     * @param keys the set of keys to compare with
+     * @param fileMap a Map from property files to their key sets
+     * @return the number of inconsistencies detected
+     */
+    private static int compareKeySets(Set keys, Map fileMap)
+    {
+        Set fls = fileMap.keySet();
+        int res = 0;
+
+        for (Iterator iter = fls.iterator(); iter.hasNext();) {
+            File currentFile = (File) iter.next();
+            // TODO: fire file started
+            Set currentKeys = (Set) fileMap.get(currentFile);
+
+            // Clone the keys so that they are not lost
+            Set keysClone = new HashSet(keys);
+            keysClone.removeAll(currentKeys);
+
+            // Remaining elements in the key set are missing in the current file
+            if (!keysClone.isEmpty()) {
+                for (Iterator it = keysClone.iterator(); it.hasNext();) {
+                    // TODO: fire errors to reporting system
+                    System.out.println(currentFile.getPath()
+                            + ": key \"" + (String) it.next() + "\" missing");
+                    res++;
+                }
+            }
+            // TODO: fire file finished
+        }
+        return res;
+    }
+

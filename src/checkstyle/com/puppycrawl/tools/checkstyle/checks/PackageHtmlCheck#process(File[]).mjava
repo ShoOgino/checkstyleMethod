@@ -6,14 +6,7 @@
     public int process(File[] aFiles)
     {
         int missing = 0;
-        Set directories = new HashSet();
-        for (int i = 0; i < aFiles.length; i++) {
-            File file = aFiles[i];
-            if (file.getName().endsWith(".java")) {
-                File dir = file.getParentFile();
-                directories.add(dir); // duplicates are handled automatically
-            }
-        }
+        Set directories = getParentDirs(aFiles);
         for (Iterator it = directories.iterator(); it.hasNext();) {
             File dir = (File) it.next();
             File packageHtml = new File(dir, "package.html");
@@ -25,7 +18,6 @@
             }
             // TODO: fireFileFinished
         }
-
         return missing;
     }
 

@@ -1,0 +1,39 @@
+    /**
+     * Loads the keys of the specified property file into a set.
+     * @param file the property file
+     * @return a Set object which holds the loaded keys
+     */
+    private static Set loadKeys(File file)
+    {
+        InputStream inputStream = null;
+        Set keys = new HashSet();
+
+        try {
+            // Load file and properties.
+            inputStream = new FileInputStream(file);
+            Properties properties = new Properties();
+            properties.load(inputStream);
+
+            // Gather the keys and put them into a set
+            Enumeration e = properties.propertyNames();
+            while (e.hasMoreElements()) {
+                keys.add(e.nextElement());
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("The file " + file.getName() + " could not be found!");
+        }
+        catch (IOException e) {
+            System.out.println("IOException occured");
+        }
+        finally {
+            try {
+                inputStream.close();
+            }
+            catch (IOException e) {
+                System.out.println("IOException occured");
+            }
+        }
+        return keys;
+    }
+

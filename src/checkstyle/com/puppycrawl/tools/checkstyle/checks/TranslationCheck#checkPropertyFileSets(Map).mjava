@@ -1,0 +1,40 @@
+    /**
+     * This method tests whether the given property files
+     * (arranged by their prefixes in a Map) contain the proper keys.
+     *
+     * Each group of files must have the same keys. If this is not the case
+     * an error message is posted giving information which key misses in which file.
+     * @param propFiles the property files organized as Map
+     * @return the number of inconsistencies detected
+     */
+    private static int checkPropertyFileSets(Map propFiles)
+    {
+        int res = 0;
+        Set keySet = propFiles.keySet();
+
+        // Go through all property file sets
+        for (Iterator iterator = keySet.iterator(); iterator.hasNext();) {
+            String baseName = (String) iterator.next();
+            Set files = (Set) propFiles.get(baseName);
+
+            // If there are at least two files in one set start comparing them
+            if (files.size() >= 2) {
+                // Collect all keys in a set and save files and corresponding keys in a map construct
+                Set keys = new HashSet();
+                Map fileMap = new HashMap();
+
+                for (Iterator iter = files.iterator(); iter.hasNext();) {
+                    File file = (File) iter.next();
+                    Set fileKeys = loadKeys(file);
+                    keys.addAll(fileKeys);
+                    fileMap.put(file, fileKeys);
+                }
+
+                // Go through all files and compare their keys,
+                // sum up the number of errors
+                res = res + compareKeySets(keys, fileMap);
+            }
+        }
+        return res;
+    }
+
