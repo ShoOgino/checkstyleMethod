@@ -1,0 +1,28 @@
+    /**
+     * Recursively processes a node calling interested checks at each node.
+     * @param aAST the node to start from
+     */
+    private void process(DetailAST aAST)
+    {
+        if (aAST == null) {
+            return;
+        }
+
+        notifyVisit(aAST);
+
+        final DetailAST child = (DetailAST) aAST.getFirstChild();
+        if (child != null) {
+            child.setParent(aAST);
+            process(child);
+        }
+
+        notifyLeave(aAST);
+
+        final DetailAST sibling = (DetailAST) aAST.getNextSibling();
+        if (sibling != null) {
+            sibling.setParent(aAST.getParent());
+            process(sibling);
+        }
+
+    }
+

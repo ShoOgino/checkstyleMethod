@@ -1,0 +1,21 @@
+    /**
+     * Register a check for a given configuration.
+     * @param aCheck the check to register
+     * @param aConfig the configuration to use
+     */
+    void registerCheck(Check aCheck, CheckConfiguration aConfig)
+    {
+        if (!aConfig.getTokens().isEmpty()) {
+            final Iterator it = aConfig.getTokens().iterator();
+            while (it.hasNext()) {
+                registerCheck((String) it.next(), aCheck);
+            }
+        }
+        else {
+            final int[] tokens = aCheck.getDefaultTokens();
+            for (int i = 0; i < tokens.length; i++) {
+                registerCheck(tokens[i], aCheck);
+            }
+        }
+    }
+

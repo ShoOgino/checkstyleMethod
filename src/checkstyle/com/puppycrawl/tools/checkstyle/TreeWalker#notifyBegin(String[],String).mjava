@@ -1,0 +1,19 @@
+    /**
+     * Notify interested checks that about to begin walking a tree.
+     * @param aLines the lines of the file the AST was generated from
+     * @param aFilename the file name of the file the AST was generated from
+     */
+    private void notifyBegin(String[] aLines, String aFilename)
+    {
+        // TODO: do not track Context properly for token
+        final Iterator it = mAllChecks.iterator();
+        while (it.hasNext()) {
+            final Check check = (Check) it.next();
+            final HashMap treeContext = new HashMap();
+            check.setFilename(aFilename);
+            check.setTreeContext(treeContext);
+            check.setLines(aLines);
+            check.beginTree();
+        }
+    }
+

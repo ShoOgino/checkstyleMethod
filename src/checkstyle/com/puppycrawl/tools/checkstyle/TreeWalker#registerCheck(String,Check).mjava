@@ -1,0 +1,17 @@
+    /**
+     * Register a check for a specified token name
+     * @param aToken the name of the token
+     * @param aCheck the check to register
+     */
+    private void registerCheck(String aToken, Check aCheck)
+    {
+        ArrayList visitors = (ArrayList) mTokenToChecks.get(aToken);
+        if (visitors == null) {
+            visitors = new ArrayList();
+            mTokenToChecks.put(aToken, visitors);
+        }
+
+        visitors.add(aCheck);
+        mAllChecks.add(aCheck);
+    }
+
