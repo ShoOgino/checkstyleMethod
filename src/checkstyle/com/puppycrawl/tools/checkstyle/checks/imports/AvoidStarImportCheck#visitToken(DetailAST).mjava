@@ -1,7 +1,7 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        final FullIdent name = getImportText(aAST);
+        final FullIdent name = FullIdent.createFullIdentBelow(aAST);
         if ((name != null) && name.getText().endsWith(".*")) {
             log(aAST.getLineNo(), "import.avoidStar", name.getText());
         }

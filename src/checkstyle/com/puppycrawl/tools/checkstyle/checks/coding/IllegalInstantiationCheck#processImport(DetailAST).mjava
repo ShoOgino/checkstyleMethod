@@ -4,7 +4,7 @@
      */
     private void processImport(DetailAST aAST)
     {
-        final FullIdent name = getImportText(aAST);
+        final FullIdent name = FullIdent.createFullIdentBelow(aAST);
         if (name != null) {
             // Note: different from UnusedImportsCheck.processImport(),
             // '.*' imports are also added here

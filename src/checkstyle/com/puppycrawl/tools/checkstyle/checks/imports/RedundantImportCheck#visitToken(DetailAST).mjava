@@ -6,7 +6,7 @@
             mPkgName = FullIdent.createFullIdent(nameAST).getText();
         }
         else {
-            final FullIdent imp = getImportText(aAST);
+            final FullIdent imp = FullIdent.createFullIdentBelow(aAST);
             if (fromPackage(imp.getText(), "java.lang")) {
                 log(aAST.getLineNo(), aAST.getColumnNo(), "import.lang",
                     imp.getText());
