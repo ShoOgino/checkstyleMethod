@@ -1,0 +1,38 @@
+    /** @see Reader */
+    public int read( char[] aCbuf, int aOff, int aLen ) throws IOException
+    {
+        if (mClosed) {
+            throw new IOException("already closed");
+        }
+
+        int retVal = 0;
+
+        if (!mUnreportedNewline && (mUnderlyingArray.length <= mArrayIdx)) {
+            return -1;
+        }
+
+        while ((retVal < aLen) && (mUnreportedNewline || dataAvailable())) {
+            if (mUnreportedNewline) {
+                aCbuf[aOff + retVal] = '\n';
+                retVal++;
+                mUnreportedNewline = false;
+            }
+
+            if ((retVal < aLen) && dataAvailable()) {
+                final String currentStr = mUnderlyingArray[mArrayIdx];
+                final int srcEnd = Math.min(currentStr.length(),
+                                            mStringIdx + aLen - retVal);
+                currentStr.getChars(mStringIdx, srcEnd, aCbuf, aOff + retVal);
+                retVal += srcEnd - mStringIdx;
+                mStringIdx = srcEnd;
+
+                if (mStringIdx >= currentStr.length()) {
+                    mArrayIdx++;
+                    mStringIdx = 0;
+                    mUnreportedNewline = true;
+                }
+            }
+        }
+        return retVal;
+    }
+
