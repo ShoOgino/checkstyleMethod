@@ -4,6 +4,7 @@
         final String fName =
             System.getProperty("testinputs.dir") + "/configs/" + aName;
 
-        return ConfigurationLoader.loadConfiguration(fName, aProps);
+        return ConfigurationLoader.loadConfiguration(
+            fName, new PropertiesExpander(aProps));
     }
 

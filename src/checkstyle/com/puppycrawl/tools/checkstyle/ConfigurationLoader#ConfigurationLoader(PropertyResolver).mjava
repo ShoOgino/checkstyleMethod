@@ -1,13 +1,13 @@
     /**
      * Creates a new <code>ConfigurationLoader</code> instance.
-     * @param aOverrideProps overriding properties
+     * @param aOverrideProps resolver for overriding properties
      * @throws ParserConfigurationException if an error occurs
      * @throws SAXException if an error occurs
      */
-    private ConfigurationLoader(Properties aOverrideProps)
+    private ConfigurationLoader(PropertyResolver aOverrideProps)
         throws ParserConfigurationException, SAXException
     {
         mSaxHandler = new InternalLoader();
-        mOverrideProps = aOverrideProps;
+        mOverridePropsResolver = aOverrideProps;
     }
 

@@ -6,9 +6,9 @@
                 throws SAXException
         {
             // TODO: debug logging for support puposes
-            if (aQName.equals("module")) {
+            if (aQName.equals(MODULE)) {
                 //create configuration
-                final String name = aAtts.getValue("name");
+                final String name = aAtts.getValue(NAME);
                 DefaultConfiguration conf = new DefaultConfiguration(name);
                 if (mConfiguration == null) {
                     mConfiguration = conf;
@@ -23,13 +23,13 @@
 
                 mConfigStack.push(conf);
             }
-            else if (aQName.equals("property")) {
+            else if (aQName.equals(PROPERTY)) {
                 //extract name and value
-                final String name = aAtts.getValue("name");
+                final String name = aAtts.getValue(NAME);
                 final String value;
                 try {
-                    value = replaceProperties(aAtts.getValue("value"),
-                        mOverrideProps);
+                    value = replaceProperties(aAtts.getValue(VALUE),
+                        mOverridePropsResolver);
                 }
                 catch (CheckstyleException ex) {
                     throw new SAXException(ex.getMessage());

@@ -1,0 +1,15 @@
+    /**
+     * Resolves a property through the underlying Properties object.
+     * @see PropertyResolver#resolve
+     */
+    public String resolve(String aPropertyName)
+        throws CheckstyleException
+    {
+        if (mProperties == null || !mProperties.containsKey(aPropertyName)) {
+            throw new CheckstyleException("Property ${"
+                + aPropertyName + "} has not been set");
+        }
+
+        return mProperties.getProperty(aPropertyName);
+    }
+

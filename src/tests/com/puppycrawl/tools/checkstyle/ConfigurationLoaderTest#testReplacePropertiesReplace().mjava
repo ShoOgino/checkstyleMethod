@@ -17,8 +17,8 @@
             };
         final Properties props = initProperties();
         for (int i = 0; i < testValues.length; i++) {
-            final String value =
-                ConfigurationLoader.replaceProperties(testValues[i][0], props);
+            final String value = ConfigurationLoader.replaceProperties(
+                testValues[i][0], new PropertiesExpander(props));
             assertEquals("\"" + testValues[i][0] + "\"",
                 testValues[i][1], value);
         }

@@ -20,7 +20,7 @@
      * http://cvs.apache.org/viewcvs/jakarta-ant/src/main/org/apache/tools/ant/ProjectHelper.java
      */
     static String replaceProperties(
-        String aValue, Properties aProps)
+        String aValue, PropertyResolver aProps)
             throws CheckstyleException
     {
         if (aValue == null) {
@@ -38,11 +38,7 @@
             String fragment = (String) i.next();
             if (fragment == null) {
                 final String propertyName = (String) j.next();
-                if (!aProps.containsKey(propertyName)) {
-                    throw new CheckstyleException("Property ${"
-                        + propertyName + "} has not been set");
-                }
-                fragment = aProps.getProperty(propertyName);
+                fragment = aProps.resolve(propertyName);
             }
             sb.append(fragment);
         }

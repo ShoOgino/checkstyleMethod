@@ -1,17 +1,17 @@
     /**
      * Returns the module configurations in a specified file.
      * @param aConfig location of config file, can be either a URL or a filename
-     * @param aOverrideProps overriding properties
+     * @param aOverridePropsResolver overriding properties
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
     public static Configuration loadConfiguration(
-        String aConfig, Properties aOverrideProps)
+        String aConfig, PropertyResolver aOverridePropsResolver)
         throws CheckstyleException
     {
         try {
             final ConfigurationLoader loader =
-                new ConfigurationLoader(aOverrideProps);
+                new ConfigurationLoader(aOverridePropsResolver);
             // figure out if this is a File or a URL
             InputStream configStream;
             try {
