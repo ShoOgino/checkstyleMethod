@@ -59,12 +59,15 @@
             }
         }
 
-        // Now dump out all throws without tags
-        final ListIterator throwIt = aThrows.listIterator();
-        while (throwIt.hasNext()) {
-            final FullIdent fi = (FullIdent) throwIt.next();
-            log(fi.getLineNo(), fi.getColumnNo(),
-                "javadoc.expectedTag", "@throws", fi.getText());
+        // Now dump out all throws without tags :- unless
+        // the user has chosen to suppress these problems
+        if (!mAllowMissingThrowsTags) {
+            final ListIterator throwIt = aThrows.listIterator();
+            while (throwIt.hasNext()) {
+                final FullIdent fi = (FullIdent) throwIt.next();
+                log(fi.getLineNo(), fi.getColumnNo(),
+                    "javadoc.expectedTag", "@throws", fi.getText());
+            }
         }
     }
 

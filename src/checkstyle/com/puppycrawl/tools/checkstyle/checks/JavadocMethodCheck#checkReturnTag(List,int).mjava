@@ -21,8 +21,9 @@
             }
         }
 
-        // Handle there being no @return tags
-        if (!found) {
+        // Handle there being no @return tags :- unless
+        // the user has chosen to suppress these problems
+        if (!found && !mAllowMissingReturnTag) {
             log(aLineNo, "javadoc.return.expected");
         }
     }

@@ -35,12 +35,15 @@
             }
         }
 
-        // Now dump out all parameters without tags
-        final Iterator paramIt = aParams.iterator();
-        while (paramIt.hasNext()) {
-            final DetailAST param = (DetailAST) paramIt.next();
-            log(param.getLineNo(), param.getColumnNo(),
-                "javadoc.expectedTag", "@param", param.getText());
+        // Now dump out all parameters without tags :- unless
+        // the user has chosen to suppress these problems
+        if (!mAllowMissingParamTags) {
+            final Iterator paramIt = aParams.iterator();
+            while (paramIt.hasNext()) {
+                final DetailAST param = (DetailAST) paramIt.next();
+                log(param.getLineNo(), param.getColumnNo(),
+                    "javadoc.expectedTag", "@param", param.getText());
+            }
         }
     }
 
