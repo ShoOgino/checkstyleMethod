@@ -12,7 +12,8 @@
             final String message = aEvt.getMessage();
 
             // avoid StringBuffer.expandCapacity
-            final int bufLen = fileName.length() + message.length() + 12;
+            final int bufLen = fileName.length() + message.length()
+                + BUFFER_CUSHION;
             final StringBuffer sb = new StringBuffer(bufLen);
 
             sb.append(fileName);

@@ -9,23 +9,19 @@
         }
 
         if (aEnt.charAt(1) == '#') {
+            int prefixLength = 2; // "&#"
+            int radix = BASE_10;
             if (aEnt.charAt(2) == 'x') {
-                try {
-                    Integer.parseInt(aEnt.substring(3, aEnt.length() - 1), 16);
-                    return true;
-                }
-                catch (NumberFormatException nfe) {
-                    return false;
-                }
+                prefixLength++;
+                radix = BASE_16;
             }
-            else {
-                try {
-                    Integer.parseInt(aEnt.substring(2, aEnt.length() - 1));
-                    return true;
-                }
-                catch (NumberFormatException nfe) {
-                    return false;
-                }
+            try {
+                Integer.parseInt(
+                    aEnt.substring(prefixLength, aEnt.length() - 1), radix);
+                return true;
+            }
+            catch (NumberFormatException nfe) {
+                return false;
             }
         }
 
