@@ -4,12 +4,12 @@
         final DetailAST slistAST = aAST.findFirstToken(TokenTypes.SLIST);
         if (slistAST != null) {
             if (mOption == BlockOption.STMT) {
-                if (slistAST.getChildCount() <= 1) {      
+                if (slistAST.getChildCount() <= 1) {
                     log(slistAST.getLineNo(),
                         slistAST.getColumnNo(),
                         "block.noStmt",
                         aAST.getText());
-                }   
+                }
             }
             else if (mOption == BlockOption.TEXT) {
                 if (!hasText(slistAST)) {
