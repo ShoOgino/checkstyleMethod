@@ -8,7 +8,7 @@
         final List tags = getMethodTags(aComment, aAST.getLineNo() - 1);
         // Check for only one @see tag
         if ((tags.size() != 1)
-            || !((JavadocTag) tags.get(0)).isSeeTag())
+            || !((JavadocTag) tags.get(0)).isSeeOrInheritDocTag())
         {
             checkParamTags(tags, getParameters(aAST));
             checkThrowsTags(tags, getThrows(aAST));
@@ -20,7 +20,7 @@
             final Iterator it = tags.iterator();
             while (it.hasNext()) {
                 final JavadocTag jt = (JavadocTag) it.next();
-                if (!jt.isSeeTag()) {
+                if (!jt.isSeeOrInheritDocTag()) {
                     log(jt.getLineNo(), "javadoc.unusedTagGeneral");
                 }
             }
