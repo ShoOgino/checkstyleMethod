@@ -3,7 +3,10 @@
                                     MyCommonAST aReturnType,
                                     MethodSignature aSig)
     {
-        if (mConfig.isIgnoreJavadoc()) {
+        final Scope methodScope =
+            inInterfaceBlock() ? Scope.PUBLIC : aMods.getVisibilityScope();
+
+        if (!inCheckScope(methodScope)) {
             return; // no need to really check anything
         }
 
@@ -19,19 +22,7 @@
 
         final String[] jd = getJavadocBefore(lineNo - 1);
         if (jd == null) {
-            // logic below is:
-            // - if in not in a method block (cause if we are, then this is an
-            // anonymous class); AND
-            // - one of:
-            //    o javadoc checking not relaxed; OR
-            //    o in an interface block (all methods must have javadoc); OR
-            //    o method is protected or public.
-            if (!inMethodBlock() &&
-                (!mConfig.isRelaxJavadoc() || inInterfaceBlock() ||
-                 (aMods.containsProtected() || aMods.containsPublic())))
-            {
-                log(lineNo, "method is missing a Javadoc comment.");
-            }
+            log(lineNo, "method is missing a Javadoc comment.");
         }
         else {
             final List tags = getMethodTags(jd, lineNo - 1);

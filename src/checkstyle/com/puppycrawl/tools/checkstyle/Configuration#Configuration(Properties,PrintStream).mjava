@@ -36,10 +36,9 @@
             getBooleanProperty(aProps, ALLOW_PROTECTED_PROP, mAllowProtected));
         setAllowNoAuthor(
             getBooleanProperty(aProps, ALLOW_NO_AUTHOR_PROP, mAllowNoAuthor));
-        setRelaxJavadoc(
-            getBooleanProperty(aProps, RELAX_JAVADOC_PROP, mRelaxJavadoc));
-        setIgnoreJavadoc(
-            getBooleanProperty(aProps, IGNORE_JAVADOC_PROP, mIgnoreJavadoc));
+        setJavadocScope(
+            Scope.getInstance( aProps.getProperty(JAVADOC_CHECKSCOPE_PROP,
+                                                  Scope.PRIVATE.getName())));
         setIgnoreImports(
             getBooleanProperty(aProps, IGNORE_IMPORTS_PROP, mIgnoreImports));
         setIgnoreWhitespace(

@@ -1,0 +1,18 @@
+    /**
+     * Scope factory method.
+     *
+     * @param aScopeName scope name, such as "nothing", "public", etc.
+     * @return the <code>Scope</code> associated with <code>aScopeName</code>
+     */
+    public static Scope getInstance(String aScopeName)
+    {
+        // canonicalize argument
+        String scopeName = aScopeName.toLowerCase();
+
+        final Scope retVal = (Scope) NAME_TO_SCOPE.get(scopeName);
+        if (retVal == null) {
+            throw new IllegalArgumentException(scopeName);
+        }
+        return retVal;
+    }
+

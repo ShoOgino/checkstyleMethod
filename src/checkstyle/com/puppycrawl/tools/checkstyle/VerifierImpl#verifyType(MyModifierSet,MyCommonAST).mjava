@@ -10,8 +10,11 @@
         //
         // Only Javadoc testing below
         //
-        if (mConfig.isIgnoreJavadoc()) {
-            return;
+        final Scope typeScope =
+            inInterfaceBlock() ? Scope.PUBLIC : aMods.getVisibilityScope();
+
+        if (!inCheckScope(typeScope)) {
+            return; // no need to really check anything
         }
 
         final int lineNo = (aMods.size() > 0)
@@ -20,7 +23,6 @@
 
         final String[] jd = getJavadocBefore(lineNo - 1);
         if (jd == null) {
-            // demand that types have Javadoc, so ignore mRelaxJavadoc
             log(lineNo, "type is missing a Javadoc comment.");
         }
         else if (!mConfig.isAllowNoAuthor() &&

@@ -1,16 +1,16 @@
     /** @see Verifier **/
     public void verifyVariable(MyVariable aVar, boolean aInInterface)
     {
-        if (!mConfig.isIgnoreJavadoc()) {
-            if (getJavadocBefore(aVar.getLineNo() - 1) == null) {
-                if (!mConfig.isRelaxJavadoc() || inInterfaceBlock() ||
-                    (aVar.getModifierSet().containsProtected() ||
-                     aVar.getModifierSet().containsPublic()))
-                {
-                    log(aVar.getLineNo(),
-                        "variable '" + aVar.getText() + "' missing Javadoc.");
-                }
-            }
+        final Scope declaredScope =
+            aVar.getModifierSet().getVisibilityScope();
+        final Scope variableScope =
+            inInterfaceBlock() ? Scope.PUBLIC : declaredScope;
+
+        if (inCheckScope(variableScope) &&
+            getJavadocBefore(aVar.getLineNo() - 1) == null)
+        {
+            log(aVar.getLineNo(),
+                "variable '" + aVar.getText() + "' missing Javadoc.");
         }
 
         // Check correct format
@@ -29,7 +29,6 @@
             //    System.out.println("Need to check for " + aVar.getText());
             //}
 
-            // Checks for Javadoc
             if (mods.containsStatic()) {
                 if (mods.containsFinal()) {
                     // Handle the serialVersionUID constant which is used for
