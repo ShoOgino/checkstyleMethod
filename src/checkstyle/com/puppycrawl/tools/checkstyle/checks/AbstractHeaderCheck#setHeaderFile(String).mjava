@@ -1,0 +1,34 @@
+    /**
+     * Set the header file to check against.
+     * @param aFileName the file that contains the header to check against.
+     * @throws ConversionException if the file cannot be loaded
+     */
+    public void setHeaderFile(String aFileName)
+        throws ConversionException
+    {
+        // Handle empty param
+        if ((aFileName == null) || (aFileName.trim().length() == 0)) {
+            return;
+        }
+
+        // load the file
+        try {
+            final LineNumberReader lnr =
+                    new LineNumberReader(new FileReader(aFileName));
+            final ArrayList lines = new ArrayList();
+            while (true) {
+                final String l = lnr.readLine();
+                if (l == null) {
+                    break;
+                }
+                lines.add(l);
+            }
+            mHeaderLines = (String[]) lines.toArray(new String[0]);
+        }
+        catch (IOException ex) {
+            throw new ConversionException(
+                    "unable to load header file " + aFileName, ex);
+        }
+
+    }
+
