@@ -10,11 +10,6 @@
     public Configuration(Properties aProps, PrintStream aLog)
         throws RESyntaxException, FileNotFoundException, IOException
     {
-        // Init the special properties
-        setJavadocScope(
-            Scope.getInstance(aProps.getProperty(Defn.JAVADOC_CHECKSCOPE_PROP,
-                                                 Scope.PRIVATE.getName())));
-
         // Initialise the general properties
         for (int i = 0; i < Defn.ALL_BOOLEAN_PROPS.length; i++) {
             setBooleanProperty(aProps, Defn.ALL_BOOLEAN_PROPS[i]);
