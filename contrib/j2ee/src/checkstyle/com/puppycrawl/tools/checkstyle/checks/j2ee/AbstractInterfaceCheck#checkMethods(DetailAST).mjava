@@ -1,0 +1,19 @@
+    /**
+     * Checks methods of a local home interface for required properties.
+     * @param aAST the home interface AST to check.
+     */
+    protected void checkMethods(DetailAST aAST)
+    {
+        final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
+        if (objBlock != null) {
+            DetailAST child = (DetailAST) objBlock.getFirstChild();
+            while (child != null) {
+                if (child.getType() == TokenTypes.METHOD_DEF) {
+                    checkMethod(child, "create", "javax.ejb.CreateException");
+                    checkMethod(child, "find", "javax.ejb.FinderException");
+                }
+                child = (DetailAST) child.getNextSibling();
+            }
+        }
+    }
+

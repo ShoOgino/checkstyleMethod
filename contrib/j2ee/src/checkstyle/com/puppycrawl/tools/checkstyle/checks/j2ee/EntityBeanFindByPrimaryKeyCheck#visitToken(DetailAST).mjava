@@ -7,12 +7,12 @@
             && !Utils.isAbstract(aAST)
             && !Utils.hasPublicMethod(aAST, "ejbFindByPrimaryKey", false, 1))
         {
-                final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
-                log(
-                    aAST.getLineNo(),
-                    nameAST.getColumnNo(),
-                    "missingmethod.bean",
-                    new Object[] {"Entity bean", "ejbFindByPrimaryKey"});
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            log(
+                aAST.getLineNo(),
+                nameAST.getColumnNo(),
+                "missingmethod.bean",
+                new Object[] {"Entity bean", "ejbFindByPrimaryKey"});
         }
     }
 

@@ -1,0 +1,26 @@
+    /**
+     * Builds the dotted name String representation of the object contained
+     * within an AST.
+     *
+     * @param aAST the AST containing the entire hierarcy of the object
+     * @return the dotted name String representation of the object contained
+     * within aAST.
+     */
+    public static String constructDottedName(DetailAST aAST)
+    {
+        String result;
+
+        if (aAST.getType() == TokenTypes.DOT) {
+            final DetailAST left = (DetailAST) aAST.getFirstChild();
+            final DetailAST right = (DetailAST) left.getNextSibling();
+
+            result =
+                constructDottedName(left) + "." + constructDottedName(right);
+        }
+        else {
+            result = aAST.getText();
+        }
+
+        return result;
+    }
+

@@ -1,25 +1,26 @@
     /**
-     * Determines whether an AST node declares an implementation of an
+     * Determines whether an AST node declares an extension of a class or
      * interface.
      * @param aAST the AST to check.
-     * @param aInterface the interface to check.
+     * @param aClassOrInterface the class or interface to check.
      * @return if the class defined by aAST implements declares an
-     * implementation of aInterface.
+     * extension of aClassOrInterface.
      */
-    public static boolean hasImplements(DetailAST aAST, String aInterface)
+    public static boolean hasExtends(DetailAST aAST, String aClassOrInterface)
     {
         final String shortName =
-            com.puppycrawl.tools.checkstyle.api.Utils.baseClassname(aInterface);
-        final DetailAST implementsAST =
-            aAST.findFirstToken(TokenTypes.IMPLEMENTS_CLAUSE);
-        if (implementsAST != null) {
-            DetailAST child = (DetailAST) implementsAST.getFirstChild();
+            com.puppycrawl.tools.checkstyle.api.Utils.baseClassname(
+                aClassOrInterface);
+        final DetailAST extendsAST =
+            aAST.findFirstToken(TokenTypes.EXTENDS_CLAUSE);
+        if (extendsAST != null) {
+            DetailAST child = (DetailAST) extendsAST.getFirstChild();
             while (child != null) {
                 if ((child.getType() == TokenTypes.IDENT)
                     || (child.getType() == TokenTypes.DOT))
                 {
                     final String name = Utils.constructDottedName(child);
-                    if (name.equals(aInterface)
+                    if (name.equals(aClassOrInterface)
                         || name.equals(shortName))
                     {
                         return true;
