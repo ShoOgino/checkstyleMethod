@@ -2,6 +2,8 @@
      * Replaces <code>${xxx}</code> style constructions in the given value
      * with the string value of the corresponding data types.
      *
+     * The method is package visible to facilitate testing.
+     *
      * @param aValue The string to be scanned for property references.
      *              May be <code>null</code>, in which case this
      *              method returns immediately with no effect.
@@ -17,7 +19,8 @@
      * Code copied from ant -
      * http://cvs.apache.org/viewcvs/jakarta-ant/src/main/org/apache/tools/ant/ProjectHelper.java
      */
-    public static String replaceProperties(String aValue,  Properties aProps)
+    static String replaceProperties(
+        String aValue, Properties aProps)
             throws CheckstyleException
     {
         if (aValue == null) {
@@ -39,9 +42,7 @@
                     throw new CheckstyleException("Property ${"
                         + propertyName + "} has not been set");
                 }
-                fragment = (aProps.containsKey(propertyName))
-                    ? (String) aProps.get(propertyName)
-                    : "${" + propertyName + "}";
+                fragment = aProps.getProperty(propertyName);
             }
             sb.append(fragment);
         }
