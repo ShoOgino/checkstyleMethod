@@ -24,17 +24,17 @@
             return null;
         }
 
-        final Vector fragments = new Vector();
-        final Vector propertyRefs = new Vector();
+        final List fragments = new ArrayList();
+        final List propertyRefs = new ArrayList();
         parsePropertyString(aValue, fragments, propertyRefs);
 
         final StringBuffer sb = new StringBuffer();
-        final Enumeration i = fragments.elements();
-        final Enumeration j = propertyRefs.elements();
-        while (i.hasMoreElements()) {
-            String fragment = (String) i.nextElement();
+        final Iterator i = fragments.iterator();
+        final Iterator j = propertyRefs.iterator();
+        while (i.hasNext()) {
+            String fragment = (String) i.next();
             if (fragment == null) {
-                final String propertyName = (String) j.nextElement();
+                final String propertyName = (String) j.next();
                 if (!aProps.containsKey(propertyName)) {
                     throw new CheckstyleException(
                             "Property ${" + propertyName + "} has not been set");
