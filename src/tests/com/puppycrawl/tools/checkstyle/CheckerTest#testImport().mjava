@@ -1,0 +1,15 @@
+    public void testImport()
+        throws Exception
+    {
+        final Checker c = new Checker(mProps, mStream);
+        assertNotNull(c);
+        final String[] expected = {
+            "InputImport.java:7: Unused import - java.util.List",
+            "InputImport.java:8: Duplicate import to line 7.",
+            "InputImport.java:8: Unused import - java.util.List",
+            "InputImport.java:9: Avoid using the '.*' form of import.",
+            "InputImport.java:10: Redundant import from the java.lang package.",
+        };
+        verify(c, "InputImport.java", expected);
+    }
+
