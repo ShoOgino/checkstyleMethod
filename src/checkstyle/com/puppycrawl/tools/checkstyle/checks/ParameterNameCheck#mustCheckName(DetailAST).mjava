@@ -1,0 +1,8 @@
+    /** @see com.puppycrawl.tools.checkstyle.checks.AbstractNameCheck */
+    protected boolean mustCheckName(DetailAST aAST)
+    {
+        return !(
+            (aAST.getParent() != null)
+                && (aAST.getParent().getType() == TokenTypes.LITERAL_CATCH));
+    }
+
