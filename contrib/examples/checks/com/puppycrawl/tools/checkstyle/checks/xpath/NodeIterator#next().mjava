@@ -1,0 +1,10 @@
+    /** @see java.util.Iterator#next() */
+    public Object next()
+    {
+        if (mNode == null)
+            throw new NoSuchElementException();
+        DetailAST ret = mNode;
+        mNode = getNextNode(mNode);
+        return ret;
+    }
+

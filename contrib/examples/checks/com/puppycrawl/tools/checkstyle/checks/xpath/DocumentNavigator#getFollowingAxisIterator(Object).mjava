@@ -1,0 +1,43 @@
+    /**
+     * Get an iterator over all following nodes, depth-first.
+     *
+     * @param contextNode The context node for the following axis.
+     * @return A possibly-empty iterator (not null).
+     */
+    public Iterator getFollowingAxisIterator(Object aObject)
+    {
+        return new NodeIterator((DetailAST) aObject)
+        {
+            protected DetailAST getFirstNode(DetailAST aAST)
+            {
+                if (aAST == null) {
+                    return null;
+                }
+                else {
+                    final DetailAST sibling = getNextSibling(aAST);
+                    if (sibling == null) {
+                        return getFirstNode(aAST.getParent());
+                    }
+                    else {
+                        return sibling;
+                    }
+                }
+            }
+
+            protected DetailAST getNextNode(DetailAST aAST)
+            {
+                if (aAST == null)
+                    return null;
+                else {
+                    DetailAST n = getFirstChild(aAST);
+                    if (n == null)
+                        n = getNextSibling(aAST);
+                    if (n == null)
+                        return getFirstNode(aAST.getParent());
+                    else
+                        return n;
+                }
+            }
+        };
+    }
+

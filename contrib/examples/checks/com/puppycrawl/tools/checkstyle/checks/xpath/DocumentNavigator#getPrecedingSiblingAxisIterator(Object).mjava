@@ -1,0 +1,21 @@
+    /**
+     * Get an iterator over all preceding siblings.
+     *
+     * @param contextNode The context node for the preceding sibling axis.
+     * @return A possibly-empty iterator (not null).
+     */
+    public Iterator getPrecedingSiblingAxisIterator(Object aObject) {
+        return new NodeIterator((DetailAST) aObject)
+        {
+            protected DetailAST getFirstNode(DetailAST aAST)
+            {
+                return getNextNode(aAST);
+            }
+
+            protected DetailAST getNextNode(DetailAST aAST)
+            {
+                return getPreviousSibling(aAST);
+            }
+        };
+    }
+

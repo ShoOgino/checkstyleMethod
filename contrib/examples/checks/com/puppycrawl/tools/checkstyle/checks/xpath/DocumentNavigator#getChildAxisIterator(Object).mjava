@@ -1,0 +1,22 @@
+    /**
+     * Get an iterator over all of this node's children.
+     *
+     * @param contextNode The context node for the child axis.
+     * @return A possibly-empty iterator (not null).
+     */
+    public Iterator getChildAxisIterator(Object aObject)
+    {
+        return new NodeIterator((DetailAST) aObject)
+        {
+            protected DetailAST getFirstNode(DetailAST aAST)
+            {
+                return getFirstChild(aAST);
+            }
+
+            protected DetailAST getNextNode(DetailAST aAST)
+            {
+                return getNextSibling(aAST);
+            }
+        };
+    }
+
