@@ -2,15 +2,17 @@
      * Returns the list of package names in a specified source.
      * @param aSource the source for the list.
      * @param aSourceName the name of the source.
+     * @param aClassLoader the class loader to load user's classes.
      * @return the list ofpackage names stored in aSource.
      * @throws CheckstyleException if an error occurs.
      */
     private static ModuleFactory loadModuleFactory(
-            InputSource aSource, String aSourceName)
+            InputSource aSource, String aSourceName, ClassLoader aClassLoader)
         throws CheckstyleException
     {
         try {
-            final PackageNamesLoader nameLoader = new PackageNamesLoader();
+            final PackageNamesLoader nameLoader =
+                new PackageNamesLoader(aClassLoader);
             nameLoader.parseInputSource(aSource);
             return nameLoader.getModuleFactory();
         }
