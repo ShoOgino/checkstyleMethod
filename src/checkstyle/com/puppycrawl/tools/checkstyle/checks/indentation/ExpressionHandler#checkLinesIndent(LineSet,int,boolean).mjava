@@ -34,7 +34,7 @@
         }
 
         if (aFirstLineMatches || startLine > mMainAst.getLineNo()) {
-            aIndentLevel += mIndentCheck.getIndentationAmount();
+            aIndentLevel += mIndentCheck.getBasicOffset();
         }
 
         // check following lines
@@ -56,7 +56,7 @@
             if (thisLine.matches("^\\s*\\.")
                 || prevLine.matches("\\.\\s*$"))
             {
-                aIndentLevel += mIndentCheck.getIndentationAmount();
+                aIndentLevel += mIndentCheck.getBasicOffset();
             }
 
             if (col != null) {
