@@ -1,0 +1,107 @@
+    /**
+    * Adds all packages and classes that are imported by this class
+    * to the class for later reference
+    */
+    private void addImports() throws ClassImportException {
+      IPackage java = new ExternalPackage("java", null);
+      IPackage lang = new ExternalPackage("lang", java);
+      java.addDefinition(lang);
+      _def.importPackage(lang);
+
+      Vector unprocessedImports = _def.getUnprocessedImports();
+      for ( int i = 0; i < unprocessedImports.size(); i++ ) {
+        SymTabAST importNode = (SymTabAST)unprocessedImports.get(i);
+        SymTabAST imported = (SymTabAST)importNode.getFirstChild();
+        SymTabAST lastPart = (SymTabAST)imported.getFirstChild().getNextSibling();
+
+        DotIterator it = new DotIterator(imported);
+        SymTabAST current = null;
+        String className = null;
+        IClass importedClass = null;
+
+        // attempt at each token to find the class
+        //   first in source
+        //   then on classpath
+        //
+        // if there are more tokens left
+        //   continue until you hit the last token
+        //   if it's a star
+        //     import all inner classes
+        //   else
+        //     import the explicitly named inner class
+        // else import the class
+        //
+        // if no classes were found, import the package
+
+        while(it.hasNext()) {
+          current = it.nextNode();
+          if (className == null) {
+            className = current.getText();
+          }
+          else {
+            if (!current.getText().equals("*")) {
+              className += "." + current.getText();
+            }
+            else {
+              break;
+            }
+          }
+          importedClass = findOrLoadClass(className, importedClass);
+
+          if (importedClass != null) {
+            break;
+          }
+        }
+
+        if (it.hasNext()) {
+          boolean isImported = false;
+          while(it.hasNext()) {
+            current = it.nextNode();
+            if (current.getText().equals("*")) {
+              importInnerClasses(importedClass);
+              isImported = true;
+            }
+            else {
+              className += "$" + current.getText();
+              importedClass = findOrLoadClass(className, importedClass);
+            }
+          }
+          if (!isImported) {
+            _def.importClass(importedClass);
+          }
+        }
+        else {
+          if (importedClass != null) {
+            _def.importClass(importedClass);
+          }
+          else {
+            if (current != null && current.getText().equals("*")) {
+              IPackage pkg = symbolTable.getPackage(className);
+              if (pkg == null) {
+                pkg = getPackage(className);
+              }
+              _def.importPackage(pkg);
+            }
+            else {
+              //TODO: can we safely ignore this?
+              //throw new ClassImportException(className);
+              ;
+            }
+          }
+        }
+
+        // now set definitions where appropriate
+        imported.ignoreChildren();
+        if ((lastPart.getType() == TokenTypes.IDENT)
+            //TODO: guard added for class not loaded
+            //This is OK for single file processing, but not
+            //multiple files.
+            && (importedClass != null)
+            )
+        {
+          lastPart.setDefinition(importedClass, null, true);
+          lastPart.setMeaningfulness(true);
+        }
+      }
+    }
+

@@ -1,0 +1,19 @@
+  public IClass getSuperclass() {
+    IClass result = null;
+    Class javaSuperclass = _javaClass.getSuperclass();
+
+    if (javaSuperclass != null) {
+      result = new ExternalClass(javaSuperclass);
+    }
+    else {
+      if (_javaClass.isInterface()) {
+        // according to Java, java.lang.Object is not the superclass of
+        // interfaces, which makes sense.  However, we need Object to be
+        // the superclass of everything to make type compatibility work.
+        result = new ExternalClass(Object.class);
+      }
+    }
+
+    return result;
+  }
+

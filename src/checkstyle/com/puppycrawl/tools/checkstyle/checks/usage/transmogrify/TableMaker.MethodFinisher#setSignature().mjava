@@ -1,0 +1,25 @@
+    /**
+    *
+    * setSignature adds a reference to the methods paramaters
+    * to the method definition
+    * @return <code>void</code>
+    * @see #makeVariableDef(SymTabAST, Definition)
+    * @see VariableFinisher
+    * @see net.sourceforge.transmogrify.symtab.MethodDef
+    */
+    private void setSignature() {
+      SymTabAST parametersNode
+        = _node.findFirstToken(TokenTypes.PARAMETERS);
+
+      SymTabAST parameterNode = (SymTabAST)(parametersNode.getFirstChild());
+      while ( parameterNode != null ) {
+        if (parameterNode.getType() == TokenTypes.PARAMETER_DEF) {
+            VariableDef parameter = makeVariableDef( parameterNode, _def );
+            new VariableFinisher( parameter ).finish();
+            _def.addParameter( parameter );
+        }
+        parameterNode = (SymTabAST)(parameterNode.getNextSibling());
+      }
+
+    }
+

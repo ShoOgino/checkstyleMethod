@@ -1,0 +1,18 @@
+    /**
+     * returns the <code>Vector</code> containing the <code>Scope</code>s related
+     * to the specified filename.
+     *
+     * @param fileName the fileName to find scopes for.
+     * @return Vector
+     */
+    private Vector getFileVector(String fileName) {
+        Vector result = (Vector) indexOfFiles.get(fileName);
+
+        if (result == null) {
+            result = new Vector();
+            indexOfFiles.put(fileName, result);
+        }
+
+        return result;
+    }
+

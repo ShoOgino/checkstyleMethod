@@ -1,0 +1,13 @@
+  public IMethod getConstructorDefinition(ISignature signature) {
+    IMethod result = null;
+
+    if (_javaClass.isInterface()) {
+      result = getInterfaceConstructor(signature);
+    }
+    else {
+      result = getClassConstructor(signature);
+    }
+
+    return result;
+  }
+

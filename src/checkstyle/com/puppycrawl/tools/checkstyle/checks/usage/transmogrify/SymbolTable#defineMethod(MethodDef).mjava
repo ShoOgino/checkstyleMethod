@@ -1,0 +1,14 @@
+  /**
+   * defines a method in the symbol table
+   *
+   * @param method the method to be defined
+   * @return <code>void</code>
+   * @see #indexScope(Scope)
+   * @see #getCurrentScope()
+   */
+  public void defineMethod(MethodDef method) {
+    indexScope(method);
+    final Scope scope = getCurrentScope();
+    ((ClassDef)getCurrentScope()).addDefinition(method);
+  }
+

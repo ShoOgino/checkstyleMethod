@@ -1,0 +1,44 @@
+  /**
+   * begins at the base of the Table and starts finishing definition creation.
+   *
+   * @param def <code>Definition</code> needs to be completed
+   * @return <code>void</code>
+   * @throws <code>SymbolTableException</code>
+   * @see ClassFinisher
+   * @see VariableFinisher
+   * @see MethodFinisher
+   * @see CatchFinisher
+   */
+  private void finishCreatingDefinition(Definition def) throws SymbolTableException {
+
+    if (def instanceof AnonymousInnerClass) {
+      AnonymousInnerClass innerClass = (AnonymousInnerClass)def;
+      innerClass.finishMakingDefinition();
+    }
+    else if (def instanceof ClassDef) {
+      new ClassFinisher((ClassDef)def).finish();
+    }
+    else if ( def instanceof VariableDef ) {
+      new VariableFinisher( (VariableDef)def ).finish();
+    }
+    else if (def instanceof DefaultConstructor) {}
+    else if ( def instanceof MethodDef ) {
+      new MethodFinisher( (MethodDef)def ).finish();
+    }
+    else if (def instanceof BlockDef) {
+      SymTabAST firstChild = (SymTabAST)def.getTreeNode().getFirstChild();
+      //handle Checkstyle grammar
+      if (firstChild.getType() == TokenTypes.LPAREN) {
+          firstChild = (SymTabAST) firstChild.getNextSibling();
+      }
+      if (firstChild.getType() == TokenTypes.PARAMETER_DEF) {
+        // this is a catch block
+        new CatchFinisher((BlockDef)def).finish();
+      }
+    }
+
+    if ( def instanceof Scope ) {
+      finishCreatingChildren((Scope)def);
+    }
+  }
+

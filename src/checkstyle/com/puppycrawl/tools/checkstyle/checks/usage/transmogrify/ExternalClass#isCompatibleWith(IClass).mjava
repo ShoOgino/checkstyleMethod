@@ -1,0 +1,31 @@
+  public boolean isCompatibleWith(IClass type) {
+    boolean result = false;
+
+    if (isPrimitive() && type.isPrimitive()) {
+      result = PrimitiveClasses.typesAreCompatible((ExternalClass)type,
+                                                     this);
+    }
+    else {
+      // check myself
+      if (type.equals(this)) {
+        result = true;
+      }
+      // check my superclass
+      else if (getSuperclass() != null && getSuperclass().isCompatibleWith(type)) {
+        result = true;
+      }
+      // check my interfaces
+      else if (_javaClass.getInterfaces().length > 0) {
+        Class[] interfaces = _javaClass.getInterfaces();
+        for (int i = 0; i < interfaces.length; i++) {
+          if (new ExternalClass(interfaces[i]).isCompatibleWith(type)) {
+            result = true;
+            break;
+          }
+        }
+      }
+    }
+
+    return result;
+  }
+

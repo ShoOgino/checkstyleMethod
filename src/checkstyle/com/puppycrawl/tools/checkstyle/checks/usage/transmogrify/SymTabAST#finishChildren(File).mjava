@@ -1,0 +1,37 @@
+    /**
+     * finishes children of this node definition process
+     * @param file file where this node belongs to
+     * @return <code>Span</code>
+     * @see #finishDefinition(File, SymTabAST, SymTabAST)
+     */
+    public Span finishChildren(File file) {
+        Span result = null;
+        SymTabAST previousSibling = null;
+        SymTabAST current = (SymTabAST) getFirstChild();
+
+        if (current == null) {
+            result = getSpan();
+        }
+        else {
+            while (current != null) {
+                Span childSpan =
+                    current.finishDefinition(file, this);
+
+                if (childSpan != null) {
+                    if (result == null) {
+                        result = new Span(childSpan);
+                    }
+                    else {
+                        result.compose(childSpan);
+                    }
+                }
+
+                SymTabAST temp = current;
+                current = (SymTabAST) current.getNextSibling();
+                previousSibling = temp;
+            }
+        }
+
+        return result;
+    }
+

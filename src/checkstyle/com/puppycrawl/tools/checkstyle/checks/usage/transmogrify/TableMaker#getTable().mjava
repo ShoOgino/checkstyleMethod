@@ -1,0 +1,19 @@
+  /**
+   * returns the <code>SymbolTable</code> that has been constructed by
+   * this <code>TableMaker</code>
+   *
+   * @return <code>SymbolTable</code>
+   * @throws <code>SymbolTableException</code>
+   */
+  public SymbolTable getTable() throws SymbolTableException {
+    if (symbolTable == null) {
+      symbolTable = new SymbolTable( _tree );
+
+      createDefinitions();
+
+      resolveReferences();
+    }
+
+    return symbolTable;
+  }
+

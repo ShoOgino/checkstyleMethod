@@ -1,0 +1,37 @@
+    /**
+     * Resolves a (binary) boolean expression.  The left and right sides of the
+     * expression
+     * are resolved in the process.
+     *
+     * @param expression the <code>SymTabAST</code> representing the boolean
+     *                   expression.
+     * @return the <code>Scope</code> for the boolean primitive type.
+     */
+    private IClass resolveBooleanExpression(
+        SymTabAST expression,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        IClass result = null;
+
+        SymTabAST leftChild = (SymTabAST) (expression.getFirstChild());
+        // handle Checkstyle grammar
+        while (leftChild.getType() == TokenTypes.LPAREN) {
+            leftChild = (SymTabAST) leftChild.getNextSibling();
+        }
+        resolveExpression(leftChild, location, context, referencePhase);
+        SymTabAST rightChild = (SymTabAST) (leftChild.getNextSibling());
+        // handle Checkstyle grammar
+        while (rightChild.getType() == TokenTypes.RPAREN) {
+            rightChild = (SymTabAST) rightChild.getNextSibling();
+        }
+
+        resolveExpression(rightChild, location, context, referencePhase);
+
+        result =
+            LiteralResolver.getResolver().getDefinition(
+                TokenTypes.LITERAL_BOOLEAN);
+
+        return result;
+    }
+

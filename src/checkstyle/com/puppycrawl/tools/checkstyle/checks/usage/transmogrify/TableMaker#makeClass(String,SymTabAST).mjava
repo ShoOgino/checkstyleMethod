@@ -1,0 +1,16 @@
+  /**
+   * creates <code>ClassDef</code> for the current class node and add it to the
+   * symbol table
+   * @param name name of the class
+   * @param tree current node to be processed
+   * @return <code>void</code>
+   * @see net.sourceforge.transmogrify.symtab.ClassDef
+   * @see net.sourceforge.transmogrify.symtab.SymbolTable
+   */
+  public void makeClass(String name, SymTabAST tree) {
+    ClassDef def = new ClassDef(name, symbolTable.getCurrentScope(), tree);
+    def.addUnprocessedImports(imports);
+    symbolTable.defineClass(def);
+    symbolTable.pushScope(def);
+  }
+

@@ -1,0 +1,20 @@
+    /**
+     * creates <code>ExternalClass</code> based on a java class
+     * @param className class to be loaded
+     * @return <code>IClass</code>
+     * @see net.sourceforge.transmogrify.symtab.ExternalClass
+     */
+    private IClass loadClass(String className) {
+      IClass result = null;
+
+      try {
+        Class javaClass
+          = ClassManager.getClassLoader().loadClass(className);
+
+        result = new ExternalClass(javaClass);
+      }
+      catch (ClassNotFoundException ignoreMe) {}
+
+      return result;
+    }
+

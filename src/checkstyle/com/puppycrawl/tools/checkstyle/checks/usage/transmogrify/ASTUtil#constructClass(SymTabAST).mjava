@@ -1,0 +1,14 @@
+    /**
+    * Returns the top Class name in the hierarchy represented by the SymTabAST.
+    *
+    * @return String
+    * @param tree the SymTabAST contaning the entire hierarcy of the object
+    */
+    public static String constructClass(SymTabAST tree) {
+        String fullName = constructDottedName(tree);
+
+        return fullName.substring(
+            fullName.lastIndexOf(".") + 1,
+            fullName.length());
+    }
+

@@ -1,0 +1,37 @@
+    /**
+     * Resolves an arithmetic expression.  Returns the <code>Scope</code> for
+     * the type to which the expression resolves.  Any references found during
+     * resolution are created and resolved.
+     *
+     * @param expression the <code>SymTabAST</code> representing the arithmetic
+     *                   expression.
+     *
+     * @return the <code>Scope</code> for the type to which the expression
+     *         evaluates.
+     */
+    private IClass resolveArithmeticExpression(
+        SymTabAST expression,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        IClass result = null;
+
+        SymTabAST leftChild = (SymTabAST) (expression.getFirstChild());
+        SymTabAST rightChild = (SymTabAST) (leftChild.getNextSibling());
+
+        IClass leftType =
+            (IClass) (resolveExpression(leftChild,
+                location,
+                context,
+                referencePhase));
+        IClass rightType =
+            (IClass) (resolveExpression(rightChild,
+                location,
+                context,
+                referencePhase));
+
+        result = binaryResultType(leftType, rightType);
+
+        return result;
+    }
+

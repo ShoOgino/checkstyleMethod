@@ -1,0 +1,34 @@
+    /**
+     * Returns the <code>ClassDef</code> for the type to which arithmetic
+     * expressions evaluate.
+     *
+     * @param a the <code>ClassDef</code> of the first operand.
+     * @param b the <code>ClassDef</code> of the second operand.
+     *
+     * @return the <code>ClassDef</code> to which the expression evaluates.
+     */
+    private IClass binaryResultType(IClass a, IClass b) {
+
+        IClass result = null;
+
+        // These may or may not be in line with the rules set forth in the java
+        // language specification.  Not being in line would be a BadThing(r).
+
+        IClass string = new ExternalClass(java.lang.String.class);
+
+        if (a.equals(string) || b.equals(string)) {
+            result = string;
+        }
+        else if (a.equals(PrimitiveClasses.BOOLEAN)) {
+            result = PrimitiveClasses.BOOLEAN;
+        }
+        else {
+            result =
+                PrimitiveClasses.binaryPromote(
+                    (ExternalClass) a,
+                    (ExternalClass) b);
+        }
+
+        return result;
+    }
+

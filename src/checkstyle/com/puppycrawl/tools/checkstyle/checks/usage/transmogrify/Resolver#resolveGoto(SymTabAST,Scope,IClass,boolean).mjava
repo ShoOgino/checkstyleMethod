@@ -1,0 +1,27 @@
+    /**
+     * resolves references in a a break statement
+     *
+     * @param expression the <code>SymTabAST</code> for the expression
+     * @param location the <code>Scope</code> where the expression occurs
+     * @param context the <code>Scope</code> in which the expression occurs
+     *                (where the search for a defintion begins)
+     *
+     * @return the <code>Scope</code> for the int primitive type
+     */
+    private IClass resolveGoto(
+        SymTabAST expression,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        SymTabAST label = (SymTabAST) (expression.getFirstChild());
+        // handle Checkstyle grammar
+        if (label != null && (label.getType() != TokenTypes.SEMI)) {
+            LabelDef def = location.getLabelDefinition(label.getText());
+            if (def != null) {
+                label.setDefinition(def, location, referencePhase);
+            }
+        }
+
+        return null;
+    }
+

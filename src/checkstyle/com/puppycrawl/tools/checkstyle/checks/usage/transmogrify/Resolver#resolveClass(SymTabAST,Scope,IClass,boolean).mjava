@@ -1,0 +1,27 @@
+    /**
+     * resolves Class type expression
+     * @param expr node to be resolved
+     * @param location scope of the <code>expr</code>
+     * @param context context of the <code>expr</code> if exists
+     * @param referencePhase <code>true</code> if this method is used to during
+     *                                         finding reference phase
+     *                       <code>false</code> otherwise
+     * @return <code>IClass</code> representing the type to which the
+     *         expression evalutes.
+     * @see #resolveDottedName(SymTabAST, Scope, IClass, boolean)
+     */
+    public IClass resolveClass(
+        SymTabAST expr,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+
+        IClass result =
+            resolveDottedName(expr, location, context, referencePhase);
+        if (result != null && referencePhase) {
+            expr.setDefinition(result, location, referencePhase);
+        }
+
+        return result;
+    }
+

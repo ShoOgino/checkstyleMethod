@@ -1,0 +1,17 @@
+/**
+   * processes the given <code>SymTabAST</code> and each of its siblings
+   *
+   * @param tree <code>SymTabAST</code> node to process
+   * @param makeAnonymousScopes
+   *
+   * @return <code>void</code>
+   * @see #walkTree(SymTabAST, boolean)
+   * @see net.sourceforge.transmogrify.symtab.antlr.SymTabAST
+   */
+  public void walkSiblings(SymTabAST tree, boolean makeAnonymousScopes) {
+    while(tree != null) {
+      walkTree(tree, makeAnonymousScopes);
+      tree = (SymTabAST)tree.getNextSibling();
+    }
+  }
+

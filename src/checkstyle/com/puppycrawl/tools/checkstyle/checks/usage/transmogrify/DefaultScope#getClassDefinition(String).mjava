@@ -1,0 +1,10 @@
+  public IClass getClassDefinition( String name ) {
+    IClass result = (ClassDef)classes.get(name);
+
+    if ( result == null && getParentScope() != null ) {
+      result = getParentScope().getClassDefinition( name );
+    }
+
+    return result;
+  }
+

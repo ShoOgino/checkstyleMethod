@@ -1,0 +1,16 @@
+    /**
+     * returns the most specific <code>Scope</code> to which the specified
+     * <code>Occurence</code> belongs.
+     *
+     * @param occ the <code>Occurrence</code> whose <code>Scope</code> we're interested in.
+     * @return Scope
+     */
+    public Scope lookup(Occurrence occ) {
+        String key = occ.getFile().getAbsolutePath();
+        Vector scopeList = getFileVector(key);
+
+        Scope result = findScope(scopeList, occ);
+
+        return result;
+    }
+

@@ -1,0 +1,13 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        if (mustCheckReferenceCount(aAST)) {
+            final DetailAST nameAST =
+                (DetailAST) aAST.findFirstToken(TokenTypes.IDENT);
+            RE regexp = getRegexp();
+            if ((regexp == null) || !regexp.match(nameAST.getText())) {
+                ASTManager.getInstance().registerCheckNode(this, nameAST);
+            }
+        }
+    }
+

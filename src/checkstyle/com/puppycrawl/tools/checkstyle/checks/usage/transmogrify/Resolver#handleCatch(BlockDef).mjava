@@ -1,0 +1,12 @@
+    /**
+     * processes a catch block and resolves references in it
+     *
+     * @param block the <code>BlockDef</code> to process
+     */
+    private void handleCatch(BlockDef block) {
+        SymTabAST node = block.getTreeNode();
+
+        SymTabAST slist = node.findFirstToken(TokenTypes.SLIST);
+        handleSList(slist, block);
+    }
+

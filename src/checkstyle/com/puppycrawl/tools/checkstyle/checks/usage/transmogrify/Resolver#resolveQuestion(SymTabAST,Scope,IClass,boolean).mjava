@@ -1,0 +1,27 @@
+    private IClass resolveQuestion(
+        SymTabAST question,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        SymTabAST test = (SymTabAST) question.getFirstChild();
+        while (test.getType() == TokenTypes.LPAREN) {
+            test = (SymTabAST) test.getNextSibling();
+        }
+        SymTabAST leftBranch = (SymTabAST) test.getNextSibling();
+        while (leftBranch.getType() == TokenTypes.RPAREN) {
+            leftBranch = (SymTabAST) leftBranch.getNextSibling();
+        }
+        SymTabAST rightBranch = (SymTabAST) leftBranch.getNextSibling();
+        if (rightBranch.getType() == TokenTypes.COLON) {
+            rightBranch = (SymTabAST) rightBranch.getNextSibling();
+        }
+
+        resolveExpression(test, location, context, referencePhase);
+        IClass leftClass =
+            resolveExpression(leftBranch, location, context, referencePhase);
+        IClass rightClass =
+            resolveExpression(rightBranch, location, context, referencePhase);
+
+        return moreGeneral(leftClass, rightClass);
+    }
+

@@ -1,0 +1,16 @@
+    /**
+     * prints the line, column and file for this node for debugging purpose
+     * @return <code>String</code>
+     */
+    public String toString() {
+        //StringBuffer resultBuffer = new StringBuffer(super.toString());
+        StringBuffer resultBuffer = new StringBuffer(prefixString(true));
+        resultBuffer.append("[" + getLineNo() + "," + getColumnNo() + "]");
+        //if ( getSpan() != null ) {
+        //  resultBuffer.append( " spans " + getSpan() );
+        //}
+        resultBuffer.append(" in " + getFile());
+        //resultBuffer.append(" type: " + getType());
+        return resultBuffer.toString();
+    }
+

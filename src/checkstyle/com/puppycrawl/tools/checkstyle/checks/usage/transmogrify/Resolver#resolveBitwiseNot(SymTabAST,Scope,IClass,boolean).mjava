@@ -1,0 +1,14 @@
+    private IClass resolveBitwiseNot(
+        SymTabAST expression,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        IClass result = null;
+        SymTabAST child = (SymTabAST) expression.getFirstChild();
+        result = resolveExpression(child, location, context, referencePhase);
+
+        result = PrimitiveClasses.unaryPromote(result);
+
+        return result;
+    }
+

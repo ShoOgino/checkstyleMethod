@@ -1,0 +1,18 @@
+    /**
+     * Determines the reference count for a DetailAST.
+     * @param aAST the DetailAST to count.
+     * @return the number of references to aAST. 
+     */
+    private int getReferenceCount(DetailAST aAST)
+    {
+        final SymTabAST ident = ASTManager.getInstance().get(aAST);
+        final Definition definition =
+            (Definition)ident.getDefinition();
+        if (definition != null) {
+            return definition.getNumReferences();
+        }
+        else {
+            return 0;
+        }
+    }
+

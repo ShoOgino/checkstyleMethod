@@ -1,0 +1,13 @@
+    /**
+     * processes a label and resolves references in it
+     *
+     * @param label the <code>LabelDef</code> to process
+     */
+    protected void handleLabel(LabelDef label) {
+        SymTabAST node = label.getTreeNode();
+        ((SymTabAST) node.getFirstChild()).setDefinition(
+            label,
+            label.getParentScope(),
+            true);
+    }
+

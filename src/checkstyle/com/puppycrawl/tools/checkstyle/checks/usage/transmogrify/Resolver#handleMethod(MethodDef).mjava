@@ -1,0 +1,42 @@
+    /**
+     * processes a <code>MethodDef</code> and resolves references in it
+     *
+     * @param method the <code>MethodDef</code> to process
+     */
+    protected void handleMethod(MethodDef method) {
+        SymTabAST node = method.getTreeNode();
+
+        SymTabAST nameNode = node.findFirstToken(TokenTypes.IDENT);
+        nameNode.setDefinition(method, method, true);
+
+        // references to classes in return type
+        SymTabAST returnTypeNode = node.findFirstToken(TokenTypes.TYPE);
+
+        if (returnTypeNode != null) {
+            // this is not a constructor
+            resolveExpression(returnTypeNode, method, null, true);
+        }
+
+        SymTabAST throwsNode =
+            node.findFirstToken(TokenTypes.LITERAL_THROWS);
+        if (throwsNode != null) {
+            SymTabAST exception = (SymTabAST) throwsNode.getFirstChild();
+            while (exception != null) {
+                // handle Checkstyle grammar
+                if (exception.getType() != TokenTypes.COMMA) {
+                    resolveClass(exception, method, null, true);
+                }
+                exception = (SymTabAST) exception.getNextSibling();
+            }
+        }
+
+        // references to classes in parameters
+
+        // the body -- this would be better its own function
+        SymTabAST slist = node.findFirstToken(TokenTypes.SLIST);
+
+        if (slist != null) {
+            handleSList(slist, method);
+        }
+    }
+

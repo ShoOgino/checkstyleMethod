@@ -1,0 +1,11 @@
+  public Iterator getReferences(Occurrence location) {
+    Iterator result = null;
+
+    SymTabAST node = getWordNodeAtOccurrence(location);
+    if ( node != null && node.getDefinition() != null ) {
+      result = node.getDefinition().getReferences();
+    }
+
+    return result;
+  }
+

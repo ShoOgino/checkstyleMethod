@@ -1,0 +1,18 @@
+    /**
+     * Registers a node for checking.
+     * @param aCheck the check to apply.
+     * @param aNode the node to check.
+     */
+    public void registerCheckNode(AbstractUsageCheck aCheck, AST aNode)
+    {
+        Set nodeSet = (Set) mCheckNodes.get(aCheck);
+        if (nodeSet == null) {
+            nodeSet = new HashSet();
+            nodeSet.add(aNode);
+            mCheckNodes.put(aCheck, nodeSet);
+        }
+        else {
+            nodeSet.add(aNode);
+        }
+    }
+

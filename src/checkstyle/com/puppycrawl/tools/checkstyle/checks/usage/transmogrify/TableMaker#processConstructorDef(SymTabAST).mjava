@@ -1,0 +1,20 @@
+  /**
+   * process the given SymTabAST as a constructor definition
+   *
+   * @param tree the SymTabAST to process
+   * @return <code>void</code>
+   * @see net.sourceforge.transmogrify.symtab.MethodDef
+   * @see net.sourceforge.transmogrify.symtab.SymbolTable
+   * @see #walkTree(SymTabAST, boolean)
+   */
+  public void processConstructorDef(SymTabAST tree) {
+    String name = tree.findFirstToken(TokenTypes.IDENT).getText();
+    MethodDef constructor = new MethodDef(name, symbolTable.getCurrentScope(),
+                                          tree);
+    symbolTable.defineMethod( constructor );
+
+    symbolTable.pushScope( constructor );
+    walkTree(tree.findFirstToken(TokenTypes.SLIST), false);
+    symbolTable.popScope();
+  }
+

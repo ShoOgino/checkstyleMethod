@@ -1,0 +1,25 @@
+  /**
+   * returns the fully qualifed name of this defintion.  The name of
+   * the parentScope and all of its parents are considered when constructing
+   * this name.
+   *
+   * @return the fully qualified name of this definition
+   */
+  public String getQualifiedName() {
+    String nameToUse = _name;
+    String result;
+
+    if (_name == null) {
+      nameToUse = "~NO NAME~";
+    }
+
+    if (getParentScope() != null &&
+         !(getParentScope() instanceof BaseScope)) {
+      result = getParentScope().getQualifiedName() + "." + nameToUse;
+    }
+    else {
+      result = nameToUse;
+    }
+    return result;
+  }
+

@@ -1,0 +1,20 @@
+    /**
+     * Gets the nodes to check with a usage check.
+     * @param aCheck the usage check.
+     * @return the nodes to check with aCheck.
+     * @throws SymbolTableException if there is an error.
+     */
+    public Set getCheckNodes(AbstractUsageCheck aCheck)
+        throws SymbolTableException
+    {
+        // lazy initialization
+        if (mCompleteTree == null) {
+              buildTree();
+        }
+        Set result = (Set) mCheckNodes.get(aCheck);
+        if (result == null) {
+            result = new HashSet();
+        }
+        return result;
+    }
+

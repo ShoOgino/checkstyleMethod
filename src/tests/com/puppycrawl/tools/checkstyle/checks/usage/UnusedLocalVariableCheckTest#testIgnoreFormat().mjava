@@ -1,0 +1,12 @@
+    public void testIgnoreFormat() throws Exception
+        {
+            final DefaultConfiguration checkConfig =
+                createCheckConfig(UnusedLocalVariableCheck.class);
+            checkConfig.addAttribute("ignoreFormat", "Array$");
+            final String[] expected = {
+                "13:13: Unread local variable 'mUnreadPrimitive'.",
+                "24:16: Unread local variable 'unreadObject'.",
+            };
+            verify(checkConfig, getPath("usage/InputUnusedLocal.java"), expected);
+        }
+

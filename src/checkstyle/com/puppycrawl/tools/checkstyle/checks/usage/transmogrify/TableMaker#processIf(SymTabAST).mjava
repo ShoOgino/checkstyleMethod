@@ -1,0 +1,35 @@
+  /**
+   * process the given SymTabAST as an if block
+   *
+   * @param tree the SymTabAST to process
+   * @return <code>void</code>
+   * @see #makeBlock(SymTabAST)
+   * @see #walkTree(SymTabAST, boolean)
+   * @see #processElse(SymTabAST)
+   */
+  public void processIf(SymTabAST tree) {
+    BlockDef block = makeBlock((SymTabAST)tree);
+
+    SymTabAST expr = tree.findFirstToken(TokenTypes.EXPR);
+    SymTabAST ifBranch = (SymTabAST)expr.getNextSibling();
+    // handle Checkstyle grammar
+    if (ifBranch.getType() == TokenTypes.RPAREN) {
+        ifBranch = (SymTabAST) ifBranch.getNextSibling();
+    }
+    SymTabAST elseBranch = (SymTabAST)ifBranch.getNextSibling();
+    // handle Checkstyle grammar
+    if ((elseBranch != null) && (elseBranch.getType() == TokenTypes.SEMI)) {
+            elseBranch = (SymTabAST) elseBranch.getNextSibling();
+    }
+    if ((elseBranch != null) && (elseBranch.getType() == TokenTypes.LITERAL_ELSE)) {
+        elseBranch = (SymTabAST) elseBranch.getFirstChild();
+    }
+
+    symbolTable.pushScope( block );
+    walkTree(expr, false);
+    walkTree(ifBranch, false);
+    symbolTable.popScope();
+
+    processElse(elseBranch);
+  }
+

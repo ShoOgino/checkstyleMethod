@@ -1,0 +1,19 @@
+    private IClass resolveArrayAccess(
+        SymTabAST node,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+
+        SymTabAST arrayNode = (SymTabAST) (node.getFirstChild());
+        SymTabAST exprNode = (SymTabAST) (arrayNode.getNextSibling());
+
+        ArrayDef array =
+            (ArrayDef) resolveExpression(arrayNode,
+                location,
+                context,
+                referencePhase);
+        resolveExpression(exprNode, location, context, referencePhase);
+
+        return array.getType();
+    }
+

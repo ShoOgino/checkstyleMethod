@@ -1,0 +1,13 @@
+    /**
+     * stores the inner classes in the approriate ClassDef
+     * @param outerClass
+     * @return <code>void</code>
+     */
+    private void importInnerClasses(IClass outerClass) {
+      IClass[] innerClasses = outerClass.getInnerClasses();
+
+      for (int i = 0; i < innerClasses.length; i++) {
+        _def.importClass(innerClasses[i]);
+      }
+    }
+

@@ -1,0 +1,20 @@
+  /**
+   * process the given SymTabAST as a method definition
+   *
+   * @param tree the SymTabAST to process
+   * @return <code>void</code>
+   * @see net.sourceforge.transmogrify.symtab.MethodDef
+   * @see net.sourceforge.transmogrify.symtab.SymbolTable
+   * @see #walkTree(SymTabAST, boolean)
+   */
+  public void processMethodDef(SymTabAST tree) {
+    String name = tree.findFirstToken(TokenTypes.IDENT).getText();
+    MethodDef method = new MethodDef(name, symbolTable.getCurrentScope(),
+                                     tree);
+    symbolTable.defineMethod( method );
+
+    symbolTable.pushScope( method );
+    walkTree(tree.findFirstToken(TokenTypes.SLIST), false);
+    symbolTable.popScope();
+  }
+

@@ -1,0 +1,10 @@
+  public IMethod getMethodDefinition(String name,
+                                     ISignature signature) {
+    IMethod result = null;
+    if (getParentScope() != null) {
+      result = getParentScope().getMethodDefinition(name, signature);
+    }
+
+    return result;
+  }
+

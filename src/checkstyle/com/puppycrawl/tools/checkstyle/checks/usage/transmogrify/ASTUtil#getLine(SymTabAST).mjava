@@ -1,0 +1,29 @@
+    /**
+     * gets a line number for the tree;  if the current SymTabAST node does not have one associated
+     * with it, traverse its children until a line number is found.  Failure results in line
+     * number value of 0.
+     *
+     * @param tree the SymTabAST to process
+     *
+     * @return int the resulting line number (0 if none is found)
+     */
+    public static int getLine(SymTabAST tree) {
+        SymTabAST indexedNode = (SymTabAST) tree;
+
+        // find a node that actually has line number info
+        if (indexedNode.getLineNo() == 0) {
+            indexedNode = (SymTabAST) indexedNode.getFirstChild();
+
+            while (indexedNode != null && indexedNode.getLineNo() == 0) {
+                indexedNode = (SymTabAST) indexedNode.getNextSibling();
+            }
+
+            if (indexedNode == null) {
+                // we're screwed
+                indexedNode = (SymTabAST) tree;
+            }
+        }
+
+        return indexedNode.getLineNo();
+    }
+

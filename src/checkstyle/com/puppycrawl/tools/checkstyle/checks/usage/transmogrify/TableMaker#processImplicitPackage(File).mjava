@@ -1,0 +1,20 @@
+  /**
+   * processes a java class that use default no package
+   *
+   * @param file <code>File</code> object of the java class
+   * @return <code>void</code>
+   * @see net.sourceforge.transmogrify.symtab.PackageDef
+   * @see net.sourceforge.transmogrify.symtab.SymbolTable
+   */
+  public void processImplicitPackage( File file ) {
+    String name = file.getParent();
+    PackageDef pkg = symbolTable.getPackage( name );
+
+    if ( pkg == null ) {
+      pkg = new PackageDef( name, symbolTable.getBaseScope(), null );
+      symbolTable.definePackage( pkg, symbolTable.getBaseScope() );
+    }
+
+    symbolTable.pushScope( pkg );
+  }
+

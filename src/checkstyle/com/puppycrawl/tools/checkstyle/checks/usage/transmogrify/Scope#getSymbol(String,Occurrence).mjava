@@ -1,0 +1,16 @@
+  public Reference getSymbol(String name, Occurrence location) {
+    Reference result = null;
+
+    for (Iterator it = getReferencesIn(); it.hasNext(); ) {
+      Reference reference = (Reference)it.next();
+//      if (name.equals(reference.getName())) {
+        if (reference.getLine() == location.getLine() &&
+            reference.getColumn() == location.getColumn()) {
+          result = reference;
+          break;
+        }
+//      }
+    }
+    return result;
+  }
+

@@ -1,0 +1,93 @@
+    /**
+     * Resolves a method call.
+     *
+     * @param methodNode the <code>SymTabAST</code> for the METHOD_CALL node
+     * @param location the <code>Scope</code> where the expression occurs
+     * @param context the <code>Scope</code> in which the expression occurs
+     *                (where the search for a defintion begins)
+     * @param referencePhase whether or not this is the reference phase of
+     *                       table construction
+     *
+     * @return the <code>ClassDef</code> for the type returned by the method
+     */
+    private IClass resolveMethod(
+        SymTabAST methodNode,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        IClass result = new UnknownClass(methodNode.getText(), methodNode);
+        IClass newContext = null;
+
+        if (context == null) {
+            newContext = location.getEnclosingClass();
+        }
+        else {
+            newContext = context;
+        }
+
+        String name = null;
+        boolean createReference = true;
+
+        SymTabAST nameNode = (SymTabAST) (methodNode.getFirstChild());
+        SymTabAST parametersNode = (SymTabAST) (nameNode.getNextSibling());
+
+        ISignature signature =
+            resolveParameters(
+                parametersNode,
+                location,
+                context,
+                referencePhase);
+
+        if (nameNode.getType() == TokenTypes.IDENT) {
+            name = nameNode.getText();
+        }
+        else if (
+            nameNode.getType() == TokenTypes.LITERAL_SUPER
+                || (nameNode.getType() == TokenTypes.SUPER_CTOR_CALL)) {
+            IClass superclass = location.getEnclosingClass().getSuperclass();
+            newContext = superclass;
+            name = superclass.getName();
+            createReference = false;
+        }
+        else if (nameNode.getType() == TokenTypes.LITERAL_THIS) {
+            newContext = location.getEnclosingClass();
+            name = newContext.getName();
+            createReference = false;
+        }
+        else {
+            // REDTAG -- doing dotted name resolution on its own
+            SymTabAST contextNode = (SymTabAST) (nameNode.getFirstChild());
+            //TODO: handle Checkstyle grammar
+            nameNode = (SymTabAST) contextNode.getNextSibling();
+            //skip to IDENT
+            while (nameNode.getType() != TokenTypes.IDENT) {
+                nameNode = (SymTabAST) nameNode.getNextSibling();
+            }
+            
+            name = nameNode.getText();
+            newContext =
+                resolveExpression(
+                    contextNode,
+                    location,
+                    context,
+                    referencePhase);
+        }
+
+        if (newContext != null) {
+            IMethod method = newContext.getMethodDefinition(name, signature);
+
+            if (method != null) {
+                if (createReference && referencePhase) {
+                    nameNode.setDefinition(method, location, referencePhase);
+                }
+                result = method.getType();
+            }
+        }
+
+        if (result == null) {
+            result = new UnknownClass(methodNode.getText(), methodNode);
+        }
+
+        return result;
+    }
+

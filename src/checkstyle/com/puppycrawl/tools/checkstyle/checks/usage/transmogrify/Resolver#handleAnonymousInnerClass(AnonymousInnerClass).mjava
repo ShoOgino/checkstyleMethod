@@ -1,0 +1,9 @@
+    protected void handleAnonymousInnerClass(AnonymousInnerClass innerClass) {
+        SymTabAST objblock = innerClass.getTreeNode();
+        SymTabAST expression = (SymTabAST) objblock.getFirstChild();
+        while (expression != null) {
+            resolveExpression(expression, innerClass, null, true);
+            expression = (SymTabAST) expression.getNextSibling();
+        }
+    }
+

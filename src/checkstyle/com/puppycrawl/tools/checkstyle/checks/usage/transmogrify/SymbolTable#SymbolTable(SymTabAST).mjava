@@ -1,0 +1,12 @@
+  /**
+   * constructor takes <code>SymTabAST</code>
+   * @param root root of the <code>SymTabAST</code> tree
+   */
+  public SymbolTable(SymTabAST root) {
+    scopes = new Stack();
+    this.root = root;
+
+    baseScope = new BaseScope( this );
+    pushScope(baseScope);
+  }
+

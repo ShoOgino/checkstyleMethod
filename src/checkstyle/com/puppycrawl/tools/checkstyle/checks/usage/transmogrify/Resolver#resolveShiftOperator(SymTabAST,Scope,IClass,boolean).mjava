@@ -1,0 +1,19 @@
+    private IClass resolveShiftOperator(
+        SymTabAST expression,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        IClass result = null;
+
+        SymTabAST leftChild = (SymTabAST) expression.getFirstChild();
+        SymTabAST rightChild = (SymTabAST) leftChild.getNextSibling();
+
+        result =
+            resolveExpression(leftChild, location, context, referencePhase);
+        resolveExpression(rightChild, location, context, referencePhase);
+
+        result = PrimitiveClasses.unaryPromote(result);
+
+        return result;
+    }
+

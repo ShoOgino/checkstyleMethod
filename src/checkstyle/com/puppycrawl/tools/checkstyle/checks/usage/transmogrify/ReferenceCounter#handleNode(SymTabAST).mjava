@@ -1,0 +1,13 @@
+  protected void handleNode( SymTabAST node ) {
+    if (node.getType() == TokenTypes.IDENT && node.isMeaningful()) {
+      _references.add( node );
+      if (node.getDefinition() != null && !(node.getDefinition() instanceof UnknownClass)) {
+            _resolvedReferences.add( node );
+      }
+      else {
+            _unresolvedReferences.add( node );
+      }
+    }
+    walkChildren( node );
+  }
+

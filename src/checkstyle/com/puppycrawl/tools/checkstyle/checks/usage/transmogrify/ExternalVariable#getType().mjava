@@ -1,0 +1,20 @@
+  /**
+   * Returns the <code>Type</code> of the variable.
+   *
+   * @see TypedDef
+   *
+   * @return the <code>Type</code> of the variable
+   */
+  public IClass getType() {
+    IClass result = null;
+
+    if (_javaField.getType().isArray()) {
+      result = new ArrayDef(new ExternalClass(_javaField.getType().getComponentType()));
+    }
+    else {
+      result = new ExternalClass(_javaField.getType());
+    }
+
+    return result;
+  }
+

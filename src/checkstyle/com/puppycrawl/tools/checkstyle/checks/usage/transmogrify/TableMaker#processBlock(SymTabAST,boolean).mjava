@@ -1,0 +1,18 @@
+  /**
+   * processes the current tree node as BlockDef
+   * @param tree current tree node
+   * @param makeAnonymousScopes
+   * @return <code>void</code>
+   */
+  public void processBlock(SymTabAST tree, boolean makeAnonymousScopes) {
+    BlockDef block = makeBlock((SymTabAST)tree);
+    symbolTable.pushScope(block);
+    //handle Checkstyle grammar
+    SymTabAST child = (SymTabAST)tree.getFirstChild();
+    if ((child != null) && (child.getType() == TokenTypes.LPAREN)) {
+        child = (SymTabAST) child.getNextSibling();
+    }
+    walkSiblings((SymTabAST)child, makeAnonymousScopes);
+    symbolTable.popScope();
+  }
+

@@ -1,0 +1,27 @@
+    /**
+     * resolves references in an instanceof expression
+     *
+     * @param expression the <code>SymTabAST</code> of the expression
+     * @param location the <code>Scope</code> where the expression occurs
+     * @param context the <code>Scope</code> in which the expression occurs
+     *                (where the search for a defintion begins)
+     *
+     * @return the resulting scope of the expression (the type to which it evaluates)
+     */
+    private IClass resolveInstanceOf(
+        SymTabAST expression,
+        Scope location,
+        IClass context,
+        boolean referencePhase) {
+        SymTabAST leftNode = (SymTabAST) (expression.getFirstChild());
+        SymTabAST rightNode = (SymTabAST) (leftNode.getNextSibling());
+
+        resolveExpression(leftNode, location, context, referencePhase);
+
+        SymTabAST classNameNode = (SymTabAST) (rightNode.getFirstChild());
+        resolveClass(classNameNode, location, context, referencePhase);
+
+        LiteralResolver literalResolver = LiteralResolver.getResolver();
+        return literalResolver.getDefinition(TokenTypes.LITERAL_BOOLEAN);
+    }
+

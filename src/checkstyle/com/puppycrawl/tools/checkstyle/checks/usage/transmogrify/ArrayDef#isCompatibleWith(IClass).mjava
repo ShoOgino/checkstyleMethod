@@ -1,0 +1,12 @@
+  public boolean isCompatibleWith(IClass type) {
+    boolean result = false;
+    if (type.equals(new ExternalClass(Object.class))) {
+      result = true;
+    }
+    else if (type instanceof ArrayDef) {
+      result = getType().isCompatibleWith(((ArrayDef)type).getType());
+    }
+
+    return result;
+  }
+

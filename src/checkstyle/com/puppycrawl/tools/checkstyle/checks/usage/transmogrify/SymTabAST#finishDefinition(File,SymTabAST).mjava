@@ -1,0 +1,34 @@
+    /**
+     * finishes process for adding node to its parent
+     * @param file file where this node belongs to
+     * @param parent parent of this node
+     * @param previousSibling previous sibling of this node
+     * @return <code>Span</code> the span of this node
+     * @see #setFile(File)
+     * @see #setParent(SymTabAST)
+     * @see #setPreviousSibling(SymTabAST)
+     * @see #finishChildren(File)
+     * @see #setSpan(Span)
+     */
+    public Span finishDefinition(
+        File file,
+        SymTabAST parent) {
+        setFile(file);
+        setParent(parent);
+
+        Span result = finishChildren(file);
+
+        if (getLineNo() != 0) {
+            result.compose(
+                new Span(
+                    getLineNo(),
+                    getColumnNo(),
+                    getLineNo(),
+                    getColumnNo()
+                        + ((getText() == null) ? 0 : getText().length() - 1)));
+        }
+
+        setSpan(result);
+        return result;
+    }
+
