@@ -1,0 +1,13 @@
+    public void testLCurlyOther()
+        throws Exception
+    {
+        mConfig.setJavadocScope(Scope.NOTHING);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputLeftCurlyOther.java");
+        assertNotNull(c);
+        final String[] expected = {
+            filepath + ":33: '{' should be on the previous line.",
+        };
+        verify(c, filepath, expected);
+    }
+
