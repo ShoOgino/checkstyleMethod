@@ -1,0 +1,16 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST nameAST = (DetailAST) aAST.getFirstChild();
+        final StringBuffer buf = new StringBuffer();
+        extractIdent(buf, nameAST);
+        final String text = buf.toString();
+
+        if (!getRegexp().match(text)) {
+            log(nameAST.getLineNo(),
+                "name.invalidPattern",
+                text,
+                getFormat());
+        }
+    }
+

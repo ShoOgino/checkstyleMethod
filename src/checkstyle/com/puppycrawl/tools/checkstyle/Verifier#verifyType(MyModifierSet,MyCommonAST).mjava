@@ -5,12 +5,6 @@
      **/
     void verifyType(MyModifierSet aMods, MyCommonAST aType)
     {
-        if (!mConfig.getTypeRegexp().match(aType.getText())) {
-            mMessages.add(aType.getLineNo(), aType.getColumnNo(),
-                          "name.invalidPattern",
-                          aType.getText(), mConfig.getTypePat());
-        }
-
         // Always check that the order of modifiers follows the JLS suggestion
         checkModOrder(aMods);
 

@@ -2,7 +2,7 @@
     public void visitToken(DetailAST aAST)
     {
         final DetailAST nameAST =
-            (DetailAST) aAST.getFirstChild().getNextSibling().getNextSibling();
+            (DetailAST) aAST.getFirstChild().getNextSibling();
         if (!getRegexp().match(nameAST.getText())) {
             log(nameAST.getLineNo(),
                 nameAST.getColumnNo(),
@@ -10,6 +10,5 @@
                 nameAST.getText(),
                 getFormat());
         }
-
     }
 

@@ -1,8 +1,9 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        final DetailAST nameAST =
-            (DetailAST) aAST.getFirstChild().getNextSibling().getNextSibling();
+        final DetailAST nameAST = (DetailAST)
+            aAST.getFirstChild().getNextSibling().getNextSibling();
+
         if (!getRegexp().match(nameAST.getText())) {
             log(nameAST.getLineNo(),
                 nameAST.getColumnNo(),
@@ -10,6 +11,5 @@
                 nameAST.getText(),
                 getFormat());
         }
-
     }
 

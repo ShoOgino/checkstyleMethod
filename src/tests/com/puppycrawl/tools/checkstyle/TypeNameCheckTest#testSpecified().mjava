@@ -1,0 +1,13 @@
+    public void testSpecified()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(TypeNameCheck.class.getName());
+        checkConfig.addProperty("format", "^inputHe");
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("inputHeader.java");
+        final String[] expected = {
+        };
+        verify(c, fname, expected);
+    }
+
