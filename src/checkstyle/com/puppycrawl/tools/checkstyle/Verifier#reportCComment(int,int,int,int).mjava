@@ -8,15 +8,5 @@
     void reportCComment(int aStartLineNo, int aStartColNo,
                         int aEndLineNo, int aEndColNo)
     {
-        final String[] cc = extractCComment(aStartLineNo, aStartColNo,
-                                            aEndLineNo, aEndColNo);
-
-        // Check for to-do comments
-        for (int i = 0; i < cc.length; i++) {
-            if (mConfig.getTodoRegexp().match(cc[i])) {
-                mMessages.add(aStartLineNo + i, "todo.match",
-                              mConfig.getTodoPat());
-            }
-        }
     }
 
