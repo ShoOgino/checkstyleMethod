@@ -1,12 +1,12 @@
-    public void testNoHeader()
-        throws Exception
+    public void testEmptyFilename()
+            throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(HeaderCheck.class);
-        // No header file specified
+        checkConfig.addAttribute("headerFile", "");
         try {
             createChecker(checkConfig);
-            fail();
+            fail("Checker creation should not succeed with invalid headerFile");
         }
         catch (CheckstyleException ex) {
             // expected exception
