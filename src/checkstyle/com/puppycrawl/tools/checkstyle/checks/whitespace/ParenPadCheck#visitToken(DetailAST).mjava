@@ -4,7 +4,9 @@
         // Strange logic in this method to guard against checking RPAREN tokens
         // that are associated with a TYPECAST token.
         if (aAST.getType() != TokenTypes.RPAREN) {
-            processLeft(aAST);
+            if (!isPreceedsEmptyForInit(aAST)) {
+                processLeft(aAST);
+            }
         }
         else if ((aAST.getParent() == null)
                  || (aAST.getParent().getType() != TokenTypes.TYPECAST))

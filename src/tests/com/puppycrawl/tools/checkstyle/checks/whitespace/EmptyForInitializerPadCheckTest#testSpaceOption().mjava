@@ -1,0 +1,9 @@
+    public void testSpaceOption() throws Exception
+    {
+        mCheckConfig.addAttribute("option", PadOption.SPACE.toString());
+        final String[] expected = {
+            "51:13: ';' is not preceded with whitespace.",
+        };
+        verify(mCheckConfig, getPath("InputForWhitespace.java"), expected);
+    }
+

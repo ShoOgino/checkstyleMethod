@@ -1,0 +1,26 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        if (aAST.getChildCount() == 0) {
+            //empty for initializer. test pad before semi.
+            final DetailAST semi = (DetailAST) aAST.getNextSibling();
+            final int semiLineIdx = semi.getLineNo() - 1;
+            final String line = getLines()[semiLineIdx];
+            final int before = semi.getColumnNo() - 1;
+            //don't check if semi at beginning of line
+            if (!Utils.whitespaceBefore(before, line)) {
+                final AbstractOption abstractOption = getAbstractOption();
+                if ((PadOption.NOSPACE == abstractOption)
+                    && (Character.isWhitespace(line.charAt(before))))
+                {
+                    log(semi.getLineNo(), before, "ws.preceded", ";");
+                }
+                else if ((PadOption.SPACE == abstractOption)
+                         && !Character.isWhitespace(line.charAt(before)))
+                {
+                    log(semi.getLineNo(), before, "ws.notPreceded", ";");
+                }
+            }
+        }
+    }
+
