@@ -1,0 +1,35 @@
+    /** {@inheritDoc} */
+    public void visitToken(DetailAST aAST)
+    {
+        DetailAST nextNode = (DetailAST) aAST.getNextSibling();
+        final boolean isCommaSeparated =
+            (nextNode != null && nextNode.getType() == TokenTypes.COMMA);
+
+        if (nextNode == null) {
+            // no next statement - no check
+            return;
+        }
+
+        if (nextNode.getType() == TokenTypes.COMMA
+            || nextNode.getType() == TokenTypes.SEMI)
+        {
+            nextNode = (DetailAST) nextNode.getNextSibling();
+        }
+
+        if (nextNode != null && nextNode.getType() == TokenTypes.VARIABLE_DEF) {
+            final DetailAST firstNode = CheckUtils.getFirstNode(aAST);
+            if (isCommaSeparated) {
+                log(firstNode, "multiple.variable.declarations.comma");
+                return;
+            }
+
+            final DetailAST lastNode = getLastNode(aAST);
+            final DetailAST firstNextNode = CheckUtils.getFirstNode(nextNode);
+
+            if (firstNextNode.getLineNo() == lastNode.getLineNo()) {
+                log(firstNode, "multiple.variable.declarations");
+            }
+        }
+
+    }
+

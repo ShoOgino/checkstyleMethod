@@ -6,7 +6,7 @@
     {
         if (!aParam.branchContains(TokenTypes.FINAL)) {
             final DetailAST paramName = aParam.findFirstToken(TokenTypes.IDENT);
-            final DetailAST firstNode = getFirstNode(aParam);
+            final DetailAST firstNode = CheckUtils.getFirstNode(aParam);
             log(firstNode.getLineNo(), firstNode.getColumnNo(),
                 "final.parameter", paramName.getText());
         }
