@@ -3,13 +3,17 @@
     {
         final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
         final String name = nameAST.getText();
-        if (name.startsWith("ejbCreate")
+        if (name.startsWith("ejbSelect")
             && Utils.implementsEntityBean(aAST))
         {
             checkMethod(aAST);
             if (Utils.isVoid(aAST)) {
                 log(nameAST.getLineNo(), nameAST.getColumnNo(),
                     "voidmethod.bean", name);
+            }
+            if (!Utils.isAbstract(aAST)) {
+                log(nameAST.getLineNo(), nameAST.getColumnNo(),
+                    "nonabstract.bean", "Method " + name);
             }
         }
     }
