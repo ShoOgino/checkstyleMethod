@@ -1,0 +1,17 @@
+    /**
+     * Checks if given method declared as <code>public</code> and
+     * <code>static</code>.
+     * @param aAST method definition node
+     * @return true if given method is declared as public and static
+     */
+    private boolean isPublicAndStatic(DetailAST aAST)
+    {
+        DetailAST modifiersAST = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        DetailAST publicAST =
+            modifiersAST.findFirstToken(TokenTypes.LITERAL_PUBLIC);
+        DetailAST staticAST =
+            modifiersAST.findFirstToken(TokenTypes.LITERAL_STATIC);
+
+        return (publicAST != null) && (staticAST != null);
+    }
+

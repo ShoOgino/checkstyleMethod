@@ -1,0 +1,28 @@
+    /**
+     * Checks signature/name of <code>setUp()</code>/<code>tearDown</code>.
+     * @param aAST method definition node
+     * @param aActualName actual method name
+     * @param aExpectedName expected method name
+     */
+    private void checkSetUpTearDownMethod(DetailAST aAST, String aActualName,
+                                          String aExpectedName)
+    {
+        if (!aActualName.equals(aExpectedName)) {
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                "junit.method.name", aActualName, aExpectedName);
+        }
+
+        if (!isPublicOrProtected(aAST)) {
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                "junit.method.protected.or.public", aExpectedName);
+        }
+
+        if (isStatic(aAST)) {
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                "junit.method.static", aExpectedName);
+        }
+
+        checkReturnValue(aAST, TEAR_DOWN_METHOD_NAME);
+        checkParameters(aAST, TEAR_DOWN_METHOD_NAME);
+    }
+

@@ -1,0 +1,15 @@
+    /**
+     * Checks that given method returns <code>void</code>.
+     * @param aAST method definition node
+     * @param aName method name
+     */
+    private void checkReturnValue(DetailAST aAST, String aName)
+    {
+        DetailAST returnValueAST = aAST.findFirstToken(TokenTypes.TYPE);
+
+        if (returnValueAST.findFirstToken(TokenTypes.LITERAL_VOID) == null) {
+            log(aAST.getLineNo(),  aAST.getColumnNo(),
+                "junit.method.return.type", aName, "void");
+        }
+    }
+

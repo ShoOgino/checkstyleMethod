@@ -1,0 +1,15 @@
+    /**
+     * Checks return value of given method.
+     * @param aAST method definition node
+     * @param aName method name
+     */
+    private void checkParameters(DetailAST aAST, String aName)
+    {
+        DetailAST parametersAST = aAST.findFirstToken(TokenTypes.PARAMETERS);
+
+        if (parametersAST.getChildCount() != 0) {
+            log (aAST.getLineNo(),  aAST.getColumnNo(),
+                 "junit.method.parameters", aName);
+        }
+    }
+
