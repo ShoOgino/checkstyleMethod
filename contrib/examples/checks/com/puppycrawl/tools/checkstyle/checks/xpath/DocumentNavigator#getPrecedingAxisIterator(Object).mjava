@@ -1,13 +1,14 @@
     /**
      * Get an iterator over all preceding nodes, depth-first.
      *
-     * @param contextNode The context node for the preceding axis.
+     * @param aObject The context node for the preceding axis.
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getPrecedingAxisIterator(Object aObject)
     {
         return new NodeIterator((DetailAST) aObject)
         {
+            /** @see NodeIterator */
             protected DetailAST getFirstNode(DetailAST aAST)
             {
                 if (aAST == null) {
@@ -24,6 +25,7 @@
                 }
             }
 
+            /** @see NodeIterator */
             protected DetailAST getNextNode(DetailAST aAST)
             {
                 if (aAST == null) {

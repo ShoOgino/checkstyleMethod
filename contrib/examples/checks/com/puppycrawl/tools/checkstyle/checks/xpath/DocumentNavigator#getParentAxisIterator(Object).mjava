@@ -1,14 +1,15 @@
     /**
      * Get a (single-member) iterator over this node's parent.
      *
-     * @param contextNode the context node for the parent axis.
+     * @param aObject the context node for the parent axis.
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getParentAxisIterator(Object aObject)
     {
         if (isAttribute(aObject)) {
             return new SingleObjectIterator(((Attribute) aObject).getParent());
-        } else {
+        }
+        else {
             DetailAST parent = ((DetailAST) aObject).getParent();
             if (parent != null) {
                 return new SingleObjectIterator(parent);
