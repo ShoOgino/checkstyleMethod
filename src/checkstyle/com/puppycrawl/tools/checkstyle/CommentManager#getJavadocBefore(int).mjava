@@ -1,0 +1,11 @@
+    /**
+     * Returns the Javadoc comment before the specified line. null is none.
+     * @return the Javadoc comment, or <code>null</code> if none
+     * @param aLineNo the line number to check before
+     **/
+    public String[] getJavadocBefore(int aLineNo)
+    {
+        Object key = mJavaDoc.headMap(new Integer(aLineNo)).lastKey();
+        return (String[]) mJavaDoc.get(key);
+    }
+
