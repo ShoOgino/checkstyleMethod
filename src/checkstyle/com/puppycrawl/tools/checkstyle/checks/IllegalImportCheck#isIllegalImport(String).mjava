@@ -5,10 +5,9 @@
      */
     private boolean isIllegalImport(String aImportText)
     {
-        final Iterator it = mConfig.getIllegalImports().iterator();
-        while (it.hasNext()) {
-            final String illegalPkgName = (String) it.next();
-            if (aImportText.startsWith(illegalPkgName + ".")) {
+        for (Iterator it = mIllegalPkgs.iterator(); it.hasNext();) {
+            final String illegalPkg = (String) it.next();
+            if (aImportText.startsWith(illegalPkg + ".")) {
                 return true;
             }
         }

@@ -1,0 +1,12 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final FullIdent imp = getImportText(aAST);
+        if (isIllegalImport(imp.getText())) {
+            log(aAST.getLineNo(),
+                aAST.getColumnNo(),
+                "import.illegal",
+                imp.getText());
+        }
+    }
+

@@ -1,0 +1,13 @@
+    public void testWithDefault()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(IllegalImportCheck.class.getName());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputImport.java");
+        final String[] expected = {
+            "15:1: Import from illegal package - sun.net.ftpclient.FtpClient.",
+        };
+        verify(c, fname, expected);
+    }
+
