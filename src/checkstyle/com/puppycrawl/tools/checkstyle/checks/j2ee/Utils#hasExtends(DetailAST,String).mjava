@@ -1,0 +1,34 @@
+    /**
+     * Determines whether an AST node declares an extension of a class or
+     * interface.
+     * @param aAST the AST to check.
+     * @param aClassOrInterface the class or interface to check.
+     * @return if the class defined by aAST implements declares an
+     * extension of aClassOrInterface.
+     */
+    public static boolean hasExtends(DetailAST aAST, String aClassOrInterface)
+    {
+        final String shortName =
+            com.puppycrawl.tools.checkstyle.api.Utils.baseClassname(
+                aClassOrInterface);
+        final DetailAST extendsAST =
+            aAST.findFirstToken(TokenTypes.EXTENDS_CLAUSE);
+        if (extendsAST != null) {
+            DetailAST child = (DetailAST) extendsAST.getFirstChild();
+            while (child != null) {
+                if ((child.getType() == TokenTypes.IDENT)
+                    || (child.getType() == TokenTypes.DOT))
+                {
+                    final String name = Utils.constructDottedName(child);
+                    if (name.equals(aClassOrInterface)
+                        || name.equals(shortName))
+                    {
+                        return true;
+                    }
+                }
+                child = (DetailAST) child.getNextSibling();
+            }
+        }
+        return false;
+    }
+

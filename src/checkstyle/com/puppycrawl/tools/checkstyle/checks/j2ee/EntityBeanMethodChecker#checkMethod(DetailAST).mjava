@@ -1,0 +1,19 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.MethodChecker
+     */
+    public void checkMethod(DetailAST aMethodAST)
+    {
+        super.checkMethod(aMethodAST);
+
+        final DetailAST nameAST = aMethodAST.findFirstToken(TokenTypes.IDENT);
+        final String name = nameAST.getText();
+
+        if (name.startsWith("ejbHome")) {
+            checkHomeMethod(aMethodAST);
+        }
+        else if (name.startsWith("ejbPostCreate")) {
+            checkPostCreateMethod(aMethodAST);
+        }
+    }
+

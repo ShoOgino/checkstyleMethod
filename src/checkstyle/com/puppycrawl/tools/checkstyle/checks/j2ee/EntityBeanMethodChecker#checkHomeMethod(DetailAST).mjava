@@ -1,0 +1,15 @@
+    /**
+      * Checks whether an ejbHome&lt;METHOD&gt;(...) method of an
+      * entity bean satisfies requirements.
+      * @param aMethodAST the AST for the method definition.
+      */
+    protected void checkHomeMethod(DetailAST aMethodAST)
+    {
+        // the method may be final
+        checkMethod(aMethodAST, true);
+
+        // The throws clause for a home method of an entity bean must not throw
+        // the java.rmi.RemoteException.
+        checkNotThrows(aMethodAST, "java.rmi.RemoteException");
+    }
+

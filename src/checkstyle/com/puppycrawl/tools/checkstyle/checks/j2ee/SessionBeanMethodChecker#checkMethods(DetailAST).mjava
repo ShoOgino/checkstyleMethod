@@ -1,0 +1,22 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.MethodChecker
+     */
+    public void checkMethods(DetailAST aAST)
+    {
+        mHasEjbCreate = false;
+
+        super.checkMethods(aAST);
+
+        // session bean must have an ejbCreate<METHOD>(...) method
+        if (!mHasEjbCreate) {
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            final String name = nameAST.getText();
+            final String arg = "Session bean '" + name + "'";
+            log(
+                aAST,
+                "missingmethod.bean",
+                new Object[] {arg, "ejbCreate<METHOD>(...)"});
+        }
+    }
+

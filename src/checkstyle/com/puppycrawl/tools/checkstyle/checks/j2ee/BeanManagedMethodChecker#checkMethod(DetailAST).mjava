@@ -1,0 +1,26 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.MethodChecker
+     */
+    public void checkMethod(DetailAST aMethodAST)
+    {
+        super.checkMethod(aMethodAST);
+
+        final DetailAST nameAST = aMethodAST.findFirstToken(TokenTypes.IDENT);
+        final String name = nameAST.getText();
+
+        if (name.startsWith("ejbFind")) {
+            if (name.equals("ejbFindByPrimaryKey")) {
+                mHasEjbFindByPrimaryKey = true;
+                // the method must have one parameter
+                final DetailAST paramAST =
+                    aMethodAST.findFirstToken(TokenTypes.PARAMETERS);
+                final int paramCount = paramAST.getChildCount();
+                if (paramCount != 1) {
+                    logName(aMethodAST, "paramcount.bean", new Object[] {"1"});
+                }
+            }
+            checkFindMethod(aMethodAST);
+        }
+    }
+

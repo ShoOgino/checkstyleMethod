@@ -1,0 +1,18 @@
+    /**
+     * Helper method to log a LocalizedMessage for an AST.
+     *
+     * @param aAST the AST for the message.
+     * @param aKey key to locale message format
+     * @param aArgs arguments for message
+     */
+    protected void log(DetailAST aAST, String aKey, Object[] aArgs)
+    {
+        final DetailAST nameAST =
+            (DetailAST) aAST.findFirstToken(TokenTypes.IDENT);
+        log(
+            nameAST.getLineNo(),
+            nameAST.getColumnNo(),
+            aKey,
+            aArgs);
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.MethodChecker
+     */
+    public void checkMethod(DetailAST aMethodAST)
+    {
+        // every kind of a bean has ejbCreate<METHOD>(...) requirements
+        final DetailAST nameAST = aMethodAST.findFirstToken(TokenTypes.IDENT);
+        final String name = nameAST.getText();
+        if (name.startsWith("ejbCreate")) {
+            checkCreateMethod(aMethodAST);
+        }
+    }
+

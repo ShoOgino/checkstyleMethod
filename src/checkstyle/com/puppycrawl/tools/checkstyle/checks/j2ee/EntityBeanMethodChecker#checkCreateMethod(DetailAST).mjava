@@ -1,0 +1,16 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.BeanMethodChecker
+     */
+    protected void checkCreateMethod(DetailAST aMethodAST)
+    {
+        super.checkCreateMethod(aMethodAST);
+
+        mEjbCreates.add(aMethodAST);
+
+        // The return type must be the entity bean�s primary key type
+        if (Utils.isVoid(aMethodAST)) {
+            logName(aMethodAST, "voidmethod.bean", new Object[] {});
+        }
+    }
+

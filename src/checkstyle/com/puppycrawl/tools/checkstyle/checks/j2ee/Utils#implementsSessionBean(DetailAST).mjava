@@ -1,0 +1,14 @@
+    /**
+     * Determines whether an AST node is in the definition of a
+     * class that implements javax.ejb.SessionBean.
+     * @param aAST the AST to check.
+     * @return true if aAST is in the definition of a
+     * class that implements javax.ejb.SessionBean.
+     */
+    public static boolean implementsSessionBean(DetailAST aAST)
+    {
+        DetailAST definer = getDefiner(aAST);
+        return ((definer != null)
+            && Utils.hasImplements(definer, "javax.ejb.SessionBean"));
+    }
+

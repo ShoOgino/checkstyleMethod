@@ -1,0 +1,17 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        if (Utils.isInEJB(aAST)
+            && Utils.isStatic(aAST)
+            && !Utils.isFinal(aAST))
+        {
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            log(
+                nameAST.getLineNo(),
+                nameAST.getColumnNo(),
+                "nonfinalstatic.bean", nameAST.getText());
+        }
+    }
+

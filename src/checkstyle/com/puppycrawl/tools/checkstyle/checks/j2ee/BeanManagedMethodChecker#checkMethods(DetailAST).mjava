@@ -1,0 +1,17 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.MethodChecker
+     */
+    public void checkMethods(DetailAST aAST)
+    {
+        mHasEjbFindByPrimaryKey = false;
+        super.checkMethods(aAST);
+        if (!mHasEjbFindByPrimaryKey) {
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            final String name = nameAST.getText();
+            final String arg = "Entity bean '" + name + "'";
+            log(aAST, "missingmethod.bean",
+                new Object[] {arg, "ejbFindByPrimaryKey"});
+        }
+    }
+

@@ -1,0 +1,31 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        if (Utils.isInEJB(aAST)) {
+            DetailAST parent = aAST.getParent();
+
+            // skip parentheses
+            while ((parent != null)
+                && (parent.getType() == TokenTypes.LPAREN))
+            {
+                parent = parent.getParent();
+            }
+
+            if ((parent != null)
+                && (parent.getType() == TokenTypes.EXPR))
+            {
+                parent = parent.getParent();
+                if ((parent != null)
+                    && (parent.getType() == TokenTypes.ELIST))
+                {
+                    log(
+                        aAST.getLineNo(),
+                        aAST.getColumnNo(),
+                        "thisparameter.bean");
+                }
+            }
+        }
+    }
+

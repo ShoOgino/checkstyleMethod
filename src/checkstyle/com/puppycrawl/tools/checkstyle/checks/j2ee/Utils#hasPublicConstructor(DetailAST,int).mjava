@@ -1,0 +1,31 @@
+   /**
+    * Determines whether an AST defines a class with a public constructor
+    * with a given number of parameters.
+    * @param aAST the AST to check.
+    * @param aParameterCount the number of parameters
+    * @return true if aAST defines a class with a public constructor
+    * with aParameterCount parameters.
+    */
+    public static boolean hasPublicConstructor(
+        DetailAST aAST,
+        int aParameterCount)
+    {
+        final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
+        if (objBlock != null) {
+            DetailAST child = (DetailAST) objBlock.getFirstChild();
+            while (child != null) {
+                if (child.getType() == TokenTypes.CTOR_DEF) {
+                    final DetailAST parameters =
+                        child.findFirstToken(TokenTypes.PARAMETERS);
+                    if (Utils.isPublic(child)
+                        && (parameters.getChildCount() == aParameterCount))
+                    {
+                        return true;
+                    }
+                }
+                child = (DetailAST) child.getNextSibling();
+            }
+        }
+        return false;
+    }
+

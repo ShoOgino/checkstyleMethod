@@ -1,0 +1,13 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        if (Utils.hasImplements(aAST, "javax.ejb.MessageDrivenBean")
+            && Utils.hasImplements(aAST, "javax.jms.MessageListener"))
+        {
+            checkBean(aAST, "Message bean", false);
+            getMethodChecker().checkMethods(aAST);
+        }
+    }
+

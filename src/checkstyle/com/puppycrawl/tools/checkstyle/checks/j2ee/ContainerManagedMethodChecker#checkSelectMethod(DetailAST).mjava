@@ -1,0 +1,19 @@
+    /**
+      * Checks whether an ejbSelect&lt;METHOD&gt;(...) method of an
+      * entity bean satisfies requirements.
+      * @param aMethodAST the AST for the method definition.
+      */
+    protected void checkSelectMethod(DetailAST aMethodAST)
+    {
+        // must be declared as public
+        if (!Utils.isPublic(aMethodAST)) {
+            log(aMethodAST, "nonpublic.bean", new Object[] {"Method"});
+        }
+        // The method must be declared as abstract.
+        if (!Utils.isAbstract(aMethodAST)) {
+            log(aMethodAST, "nonabstract.bean", new Object[] {"Method"});
+        }
+        // The throws clause must define the javax.ejb.FinderException.
+        checkThrows(aMethodAST, "javax.ejb.FinderException");
+    }
+

@@ -1,0 +1,28 @@
+    /**
+     * Checks whether a method satisfies public, non-static, and final
+     * requirements.
+     * @param aMethodAST AST for the method definition.
+     * @param aAllowFinal true if the method may be final.
+     */
+    public void checkMethod(
+        DetailAST aMethodAST,
+        boolean aAllowFinal)
+    {
+        // must be declared as public
+        if (!Utils.isPublic(aMethodAST)) {
+            logName(aMethodAST, "nonpublicmethod.bean", new Object[] {});
+        }
+
+        // declared as final?
+        if (!aAllowFinal && Utils.isFinal(aMethodAST)) {
+            logName(aMethodAST, "illegalmodifiermethod.bean",
+                new Object[] {"final"});
+        }
+
+        // must not be declared as static
+        if (Utils.isStatic(aMethodAST)) {
+            logName(aMethodAST, "illegalmodifiermethod.bean",
+                new Object[] {"static"});
+        }
+    }
+

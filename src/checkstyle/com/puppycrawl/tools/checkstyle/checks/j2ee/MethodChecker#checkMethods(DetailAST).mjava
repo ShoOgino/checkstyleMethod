@@ -1,0 +1,18 @@
+    /**
+     * Checks that the methods of a component satisfy requirements.
+     * @param aAST the AST for the component definition.
+     */
+    public void checkMethods(DetailAST aAST)
+    {
+        final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
+        if (objBlock != null) {
+            DetailAST child = (DetailAST) objBlock.getFirstChild();
+            while (child != null) {
+                if (child.getType() == TokenTypes.METHOD_DEF) {
+                    checkMethod(child);
+                }
+                child = (DetailAST) child.getNextSibling();
+            }
+        }
+    }
+

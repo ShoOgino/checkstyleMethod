@@ -1,0 +1,18 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.MethodChecker
+     */
+    public void checkMethod(DetailAST aMethodAST)
+    {
+        // every kind of a home interface has create<METHOD>(...)
+        // and find<METHOD>(...) requirements
+        final DetailAST nameAST = aMethodAST.findFirstToken(TokenTypes.IDENT);
+        final String name = nameAST.getText();
+        if (name.startsWith("create")) {
+            checkCreateMethod(aMethodAST);
+        }
+        else if (name.startsWith("find")) {
+            checkFindMethod(aMethodAST);
+        }
+    }
+

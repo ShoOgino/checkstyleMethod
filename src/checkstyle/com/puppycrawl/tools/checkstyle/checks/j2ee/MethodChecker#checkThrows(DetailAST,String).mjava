@@ -1,0 +1,14 @@
+    /**
+     * Checks that the throws clause of a method definition includes an
+     * Exception.
+     * @param aMethodAST the AST for the method definition.
+     * @param aException the name of the Exception to check.
+     */
+    protected void checkThrows(DetailAST aMethodAST, String aException)
+    {
+        if (!Utils.hasThrows(aMethodAST, aException)) {
+            logName(aMethodAST, "missingthrows.bean",
+                new Object[] {aException});
+        }
+    }
+

@@ -1,0 +1,26 @@
+    /**
+     * Determines whether an AST node defines a public method.
+     * @param aAST the node to check. Normally aAST is a METHOD_DEF.
+     * @param aName the name of the method.
+     * @param aIsVoid designates whether the method is void.
+     * @return true if aAST is the definition of a public method with name
+     * aName and that is void according to aIsVoid.
+     */
+    public static boolean isPublicMethod(
+        DetailAST aAST,
+        String aName,
+        boolean aIsVoid)
+    {
+        final DetailAST nameNode = aAST.findFirstToken(TokenTypes.IDENT);
+        if (nameNode != null) {
+            final String name = nameNode.getText();
+            if (name.equals(aName)
+                && isPublic(aAST)
+                && (isVoid(aAST) == aIsVoid))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+

@@ -1,0 +1,12 @@
+    /**
+     * Determines whether an AST defines an abstract element.
+     * @param aAST the AST to check.
+     * @return true if aAST defines an abstract element.
+     */
+    public static boolean isAbstract(DetailAST aAST)
+    {
+        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        return ((mods != null)
+            && mods.branchContains(TokenTypes.ABSTRACT));
+    }
+

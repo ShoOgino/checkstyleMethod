@@ -1,0 +1,12 @@
+    /**
+     * Determines whether an AST defines a void method.
+     * @param aAST the AST to check.
+     * @return true if aAST defines a void method.
+     */
+    public static boolean isVoid(DetailAST aAST)
+    {
+        final DetailAST type = aAST.findFirstToken(TokenTypes.TYPE);
+        return ((type != null)
+            && type.branchContains(TokenTypes.LITERAL_VOID));
+    }
+

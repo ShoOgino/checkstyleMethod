@@ -1,0 +1,10 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.checks.j2ee.MethodChecker
+     */
+    public void checkMethod(DetailAST aMethodAST)
+    {
+        // every method must not throw java.rmi.RemoteException
+        checkNotThrows(aMethodAST, "java.rmi.RemoteException");
+    }
+
