@@ -8,10 +8,10 @@
             (ArrayList) mTokenToChecks.get(
                 TokenTypes.getTokenName(aAST.getType()));
         if (visitors != null) {
-            mContext.clear();
+            mTokenContext.clear();
             for (int i = 0; i < visitors.size(); i++) {
                 final Check check = (Check) visitors.get(i);
-                check.setTokenContext(mContext);
+                check.setTokenContext(mTokenContext);
                 check.visitToken(aAST);
             }
         }
