@@ -1,0 +1,31 @@
+    /**
+     * Determines whether an AST node declares an implementation of an
+     * interface.
+     * @param aAST the AST to check.
+     * @param aInterface the interface to check.
+     * @return if the class defined by aAST implements declares an
+     * implementation of aInterface.
+     */
+    public static boolean hasImplements(DetailAST aAST, String aInterface)
+    {
+        final String shortName =
+            com.puppycrawl.tools.checkstyle.api.Utils.baseClassname(aInterface);
+        final DetailAST implementsAST =
+            aAST.findFirstToken(TokenTypes.IMPLEMENTS_CLAUSE);
+        if (implementsAST != null) {
+            AST child = implementsAST.getFirstChild();
+            while (child != null) {
+                if (child.getType() == TokenTypes.IDENT) {
+                    final String name = child.getText();
+                    if (name.equals(aInterface)
+                        || name.equals(shortName))
+                    {
+                        return true;
+                    }
+                }
+                child = child.getNextSibling();
+            }
+        }
+        return false;
+    }
+

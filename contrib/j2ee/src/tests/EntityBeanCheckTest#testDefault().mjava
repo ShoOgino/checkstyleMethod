@@ -1,0 +1,13 @@
+    public void testDefault()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(EntityBeanCheck.class);
+        final String[] expected = {
+            "13:14: Entity bean does not have a public constructor with no parameters.",
+            "83:13: Entity bean has illegal modifier final.",
+            "83:13: Entity bean is not public.",
+        };
+        verify(checkConfig, getPath("InputEntityBean.java"), expected);
+    }
+

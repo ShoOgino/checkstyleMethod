@@ -1,0 +1,23 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        DetailAST definer = aAST.getParent();
+        while ((definer != null)) {
+            if (definer.getType() == TokenTypes.CLASS_DEF) {
+                break;
+            }
+            definer = definer.getParent();
+        }
+        if (definer != null) {
+            if (Utils.hasImplements(definer, "javax.ejb.SessionBean")) {
+                final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+                if (Utils.isPublicMethod(aAST, "ejbCreate", false, 1)) {
+                    log(nameAST.getLineNo(), nameAST.getColumnNo(),
+                        "nonvoidejbcreate.sessionbean");
+                }
+            }
+        }
+    }
+

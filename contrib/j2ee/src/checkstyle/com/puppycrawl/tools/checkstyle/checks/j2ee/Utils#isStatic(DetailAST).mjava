@@ -1,0 +1,12 @@
+    /**
+     * Determines whether an AST defines a static element.
+     * @param aAST the AST to check.
+     * @return true if aAST defines a static element.
+     */
+    public static boolean isStatic(DetailAST aAST)
+    {
+        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        return ((mods != null)
+            && mods.branchContains(TokenTypes.LITERAL_STATIC));
+    }
+

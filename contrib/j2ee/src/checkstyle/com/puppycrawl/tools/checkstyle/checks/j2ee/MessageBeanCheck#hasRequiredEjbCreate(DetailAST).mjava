@@ -1,0 +1,38 @@
+    /**
+     * Determines whether an AST node for a MessageBean class definition
+     * contains the required ejbCreate method.
+     * @param aAST the class to check.
+     * @return true if aAST contains the required ejbCreate method.
+     */
+    private boolean hasRequiredEjbCreate(DetailAST aAST)
+    {
+        final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
+        if (objBlock != null) {
+            DetailAST child = (DetailAST) objBlock.getFirstChild();
+            while (child != null) {
+                if (child.getType() == TokenTypes.METHOD_DEF) {
+                    final DetailAST nameNode =
+                        child.findFirstToken(TokenTypes.IDENT);
+                    final String name = nameNode.getText();
+                    if (name.equals("ejbCreate")) {
+                        final DetailAST parameters =
+                            child.findFirstToken(TokenTypes.PARAMETERS);
+                        //TODO: actually check throws clause
+                        final boolean validThrows = true;
+                        if (Utils.isPublic(child)
+                            && Utils.isVoid(child)
+                            && !Utils.isStatic(child)
+                            && !Utils.isFinal(child)
+                            && (parameters.getChildCount() == 0)
+                            && validThrows)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                child = (DetailAST) child.getNextSibling();
+            }
+        }
+        return false;
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        if (Utils.hasImplements(aAST, "javax.ejb.MessageDrivenBean")
+            && Utils.hasImplements(aAST, "javax.jms.MessageListener")
+            && !Utils.isAbstract(aAST))
+        {
+            checkBean(aAST, "Message");
+            if (!hasRequiredEjbCreate(aAST)) {
+                final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+                log(nameAST.getLineNo(), nameAST.getColumnNo(),
+                    "missingmethod.bean",
+                    new Object[] {"Message", "ejbCreate"});
+            }
+        }
+    }
+

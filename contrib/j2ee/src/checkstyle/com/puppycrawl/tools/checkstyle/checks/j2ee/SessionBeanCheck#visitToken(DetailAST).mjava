@@ -1,0 +1,20 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        if (Utils.hasImplements(aAST, "javax.ejb.SessionBean")
+            && !Utils.isAbstract(aAST))
+        {
+            checkBean(aAST, "Session");
+            if (!Utils.hasPublicMethod(aAST, "ejbCreate", true)) {
+                final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+                log(
+                    nameAST.getLineNo(),
+                    nameAST.getColumnNo(),
+                    "missingmethod.bean",
+                    new Object[] {"Session", "ejbCreate"});
+            }
+        }
+    }
+

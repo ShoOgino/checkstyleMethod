@@ -1,0 +1,12 @@
+    /**
+     * Determines whether an AST defines a final element.
+     * @param aAST the AST to check.
+     * @return true if aAST defines a final element.
+     */
+    public static boolean isFinal(DetailAST aAST)
+    {
+        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        return ((mods != null)
+            && mods.branchContains(TokenTypes.FINAL));
+    }
+
