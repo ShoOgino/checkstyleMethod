@@ -1,6 +1,16 @@
-    /** @param aFormat author tag pattern */
+    /**
+     * Set the author tag pattern.
+     * @param aFormat a <code>String</code> value
+     * @throws ConversionException unable to parse aFormat
+     */
     public void setAuthorFormat(String aFormat)
-    {
-        mAuthorRE = Utils.createRE("@author\\s+" + aFormat);
+        throws ConversionException
+    {      
+        try {
+            mAuthorRE = Utils.getRE("@author\\s+" + aFormat);
+        }
+        catch (RESyntaxException e) {
+            throw new ConversionException("unable to parse " + aFormat, e);
+        }
     }
 

@@ -1,6 +1,17 @@
-    /** @param aFormat version tag pattern */
+    /**
+     * Set the ignore pattern.
+     * @param aFormat a <code>String</code> value
+     * @throws ConversionException unable to parse aFormat
+     */
     public void setVersionFormat(String aFormat)
+        throws ConversionException
     {
-        mVersionRE = Utils.createRE("@version\\s+" + aFormat);
+        try {
+            mVersionRE = Utils.getRE("@version\\s+" + aFormat);
+        }
+        catch (RESyntaxException e) {
+            throw new ConversionException("unable to parse " + aFormat, e);
+        }
+
     }
 
