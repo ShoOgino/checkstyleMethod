@@ -1,0 +1,11 @@
+    /**
+     * Checks number of return statments and restore
+     * previous method context.
+     * @param aAST method def node.
+     */
+    private void leaveMethodDef(DetailAST aAST)
+    {
+        mContext.checkCount(aAST);
+        mContext = (Context) mContextStack.pop();
+    }
+

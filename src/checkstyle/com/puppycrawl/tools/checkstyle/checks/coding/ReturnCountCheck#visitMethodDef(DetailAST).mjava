@@ -1,0 +1,10 @@
+    /**
+     * Creates new method context and places old one on the stack.
+     * @param aAST method definition for check.
+     */
+    private void visitMethodDef(DetailAST aAST)
+    {
+        mContextStack.push(mContext);
+        mContext = new Context(!isEqualsMethod(aAST));
+    }
+

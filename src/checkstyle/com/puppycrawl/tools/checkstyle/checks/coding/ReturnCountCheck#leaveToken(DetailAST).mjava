@@ -1,0 +1,16 @@
+    /** @see Check */
+    public void leaveToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+        case TokenTypes.CTOR_DEF:
+        case TokenTypes.METHOD_DEF:
+            leaveMethodDef(aAST);
+            break;
+        case TokenTypes.LITERAL_RETURN:
+            // Do nothing
+            break;
+        default:
+            throw new IllegalStateException(aAST.toString());
+        }
+    }
+
