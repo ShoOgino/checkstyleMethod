@@ -1,0 +1,25 @@
+    /** @see com.puppycrawl.tools.checkstyle.filter.AbstractFilter */
+    public int decide(AuditEvent aEvent)
+    {
+        if (mSeverityLevel == null) {
+            return Filter.NEUTRAL;
+        }
+
+        boolean matchOccurred = false;
+        if (mSeverityLevel.equals(aEvent.getSeverityLevel())) {
+            matchOccurred = true;
+        }
+
+        if (matchOccurred) {
+            if (mAcceptOnMatch) {
+                return Filter.ACCEPT;
+            }
+            else {
+                return Filter.DENY;
+            }
+        }
+        else {
+            return Filter.NEUTRAL;
+        }
+    }
+
