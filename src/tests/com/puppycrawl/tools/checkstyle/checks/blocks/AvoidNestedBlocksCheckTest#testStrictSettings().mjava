@@ -1,0 +1,14 @@
+    public void testStrictSettings()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(AvoidNestedBlocksCheck.class);
+        final String[] expected = {
+            "22:9: Avoid nested blocks.",
+            "44:17: Avoid nested blocks.",
+            "50:17: Avoid nested blocks.",
+            "58:17: Avoid nested blocks.",
+        };
+        verify(checkConfig, getPath("InputNestedBlocks.java"), expected);
+    }
+

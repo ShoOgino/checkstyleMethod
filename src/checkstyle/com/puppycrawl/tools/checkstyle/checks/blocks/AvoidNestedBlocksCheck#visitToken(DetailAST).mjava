@@ -1,7 +1,14 @@
     /** @see Check */
     public void visitToken(DetailAST aAST)
     {
-        if (aAST.getParent().getType() == TokenTypes.SLIST) {
+        final DetailAST parent = aAST.getParent();
+        if (parent.getType() == TokenTypes.SLIST) {
+            if (mAllowInSwitchCase
+                    && parent.getParent().getType() == TokenTypes.CASE_GROUP
+                    && parent.getNumberOfChildren() == 1)
+            {
+                return;
+            }
             log(aAST.getLineNo(), aAST.getColumnNo(), "block.nested");
         }
     }
