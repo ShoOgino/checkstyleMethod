@@ -1,0 +1,17 @@
+    /** @see org.xml.sax.EntityResolver */
+    public InputSource resolveEntity(String aPublicId, String aSystemId)
+        throws SAXException
+    {
+        if (PACKAGE_DTD_PUBLIC_ID.equals(aPublicId)) {
+            final InputStream dtdIS = getClass().getClassLoader()
+                .getResourceAsStream(PACKAGE_DTD_RESOURCE);
+            if (dtdIS == null) {
+                throw new SAXException(
+                    "Unable to load internal dtd " + PACKAGE_DTD_RESOURCE);
+            }
+            return new InputSource(dtdIS);
+        }
+
+        return super.resolveEntity(aPublicId, aSystemId);
+    }
+
