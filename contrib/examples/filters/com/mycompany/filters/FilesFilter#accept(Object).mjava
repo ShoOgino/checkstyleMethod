@@ -1,0 +1,7 @@
+    public boolean accept(Object aObject)
+    {
+        final AuditEvent event = (AuditEvent) aObject;
+        final String fileName = event.getFileName();
+        return ((fileName == null) || !mFileRegexp.match(fileName));
+    }
+
