@@ -4,7 +4,8 @@
      */
     private boolean isCheckedMethod(DetailAST aAST)
     {
-        String methodName = aAST.findFirstToken(TokenTypes.IDENT).getText();
+        final String methodName =
+            aAST.findFirstToken(TokenTypes.IDENT).getText();
         return !mIgnoredMethodNames.contains(methodName);
     }
 

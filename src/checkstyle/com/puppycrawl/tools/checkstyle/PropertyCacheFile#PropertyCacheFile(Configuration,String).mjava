@@ -13,8 +13,10 @@
             try {
                 inStream = new FileInputStream(fileName);
                 mDetails.load(inStream);
-                String cachedConfigHash = mDetails.getProperty(CONFIG_HASH_KEY);
-                String currentConfigHash = getConfigHashCode(aCurrentConfig);
+                final String cachedConfigHash =
+                    mDetails.getProperty(CONFIG_HASH_KEY);
+                final String currentConfigHash =
+                    getConfigHashCode(aCurrentConfig);
                 setInActive = false;
                 if ((cachedConfigHash == null)
                     || !cachedConfigHash.equals(currentConfigHash))

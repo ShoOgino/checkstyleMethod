@@ -1,14 +1,14 @@
     /** {@inheritDoc} */
     public void visitToken(DetailAST aAST)
     {
-        String currentString = aAST.getText();
-        ArrayList i = (ArrayList) mStringMap.get(currentString);
-        if (i == null) {
-            i = new ArrayList();
-            mStringMap.put(currentString, i);
+        final String currentString = aAST.getText();
+        ArrayList hitList = (ArrayList) mStringMap.get(currentString);
+        if (hitList == null) {
+            hitList = new ArrayList();
+            mStringMap.put(currentString, hitList);
         }
         int line = aAST.getLineNo();
         int col = aAST.getColumnNo();
-        i.add(new StringInfo(line, col));
+        hitList.add(new StringInfo(line, col));
     }
 

@@ -1,10 +1,10 @@
     /** @see Check */
     public void visitToken(DetailAST aDetailAST)
     {
-        DetailAST paramDef =
+        final DetailAST paramDef =
             aDetailAST.findFirstToken(TokenTypes.PARAMETER_DEF);
-        DetailAST excType = paramDef.findFirstToken(TokenTypes.TYPE);
-        FullIdent ident = CheckUtils.createFullType(excType);
+        final DetailAST excType = paramDef.findFirstToken(TokenTypes.TYPE);
+        final FullIdent ident = CheckUtils.createFullType(excType);
 
         if (isIllegalClassName(ident.getText())) {
             log(aDetailAST, "illegal.catch", ident.getText());

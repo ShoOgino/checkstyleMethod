@@ -12,7 +12,8 @@
         while (isTerminated && caseGroup != null
                && caseGroup.getType() != TokenTypes.RCURLY)
         {
-            DetailAST caseBody = caseGroup.findFirstToken(TokenTypes.SLIST);
+            final DetailAST caseBody =
+                caseGroup.findFirstToken(TokenTypes.SLIST);
             isTerminated &= isTerminated(caseBody, false, aUseContinue);
             caseGroup = (DetailAST) caseGroup.getNextSibling();
         }

@@ -6,10 +6,11 @@
      */
     private boolean isPublicOrProtected(DetailAST aAST)
     {
-        DetailAST modifiersAST = aAST.findFirstToken(TokenTypes.MODIFIERS);
-        DetailAST publicAST =
+        final DetailAST modifiersAST =
+            aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST publicAST =
             modifiersAST.findFirstToken(TokenTypes.LITERAL_PUBLIC);
-        DetailAST protectedAST =
+        final DetailAST protectedAST =
             modifiersAST.findFirstToken(TokenTypes.LITERAL_PROTECTED);
 
         return (publicAST != null) || (protectedAST != null);

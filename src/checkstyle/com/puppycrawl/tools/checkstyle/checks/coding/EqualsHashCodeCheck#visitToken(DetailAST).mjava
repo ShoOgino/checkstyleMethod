@@ -1,8 +1,7 @@
     /** @see Check */
     public void visitToken(DetailAST aAST)
     {
-        DetailAST modifiers = (DetailAST) aAST.getFirstChild();
-
+        final DetailAST modifiers = (DetailAST) aAST.getFirstChild();
         final AST type = modifiers.getNextSibling();
         final AST methodName = type.getNextSibling();
         final DetailAST parameters = aAST.findFirstToken(TokenTypes.PARAMETERS);

@@ -14,10 +14,10 @@
         }
 
         // let's check return type
-        DetailAST typeAST = aAST.findFirstToken(TokenTypes.TYPE);
-        boolean isArray =
+        final DetailAST typeAST = aAST.findFirstToken(TokenTypes.TYPE);
+        final boolean isArray =
             (typeAST.findFirstToken(TokenTypes.ARRAY_DECLARATOR) != null);
-        String type = CheckUtils.createFullType(typeAST).getText();
+        final String type = CheckUtils.createFullType(typeAST).getText();
         if (isArray
             || !"Test".equals(type)
             && !"junit.framework.Test".equals(type))

@@ -10,11 +10,12 @@
     {
         fireAuditStarted();
         for (int i = 0; i < mFileSetChecks.size(); i++) {
-            FileSetCheck fileSetCheck = (FileSetCheck) mFileSetChecks.get(i);
+            final FileSetCheck fileSetCheck =
+                (FileSetCheck) mFileSetChecks.get(i);
             fileSetCheck.process(aFiles);
             fileSetCheck.destroy();
         }
-        int errorCount = mCounter.getCount();
+        final int errorCount = mCounter.getCount();
         fireAuditFinished();
         return errorCount;
     }

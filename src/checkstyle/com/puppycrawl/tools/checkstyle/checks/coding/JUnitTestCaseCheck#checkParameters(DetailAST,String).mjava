@@ -5,7 +5,8 @@
      */
     private void checkParameters(DetailAST aAST, String aName)
     {
-        DetailAST parametersAST = aAST.findFirstToken(TokenTypes.PARAMETERS);
+        final DetailAST parametersAST =
+            aAST.findFirstToken(TokenTypes.PARAMETERS);
 
         if (parametersAST.getChildCount() != 0) {
             log(aAST, "junit.method.parameters", aName);

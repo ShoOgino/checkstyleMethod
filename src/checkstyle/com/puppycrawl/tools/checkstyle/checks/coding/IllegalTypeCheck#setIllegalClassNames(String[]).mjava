@@ -6,11 +6,12 @@
     {
         mIllegalClassNames.clear();
         for (int i = 0; i < aClassNames.length; i++) {
-            String name = aClassNames[i];
+            final String name = aClassNames[i];
             mIllegalClassNames.add(name);
-            int lastDot = name.lastIndexOf(".");
+            final int lastDot = name.lastIndexOf(".");
             if (lastDot > 0 && lastDot < (name.length() - 1)) {
-                String shortName = name.substring(name.lastIndexOf(".") + 1);
+                final String shortName =
+                    name.substring(name.lastIndexOf(".") + 1);
                 mIllegalClassNames.add(shortName);
             }
         }

@@ -5,7 +5,7 @@
      */
     private void checkReturnValue(DetailAST aAST, String aName)
     {
-        DetailAST returnValueAST = aAST.findFirstToken(TokenTypes.TYPE);
+        final DetailAST returnValueAST = aAST.findFirstToken(TokenTypes.TYPE);
 
         if (returnValueAST.findFirstToken(TokenTypes.LITERAL_VOID) == null) {
             log(aAST, "junit.method.return.type", aName, "void");

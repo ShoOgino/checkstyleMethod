@@ -20,7 +20,8 @@
 
         DetailAST catchStmt = aAST.findFirstToken(TokenTypes.LITERAL_CATCH);
         while (catchStmt != null && isTerminated) {
-            DetailAST catchBody = catchStmt.findFirstToken(TokenTypes.SLIST);
+            final DetailAST catchBody =
+                catchStmt.findFirstToken(TokenTypes.SLIST);
             isTerminated &= isTerminated(catchBody, aUseBreak, aUseContinue);
             catchStmt = (DetailAST) catchStmt.getNextSibling();
         }

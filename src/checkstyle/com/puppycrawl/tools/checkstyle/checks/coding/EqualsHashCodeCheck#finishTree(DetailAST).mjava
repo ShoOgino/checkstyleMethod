@@ -5,9 +5,10 @@
     {
         final Set equalsDefs = mObjBlockEquals.keySet();
         for (Iterator it = equalsDefs.iterator(); it.hasNext();) {
-            Object objBlock = it.next();
+            final Object objBlock = it.next();
             if (!mObjBlockWithHashCode.contains(objBlock)) {
-                DetailAST equalsAST = (DetailAST) mObjBlockEquals.get(objBlock);
+                final DetailAST equalsAST =
+                    (DetailAST) mObjBlockEquals.get(objBlock);
                 log(equalsAST.getLineNo(), equalsAST.getColumnNo(),
                         "equals.noHashCode");
             }

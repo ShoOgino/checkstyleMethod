@@ -5,7 +5,7 @@
     private void checkClassName(DetailAST aAST)
     {
         final DetailAST type = aAST.findFirstToken(TokenTypes.TYPE);
-        FullIdent ident = CheckUtils.createFullType(type);
+        final FullIdent ident = CheckUtils.createFullType(type);
 
         if (isMatchingClassName(ident.getText())) {
             log(ident.getLineNo(), ident.getColumnNo(),

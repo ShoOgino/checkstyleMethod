@@ -4,7 +4,7 @@
      */
     private void visitMethodDef(DetailAST aAST)
     {
-        String name = aAST.findFirstToken(TokenTypes.IDENT).getText();
+        final String name = aAST.findFirstToken(TokenTypes.IDENT).getText();
 
         if (name.equalsIgnoreCase(SET_UP_METHOD_NAME)) {
             checkSetUpTearDownMethod(aAST, name, SET_UP_METHOD_NAME);
