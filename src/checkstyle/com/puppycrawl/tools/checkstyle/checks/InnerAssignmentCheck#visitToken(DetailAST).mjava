@@ -1,0 +1,21 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        DetailAST parent1 = aAST.getParent();
+        DetailAST parent2 = parent1.getParent();
+        DetailAST parent3 = parent2.getParent();
+
+        final boolean assigment = isAssigment(parent1);
+        final boolean expr = parent1.getType() == TokenTypes.EXPR;
+        final boolean exprList =
+                expr && parent2.getType() == TokenTypes.ELIST;
+        final boolean methodCall =
+                exprList && parent3.getType() == TokenTypes.METHOD_CALL;
+        final boolean ctorCall =
+                exprList && parent3.getType() == TokenTypes.LITERAL_NEW;
+
+        if (assigment || methodCall || ctorCall) {
+            log(aAST.getLineNo(), aAST.getColumnNo(), "assignment.inner.avoid");
+        }
+    }
+
