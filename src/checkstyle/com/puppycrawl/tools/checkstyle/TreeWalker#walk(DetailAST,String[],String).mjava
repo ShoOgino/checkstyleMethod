@@ -4,13 +4,12 @@
      * @param aLines the lines of the file the AST was generated from
      * @param aFilename the file name of the file the AST was generated from
      */
-    LocalizedMessages walk(DetailAST aAST, String[] aLines, String aFilename)
+    void walk(DetailAST aAST, String[] aLines, String aFilename)
     {
         mMessages.reset();
         notifyBegin(aLines, aFilename);
         aAST.setParent(null);
         process(aAST);
         notifyEnd();
-        return mMessages;
     }
 

@@ -1,0 +1,20 @@
+    public void testIt()
+        throws Exception
+    {
+        final LocalizedMessages msgs = new LocalizedMessages(8);
+        final TreeWalker walker = new TreeWalker(msgs);
+        final CheckConfiguration config = new CheckConfiguration();
+        config.setClassname(AvoidStarImport.class.getName());
+        final Check c = config.createInstance(
+            Thread.currentThread().getContextClassLoader());
+        walker.registerCheck(c, config);
+        final String fname = CheckerTest.getPath("InputImport.java");
+        final String[] lines = getLines(fname);
+        walker.walk(getAST(fname, lines), lines, fname);
+        assertEquals(msgs.getMessages().length, 3);
+        assertEquals(msgs.getMessages()[0].getLineNo(), 7);
+        assertEquals(msgs.getMessages()[1].getLineNo(), 9);
+        assertEquals(msgs.getMessages()[2].getLineNo(), 10);
+        assertEquals(msgs.getMessages()[0].getMessage(), "help me Ronda");
+    }
+

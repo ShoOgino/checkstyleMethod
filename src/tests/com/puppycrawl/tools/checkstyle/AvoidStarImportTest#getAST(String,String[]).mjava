@@ -1,0 +1,19 @@
+    private static DetailAST getAST(String aFilename, String[] aLines)
+        throws Exception
+    {
+        final Reader r = new BufferedReader(new FileReader(aFilename));
+        // Create a scanner that reads from the input stream passed to us
+        JavaLexer lexer = new JavaLexer(r);
+        lexer.setFilename(aFilename);
+        lexer.setCommentManager(new CommentManager(aLines));
+
+        // Create a parser that reads from the scanner
+        JavaRecognizer parser = new JavaRecognizer(lexer);
+        parser.setFilename(aFilename);
+        parser.setASTNodeClass(DetailAST.class.getName());
+
+        // start parsing at the compilationUnit rule
+        parser.compilationUnit();
+        return (DetailAST) parser.getAST();
+    }
+
