@@ -13,7 +13,8 @@
             reader = new FileReader(aFilename);
         }
         catch (FileNotFoundException e) {
-            throw new CheckstyleException("unable to find " + aFilename);
+            throw new CheckstyleException(
+                "unable to find " + aFilename, e);
         }
         final InputSource source = new InputSource(reader);
         return loadModuleFactory(source, aFilename);
