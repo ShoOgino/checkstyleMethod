@@ -1,0 +1,12 @@
+    protected Checker createChecker(CheckConfiguration aCheckConfig)
+        throws RESyntaxException, FileNotFoundException, IOException,
+        ParserConfigurationException, SAXException, ClassNotFoundException,
+        InstantiationException, IllegalAccessException
+    {
+        final Checker c = new Checker(new Configuration(mProps, mStream),
+                                      new CheckConfiguration[] {aCheckConfig});
+        final AuditListener listener = new BriefLogger(mStream);
+        c.addListener(listener);
+        return c;
+    }
+

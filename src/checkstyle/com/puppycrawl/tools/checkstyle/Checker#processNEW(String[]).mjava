@@ -6,9 +6,9 @@
      * @return the total number of errors found
      * @see #destroy()
      */
-    public int process(String[] aFiles)
+    public int processNEW(String[] aFiles)
     {
-        // TODO: delete
+        // TODO: rename and blow away the old stuff
         int total = 0;
         fireAuditStarted();
 
@@ -21,7 +21,7 @@
         total += checkPackageHtml(aFiles);
 
         for (int i = 0; i < aFiles.length; i++) {
-            total += process(aFiles[i]);
+            total += processNEW(aFiles[i]);
         }
         fireAuditFinished();
         return total;
