@@ -1,0 +1,18 @@
+    public void testText()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(EmptyBlockCheck.class.getName());
+        checkConfig.addProperty("option", BlockOption.TEXT.toString());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputSemantic.java");
+        final String[] expected = {
+            "52:65: Empty catch block.",
+            "72:52: Empty catch block.",
+            "73:45: Empty catch block.",
+            "75:13: Empty try block.",
+            "77:17: Empty finally block.",
+        };
+        verify(c, fname, expected);
+    }
+

@@ -1,20 +1,24 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        // defend against users that change the token set in the config file.
-        if (aAST.getType() != TokenTypes.SLIST) {
-            return;
-        }
-
-        // TODO: port BlockOption.TEXT
-        if (aAST.getChildCount() == 0) {
-            DetailAST parent = aAST.getParent();
-            String parentText = parent.getText();
-            if (mCheckFor.contains(parentText)) {
-                // TODO: i18n
-                log(aAST.getLineNo(), "empty " + parentText + " block");
+        final DetailAST slistAST = aAST.findFirstToken(TokenTypes.SLIST);
+        if (slistAST != null) {
+            if (mOption == BlockOption.STMT) {
+                if (slistAST.getChildCount() <= 1) {      
+                    log(slistAST.getLineNo(),
+                        slistAST.getColumnNo(),
+                        "block.noStmt",
+                        aAST.getText());
+                }   
+            }
+            else if (mOption == BlockOption.TEXT) {
+                if (!hasText(slistAST)) {
+                        log(slistAST.getLineNo(),
+                        slistAST.getColumnNo(),
+                        "block.empty",
+                        aAST.getText());
+                }
             }
         }
-
     }
 

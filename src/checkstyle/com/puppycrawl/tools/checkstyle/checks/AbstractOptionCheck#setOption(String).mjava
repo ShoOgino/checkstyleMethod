@@ -1,0 +1,13 @@
+    /**
+     * Set the option to enforce.
+     * @param aOption string to decode option from
+     * @throws ConversionException if unable to decode
+     */
+    public void setOption(String aOption)
+    {
+        mOption = AbstractOption.decode(aOption);
+        if (mOption == null) {
+            throw new ConversionException("unable to parse " + aOption);
+        }
+    }
+
