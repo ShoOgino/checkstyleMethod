@@ -1,0 +1,79 @@
+    /** @see Check#visitToken(DetailAST) */
+    public void visitToken(DetailAST aAST)
+    {
+        final int parentType = aAST.getParent().getType();
+        ScopeState state;
+
+        switch(aAST.getType()) {
+        case TokenTypes.OBJBLOCK:
+            mScopeStates.push(new ScopeState());
+            break;
+
+        case TokenTypes.CTOR_DEF:
+            if (parentType != TokenTypes.OBJBLOCK) {
+                return;
+            }
+
+            state = (ScopeState) mScopeStates.peek();
+            if (state.mScopeState > STATE_CTOR_DEF) {
+                log(aAST, "Constructor");
+            }
+            else {
+                state.mScopeState = STATE_CTOR_DEF;
+            }
+            break;
+
+        case TokenTypes.METHOD_DEF:
+            state = (ScopeState) mScopeStates.peek();
+            if (parentType != TokenTypes.OBJBLOCK) {
+                return;
+            }
+
+            if (state.mScopeState > STATE_METHOD_DEF) {
+                log(aAST, "Method");
+            }
+            else {
+                state.mScopeState = STATE_METHOD_DEF;
+            }
+            break;
+
+        case TokenTypes.MODIFIERS:
+            if ((parentType != TokenTypes.VARIABLE_DEF)
+                || (aAST.getParent().getParent().getType()
+                    != TokenTypes.OBJBLOCK))
+            {
+                return;
+            }
+
+            state = (ScopeState) mScopeStates.peek();
+            if (aAST.findFirstToken(TokenTypes.LITERAL_STATIC) != null) {
+                if (state.mScopeState > STATE_STATIC_VARIABLE_DEF) {
+                    log(aAST, "Static variable");
+                }
+                else {
+                    state.mScopeState = STATE_STATIC_VARIABLE_DEF;
+                }
+            }
+            else {
+                if (state.mScopeState > STATE_INSTANCE_VARIABLE_DEF) {
+                    log(aAST, "Instance variable");
+                }
+                else if (state.mScopeState == STATE_STATIC_VARIABLE_DEF) {
+                    state.mDeclarationAccess = Scope.PUBLIC;
+                    state.mScopeState = STATE_INSTANCE_VARIABLE_DEF;
+                }
+            }
+
+            final Scope access = ScopeUtils.getScopeFromMods(aAST);
+            if (state.mDeclarationAccess.compareTo(access) > 0) {
+                log(aAST, "Variable access");
+            }
+            else {
+                state.mDeclarationAccess = access;
+            }
+            break;
+
+        default:
+        }
+    }
+
