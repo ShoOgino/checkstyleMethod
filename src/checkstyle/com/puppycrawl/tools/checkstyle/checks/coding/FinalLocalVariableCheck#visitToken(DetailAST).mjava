@@ -15,6 +15,9 @@
             break;
 
         case TokenTypes.PARAMETER_DEF:
+            if (ScopeUtils.inInterfaceBlock(aAST)) {
+                break;
+            }
         case TokenTypes.VARIABLE_DEF:
             if (aAST.getParent().getType() != TokenTypes.OBJBLOCK) {
                 insertVariable(aAST);
