@@ -7,7 +7,7 @@
      *
      * @return suggested indentation for child
      */
-    public int suggestedChildLevel(ExpressionHandler aChild)
+    public IndentLevel suggestedChildLevel(ExpressionHandler aChild)
     {
         // for whatever reason a method that crosses lines, like asList
         // here:
@@ -21,9 +21,9 @@
             if (!areOnSameLine((DetailAST) aChild.getMainAst().getFirstChild(),
                 (DetailAST) getMainAst().getFirstChild()))
             {
-                indentLevel += getIndentCheck().getBasicOffset();
+                indentLevel += getBasicOffset();
             }
         }
-        return indentLevel;
+        return new IndentLevel(indentLevel);
     }
 

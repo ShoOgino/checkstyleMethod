@@ -5,8 +5,8 @@
     {
         DetailAST condAst = (DetailAST)
             getMainAst().findFirstToken(TokenTypes.LPAREN).getNextSibling();
-        int expectedLevel =
-            getLevel() + getIndentCheck().getBasicOffset();
-        checkExpressionSubtree(condAst, expectedLevel, false, false);
+        IndentLevel expected = new IndentLevel(getLevel(), getBasicOffset());
+
+        checkExpressionSubtree(condAst, expected, false, false);
     }
 

@@ -7,13 +7,13 @@
      * @param aIndentLevel   the required indent level
      */
     protected final void checkLinesIndent(int aStartLine, int aEndLine,
-        int aIndentLevel)
+                                          IndentLevel aIndentLevel)
     {
         // check first line
         checkSingleLine(aStartLine, aIndentLevel);
 
         // check following lines
-        aIndentLevel += mIndentCheck.getBasicOffset();
+        aIndentLevel = new IndentLevel(aIndentLevel, getBasicOffset());
         for (int i = aStartLine + 1; i <= aEndLine; i++) {
             checkSingleLine(i, aIndentLevel);
         }

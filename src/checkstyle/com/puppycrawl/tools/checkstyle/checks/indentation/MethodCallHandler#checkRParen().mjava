@@ -8,7 +8,7 @@
         DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
         int columnNo = expandedTabsColumnNo(rparen);
 
-        if (columnNo == getLevel()) {
+        if (getLevel().accept(columnNo)) {
             return;
         }
 

@@ -3,8 +3,9 @@
      *
      * @return the expected indentation amount
      */
-    public int getLevelImpl()
+    public IndentLevel getLevelImpl()
     {
-        return getParent().getLevel() + getIndentCheck().getCaseIndent();
+        return new IndentLevel(getParent().getLevel(),
+                               getIndentCheck().getCaseIndent());
     }
 

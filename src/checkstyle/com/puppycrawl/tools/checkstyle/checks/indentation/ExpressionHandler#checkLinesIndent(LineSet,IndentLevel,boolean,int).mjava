@@ -39,8 +39,7 @@
         if (aFirstLineMatches
             || (aFirstLine > mMainAst.getLineNo() && shouldIncreaseIndent()))
         {
-            aIndentLevel = new IndentLevel(aIndentLevel,
-                                           mIndentCheck.getBasicOffset());
+            aIndentLevel = new IndentLevel(aIndentLevel, getBasicOffset());
         }
 
         // check following lines
@@ -62,8 +61,7 @@
             if (thisLine.matches("^\\s*\\.")
                 || prevLine.matches("\\.\\s*$"))
             {
-                aIndentLevel = new IndentLevel(aIndentLevel,
-                                               mIndentCheck.getBasicOffset());
+                aIndentLevel = new IndentLevel(aIndentLevel, getBasicOffset());
             }
 
             if (col != null) {

@@ -6,14 +6,15 @@
         // the lcurly can either be at the correct indentation, or nested
         // with a previous expression
         DetailAST lcurly = getLCurly();
+        int lcurlyPos = expandedTabsColumnNo(lcurly);
 
         if (lcurly == null
-            || expandedTabsColumnNo(lcurly) == curlyLevel()
+            || curlyLevel().accept(lcurlyPos)
             || !startsLine(lcurly))
         {
             return;
         }
 
-        logError(lcurly, "lcurly", expandedTabsColumnNo(lcurly));
+        logError(lcurly, "lcurly", lcurlyPos);
     }
 

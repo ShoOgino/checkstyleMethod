@@ -5,7 +5,7 @@
     {
         DetailAST ident = getMainAst().findFirstToken(TokenTypes.IDENT);
         int columnNo = expandedTabsColumnNo(ident);
-        if (startsLine(ident) && columnNo != getLevel()) {
+        if (startsLine(ident) && !getLevel().accept(columnNo)) {
             logError(ident, "", columnNo);
         }
     }

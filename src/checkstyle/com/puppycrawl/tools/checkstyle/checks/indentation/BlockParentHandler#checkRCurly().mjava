@@ -7,14 +7,15 @@
         // on the same line as the lcurly
         DetailAST lcurly = getLCurly();
         DetailAST rcurly = getRCurly();
+        int rcurlyPos = expandedTabsColumnNo(rcurly);
+
         if (rcurly == null
-            || expandedTabsColumnNo(rcurly) == curlyLevel()
+            || curlyLevel().accept(rcurlyPos)
             || (!rcurlyMustStart() && !startsLine(rcurly))
             || areOnSameLine(rcurly, lcurly))
         {
             return;
         }
-        logError(rcurly, "rcurly", expandedTabsColumnNo(rcurly),
-                 new IndentLevel(curlyLevel()));
+        logError(rcurly, "rcurly", rcurlyPos, curlyLevel());
     }
 

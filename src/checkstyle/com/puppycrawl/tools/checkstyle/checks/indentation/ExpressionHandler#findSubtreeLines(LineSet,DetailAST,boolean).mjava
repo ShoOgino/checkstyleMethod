@@ -21,21 +21,16 @@
         // TODO: the problem with this is that not all tree tokens actually
         // have the right column number -- I should get a list of these
         // and verify that checking nesting this way won't cause problems
-//        if (allowNesting && tree.getColumnNo() != getLineStart(tree)) {
-//            return;
-//        }
+//          if (aAllowNesting && aTree.getColumnNo() != getLineStart(aTree)) {
+//              return;
+//          }
 
         Integer lineNum = new Integer(aTree.getLineNo());
         Integer colNum = aLines.getStartColumn(lineNum);
 
         int thisLineColumn = expandedTabsColumnNo(aTree);
-        if (colNum == null) {
+        if (colNum == null || (thisLineColumn < colNum.intValue())) {
             aLines.addLineAndCol(lineNum, thisLineColumn);
-        }
-        else {
-            if (expandedTabsColumnNo(aTree) < colNum.intValue()) {
-                aLines.addLineAndCol(lineNum, thisLineColumn);
-            }
         }
 
         // check children

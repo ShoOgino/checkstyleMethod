@@ -3,7 +3,7 @@
      *
      * @return the expected indentation amount
      */
-    public int getLevelImpl()
+    public IndentLevel getLevelImpl()
     {
         // if inside a method call's params, this could be part of
         // an expression, so get the previous line's start
@@ -14,8 +14,8 @@
                     return container.getLevel();
                 }
                 else {
-                    return container.getLevel()
-                        + getIndentCheck().getBasicOffset();
+                    return new IndentLevel(container.getLevel(),
+                                           getBasicOffset());
                 }
             }
 
@@ -37,7 +37,7 @@
         int firstCol = lines.firstLineCol();
         int lineStart = getLineStart(getFirstAst(getMainAst()));
         if (lineStart != firstCol) {
-            return lineStart;
+            return new IndentLevel(lineStart);
         }
         else {
             return super.getLevelImpl();

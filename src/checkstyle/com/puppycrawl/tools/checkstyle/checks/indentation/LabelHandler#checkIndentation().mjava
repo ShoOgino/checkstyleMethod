@@ -7,9 +7,9 @@
         // need to check children (like 'block' parents do)
         DetailAST parent = (DetailAST)
             getMainAst().getFirstChild().getNextSibling();
-        checkExpressionSubtree(parent,
-                               getLevel() + getIndentCheck().getBasicOffset(),
-                               true,
-                               false);
+
+        IndentLevel expected = new IndentLevel(getLevel(), getBasicOffset());
+
+        checkExpressionSubtree(parent, expected, true, false);
     }
 

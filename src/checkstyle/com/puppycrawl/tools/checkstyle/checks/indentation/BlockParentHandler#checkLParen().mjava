@@ -7,7 +7,7 @@
         // same line as the lcurly
         DetailAST lparen = getLParen();
         if (lparen == null
-            || expandedTabsColumnNo(lparen) == getLevel()
+            || getLevel().accept(expandedTabsColumnNo(lparen))
             || !startsLine(lparen))
         {
             return;
