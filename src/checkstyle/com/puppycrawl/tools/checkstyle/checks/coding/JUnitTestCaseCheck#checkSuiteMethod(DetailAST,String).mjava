@@ -6,13 +6,11 @@
     private void checkSuiteMethod(DetailAST aAST, String aActualName)
     {
         if (!aActualName.equals(SUITE_METHOD_NAME)) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
-                "junit.method.name", SUITE_METHOD_NAME);
+            log(aAST, "junit.method.name", SUITE_METHOD_NAME);
         }
 
         if (!isPublicAndStatic(aAST)) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
-                "junit.method.public.and.static", SUITE_METHOD_NAME);
+            log(aAST, "junit.method.public.and.static", SUITE_METHOD_NAME);
         }
 
         // let's check return type
@@ -24,9 +22,8 @@
             || !"Test".equals(type)
             && !"junit.framework.Test".equals(type))
         {
-            log(aAST.getLineNo(),  aAST.getColumnNo(),
-                "junit.method.return.type", SUITE_METHOD_NAME,
-                "junit.framework.Test");
+            log(aAST, "junit.method.return.type",
+                SUITE_METHOD_NAME, "junit.framework.Test");
         }
         checkParameters(aAST, SUITE_METHOD_NAME);
     }

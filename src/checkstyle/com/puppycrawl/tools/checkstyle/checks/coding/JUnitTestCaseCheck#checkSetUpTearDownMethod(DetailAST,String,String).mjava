@@ -8,18 +8,15 @@
                                           String aExpectedName)
     {
         if (!aActualName.equals(aExpectedName)) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
-                "junit.method.name", aActualName, aExpectedName);
+            log(aAST, "junit.method.name", aActualName, aExpectedName);
         }
 
         if (!isPublicOrProtected(aAST)) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
-                "junit.method.protected.or.public", aExpectedName);
+            log(aAST, "junit.method.protected.or.public", aExpectedName);
         }
 
         if (isStatic(aAST)) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
-                "junit.method.static", aExpectedName);
+            log(aAST, "junit.method.static", aExpectedName);
         }
 
         checkReturnValue(aAST, TEAR_DOWN_METHOD_NAME);
