@@ -13,7 +13,7 @@
                 getLocation());
         }
 
-        if (mConfigFile == null) {
+        if (mConfigLocation == null) {
             throw new BuildException("Must specify 'config'.", getLocation());
         }
 
@@ -24,7 +24,7 @@
                 final Properties props = createOverridingProperties();
                 final Configuration config =
                     ConfigurationLoader.loadConfiguration(
-                        mConfigFile.getAbsolutePath(), props);
+                        mConfigLocation, props);
 
                 DefaultContext context = new DefaultContext();
                 ClassLoader loader =
