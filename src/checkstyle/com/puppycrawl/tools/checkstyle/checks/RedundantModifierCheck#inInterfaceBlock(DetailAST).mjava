@@ -1,0 +1,17 @@
+    /** @return whether currently in an interface block,
+     *          i.e. in an OBJ_BLOCK of an INTERFACE_DEF
+     */
+    private boolean inInterfaceBlock(DetailAST aAST)
+    {
+        if (mInInterface.empty()) {
+            return false;
+        }
+        if (aAST.getParent().getType() == INTERFACE_DEF) {
+            int size = mInInterface.size();
+            return size > 1 && Boolean.TRUE.equals(mInInterface.get(size - 2));
+        }
+        else {
+            return Boolean.TRUE.equals(mInInterface.peek());
+        }
+    }
+
