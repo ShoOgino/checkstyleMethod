@@ -1,0 +1,20 @@
+    /**
+     * Common implementation for logLoadError() method.
+     * @param aLineNo line number of the problem.
+     * @param aColumnNo column number of the problem.
+     * @param aMsgKey message key to use.
+     * @param aValues values to fill the message out.
+     */
+    protected final void logLoadErrorImpl(int aLineNo, int aColumnNo,
+                                          String aMsgKey, Object[] aValues)
+    {
+        LocalizedMessage msg = new LocalizedMessage(aLineNo,
+                                                    aColumnNo,
+                                                    getMessageBundle(),
+                                                    aMsgKey,
+                                                    aValues,
+                                                    getSeverityLevel(),
+                                                    this.getClass());
+        throw new RuntimeException(msg.getMessage());
+    }
+
