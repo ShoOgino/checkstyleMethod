@@ -1,6 +1,10 @@
     /** @see com.puppycrawl.tools.checkstyle.filter.Filter */
     public int decide(Object aObject)
     {
+        if (!(aObject instanceof AuditEvent)) {
+            return Filter.NEUTRAL;
+        }
+
         final AuditEvent event = (AuditEvent) aObject;
 
         if (mSeverityLevel == null) {
