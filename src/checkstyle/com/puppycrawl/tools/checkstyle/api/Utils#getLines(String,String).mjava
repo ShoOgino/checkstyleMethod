@@ -1,0 +1,37 @@
+    /**
+     * Loads the contents of a file in a String array using
+     * the named charset.
+     * @return the lines in the file
+     * @param aFileName the name of the file to load
+     * @param aCharsetName the name of a supported charset
+     * @throws IOException error occurred
+     **/
+    public static String[] getLines(String aFileName, String aCharsetName)
+        throws IOException
+    {
+        final ArrayList lines = new ArrayList();
+        final FileInputStream fr = new FileInputStream(aFileName);
+        final LineNumberReader lnr =
+              new LineNumberReader(new InputStreamReader(fr, aCharsetName));
+
+        try {
+            while (true) {
+                final String l = lnr.readLine();
+                if (l == null) {
+                    break;
+                }
+                lines.add(l);
+            }
+        }
+        finally {
+            try {
+                lnr.close();
+            }
+            catch (IOException e) {
+                ; // silently ignore
+            }
+        }
+
+        return (String[]) lines.toArray(new String[0]);
+    }
+
