@@ -13,11 +13,11 @@
 
         mMessages.reset();
         try {
-            fireFileStarted(fileName);
+            getMessageDispatcher().fireFileStarted(fileName);
             final String[] lines = Utils.getLines(fileName);
             final FileContents contents = new FileContents(fileName, lines);
             final DetailAST rootAST = TreeWalker.parse(contents);
-            mWalker.walk(rootAST, contents, mConfig.getClassLoader());
+            walk(rootAST, contents, mConfig.getClassLoader());
         }
         catch (FileNotFoundException fnfe) {
             mMessages.add(new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE,
@@ -44,9 +44,9 @@
             mCache.checkedOk(fileName, timestamp);
         }
         else {
-            fireErrors(fileName, mMessages.getMessages());
+            getMessageDispatcher().fireErrors(fileName, mMessages.getMessages());
         }
 
-        fireFileFinished(fileName);
+        getMessageDispatcher().fireFileFinished(fileName);
     }
 
