@@ -2,8 +2,8 @@
     public void visitToken(DetailAST aAST)
     {
         // Check for RCURLY in array initializer
-        if ((aAST.getType() == RCURLY)
-            && (aAST.getParent().getType() == ARRAY_INIT))
+        if ((aAST.getType() == TokenTypes.RCURLY)
+            && (aAST.getParent().getType() == TokenTypes.ARRAY_INIT))
         {
             return;
         }
@@ -20,7 +20,7 @@
 
         if ((after < line.length())
             && !Character.isWhitespace(line.charAt(after))
-            && !((aAST.getType() == LITERAL_return)
+            && !((aAST.getType() == TokenTypes.LITERAL_RETURN)
                  && (aAST.getFirstChild().getType() == TokenTypes.SEMI)))
         {
             log(aAST.getLineNo(), aAST.getColumnNo() + aAST.getText().length(),

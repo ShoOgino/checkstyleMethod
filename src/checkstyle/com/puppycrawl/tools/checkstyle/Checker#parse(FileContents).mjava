@@ -14,12 +14,12 @@
             // all code that compiles without any warnings in JDK 1.4,
             // that should cover most cases
             final Reader sar = new StringArrayReader(aContents.getLines());
-            final Java14Lexer jl = new Java14Lexer(sar);
+            final GeneratedJava14Lexer jl = new GeneratedJava14Lexer(sar);
             jl.setFilename(aContents.getFilename());
             jl.setFileContents(aContents);
 
-            final Java14Recognizer jr =
-                new NEWSilentJava14Recognizer(jl);
+            final GeneratedJava14Recognizer jr =
+                new SilentJava14Recognizer(jl);
             jr.setFilename(aContents.getFilename());
             jr.setASTNodeClass(DetailAST.class.getName());
             jr.compilationUnit();
@@ -33,11 +33,11 @@
 
             // Arghh - the pain - duplicate code!
             final Reader sar = new StringArrayReader(aContents.getLines());
-            final JavaLexer jl = new JavaLexer(sar);
+            final GeneratedJavaLexer jl = new GeneratedJavaLexer(sar);
             jl.setFilename(aContents.getFilename());
             jl.setFileContents(aContents);
 
-            final JavaRecognizer jr = new JavaRecognizer(jl);
+            final GeneratedJavaRecognizer jr = new GeneratedJavaRecognizer(jl);
             jr.setFilename(aContents.getFilename());
             jr.setASTNodeClass(DetailAST.class.getName());
             jr.compilationUnit();

@@ -15,7 +15,7 @@
             e.printStackTrace();
             usage();
         }
-        
+
         // setup the properties
         final Properties props =
             line.hasOption("p")
@@ -27,7 +27,7 @@
             System.out.println("Must specify a config XML file.");
             usage();
         }
-        
+
         // Load the config file
         CheckConfiguration[] checkConfigs = null;
         try {
@@ -44,7 +44,7 @@
         OutputStream out = null;
         boolean closeOut = false;
         if (line.hasOption("o")) {
-            final String fname = line.getOptionValue("o"); 
+            final String fname = line.getOptionValue("o");
             try {
                 out = new FileOutputStream(fname);
                 closeOut = true;
@@ -58,11 +58,11 @@
             out = System.out;
             closeOut = false;
         }
-        
+
         // create the appropriate listener
         final String format =
             line.hasOption("f") ? line.getOptionValue("f") : "plain";
-        
+
         AuditListener listener = null;
         if ("xml".equals(format)) {
             listener = new XMLLogger(out, closeOut);
@@ -84,16 +84,16 @@
                 traverse(new File(values[i]), files);
             }
         }
- 
+
         final String[] remainingArgs = line.getArgs();
         for (int i = 0; i < remainingArgs.length; i++) {
             files.add(remainingArgs[i]);
-        } 
+        }
 
         if (files.isEmpty()) {
             System.out.println("Must specify files to process");
             usage();
-        }         
+        }
 
         // create the checker
         Checker c = null;
@@ -109,7 +109,7 @@
         }
 
         final int numErrs =
-            c.processNEW((String[]) files.toArray(new String[files.size()]));
+            c.process((String[]) files.toArray(new String[files.size()]));
         c.destroy();
         System.exit(numErrs);
     }
