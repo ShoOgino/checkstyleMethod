@@ -11,10 +11,9 @@
         IllegalAccessException, IOException
     {
         final int formatterCount = Math.max(1, mFormatters.size());
-        final int listenerCount = mCustomListeners.size();
 
         final AuditListener[] listeners =
-            new AuditListener[formatterCount + listenerCount];
+            new AuditListener[formatterCount];
 
         // formatters
         if (mFormatters.size() == 0) {
@@ -27,11 +26,6 @@
                 final Formatter f = (Formatter) mFormatters.get(i);
                 listeners[i] = f.createListener(this);
             }
-        }
-        //custom listeners
-        for (int i = 0; i < listenerCount; i++) {
-            final Listener listener = (Listener) mCustomListeners.get(i);
-            listeners[formatterCount + i] = createCustomListener(listener);
         }
         return listeners;
     }
