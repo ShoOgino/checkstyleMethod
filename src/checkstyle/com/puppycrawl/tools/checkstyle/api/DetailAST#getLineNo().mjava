@@ -1,6 +1,17 @@
     /** @return the line number **/
     public int getLineNo()
     {
+        if (mLineNo == NOT_INITIALIZED) {
+            // an inner AST that has been initiaized
+            // with initialize(String text)
+            DetailAST child = (DetailAST) getFirstChild();
+            DetailAST sibling = (DetailAST) getNextSibling();
+            if (child != null) {
+                return child.getLineNo();
+            } else if (sibling != null) {
+                return sibling.getLineNo();
+            }
+        }
         return mLineNo;
     }
 

@@ -1,6 +1,17 @@
     /** @return the column number **/
     public int getColumnNo()
     {
+        if (mColumnNo == NOT_INITIALIZED) {
+            // an inner AST that has been initiaized
+            // with initialize(String text)
+            DetailAST child = (DetailAST) getFirstChild();
+            DetailAST sibling = (DetailAST) getNextSibling();
+            if (child != null) {
+                return child.getColumnNo();
+            } else if (sibling != null) {
+                return sibling.getColumnNo();
+            }
+        }
         return mColumnNo;
     }
 
