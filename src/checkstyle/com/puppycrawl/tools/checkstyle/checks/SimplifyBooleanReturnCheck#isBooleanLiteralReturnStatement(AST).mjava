@@ -12,11 +12,16 @@
      */
     private boolean isBooleanLiteralReturnStatement(AST aAST)
     {
-        if (aAST.getType() != TokenTypes.LITERAL_RETURN) {
+        if (aAST == null || aAST.getType() != TokenTypes.LITERAL_RETURN) {
             return false;
         }
 
         final AST expr = aAST.getFirstChild();
+
+        if (expr == null) {
+            return false;
+        }
+
         final AST value = expr.getFirstChild();
 
         final int valueType = value.getType();
