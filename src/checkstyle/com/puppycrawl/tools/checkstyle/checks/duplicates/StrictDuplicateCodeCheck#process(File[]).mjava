@@ -22,7 +22,12 @@
                 mLineChecksums[i] = transformer.convertLines(lines);
             }
             catch (IOException ex) {
-                ex.printStackTrace(); // TODO
+                LOG.error("Cannot access files to check, giving up: "
+                        + ex.getMessage(), ex);
+                // TODO: better to throw an exception here?
+                // it would be best to throw IOException from process(),
+                // but interface definition doesn't allow that...
+                mLineChecksums = new long[0][0];
             }
         }
         fillSortedRelevantChecksums();

@@ -4,13 +4,13 @@
          * @param aLine the aLine
          * @return checksum
          */
-        private long calcChecksum(String aLine)
+        protected long calcChecksum(String aLine)
         {
             if (aLine.startsWith("import ")) {
                 return IGNORE;
             }
             else {
-                return reallyCalcChecksum(aLine);
+                return super.calcChecksum(aLine);
             }
         }
 
