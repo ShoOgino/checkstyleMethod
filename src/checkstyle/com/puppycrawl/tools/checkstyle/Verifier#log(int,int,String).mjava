@@ -6,6 +6,9 @@
      **/
     private void log(int aLineNo, int aColNo, String aMsg)
     {
-        mMessages.add(new LineText(aLineNo, aColNo + 1, aMsg));
+        // message must account for tabs before the error column
+        int colNo = Utils.lengthExpandedTabs(
+            mLines[aLineNo - 1], aColNo, mConfig.getTabWidth());
+        mMessages.add(new LineText(aLineNo, colNo + 1, aMsg));
     }
 
