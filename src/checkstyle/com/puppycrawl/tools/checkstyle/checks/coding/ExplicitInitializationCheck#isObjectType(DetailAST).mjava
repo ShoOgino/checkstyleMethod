@@ -1,0 +1,12 @@
+    /**
+     * Determines if a giiven type is an object type.
+     * @param aType type to check.
+     * @return true if it is an object type.
+     */
+    private boolean isObjectType(DetailAST aType)
+    {
+        int type = aType.getFirstChild().getType();
+        return (type == TokenTypes.IDENT || type == TokenTypes.DOT
+                || type == TokenTypes.ARRAY_DECLARATOR);
+    }
+
