@@ -1,3 +1,4 @@
+    /** @see Check */
     public void visitToken(DetailAST aAST)
     {
         // paranoia
@@ -18,14 +19,14 @@
                 && isObjectParam(parameters.getFirstChild())
                 )
         {
-            objBlockEquals.put(aAST.getParent(), aAST);
+            mObjBlockEquals.put(aAST.getParent(), aAST);
         }
         else if (type.getFirstChild().getType() == TokenTypes.LITERAL_INT
                 && "hashCode".equals(methodName.getText())
                 && modifiers.branchContains(TokenTypes.LITERAL_PUBLIC)
                 && parameters.getFirstChild() == null) // no params
         {
-            objBlockWithHashCode.add(aAST.getParent());
+            mObjBlockWithHashCode.add(aAST.getParent());
         }
     }
 
