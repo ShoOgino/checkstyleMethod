@@ -1,0 +1,15 @@
+    public void testStaticInit() throws Exception 
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ExecutableStatementCountCheck.class);
+
+        checkConfig.addAttribute("max", "0");
+        checkConfig.addAttribute("tokens", "STATIC_INIT");
+
+        final String[] expected = {
+            "58:5: Executable statement count is 2 (max allowed is 0).",
+        };
+
+        verify(checkConfig, getPath("ComplexityCheckTestInput.java"), expected);
+    }
+

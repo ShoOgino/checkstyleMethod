@@ -1,0 +1,19 @@
+    /**
+     * Process the end of a method definition.
+     *
+     * @param aAST the token representing the method definition.
+     */
+    private void leaveMethodDef(DetailAST aAST)
+    {
+        final int count = mContext.getCount();
+        if (count > getMax()) {
+            log(
+                aAST.getLineNo(),
+                aAST.getColumnNo(),
+                "executableStatementCount",
+                new Integer(count),
+                new Integer(getMax()));
+        }
+        mContext = (Context) mContextStack.pop();
+    }
+
