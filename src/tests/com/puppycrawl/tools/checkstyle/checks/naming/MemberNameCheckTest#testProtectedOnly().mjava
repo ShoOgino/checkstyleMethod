@@ -1,0 +1,16 @@
+    public void testProtectedOnly() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(MemberNameCheck.class);
+        checkConfig.addAttribute("format", "^_[a-z]*$");
+        checkConfig.addAttribute("applyToPublic", "false");
+        checkConfig.addAttribute("applyToPackage", "false");
+        checkConfig.addAttribute("applyToPrivate", "false");
+        final String[] expected = {
+            "4:19: Name 'mProtected' must match pattern '^_[a-z]*$'.",
+        };
+        verify(checkConfig,
+               getPath("naming" + File.separator + "InputMemberName.java"),
+               expected);
+    }
+

@@ -1,0 +1,15 @@
+    public void testDefaults() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(MemberNameCheck.class);
+        final String[] expected = {
+            "8:16: Name '_public' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "9:19: Name '_protected' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "10:9: Name '_package' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "11:17: Name '_private' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+        };
+        verify(checkConfig,
+               getPath("naming" + File.separator + "InputMemberName.java"),
+               expected);
+    }
+

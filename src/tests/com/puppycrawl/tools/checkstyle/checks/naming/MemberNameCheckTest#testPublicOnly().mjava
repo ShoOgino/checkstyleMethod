@@ -1,0 +1,16 @@
+    public void testPublicOnly() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(MemberNameCheck.class);
+        checkConfig.addAttribute("format", "^_[a-z]*$");
+        checkConfig.addAttribute("applyToProtected", "false");
+        checkConfig.addAttribute("applyToPackage", "false");
+        checkConfig.addAttribute("applyToPrivate", "false");
+        final String[] expected = {
+            "3:16: Name 'mPublic' must match pattern '^_[a-z]*$'.",
+        };
+        verify(checkConfig,
+               getPath("naming" + File.separator + "InputMemberName.java"),
+               expected);
+    }
+

@@ -6,6 +6,8 @@
             && modifiersAST.branchContains(TokenTypes.LITERAL_STATIC);
 
         return (!isStatic && !ScopeUtils.inInterfaceBlock(aAST)
-            && !ScopeUtils.isLocalVariableDef(aAST));
+            && !ScopeUtils.isLocalVariableDef(aAST))
+            && modifiersAST != null
+            && shouldCheckInScope(modifiersAST);
     }
 
