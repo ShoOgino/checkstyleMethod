@@ -1,0 +1,17 @@
+    /**
+     * searches towards the root of the AST for a specific AST type.
+     * @param aAST the starting node for searching (inclusive)
+     * @param aTokenType the token type to search for
+     * @return the first token of type aTokenTye or null if no such token exists
+     */
+    private DetailAST getLowestParent(DetailAST aAST, int aTokenType)
+    {
+        DetailAST synchronizedParent = aAST;
+        while (synchronizedParent != null
+            && synchronizedParent.getType() != aTokenType)
+        {
+            synchronizedParent = synchronizedParent.getParent();
+        }
+        return synchronizedParent;
+    }
+

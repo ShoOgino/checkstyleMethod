@@ -1,0 +1,21 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        DetailAST synchronizedAST =
+            getLowestParent(aAST, TokenTypes.LITERAL_SYNCHRONIZED);
+        if (synchronizedAST == null) {
+            return;
+        }
+
+        DetailAST ifAST =
+            getLowestParent(synchronizedAST, TokenTypes.LITERAL_IF);
+        if (ifAST == null) {
+            return;
+        }
+
+        if (getIfCondition(aAST).equalsTree(getIfCondition(ifAST))) {
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                "doublechecked.locking.avoid");
+        }
+    }
+
