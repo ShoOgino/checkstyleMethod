@@ -3,7 +3,7 @@
         final Properties props = initProperties();
         try {
             final String value = ConfigurationLoader.replaceProperties(
-                "${c}", new PropertiesExpander(props));
+                "${c}", new PropertiesExpander(props), null);
             fail("expected to fail, instead got: " + value);
         }
         catch (CheckstyleException ex) {
