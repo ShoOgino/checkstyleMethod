@@ -1,28 +1,22 @@
     /**
      * @return the token types that occur in the branch as a sorted set.
      */
-    private int[] getBranchTokenTypes()
+    private BitSet getBranchTokenTypes()
     {
         // lazy init
         if (mBranchTokenTypes == null) {
 
-            // TODO: improve algorithm to avoid most array creation
-            int[] bag = new int[] {getType()};
+            mBranchTokenTypes = new BitSet();
+            mBranchTokenTypes.set(getType());
 
             // add union of all childs
             DetailAST child = (DetailAST) getFirstChild();
             while (child != null) {
-                final int[] childTypes = child.getBranchTokenTypes();
-                final int[] savedBag = bag;
-                bag = new int[savedBag.length + childTypes.length];
-                System.arraycopy(savedBag, 0, bag, 0, savedBag.length);
-                System.arraycopy(childTypes, 0, bag, savedBag.length,
-                        childTypes.length);
+                final BitSet childTypes = child.getBranchTokenTypes();
+                mBranchTokenTypes.or(childTypes);
+
                 child = (DetailAST) child.getNextSibling();
             }
-            // TODO: remove duplicates to speed up searching
-            mBranchTokenTypes = bag;
-            Arrays.sort(mBranchTokenTypes);
         }
         return mBranchTokenTypes;
     }
