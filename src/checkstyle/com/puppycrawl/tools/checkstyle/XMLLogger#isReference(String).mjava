@@ -1,0 +1,40 @@
+    /**
+     * @return whether the given argument a character or entity reference
+     * @param aEnt the possible entity to look for.
+     */
+    public boolean isReference(String aEnt)
+    {
+        if (!(aEnt.charAt(0) == '&') || !aEnt.endsWith(";")) {
+            return false;
+        }
+
+        if (aEnt.charAt(1) == '#') {
+            if (aEnt.charAt(2) == 'x') {
+                try {
+                    Integer.parseInt(aEnt.substring(3, aEnt.length() - 1), 16);
+                    return true;
+                }
+                catch (NumberFormatException nfe) {
+                    return false;
+                }
+            }
+            else {
+                try {
+                    Integer.parseInt(aEnt.substring(2, aEnt.length() - 1));
+                    return true;
+                }
+                catch (NumberFormatException nfe) {
+                    return false;
+                }
+            }
+        }
+
+        final String name = aEnt.substring(1, aEnt.length() - 1);
+        for (int i = 0; i < ENTITIES.length; i++) {
+            if (name.equals(ENTITIES[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+

@@ -1,0 +1,42 @@
+    /**
+     * Escape &lt;, &gt; &amp; &apos; and &quot; as their entities.
+     * @param aValue the value to escape.
+     * @return the escaped value if necessary.
+     */
+    public String encode(String aValue)
+    {
+        final StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < aValue.length(); i++) {
+            char c = aValue.charAt(i);
+            switch (c) {
+            case '<':
+                sb.append("&lt;");
+                break;
+            case '>':
+                sb.append("&gt;");
+                break;
+            case '\'':
+                sb.append("&apos;");
+                break;
+            case '\"':
+                sb.append("&quot;");
+                break;
+            case '&':
+                int nextSemi = aValue.indexOf(";", i);
+                if ((nextSemi < 0) ||
+                    !isReference(aValue.substring(i, nextSemi + 1)))
+                {
+                    sb.append("&amp;");
+                }
+                else {
+                    sb.append('&');
+                }
+                break;
+            default:
+                sb.append(c);
+                break;
+            }
+        }
+        return sb.toString();
+    }
+
