@@ -1,0 +1,38 @@
+    /**
+     * The doclet's starter method.
+     * @param aRoot <code>RootDoc</code> given to the doclet
+     * @exception FileNotFoundException will be thrown if the doclet
+     *            will be unable to write to the specified file.
+     * @return true if the given <code>RootDoc</code> is processed.
+     */
+    public static boolean start(RootDoc aRoot) throws FileNotFoundException
+    {
+        String fileName = getDestFileName(aRoot.options());
+        FileOutputStream fos = new FileOutputStream(fileName);
+        PrintStream ps = new PrintStream(fos);
+        ClassDoc[] classes = aRoot.classes();
+        if (classes.length != 1 || !classes[0].name().equals("TokenTypes")) {
+            final String message =
+                "The doclet should be used for TokenTypes only";
+            throw new IllegalArgumentException(message);
+        }
+
+        FieldDoc[] fields = classes[0].fields();
+        for (int j = 0; j < fields.length; j++) {
+            final FieldDoc field = fields[j];
+            if (field.isStatic() && field.isPublic() && field.isFinal()
+                && "int".equals((field.type().qualifiedTypeName())))
+            {
+                if (field.firstSentenceTags().length != 1) {
+                    final String message = "Should be only one tag.";
+                    throw new IllegalArgumentException(message);
+                }
+                ps.println(field.name() + "="
+                           + field.firstSentenceTags()[0].text());
+            }
+        }
+
+        ps.close();
+        return true;
+    }
+
