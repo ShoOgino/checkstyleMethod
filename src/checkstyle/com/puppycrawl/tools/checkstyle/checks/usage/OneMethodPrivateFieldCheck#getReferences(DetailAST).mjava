@@ -1,0 +1,19 @@
+    /**
+     * Returns the references to an AST.
+     * @param aAST the AST for the references.
+     * @return an iterator for the references to aAST.
+     */
+    private Iterator getReferences(DetailAST aAST)
+    {
+        final SymTabAST ident = ASTManager.getInstance().get(aAST);
+        final Definition definition =
+            (Definition) ident.getDefinition();
+        if (definition != null) {
+            return definition.getReferences();
+        }
+        else {
+            final Set dummy = new HashSet();
+            return dummy.iterator();
+        }
+    }
+

@@ -1,0 +1,47 @@
+    /** @see com.puppycrawl.tools.checkstyle.checks.usage.AbstractUsageCheck */
+    public void applyTo(Set aNodes)
+    {
+        // apply the check to each private field
+        final Set methods = new HashSet();
+        final Iterator it = aNodes.iterator();
+        while (it.hasNext()) {
+            methods.clear();
+            final DetailAST nameAST = (DetailAST) it.next();
+            // find methods using the field
+            final Iterator refIt = getReferences(nameAST);
+            while (refIt.hasNext()) {
+                final Reference ref = (Reference) refIt.next();
+                final SymTabAST refNode = ref.getTreeNode();
+                final DetailAST refDetail = refNode.getDetailNode();
+                // don't need to check a self-reference
+                if (refDetail == nameAST) {
+                    continue;
+                }
+                DetailAST parent = refDetail.getParent();
+                while (parent != null) {
+                    final int type = parent.getType();
+                    if ((type == TokenTypes.METHOD_DEF)
+                        || (type == TokenTypes.CTOR_DEF)
+                        || (type == TokenTypes.INSTANCE_INIT)
+                        || (type == TokenTypes.STATIC_INIT))
+                    {
+                        methods.add(parent);
+                        break;
+                    }
+                    // initializer for inner class?
+                    else if (type == TokenTypes.CLASS_DEF) {
+                        break;
+                    }
+                    parent = parent.getParent();
+                }
+            }
+            if (methods.size() == 1) {
+                log(
+                    nameAST.getLineNo(),
+                    nameAST.getColumnNo(),
+                    getErrorKey(),
+                    nameAST.getText());
+            }
+        }
+    }
+
