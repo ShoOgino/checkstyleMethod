@@ -13,7 +13,6 @@
                 //local variable or parameter. Does it shadow a field?
                 final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
                 final String name = nameAST.getText();
-                boolean inStatic = inStatic(aAST);
                 if ((mCurrentFrame.containsStaticField(name)
                      || (!inStatic(aAST)
                          && mCurrentFrame.containsInstanceField(name)))
