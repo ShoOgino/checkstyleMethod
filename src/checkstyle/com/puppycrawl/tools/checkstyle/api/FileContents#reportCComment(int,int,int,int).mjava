@@ -25,7 +25,9 @@
 
         // Remember if possible Javadoc comment
         if (mLines[aStartLineNo - 1].indexOf("/**", aStartColNo) != -1) {
-            mJavadocComments.put(new Integer(aEndLineNo - 1), cc);
+            Comment comment = new Comment(cc, aStartColNo, aEndLineNo);
+
+            mJavadocComments.put(new Integer(aEndLineNo - 1), comment);
         }
     }
 
