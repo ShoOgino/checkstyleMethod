@@ -1,0 +1,14 @@
+    public void testMissingPropertyName()
+    {
+        try {
+            final DefaultConfiguration config =
+                (DefaultConfiguration) loadConfiguration(
+                    "missing_property_name.xml");
+            fail("missing property name");
+        }
+        catch (CheckstyleException ex) {
+            assertTrue("exception error",
+                ex.getMessage().indexOf("missing property name") >= 0);
+        }
+    }
+

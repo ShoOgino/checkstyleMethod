@@ -1,0 +1,18 @@
+    private void verifyConfigNode(
+        DefaultConfiguration aConfig, String aName, int aChildrenLength,
+        Properties atts) throws Exception
+    {
+        assertEquals("name.", aName, aConfig.getName());
+        assertEquals(
+            "children.length.", aChildrenLength, aConfig.getChildren().length);
+
+        final String[] attNames = aConfig.getAttributeNames();
+        assertEquals("attributes.length", atts.size(), attNames.length);
+
+        for (int i = 0; i < attNames.length; i++) {
+            assertEquals(
+                "attribute[" + attNames[i] + "]", atts.get(attNames[i]),
+                aConfig.getAttribute(attNames[i]));
+        }
+    }
+

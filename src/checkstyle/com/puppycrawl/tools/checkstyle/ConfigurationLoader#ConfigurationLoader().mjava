@@ -6,7 +6,9 @@
     private ConfigurationLoader()
         throws ParserConfigurationException, SAXException
     {
-        mParser = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
+        final SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setValidating(false);
+        mParser = factory.newSAXParser().getXMLReader();
         mParser.setContentHandler(this);
     }
 
