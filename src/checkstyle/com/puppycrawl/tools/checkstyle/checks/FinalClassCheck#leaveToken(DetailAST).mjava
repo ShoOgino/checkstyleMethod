@@ -1,0 +1,18 @@
+    /** @see Check */
+    public void leaveToken(DetailAST aAST)
+    {
+        if (aAST.getType() != TokenTypes.CLASS_DEF) {
+            return;
+        }
+
+        final ClassDesc desc = (ClassDesc) mClasses.pop();
+        if (!desc.isDeclaredAsFinal()
+            && desc.hasPrivateCtor()
+            && !desc.hasNonPrivateCtor())
+        {
+            final String className =
+                aAST.findFirstToken(TokenTypes.IDENT).getText();
+            log(aAST.getLineNo(), "final.class", className);
+        }
+    }
+
