@@ -1,0 +1,23 @@
+    /**
+     * Traverses a specified node looking for Java source files. Found Java
+     * source files are added to a specified list. Subdirectories are also
+     * traversed.
+     *
+     * @param aNode the node to process
+     * @param aFiles list to add found files to
+     */
+    private static void traverse(File aNode, List aFiles)
+    {
+        if (aNode.canRead()) {
+            if (aNode.isDirectory()) {
+                final File[] nodes = aNode.listFiles();
+                for (int i = 0; i < nodes.length; i++) {
+                    traverse(nodes[i], aFiles);
+                }
+            }
+            else if (aNode.isFile() && aNode.getPath().endsWith(".java")) {
+                aFiles.add(aNode.getPath());
+            }
+        }
+    }
+

@@ -12,7 +12,7 @@
         // be brain dead about arguments parsing
         String format = "plain";
         String output = null;
-        String[] files = null;
+        final ArrayList files = new ArrayList();
         for (int i = 0; i < aArgs.length; i++) {
             if ("-f".equals(aArgs[i])) {
                 format = aArgs[++i];
@@ -20,10 +20,11 @@
             else if ("-o".equals(aArgs[i])) {
                 output = aArgs[++i];
             }
+            else if ("-r".equals(aArgs[i])) {
+                traverse(new File(aArgs[++i]), files);
+            }
             else {
-                files = new String[aArgs.length - i];
-                System.arraycopy(aArgs, i, files, 0, files.length);
-                break;
+                files.add(aArgs[i]);
             }
         }
 
@@ -69,8 +70,8 @@
             System.exit(1);
         }
 
-        final int numErrs = c.process(files);
-
+        final int numErrs =
+            c.process((String[]) files.toArray(new String[files.size()]));
         c.destroy();
         System.exit(numErrs);
     }
