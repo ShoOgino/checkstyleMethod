@@ -1,32 +1,26 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        switch (aAST.getType()) {
-            case TokenTypes.VARIABLE_DEF:
-                processVariable(aAST);
-                break;
-            case TokenTypes.PARAMETER_DEF:
-                if (mCheckParameters) {
-                    processVariable(aAST);
+        if (aAST.getType() == TokenTypes.CLASS_DEF) {
+            //find and push fields
+            final HashSet fieldSet = new HashSet(); //fields container
+            //add fields to container
+            final DetailAST objBlock =
+                aAST.findFirstToken(TokenTypes.OBJBLOCK);
+            DetailAST child = (DetailAST) objBlock.getFirstChild();
+            while (child != null) {
+                if (child.getType() == TokenTypes.VARIABLE_DEF) {
+                    final String name =
+                        child.findFirstToken(TokenTypes.IDENT).getText();
+                    fieldSet.add(name);
                 }
-                break;
-            case TokenTypes.CLASS_DEF:
-                //find and push fields
-                final HashSet fieldSet = new HashSet(); //fields container
-                //add fields to container
-                final DetailAST objBlock =
-                    aAST.findFirstToken(TokenTypes.OBJBLOCK);
-                DetailAST child = (DetailAST) objBlock.getFirstChild();
-                while (child != null) {
-                    if (child.getType() == TokenTypes.VARIABLE_DEF) {
-                        final String name =
-                            child.findFirstToken(TokenTypes.IDENT).getText();
-                        fieldSet.add(name);
-                    }
-                    child = (DetailAST) child.getNextSibling();
-                }                
-                mFieldsStack.addLast(fieldSet); //push container              
-                break;
+                child = (DetailAST) child.getNextSibling();
+            }                
+            mFieldsStack.addLast(fieldSet); //push container              
+        }
+        else {
+            //must be VARIABLE_DEF or PARAMETER_DEF
+            processVariable(aAST);
         }
     }
 
