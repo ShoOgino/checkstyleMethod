@@ -1,0 +1,16 @@
+    /** {@inheritDoc} */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST nextGroup = (DetailAST) aAST.getNextSibling();
+        if (nextGroup == null || nextGroup.getType() != TokenTypes.CASE_GROUP) {
+            // last group we shouldn't check it
+            return;
+        }
+
+        final DetailAST slist = aAST.findFirstToken(TokenTypes.SLIST);
+
+        if (!isTerminated(slist, true, true)) {
+            log(nextGroup, "fall.through");
+        }
+    }
+

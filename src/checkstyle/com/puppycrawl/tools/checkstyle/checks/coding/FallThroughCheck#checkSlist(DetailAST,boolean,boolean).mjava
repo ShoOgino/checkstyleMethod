@@ -1,0 +1,21 @@
+    /**
+     * Checks if a given SLIST terminated by return, throw or,
+     * if allowed break, continue.
+     * @param aAST SLIST to check
+     * @param aUseBreak should we consider break as terminator.
+     * @param aUseContinue should we consider continue as terminator.
+     * @return true if SLIST is terminated.
+     */
+    private boolean checkSlist(final DetailAST aAST, boolean aUseBreak,
+                               boolean aUseContinue)
+    {
+        DetailAST lastStmt = aAST.getLastChild();
+
+        if (lastStmt.getType() == TokenTypes.RCURLY) {
+            lastStmt = lastStmt.getPreviousSibling();
+        }
+
+        return lastStmt != null
+            && isTerminated(lastStmt, aUseBreak, aUseContinue);
+    }
+

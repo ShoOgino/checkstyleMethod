@@ -1,0 +1,23 @@
+    /**
+     * Checks if a given IF terminated by return, throw or,
+     * if allowed break, continue.
+     * @param aAST IF to check
+     * @param aUseBreak should we consider break as terminator.
+     * @param aUseContinue should we consider continue as terminator.
+     * @return true if IF is terminated.
+     */
+    private boolean checkIf(final DetailAST aAST, boolean aUseBreak,
+                            boolean aUseContinue)
+    {
+        final DetailAST thenStmt = (DetailAST)
+            aAST.findFirstToken(TokenTypes.RPAREN).getNextSibling();
+        final DetailAST elseStmt = (DetailAST) thenStmt.getNextSibling();
+        boolean isTerminated = isTerminated(thenStmt, aUseBreak, aUseContinue);
+
+        if (isTerminated && elseStmt != null) {
+            isTerminated = isTerminated((DetailAST) elseStmt.getFirstChild(),
+                                        aUseBreak, aUseContinue);
+        }
+        return isTerminated;
+    }
+

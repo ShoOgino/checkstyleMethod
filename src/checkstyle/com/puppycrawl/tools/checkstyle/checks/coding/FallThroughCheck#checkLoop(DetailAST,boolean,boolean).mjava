@@ -1,0 +1,23 @@
+    /**
+     * Checks if a given loop terminated by return, throw or,
+     * if allowed break, continue.
+     * @param aAST loop to check
+     * @param aUseBreak should we consider break as terminator.
+     * @param aUseContinue should we consider continue as terminator.
+     * @return true if loop is terminated.
+     */
+    private boolean checkLoop(final DetailAST aAST, boolean aUseBreak,
+                              boolean aUseContinue)
+    {
+        DetailAST loopBody = null;
+        if (aAST.getType() == TokenTypes.LITERAL_DO) {
+            final DetailAST lparen = aAST.findFirstToken(TokenTypes.LPAREN);
+            loopBody = lparen.getPreviousSibling();
+        }
+        else {
+            final DetailAST rparen = aAST.findFirstToken(TokenTypes.RPAREN);
+            loopBody = (DetailAST) rparen.getNextSibling();
+        }
+        return isTerminated(loopBody, false, false);
+    }
+
