@@ -1,0 +1,17 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void beginTree()
+    {
+        final String[] lines = getLines();
+        for (int i = 0; i < lines.length; i++) {
+
+            final String line = lines[i];
+            final int realLength = Utils.lengthExpandedTabs(
+                line, line.length(), getTabWidth());
+
+
+            if (realLength > mMax && !mIgnorePattern.match(line)) {
+                log(i + 1, "maxLineLen", new Integer(mMax));
+            }
+        }
+    }
+
