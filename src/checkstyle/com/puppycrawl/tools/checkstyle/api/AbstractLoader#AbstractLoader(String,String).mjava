@@ -8,13 +8,7 @@
     protected AbstractLoader(String aPublicId, String aDtdResourceName)
         throws SAXException, ParserConfigurationException
     {
-        mPublicId = aPublicId;
-        mDtdResourceName = aDtdResourceName;
-        final SAXParserFactory factory = SAXParserFactory.newInstance();
-        factory.setValidating(true);
-        mParser = factory.newSAXParser().getXMLReader();
-        mParser.setContentHandler(this);
-        mParser.setEntityResolver(this);
-        mParser.setErrorHandler(this);
+        this(new HashMap(1));
+        mPublicIdToResourceNameMap.put(aPublicId, aDtdResourceName);
     }
 

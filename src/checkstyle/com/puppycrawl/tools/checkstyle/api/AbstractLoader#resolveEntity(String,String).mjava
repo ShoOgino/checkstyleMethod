@@ -2,12 +2,14 @@
     public InputSource resolveEntity(String aPublicId, String aSystemId)
         throws SAXException
     {
-        if (mPublicId.equals(aPublicId)) {
+        if (mPublicIdToResourceNameMap.keySet().contains(aPublicId)) {
+            final String dtdResourceName =
+                    (String) mPublicIdToResourceNameMap.get(aPublicId);
             final InputStream dtdIS = getClass().getClassLoader()
-                .getResourceAsStream(mDtdResourceName);
+                .getResourceAsStream(dtdResourceName);
             if (dtdIS == null) {
                 throw new SAXException(
-                    "Unable to load internal dtd " + mDtdResourceName);
+                    "Unable to load internal dtd " + dtdResourceName);
             }
             return new InputSource(dtdIS);
         }
