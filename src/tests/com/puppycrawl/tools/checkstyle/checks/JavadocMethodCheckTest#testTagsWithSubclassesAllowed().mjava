@@ -1,9 +1,9 @@
-    public void testTagsWithResolver()
+    public void testTagsWithSubclassesAllowed()
         throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("allowUndeclaredRTE", "true");
+        checkConfig.addAttribute("allowThrowsTagsForSubclasses", "true");
         final String[] expected = {
             "14:5: Missing a Javadoc comment.",
             "18: Unused @param tag for 'unused'.",
@@ -26,7 +26,8 @@
             "109:23: Expected @param tag for 'aOne'.",
             "109:55: Expected @param tag for 'aFour'.",
             "109:66: Expected @param tag for 'aFive'.",
-            "236: Unused @throws tag for 'java.io.FileNotFoundException'.",
+            "178: Unused @throws tag for 'ThreadDeath'.",
+            "179: Unused @throws tag for 'ArrayStoreException'.",
         };
         verify(checkConfig, getPath("InputTags.java"), expected);
     }

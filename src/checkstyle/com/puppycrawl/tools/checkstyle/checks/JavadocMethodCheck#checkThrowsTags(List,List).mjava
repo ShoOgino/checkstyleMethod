@@ -6,7 +6,7 @@
     private void checkThrowsTags(List aTags, List aThrows)
     {
         // Loop over the tags, checking to see they exist in the throws.
-        final Set foundThrows = new HashSet();
+        final Set foundThrows = new HashSet(); //used for performance only
         final ListIterator tagIt = aTags.listIterator();
         while (tagIt.hasNext()) {
             final JavadocTag tag = (JavadocTag) tagIt.next();
@@ -22,12 +22,35 @@
             boolean found = foundThrows.contains(documentedEx);
             final ListIterator throwIt = aThrows.listIterator();
             while (!found && throwIt.hasNext()) {
-                final FullIdent fi = (FullIdent) throwIt.next();
+                final ExceptionInfo ei = (ExceptionInfo) throwIt.next();
+                final FullIdent fi = ei.getFullIdent();
                 final String declaredEx = fi.getText();
                 if (isSameType(declaredEx, documentedEx)) {
                     found = true;
-                    throwIt.remove();
+                    ei.setFound();
                     foundThrows.add(documentedEx);
+                }
+                else if (mAllowThrowsTagsForSubclasses) {
+                    final ClassResolver cr = getClassResolver();
+                    try {
+                        final Class documentedClass = cr.resolve(documentedEx);
+                        try {
+                            final Class declaredClass = cr.resolve(declaredEx);
+                            found = 
+                                declaredClass.isAssignableFrom(documentedClass);
+                            if (found) {
+                                ei.setFound();
+                            }
+                        }
+                        catch (ClassNotFoundException e) {
+                            log(tag.getLineNo(), "javadoc.classInfo",
+                                "@throws", declaredEx);
+                        }
+                    }
+                    catch (ClassNotFoundException e) {
+                        log(tag.getLineNo(), "javadoc.classInfo",
+                                      "@throws", documentedEx);
+                    }
                 }
             }
 
@@ -35,11 +58,7 @@
             if (!found) {
                 boolean reqd = true;
                 if (mAllowUndeclaredRTE) {
-                    final ClassResolver cr =
-                        new ClassResolver(
-                            getClassLoader(),
-                            mPackageFullIdent.getText(),
-                            mImports);
+                    final ClassResolver cr = getClassResolver();
                     try {
                         final Class clazz = cr.resolve(tag.getArg1());
                         reqd =
@@ -64,9 +83,12 @@
         if (!mAllowMissingThrowsTags) {
             final ListIterator throwIt = aThrows.listIterator();
             while (throwIt.hasNext()) {
-                final FullIdent fi = (FullIdent) throwIt.next();
-                log(fi.getLineNo(), fi.getColumnNo(),
-                    "javadoc.expectedTag", "@throws", fi.getText());
+                final ExceptionInfo ei = (ExceptionInfo) throwIt.next();
+                if (!ei.isFound()) {
+                    final FullIdent fi = ei.getFullIdent();
+                    log(fi.getLineNo(), fi.getColumnNo(),
+                        "javadoc.expectedTag", "@throws", fi.getText());
+                }
             }
         }
     }
