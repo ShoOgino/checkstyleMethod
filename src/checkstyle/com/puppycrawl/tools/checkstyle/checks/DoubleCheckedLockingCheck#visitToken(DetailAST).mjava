@@ -1,13 +1,13 @@
     /** @see Check */
     public void visitToken(DetailAST aAST)
     {
-        DetailAST synchronizedAST =
+        final DetailAST synchronizedAST =
             getLowestParent(aAST, TokenTypes.LITERAL_SYNCHRONIZED);
         if (synchronizedAST == null) {
             return;
         }
 
-        DetailAST ifAST =
+        final DetailAST ifAST =
             getLowestParent(synchronizedAST, TokenTypes.LITERAL_IF);
         if (ifAST == null) {
             return;
