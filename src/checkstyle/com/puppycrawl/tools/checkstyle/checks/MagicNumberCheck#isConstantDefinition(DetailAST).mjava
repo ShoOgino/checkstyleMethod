@@ -6,6 +6,9 @@
      */
     private boolean isConstantDefinition(DetailAST aAST)
     {
+        if (ScopeUtils.inInterfaceBlock(aAST)) {
+            return true;
+        }
         DetailAST parent = aAST.getParent();
 
         //expression?
@@ -13,8 +16,13 @@
             return false;
         }
 
-        //assignment?
+        //array init?
         parent = parent.getParent();
+        if ((parent != null) && (parent.getType() == TokenTypes.ARRAY_INIT)) {
+            parent = parent.getParent();
+        }
+
+        //assignment?
         if ((parent == null) || (parent.getType() != TokenTypes.ASSIGN)) {
             return false;
         }
