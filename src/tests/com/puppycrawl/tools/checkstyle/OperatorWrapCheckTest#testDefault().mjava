@@ -1,0 +1,16 @@
+    public void testDefault()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(OperatorWrapCheck.class.getName());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputOpWrap.java");
+        final String[] expected = {
+            "15:19: '+' should be on a new line.",
+            "16:15: '-' should be on a new line.",
+            "24:18: '&&' should be on a new line.",
+
+        };
+        verify(c, fname, expected);
+    }
+
