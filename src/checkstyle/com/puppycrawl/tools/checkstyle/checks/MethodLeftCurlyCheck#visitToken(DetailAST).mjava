@@ -1,0 +1,16 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST brace = Utils.getLastSibling(aAST.getFirstChild());
+        // TODO: should check for modifiers
+        final DetailAST startToken;
+        if (aAST.getType() == JavaTokenTypes.CTOR_DEF) {
+            startToken = (DetailAST) aAST.getFirstChild().getNextSibling();
+        }
+        else {
+            startToken = (DetailAST)
+                aAST.getFirstChild().getNextSibling().getNextSibling();
+        }
+        verifyBrace(brace, startToken);
+    }
+
