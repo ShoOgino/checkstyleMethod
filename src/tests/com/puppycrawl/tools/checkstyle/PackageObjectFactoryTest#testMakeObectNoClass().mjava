@@ -2,11 +2,9 @@
         throws CheckstyleException
     {
         try {
-            PackageObjectFactory factory =
-                (PackageObjectFactory) PackageObjectFactory.makeObject(
-                    new String [] {},
-                    this.getClass().getClassLoader(),
-                    "NoClass");
+            PackageObjectFactory.makeObject(new String[] {},
+                                            getClass().getClassLoader(),
+                                            "NoClass");
             fail("Instantiated non-existant class");
         }
         catch (CheckstyleException ex) {
