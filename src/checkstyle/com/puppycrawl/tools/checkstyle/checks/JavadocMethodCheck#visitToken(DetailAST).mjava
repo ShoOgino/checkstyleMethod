@@ -2,12 +2,12 @@
     public void visitToken(DetailAST aAST)
     {
         if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
-            if (mCheckUnusedThrows) {
+            if (mAllowUndeclaredRTE) {
                 processPackage(aAST);
             }
         }
         else if (aAST.getType() == TokenTypes.IMPORT) {
-            if (mCheckUnusedThrows) {
+            if (mAllowUndeclaredRTE) {
                 processImport(aAST);
             }
         }
