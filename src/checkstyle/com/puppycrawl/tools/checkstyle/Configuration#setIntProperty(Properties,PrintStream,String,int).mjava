@@ -1,20 +1,19 @@
     /**
+     * Set the value of an integer property. If the property is not defined
+     *    or cannot be parsed, then a default value is used.
      * @param aProps the properties set to use
      * @param aLog where to log errors to
      * @param aName the name of the property to parse
      * @param aDefault the default value to use.
-     *
-     * @return the value of an integer property. If the property is not defined
-     *    or cannot be parsed, then a default value is returned.
      */
-    private static int getIntProperty(Properties aProps, PrintStream aLog,
-                                      String aName, int aDefault)
+    private void setIntProperty(Properties aProps, PrintStream aLog,
+                                String aName, int aDefault)
     {
-        int retVal = aDefault;
+        int val = aDefault;
         final String strRep = aProps.getProperty(aName);
         if (strRep != null) {
             try {
-                retVal = Integer.parseInt(strRep);
+                val = Integer.parseInt(strRep);
             }
             catch (NumberFormatException nfe) {
                 aLog.println("Unable to parse " + aName
@@ -22,6 +21,6 @@
                              + ", defaulting to " + aDefault + ".");
             }
         }
-        return retVal;
+        setIntProperty(aName, val);
     }
 
