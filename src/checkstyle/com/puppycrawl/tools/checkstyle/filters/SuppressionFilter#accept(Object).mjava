@@ -1,6 +1,11 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Filter */
     public boolean accept(Object aObject)
     {
-        return mFilterChain.accept(aObject);
+        if (!(aObject instanceof AuditEvent)) {
+            return false;
+        }
+        else {
+            return mFilters.accept(aObject);
+        }
     }
 

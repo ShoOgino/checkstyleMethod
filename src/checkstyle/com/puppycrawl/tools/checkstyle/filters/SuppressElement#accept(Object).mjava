@@ -2,7 +2,7 @@
     public boolean accept(Object aObject)
     {
         if (!(aObject instanceof AuditEvent)) {
-            return true;
+            return false;
         }
 
         final AuditEvent event = (AuditEvent) aObject;
@@ -21,7 +21,7 @@
             return false;
         }
 
-        // reject line if it is accepted by the line CSV filter
+        // reject if line matches a line CSV value.
         if (mLineFilter != null) {
             final Integer line = new Integer(event.getLine());
             if (mLineFilter.accept(line)) {
@@ -29,7 +29,7 @@
             }
         }
 
-        // reject if column accepted by the column CSV filter
+        // reject if column matches a column CSV value.
         if (mColumnFilter != null) {
             final Integer column = new Integer(event.getColumn());
             if (mColumnFilter.accept(column)) {
