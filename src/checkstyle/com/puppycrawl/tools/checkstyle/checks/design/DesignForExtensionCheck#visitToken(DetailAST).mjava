@@ -16,6 +16,13 @@
             return;
         }
 
+        // method is ok if containing class is not visible in API and
+        // cannot be extended by 3rd parties (bug #884035)
+        if (!ScopeUtils.getSurroundingScope(aAST).isIn(Scope.PROTECTED))
+        {
+            return;
+        }
+
         // method is ok if it is implementation can verified to be empty
         // Note: native methods don't have impl in java code, so
         // implementation can be null even if method not abstract
