@@ -13,6 +13,19 @@
             else if (fromPackage(imp.getText(), mPkgName)) {
                 log(aAST.getLineNo(), aAST.getColumnNo(), "import.same");
             }
+            // Check for a duplicate import
+            final Iterator it = mImports.iterator();
+            while (it.hasNext()) {
+                final FullIdent full = (FullIdent) it.next();
+                if (imp.getText().equals(full.getText())) {
+                    log(aAST.getLineNo(),
+                        aAST.getColumnNo(),
+                        "import.duplicate",
+                        new Integer(full.getLineNo()));
+                }
+            }
+
+            mImports.add(imp);
         }
     }
 

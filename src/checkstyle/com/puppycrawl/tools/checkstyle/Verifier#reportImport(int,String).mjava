@@ -5,17 +5,6 @@
      **/
     void reportImport(int aLineNo, String aType)
     {
-        if (!mConfig.isIgnoreImports()) {
-            // Check for a duplicate import
-            final Iterator it = mImports.iterator();
-            while (it.hasNext()) {
-                final LineText lt = (LineText) it.next();
-                if (aType.equals(lt.getText())) {
-                    mMessages.add(aLineNo, "import.duplicate",
-                                  new Integer(lt.getLineNo()));
-                }
-            }
-        }
         // Add to list to check for duplicates, usage and instantiation checks
         mImports.add(new LineText(aLineNo, aType));
     }
