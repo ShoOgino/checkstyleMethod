@@ -1,0 +1,15 @@
+    /**
+     * The token set this check is designed for. Used to protect Checks
+     * against malicious users who specify a meaningless token set in the
+     * config file.
+     * The default implementations returns the check's default tokens.
+     * @return the token set this check is designed for.
+     */
+    public int[] getAcceptableTokens()
+    {
+        int[] defaultTokens = getDefaultTokens();
+        int[] copy = new int[defaultTokens.length];
+        System.arraycopy(defaultTokens, 0, copy, 0, defaultTokens.length);
+        return copy;
+    }
+
