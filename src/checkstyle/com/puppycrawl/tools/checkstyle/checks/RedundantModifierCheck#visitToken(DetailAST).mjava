@@ -1,52 +1,32 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        switch (aAST.getType()) {
-        case TokenTypes.INTERFACE_DEF:
-            mInInterface.push(Boolean.TRUE);
-            break;
-        case TokenTypes.CLASS_DEF:
-            mInInterface.push(Boolean.FALSE);
-            break;
-        case TokenTypes.MODIFIERS:
-
-            // modifiers of the interface itself (public interface X)
-            // will be below the INTERFACE_DEF node. Example:
-
-            // public interface X {void y();}
-
-            // INTERFACE_DEF
-            // + MODIFIERS
-            //   + public
-            // + OBJ_BLOCK
-            //   + ...
-
-            if (inInterfaceBlock(aAST)) {
-                DetailAST ast = (DetailAST) aAST.getFirstChild();
-                while (ast != null) {
-
-                    // javac does not allow final in interface methods
-                    // hence no need to check that this is not a method
-
-                    final int type = ast.getType();
-                    if (type == TokenTypes.LITERAL_PUBLIC
-                            || type == TokenTypes.ABSTRACT
-                            || type == TokenTypes.FINAL)
-                    {
-                            String modifier = ast.getText();
-                            log(ast.getLineNo(),
-                                    ast.getColumnNo(),
-                                    "redundantModifier",
-                                    new String[] {modifier});
-                            break;
-                    }
-
-                    ast = (DetailAST) ast.getNextSibling();
-                }
-            }
-            break;
-        default:
+        if (!ScopeUtils.inInterfaceBlock(aAST)) {
             return;
+        }
+
+        DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+
+        DetailAST modifier = (DetailAST) modifiers.getFirstChild();
+        while (modifier != null) {
+
+            // javac does not allow final or static in interface methods
+            // hence no need to check that this is not a method
+
+            final int type = modifier.getType();
+            if (type == TokenTypes.LITERAL_PUBLIC
+                || type == TokenTypes.ABSTRACT
+                || type == TokenTypes.LITERAL_STATIC
+                || type == TokenTypes.FINAL)
+            {
+                log(modifier.getLineNo(),
+                    modifier.getColumnNo(),
+                    "redundantModifier",
+                    new String[] {modifier.getText()});
+                break;
+            }
+
+            modifier = (DetailAST) modifier.getNextSibling();
         }
     }
 
