@@ -4,19 +4,18 @@
      * @param aName the name of the property to parse
      * @param aDefault the default value to use.
      *
-     * @return the value of a CatchBlockOption property. If the property is not
+     * @return the value of a BlockOption property. If the property is not
      *    defined or cannot be decoded, then a default value is returned.
      */
-    private static CatchBlockOption getCatchBlockOptionProperty(
-        Properties aProps,
-        String aName,
-        CatchBlockOption aDefault,
-        PrintStream aLog)
+    private static BlockOption getBlockOptionProperty(Properties aProps,
+                                                      String aName,
+                                                      BlockOption aDefault,
+                                                      PrintStream aLog)
     {
-        CatchBlockOption retVal = aDefault;
+        BlockOption retVal = aDefault;
         final String strRep = aProps.getProperty(aName);
         if (strRep != null) {
-            retVal = CatchBlockOption.decode(strRep);
+            retVal = BlockOption.decode(strRep);
             if (retVal == null) {
                 aLog.println("Unable to parse " + aName
                              + " property with value " + strRep

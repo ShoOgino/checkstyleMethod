@@ -2,7 +2,9 @@
         throws Exception
     {
         mConfig.setJavadocScope(Scope.NOTHING);
-        mConfig.setCatchBlock(CatchBlockOption.STMT);
+        mConfig.setTryBlock(BlockOption.STMT);
+        mConfig.setCatchBlock(BlockOption.STMT);
+        mConfig.setFinallyBlock(BlockOption.STMT);
         mConfig.setIgnoreImports(true);
         mConfig.setIllegalInstantiations(
             "java.lang.Boolean," +
@@ -25,6 +27,10 @@
             filepath + ":70:38: Must have at least one statement.",
             filepath + ":71:52: Must have at least one statement.",
             filepath + ":72:45: Must have at least one statement.",
+            filepath + ":74:13: Must have at least one statement.",
+            filepath + ":76:17: Must have at least one statement.",
+            filepath + ":78:13: Must have at least one statement.",
+            filepath + ":81:17: Must have at least one statement.",
         };
         verify(c, filepath, expected);
     }

@@ -2,7 +2,9 @@
         throws Exception
     {
         mConfig.setJavadocScope(Scope.NOTHING);
-        mConfig.setCatchBlock(CatchBlockOption.TEXT);
+        mConfig.setTryBlock(BlockOption.TEXT);
+        mConfig.setCatchBlock(BlockOption.TEXT);
+        mConfig.setFinallyBlock(BlockOption.TEXT);
         mConfig.setIgnoreImports(true);
         mConfig.setIllegalInstantiations("");
         final Checker c = createChecker();
@@ -12,6 +14,8 @@
             filepath + ":51:65: Empty catch block.",
             filepath + ":71:52: Empty catch block.",
             filepath + ":72:45: Empty catch block.",
+            filepath + ":74:13: Empty try block.",
+            filepath + ":76:17: Empty finally block.",
         };
         verify(c, filepath, expected);
     }
