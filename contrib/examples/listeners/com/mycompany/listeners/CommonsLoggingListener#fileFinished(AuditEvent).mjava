@@ -1,0 +1,9 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.AuditListener */
+    public void fileFinished(AuditEvent aEvt)
+    {
+        if (mInitialized) {
+            final Log log = mLogFactory.getInstance(Checker.class);
+            log.info("File \"" + aEvt.getFileName() + "\" finished.");
+        }
+    }
+

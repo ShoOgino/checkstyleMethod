@@ -1,0 +1,27 @@
+    /**
+     * Creates an audit listener for a custom listener.
+     * @param aListener custom listener
+     * @return an audit listener
+     */
+    private AuditListener createCustomListener(Listener aListener)
+    {
+        final String classname = aListener.getClassname();
+        final ClassLoader loader =
+            new AntClassLoader(getProject(), mClasspath);
+        AuditListener listener = null;
+        try {
+            //TODO: this works:
+            final Class listenerClass = Class.forName(classname);
+            // this causes the next statement to throw a ClassCastException
+            //final Class listenerClass =
+            //    Class.forName(classname, true, loader);
+            listener =
+                (AuditListener) listenerClass.newInstance();
+        }
+        catch (Exception e) {
+            throw new BuildException("Unable to create listener '"
+                + classname + "': " + e);
+        }
+        return listener;
+    }
+

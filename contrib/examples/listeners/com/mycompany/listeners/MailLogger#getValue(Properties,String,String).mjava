@@ -1,0 +1,30 @@
+    /**
+     *  Gets the value of a property.
+     *
+     * @param  aProperties Properties to obtain value from.
+     * @param  aName suffix of property name. "MailLogger." will be
+     * prepended internally.
+     * @param  aDefaultValue value returned if not present in the properties.
+     * Set to null to make required.
+     * @return The value of the property, or default value.
+     * @throws CheckstyleException if no default value is specified and the
+     *  property is not present in properties.
+     */
+    private String getValue(Properties aProperties, String aName,
+                            String aDefaultValue) throws CheckstyleException
+    {
+        final String propertyName = "MailLogger." + aName;
+        String value = (String) aProperties.get(propertyName);
+
+        if (value == null) {
+            value = aDefaultValue;
+        }
+
+        if (value == null) {
+            throw new CheckstyleException(
+                "Missing required parameter: " + propertyName);
+        }
+
+        return value;
+    }
+

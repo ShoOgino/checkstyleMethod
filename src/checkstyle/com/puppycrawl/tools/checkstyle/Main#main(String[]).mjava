@@ -124,6 +124,27 @@
             System.exit(1);
         }
 
+        // add custom listeners
+        if (line.hasOption("l")) {
+            final String listeners = line.getOptionValue("l");
+            final StringTokenizer t = new StringTokenizer(listeners, ",");
+            while (t.hasMoreTokens()) {
+                final String className = t.nextToken();
+                AuditListener customListener = null;
+                try {
+                    customListener =
+                        (AuditListener) Class.forName(className).newInstance();
+                }
+                catch (Exception e) {
+                    System.out.println("Unable to create listener '"
+                        + className + "': " + e);
+                    e.printStackTrace(System.out);
+                    System.exit(1);
+                }
+                c.addListener(customListener);
+            }
+        }
+
         final File[] processedFiles = new File[files.size()];
         files.toArray(processedFiles);
         final int numErrs = c.process(processedFiles);

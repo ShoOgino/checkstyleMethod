@@ -10,20 +10,28 @@
         throws ClassNotFoundException, InstantiationException,
         IllegalAccessException, IOException
     {
-        final int listenerCount = Math.max(1, mFormatters.size());
+        final int formatterCount = Math.max(1, mFormatters.size());
+        final int listenerCount = mCustomListeners.size();
 
-        final AuditListener[] listeners = new AuditListener[listenerCount];
+        final AuditListener[] listeners =
+            new AuditListener[formatterCount + listenerCount];
 
+        // formatters
         if (mFormatters.size() == 0) {
             OutputStream debug = new LogOutputStream(this, Project.MSG_DEBUG);
             OutputStream err = new LogOutputStream(this, Project.MSG_ERR);
             listeners[0] = new DefaultLogger(debug, true, err, true);
-            return listeners;
         }
-
-        for (int i = 0; i < listeners.length; i++) {
-            final Formatter f = (Formatter) mFormatters.get(i);
-            listeners[i] = f.createListener(this);
+        else {
+            for (int i = 0; i < formatterCount; i++) {
+                final Formatter f = (Formatter) mFormatters.get(i);
+                listeners[i] = f.createListener(this);
+            }
+        }
+        //custom listeners
+        for (int i = 0; i < listenerCount; i++) {
+            final Listener listener = (Listener) mCustomListeners.get(i);
+            listeners[formatterCount + i] = createCustomListener(listener);
         }
         return listeners;
     }

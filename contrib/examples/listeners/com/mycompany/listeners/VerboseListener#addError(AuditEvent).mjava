@@ -1,0 +1,10 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.AuditListener */
+    public void addError(AuditEvent aEvt)
+    {
+        printEvent(aEvt);
+        if (SeverityLevel.ERROR.equals(aEvt.getSeverityLevel())) {
+            mErrors++;
+            mTotalErrors++;
+        }
+    }
+
