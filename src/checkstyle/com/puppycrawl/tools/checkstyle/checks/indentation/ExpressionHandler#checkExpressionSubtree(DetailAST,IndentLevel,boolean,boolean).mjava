@@ -8,12 +8,20 @@
      */
     protected final void checkExpressionSubtree(
         DetailAST aTree,
-        int aLevel,
+        IndentLevel aLevel,
         boolean aFirstLineMatches,
         boolean aAllowNesting
     )
     {
-        checkExpressionSubtree(aTree, new IndentLevel(aLevel),
-                               aFirstLineMatches, aAllowNesting);
+        LineSet subtreeLines = new LineSet();
+        int firstLine = getFirstLine(Integer.MAX_VALUE, aTree);
+        if (aFirstLineMatches && !aAllowNesting) {
+            subtreeLines.addLineAndCol(new Integer(firstLine),
+                getLineStart(
+                    mIndentCheck.getLines()[firstLine - 1]));
+        }
+        findSubtreeLines(subtreeLines, aTree, aAllowNesting);
+
+        checkLinesIndent(subtreeLines, aLevel, aFirstLineMatches, firstLine);
     }
 

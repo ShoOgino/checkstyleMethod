@@ -8,7 +8,7 @@
      */
 
     private void checkSingleLine(int aLineNum, int aColNum,
-        int aIndentLevel, boolean aMustMatch)
+        IndentLevel aIndentLevel, boolean aMustMatch)
     {
         String line = mIndentCheck.getLines()[aLineNum - 1];
         int start = getLineStart(line);
@@ -16,8 +16,8 @@
         // at the correct indention level; otherwise, it is an only an
         // error if this statement starts the line and it is less than
         // the correct indentation level
-        if (aMustMatch ? start != aIndentLevel
-            : aColNum == start && start < aIndentLevel)
+        if (aMustMatch ? !aIndentLevel.accept(start)
+            : aColNum == start && aIndentLevel.gt(start))
         {
             logChildError(aLineNum, start, aIndentLevel);
         }

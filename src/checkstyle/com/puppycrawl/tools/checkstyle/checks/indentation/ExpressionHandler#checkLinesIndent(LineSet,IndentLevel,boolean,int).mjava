@@ -7,7 +7,7 @@
      * @param aFirstLine          firstline of whole expression
      */
     private void checkLinesIndent(LineSet aLines,
-                                  int aIndentLevel,
+                                  IndentLevel aIndentLevel,
                                   boolean aFirstLineMatches,
                                   int aFirstLine)
     {
@@ -39,7 +39,8 @@
         if (aFirstLineMatches
             || (aFirstLine > mMainAst.getLineNo() && shouldIncraeseIndent()))
         {
-            aIndentLevel += mIndentCheck.getBasicOffset();
+            aIndentLevel = new IndentLevel(aIndentLevel,
+                                           mIndentCheck.getBasicOffset());
         }
 
         // check following lines
@@ -61,7 +62,8 @@
             if (thisLine.matches("^\\s*\\.")
                 || prevLine.matches("\\.\\s*$"))
             {
-                aIndentLevel += mIndentCheck.getBasicOffset();
+                aIndentLevel = new IndentLevel(aIndentLevel,
+                                               mIndentCheck.getBasicOffset());
             }
 
             if (col != null) {
