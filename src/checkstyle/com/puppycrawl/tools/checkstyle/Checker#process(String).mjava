@@ -18,8 +18,12 @@
             VerifierSingleton.getInstance().clearMessages();
             VerifierSingleton.getInstance().setLines(lines);
             final Reader sar = new StringArrayReader(lines);
-            final AST ast = getAST(aFileName, sar);
-            processAST(ast);
+            final GeneratedJavaLexer jl = new GeneratedJavaLexer(sar);
+            jl.setFilename(aFileName);
+            final GeneratedJavaRecognizer jr = new GeneratedJavaRecognizer(jl);
+            jr.setFilename(aFileName);
+            jr.setASTNodeClass(MyCommonAST.class.getName());
+            jr.compilationUnit();
             errors = VerifierSingleton.getInstance().getMessages();
         }
         catch (FileNotFoundException fnfe) {
