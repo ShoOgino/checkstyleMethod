@@ -1,0 +1,14 @@
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST nameAST =
+            (DetailAST) aAST.getFirstChild().getNextSibling().getNextSibling();
+        if (!mRegexp.match(nameAST.getText())) {
+            log(nameAST.getLineNo(),
+                nameAST.getColumnNo(),
+                "name.invalidPattern",
+                nameAST.getText(),
+                mFormat);
+        }
+
+    }
+
