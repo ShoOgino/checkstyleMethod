@@ -1,16 +1,16 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        if (aAST.getType() == JavaTokenTypes.IDENT) {
+        if (aAST.getType() == TokenTypes.IDENT) {
             if (mCollect) {
                 processIdent(aAST);
             }
         }
-        else if (aAST.getType() == JavaTokenTypes.IMPORT) {
+        else if (aAST.getType() == TokenTypes.IMPORT) {
             processImport(aAST);
         }
-        else if ((aAST.getType() == JavaTokenTypes.CLASS_DEF)
-            || (aAST.getType() == JavaTokenTypes.INTERFACE_DEF))
+        else if ((aAST.getType() == TokenTypes.CLASS_DEF)
+            || (aAST.getType() == TokenTypes.INTERFACE_DEF))
         {
             mCollect = true;
         }

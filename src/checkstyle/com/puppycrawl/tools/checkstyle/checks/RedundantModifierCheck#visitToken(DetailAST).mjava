@@ -2,13 +2,13 @@
     public void visitToken(DetailAST aAST)
     {
         switch (aAST.getType()) {
-        case INTERFACE_DEF:
+        case TokenTypes.INTERFACE_DEF:
             mInInterface.push(Boolean.TRUE);
             break;
-        case CLASS_DEF:
+        case TokenTypes.CLASS_DEF:
             mInInterface.push(Boolean.FALSE);
             break;
-        case MODIFIERS:
+        case TokenTypes.MODIFIERS:
 
             // modifiers of the interface itself (public interface X)
             // will be below the INTERFACE_DEF node. Example:

@@ -5,20 +5,20 @@
         final DetailAST brace;
 
         switch (aAST.getType()) {
-            case JavaTokenTypes.LITERAL_while:
-            case JavaTokenTypes.LITERAL_catch:
-            case JavaTokenTypes.LITERAL_synchronized:
-            case JavaTokenTypes.LITERAL_for:
+            case TokenTypes.LITERAL_WHILE:
+            case TokenTypes.LITERAL_CATCH:
+            case TokenTypes.LITERAL_SYNCHRONIZED:
+            case TokenTypes.LITERAL_FOR:
                 brace = Utils.getLastSibling(aAST.getFirstChild());
                 break;
-            case JavaTokenTypes.LITERAL_try:
-            case JavaTokenTypes.LITERAL_finally:
-            case JavaTokenTypes.LITERAL_do:
+            case TokenTypes.LITERAL_TRY:
+            case TokenTypes.LITERAL_FINALLY:
+            case TokenTypes.LITERAL_DO:
                 brace = (DetailAST) aAST.getFirstChild();
                 break;
-            case JavaTokenTypes.LITERAL_else:
+            case TokenTypes.LITERAL_ELSE:
                 final DetailAST candidate = (DetailAST) aAST.getFirstChild();
-                if (candidate.getType() == JavaTokenTypes.SLIST) {
+                if (candidate.getType() == TokenTypes.SLIST) {
                     brace = candidate;
                 }
                 else {
@@ -26,8 +26,8 @@
                     brace = null;
                 }
                 break;
-            case JavaTokenTypes.LITERAL_switch:
-            case JavaTokenTypes.LITERAL_if:
+            case TokenTypes.LITERAL_SWITCH:
+            case TokenTypes.LITERAL_IF:
                 brace = (DetailAST) aAST.getFirstChild().getNextSibling()
                     .getNextSibling().getNextSibling();
                 break;

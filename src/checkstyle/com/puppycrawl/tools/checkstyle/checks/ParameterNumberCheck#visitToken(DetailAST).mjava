@@ -3,12 +3,12 @@
     {
         final DetailAST params =
             Utils.findFirstToken(aAST.getFirstChild(),
-                                 JavaTokenTypes.PARAMETERS);
+                                 TokenTypes.PARAMETERS);
         final int count = Utils.countTokens(params.getFirstChild(),
-                                            JavaTokenTypes.PARAMETER_DEF);
+                                            TokenTypes.PARAMETER_DEF);
         if (count > mMax) {
             final DetailAST name = Utils.findFirstToken(aAST.getFirstChild(),
-                                                        JavaTokenTypes.IDENT);
+                                                        TokenTypes.IDENT);
             log(name.getLineNo(), name.getColumnNo(),
                 "maxParam", new Integer(mMax));
         }

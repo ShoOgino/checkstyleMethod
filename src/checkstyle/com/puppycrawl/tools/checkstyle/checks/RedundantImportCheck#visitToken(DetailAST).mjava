@@ -1,7 +1,7 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        if (aAST.getType() == JavaTokenTypes.PACKAGE_DEF) {
+        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
             final DetailAST nameAST = (DetailAST) aAST.getFirstChild();
             mPkgName = FullIdent.createFullIdent(nameAST).getText();
         }
