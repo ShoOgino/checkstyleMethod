@@ -1,0 +1,17 @@
+    public void testMissingBraces()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(LeftCurlyCheck.class);
+        final String[] expected = {
+            "12:1: '{' should be on the previous line.",
+            "15:5: '{' should be on the previous line.",
+            "21:5: '{' should be on the previous line.",
+            "34:5: '{' should be on the previous line.",
+            "51:5: '{' should be on the previous line.",
+            "69:5: '{' should be on the previous line.",
+            "105:5: '{' should be on the previous line.",
+        };
+        verify(checkConfig, getPath("InputBraces.java"), expected);
+    }
+

@@ -2,11 +2,10 @@
         throws Exception
     {
         final DefaultConfiguration checkConfig =
-            createCheckConfig(OtherLeftCurlyCheck.class);
+            createCheckConfig(LeftCurlyCheck.class);
         checkConfig.addAttribute("option", LeftCurlyOption.NL.toString());
         final String[] expected = {
-            "26:33: '{' should be on a new line."
         };
-        verify(checkConfig, getPath("InputLeftCurlyOther.java"), expected);
+        verify(checkConfig, getPath("InputScopeInnerInterfaces.java"), expected);
     }
 
