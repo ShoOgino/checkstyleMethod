@@ -1,12 +1,13 @@
     /**
      * Notify checks that finished walking a tree.
+     * @param aRootAST the root of the tree
      */
-    private void notifyEnd()
+    private void notifyEnd(DetailAST aRootAST)
     {
         final Iterator it = mAllChecks.iterator();
         while (it.hasNext()) {
             final Check check = (Check) it.next();
-            check.finishTree();
+            check.finishTree(aRootAST);
         }
     }
 

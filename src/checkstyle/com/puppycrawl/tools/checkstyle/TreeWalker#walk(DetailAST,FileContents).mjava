@@ -6,7 +6,7 @@
     private void walk(DetailAST aAST, FileContents aContents)
     {
         mMessages.reset();
-        notifyBegin(aContents);
+        notifyBegin(aAST, aContents);
 
          // empty files are not flagged by javac, will yield aAST == null
         if (aAST != null) {
@@ -14,6 +14,6 @@
             process(aAST);
         }
 
-        notifyEnd();
+        notifyEnd(aAST);
     }
 

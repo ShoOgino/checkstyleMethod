@@ -1,14 +1,15 @@
     /**
      * Notify interested checks that about to begin walking a tree.
+     * @param aRootAST the root of the tree
      * @param aContents the contents of the file the AST was generated from
      */
-    private void notifyBegin(FileContents aContents)
+    private void notifyBegin(DetailAST aRootAST, FileContents aContents)
     {
         final Iterator it = mAllChecks.iterator();
         while (it.hasNext()) {
             final Check check = (Check) it.next();
             check.setFileContents(aContents);
-            check.beginTree();
+            check.beginTree(aRootAST);
         }
     }
 
