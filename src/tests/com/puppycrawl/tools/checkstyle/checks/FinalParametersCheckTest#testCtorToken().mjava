@@ -1,0 +1,13 @@
+    public void testCtorToken()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(FinalParametersCheck.class);
+        checkConfig.addAttribute("tokens", "CTOR_DEF");
+        final String[] expected = {
+            "22:26: Parameter s should be final.",
+            "32:26: Parameter s should be final.",
+        };
+        verify(checkConfig, getPath("InputFinalParameters.java"), expected);
+    }
+
