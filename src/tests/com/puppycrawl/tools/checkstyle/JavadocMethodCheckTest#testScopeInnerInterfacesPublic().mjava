@@ -1,0 +1,15 @@
+    public void testScopeInnerInterfacesPublic()
+        throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(JavadocMethodCheck.class.getName());
+        checkConfig.addProperty("scope", Scope.PUBLIC.getName());
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputScopeInnerInterfaces.java");
+        final String[] expected = {
+            "43:9: Missing a Javadoc comment.",
+            "44:9: Missing a Javadoc comment."
+        };
+        verify(c, fname, expected);
+    }
+

@@ -1,0 +1,24 @@
+    private void checkComment(DetailAST aAST, String[] aComment)
+    {
+        final List tags = getMethodTags(aComment, aAST.getLineNo() - 1);
+        // Check for only one @see tag
+        if ((tags.size() != 1)
+            || !((JavadocTag) tags.get(0)).isSeeTag())
+        {
+            checkParamTags(tags, getParameters(aAST));
+            checkThrowsTags(tags, getThrows(aAST));
+            if (isFunction(aAST)) {
+                checkReturnTag(tags, aAST.getLineNo());
+            }
+
+            // Dump out all unused tags
+            final Iterator it = tags.iterator();
+            while (it.hasNext()) {
+                final JavadocTag jt = (JavadocTag) it.next();
+                if (!jt.isSeeTag()) {
+                    log(jt.getLineNo(), "javadoc.unusedTagGeneral");
+                }
+            }
+        }
+    }
+

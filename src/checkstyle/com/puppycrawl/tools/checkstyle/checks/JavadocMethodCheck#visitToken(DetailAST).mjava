@@ -1,0 +1,19 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {            
+        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
+            if (mCheckUnusedThrows) {
+                processPackage(aAST);
+            }
+        }
+        else if (aAST.getType() == TokenTypes.IMPORT) {
+            if (mCheckUnusedThrows) {
+                processImport(aAST);
+            }
+        }
+        else {
+            //TokenTypes.METHOD_DEF or TokenTypes.CTOR_DEF 
+            processMethod(aAST);
+        }
+    }
+

@@ -1,0 +1,25 @@
+     /**
+     * Computes the exception nodes for a method.
+     * @param aAST the method node.
+     * @return the list of exception nodes for aAST.
+     **/
+    private List getThrows(DetailAST aAST)
+    {
+        final List retVal = new ArrayList();
+        final DetailAST throwsAST
+            = aAST.findFirstToken(TokenTypes.LITERAL_THROWS);
+        if (throwsAST != null) {
+            DetailAST child = (DetailAST) throwsAST.getFirstChild();
+            while (child != null) {
+                if ((child.getType() == TokenTypes.IDENT)
+                    || (child.getType() == TokenTypes.DOT))
+                {
+                    final FullIdent fi = FullIdent.createFullIdent(child);
+                    retVal.add(fi);
+                }
+                child = (DetailAST) child.getNextSibling();
+            }
+        }
+        return retVal;
+    }
+

@@ -1,0 +1,19 @@
+    /** 
+     * Checks whether a method is a function.
+     * @param aAST the method node.
+     * @return whether the method is a function.
+     **/
+    private boolean isFunction(DetailAST aAST)
+    {
+        boolean retVal = false;
+        if (aAST.getType() == TokenTypes.METHOD_DEF) {
+            final DetailAST typeAST = aAST.findFirstToken(TokenTypes.TYPE);
+            if ((typeAST != null)
+                && (typeAST.findFirstToken(TokenTypes.LITERAL_VOID) == null))
+            {
+                retVal = true;
+            }
+        }
+        return retVal;
+    }
+

@@ -1,0 +1,29 @@
+    /**
+     * Checks for only one return tag. All return tags will be removed from the
+     * supplied list.
+     * @param aTags the tags to check
+     * @param aLineNo the line number of the expected tag
+     **/
+    private void checkReturnTag(List aTags, int aLineNo)
+    {
+        // Loop over tags finding return tags. After the first one, report an
+        // error.
+        boolean found = false;
+        final ListIterator it = aTags.listIterator();
+        while (it.hasNext()) {
+            final JavadocTag jt = (JavadocTag) it.next();
+            if (jt.isReturnTag()) {
+                if (found) {
+                    log(jt.getLineNo(), "javadoc.return.duplicate");
+                }
+                found = true;
+                it.remove();
+            }
+        }
+
+        // Handle there being no @return tags
+        if (!found) {
+            log(aLineNo, "javadoc.return.expected");
+        }
+    }
+

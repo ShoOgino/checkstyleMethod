@@ -1,0 +1,46 @@
+    /**
+     * Checks a set of tags for matching parameters.
+     * @param aTags the tags to check
+     * @param aAST the method to check
+     **/
+    private void checkParamTags(List aTags, List aParams)
+    {        
+        // Loop over the tags, checking to see they exist in the params.
+        final ListIterator tagIt = aTags.listIterator();
+        while (tagIt.hasNext()) {
+            final JavadocTag tag = (JavadocTag) tagIt.next();
+
+            if (!tag.isParamTag()) {
+                continue;
+            }
+
+            tagIt.remove();
+
+            // Loop looking for matching param
+            boolean found = false;
+            final Iterator paramIt = aParams.iterator();
+            while (paramIt.hasNext()) {
+                final DetailAST param = (DetailAST) paramIt.next();
+                if (param.getText().equals(tag.getArg1())) {
+                    found = true;
+                    paramIt.remove();
+                    break;
+                }
+            }
+
+            // Handle extra JavadocTag
+            if (!found) {
+                log(tag.getLineNo(), "javadoc.unusedTag",
+                              "@param", tag.getArg1());
+            }
+        }
+
+        // Now dump out all parameters without tags
+        final Iterator paramIt = aParams.iterator();
+        while (paramIt.hasNext()) {
+            final DetailAST param = (DetailAST) paramIt.next();
+            log(param.getLineNo(), param.getColumnNo(),
+                "javadoc.expectedTag", "@param", param.getText());
+        }
+    }
+

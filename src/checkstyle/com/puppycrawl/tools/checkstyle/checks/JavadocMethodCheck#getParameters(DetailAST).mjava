@@ -1,0 +1,22 @@
+    /**
+     * Computes the parameter nodes for a method.
+     * @param aAST the method node.
+     * @return the list of parameter nodes for aAST.
+     **/
+    private List getParameters(DetailAST aAST)
+    {
+        final DetailAST params = aAST.findFirstToken(TokenTypes.PARAMETERS);
+        final List retVal = new ArrayList();
+
+        DetailAST child = (DetailAST) params.getFirstChild();
+        while (child != null) {
+            if (child.getType() == TokenTypes.PARAMETER_DEF) {
+                final DetailAST ident
+                    = child.findFirstToken(TokenTypes.IDENT);
+                retVal.add(ident);
+            }
+            child = (DetailAST) child.getNextSibling();
+        }
+        return retVal;
+    }
+
