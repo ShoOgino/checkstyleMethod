@@ -1,11 +1,13 @@
-    public void testAts() throws Exception
+    public void testAuthorRegularExError()
+        throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("authorFormat", "ABC");
+
         final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputWhitespace.java");
-        final String[] expected =
-        {
+        final String fname = getPath("InputJavadoc.java");
+        final String[] expected = {
             "13: Type Javadoc comment is missing an @author tag.",
         };
         verify(c, fname, expected);

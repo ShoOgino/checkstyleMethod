@@ -1,15 +1,13 @@
-    public void testNoVersion()
+    public void testVersionRegularEx()
         throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocTypeCheck.class);
-        checkConfig.addAttribute("allowNoAuthor", "true");
-        checkConfig.addAttribute("requireVersion", "true");
+        checkConfig.addAttribute("versionFormat", "[:digit:].*");
 
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputJavadoc.java");
         final String[] expected = {
-            "11: Type Javadoc comment is missing an @version tag."
         };
         verify(c, fname, expected);
     }

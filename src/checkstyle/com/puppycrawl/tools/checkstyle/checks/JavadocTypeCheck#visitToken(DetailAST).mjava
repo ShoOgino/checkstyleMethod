@@ -16,17 +16,20 @@
                 }
                 else if (ScopeUtils.isOuterMostType(aAST)) {
                     // don't check author/version for inner classes
-                    if (!mAllowNoAuthor
-                        && (MATCH_JAVADOC_AUTHOR.grep(cmt).length == 0))
+                    if ((mAuthorRE != null)
+                        && (mAuthorRE.grep(cmt).length == 0))
                     {
+                        // TODO: better error message
                         log(aAST.getLineNo(), "type.missingTag", "@author");
                     }
 
-                    if (mRequireVersion
-                        && (MATCH_JAVADOC_VERSION.grep(cmt).length == 0))
+                    if ((mVersionRE != null)
+                        && (mVersionRE.grep(cmt).length == 0))
                     {
+                        // TODO: better error message
                         log(aAST.getLineNo(), "type.missingTag", "@version");
                     }
+
                 }
             }
         }
