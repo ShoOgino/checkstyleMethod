@@ -2,5 +2,12 @@
      * Verify that a parameter conforms to the style.
      * @param aParam the parameter details
      **/
-    void verifyParameter(LineText aParam);
+    void verifyParameter(LineText aParam)
+    {
+        if (!mConfig.getParamRegexp().match(aParam.getText())) {
+            log(aParam.getLineNo(),
+                "parameter '" + aParam.getText() +
+                "' must match pattern '" + mConfig.getParamPat() + "'.");
+        }
+    }
 

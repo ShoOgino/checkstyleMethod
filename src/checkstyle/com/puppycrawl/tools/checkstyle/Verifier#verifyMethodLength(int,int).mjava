@@ -3,5 +3,12 @@
      * @param aLineNo line the method block starts at
      * @param aLength the length of the method block
      */
-    void verifyMethodLength(int aLineNo, int aLength);
+    void verifyMethodLength(int aLineNo, int aLength)
+    {
+        if (aLength > mConfig.getMaxMethodLength()) {
+            log(aLineNo,
+                "method length is " + aLength + " lines (max allowed is " +
+                mConfig.getMaxMethodLength() + ").");
+        }
+    }
 

@@ -3,5 +3,12 @@
      * @param aLineNo line the constructor block starts at
      * @param aLength the length of the constructor block
      */
-    void verifyConstructorLength(int aLineNo, int aLength);
+    void verifyConstructorLength(int aLineNo, int aLength)
+    {
+        if (aLength > mConfig.getMaxConstructorLength()) {
+            log(aLineNo,
+                "constructor length is " + aLength + " lines (max allowed is " +
+                mConfig.getMaxConstructorLength() + ").");
+        }
+    }
 

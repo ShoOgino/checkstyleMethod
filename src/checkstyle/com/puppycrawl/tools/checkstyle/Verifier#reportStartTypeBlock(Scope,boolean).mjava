@@ -5,5 +5,9 @@
      * @param aScope the Scope of the type block
      * @param aIsInterface indicates if the block is for an interface
      */
-    void reportStartTypeBlock(Scope aScope, boolean aIsInterface);
+    void reportStartTypeBlock(Scope aScope, boolean aIsInterface)
+    {
+        mInScope.push(aScope);
+        mInInterface.push(aIsInterface ? Boolean.TRUE : Boolean.FALSE);
+    }
 

@@ -6,5 +6,13 @@
      * @param aEndColNo the ending column number
      **/
     void reportCComment(int aStartLineNo, int aStartColNo,
-                        int aEndLineNo, int aEndColNo);
+                               int aEndLineNo, int aEndColNo)
+    {
+        if (mLines[aStartLineNo - 1].indexOf("/**", aStartColNo) != -1) {
+            final String[] cc =
+                extractCComment(aStartLineNo, aStartColNo,
+                                aEndLineNo, aEndColNo);
+            mComments.put(new Integer(aEndLineNo - 1), cc);
+        }
+    }
 

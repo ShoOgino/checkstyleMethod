@@ -3,5 +3,13 @@
      * (that is, {}'s).
      * @param aStmt the token for the statement
      */
-    void reportNeedBraces(Token aStmt);
+    void reportNeedBraces(Token aStmt)
+    {
+        if (mConfig.isIgnoreBraces()) {
+            return;
+        }
+
+        log(aStmt.getLine(),
+            "'" + aStmt.getText() + "' construct must use '{}'s.");
+    }
 

@@ -2,5 +2,10 @@
      * Returns the ordered list of error messages.
      * @return the list of messages
      **/
-    LineText[] getMessages();
+    LineText[] getMessages()
+    {
+        checkImports();
+        Collections.sort(mMessages);
+        return (LineText[]) mMessages.toArray(new LineText[0]);
+    }
 
