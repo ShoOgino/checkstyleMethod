@@ -4,6 +4,9 @@
             try {
                 DetailAST parseTree = parseFile(aFile.getAbsolutePath());
                 mParseTreeModel.setParseTree(parseTree);
+                mCurrentFile = aFile;
+                mLastDirectory = aFile.getParentFile();
+                reloadAction.setEnabled(true);
             }
             catch (IOException ex) {
                 showErrorDialog(

@@ -10,10 +10,19 @@
         mTreeTable = new JTreeTable(mParseTreeModel);
         final JScrollPane sp = new JScrollPane(mTreeTable);
         this.add(sp, BorderLayout.CENTER);
+        
+        final JPanel p = new JPanel(new GridLayout(1,2));
+        this.add(p, BorderLayout.SOUTH);
+
         final JButton fileSelectionButton =
             new JButton(new FileSelectionAction());
 
-        this.add(fileSelectionButton, BorderLayout.SOUTH);
+        reloadAction = new ReloadAction();
+        reloadAction.setEnabled(false);
+        final JButton reloadButton = new JButton(reloadAction);
+
+        p.add(fileSelectionButton);
+        p.add(reloadButton);
 
         try {
             // TODO: creating an object for the side effect of the constructor
