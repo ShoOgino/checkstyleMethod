@@ -1,0 +1,11 @@
+    /** @see org.apache.commons.digester.xmlrules.DigesterRuleParser */
+    public void addRuleInstances(Digester aDigester)
+    {
+        super.addRuleInstances(aDigester);
+        aDigester.addFactoryCreate(
+            "*/config-create-rule", new ConfigCreateRuleFactory());
+        aDigester.addRule(
+            "*/config-create-rule", new PatternRule("pattern"));
+        aDigester.addSetNext("*/config-create-rule", "add", ruleClassName);
+    }
+
