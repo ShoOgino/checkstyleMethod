@@ -2,9 +2,13 @@
      * Creates a new PropertiesExpander.
      * @param aProperties the underlying properties to use for
      * property resolution.
+     * @throws IllegalArgumentException indicates null was passed
      */
     public PropertiesExpander(Properties aProperties)
     {
+        if (aProperties == null) {
+            throw new IllegalArgumentException("cannot pass null");
+        }
         mProperties = aProperties;
     }
 
