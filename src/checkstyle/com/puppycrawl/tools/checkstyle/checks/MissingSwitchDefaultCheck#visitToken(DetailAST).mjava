@@ -1,0 +1,15 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAst)
+    {
+        DetailAST child = aAst.findFirstToken(TokenTypes.CASE_GROUP);
+        while (child != null) {
+            if ((child.getType() == TokenTypes.CASE_GROUP)
+                && child.branchContains(TokenTypes.LITERAL_DEFAULT))
+            {
+                return;
+            }
+            child = (DetailAST) child.getNextSibling();
+        }
+        log(aAst.getLineNo(), "missing.switch.default");
+    }
+
