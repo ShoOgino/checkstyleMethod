@@ -1,6 +1,12 @@
     /** @param aIgnore whether to ignore import statements **/
-    public void setIgnoreImports(boolean aIgnore)
+    public void setIgnoreImports(final boolean aIgnore)
     {
-        mConfig.setIgnoreImports(aIgnore);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setIgnoreImports(aIgnore);
+                }
+            });
     }
 

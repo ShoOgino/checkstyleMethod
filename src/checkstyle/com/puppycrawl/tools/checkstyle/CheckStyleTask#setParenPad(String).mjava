@@ -1,6 +1,12 @@
     /** @param aTo the parenthesis padding option **/
-    public void setParenPad(String aTo)
+    public void setParenPad(final String aTo)
     {
-        mConfig.setParenPadOption(extractPadOption(aTo));
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setParenPadOption(extractPadOption(aTo));
+                }
+            });
     }
 

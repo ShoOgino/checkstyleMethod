@@ -1,6 +1,12 @@
     /** @param aTo the left curly placement option for others **/
-    public void setLCurlyOther(String aTo)
+    public void setLCurlyOther(final String aTo)
     {
-        mConfig.setLCurlyOther(extractLeftCurlyOption(aTo));
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setLCurlyOther(extractLeftCurlyOption(aTo));
+                }
+            });
     }
 

@@ -1,8 +1,14 @@
     /** @param aIgnore whether max line length should be ignored for
      *                 import statements
      */
-    public void setIgnoreImportLen(boolean aIgnore)
+    public void setIgnoreImportLen(final boolean aIgnore)
     {
-        mConfig.setIgnoreImportLength(aIgnore);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setIgnoreImportLength(aIgnore);
+                }
+            });
     }
 

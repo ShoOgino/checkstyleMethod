@@ -1,6 +1,12 @@
     /** @param aRequirePackageHtml whether package.html is required **/
-    public void setRequirePackageHtml(boolean aRequirePackageHtml)
+    public void setRequirePackageHtml(final boolean aRequirePackageHtml)
     {
-        mConfig.setRequirePackageHtml(aRequirePackageHtml);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setRequirePackageHtml(aRequirePackageHtml);
+                }
+            });
     }
 

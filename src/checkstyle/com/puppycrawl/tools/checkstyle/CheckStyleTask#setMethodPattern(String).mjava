@@ -1,11 +1,18 @@
     /** @param aPat pattern for method names **/
-    public void setMethodPattern(String aPat)
+    public void setMethodPattern(final String aPat)
     {
-        try {
-            mConfig.setMethodPat(aPat);
-        }
-        catch (RESyntaxException ex) {
-            throw new BuildException("Unable to parse methodPattern - ", ex);
-        }
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    try {
+                        mConfig.setMethodPat(aPat);
+                    }
+                    catch (RESyntaxException ex) {
+                        throw new BuildException(
+                            "Unable to parse methodPattern - ", ex);
+                    }
+                }
+            });
     }
 

@@ -1,6 +1,12 @@
     /** @param aLen max allowed file length **/
-    public void setMaxFileLen(int aLen)
+    public void setMaxFileLen(final int aLen)
     {
-        mConfig.setMaxFileLength(aLen);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setMaxFileLength(aLen);
+                }
+            });
     }
 

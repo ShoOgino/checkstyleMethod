@@ -1,6 +1,12 @@
     /** @param aJavadocScope visibility scope where Javadoc is checked **/
-    public void setJavadocScope(String aJavadocScope)
+    public void setJavadocScope(final String aJavadocScope)
     {
-        mConfig.setJavadocScope(Scope.getInstance(aJavadocScope));
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setJavadocScope(Scope.getInstance(aJavadocScope));
+                }
+            });
     }
 

@@ -1,11 +1,18 @@
     /** @param aPat pattern for constant variables **/
-    public void setConstPattern(String aPat)
+    public void setConstPattern(final String aPat)
     {
-        try {
-            mConfig.setStaticFinalPat(aPat);
-        }
-        catch (RESyntaxException ex) {
-            throw new BuildException("Unable to parse constPattern - " , ex);
-        }
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    try {
+                        mConfig.setStaticFinalPat(aPat);
+                    }
+                    catch (RESyntaxException ex) {
+                        throw new BuildException(
+                            "Unable to parse constPattern - " , ex);
+                    }
+                }
+            });
     }
 

@@ -1,6 +1,12 @@
     /** @param aIgnore whether to ignore whitespace **/
-    public void setIgnoreWhitespace(boolean aIgnore)
+    public void setIgnoreWhitespace(final boolean aIgnore)
     {
-        mConfig.setIgnoreWhitespace(aIgnore);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setIgnoreWhitespace(aIgnore);
+                }
+            });
     }
 

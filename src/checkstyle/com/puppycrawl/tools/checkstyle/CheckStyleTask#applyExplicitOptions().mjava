@@ -1,0 +1,13 @@
+    /**
+     * Applies the options that have been saved in the mOptionMemory.
+     */
+    private void applyExplicitOptions()
+    {
+        Iterator it = mOptionMemory.iterator();
+        while (it.hasNext()) {
+            Runnable runnable = (Runnable) it.next();
+            runnable.run();
+        }
+        mOptionMemory.clear();
+    }
+

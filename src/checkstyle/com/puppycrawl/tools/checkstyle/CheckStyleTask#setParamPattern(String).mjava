@@ -1,11 +1,18 @@
     /** @param aPat pattern for parameters **/
-    public void setParamPattern(String aPat)
+    public void setParamPattern(final String aPat)
     {
-        try {
-            mConfig.setParamPat(aPat);
-        }
-        catch (RESyntaxException ex) {
-            throw new BuildException("Unable to parse paramPattern - ", ex);
-        }
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    try {
+                        mConfig.setParamPat(aPat);
+                    }
+                    catch (RESyntaxException ex) {
+                        throw new BuildException(
+                            "Unable to parse paramPattern - ", ex);
+                    }
+                }
+            });
     }
 

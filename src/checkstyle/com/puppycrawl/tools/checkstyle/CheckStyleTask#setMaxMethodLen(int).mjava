@@ -1,6 +1,12 @@
     /** @param aLen max allowed method length **/
-    public void setMaxMethodLen(int aLen)
+    public void setMaxMethodLen(final int aLen)
     {
-        mConfig.setMaxMethodLength(aLen);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setMaxMethodLength(aLen);
+                }
+            });
     }
 

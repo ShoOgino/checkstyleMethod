@@ -1,6 +1,12 @@
     /** @param aLen max allowed constructor length **/
-    public void setMaxConstructorLen(int aLen)
+    public void setMaxConstructorLen(final int aLen)
     {
-        mConfig.setMaxConstructorLength(aLen);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setMaxConstructorLength(aLen);
+                }
+            });
     }
 

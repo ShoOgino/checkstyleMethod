@@ -1,6 +1,12 @@
     /** @param aAllowed whether allow having no author **/
-    public void setAllowNoAuthor(boolean aAllowed)
+    public void setAllowNoAuthor(final boolean aAllowed)
     {
-        mConfig.setAllowNoAuthor(aAllowed);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setAllowNoAuthor(aAllowed);
+                }
+            });
     }
 

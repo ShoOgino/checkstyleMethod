@@ -1,6 +1,12 @@
     /** @param aIsRegexp whether to interpret header lines as regexp */
-    public void setHeaderLinesRegexp(boolean aIsRegexp)
+    public void setHeaderLinesRegexp(final boolean aIsRegexp)
     {
-        mConfig.setHeaderLinesRegexp(aIsRegexp);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setHeaderLinesRegexp(aIsRegexp);
+                }
+            });
     }
 

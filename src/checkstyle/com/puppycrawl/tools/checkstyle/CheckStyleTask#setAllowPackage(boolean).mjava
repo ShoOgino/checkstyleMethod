@@ -1,6 +1,12 @@
     /** @param aAllowed whether package visible data is allowed **/
-    public void setAllowPackage(boolean aAllowed)
+    public void setAllowPackage(final boolean aAllowed)
     {
-        mConfig.setAllowPackage(aAllowed);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setAllowPackage(aAllowed);
+                }
+            });
     }
 

@@ -1,6 +1,12 @@
     /** @param aTo the right curly placement option **/
-    public void setRCurly(String aTo)
+    public void setRCurly(final String aTo)
     {
-        mConfig.setRCurly(extractRightCurlyOption(aTo));
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setRCurly(extractRightCurlyOption(aTo));
+                }
+            });
     }
 

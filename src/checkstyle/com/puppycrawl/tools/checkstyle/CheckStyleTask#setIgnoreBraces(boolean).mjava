@@ -1,6 +1,12 @@
     /** @param aIgnore whether to ignore braces **/
-    public void setIgnoreBraces(boolean aIgnore)
+    public void setIgnoreBraces(final boolean aIgnore)
     {
-        mConfig.setIgnoreBraces(aIgnore);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setIgnoreBraces(aIgnore);
+                }
+            });
     }
 

@@ -1,12 +1,18 @@
     /** @param aPat pattern for public member variables **/
-    public void setPublicMemberPattern(String aPat)
+    public void setPublicMemberPattern(final String aPat)
     {
-        try {
-            mConfig.setPublicMemberPat(aPat);
-        }
-        catch (RESyntaxException ex) {
-            throw new BuildException(
-                "Unable to parse publicMemberPattern - ", ex);
-        }
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    try {
+                        mConfig.setPublicMemberPat(aPat);
+                    }
+                    catch (RESyntaxException ex) {
+                        throw new BuildException(
+                            "Unable to parse publicMemberPattern - ", ex);
+                    }
+                }
+            });
     }
 

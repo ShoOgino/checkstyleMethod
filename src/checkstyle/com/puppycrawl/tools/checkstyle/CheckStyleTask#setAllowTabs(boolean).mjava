@@ -1,6 +1,12 @@
     /** @param aAllowed whether tabs are allowed **/
-    public void setAllowTabs(boolean aAllowed)
+    public void setAllowTabs(final boolean aAllowed)
     {
-        mConfig.setAllowTabs(aAllowed);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setAllowTabs(aAllowed);
+                }
+            });
     }
 

@@ -1,6 +1,12 @@
     /** @param aPkgPrefixList comma separated list of package prefixes */
-    public void setIllegalImports(String aPkgPrefixList)
+    public void setIllegalImports(final String aPkgPrefixList)
     {
-        mConfig.setIllegalImports(aPkgPrefixList);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setIllegalImports(aPkgPrefixList);
+                }
+            });
     }
 

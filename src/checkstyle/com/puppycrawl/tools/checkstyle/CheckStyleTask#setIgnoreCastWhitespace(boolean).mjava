@@ -1,6 +1,12 @@
     /** @param aIgnore whether to ignore whitespace after casts **/
-    public void setIgnoreCastWhitespace(boolean aIgnore)
+    public void setIgnoreCastWhitespace(final boolean aIgnore)
     {
-        mConfig.setIgnoreCastWhitespace(aIgnore);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setIgnoreCastWhitespace(aIgnore);
+                }
+            });
     }
 

@@ -1,6 +1,12 @@
     /** @param aIgnore whether to ignore 'public' in interfaces **/
-    public void setIgnorePublicInInterface(boolean aIgnore)
+    public void setIgnorePublicInInterface(final boolean aIgnore)
     {
-        mConfig.setIgnorePublicInInterface(aIgnore);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setIgnorePublicInInterface(aIgnore);
+                }
+            });
     }
 

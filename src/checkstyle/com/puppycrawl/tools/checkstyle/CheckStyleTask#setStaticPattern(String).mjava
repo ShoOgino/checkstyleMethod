@@ -1,11 +1,18 @@
     /** @param aPat pattern for static variables **/
-    public void setStaticPattern(String aPat)
+    public void setStaticPattern(final String aPat)
     {
-        try {
-            mConfig.setStaticPat(aPat);
-        }
-        catch (RESyntaxException ex) {
-            throw new BuildException("Unable to parse staticPattern - ", ex);
-        }
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    try {
+                        mConfig.setStaticPat(aPat);
+                    }
+                    catch (RESyntaxException ex) {
+                        throw new BuildException(
+                            "Unable to parse staticPattern - ", ex);
+                    }
+                }
+            });
     }
 

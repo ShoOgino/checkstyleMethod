@@ -1,6 +1,12 @@
     /** @param aList Comma separated list of line numbers **/
-    public void setHeaderIgnoreLine(String aList)
+    public void setHeaderIgnoreLine(final String aList)
     {
-        mConfig.setHeaderIgnoreLines(aList);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setHeaderIgnoreLines(aList);
+                }
+            });
     }
 

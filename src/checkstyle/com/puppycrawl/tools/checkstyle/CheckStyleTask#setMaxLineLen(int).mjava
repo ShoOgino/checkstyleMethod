@@ -1,6 +1,12 @@
     /** @param aLen max allowed line length **/
-    public void setMaxLineLen(int aLen)
+    public void setMaxLineLen(final int aLen)
     {
-        mConfig.setMaxLineLength(aLen);
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setMaxLineLength(aLen);
+                }
+            });
     }
 
