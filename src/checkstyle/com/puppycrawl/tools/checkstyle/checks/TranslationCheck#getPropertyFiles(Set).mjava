@@ -1,15 +1,15 @@
     /**
      * Searches for all files with suffix ".properties" in the
      * given set of directories.
-     * @param dirs the file set to search in
+     * @param aDirs the file set to search in
      * @return the property files
      */
-    private static Set getPropertyFiles(Set dirs)
+    private static Set getPropertyFiles(Set aDirs)
     {
         Set propFiles = new HashSet();
         final PropertyFileFilter filter = new PropertyFileFilter();
 
-        for (Iterator iterator = dirs.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = aDirs.iterator(); iterator.hasNext();) {
             File dir = (File) iterator.next();
             File[] propertyFiles = dir.listFiles(filter);
             for (int j = 0; j < propertyFiles.length; j++) {

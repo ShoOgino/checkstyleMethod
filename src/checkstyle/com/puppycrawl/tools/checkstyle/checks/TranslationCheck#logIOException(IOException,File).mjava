@@ -1,19 +1,19 @@
     /**
      * helper method to log an io exception.
-     * @param e the exception that occured
-     * @param file the file that could not be processed
+     * @param aEx the exception that occured
+     * @param aFile the file that could not be processed
      */
-    private void logIOException(IOException e, File file)
+    private void logIOException(IOException aEx, File aFile)
     {
         String[] args = null;
         String key = "general.fileNotFound";
-        if (!(e instanceof FileNotFoundException)) {
-            args = new String[] {e.getMessage()};
+        if (!(aEx instanceof FileNotFoundException)) {
+            args = new String[] {aEx.getMessage()};
             key = "general.exception";
         }
         LocalizedMessage message =
                 new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE, key, args);
         LocalizedMessage[] messages = new LocalizedMessage[]{message};
-        getMessageDispatcher().fireErrors(file.getPath(), messages);
+        getMessageDispatcher().fireErrors(aFile.getPath(), messages);
     }
 

@@ -6,15 +6,15 @@
      * an error message is posted giving information which key misses in
      * which file.
      *
-     * @param propFiles the property files organized as Map
+     * @param aPropFiles the property files organized as Map
      */
-    private void checkPropertyFileSets(Map propFiles)
+    private void checkPropertyFileSets(Map aPropFiles)
     {
-        Set keySet = propFiles.keySet();
+        Set keySet = aPropFiles.keySet();
 
         for (Iterator iterator = keySet.iterator(); iterator.hasNext();) {
             String baseName = (String) iterator.next();
-            Set files = (Set) propFiles.get(baseName);
+            Set files = (Set) aPropFiles.get(baseName);
 
             if (files.size() >= 2) {
                 // build a map from files to the keys they contain
