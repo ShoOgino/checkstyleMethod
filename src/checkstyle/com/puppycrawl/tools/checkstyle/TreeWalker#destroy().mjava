@@ -3,7 +3,11 @@
      */
     public void destroy()
     {
-        super.destroy();
+        for (Iterator it = mAllChecks.iterator(); it.hasNext();) {
+            final Check c = (Check) it.next();
+            c.destroy();
+        }
         mCache.destroy();
+        super.destroy();
     }
 

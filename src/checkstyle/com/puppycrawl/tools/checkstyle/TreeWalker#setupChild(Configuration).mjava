@@ -12,13 +12,15 @@
         // class. Otherwise can get ClassCastException problems.
         final String name = aChildConf.getName();
         final String[] packageNames = getPackageNames();
-        final Check check =
-                (Check) PackageObjectFactory.makeObject(
-                        packageNames, this.getClass().getClassLoader(), name);
+        final Check c =
+            (Check) PackageObjectFactory.makeObject(
+                packageNames,
+                getClass().getClassLoader(),
+                name);
+        c.contextualize(mChildContext);
+        c.configure(aChildConf);
+        c.init();
 
-        check.contextualize(mChildContext);
-        check.configure(aChildConf);
-
-        registerCheck(check);
+        registerCheck(c);
     }
 
