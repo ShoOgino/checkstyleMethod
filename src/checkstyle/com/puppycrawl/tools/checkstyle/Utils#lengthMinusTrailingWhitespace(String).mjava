@@ -1,0 +1,19 @@
+    /**
+     * Returns the length of a string ignoring all trailing whitespace. It is a
+     * pity that there is not a trim() like method that only removed the
+     * trailing whitespace.
+     * @param aLine the string to process
+     * @return the length of the string ignoring all trailing whitespace
+     **/
+    static int lengthMinusTrailingWhitespace(String aLine)
+    {
+        int len = aLine.length();
+        for (int i = len - 1; i >= 0; i--) {
+            if (!Character.isWhitespace(aLine.charAt(i))) {
+                break;
+            }
+            len--;
+        }
+        return len;
+    }
+

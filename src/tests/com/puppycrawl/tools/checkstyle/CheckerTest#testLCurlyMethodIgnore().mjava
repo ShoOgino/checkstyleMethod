@@ -1,0 +1,13 @@
+    public void testLCurlyMethodIgnore()
+        throws Exception
+    {
+        mConfig.setLCurlyMethod(LeftCurlyOption.IGNORE);
+        mConfig.setJavadocScope(Scope.NOTHING);
+        final Checker c = createChecker();
+        final String filepath = getPath("InputLeftCurlyMethod.java");
+        assertNotNull(c);
+        final String[] expected = {
+        };
+        verify(c, filepath, expected);
+    }
+
