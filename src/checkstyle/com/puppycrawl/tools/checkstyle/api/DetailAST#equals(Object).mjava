@@ -3,10 +3,19 @@
     {
         if (aObj instanceof DetailAST) {
             final DetailAST other = (DetailAST) aObj;
+            boolean isTextEquals = true;
+
+            if (getText() != null) {
+                isTextEquals = getText().equals(other.getText());
+            }
+            else if (other.getText() != null) {
+                isTextEquals = false;
+            }
+
             return (other.getType() == getType())
-                && (other.getText().equals(getText()))
-                && (other.mLineNo == mLineNo)
-                && (other.mColumnNo == mColumnNo);
+                && isTextEquals
+                && (other.mLineNo == getLineNo())
+                && (other.mColumnNo == getColumnNo());
         }
         else {
             return false;
