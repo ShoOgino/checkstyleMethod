@@ -12,6 +12,7 @@
         // be brain dead about arguments parsing
         String format = "plain";
         String output = null;
+        Properties properties = System.getProperties();
         final ArrayList files = new ArrayList();
         for (int i = 0; i < aArgs.length; i++) {
             if ("-f".equals(aArgs[i])) {
@@ -22,6 +23,9 @@
             }
             else if ("-r".equals(aArgs[i])) {
                 traverse(new File(aArgs[++i]), files);
+            }
+            else if ("-p".equals(aArgs[i])) {
+                properties = loadProperties(new File(aArgs[++i]));
             }
             else {
                 files.add(aArgs[i]);
@@ -54,8 +58,7 @@
 
         Checker c = null;
         try {
-            c = new Checker(new Configuration(System.getProperties(),
-                                              System.out));
+            c = new Checker(new Configuration(properties, System.out));
             c.addListener(listener);
         }
         catch (RESyntaxException rese) {
