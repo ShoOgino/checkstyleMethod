@@ -1,11 +1,14 @@
-    /** check that a global property doesn't effect a check property.
-     *  and vice versa
-     */
-    public void testFromGlobal()
+    public void testOverridePropsGlobal()
         throws Exception
     {
+        String fName = System.getProperty("testinputs.dir") + "/configs/"
+                + "fromglobal_configuration.xml";
+        
+        Properties overrideProps = new Properties();
+        overrideProps.put("rightcurlycheck.option", "same");
+        
         Configuration config =
-            loadConfiguration("fromglobal_configuration.xml");
+            ConfigurationLoader.loadConfiguration(fName, overrideProps);
                                     
         CheckConfiguration[] checkConfigs =
             config.getCheckConfigurations();        
@@ -14,6 +17,6 @@
                 createInstance(this.getClass().getClassLoader()));
         RightCurlyOption option =
             (RightCurlyOption) rightCurly.getAbstractOption();
-        assertEquals("option", "alone", option.toString());
-    }
+        assertEquals("option", "same", option.toString());
+    }       
 
