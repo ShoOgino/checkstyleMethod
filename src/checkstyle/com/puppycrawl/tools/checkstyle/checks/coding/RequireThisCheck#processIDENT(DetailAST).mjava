@@ -21,6 +21,14 @@
             // we shouldn't check fields
             return;
         }
+
+        if (ScopeUtils.getSurroundingScope(aAST) == null) {
+            // it is not a class or inteface it's
+            // either import or package
+            // we shouldn't checks this
+            return;
+        }
+
         if (parentType == TokenTypes.DOT
             && aAST.getPreviousSibling() != null)
         {
