@@ -4,8 +4,8 @@
     public void visitToken(DetailAST aAST)
     {
         if (Utils.hasImplements(aAST, "javax.ejb.SessionBean")) {
-            checkBean(aAST, "Session bean");
-            if (!Utils.hasPublicMethod(aAST, "ejbCreate", true)) {
+            checkBean(aAST, "Session bean", false);
+            if (!Utils.hasPublicMethod(aAST, "ejbCreate")) {
                 final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
                 log(
                     nameAST.getLineNo(),

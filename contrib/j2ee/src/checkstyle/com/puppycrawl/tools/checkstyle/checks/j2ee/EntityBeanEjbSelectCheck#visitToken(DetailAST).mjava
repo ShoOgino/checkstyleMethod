@@ -3,14 +3,15 @@
     {
         final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
         final String name = nameAST.getText();
+        final String nameMessage = "Method " + name;
         if (name.startsWith("ejbSelect")
             && Utils.implementsEntityBean(aAST))
         {
-            checkMethod(aAST);
-            if (Utils.isVoid(aAST)) {
+            if (!Utils.isPublic(aAST)) {
                 log(nameAST.getLineNo(), nameAST.getColumnNo(),
-                    "voidmethod.bean", name);
+                    "nonpublic.bean", nameMessage);
             }
+
             if (!Utils.isAbstract(aAST)) {
                 log(nameAST.getLineNo(), nameAST.getColumnNo(),
                     "nonabstract.bean", "Method " + name);

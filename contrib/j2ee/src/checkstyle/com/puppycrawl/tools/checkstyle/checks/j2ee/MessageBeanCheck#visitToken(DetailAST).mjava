@@ -6,7 +6,7 @@
         if (Utils.hasImplements(aAST, "javax.ejb.MessageDrivenBean")
             && Utils.hasImplements(aAST, "javax.jms.MessageListener"))
         {
-            checkBean(aAST, "Message bean");
+            checkBean(aAST, "Message bean", false);
             if (!hasRequiredEjbCreate(aAST)) {
                 final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
                 log(nameAST.getLineNo(), nameAST.getColumnNo(),

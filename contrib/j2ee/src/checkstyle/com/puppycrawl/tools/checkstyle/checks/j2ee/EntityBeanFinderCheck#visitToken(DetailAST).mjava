@@ -6,7 +6,8 @@
         if (name.startsWith("ejbFind")
             && Utils.implementsEntityBean(aAST))
         {
-            checkMethod(aAST);
+            checkMethod(aAST, false);
+
             if (Utils.isVoid(aAST)) {
                 log(nameAST.getLineNo(), nameAST.getColumnNo(),
                     "voidmethod.bean", name);

@@ -6,7 +6,8 @@
         if (name.startsWith("ejbHome")
             && Utils.implementsEntityBean(aAST))
         {
-            checkMethod(aAST);
+            // allow final
+            checkMethod(aAST, true);
             if (Utils.hasThrows(aAST, "java.rmi.RemoteException")) {
                 log(nameAST.getLineNo(), nameAST.getColumnNo(),
                     "illegalthrows.bean",
