@@ -30,5 +30,22 @@
             // Metal looks better like this.
             setRowHeight(getRowHeight());
         }
+
+        Action expand = new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    TreePath selected = tree.getSelectionPath();
+                    if (tree.isExpanded(selected)) {
+                        tree.collapsePath(selected);
+                    }
+                    else {
+                        tree.expandPath(selected);
+                    }
+                    tree.setSelectionPath(selected);
+                }
+            };
+        KeyStroke stroke = KeyStroke.getKeyStroke("ENTER");
+        String command = "expand/collapse";
+        getInputMap().put(stroke, command);
+        getActionMap().put(command, expand);
     }
 
