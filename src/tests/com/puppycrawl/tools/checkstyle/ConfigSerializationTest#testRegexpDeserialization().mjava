@@ -4,8 +4,9 @@
     public void testRegexpDeserialization()
         throws Exception
     {
-        Configuration configOrig = new Configuration();
-        configOrig.setPatternProperty(Defn.TYPE_PATTERN_PROP, "xyz");
+        final Properties props = new Properties();
+        props.setProperty(Defn.TYPE_PATTERN_PROP, "xyz");
+        Configuration configOrig = new Configuration(props, System.out);
 
         Configuration configCopy = copyBySerialization(configOrig);
         assertNotNull(configCopy);
