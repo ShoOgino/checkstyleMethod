@@ -1,0 +1,13 @@
+    /** {@inheritDoc} */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        if (modifiers != null && modifiers.branchContains(TokenTypes.ABSTRACT))
+        {
+            // should apply the check to abtract class
+            return;
+        }
+
+        super.visitToken(aAST);
+    }
+

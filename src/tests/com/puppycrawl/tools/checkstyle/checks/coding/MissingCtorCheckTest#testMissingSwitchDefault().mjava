@@ -1,0 +1,14 @@
+    public void testMissingSwitchDefault() throws Exception
+    {
+        DefaultConfiguration checkConfig = 
+            createCheckConfig(MissingCtorCheck.class);
+
+        final String[] expected = {
+            "1:1: Class should define a constructor.",
+        };
+
+        verify(checkConfig,
+               getPath("coding" + File.separator + "InputMissingCtor.java"),
+               expected);
+    }
+
