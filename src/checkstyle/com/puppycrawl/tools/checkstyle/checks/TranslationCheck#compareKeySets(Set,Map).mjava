@@ -26,9 +26,7 @@
                     log(0, "translation.missingKey", key);
                 }
             }
-            final LocalizedMessage[] errors =
-                getMessageCollector().getMessages();
-            getMessageDispatcher().fireErrors(path, errors);
+            fireErrors(path);
             dispatcher.fireFileFinished(path);
         }
     }

@@ -15,9 +15,7 @@
             dispatcher.fireFileStarted(path);
             if (!packageHtml.exists()) {
                 log(0, "javadoc.packageHtml");
-                final LocalizedMessages messageList = getMessageCollector();
-                final LocalizedMessage[] messages = messageList.getMessages();
-                getMessageDispatcher().fireErrors(path, messages);
+                fireErrors(path);
             }
             dispatcher.fireFileFinished(path);
         }
