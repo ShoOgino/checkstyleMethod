@@ -1,0 +1,19 @@
+    /**
+     *
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void leaveToken(DetailAST aAST)
+    {
+        if (isCloneMethod(aAST)) {
+            final CloneNode cloneNode = (CloneNode) mCloneStack.removeLast();
+            if (!cloneNode.getCallsSuper()) {
+                final DetailAST methodAST = cloneNode.getCloneMethod();
+                final DetailAST nameAST =
+                    methodAST.findFirstToken(TokenTypes.IDENT);
+                log(nameAST.getLineNo(), nameAST.getColumnNo(),
+                    "missing.super.call",
+                    new Object[] {nameAST.getText()});
+            }
+        }
+    }
+
