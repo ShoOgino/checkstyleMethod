@@ -13,10 +13,12 @@
                 //local variable or parameter. Does it shadow a field?
                 final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
                 final String name = nameAST.getText();
-                final boolean inStatic = inStatic(aAST);
-                final Iterator it = mFieldsStack.iterator();
-                while (it.hasNext()) {
-                    final FieldFrame frame = (FieldFrame) it.next();
+                boolean inStatic = inStatic(aAST);
+                final ListIterator it =
+                    mFieldsStack.listIterator(mFieldsStack.size());
+                while (it.hasPrevious()) {
+                    final FieldFrame frame = (FieldFrame) it.previous();
+                    inStatic |= frame.isStaticClass();
                     if ((frame.containsStaticField(name)
                         || (!inStatic && frame.containsInstanceField(name)))
                         && ((mRegexp == null) || (!getRegexp().match(name)))

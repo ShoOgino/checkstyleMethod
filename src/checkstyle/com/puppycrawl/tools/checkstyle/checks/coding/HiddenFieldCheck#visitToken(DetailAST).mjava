@@ -3,7 +3,11 @@
     {
         if (aAST.getType() == TokenTypes.CLASS_DEF) {
             //find and push fields
-            final FieldFrame frame = new FieldFrame();
+            final DetailAST classMods =
+                aAST.findFirstToken(TokenTypes.MODIFIERS);
+            final boolean isStaticInnerClass =
+                classMods.branchContains(TokenTypes.LITERAL_STATIC);
+            final FieldFrame frame = new FieldFrame(isStaticInnerClass);
             //add fields to container
             final DetailAST objBlock =
                 aAST.findFirstToken(TokenTypes.OBJBLOCK);
