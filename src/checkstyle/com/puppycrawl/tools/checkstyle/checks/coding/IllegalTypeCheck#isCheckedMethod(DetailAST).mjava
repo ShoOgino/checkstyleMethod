@@ -1,0 +1,10 @@
+    /**
+     * @param aAST method def to check.
+     * @return true if we should check this method.
+     */
+    private boolean isCheckedMethod(DetailAST aAST)
+    {
+        String methodName = aAST.findFirstToken(TokenTypes.IDENT).getText();
+        return !mIgnoredMethodNames.contains(methodName);
+    }
+

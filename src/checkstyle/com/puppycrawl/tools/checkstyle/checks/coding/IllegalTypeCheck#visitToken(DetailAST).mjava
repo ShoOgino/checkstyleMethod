@@ -1,0 +1,18 @@
+    /** {@inheritDoc} */
+    public void visitToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+        case TokenTypes.METHOD_DEF:
+            visitMethodDef(aAST);
+            break;
+        case TokenTypes.VARIABLE_DEF:
+            visitVariableDef(aAST);
+            break;
+        case TokenTypes.PARAMETER_DEF:
+            visitParameterDef(aAST);
+            break;
+        default:
+            throw new IllegalStateException(aAST.toString());
+        }
+    }
+
