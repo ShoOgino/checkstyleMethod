@@ -4,12 +4,16 @@
      **/
     void verifyVariable(MyVariable aVar)
     {
-        if (inMethodBlock()) {
+        if (inMethodBlock())
+        {
+            checkVariable(aVar,
+                          mConfig.getLocalVarRegexp(),
+                          mConfig.getLocalVarPat());
             return;
         }
 
-        final Scope declaredScope =
-            aVar.getModifierSet().getVisibilityScope();
+        final MyModifierSet mods = aVar.getModifierSet();
+        final Scope declaredScope = mods.getVisibilityScope();
         final Scope variableScope =
             inInterfaceBlock() ? Scope.PUBLIC : declaredScope;
 
@@ -29,7 +33,6 @@
                           mConfig.getStaticFinalPat());
         }
         else {
-            final MyModifierSet mods = aVar.getModifierSet();
 
             if (mods.containsStatic()) {
                 if (mods.containsFinal()) {
@@ -42,7 +45,7 @@
                     }
                 }
                 else {
-                    if (mods.containsPrivate()) {
+                    if (Scope.PRIVATE.equals(variableScope)) {
                         checkVariable(aVar,
                                       mConfig.getStaticRegexp(),
                                       mConfig.getStaticPat());
@@ -56,8 +59,11 @@
             }
             else {
                 // These are the non-static variables
-                if (mods.containsPrivate() ||
-                    (mConfig.isAllowProtected() && mods.containsProtected()))
+                final boolean isPckg = Scope.PACKAGE.equals(variableScope);
+                final boolean isProt = Scope.PROTECTED.equals(variableScope);
+                if (Scope.PRIVATE.equals(variableScope) ||
+                    (mConfig.isAllowPackage() && isPckg) ||
+                    (mConfig.isAllowProtected() && isProt))
                 {
                     checkVariable(aVar,
                                   mConfig.getMemberRegexp(),

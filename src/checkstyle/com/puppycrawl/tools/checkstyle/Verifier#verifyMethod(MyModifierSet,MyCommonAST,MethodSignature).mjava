@@ -8,11 +8,24 @@
                       MyCommonAST aReturnType,
                       MethodSignature aSig)
     {
+        // Calculate line number. Unfortunately aReturnType does not contain a
+        // valid line number
+        final int lineNo = (aMods.size() > 0)
+            ? aMods.getFirstLineNo()
+            : aSig.getLineNo();
+
+        // no need to check constructor names
+        if (aReturnType != null &&
+            !mConfig.getMethodRegexp().match(aSig.getName())) {
+            log(lineNo,
+                "method name '" + aSig.getName() +
+                "' must match pattern '" + mConfig.getMethodPat() + "'.");
+        }
+
         // Always verify the parameters are ok
         for (Iterator it = aSig.getParams().iterator(); it.hasNext(); ) {
             verifyParameter((LineText) it.next());
         }
-
 
         // now check the javadoc
         final Scope methodScope =
@@ -21,12 +34,6 @@
         if (!inCheckScope(methodScope)) {
             return; // no need to really check anything
         }
-
-        // Calculate line number. Unfortunately aReturnType does not contain a
-        // valid line number
-        final int lineNo = (aMods.size() > 0)
-            ? aMods.getFirstLineNo()
-            : aSig.getLineNo();
 
         final boolean isFunction = (aReturnType == null)
             ? false
