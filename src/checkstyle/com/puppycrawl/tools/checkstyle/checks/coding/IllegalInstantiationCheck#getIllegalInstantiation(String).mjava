@@ -25,7 +25,32 @@
                 && illegal.endsWith(aClassName)
                 && illegal.startsWith(javaLang))
             {
-                return illegal;
+                // java.lang needs no import, but a class without import might
+                // also come from the same file or be in the same package.
+                // E.g. if a class defines an inner class "Boolean",
+                // the expression "new Boolean()" refers to that class,
+                // not to java.lang.Boolean
+
+                boolean isSameFile = mClassNames.contains(aClassName);
+
+                boolean isSamePackage = false;
+                try {
+                    final ClassLoader classLoader = getClassLoader();
+                    if (classLoader != null) {
+                        final String fqName = mPkgName + "." + aClassName;
+                        classLoader.loadClass(fqName);
+                        // no ClassNotFoundException, fqName is a known class
+                        isSamePackage = true;
+                    }
+                }
+                catch (ClassNotFoundException ex) {
+                    // not a class from the same package
+                    isSamePackage = false;
+                }
+
+                if (!(isSameFile || isSamePackage)) {
+                    return illegal;
+                }
             }
 
             // class from same package

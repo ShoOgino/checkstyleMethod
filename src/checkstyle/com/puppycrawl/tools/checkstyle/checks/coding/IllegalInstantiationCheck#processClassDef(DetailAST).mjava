@@ -1,0 +1,13 @@
+    /**
+     * Collects classes defined in the source file. Required
+     * to avoid false alarms for local vs. java.lang classes.
+     *
+     * @param aAST the classdef token.
+     */
+    private void processClassDef(DetailAST aAST)
+    {
+        final DetailAST identToken = aAST.findFirstToken(TokenTypes.IDENT);
+        String className = identToken.getText();
+        mClassNames.add(className);
+    }
+
