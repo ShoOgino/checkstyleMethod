@@ -1,0 +1,13 @@
+    public void testMaximumDepth()
+         throws Exception
+     {
+         final DefaultConfiguration checkConfig =
+             createCheckConfig(DescendantTokenCheck.class);
+         checkConfig.addAttribute("tokens", "LITERAL_SWITCH");
+         checkConfig.addAttribute("limitedTokens", "LITERAL_DEFAULT");
+         checkConfig.addAttribute("maximumNumber", "0");
+         checkConfig.addAttribute("maximumDepth", "1");
+         final String[] expected = {};
+         verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
+     }
+
