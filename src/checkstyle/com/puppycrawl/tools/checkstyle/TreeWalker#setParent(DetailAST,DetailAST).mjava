@@ -1,0 +1,19 @@
+    /**
+     * Sets the parent of an AST.
+     * @param aChildAST the child that gets a new parent
+     * @param aParentAST the new parent
+     */
+    // TODO: remove this method and manage parent in DetailAST
+    private void setParent(DetailAST aChildAST, DetailAST aParentAST)
+    {
+        // HACK
+        try {
+            mDetailASTmParent.set(aChildAST, aParentAST);
+        }
+        catch (IllegalAccessException iae) {
+            // can't happen because method has been made accesible
+            throw new RuntimeException();
+        }
+        // End of HACK
+    }
+

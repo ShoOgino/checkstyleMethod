@@ -12,7 +12,7 @@
 
         final DetailAST child = (DetailAST) aAST.getFirstChild();
         if (child != null) {
-            child.setParent(aAST);
+            setParent(child, aAST); // TODO: Manage parent in DetailAST
             process(child);
         }
 
@@ -20,7 +20,7 @@
 
         final DetailAST sibling = (DetailAST) aAST.getNextSibling();
         if (sibling != null) {
-            sibling.setParent(aAST.getParent());
+            setParent(sibling, aAST.getParent()); // TODO: Manage parent ...
             process(sibling);
         }
 

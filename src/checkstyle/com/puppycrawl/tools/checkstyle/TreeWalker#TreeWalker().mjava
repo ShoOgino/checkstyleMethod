@@ -4,5 +4,20 @@
     public TreeWalker()
     {
         mMessages = new LocalizedMessages();
+
+        // TODO: I (lkuehne) can't believe I wrote this! HACK HACK HACK!
+
+        // the parent relationship should really be managed by the DetailAST
+        // itself but ANTLR calls setFirstChild and friends in an
+        // unpredictable way. Introducing this hack for now to make
+        // DetailsAST.setParent() private...
+        try {
+            mDetailASTmParent = DetailAST.class.getDeclaredField("mParent");
+            // this will fail in environments with security managers
+            mDetailASTmParent.setAccessible(true);
+        }
+        catch (NoSuchFieldException e) {
+            mDetailASTmParent = null;
+        }
     }
 
