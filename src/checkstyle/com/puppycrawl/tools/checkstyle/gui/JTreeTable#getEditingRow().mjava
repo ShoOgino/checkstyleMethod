@@ -6,7 +6,7 @@
      */
     public int getEditingRow()
     {
-        return (getColumnClass(editingColumn) == TreeTableModel.class) ? -1 :
-                editingRow;
+        final Class editingClass = getColumnClass(editingColumn);
+        return (editingClass == TreeTableModel.class) ? -1 : editingRow;
     }
 

@@ -20,7 +20,8 @@
                 || mods.contains("static") && mods.contains("final")
                 || "package".equals(variableScope) && isPackageAllowed()
                 || "protected".equals(variableScope) && isProtectedAllowed()
-                || "public".equals(variableScope) && getPublicMemberRegexp().match(varName)))
+                || "public".equals(variableScope)
+                   && getPublicMemberRegexp().match(varName)))
         {
             log(varNameAST.getLineNo(), varNameAST.getColumnNo(),
                     "variable.notPrivate", varName);
