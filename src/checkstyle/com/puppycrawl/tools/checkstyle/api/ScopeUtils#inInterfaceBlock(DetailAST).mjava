@@ -1,7 +1,14 @@
+    /**
+     * Returns whether a node is directly contained within an interface block.
+     *
+     * @param aAST the node to check if directly contained within an interface
+     * block
+     * @return a <code>boolean</code> value
+     */
     public static boolean inInterfaceBlock(DetailAST aAST)
     {
         boolean retVal = false;
-    
+
         // Loop up looking for a containing interface block
         for (DetailAST token = aAST.getParent();
              token != null;
@@ -16,7 +23,7 @@
                 break;
             }
         }
-    
+
         return retVal;
     }
 

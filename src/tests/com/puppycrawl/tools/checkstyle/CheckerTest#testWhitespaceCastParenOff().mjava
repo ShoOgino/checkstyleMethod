@@ -2,7 +2,6 @@
         throws Exception
     {
         mProps.setProperty(Defn.IGNORE_CAST_WHITESPACE_PROP, "true");
-        mProps.setProperty(Defn.ALLOW_NO_AUTHOR_PROP, "false");
         mProps.setProperty(Defn.TRY_BLOCK_PROP, BlockOption.IGNORE.toString());
         mProps.setProperty(Defn.CATCH_BLOCK_PROP, BlockOption.IGNORE.toString());
         final Checker c = createChecker();
@@ -11,7 +10,6 @@
         final String[] expected = {
             filepath + ":5:12: '.' is preceeded with whitespace.",
             filepath + ":5:14: '.' is followed by whitespace.",
-            filepath + ":13: Type Javadoc comment is missing an @author tag.",
             filepath + ":29:14: '-' is followed by whitespace.",
             filepath + ":29:21: '+' is followed by whitespace.",
             filepath + ":30:14: '++' is preceeded with whitespace.",

@@ -14,17 +14,20 @@
                 if (cmt == null) {
                     log(aAST.getLineNo(), "javadoc.missing");
                 }
-//                else if (mInScope.size() == 0) {
-//                    // don't check author/version for inner classes
-//                    if (!mConfig.isAllowNoAuthor()
-//                        && (MATCH_JAVADOC_AUTHOR.grep(cmt).length == 0)) {
-//                        mMessages.add(lineNo, "type.missingTag", "@author");
-//                    }
-//                    if (mConfig.isRequireVersion()
-//                        && (MATCH_JAVADOC_VERSION.grep(cmt).length == 0)) {
-//                        mMessages.add(lineNo, "type.missingTag", "@version");
-//                    }
-//                }
+                else if (ScopeUtils.isOuterMostType(aAST)) {
+                    // don't check author/version for inner classes
+                    if (!mAllowNoAuthor
+                        && (MATCH_JAVADOC_AUTHOR.grep(cmt).length == 0))
+                    {
+                        log(aAST.getLineNo(), "type.missingTag", "@author");
+                    }
+                    
+                    if (mRequireVersion
+                        && (MATCH_JAVADOC_VERSION.grep(cmt).length == 0))
+                    {
+                        log(aAST.getLineNo(), "type.missingTag", "@version");
+                    }
+                }
             }
         }
     }
