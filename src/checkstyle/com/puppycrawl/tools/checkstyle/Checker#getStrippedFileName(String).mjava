@@ -5,15 +5,6 @@
      */
     private String getStrippedFileName(final String aFileName)
     {
-        final String stripped;
-        if ((mBasedir == null) || !aFileName.startsWith(mBasedir)) {
-            stripped = aFileName;
-        }
-        else {
-            // making the assumption that there is text after basedir
-            final int skipSep = mBasedir.endsWith(File.separator) ? 0 : 1;
-            stripped = aFileName.substring(mBasedir.length() + skipSep);
-        }
-        return stripped;
+        return Utils.getStrippedFileName(mBasedir, aFileName);
     }
 
