@@ -2,10 +2,21 @@
     public void visitToken(DetailAST aAST)
     {
         if (!inIgnoreList(aAST) && !isConstantDefinition(aAST)) {
+            String text = aAST.getText();
+            int columnNo = aAST.getColumnNo();
+            final DetailAST parent = aAST.getParent();
+            if (parent.getType() == TokenTypes.UNARY_MINUS) {
+                columnNo--;
+                text = "-" + text;
+            }
+            else if (parent.getType() == TokenTypes.UNARY_PLUS) {
+                columnNo--;
+                text = "+" + text;
+            }
             log(aAST.getLineNo(),
-                aAST.getColumnNo(),
+                columnNo,
                 "magic.number",
-                aAST.getText());
+                text);
         }
     }
 
