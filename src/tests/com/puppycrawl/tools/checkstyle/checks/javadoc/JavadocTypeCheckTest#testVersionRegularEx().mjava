@@ -3,8 +3,9 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocTypeCheck.class);
-        checkConfig.addAttribute("versionFormat", "[:digit:].*");
+        checkConfig.addAttribute("versionFormat", "^[:digit:]+\\.[:digit:]+$");
         final String[] expected = {
+            "22: Type Javadoc comment is missing an @version tag.",
         };
         verify(checkConfig, getPath("InputJavadoc.java"), expected);
     }

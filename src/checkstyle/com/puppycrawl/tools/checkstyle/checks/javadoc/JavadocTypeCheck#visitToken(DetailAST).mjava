@@ -16,10 +16,11 @@
                 }
                 else if (ScopeUtils.isOuterMostType(aAST)) {
                     // don't check author/version for inner classes
-                    checkTag(lineNo, cmt.getText(), "@author",
-                            mAuthorTagRE, mAuthorFormatRE, mAuthorFormat);
-                    checkTag(lineNo, cmt.getText(), "@version",
-                            mVersionTagRE, mVersionFormatRE, mVersionFormat);
+                    Vector tags = getJavadocTags(cmt);
+                    checkTag(lineNo, tags, "author",
+                             mAuthorFormatRE, mAuthorFormat);
+                    checkTag(lineNo, tags, "version",
+                             mVersionFormatRE, mVersionFormat);
                 }
             }
         }
