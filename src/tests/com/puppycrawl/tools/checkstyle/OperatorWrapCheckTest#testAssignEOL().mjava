@@ -1,14 +1,13 @@
-    public void testDefault()
+    public void testAssignEOL()
         throws Exception
     {
+        checkConfig.addTokens("ASSIGN");
+        checkConfig.addProperty("option", OperatorWrapOption.EOL.toString());
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputOpWrap.java");
         final String[] expected = {
-            "15:19: '+' should be on a new line.",
-            "16:15: '-' should be on a new line.",
-            "24:18: '&&' should be on a new line.",
-
+            "33:13: '=' should be on the previous line.",
         };
         verify(c, fname, expected);
-    }
+    }    
 
