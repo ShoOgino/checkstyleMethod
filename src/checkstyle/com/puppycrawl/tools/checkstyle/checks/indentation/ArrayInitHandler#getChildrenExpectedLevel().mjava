@@ -1,0 +1,23 @@
+    /** @see BlockParentHandler */
+    protected int getChildrenExpectedLevel()
+    {
+        // now we accept "new int[] {1,
+        //                           2};"
+        // TODO: should be accepted 
+        // new int[] {1, 2,
+        //     3};
+        // see InputValidArrayIndent.java (array6)
+
+        final int firstLine = getFirstLine(Integer.MAX_VALUE, getListChild());
+        if (hasCurlys() && firstLine == getLCurly().getLineNo()) {
+            final int lcurlyPos = expandedTabsColumnNo(getLCurly());
+            int firstChildPos =
+                getNextFirstNonblankOnLineAfter(firstLine, lcurlyPos);
+            if (firstChildPos >= 0) {
+                return firstChildPos;
+            }
+        }
+
+        return super.getChildrenExpectedLevel();
+    }
+
