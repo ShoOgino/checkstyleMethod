@@ -3,10 +3,10 @@
      *
      * @param aCurrentConfig the current configuration, not null
      */
-    PropertyCacheFile(GlobalProperties aCurrentConfig)
+    PropertyCacheFile(Configuration aCurrentConfig, String aFileName)
     {
         boolean setInActive = true;
-        final String fileName = aCurrentConfig.getCacheFile();
+        final String fileName = aFileName;
         if (fileName != null) {
             try {
                 mDetails.load(new FileInputStream(fileName));
@@ -26,6 +26,7 @@
                 setInActive = false;
             }
             catch (IOException e) {
+                // TODO: use logger
                 System.out.println("Unable to open cache file, ignoring.");
                 e.printStackTrace(System.out);
             }

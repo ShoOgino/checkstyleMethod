@@ -17,7 +17,7 @@
             final String[] lines = Utils.getLines(fileName);
             final FileContents contents = new FileContents(fileName, lines);
             final DetailAST rootAST = TreeWalker.parse(contents);
-            walk(rootAST, contents, mConfig.getClassLoader());
+            walk(rootAST, contents);
         }
         catch (FileNotFoundException fnfe) {
             mMessages.add(new LocalizedMessage(0, Defn.CHECKSTYLE_BUNDLE,

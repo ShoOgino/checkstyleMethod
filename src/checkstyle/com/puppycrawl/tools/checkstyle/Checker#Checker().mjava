@@ -1,12 +1,12 @@
     /**
      * Creates a new <code>Checker</code> instance.
+     * The instance needs to be contextualized and configured.
      *
-     * @param aConfig the configuration to use
      * @throws CheckstyleException if an error occurs
      */
-    public Checker(Configuration aConfig)
+    public Checker()
         throws CheckstyleException
     {
-        this(aConfig.getGlobalProperties(), aConfig.getCheckConfigurations());
+        this.addListener(mCounter);
     }
 

@@ -1,0 +1,30 @@
+    /** @see AutomaticBean */
+    public void configure(Configuration aConfiguration)
+            throws CheckstyleException
+    {
+        super.configure(aConfiguration);
+
+        final Locale locale = new Locale(mLocaleLanguage, mLocaleCountry);
+        LocalizedMessage.setLocale(locale);
+
+        DefaultContext context = new DefaultContext();
+        context.add("classLoader", this.getClassLoader());
+        Configuration[] fileSetChecks = aConfiguration.getChildren();
+        for (int i = 0; i < fileSetChecks.length; i++) {
+            Configuration fscConf = fileSetChecks[i];
+            String className = fscConf.getAttribute("classname");
+            try {
+                Class clazz = Class.forName(className);
+                FileSetCheck fsc = (FileSetCheck) clazz.newInstance();
+                fsc.contextualize(context);
+                fsc.configure(fscConf);
+                addFileSetCheck(fsc);
+            }
+            catch (Exception ex) {
+                // TODO i18n
+                throw new CheckstyleException(
+                        "cannot initialize filesetcheck of class " + className);
+            }
+        }
+    }
+

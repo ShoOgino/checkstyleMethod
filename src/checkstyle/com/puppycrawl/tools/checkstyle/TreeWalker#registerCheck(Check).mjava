@@ -1,16 +1,15 @@
     /**
      * Register a check for a given configuration.
      * @param aCheck the check to register
-     * @param aConfig the configuration to use
      */
-    void registerCheck(Check aCheck, CheckConfiguration aConfig)
+    void registerCheck(Check aCheck)
+           throws CheckstyleException
     {
-        aCheck.setMessages(mMessages);
-        aCheck.setTabWidth(mTabWidth);
-        if (!aConfig.getTokens().isEmpty()) {
+        final Set checkTokens = aCheck.getTokens();
+        if (!checkTokens.isEmpty()) {
             int acceptableTokens[] = aCheck.getAcceptableTokens();
             Arrays.sort(acceptableTokens);
-            final Iterator it = aConfig.getTokens().iterator();
+            final Iterator it = checkTokens.iterator();
             while (it.hasNext()) {
                 String token = (String) it.next();
                 int tokenId = TokenTypes.getTokenId(token);

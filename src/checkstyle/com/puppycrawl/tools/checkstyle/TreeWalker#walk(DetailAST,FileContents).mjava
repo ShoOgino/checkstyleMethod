@@ -2,12 +2,11 @@
      * Initiates the walk of an AST.
      * @param aAST the root AST
      * @param aContents the contents of the file the AST was generated from
-     * @param aLoader the class loader for resolving classes
      */
-    void walk(DetailAST aAST, FileContents aContents, ClassLoader aLoader)
+    private void walk(DetailAST aAST, FileContents aContents)
     {
         mMessages.reset();
-        notifyBegin(aContents, aLoader);
+        notifyBegin(aContents);
 
          // empty files are not flagged by javac, will yield aAST == null
         if (aAST != null) {
