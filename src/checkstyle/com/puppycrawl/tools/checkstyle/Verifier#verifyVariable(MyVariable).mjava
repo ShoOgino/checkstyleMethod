@@ -22,7 +22,7 @@
         if (inCheckScope(variableScope) &&
             getJavadocBefore(aVar.getStartLineNo() - 1) == null)
         {
-            log(aVar.getLineNo(),
+            log(aVar.getLineNo(), aVar.getColumnNo() - 1,
                 "variable '" + aVar.getText() + "' missing Javadoc.");
         }
 
@@ -61,7 +61,7 @@
                                       mConfig.getStaticPat());
                     }
                     else {
-                        log(aVar.getLineNo(),
+                        log(aVar.getLineNo(), aVar.getColumnNo() - 1,
                             "variable '" + aVar.getText() +
                             "' must be private and have accessor methods.");
                     }
@@ -83,7 +83,7 @@
                     // silently allow
                 }
                 else {
-                    log(aVar.getLineNo(),
+                    log(aVar.getLineNo(), aVar.getColumnNo() - 1,
                         "variable '" + aVar.getText() +
                         "' must be private and have accessor methods.");
                 }

@@ -26,7 +26,9 @@
         if (!mConfig.isIgnorePublicInInterface() && inInterfaceBlock()
             && aSig.getModSet().containsPublic())
         {
-            log(aSig.getLineNo(), "redundant 'public' modifier.");
+            log(aSig.getModSet().getFirstLineNo(),
+                aSig.getModSet().getFirstColNo(),
+                "redundant 'public' modifier.");
         }
 
         // now check the javadoc
@@ -38,12 +40,12 @@
             return; // no need to really check anything
         }
 
-        final String[] jd = getJavadocBefore(aSig.getLineNo() - 1);
+        final String[] jd = getJavadocBefore(aSig.getFirstLineNo() - 1);
         if (jd == null) {
-            log(aSig.getLineNo(), "method is missing a Javadoc comment.");
+            log(aSig.getFirstLineNo(), "method is missing a Javadoc comment.");
         }
         else {
-            final List tags = getMethodTags(jd, aSig.getLineNo() - 1);
+            final List tags = getMethodTags(jd, aSig.getFirstLineNo() - 1);
             // Check for only one @see tag
             if ((tags.size() != 1) ||
                 !((JavadocTag) tags.get(0)).isSeeTag())
@@ -51,7 +53,7 @@
                 checkParamTags(tags, aSig.getParams());
                 checkThrowsTags(tags, aSig.getThrows());
                 if (aSig.isFunction()) {
-                    checkReturnTag(tags, aSig.getLineNo());
+                    checkReturnTag(tags, aSig.getFirstLineNo());
                 }
 
                 // Dump out all unused tags
