@@ -1,0 +1,15 @@
+    /**
+     * Find a ResourceBundle for a given bundle name.
+     * @param aBundleName the bundle name
+     * @return a ResourceBundle
+     */
+    private static ResourceBundle getBundle(String aBundleName)
+    {
+        ResourceBundle bundle = (ResourceBundle) sBundleCache.get(aBundleName);
+        if (bundle == null) {
+            bundle = ResourceBundle.getBundle(aBundleName, sLocale);
+            sBundleCache.put(aBundleName, bundle);
+        }
+        return bundle;
+    }
+
