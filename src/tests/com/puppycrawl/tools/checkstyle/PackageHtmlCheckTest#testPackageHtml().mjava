@@ -1,12 +1,20 @@
     public void testPackageHtml()
          throws Exception
     {
+        CheckConfiguration checkConfig = new CheckConfiguration();
+        // no Checks in config, but register new PackageHtml as a FileSetCheck
+        Checker c = createChecker(checkConfig);
         final FileSetCheck fsc = new PackageHtmlCheck();
+        c.addFileSetCheck(fsc);
+
         final String packageHtmlPath = getPath("package.html");
+        // final String filepath = packageHtmlPath;
+        // TODO: should really be a java file like
         final String filepath = getPath("InputScopeAnonInner.java");
+
         final String[] expected = {
-            packageHtmlPath + ":0: Missing package documentation file.",
+            "0: Missing package documentation file.",
         };
-        // TODO: verify(fsc, filepath, expected);
+        verify(c, filepath, packageHtmlPath, expected);
     }
 

@@ -1,19 +1,6 @@
-    protected void verify(Checker aC, String aFilename, String[] aExpected)
-        throws Exception
+    protected void verify(Checker aC, String aFileName, String[] aExpected)
+            throws Exception
     {
-        mStream.flush();
-        final int errs = aC.process(new File[] {new File(aFilename)});
-
-        // process each of the lines
-        final ByteArrayInputStream bais =
-            new ByteArrayInputStream(mBAOS.toByteArray());
-        final LineNumberReader lnr =
-            new LineNumberReader(new InputStreamReader(bais));
-
-        for (int i = 0; i < aExpected.length; i++) {
-            assertEquals(aFilename + ":" + aExpected[i], lnr.readLine());
-        }
-        assertEquals(aExpected.length, errs);
-        aC.destroy();
+        verify(aC, aFileName, aFileName, aExpected);
     }
 
