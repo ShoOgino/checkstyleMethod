@@ -10,12 +10,13 @@
         if ((mFileName == null) && (mFileSets.size() == 0)) {
             throw new BuildException(
                 "Must specify atleast one of 'file' or nested 'fileset'.",
-                location);
+                getLocation());
         }
 
         // setup the classloader
         if (mClasspath != null) {
-            mConfig.setClassLoader(new AntClassLoader(project, mClasspath));
+            mConfig.setClassLoader(
+                new AntClassLoader(getProject(), mClasspath));
         }
         // Create the checker
         Checker c = null;
@@ -44,7 +45,7 @@
 
             if ((numErrs > 0) && mFailOnViolation) {
                 throw new BuildException("Got " + numErrs + " errors.",
-                                         location);
+                                         getLocation());
             }
         }
         finally {
