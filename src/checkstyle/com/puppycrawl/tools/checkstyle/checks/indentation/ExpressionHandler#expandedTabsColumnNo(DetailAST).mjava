@@ -1,17 +1,17 @@
     /**
      * Get the column number for the start of a given expression, expanding
      * tabs out into spaces in the process.
-     * 
+     *
      * @param aAst   the expression to find the start of
-     * 
+     *
      * @return the column number for the start of the expression
      */
     protected int expandedTabsColumnNo(DetailAST aAst)
     {
-        String line = 
+        String line =
             mIndentCheck.getLines()[aAst.getLineNo() - 1];
 
-        return Utils.lengthExpandedTabs(line, aAst.getColumnNo(), 
+        return Utils.lengthExpandedTabs(line, aAst.getColumnNo(),
             mIndentCheck.getIndentationTabWidth());
     }
 

@@ -1,22 +1,22 @@
     /**
      * Check the indentation for a single line.
-     * 
+     *
      * @param aLineNum       the number of the line to check
      * @param aColNum        the column number we are starting at
      * @param aIndentLevel   the indentation level
      * @param aMustMatch     whether or not the indentation level must match
      */
-    private void checkSingleLine(int aLineNum, int aColNum, 
-        int aIndentLevel, boolean aMustMatch) 
+    private void checkSingleLine(int aLineNum, int aColNum,
+        int aIndentLevel, boolean aMustMatch)
     {
         String line = mIndentCheck.getLines()[aLineNum - 1];
         int start = getLineStart(line);
         // if must match is set, it is an error if the line start is not
-        // at the correct indention level; otherwise, it is an only an 
+        // at the correct indention level; otherwise, it is an only an
         // error if this statement starts the line and it is less than
         // the correct indentation level
         if (aMustMatch ? start != aIndentLevel
-            : aColNum == start && start < aIndentLevel) 
+            : aColNum == start && start < aIndentLevel)
         {
             // TODO: i18n or use logError
             mIndentCheck.indentationLog(aLineNum, mTypeName

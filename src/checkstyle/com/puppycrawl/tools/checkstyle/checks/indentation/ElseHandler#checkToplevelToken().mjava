@@ -1,7 +1,7 @@
     /**
      * Check the indent of the top level token.
      */
-    protected void checkToplevelToken() 
+    protected void checkToplevelToken()
     {
         // check if else is nested with rcurly of if:
         //
@@ -12,8 +12,8 @@
             DetailAST slist = ifAST.findFirstToken(TokenTypes.SLIST);
             if (slist != null) {
                 DetailAST lcurly = slist.getLastChild();
-                if (lcurly != null 
-                    && lcurly.getLineNo() == getMainAst().getLineNo()) 
+                if (lcurly != null
+                    && lcurly.getLineNo() == getMainAst().getLineNo())
                 {
                     // indentation checked as part of LITERAL IF check
                     return;

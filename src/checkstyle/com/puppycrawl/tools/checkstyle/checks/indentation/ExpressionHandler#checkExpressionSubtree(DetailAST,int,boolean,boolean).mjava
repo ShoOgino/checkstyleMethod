@@ -1,22 +1,22 @@
     /**
      * Check the indentation level for an expression subtree.
-     * 
+     *
      * @param aTree               the expression subtree to check
      * @param aLevel              the indentation level
      * @param aFirstLineMatches   whether or not the first line has to match
      * @param aAllowNesting       whether or not subtree nesting is allowed
      */
     protected void checkExpressionSubtree(
-        DetailAST aTree, 
-        int aLevel, 
-        boolean aFirstLineMatches, 
+        DetailAST aTree,
+        int aLevel,
+        boolean aFirstLineMatches,
         boolean aAllowNesting
     )
     {
         LineSet subtreeLines = new LineSet();
         if (aFirstLineMatches && !aAllowNesting) {
             int firstLine = getFirstLine(Integer.MAX_VALUE, aTree);
-            subtreeLines.addLineAndCol(new Integer(firstLine), 
+            subtreeLines.addLineAndCol(new Integer(firstLine),
                 getLineStart(
                     mIndentCheck.getLines()[firstLine - 1]));
         }

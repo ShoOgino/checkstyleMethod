@@ -1,14 +1,14 @@
     /**
      * Compute the indentation amount for this handler.
-     * 
+     *
      * @return the expected indentation amount
      */
-    public int getLevelImpl() 
+    public int getLevelImpl()
     {
         DetailAST parentAST = getMainAst().getParent();
         if (parentAST.getType() != TokenTypes.LITERAL_NEW) {
             return getParent().getLevel();
-        } 
+        }
         else {
             return getLineStart(parentAST);
         }

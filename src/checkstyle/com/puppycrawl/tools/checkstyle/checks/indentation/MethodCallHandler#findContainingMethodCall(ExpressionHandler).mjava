@@ -1,8 +1,8 @@
     /**
      * Find the handler for the method call that contains the specified child
-     * 
+     *
      * @param aChild   the child
-     * 
+     *
      * @return the handler that contains the specified child
      */
     private MethodCallHandler findContainingMethodCall(
@@ -17,13 +17,13 @@
                 if (getParent() instanceof MethodCallHandler) {
                     return ((MethodCallHandler) getParent())
                         .findContainingMethodCall(this);
-                } 
+                }
                 else {
                     return null;
                 }
-            } 
+            }
             else if (climber == secondChild) {
-                // part of method arguments, this the method the child 
+                // part of method arguments, this the method the child
                 // is contained in
                 return this;
             }

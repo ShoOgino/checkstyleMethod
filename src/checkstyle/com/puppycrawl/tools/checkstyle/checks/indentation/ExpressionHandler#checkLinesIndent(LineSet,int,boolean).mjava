@@ -1,13 +1,13 @@
     /**
      * Check the indentation for a set of lines.
-     * 
+     *
      * @param aLines              the set of lines to check
      * @param aIndentLevel        the indentation level
      * @param aFirstLineMatches   whether or not the first line has to match
      */
-    protected void checkLinesIndent(LineSet aLines, 
-                                    int aIndentLevel, 
-                                    boolean aFirstLineMatches) 
+    protected void checkLinesIndent(LineSet aLines,
+                                    int aIndentLevel,
+                                    boolean aFirstLineMatches)
     {
         if (aLines.isEmpty()) {
             return;
@@ -22,16 +22,16 @@
             mIndentCheck.getLines()[startLine - 1]);
 
         if (realStartCol == startCol) {
-            checkSingleLine(startLine, startCol, aIndentLevel, 
+            checkSingleLine(startLine, startCol, aIndentLevel,
                 aFirstLineMatches);
 
-            // if first line starts the line, following lines are indented 
-            // one level; but if the first line of this expression is 
-            // nested with the previous expression (which is assumed if it 
-            // doesn't start the line) then don't indent more, the first 
+            // if first line starts the line, following lines are indented
+            // one level; but if the first line of this expression is
+            // nested with the previous expression (which is assumed if it
+            // doesn't start the line) then don't indent more, the first
             // indentation is absorbed by the nesting
 
-        } 
+        }
 
         if (aFirstLineMatches || startLine > mMainAst.getLineNo()) {
             aIndentLevel += mIndentCheck.getIndentationAmount();
@@ -40,8 +40,8 @@
         // check following lines
         for (int i = startLine + 1; i <= endLine; i++) {
             Integer col = aLines.getStartColumn(new Integer(i));
-            // startCol could be null if this line didn't have an 
-            // expression that was required to be checked (it could be 
+            // startCol could be null if this line didn't have an
+            // expression that was required to be checked (it could be
             // checked by a child expression)
 
             // TODO: not sure if this does anything, look at taking it out
@@ -49,17 +49,17 @@
             // TODO: we can check here if this line starts or the previous
             // line ends in a dot.  If so, we should increase the indent.
 
-            // TODO: check if -2 is possible here?  but unlikely to be a 
+            // TODO: check if -2 is possible here?  but unlikely to be a
             // problem...
             String thisLine = mIndentCheck.getLines()[i - 1];
             String prevLine = mIndentCheck.getLines()[i - 2];
-            if (thisLine.matches("^\\s*\\.") 
-                || prevLine.matches("\\.\\s*$")) 
+            if (thisLine.matches("^\\s*\\.")
+                || prevLine.matches("\\.\\s*$"))
             {
                 aIndentLevel += mIndentCheck.getIndentationAmount();
             }
 
-            if (col != null) { 
+            if (col != null) {
                 checkSingleLine(i, col.intValue(), aIndentLevel, false);
             }
         }

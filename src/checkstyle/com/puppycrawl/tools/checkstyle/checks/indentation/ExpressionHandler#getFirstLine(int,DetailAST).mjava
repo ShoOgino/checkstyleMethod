@@ -1,26 +1,26 @@
     /**
      * Get the first line for a given expression.
-     * 
+     *
      * @param aStartLine   the line we are starting from
      * @param aTree        the expression to find the first line for
-     * 
+     *
      * @return the first line of the expression
      */
-    private int getFirstLine(int aStartLine, DetailAST aTree) 
+    private int getFirstLine(int aStartLine, DetailAST aTree)
     {
         // find line for this node
-        // TODO: getLineNo should probably not return < 0, but it is for 
+        // TODO: getLineNo should probably not return < 0, but it is for
         // the interface methods... I should ask about this
 
         int currLine = aTree.getLineNo();
         if (currLine < aStartLine) {
             aStartLine = currLine;
-        } 
+        }
 
         // check children
-        for (DetailAST node = (DetailAST) aTree.getFirstChild(); 
-            node != null; 
-            node = (DetailAST) node.getNextSibling()) 
+        for (DetailAST node = (DetailAST) aTree.getFirstChild();
+            node != null;
+            node = (DetailAST) node.getNextSibling())
         {
             aStartLine = getFirstLine(aStartLine, node);
         }

@@ -1,20 +1,20 @@
     /**
      * Check the indentation of the throws clause.
      */
-    private void checkThrows() 
+    private void checkThrows()
     {
-        DetailAST throwsAst = 
+        DetailAST throwsAst =
             getMainAst().findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAst == null) {
             return;
         }
 
         int columnNo = expandedTabsColumnNo(throwsAst);
-        int expectedColumnNo = 
+        int expectedColumnNo =
             getLevel() + getIndentCheck().getIndentationAmount();
 
-        if (startsLine(throwsAst) 
-            && columnNo != expectedColumnNo) 
+        if (startsLine(throwsAst)
+            && columnNo != expectedColumnNo)
         {
             logError(throwsAst, "throws", columnNo, expectedColumnNo);
         }

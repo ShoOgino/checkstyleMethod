@@ -1,11 +1,11 @@
     /**
      * Compute the indentation amount for this handler.
-     * 
+     *
      * @return the expected indentation amount
      */
     public int getLevelImpl()
     {
-        // if inside a method call's params, this could be part of 
+        // if inside a method call's params, this could be part of
         // an expression, so get the previous line's start
 
         if (getParent() instanceof MethodCallHandler) {
@@ -14,15 +14,15 @@
             if (container != null) {
                 if (areOnSameLine(container.getMainAst(), getMainAst())) {
                     return container.getLevel();
-                } 
+                }
                 else {
                     return container.getLevel()
                         + getIndentCheck().getIndentationAmount();
                 }
-            } 
+            }
 
             // if we get here, we are the child of the left hand side (name
-            //  side) of a method call with no "containing" call, use 
+            //  side) of a method call with no "containing" call, use
             //  the first non-method callparent
 
             ExpressionHandler p = getParent();

@@ -1,14 +1,14 @@
-    /** 
+    /**
      * Get the handler for an AST.
-     * 
+     *
      * @param aIndentCheck   the indentation check
      * @param aAst           ast to handle
      * @param aParent        the handler parent of this AST
-     * 
+     *
      * @return the ExpressionHandler for aAst
      */
     public ExpressionHandler getHandler(IndentationCheck aIndentCheck,
-        DetailAST aAst, ExpressionHandler aParent) 
+        DetailAST aAst, ExpressionHandler aParent)
     {
         int type = aAst.getType();
 
@@ -25,18 +25,18 @@
                     }
                 );
             }
-        } 
+        }
         catch (InstantiationException e) {
-            System.out.println("couldn't instantiate constructor for " 
+            System.out.println("couldn't instantiate constructor for "
                 + aAst);
             e.printStackTrace();
-        } 
+        }
         catch (IllegalAccessException e) {
             System.out.println("couldn't access constructor for " + aAst);
             e.printStackTrace();
-        } 
+        }
         catch (InvocationTargetException e) {
-            System.out.println("couldn't instantiate constructor for " 
+            System.out.println("couldn't instantiate constructor for "
                 + aAst);
             e.printStackTrace();
         }

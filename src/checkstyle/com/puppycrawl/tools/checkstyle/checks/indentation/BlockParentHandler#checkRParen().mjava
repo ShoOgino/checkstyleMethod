@@ -1,20 +1,20 @@
     /**
      * Check the indentation of the right parenthesis.
      */
-    protected void checkRParen() 
+    protected void checkRParen()
     {
-        // the rcurly can either be at the correct indentation, or on 
+        // the rcurly can either be at the correct indentation, or on
         // the same line as the lcurly
         final DetailAST rparen = getRParen();
 
-        // TODO: perhaps the handler should allow to place 
+        // TODO: perhaps the handler should allow to place
         // rparen at indentation of lparen plus 1
         // if (test1
         //     || test2
         //     )
         if (rparen == null
-            || expandedTabsColumnNo(rparen) == getLevel() 
-            || !startsLine(rparen)) 
+            || expandedTabsColumnNo(rparen) == getLevel()
+            || !startsLine(rparen))
         {
             return;
         }

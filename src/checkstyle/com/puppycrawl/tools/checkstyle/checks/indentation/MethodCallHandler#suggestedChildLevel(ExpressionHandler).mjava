@@ -1,13 +1,13 @@
-    /** 
+    /**
      * Indentation level suggested for a child element. Children don't have
      * to respect this, but most do.
      *
      * @param aChild  child AST (so suggestion level can differ based on child
      *                  type)
-     * 
+     *
      * @return suggested indentation for child
      */
-    public int suggestedChildLevel(ExpressionHandler aChild) 
+    public int suggestedChildLevel(ExpressionHandler aChild)
     {
         // for whatever reason a method that crosses lines, like asList
         // here:
@@ -18,8 +18,8 @@
         DetailAST first = (DetailAST) getMainAst().getFirstChild();
         int indentLevel = getLineStart(first);
         if (aChild instanceof MethodCallHandler) {
-            if (!areOnSameLine((DetailAST) aChild.getMainAst().getFirstChild(), 
-                (DetailAST) getMainAst().getFirstChild())) 
+            if (!areOnSameLine((DetailAST) aChild.getMainAst().getFirstChild(),
+                (DetailAST) getMainAst().getFirstChild()))
             {
                 indentLevel += getIndentCheck().getIndentationAmount();
             }

@@ -1,15 +1,15 @@
     /**
      * Check the indentation of the left curly brace.
      */
-    protected void checkLCurly() 
+    protected void checkLCurly()
     {
-        // the lcurly can either be at the correct indentation, or nested 
+        // the lcurly can either be at the correct indentation, or nested
         // with a previous expression
         DetailAST lcurly = getLCurly();
 
         if (lcurly == null
             || expandedTabsColumnNo(lcurly) == curlyLevel()
-            || !startsLine(lcurly)) 
+            || !startsLine(lcurly))
         {
             return;
         }

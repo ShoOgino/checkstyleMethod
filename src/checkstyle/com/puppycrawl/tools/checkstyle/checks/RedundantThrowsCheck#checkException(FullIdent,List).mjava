@@ -1,10 +1,10 @@
     /**
-     * Checks if an exception is already know (list of known 
-     * exceptions contains it or its superclass) and it's not 
-     * a superclass for some known exception and it's not 
+     * Checks if an exception is already know (list of known
+     * exceptions contains it or its superclass) and it's not
+     * a superclass for some known exception and it's not
      * an unchecked exception.
      * If it's unknown then it will be added to ist of known exception.
-     * All subclasses of this exception will be deleted from known 
+     * All subclasses of this exception will be deleted from known
      * and the exception  will be added instead.
      *
      * @param aExc <code>FullIdent</code> of exception to check
@@ -13,8 +13,8 @@
     private void checkException(FullIdent aExc, List aKnownExcs)
     {
         if (!mAllowUnchecked) {
-            if (isUnchecked(aExc)) { 
-                log(aExc.getLineNo(), aExc.getColumnNo(), 
+            if (isUnchecked(aExc)) {
+                log(aExc.getLineNo(), aExc.getColumnNo(),
                     "redundant.throws.unchecked", aExc.getText());
             }
         }
@@ -26,18 +26,18 @@
                 shouldAdd = false;
                 log(aExc.getLineNo(), aExc.getColumnNo(),
                     "redundant.throws.duplicate", aExc.getText());
-            } 
+            }
             else if (!mAllowSubclasses) {
                 if (isSubclass(fi, aExc)) {
                     known.remove();
                     log(fi.getLineNo(), fi.getColumnNo(),
-                        "redundant.throws.subclass", 
+                        "redundant.throws.subclass",
                         fi.getText(), aExc.getText());
-                } 
+                }
                 else if (isSubclass(aExc, fi)) {
                     shouldAdd = false;
                     log(aExc.getLineNo(), aExc.getColumnNo(),
-                        "redundant.throws.subclass", 
+                        "redundant.throws.subclass",
                         aExc.getText(), fi.getText());
                 }
             }
