@@ -1,6 +1,8 @@
         /** @see AuditListener */
         public void addError(AuditEvent aEvt)
         {
-            mCount++;
+            if (SeverityLevel.ERROR.equals(aEvt.getSeverityLevel())) {
+                mCount++;
+            }
         }
 
