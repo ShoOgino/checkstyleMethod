@@ -1,8 +1,6 @@
     public void testPackageHtml()
         throws Exception
     {
-        final boolean savedRequirePackageHtml = mConfig.isRequirePackageHtml();
-        final Scope savedDocScope = mConfig.getJavadocScope();
         mConfig.setRequirePackageHtml(true);
         mConfig.setJavadocScope(Scope.PRIVATE);
         final Checker c = createChecker();
@@ -13,7 +11,5 @@
             packageHtmlPath + ":0: missing package documentation file.",
         };
         verify(c, filepath, expected);
-        mConfig.setRequirePackageHtml(savedRequirePackageHtml);
-        mConfig.setJavadocScope(savedDocScope);
     }
 

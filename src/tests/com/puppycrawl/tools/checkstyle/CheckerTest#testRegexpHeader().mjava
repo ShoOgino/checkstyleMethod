@@ -1,0 +1,14 @@
+    public void testRegexpHeader()
+        throws Exception
+    {
+        final Checker c = createChecker();
+        mConfig.setHeaderLinesRegexp(true);
+        mConfig.setHeaderFile(getPath("regexp.header"));
+        final String filepath = getPath("InputScopeAnonInner.java");
+        assertNotNull(c);
+        final String[] expected = {
+            filepath + ":3: Line does not match expected header line of '// Created: 2002'.",
+        };
+        verify(c, filepath, expected);
+    }
+
