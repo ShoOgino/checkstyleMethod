@@ -20,10 +20,12 @@
             return false;
         }
 
-        // ignoring mArgs and mBundle for perf reasons.
+        if (!Arrays.equals(mArgs, localizedMessage.mArgs)) {
+           return false;
+        }
+        // ignoring mBundle for perf reasons.
 
-        // we currently never load the same error from different bundles or
-        // fire the same error for the same location with different arguments.
+        // we currently never load the same error from different bundles.
 
         return true;
     }
