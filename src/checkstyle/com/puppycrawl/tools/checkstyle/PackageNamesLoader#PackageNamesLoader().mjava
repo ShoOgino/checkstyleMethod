@@ -6,11 +6,6 @@
     private PackageNamesLoader()
         throws ParserConfigurationException, SAXException
     {
-        final SAXParserFactory factory = SAXParserFactory.newInstance();
-        factory.setValidating(true);
-        mParser = factory.newSAXParser().getXMLReader();
-        mParser.setContentHandler(this);
-        mParser.setEntityResolver(this);
-        mParser.setErrorHandler(HardErrorHandler.INSTANCE);
+        super(DTD_PUBLIC_ID, DTD_RESOURCE_NAME);
     }
 

@@ -1,0 +1,20 @@
+    /**
+     * Creates a new instance.
+     * @param aPublicId the public ID for the DTD to resolve
+     * @param aDtdResourceName the resource for the DTD
+     * @throws SAXException if an error occurs
+     * @throws ParserConfigurationException if an error occurs
+     */
+    protected AbstractLoader(String aPublicId, String aDtdResourceName)
+        throws SAXException, ParserConfigurationException
+    {
+        mPublicId = aPublicId;
+        mDtdResourceName = aDtdResourceName;
+        final SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setValidating(true);
+        mParser = factory.newSAXParser().getXMLReader();
+        mParser.setContentHandler(this);
+        mParser.setEntityResolver(this);
+        mParser.setErrorHandler(this);
+    }
+

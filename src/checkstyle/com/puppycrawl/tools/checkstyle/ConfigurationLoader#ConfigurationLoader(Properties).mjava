@@ -7,12 +7,7 @@
     private ConfigurationLoader(Properties aOverrideProps)
         throws ParserConfigurationException, SAXException
     {
+        super(DTD_PUBLIC_ID, DTD_RESOURCE_NAME);
         mOverrideProps = aOverrideProps;
-        final SAXParserFactory factory = SAXParserFactory.newInstance();
-        factory.setValidating(true);
-        mParser = factory.newSAXParser().getXMLReader();
-        mParser.setContentHandler(this);
-        mParser.setEntityResolver(this);
-        mParser.setErrorHandler(HardErrorHandler.INSTANCE);
     }
 
