@@ -7,28 +7,11 @@
             return;
         }
 
-        // exit on fast lane if there is nothing to check here
-        if (!aAST.branchContains(TokenTypes.PARAMETER_DEF)) {
-            return;
+        if (aAST.getType() == TokenTypes.LITERAL_CATCH) {
+            visitCatch(aAST);
         }
-
-        // we can now be sure that there is at least one parameter
-
-        DetailAST parameters = aAST.findFirstToken(TokenTypes.PARAMETERS);
-        DetailAST child = (DetailAST) parameters.getFirstChild();
-        while (child != null) {
-            // childs are PARAMETER_DEF and COMMA
-            if (child.getType() == TokenTypes.PARAMETER_DEF
-                    && !child.branchContains(TokenTypes.FINAL))
-            {
-                DetailAST paramName = child.findFirstToken(TokenTypes.IDENT);
-                // TODO: i18n
-                log(child.getLineNo(), child.getColumnNo(),
-                    "Parameter " + paramName.getText() + " should be final.");
-            }
-            child = (DetailAST) child.getNextSibling();
+        else {
+            visitMethod(aAST);
         }
-
-
     }
 
