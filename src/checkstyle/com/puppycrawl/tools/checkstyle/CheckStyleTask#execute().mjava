@@ -33,6 +33,10 @@
             }
         }
 
+        if ((numErrs > 0) && mFailureProperty != null) {
+            getProject().setProperty(mFailureProperty, "true");
+        }
+
         if ((numErrs > 0) && mFailOnViolation) {
             throw new BuildException("Got " + numErrs + " errors.", location);
         }
