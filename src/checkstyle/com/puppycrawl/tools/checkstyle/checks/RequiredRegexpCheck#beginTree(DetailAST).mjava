@@ -1,0 +1,15 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void beginTree(DetailAST aRootAST)
+    {
+        final RE regexp = getRegexp();
+        final String[] lines = getLines();
+        for (int i = 0; i < lines.length; i++) {
+
+            final String line = lines[i];
+            if (regexp.match(line)) {
+                return;
+            }
+        }
+        log(0, "required.regexp", getFormat());
+    }
+

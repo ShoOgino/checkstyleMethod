@@ -1,0 +1,12 @@
+    public void testExistingInCode()
+            throws Exception
+    {
+        final String required = "package";
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RequiredRegexpCheck.class);
+        checkConfig.addAttribute("format", required);
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
+    }
+
