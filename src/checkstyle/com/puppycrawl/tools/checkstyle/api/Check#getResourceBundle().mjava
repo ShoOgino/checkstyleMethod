@@ -1,0 +1,24 @@
+    /**
+     * TODO: Should this method be protected or should we keep the api simple?
+     * Returns the name of a a resource bundle that contains the messages
+     * used by this check.
+     *
+     * The default implementation expects the resource files to be named
+     * messages.properties, messages_de.properties, etc. The file should
+     * be placed in the same package as the Check implementation.
+     *
+     * Example: If you write com/foo/MyCoolCheck, create resource files
+     * com/foo/messages.properties, com/foo/messages_de.properties, etc.
+     *
+     * @return name of a resource bundle that contains the messages
+     * used by this check
+     */
+    private String getResourceBundle()
+    {
+        // PERF: check perf impact, maybe cache result
+        final String className = this.getClass().getName();
+        final String packageName =
+                className.substring(className.lastIndexOf('.') + 1);
+        return packageName + "." + "messages";
+    }
+

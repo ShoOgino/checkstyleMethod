@@ -1,7 +1,11 @@
-    /** @see needs to be fixed */
-    public void log(int aLine, String aMessage)
+    /**
+     * Log an error message.
+     *
+     * @param aLine the line number where the error was found
+     * @param aKey the message that describes the error
+     */
+    protected final void log(int aLine, String aKey)
     {
-        final String fname = (String) getTreeContext().get(FILENAME_ATTRIBUTE);
-        System.out.println(fname + ":" + aLine + ": " + aMessage);
+        log(aLine, aKey, EMPTY_OBJECT_ARRAY);
     }
 
