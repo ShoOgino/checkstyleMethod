@@ -5,8 +5,8 @@
      */
     public IndentLevel getLevelImpl()
     {
-        DetailAST parentAST = getMainAst().getParent();
-        int type = parentAST.getType();
+        final DetailAST parentAST = getMainAst().getParent();
+        final int type = parentAST.getType();
         if (type == TokenTypes.LITERAL_NEW || type == TokenTypes.ASSIGN) {
             // note: assumes new or assignment is line to align with
             return new IndentLevel(getLineStart(parentAST));

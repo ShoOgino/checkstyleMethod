@@ -5,8 +5,9 @@
      */
     private boolean isStatic(DetailAST aAST)
     {
-        DetailAST modifiersAST = aAST.findFirstToken(TokenTypes.MODIFIERS);
-        DetailAST staticAST =
+        final DetailAST modifiersAST =
+            aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST staticAST =
             modifiersAST.findFirstToken(TokenTypes.LITERAL_STATIC);
 
         return (staticAST != null);
