@@ -1,0 +1,18 @@
+    /**
+     * Adds a set of tokens the check is interested in. The string is a comma
+     * separated list of token names.
+     * @param aStrRep the string representation of the tokens interested in
+     */
+    void addTokens(String aStrRep)
+    {
+        final String trimmed = aStrRep.trim();
+        if (trimmed.length() == 0) {
+            return;
+        }
+
+        final StringTokenizer st = new StringTokenizer(trimmed, ",");
+        while (st.hasMoreTokens()) {
+            mTokens.add(st.nextToken().trim());
+        }
+    }
+
