@@ -1,0 +1,57 @@
+    /** @return a Properties object representing the current configuration.
+     * The returned object can be used to recreate the configuration.
+     * Tip: used on a default object returns all the default objects. */
+    public Properties getProperties()
+    {
+        final Properties retVal = new Properties();
+
+        Utils.addSetString(retVal, Defn.HEADER_IGNORE_LINE_PROP,
+                           mHeaderIgnoreLineNo);
+        Utils.addObjectString(retVal, Defn.RCURLY_PROP, mRCurly.toString());
+        Utils.addObjectString(retVal, Defn.JAVADOC_CHECKSCOPE_PROP,
+                              mJavadocScope.getName());
+        Utils.addObjectString(retVal, Defn.PAREN_PAD_PROP,
+                              mParenPadOption.toString());
+        Utils.addObjectString(retVal, Defn.WRAP_OP_PROP,
+                              mWrapOpOption.toString());
+        Utils.addObjectString(retVal, Defn.HEADER_FILE_PROP, mHeaderFile);
+
+        for (int i = 0; i < Defn.ALL_BOOLEAN_PROPS.length; i++) {
+            final String key = Defn.ALL_BOOLEAN_PROPS[i];
+            retVal.put(key, Boolean.toString(getBooleanProperty(key)));
+        }
+
+        for (int i = 0; i < Defn.ALL_PATTERN_PROPS.length; i++) {
+            final String key = Defn.ALL_PATTERN_PROPS[i];
+            Utils.addObjectString(retVal, key, getPatternProperty(key));
+        }
+
+        for (int i = 0; i < Defn.ALL_INT_PROPS.length; i++) {
+            final String key = Defn.ALL_INT_PROPS[i];
+            Utils.addObjectString(retVal, key,
+                                  Integer.toString(getIntProperty(key)));
+        }
+
+        for (int i = 0; i < Defn.ALL_BLOCK_PROPS.length; i++) {
+            final String key = Defn.ALL_BLOCK_PROPS[i];
+            Utils.addObjectString(retVal, key, getBlockOptionProperty(key));
+        }
+
+        for (int i = 0; i < Defn.ALL_STRING_PROPS.length; i++) {
+            final String key = Defn.ALL_STRING_PROPS[i];
+            Utils.addObjectString(retVal, key, getStringProperty(key));
+        }
+
+        for (int i = 0; i < Defn.ALL_LCURLY_PROPS.length; i++) {
+            final String key = Defn.ALL_LCURLY_PROPS[i];
+            Utils.addObjectString(retVal, key, getLeftCurlyOptionProperty(key));
+        }
+
+        for (int i = 0; i < Defn.ALL_STRING_SET_PROPS.length; i++) {
+            final String key = Defn.ALL_STRING_SET_PROPS[i];
+            Utils.addSetString(retVal, key, getStringSetProperty(key));
+        }
+
+        return retVal;
+    }
+

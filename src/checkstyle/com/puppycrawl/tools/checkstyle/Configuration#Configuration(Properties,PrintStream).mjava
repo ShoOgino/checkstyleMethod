@@ -10,81 +10,50 @@
     public Configuration(Properties aProps, PrintStream aLog)
         throws RESyntaxException, FileNotFoundException, IOException
     {
-        setPatternProperty(aProps, Defn.TODO_PATTERN_PROP, TODO_PATTERN);
-        setPatternProperty(aProps, Defn.PARAMETER_PATTERN_PROP,
-                           PARAMETER_PATTERN);
-        setPatternProperty(aProps, Defn.STATIC_PATTERN_PROP, STATIC_PATTERN);
-        setPatternProperty(aProps, Defn.CONST_PATTERN_PROP, CONST_PATTERN);
-        setPatternProperty(aProps, Defn.MEMBER_PATTERN_PROP, MEMBER_PATTERN);
-        setPatternProperty(aProps, Defn.PUBLIC_MEMBER_PATTERN_PROP,
-                           PUBLIC_MEMBER_PATTERN);
-        setPatternProperty(aProps, Defn.TYPE_PATTERN_PROP, TYPE_PATTERN);
-        setPatternProperty(aProps, Defn.LOCAL_VAR_PATTERN_PROP,
-                           LOCAL_VAR_PATTERN);
-        setPatternProperty(aProps, Defn.LOCAL_FINAL_VAR_PATTERN_PROP,
-                           LOCAL_FINAL_VAR_PATTERN);
-        setPatternProperty(aProps, Defn.METHOD_PATTERN_PROP, METHOD_PATTERN);
-        setPatternProperty(aProps, Defn.IGNORE_LINE_LENGTH_PATTERN_PROP,
-                           IGNORE_LINE_LENGTH_PATTERN);
-        setIntProperty(aProps, aLog, Defn.MAX_LINE_LENGTH_PROP,
-                       MAX_LINE_LENGTH);
-        setIntProperty(aProps, aLog, Defn.MAX_METHOD_LENGTH_PROP,
-                       MAX_METHOD_LENGTH);
-        setIntProperty(aProps, aLog, Defn.MAX_CONSTRUCTOR_LENGTH_PROP,
-                       MAX_CONSTRUCTOR_LENGTH);
-        setIntProperty(aProps, aLog, Defn.MAX_FILE_LENGTH_PROP,
-                       MAX_FILE_LENGTH);
-
-        setBooleanProperty(aProps, Defn.ALLOW_TABS_PROP);
-        setIntProperty(aProps, aLog, Defn.TAB_WIDTH_PROP, TAB_WIDTH);
-        setBooleanProperty(aProps, Defn.ALLOW_PROTECTED_PROP);
-        setBooleanProperty(aProps, Defn.ALLOW_PACKAGE_PROP);
-        setBooleanProperty(aProps, Defn.ALLOW_NO_AUTHOR_PROP);
-        setBooleanProperty(aProps, Defn.REQUIRE_VERSION_PROP);
+        // Init the special properties
+        setHeaderIgnoreLines(aProps.getProperty(Defn.HEADER_IGNORE_LINE_PROP));
+        setRCurly(getRightCurlyOptionProperty(
+                      aProps, Defn.RCURLY_PROP, RightCurlyOption.SAME, aLog));
         setJavadocScope(
             Scope.getInstance(aProps.getProperty(Defn.JAVADOC_CHECKSCOPE_PROP,
                                                  Scope.PRIVATE.getName())));
-        setBooleanProperty(aProps, Defn.REQUIRE_PACKAGE_HTML_PROP);
-        setBooleanProperty(aProps, Defn.IGNORE_IMPORTS_PROP);
-        setIllegalImports(
-            aProps.getProperty(Defn.ILLEGAL_IMPORTS_PROP, ILLEGAL_IMPORTS));
-        setIllegalInstantiations(
-            aProps.getProperty(Defn.ILLEGAL_INSTANTIATIONS_PROP,
-                               ILLEGAL_INSTANTIATIONS));
-        setBooleanProperty(aProps, Defn.IGNORE_WHITESPACE_PROP);
-        setBooleanProperty(aProps, Defn.IGNORE_CAST_WHITESPACE_PROP);
-        setBooleanProperty(aProps, Defn.IGNORE_BRACES_PROP);
-        setBooleanProperty(aProps, Defn.IGNORE_LONG_ELL_PROP);
-        setBooleanProperty(aProps, Defn.IGNORE_PUBLIC_IN_INTERFACE_PROP);
-        setStringProperty(aProps, Defn.CACHE_FILE_PROP);
-        setStringProperty(aProps, Defn.LOCALE_LANGUAGE_PROP);
-        setStringProperty(aProps, Defn.LOCALE_COUNTRY_PROP);
-        setBooleanProperty(aProps, Defn.IGNORE_IMPORT_LENGTH_PROP);
-        setHeaderIgnoreLines(aProps.getProperty(Defn.HEADER_IGNORE_LINE_PROP));
-        setBooleanProperty(aProps, Defn.HEADER_LINES_REGEXP_PROP);
-        setBooleanProperty(aProps, Defn.JAVADOC_CHECK_UNUSED_THROWS_PROP);
-
-        final String fname = aProps.getProperty(Defn.HEADER_FILE_PROP);
-        if (fname != null) {
-            setHeaderFile(fname);
-        }
-
-        setLeftCurlyOptionProperty(aProps, Defn.LCURLY_METHOD_PROP, aLog);
-        setLeftCurlyOptionProperty(aProps, Defn.LCURLY_TYPE_PROP, aLog);
-        setLeftCurlyOptionProperty(aProps, Defn.LCURLY_OTHER_PROP, aLog);
-        setRCurly(getRightCurlyOptionProperty(
-                      aProps, Defn.RCURLY_PROP, RightCurlyOption.SAME, aLog));
-        setBlockOptionProperty(aProps, Defn.TRY_BLOCK_PROP, aLog);
-        setBlockOptionProperty(aProps, Defn.CATCH_BLOCK_PROP, aLog);
-        setBlockOptionProperty(aProps, Defn.FINALLY_BLOCK_PROP, aLog);
         setParenPadOption(getPadOptionProperty(aProps,
                                                Defn.PAREN_PAD_PROP,
                                                PadOption.NOSPACE,
                                                aLog));
-        setStringProperty(aProps, Defn.BASEDIR_PROP);
         setWrapOpOption(getWrapOpOptionProperty(aProps,
                                                 Defn.WRAP_OP_PROP,
                                                 WrapOpOption.NL,
                                                 aLog));
+        setHeaderFile(aProps.getProperty(Defn.HEADER_FILE_PROP));
+
+        // Initialise the general properties
+        for (int i = 0; i < Defn.ALL_BOOLEAN_PROPS.length; i++) {
+            setBooleanProperty(aProps, Defn.ALL_BOOLEAN_PROPS[i]);
+        }
+
+        for (int i = 0; i < Defn.ALL_PATTERN_PROPS.length; i++) {
+            setPatternProperty(aProps, Defn.ALL_PATTERN_PROPS[i]);
+        }
+
+        for (int i = 0; i < Defn.ALL_INT_PROPS.length; i++) {
+            setIntProperty(aProps, aLog, Defn.ALL_INT_PROPS[i]);
+        }
+
+        for (int i = 0; i < Defn.ALL_BLOCK_PROPS.length; i++) {
+            setBlockOptionProperty(aProps, Defn.ALL_BLOCK_PROPS[i], aLog);
+        }
+
+        for (int i = 0; i < Defn.ALL_STRING_PROPS.length; i++) {
+            setStringProperty(aProps, Defn.ALL_STRING_PROPS[i]);
+        }
+
+        for (int i = 0; i < Defn.ALL_LCURLY_PROPS.length; i++) {
+            setLeftCurlyOptionProperty(aProps, Defn.ALL_LCURLY_PROPS[i], aLog);
+        }
+
+        for (int i = 0; i < Defn.ALL_STRING_SET_PROPS.length; i++) {
+            setStringSetProperty(aProps, Defn.ALL_STRING_SET_PROPS[i]);
+        }
     }
 

@@ -6,6 +6,10 @@
     public void setHeaderFile(String aFileName)
         throws FileNotFoundException, IOException
     {
+        if (aFileName == null) {
+            return;
+        }
+
         final LineNumberReader lnr =
             new LineNumberReader(new FileReader(aFileName));
         final ArrayList lines = new ArrayList();
@@ -17,5 +21,6 @@
             lines.add(l);
         }
         mHeaderLines = (String[]) lines.toArray(new String[0]);
+        mHeaderFile = aFileName;
     }
 
