@@ -1,0 +1,20 @@
+    /**
+     * Determines whether an Object matches a CSV integer value.
+     * @param aObject the Object to check.
+     * @return true if aObject is an Integer that matches a CSV value.
+     */
+    public boolean accept(Object aObject)
+    {
+        if (!(aObject instanceof Integer)) {
+            return false;
+        }
+        final Iterator it = getFilters().iterator();
+        while (it.hasNext()) {
+            final Filter filter = (Filter) it.next();
+            if (filter.accept(aObject)) {
+                return true;
+            }
+        }
+        return false;
+    }
+

@@ -4,6 +4,6 @@
             new LocalizedMessage(0, 0, "", "", null, this.getClass());
         final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
         //deny because there are matches on file and check names
-        assertEquals("Names match", Filter.DENY, filter.decide(ev));
+        assertFalse("Names match", filter.accept(ev));
     }
 

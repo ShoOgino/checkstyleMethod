@@ -1,0 +1,13 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Filter */
+    public boolean accept(Object aObject)
+    {
+        final Iterator it = mFilters.iterator();
+        while (it.hasNext()) {
+            final Filter filter = (Filter) it.next();
+            if (!filter.accept(aObject)) {
+                return false;
+            }
+        }
+        return true;
+    }
+

@@ -5,8 +5,8 @@
         final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
         //deny because there are matches on file name, check name, and column
         filter.setColumns("1-10");
-        assertEquals("In range 1-10)", Filter.DENY, filter.decide(ev));
+        assertFalse("In range 1-10", filter.accept(ev));
         filter.setColumns("1-9, 11");
-        assertEquals("Not in 1-9, 11)", Filter.NEUTRAL, filter.decide(ev));
+        assertTrue("Not in 1-9, 1)", filter.accept(ev));
     }
 
