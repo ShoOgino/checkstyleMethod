@@ -4,9 +4,9 @@
      */
     private void processLiteralNew(DetailAST aAST)
     {
-        DetailAST typeNameAST = (DetailAST) aAST.getFirstChild();
+        final DetailAST typeNameAST = (DetailAST) aAST.getFirstChild();
 
-        AST nameSibling = typeNameAST.getNextSibling();
+        final AST nameSibling = typeNameAST.getNextSibling();
         if (nameSibling != null
                 && nameSibling.getType() == TokenTypes.ARRAY_DECLARATOR)
         {
