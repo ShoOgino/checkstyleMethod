@@ -1,6 +1,6 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
-    {            
+    {
         if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
             if (mCheckUnusedThrows) {
                 processPackage(aAST);
@@ -12,7 +12,7 @@
             }
         }
         else {
-            //TokenTypes.METHOD_DEF or TokenTypes.CTOR_DEF 
+            //TokenTypes.METHOD_DEF or TokenTypes.CTOR_DEF
             processMethod(aAST);
         }
     }

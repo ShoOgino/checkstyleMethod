@@ -2,23 +2,24 @@
      * Checks Javadoc comments for a method or constructor.
      * @param aAST the tree node for the method or constructor.
      */
-    private void processMethod(DetailAST aAST) {
+    private void processMethod(DetailAST aAST)
+    {
         final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
         final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
         final Scope targetScope =
             ScopeUtils.inInterfaceBlock(aAST)
                 ? Scope.PUBLIC
                 : declaredScope;
-                
+
         if (targetScope.isIn(mScope)) {
             final Scope surroundingScope =
                 ScopeUtils.getSurroundingScope(aAST);
-                
+
             if (surroundingScope.isIn(mScope)) {
                 final FileContents contents = getFileContents();
                 final String[] cmt =
                     contents.getJavadocBefore(aAST.getLineNo());
-                
+
                 if (cmt == null) {
                     log(aAST.getLineNo(),
                         aAST.getColumnNo(),
