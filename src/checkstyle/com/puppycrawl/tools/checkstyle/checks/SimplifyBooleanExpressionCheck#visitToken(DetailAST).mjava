@@ -1,0 +1,19 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST parent = aAST.getParent();
+        switch (parent.getType()) {
+            case TokenTypes.NOT_EQUAL:
+            case TokenTypes.EQUAL:
+            case TokenTypes.LNOT:
+            case TokenTypes.LOR:
+            case TokenTypes.LAND:
+                log(parent.getLineNo(), parent.getColumnNo(),
+                        // TODO: i18n
+                        "Expression can be simplified.");
+                break;
+            default:
+                break;
+        }
+    }
+
