@@ -19,7 +19,7 @@
         // try matching explicit imports
         Iterator it = mImports.iterator();
         while (it.hasNext()) {
-            final String imp = ((DetailAST) it.next()).getText();
+            final String imp = (String) it.next();
             if (imp.endsWith(aName) && isLoadable(imp)) {
                 return safeLoad(imp);
             }
@@ -42,7 +42,7 @@
         // try star imports
         it = mImports.iterator();
         while (it.hasNext()) {
-            final String imp = ((DetailAST) it.next()).getText();
+            final String imp = (String) it.next();
             if (imp.endsWith(".*")) {
                 final String fqn = imp.substring(0, imp.lastIndexOf('.') + 1)
                     + aName;
