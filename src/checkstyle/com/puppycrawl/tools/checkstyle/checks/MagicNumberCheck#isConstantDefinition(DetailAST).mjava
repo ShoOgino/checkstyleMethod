@@ -6,9 +6,6 @@
      */
     private boolean isConstantDefinition(DetailAST aAST)
     {
-        if (ScopeUtils.inInterfaceBlock(aAST)) {
-            return true;
-        }
         DetailAST parent = aAST.getParent();
 
         //expression?
@@ -33,9 +30,10 @@
             return false;
         }
 
-        //final?
+        //final or interface constant
         final DetailAST modifiersAST =
             parent.findFirstToken(TokenTypes.MODIFIERS);
-        return modifiersAST.branchContains(TokenTypes.FINAL);
+        return modifiersAST.branchContains(TokenTypes.FINAL)
+            || ScopeUtils.inInterfaceBlock(parent);
     }
 
