@@ -1,0 +1,25 @@
+    // Here's where we do the real work...
+    public static void parseFile(String aFilename)
+        throws Exception {
+        try {
+            final String[] lines = Utils.getLines(aFilename);
+            final CommentManager cmgr = new CommentManager(lines);
+            final Reader sar = new StringArrayReader(lines);
+            final Java14Lexer jl = new Java14Lexer(sar);
+            jl.setFilename(aFilename);
+            jl.setCommentManager(cmgr);
+
+            final Java14Recognizer jr = new Java14Recognizer(jl);
+            jr.setFilename(aFilename);
+            jr.setASTNodeClass(DetailAST.class.getName());
+            jr.compilationUnit();
+            final DetailAST rootAST = (DetailAST) jr.getAST();
+            // do something with the tree
+            doTreeAction(rootAST, jr.getTokenNames());
+        }
+        catch (Exception e) {
+            System.err.println("parser exception: "+e);
+            e.printStackTrace();   // so we can get stack trace
+        }
+    }
+
