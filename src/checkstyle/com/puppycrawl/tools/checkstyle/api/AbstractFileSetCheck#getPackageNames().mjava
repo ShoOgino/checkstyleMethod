@@ -1,9 +1,11 @@
-    /**
-     * Returns the list of package names for object instantiation.
-     * @return the list of package names.
-     */
+    /** @see com.puppycrawl.tools.checkstyle.api.PackageNamesBean */
     public String[] getPackageNames()
+        throws CheckstyleException
     {
+        if (mPackageNames == null) {
+            mPackageNames = PackageNamesLoader.loadPackageNames(
+                this.getClass().getClassLoader());
+        }
         return mPackageNames;
     }
 
