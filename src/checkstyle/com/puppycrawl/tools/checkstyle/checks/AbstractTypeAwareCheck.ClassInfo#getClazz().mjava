@@ -2,7 +2,8 @@
         public final Class getClazz()
         {
             if (isLoadable() && mClass == null) {
-                setClazz(AbstractTypeAwareCheck.this.tryLoadClass(getName()));
+                setClazz(AbstractTypeAwareCheck.this.
+                         tryLoadClass(getName(), mCurrentClass));
             }
             return mClass;
         }

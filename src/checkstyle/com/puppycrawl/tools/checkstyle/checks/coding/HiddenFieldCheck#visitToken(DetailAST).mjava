@@ -16,7 +16,8 @@
                 (typeMods == null)
                     ? false
                     : typeMods.branchContains(TokenTypes.LITERAL_STATIC);
-            final FieldFrame frame = new FieldFrame(isStaticInnerType);
+            final FieldFrame frame =
+                new FieldFrame(mCurrentFrame, isStaticInnerType);
 
             //add fields to container
             final DetailAST objBlock =
@@ -40,7 +41,8 @@
                     child = (DetailAST) child.getNextSibling();
                 }
             }
-            mFieldsStack.addLast(frame); //push container
+            // push container
+            mCurrentFrame = frame;
         }
         else {
             //must be VARIABLE_DEF or PARAMETER_DEF

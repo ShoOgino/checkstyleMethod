@@ -13,7 +13,8 @@
     private void checkException(FullIdent aExc, List aKnownExcs)
     {
         // Let's try to load class.
-        final ClassInfo newClassInfo = new ClassInfo(aExc);
+        final ClassInfo newClassInfo =
+            new ClassInfo(aExc, getCurrentClassName());
 
         if (!mAllowUnchecked) {
             if (isUnchecked(newClassInfo.getClazz())) {

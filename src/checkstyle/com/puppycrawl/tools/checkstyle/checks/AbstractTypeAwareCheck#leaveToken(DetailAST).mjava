@@ -1,0 +1,14 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public final void leaveToken(DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.CLASS_DEF) {
+            int dotIdx = mCurrentClass.lastIndexOf(".");
+            if (dotIdx == -1) {
+                mCurrentClass = "";
+            }
+            else {
+                mCurrentClass = mCurrentClass.substring(0, dotIdx);
+            }
+        }
+    }
+

@@ -14,21 +14,14 @@
                 final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
                 final String name = nameAST.getText();
                 boolean inStatic = inStatic(aAST);
-                final ListIterator it =
-                    mFieldsStack.listIterator(mFieldsStack.size());
-                while (it.hasPrevious()) {
-                    final FieldFrame frame = (FieldFrame) it.previous();
-                    inStatic |= frame.isStaticType();
-                    if ((frame.containsStaticField(name)
-                        || (!inStatic && frame.containsInstanceField(name)))
-                        && ((mRegexp == null) || (!getRegexp().match(name)))
-                        && !isIgnoredSetterParam(aAST, name)
-                        && !isIgnoredConstructorParam(aAST))
-                    {
-                        log(nameAST.getLineNo(), nameAST.getColumnNo(),
-                            "hidden.field", name);
-                        break;
-                    }
+                if ((mCurrentFrame.containsStaticField(name)
+                     || (!inStatic(aAST)
+                         && mCurrentFrame.containsInstanceField(name)))
+                    && ((mRegexp == null) || (!getRegexp().match(name)))
+                    && !isIgnoredSetterParam(aAST, name)
+                    && !isIgnoredConstructorParam(aAST))
+                {
+                    log(nameAST, "hidden.field", name);
                 }
             }
         }

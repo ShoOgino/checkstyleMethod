@@ -5,6 +5,13 @@
          */
         public boolean containsInstanceField(String aField)
         {
-            return mInstanceFields.contains(aField);
+            if (mInstanceFields.contains(aField)) {
+                return true;
+            }
+            if (mStaticType) {
+                return false;
+            }
+
+            return (mParent != null) && mParent.containsInstanceField(aField);
         }
 

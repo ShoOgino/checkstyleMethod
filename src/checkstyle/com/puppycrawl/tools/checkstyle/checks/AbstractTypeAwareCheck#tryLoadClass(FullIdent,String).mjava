@@ -1,11 +1,13 @@
     /**
      * Tries to load class. Logs error if unable.
      * @param aIdent name of class which we try to load.
+     * @param aCurrentClass name of surrounding class.
      * @return <code>Class</code> for a ident.
      */
-    protected final Class tryLoadClass(FullIdent aIdent)
+    protected final Class tryLoadClass(FullIdent aIdent,
+                                       String aCurrentClass)
     {
-        final Class clazz = resolveClass(aIdent.getText());
+        final Class clazz = resolveClass(aIdent.getText(), aCurrentClass);
         if (clazz == null) {
             logLoadError(aIdent);
         }

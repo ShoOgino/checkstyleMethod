@@ -5,7 +5,8 @@
      */
     private Class loadClassForTag(JavadocTag aTag)
     {
-        Class clazz = resolveClass(aTag.getArg1());
+        final String currentClassName = "";
+        Class clazz = resolveClass(aTag.getArg1(), currentClassName);
         if (clazz == null) {
             log(aTag.getLineNo(), "javadoc.classInfo",
                 "@throws", aTag.getArg1());
