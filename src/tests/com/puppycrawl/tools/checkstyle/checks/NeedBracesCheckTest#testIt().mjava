@@ -1,0 +1,26 @@
+    public void testIt() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(NeedBracesCheck.class);
+        final String[] expected = {
+            "29: 'do' construct must use '{}'s." ,
+            "41: 'while' construct must use '{}'s." ,
+            "42: 'while' construct must use '{}'s." ,
+            "44: 'while' construct must use '{}'s." ,
+            "45: 'if' construct must use '{}'s." ,
+            "58: 'for' construct must use '{}'s." ,
+            "59: 'for' construct must use '{}'s." ,
+            "61: 'for' construct must use '{}'s." ,
+            "63: 'if' construct must use '{}'s." ,
+            "82: 'if' construct must use '{}'s." ,
+            "83: 'if' construct must use '{}'s." ,
+            "85: 'if' construct must use '{}'s." ,
+            "87: 'else' construct must use '{}'s." ,
+            "89: 'if' construct must use '{}'s." ,
+            "97: 'else' construct must use '{}'s." ,
+            "99: 'if' construct must use '{}'s." ,
+            "100: 'if' construct must use '{}'s." ,
+        };
+        verify(checkConfig, getPath("InputBraces.java"), expected);
+    }
+

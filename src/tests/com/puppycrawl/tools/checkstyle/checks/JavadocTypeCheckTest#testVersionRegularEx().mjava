@@ -1,0 +1,11 @@
+    public void testVersionRegularEx()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("versionFormat", "[:digit:].*");
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputJavadoc.java"), expected);
+    }
+

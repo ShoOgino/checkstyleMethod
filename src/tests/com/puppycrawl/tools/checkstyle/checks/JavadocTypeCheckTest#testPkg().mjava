@@ -1,0 +1,16 @@
+    public void testPkg() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute(
+            "scope",
+            Scope.getInstance("package").getName());
+        final String[] expected =
+        {
+            "18: Missing a Javadoc comment.",
+            "20: Missing a Javadoc comment.",
+            "22: Missing a Javadoc comment.",
+        };
+        verify(checkConfig, getPath("InputScopeInnerClasses.java"), expected);
+    }
+

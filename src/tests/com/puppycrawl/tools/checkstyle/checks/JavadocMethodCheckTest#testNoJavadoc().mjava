@@ -1,0 +1,11 @@
+    public void testNoJavadoc()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
+        checkConfig.addAttribute("scope", Scope.NOTHING.getName());
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputPublicOnly.java"), expected);
+    }
+

@@ -1,0 +1,12 @@
+    public void testAuthorRegularExError()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("authorFormat", "ABC");
+        final String[] expected = {
+            "13: Type Javadoc comment is missing an @author tag.",
+        };
+        verify(checkConfig, getPath("InputJavadoc.java"), expected);
+    }
+

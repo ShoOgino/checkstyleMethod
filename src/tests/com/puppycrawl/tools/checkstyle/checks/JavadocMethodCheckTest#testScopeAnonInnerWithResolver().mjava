@@ -1,0 +1,11 @@
+        public void testScopeAnonInnerWithResolver()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
+        checkConfig.addAttribute("checkUnusedThrows", "true");
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
+    }
+

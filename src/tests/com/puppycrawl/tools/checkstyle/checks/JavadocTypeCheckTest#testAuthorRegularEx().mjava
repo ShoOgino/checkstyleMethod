@@ -1,0 +1,11 @@
+    public void testAuthorRegularEx()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("authorFormat", "0*");
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputJavadoc.java"), expected);
+    }
+

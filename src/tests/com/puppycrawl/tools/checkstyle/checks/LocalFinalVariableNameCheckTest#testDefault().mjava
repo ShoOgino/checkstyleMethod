@@ -1,0 +1,11 @@
+    public void testDefault()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(LocalFinalVariableNameCheck.class);
+        final String[] expected = {
+            "123:19: Name 'CDE' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+        };
+        verify(checkConfig, getPath("InputSimple.java"), expected);
+    }
+

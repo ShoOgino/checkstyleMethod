@@ -1,0 +1,14 @@
+    public void testProtest() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("scope", Scope.PROTECTED.getName());
+        final String[] expected =
+        {
+            "7: Missing a Javadoc comment.",
+            "29: Missing a Javadoc comment.",
+            "38: Missing a Javadoc comment.",
+        };
+        verify(checkConfig, getPath("InputScopeInnerInterfaces.java"), expected);
+    }
+

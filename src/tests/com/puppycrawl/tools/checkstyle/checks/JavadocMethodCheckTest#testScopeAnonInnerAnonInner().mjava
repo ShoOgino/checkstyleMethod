@@ -1,0 +1,14 @@
+    public void testScopeAnonInnerAnonInner()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
+        checkConfig.addAttribute("scope", Scope.ANONINNER.getName());
+        final String[] expected = {
+            "26:9: Missing a Javadoc comment.",
+            "39:17: Missing a Javadoc comment.",
+            "53:17: Missing a Javadoc comment.",
+        };
+        verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
+    }
+

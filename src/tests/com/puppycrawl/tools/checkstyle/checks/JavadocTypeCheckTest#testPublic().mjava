@@ -1,0 +1,13 @@
+    public void testPublic() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("scope", Scope.PUBLIC.getName());
+        final String[] expected =
+        {
+            "7: Missing a Javadoc comment.",
+            "38: Missing a Javadoc comment.",
+        };
+        verify(checkConfig, getPath("InputScopeInnerInterfaces.java"), expected);
+    }
+

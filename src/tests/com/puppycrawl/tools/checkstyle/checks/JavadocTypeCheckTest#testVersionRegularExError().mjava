@@ -1,0 +1,12 @@
+    public void testVersionRegularExError()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("versionFormat", "\\$Revision.*\\$");
+        final String[] expected = {
+            "13: Type Javadoc comment is missing an @version tag."
+        };
+        verify(checkConfig, getPath("InputJavadoc.java"), expected);
+    }
+

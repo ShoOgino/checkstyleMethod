@@ -1,0 +1,12 @@
+    public void testAuthorRequired() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("authorFormat", "\\S");
+        final String[] expected =
+        {
+            "13: Type Javadoc comment is missing an @author tag.",
+        };
+        verify(checkConfig, getPath("InputWhitespace.java"), expected);
+    }
+

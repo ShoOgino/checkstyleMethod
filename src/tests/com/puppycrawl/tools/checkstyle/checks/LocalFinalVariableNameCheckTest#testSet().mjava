@@ -1,0 +1,12 @@
+    public void testSet()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(LocalFinalVariableNameCheck.class);
+        checkConfig.addAttribute("format", "[A-Z]+");
+        final String[] expected = {
+            "122:19: Name 'cde' must match pattern '[A-Z]+'.",
+        };
+        verify(checkConfig, getPath("InputSimple.java"), expected);
+    }
+
