@@ -1,0 +1,25 @@
+    /**
+     * Check the indent of the top level token.
+     */
+    protected void checkToplevelToken() 
+    {
+        // check if else is nested with rcurly of if:
+        //
+        //  } else ...
+
+        DetailAST ifAST = getMainAst().getParent();
+        if (ifAST != null) {
+            DetailAST slist = ifAST.findFirstToken(TokenTypes.SLIST);
+            if (slist != null) {
+                DetailAST lcurly = slist.getLastChild();
+                if (lcurly != null 
+                    && lcurly.getLineNo() == getMainAst().getLineNo()) 
+                {
+                    // indentation checked as part of LITERAL IF check
+                    return;
+                }
+            }
+        }
+        super.checkToplevelToken();
+    }
+

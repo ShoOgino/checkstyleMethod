@@ -1,0 +1,17 @@
+    /**
+     * Log an indentation error.
+     * 
+     * @param aAst           the expression that caused the error
+     * @param aSubtypeName   the type of the expression
+     * @param aActualLevel    the actual indent level of the expression
+     */
+    protected void logError(DetailAST aAst, String aSubtypeName, 
+        int aActualLevel) 
+    {
+        // TODO: i18n
+        String typeStr = (aSubtypeName == "" ? "" : (" " + aSubtypeName));
+        mIndentCheck.indentationLog(aAst.getLineNo(), mTypeName + typeStr 
+            + " at indentation level " 
+            + aActualLevel + " not at correct indentation, " + getLevel());
+    }
+

@@ -1,0 +1,15 @@
+    /**
+     * Check the indentation of the expression we are handling.
+     */
+    public void checkIndentation() 
+    {
+        int columnNo = expandedTabsColumnNo(getMainAst());
+        if (columnNo != getLevel()) {
+            logError(getMainAst(), "", columnNo);
+        }
+
+        checkLinesIndent(getMainAst().getLineNo(), 
+            getMainAst().findFirstToken(TokenTypes.SEMI).getLineNo(), 
+            getLevel());
+    }
+

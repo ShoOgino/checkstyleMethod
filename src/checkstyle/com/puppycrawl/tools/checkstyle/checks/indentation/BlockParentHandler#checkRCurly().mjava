@@ -1,0 +1,19 @@
+    /**
+     * Check the indentation of the right curly brace.
+     */
+    protected void checkRCurly() 
+    {
+        // the rcurly can either be at the correct indentation, or 
+        // on the same line as the lcurly
+        DetailAST lcurly = getLCurly();
+        DetailAST rcurly = getRCurly();
+        if (rcurly == null
+            || expandedTabsColumnNo(rcurly) == curlyLevel()
+            || (!rcurlyMustStart() && !startsLine(rcurly))
+            || areOnSameLine(rcurly, lcurly)) 
+        {
+            return;
+        }
+        logError(rcurly, "rcurly", expandedTabsColumnNo(rcurly));
+    }
+

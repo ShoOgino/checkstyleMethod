@@ -1,0 +1,20 @@
+    /**
+     * Check the indentation of the expression we are handling.
+     */
+    public void checkIndentation() 
+    {
+        checkModifiers();
+        checkIdent();
+        checkThrows();
+        if (getMainAst().getType() != TokenTypes.CTOR_DEF) {
+            checkType();
+        }
+        checkParameters();
+
+        if (getLCurly() == null) {
+            // asbtract method def -- no body
+            return;
+        }
+        super.checkIndentation();
+    }
+

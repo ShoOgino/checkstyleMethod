@@ -1,0 +1,33 @@
+    /**
+     * Check the indentation of the expression we are handling.
+     */
+    public void checkIndentation() 
+    {
+        DetailAST methodName = (DetailAST) getMainAst().getFirstChild();
+        checkExpressionSubtree(methodName, getLevel(), false, false);
+
+        checkLParen();
+        DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
+        DetailAST lparen = getMainAst();
+
+        if (rparen.getLineNo() != lparen.getLineNo()) {
+
+            // if this method name is on the same line as a containing 
+            // method, don't indent, this allows expressions like:
+            //    method("my str" + method2(
+            //        "my str2"));
+            // as well as
+            //    method("my str" + 
+            //        method2(
+            //            "my str2"));
+            //
+
+            checkExpressionSubtree(
+                getMainAst().findFirstToken(TokenTypes.ELIST), 
+                getLevel() + getIndentCheck().getIndentationAmount(),
+                false, true);
+
+            checkRParen();
+        }
+    }
+

@@ -1,0 +1,15 @@
+    /**
+     * Check the indentation level of a child that is not a list of statements.
+     */
+    private void checkNonlistChild() 
+    {
+        // TODO: look for SEMI and check for it here?
+        DetailAST nonlist = getNonlistChild();
+        if (nonlist == null) {
+            return;
+        }
+
+        checkExpressionSubtree(nonlist, getLevel()
+                + getIndentCheck().getIndentationAmount());
+    }
+

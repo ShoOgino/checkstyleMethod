@@ -1,0 +1,17 @@
+    /**
+     * Check the indentation of the left parenthesis.
+     */
+    protected void checkLParen()
+    {
+        // the rcurly can either be at the correct indentation, or on the 
+        // same line as the lcurly
+        DetailAST lparen = getLParen();
+        if (lparen == null 
+            || expandedTabsColumnNo(lparen) == getLevel() 
+            || !startsLine(lparen)) 
+        {
+            return;
+        }
+        logError(lparen, "lparen", expandedTabsColumnNo(lparen));
+    }
+

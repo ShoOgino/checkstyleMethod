@@ -1,0 +1,10 @@
+    /**
+     * Check the indentation of the conditional expression.
+     */
+    private void checkCondExpr() 
+    {
+        DetailAST condAst = getMainAst().findFirstToken(TokenTypes.EXPR);
+        checkExpressionSubtree(condAst, getLevel()
+            + getIndentCheck().getIndentationAmount());
+    }
+

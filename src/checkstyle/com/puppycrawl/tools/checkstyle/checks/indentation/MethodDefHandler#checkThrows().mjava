@@ -1,0 +1,22 @@
+    /**
+     * Check the indentation of the throws clause.
+     */
+    private void checkThrows() 
+    {
+        DetailAST throwsAst = 
+            getMainAst().findFirstToken(TokenTypes.LITERAL_THROWS);
+        if (throwsAst == null) {
+            return;
+        }
+
+        int columnNo = expandedTabsColumnNo(throwsAst);
+        int expectedColumnNo = 
+            getLevel() + getIndentCheck().getIndentationAmount();
+
+        if (startsLine(throwsAst) 
+            && columnNo != expectedColumnNo) 
+        {
+            logError(throwsAst, "throws", columnNo, expectedColumnNo);
+        }
+    }
+

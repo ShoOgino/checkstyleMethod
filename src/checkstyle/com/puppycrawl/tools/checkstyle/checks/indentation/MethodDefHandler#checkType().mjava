@@ -1,0 +1,12 @@
+    /**
+     * Check the indentation of the method type.
+     */
+    private void checkType() 
+    {
+        DetailAST ident = getMainAst().findFirstToken(TokenTypes.TYPE);
+        int columnNo = expandedTabsColumnNo(ident);
+        if (startsLine(ident) && columnNo != getLevel()) {
+            logError(ident, "return type", columnNo);
+        }
+    }
+

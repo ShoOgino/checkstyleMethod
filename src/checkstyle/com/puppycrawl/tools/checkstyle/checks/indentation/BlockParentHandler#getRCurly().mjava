@@ -1,0 +1,15 @@
+    /**
+     * Get the right curly brace portion of the expression we are handling.
+     * 
+     * @return the right curly brace expression
+     */
+    protected DetailAST getRCurly() 
+    {
+        DetailAST slist = getMainAst().findFirstToken(TokenTypes.SLIST);
+        if (slist == null) {
+            return null;
+        }
+
+        return slist.findFirstToken(TokenTypes.RCURLY);
+    }
+

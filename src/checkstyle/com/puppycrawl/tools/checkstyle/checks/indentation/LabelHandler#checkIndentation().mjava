@@ -1,0 +1,13 @@
+    /**
+     * Check the indentation of the expression we are handling.
+     */
+    public void checkIndentation() 
+    {
+        checkLabel();
+        // need to check children (like 'block' parents do)
+        DetailAST parent = (DetailAST) 
+            getMainAst().getFirstChild().getNextSibling();
+        checkExpressionSubtree(parent, getLevel()
+            + getIndentCheck().getIndentationAmount(), true, false);
+    }
+

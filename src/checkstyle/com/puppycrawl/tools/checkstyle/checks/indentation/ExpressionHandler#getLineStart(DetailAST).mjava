@@ -1,0 +1,15 @@
+    /**
+     * Get the start of the line for the given expression.
+     * 
+     * @param aAst   the expression to find the start of the line for
+     * 
+     * @return the start of the line for the given expression
+     */
+    protected int getLineStart(DetailAST aAst) 
+    {
+        // TODO: this breaks indentation -- add to tests
+        String line = mIndentCheck.getLines()[
+            aAst.getLineNo() - 1];
+        return getLineStart(line);
+    }
+

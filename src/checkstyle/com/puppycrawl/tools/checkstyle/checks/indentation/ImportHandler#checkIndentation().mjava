@@ -1,0 +1,14 @@
+    /**
+     * Check the indentation of the expression we are handling.
+     */
+    public void checkIndentation() 
+    {
+        int lineStart = getMainAst().getLineNo();
+        DetailAST semi = getMainAst().findFirstToken(TokenTypes.SEMI);
+        int lineEnd = semi.getLineNo();
+
+        if (getMainAst().getLineNo() != lineEnd) {
+            checkLinesIndent(lineStart, lineEnd, getLevel());
+        }
+    }
+

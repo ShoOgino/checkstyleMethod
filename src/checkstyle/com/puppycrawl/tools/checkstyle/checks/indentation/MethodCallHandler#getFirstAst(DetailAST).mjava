@@ -1,0 +1,28 @@
+    /**
+     * Get the first AST of the specified method call.
+     * 
+     * @param aAst   the method call
+     * 
+     * @return the first AST of the specified method call
+     */
+    private DetailAST getFirstAst(DetailAST aAst)
+    {
+        // walk down the first child part of the dots that make up a method
+        // call name
+
+        // TODO: I'm not convinced this will work yet, what will happen
+        // when there is a method call in the dots? -- we would have to go
+        // down that call?
+
+        DetailAST ast = (DetailAST) aAst.getFirstChild();
+        while (ast != null && ast.getType() == TokenTypes.DOT) {
+            ast = (DetailAST) ast.getFirstChild();
+        }
+
+        if (ast == null) {
+            ast = aAst;
+        }
+
+        return ast;
+    }
+

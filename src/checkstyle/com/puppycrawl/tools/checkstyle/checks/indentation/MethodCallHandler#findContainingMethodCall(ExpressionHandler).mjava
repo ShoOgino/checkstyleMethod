@@ -1,0 +1,34 @@
+    /**
+     * Find the handler for the method call that contains the specified child
+     * 
+     * @param aChild   the child
+     * 
+     * @return the handler that contains the specified child
+     */
+    private MethodCallHandler findContainingMethodCall(
+        ExpressionHandler aChild)
+    {
+        DetailAST firstChild = (DetailAST) getMainAst().getFirstChild();
+        DetailAST secondChild = (DetailAST) firstChild.getNextSibling();
+        DetailAST climber = aChild.getMainAst().getParent();
+        while (climber != null) {
+            if (climber == firstChild) {
+                // part of method name
+                if (getParent() instanceof MethodCallHandler) {
+                    return ((MethodCallHandler) getParent())
+                        .findContainingMethodCall(this);
+                } 
+                else {
+                    return null;
+                }
+            } 
+            else if (climber == secondChild) {
+                // part of method arguments, this the method the child 
+                // is contained in
+                return this;
+            }
+            climber = climber.getParent();
+        }
+        return null;
+    }
+

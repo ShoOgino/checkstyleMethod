@@ -1,0 +1,17 @@
+    /**
+     * Check the indent level for a single line.
+     * 
+     * @param aLineNum       the line number to check
+     * @param aIndentLevel   the required indent level
+     */
+    private void checkSingleLine(int aLineNum, int aIndentLevel) 
+    {
+        String line = mIndentCheck.getLines()[aLineNum - 1];
+        int start = getLineStart(line);
+        if (start < aIndentLevel) {
+            mIndentCheck.indentationLog(aLineNum,
+                mTypeName + " child at indentation level " 
+                + start + " not at correct indentation, " + aIndentLevel);
+        }
+    }
+

@@ -1,0 +1,18 @@
+    /**
+     * Check the indent of the top level token.
+     */
+    protected void checkToplevelToken() 
+    {
+        DetailAST toplevel = getToplevelAST();
+
+        if (toplevel == null 
+            || expandedTabsColumnNo(toplevel) == getLevel()) 
+        {
+            return;
+        }
+        if (!toplevelMustStartLine() && !startsLine(toplevel)) {
+            return;
+        }
+        logError(toplevel, "", expandedTabsColumnNo(toplevel));
+    }
+

@@ -1,0 +1,31 @@
+    /**
+     * Check the indentation of the expression we are handling.
+     */
+    public void checkIndentation() 
+    {
+        checkToplevelToken();
+        // seperate to allow for eventual configuration
+        checkLParen();
+        checkRParen();
+        if (hasCurlys()) {
+            checkLCurly();
+            checkRCurly();
+        }
+        DetailAST listChild = getListChild();
+        if (listChild != null) {
+            final int expectedLevel = 
+                getLevel() + getIndentCheck().getIndentationAmount();
+            // NOTE: switch statements usually don't have curlys
+            if (!hasCurlys() || !areOnSameLine(getLCurly(), getRCurly())) {
+                checkChildren(listChild, 
+                              CHECKED_CHILDREN, 
+                              expectedLevel,
+                              true, 
+                              childrenMayNest());
+            }
+        } 
+        else {
+            checkNonlistChild();
+        }
+    }
+
