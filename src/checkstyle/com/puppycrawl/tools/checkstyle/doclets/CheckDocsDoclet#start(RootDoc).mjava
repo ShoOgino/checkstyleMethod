@@ -23,19 +23,7 @@
 
         // TODO: close files in finally blocks
 
-        final Collection pages = sDocumentationPages.values();
         final File destDir = new File(getDestDir(aRoot.options()));
-        for (Iterator it = pages.iterator(); it.hasNext();) {
-            DocumentationPage page = (DocumentationPage) it.next();
-            String pageName = getPageName(page);
-            // only documentation for duplicates is generated for now
-            if  ("duplicates".equals(pageName)) {
-                File outfile = new File(destDir, "config_" + pageName + ".xml");
-                Writer writer = new FileWriter(outfile);
-                page.write(writer);
-                writer.close();
-            }
-        }
 
         final File checksIndexFile = new File(destDir, "availablechecks.xml");
         PrintWriter fileWriter = new PrintWriter(
