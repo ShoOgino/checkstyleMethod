@@ -1,0 +1,12 @@
+    public void testOperatorWrapOption()
+    {
+        OperatorWrapOption eolOpt = OperatorWrapOption.EOL;
+        assertEquals("EOL", "eol", eolOpt.toString());
+        OperatorWrapOption nlOpt = OperatorWrapOption.NL;
+        assertEquals("NL", "nl", nlOpt.toString());
+        OperatorWrapOption eolDecode = (OperatorWrapOption)(eolOpt.decode("eol"));
+        assertTrue("EOL decode", eolOpt == eolDecode);
+        OperatorWrapOption nlDecode = (OperatorWrapOption)(nlOpt.decode("nl"));
+        assertTrue("NL decode", nlOpt == nlDecode);
+    }
+

@@ -1,0 +1,12 @@
+    public void testRightCurlyOption()
+    {
+        RightCurlyOption aloneOpt = RightCurlyOption.ALONE;
+        assertEquals("ALONE", "alone", aloneOpt.toString());
+        RightCurlyOption sameOpt = RightCurlyOption.SAME;
+        assertEquals("SAME", "same", sameOpt.toString());
+        RightCurlyOption aloneDecode = (RightCurlyOption)(aloneOpt.decode("alone"));
+        assertTrue("ALONE decode", aloneOpt == aloneDecode);
+        RightCurlyOption sameDecode = (RightCurlyOption)(sameOpt.decode("same"));
+        assertTrue("SAME decode", sameOpt == sameDecode);
+    }
+

@@ -1,0 +1,23 @@
+    public void testEqualKeys()
+    {
+        LeftCurlyOption eolLeftCurl = LeftCurlyOption.EOL;
+        LeftCurlyOption eolLeftCurlDecode =
+            (LeftCurlyOption)(eolLeftCurl.decode("eol"));
+        OperatorWrapOption eolOpWrap = OperatorWrapOption.EOL;
+        OperatorWrapOption eolOpWrapDecode =
+            (OperatorWrapOption)(eolOpWrap.decode("eol"));
+        assertTrue("eol",
+                   (AbstractOption)eolLeftCurlDecode
+                        != (AbstractOption)eolOpWrapDecode);
+                        
+        LeftCurlyOption nlLeftCurl = LeftCurlyOption.NL;
+        LeftCurlyOption nlLeftCurlDecode =
+            (LeftCurlyOption)(nlLeftCurl.decode("nl"));
+        OperatorWrapOption nlOpWrap = OperatorWrapOption.NL;
+        OperatorWrapOption nlOpWrapDecode =
+            (OperatorWrapOption)(nlOpWrap.decode("eol"));
+        assertTrue("nl",
+                   (AbstractOption)nlLeftCurlDecode
+                        != (AbstractOption)nlOpWrapDecode);
+    }
+
