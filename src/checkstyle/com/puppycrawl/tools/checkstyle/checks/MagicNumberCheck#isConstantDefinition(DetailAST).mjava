@@ -9,19 +9,19 @@
         DetailAST parent = aAST.getParent();
 
         //expression?
-        if ((parent == null) || parent.getType() != TokenTypes.EXPR) {
+        if ((parent == null) || (parent.getType() != TokenTypes.EXPR)) {
             return false;
         }
 
         //assignment?
         parent = parent.getParent();
-        if ((parent == null) || parent.getType() != TokenTypes.ASSIGN) {
+        if ((parent == null) || (parent.getType() != TokenTypes.ASSIGN)) {
             return false;
         }
 
         //variable definition?
         parent = parent.getParent();
-        if ((parent == null) || parent.getType() != TokenTypes.VARIABLE_DEF) {
+        if ((parent == null) || (parent.getType() != TokenTypes.VARIABLE_DEF)) {
             return false;
         }
 
