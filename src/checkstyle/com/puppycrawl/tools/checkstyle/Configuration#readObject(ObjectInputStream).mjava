@@ -15,8 +15,10 @@
         // initialize the transient fields
         mLoader = Thread.currentThread().getContextClassLoader();
         mRegexps = new HashMap();
-        // reset the header file to re-read the lines
-        setHeaderFile(mHeaderFile);
+
+        // load the file to re-read the lines
+        loadFiles();
+
         try {
             // Loop on the patterns creating the RE's
             final Iterator keys = mPatterns.keySet().iterator();

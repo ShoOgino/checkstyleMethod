@@ -18,11 +18,14 @@
             mConfig.setClassLoader(
                 new AntClassLoader(getProject(), mClasspath));
         }
+
+        // set the root directory location
+        mConfig.setRootDir(getProject().getBaseDir());
+
         // Create the checker
         Checker c = null;
         try {
             try {
-                applyExplicitOptions();
                 c = new Checker(mConfig);
                 // setup the listeners
                 AuditListener[] listeners = getListeners();

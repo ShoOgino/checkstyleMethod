@@ -1,0 +1,18 @@
+    /**
+     * @return the absolute file name for a given filename. If the passed
+     * filename is absolute, then that is returned. If the setRootDir() was
+     * called, that is used to caluclate the absolute path. Otherise, the
+     * absolute path of the given filename is returned (this behaviour cannot
+     * be determined).
+     *
+     * @param aFilename the filename to make absolute
+     */
+    private String getAbsoluteFilename(String aFilename)
+    {
+        File f = new File(aFilename);
+        if (!f.isAbsolute() && (mRootDir != null)) {
+            f = new File(mRootDir, aFilename);
+        }
+        return f.getAbsolutePath();
+    }
+

@@ -1,6 +1,7 @@
-    /** @return the name of the cache file **/
+    /** @return the File of the cache file **/
     public String getCacheFile()
     {
-        return getStringProperty(Defn.CACHE_FILE_PROP);
+        final String fname = getStringProperty(Defn.CACHE_FILE_PROP);
+        return (fname == null) ? null : getAbsoluteFilename(fname);
     }
 
