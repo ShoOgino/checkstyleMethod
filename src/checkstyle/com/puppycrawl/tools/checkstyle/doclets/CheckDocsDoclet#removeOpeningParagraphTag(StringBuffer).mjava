@@ -1,0 +1,15 @@
+    /**
+     * Removes an opening p tag from a StringBuffer.
+     * @param aText the text to process
+     */
+    private static void removeOpeningParagraphTag(final StringBuffer aText)
+    {
+        final String openTag = "<p>";
+        final int tagLen = openTag.length();
+        if (aText.length() > tagLen
+                && aText.substring(0, tagLen).equals(openTag))
+        {
+            aText.delete(0, tagLen);
+        }
+    }
+

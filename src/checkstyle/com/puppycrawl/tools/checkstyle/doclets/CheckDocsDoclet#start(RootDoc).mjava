@@ -7,26 +7,11 @@
     public static boolean start(RootDoc aRoot) throws IOException
     {
         final ClassDoc[] classDocs = aRoot.classes();
-        final Map allChecks = new TreeMap();
-        for (int i = 0; i < classDocs.length; i++) {
-            ClassDoc classDoc = classDocs[i];
-            // TODO: introduce a "CheckstyleModule" interface
-            // so we can do better in the next line...
-            if (classDoc.typeName().endsWith("Check")
-                    && !classDoc.isAbstract())
-            {
-                DocumentationPage page = findDocumentationPage(classDoc);
-                page.addCheck(classDoc);
-                allChecks.put(getCheckName(classDoc), page);
-            }
-        }
-
-        // TODO: close files in finally blocks
 
         final File destDir = new File(getDestDir(aRoot.options()));
 
         final File checksIndexFile = new File(destDir, "availablechecks.xml");
-        PrintWriter fileWriter = new PrintWriter(
+        final PrintWriter fileWriter = new PrintWriter(
                 new FileWriter(checksIndexFile));
         writeXdocsHeader(fileWriter, "Available Checks");
 
@@ -36,18 +21,39 @@
                 + " organized by functionality.</p>");
         fileWriter.println("<table>");
 
-        for (Iterator it = allChecks.keySet().iterator(); it.hasNext();) {
-            String checkName = (String) it.next();
-            DocumentationPage page =
-                    (DocumentationPage) allChecks.get(checkName);
-            String descr = page.getDescription(checkName);
-            fileWriter.println("<tr>"
-                    + "<td><a href=\""
-                    + "config_" + getPageName(page) + ".html#" + checkName
-                    + "\">" + checkName + "</a></td><td>"
-                    + descr
-                    + "</td></tr>");
+        Arrays.sort(classDocs, new ClassDocByCheckNameComparator());
+
+        for (int i = 0; i < classDocs.length; i++) {
+
+            final ClassDoc classDoc = classDocs[i];
+
+            // TODO: introduce a "CheckstyleModule" interface
+            // so we can do better in the next line...
+            if (classDoc.typeName().endsWith("Check")
+                    && !classDoc.isAbstract())
+            {
+                String pageName = getPageName(classDoc);
+
+                // allow checks to override pageName when
+                // java package hierarchy is not reflected in doc structure
+                final Tag[] docPageTags = classDoc.tags("checkstyle-docpage");
+                if (docPageTags != null && docPageTags.length > 0) {
+                    pageName = docPageTags[0].text();
+                }
+
+                final String descr = getDescription(classDoc);
+                final String checkName = getCheckName(classDoc);
+
+
+                fileWriter.println("<tr>"
+                        + "<td><a href=\""
+                        + "config_" + pageName + ".html#" + checkName
+                        + "\">" + checkName + "</a></td><td>"
+                        + descr
+                        + "</td></tr>");
+            }
         }
+
         fileWriter.println("</table>");
         writeXdocsFooter(fileWriter);
         fileWriter.close();
