@@ -4,14 +4,15 @@
      * @param aFile the file to add.
      * @param aAST the DetailAST to add.
     */
-    private void addToCompleteTree(File aFile, AST aAST) {
+    private void addToCompleteTree(File aFile, AST aAST)
+    {
         // add aFile to the root
         final SymTabAST fileNode =
             SymTabASTFactory.create(0, aFile.getAbsolutePath());
         fileNode.setFile(aFile);
         mCompleteTree.addChild(fileNode);
         fileNode.setParent(mCompleteTree);
-        
+
         // add aAST to aFile
         final SymTabAST child = SymTabASTFactory.create(aAST);
         child.setFile(aFile);
