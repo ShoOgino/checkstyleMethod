@@ -15,14 +15,13 @@
             mTypeHandlers.put(new Integer(aType), ctor);
         }
         catch (NoSuchMethodException e) {
-            System.out.println("couldn't find ctor for " + aHandlerClass);
-            System.out.println("methods are: " + Arrays.asList(
-                aHandlerClass.getConstructors()).toString());
-            e.printStackTrace();
+            throw new RuntimeException("couldn't find ctor for "
+                                       + aHandlerClass);
         }
         catch (SecurityException e) {
-            System.out.println("couldn't find ctor for " + aHandlerClass);
-            e.printStackTrace();
+            throw new RuntimeException("couldn't find ctor for "
+                                       + aHandlerClass,
+                                       e);
         }
     }
 
