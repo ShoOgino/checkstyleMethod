@@ -2,7 +2,7 @@
     public void verifyVariable(MyVariable aVar, boolean aInInterface)
     {
         if (getJavadocBefore(aVar.getLineNo() - 1) == null) {
-            if (!mRelaxJavadoc || inInterfaceBlock() ||
+            if (!mConfig.isRelaxJavadoc() || inInterfaceBlock() ||
                 (aVar.getModifierSet().containsProtected() ||
                  aVar.getModifierSet().containsPublic()))
             {
@@ -16,8 +16,8 @@
             // The only declarations allowed in interfaces are all static final,
             // even if not declared that way.
             checkVariable(aVar,
-                          mStaticFinalRegexp,
-                          mStaticFinalPat);
+                          mConfig.getStaticFinalRegexp(),
+                          mConfig.getStaticFinalPat());
         }
         else {
             final MyModifierSet mods = aVar.getModifierSet();
@@ -27,13 +27,15 @@
                     // Serialization. Cannot enforce rules on it. :-)
                     if (!"serialVersionUID".equals(aVar.getText())) {
                         checkVariable(aVar,
-                                      mStaticFinalRegexp,
-                                      mStaticFinalPat);
+                                      mConfig.getStaticFinalRegexp(),
+                                      mConfig.getStaticFinalPat());
                     }
                 }
                 else {
                     if (mods.containsPrivate()) {
-                        checkVariable(aVar, mStaticRegexp, mStaticPat);
+                        checkVariable(aVar,
+                                      mConfig.getStaticRegexp(),
+                                      mConfig.getStaticPat());
                 }
                     else {
                         log(aVar.getLineNo(),
@@ -45,9 +47,11 @@
             else {
                 // These are the non-static variables
                 if (mods.containsPrivate() ||
-                    (mAllowProtected && mods.containsProtected()))
+                    (mConfig.isAllowProtected() && mods.containsProtected()))
                 {
-                    checkVariable(aVar, mMemberRegexp, mMemberPat);
+                    checkVariable(aVar,
+                                  mConfig.getMemberRegexp(),
+                                  mConfig.getMemberPat());
                 }
                 else {
                     log(aVar.getLineNo(),

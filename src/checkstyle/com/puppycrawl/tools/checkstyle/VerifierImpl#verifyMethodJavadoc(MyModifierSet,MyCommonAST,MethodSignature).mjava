@@ -23,7 +23,7 @@
             //    o in an interface block (all methods must have javadoc); OR
             //    o method is protected or public.
             if (!inMethodBlock() &&
-                (!mRelaxJavadoc || inInterfaceBlock() ||
+                (!mConfig.isRelaxJavadoc() || inInterfaceBlock() ||
                  (aMods.containsProtected() || aMods.containsPublic())))
             {
                 log(lineNo, "method is missing a Javadoc comment.");

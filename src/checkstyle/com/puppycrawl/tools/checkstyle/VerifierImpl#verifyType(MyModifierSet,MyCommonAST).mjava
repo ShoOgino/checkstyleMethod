@@ -10,15 +10,16 @@
             // demand that types have Javadoc, so ignore mRelaxJavadoc
             log(lineNo, "type is missing a Javadoc comment.");
         }
-        else if (!mAllowNoAuthor && (MATCH_JAVADOC_AUTHOR.grep(jd).length == 0))
+        else if (!mConfig.isAllowNoAuthor() &&
+                 (MATCH_JAVADOC_AUTHOR.grep(jd).length == 0))
         {
             log(lineNo, "type Javadoc comment is missing an @author tag.");
         }
 
-        if (!mTypeRegexp.match(aType.getText())) {
+        if (!mConfig.getTypeRegexp().match(aType.getText())) {
             log(aType.getLineNo(),
                 "type name '" + aType.getText() +
-                "' must match pattern '" + mTypePat + "'.");
+                "' must match pattern '" + mConfig.getTypePat() + "'.");
         }
     }
 
