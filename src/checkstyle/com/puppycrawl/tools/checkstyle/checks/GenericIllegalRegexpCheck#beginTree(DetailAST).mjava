@@ -6,7 +6,12 @@
 
             final String line = lines[i];
             if (getRegexp().match(line)) {
-                log(i + 1, "illegal.regexp", getFormat());
+                if ("".equals(mMessage)) {
+                    log(i + 1, "illegal.regexp", getFormat());
+                }
+                else {
+                    log(i + 1, mMessage);
+                }
             }
         }
     }
