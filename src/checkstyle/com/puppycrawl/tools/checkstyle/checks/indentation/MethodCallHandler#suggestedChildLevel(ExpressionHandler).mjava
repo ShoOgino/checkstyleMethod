@@ -17,12 +17,10 @@
 
         DetailAST first = (DetailAST) getMainAst().getFirstChild();
         int indentLevel = getLineStart(first);
-        if (aChild instanceof MethodCallHandler) {
-            if (!areOnSameLine((DetailAST) aChild.getMainAst().getFirstChild(),
-                (DetailAST) getMainAst().getFirstChild()))
-            {
-                indentLevel += getBasicOffset();
-            }
+        if (!areOnSameLine((DetailAST) aChild.getMainAst().getFirstChild(),
+                           (DetailAST) getMainAst().getFirstChild()))
+        {
+            indentLevel += getBasicOffset();
         }
         return new IndentLevel(indentLevel);
     }
