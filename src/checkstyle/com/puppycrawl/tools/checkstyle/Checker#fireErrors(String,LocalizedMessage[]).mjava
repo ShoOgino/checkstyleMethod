@@ -8,7 +8,7 @@
         final String stripped = getStrippedFileName(aFileName);
         for (int i = 0; i < aErrors.length; i++) {
             final AuditEvent evt = new AuditEvent(this, stripped, aErrors[i]);
-            if (accept(evt)) {
+            if (mFilterChain.decide(evt) != Filter.DENY) {
                 final Iterator it = mListeners.iterator();
                 while (it.hasNext()) {
                     final AuditListener listener = (AuditListener) it.next();

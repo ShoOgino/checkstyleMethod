@@ -1,0 +1,8 @@
+    public void testDecideSingle()
+    {
+        final Filter filter = new IntRangeFilter(0, 0);
+        assertEquals("less than", Filter.NEUTRAL, filter.decide(new Integer(-1)));
+        assertEquals("in range", Filter.ACCEPT, filter.decide(new Integer(0)));
+        assertEquals("greater than", Filter.NEUTRAL, filter.decide(new Integer(1)));
+    }
+

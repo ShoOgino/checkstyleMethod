@@ -1,0 +1,37 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Filter */
+    public int decide(Object aObject)
+    {
+        final AuditEvent event = (AuditEvent) aObject;
+
+        // file and check match?
+        if ((event.getFileName() == null)
+            || !mFileRegexp.match(event.getFileName())
+            || (event.getLocalizedMessage() == null)
+            || !mCheckRegexp.match(event.getSourceName()))
+        {
+            return Filter.NEUTRAL;
+        }
+
+        // deny if no line/column matching
+        if ((mLineFilter == null) && (mColumnFilter == null)) {
+            return Filter.DENY;
+        }
+
+        // deny line if it is accepted by the line CSV filter
+        if (mLineFilter != null) {
+            final Integer line = new Integer(event.getLine());
+            if (mLineFilter.decide(line) == Filter.ACCEPT) {
+                return Filter.DENY;
+            }
+        }
+
+        // deny if column accepted by the column CSV filter
+        if (mColumnFilter != null) {
+            final Integer column = new Integer(event.getColumn());
+            if (mColumnFilter.decide(column) == Filter.ACCEPT) {
+                return Filter.DENY;
+            }
+        }
+        return Filter.NEUTRAL;
+    }
+

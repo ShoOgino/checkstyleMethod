@@ -1,0 +1,14 @@
+    /** @see java.lang.Object#hashCode() */
+    public int hashCode()
+    {
+        int result = HASH_MULT * mFilePattern.hashCode()
+            + mCheckPattern.hashCode();
+        if (mLinesCSV != null) {
+            result = HASH_MULT * result + mLinesCSV.hashCode();
+        }
+        if (mColumnsCSV != null) {
+            result = HASH_MULT * result + mColumnsCSV.hashCode();
+        }
+        return result;
+    }
+

@@ -1,0 +1,44 @@
+    /** @see java.lang.Object#equals(java.lang.Object) */
+    public boolean equals(Object aObject)
+    {
+        if (aObject instanceof SuppressElement) {
+            final SuppressElement other = (SuppressElement) aObject;
+
+            // same file pattern?
+            if (!this.mFilePattern.equals(other.mFilePattern)) {
+                return false;
+            }
+
+            // same check pattern?
+            if (!this.mCheckPattern.equals(other.mCheckPattern)) {
+                return false;
+            }
+
+            // same line number filter?
+            if (mLineFilter != null) {
+                if (!mLineFilter.equals(other.mLineFilter)) {
+                    return false;
+                }
+            }
+            else if (other.mLineFilter != null) {
+                return false;
+            }
+
+            // same column number filter?
+            if (mColumnFilter != null) {
+                if (!mColumnFilter.equals(other.mColumnFilter)) {
+                    return false;
+                }
+            }
+            else if (other.mColumnFilter != null) {
+                return false;
+            }
+
+            // everything is the same
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+

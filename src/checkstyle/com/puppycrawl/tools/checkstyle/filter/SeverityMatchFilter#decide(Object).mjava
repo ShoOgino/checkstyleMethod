@@ -1,12 +1,14 @@
-    /** @see com.puppycrawl.tools.checkstyle.filter.AbstractFilter */
-    public int decide(AuditEvent aEvent)
+    /** @see com.puppycrawl.tools.checkstyle.filter.Filter */
+    public int decide(Object aObject)
     {
+        final AuditEvent event = (AuditEvent) aObject;
+
         if (mSeverityLevel == null) {
             return Filter.NEUTRAL;
         }
 
         boolean matchOccurred = false;
-        if (mSeverityLevel.equals(aEvent.getSeverityLevel())) {
+        if (mSeverityLevel.equals(event.getSeverityLevel())) {
             matchOccurred = true;
         }
 

@@ -1,0 +1,10 @@
+    public void testDecideEmpty()
+    {
+        final Filter filter = new IntRangeFilter(10, 0);
+        assertEquals("out", Filter.NEUTRAL, filter.decide(new Integer(-1)));
+        assertEquals("out", Filter.NEUTRAL, filter.decide(new Integer(0)));
+        assertEquals("out", Filter.NEUTRAL, filter.decide(new Integer(5)));
+        assertEquals("out", Filter.NEUTRAL, filter.decide(new Integer(10)));
+        assertEquals("out", Filter.NEUTRAL, filter.decide(new Integer(11)));
+    }
+

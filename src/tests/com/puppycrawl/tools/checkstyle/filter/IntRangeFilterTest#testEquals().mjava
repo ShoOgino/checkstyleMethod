@@ -1,0 +1,13 @@
+    public void testEquals()
+    {
+        final Filter filter = new IntRangeFilter(0, 2);
+        final Filter filter2 = new IntRangeFilter(0, 2);
+        final Filter filter3 = new IntRangeFilter(0, 1);
+        final Filter filter4 = new IntRangeFilter(1, 2);
+        assertEquals("[0,2] == [0,2]", filter, filter2);
+        assertFalse("[0,2] != [0,1]", filter.equals(filter3));
+        assertFalse("[0,2] != [1,2]", filter.equals(filter4));
+        assertFalse("[0,2] != this", filter.equals(this));
+        assertFalse("[0,2] != null", filter.equals(null)); 
+    }
+

@@ -1,0 +1,21 @@
+    /**
+     * Returns the suppression filters in a specified file.
+     * @param aFilename name of the suppresssions file.
+     * @return the filter chain of suppression elements specified in the file.
+     * @throws CheckstyleException if an error occurs.
+     */
+    public static FilterChain loadSuppressions(String aFilename)
+        throws CheckstyleException
+    {
+        FileReader reader = null;
+        try {
+            reader = new FileReader(aFilename);
+        }
+        catch (FileNotFoundException e) {
+            throw new CheckstyleException(
+                "unable to find " + aFilename, e);
+        }
+        final InputSource source = new InputSource(reader);
+        return loadSuppressions(source, aFilename);
+    }
+

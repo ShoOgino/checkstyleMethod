@@ -1,0 +1,15 @@
+    public void testBadInt()
+        throws CheckstyleException
+    {
+        try
+        {
+            final FilterChain fc =
+                SuppressionsLoader.loadSuppressions(
+                    "src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_bad_int.xml");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("number format exception src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_bad_int.xml - For input string: \"a\"",
+                ex.getMessage());
+        }
+    }
+

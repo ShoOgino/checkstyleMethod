@@ -2,10 +2,12 @@
     protected void fireAuditStarted()
     {
         final AuditEvent evt = new AuditEvent(this);
-        final Iterator it = mListeners.iterator();
-        while (it.hasNext()) {
-            final AuditListener listener = (AuditListener) it.next();
-            listener.auditStarted(evt);
+        if (mFilterChain.decide(evt) != Filter.DENY) {
+            final Iterator it = mListeners.iterator();
+            while (it.hasNext()) {
+                final AuditListener listener = (AuditListener) it.next();
+                listener.auditStarted(evt);
+            }
         }
     }
 

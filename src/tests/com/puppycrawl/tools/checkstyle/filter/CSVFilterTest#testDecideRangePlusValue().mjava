@@ -1,0 +1,11 @@
+    public void testDecideRangePlusValue()
+    {
+        final Filter filter = new CSVFilter("0-2, 10");
+        assertEquals("less than", Filter.NEUTRAL, filter.decide(new Integer(-1)));
+        assertEquals("equal 0", Filter.ACCEPT, filter.decide(new Integer(0)));
+        assertEquals("equal 1", Filter.ACCEPT, filter.decide(new Integer(1)));
+        assertEquals("equal 2", Filter.ACCEPT, filter.decide(new Integer(2)));
+        assertEquals("greater than", Filter.NEUTRAL, filter.decide(new Integer(3)));
+        assertEquals("equal 10", Filter.ACCEPT, filter.decide(new Integer(10)));
+    }
+

@@ -1,0 +1,36 @@
+    /** @see org.xml.sax.helpers.DefaultHandler **/
+    public void startElement(String aNamespaceURI,
+                             String aLocalName,
+                             String aQName,
+                             Attributes aAtts)
+        throws SAXException
+    {
+        if (aQName.equals("suppress")) {
+            //add SuppressElement filter to the filter chain
+            final String files = aAtts.getValue("files");
+            if (files == null) {
+                throw new SAXException("missing files attribute");
+            }
+            final String checks = aAtts.getValue("checks");
+            if (checks == null) {
+                throw new SAXException("missing checks attribute");
+            }
+            final SuppressElement suppress;
+            try {
+                suppress = new SuppressElement(files, checks);
+            }
+            catch (RESyntaxException e) {
+                throw new SAXException("invalid files or checks format");
+            }
+            final String lines = aAtts.getValue("lines");
+            if (lines != null) {
+                suppress.setLines(lines);
+            }
+            final String columns = aAtts.getValue("columns");
+            if (columns != null) {
+                suppress.setColumns(columns);
+            }
+            mFilterChain.addFilter(suppress);
+        }
+    }
+

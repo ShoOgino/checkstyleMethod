@@ -1,0 +1,36 @@
+    /**
+     * Returns the suppression filters in a specified source.
+     * @param aSource the source for the suppressions.
+     * @param aSourceName the name of the source.
+     * @return the filter chain of suppression elements in aSource.
+     * @throws CheckstyleException if an error occurs.
+     */
+    private static FilterChain loadSuppressions(
+            InputSource aSource, String aSourceName)
+        throws CheckstyleException
+    {
+        try {
+            final SuppressionsLoader suppressionsLoader =
+                new SuppressionsLoader();
+            suppressionsLoader.parseInputSource(aSource);
+            return suppressionsLoader.getFilterChain();
+        }
+        catch (FileNotFoundException e) {
+            throw new CheckstyleException("unable to find " + aSourceName, e);
+        }
+        catch (ParserConfigurationException e) {
+            throw new CheckstyleException("unable to parse " + aSourceName, e);
+        }
+        catch (SAXException e) {
+            throw new CheckstyleException("unable to parse "
+                    + aSourceName + " - " + e.getMessage(), e);
+        }
+        catch (IOException e) {
+            throw new CheckstyleException("unable to read " + aSourceName, e);
+        }
+        catch (NumberFormatException e) {
+            throw new CheckstyleException("number format exception "
+                + aSourceName + " - " + e.getMessage(), e);
+        }
+    }
+
