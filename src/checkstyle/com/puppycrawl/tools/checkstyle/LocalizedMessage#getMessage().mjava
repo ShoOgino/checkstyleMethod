@@ -2,7 +2,8 @@
     String getMessage()
     {
         // Very simple approach - wait for performance problems
-        final ResourceBundle bundle = ResourceBundle.getBundle(MESSAGE_BUNDLE);
+        final ResourceBundle bundle =
+            ResourceBundle.getBundle(MESSAGE_BUNDLE, sLocale, sLoader);
         final String pattern = bundle.getString(mKey);
         return MessageFormat.format(pattern, mArgs);
     }

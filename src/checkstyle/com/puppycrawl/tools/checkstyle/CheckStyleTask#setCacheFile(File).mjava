@@ -1,12 +1,6 @@
     /** @param aCacheFile the file to cache which files have been checked **/
     public void setCacheFile(final File aCacheFile)
     {
-        mOptionMemory.add(new Runnable()
-            {
-                public void run()
-                {
-                    mConfig.setCacheFile(aCacheFile.getAbsolutePath());
-                }
-            });
+        setStringProperty(Defn.CACHE_FILE_PROP, aCacheFile.getAbsolutePath());
     }
 
