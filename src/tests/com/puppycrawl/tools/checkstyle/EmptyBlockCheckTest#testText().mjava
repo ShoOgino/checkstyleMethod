@@ -1,9 +1,9 @@
     public void testText()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(EmptyBlockCheck.class.getName());
-        checkConfig.addProperty("option", BlockOption.TEXT.toString());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(EmptyBlockCheck.class);
+        checkConfig.addAttribute("option", BlockOption.TEXT.toString());
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputSemantic.java");
         final String[] expected = {

@@ -1,8 +1,8 @@
     public void testInterface()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(ConstantNameCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ConstantNameCheck.class);
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputInner.java");
         final String[] expected = {
