@@ -1,0 +1,20 @@
+    /**
+     * Check if the given token type can be found in an array of token types.
+     * @param aType the token type.
+     * @param aTokens an array of token types to search.
+     * @return <code>true</code> if <code>aType</code> was found in <code>
+     *         aTokens</code>.
+     */
+    private boolean inTokenList(int aType, int [] aTokens)
+    {
+        // NOTE: Given the small size of the two arrays searched, I'm not sure
+        //       it's worth bothering with doing a binary search or using a
+        //       HashMap to do the searches.
+
+        boolean found = false;
+        for (int i = 0; i < aTokens.length && !found; i++) {
+            found = aTokens[i] == aType;
+        }
+        return found;
+    }
+

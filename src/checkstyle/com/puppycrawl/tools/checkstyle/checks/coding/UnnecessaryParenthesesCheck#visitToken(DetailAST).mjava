@@ -1,0 +1,36 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final int type = aAST.getType();
+        final boolean surrounded = isSurrounded(aAST);
+
+        // An identifier surrounded by parentheses.
+        if (surrounded && type == TokenTypes.IDENT) {
+            mParentToSkip = aAST.getParent();
+            log(aAST, "unnecessary.paren.ident", aAST.getText());
+            return;
+        }
+
+        // A literal (numeric or string) surrounded by parentheses.
+        if (surrounded && inTokenList(type, LITERALS)) {
+            mParentToSkip = aAST.getParent();
+            if (type == TokenTypes.STRING_LITERAL) {
+                log(aAST, "unnecessary.paren.string",
+                    chopString(aAST.getText()));
+            }
+            else {
+                log(aAST, "unnecessary.paren.literal", aAST.getText());
+            }
+            return;
+        }
+
+        // The rhs of an assignment surrounded by parentheses.
+        if (inTokenList(type, ASSIGNMENTS)) {
+            mAssignDepth++;
+            final DetailAST last = aAST.getLastChild();
+            if (last.getType() == TokenTypes.RPAREN) {
+                log(aAST, "unnecessary.paren.assign");
+            }
+        }
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * Tests if the given <code>DetailAST</code> is surrounded by parentheses.
+     * In short, does <code>aAST</code> have a previous sibling whose type is
+     * <code>TokenTypes.LPAREN</code> and a next sibling whose type is <code>
+     * TokenTypes.RPAREN</code>.
+     * @param aAST the <code>DetailAST</code> to check if it is surrounded by
+     *        parentheses.
+     * @return <code>true</code> if <code>aAST</code> is surrounded by
+     *         parentheses.
+     */
+    private boolean isSurrounded(DetailAST aAST)
+    {
+        final DetailAST prev = aAST.getPreviousSibling();
+        final DetailAST next = (DetailAST) aAST.getNextSibling();
+
+        return prev != null && prev.getType() == TokenTypes.LPAREN
+            && next != null && next.getType() == TokenTypes.RPAREN;
+    }
+

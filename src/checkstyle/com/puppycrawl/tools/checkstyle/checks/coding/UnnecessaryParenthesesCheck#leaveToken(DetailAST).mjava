@@ -1,0 +1,35 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void leaveToken(DetailAST aAST)
+    {
+        final int type = aAST.getType();
+
+        // An expression is surrounded by parentheses.
+        if (type == TokenTypes.EXPR) {
+
+            // If 'mParentToSkip' == 'aAST', then we've already logged a
+            // warning about an immediate child node in visitToken, so we don't
+            // need to log another one here.
+
+            if (mParentToSkip != aAST && exprSurrounded(aAST)) {
+                if (mAssignDepth >= 1) {
+                    log(aAST, "unnecessary.paren.assign");
+                }
+                else if (aAST.getParent().getType()
+                    == TokenTypes.LITERAL_RETURN)
+                {
+                    log(aAST, "unnecessary.paren.return");
+                }
+                else {
+                    log(aAST, "unnecessary.paren.expr");
+                }
+            }
+
+            mParentToSkip = null;
+        }
+        else if (inTokenList(type, ASSIGNMENTS)) {
+            mAssignDepth--;
+        }
+
+        super.leaveToken(aAST);
+    }
+
