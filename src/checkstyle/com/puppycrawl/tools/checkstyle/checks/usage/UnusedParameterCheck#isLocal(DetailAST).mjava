@@ -1,0 +1,17 @@
+    /**
+     * Checks if a given method is local, i.e. either static or private.
+     * @param aAST method def for check
+     * @return true if a given method is iether static or private.
+     */
+    private boolean isLocal(DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.METHOD_DEF) {
+            final DetailAST modifiers =
+                aAST.findFirstToken(TokenTypes.MODIFIERS);
+            return (modifiers == null)
+                || modifiers.branchContains(TokenTypes.LITERAL_STATIC)
+                || modifiers.branchContains(TokenTypes.LITERAL_PRIVATE);
+        }
+        return true;
+    }
+
