@@ -5,6 +5,7 @@
     private void visitMethodDef(DetailAST aAST)
     {
         mContextStack.push(mContext);
-        mContext = new Context(!CheckUtils.isEqualsMethod(aAST));
+        DetailAST methodNameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        mContext = new Context(!getRegexp().match(methodNameAST.getText()));
     }
 
