@@ -1,0 +1,33 @@
+    /**
+     * Parse tag id.
+     * @param aText text of javadoc comments.
+     * @param aTagStart start position of the tag
+     * @return id for given tag
+     */
+    private String getTagId(String[] aText, Point aTagStart)
+    {
+        int column = aTagStart.getColumnNo() + 1;
+        String text = aText[aTagStart.getLineNo()];
+        if (column >= text.length()) {
+            return "";
+        }
+
+        if (text.charAt(column) == '/') {
+            column++;
+        }
+
+        text = text.substring(column).trim();
+        column = 0;
+
+        while (column < text.length()
+               && ((text.charAt(column) >= 'A'
+                    && text.charAt(column) <= 'Z')
+                   || (text.charAt(column) >= 'a'
+                       && text.charAt(column) <= 'z')))
+        {
+            column++;
+        }
+
+        return text.substring(0, column);
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * Finds next occurence of given character.
+     * @param aText text to search
+     * @param aChar character to search
+     * @param aFrom position to start search
+     * @return position of next occurence of given character
+     */
+    private Point findChar(String[] aText, char aChar, Point aFrom)
+    {
+        Point curr = new Point(aFrom.getLineNo(), aFrom.getColumnNo());
+        while (curr.getLineNo() < aText.length
+               && aText[curr.getLineNo()].charAt(curr.getColumnNo()) != aChar)
+        {
+            curr = getNextCharPos(aText, curr);
+        }
+
+        return curr;
+    }
+

@@ -1,0 +1,37 @@
+    /**
+     * Returns position of next comment character, skips
+     * whitespaces and asteriks.
+     * @param aText to search.
+     * @param aFrom location to search from
+     * @return location of the next character.
+     */
+    private Point getNextCharPos(String[] aText, Point aFrom)
+    {
+        int line = aFrom.getLineNo();
+        int column = aFrom.getColumnNo() + 1;
+        while (line < aText.length && column >= aText[line].length()) {
+            // go to the next line
+            line++;
+            column = 0;
+            if (line < aText.length) {
+                //skip beginning spaces and stars
+                String currentLine = aText[line];
+                while (column < currentLine.length()
+                       && (Character.isWhitespace(currentLine.charAt(column))
+                           || currentLine.charAt(column) == '*'))
+                {
+                    column++;
+                    if (column < currentLine.length()
+                        && currentLine.charAt(column - 1) == '*'
+                        && currentLine.charAt(column) == '/')
+                    {
+                        // this is end of comment
+                        column = currentLine.length();
+                    }
+                }
+            }
+        }
+
+        return new Point(line, column);
+    }
+
