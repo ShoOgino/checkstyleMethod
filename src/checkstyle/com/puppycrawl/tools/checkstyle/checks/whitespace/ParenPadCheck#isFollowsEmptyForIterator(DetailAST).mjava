@@ -1,0 +1,19 @@
+    /**
+     * @param aAST the token to check
+     * @return whether a token follows an empty for iterator
+     */
+    private boolean isFollowsEmptyForIterator(DetailAST aAST)
+    {
+        boolean followsEmptyForIterator = false;
+        final DetailAST parent = aAST.getParent();
+        if ((parent != null)
+            && (parent.getType() == TokenTypes.LITERAL_FOR))
+        {
+            final DetailAST forIterator =
+                parent.findFirstToken(TokenTypes.FOR_ITERATOR);
+            followsEmptyForIterator = (forIterator.getChildCount() == 0)
+                && (aAST == forIterator.getNextSibling());
+        }
+        return followsEmptyForIterator;
+    }
+

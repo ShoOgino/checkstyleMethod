@@ -1,0 +1,15 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        // Strange logic in this method to guard against checking RPAREN tokens
+        // that are not associated with a TYPECAST token.
+        if (aAST.getType() == TokenTypes.TYPECAST) {
+            processLeft(aAST);
+        }
+        else if ((aAST.getParent() != null)
+                && (aAST.getParent().getType() == TokenTypes.TYPECAST))
+        {
+            processRight(aAST);
+        }
+    }
+

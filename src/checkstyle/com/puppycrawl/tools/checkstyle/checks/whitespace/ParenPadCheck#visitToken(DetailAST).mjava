@@ -9,7 +9,9 @@
         else if ((aAST.getParent() == null)
                  || (aAST.getParent().getType() != TokenTypes.TYPECAST))
         {
-            processRight(aAST);
+            if (!isFollowsEmptyForIterator(aAST)) {
+                processRight(aAST);
+            }
         }
     }
 

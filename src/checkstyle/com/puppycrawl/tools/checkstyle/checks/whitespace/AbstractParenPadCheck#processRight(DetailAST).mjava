@@ -2,25 +2,12 @@
      * Process a token representing a right parentheses.
      * @param aAST the token representing a right parentheses
      */
-    private void processRight(DetailAST aAST)
+    protected void processRight(DetailAST aAST)
     {
         final String line = getLines()[aAST.getLineNo() - 1];
         final int before = aAST.getColumnNo() - 1;
         if (before >= 0) {
-            boolean followsEmptyForIterator = false;
-            final DetailAST parent = aAST.getParent();
-            if ((parent != null)
-                && (parent.getType() == TokenTypes.LITERAL_FOR))
-            {
-                final DetailAST forIterator =
-                    parent.findFirstToken(TokenTypes.FOR_ITERATOR);
-                followsEmptyForIterator = (forIterator.getChildCount() == 0)
-                    && (aAST == forIterator.getNextSibling());
-            }
-            if (followsEmptyForIterator) {
-                return;
-            }
-            else if ((PadOption.NOSPACE == getAbstractOption())
+            if ((PadOption.NOSPACE == getAbstractOption())
                 && Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line))
             {

@@ -1,0 +1,12 @@
+    public void testDefault()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(TypecastParenPadCheck.class);
+        final String[] expected = {
+            "89:14: '(' is followed by whitespace.",
+            "89:21: ')' is preceeded with whitespace.",
+        };
+        verify(checkConfig, getPath("InputWhitespace.java"), expected);
+    }
+
