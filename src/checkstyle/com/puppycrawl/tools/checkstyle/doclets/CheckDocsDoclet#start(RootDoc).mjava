@@ -7,6 +7,7 @@
     public static boolean start(RootDoc aRoot) throws IOException
     {
         final ClassDoc[] classDocs = aRoot.classes();
+        final Map allChecks = new TreeMap();
         for (int i = 0; i < classDocs.length; i++) {
             ClassDoc classDoc = classDocs[i];
             // TODO: introduce a "CheckstyleModule" interface
@@ -16,8 +17,11 @@
             {
                 DocumentationPage page = findDocumentationPage(classDoc);
                 page.addCheck(classDoc);
+                allChecks.put(getCheckName(classDoc), page);
             }
         }
+
+        // TODO: close files in finally blocks
 
         final Collection pages = sDocumentationPages.values();
         final File destDir = new File(getDestDir(aRoot.options()));
@@ -29,6 +33,33 @@
             page.write(writer);
             writer.close();
         }
+
+        final File checksIndexFile = new File(destDir, "availablechecks.xml");
+        PrintWriter fileWriter = new PrintWriter(
+                new FileWriter(checksIndexFile));
+        writeXdocsHeader(fileWriter, "Available Checks");
+
+        fileWriter.println("<p>Checkstyle provides many checks that you can"
+                + " apply to your sourcecode. Below is an alphabetical"
+                + " reference, the site navigation menu provides a reference"
+                + " organized by functionality.</p>");
+        fileWriter.println("<table>");
+
+        for (Iterator it = allChecks.keySet().iterator(); it.hasNext();) {
+            String checkName = (String) it.next();
+            DocumentationPage page =
+                    (DocumentationPage) allChecks.get(checkName);
+            String descr = page.getDescription(checkName);
+            fileWriter.println("<tr>"
+                    + "<td><a href=\""
+                    + "config_" + getPageName(page) + ".html#" + checkName
+                    + "\">" + checkName + "</a></td><td>"
+                    + descr
+                    + "</td></tr>");
+        }
+        fileWriter.println("</table>");
+        writeXdocsFooter(fileWriter);
+        fileWriter.close();
 
         return true;
     }

@@ -1,0 +1,17 @@
+    /**
+     * Returns the official name of a check.
+     *
+     * @param aClassDoc the the check's documentation as extracted by javadoc
+     * @return the check name, e.g. "IllegalImport" for
+     * the "c.p.t.c.c.i.IllegalImportCheck" class.
+     */
+    private static String getCheckName(final ClassDoc aClassDoc)
+    {
+        final String strippedClassName = aClassDoc.typeName();
+        final String checkName = strippedClassName.endsWith("Check")
+                ? strippedClassName.substring(
+                        0, strippedClassName.length() - "Check".length())
+                : strippedClassName;
+        return checkName;
+    }
+

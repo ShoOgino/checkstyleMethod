@@ -6,11 +6,7 @@
          */
         private void addCheck(ClassDoc aClassDoc)
         {
-            final String strippedClassName = aClassDoc.typeName();
-            final String checkName = strippedClassName.endsWith("Check")
-                    ? strippedClassName.substring(
-                            0, strippedClassName.length() - "Check".length())
-                    : strippedClassName;
+            String checkName = getCheckName(aClassDoc);
             mChecks.put(checkName, aClassDoc);
         }
 

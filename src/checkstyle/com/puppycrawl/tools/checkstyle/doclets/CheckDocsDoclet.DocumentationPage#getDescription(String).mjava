@@ -1,0 +1,19 @@
+        /**
+         * The first sentence of the check description.
+         * Checks msut have been registered with {@link #addCheck}.
+         *
+         * @param aCheckName the name of the check, e.g. EmptyStatement
+         * @return The first sentence of the check description.
+         */
+        private String getDescription(String aCheckName)
+        {
+            ClassDoc classDoc = (ClassDoc) mChecks.get(aCheckName);
+            final Tag[] tags = classDoc.firstSentenceTags();
+            StringBuffer buf = new StringBuffer();
+            if (tags.length > 0) {
+                buf.append(tags[0].text());
+            }
+            removeOpeningParagraphTag(buf);
+            return buf.toString();
+        }
+

@@ -6,16 +6,9 @@
         private void write(Writer aWriter) throws IOException
         {
             // TODO: use velocity to implement this method???
+            final String title = getTitle();
             PrintWriter pw = new PrintWriter(aWriter);
-            pw.println("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
-            pw.println("<document>");
-            pw.println("<properties>");
-            pw.println("<title>" + getTitle() + "</title>");
-            pw.println("<author email=\"checkstyle-devel@lists.sourceforge.net"
-                    + "\">Checkstyle Development Team</author>");
-            pw.println("</properties>");
-            pw.println("<body>");
-            pw.flush();
+            writeXdocsHeader(pw, title);
             final Tag[] packageInlineTags = mPackageDoc.inlineTags();
             for (int i = 0; i < packageInlineTags.length; i++) {
                 Tag packageInlineTag = packageInlineTags[i];
@@ -52,7 +45,6 @@
 
             }
 
-            pw.println("</body>");
-            pw.println("</document>");
+            writeXdocsFooter(pw);
         }
 

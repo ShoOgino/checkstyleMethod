@@ -1,0 +1,21 @@
+    /**
+     * Writes the opening tags of an xdoc.
+     * @param aPrintWriter you guessed it ... the target to print to :)
+     * @param aTitle the title to use for the document.
+     */
+    private static void writeXdocsHeader(
+            final PrintWriter aPrintWriter,
+            final String aTitle)
+    {
+        aPrintWriter.println("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
+        aPrintWriter.println("<document>");
+        aPrintWriter.println("<properties>");
+        aPrintWriter.println("<title>" + aTitle + "</title>");
+        aPrintWriter.println("<author "
+                + "email=\"checkstyle-devel@lists.sourceforge.net"
+                + "\">Checkstyle Development Team</author>");
+        aPrintWriter.println("</properties>");
+        aPrintWriter.println("<body>");
+        aPrintWriter.flush();
+    }
+
