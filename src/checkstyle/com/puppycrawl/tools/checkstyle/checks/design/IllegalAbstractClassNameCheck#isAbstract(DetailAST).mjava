@@ -1,0 +1,12 @@
+    /**
+     * @param aAST class definition for check.
+     * @return true if a given class declared as abstract.
+     */
+    private boolean isAbstract(DetailAST aAST)
+    {
+        final DetailAST abstractAST = aAST.findFirstToken(TokenTypes.MODIFIERS)
+            .findFirstToken(TokenTypes.ABSTRACT);
+
+        return abstractAST != null;
+    }
+

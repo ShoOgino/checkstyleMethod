@@ -1,0 +1,16 @@
+    /**
+     * Checks class definition.
+     * @param aAST class definition for check.
+     */
+    private void visitClassDef(DetailAST aAST)
+    {
+        if (isAbstract(aAST)) {
+            String className = aAST.findFirstToken(TokenTypes.IDENT).getText();
+
+            if (!isMatchingClassName(className)) {
+                log(aAST.getLineNo(), aAST.getColumnNo(),
+                    "illegal.abstract.class.name", className, getFormat());
+            }
+        }
+    }
+
