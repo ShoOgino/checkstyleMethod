@@ -23,9 +23,6 @@
         final Scope variableScope =
             inInterfaceBlock() ? Scope.PUBLIC : declaredScope;
 
-        // Always check that the order of modifiers follows the JLS suggestion
-        checkModOrder(mods);
-
         if (inCheckScope(variableScope)
             && (getJavadocBefore(aVar.getStartLineNo() - 1) == null))
         {

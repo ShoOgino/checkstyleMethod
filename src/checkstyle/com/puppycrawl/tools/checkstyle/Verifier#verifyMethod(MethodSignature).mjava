@@ -4,9 +4,6 @@
      **/
     void verifyMethod(MethodSignature aSig)
     {
-        // Always check that the order of modifiers follows the JLS suggestion
-        checkModOrder(aSig.getModSet());
-
         // Check for to many parameters
         if (aSig.getParams().size() > mConfig.getMaxParameters()) {
             mMessages.add(aSig.getFirstLineNo(),
