@@ -1,10 +1,9 @@
-    public void testDefault()
+    public void testNLOW()
         throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(TypeLeftCurlyCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputScopeInnerInterfaces.java");
+        checkConfig.addAttribute("option", LeftCurlyOption.NLOW.toString());
         final String[] expected = {
             "8:1: '{' should be on the previous line.",
             "12:5: '{' should be on the previous line.",
@@ -12,6 +11,6 @@
             "30:5: '{' should be on the previous line.",
             "39:5: '{' should be on the previous line.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputScopeInnerInterfaces.java"), expected);
     }
 

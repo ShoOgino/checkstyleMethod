@@ -2,8 +2,6 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(TabCharacterCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputSimple.java");
         final String[] expected = {
             "19:25: Line contains a tab character.",
             "145:35: Line contains a tab character.",
@@ -14,6 +12,6 @@
             "157:3: Line contains a tab character.",
             "158:3: Line contains a tab character."
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputSimple.java"), expected);
     }
 

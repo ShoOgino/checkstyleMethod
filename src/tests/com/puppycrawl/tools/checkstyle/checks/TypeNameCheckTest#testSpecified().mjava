@@ -4,10 +4,8 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(TypeNameCheck.class);
         checkConfig.addAttribute("format", "^inputHe");
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("inputHeader.java");
         final String[] expected = {
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("inputHeader.java"), expected);
     }
 

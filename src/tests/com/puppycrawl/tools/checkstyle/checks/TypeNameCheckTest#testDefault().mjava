@@ -3,11 +3,9 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(TypeNameCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("inputHeader.java");
         final String[] expected = {
             "1:48: Name 'inputHeader' must match pattern '^[A-Z][a-zA-Z0-9]*$'."
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("inputHeader.java"), expected);
     }
 

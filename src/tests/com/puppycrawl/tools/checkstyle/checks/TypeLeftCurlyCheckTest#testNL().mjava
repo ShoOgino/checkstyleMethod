@@ -4,10 +4,8 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(TypeLeftCurlyCheck.class);
         checkConfig.addAttribute("option", LeftCurlyOption.NL.toString());
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputScopeInnerInterfaces.java");
         final String[] expected = {
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputScopeInnerInterfaces.java"), expected);
     }
 

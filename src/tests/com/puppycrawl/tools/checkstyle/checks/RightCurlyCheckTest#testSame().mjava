@@ -4,14 +4,12 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.SAME.toString());
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputLeftCurlyOther.java");
         final String[] expected = {
             "25:17: '}' should be on the same line.",
             "28:17: '}' should be on the same line.",
             "40:13: '}' should be on the same line.",
             "44:13: '}' should be on the same line.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputLeftCurlyOther.java"), expected);
     }
 

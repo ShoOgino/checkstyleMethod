@@ -3,11 +3,9 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(UpperEllCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputSemantic.java");
         final String[] expected = {
             "94:43: Should use uppercase 'L'.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
     }
 
