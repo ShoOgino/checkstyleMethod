@@ -1,0 +1,23 @@
+    public void contextualize(Context aContext)
+            throws CheckstyleException
+    {
+        // TODO: debug log messages
+
+        final String[] attributes = aContext.getAttributeNames();
+        for (int i = 0; i < attributes.length; i++) {
+            final String key = attributes[i];
+            final Object value = aContext.get(key);
+            try {
+                BeanUtils.copyProperty(this, key, value);
+            }
+            catch (InvocationTargetException e) {
+                // TODO: log.debug("The bean " + this.getClass()
+                // + " is not interested in " + value)
+            }
+            catch (IllegalAccessException e) {
+                throw new CheckstyleException(
+                        "cannot access " + key + " in " + this.getClass().getName());
+            }
+        }
+    }
+

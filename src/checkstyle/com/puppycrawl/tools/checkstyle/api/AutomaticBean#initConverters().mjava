@@ -1,0 +1,58 @@
+    /**
+     * Setup the jakarta-commons-beanutils type converters so they throw
+     * a ConversionException instead of using the default value.
+     */
+    private static void initConverters()
+    {
+        // TODO: is there a smarter way to tell beanutils not to use defaults?
+
+        boolean booleanArray[] = new boolean[0];
+        byte byteArray[] = new byte[0];
+        char charArray[] = new char[0];
+        double doubleArray[] = new double[0];
+        float floatArray[] = new float[0];
+        int intArray[] = new int[0];
+        long longArray[] = new long[0];
+        short shortArray[] = new short[0];
+
+        ConvertUtils.register(new BooleanConverter(), Boolean.TYPE);
+        ConvertUtils.register(new BooleanConverter(), Boolean.class);
+        ConvertUtils.register(new BooleanArrayConverter(),
+                booleanArray.getClass());
+        ConvertUtils.register(new ByteConverter(), Byte.TYPE);
+        ConvertUtils.register(new ByteConverter(), Byte.class);
+        ConvertUtils.register(new ByteArrayConverter(byteArray),
+                byteArray.getClass());
+        ConvertUtils.register(new CharacterConverter(), Character.TYPE);
+        ConvertUtils.register(new CharacterConverter(), Character.class);
+        ConvertUtils.register(new CharacterArrayConverter(),
+                charArray.getClass());
+        ConvertUtils.register(new DoubleConverter(), Double.TYPE);
+        ConvertUtils.register(new DoubleConverter(), Double.class);
+        ConvertUtils.register(new DoubleArrayConverter(doubleArray),
+                doubleArray.getClass());
+        ConvertUtils.register(new FloatConverter(), Float.TYPE);
+        ConvertUtils.register(new FloatConverter(), Float.class);
+        ConvertUtils.register(new FloatArrayConverter(),
+                floatArray.getClass());
+        ConvertUtils.register(new IntegerConverter(), Integer.TYPE);
+        ConvertUtils.register(new IntegerConverter(), Integer.class);
+        ConvertUtils.register(new IntegerArrayConverter(),
+                intArray.getClass());
+        ConvertUtils.register(new LongConverter(), Long.TYPE);
+        ConvertUtils.register(new LongConverter(), Long.class);
+        ConvertUtils.register(new LongArrayConverter(), longArray.getClass());
+        ConvertUtils.register(new ShortConverter(), Short.TYPE);
+        ConvertUtils.register(new ShortConverter(), Short.class);
+        ConvertUtils.register(new ShortArrayConverter(),
+                shortArray.getClass());
+        ConvertUtils.register(new StringArrayConverter(),
+                        String[].class);
+        ConvertUtils.register(new IntegerArrayConverter(),
+                        Integer[].class);
+
+        // BigDecimal, BigInteger, Class, Date, String, Time, TimeStamp
+        // do not use defaults in the default configuration of ConvertUtils
+
+    }
+

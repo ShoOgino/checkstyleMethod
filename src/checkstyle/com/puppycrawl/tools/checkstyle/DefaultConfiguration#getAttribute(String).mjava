@@ -1,0 +1,11 @@
+    /** @see Configuration */
+    public String getAttribute(String aName) throws CheckstyleException
+    {
+        if (!mAttributeMap.containsKey(aName)) {
+            // TODO: i18n
+            throw new CheckstyleException(
+                    "missing key '" + aName + "' in " + getName());
+        }
+        return (String) mAttributeMap.get(aName);
+    }
+
