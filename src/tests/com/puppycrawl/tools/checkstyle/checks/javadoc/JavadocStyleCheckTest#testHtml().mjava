@@ -1,10 +1,10 @@
-   public void testHtml() throws Exception
-   {
-      final DefaultConfiguration checkConfig = createCheckConfig(JavadocStyleCheck.class);
-      checkConfig.addAttribute("checkFirstSentence", "false");
-      checkConfig.addAttribute("checkHtml", "true");
-      final String[] expected =
-         {
+    public void testHtml() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(JavadocStyleCheck.class);
+        checkConfig.addAttribute("checkFirstSentence", "false");
+        checkConfig.addAttribute("checkHtml", "true");
+        final String[] expected =
+        {
             "63:11: Unclosed HTML tag found: <b>This guy is missing end of bold tag",
             "66:7: Extra HTML tag found: </td>Extra tag shouldn't be here",
             "68:19: Unclosed HTML tag found: <code>dummy.",
@@ -14,8 +14,8 @@
             "90: Incomplete HTML tag found:     * should fail <",
             "109:39: Extra HTML tag found: </img>",
             "186:8: Unclosed HTML tag found: <blockquote>",
-         };
+        };
 
-      verify(checkConfig, getPath("InputJavadocStyleCheck.java"), expected);
-  }
+        verify(checkConfig, getPath("InputJavadocStyleCheck.java"), expected);
+    }
 

@@ -1,0 +1,14 @@
+    /**
+     * Checks that the Javadoc is not empty.
+     *
+     * @param aComment the source lines that make up the Javadoc comment.
+     */
+    private void checkEmptyJavadoc(TextBlock aComment)
+    {
+        final String commentText = getCommentText(aComment.getText());
+
+        if (commentText.length() == 0) {
+            log(aComment.getStartLineNo(), "javadoc.empty");
+        }
+    }
+
