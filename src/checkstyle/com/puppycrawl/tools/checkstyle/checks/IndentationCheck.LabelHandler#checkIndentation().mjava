@@ -1,0 +1,9 @@
+        public void checkIndentation() 
+        {
+            checkLabel();
+            // need to check children (like 'block' parents do)
+            DetailAST parent = (DetailAST) 
+                mMainAst.getFirstChild().getNextSibling();
+            checkExpressionSubtree(parent, getLevel() + mIndentationAmount, true, false);
+        }        
+

@@ -1,0 +1,12 @@
+        public void checkIndentation() 
+        {
+            int columnNo = expandedTabsColumnNo(mMainAst);
+            if (columnNo != getLevel()) {
+                logError(mMainAst, "", columnNo);
+            }
+            
+            checkLinesIndent(mMainAst.getLineNo(), 
+                mMainAst.findFirstToken(TokenTypes.SEMI).getLineNo(), 
+                getLevel());
+        }
+

@@ -1,0 +1,18 @@
+        private void checkSingleLine(int aLineNum, int aColNum, 
+            int aIndentLevel, boolean aMustMatch) 
+        {
+            String line = IndentationCheck.this.getLines()[aLineNum - 1];
+            int start = getLineStart(line);
+            // if must match is set, it is an error if the line start is not
+            // at the correct indention level; otherwise, it is an only an 
+            // error if this statement starts the line and it is less than
+            // the correct indentation level
+            if (aMustMatch ? start != aIndentLevel
+                : aColNum == start && start < aIndentLevel) 
+            {
+                // TODO: i18n or use logError
+                log(aLineNum, mTypeName + " child at indentation level "
+                    + start + " not at correct indentation, " + aIndentLevel);
+            }
+        }
+

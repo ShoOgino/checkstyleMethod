@@ -1,0 +1,31 @@
+    public void testInvalidForWithChecker()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("indentation/InputInvalidForIndent.java");
+        final String[] expected = {
+            "22: for at indentation level 6 not at correct indentation, 8",
+            "23: for rcurly at indentation level 10 not at correct indentation, 8",
+            "25: for at indentation level 9 not at correct indentation, 8",
+            "26: for lcurly at indentation level 6 not at correct indentation, 8",
+            "27: for rcurly at indentation level 6 not at correct indentation, 8",
+            "31: for child at indentation level 10 not at correct indentation, 12",
+            "31: method call child at indentation level 10 not at correct indentation, 12",
+            "32: for rcurly at indentation level 10 not at correct indentation, 8",
+            "35: for lcurly at indentation level 10 not at correct indentation, 8",
+            "36: for child at indentation level 10 not at correct indentation, 12",
+            "44: for child at indentation level 10 not at correct indentation, 12",
+            "50: for at indentation level 7 not at correct indentation, 8",
+            "51: for child at indentation level 10 not at correct indentation, 12",
+            "60: for child at indentation level 7 not at correct indentation, 12",
+            "65: for at indentation level 6 not at correct indentation, 8",
+            "66: for child at indentation level 10 not at correct indentation, 12",
+            "67: for child at indentation level 14 not at correct indentation, 16",
+            "68: for child at indentation level 10 not at correct indentation, 12",
+            "73: for rcurly at indentation level 39 not at correct indentation, 8",
+            "77: for rparen at indentation level 12 not at correct indentation, 8",
+        };
+        verify(c, fname, expected);
+    }
+

@@ -1,0 +1,12 @@
+        protected int getLineStart(String aLine) 
+        {   
+            for (int start = 0; start < aLine.length(); start++) {
+                char c = aLine.charAt(start);
+                
+                if (!Character.isWhitespace(c)) {
+                    return Utils.lengthExpandedTabs(aLine, start, getTabWidth());
+                }
+            }
+            return 0;
+        }
+

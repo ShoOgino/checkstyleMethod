@@ -1,0 +1,11 @@
+        public void checkIndentation() 
+        {
+            int lineStart = mMainAst.getLineNo();
+            DetailAST semi = mMainAst.findFirstToken(TokenTypes.SEMI);
+            int lineEnd = semi.getLineNo();
+            
+            if (mMainAst.getLineNo() != lineEnd) {
+                checkLinesIndent(lineStart, lineEnd, getLevel());
+            }
+        }
+

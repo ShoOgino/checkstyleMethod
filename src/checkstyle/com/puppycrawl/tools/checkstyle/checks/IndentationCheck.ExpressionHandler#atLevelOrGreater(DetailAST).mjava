@@ -1,0 +1,16 @@
+        protected boolean atLevelOrGreater(DetailAST aParent) 
+        {
+            if (expandedTabsColumnNo(aParent) < getLevel()) {
+                return false;
+            }
+
+            for (DetailAST child = aParent.getLastChild(); child != null;
+                child = child.getPreviousSibling())
+            {
+                if (!atLevelOrGreater(child)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+

@@ -1,0 +1,11 @@
+    public void testCaseLevel()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        checkConfig.addAttribute("caseIndent", new Integer(0).toString());
+        final String[] expected = {
+            "23: case child at indentation level 10 not at correct indentation, 8",
+        };
+        verify(checkConfig, getPath("indentation/InputCaseLevel.java"), expected);
+    }
+

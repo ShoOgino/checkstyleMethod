@@ -1,0 +1,10 @@
+        private void checkSingleLine(int aLineNum, int aIndentLevel) 
+        {
+            String line = IndentationCheck.this.getLines()[aLineNum - 1];
+            int start = getLineStart(line);
+            if (start < aIndentLevel) {
+                log(aLineNum, mTypeName + " child at indentation level " 
+                    + start + " not at correct indentation, " + aIndentLevel);
+            }    
+        }
+

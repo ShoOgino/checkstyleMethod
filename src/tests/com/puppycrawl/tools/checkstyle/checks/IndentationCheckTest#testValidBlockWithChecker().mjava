@@ -1,0 +1,12 @@
+    public void testValidBlockWithChecker()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("indentation/InputValidBlockIndent.java");
+        final String[] expected = {
+            // TODO: This currently fails, raises two false alarms - or are they justified?
+        };
+        verify(c, fname, expected);
+    }
+

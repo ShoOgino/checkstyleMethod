@@ -1,0 +1,12 @@
+        public int suggestedChildLevel(ExpressionHandler aChild) 
+        {
+            if (aChild instanceof CatchHandler 
+                || aChild instanceof FinallyHandler) 
+            {
+                return getLevel();
+            } 
+            else {
+                return super.suggestedChildLevel(aChild);
+            }
+        }
+

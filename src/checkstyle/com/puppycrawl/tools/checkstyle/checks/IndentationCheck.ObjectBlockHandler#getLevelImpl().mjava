@@ -1,0 +1,11 @@
+        public int getLevelImpl() 
+        {
+            DetailAST parentAST = mMainAst.getParent();
+            if (parentAST.getType() != TokenTypes.LITERAL_NEW) {
+                return mParent.getLevel();
+            } 
+            else {
+                return getLineStart(parentAST);
+            }
+        }
+

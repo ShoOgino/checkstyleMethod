@@ -1,0 +1,38 @@
+    public void testInvalidWhileWithChecker()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("indentation/InputInvalidWhileIndent.java");
+        final String[] expected = {
+            "21: while at indentation level 9 not at correct indentation, 8",
+            "22: while rcurly at indentation level 7 not at correct indentation, 8",
+            "24: while at indentation level 7 not at correct indentation, 8",
+            "25: while lcurly at indentation level 9 not at correct indentation, 8",
+            "26: while rcurly at indentation level 9 not at correct indentation, 8",
+            "28: while at indentation level 9 not at correct indentation, 8",
+            "29: while lcurly at indentation level 6 not at correct indentation, 8",
+            "30: while child at indentation level 14 not at correct indentation, 12",
+            "31: while rcurly at indentation level 6 not at correct indentation, 8",
+            "33: while at indentation level 10 not at correct indentation, 8",
+            "35: while rcurly at indentation level 10 not at correct indentation, 8",
+            "37: while at indentation level 10 not at correct indentation, 8",
+            "40: while rcurly at indentation level 10 not at correct indentation, 8",
+            "42: while at indentation level 6 not at correct indentation, 8",
+            "43: while lcurly at indentation level 10 not at correct indentation, 8",
+            "46: while rcurly at indentation level 6 not at correct indentation, 8",
+            "49: if at indentation level 14 not at correct indentation, 12",
+            "50: if child at indentation level 18 not at correct indentation, 16",
+            "51: if rcurly at indentation level 14 not at correct indentation, 12",
+            "52: while child at indentation level 14 not at correct indentation, 12",
+            "53: while rcurly at indentation level 10 not at correct indentation, 8",
+            "56: while child at indentation level 10 not at correct indentation, 12",
+            "62: while child at indentation level 10 not at correct indentation, 12",
+            "67: while child at indentation level 10 not at correct indentation, 12",
+            "74: while rparen at indentation level 5 not at correct indentation, 8",
+            "81: while rparen at indentation level 10 not at correct indentation, 8",
+            "88: while rparen at indentation level 10 not at correct indentation, 8",
+        };
+        verify(c, fname, expected);
+    }
+

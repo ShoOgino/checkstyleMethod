@@ -1,0 +1,44 @@
+    public void testInvalidMethodWithChecker()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("indentation/InputInvalidMethodIndent.java");
+        final String[] expected = {
+            "17: ctor def rcurly at indentation level 6 not at correct indentation, 4",
+            "20: ctor def modifier at indentation level 6 not at correct indentation, 4",
+            "21: ctor def lcurly at indentation level 2 not at correct indentation, 4",
+            "22: ctor def rcurly at indentation level 6 not at correct indentation, 4",
+            "25: method def modifier at indentation level 2 not at correct indentation, 4",
+            "26: method def rcurly at indentation level 6 not at correct indentation, 4",
+            "63: method def modifier at indentation level 5 not at correct indentation, 4",
+            "64: method def modifier at indentation level 5 not at correct indentation, 4",
+            "65: method def return type at indentation level 5 not at correct indentation, 4",
+            "74: method def modifier at indentation level 3 not at correct indentation, 4",
+            "75: method def modifier at indentation level 3 not at correct indentation, 4",
+            "76: method def return type at indentation level 3 not at correct indentation, 4",
+            "77: method def at indentation level 5 not at correct indentation, 4",
+            "87: ctor def child at indentation level 4 not at correct indentation, 8",
+            "87: method call child at indentation level 4 not at correct indentation, 8",
+            "92: method def child at indentation level 6 not at correct indentation, 8",
+            "93: if at indentation level 6 not at correct indentation, 8",
+            "94: if child at indentation level 10 not at correct indentation, 12",
+            "94: method call child at indentation level 10 not at correct indentation, 12",
+            "95: if rcurly at indentation level 6 not at correct indentation, 8",
+            "98: method call child at indentation level 10 not at correct indentation, 12",
+            "104: method call child at indentation level 14 not at correct indentation, 16",
+            "107: method call child at indentation level 10 not at correct indentation, 12",
+            "112: method call child at indentation level 14 not at correct indentation, 16",
+            "116: method call child at indentation level 10 not at correct indentation, 12",
+            "120: method call child at indentation level 10 not at correct indentation, 12",
+            "121: method call rparen at indentation level 6 not at correct indentation, 8",
+            "125: method call rparen at indentation level 6 not at correct indentation, 8",
+            "139: method call child at indentation level 10 not at correct indentation, 12",
+            "142: method call child at indentation level 10 not at correct indentation, 12",
+            // todo: 152 -- 8 should be 12
+            "152: method call child at indentation level 6 not at correct indentation, 8", 
+            "158: method def throws at indentation level 6 not at correct indentation, 4",
+        };
+        verify(c, fname, expected);
+    }
+

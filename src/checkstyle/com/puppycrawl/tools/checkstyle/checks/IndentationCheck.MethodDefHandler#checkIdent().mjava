@@ -1,0 +1,9 @@
+        private void checkIdent() 
+        {
+            DetailAST ident = mMainAst.findFirstToken(TokenTypes.IDENT);
+            int columnNo = expandedTabsColumnNo(ident);
+            if (startsLine(ident) && columnNo != getLevel()) {
+                logError(ident, "", columnNo);
+            }
+        }
+

@@ -1,0 +1,13 @@
+        public int getLevelImpl() 
+        {
+            DetailAST parentAST = mMainAst.getParent();
+            int type = parentAST.getType();
+            if (type == TokenTypes.LITERAL_NEW || type == TokenTypes.ASSIGN) {
+                // note: assumes new or assignment is line to align with
+                return getLineStart(parentAST);
+            } 
+            else {
+                return mParent.getLevel();
+            }
+        }
+

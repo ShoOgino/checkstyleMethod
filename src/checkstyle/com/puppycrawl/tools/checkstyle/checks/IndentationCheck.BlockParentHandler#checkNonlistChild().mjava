@@ -1,0 +1,11 @@
+        private void checkNonlistChild() 
+        {
+            // TODO: look for SEMI and check for it here?
+            DetailAST nonlist = getNonlistChild();
+            if (nonlist == null) {
+                return;
+            }
+            
+            checkExpressionSubtree(nonlist, getLevel() + mIndentationAmount);
+        }
+

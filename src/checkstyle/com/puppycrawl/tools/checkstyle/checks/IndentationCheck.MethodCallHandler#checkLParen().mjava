@@ -1,0 +1,16 @@
+        private void checkLParen() 
+        {
+            DetailAST lparen = mMainAst;
+            int columnNo = expandedTabsColumnNo(lparen);
+            
+            if (columnNo == getLevel()) {
+                return;
+            }
+
+            if (!startsLine(lparen)) {
+                return;
+            }
+            
+            logError(lparen, "lparen", columnNo);
+        }
+
