@@ -10,8 +10,7 @@
             if ((surroundingScope == null) || surroundingScope.isIn(mScope)) {
                 final FileContents contents = getFileContents();
                 final int lineNo = aAST.getLineNo();
-                final Comment cmt =
-                    contents.getJavadocBefore(lineNo);
+                final TextBlock cmt = contents.getJavadocBefore(lineNo);
                 if (cmt == null) {
                     log(lineNo, "javadoc.missing");
                 }

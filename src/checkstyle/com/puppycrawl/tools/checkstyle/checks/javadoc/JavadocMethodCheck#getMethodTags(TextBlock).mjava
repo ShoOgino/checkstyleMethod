@@ -4,11 +4,11 @@
      * @return the tags found
      * @param aComment the Javadoc comment
      */
-    private List getMethodTags(Comment aComment)
+    private List getMethodTags(TextBlock aComment)
     {
         final String[] lines = aComment.getText();
         final List tags = new ArrayList();
-        int currentLine = aComment.getFirstLineNo() - 1;
+        int currentLine = aComment.getStartLineNo() - 1;
 
         for (int i = 0; i < lines.length; i++) {
             currentLine++;

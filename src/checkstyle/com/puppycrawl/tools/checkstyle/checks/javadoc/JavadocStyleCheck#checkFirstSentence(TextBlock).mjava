@@ -7,7 +7,7 @@
      *
      * @param aComment the source lines that make up the Javadoc comment.
      */
-    private void checkFirstSentence(Comment aComment)
+    private void checkFirstSentence(TextBlock aComment)
     {
         final String commentText = getCommentText(aComment.getText());
 
@@ -15,7 +15,7 @@
             && !getEndOfSentenceRE().match(commentText)
             && !"{@inheritDoc}".equals(commentText))
         {
-            log(aComment.getFirstLineNo(), "javadoc.noperiod");
+            log(aComment.getStartLineNo(), "javadoc.noperiod");
         }
     }
 
