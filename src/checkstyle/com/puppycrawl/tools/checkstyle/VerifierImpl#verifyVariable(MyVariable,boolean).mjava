@@ -1,13 +1,15 @@
     /** @see Verifier **/
     public void verifyVariable(MyVariable aVar, boolean aInInterface)
     {
-        if (getJavadocBefore(aVar.getLineNo() - 1) == null) {
-            if (!mConfig.isRelaxJavadoc() || inInterfaceBlock() ||
-                (aVar.getModifierSet().containsProtected() ||
-                 aVar.getModifierSet().containsPublic()))
-            {
-                log(aVar.getLineNo(),
-                    "variable '" + aVar.getText() + "' missing Javadoc.");
+        if (!mConfig.isIgnoreJavadoc()) {
+            if (getJavadocBefore(aVar.getLineNo() - 1) == null) {
+                if (!mConfig.isRelaxJavadoc() || inInterfaceBlock() ||
+                    (aVar.getModifierSet().containsProtected() ||
+                     aVar.getModifierSet().containsPublic()))
+                {
+                    log(aVar.getLineNo(),
+                        "variable '" + aVar.getText() + "' missing Javadoc.");
+                }
             }
         }
 

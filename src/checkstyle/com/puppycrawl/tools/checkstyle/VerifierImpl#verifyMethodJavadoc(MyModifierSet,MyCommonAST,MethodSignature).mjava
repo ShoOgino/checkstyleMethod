@@ -3,6 +3,10 @@
                                     MyCommonAST aReturnType,
                                     MethodSignature aSig)
     {
+        if (mConfig.isIgnoreJavadoc()) {
+            return; // no need to really check anything
+        }
+
         // Calculate line number. Unfortunately aReturnType does not contain a
         // valid line number
         final int lineNo = (aMods.size() > 0)

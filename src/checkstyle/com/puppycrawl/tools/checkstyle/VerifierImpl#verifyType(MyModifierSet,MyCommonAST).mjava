@@ -1,6 +1,19 @@
     /** @see Verifier **/
     public void verifyType(MyModifierSet aMods, MyCommonAST aType)
     {
+        if (!mConfig.getTypeRegexp().match(aType.getText())) {
+            log(aType.getLineNo(),
+                "type name '" + aType.getText() +
+                "' must match pattern '" + mConfig.getTypePat() + "'.");
+        }
+
+        //
+        // Only Javadoc testing below
+        //
+        if (mConfig.isIgnoreJavadoc()) {
+            return;
+        }
+
         final int lineNo = (aMods.size() > 0)
             ? aMods.getFirstLineNo()
             : aType.getLineNo();
@@ -14,12 +27,6 @@
                  (MATCH_JAVADOC_AUTHOR.grep(jd).length == 0))
         {
             log(lineNo, "type Javadoc comment is missing an @author tag.");
-        }
-
-        if (!mConfig.getTypeRegexp().match(aType.getText())) {
-            log(aType.getLineNo(),
-                "type name '" + aType.getText() +
-                "' must match pattern '" + mConfig.getTypePat() + "'.");
         }
     }
 
