@@ -3,6 +3,14 @@
     {
         final int type = aAST.getType();
         final boolean surrounded = isSurrounded(aAST);
+        final DetailAST parent = aAST.getParent();
+
+        if (type == TokenTypes.ASSIGN
+            && parent.getType() == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
+        {
+            // shouldn't process assign in annotation pairs
+            return;
+        }
 
         // An identifier surrounded by parentheses.
         if (surrounded && type == TokenTypes.IDENT) {
