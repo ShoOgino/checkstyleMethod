@@ -6,7 +6,7 @@
      * @return true  if exception is unchecked
      *         false if exception is checked
      */
-    private boolean isUnchecked(FullIdent aException)
+    protected boolean isUnchecked(FullIdent aException)
     {
         final ClassResolver cr = getClassResolver();
         try {
@@ -19,6 +19,7 @@
                 "redundant.throws.classInfo",
                 aException.getText());
         }
+
         // return false to prefent from additional errors
         return false;
     }

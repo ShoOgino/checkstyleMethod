@@ -1,5 +1,5 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
-    public void visitToken(DetailAST aAST)
+    public final void visitToken(DetailAST aAST)
     {
         if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
             processPackage(aAST);
@@ -8,8 +8,7 @@
             processImport(aAST);
         }
         else {
-            //TokenTypes.METHOD_DEF or TokenTypes.CTOR_DEF
-            processMethod(aAST);
+            processAST(aAST);
         }
     }
 
