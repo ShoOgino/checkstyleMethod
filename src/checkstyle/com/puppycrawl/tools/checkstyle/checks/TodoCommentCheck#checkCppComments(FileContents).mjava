@@ -7,7 +7,7 @@
         final Map comments = aContents.getCppComments();
         for (final Iterator it = comments.keySet().iterator(); it.hasNext();) {
             final Integer key = (Integer) it.next();
-            final String cmt = (String) comments.get(key);
+            final String cmt = ((TextBlock) comments.get(key)).getText()[0];
             if (getRegexp().match(cmt)) {
                 log(key.intValue(), "todo.match", getFormat());
             }

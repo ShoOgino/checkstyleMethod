@@ -11,7 +11,7 @@
             final List lineComments = (List) allComments.get(key);
             final Iterator lineIter = lineComments.iterator();
             while (lineIter.hasNext()) {
-                final String[] cmt = (String[]) lineIter.next();
+                final String[] cmt = ((TextBlock) lineIter.next()).getText();
                 for (int i = 0; i < cmt.length; i++) {
                     if (getRegexp().match(cmt[i])) {
                         log(key.intValue() + i, "todo.match", getFormat());

@@ -10,23 +10,23 @@
     {
         final String[] cc = extractCComment(aStartLineNo, aStartColNo,
                                             aEndLineNo, aEndColNo);
+        final Comment comment = new Comment(cc, aStartColNo, aEndLineNo,
+                                            aEndColNo);
 
         // save the comment
         final Integer key = new Integer(aStartLineNo);
         if (mCComments.containsKey(key)) {
             final List entries = (List) mCComments.get(key);
-            entries.add(cc);
+            entries.add(comment);
         }
         else {
             final List entries = new ArrayList();
-            entries.add(cc);
+            entries.add(comment);
             mCComments.put(key, entries);
         }
 
         // Remember if possible Javadoc comment
         if (mLines[aStartLineNo - 1].indexOf("/**", aStartColNo) != -1) {
-            Comment comment = new Comment(cc, aStartColNo, aEndLineNo);
-
             mJavadocComments.put(new Integer(aEndLineNo - 1), comment);
         }
     }
