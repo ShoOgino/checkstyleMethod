@@ -1,8 +1,8 @@
     public void testTags()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocMethodCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputTags.java");
         final String[] expected = {

@@ -1,8 +1,8 @@
     public void testEclipse() throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocTypeCheck.class.getName());
-        checkConfig.addProperty(
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute(
             "scope",
             Scope.getInstance("public").getName());
         final Checker c = createChecker(checkConfig);

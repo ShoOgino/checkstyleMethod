@@ -1,9 +1,9 @@
     public void testNoJavadoc()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocMethodCheck.class.getName());
-        checkConfig.addProperty("scope", Scope.NOTHING.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
+        checkConfig.addAttribute("scope", Scope.NOTHING.getName());
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputPublicOnly.java");
         final String[] expected = {

@@ -1,9 +1,9 @@
         public void testScopeAnonInnerWithResolver()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocMethodCheck.class.getName());
-        checkConfig.addProperty("checkUnusedThrows", "true");
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
+        checkConfig.addAttribute("checkUnusedThrows", "true");
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputScopeAnonInner.java");
         final String[] expected = {

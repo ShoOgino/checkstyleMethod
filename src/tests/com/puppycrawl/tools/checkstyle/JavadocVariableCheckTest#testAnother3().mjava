@@ -1,8 +1,8 @@
     public void testAnother3()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocVariableCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocVariableCheck.class);
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputPublicOnly.java");
         final String[] expected = {

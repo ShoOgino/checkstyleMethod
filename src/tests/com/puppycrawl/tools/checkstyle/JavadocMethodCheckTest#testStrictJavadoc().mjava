@@ -1,8 +1,8 @@
     public void testStrictJavadoc()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocMethodCheck.class.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocMethodCheck.class);
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputPublicOnly.java");
         final String[] expected = {

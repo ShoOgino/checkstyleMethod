@@ -1,9 +1,9 @@
     public void testAnother2()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocVariableCheck.class.getName());
-        checkConfig.addProperty("scope", Scope.PUBLIC.getName());
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocVariableCheck.class);
+        checkConfig.addAttribute("scope", Scope.PUBLIC.getName());
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputInner.java");
         final String[] expected = {

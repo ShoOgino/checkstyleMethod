@@ -1,10 +1,10 @@
     public void testNoVersion()
         throws Exception
     {
-        final CheckConfiguration checkConfig = new CheckConfiguration();
-        checkConfig.setClassname(JavadocTypeCheck.class.getName());
-        checkConfig.addProperty("allowNoAuthor", "true");
-        checkConfig.addProperty("requireVersion", "true");
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("allowNoAuthor", "true");
+        checkConfig.addAttribute("requireVersion", "true");
 
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("InputJavadoc.java");
