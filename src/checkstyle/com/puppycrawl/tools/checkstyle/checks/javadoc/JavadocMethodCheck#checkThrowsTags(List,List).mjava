@@ -21,15 +21,7 @@
             final String documentedEx = tag.getArg1();
             boolean found = foundThrows.contains(documentedEx);
             Class documentedClass = null;
-            if (!found
-                && (mAllowThrowsTagsForSubclasses || mAllowUndeclaredRTE))
-            {
-                documentedClass = resolveClass(documentedEx);
-                if (documentedClass == null) {
-                    log(tag.getLineNo(), "javadoc.classInfo",
-                        "@throws", documentedEx);
-                }
-            }
+            boolean classLoaded = false;
 
             final ListIterator throwIt = aThrows.listIterator();
             while (!found && throwIt.hasNext()) {
@@ -41,19 +33,11 @@
                     ei.setFound();
                     foundThrows.add(documentedEx);
                 }
-                else if (mAllowThrowsTagsForSubclasses
-                         && documentedClass != null)
-                {
-                    if (ei.isLoadable() && ei.getClazz() == null) {
-                        // if the class is not loaded yet.
-                        // try to load it.
-                        ei.setClazz(resolveClass(declaredEx));
-                        if (!ei.isLoadable()) {
-                            log(fi.getLineNo(), "javadoc.classInfo",
-                                "@throws", declaredEx);
-                        }
+                else if (mAllowThrowsTagsForSubclasses) {
+                    if (!classLoaded) {
+                        documentedClass = loadClassForTag(tag);
+                        classLoaded = true;
                     }
-
                     found = isSubclass(documentedClass, ei.getClazz());
                     if (found) {
                         ei.setFound();
@@ -64,7 +48,11 @@
             // Handle extra JavadocTag.
             if (!found) {
                 boolean reqd = true;
-                if (mAllowUndeclaredRTE && documentedClass != null) {
+                if (mAllowUndeclaredRTE) {
+                    if (!classLoaded) {
+                        documentedClass = loadClassForTag(tag);
+                        classLoaded = true;
+                    }
                     reqd = !isUnchecked(documentedClass);
                 }
 

@@ -1,0 +1,14 @@
+    /**
+     * Tries to load class. Logs error if unable.
+     * @param aIdent name of class which we try to load.
+     * @return <code>Class</code> for a ident.
+     */
+    protected final Class tryLoadClass(FullIdent aIdent)
+    {
+        Class clazz = resolveClass(aIdent.getText());
+        if (clazz == null) {
+            logLoadError(aIdent);
+        }
+        return clazz;
+    }
+

@@ -1,0 +1,15 @@
+    /**
+     * Tries to load class for throws tag. Logs error if unable.
+     * @param aTag name of class which we try to load.
+     * @return <code>Class</code> for the tag.
+     */
+    private Class loadClassForTag(JavadocTag aTag)
+    {
+        Class clazz = resolveClass(aTag.getArg1());
+        if (clazz == null) {
+            log(aTag.getLineNo(), "javadoc.classInfo",
+                "@throws", aTag.getArg1());
+        }
+        return clazz;
+    }
+

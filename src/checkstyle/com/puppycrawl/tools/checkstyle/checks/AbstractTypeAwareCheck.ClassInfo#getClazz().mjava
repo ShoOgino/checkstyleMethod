@@ -1,6 +1,9 @@
         /** @return <code>Class</code> associated with an object. */
         public final Class getClazz()
         {
+            if (isLoadable() && mClass == null) {
+                setClazz(AbstractTypeAwareCheck.this.tryLoadClass(getName()));
+            }
             return mClass;
         }
 
