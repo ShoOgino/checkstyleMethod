@@ -1,8 +1,9 @@
     protected Checker createChecker()
-        throws RESyntaxException
+        throws RESyntaxException, FileNotFoundException, IOException
     {
+        final Configuration config = new Configuration(mProps, mStream);
+        final Checker c = new Checker(config);
         final AuditListener listener = new BriefLogger(mStream);
-        final Checker c = new Checker(mConfig);
         c.addListener(listener);
         return c;
     }

@@ -1,7 +1,8 @@
     public void testScopeAnonInnerAnonInner()
         throws Exception
     {
-        mConfig.setJavadocScope(Scope.ANONINNER);
+        mProps.setProperty(Defn.JAVADOC_CHECKSCOPE_PROP,
+                           Scope.ANONINNER.getName());
         final Checker c = createChecker();
         final String filepath = getPath("InputScopeAnonInner.java");
         assertNotNull(c);

@@ -1,8 +1,8 @@
     public void testPackageHtml()
         throws Exception
     {
-        mConfig.setBooleanProperty(Defn.REQUIRE_PACKAGE_HTML_PROP, true);
-        mConfig.setJavadocScope(Scope.PRIVATE);
+        mProps.setProperty(Defn.REQUIRE_PACKAGE_HTML_PROP, "true");
+        mProps.setProperty(Defn.JAVADOC_CHECKSCOPE_PROP, Scope.PRIVATE.getName());
         final Checker c = createChecker();
         final String packageHtmlPath = getPath("package.html");
         final String filepath = getPath("InputScopeAnonInner.java");

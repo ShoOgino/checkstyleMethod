@@ -1,9 +1,9 @@
     public void testNoVersion()
         throws Exception
     {
-        mConfig.setWrapOpOption(WrapOpOption.NL);
-        mConfig.setBooleanProperty(Defn.ALLOW_NO_AUTHOR_PROP, true);
-        mConfig.setBooleanProperty(Defn.REQUIRE_VERSION_PROP, true);
+        mProps.setProperty(Defn.WRAP_OP_PROP, WrapOpOption.NL.toString());
+        mProps.setProperty(Defn.ALLOW_NO_AUTHOR_PROP, "true");
+        mProps.setProperty(Defn.REQUIRE_VERSION_PROP, "true");
         final Checker c = createChecker();
         final String filepath = getPath("InputJavadoc.java");
         assertNotNull(c);

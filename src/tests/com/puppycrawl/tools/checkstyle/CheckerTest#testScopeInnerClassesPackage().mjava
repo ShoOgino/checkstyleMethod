@@ -1,7 +1,8 @@
     public void testScopeInnerClassesPackage()
         throws Exception
     {
-        mConfig.setJavadocScope(Scope.getInstance("package"));
+        mProps.setProperty(Defn.JAVADOC_CHECKSCOPE_PROP,
+                           Scope.getInstance("package").getName());
         final Checker c = createChecker();
         final String filepath = getPath("InputScopeInnerClasses.java");
         assertNotNull(c);

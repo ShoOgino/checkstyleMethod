@@ -1,11 +1,11 @@
     public void testRegexpHeader()
         throws Exception
     {
-        final Checker c = createChecker();
-        mConfig.setBooleanProperty(Defn.HEADER_LINES_REGEXP_PROP, true);
-        mConfig.setHeaderFile(getPath("regexp.header"));
-        mConfig.setHeaderIgnoreLines("4,5");
+        mProps.setProperty(Defn.HEADER_LINES_REGEXP_PROP, "true");
+        mProps.setProperty(Defn.HEADER_FILE_PROP, getPath("regexp.header"));
+        mProps.setProperty(Defn.HEADER_IGNORE_LINE_PROP, "4,5");
         final String filepath = getPath("InputScopeAnonInner.java");
+        final Checker c = createChecker();
         assertNotNull(c);
         final String[] expected = {
             filepath + ":3: Line does not match expected header line of '// Created: 2002'.",

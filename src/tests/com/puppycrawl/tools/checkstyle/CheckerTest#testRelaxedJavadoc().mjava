@@ -2,8 +2,10 @@
     public void testRelaxedJavadoc()
         throws Exception
     {
-        mConfig.setBooleanProperty(Defn.IGNORE_WHITESPACE_PROP, true);
-        mConfig.setJavadocScope(Scope.PROTECTED);
+        mProps.setProperty(Defn.IGNORE_WHITESPACE_PROP, "true");
+        mProps.setProperty(Defn.JAVADOC_CHECKSCOPE_PROP,
+                           Scope.PROTECTED.getName());
+
         final Checker c = createChecker();
         final String filepath = getPath("InputPublicOnly.java");
         assertNotNull(c);

@@ -1,12 +1,13 @@
     public void testWhitespace()
         throws Exception
     {
-        mConfig.setBooleanProperty(Defn.IGNORE_CAST_WHITESPACE_PROP, false);
-        mConfig.setBooleanProperty(Defn.ALLOW_NO_AUTHOR_PROP, false);
-        mConfig.setParenPadOption(PadOption.NOSPACE);
-        mConfig.setBlockOptionProperty(Defn.TRY_BLOCK_PROP, BlockOption.IGNORE);
-        mConfig.setBlockOptionProperty(Defn.CATCH_BLOCK_PROP,
-                                       BlockOption.IGNORE);
+        mProps.setProperty(Defn.IGNORE_CAST_WHITESPACE_PROP,
+                           Boolean.FALSE.toString());
+        mProps.setProperty(Defn.ALLOW_NO_AUTHOR_PROP, Boolean.FALSE.toString());
+        mProps.setProperty(Defn.PAREN_PAD_PROP, PadOption.NOSPACE.toString());
+
+        mProps.setProperty(Defn.TRY_BLOCK_PROP, BlockOption.IGNORE.toString());
+        mProps.setProperty(Defn.CATCH_BLOCK_PROP, BlockOption.IGNORE.toString());
         final Checker c = createChecker();
         final String filepath = getPath("InputWhitespace.java");
         assertNotNull(c);
