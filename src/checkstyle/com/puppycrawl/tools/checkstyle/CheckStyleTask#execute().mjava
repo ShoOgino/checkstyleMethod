@@ -1,0 +1,44 @@
+    /**
+     * Actually checks the files specified. All errors are reported to
+     * System.err. Will fail if any errors occurred.
+     * @throws BuildException an error occurred
+     **/
+    public void execute()
+        throws BuildException
+    {
+        // Check for no arguments
+        if ((mFileName == null) && (mFileSets.size() == 0)) {
+            throw new BuildException("Must specify atleast one of 'file' " +
+                                     "or nested 'fileset'.", location);
+        }
+
+        // Create the checker
+        Checker c;
+        try {
+            c = new Checker(mProps, System.err);
+        }
+        catch (RESyntaxException e){
+            e.printStackTrace();
+            throw new BuildException("Unable to create a Checker", location);
+        }
+
+        // Process the files
+        int numErrs = 0;
+        if (mFileName != null) {
+            numErrs += c.process(mFileName);
+        }
+
+        final Iterator it = mFileSets.iterator();
+        while (it.hasNext()) {
+            final FileSet fs = (FileSet) it.next();
+            final DirectoryScanner ds = fs.getDirectoryScanner(project);
+            numErrs += process(fs.getDir(project).getAbsolutePath(),
+                               ds.getIncludedFiles(),
+                               c);
+        }
+
+        if (numErrs > 0) {
+            throw new BuildException("Got " + numErrs + " errors.", location);
+        }
+    }
+

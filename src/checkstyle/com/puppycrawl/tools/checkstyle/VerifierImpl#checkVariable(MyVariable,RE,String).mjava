@@ -1,0 +1,16 @@
+    /**
+     * Checks that a variable confirms to a specified regular expression. Logs
+     * a message if it does not.
+     * @param aVar the variable to check
+     * @param aRegexp the regexp to match against
+     * @param aPattern text representation of regexp
+     **/
+    private void checkVariable(MyVariable aVar, RE aRegexp, String aPattern)
+    {
+        if (!aRegexp.match(aVar.getText())) {
+            log(aVar.getLineNo(),
+                "variable '" + aVar.getText() +
+                "' must match pattern '" + aPattern + "'.");
+        }
+    }
+

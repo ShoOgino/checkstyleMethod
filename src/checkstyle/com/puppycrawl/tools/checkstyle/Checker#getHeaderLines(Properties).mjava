@@ -1,0 +1,22 @@
+    /**
+     * @return the header lines specified by a file in the supplied properties
+     *    set. If no file specified, or unable to read specified file, then an
+     *    empty list is returned. Errors are reported.
+     * @param aProps the property set to get the file name from
+     **/
+    private String[] getHeaderLines(Properties aProps)
+    {
+        String[] retVal = new String[] {};
+        final String fname = aProps.getProperty(HEADER_FILE_PROP);
+        if (fname != null) {
+            try {
+                retVal = getLines(fname);
+            }
+            catch (IOException ioe) {
+                mLog.println("Unable to read '" + fname + "', got '" +
+                             ioe.getMessage() + "'. Ignoring.");
+            }
+        }
+        return retVal;
+    }
+

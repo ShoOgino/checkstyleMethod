@@ -1,0 +1,30 @@
+    public void testTags()
+        throws Exception
+    {
+        final Checker c = new Checker(mProps, mStream);
+        assertNotNull(c);
+        final String[] expected = {
+            "InputTags.java:8: type is missing a Javadoc comment.",
+            "InputTags.java:11: variable 'mMissingJavadoc' missing Javadoc.",
+            "InputTags.java:14: method is missing a Javadoc comment.",
+            "InputTags.java:18: Unused @param tag for 'unused'.",
+            "InputTags.java:24: Expected an @return tag.",
+            "InputTags.java:33: Expected an @return tag.",
+            "InputTags.java:40: Expected @throws tag for 'Exception'.",
+            "InputTags.java:49: Expected @throws tag for 'Exception'.",
+            "InputTags.java:53: Unused @throws tag for 'WrongException'.",
+            "InputTags.java:55: Expected @throws tag for 'Exception'.",
+            "InputTags.java:55: Expected @throws tag for 'NullPointerException'.",
+            "InputTags.java:60: Expected @param tag for 'aOne'.",
+            "InputTags.java:68: Expected @param tag for 'aOne'.",
+            "InputTags.java:72: Unused @param tag for 'WrongParam'.",
+            "InputTags.java:73: Expected @param tag for 'aOne'.",
+            "InputTags.java:73: Expected @param tag for 'aTwo'.",
+            "InputTags.java:78: Unused @param tag for 'Unneeded'.",
+            "InputTags.java:79: Unused Javadoc tag.",
+            "InputTags.java:87: Duplicate @return tag."
+        };
+
+        verify(c, "InputTags.java", expected);
+    }
+

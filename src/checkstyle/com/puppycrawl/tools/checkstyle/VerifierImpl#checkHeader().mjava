@@ -1,0 +1,20 @@
+    /** checks that a file contains a valid header **/
+    private void checkHeader()
+    {
+        if (mHeaderLines.length > mLines.length) {
+            log(1, "Missing a header - not enough lines in file.");
+        }
+        else {
+            for (int i = 0; i < mHeaderLines.length; i++) {
+                if ((i != (mHeaderIgnoreLineNo - 1)) &&
+                    !mHeaderLines[i].equals(mLines[i]))
+                {
+                    log(i + 1,
+                        "Line does not match expected header line of '" +
+                        mHeaderLines[i] + "'.");
+                    break; // stop checking
+                }
+            }
+        }
+    }
+

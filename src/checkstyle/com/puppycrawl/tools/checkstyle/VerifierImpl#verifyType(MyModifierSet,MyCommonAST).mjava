@@ -1,0 +1,24 @@
+    /** @see Verifier **/
+    public void verifyType(MyModifierSet aMods, MyCommonAST aType)
+    {
+        final int lineNo = (aMods.size() > 0)
+            ? aMods.getFirstLineNo()
+            : aType.getLineNo();
+
+        final String[] jd = getJavadocBefore(lineNo - 1);
+        if (jd == null) {
+            // demand that types have Javadoc, so ignore mRelaxJavadoc
+            log(lineNo, "type is missing a Javadoc comment.");
+        }
+        else if (!mAllowNoAuthor && (MATCH_JAVADOC_AUTHOR.grep(jd).length == 0))
+        {
+            log(lineNo, "type Javadoc comment is missing an @author tag.");
+        }
+
+        if (!mTypeRegexp.match(aType.getText())) {
+            log(aType.getLineNo(),
+                "type name '" + aType.getText() +
+                "' must match pattern '" + mTypePat + "'.");
+        }
+    }
+

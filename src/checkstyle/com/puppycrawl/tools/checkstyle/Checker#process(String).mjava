@@ -1,0 +1,38 @@
+    /**
+     * Processes a specified file and prints out all errors found.
+     * @return the number of errors found
+     * @param aFileName the name of the file to process
+     **/
+    int process(String aFileName)
+    {
+        LineText[] errors;
+        try {
+            VerifierSingleton.getInstance().clearMessages();
+            VerifierSingleton.getInstance().setLines(getLines(aFileName));
+            final AST ast = getAST(aFileName);
+            processAST(ast);
+            errors = VerifierSingleton.getInstance().getMessages();
+        }
+        catch (FileNotFoundException fnfe) {
+            errors = new LineText[] {new LineText(0, "File not found!")};
+        }
+        catch (IOException ioe) {
+            errors = new LineText[] {
+                new LineText(0, "Got an IOException -" + ioe.getMessage())};
+        }
+        catch (RecognitionException re) {
+            errors = new LineText[] {
+                new LineText(0,
+                             "Got a RecognitionException -" +
+                             re.getMessage())};
+        }
+        catch (TokenStreamException te) {
+            errors = new LineText[] {
+                new LineText(0,
+                             "Got a TokenStreamException -" + te.getMessage())};
+        }
+
+        displayErrors(aFileName, errors);
+        return errors.length;
+    }
+

@@ -1,0 +1,19 @@
+    /** @see Verifier **/
+    public void setLines(String[] aLines)
+    {
+        mLines = aLines;
+
+        // Iterate over the lines looking for long lines and tabs
+        for (int i = 0; i < mLines.length; i++) {
+            if (mLines[i].length() > mMaxLineLength) {
+                log(i + 1,
+                    "line longer than " + mMaxLineLength + " characters");
+            }
+            if (!mAllowTabs && (mLines[i].indexOf('\t') != -1)) {
+                log(i + 1, "line contains a tab character");
+            }
+        }
+
+        checkHeader();
+    }
+

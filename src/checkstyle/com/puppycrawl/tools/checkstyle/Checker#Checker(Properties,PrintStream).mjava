@@ -1,0 +1,33 @@
+    /**
+     * Constructs the object.
+     * @param aProps contains the properties to define what to do
+     * @param aLog the PrintStream to log messages to
+     * @throws RESyntaxException unable to create a regexp object
+     **/
+    Checker(Properties aProps, PrintStream aLog)
+        throws RESyntaxException
+    {
+        mLog = aLog;
+        final Verifier v =
+            new VerifierImpl(
+                aProps.getProperty(PARAMETER_PATTERN_PROP,
+                                   PARAMETER_PATTERN),
+                aProps.getProperty(STATIC_PATTERN_PROP,
+                                   STATIC_PATTERN),
+                aProps.getProperty(CONST_PATTERN_PROP,
+                                   CONST_PATTERN),
+                aProps.getProperty(MEMBER_PATTERN_PROP,
+                                   MEMBER_PATTERN),
+                aProps.getProperty(TYPE_PATTERN_PROP,
+                                   TYPE_PATTERN),
+                getIntProperty(aProps, MAX_LINE_LENGTH_PROP, MAX_LINE_LENGTH),
+                getAllowTabs(aProps),
+                getAllowProtected(aProps),
+                getAllowNoAuthor(aProps),
+                getRelaxJavadoc(aProps),
+                getCheckImports(aProps),
+                getHeaderLines(aProps),
+                getIntProperty(aProps, HEADER_IGNORE_LINE_PROP, -1));
+        VerifierSingleton.setInstance(v);
+    }
+

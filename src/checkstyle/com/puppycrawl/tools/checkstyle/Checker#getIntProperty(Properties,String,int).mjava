@@ -1,0 +1,24 @@
+    /**
+     * @return the value of an integer property. If the property is not defined
+     *    or cannot be parsed, then a default value is returned.
+     * @param aProps the properties set to use
+     * @param aName the name of the property to parse
+     * @param aDefault the default value to use.
+     **/
+    private int getIntProperty(Properties aProps, String aName, int aDefault)
+    {
+        int retVal = aDefault;
+        final String strRep = aProps.getProperty(aName);
+        if (strRep != null) {
+            try {
+                retVal = Integer.parseInt(strRep);
+            }
+            catch (NumberFormatException nfe) {
+                mLog.println("Unable to parse " + aName +
+                             " property with value " + strRep +
+                             ", defaulting to " + aDefault + ".");
+            }
+        }
+        return retVal;
+    }
+

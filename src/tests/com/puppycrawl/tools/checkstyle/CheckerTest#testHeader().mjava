@@ -1,0 +1,13 @@
+    public void testHeader()
+        throws Exception
+    {
+        final Checker c = new Checker(mProps, mStream);
+        assertNotNull(c);
+        final String[] expected = {
+            "inputHeader.java:1: Missing a header - not enough lines in file.",
+            "inputHeader.java:1: type is missing a Javadoc comment.",
+            "inputHeader.java:1: type name 'inputHeader' must match pattern '^[A-Z][a-zA-Z0-9]*$'."
+        };
+        verify(c, "inputHeader.java", expected);
+    }
+

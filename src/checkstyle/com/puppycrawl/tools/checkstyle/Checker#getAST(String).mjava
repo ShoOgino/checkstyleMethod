@@ -1,0 +1,24 @@
+    /**
+     * Parses and returns the AST for a file.
+     * @return the AST
+     * @param aFileName the name of the file to generate the AST
+     * @throws FileNotFoundException error occurred
+     * @throws RecognitionException error occurred
+     * @throws TokenStreamException error occurred
+     **/
+    private AST getAST(String aFileName)
+        throws FileNotFoundException, RecognitionException, TokenStreamException
+    {
+        // Create the lexer/parser stuff
+        final GeneratedJavaLexer jl =
+            new GeneratedJavaLexer(new FileReader(aFileName));
+        jl.setFilename(aFileName);
+        final GeneratedJavaRecognizer jr = new GeneratedJavaRecognizer(jl);
+        jr.setFilename(aFileName);
+        jr.setASTNodeClass(MyCommonAST.class.getName());
+
+        // Parse the file
+        jr.compilationUnit();
+        return jr.getAST();
+    }
+

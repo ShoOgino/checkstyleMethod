@@ -1,0 +1,11 @@
+    /** @see Verifier **/
+    public void verifyLeftCurly(String aText,
+                                boolean aAllowIf,
+                                String aConstruct,
+                                int aLineNo)
+    {
+        if (!"{".equals(aText) && !(aAllowIf && "if".equals(aText))) {
+            log(aLineNo, "'" + aConstruct + "' construct must use '{}'s.");
+        }
+    }
+

@@ -1,0 +1,52 @@
+    /**
+     * Constructs the object.
+     * @param aParamPat pattern to match against parameters
+     * @param aStaticPat pattern to match against static variables
+     * @param aStaticFinalPat pattern to match against static final variables
+     * @param aMemberPat pattern to match against member variables
+     * @param aTypePat pattern to match against type names
+     * @param aMaxLineLength max line length allowed
+     * @param aAllowTabs specifies if tabs are allowed
+     * @param aAllowProtected specifies if protected data is allowed
+     * @param aAllowNoAuthor specifies if allowed to have no author tag
+     * @param aRelaxJavadoc specifies if to relax Javadoc checking
+     * @param aCheckImports specifies whether to check import statements
+     * @param aHeaderLines the header lines to check for
+     * @param aHeaderIgnoreLineNo the line to ignore in the header
+     * @throws RESyntaxException error creating a regexp object
+     **/
+    VerifierImpl(String aParamPat,
+                 String aStaticPat,
+                 String aStaticFinalPat,
+                 String aMemberPat,
+                 String aTypePat,
+                 int aMaxLineLength,
+                 boolean aAllowTabs,
+                 boolean aAllowProtected,
+                 boolean aAllowNoAuthor,
+                 boolean aRelaxJavadoc,
+                 boolean aCheckImports,
+                 String[] aHeaderLines,
+                 int aHeaderIgnoreLineNo)
+        throws RESyntaxException
+    {
+        mParamPat = aParamPat;
+        mParamRegexp = new RE(aParamPat);
+        mStaticPat = aStaticPat;
+        mStaticRegexp = new RE(aStaticPat);
+        mStaticFinalPat = aStaticFinalPat;
+        mStaticFinalRegexp = new RE(aStaticFinalPat);
+        mMemberPat = aMemberPat;
+        mMemberRegexp = new RE(aMemberPat);
+        mTypePat = aTypePat;
+        mTypeRegexp = new RE(aTypePat);
+        mMaxLineLength = aMaxLineLength;
+        mAllowTabs = aAllowTabs;
+        mAllowProtected = aAllowProtected;
+        mAllowNoAuthor = aAllowNoAuthor;
+        mRelaxJavadoc = aRelaxJavadoc;
+        mCheckImports = aCheckImports;
+        mHeaderLines = aHeaderLines;
+        mHeaderIgnoreLineNo = aHeaderIgnoreLineNo;
+    }
+

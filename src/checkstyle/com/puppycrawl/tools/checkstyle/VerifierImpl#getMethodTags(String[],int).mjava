@@ -1,0 +1,27 @@
+    /**
+     * Returns the tags in a javadoc comment. Only finds throws, exception,
+     * param, return and see tags.
+     * @return the tags found
+     * @param aLines the Javadoc comment
+     * @param aLastLineNo the line number of the last line in the Javadoc
+     *                    comment
+     **/
+    private List getMethodTags(String[] aLines, int aLastLineNo)
+    {
+        final List tags = new ArrayList();
+        int currentLine = aLastLineNo - aLines.length;
+        for (int i = 0; i < aLines.length; i++) {
+            currentLine++;
+            if (MATCH_JAVADOC_ARG.match(aLines[i])) {
+                tags.add(new JavadocTag(currentLine,
+                                        MATCH_JAVADOC_ARG.getParen(1),
+                                        MATCH_JAVADOC_ARG.getParen(2)));
+            }
+            else if (MATCH_JAVADOC_NOARG.match(aLines[i])) {
+                tags.add(new JavadocTag(currentLine,
+                                        MATCH_JAVADOC_NOARG.getParen(1)));
+            }
+        }
+        return tags;
+    }
+

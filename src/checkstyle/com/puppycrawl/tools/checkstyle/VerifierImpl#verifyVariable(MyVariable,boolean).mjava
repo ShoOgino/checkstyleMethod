@@ -1,0 +1,60 @@
+    /** @see Verifier **/
+    public void verifyVariable(MyVariable aVar, boolean aInInterface)
+    {
+        if (getJavadocBefore(aVar.getLineNo() - 1) == null) {
+            if (!mRelaxJavadoc || inInterfaceBlock() ||
+                (aVar.getModifierSet().containsProtected() ||
+                 aVar.getModifierSet().containsPublic()))
+            {
+                log(aVar.getLineNo(),
+                    "variable '" + aVar.getText() + "' missing Javadoc.");
+            }
+        }
+
+        // Check correct format
+        if (aInInterface) {
+            // The only declarations allowed in interfaces are all static final,
+            // even if not declared that way.
+            checkVariable(aVar,
+                          mStaticFinalRegexp,
+                          mStaticFinalPat);
+        }
+        else {
+            final MyModifierSet mods = aVar.getModifierSet();
+            if (mods.containsStatic()) {
+                if (mods.containsFinal()) {
+                    // Handle the serialVersionUID constant which is used for
+                    // Serialization. Cannot enforce rules on it. :-)
+                    if (!"serialVersionUID".equals(aVar.getText())) {
+                        checkVariable(aVar,
+                                      mStaticFinalRegexp,
+                                      mStaticFinalPat);
+                    }
+                }
+                else {
+                    if (mods.containsPrivate()) {
+                        checkVariable(aVar, mStaticRegexp, mStaticPat);
+                }
+                    else {
+                        log(aVar.getLineNo(),
+                            "variable '" + aVar.getText() +
+                            "' must be private and have accessor methods.");
+                    }
+                }
+            }
+            else {
+                // These are the non-static variables
+                if (mods.containsPrivate() ||
+                    (mAllowProtected && mods.containsProtected()))
+                {
+                    checkVariable(aVar, mMemberRegexp, mMemberPat);
+                }
+                else {
+                    log(aVar.getLineNo(),
+                        "variable '" + aVar.getText() +
+                        "' must be private and have accessor methods.");
+                }
+            }
+        }
+    }
+

@@ -1,0 +1,17 @@
+    private void verify(Checker aC, String aFilename, String[] aExpected)
+        throws Exception
+    {
+        final int errs = aC.process(aFilename);
+
+        // process each of the lines
+        final ByteArrayInputStream bais =
+            new ByteArrayInputStream(mBAOS.toByteArray());
+        final LineNumberReader lnr =
+            new LineNumberReader(new InputStreamReader(bais));
+
+        for (int i = 0; i < aExpected.length; i++) {
+            assertEquals(aExpected[i], lnr.readLine());
+        }
+        assertEquals(aExpected.length, errs);
+    }
+

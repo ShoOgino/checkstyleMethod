@@ -1,0 +1,46 @@
+    /**
+     * Checks a set of tags for matching throws.
+     * @param aTags the tags to check
+     * @param aThrows the throws to check
+     **/
+    private void checkThrowsTags(List aTags, List aThrows)
+    {
+        // Loop over the tags, checking to see they exist in the throws.
+        final ListIterator tagIt = aTags.listIterator();
+        while (tagIt.hasNext()) {
+            final JavadocTag tag = (JavadocTag) tagIt.next();
+
+            if (!tag.isThrowsTag()) {
+                continue;
+            }
+
+            tagIt.remove();
+
+            // Loop looking for matching throw
+            boolean found = false;
+            final ListIterator throwIt = aThrows.listIterator();
+            while (throwIt.hasNext()) {
+                final LineText t = (LineText) throwIt.next();
+                if (t.getText().equals(tag.getArg1())) {
+                    found = true;
+                    throwIt.remove();
+                    break;
+                }
+            }
+
+            // Handle extra JavadocTag
+            if (!found) {
+                log(tag.getLineNo(),
+                    "Unused @throws tag for '" + tag.getArg1() + "'.");
+            }
+        }
+
+        // Now dump out all throws without tags
+        final ListIterator throwIt = aThrows.listIterator();
+        while (throwIt.hasNext()) {
+            final LineText t = (LineText) throwIt.next();
+            log(t.getLineNo(),
+                "Expected @throws tag for '" + t.getText() + "'.");
+        }
+    }
+

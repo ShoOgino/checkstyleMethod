@@ -1,0 +1,30 @@
+    /**
+     * Loops over the files specified checking them for errors. The exit code
+     * is the number of errors found in all the files.
+     * @param aArgs the command line arguments
+     **/
+    public static void main(String[] aArgs)
+    {
+        if (aArgs.length == 0) {
+            usage();
+        }
+
+        Checker c = null;
+        try {
+            c = new Checker(System.getProperties(), System.err);
+        }
+        catch (RESyntaxException rese) {
+            System.err.println("Unable to create an regexp object: " +
+                               rese.getMessage());
+            rese.printStackTrace(System.err);
+            System.exit(1);
+        }
+
+        int numErrors = 0;
+        for (int i = 0; i < aArgs.length; i++) {
+            numErrors += c.process(aArgs[i]);
+        }
+
+        System.exit(numErrors);
+    }
+
