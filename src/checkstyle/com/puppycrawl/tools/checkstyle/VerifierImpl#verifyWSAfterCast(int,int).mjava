@@ -1,0 +1,15 @@
+    /** @see Verifier **/
+    public void verifyWSAfterCast(int aLineNo, int aColNo)
+    {
+        if (mConfig.isIgnoreWhitespace()) {
+            return;
+        }
+
+        final String line = mLines[aLineNo - 1];
+        if ((aColNo < line.length()) &&
+            !Character.isWhitespace(line.charAt(aColNo)))
+        {
+            log(aLineNo,"cast needs to be followed by whitespace.");
+        }
+    }
+
