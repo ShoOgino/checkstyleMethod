@@ -1,0 +1,37 @@
+    public void testInvalidTryWithChecker()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("indentation/InputInvalidTryIndent.java");
+        final String[] expected = {
+            "21: try at indentation level 9 not at correct indentation, 8",
+            "22: try rcurly at indentation level 7 not at correct indentation, 8",
+            "24: catch rcurly at indentation level 7 not at correct indentation, 8",
+            "26: try at indentation level 4 not at correct indentation, 8",
+            "27: method call child at indentation level 8 not at correct indentation, 12",
+            "27: try child at indentation level 8 not at correct indentation, 12",
+            "28: try rcurly at indentation level 4 not at correct indentation, 8",
+            "29: finally child at indentation level 8 not at correct indentation, 12",
+            "29: method call child at indentation level 8 not at correct indentation, 12",
+            "34: catch child at indentation level 8 not at correct indentation, 12",
+            "34: method call child at indentation level 8 not at correct indentation, 12",
+            "39: try rcurly at indentation level 10 not at correct indentation, 8",
+            "41: catch rcurly at indentation level 6 not at correct indentation, 8",
+            "48: catch rcurly at indentation level 5 not at correct indentation, 8",
+            "55: catch child at indentation level 10 not at correct indentation, 12",
+            "55: method call child at indentation level 10 not at correct indentation, 12",
+            "56: catch child at indentation level 14 not at correct indentation, 12",
+            "57: catch child at indentation level 10 not at correct indentation, 12",
+            "57: method call child at indentation level 10 not at correct indentation, 12",
+            "59: catch at indentation level 6 not at correct indentation, 8",
+            "66: try lcurly at indentation level 10 not at correct indentation, 8",
+            "68: try rcurly at indentation level 10 not at correct indentation, 8",
+            "70: catch lcurly at indentation level 6 not at correct indentation, 8",
+            "73: catch rcurly at indentation level 10 not at correct indentation, 8",
+            "76: catch child at indentation level 10 not at correct indentation, 12",
+            "76: method call child at indentation level 10 not at correct indentation, 12",
+        };
+        verify(c, fname, expected);
+    }
+

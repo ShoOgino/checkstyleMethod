@@ -1,0 +1,58 @@
+    public void testInvalidBlockWithChecker()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("indentation/InputInvalidBlockIndent.java");
+        final String[] expected = {
+            "22: block lcurly at indentation level 7 not at correct indentation, 8",
+            "23: block lcurly at indentation level 9 not at correct indentation, 8",
+            "25: block lcurly at indentation level 9 not at correct indentation, 8",
+            "26: block rcurly at indentation level 7 not at correct indentation, 8",
+            "28: block lcurly at indentation level 6 not at correct indentation, 8",
+            "30: block rcurly at indentation level 6 not at correct indentation, 8",
+            "31: block lcurly at indentation level 6 not at correct indentation, 8",
+            "34: block lcurly at indentation level 9 not at correct indentation, 8",
+            "35: block child at indentation level 13 not at correct indentation, 12",
+            "37: block child at indentation level 13 not at correct indentation, 12",
+            "38: block rcurly at indentation level 9 not at correct indentation, 8",
+            "41: block lcurly at indentation level 6 not at correct indentation, 8",
+            "42: block child at indentation level 10 not at correct indentation, 12",
+            "44: block child at indentation level 10 not at correct indentation, 12",
+            "45: block rcurly at indentation level 6 not at correct indentation, 8",
+            "48: block lcurly at indentation level 6 not at correct indentation, 8",
+            "51: block child at indentation level 10 not at correct indentation, 12",
+            "55: block lcurly at indentation level 10 not at correct indentation, 12",
+            "59: block rcurly at indentation level 10 not at correct indentation, 12",
+            "64: block child at indentation level 10 not at correct indentation, 12",
+            "66: block lcurly at indentation level 10 not at correct indentation, 12",
+            "67: block child at indentation level 14 not at correct indentation, 16",
+            "82: block rcurly at indentation level 10 not at correct indentation, 12",
+            "91: static initialization at indentation level 2 not at correct indentation, 4",
+            "92: static initialization at indentation level 6 not at correct indentation, 4",
+            "96: static initialization child at indentation level 7 not at correct indentation, 8",
+            "99: static initialization at indentation level 6 not at correct indentation, 4",
+            "101: static initialization rcurly at indentation level 2 not at correct indentation, 4",
+            "103: static initialization at indentation level 2 not at correct indentation, 4",
+            "105: static initialization rcurly at indentation level 6 not at correct indentation, 4",
+            "107: static initialization at indentation level 2 not at correct indentation, 4",
+            "109: static initialization child at indentation level 6 not at correct indentation, 8",
+            "112: static initialization lcurly at indentation level 2 not at correct indentation, 4",
+            "113: static initialization child at indentation level 6 not at correct indentation, 8",
+            "114: static initialization rcurly at indentation level 6 not at correct indentation, 4",
+            "119: static initialization child at indentation level 6 not at correct indentation, 8",
+            "124: static initialization child at indentation level 4 not at correct indentation, 8",
+            "125: static initialization rcurly at indentation level 2 not at correct indentation, 4",
+            "130: static initialization rcurly at indentation level 6 not at correct indentation, 4",
+            "133: block lcurly at indentation level 2 not at correct indentation, 4",
+            "134: block lcurly at indentation level 6 not at correct indentation, 4",
+            "137: block lcurly at indentation level 2 not at correct indentation, 4",
+            "139: block rcurly at indentation level 6 not at correct indentation, 4",
+            "141: block lcurly at indentation level 6 not at correct indentation, 4",
+            "143: block rcurly at indentation level 2 not at correct indentation, 4",
+            "146: block child at indentation level 6 not at correct indentation, 8",
+
+        };
+        verify(c, fname, expected);
+    }
+

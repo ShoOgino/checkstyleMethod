@@ -1,0 +1,11 @@
+    /**
+     * @see com.puppycrawl.tools.checkstyle.api.Check
+     */
+    public void visitToken(DetailAST aAST)
+    {
+        ExpressionHandler handler = mHandlerFactory.getHandler(this, aAST,
+            (ExpressionHandler) mHandlers.peek());
+        mHandlers.push(handler);
+        handler.checkIndentation();
+    }
+
