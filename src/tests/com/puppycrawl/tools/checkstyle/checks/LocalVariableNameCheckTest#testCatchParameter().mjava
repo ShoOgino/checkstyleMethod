@@ -1,0 +1,13 @@
+    public void testCatchParameter()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(LocalVariableNameCheck.class);
+        checkConfig.addAttribute("tokens", "PARAMETER_DEF");
+        checkConfig.addAttribute("format", "^e$");
+        final String[] expected = {
+            "74:24: Name 'ex' must match pattern '^e$'.",
+        };
+        verify(checkConfig, getPath("InputEmptyStatement.java"), expected);
+    }
+
