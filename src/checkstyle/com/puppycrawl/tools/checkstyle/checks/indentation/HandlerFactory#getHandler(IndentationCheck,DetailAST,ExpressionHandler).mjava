@@ -10,12 +10,15 @@
     public ExpressionHandler getHandler(IndentationCheck aIndentCheck,
         DetailAST aAst, ExpressionHandler aParent)
     {
-        int type = aAst.getType();
+        if (aAst.getType() == TokenTypes.METHOD_CALL) {
+            return createMethodCallHandler(aIndentCheck, aAst, aParent);
+        }
+
+        Integer type = new Integer(aAst.getType());
 
         ExpressionHandler expHandler = null;
         try {
-            Constructor handlerCtor = (Constructor) mTypeHandlers.get(
-                new Integer(type));
+            Constructor handlerCtor = (Constructor) mTypeHandlers.get(type);
             if (handlerCtor != null) {
                 expHandler = (ExpressionHandler) handlerCtor.newInstance(
                     new Object[] {
@@ -26,6 +29,7 @@
                 );
             }
         }
+        ///CLOVER:OFF
         catch (InstantiationException e) {
             throw new RuntimeException("couldn't instantiate constructor for "
                                        + aAst, e);
@@ -42,6 +46,7 @@
         if (expHandler == null) {
             throw new RuntimeException("no handler for type " + type);
         }
+        ///CLOVER:ON
         return expHandler;
     }
 

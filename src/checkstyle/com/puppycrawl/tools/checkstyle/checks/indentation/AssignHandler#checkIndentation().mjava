@@ -1,0 +1,28 @@
+    /**
+     * Check the indentation of the expression we are handling.
+     */
+    public void checkIndentation()
+    {
+        IndentLevel expectedLevel = getChildrenExpectedLevel();
+
+        // check indentation of assign if it starts line
+        DetailAST assign = getMainAst();
+        if (startsLine(assign)
+            && !expectedLevel.accept(expandedTabsColumnNo(assign)))
+        {
+            logError(assign, "" , expandedTabsColumnNo(assign), expectedLevel);
+        }
+
+        // check indentation of rvalue
+        DetailAST child = (DetailAST) assign.getFirstChild();
+
+        // if this is assign in expression then skip first child,
+        // because it's lvalue.
+        if (assign.getParent() != null
+            && assign.getParent().getType() == TokenTypes.EXPR)
+        {
+            child = (DetailAST) child.getNextSibling();
+        }
+        checkExpressionSubtree(child, expectedLevel, false, true);
+    }
+

@@ -7,13 +7,13 @@
      * @param aExpectedLevel the expected indent level of the expression
      */
     protected final void logError(DetailAST aAst, String aSubtypeName,
-                                  int aActualLevel, int aExpectedLevel)
+                                  int aActualLevel, IndentLevel aExpectedLevel)
     {
         String typeStr = (aSubtypeName == "" ? "" : (" " + aSubtypeName));
         Object[] args = new Object[] {
             mTypeName + typeStr,
             new Integer(aActualLevel),
-            new Integer(aExpectedLevel),
+            aExpectedLevel,
         };
         mIndentCheck.indentationLog(aAst.getLineNo(),
                                     "indentation.error",

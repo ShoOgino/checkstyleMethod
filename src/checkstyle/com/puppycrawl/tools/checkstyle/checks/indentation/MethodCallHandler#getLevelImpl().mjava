@@ -7,10 +7,8 @@
     {
         // if inside a method call's params, this could be part of
         // an expression, so get the previous line's start
-
         if (getParent() instanceof MethodCallHandler) {
-            MethodCallHandler container = ((MethodCallHandler) getParent())
-                .findContainingMethodCall(this);
+            MethodCallHandler container = ((MethodCallHandler) getParent());
             if (container != null) {
                 if (areOnSameLine(container.getMainAst(), getMainAst())) {
                     return container.getLevel();
@@ -23,7 +21,7 @@
 
             // if we get here, we are the child of the left hand side (name
             //  side) of a method call with no "containing" call, use
-            //  the first non-method callparent
+            //  the first non-method call parent
 
             ExpressionHandler p = getParent();
             while (p instanceof MethodCallHandler) {
