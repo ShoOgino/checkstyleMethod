@@ -6,20 +6,24 @@
         c.addFilter(f);
 
         // Let's try fire some events
-        c.fireAuditStarted();
-        assertTrue("Checker.fireAuditStarted() doesn't call filter", f.wasCalled());
+	// we do not call filter in fireAuditStarted() (fix for 1080343)
+//         c.fireAuditStarted();
+//         assertTrue("Checker.fireAuditStarted() doesn't call filter", f.wasCalled());
 
-        f.resetFilter();
-        c.fireAuditFinished();
-        assertTrue("Checker.fireAuditFinished() doesn't call filter", f.wasCalled());
+	// we do not call filter in fireAuditFinished() (fix for 1080343)
+//         f.resetFilter();
+//         c.fireAuditFinished();
+//         assertTrue("Checker.fireAuditFinished() doesn't call filter", f.wasCalled());
 
-        f.resetFilter();
-        c.fireFileStarted("Some File Name");
-        assertTrue("Checker.fireFileStarted() doesn't call filter", f.wasCalled());
+	// we do not call filter in fireFileStarted() (fix for 1080343)
+//         f.resetFilter();
+//         c.fireFileStarted("Some File Name");
+//         assertTrue("Checker.fireFileStarted() doesn't call filter", f.wasCalled());
 
-        f.resetFilter();
-        c.fireFileFinished("Some File Name");
-        assertTrue("Checker.fireFileFinished() doesn't call filter", f.wasCalled());
+	// we do not call filter in fireFileFinished() (fix for 1080343)
+//         f.resetFilter();
+//         c.fireFileFinished("Some File Name");
+//         assertTrue("Checker.fireFileFinished() doesn't call filter", f.wasCalled());
 
         f.resetFilter();
         LocalizedMessage[] msgs = new LocalizedMessage[1];

@@ -8,24 +8,28 @@
         c.removeFilter(f);
 
         // Let's try fire some events
-        c.fireAuditStarted();
-        assertTrue("Checker.fireAuditStarted() doesn't call filter", f2.wasCalled());
-        assertFalse("Checker.fireAuditStarted() does call removed filter", f.wasCalled());
+ 	// we do call filter in fireErrors() only (fix for 1080343)
+// 	c.fireAuditStarted();
+//         assertTrue("Checker.fireAuditStarted() doesn't call filter", f2.wasCalled());
+//         assertFalse("Checker.fireAuditStarted() does call removed filter", f.wasCalled());
 
-        f2.resetFilter();
-        c.fireAuditFinished();
-        assertTrue("Checker.fireAuditFinished() doesn't call filter", f2.wasCalled());
-        assertFalse("Checker.fireAuditFinished() does call removed filter", f.wasCalled());
+ 	// we do call filter in fireErrors() only (fix for 1080343)
+//         f2.resetFilter();
+//         c.fireAuditFinished();
+//         assertTrue("Checker.fireAuditFinished() doesn't call filter", f2.wasCalled());
+//         assertFalse("Checker.fireAuditFinished() does call removed filter", f.wasCalled());
 
-        f2.resetFilter();
-        c.fireFileStarted("Some File Name");
-        assertTrue("Checker.fireFileStarted() doesn't call filter", f2.wasCalled());
-        assertFalse("Checker.fireFileStarted() does call removed filter", f.wasCalled());
+ 	// we do call filter in fireErrors() only (fix for 1080343)
+//         f2.resetFilter();
+//         c.fireFileStarted("Some File Name");
+//         assertTrue("Checker.fireFileStarted() doesn't call filter", f2.wasCalled());
+//         assertFalse("Checker.fireFileStarted() does call removed filter", f.wasCalled());
 
-        f2.resetFilter();
-        c.fireFileFinished("Some File Name");
-        assertTrue("Checker.fireFileFinished() doesn't call filter", f2.wasCalled());
-        assertFalse("Checker.fireFileFinished() does call removed filter", f.wasCalled());
+ 	// we do call filter in fireErrors() only (fix for 1080343)
+//         f2.resetFilter();
+//         c.fireFileFinished("Some File Name");
+//         assertTrue("Checker.fireFileFinished() doesn't call filter", f2.wasCalled());
+//         assertFalse("Checker.fireFileFinished() does call removed filter", f.wasCalled());
 
         f2.resetFilter();
         LocalizedMessage[] msgs = new LocalizedMessage[1];
