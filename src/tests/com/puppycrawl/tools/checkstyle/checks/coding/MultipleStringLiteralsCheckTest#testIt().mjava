@@ -1,0 +1,15 @@
+    public void testIt() throws Exception
+    {
+        DefaultConfiguration checkConfig =
+            createCheckConfig(MultipleStringLiteralsCheck.class);
+        checkConfig.addAttribute("allowedDuplicates", "2");
+
+        final String[] expected = {
+            "5:16: The String \"StringContents\" appears 3 times in the file.",
+        };
+
+        verify(checkConfig,
+               getPath("coding" + File.separator + "InputMultipleStringLiterals.java"),
+               expected);
+    }
+
