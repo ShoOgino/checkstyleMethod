@@ -1,18 +1,20 @@
-    /** @see AuditListener **/
+    /**
+     * Print an Emacs compliant line on the error stream.
+     * If the column number is non zero, then also display it.
+     * @see AuditListener
+     **/
     public void addError(AuditEvent aEvt)
     {
-        // Print an Emacs compliant line. If the column number is non zero,
-        // then also display it.
         if (aEvt.getColumn() > 0) {
-            mWriter.println(aEvt.getFileName()
-                            + ":" + aEvt.getLine()
-                            + ":" + aEvt.getColumn()
-                            + ": " + aEvt.getMessage());
+            mErrorWriter.println(aEvt.getFileName()
+                                 + ":" + aEvt.getLine()
+                                 + ":" + aEvt.getColumn()
+                                 + ": " + aEvt.getMessage());
         }
         else {
-            mWriter.println(aEvt.getFileName()
-                            + ":" + aEvt.getLine()
-                            + ": " + aEvt.getMessage());
+            mErrorWriter.println(aEvt.getFileName()
+                                 + ":" + aEvt.getLine()
+                                 + ": " + aEvt.getMessage());
         }
     }
 

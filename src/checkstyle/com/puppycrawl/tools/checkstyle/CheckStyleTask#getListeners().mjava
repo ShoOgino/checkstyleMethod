@@ -10,15 +10,17 @@
         throws ClassNotFoundException, InstantiationException,
         IllegalAccessException, IOException
     {
+        final int listenerCount = Math.max(1, mFormatters.size());
+
+        final AuditListener[] listeners = new AuditListener[listenerCount];
+
         if (mFormatters.size() == 0) {
-            final Formatter f = new Formatter();
-            final FormatterType type = new FormatterType();
-            type.setValue(E_PLAIN);
-            f.setType(type);
-            mFormatters.add(f);
+            OutputStream debug = new LogOutputStream(this, Project.MSG_DEBUG);
+            OutputStream err = new LogOutputStream(this, Project.MSG_ERR);
+            listeners[0] = new DefaultLogger(debug, true, err, true);
+            return listeners;
         }
 
-        final AuditListener[] listeners = new AuditListener[mFormatters.size()];
         for (int i = 0; i < listeners.length; i++) {
             final Formatter f = (Formatter) mFormatters.get(i);
             listeners[i] = f.createListener(this);

@@ -1,9 +1,9 @@
     /** @see AuditListener **/
     public void addException(AuditEvent aEvt, Throwable aThrowable)
     {
-        synchronized (mWriter) {
-            mWriter.println("Error auditing " + aEvt.getFileName());
-            aThrowable.printStackTrace(mWriter);
+        synchronized (mErrorWriter) {
+            mErrorWriter.println("Error auditing " + aEvt.getFileName());
+            aThrowable.printStackTrace(mErrorWriter);
         }
     }
 

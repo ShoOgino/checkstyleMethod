@@ -2,18 +2,16 @@
          * Creates a listener for the formatter.
          * @param aTask the task running
          * @return a listener
-         * @throws ClassNotFoundException if an error occurs
-         * @throws InstantiationException if an error occurs
-         * @throws IllegalAccessException if an error occurs
          * @throws IOException if an error occurs
          */
         public AuditListener createListener(Task aTask)
-            throws ClassNotFoundException, InstantiationException,
-            IllegalAccessException, IOException
+            throws IOException
         {
-            final Class clazz = Class.forName(mClassName);
-            final AuditListener listener = (AuditListener) clazz.newInstance();
-            listener.setOutputStream(createOutputStream(aTask));
-            return listener;
+            if (E_XML.equals(mFormatterType.getValue())) {
+                return createXMLLogger(aTask);
+            }
+            else {
+                return createDefaultLogger(aTask);
+            }
         }
 

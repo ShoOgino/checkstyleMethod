@@ -1,12 +1,12 @@
-    /** @see AuditListener **/
-    public void setOutputStream(OutputStream aOS)
+    /**
+     * sets the OutputStream
+     * @param aOS the OutputStream to use
+     **/
+    private void setOutputStream(OutputStream aOS)
     {
         try {
             final OutputStreamWriter osw = new OutputStreamWriter(aOS, "UTF8");
             mWriter = new PrintWriter(osw);
-            // keep a handle on the original stream
-            // for getoutputstream
-            mStream = aOS;
         }
         catch (UnsupportedEncodingException e) {
             // unlikely to happen...

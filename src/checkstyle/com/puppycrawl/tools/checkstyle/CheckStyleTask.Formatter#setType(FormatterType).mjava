@@ -5,14 +5,10 @@
         public void setType(FormatterType aType)
         {
             final String val = aType.getValue();
-            if (E_XML.equals(val)) {
-                setClassname(XMLLogger.class.getName());
-            }
-            else if (E_PLAIN.equals(val)) {
-                setClassname(DefaultLogger.class.getName());
-            }
-            else {
+            if (!E_XML.equals(val) && !E_PLAIN.equals(val)) {
                 throw new BuildException("Invalid formatter type: " + val);
             }
+
+            mFormatterType = aType;
         }
 

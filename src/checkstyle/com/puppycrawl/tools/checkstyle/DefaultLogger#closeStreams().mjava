@@ -1,0 +1,22 @@
+    /**
+     * Flushes the output streams and closes them if needed.
+     */
+    protected void closeStreams()
+    {
+        if (mCloseInfo) {
+            mInfoWriter.flush();
+        }
+        else {
+            mInfoWriter.flush();
+            mInfoWriter.close();
+        }
+
+        if (mCloseError) {
+            mErrorWriter.flush();
+        }
+        else {
+            mErrorWriter.flush();
+            mErrorWriter.close();
+        }
+    }
+

@@ -1,0 +1,16 @@
+        /**
+         * @return a DefaultLogger instance
+         * @param aTask the task to possibly log to
+         * @throws IOException if an error occurs
+         */
+        private AuditListener createDefaultLogger(Task aTask)
+            throws IOException
+        {
+            if (mToFile == null) {
+                return new DefaultLogger(
+                    new LogOutputStream(aTask, Project.MSG_DEBUG), true,
+                    new LogOutputStream(aTask, Project.MSG_ERR), true);
+            }
+            return new DefaultLogger(new FileOutputStream(mToFile), true);
+        }
+
