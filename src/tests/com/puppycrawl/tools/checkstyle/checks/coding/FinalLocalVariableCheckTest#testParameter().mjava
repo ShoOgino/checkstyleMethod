@@ -1,0 +1,12 @@
+    public void testParameter() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(FinalLocalVariableCheck.class);
+        checkConfig.addAttribute("tokens", "PARAMETER_DEF");
+        
+        final String[] expected = {
+            "45:28: Variable 'aArg' should be declared final.",
+        };
+        verify(checkConfig, getPath("coding/InputFinalLocalVariable.java"), expected);
+    }
+
