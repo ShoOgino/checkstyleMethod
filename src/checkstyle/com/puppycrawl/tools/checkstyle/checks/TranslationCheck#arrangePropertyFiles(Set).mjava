@@ -11,12 +11,12 @@
 
         for (Iterator iterator = aPropFiles.iterator(); iterator.hasNext();) {
             File file = (File) iterator.next();
-            String baseName = extractBaseName(file);
+            String identifier = extractPropertyIdentifier(file);
 
-            Set fileSet = (Set) propFileMap.get(baseName);
+            Set fileSet = (Set) propFileMap.get(identifier);
             if (fileSet == null) {
                 fileSet = new HashSet();
-                propFileMap.put(baseName, fileSet);
+                propFileMap.put(identifier, fileSet);
             }
             fileSet.add(file);
         }
