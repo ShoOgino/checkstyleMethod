@@ -1,0 +1,16 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST params =
+            Utils.findFirstToken(aAST.getFirstChild(),
+                                 JavaTokenTypes.PARAMETERS);
+        final int count = Utils.countTokens(params.getFirstChild(),
+                                            JavaTokenTypes.PARAMETER_DEF);
+        if (count > mMax) {
+            final DetailAST name = Utils.findFirstToken(aAST.getFirstChild(),
+                                                        JavaTokenTypes.IDENT);
+            log(name.getLineNo(), name.getColumnNo(),
+                "maxParam", new Integer(mMax));
+        }
+    }
+
