@@ -6,13 +6,6 @@
      */
     protected FullIdent getImportText(DetailAST aAST)
     {
-        FullIdent text = (FullIdent) getTokenContext().get(TEXT_KEY);
-        if (text != null) {
-            return text;
-        }
-
-        text = FullIdent.createFullIdent((DetailAST) aAST.getFirstChild());
-        getTokenContext().put(TEXT_KEY, text);
-        return text;
+        return FullIdent.createFullIdent((DetailAST) aAST.getFirstChild());
     }
 

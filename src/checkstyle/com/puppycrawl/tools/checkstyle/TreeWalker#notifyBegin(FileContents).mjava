@@ -4,12 +4,9 @@
      */
     private void notifyBegin(FileContents aContents)
     {
-        // TODO: do not track Context properly for token
         final Iterator it = mAllChecks.iterator();
         while (it.hasNext()) {
             final Check check = (Check) it.next();
-            mTreeContext.clear();
-            check.setTreeContext(mTreeContext);
             check.setFileContents(aContents);
             check.beginTree();
         }
