@@ -3,11 +3,9 @@
      *
      * @param aFileName name of properties file that contains details. if the
                         file does not exist, it will be created
-     * @param aLog where to log errors
      */
-    PropertyCacheFile(String aFileName, PrintStream aLog)
+    PropertyCacheFile(String aFileName)
     {
-        mLog = aLog;
         boolean setInActive = true;
         if (aFileName != null) {
             try {
@@ -19,8 +17,8 @@
                 setInActive = false;
             }
             catch (IOException e) {
-                mLog.println("Unable to open cache file, ignoring.");
-                e.printStackTrace(mLog);
+                System.out.println("Unable to open cache file, ignoring.");
+                e.printStackTrace(System.out);
             }
         }
         mDetailsFile = (setInActive) ? null : aFileName;
