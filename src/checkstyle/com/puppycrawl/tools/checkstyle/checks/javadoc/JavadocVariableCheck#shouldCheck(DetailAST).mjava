@@ -9,10 +9,18 @@
             return false;
         }
 
-        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
-        final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
-        final Scope scope =
-            ScopeUtils.inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
+        final Scope scope;
+        if (aAST.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
+            scope = Scope.PUBLIC;
+        }
+        else {
+            final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
+            final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
+            scope =
+                ScopeUtils.inInterfaceOrAnnotationBlock(aAST)
+                    ? Scope.PUBLIC : declaredScope;
+        }
+
         final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
 
         return scope.isIn(mScope) && surroundingScope.isIn(mScope)

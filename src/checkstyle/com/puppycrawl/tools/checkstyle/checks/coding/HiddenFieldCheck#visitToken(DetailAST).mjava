@@ -1,31 +1,44 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        if (aAST.getType() == TokenTypes.CLASS_DEF) {
-            //find and push fields
-            final DetailAST classMods =
+        //A more thorough check of enum constant class bodies is
+        //possible (checking for hidden fields against the enum
+        //class body in addition to enum constant class bodies)
+        //but not attempted as it seems out of the scope of this
+        //check.
+        if ((aAST.getType() == TokenTypes.CLASS_DEF)
+            || (aAST.getType() == TokenTypes.ENUM_DEF)
+            || (aAST.getType() == TokenTypes.ENUM_CONSTANT_DEF))
+        {
+            final DetailAST typeMods =
                 aAST.findFirstToken(TokenTypes.MODIFIERS);
-            final boolean isStaticInnerClass =
-                classMods.branchContains(TokenTypes.LITERAL_STATIC);
-            final FieldFrame frame = new FieldFrame(isStaticInnerClass);
+            final boolean isStaticInnerType =
+                (typeMods == null)
+                    ? false
+                    : typeMods.branchContains(TokenTypes.LITERAL_STATIC);
+            final FieldFrame frame = new FieldFrame(isStaticInnerType);
+
             //add fields to container
             final DetailAST objBlock =
                 aAST.findFirstToken(TokenTypes.OBJBLOCK);
-            DetailAST child = (DetailAST) objBlock.getFirstChild();
-            while (child != null) {
-                if (child.getType() == TokenTypes.VARIABLE_DEF) {
-                    final String name =
-                        child.findFirstToken(TokenTypes.IDENT).getText();
-                    final DetailAST mods =
-                        child.findFirstToken(TokenTypes.MODIFIERS);
-                    if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                        frame.addStaticField(name);
+            // enum constants may not have bodies
+            if (objBlock != null) {
+                DetailAST child = (DetailAST) objBlock.getFirstChild();
+                while (child != null) {
+                    if (child.getType() == TokenTypes.VARIABLE_DEF) {
+                        final String name =
+                            child.findFirstToken(TokenTypes.IDENT).getText();
+                        final DetailAST mods =
+                            child.findFirstToken(TokenTypes.MODIFIERS);
+                        if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
+                            frame.addStaticField(name);
+                        }
+                        else {
+                            frame.addInstanceField(name);
+                        }
                     }
-                    else {
-                        frame.addInstanceField(name);
-                    }
+                    child = (DetailAST) child.getNextSibling();
                 }
-                child = (DetailAST) child.getNextSibling();
             }
             mFieldsStack.addLast(frame); //push container
         }

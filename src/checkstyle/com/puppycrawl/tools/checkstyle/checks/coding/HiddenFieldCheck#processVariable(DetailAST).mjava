@@ -6,7 +6,7 @@
      */
     private void processVariable(DetailAST aAST)
     {
-        if (!ScopeUtils.inInterfaceBlock(aAST)) {
+        if (!ScopeUtils.inInterfaceOrAnnotationBlock(aAST)) {
             if (ScopeUtils.isLocalVariableDef(aAST)
                 || (aAST.getType() == TokenTypes.PARAMETER_DEF))
             {
@@ -18,7 +18,7 @@
                     mFieldsStack.listIterator(mFieldsStack.size());
                 while (it.hasPrevious()) {
                     final FieldFrame frame = (FieldFrame) it.previous();
-                    inStatic |= frame.isStaticClass();
+                    inStatic |= frame.isStaticType();
                     if ((frame.containsStaticField(name)
                         || (!inStatic && frame.containsInstanceField(name)))
                         && ((mRegexp == null) || (!getRegexp().match(name)))

@@ -1,47 +1,25 @@
     /**
      * Static helper method to parses a Java source file.
      * @param aContents contains the contents of the file
-     * @throws RecognitionException if parsing failed
      * @throws TokenStreamException if lexing failed
+     * @throws RecognitionException if parsing failed
      * @return the root of the AST
      */
-    public static DetailAST parse(FileContents aContents)
+    public static DetailAST parse(
+        FileContents aContents)
         throws RecognitionException, TokenStreamException
     {
         DetailAST rootAST;
+
         try {
-            // try the 1.4 grammar first, this will succeed for
-            // all code that compiles without any warnings in JDK 1.4,
-            // that should cover most cases
-            final Reader sar = new StringArrayReader(aContents.getLines());
-            final GeneratedJava14Lexer jl = new GeneratedJava14Lexer(sar);
-            jl.setFilename(aContents.getFilename());
-            jl.setCommentListener(aContents);
-
-            final GeneratedJava14Recognizer jr =
-                new SilentJava14Recognizer(jl);
-            jr.setFilename(aContents.getFilename());
-            jr.setASTNodeClass(DetailAST.class.getName());
-            jr.compilationUnit();
-            rootAST = (DetailAST) jr.getAST();
+            rootAST = parse(
+                GeneratedJava15Lexer.class, SilentJava15Recognizer.class,
+                aContents);
         }
-        catch (RecognitionException re) {
-            // Parsing might have failed because the checked
-            // file contains "assert" as an identifier. Retry with a
-            // grammar that treats "assert" as an identifier
-            // and not as a keyword
-
-            // Arghh - the pain - duplicate code!
-            final Reader sar = new StringArrayReader(aContents.getLines());
-            final GeneratedJavaLexer jl = new GeneratedJavaLexer(sar);
-            jl.setFilename(aContents.getFilename());
-            jl.setCommentListener(aContents);
-
-            final GeneratedJavaRecognizer jr = new GeneratedJavaRecognizer(jl);
-            jr.setFilename(aContents.getFilename());
-            jr.setASTNodeClass(DetailAST.class.getName());
-            jr.compilationUnit();
-            rootAST = (DetailAST) jr.getAST();
+        catch (RecognitionException exception) {
+            rootAST = parse(
+                GeneratedJavaLexer.class, GeneratedJavaRecognizer.class,
+                aContents);
         }
         return rootAST;
     }

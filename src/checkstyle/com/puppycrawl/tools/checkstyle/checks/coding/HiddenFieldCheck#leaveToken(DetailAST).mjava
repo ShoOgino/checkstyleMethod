@@ -1,7 +1,10 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void leaveToken(DetailAST aAST)
     {
-        if (aAST.getType() == TokenTypes.CLASS_DEF) {
+        if ((aAST.getType() == TokenTypes.CLASS_DEF)
+            || (aAST.getType() == TokenTypes.ENUM_DEF)
+            || (aAST.getType() == TokenTypes.ENUM_CONSTANT_DEF))
+        {
             //pop
             mFieldsStack.removeLast();
         }

@@ -10,7 +10,7 @@
                     && modifiers.branchContains(TokenTypes.ABSTRACT);
             mClasses.push(new ClassDesc(isFinal, isAbstract));
         }
-        else {
+        else if (!ScopeUtils.inEnumBlock(aAST)) { //ctors in enums don't matter
             final ClassDesc desc = (ClassDesc) mClasses.peek();
             if ((modifiers != null)
                 && modifiers.branchContains(TokenTypes.LITERAL_PRIVATE))

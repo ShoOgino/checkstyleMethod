@@ -11,18 +11,46 @@
         int i = 0;
         DetailAST modifier;
         final Iterator it = aModifiers.iterator();
+        //No modifiers, no problems
+        if (!it.hasNext()) {
+            return null;
+        }
+
+        //Speed past all initial annotations
         do {
-            if (!it.hasNext()) {
-                return null;
+            modifier = (DetailAST) it.next();
+        }
+        while (it.hasNext() && (modifier.getType() == TokenTypes.ANNOTATION));
+
+        //All modifiers are annotations, no problem
+        if (modifier.getType() == TokenTypes.ANNOTATION) {
+            return null;
+        }
+
+        while (i < JLS_ORDER.length) {
+            if (modifier.getType() == TokenTypes.ANNOTATION) {
+                //Annotation not at start of modifiers, bad
+                return modifier;
             }
 
-            modifier = (DetailAST) it.next();
             while ((i < JLS_ORDER.length)
                    && !JLS_ORDER[i].equals(modifier.getText()))
             {
                 i++;
             }
-        } while (i < JLS_ORDER.length);
+
+            if (i == JLS_ORDER.length) {
+                //Current modifier is out of JLS order
+                return modifier;
+            }
+            else if (!it.hasNext()) {
+                //Reached end of modifiers without problem
+                return null;
+            }
+            else {
+                modifier = (DetailAST) it.next();
+            }
+        }
 
         return modifier;
     }

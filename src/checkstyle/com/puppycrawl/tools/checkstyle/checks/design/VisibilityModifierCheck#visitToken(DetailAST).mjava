@@ -9,14 +9,15 @@
 
         final DetailAST varNameAST = getVarNameAST(aAST);
         final String varName = varNameAST.getText();
-        final boolean inInterfaceBlock = inInterfaceBlock(aAST);
+        final boolean inInterfaceOrAnnotationBlock =
+            ScopeUtils.inInterfaceOrAnnotationBlock(aAST);
         final Set mods = getModifiers(aAST);
         final String declaredScope = getVisibilityScope(mods);
         final String variableScope =
-             inInterfaceBlock ? "public" : declaredScope;
+             inInterfaceOrAnnotationBlock ? "public" : declaredScope;
 
         if (!("private".equals(variableScope)
-                || inInterfaceBlock // implicitly static and final
+                || inInterfaceOrAnnotationBlock // implicitly static and final
                 || mods.contains("static") && mods.contains("final")
                 || "package".equals(variableScope) && isPackageAllowed()
                 || "protected".equals(variableScope) && isProtectedAllowed()

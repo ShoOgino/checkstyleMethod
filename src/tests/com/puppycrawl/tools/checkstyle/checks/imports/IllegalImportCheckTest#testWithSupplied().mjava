@@ -6,6 +6,8 @@
         checkConfig.addAttribute("illegalPkgs", "java.io");
         final String[] expected = {
             "9:1: Import from illegal package - java.io.*.",
+            "23:1: Import from illegal package - java.io.File.listRoots.",
+            "27:1: Import from illegal package - java.io.File.createTempFile.",
         };
         verify(checkConfig, getPath("InputImport.java"), expected);
     }

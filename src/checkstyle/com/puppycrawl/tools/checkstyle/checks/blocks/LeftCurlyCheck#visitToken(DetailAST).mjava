@@ -13,8 +13,12 @@
 
         case TokenTypes.INTERFACE_DEF :
         case TokenTypes.CLASS_DEF :
+        case TokenTypes.ANNOTATION_DEF :
+        case TokenTypes.ENUM_DEF :
+        case TokenTypes.ENUM_CONSTANT_DEF :
             startToken = (DetailAST) aAST.getFirstChild();
-            brace = (DetailAST) aAST.getLastChild().getFirstChild();
+            brace = (DetailAST) aAST.findFirstToken(TokenTypes.OBJBLOCK)
+                .getFirstChild();
             break;
 
         case TokenTypes.LITERAL_WHILE:

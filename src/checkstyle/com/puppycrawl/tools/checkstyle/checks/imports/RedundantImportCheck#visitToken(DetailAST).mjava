@@ -2,10 +2,12 @@
     public void visitToken(DetailAST aAST)
     {
         if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
-            final DetailAST nameAST = (DetailAST) aAST.getFirstChild();
-            mPkgName = FullIdent.createFullIdent(nameAST).getText();
+            mPkgName =
+                FullIdent.createFullIdent(
+                    (DetailAST) aAST.getLastChild()
+                        .getPreviousSibling()).getText();
         }
-        else {
+        else if (aAST.getType() == TokenTypes.IMPORT) {
             final FullIdent imp = FullIdent.createFullIdentBelow(aAST);
             if (fromPackage(imp.getText(), "java.lang")) {
                 log(aAST.getLineNo(), aAST.getColumnNo(), "import.lang",
@@ -29,6 +31,25 @@
             }
 
             mImports.add(imp);
+        }
+        else {
+            // Check for a duplicate static import
+            final FullIdent imp =
+                FullIdent.createFullIdent(
+                    aAST.getLastChild().getPreviousSibling());
+            final Iterator it = mStaticImports.iterator();
+            while (it.hasNext()) {
+                final FullIdent full = (FullIdent) it.next();
+                if (imp.getText().equals(full.getText())) {
+                    log(aAST.getLineNo(),
+                        aAST.getColumnNo(),
+                        "import.duplicate",
+                        new Integer(full.getLineNo()),
+                        imp.getText());
+                }
+            }
+
+            mStaticImports.add(imp);
         }
     }
 

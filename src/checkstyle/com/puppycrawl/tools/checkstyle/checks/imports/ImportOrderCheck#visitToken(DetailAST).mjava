@@ -1,7 +1,17 @@
     /** {@inheritDoc} */
     public void visitToken(DetailAST aAST)
     {
-        final FullIdent ident = FullIdent.createFullIdentBelow(aAST);
+        final FullIdent ident;
+        boolean isStatic;
+        if (aAST.getType() == TokenTypes.IMPORT) {
+            ident = FullIdent.createFullIdentBelow(aAST);
+            isStatic = false;
+        }
+        else {
+            ident = FullIdent.createFullIdent(
+                (DetailAST) aAST.getFirstChild().getNextSibling());
+            isStatic = true;
+        }
 
         if (ident != null) {
             String name = ident.getText();
@@ -21,11 +31,28 @@
                 if (mOrdered) {
                     boolean shouldFireError = false;
                     if (mCaseSensitive) {
-                        shouldFireError = (mLastImport.compareTo(name) >= 0);
+                        shouldFireError =
+                            //current and previous static or current and
+                            //previous non-static
+                            (!(mLastImportStatic ^ isStatic)
+                            &&
+                            //and out of lexicographic order
+                            (mLastImport.compareTo(name) >= 0))
+                            ||
+                            //previous static but current is non-static
+                            (mLastImportStatic && !isStatic);
                     }
                     else {
                         shouldFireError =
-                            (mLastImport.compareToIgnoreCase(name) >= 0);
+                                //current and previous static or current and
+                                //previous non-static
+                                (!(mLastImportStatic ^ isStatic)
+                                &&
+                                //and out of lexicographic order
+                                (mLastImport.compareToIgnoreCase(name) >= 0))
+                                ||
+                                //previous static but current is non-static
+                                (mLastImportStatic && !isStatic);
                     }
                     if (shouldFireError) {
                         log(line, "import.ordering", name);
@@ -39,6 +66,7 @@
             mLastGroup = groupIdx;
             mLastImport = name;
             mLastImportLine = aAST.findFirstToken(TokenTypes.SEMI).getLineNo();
+            mLastImportStatic = isStatic;
             mBeforeFirstImport = false;
         }
     }

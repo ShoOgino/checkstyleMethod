@@ -1,7 +1,14 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        final FullIdent imp = FullIdent.createFullIdentBelow(aAST);
+        final FullIdent imp;
+        if (aAST.getType() == TokenTypes.IMPORT) {
+            imp = FullIdent.createFullIdentBelow(aAST);
+        }
+        else {
+            imp = FullIdent.createFullIdent(
+                (DetailAST) aAST.getFirstChild().getNextSibling());
+        }
         if (isIllegalImport(imp.getText())) {
             log(aAST.getLineNo(),
                 aAST.getColumnNo(),

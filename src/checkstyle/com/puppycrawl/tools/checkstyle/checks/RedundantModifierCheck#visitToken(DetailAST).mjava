@@ -1,7 +1,7 @@
     /** @see com.puppycrawl.tools.checkstyle.api.Check */
     public void visitToken(DetailAST aAST)
     {
-        if (ScopeUtils.inInterfaceBlock(aAST)) {
+        if (ScopeUtils.inInterfaceOrAnnotationBlock(aAST)) {
             final DetailAST modifiers =
                 aAST.findFirstToken(TokenTypes.MODIFIERS);
 
@@ -9,7 +9,8 @@
             while (modifier != null) {
 
                 // javac does not allow final or static in interface methods
-                // hence no need to check that this is not a method
+                // order annotation fields hence no need to check that this
+                // is not a method or annotation field
 
                 final int type = modifier.getType();
                 if (type == TokenTypes.LITERAL_PUBLIC

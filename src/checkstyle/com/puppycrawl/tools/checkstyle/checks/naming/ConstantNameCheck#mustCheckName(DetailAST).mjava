@@ -9,7 +9,9 @@
         final boolean isFinal = modifiersAST != null
             && modifiersAST.branchContains(TokenTypes.FINAL);
 
-        if ((isStatic  && isFinal) || ScopeUtils.inInterfaceBlock(aAST)) {
+        if ((isStatic  && isFinal)
+            || ScopeUtils.inInterfaceOrAnnotationBlock(aAST))
+        {
             // Handle the serialVersionUID constant which is used for
             // Serialization. Cannot enforce rules on it. :-)
             final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);

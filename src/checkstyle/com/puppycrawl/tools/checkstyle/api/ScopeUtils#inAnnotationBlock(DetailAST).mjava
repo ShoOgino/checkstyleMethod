@@ -1,0 +1,32 @@
+    /**
+     * Returns whether a node is directly contained within an annotation block.
+     *
+     * @param aAST the node to check if directly contained within an annotation
+     * block
+     * @return a <code>boolean</code> value
+     */
+    public static boolean inAnnotationBlock(DetailAST aAST)
+    {
+        boolean retVal = false;
+
+        // Loop up looking for a containing interface block
+        for (DetailAST token = aAST.getParent();
+             token != null;
+             token = token.getParent())
+        {
+            final int type = token.getType();
+            if (type == TokenTypes.CLASS_DEF) {
+                break; // in a class
+            }
+            else if (type == TokenTypes.LITERAL_NEW) {
+                break; // inner implementation
+            }
+            else if (type == TokenTypes.ANNOTATION_DEF) {
+                retVal = true;
+                break;
+            }
+        }
+
+        return retVal;
+    }
+
