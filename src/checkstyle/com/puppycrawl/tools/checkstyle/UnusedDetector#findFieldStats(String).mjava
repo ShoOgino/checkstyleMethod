@@ -1,0 +1,15 @@
+    /**
+     * @return the FieldStats for the specifed name. If one does not exist, it
+     *         is created
+     * @param aName the field name
+     */
+    private FieldStats findFieldStats(String aName)
+    {
+        FieldStats retVal = (FieldStats) mFieldStats.get(aName);
+        if (retVal == null) {
+            retVal = new FieldStats(aName);
+            mFieldStats.put(aName, retVal);
+        }
+        return retVal;
+    }
+

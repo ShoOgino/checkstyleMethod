@@ -4,10 +4,17 @@
      * to the reportEndBlock().
      * @param aScope the Scope of the type block
      * @param aIsInterface indicates if the block is for an interface
+     * @param aType the name of the type
      */
-    void reportStartTypeBlock(Scope aScope, boolean aIsInterface)
+    void reportStartTypeBlock(Scope aScope,
+                              boolean aIsInterface,
+                              MyCommonAST aType)
     {
         mInScope.push(aScope);
         mInInterface.push(aIsInterface ? Boolean.TRUE : Boolean.FALSE);
+        if (aType != null) {
+            mTypeNames.push(aType.getText());
+            calculateTypeName();
+        }
     }
 

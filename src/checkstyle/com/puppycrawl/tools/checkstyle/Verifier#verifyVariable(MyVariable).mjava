@@ -42,6 +42,14 @@
                           mConfig.getStaticFinalPat());
         }
         else {
+            // Record the name of the variable for detection of unused
+            Map typeVars = (Map) mTypeFieldsMap.get(mCurrentTypeName);
+            if (typeVars == null) {
+                typeVars = new HashMap();
+                mTypeFieldsMap.put(mCurrentTypeName, typeVars);
+            }
+            typeVars.put(aVar.getText(), aVar);
+
             ///////////////////////////////////////////////////////////////////
             // THIS BLOCK NEEDS REFACTORING!!
             ///////////////////////////////////////////////////////////////////

@@ -1,0 +1,13 @@
+    /** @see org.apache.bcel.classfile.Visitor */
+    public void visitCode(Code aCode)
+    {
+        // Process all the instructions
+        final InstructionList list = new InstructionList(aCode.getCode());
+        for (InstructionHandle handle = list.getStart();
+             handle != null;
+             handle = handle.getNext())
+        {
+            handle.getInstruction().accept(mIV);
+        }
+    }
+
