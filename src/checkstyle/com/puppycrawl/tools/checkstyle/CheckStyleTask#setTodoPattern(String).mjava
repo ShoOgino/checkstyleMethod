@@ -1,18 +1,6 @@
     /** @param aPat pattern for todo lines **/
     public void setTodoPattern(final String aPat)
     {
-        mOptionMemory.add(new Runnable()
-            {
-                public void run()
-                {
-                    try {
-                        mConfig.setTodoPat(aPat);
-                    }
-                    catch (RESyntaxException ex) {
-                        throw new BuildException(
-                            "Unable to parse todoPattern - ", ex);
-                    }
-                }
-            });
+        setPatternProperty(Defn.TODO_PATTERN_PROP, aPat, "todoPattern");
     }
 

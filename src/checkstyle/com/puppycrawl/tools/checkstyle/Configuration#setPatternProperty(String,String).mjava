@@ -1,0 +1,14 @@
+    /**
+     * Set an pattern property.
+     * @param aName name of the property to set
+     * @param aPat the value to set
+     * @throws RESyntaxException if an error occurs
+     */
+    public void setPatternProperty(String aName, String aPat)
+        throws RESyntaxException
+    {
+        // Set the regexp first, incase cannot create the RE
+        mRegexps.put(aName, new RE(aPat));
+        mPatterns.put(aName, aPat);
+    }
+

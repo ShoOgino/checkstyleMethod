@@ -3,8 +3,9 @@
     {
         mConfig.setBooleanProperty(Defn.IGNORE_CAST_WHITESPACE_PROP, false);
         mConfig.setParenPadOption(PadOption.NOSPACE);
-        mConfig.setTryBlock(BlockOption.IGNORE);
-        mConfig.setCatchBlock(BlockOption.IGNORE);
+        mConfig.setBlockOptionProperty(Defn.TRY_BLOCK_PROP, BlockOption.IGNORE);
+        mConfig.setBlockOptionProperty(Defn.CATCH_BLOCK_PROP,
+                                       BlockOption.IGNORE);
         final Checker c = createChecker();
         final String filepath = getPath("InputWhitespace.java");
         assertNotNull(c);

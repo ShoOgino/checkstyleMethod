@@ -10,79 +10,70 @@
     public Configuration(Properties aProps, PrintStream aLog)
         throws RESyntaxException, FileNotFoundException, IOException
     {
-        setTodoPat(aProps.getProperty(TODO_PATTERN_PROP, TODO_PATTERN));
-        setParamPat(aProps.getProperty(PARAMETER_PATTERN_PROP,
-                                       PARAMETER_PATTERN));
-        setStaticPat(aProps.getProperty(STATIC_PATTERN_PROP, STATIC_PATTERN));
-        setStaticFinalPat(aProps.getProperty(CONST_PATTERN_PROP,
-                                             CONST_PATTERN));
-        setMemberPat(aProps.getProperty(MEMBER_PATTERN_PROP, MEMBER_PATTERN));
-        setPublicMemberPat(aProps.getProperty(PUBLIC_MEMBER_PATTERN_PROP,
-                                              PUBLIC_MEMBER_PATTERN));
-        setTypePat(aProps.getProperty(TYPE_PATTERN_PROP, TYPE_PATTERN));
-        setLocalVarPat(aProps.getProperty(LOCAL_VAR_PATTERN_PROP,
-                                          LOCAL_VAR_PATTERN));
-        setMethodPat(aProps.getProperty(METHOD_PATTERN_PROP, METHOD_PATTERN));
-        setIgnoreLineLengthPat(aProps.getProperty(
-            IGNORE_LINE_LENGTH_PATTERN_PROP, IGNORE_LINE_LENGTH_PATTERN));
-        setIntProperty(aProps, aLog, MAX_LINE_LENGTH_PROP, MAX_LINE_LENGTH);
-        setIntProperty(aProps, aLog, MAX_METHOD_LENGTH_PROP, MAX_METHOD_LENGTH);
-        setIntProperty(aProps, aLog,
-                       MAX_CONSTRUCTOR_LENGTH_PROP, MAX_CONSTRUCTOR_LENGTH);
-        setIntProperty(aProps, aLog, MAX_FILE_LENGTH_PROP, MAX_FILE_LENGTH);
+        setPatternProperty(aProps, Defn.TODO_PATTERN_PROP, TODO_PATTERN);
+        setPatternProperty(aProps, Defn.PARAMETER_PATTERN_PROP,
+                           PARAMETER_PATTERN);
+        setPatternProperty(aProps, Defn.STATIC_PATTERN_PROP, STATIC_PATTERN);
+        setPatternProperty(aProps, Defn.CONST_PATTERN_PROP, CONST_PATTERN);
+        setPatternProperty(aProps, Defn.MEMBER_PATTERN_PROP, MEMBER_PATTERN);
+        setPatternProperty(aProps, Defn.PUBLIC_MEMBER_PATTERN_PROP,
+                           PUBLIC_MEMBER_PATTERN);
+        setPatternProperty(aProps, Defn.TYPE_PATTERN_PROP, TYPE_PATTERN);
+        setPatternProperty(aProps, Defn.LOCAL_VAR_PATTERN_PROP,
+                           LOCAL_VAR_PATTERN);
+        setPatternProperty(aProps, Defn.METHOD_PATTERN_PROP, METHOD_PATTERN);
+        setPatternProperty(aProps, Defn.IGNORE_LINE_LENGTH_PATTERN_PROP,
+                           IGNORE_LINE_LENGTH_PATTERN);
+        setIntProperty(aProps, aLog, Defn.MAX_LINE_LENGTH_PROP,
+                       MAX_LINE_LENGTH);
+        setIntProperty(aProps, aLog, Defn.MAX_METHOD_LENGTH_PROP,
+                       MAX_METHOD_LENGTH);
+        setIntProperty(aProps, aLog, Defn.MAX_CONSTRUCTOR_LENGTH_PROP,
+                       MAX_CONSTRUCTOR_LENGTH);
+        setIntProperty(aProps, aLog, Defn.MAX_FILE_LENGTH_PROP,
+                       MAX_FILE_LENGTH);
 
-        setBooleanProperty(aProps, ALLOW_TABS_PROP);
-        setIntProperty(aProps, aLog, TAB_WIDTH_PROP, TAB_WIDTH);
-        setBooleanProperty(aProps, ALLOW_PROTECTED_PROP);
-        setBooleanProperty(aProps, ALLOW_PACKAGE_PROP);
-        setBooleanProperty(aProps, ALLOW_NO_AUTHOR_PROP);
+        setBooleanProperty(aProps, Defn.ALLOW_TABS_PROP);
+        setIntProperty(aProps, aLog, Defn.TAB_WIDTH_PROP, TAB_WIDTH);
+        setBooleanProperty(aProps, Defn.ALLOW_PROTECTED_PROP);
+        setBooleanProperty(aProps, Defn.ALLOW_PACKAGE_PROP);
+        setBooleanProperty(aProps, Defn.ALLOW_NO_AUTHOR_PROP);
         setJavadocScope(
-            Scope.getInstance(aProps.getProperty(JAVADOC_CHECKSCOPE_PROP,
+            Scope.getInstance(aProps.getProperty(Defn.JAVADOC_CHECKSCOPE_PROP,
                                                  Scope.PRIVATE.getName())));
-        setBooleanProperty(aProps, REQUIRE_PACKAGE_HTML_PROP);
-        setBooleanProperty(aProps, IGNORE_IMPORTS_PROP);
+        setBooleanProperty(aProps, Defn.REQUIRE_PACKAGE_HTML_PROP);
+        setBooleanProperty(aProps, Defn.IGNORE_IMPORTS_PROP);
         setIllegalImports(
-            aProps.getProperty(ILLEGAL_IMPORTS_PROP, ILLEGAL_IMPORTS));
-        setIllegalInstantiations(aProps.getProperty(ILLEGAL_INSTANTIATIONS_PROP,
-                                                   ILLEGAL_INSTANTIATIONS));
-        setBooleanProperty(aProps, IGNORE_WHITESPACE_PROP);
-        setBooleanProperty(aProps, IGNORE_CAST_WHITESPACE_PROP);
-        setBooleanProperty(aProps, IGNORE_OP_WRAP_PROP);
-        setBooleanProperty(aProps, IGNORE_BRACES_PROP);
-        setBooleanProperty(aProps, IGNORE_LONG_ELL_PROP);
-        setBooleanProperty(aProps, IGNORE_PUBLIC_IN_INTERFACE_PROP);
-        setCacheFile(aProps.getProperty(CACHE_FILE_PROP));
-        setBooleanProperty(aProps, IGNORE_IMPORT_LENGTH_PROP);
-        setHeaderIgnoreLines(aProps.getProperty(HEADER_IGNORE_LINE_PROP));
-        setBooleanProperty(aProps, HEADER_LINES_REGEXP_PROP);
+            aProps.getProperty(Defn.ILLEGAL_IMPORTS_PROP, ILLEGAL_IMPORTS));
+        setIllegalInstantiations(
+            aProps.getProperty(Defn.ILLEGAL_INSTANTIATIONS_PROP,
+                               ILLEGAL_INSTANTIATIONS));
+        setBooleanProperty(aProps, Defn.IGNORE_WHITESPACE_PROP);
+        setBooleanProperty(aProps, Defn.IGNORE_CAST_WHITESPACE_PROP);
+        setBooleanProperty(aProps, Defn.IGNORE_OP_WRAP_PROP);
+        setBooleanProperty(aProps, Defn.IGNORE_BRACES_PROP);
+        setBooleanProperty(aProps, Defn.IGNORE_LONG_ELL_PROP);
+        setBooleanProperty(aProps, Defn.IGNORE_PUBLIC_IN_INTERFACE_PROP);
+        setCacheFile(aProps.getProperty(Defn.CACHE_FILE_PROP));
+        setBooleanProperty(aProps, Defn.IGNORE_IMPORT_LENGTH_PROP);
+        setHeaderIgnoreLines(aProps.getProperty(Defn.HEADER_IGNORE_LINE_PROP));
+        setBooleanProperty(aProps, Defn.HEADER_LINES_REGEXP_PROP);
 
-        final String fname = aProps.getProperty(HEADER_FILE_PROP);
+        final String fname = aProps.getProperty(Defn.HEADER_FILE_PROP);
         if (fname != null) {
             setHeaderFile(fname);
         }
 
-        setLCurlyMethod(getLeftCurlyOptionProperty(
-                            aProps, LCURLY_METHOD_PROP,
-                            LeftCurlyOption.EOL, aLog));
-        setLCurlyType(getLeftCurlyOptionProperty(
-                          aProps, LCURLY_TYPE_PROP,
-                          LeftCurlyOption.EOL, aLog));
-        setLCurlyOther(getLeftCurlyOptionProperty(
-                           aProps, LCURLY_OTHER_PROP,
-                           LeftCurlyOption.EOL, aLog));
+        setLeftCurlyOptionProperty(aProps, Defn.LCURLY_METHOD_PROP, aLog);
+        setLeftCurlyOptionProperty(aProps, Defn.LCURLY_TYPE_PROP, aLog);
+        setLeftCurlyOptionProperty(aProps, Defn.LCURLY_OTHER_PROP, aLog);
         setRCurly(getRightCurlyOptionProperty(
-                      aProps, RCURLY_PROP, RightCurlyOption.SAME, aLog));
-        setTryBlock(
-            getBlockOptionProperty(
-                aProps, TRY_BLOCK_PROP, BlockOption.TEXT, aLog));
-        setCatchBlock(
-            getBlockOptionProperty(
-                aProps, CATCH_BLOCK_PROP, BlockOption.TEXT, aLog));
-        setFinallyBlock(
-            getBlockOptionProperty(
-                aProps, FINALLY_BLOCK_PROP, BlockOption.TEXT, aLog));
+                      aProps, Defn.RCURLY_PROP, RightCurlyOption.SAME, aLog));
+        setBlockOptionProperty(aProps, Defn.TRY_BLOCK_PROP, aLog);
+        setBlockOptionProperty(aProps, Defn.CATCH_BLOCK_PROP, aLog);
+        setBlockOptionProperty(aProps, Defn.FINALLY_BLOCK_PROP, aLog);
         setParenPadOption(getPadOptionProperty(aProps,
-                                               PAREN_PAD_PROP,
+                                               Defn.PAREN_PAD_PROP,
                                                PadOption.NOSPACE,
                                                aLog));
     }

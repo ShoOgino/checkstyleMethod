@@ -1,0 +1,25 @@
+    /**
+     * Set the value of a BlockOption property.
+     * @param aProps the properties set to use
+     * @param aLog where to log errors to
+     * @param aName the name of the property to parse
+     */
+    private void setBlockOptionProperty(Properties aProps,
+                                        String aName,
+                                        PrintStream aLog)
+    {
+        final String strRep = aProps.getProperty(aName);
+        if (strRep != null) {
+            final BlockOption opt = BlockOption.decode(strRep);
+            if (opt == null) {
+                aLog.println("Unable to parse " + aName
+                             + " property with value " + strRep
+                             + ", leaving as " + getBlockOptionProperty(aName)
+                             + ".");
+            }
+            else {
+                setBlockOptionProperty(aName, opt);
+            }
+        }
+    }
+

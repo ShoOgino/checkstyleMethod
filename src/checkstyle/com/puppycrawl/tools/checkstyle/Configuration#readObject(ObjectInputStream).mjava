@@ -13,17 +13,14 @@
         aStream.defaultReadObject();
 
         // initialize the transient fields
+        mRegexps = new HashMap();
         try {
-            setTodoPat(getTodoPat());
-            setParamPat(getParamPat());
-            setStaticPat(getStaticPat());
-            setStaticFinalPat(getStaticFinalPat());
-            setMemberPat(getMemberPat());
-            setPublicMemberPat(getPublicMemberPat());
-            setTypePat(getTypePat());
-            setLocalVarPat(getLocalVarPat());
-            setMethodPat(getMethodPat());
-            setIgnoreLineLengthPat(getIgnoreLineLengthPat());
+            // Loop on the patterns creating the RE's
+            final Iterator keys = mPatterns.keySet().iterator();
+            while (keys.hasNext()) {
+                final String k = (String) keys.next();
+                mRegexps.put(k, new RE((String) mPatterns.get(k)));
+            }
         }
         catch (RESyntaxException ex) {
             // This should never happen, as the serialized regexp patterns

@@ -1,0 +1,23 @@
+    /**
+     * Set the specified LeftCurlyOption property.
+     * @param aName name of property to set
+     * @param aTo the value of the property
+     * @throws BuildException if unable to decode aTo
+     */
+    private void setLeftCurlyOptionProperty(final String aName, String aTo)
+        throws BuildException
+    {
+        final LeftCurlyOption opt = LeftCurlyOption.decode(aTo);
+        if (opt == null) {
+            throw new BuildException("Unable to parse '" + aTo + "'.",
+                                     location);
+        }
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setLeftCurlyOptionProperty(aName, opt);
+                }
+            });
+    }
+

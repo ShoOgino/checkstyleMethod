@@ -1,18 +1,7 @@
     /** @param aPat line length check exclusion pattern */
     public void setIgnoreLineLengthPattern(final String aPat)
     {
-        mOptionMemory.add(new Runnable()
-            {
-                public void run()
-                {
-                    try {
-                        mConfig.setIgnoreLineLengthPat(aPat);
-                    }
-                    catch (RESyntaxException ex) {
-                        throw new BuildException(
-                            "Unable to parse ignoreLineLengthPattern - ", ex);
-                    }
-                }
-            });
+        setPatternProperty(Defn.IGNORE_LINE_LENGTH_PATTERN_PROP, aPat,
+                           "ignoreLineLengthPattern");
     }
 

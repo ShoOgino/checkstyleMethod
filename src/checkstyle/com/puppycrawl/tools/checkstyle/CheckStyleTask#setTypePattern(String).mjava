@@ -1,18 +1,6 @@
     /** @param aPat pattern for type names **/
     public void setTypePattern(final String aPat)
     {
-        mOptionMemory.add(new Runnable()
-            {
-                public void run()
-                {
-                    try {
-                        mConfig.setTypePat(aPat);
-                    }
-                    catch (RESyntaxException ex) {
-                        throw new BuildException(
-                            "Unable to parse typePattern - ", ex);
-                    }
-                }
-            });
+        setPatternProperty(Defn.TYPE_PATTERN_PROP, aPat, "typePattern");
     }
 

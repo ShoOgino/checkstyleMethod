@@ -1,19 +1,6 @@
     /** @param aPat pattern for member variables **/
     public void setMemberPattern(final String aPat)
     {
-        mOptionMemory.add(new Runnable()
-            {
-                public void run()
-                {
-                    try {
-                        mConfig.setMemberPat(aPat);
-                    }
-                    catch (RESyntaxException ex) {
-                        throw new BuildException(
-                            "Unable to parse memberPattern - ", ex);
-                    }
-                }
-            });
-
+        setPatternProperty(Defn.MEMBER_PATTERN_PROP, aPat, "memberPattern");
     }
 

@@ -1,0 +1,25 @@
+    /**
+     * Set the specified pattern property.
+     * @param aName name of property to set
+     * @param aTo the value of the property
+     * @param aLabel the label to display in errors
+     */
+    private void setPatternProperty(final String aName,
+                                    final String aTo,
+                                    final String aLabel)
+    {
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    try {
+                        mConfig.setPatternProperty(aName, aTo);
+                    }
+                    catch (RESyntaxException ex) {
+                        throw new BuildException(
+                            "Unable to parse " + aLabel + " - ", ex);
+                    }
+                }
+            });
+    }
+

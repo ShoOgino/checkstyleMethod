@@ -1,0 +1,25 @@
+    /**
+     * Set the value of a LeftCurlyOption property.
+     * @param aProps the properties set to use
+     * @param aLog where to log errors to
+     * @param aName the name of the property to parse
+     */
+    private void setLeftCurlyOptionProperty(Properties aProps,
+                                            String aName,
+                                            PrintStream aLog)
+    {
+        final String strRep = aProps.getProperty(aName);
+        if (strRep != null) {
+            final LeftCurlyOption opt = LeftCurlyOption.decode(strRep);
+            if (opt == null) {
+                aLog.println("Unable to parse " + aName
+                             + " property with value " + strRep
+                             + ", leaving as "
+                             + getLeftCurlyOptionProperty(aName) + ".");
+            }
+            else {
+                setLeftCurlyOptionProperty(aName, opt);
+            }
+        }
+    }
+

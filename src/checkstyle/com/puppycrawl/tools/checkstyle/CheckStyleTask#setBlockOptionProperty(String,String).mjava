@@ -1,0 +1,24 @@
+    /**
+     * Set the specified BlockOption property.
+     * @param aName name of property to set
+     * @param aTo the value of the property
+     * @throws BuildException if unable to decode aTo
+     */
+    private void setBlockOptionProperty(final String aName, String aTo)
+        throws BuildException
+    {
+        final BlockOption opt = BlockOption.decode(aTo);
+        if (opt == null) {
+            throw new BuildException("Unable to parse '" + aTo + "'.",
+                                     location);
+        }
+
+        mOptionMemory.add(new Runnable()
+            {
+                public void run()
+                {
+                    mConfig.setBlockOptionProperty(aName, opt);
+                }
+            });
+    }
+

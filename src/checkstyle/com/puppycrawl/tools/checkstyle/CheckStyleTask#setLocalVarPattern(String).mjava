@@ -1,18 +1,7 @@
     /** @param aPat pattern for local variables **/
     public void setLocalVarPattern(final String aPat)
     {
-        mOptionMemory.add(new Runnable()
-            {
-                public void run()
-                {
-                    try {
-                        mConfig.setLocalVarPat(aPat);
-                    }
-                    catch (RESyntaxException ex) {
-                        throw new BuildException(
-                            "Unable to parse localVarPattern - ", ex);
-                    }
-                }
-            });
+        setPatternProperty(Defn.LOCAL_VAR_PATTERN_PROP, aPat,
+                           "localVarPattern");
     }
 
