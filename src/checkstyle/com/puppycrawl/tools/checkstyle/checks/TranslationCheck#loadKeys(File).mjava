@@ -5,17 +5,17 @@
      */
     private Set loadKeys(File aFile)
     {
-        InputStream inputStream = null;
-        Set keys = new HashSet();
+        final Set keys = new HashSet();
+        InputStream inStream = null;
 
         try {
             // Load file and properties.
-            inputStream = new FileInputStream(aFile);
-            Properties properties = new Properties();
-            properties.load(inputStream);
+            inStream = new FileInputStream(aFile);
+            Properties props = new Properties();
+            props.load(inStream);
 
             // Gather the keys and put them into a set
-            Enumeration e = properties.propertyNames();
+            final Enumeration e = props.propertyNames();
             while (e.hasMoreElements()) {
                 keys.add(e.nextElement());
             }
@@ -25,7 +25,7 @@
         }
         finally {
             try {
-                inputStream.close();
+                inStream.close();
             }
             catch (IOException e) {
                 logIOException(e, aFile);

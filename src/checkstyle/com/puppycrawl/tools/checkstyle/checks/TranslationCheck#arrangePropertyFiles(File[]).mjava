@@ -7,18 +7,18 @@
      */
     private static Map arrangePropertyFiles(File[] aPropFiles)
     {
-        Map propFileMap = new HashMap();
+        final Map propFileMap = new HashMap();
 
         for (int i = 0; i < aPropFiles.length; i++) {
-            File file = aPropFiles[i];
-            String identifier = extractPropertyIdentifier(file);
+            final File f = aPropFiles[i];
+            final String identifier = extractPropertyIdentifier(f);
 
             Set fileSet = (Set) propFileMap.get(identifier);
             if (fileSet == null) {
                 fileSet = new HashSet();
                 propFileMap.put(identifier, fileSet);
             }
-            fileSet.add(file);
+            fileSet.add(f);
         }
         return propFileMap;
     }

@@ -6,17 +6,17 @@
      */
     private void compareKeySets(Set aKeys, Map aFileMap)
     {
-        Set fls = aFileMap.keySet();
+        final Set fls = aFileMap.keySet();
 
         for (Iterator iter = fls.iterator(); iter.hasNext();) {
-            File currentFile = (File) iter.next();
+            final File currentFile = (File) iter.next();
             final MessageDispatcher dispatcher = getMessageDispatcher();
             final String path = currentFile.getPath();
             dispatcher.fireFileStarted(path);
-            Set currentKeys = (Set) aFileMap.get(currentFile);
+            final Set currentKeys = (Set) aFileMap.get(currentFile);
 
             // Clone the keys so that they are not lost
-            Set keysClone = new HashSet(aKeys);
+            final Set keysClone = new HashSet(aKeys);
             keysClone.removeAll(currentKeys);
 
             // Remaining elements in the key set are missing in the current file
@@ -26,7 +26,8 @@
                     log(0, "translation.missingKey", key);
                 }
             }
-            LocalizedMessage[] errors = getMessageCollector().getMessages();
+            final LocalizedMessage[] errors =
+                getMessageCollector().getMessages();
             getMessageDispatcher().fireErrors(path, errors);
             dispatcher.fireFileFinished(path);
         }
