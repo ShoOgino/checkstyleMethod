@@ -1,0 +1,14 @@
+    /**
+     * Increasing current nesting depth.
+     * @param aAST note which increases nesting.
+     * @param aMessageId message id for logging error.
+     */
+    protected final void nestIn(DetailAST aAST, String aMessageId)
+    {
+        if (mDepth > mMax) {
+            log(aAST.getLineNo(), aAST.getColumnNo(), aMessageId,
+                new Integer(mDepth), new Integer(mMax));
+        }
+        ++mDepth;
+    }
+

@@ -1,0 +1,14 @@
+    public void testDefault() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(NestedTryDepthCheck.class);
+
+        final String[] expected = {
+            "20:17: Nested try depth is 2 (max allowed is 1).",
+            "31:17: Nested try depth is 2 (max allowed is 1).",
+            "32:21: Nested try depth is 3 (max allowed is 1).",
+        };
+
+        verify(checkConfig, getPath("coding/InputNestedTryDepth.java"), expected);
+    }
+

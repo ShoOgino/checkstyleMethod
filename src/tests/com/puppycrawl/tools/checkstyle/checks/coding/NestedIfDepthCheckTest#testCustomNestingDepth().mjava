@@ -1,0 +1,12 @@
+    public void testCustomNestingDepth() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(NestedIfDepthCheck.class);
+        checkConfig.addAttribute("max", "2");
+
+        final String[] expected = {
+        };
+
+        verify(checkConfig, getPath("coding/InputNestedIfDepth.java"), expected);
+    }
+

@@ -1,0 +1,12 @@
+    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    public void visitToken(DetailAST aAST)
+    {
+        switch (aAST.getType()) {
+        case TokenTypes.LITERAL_TRY:
+            visitLiteralTry(aAST);
+            break;
+        default:
+            throw new IllegalStateException(aAST.toString());
+        }
+    }
+

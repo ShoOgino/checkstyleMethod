@@ -1,0 +1,11 @@
+    /**
+     * Increases current nesting depth.
+     * @param aIf node for if.
+     */
+    private void visitLiteralIf(DetailAST aIf)
+    {
+        if (!CheckUtils.isElseIf(aIf)) {
+            nestIn(aIf, "nested.if.depth");
+        }
+    }
+
