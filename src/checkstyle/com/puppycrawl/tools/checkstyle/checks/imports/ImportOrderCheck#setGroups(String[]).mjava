@@ -1,0 +1,21 @@
+    /**
+     * sets the list of package groups and the order they should
+     * occur in the  file.
+     *
+     * @param aGroups a comma-separated list of package names/prefixes
+     */
+    public void setGroups(String[] aGroups)
+    {
+        mGroups = new String[ aGroups.length ];
+
+        for (int i = 0; i < aGroups.length; i++) {
+            String pkg = aGroups[i];
+
+            if (!pkg.endsWith(".")) {
+                pkg = pkg + ".";
+            }
+
+            mGroups[i] = pkg;
+        }
+    }
+

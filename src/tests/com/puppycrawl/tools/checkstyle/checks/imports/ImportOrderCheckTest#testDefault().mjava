@@ -1,0 +1,12 @@
+    public void testDefault() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
+        final String[] expected = {
+            "3: Wrong order for 'java.awt.Dialog' import.",
+            "8: Wrong order for 'java.io.File' import.",
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder.java"), expected);
+    }
+
