@@ -1,0 +1,18 @@
+    /**
+     * Dumps out a duplicate report.
+     * @param aEquivalent number of equivalent lines
+     * @param aILine location of duplicate code
+     * within file that is currently checked
+     * @param aJFile the other file that contains the duplicate
+     * @param aJLine location of duplicate code within aJFile
+     */
+    private void reportDuplicate(
+            int aEquivalent, int aILine, File aJFile, int aJLine)
+    {
+        final Integer dupLines = new Integer(aEquivalent);
+        final Integer startLine = new Integer(aJLine);
+        log(aILine, "duplicates.lines",
+                new Object[]{dupLines, aJFile, startLine});
+        mDuplicates += 1;
+    }
+

@@ -1,0 +1,20 @@
+    /**
+     * Dump out statistics data on stderr.
+     * @param aStart start time
+     * @param aEndReading end time of reading phsical files
+     * @param aEndSearching end time duplicate analysis
+     */
+    private void dumpStats(long aStart, long aEndReading, long aEndSearching)
+    {
+        if (LOG.isDebugEnabled()) {
+            final long cacheLookups = mCacheHits + mCacheMisses;
+            final long initTime = aEndReading - aStart;
+            final long workTime = aEndSearching - aEndReading;
+            LOG.debug("cache hits = " + mCacheHits + "/" + cacheLookups);
+            LOG.debug("files = " + mFiles.length);
+            LOG.debug("loc = " + mLoc);
+            LOG.debug("duplicates = " + mDuplicates);
+            LOG.debug("Runtime = " + initTime + " + " + workTime);
+        }
+    }
+

@@ -1,0 +1,41 @@
+    /**
+     * Compare two files and search for duplicates.
+     * @param aI mLineChecksums index of the first file to compare
+     * @param aJ mLineChecksums index of the seconds file to compare
+     */
+    private void findDuplicatesInFiles(int aI, int aJ)
+    {
+        final int iFileLength = mLineChecksums[aI].length;
+
+        // build up some supporting data structures
+        final boolean[] iLineOccurInJ = new boolean[iFileLength];
+        for (int iLine = 0; iLine < iFileLength; iLine++) {
+            iLineOccurInJ[iLine] = (Arrays.binarySearch(
+                mSortedRelevantChecksums[aJ], mLineChecksums[aI][iLine]) >= 0);
+        }
+
+        // go through all the lines in iFile and check if the following
+        // mMin lines occur in jFile
+        for (int iLine = 0; iLine < iFileLength - mMin; iLine++) {
+
+            // fast exit if one of the lines does not occur in jFile at all
+            boolean fastExit = false;
+            final int kLimit = iFileLength - iLine;
+            for (int k = 0; k < Math.min(mMin, kLimit); k++) {
+                if (!iLineOccurInJ[iLine + k]) {
+                    fastExit = true;
+                    break;
+                }
+            }
+
+            if (!fastExit) {
+                // all lines do occur -> brute force searching
+                mCacheMisses += 1;
+                iLine = findDuplicateFromLine(aI, aJ, iLine);
+            }
+            else {
+                mCacheHits += 1;
+            }
+        }
+    }
+

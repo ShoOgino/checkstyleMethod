@@ -1,0 +1,16 @@
+        /**
+         * computes a checksum for a aLine. to avoid false alarms it is
+         * important that different lines result in different checksums.
+         * @param aLine the aLine
+         * @return checksum
+         */
+        private long calcChecksum(String aLine)
+        {
+            if (aLine.startsWith("import ")) {
+                return IGNORE;
+            }
+            else {
+                return reallyCalcChecksum(aLine);
+            }
+        }
+

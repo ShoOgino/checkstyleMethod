@@ -1,0 +1,22 @@
+        /**
+         * Does the dirty work for computing a checksum for a aLine.
+         * @param aLine the aLine
+         * @return checksum
+         */
+        private long reallyCalcChecksum(String aLine)
+        {
+            // important that it's larger than the length of most lines
+            // see http://www.utm.edu/research/primes/lists/small/1000.txt
+            final int bigPrime = 317;
+
+            // TODO: Not sure that this algorithm makes it
+            // sufficiently improbable to get false alarms
+            long result = 0;
+            for (int i = 0; i < aLine.length(); i++) {
+                long c = aLine.charAt(i);
+                long idx = i;
+                result += bigPrime * idx + c;
+            }
+            return result;
+        }
+

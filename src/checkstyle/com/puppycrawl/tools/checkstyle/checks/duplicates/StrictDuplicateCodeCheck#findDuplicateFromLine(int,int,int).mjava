@@ -1,0 +1,36 @@
+    /**
+     * Find and report a duplicate of the code starting from line aILine
+     * in file aI in the file aJ
+     * @param aI index of file that contains the candidate code
+     * @param aJ index of file that is searched for a dup of the candidate
+     * @param aILine starting line of the candidate in aI
+     * @return the next line in file i where
+     * starting to search will make sense
+     */
+    private int findDuplicateFromLine(int aI, int aJ, int aILine)
+    {
+        // Using something more advanced like Boyer-Moore might be a
+        // good idea...
+
+        final int iFileLength = mLineChecksums[aI].length;
+        final int jFileLength = mLineChecksums[aJ].length;
+
+        for (int jLine = 0; jLine < jFileLength - mMin; jLine++) {
+            int equivalent = 0;
+            while (aILine + equivalent < iFileLength
+                    && jLine + equivalent < jFileLength
+                    && mLineChecksums[aI][aILine + equivalent] != IGNORE
+                    && mLineChecksums[aI][aILine + equivalent]
+                       == mLineChecksums[aJ][jLine + equivalent])
+            {
+                equivalent += 1;
+            }
+            if ((aI != aJ || aILine != jLine) && equivalent >= mMin) {
+                reportDuplicate(
+                        equivalent, aILine, mFiles[aJ], jLine);
+                aILine += equivalent; // skip to end of equivalent section
+            }
+        }
+        return aILine;
+    }
+

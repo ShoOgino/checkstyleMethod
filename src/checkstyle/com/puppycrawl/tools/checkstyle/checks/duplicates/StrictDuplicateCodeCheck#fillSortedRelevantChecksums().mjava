@@ -1,0 +1,27 @@
+    /**
+     * filters and sorts the relevant lines and stores the result
+     * in sortedRelevantChecksums during the setup phase.
+     * That data is later used in a binary search to find out
+     * if it is worth investigating a file for duplicates of a block.
+     * If one of the lines in the block does not occur in the other file
+     * at all, we can skip that file quickly.
+     */
+    private void fillSortedRelevantChecksums()
+    {
+        for (int i = 0; i < mLineChecksums.length; i++) {
+            int count = 0;
+            long[] checksums = mLineChecksums[i];
+            long[] relevant = new long[checksums.length];
+            for (int j = 0; j < checksums.length; j++) {
+                long checksum = checksums[j];
+                if (checksum != IGNORE) {
+                    relevant[count++] = checksum;
+                }
+            }
+            Arrays.sort(relevant, 0, count);
+            long[] result = new long[count];
+            System.arraycopy(relevant, 0, result, 0, count);
+            mSortedRelevantChecksums[i] = result;
+        }
+    }
+
