@@ -1,0 +1,37 @@
+    public void visitToken(DetailAST aAST)
+    {
+        // paranoia
+        if (aAST.getType() != TokenTypes.METHOD_DEF) {
+            return;
+        }
+
+        AST modifiers = aAST.getFirstChild();
+        final Set mods = new HashSet();
+        AST modifier = modifiers.getFirstChild();
+        while (modifier != null) {
+            mods.add(modifier.getText());
+            modifier = modifier.getNextSibling();
+        }
+
+        AST type = modifiers.getNextSibling();
+        AST methodName = type.getNextSibling();
+        DetailAST parameters = (DetailAST) methodName.getNextSibling();
+
+        if (type.getFirstChild().getType() == TokenTypes.LITERAL_BOOLEAN
+                && "equals".equals(methodName.getText())
+                && mods.contains("public")
+                && parameters.getChildCount() == 1
+                && isObjectParam(parameters.getFirstChild())
+                )
+        {
+            objBlockEquals.put(aAST.getParent(), aAST);
+        }
+        else if (type.getFirstChild().getType() == TokenTypes.LITERAL_INT
+                && "hashCode".equals(methodName.getText())
+//                && modifiers.subTreeContains(TokenTypes.LITERAL_PUBLIC)
+                && parameters.getFirstChild() == null) // no params
+        {
+            objBlockWithHashCode.add(aAST.getParent());
+        }
+    }
+

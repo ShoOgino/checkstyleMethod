@@ -1,0 +1,16 @@
+    public void finishTree()
+    {
+        Set equalsDefs = objBlockEquals.keySet();
+        for (Iterator it = equalsDefs.iterator(); it.hasNext();) {
+            Object objBlock = it.next();
+            if (!objBlockWithHashCode.contains(objBlock)) {
+                DetailAST equalsAST = (DetailAST) objBlockEquals.get(objBlock);
+                log(equalsAST.getLineNo(), equalsAST.getColumnNo(),
+                        "equals.noHashCode");
+            }
+        }
+
+        objBlockEquals.clear();
+        objBlockWithHashCode.clear();
+    }
+
