@@ -1,0 +1,13 @@
+    public void testAbstractBeanBean()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(EntityBeanCheck.class);
+        checkConfig.addAttribute("persistence", 
+             PersistenceOption.BEAN.toString());
+        final String[] expected = {
+            "8:23: Entity bean 'InputAbstractEntityBean' must not be abstract.",
+        };
+        verify(checkConfig, getPath("j2ee/InputAbstractEntityBean.java"), expected);
+    }
+

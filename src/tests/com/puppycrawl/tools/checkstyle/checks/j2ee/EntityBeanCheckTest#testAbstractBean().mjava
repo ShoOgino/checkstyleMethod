@@ -1,0 +1,13 @@
+    public void testAbstractBean()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(EntityBeanCheck.class);
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("j2ee/InputAbstractEntityBean.java"), expected);
+        checkConfig.addAttribute("persistence", 
+             PersistenceOption.CONTAINER.toString());
+        verify(checkConfig, getPath("j2ee/InputAbstractEntityBean.java"), expected);
+    }
+

@@ -1,0 +1,16 @@
+    public void testDefault()
+            throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(LocalHomeInterfaceCheck.class);
+        final String[] expected = {
+            "11:18: Home interface 'InputLocalHomeInterface' must have method 'findByPrimaryKey()'.",
+            "17:19: Method 'createSomething' must be non-void.",
+            "17:19: Method 'createSomething' must throw 'javax.ejb.CreateException'.",
+            "19:19: Method 'findSomething' must be non-void.",
+            "19:19: Method 'findSomething' must throw 'javax.ejb.FinderException'.",
+            "24:17: Method 'method' must not throw 'java.rmi.RemoteException'.",
+        };
+        verify(checkConfig, getPath("j2ee/InputLocalHomeInterface.java"), expected);
+    }
+

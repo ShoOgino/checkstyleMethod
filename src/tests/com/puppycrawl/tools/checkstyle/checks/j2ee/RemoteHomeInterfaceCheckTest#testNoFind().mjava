@@ -1,0 +1,16 @@
+    public void testNoFind() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RemoteHomeInterfaceCheck.class);
+        final String[] expected =
+            {
+                "16:19: Method 'findByPrimaryKey' must have 1 parameter(s).",
+                "19:19: Home interface can have only one 'findByPrimaryKey()' method.",
+                "19:19: Method 'findByPrimaryKey' must have 1 parameter(s).",
+                };
+        verify(
+            checkConfig,
+            getPath("j2ee/InputRemoteHomeInterfaceNoFind.java"),
+            expected);
+    }
+
