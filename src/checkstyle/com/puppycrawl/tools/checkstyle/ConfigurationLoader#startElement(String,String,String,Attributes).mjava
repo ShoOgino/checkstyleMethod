@@ -9,9 +9,6 @@
         if (aQName.equals("config")) {
             //create configuration
             final String name = aAtts.getValue("name");
-            if (name == null) {
-                throw new SAXException("missing config name");
-            }
             final DefaultConfiguration conf = new DefaultConfiguration(name);
             if (mConfiguration == null) {
                 mConfiguration = conf;
@@ -19,7 +16,7 @@
 
             //add configuration to it's parent
             if (!mConfigStack.isEmpty()) {
-                DefaultConfiguration top =
+                final DefaultConfiguration top =
                         (DefaultConfiguration) mConfigStack.peek();
                 top.addChild(conf);
             }
@@ -27,31 +24,21 @@
             mConfigStack.push(conf);
         }
         else if (aQName.equals("property")) {
-
             //extract name and value
             final String name = aAtts.getValue("name");
-            String value = aAtts.getValue("value");
-
-            // expand properties
-            if (mOverrideProps != null) {
-                try {
-                    value = Utils.replaceProperties(value, mOverrideProps);
-                }
-                catch (CheckstyleException ex) {
-                    throw new SAXException(ex.getMessage());
-                }
+            final String value;
+            try {
+                value = Utils.replaceProperties(aAtts.getValue("value"),
+                                                mOverrideProps);
+            }
+            catch (CheckstyleException ex) {
+                throw new SAXException(ex.getMessage());
             }
 
             //add to attributes of configuration
-            if (!mConfigStack.isEmpty()) {
-                final DefaultConfiguration top =
-                        (DefaultConfiguration) mConfigStack.peek();
-                top.addAttribute(name, value);
-            }
-            else {
-                throw new SAXException(
-                            "property " + name + "has no config parent");
-            }
+            final DefaultConfiguration top =
+                (DefaultConfiguration) mConfigStack.peek();
+            top.addAttribute(name, value);
         }
     }
 
