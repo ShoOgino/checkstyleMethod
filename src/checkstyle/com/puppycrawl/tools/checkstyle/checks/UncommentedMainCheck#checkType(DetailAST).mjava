@@ -1,0 +1,12 @@
+    /**
+     * Checks that return type is <code>void</code>.
+     * @param aMethod the METHOD_DEF node
+     * @return true if check passed, false otherwise
+     */
+    private boolean checkType(DetailAST aMethod)
+    {
+        DetailAST type =
+            (DetailAST) aMethod.findFirstToken(TokenTypes.TYPE).getFirstChild();
+        return type.getType() == TokenTypes.LITERAL_VOID;
+    }
+

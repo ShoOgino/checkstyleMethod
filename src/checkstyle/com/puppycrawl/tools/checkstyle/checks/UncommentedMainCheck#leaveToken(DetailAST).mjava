@@ -1,0 +1,11 @@
+    /** @see Check */
+    public void leaveToken(DetailAST aAst)
+    {
+        if (aAst.getType() == TokenTypes.CLASS_DEF) {
+            if (mClassDepth == 1) {
+                mCurrentClass = null;
+            }
+            mClassDepth--;
+        }
+    }
+

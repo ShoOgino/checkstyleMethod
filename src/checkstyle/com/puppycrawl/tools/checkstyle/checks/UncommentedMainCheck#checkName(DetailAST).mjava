@@ -1,0 +1,11 @@
+    /**
+     * Checks that method name is @quot;main@quot;.
+     * @param aMethod the METHOD_DEF node
+     * @return true if check passed, false otherwise
+     */
+    private boolean checkName(DetailAST aMethod)
+    {
+        DetailAST ident = aMethod.findFirstToken(TokenTypes.IDENT);
+        return "main".equals(ident.getText());
+    }
+

@@ -1,0 +1,16 @@
+    /**
+     * If not inner class then change current class name.
+     * @param aClass node for class definition
+     */
+    private void visitClassDef(DetailAST aClass)
+    {
+        // we are not use inner classes because they can not
+        // have static methods
+        if (mClassDepth == 0) {
+            DetailAST ident = aClass.findFirstToken(TokenTypes.IDENT);
+            mCurrentClass = mPackage.getText() + "." + ident.getText();
+            mClassDepth++;
+        }
+        return;
+    }
+

@@ -1,0 +1,18 @@
+    /** @see Check */
+    public void visitToken(DetailAST aAst)
+    {
+        switch (aAst.getType()) {
+        case TokenTypes.PACKAGE_DEF:
+            visitPackageDef(aAst);
+            break;
+        case TokenTypes.CLASS_DEF:
+            visitClassDef(aAst);
+            break;
+        case TokenTypes.METHOD_DEF:
+            visitMethodDef(aAst);
+            break;
+        default:
+            throw new IllegalStateException(aAst.toString());
+        }
+    }
+

@@ -1,0 +1,22 @@
+    /**
+     * Checks method definition if this is
+     * <code>public static void main(String[])</code>.
+     * @param aMethod method definition node
+     */
+    private void visitMethodDef(DetailAST aMethod)
+    {
+        if (mClassDepth != 1) {
+            // method in inner class or in interface definition
+            return;
+        }
+
+        if (checkClassName()
+            && checkName(aMethod)
+            && checkModifiers(aMethod)
+            && checkType(aMethod)
+            && checkParams(aMethod))
+        {
+            log(aMethod.getLineNo(), "uncommented.main");
+        }
+    }
+

@@ -1,0 +1,13 @@
+    public void testDefaults()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(UncommentedMainCheck.class);
+        final String[] expected = {
+            "14: Uncommented main method found.",
+            "23: Uncommented main method found.",
+            "32: Uncommented main method found.",
+        };
+        verify(checkConfig, getPath("InputUncommentedMain.java"), expected);
+    }
+
