@@ -1,0 +1,14 @@
+    public void testIgnoreCommentsCStyle()
+            throws Exception
+    {
+        // See if the comment is removed properly
+        final String illegal = "c-style 1";
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(GenericIllegalRegexpCheck.class);
+        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("ignoreComments", "true");
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputTrailingComment.java"), expected);
+    }
+
