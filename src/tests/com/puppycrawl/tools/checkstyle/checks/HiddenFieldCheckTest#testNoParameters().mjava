@@ -4,8 +4,6 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(HiddenFieldCheck.class);
         checkConfig.addAttribute("checkParameters", "false");
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputHiddenField.java");
         final String[] expected = {
             "18:13: 'hidden' hides a field.",
             "27:13: 'hidden' hides a field.",
@@ -19,6 +17,6 @@
             "77:17: 'hidden' hides a field.",
             "82:13: 'hidden' hides a field.",
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputHiddenField.java"), expected);
     }
 

@@ -5,11 +5,9 @@
             createCheckConfig(RegexpHeaderCheck.class);
         checkConfig.addAttribute("headerFile", getPath("regexp.header"));
         checkConfig.addAttribute("ignoreLines", "4,5");
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputScopeAnonInner.java");
         final String[] expected = {
             "3: Line does not match expected header line of '// Created: 2002'."
         };
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
     }
 

@@ -1,0 +1,12 @@
+    public void testTranslation()
+         throws Exception
+    {
+        final Configuration checkConfig =
+            createCheckConfig(TestFileSetCheck.class);
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
+
+        assertTrue("destroy() not called by Checker", TestFileSetCheck.isDestroyed());
+    }
+

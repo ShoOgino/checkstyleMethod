@@ -4,13 +4,10 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(HeaderCheck.class);
         // No header file specified
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputScopeAnonInner.java");
-
         final String[] expected = {
             "1: Unable to check as missing lines to check."
         };
 
-        verify(c, fname, expected);
+        verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
     }
 

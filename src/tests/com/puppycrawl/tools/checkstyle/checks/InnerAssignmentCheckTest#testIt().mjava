@@ -2,15 +2,12 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(InnerAssignmentCheck.class);
-        final Checker c = createChecker(checkConfig);
-        final String fname = getPath("InputSemantic.java");
         final String[] expected = {
             "102:15: Avoid inner assignments.",
             "102:19: Avoid inner assignments.",
             "104:39: Avoid inner assignments.",
             "106:35: Avoid inner assignments.",
         };
-        verify(c, fname, expected);
-
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
     }
 
