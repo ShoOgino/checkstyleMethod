@@ -9,8 +9,7 @@
      */
     public void process(File[] aFiles)
     {
-        final Set dirs = getParentDirs(aFiles);
-        final Set propertyFiles = getPropertyFiles(dirs);
+        File[] propertyFiles = filter(aFiles);
         final Map propFilesMap = arrangePropertyFiles(propertyFiles);
         checkPropertyFileSets(propFilesMap);
     }

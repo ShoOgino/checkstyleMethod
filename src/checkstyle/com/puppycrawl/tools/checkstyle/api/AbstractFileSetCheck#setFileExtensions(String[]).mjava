@@ -1,0 +1,24 @@
+    /**
+     * Sets the file extensions that identify the files that pass the
+     * filter of this FileSetCheck.
+     * @param aExtensions the set of file extensions. A missing
+     * initial '.' character of an extension is automatically added.
+     */
+    public final void setFileExtensions(String[] aExtensions)
+    {
+        if (aExtensions == null) {
+            mFileExtensions = null;
+            return;
+        }
+        mFileExtensions = new String[aExtensions.length];
+        for (int i = 0; i < aExtensions.length; i++) {
+            String extension = aExtensions[i];
+            if (extension.startsWith(".")) {
+                mFileExtensions[i] = extension;
+            }
+            else {
+                mFileExtensions[i] = "." + extension;
+            }
+        }
+    }
+

@@ -1,0 +1,30 @@
+    /**
+     * Determines the set of files this FileSetCheck is interested in.
+     * Returns the files that have one of the currently active file extensions.
+     * If no file extensions are active the argument array is returned.
+     *
+     * Determines the set of files this FileSetCheck is interested in. For
+     * example a FileSetCheck that processes java files should return only
+     * the java files in the argument array.
+     *
+     * @param aFiles the candidates for processing
+     * @return the subset of aFiles that this FileSetCheck should process
+     */
+    protected final File[] filter(File[] aFiles)
+    {
+        if (mFileExtensions == null || mFileExtensions.length == 0) {
+            return aFiles;
+        }
+        ArrayList files = new ArrayList(aFiles.length);
+        for (int i = 0; i < aFiles.length; i++) {
+            File file = aFiles[i];
+            for (int j = 0; j < mFileExtensions.length; j++) {
+                String fileExtension = mFileExtensions[j];
+                if (file.getName().endsWith(fileExtension)) {
+                    files.add(file);
+                }
+            }
+        }
+        return (File[]) files.toArray(new File[files.size()]);
+    }
+

@@ -5,9 +5,13 @@
         final String[] expected = {
             "0: Key 'only.english' missing."
         };
+        final File[] propertyFiles = new File[] {
+            new File(getPath("messages_de.properties")),
+            new File(getPath("messages.properties"))
+        };
         verify(
             createChecker(checkConfig),
-            getPath("InputScopeAnonInner.java"),
+            propertyFiles,
             getPath("messages_de.properties"),
             expected);
     }

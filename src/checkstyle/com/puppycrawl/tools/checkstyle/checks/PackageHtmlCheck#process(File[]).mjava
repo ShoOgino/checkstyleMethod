@@ -5,7 +5,8 @@
      */
     public void process(File[] aFiles)
     {
-        Set directories = getParentDirs(aFiles);
+        File[] javaFiles = filter(aFiles);
+        Set directories = getParentDirs(javaFiles);
         for (Iterator it = directories.iterator(); it.hasNext();) {
             File dir = (File) it.next();
             File packageHtml = new File(dir, "package.html");
