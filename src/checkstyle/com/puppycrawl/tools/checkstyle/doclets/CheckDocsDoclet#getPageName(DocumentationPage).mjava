@@ -1,0 +1,17 @@
+    /**
+     * Calculates the human readable page name for a doc page.
+     *
+     * @param aPage the doc page.
+     * @return the human readable page name for the doc page.
+     */
+    private static String getPageName(DocumentationPage aPage)
+    {
+        final String packageName = aPage.getPackageName();
+        String pageName =
+                packageName.substring(packageName.lastIndexOf('.') + 1);
+        if ("checks".equals(pageName)) {
+            return "misc";
+        }
+        return pageName;
+    }
+

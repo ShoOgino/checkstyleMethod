@@ -1,0 +1,58 @@
+        /**
+         * Write page.
+         * @param aWriter the target to write to
+         * @throws IOException if there are problems writing output
+         */
+        private void write(Writer aWriter) throws IOException
+        {
+            // TODO: use velocity to implement this method???
+            PrintWriter pw = new PrintWriter(aWriter);
+            pw.println("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
+            pw.println("<document>");
+            pw.println("<properties>");
+            pw.println("<title>" + getTitle() + "</title>");
+            pw.println("<author email=\"checkstyle-devel@lists.sourceforge.net"
+                    + "\">Checkstyle Development Team</author>");
+            pw.println("</properties>");
+            pw.println("<body>");
+            pw.flush();
+            final Tag[] packageInlineTags = mPackageDoc.inlineTags();
+            for (int i = 0; i < packageInlineTags.length; i++) {
+                Tag packageInlineTag = packageInlineTags[i];
+                final String text = packageInlineTag.text();
+                aWriter.write(text);
+            }
+
+
+            Set checkNames = mChecks.keySet();
+            for (Iterator it = checkNames.iterator(); it.hasNext();) {
+                String checkName = (String) it.next();
+
+                pw.println("<section name=\"" + checkName + "\">");
+                ClassDoc classDoc = (ClassDoc) mChecks.get(checkName);
+                final Tag[] classInlineTags = classDoc.inlineTags();
+                for (int j = 0; j < classInlineTags.length; j++) {
+                    Tag inlineTag = classInlineTags[j];
+                    if ("@see".equals(inlineTag.kind())) {
+                        // this works fine for TokenType @links
+                        // TODO: check for other link packageInlineTags
+                        SeeTag seeTag = (SeeTag) inlineTag;
+                        String memberName = seeTag.referencedMemberName();
+
+                        aWriter.write(memberName != null
+                                ? memberName
+                                : seeTag.text());
+                    }
+                    else {
+                        aWriter.write(inlineTag.text());
+                    }
+                }
+                pw.println();
+                pw.println("</section>\n");
+
+            }
+
+            pw.println("</body>");
+            pw.println("</document>");
+        }
+

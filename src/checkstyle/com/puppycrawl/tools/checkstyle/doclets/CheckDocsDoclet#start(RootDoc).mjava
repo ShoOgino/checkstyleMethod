@@ -1,0 +1,35 @@
+    /**
+     * Doclet entry point.
+     * @param aRoot parsed javadoc of all java files passed to the javadoc task
+     * @return true (TODO: semantics of the return value is not clear to me)
+     * @throws IOException if there are problems writing output
+     */
+    public static boolean start(RootDoc aRoot) throws IOException
+    {
+        final ClassDoc[] classDocs = aRoot.classes();
+        for (int i = 0; i < classDocs.length; i++) {
+            ClassDoc classDoc = classDocs[i];
+            // TODO: introduce a "CheckstyleModule" interface
+            // so we can do better in the next line...
+            if (classDoc.typeName().endsWith("Check")
+                    && !classDoc.isAbstract())
+            {
+                DocumentationPage page = findDocumentationPage(classDoc);
+                page.addCheck(classDoc);
+            }
+        }
+
+        final Collection pages = sDocumentationPages.values();
+        final File destDir = new File(getDestDir(aRoot.options()));
+        for (Iterator it = pages.iterator(); it.hasNext();) {
+            DocumentationPage page = (DocumentationPage) it.next();
+            String pageName = getPageName(page);
+            File outfile = new File(destDir, "config_" + pageName + ".xml");
+            Writer writer = new FileWriter(outfile);
+            page.write(writer);
+            writer.close();
+        }
+
+        return true;
+    }
+

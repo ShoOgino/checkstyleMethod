@@ -1,0 +1,30 @@
+        /**
+         * Calculates the title of the DocumentationPage using the first
+         * sentence in the package javadoc.
+         * If parts of the first sentence are enclosed between
+         * {@link #PAGETITLE} and {@link #PAGETITLE_END}, only those parts
+         * are returned.
+         *
+         * @return the calculated title
+         */
+        private String getTitle()
+        {
+            final Tag[] tags = mPackageDoc.firstSentenceTags();
+            final String tagText = tags[0].text();
+            final int pagetitleIdx = tagText.indexOf(PAGETITLE);
+            final StringBuffer text;
+            if (pagetitleIdx != -1) {
+                int titleEndIdx = tagText.indexOf(PAGETITLE_END, pagetitleIdx);
+                final int titleStartIdx = pagetitleIdx + PAGETITLE.length();
+                text = new StringBuffer(
+                        tagText.substring(titleStartIdx, titleEndIdx));
+            }
+            else {
+                text = new StringBuffer(tagText);
+            }
+            removeClosingDot(text);
+            removeOpeningParagraphTag(text);
+            System.out.println("text = '" + text + "'");
+            return text.toString().trim();
+        }
+
