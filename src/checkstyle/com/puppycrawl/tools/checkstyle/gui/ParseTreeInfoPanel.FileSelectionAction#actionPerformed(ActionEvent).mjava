@@ -1,0 +1,12 @@
+        public void actionPerformed(ActionEvent e)
+        {
+            JFileChooser fc = new JFileChooser();
+            FileFilter filter = new JavaFileFilter();
+            fc.setFileFilter(filter);
+            final Component parent =
+                SwingUtilities.getRoot(ParseTreeInfoPanel.this);
+            fc.showDialog(parent, "Open");
+            File file = fc.getSelectedFile();
+            openFile(file, parent);
+        }
+

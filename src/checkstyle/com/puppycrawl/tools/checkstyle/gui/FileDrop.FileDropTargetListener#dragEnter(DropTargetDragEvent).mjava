@@ -1,0 +1,15 @@
+        public void dragEnter(DropTargetDragEvent evt)
+        {
+            if (isDragOk(evt)) {
+                if (mC instanceof JComponent) {
+                    JComponent jc = (JComponent) mC;
+                    normalBorder = jc.getBorder();
+                    jc.setBorder(mDragBorder);
+                }
+                evt.acceptDrag(DnDConstants.ACTION_COPY);
+            }
+            else {
+                evt.rejectDrag();
+            }
+        }
+

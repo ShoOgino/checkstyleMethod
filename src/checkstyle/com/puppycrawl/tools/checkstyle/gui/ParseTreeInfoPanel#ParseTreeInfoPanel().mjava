@@ -8,10 +8,22 @@
         DetailAST treeRoot = null;
         mParseTreeModel = new ParseTreeModel(treeRoot);
         mTreeTable = new JTreeTable(mParseTreeModel);
-        JScrollPane sp = new JScrollPane(mTreeTable);
+        final JScrollPane sp = new JScrollPane(mTreeTable);
         this.add(sp, BorderLayout.CENTER);
-        final JButton fileSelectionButton = new JButton(new FileSectionAction());
+        final JButton fileSelectionButton =
+            new JButton(new FileSelectionAction());
 
         this.add(fileSelectionButton, BorderLayout.SOUTH);
+
+        try {
+            // TODO: creating an object for the side effect of the constructor
+            // and then ignoring the object looks strange.
+            new FileDrop(sp, new FileDropListener(sp));
+        }
+        catch (TooManyListenersException ex)
+        {
+           showErrorDialog(null, "Cannot initialize Drag and Drop support");
+        }
+
     }
 

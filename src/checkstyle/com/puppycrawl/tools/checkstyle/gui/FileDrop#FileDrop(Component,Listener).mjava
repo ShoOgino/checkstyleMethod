@@ -1,0 +1,21 @@
+    /**
+     * Constructs a {@link FileDrop} with a default light-blue border
+     * and, if <var>c</var> is a {@link java.awt.Container}, recursively
+     * sets all elements contained within as drop targets, though only
+     * the top level container will change borders.
+     *
+     * @param c Component on which files will be dropped.
+     * @param listener Listens for <tt>filesDropped</tt>.
+     * @since 1.0
+     */
+    FileDrop(
+            final Component c,
+            final Listener listener)
+            throws TooManyListenersException
+    {
+        this(   c, // Drop target
+                BorderFactory.createMatteBorder(2, 2, 2, 2, DEFAULT_BORDER_COLOR), // Drag border
+                true, // Recursive
+                listener);
+    }
+

@@ -1,0 +1,17 @@
+    /** Determine if the dragged data is a file list. */
+    private boolean isDragOk(final DropTargetDragEvent evt)
+    {
+        boolean ok = false;
+        DataFlavor[] flavors = evt.getCurrentDataFlavors();
+
+        // See if any of the flavors are a file list
+        int i = 0;
+        while (!ok && i < flavors.length) {   // Is the flavor a file list?
+            if (flavors[i].equals(DataFlavor.javaFileListFlavor))
+                ok = true;
+            i++;
+        }
+
+        return ok;
+    }
+

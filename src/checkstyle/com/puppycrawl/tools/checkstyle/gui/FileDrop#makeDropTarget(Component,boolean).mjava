@@ -1,0 +1,35 @@
+    private void makeDropTarget(final Component c, boolean recursive)
+            throws TooManyListenersException
+    {
+        // Make drop target
+        final DropTarget dt = new DropTarget();
+        dt.addDropTargetListener(dropListener);
+
+        // Listen for hierarchy changes and remove the
+        // drop target when the parent gets cleared out.
+        c.addHierarchyListener(new HierarchyListener()
+        {
+            public void hierarchyChanged(HierarchyEvent evt)
+            {
+                Component parent = c.getParent();
+                if (parent == null) {
+                    c.setDropTarget(null);
+                }
+                else {
+                    new DropTarget(c, dropListener);
+                }
+            }
+        });
+
+        if (c.getParent() != null) {
+            new DropTarget(c, dropListener);
+        }
+
+        if (recursive && (c instanceof Container)) {
+            Container cont = (Container) c;
+            Component[] comps = cont.getComponents();
+            for (int i = 0; i < comps.length; i++)
+                makeDropTarget(comps[i], recursive);
+        }
+    }
+
