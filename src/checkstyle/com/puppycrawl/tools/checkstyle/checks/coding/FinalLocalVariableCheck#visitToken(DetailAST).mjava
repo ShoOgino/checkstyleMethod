@@ -15,7 +15,9 @@
             break;
 
         case TokenTypes.PARAMETER_DEF:
-            if (ScopeUtils.inInterfaceBlock(aAST)) {
+            if (ScopeUtils.inInterfaceBlock(aAST)
+                || inAbstractMethod(aAST))
+            {
                 break;
             }
         case TokenTypes.VARIABLE_DEF:
