@@ -6,7 +6,12 @@
         }
 
         final AuditEvent event = (AuditEvent) aObject;
-
-        return mSeverityLevel.equals(event.getSeverityLevel());
+        boolean result = mSeverityLevel.equals(event.getSeverityLevel());
+        if (mAcceptOnMatch) {
+            return result;
+        }
+        else {
+            return !result;
+        }
     }
 
