@@ -1,0 +1,10 @@
+    private void runIt(String aMax, String[] aExpected) throws Exception
+    {
+        final CheckConfiguration checkConfig = new CheckConfiguration();
+        checkConfig.setClassname(FileLengthCheck.class.getName());
+        checkConfig.addProperty("max", aMax);
+        final Checker c = createChecker(checkConfig);
+        final String fname = getPath("InputSimple.java");
+        verify(c, fname, aExpected);
+    }
+
