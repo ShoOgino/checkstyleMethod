@@ -5,7 +5,9 @@
      */
     protected boolean isMatch(int aLineNumber)
     {
-        final String[] lines = getLines();
-        return mHeaderLines[aLineNumber].equals(lines[aLineNumber]);
+        final String line = getLines()[aLineNumber];
+        // skip lines we are meant to ignore
+        return isIgnoreLine(aLineNumber + 1)
+            || getHeaderLines()[aLineNumber].equals(line);
     }
 

@@ -1,0 +1,11 @@
+    public void testRegexpHeaderMulti4() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header2"));
+        checkConfig.addAttribute("multiLines", "3, 5, 6, 7");
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputRegexpHeader3.java"), expected);
+    }
+
