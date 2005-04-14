@@ -1,6 +1,7 @@
-    /** @see com.puppycrawl.tools.checkstyle.api.Check */
+    /** {@inheritDoc} */
     public void visitToken(DetailAST aAST)
     {
+        super.visitToken(aAST);
         if (aAST.getType() == TokenTypes.IDENT) {
             if (mCollect) {
                 processIdent(aAST);
