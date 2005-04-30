@@ -12,9 +12,7 @@
 
         checkHeaderNotInitialized();
 
-        // in JDK 1.4 we'd simply do aHeader.replaceAll("\\\\n", "\n");
-        final RE re = Utils.getRE("\\\\n");
-        final String headerExpandedNewLines = re.subst(aHeader, "\n");
+        final String headerExpandedNewLines = aHeader.replaceAll("\\\\n", "\n");
 
         final Reader headerReader = new StringReader(headerExpandedNewLines);
         try {
