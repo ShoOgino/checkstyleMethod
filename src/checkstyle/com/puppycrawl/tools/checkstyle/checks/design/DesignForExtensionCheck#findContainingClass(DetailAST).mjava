@@ -6,7 +6,9 @@
     private DetailAST findContainingClass(DetailAST aAST)
     {
         DetailAST searchAST = aAST;
-        while (searchAST.getType() != TokenTypes.CLASS_DEF) {
+        while (searchAST.getType() != TokenTypes.CLASS_DEF
+               && searchAST.getType() != TokenTypes.ENUM_DEF)
+        {
             searchAST = searchAST.getParent();
         }
         return searchAST;

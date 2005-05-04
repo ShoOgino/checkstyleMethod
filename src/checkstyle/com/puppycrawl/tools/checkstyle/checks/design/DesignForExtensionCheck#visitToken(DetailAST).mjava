@@ -36,7 +36,9 @@
         final DetailAST classDef = findContainingClass(aAST);
         final DetailAST classMods =
             classDef.findFirstToken(TokenTypes.MODIFIERS);
-        if (classMods.branchContains(TokenTypes.FINAL)) {
+        if (classDef.getType() == TokenTypes.ENUM_DEF
+            || classMods.branchContains(TokenTypes.FINAL))
+        {
             return;
         }
 
