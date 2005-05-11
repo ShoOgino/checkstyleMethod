@@ -1,16 +1,14 @@
     /** @return the regexp to match against */
-    public RE getRegexp()
+    public Pattern getRegexp()
     {
-        final RE regexp = super.getRegexp();
+        Pattern regexp = super.getRegexp();
 
         // we should explicitly set match flags because
-        // we caching RE and another check (or instance
+        // we caching Pattern and another check (or instance
         // of this check could change match flags.
         if (mIgnoreCase) {
-            regexp.setMatchFlags(RE.MATCH_CASEINDEPENDENT);
-        }
-        else {
-            regexp.setMatchFlags(RE.MATCH_NORMAL);
+            regexp =
+                Pattern.compile(regexp.pattern(), Pattern.CASE_INSENSITIVE);
         }
         return regexp;
     }

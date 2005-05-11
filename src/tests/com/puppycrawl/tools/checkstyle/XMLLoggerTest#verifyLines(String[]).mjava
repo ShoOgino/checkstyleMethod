@@ -11,8 +11,8 @@
         assertEquals("first line.",
                      "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
                      lines[0]);
-        RE checkstyleOpenTag = Utils.getRE("^<checkstyle version=\".*\">$");
-        assertTrue("second line.", checkstyleOpenTag.match(lines[1]));
+        Pattern checkstyleOpenTag = Utils.getPattern("^<checkstyle version=\".*\">$");
+        assertTrue("second line.", checkstyleOpenTag.matcher(lines[1]).matches());
         for (int i = 0; i < aExpectedLines.length; i++) {
             assertEquals("line " + i + ".", aExpectedLines[i], lines[i + 2]);
         }

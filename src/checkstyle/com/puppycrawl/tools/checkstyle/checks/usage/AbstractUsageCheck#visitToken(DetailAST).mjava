@@ -3,8 +3,10 @@
     {
         if (mustCheckReferenceCount(aAST)) {
             final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
-            RE regexp = getRegexp();
-            if ((regexp == null) || !regexp.match(nameAST.getText())) {
+            Pattern regexp = getRegexp();
+            if ((regexp == null)
+                || !regexp.matcher(nameAST.getText()).find())
+            {
                 getASTManager().registerCheckNode(this, nameAST);
             }
         }

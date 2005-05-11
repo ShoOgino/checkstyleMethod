@@ -7,12 +7,13 @@
     {
         final String[] text = aCmt.getText();
         Vector tags = new Vector();
-        RE tagRE = Utils.getRE("/\\*{2,}\\s*@([:alpha:]+)\\s");
+        Pattern tagPattern = Utils.getPattern("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
         for (int i = 0; i < text.length; i++) {
             final String s = text[i];
-            if (tagRE.match(s)) {
-                final String tagName = tagRE.getParen(1);
-                String content = s.substring(tagRE.getParenEnd(0));
+            Matcher tagMatcher = tagPattern.matcher(s);
+            if (tagMatcher.find()) {
+                final String tagName = tagMatcher.group(1);
+                String content = s.substring(tagMatcher.end(1));
                 if (content.endsWith("*/")) {
                     content = content.substring(0, content.length() - 2);
                 }
@@ -20,7 +21,7 @@
                                         tagName,
                                         content.trim()));
             }
-            tagRE = Utils.getRE("^\\s*\\**\\s*@([:alpha:]+)\\s");
+            tagPattern = Utils.getPattern("^\\s*\\**\\s*@(\\p{Alpha}+)\\s");
         }
         return tags;
     }

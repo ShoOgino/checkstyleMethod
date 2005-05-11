@@ -6,11 +6,15 @@
          */
         public boolean isMatch(AuditEvent aEvent)
         {
-            if (mTagCheckRegexp.match(aEvent.getSourceName())) {
+            Matcher tagMatcher =
+                mTagCheckRegexp.matcher(aEvent.getSourceName());
+            if (tagMatcher.find()) {
                 return true;
             }
             if (mTagMessageRegexp != null) {
-                return mTagMessageRegexp.match(aEvent.getMessage());
+                Matcher messageMatcher =
+                    mTagMessageRegexp.matcher(aEvent.getMessage());
+                return messageMatcher.find();
             }
             return false;
         }

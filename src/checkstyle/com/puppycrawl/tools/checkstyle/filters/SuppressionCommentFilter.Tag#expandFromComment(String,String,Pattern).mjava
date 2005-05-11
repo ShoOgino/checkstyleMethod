@@ -8,18 +8,19 @@
         private String expandFromComment(
             String aComment,
             String aString,
-            RE aRegexp)
+            Pattern aRegexp)
         {
+            Matcher matcher = aRegexp.matcher(aComment);
             // Match primarily for effect.
-            if (!aRegexp.match(aComment)) {
+            if (!matcher.find()) {
                 ///CLOVER:OFF
                 return aString;
                 ///CLOVER:ON
             }
             String result = aString;
-            for (int i = 1; i < aRegexp.getParenCount(); i++) {
-                // $n expands comment match like in RE.subst().
-                result = result.replaceAll("\\$" + i, aRegexp.getParen(i));
+            for (int i = 0; i <= matcher.groupCount(); i++) {
+                // $n expands comment match like in Pattern.subst().
+                result = result.replaceAll("\\$" + i, matcher.group(i));
             }
             return result;
         }

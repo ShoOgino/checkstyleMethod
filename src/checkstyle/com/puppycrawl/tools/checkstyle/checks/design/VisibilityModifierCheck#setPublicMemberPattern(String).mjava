@@ -5,10 +5,10 @@
     public void setPublicMemberPattern(String aPattern)
     {
         try {
-            mPublicMemberRE = Utils.getRE(aPattern);
-            mPublicMemberPattern = aPattern;
+            mPublicMemberPattern = Utils.getPattern(aPattern);
+            mPublicMemberFormat = aPattern;
         }
-        catch (RESyntaxException e) {
+        catch (PatternSyntaxException e) {
             throw new ConversionException("unable to parse " + aPattern, e);
         }
     }

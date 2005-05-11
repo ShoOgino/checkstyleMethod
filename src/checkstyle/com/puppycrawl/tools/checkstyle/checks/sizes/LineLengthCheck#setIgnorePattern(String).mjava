@@ -7,9 +7,9 @@
         throws ConversionException
     {
         try {
-            mIgnorePattern = Utils.getRE(aFormat);
+            mIgnorePattern = Utils.getPattern(aFormat);
         }
-        catch (RESyntaxException e) {
+        catch (PatternSyntaxException e) {
             throw new ConversionException("unable to parse " + aFormat, e);
         }
     }

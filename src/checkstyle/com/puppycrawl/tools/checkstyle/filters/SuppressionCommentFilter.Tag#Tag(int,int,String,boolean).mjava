@@ -17,34 +17,34 @@
 
             mTagCheckRegexp = mCheckRegexp;
             //Expand regexp for check and message
-            //Does not intern REs with Utils.getRE()
+            //Does not intern Patterns with Utils.getPattern()
             String format = "";
             try {
                 if (aOn) {
                     format =
                         expandFromComment(aText, mCheckFormat, mOnRegexp);
-                    mTagCheckRegexp = new RE(format);
+                    mTagCheckRegexp = Pattern.compile(format);
                     if (mMessageFormat != null) {
                         format =
                             expandFromComment(aText, mMessageFormat, mOnRegexp);
-                        mTagMessageRegexp = new RE(format);
+                        mTagMessageRegexp = Pattern.compile(format);
                     }
                 }
                 else {
                     format =
                         expandFromComment(aText, mCheckFormat, mOffRegexp);
-                    mTagCheckRegexp = new RE(format);
+                    mTagCheckRegexp = Pattern.compile(format);
                     if (mMessageFormat != null) {
                         format =
                             expandFromComment(
                                 aText,
                                 mMessageFormat,
                                 mOffRegexp);
-                        mTagMessageRegexp = new RE(format);
+                        mTagMessageRegexp = Pattern.compile(format);
                     }
                 }
             }
-            catch (RESyntaxException e) {
+            catch (PatternSyntaxException e) {
                 throw new ConversionException(
                     "unable to parse expanded comment " + format,
                     e);

@@ -7,11 +7,15 @@
      */
     private void tagCommentLine(String aText, int aLine, int aColumn)
     {
-        if (mOffRegexp.match(aText)) {
-            addTag(mOffRegexp.getParen(0), aLine, aColumn, false);
+        Matcher offMatcher = mOffRegexp.matcher(aText);
+        if (offMatcher.find()) {
+            addTag(offMatcher.group(0), aLine, aColumn, false);
         }
-        else if (mOnRegexp.match(aText)) {
-            addTag(mOnRegexp.getParen(0), aLine, aColumn, true);
+        else {
+            Matcher onMatcher = mOnRegexp.matcher(aText);
+            if (onMatcher.find()) {
+                addTag(onMatcher.group(0), aLine, aColumn, true);
+            }
         }
     }
 

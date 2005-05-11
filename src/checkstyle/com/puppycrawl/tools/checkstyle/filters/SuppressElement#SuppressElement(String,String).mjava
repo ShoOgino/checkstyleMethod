@@ -3,14 +3,14 @@
      * file name pattern and and a check class pattern.
      * @param aFiles regular expression for names of filtered files.
      * @param aChecks regular expression for filtered check classes.
-     * @throws RESyntaxException if there is an error.
+     * @throws PatternSyntaxException if there is an error.
      */
     public SuppressElement(String aFiles, String aChecks)
-        throws RESyntaxException
+        throws PatternSyntaxException
     {
         mFilePattern = aFiles;
-        mFileRegexp = Utils.getRE(aFiles);
+        mFileRegexp = Utils.getPattern(aFiles);
         mCheckPattern = aChecks;
-        mCheckRegexp = Utils.getRE(aChecks);
+        mCheckRegexp = Utils.getPattern(aChecks);
     }
 

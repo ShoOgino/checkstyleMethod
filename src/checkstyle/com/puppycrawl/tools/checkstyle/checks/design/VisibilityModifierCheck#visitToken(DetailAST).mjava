@@ -22,7 +22,7 @@
                 || "package".equals(variableScope) && isPackageAllowed()
                 || "protected".equals(variableScope) && isProtectedAllowed()
                 || "public".equals(variableScope)
-                   && getPublicMemberRegexp().match(varName)))
+                   && getPublicMemberRegexp().matcher(varName).find()))
         {
             log(varNameAST.getLineNo(), varNameAST.getColumnNo(),
                     "variable.notPrivate", varName);

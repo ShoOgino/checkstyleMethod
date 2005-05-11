@@ -8,9 +8,9 @@
     {
         try {
             mExcludedClasses = aExcludedClasses;
-            mExcludedClassesRE = Utils.getRE(mExcludedClasses);
+            mExcludedClassesPattern = Utils.getPattern(mExcludedClasses);
         }
-        catch (RESyntaxException e) {
+        catch (PatternSyntaxException e) {
             throw new ConversionException("unable to parse "
                                           + mExcludedClasses,
                                           e);

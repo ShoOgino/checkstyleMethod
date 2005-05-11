@@ -3,17 +3,18 @@
      *
      * @return a regular expression for matching the end of a sentence.
      */
-    private RE getEndOfSentenceRE()
+    private Pattern getEndOfSentencePattern()
     {
-        if (mEndOfSentenceRE == null) {
+        if (mEndOfSentencePattern == null) {
             try {
-                mEndOfSentenceRE = new RE("([.?!][ \t\n\r\f<])|([.?!]$)");
+                mEndOfSentencePattern =
+                    Pattern.compile("([.?!][ \t\n\r\f<])|([.?!]$)");
             }
-            catch (RESyntaxException e) {
+            catch (PatternSyntaxException e) {
                 // This should never occur.
                 e.printStackTrace();
             }
         }
-        return mEndOfSentenceRE;
+        return mEndOfSentencePattern;
     }
 

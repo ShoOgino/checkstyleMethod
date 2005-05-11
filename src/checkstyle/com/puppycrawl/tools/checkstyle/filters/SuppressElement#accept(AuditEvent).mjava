@@ -3,9 +3,9 @@
     {
         // file and check match?
         if ((aEvent.getFileName() == null)
-            || !mFileRegexp.match(aEvent.getFileName())
+            || !mFileRegexp.matcher(aEvent.getFileName()).find()
             || (aEvent.getLocalizedMessage() == null)
-            || !mCheckRegexp.match(aEvent.getSourceName()))
+            || !mCheckRegexp.matcher(aEvent.getSourceName()).find())
         {
             return true;
         }

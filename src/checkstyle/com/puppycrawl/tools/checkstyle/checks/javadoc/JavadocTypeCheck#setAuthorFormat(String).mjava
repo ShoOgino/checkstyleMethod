@@ -8,9 +8,9 @@
     {
         try {
             mAuthorFormat = aFormat;
-            mAuthorFormatRE = Utils.getRE(aFormat);
+            mAuthorFormatPattern = Utils.getPattern(aFormat);
         }
-        catch (RESyntaxException e) {
+        catch (PatternSyntaxException e) {
             throw new ConversionException("unable to parse " + aFormat, e);
         }
     }

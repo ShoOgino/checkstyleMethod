@@ -9,7 +9,9 @@
                 line, line.length(), getTabWidth());
 
 
-            if (realLength > mMax && !mIgnorePattern.match(line)) {
+            if (realLength > mMax
+                && !mIgnorePattern.matcher(line).find())
+            {
                 log(i + 1, "maxLineLen", new Integer(mMax));
             }
         }
