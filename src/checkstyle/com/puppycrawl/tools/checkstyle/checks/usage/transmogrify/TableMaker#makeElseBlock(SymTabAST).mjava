@@ -8,7 +8,7 @@
    */
   public void makeElseBlock(SymTabAST tree) {
     if (tree.getType() == TokenTypes.SLIST) {
-      BlockDef block = makeBlock((SymTabAST)tree);
+      BlockDef block = makeBlock(tree);
       symbolTable.pushScope( block );
       walkTree(tree, false);
       symbolTable.popScope();

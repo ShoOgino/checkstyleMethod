@@ -13,7 +13,7 @@
     VariableDef def = makeVariableDef( tree, symbolTable.getCurrentScope() );
     symbolTable.defineVariable(def);
     SymTabAST assignmentNode
-      = ((SymTabAST)tree).findFirstToken(TokenTypes.ASSIGN);
+      = tree.findFirstToken(TokenTypes.ASSIGN);
     if (assignmentNode != null) {
       walkTree((SymTabAST)assignmentNode.getFirstChild(), false);
     }

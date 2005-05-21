@@ -28,13 +28,13 @@
 
     if (tree != null) {
 
-      ((SymTabAST)tree).setScope( symbolTable.getCurrentScope() );
+      tree.setScope( symbolTable.getCurrentScope() );
 
       switch(tree.getType()) {
       case 0:
         processFile(tree);
         if ( tree.getFirstChild().getType() != TokenTypes.PACKAGE_DEF ) {
-          processImplicitPackage( ((SymTabAST)tree).getFile() );
+          processImplicitPackage( tree.getFile() );
         }
 
         walkSiblings((SymTabAST)tree.getFirstChild(), false);
@@ -45,7 +45,7 @@
         break;
 
       case TokenTypes.LITERAL_NEW:
-        SymTabAST symtabTree = (SymTabAST)tree;
+        SymTabAST symtabTree = tree;
         //walk parameters, in case of anonymous inner class
         walkTree(symtabTree.findFirstToken(TokenTypes.ELIST),
           makeAnonymousScopes);

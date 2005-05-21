@@ -16,14 +16,14 @@
       innerClass.finishMakingDefinition();
     }
     else if (def instanceof ClassDef) {
-      new ClassFinisher((ClassDef)def).finish();
+      new ClassFinisher(def).finish();
     }
     else if ( def instanceof VariableDef ) {
-      new VariableFinisher( (VariableDef)def ).finish();
+      new VariableFinisher( def ).finish();
     }
     else if (def instanceof DefaultConstructor) {}
     else if ( def instanceof MethodDef ) {
-      new MethodFinisher( (MethodDef)def ).finish();
+      new MethodFinisher( def ).finish();
     }
     else if (def instanceof BlockDef) {
       SymTabAST firstChild = (SymTabAST)def.getTreeNode().getFirstChild();
