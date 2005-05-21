@@ -6,7 +6,6 @@
      */
     public Span finishChildren(File file) {
         Span result = null;
-        SymTabAST previousSibling = null;
         SymTabAST current = (SymTabAST) getFirstChild();
 
         if (current == null) {
@@ -26,9 +25,7 @@
                     }
                 }
 
-                SymTabAST temp = current;
                 current = (SymTabAST) current.getNextSibling();
-                previousSibling = temp;
             }
         }
 

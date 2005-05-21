@@ -19,18 +19,18 @@
         SymTabAST leftChild = findLeftChild(expression);
         
         IClass leftType =
-            (IClass) (resolveExpression(leftChild,
-                location,
-                context,
-                referencePhase));
+            (resolveExpression(leftChild,
+		    location,
+		    context,
+		    referencePhase));
                 
         SymTabAST rightChild = findRightSibling(leftChild);
 
         IClass rightType =
-                    (IClass) (resolveExpression(rightChild,
-                        location,
-                        context,
-                        referencePhase));
+                    (resolveExpression(rightChild,
+		    location,
+		    context,
+		    referencePhase));
 
         result = binaryResultType(leftType, rightType);
 
