@@ -6,24 +6,23 @@
      */
     private void processVariable(DetailAST aAST)
     {
-        if (!ScopeUtils.inInterfaceOrAnnotationBlock(aAST)) {
-            if (ScopeUtils.isLocalVariableDef(aAST)
-                || (aAST.getType() == TokenTypes.PARAMETER_DEF))
-            {
-                //local variable or parameter. Does it shadow a field?
-                final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
-                final String name = nameAST.getText();
-                if ((mCurrentFrame.containsStaticField(name)
-                     || (!inStatic(aAST)
-                         && mCurrentFrame.containsInstanceField(name)))
-                    && ((mRegexp == null)
-                        || (!getRegexp().matcher(name).find()))
-                    && !isIgnoredSetterParam(aAST, name)
-                    && !isIgnoredConstructorParam(aAST))
-                {
-                    log(nameAST, "hidden.field", name);
-                }
-            }
+        if (ScopeUtils.inInterfaceOrAnnotationBlock(aAST)
+            || !ScopeUtils.isLocalVariableDef(aAST)
+            && (aAST.getType() != TokenTypes.PARAMETER_DEF))
+        {
+            // do nothing
+            return;
+        }
+        //local variable or parameter. Does it shadow a field?
+        final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        final String name = nameAST.getText();
+        if ((mCurrentFrame.containsStaticField(name)
+             || (!inStatic(aAST) && mCurrentFrame.containsInstanceField(name)))
+            && ((mRegexp == null) || (!getRegexp().matcher(name).find()))
+            && !isIgnoredSetterParam(aAST, name)
+            && !isIgnoredConstructorParam(aAST))
+        {
+            log(nameAST, "hidden.field", name);
         }
     }
 
