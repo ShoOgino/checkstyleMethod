@@ -18,13 +18,14 @@
 
             if ((retVal < aLen) && dataAvailable()) {
                 final String currentStr = mUnderlyingArray[mArrayIdx];
-                final int srcEnd = Math.min(currentStr.length(),
+                final int currentLenth = mLenghtArray[mArrayIdx];
+                final int srcEnd = Math.min(currentLenth,
                                             mStringIdx + aLen - retVal);
                 currentStr.getChars(mStringIdx, srcEnd, aCbuf, aOff + retVal);
                 retVal += srcEnd - mStringIdx;
                 mStringIdx = srcEnd;
 
-                if (mStringIdx >= currentStr.length()) {
+                if (mStringIdx >= currentLenth) {
                     mArrayIdx++;
                     mStringIdx = 0;
                     mUnreportedNewline = true;
