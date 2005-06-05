@@ -1,0 +1,11 @@
+    public void testAllowMissingTypeParameters() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("allowMissingParamTags", "true");
+        final String[] expected = {
+            "7: Unused @param tag for '<D>'.",
+        };
+        verify(checkConfig, getPath("InputTypeParamsTags.java"), expected);
+    }
+

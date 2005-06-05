@@ -15,6 +15,18 @@
                          mAuthorFormatPattern, mAuthorFormat);
                 checkTag(lineNo, tags, "version",
                          mVersionFormatPattern, mVersionFormat);
+
+                List typeParamNames = CheckUtils.getTypeParameterNames(aAST);
+                if (!mAllowMissingParamTags) {
+                    //Check type parameters that should exist, do
+                    for (Iterator typeParamNameIt = typeParamNames.iterator();
+                         typeParamNameIt.hasNext();) {
+                        checkTypeParamTag(
+                            lineNo, tags, (String) typeParamNameIt.next());
+                    }
+                }
+
+                checkUnusedTypeParamTags(tags, typeParamNames);
             }
         }
     }

@@ -23,7 +23,7 @@
                 hasInheritDocTag |= ((JavadocTag) it.next()).isInheritDocTag();
             }
 
-            checkParamTags(tags, getParameters(aAST), !hasInheritDocTag);
+            checkParamTags(tags, aAST, !hasInheritDocTag);
             checkThrowsTags(tags, getThrows(aAST), !hasInheritDocTag);
             if (isFunction(aAST)) {
                 checkReturnTag(tags, aAST.getLineNo(), !hasInheritDocTag);

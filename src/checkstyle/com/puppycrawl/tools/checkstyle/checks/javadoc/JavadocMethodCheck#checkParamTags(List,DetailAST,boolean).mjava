@@ -1,0 +1,82 @@
+    /**
+     * Checks a set of tags for matching parameters.
+     *
+     * @param aTags the tags to check
+     * @param aParent the node which takes the parameters
+     * @param aReportExpectedTags whether we should report if do not find
+     *            expected tag
+     */
+    private void checkParamTags(final List aTags, final DetailAST aParent,
+                                boolean aReportExpectedTags)
+    {
+        List params = getParameters(aParent);
+        List typeParams = CheckUtils.getTypeParameters(aParent);
+
+        // Loop over the tags, checking to see they exist in the params.
+        final ListIterator tagIt = aTags.listIterator();
+        while (tagIt.hasNext()) {
+            final JavadocTag tag = (JavadocTag) tagIt.next();
+
+            if (!tag.isParamTag()) {
+                continue;
+            }
+
+            tagIt.remove();
+
+            boolean found = false;
+
+            // Loop looking for matching param
+            final Iterator paramIt = params.iterator();
+            while (paramIt.hasNext()) {
+                final DetailAST param = (DetailAST) paramIt.next();
+                if (param.getText().equals(tag.getArg1())) {
+                    found = true;
+                    paramIt.remove();
+                    break;
+                }
+            }
+
+            if (tag.getArg1().startsWith("<") && tag.getArg1().endsWith(">")) {
+                // Loop looking for matching type param
+                Iterator typeParamsIt = typeParams.iterator();
+                while (typeParamsIt.hasNext()) {
+                    final DetailAST typeParam = (DetailAST) typeParamsIt.next();
+                    if (typeParam.findFirstToken(TokenTypes.IDENT).getText()
+                        .equals(tag.getArg1().substring(
+                            1, tag.getArg1().length() - 1)))
+                    {
+                        found = true;
+                        typeParamsIt.remove();
+                        break;
+                    }
+                }
+
+            }
+
+            // Handle extra JavadocTag
+            if (!found) {
+                log(tag.getLineNo(), "javadoc.unusedTag", "@param", tag
+                    .getArg1());
+            }
+        }
+
+        // Now dump out all type parameters/parameters without tags :- unless
+        // the user has chosen to suppress these problems
+        if (!mAllowMissingParamTags && aReportExpectedTags) {
+            final Iterator paramIt = params.iterator();
+            while (paramIt.hasNext()) {
+                final DetailAST param = (DetailAST) paramIt.next();
+                log(param, "javadoc.expectedTag", "@param", param.getText());
+            }
+
+            final Iterator typeParamsIt = typeParams.iterator();
+            while (typeParamsIt.hasNext()) {
+                final DetailAST typeParam = (DetailAST) typeParamsIt.next();
+                log(typeParam, "javadoc.expectedTag", "@param",
+                    "<"
+                    + typeParam.findFirstToken(TokenTypes.IDENT).getText()
+                    + ">");
+            }
+        }
+    }
+

@@ -1,0 +1,25 @@
+    /**
+     * Verifies that a type definition has the specified param tag for
+     * the specified type parameter name.
+     * @param aLineNo the line number for the type definition.
+     * @param aTags tags from the Javadoc comment for the type definition.
+     * @param aTypeParamName the name of the type parameter
+     */
+    private void checkTypeParamTag(
+        final int aLineNo, final Vector aTags, final String aTypeParamName)
+    {
+        boolean found = false;
+        for (int i = aTags.size() - 1; i >= 0; i--) {
+            final JavadocTag tag = (JavadocTag) aTags.get(i);
+            if (tag.getTag().equals("param")
+                && tag.getArg1() != null
+                && tag.getArg1().indexOf("<" + aTypeParamName + ">") == 0)
+            {
+                found = true;
+            }
+        }
+        if (!found) {
+            log(aLineNo, "type.missingTag", "@param <" + aTypeParamName + ">");
+        }
+    }
+

@@ -1,0 +1,37 @@
+    /**
+     * Checks for unused param tags for type parameters.
+     * @param aTags tags from the Javadoc comment for the type definition.
+     * @param aTypeParamNames names of type parameters
+     */
+    private void checkUnusedTypeParamTags(
+        final Vector aTags,
+        final List aTypeParamNames)
+    {
+        Pattern pattern = Utils.getPattern("\\s*<([^>])+>.*");
+        for (int i = aTags.size() - 1; i >= 0; i--) {
+            final JavadocTag tag = (JavadocTag) aTags.get(i);
+            if (tag.getTag().equals("param")) {
+
+                if (tag.getArg1() != null) {
+
+                    Matcher matcher = pattern.matcher(tag.getArg1());
+                    String typeParamName = null;
+
+                    if (matcher.matches()) {
+                        typeParamName = matcher.group(1).trim();
+                        if (!aTypeParamNames.contains(typeParamName)) {
+                            log(tag.getLineNo(), "javadoc.unusedTag",
+                                "@param", "<" + typeParamName + ">");
+                        }
+                    }
+                    else {
+                        log(tag.getLineNo(), "javadoc.unusedTagGeneral");
+                    }
+                }
+                else {
+                    log(tag.getLineNo(), "javadoc.unusedTagGeneral");
+                }
+            }
+        }
+    }
+
