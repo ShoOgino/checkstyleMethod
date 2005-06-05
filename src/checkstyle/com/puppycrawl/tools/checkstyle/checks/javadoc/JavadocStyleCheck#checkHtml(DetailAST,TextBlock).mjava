@@ -6,11 +6,13 @@
      * @param aComment the <code>TextBlock</code> which represents
      *                 the Javadoc comment.
      */
-    private void checkHtml(TextBlock aComment)
+    private void checkHtml(final DetailAST aAST, final TextBlock aComment)
     {
         final int lineno = aComment.getStartLineNo();
         final Stack htmlStack = new Stack();
         final String[] text = aComment.getText();
+        final List typeParameters =
+            CheckUtils.getTypeParameterNames(aAST);
 
         TagParser parser = null;
         parser = new TagParser(text, lineno);
@@ -51,7 +53,10 @@
         String lastFound = ""; // Skip multiples, like <b>...<b>
         for (int i = 0; i < htmlStack.size(); i++) {
             final HtmlTag htag = (HtmlTag) htmlStack.elementAt(i);
-            if (!isSingleTag(htag) && !htag.getId().equals(lastFound)) {
+            if (!isSingleTag(htag)
+                && !htag.getId().equals(lastFound)
+                && !typeParameters.contains(htag.getId()))
+            {
                 log(htag.getLineno(), htag.getPosition(), UNCLOSED_HTML, htag);
                 lastFound = htag.getId();
             }
