@@ -20,7 +20,8 @@
              || (!inStatic(aAST) && mCurrentFrame.containsInstanceField(name)))
             && ((mRegexp == null) || (!getRegexp().matcher(name).find()))
             && !isIgnoredSetterParam(aAST, name)
-            && !isIgnoredConstructorParam(aAST))
+            && !isIgnoredConstructorParam(aAST)
+            && !isIgnoredParamOfAbstractMethod(aAST))
         {
             log(nameAST, "hidden.field", name);
         }

@@ -1,0 +1,23 @@
+    /**
+     * Decides whether to ignore an AST node that is the parameter of an
+     * abstract method.
+     * @param aAST the AST to check.
+     * @return true if aAST should be ignored because check property
+     * ignoreAbstactMethods is true and aAST is a parameter of abstract
+     * methods.
+     */
+    private boolean isIgnoredParamOfAbstractMethod(DetailAST aAST)
+    {
+        if (aAST.getType() != TokenTypes.PARAMETER_DEF
+            || !mIgnoreAbstractMethods)
+        {
+            return false;
+        }
+        final DetailAST method = aAST.getParent().getParent();
+        if (method.getType() != TokenTypes.METHOD_DEF) {
+            return false;
+        }
+        final DetailAST mods = method.findFirstToken(TokenTypes.MODIFIERS);
+        return (mods != null && mods.branchContains(TokenTypes.ABSTRACT));
+    }
+
