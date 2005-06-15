@@ -9,7 +9,9 @@
             }
         }
         else if ((aAST.getParent() == null)
-                 || (aAST.getParent().getType() != TokenTypes.TYPECAST))
+                 || (aAST.getParent().getType() != TokenTypes.TYPECAST)
+                 || (aAST.getParent().findFirstToken(TokenTypes.RPAREN)
+                     != aAST))
         {
             if (!isFollowsEmptyForIterator(aAST)) {
                 processRight(aAST);
