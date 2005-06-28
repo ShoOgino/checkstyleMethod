@@ -1,13 +1,12 @@
     protected Checker createChecker(Configuration aFilterConfig)
             throws CheckstyleException
     {
-        final DefaultConfiguration checkerConfig = 
+        final DefaultConfiguration checkerConfig =
             new DefaultConfiguration("configuration");
         final DefaultConfiguration checksConfig = createCheckConfig(TreeWalker.class);
         checksConfig.addChild(createCheckConfig(FileContentsHolder.class));
         checksConfig.addChild(createCheckConfig(MemberNameCheck.class));
         checksConfig.addChild(createCheckConfig(ConstantNameCheck.class));
-        checksConfig.addChild(createCheckConfig(UnusedParameterCheck.class));
         checksConfig.addChild(createCheckConfig(IllegalCatchCheck.class));
         checkerConfig.addChild(checksConfig);
         if (aFilterConfig != null) {
