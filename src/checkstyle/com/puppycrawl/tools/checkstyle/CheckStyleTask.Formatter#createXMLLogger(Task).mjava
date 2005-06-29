@@ -6,7 +6,7 @@
         private AuditListener createXMLLogger(Task aTask)
             throws IOException
         {
-            if (mToFile == null) {
+            if (mToFile == null || !mUseFile) {
                 return new XMLLogger(
                     new LogOutputStream(aTask, Project.MSG_INFO), true);
             }
