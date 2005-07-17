@@ -2,9 +2,34 @@
         public void endElement(String aNamespaceURI,
                                String aLocalName,
                                String aQName)
+            throws SAXException
         {
             if (aQName.equals(MODULE)) {
-                mConfigStack.pop();
+
+                Configuration recentModule = (Configuration) mConfigStack.pop();
+
+                // remove modules with severity ignore if these modules should
+                // be omitted
+                SeverityLevel level = null;
+                try {
+                    final String severity = recentModule.getAttribute(SEVERITY);
+                    level = SeverityLevel.getInstance(severity);
+                }
+                catch (CheckstyleException e) {
+                    //severity not set -> ignore
+                    ;
+                }
+
+                // omit this module if these should be omitted and the module
+                // has the severity 'ignore'
+                final boolean omitModule = mOmitIgnoredModules
+                    && SeverityLevel.IGNORE.equals(level);
+
+                if (omitModule && !mConfigStack.isEmpty()) {
+                    final DefaultConfiguration parentModule =
+                        (DefaultConfiguration) mConfigStack.peek();
+                    parentModule.removeChild(recentModule);
+                }
             }
         }
 

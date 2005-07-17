@@ -1,13 +1,17 @@
     /**
      * Creates a new <code>ConfigurationLoader</code> instance.
      * @param aOverrideProps resolver for overriding properties
+     * @param aOmitIgnoredModules <code>true</code> if ignored modules should be
+     *         omitted
      * @throws ParserConfigurationException if an error occurs
      * @throws SAXException if an error occurs
      */
-    private ConfigurationLoader(PropertyResolver aOverrideProps)
+    private ConfigurationLoader(final PropertyResolver aOverrideProps,
+                                final boolean aOmitIgnoredModules)
         throws ParserConfigurationException, SAXException
     {
         mSaxHandler = new InternalLoader();
         mOverridePropsResolver = aOverrideProps;
+        mOmitIgnoredModules = aOmitIgnoredModules;
     }
 
