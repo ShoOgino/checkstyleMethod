@@ -10,13 +10,14 @@
         final String fileName = aFileName;
         if (fileName != null) {
             FileInputStream inStream = null;
+            // get the current config so if the file isn't found
+            // the first time the hash will be added to output file
+            final String currentConfigHash = getConfigHashCode(aCurrentConfig);
             try {
                 inStream = new FileInputStream(fileName);
                 mDetails.load(inStream);
                 final String cachedConfigHash =
                     mDetails.getProperty(CONFIG_HASH_KEY);
-                final String currentConfigHash =
-                    getConfigHashCode(aCurrentConfig);
                 setInActive = false;
                 if ((cachedConfigHash == null)
                     || !cachedConfigHash.equals(currentConfigHash))
@@ -29,11 +30,12 @@
             catch (FileNotFoundException e) {
                 // Ignore, the cache does not exist
                 setInActive = false;
+                // put the hash in the file if the file is going to be created
+                mDetails.put(CONFIG_HASH_KEY, currentConfigHash);
             }
             catch (IOException e) {
-                // TODO: use logger
-                System.out.println("Unable to open cache file, ignoring.");
-                e.printStackTrace(System.out);
+                Utils.getExceptionLogger()
+                    .debug("Unable to open cache file, ignoring.", e);
             }
             finally {
                 if (inStream != null) {
@@ -41,9 +43,8 @@
                         inStream.close();
                     }
                     catch (IOException ex) {
-                        // TODO: use logger
-                        System.out.println("Unable to close cache file.");
-                        ex.printStackTrace(System.out);
+                        Utils.getExceptionLogger()
+                            .debug("Unable to close cache file.", ex);
                     }
                 }
             }
