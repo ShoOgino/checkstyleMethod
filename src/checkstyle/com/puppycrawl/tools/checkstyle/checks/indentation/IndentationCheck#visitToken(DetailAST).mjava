@@ -3,6 +3,13 @@
      */
     public void visitToken(DetailAST aAST)
     {
+        if (aAST.getType() == TokenTypes.VARIABLE_DEF
+            && ScopeUtils.isLocalVariableDef(aAST))
+        {
+            // we have handler only for members
+            return;
+        }
+
         ExpressionHandler handler = mHandlerFactory.getHandler(this, aAST,
             (ExpressionHandler) mHandlers.peek());
         mHandlers.push(handler);
