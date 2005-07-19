@@ -1,0 +1,14 @@
+    public void testIllegalClassNames() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        checkConfig.addAttribute("illegalClassNames",
+                                 "java.lang.Error, java.lang.Exception, NullPointerException");
+
+        String[] expected = {
+            "5:33: Throwing 'NullPointerException' is not allowed.",
+            "14:73: Throwing 'java.lang.Error' is not allowed.",
+        };
+
+        verify(checkConfig, getPath("coding" + File.separator + "InputIllegalThrowsCheck.java"), expected);
+    }
+

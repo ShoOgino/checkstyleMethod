@@ -1,0 +1,13 @@
+    public void testDefault() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+
+        String[] expected = {
+            "9:51: Throwing 'RuntimeException' is not allowed.",
+            "14:45: Throwing 'java.lang.RuntimeException' is not allowed.",
+            "14:73: Throwing 'java.lang.Error' is not allowed.",
+        };
+
+        verify(checkConfig, getPath("coding" + File.separator + "InputIllegalThrowsCheck.java"), expected);
+    }
+

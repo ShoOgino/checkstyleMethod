@@ -1,0 +1,16 @@
+    /** {@inheritDoc} */
+    public void visitToken(DetailAST aDetailAST)
+    {
+        DetailAST token = (DetailAST) aDetailAST.getFirstChild();
+        while (token != null) {
+            if (token.getType() != TokenTypes.COMMA) {
+                final FullIdent ident = FullIdent.createFullIdent(token);
+                if (isIllegalClassName(ident.getText())) {
+                    log(token, "illegal.throw", ident.getText());
+                }
+            }
+
+            token = (DetailAST) token.getNextSibling();
+        }
+    }
+
