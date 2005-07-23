@@ -4,9 +4,9 @@
         DetailAST type = (DetailAST) getMainAst().getFirstChild();
         checkExpressionSubtree(type, getLevel(), false, false);
 
-        checkLParen();
-        DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
         DetailAST lparen = getMainAst().findFirstToken(TokenTypes.LPAREN);
+        DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
+        checkLParen(lparen);
 
         if (rparen == null || lparen == null
             || rparen.getLineNo() == lparen.getLineNo())
@@ -29,6 +29,6 @@
             new IndentLevel(getLevel(), getBasicOffset()),
             false, true);
 
-        checkRParen();
+        checkRParen(lparen, rparen);
     }
 
