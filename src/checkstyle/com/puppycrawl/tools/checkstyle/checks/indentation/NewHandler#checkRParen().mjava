@@ -7,6 +7,9 @@
         // the same line as the lparen
         final DetailAST rparen =
             getMainAst().findFirstToken(TokenTypes.RPAREN);
+        if (rparen == null) {
+            return;
+        }
         final int columnNo = expandedTabsColumnNo(rparen);
 
         if (getLevel().accept(columnNo) || !startsLine(rparen)) {

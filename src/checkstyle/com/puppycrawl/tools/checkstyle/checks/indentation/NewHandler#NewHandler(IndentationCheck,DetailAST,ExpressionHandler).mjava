@@ -6,13 +6,10 @@
      * @param aAST           the abstract syntax tree
      * @param aParent        the parent handler
      */
-    public MethodCallHandler(IndentationCheck aIndentCheck,
-        DetailAST aAST, ExpressionHandler aParent)
+    public NewHandler(IndentationCheck aIndentCheck,
+                      DetailAST aAST,
+                      ExpressionHandler aParent)
     {
-        super(aIndentCheck,
-            aAST.getType() == TokenTypes.METHOD_CALL
-                ? "method call" : "ctor call",
-            aAST,
-            aParent);
+        super(aIndentCheck, "operator new", aAST, aParent);
     }
 
