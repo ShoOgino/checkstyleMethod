@@ -1,0 +1,22 @@
+    /**
+     * Processes a node calling interested checks at each node.
+     * Uses iterative algorithm.
+     * @param aRoot the root of tree for process
+     */
+    private void processIter(DetailAST aRoot)
+    {
+        DetailAST curNode = aRoot;
+        while (curNode != null) {
+            notifyVisit(curNode);
+            DetailAST toVisit = (DetailAST) curNode.getFirstChild();
+            while (curNode != null && toVisit == null) {
+                notifyLeave(curNode);
+                toVisit = (DetailAST) curNode.getNextSibling();
+                if (toVisit == null) {
+                    curNode = curNode.getParent();
+                }
+            }
+            curNode = toVisit;
+        }
+    }
+

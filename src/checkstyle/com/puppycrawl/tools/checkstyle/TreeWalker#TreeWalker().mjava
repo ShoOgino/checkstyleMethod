@@ -4,5 +4,19 @@
     public TreeWalker()
     {
         setFileExtensions(new String[]{"java"});
+        // Tree walker can use two possible algorithms for
+        // tree processing (iterative and recursive.
+        // Recursive is default for now.
+        String recursive =
+            System.getProperty("checkstyle.use.recursive.algorithm", "true");
+        mRecursive = "true".equals(recursive);
+        if (mRecursive) {
+            Utils.getExceptionLogger()
+                .debug("TreeWalker uses recursive algorithm");
+        }
+        else {
+            Utils.getExceptionLogger()
+                .debug("TreeWalker uses iterative algorithm");
+        }
     }
 

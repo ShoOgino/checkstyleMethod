@@ -1,13 +1,14 @@
     public void testNoFile()
         throws CheckstyleException
     {
+        final String fn = System.getProperty("testinputs.dir")
+            + "/suppressions_no_file.xml";
         try {
-            SuppressionsLoader.loadSuppressions(
-                "src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_no_file.xml");
+            SuppressionsLoader.loadSuppressions(fn);
         }
         catch (CheckstyleException ex) {
             assertEquals(
-                "unable to parse src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_no_file.xml - Attribute \"files\" is required and must be specified for element type \"suppress\".",
+                "unable to parse " + fn + " - Attribute \"files\" is required and must be specified for element type \"suppress\".",
                 ex.getMessage());
         }
     }

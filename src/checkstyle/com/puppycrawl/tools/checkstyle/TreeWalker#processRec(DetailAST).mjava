@@ -1,8 +1,9 @@
     /**
      * Recursively processes a node calling interested checks at each node.
+     * Uses recursive algorithm.
      * @param aAST the node to start from
      */
-    private void process(DetailAST aAST)
+    private void processRec(DetailAST aAST)
     {
         if (aAST == null) {
             return;
@@ -12,15 +13,14 @@
 
         final DetailAST child = (DetailAST) aAST.getFirstChild();
         if (child != null) {
-            process(child);
+            processRec(child);
         }
 
         notifyLeave(aAST);
 
         final DetailAST sibling = (DetailAST) aAST.getNextSibling();
         if (sibling != null) {
-            process(sibling);
+            processRec(sibling);
         }
-
     }
 

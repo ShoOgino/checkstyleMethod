@@ -10,7 +10,12 @@
 
          // empty files are not flagged by javac, will yield aAST == null
         if (aAST != null) {
-            process(aAST);
+            if (useRecursiveAlgorithm()) {
+                processRec(aAST);
+            }
+            else {
+                processIter(aAST);
+            }
         }
 
         notifyEnd(aAST);

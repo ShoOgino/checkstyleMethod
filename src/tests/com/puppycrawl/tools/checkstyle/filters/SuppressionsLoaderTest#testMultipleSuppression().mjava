@@ -3,7 +3,8 @@
     {
         final FilterSet fc =
             SuppressionsLoader.loadSuppressions(
-                "src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_multiple.xml");
+                System.getProperty("testinputs.dir")
+                + "/suppressions_multiple.xml");
         final FilterSet fc2 = new FilterSet();
         SuppressElement se0 = new SuppressElement("file0", "check0");
         fc2.addFilter(se0);

@@ -1,14 +1,15 @@
     public void testBadInt()
         throws CheckstyleException
     {
+        final String fn = System.getProperty("testinputs.dir")
+            + "/suppressions_bad_int.xml";
         try {
-            SuppressionsLoader.loadSuppressions(
-                "src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_bad_int.xml");
+            SuppressionsLoader.loadSuppressions(fn);
         }
         catch (CheckstyleException ex) {
             assertTrue(
                 ex.getMessage(),
-                ex.getMessage().startsWith("number format exception src/testinputs/com/puppycrawl/tools/checkstyle/suppressions_bad_int.xml - "));
+                ex.getMessage().startsWith("number format exception " + fn + " - "));
         }
     }
 
