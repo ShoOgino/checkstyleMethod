@@ -4,19 +4,6 @@
      */
     public DetailAST getPreviousSibling()
     {
-        final DetailAST parent = getParent();
-        if (parent == null) {
-            return null;
-        }
-
-        AST ast = parent.getFirstChild();
-        while (ast != null) {
-            AST nextSibling = ast.getNextSibling();
-            if (this == nextSibling) {
-                return (DetailAST) ast;
-            }
-            ast = nextSibling;
-        }
-        return null;
+        return mPreviousSibling;
     }
 
