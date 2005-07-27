@@ -1,0 +1,12 @@
+    /**
+     * Ensures that we don't get multiple instances of one SeverityLevel
+     * during deserialization. See Section 3.6 of the Java Object
+     * Serialization Specification for details.
+     *
+     * @return the serialization replacement object
+     */
+    private Object readResolve()
+    {
+        return getInstance(mLabel);
+    }
+

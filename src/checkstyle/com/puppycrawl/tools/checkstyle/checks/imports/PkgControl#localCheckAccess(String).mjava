@@ -1,0 +1,19 @@
+    /**
+     * Checks whether any of the guards for this node control access to
+     * a specified package.
+     * @param aForPkg the package to check.
+     * @return an {@link AccessResult}.
+     */
+    private AccessResult localCheckAccess(final String aForPkg)
+    {
+        final Iterator it = mGuards.iterator();
+        while (it.hasNext()) {
+            final Guard g = (Guard) it.next();
+            final AccessResult result = g.verify(aForPkg);
+            if (result != AccessResult.UNKNOWN) {
+                return result;
+            }
+        }
+        return AccessResult.UNKNOWN;
+    }
+

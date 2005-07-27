@@ -1,0 +1,16 @@
+    public void testCheckAccess()
+    {
+        assertEquals(AccessResult.DISALLOWED, pcCommon
+                .checkAccess("org.springframework.something"));
+        assertEquals(AccessResult.ALLOWED, pcCommon
+                .checkAccess("org.apache.commons.something"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon
+                .checkAccess("org.apache.commons"));
+        assertEquals(AccessResult.ALLOWED, pcCommon
+                .checkAccess("org.hibernate.something"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon
+                .checkAccess("com.badpackage.something"));
+        assertEquals(AccessResult.DISALLOWED, pcRoot
+                .checkAccess("org.hibernate.something"));
+    }
+

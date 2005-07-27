@@ -1,0 +1,23 @@
+    /**
+     * Returns whether a package is allowed to be used. The algorithm checks
+     * with the current node for a result, and if none is found then calls
+     * its parent looking for a match. This will recurse looking for match.
+     * If there is no clear result then {@link AccessResult#UNKNOWN} is
+     * returned.
+     * @param aForPkg the package to check on.
+     * @return an {@link AccessResult}.
+     */
+    AccessResult checkAccess(final String aForPkg)
+    {
+        AccessResult retVal = localCheckAccess(aForPkg);
+        if (retVal != AccessResult.UNKNOWN) {
+            return retVal;
+        }
+        else if (mParent == null) {
+            // we are the top, so default to not allowed.
+            return AccessResult.DISALLOWED;
+        }
+
+        return mParent.checkAccess(aForPkg);
+    }
+

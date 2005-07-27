@@ -1,0 +1,14 @@
+    /**
+     * Construct a child node.
+     * @param aParent the parent node.
+     * @param aSubPkg the sub package name.
+     */
+    PkgControl(final PkgControl aParent, final String aSubPkg)
+    {
+        assert aParent != null;
+        assert aSubPkg != null;
+        mParent = aParent;
+        mFullPackage = aParent.getFullPackage() + "." + aSubPkg;
+        mParent.mChildren.add(this);
+    }
+

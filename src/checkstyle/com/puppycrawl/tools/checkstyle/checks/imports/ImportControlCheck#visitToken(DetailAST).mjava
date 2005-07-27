@@ -1,0 +1,29 @@
+    /** {@inheritDoc} */
+    public void visitToken(final DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
+            final DetailAST nameAST = aAST.getLastChild().getPreviousSibling();
+            final FullIdent full = FullIdent.createFullIdent(nameAST);
+            if (mRoot == null) {
+                log(nameAST, "import.control.missing.file");
+            }
+            else {
+                mCurrentLeaf = mRoot.locateFinest(full.getText());
+            }
+        }
+        else if (mCurrentLeaf != null) {
+            final FullIdent imp;
+            if (aAST.getType() == TokenTypes.IMPORT) {
+                imp = FullIdent.createFullIdentBelow(aAST);
+            }
+            else {
+                imp = FullIdent.createFullIdent((DetailAST) aAST
+                        .getFirstChild().getNextSibling());
+            }
+            final AccessResult access = mCurrentLeaf.checkAccess(imp.getText());
+            if (!AccessResult.ALLOWED.equals(access)) {
+                log(aAST, "import.control.disallowed", imp.getText());
+            }
+        }
+    }
+

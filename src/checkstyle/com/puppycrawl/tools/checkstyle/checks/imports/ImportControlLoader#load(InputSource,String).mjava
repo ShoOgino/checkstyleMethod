@@ -1,0 +1,27 @@
+    /**
+     * Loads the import control file from a {@link InputSource}.
+     * @param aSource the source to load from.
+     * @param aSourceName name of the source being loaded.
+     * @return the root {@link PkgControl} object.
+     * @throws CheckstyleException if an error occurs.
+     */
+    private static PkgControl load(final InputSource aSource,
+        final String aSourceName) throws CheckstyleException
+    {
+        try {
+            final ImportControlLoader loader = new ImportControlLoader();
+            loader.parseInputSource(aSource);
+            return loader.getRoot();
+        }
+        catch (ParserConfigurationException e) {
+            throw new CheckstyleException("unable to parse " + aSourceName, e);
+        }
+        catch (SAXException e) {
+            throw new CheckstyleException("unable to parse " + aSourceName
+                    + " - " + e.getMessage(), e);
+        }
+        catch (IOException e) {
+            throw new CheckstyleException("unable to read " + aSourceName, e);
+        }
+    }
+

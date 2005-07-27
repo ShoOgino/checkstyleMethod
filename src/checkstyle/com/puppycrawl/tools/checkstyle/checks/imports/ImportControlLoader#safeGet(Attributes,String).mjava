@@ -1,0 +1,18 @@
+    /**
+     * Utility to safely get an attribute. If it does not exist an exception
+     * is thrown.
+     * @param aAtts collect to get attribute from.
+     * @param aName name of the attribute to get.
+     * @return the value of the attribute.
+     * @throws SAXException if the attribute does not exist.
+     */
+    private String safeGet(final Attributes aAtts, String aName)
+        throws SAXException
+    {
+        final String retVal = aAtts.getValue(aName);
+        if (retVal == null) {
+            throw new SAXException("missing attibute " + aName);
+        }
+        return retVal;
+    }
+
