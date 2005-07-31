@@ -1,0 +1,25 @@
+    /**
+     * Checks whether any of the guards for this node control access to
+     * a specified package.
+     * @param aForImport the package to check.
+     * @param aInPkg the package doing the import.
+     * @return an {@link AccessResult}.
+     */
+    private AccessResult localCheckAccess(final String aForImport,
+        final String aInPkg)
+    {
+        final Iterator it = mGuards.iterator();
+        while (it.hasNext()) {
+            final Guard g = (Guard) it.next();
+            // Check if a Guard is only meant to be applied locally.
+            if (g.isLocalOnly() && !mFullPackage.equals(aInPkg)) {
+                continue;
+            }
+            final AccessResult result = g.verifyImport(aForImport, aInPkg);
+            if (result != AccessResult.UNKNOWN) {
+                return result;
+            }
+        }
+        return AccessResult.UNKNOWN;
+    }
+

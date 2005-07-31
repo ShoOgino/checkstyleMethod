@@ -8,7 +8,8 @@
                 log(nameAST, "import.control.missing.file");
             }
             else {
-                mCurrentLeaf = mRoot.locateFinest(full.getText());
+                mInPkg = full.getText();
+                mCurrentLeaf = mRoot.locateFinest(mInPkg);
             }
         }
         else if (mCurrentLeaf != null) {
@@ -20,7 +21,8 @@
                 imp = FullIdent.createFullIdent((DetailAST) aAST
                         .getFirstChild().getNextSibling());
             }
-            final AccessResult access = mCurrentLeaf.checkAccess(imp.getText());
+            final AccessResult access = mCurrentLeaf.checkAccess(imp.getText(),
+                    mInPkg);
             if (!AccessResult.ALLOWED.equals(access)) {
                 log(aAST, "import.control.disallowed", imp.getText());
             }

@@ -1,0 +1,14 @@
+    /**
+     * Returns the appropriate {@link AccessResult} based on whether there
+     * was a match and if the guard is to allow access.
+     * @param aMatched indicates whether there was a match.
+     * @return An appropriate {@link AccessResult}.
+     */
+    private AccessResult calculateResult(final boolean aMatched)
+    {
+        if (aMatched) {
+            return mAllowed ? AccessResult.ALLOWED : AccessResult.DISALLOWED;
+        }
+        return AccessResult.UNKNOWN;
+    }
+
