@@ -1,0 +1,12 @@
+    public void testSerial() throws Exception
+    {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(AccessResult.ALLOWED);
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final ObjectInputStream ois = new ObjectInputStream(bais);
+        final AccessResult revivied = (AccessResult) ois.readObject();
+        assertNotNull(revivied);
+        assertTrue(revivied == AccessResult.ALLOWED);
+    }
+
