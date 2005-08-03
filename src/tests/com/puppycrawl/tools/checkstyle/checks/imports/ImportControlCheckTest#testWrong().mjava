@@ -1,0 +1,15 @@
+    public void testWrong() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        checkConfig.addAttribute("file", "unknown-file");
+        final String[] expected = {};
+        try {
+            verify(checkConfig, getPath("imports" + File.separator
+                    + "InputImportControl.java"), expected);
+            fail("should fail");
+        }
+        catch (CheckstyleException ex) {
+            ;
+        }
+    }
+

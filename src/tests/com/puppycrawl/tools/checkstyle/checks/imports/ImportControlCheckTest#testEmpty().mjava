@@ -1,0 +1,9 @@
+    public void testEmpty() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        checkConfig.addAttribute("file", "   ");
+        final String[] expected = {"1:40: Missing an import control file."};
+        verify(checkConfig, getPath("imports" + File.separator
+                + "InputImportControl.java"), expected);
+    }
+

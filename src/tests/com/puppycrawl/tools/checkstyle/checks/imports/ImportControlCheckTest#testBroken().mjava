@@ -1,0 +1,16 @@
+    public void testBroken() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        checkConfig.addAttribute("file", System.getProperty("testinputs.dir")
+                + "/import-control_broken.xml");
+        final String[] expected = {};
+        try {
+            verify(checkConfig, getPath("imports" + File.separator
+                    + "InputImportControl.java"), expected);
+            fail("should fail");
+        }
+        catch (CheckstyleException ex) {
+            ;
+        }
+    }
+
