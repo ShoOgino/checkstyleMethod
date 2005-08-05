@@ -14,7 +14,7 @@
     {
         // Let's try to load class.
         final ClassInfo newClassInfo =
-            new ClassInfo(aExc, getCurrentClassName());
+            createClassInfo(new Token(aExc), getCurrentClassName());
 
         if (!mAllowUnchecked) {
             if (isUnchecked(newClassInfo.getClazz())) {
@@ -26,7 +26,7 @@
         boolean shouldAdd = true;
         for (Iterator known = aKnownExcs.iterator(); known.hasNext();) {
             final ClassInfo ci = (ClassInfo) known.next();
-            final FullIdent fi = ci.getName();
+            final Token fi = ci.getName();
 
             if (isSameType(fi.getText(), aExc.getText())) {
                 shouldAdd = false;

@@ -1,0 +1,35 @@
+    /**
+     * Process type params (if any) for given class, enum or method.
+     * @param aAST class, enum or method to process.
+     */
+    private void processTypeParams(DetailAST aAST)
+    {
+        final DetailAST typeParams =
+            aAST.findFirstToken(TokenTypes.TYPE_PARAMETERS);
+
+        Map paramsMap = new HashMap();
+        mTypeParams.add(paramsMap);
+
+        if (typeParams == null) {
+            return;
+        }
+
+        for (DetailAST child = (DetailAST) typeParams.getFirstChild();
+             child != null;
+             child = (DetailAST) child.getNextSibling())
+        {
+            if (child.getType() == TokenTypes.TYPE_PARAMETER) {
+                DetailAST param = child;
+                String alias = param.findFirstToken(TokenTypes.IDENT).getText();
+                DetailAST bounds =
+                    param.findFirstToken(TokenTypes.TYPE_UPPER_BOUNDS);
+                if (bounds != null) {
+                    FullIdent name = FullIdent.createFullIdentBelow(bounds);
+                    ClassInfo ci =
+                        createClassInfo(new Token(name), getCurrentClassName());
+                    paramsMap.put(alias, ci);
+                }
+            }
+        }
+    }
+

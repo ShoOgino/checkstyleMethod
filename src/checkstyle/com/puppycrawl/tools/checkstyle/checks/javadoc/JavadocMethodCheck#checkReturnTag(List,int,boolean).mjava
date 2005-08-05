@@ -18,7 +18,8 @@
             final JavadocTag jt = (JavadocTag) it.next();
             if (jt.isReturnTag()) {
                 if (found) {
-                    log(jt.getLineNo(), "javadoc.return.duplicate");
+                    log(jt.getLineNo(), jt.getColumnNo(),
+                        "javadoc.return.duplicate");
                 }
                 found = true;
                 it.remove();

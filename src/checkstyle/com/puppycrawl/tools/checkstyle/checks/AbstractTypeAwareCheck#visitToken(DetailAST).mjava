@@ -13,6 +13,9 @@
             processClass(aAST);
         }
         else {
+            if (aAST.getType() == TokenTypes.METHOD_DEF) {
+                processTypeParams(aAST);
+            }
             processAST(aAST);
         }
     }

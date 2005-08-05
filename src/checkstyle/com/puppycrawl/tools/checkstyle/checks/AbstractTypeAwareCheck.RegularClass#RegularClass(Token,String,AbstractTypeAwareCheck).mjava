@@ -2,15 +2,14 @@
          * Creates new instance of of class information object.
          * @param aName <code>FullIdent</code> associated with new object.
          * @param aSurroundingClass name of current surrounding class.
+         * @param aCheck the check we use to load class.
          */
-        public ClassInfo(final FullIdent aName, final String aSurroundingClass)
+        private RegularClass(final Token aName,
+                             final String aSurroundingClass,
+                             final AbstractTypeAwareCheck aCheck)
         {
-            if (aName == null) {
-                throw new NullPointerException(
-                    "ClassInfo's name should be non-null");
-            }
-            mName = aName;
+            super(aName);
             mSurroundingClass = aSurroundingClass;
-            mIsLoadable = true;
+            mCheck = aCheck;
         }
 

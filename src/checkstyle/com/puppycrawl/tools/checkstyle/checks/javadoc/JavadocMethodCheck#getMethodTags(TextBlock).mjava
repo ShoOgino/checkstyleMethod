@@ -23,21 +23,37 @@
             Matcher noargMultilineStart =
                 MATCH_JAVADOC_NOARG_MULTILINE_START.matcher(lines[i]);
             if (javadocArgMatcher.find()) {
-                tags.add(new JavadocTag(currentLine,
+                int col = javadocArgMatcher.start(1) - 1;
+                if (i == 0) {
+                    col += aComment.getStartColNo();
+                }
+                tags.add(new JavadocTag(currentLine, col,
                                         javadocArgMatcher.group(1),
                                         javadocArgMatcher.group(2)));
             }
             else if (javadocNoargMatcher.find()) {
-                tags.add(new JavadocTag(currentLine,
+                int col = javadocNoargMatcher.start(1) - 1;
+                if (i == 0) {
+                    col += aComment.getStartColNo();
+                }
+                tags.add(new JavadocTag(currentLine, col,
                                         javadocNoargMatcher.group(1)));
             }
             else if (noargCurlyMatcher.find()) {
-                tags.add(new JavadocTag(currentLine,
+                int col = noargCurlyMatcher.start(1) - 1;
+                if (i == 0) {
+                    col += aComment.getStartColNo();
+                }
+                tags.add(new JavadocTag(currentLine, col,
                                         noargCurlyMatcher.group(1)));
             }
             else if (argMultilineStart.find()) {
                 final String p1 = argMultilineStart.group(1);
                 final String p2 = argMultilineStart.group(2);
+                int col = argMultilineStart.start(1) - 1;
+                if (i == 0) {
+                    col += aComment.getStartColNo();
+                }
 
                 // Look for the rest of the comment if all we saw was
                 // the tag and the name. Stop when we see '*/' (end of
@@ -52,7 +68,7 @@
                         String lFin = multilineCont.group(1);
                         if (!lFin.equals(NEXT_TAG) && !lFin.equals(END_JAVADOC))
                         {
-                            tags.add(new JavadocTag(currentLine, p1, p2));
+                            tags.add(new JavadocTag(currentLine, col, p1, p2));
                         }
                     }
                     remIndex++;
@@ -60,6 +76,10 @@
             }
             else if (noargMultilineStart.find()) {
                 final String p1 = noargMultilineStart.group(1);
+                int col = noargMultilineStart.start(1) - 1;
+                if (i == 0) {
+                    col += aComment.getStartColNo();
+                }
 
                 // Look for the rest of the comment if all we saw was
                 // the tag and the name. Stop when we see '*/' (end of
@@ -74,7 +94,7 @@
                         String lFin = multilineCont.group(1);
                         if (!lFin.equals(NEXT_TAG) && !lFin.equals(END_JAVADOC))
                         {
-                            tags.add(new JavadocTag(currentLine, p1));
+                            tags.add(new JavadocTag(currentLine, col, p1));
                         }
                     }
                     remIndex++;

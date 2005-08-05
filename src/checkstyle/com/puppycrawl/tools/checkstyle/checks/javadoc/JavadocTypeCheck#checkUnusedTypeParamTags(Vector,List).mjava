@@ -20,16 +20,19 @@
                     if (matcher.matches()) {
                         typeParamName = matcher.group(1).trim();
                         if (!aTypeParamNames.contains(typeParamName)) {
-                            log(tag.getLineNo(), "javadoc.unusedTag",
+                            log(tag.getLineNo(), tag.getColumnNo(),
+                                "javadoc.unusedTag",
                                 "@param", "<" + typeParamName + ">");
                         }
                     }
                     else {
-                        log(tag.getLineNo(), "javadoc.unusedTagGeneral");
+                        log(tag.getLineNo(), tag.getColumnNo(),
+                            "javadoc.unusedTagGeneral");
                     }
                 }
                 else {
-                    log(tag.getLineNo(), "javadoc.unusedTagGeneral");
+                    log(tag.getLineNo(), tag.getColumnNo(),
+                        "javadoc.unusedTagGeneral");
                 }
             }
         }
