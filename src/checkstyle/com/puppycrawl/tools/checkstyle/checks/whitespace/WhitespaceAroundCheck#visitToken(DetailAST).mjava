@@ -25,6 +25,14 @@
             return;
         }
 
+        //we do not want to check colon for cases and defaults
+        if (type == TokenTypes.COLON
+            && (parentType == TokenTypes.LITERAL_DEFAULT
+                || parentType == TokenTypes.LITERAL_CASE))
+        {
+            return;
+        }
+
         final String[] lines = getLines();
         final String line = lines[aAST.getLineNo() - 1];
         final int before = aAST.getColumnNo() - 1;
