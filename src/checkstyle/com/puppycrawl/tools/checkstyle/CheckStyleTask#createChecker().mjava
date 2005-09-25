@@ -7,22 +7,20 @@
         Checker c = null;
         try {
             final Properties props = createOverridingProperties();
-            final Configuration config =
-                ConfigurationLoader.loadConfiguration(
+            final Configuration config = ConfigurationLoader.loadConfiguration(
                     mConfigLocation, new PropertiesExpander(props), true);
 
             final DefaultContext context = new DefaultContext();
-            final ClassLoader loader =
-                new AntClassLoader(getProject(), mClasspath);
+            final ClassLoader loader = new AntClassLoader(getProject(),
+                    mClasspath);
             context.add("classloader", loader);
 
             c = new Checker();
 
             //load the set of package names
             if (mPackageNamesFile != null) {
-                final ModuleFactory moduleFactory =
-                    PackageNamesLoader.loadModuleFactory(
-                        mPackageNamesFile.getAbsolutePath());
+                final ModuleFactory moduleFactory = PackageNamesLoader
+                        .loadModuleFactory(mPackageNamesFile.getAbsolutePath());
                 c.setModuleFactory(moduleFactory);
             }
             c.contextualize(context);
@@ -35,8 +33,8 @@
             }
         }
         catch (Exception e) {
-            throw new BuildException(
-                "Unable to create a Checker: " + e.getMessage(), e);
+            throw new BuildException("Unable to create a Checker: "
+                    + e.getMessage(), e);
         }
 
         return c;

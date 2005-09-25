@@ -16,14 +16,12 @@
                 retVal.load(inStream);
             }
             catch (FileNotFoundException e) {
-                throw new BuildException(
-                    "Could not find Properties file '" + mPropertiesFile + "'",
-                    e, getLocation());
+                throw new BuildException("Could not find Properties file '"
+                        + mPropertiesFile + "'", e, getLocation());
             }
             catch (IOException e) {
-                throw new BuildException(
-                    "Error loading Properties file '" + mPropertiesFile + "'",
-                    e, getLocation());
+                throw new BuildException("Error loading Properties file '"
+                        + mPropertiesFile + "'", e, getLocation());
             }
             finally {
                 try {
@@ -32,10 +30,8 @@
                     }
                 }
                 catch (IOException e) {
-                    throw new BuildException(
-                        "Error closing Properties file '"
-                        + mPropertiesFile + "'",
-                        e, getLocation());
+                    throw new BuildException("Error closing Properties file '"
+                            + mPropertiesFile + "'", e, getLocation());
                 }
             }
         }

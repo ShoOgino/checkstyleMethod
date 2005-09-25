@@ -6,19 +6,17 @@
      * @throws IllegalAccessException if an error occurs
      * @throws IOException if an error occurs
      */
-    protected AuditListener[] getListeners()
-        throws ClassNotFoundException, InstantiationException,
-        IllegalAccessException, IOException
+    protected AuditListener[] getListeners() throws ClassNotFoundException,
+            InstantiationException, IllegalAccessException, IOException
     {
         final int formatterCount = Math.max(1, mFormatters.size());
 
-        final AuditListener[] listeners =
-            new AuditListener[formatterCount];
+        final AuditListener[] listeners = new AuditListener[formatterCount];
 
         // formatters
         if (mFormatters.size() == 0) {
-            final OutputStream debug =
-                new LogOutputStream(this, Project.MSG_DEBUG);
+            final OutputStream debug = new LogOutputStream(this,
+                    Project.MSG_DEBUG);
             final OutputStream err = new LogOutputStream(this, Project.MSG_ERR);
             listeners[0] = new DefaultLogger(debug, true, err, true);
         }
