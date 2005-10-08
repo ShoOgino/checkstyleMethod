@@ -1,0 +1,17 @@
+    /**
+     * Sets regexp pattern for ignored strings.
+     * @param aIgnoreStringsRegexp regexp pattern for ignored strings
+     */
+    public void setIgnoreStringsRegexp(String aIgnoreStringsRegexp)
+    {
+        mIgnoreStringsRegexp = aIgnoreStringsRegexp;
+        if ((mIgnoreStringsRegexp != null)
+            && (mIgnoreStringsRegexp.length() > 0))
+        {
+            mPattern = Utils.getPattern(mIgnoreStringsRegexp);
+        }
+        else {
+            mPattern = null;
+        }
+    }
+
