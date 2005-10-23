@@ -1,0 +1,35 @@
+    /**
+     * Determines if aAST is in the body of a flow control statement without
+     * braces. An example of such a statement would be
+     * <p>
+     * <pre>
+     * if (y < 0)
+     *     x = y;
+     * </pre>
+     * <p>
+     * This leads to the following AST structure:
+     * <p>
+     * <pre>
+     * LITERAL_IF
+     *     LPAREN
+     *     EXPR // test
+     *     RPAREN
+     *     EXPR // body
+     *     SEMI
+     * </pre>
+     * <p>
+     * We need to ensure that aAST is in the body and not in the test.
+     *
+     * @param aAST an assignment operator AST
+     * @return whether aAST is in the body of a flow control statement
+     */
+    private static boolean isInNoBraceControlStatement(DetailAST aAST)
+    {
+        if (!isInContext(aAST, CONTROL_CONTEXT)) {
+            return false;
+        }
+        final DetailAST expr = aAST.getParent();
+        final AST exprNext = expr.getNextSibling();
+        return exprNext != null && exprNext.getType() == TokenTypes.SEMI;
+    }
+

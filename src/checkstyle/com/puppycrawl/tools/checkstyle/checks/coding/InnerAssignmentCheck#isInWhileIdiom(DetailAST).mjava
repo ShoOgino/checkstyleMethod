@@ -1,0 +1,21 @@
+    /**
+     * Tests whether the given AST is used in the "assignment in while test"
+     * idiom.
+     * <p>
+     * <pre>
+     * while ((b = is.read()) != -1) {
+     *   // work with b
+     * }
+     * <pre>
+     * @param aAST assignment AST
+     * @return whether the context of the assignemt AST indicates the idiom
+     */
+    private boolean isInWhileIdiom(DetailAST aAST)
+    {
+        if (!isComparison(aAST.getParent())) {
+            return false;
+        }
+        return isInContext(
+                aAST.getParent(), ALLOWED_ASSIGMENT_IN_COMPARISON_CONTEXT);
+    }
+
