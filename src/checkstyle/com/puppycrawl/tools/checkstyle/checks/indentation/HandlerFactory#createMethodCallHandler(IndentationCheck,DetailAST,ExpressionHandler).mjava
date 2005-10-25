@@ -10,18 +10,12 @@
     ExpressionHandler createMethodCallHandler(IndentationCheck aIndentCheck,
         DetailAST aAst, ExpressionHandler aParent)
     {
-        ExpressionHandler handler =
-            (ExpressionHandler) mCreatedHandlers.get(aAst);
-        if (handler != null) {
-            return handler;
-        }
-
         DetailAST ast = (DetailAST) aAst.getFirstChild();
         while (ast != null && ast.getType() == TokenTypes.DOT) {
             ast = (DetailAST) ast.getFirstChild();
         }
-        if (ast != null && ast.getType() == TokenTypes.METHOD_CALL) {
-            aParent = createMethodCallHandler(aIndentCheck, ast, aParent);
+        if (ast != null && isHandledType(ast.getType())) {
+            aParent = getHandler(aIndentCheck, ast, aParent);
             mCreatedHandlers.put(ast, aParent);
         }
         return new MethodCallHandler(aIndentCheck, aAst, aParent);

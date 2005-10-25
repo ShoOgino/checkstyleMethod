@@ -10,6 +10,12 @@
     public ExpressionHandler getHandler(IndentationCheck aIndentCheck,
         DetailAST aAst, ExpressionHandler aParent)
     {
+        ExpressionHandler handler =
+            (ExpressionHandler) mCreatedHandlers.get(aAst);
+        if (handler != null) {
+            return handler;
+        }
+
         if (aAst.getType() == TokenTypes.METHOD_CALL) {
             return createMethodCallHandler(aIndentCheck, aAst, aParent);
         }
