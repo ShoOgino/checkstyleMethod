@@ -10,10 +10,7 @@
             final TextBlock cmt = contents.getJavadocBefore(aAST.getLineNo());
 
             if (cmt == null) {
-                if (!mAllowMissingJavadoc
-                    && !(mAllowMissingPropertyJavadoc
-                         && (isSetterMethod(aAST) || isGetterMethod(aAST))))
-                {
+                if (!isMissingJavadocAllowed(aAST)) {
                     log(aAST, "javadoc.missing");
                 }
             }
