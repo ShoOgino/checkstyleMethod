@@ -7,9 +7,9 @@
         throws ConversionException
     {
         try {
-            mIgnoreNameRegexp = Utils.getRE(aFormat);
+            mIgnoreNameRegexp = Utils.getPattern(aFormat);
         }
-        catch (RESyntaxException e) {
+        catch (PatternSyntaxException e) {
             throw new ConversionException("unable to parse " + aFormat, e);
         }
     }

@@ -8,7 +8,7 @@
     {
         final String fieldOrMethodName = aFieldOrMethod.getName();
         return (!equalScope(aFieldOrMethod)
-            || mIgnoreClassNameRegexp.match(aClassName)
-            || mIgnoreNameRegexp.match(fieldOrMethodName));
+                || mIgnoreClassNameRegexp.matcher(aClassName).matches()
+            || mIgnoreNameRegexp.matcher(fieldOrMethodName).matches());
     }
 
