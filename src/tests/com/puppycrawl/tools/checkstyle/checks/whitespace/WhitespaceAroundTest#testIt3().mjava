@@ -1,13 +1,15 @@
     public void testIt3()
         throws Exception
     {
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(WhitespaceAroundCheck.class);
         final String[] expected = {
             "41:14: 'while' is not followed by whitespace.",
             "58:12: 'for' is not followed by whitespace.",
             // + ":58:23: ';' is not followed by whitespace.",
             //  + ":58:29: ';' is not followed by whitespace.",
+            "115:27: '{' is not followed by whitespace.",
+            "115:27: '}' is not preceded with whitespace.",
+            "118:40: '{' is not followed by whitespace.",
+            "118:40: '}' is not preceded with whitespace.",
         };
         verify(checkConfig, getPath("InputBraces.java"), expected);
     }

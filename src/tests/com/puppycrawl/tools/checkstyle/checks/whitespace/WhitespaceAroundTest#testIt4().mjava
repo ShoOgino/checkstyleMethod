@@ -1,0 +1,12 @@
+    public void testIt4()
+        throws Exception
+    {
+        checkConfig.addAttribute("allowEmptyMethods", "true");
+        checkConfig.addAttribute("allowEmptyConstructors", "true");
+        final String[] expected = {
+            "41:14: 'while' is not followed by whitespace.",
+            "58:12: 'for' is not followed by whitespace.",
+        };
+        verify(checkConfig, getPath("InputBraces.java"), expected);
+    }
+

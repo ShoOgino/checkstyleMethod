@@ -1,0 +1,14 @@
+    /**
+     * Test if the given <code>DetailAST</code> is part of an allowed empty
+     * method block.
+     * @param aAST the <code>DetailAST</code> to test.
+     * @param aParentType the token type of <code>aAST</code>'s parent.
+     * @return <code>true</code> if <code>aAST</code> makes up part of an
+     *         allowed empty method block.
+     */
+    private boolean emptyMethodBlockCheck(DetailAST aAST, int aParentType)
+    {
+        return mAllowEmptyMethods
+            && emptyBlockCheck(aAST, aParentType, TokenTypes.METHOD_DEF);
+    }
+
