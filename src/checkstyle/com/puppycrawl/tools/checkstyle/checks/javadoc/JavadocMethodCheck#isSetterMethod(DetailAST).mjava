@@ -9,7 +9,7 @@
         // is allowed in a proper setter method which does not throw any
         // exceptions.
         if ((aAST.getType() != TokenTypes.METHOD_DEF)
-            || (aAST.getChildCount() != 7))
+            || (aAST.getChildCount() != MAX_CHILDREN))
         {
             return false;
         }
@@ -41,7 +41,7 @@
         // SEMI
         // RCURLY
         final DetailAST slist = aAST.findFirstToken(TokenTypes.SLIST);
-        if ((slist == null) || (slist.getChildCount() != 3)) {
+        if ((slist == null) || (slist.getChildCount() != BODY_SIZE)) {
             return false;
         }
 

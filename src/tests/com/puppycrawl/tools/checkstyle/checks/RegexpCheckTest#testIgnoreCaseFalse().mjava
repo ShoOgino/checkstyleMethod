@@ -1,0 +1,21 @@
+    public void testIgnoreCaseFalse()
+            throws Exception
+    {
+        final String illegalTrue = "(?i)SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
+        final DefaultConfiguration checkConfigTrue =
+            createCheckConfig(RegexpCheck.class);
+        checkConfigTrue.addAttribute("format", illegalTrue);
+        checkConfigTrue.addAttribute("illegalPattern", "true");
+        final String[] expectedTrue = {
+            "69: Line matches the illegal pattern '" + illegalTrue + "'."};
+        verify(checkConfigTrue, getPath("InputSemantic.java"), expectedTrue);
+        
+        final String illegalFalse = "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
+        final DefaultConfiguration checkConfigFalse =
+            createCheckConfig(RegexpCheck.class);
+        checkConfigFalse.addAttribute("format", illegalFalse);
+        checkConfigFalse.addAttribute("illegalPattern", "true");
+        final String[] expectedFalse = {};
+        verify(checkConfigFalse, getPath("InputSemantic.java"), expectedFalse);
+    }
+

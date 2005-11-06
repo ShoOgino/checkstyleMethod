@@ -1,0 +1,45 @@
+    /** recursive method that finds the matches. */
+    private void findMatch()
+    {
+        int startLine;
+        int startColumn;
+        int endLine;
+        int endColumn;
+        boolean foundMatch;
+        boolean ignore = false;
+
+        foundMatch = mMatcher.find();
+        if (!foundMatch && !mIllegalPattern && mMatchCount == 0) {
+            logMessage(0);
+        }
+        else if (foundMatch) {
+            startLine = ((Integer[]) mCharacters.get(mMatcher.start()))[0].
+                    intValue();
+            startColumn = ((Integer[]) mCharacters.get(mMatcher.start()))[1].
+                    intValue();
+            endLine = ((Integer[]) mCharacters.get(mMatcher.end() - 1))[0].
+                    intValue();
+            endColumn = ((Integer[]) mCharacters.get(mMatcher.end() - 1))[1].
+                    intValue();
+            if (mIgnoreComments) {
+                final FileContents theFileContents = getFileContents();
+                ignore = theFileContents.hasIntersectionWithComment(startLine,
+                    startColumn, endLine, endColumn);
+            }
+            if (!ignore) {
+                mMatchCount++;
+                if (mIllegalPattern || (mCheckForDuplicates
+                        && ((mMatchCount - 1) > mDuplicateLimit)))
+                {
+                    mErrorCount++;
+                    logMessage(startLine);
+                }
+            }
+            if ((mErrorCount < mErrorLimit)
+                    && (ignore || mIllegalPattern || mCheckForDuplicates))
+            {
+                findMatch();
+            }
+        }
+    }
+

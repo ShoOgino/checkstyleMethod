@@ -1,0 +1,23 @@
+    /**
+     * Displays the right message.
+     * @param aLineNumber the line number the message relates to.
+     */
+    private void logMessage(int aLineNumber)
+    {
+        String message = "".equals(getMessage()) ? getFormat() : mMessage;
+        if (mErrorCount >= mErrorLimit) {
+            message = ERROR_LIMIT_EXCEEDED_MESSAGE + message;
+        }
+        if (mIllegalPattern) {
+            log(aLineNumber, "illegal.regexp", message);
+        }
+        else {
+            if (aLineNumber > 0) {
+                log(aLineNumber, "duplicate.regexp", message);
+            }
+            else {
+                log(aLineNumber, "required.regexp", message);
+            }
+        }
+    }
+

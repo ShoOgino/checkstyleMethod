@@ -1,0 +1,15 @@
+    public void testMessagePropertyBad()
+        throws Exception
+    {
+        final String illegal = "System\\.(out)|(err)\\.print(ln)?\\(";
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RegexpCheck.class);
+        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("illegalPattern", "true");
+        checkConfig.addAttribute("message", null);
+        final String[] expected = {
+            "69: Line matches the illegal pattern '" + illegal + "'."
+        };
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
+    }
+

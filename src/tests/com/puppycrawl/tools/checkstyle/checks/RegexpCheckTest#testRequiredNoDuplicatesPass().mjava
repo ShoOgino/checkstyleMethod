@@ -1,0 +1,13 @@
+    public void testRequiredNoDuplicatesPass()
+            throws Exception
+    {
+        final String required = "Test case file";
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RegexpCheck.class);
+        checkConfig.addAttribute("format", required);
+        checkConfig.addAttribute("duplicateLimit", "0");
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
+    }
+
