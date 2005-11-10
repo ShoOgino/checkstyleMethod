@@ -1,5 +1,6 @@
-    public void testIt() throws Exception
+    public void testLastCaseGroup() throws Exception
     {
+        DefaultConfiguration checkConfig = createCheckConfig(FallThroughCheck.class);
         checkConfig.addAttribute("checkLastCaseGroup", "true");
         final String[] expected = {
             "12:13: Fall through from previous branch of the switch statement.",
@@ -10,6 +11,10 @@
             "103:13: Fall through from previous branch of the switch statement.",
             "121:13: Fall through from previous branch of the switch statement.",
             "121:13: Fall through from the last branch of the switch statement.",
+            "367:11: Fall through from previous branch of the switch statement.",
+            "370:11: Fall through from previous branch of the switch statement.",
+            "372:40: Fall through from previous branch of the switch statement.",
+            "374:11: Fall through from the last branch of the switch statement.",
         };
         verify(checkConfig,
                getPath("coding" + File.separator + "InputFallThrough.java"),
