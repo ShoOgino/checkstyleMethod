@@ -1,8 +1,8 @@
-    public void testIgnoreCommentsNoSpaces()
+    public void test1371588()
             throws Exception
     {
-        // make sure the comment is not turned into spaces
-        final String illegal = "long ms  ";
+        // StackOverflowError with trailing space and ignoreComments
+        final String illegal = "\\s+$";
         mCheckConfig.addAttribute("format", illegal);
         mCheckConfig.addAttribute("ignoreComments", "true");
         final String[] expected = {

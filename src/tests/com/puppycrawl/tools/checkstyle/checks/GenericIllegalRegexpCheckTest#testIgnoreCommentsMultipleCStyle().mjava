@@ -3,12 +3,10 @@
     {
         // See if a second comment on the same line is removed properly
         final String illegal = "c-style 2";
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(GenericIllegalRegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
-        checkConfig.addAttribute("ignoreComments", "true");
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("ignoreComments", "true");
         final String[] expected = {
         };
-        verify(checkConfig, getPath("InputTrailingComment.java"), expected);
+        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
     }
 

@@ -2,12 +2,10 @@
             throws Exception
     {
         final String illegal = "Let's check multi-line comments";
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(GenericIllegalRegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
-        checkConfig.addAttribute("ignoreComments", "true");
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("ignoreComments", "true");
         final String[] expected = {
         };
-        verify(checkConfig, getPath("InputTrailingComment.java"), expected);
+        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
     }
 

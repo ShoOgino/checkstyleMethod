@@ -2,13 +2,11 @@
             throws Exception
     {
         final String illegal = "int z";
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(GenericIllegalRegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
-        checkConfig.addAttribute("ignoreComments", "true");
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("ignoreComments", "true");
         final String[] expected = {
             "20: Line matches the illegal pattern '" + illegal + "'."
         };
-        verify(checkConfig, getPath("InputTrailingComment.java"), expected);
+        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
     }
 
