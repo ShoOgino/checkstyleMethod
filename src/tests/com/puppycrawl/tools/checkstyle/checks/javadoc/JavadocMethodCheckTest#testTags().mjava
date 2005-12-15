@@ -1,7 +1,5 @@
     public void testTags() throws Exception
     {
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(JavadocMethodCheck.class);
         final String[] expected = {
             "14:5: Missing a Javadoc comment.",
             "18:9: Unused @param tag for 'unused'.",
@@ -34,6 +32,6 @@
             "333: Unused Javadoc tag.",
         };
 
-        verify(checkConfig, getPath("InputTags.java"), expected);
+        verify(mCheckConfig, getPath("InputTags.java"), expected);
     }
 

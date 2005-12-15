@@ -1,10 +1,8 @@
     public void testAllowMissingJavadoc() throws Exception
     {
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("allowMissingJavadoc", "true");
+        mCheckConfig.addAttribute("allowMissingJavadoc", "true");
         final String[] expected = {};
-        verify(checkConfig, getPath("javadoc" + File.separator
+        verify(mCheckConfig, getPath("javadoc" + File.separator
                                     + "InputNoJavadoc.java"), expected);
     }
 

@@ -1,8 +1,6 @@
     public void test_generics_2() throws Exception
     {
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("allowThrowsTagsForSubclasses", "true");
+        mCheckConfig.addAttribute("allowThrowsTagsForSubclasses", "true");
         final String[] expected = {
             "15:34: Expected @throws tag for 'RE'.",
             "23:37: Expected @throws tag for 'RE'.",
@@ -11,6 +9,6 @@
             "41:38: Expected @throws tag for 'RuntimeException'.",
             "42:13: Expected @throws tag for 'java.lang.RuntimeException'.",
         };
-        verify(checkConfig, getPath("javadoc/TestGenerics.java"), expected);
+        verify(mCheckConfig, getPath("javadoc/TestGenerics.java"), expected);
     }
 

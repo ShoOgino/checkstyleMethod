@@ -1,0 +1,30 @@
+    /**
+     * Tries to resolve a class for fully-specified name.
+     * @param aName a given name of class.
+     * @return Class object for the given name or null.
+     */
+    private Class resolveQualifiedName(final String aName)
+    {
+        try {
+            if (isLoadable(aName)) {
+                return safeLoad(aName);
+            }
+            //Perhaps it's fully-qualified inner class
+            final int dot = aName.lastIndexOf(".");
+            if (dot != -1) {
+                final String innerName =
+                    aName.substring(0, dot) + "$" + aName.substring(dot + 1);
+                if (isLoadable(innerName)) {
+                    return safeLoad(innerName);
+                }
+            }
+        }
+        catch (ClassNotFoundException ex) {
+            // we shouldn't get this exception here,
+            // so this is unexpected runtime exception
+            throw new RuntimeException(ex);
+        }
+
+        return null;
+    }
+

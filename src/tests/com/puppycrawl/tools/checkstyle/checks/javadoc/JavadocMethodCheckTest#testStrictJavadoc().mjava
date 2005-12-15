@@ -1,7 +1,5 @@
     public void testStrictJavadoc() throws Exception
     {
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(JavadocMethodCheck.class);
         final String[] expected = {
             "12:9: Missing a Javadoc comment.",
             "18:13: Missing a Javadoc comment.",
@@ -16,6 +14,6 @@
             "79:5: Missing a Javadoc comment.",
             "84:5: Missing a Javadoc comment.",
             "94:32: Expected @param tag for 'aA'." };
-        verify(checkConfig, getPath("InputPublicOnly.java"), expected);
+        verify(mCheckConfig, getPath("InputPublicOnly.java"), expected);
     }
 
