@@ -1,9 +1,6 @@
-    public void testNL2()
-        throws Exception
+    public void testNL2() throws Exception
     {
-        final DefaultConfiguration checkConfig =
-            createCheckConfig(LeftCurlyCheck.class);
-        checkConfig.addAttribute("option", LeftCurlyOption.NL.toString());
+        mCheckConfig.addAttribute("option", LeftCurlyOption.NL.toString());
         final String[] expected = {
             "14:39: '{' should be on a new line.",
             "21:20: '{' should be on a new line.",
@@ -14,6 +11,6 @@
             "74:20: '{' should be on a new line.",
             "87:31: '{' should be on a new line.",
         };
-        verify(checkConfig, getPath("InputLeftCurlyMethod.java"), expected);
+        verify(mCheckConfig, getPath("InputLeftCurlyMethod.java"), expected);
     }
 

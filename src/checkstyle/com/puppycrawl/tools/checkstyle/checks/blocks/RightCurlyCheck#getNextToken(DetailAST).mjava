@@ -1,0 +1,16 @@
+    /**
+     * Finds next token after the given one.
+     * @param aAST the given node.
+     * @return the token which represents next lexical item.
+     */
+    private DetailAST getNextToken(DetailAST aAST)
+    {
+        DetailAST next = null;
+        DetailAST parent = aAST;
+        while (parent != null && next == null) {
+            next = (DetailAST) parent.getNextSibling();
+            parent = parent.getParent();
+        }
+        return CheckUtils.getFirstNode(next);
+    }
+

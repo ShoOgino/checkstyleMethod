@@ -1,9 +1,9 @@
-    public void testAlone() throws Exception
+    public void testShouldStartLine() throws Exception
     {
         mCheckConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
+        mCheckConfig.addAttribute("shouldStartLine", "false");
         final String[] expected = {
             "93:27: '}' should be alone on a line.",
-            "93:27: '}' should be on a new line.",
         };
         verify(mCheckConfig, getPath("InputLeftCurlyOther.java"), expected);
     }
