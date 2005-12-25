@@ -1,9 +1,13 @@
     /** {@inheritDoc} */
     public void visitToken(DetailAST aAST)
     {
-        final String[] lines = getLines();
-        final String line = lines[aAST.getLineNo() - 1];
-        final int after = aAST.getColumnNo() + aAST.getText().length();
+        DetailAST targetAST = aAST;
+        if (targetAST.getType() == TokenTypes.TYPECAST) {
+            targetAST = targetAST.findFirstToken(TokenTypes.RPAREN);
+        }
+        final String line = getLines()[aAST.getLineNo() - 1];
+        final int after =
+            targetAST.getColumnNo() + targetAST.getText().length();
 
         if (after >= line.length()
             || Character.isWhitespace(line.charAt(after)))
@@ -15,7 +19,8 @@
                 }
             }
             if (flag) {
-                log(aAST.getLineNo(), after, "ws.followed", aAST.getText());
+                log(targetAST.getLineNo(), after,
+                    "ws.followed", targetAST.getText());
             }
         }
     }

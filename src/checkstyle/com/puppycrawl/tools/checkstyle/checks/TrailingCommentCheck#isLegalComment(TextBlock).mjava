@@ -1,0 +1,26 @@
+    /**
+     * Checks if given comment is legal (single-line and matches to the
+     * pattern).
+     * @param aComment comment to check.
+     * @return true if the comment if legal.
+     */
+    private boolean isLegalComment(final TextBlock aComment)
+    {
+        if (mLegalComment == null) {
+            return false;
+        }
+        // multi-line comment can not be legal
+        if (aComment.getStartLineNo() != aComment.getEndLineNo()) {
+            return false;
+        }
+        String commentText = aComment.getText()[0];
+        // remove chars which start comment
+        commentText = commentText.substring(2);
+        // if this is a C-style comment we need to remove its end
+        if (commentText.endsWith("*/")) {
+            commentText = commentText.substring(0, commentText.length() - 2);
+        }
+        commentText = commentText.trim();
+        return mLegalComment.matcher(commentText).find();
+    }
+

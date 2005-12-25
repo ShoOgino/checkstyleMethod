@@ -14,14 +14,14 @@
 
             final String line = getLines()[lineNo.intValue() - 1];
             String lineBefore = "";
+            TextBlock comment = null;
             if (cppComments.containsKey(lineNo)) {
-                final TextBlock comment = (TextBlock) cppComments.get(lineNo);
+                comment = (TextBlock) cppComments.get(lineNo);
                 lineBefore = line.substring(0, comment.getStartColNo());
             }
             else if (cComments.containsKey(lineNo)) {
                 final List commentList = (List) cComments.get(lineNo);
-                final TextBlock comment =
-                    (TextBlock) commentList.get(commentList.size() - 1);
+                comment = (TextBlock) commentList.get(commentList.size() - 1);
                 lineBefore = line.substring(0, comment.getStartColNo());
                 if (comment.getText().length == 1) {
                     final String lineAfter =
@@ -32,7 +32,9 @@
                     }
                 }
             }
-            if (!blankLinePattern.matcher(lineBefore).find()) {
+            if (comment != null && !blankLinePattern.matcher(lineBefore).find()
+                && !isLegalComment(comment))
+            {
                 log(lineNo.intValue(), "trailing.comments");
             }
         }
