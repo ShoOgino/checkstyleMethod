@@ -1,0 +1,11 @@
+    public void testIgnoreMissing() throws Exception
+    {
+        mCheckConfig.addAttribute("tag", "@todo2");
+        mCheckConfig.addAttribute("tagFormat", "\\S");
+        mCheckConfig.addAttribute("severity", "ignore");
+        final String[] expected =
+        {
+        };
+        verify(mCheckConfig, getPath("InputWriteTag.java"), expected);
+    }
+

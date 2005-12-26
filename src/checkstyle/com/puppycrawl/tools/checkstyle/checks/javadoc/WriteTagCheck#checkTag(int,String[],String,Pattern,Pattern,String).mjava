@@ -1,0 +1,46 @@
+    /**
+     * Verifies that a type definition has a required tag.
+     * @param aLineNo the line number for the type definition.
+     * @param aCmt the Javadoc comment for the type definition.
+     * @param aTag the required tag name.
+     * @param aTagRE regexp for the full tag.
+     * @param aFormatRE regexp for the tag value.
+     * @param aFormat pattern for the tag value.
+     */
+    private void checkTag(
+            int aLineNo,
+            String[] aCmt,
+            String aTag,
+            Pattern aTagRE,
+            Pattern aFormatRE,
+            String aFormat)
+    {
+        if (aTagRE == null) {
+            return;
+        }
+
+        int tagCount = 0;
+        for (int i = 0; i < aCmt.length; i++) {
+            final String s = aCmt[i];
+            final Matcher matcher = aTagRE.matcher(s);
+            if (matcher.find()) {
+                tagCount += 1;
+                final int contentStart = matcher.start(1);
+                final String content = s.substring(contentStart);
+                if (aFormatRE != null && !aFormatRE.matcher(content).find()) {
+                    log(aLineNo + i - aCmt.length, "type.tagFormat", aTag,
+                        aFormat);
+                }
+                else {
+                    logTag(aLineNo + i - aCmt.length, aTag, content);
+                }
+
+            }
+        }
+        if (tagCount == 0) {
+            Object[] args = {aTag};
+            log(aLineNo, "type.missingTag", aTag);
+        }
+
+    }
+

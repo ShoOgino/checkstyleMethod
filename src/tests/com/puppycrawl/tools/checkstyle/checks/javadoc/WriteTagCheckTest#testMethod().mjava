@@ -1,0 +1,14 @@
+    public void testMethod() throws Exception
+    {
+        mCheckConfig.addAttribute("tag", "@todo");
+        mCheckConfig.addAttribute("tagFormat", "\\S");
+        mCheckConfig.addAttribute("tokens",
+            "INTERFACE_DEF, CLASS_DEF, METHOD_DEF");
+        mCheckConfig.addAttribute("severity", "ignore");
+        final String[] expected =
+        {
+            "22: @todo=Add a comment",
+        };
+        verify(mCheckConfig, getPath("InputWriteTag.java"), expected);
+    }
+

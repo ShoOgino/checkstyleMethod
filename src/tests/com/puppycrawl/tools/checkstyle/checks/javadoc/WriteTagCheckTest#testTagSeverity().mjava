@@ -1,0 +1,12 @@
+    public void testTagSeverity() throws Exception
+    {
+        mCheckConfig.addAttribute("tag", "@incomplete");
+        mCheckConfig.addAttribute("tagFormat", "\\S");
+        mCheckConfig.addAttribute("tagSeverity", "warning");
+        final String[] expected =
+        {
+            "11: warning: @incomplete=This class needs more code...",
+        };
+        verify(mCheckConfig, getPath("InputWriteTag.java"), expected);
+    }
+
