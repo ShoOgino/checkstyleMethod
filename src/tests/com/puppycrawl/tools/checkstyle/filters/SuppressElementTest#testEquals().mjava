@@ -1,8 +1,10 @@
     public void testEquals() throws PatternSyntaxException
     {
-        final SuppressElement filter2 = new SuppressElement("Test", "Test");
+        final SuppressElement filter2 = new SuppressElement("Test");
+        filter2.setChecks("Test");
         assertEquals("filter, filter2", filter, filter2);
-        final SuppressElement filter3 = new SuppressElement("Test", "Test3");
+        final SuppressElement filter3 = new SuppressElement("Test");
+        filter3.setChecks("Test3");
         assertFalse("filter, filter3", filter.equals(filter3));
         filter.setColumns("1-10");
         assertFalse("filter, filter2", filter.equals(filter2));

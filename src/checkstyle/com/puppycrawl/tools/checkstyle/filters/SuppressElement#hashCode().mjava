@@ -1,8 +1,13 @@
     /** {@inheritDoc} */
     public int hashCode()
     {
-        int result = HASH_MULT * mFilePattern.hashCode()
-            + mCheckPattern.hashCode();
+        int result = HASH_MULT * mFilePattern.hashCode();
+        if (mCheckPattern != null) {
+            result = HASH_MULT * result + mCheckPattern.hashCode();
+        }
+        if (mModuleId != null) {
+            result = HASH_MULT * result + mModuleId.hashCode();
+        }
         if (mLinesCSV != null) {
             result = HASH_MULT * result + mLinesCSV.hashCode();
         }

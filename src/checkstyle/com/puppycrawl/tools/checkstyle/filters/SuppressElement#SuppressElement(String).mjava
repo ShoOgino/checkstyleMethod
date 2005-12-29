@@ -1,16 +1,14 @@
     /**
      * Constructs a <code>SuppressElement</code> for a
-     * file name pattern and and a check class pattern.
+     * file name pattern. Must either call {@link #setColumns(String)} or
+     * {@link #setModuleId(String)} before using this object.
      * @param aFiles regular expression for names of filtered files.
-     * @param aChecks regular expression for filtered check classes.
      * @throws PatternSyntaxException if there is an error.
      */
-    public SuppressElement(String aFiles, String aChecks)
+    public SuppressElement(String aFiles)
         throws PatternSyntaxException
     {
         mFilePattern = aFiles;
         mFileRegexp = Utils.getPattern(aFiles);
-        mCheckPattern = aChecks;
-        mCheckRegexp = Utils.getPattern(aChecks);
     }
 

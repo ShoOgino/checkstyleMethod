@@ -10,7 +10,22 @@
             }
 
             // same check pattern?
-            if (!this.mCheckPattern.equals(other.mCheckPattern)) {
+            if (mCheckPattern != null) {
+                if (!mCheckPattern.equals(other.mCheckPattern)) {
+                    return false;
+                }
+            }
+            else if (other.mCheckPattern != null) {
+                return false;
+            }
+
+            // same module id?
+            if (mModuleId != null) {
+                if (!mModuleId.equals(other.mModuleId)) {
+                    return false;
+                }
+            }
+            else if (other.mModuleId != null) {
                 return false;
             }
 

@@ -1,10 +1,6 @@
     /** {@inheritDoc} */
     public void visitToken(DetailAST aAST)
     {
-        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
-        final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
-        final Scope typeScope =
-            ScopeUtils.inInterfaceBlock(aAST) ? Scope.PUBLIC : declaredScope;
         final FileContents contents = getFileContents();
         final int lineNo = aAST.getLineNo();
         final TextBlock cmt =

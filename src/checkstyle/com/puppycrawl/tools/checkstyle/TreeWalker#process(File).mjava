@@ -27,6 +27,7 @@
                     Defn.CHECKSTYLE_BUNDLE,
                     "general.fileNotFound",
                     null,
+                    getId(),
                     this.getClass()));
         }
         catch (IOException ioe) {
@@ -37,6 +38,7 @@
                     Defn.CHECKSTYLE_BUNDLE,
                     "general.exception",
                     new String[] {ioe.getMessage()},
+                    getId(),
                     this.getClass()));
         }
         catch (RecognitionException re) {
@@ -49,6 +51,7 @@
                     Defn.CHECKSTYLE_BUNDLE,
                     "general.exception",
                     new String[] {re.getMessage()},
+                    getId(),
                     this.getClass()));
         }
         catch (TokenStreamRecognitionException tre) {
@@ -63,6 +66,7 @@
                         Defn.CHECKSTYLE_BUNDLE,
                         "general.exception",
                         new String[] {re.getMessage()},
+                        getId(),
                         this.getClass()));
             }
             else {
@@ -73,6 +77,7 @@
                         "general.exception",
                         new String[]
                         {"TokenStreamRecognitionException occured."},
+                        getId(),
                         this.getClass()));
             }
         }
@@ -85,6 +90,7 @@
                     Defn.CHECKSTYLE_BUNDLE,
                     "general.exception",
                     new String[] {te.getMessage()},
+                    getId(),
                     this.getClass()));
         }
         catch (Throwable err) {
@@ -95,6 +101,7 @@
                     Defn.CHECKSTYLE_BUNDLE,
                     "general.exception",
                     new String[] {"" + err},
+                    getId(),
                     this.getClass()));
         }
 

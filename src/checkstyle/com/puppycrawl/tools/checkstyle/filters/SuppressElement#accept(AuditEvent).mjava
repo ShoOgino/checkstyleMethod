@@ -3,9 +3,12 @@
     {
         // file and check match?
         if ((aEvent.getFileName() == null)
-            || !mFileRegexp.matcher(aEvent.getFileName()).find()
-            || (aEvent.getLocalizedMessage() == null)
-            || !mCheckRegexp.matcher(aEvent.getSourceName()).find())
+                || !mFileRegexp.matcher(aEvent.getFileName()).find()
+                || (aEvent.getLocalizedMessage() == null)
+                || ((mModuleId != null) && !mModuleId.equals(aEvent
+                        .getModuleId()))
+                || ((mCheckRegexp != null) && !mCheckRegexp.matcher(
+                        aEvent.getSourceName()).find()))
         {
             return true;
         }

@@ -12,12 +12,19 @@
                 throw new SAXException("missing files attribute");
             }
             final String checks = aAtts.getValue("checks");
-            if (checks == null) {
-                throw new SAXException("missing checks attribute");
+            final String modId = aAtts.getValue("id");
+            if ((checks == null) && (modId == null)) {
+                throw new SAXException("missing checks and id attribute");
             }
             final SuppressElement suppress;
             try {
-                suppress = new SuppressElement(files, checks);
+                suppress = new SuppressElement(files);
+                if (modId != null) {
+                    suppress.setModuleId(modId);
+                }
+                if (checks != null) {
+                    suppress.setChecks(checks);
+                }
             }
             catch (PatternSyntaxException e) {
                 throw new SAXException("invalid files or checks format");
