@@ -8,7 +8,9 @@
     protected final void logLoadErrorImpl(int aLineNo, int aColumnNo,
                                           String aMsgKey, Object[] aValues)
     {
-        LocalizedMessage msg = new LocalizedMessage(aLineNo,
+        System.out.println(mLogLoadErrors);
+        if (!mLogLoadErrors) {
+            LocalizedMessage msg = new LocalizedMessage(aLineNo,
                                                     aColumnNo,
                                                     getMessageBundle(),
                                                     aMsgKey,
@@ -16,6 +18,8 @@
                                                     getSeverityLevel(),
                                                     getId(),
                                                     this.getClass());
-        throw new RuntimeException(msg.getMessage());
+            throw new RuntimeException(msg.getMessage());
+        }
+        log(aLineNo, aColumnNo, aMsgKey, aValues);
     }
 
