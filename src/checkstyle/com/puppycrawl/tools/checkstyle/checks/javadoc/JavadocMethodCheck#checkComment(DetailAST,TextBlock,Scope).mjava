@@ -3,15 +3,13 @@
      *
      * @param aAST the token for the method
      * @param aComment the Javadoc comment
+     * @param aScope the scope of the method.
      */
-    private void checkComment(DetailAST aAST, TextBlock aComment)
+    private void checkComment(DetailAST aAST, TextBlock aComment, Scope aScope)
     {
         final List tags = getMethodTags(aComment);
 
-        // Check for only one inheritDoc tag
-        if ((tags.size() == 1)
-            && ((JavadocTag) tags.get(0)).isInheritDocTag())
-        {
+        if (hasShortCircuitTag(aAST, tags, aScope)) {
             return;
         }
 

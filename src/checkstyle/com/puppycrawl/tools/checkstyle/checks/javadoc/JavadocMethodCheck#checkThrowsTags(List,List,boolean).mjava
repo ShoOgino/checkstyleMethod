@@ -7,7 +7,7 @@
      *            expected tag
      */
     private void checkThrowsTags(List aTags, List aThrows,
-                                 boolean aReportExpectedTags)
+        boolean aReportExpectedTags)
     {
         // Loop over the tags, checking to see they exist in the throws.
         final Set foundThrows = new HashSet(); //used for performance only
@@ -23,10 +23,10 @@
 
             // Loop looking for matching throw
             final String documentedEx = tag.getArg1();
-            Token token = new Token(tag.getArg1(), tag.getLineNo(),
-                                    tag.getColumnNo());
-            ClassInfo documentedCI =
-                createClassInfo(token, getCurrentClassName());
+            Token token = new Token(tag.getArg1(), tag.getLineNo(), tag
+                    .getColumnNo());
+            ClassInfo documentedCI = createClassInfo(token,
+                    getCurrentClassName());
             boolean found = foundThrows.contains(documentedEx);
 
             final ListIterator throwIt = aThrows.listIterator();
@@ -52,7 +52,7 @@
 
                 if (reqd) {
                     log(tag.getLineNo(), tag.getColumnNo(),
-                        "javadoc.unusedTag", "@throws", tag.getArg1());
+                            "javadoc.unusedTag", "@throws", tag.getArg1());
 
                 }
             }
@@ -67,7 +67,7 @@
                 if (!ei.isFound()) {
                     final Token fi = ei.getName();
                     log(fi.getLineNo(), fi.getColumnNo(),
-                        "javadoc.expectedTag", "@throws", fi.getText());
+                            "javadoc.expectedTag", "@throws", fi.getText());
                 }
             }
         }

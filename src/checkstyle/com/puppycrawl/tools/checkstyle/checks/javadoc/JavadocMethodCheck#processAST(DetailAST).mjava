@@ -5,7 +5,8 @@
      */
     protected final void processAST(DetailAST aAST)
     {
-        if (shouldCheck(aAST)) {
+        final Scope theScope = calculateScope(aAST);
+        if (shouldCheck(aAST, theScope)) {
             final FileContents contents = getFileContents();
             final TextBlock cmt = contents.getJavadocBefore(aAST.getLineNo());
 
@@ -15,7 +16,7 @@
                 }
             }
             else {
-                checkComment(aAST, cmt);
+                checkComment(aAST, cmt, theScope);
             }
         }
     }

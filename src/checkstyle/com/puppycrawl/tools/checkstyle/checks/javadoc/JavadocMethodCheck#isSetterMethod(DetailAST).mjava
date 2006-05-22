@@ -9,7 +9,7 @@
         // is allowed in a proper setter method which does not throw any
         // exceptions.
         if ((aAST.getType() != TokenTypes.METHOD_DEF)
-            || (aAST.getChildCount() != MAX_CHILDREN))
+                || (aAST.getChildCount() != MAX_CHILDREN))
         {
             return false;
         }
@@ -31,7 +31,7 @@
         // Check that is had only one parameter
         final DetailAST params = aAST.findFirstToken(TokenTypes.PARAMETERS);
         if ((params == null)
-            || (params.getChildCount(TokenTypes.PARAMETER_DEF) != 1))
+                || (params.getChildCount(TokenTypes.PARAMETER_DEF) != 1))
         {
             return false;
         }
@@ -47,7 +47,7 @@
 
         final AST expr = slist.getFirstChild();
         if ((expr.getType() != TokenTypes.EXPR)
-            || (expr.getFirstChild().getType() != TokenTypes.ASSIGN))
+                || (expr.getFirstChild().getType() != TokenTypes.ASSIGN))
         {
             return false;
         }
