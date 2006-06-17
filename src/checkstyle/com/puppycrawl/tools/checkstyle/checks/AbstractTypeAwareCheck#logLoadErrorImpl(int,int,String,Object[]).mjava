@@ -8,7 +8,6 @@
     protected final void logLoadErrorImpl(int aLineNo, int aColumnNo,
                                           String aMsgKey, Object[] aValues)
     {
-        System.out.println(mLogLoadErrors);
         if (!mLogLoadErrors) {
             LocalizedMessage msg = new LocalizedMessage(aLineNo,
                                                     aColumnNo,
@@ -20,6 +19,9 @@
                                                     this.getClass());
             throw new RuntimeException(msg.getMessage());
         }
-        log(aLineNo, aColumnNo, aMsgKey, aValues);
+
+        if (!mSuppressLoadErrors) {
+            log(aLineNo, aColumnNo, aMsgKey, aValues);
+        }
     }
 
