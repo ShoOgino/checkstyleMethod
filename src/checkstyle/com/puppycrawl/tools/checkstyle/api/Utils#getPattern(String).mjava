@@ -1,7 +1,7 @@
     /**
      * This is a factory method to return an Pattern object for the specified
-     * regular expression. This method is not MT safe, but neither are the
-     * returned Pattern objects.
+     * regular expression. It calls {@link #getPattern(String, int)} with the
+     * compile flags defaults to 0.
      * @return an Pattern object for the supplied pattern
      * @param aPattern the regular expression pattern
      * @throws PatternSyntaxException an invalid pattern was supplied
@@ -9,11 +9,6 @@
     public static Pattern getPattern(String aPattern)
         throws PatternSyntaxException
     {
-        Pattern retVal = (Pattern) CREATED_RES.get(aPattern);
-        if (retVal == null) {
-            retVal = Pattern.compile(aPattern);
-            CREATED_RES.put(aPattern, retVal);
-        }
-        return retVal;
+        return getPattern(aPattern, 0);
     }
 

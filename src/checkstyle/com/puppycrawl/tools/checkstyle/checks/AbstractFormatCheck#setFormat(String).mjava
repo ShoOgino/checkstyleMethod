@@ -3,15 +3,9 @@
      * @param aFormat a <code>String</code> value
      * @throws ConversionException unable to parse aFormat
      */
-    public void setFormat(String aFormat)
+    public final void setFormat(String aFormat)
         throws ConversionException
     {
-        try {
-            mRegexp = Utils.getPattern(aFormat);
-            mFormat = aFormat;
-        }
-        catch (PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + aFormat, e);
-        }
+        updateRegexp(aFormat, mCompileFlags);
     }
 

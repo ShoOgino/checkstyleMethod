@@ -1,0 +1,22 @@
+    /**
+     * This is a factory method to return an Pattern object for the specified
+     * regular expression and compile flags.
+     * <p>
+     * This method is not MT safe, but neither are the returned Pattern objects.
+     * @return an Pattern object for the supplied pattern
+     * @param aPattern the regular expression pattern
+     * @param aCompileFlags the compilation flags
+     * @throws PatternSyntaxException an invalid pattern was supplied
+     **/
+    public static Pattern getPattern(String aPattern, int aCompileFlags)
+        throws PatternSyntaxException
+    {
+        final String key = aPattern + ":flags-" + aCompileFlags;
+        Pattern retVal = (Pattern) CREATED_RES.get(key);
+        if (retVal == null) {
+            retVal = Pattern.compile(aPattern, aCompileFlags);
+            CREATED_RES.put(key, retVal);
+        }
+        return retVal;
+    }
+
