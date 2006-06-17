@@ -1,0 +1,11 @@
+    public void testTypecast() throws Exception
+    {
+        checkConfig.addAttribute("tokens", "TYPECAST");
+        final String[] expected = {
+            "87:28: ')' is followed by whitespace.",
+            "89:23: ')' is followed by whitespace.",
+            "241:22: ')' is followed by whitespace.",
+        };
+        verify(checkConfig, getPath("InputWhitespace.java"), expected);
+    }
+
