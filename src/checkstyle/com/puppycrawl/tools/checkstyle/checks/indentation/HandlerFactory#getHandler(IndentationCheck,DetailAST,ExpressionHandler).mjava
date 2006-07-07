@@ -10,7 +10,7 @@
     public ExpressionHandler getHandler(IndentationCheck aIndentCheck,
         DetailAST aAst, ExpressionHandler aParent)
     {
-        ExpressionHandler handler =
+        final ExpressionHandler handler =
             (ExpressionHandler) mCreatedHandlers.get(aAst);
         if (handler != null) {
             return handler;
@@ -20,11 +20,12 @@
             return createMethodCallHandler(aIndentCheck, aAst, aParent);
         }
 
-        Integer type = new Integer(aAst.getType());
+        final Integer type = new Integer(aAst.getType());
 
         ExpressionHandler expHandler = null;
         try {
-            Constructor handlerCtor = (Constructor) mTypeHandlers.get(type);
+            final Constructor handlerCtor =
+                (Constructor) mTypeHandlers.get(type);
             if (handlerCtor != null) {
                 expHandler = (ExpressionHandler) handlerCtor.newInstance(
                     new Object[] {
@@ -36,17 +37,17 @@
             }
         }
         ///CLOVER:OFF
-        catch (InstantiationException e) {
+        catch (final InstantiationException e) {
             LOG.debug("couldn't instantiate constructor for " + aAst, e);
             throw new RuntimeException("couldn't instantiate constructor for "
                                        + aAst);
         }
-        catch (IllegalAccessException e) {
+        catch (final IllegalAccessException e) {
             LOG.debug("couldn't access constructor for " + aAst, e);
             throw new RuntimeException("couldn't access constructor for "
                                        + aAst);
         }
-        catch (InvocationTargetException e) {
+        catch (final InvocationTargetException e) {
             LOG.debug("couldn't instantiate constructor for " + aAst, e);
             throw new RuntimeException("couldn't instantiate constructor for "
                                        + aAst);

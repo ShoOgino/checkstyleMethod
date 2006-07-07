@@ -3,16 +3,16 @@
      */
     public void leaveToken(DetailAST aAST)
     {
-        int tokenType = aAST.getType();
+        final int tokenType = aAST.getType();
         if ((TokenTypes.METHOD_DEF == tokenType)
             || (TokenTypes.CTOR_DEF == tokenType)
             || (TokenTypes.STATIC_INIT == tokenType)
             || (TokenTypes.INSTANCE_INIT == tokenType))
         {
             //pop counter from the stack
-            Counter counter = (Counter) mCounters.pop();
+            final Counter counter = (Counter) mCounters.pop();
 
-            int count = counter.getCount();
+            final int count = counter.getCount();
             if (count > mMethodMax) {
                 log(aAST.getLineNo(), aAST.getColumnNo(), "ncss.method",
                         new Integer(count), new Integer(mMethodMax));
@@ -20,9 +20,9 @@
         }
         else if (TokenTypes.CLASS_DEF == tokenType) {
             //pop counter from the stack
-            Counter counter = (Counter) mCounters.pop();
+            final Counter counter = (Counter) mCounters.pop();
 
-            int count = counter.getCount();
+            final int count = counter.getCount();
             if (count > mClassMax) {
                 log(aAST.getLineNo(), aAST.getColumnNo(), "ncss.class",
                         new Integer(count), new Integer(mClassMax));

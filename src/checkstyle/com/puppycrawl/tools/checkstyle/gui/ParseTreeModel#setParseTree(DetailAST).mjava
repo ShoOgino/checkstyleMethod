@@ -1,8 +1,8 @@
     void setParseTree(DetailAST parseTree)
     {
-        DetailAST root = (DetailAST) getRoot();
+        final DetailAST root = (DetailAST) getRoot();
         root.setFirstChild(parseTree);
-        Object[] path = {root};
+        final Object[] path = {root};
         // no need to setup remaining info, as the call results in a
         // table structure changed event anyway - we just pass nulls
         fireTreeStructureChanged(this, path, null, null);

@@ -3,7 +3,7 @@
      */
     public void visitToken(DetailAST aAST)
     {
-        int tokenType = aAST.getType();
+        final int tokenType = aAST.getType();
 
         if ((TokenTypes.CLASS_DEF == tokenType)
             || (TokenTypes.METHOD_DEF == tokenType)
@@ -18,7 +18,7 @@
         //check if token is countable
         if (isCountable(aAST)) {
             //increment the stacked counters
-            int size = mCounters.size();
+            final int size = mCounters.size();
             for (int i = 0; i < size; i++) {
                 ((Counter) mCounters.get(i)).increment();
             }

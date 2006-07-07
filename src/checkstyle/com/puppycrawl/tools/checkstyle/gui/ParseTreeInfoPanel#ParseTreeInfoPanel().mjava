@@ -5,7 +5,7 @@
     {
         setLayout(new BorderLayout());
 
-        DetailAST treeRoot = null;
+        final DetailAST treeRoot = null;
         mParseTreeModel = new ParseTreeModel(treeRoot);
         mTreeTable = new JTreeTable(mParseTreeModel);
         final JScrollPane sp = new JScrollPane(mTreeTable);
@@ -34,7 +34,7 @@
             // and then ignoring the object looks strange.
             new FileDrop(sp, new FileDropListener(sp));
         }
-        catch (TooManyListenersException ex)
+        catch (final TooManyListenersException ex)
         {
            showErrorDialog(null, "Cannot initialize Drag and Drop support");
         }

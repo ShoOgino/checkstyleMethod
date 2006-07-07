@@ -3,8 +3,8 @@
      */
     private void checkIdent()
     {
-        DetailAST ident = getMainAst().findFirstToken(TokenTypes.IDENT);
-        int columnNo = expandedTabsColumnNo(ident);
+        final DetailAST ident = getMainAst().findFirstToken(TokenTypes.IDENT);
+        final int columnNo = expandedTabsColumnNo(ident);
         if (startsLine(ident) && !getLevel().accept(columnNo)) {
             logError(ident, "", columnNo);
         }

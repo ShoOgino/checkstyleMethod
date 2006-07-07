@@ -7,7 +7,7 @@
         final DetailAST typeParams =
             aAST.findFirstToken(TokenTypes.TYPE_PARAMETERS);
 
-        Map paramsMap = new HashMap();
+        final Map paramsMap = new HashMap();
         mTypeParams.add(paramsMap);
 
         if (typeParams == null) {
@@ -19,13 +19,15 @@
              child = (DetailAST) child.getNextSibling())
         {
             if (child.getType() == TokenTypes.TYPE_PARAMETER) {
-                DetailAST param = child;
-                String alias = param.findFirstToken(TokenTypes.IDENT).getText();
-                DetailAST bounds =
+                final DetailAST param = child;
+                final String alias =
+                    param.findFirstToken(TokenTypes.IDENT).getText();
+                final DetailAST bounds =
                     param.findFirstToken(TokenTypes.TYPE_UPPER_BOUNDS);
                 if (bounds != null) {
-                    FullIdent name = FullIdent.createFullIdentBelow(bounds);
-                    ClassInfo ci =
+                    final FullIdent name =
+                        FullIdent.createFullIdentBelow(bounds);
+                    final ClassInfo ci =
                         createClassInfo(new Token(name), getCurrentClassName());
                     paramsMap.put(alias, ci);
                 }

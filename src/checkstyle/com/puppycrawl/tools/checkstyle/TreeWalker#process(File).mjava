@@ -18,7 +18,7 @@
             final DetailAST rootAST = TreeWalker.parse(contents);
             walk(rootAST, contents);
         }
-        catch (FileNotFoundException fnfe) {
+        catch (final FileNotFoundException fnfe) {
             Utils.getExceptionLogger()
                 .debug("FileNotFoundException occured.", fnfe);
             getMessageCollector().add(
@@ -30,7 +30,7 @@
                     getId(),
                     this.getClass()));
         }
-        catch (IOException ioe) {
+        catch (final IOException ioe) {
             Utils.getExceptionLogger().debug("IOException occured.", ioe);
             getMessageCollector().add(
                 new LocalizedMessage(
@@ -41,7 +41,7 @@
                     getId(),
                     this.getClass()));
         }
-        catch (RecognitionException re) {
+        catch (final RecognitionException re) {
             Utils.getExceptionLogger()
                 .debug("RecognitionException occured.", re);
             getMessageCollector().add(
@@ -54,7 +54,7 @@
                     getId(),
                     this.getClass()));
         }
-        catch (TokenStreamRecognitionException tre) {
+        catch (final TokenStreamRecognitionException tre) {
             Utils.getExceptionLogger()
                 .debug("TokenStreamRecognitionException occured.", tre);
             final RecognitionException re = tre.recog;
@@ -81,7 +81,7 @@
                         this.getClass()));
             }
         }
-        catch (TokenStreamException te) {
+        catch (final TokenStreamException te) {
             Utils.getExceptionLogger()
                 .debug("TokenStreamException occured.", te);
             getMessageCollector().add(
@@ -93,7 +93,7 @@
                     getId(),
                     this.getClass()));
         }
-        catch (Throwable err) {
+        catch (final Throwable err) {
             Utils.getExceptionLogger().debug("Throwable occured.", err);
             getMessageCollector().add(
                 new LocalizedMessage(

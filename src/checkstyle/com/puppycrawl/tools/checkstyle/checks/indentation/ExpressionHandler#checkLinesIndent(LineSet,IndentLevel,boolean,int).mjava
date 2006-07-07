@@ -16,11 +16,12 @@
         }
 
         // check first line
-        int startLine = aLines.firstLine();
-        int endLine = aLines.lastLine();
-        int startCol = aLines.firstLineCol();
+        final int startLine = aLines.firstLine();
+        final int endLine = aLines.lastLine();
+        final int startCol = aLines.firstLineCol();
 
-        int realStartCol = getLineStart(mIndentCheck.getLines()[startLine - 1]);
+        final int realStartCol =
+            getLineStart(mIndentCheck.getLines()[startLine - 1]);
 
         if (realStartCol == startCol) {
             checkSingleLine(startLine, startCol, aIndentLevel,
@@ -44,7 +45,7 @@
 
         // check following lines
         for (int i = startLine + 1; i <= endLine; i++) {
-            Integer col = aLines.getStartColumn(new Integer(i));
+            final Integer col = aLines.getStartColumn(new Integer(i));
             // startCol could be null if this line didn't have an
             // expression that was required to be checked (it could be
             // checked by a child expression)

@@ -13,14 +13,14 @@
             loader.parseInputSource(aSource);
             return loader.getRoot();
         }
-        catch (ParserConfigurationException e) {
+        catch (final ParserConfigurationException e) {
             throw new CheckstyleException("unable to parse " + aSourceName, e);
         }
-        catch (SAXException e) {
+        catch (final SAXException e) {
             throw new CheckstyleException("unable to parse " + aSourceName
                     + " - " + e.getMessage(), e);
         }
-        catch (IOException e) {
+        catch (final IOException e) {
             throw new CheckstyleException("unable to read " + aSourceName, e);
         }
     }

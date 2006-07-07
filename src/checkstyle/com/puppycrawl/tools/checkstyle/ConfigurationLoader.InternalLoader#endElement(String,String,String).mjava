@@ -6,7 +6,8 @@
         {
             if (aQName.equals(MODULE)) {
 
-                Configuration recentModule = (Configuration) mConfigStack.pop();
+                final Configuration recentModule =
+                    (Configuration) mConfigStack.pop();
 
                 // remove modules with severity ignore if these modules should
                 // be omitted
@@ -15,7 +16,7 @@
                     final String severity = recentModule.getAttribute(SEVERITY);
                     level = SeverityLevel.getInstance(severity);
                 }
-                catch (CheckstyleException e) {
+                catch (final CheckstyleException e) {
                     //severity not set -> ignore
                     ;
                 }

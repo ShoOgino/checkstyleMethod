@@ -7,7 +7,7 @@
                 out = new FileOutputStream(mDetailsFile);
                 mDetails.store(out, null);
             }
-            catch (IOException e) {
+            catch (final IOException e) {
                 Utils.getExceptionLogger()
                     .debug("Unable to save cache file.", e);
             }
@@ -17,7 +17,7 @@
                         out.flush();
                         out.close();
                     }
-                    catch (IOException ex) {
+                    catch (final IOException ex) {
                         Utils.getExceptionLogger()
                             .debug("Unable to close cache file.", ex);
                     }

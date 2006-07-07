@@ -9,8 +9,8 @@
     private void checkParamTags(final List aTags, final DetailAST aParent,
         boolean aReportExpectedTags)
     {
-        List params = getParameters(aParent);
-        List typeParams = CheckUtils.getTypeParameters(aParent);
+        final List params = getParameters(aParent);
+        final List typeParams = CheckUtils.getTypeParameters(aParent);
 
         // Loop over the tags, checking to see they exist in the params.
         final ListIterator tagIt = aTags.listIterator();
@@ -38,7 +38,7 @@
 
             if (tag.getArg1().startsWith("<") && tag.getArg1().endsWith(">")) {
                 // Loop looking for matching type param
-                Iterator typeParamsIt = typeParams.iterator();
+                final Iterator typeParamsIt = typeParams.iterator();
                 while (typeParamsIt.hasNext()) {
                     final DetailAST typeParam = (DetailAST) typeParamsIt.next();
                     if (typeParam.findFirstToken(TokenTypes.IDENT).getText()

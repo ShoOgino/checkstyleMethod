@@ -5,7 +5,7 @@
      */
     protected IndentLevel getLevelImpl()
     {
-        DetailAST parentAST = getMainAst().getParent();
+        final DetailAST parentAST = getMainAst().getParent();
         IndentLevel indent = getParent().getLevel();
         if (parentAST.getType() == TokenTypes.LITERAL_NEW) {
             indent.addAcceptedIndent(super.getLevelImpl());

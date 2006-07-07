@@ -3,14 +3,14 @@
      */
     private void checkThrows()
     {
-        DetailAST throwsAst =
+        final DetailAST throwsAst =
             getMainAst().findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAst == null) {
             return;
         }
 
-        int columnNo = expandedTabsColumnNo(throwsAst);
-        IndentLevel expectedColumnNo =
+        final int columnNo = expandedTabsColumnNo(throwsAst);
+        final IndentLevel expectedColumnNo =
             new IndentLevel(getLevel(), getBasicOffset());
 
         if (startsLine(throwsAst)

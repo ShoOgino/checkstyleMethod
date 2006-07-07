@@ -6,11 +6,11 @@
     private Vector getJavadocTags(TextBlock aCmt)
     {
         final String[] text = aCmt.getText();
-        Vector tags = new Vector();
+        final Vector tags = new Vector();
         Pattern tagPattern = Utils.getPattern("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
         for (int i = 0; i < text.length; i++) {
             final String s = text[i];
-            Matcher tagMatcher = tagPattern.matcher(s);
+            final Matcher tagMatcher = tagPattern.matcher(s);
             if (tagMatcher.find()) {
                 final String tagName = tagMatcher.group(1);
                 String content = s.substring(tagMatcher.end(1));

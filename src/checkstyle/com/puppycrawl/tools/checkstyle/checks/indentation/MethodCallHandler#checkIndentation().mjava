@@ -3,11 +3,11 @@
      */
     public void checkIndentation()
     {
-        DetailAST methodName = (DetailAST) getMainAst().getFirstChild();
+        final DetailAST methodName = (DetailAST) getMainAst().getFirstChild();
         checkExpressionSubtree(methodName, getLevel(), false, false);
 
-        DetailAST lparen = getMainAst();
-        DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
+        final DetailAST lparen = getMainAst();
+        final DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
         checkLParen(lparen);
 
         if (rparen.getLineNo() == lparen.getLineNo()) {

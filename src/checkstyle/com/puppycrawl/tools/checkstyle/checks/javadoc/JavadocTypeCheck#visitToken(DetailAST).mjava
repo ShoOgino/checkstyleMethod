@@ -10,16 +10,19 @@
             }
             else if (ScopeUtils.isOuterMostType(aAST)) {
                 // don't check author/version for inner classes
-                Vector tags = getJavadocTags(cmt);
+                final Vector tags = getJavadocTags(cmt);
                 checkTag(lineNo, tags, "author",
                          mAuthorFormatPattern, mAuthorFormat);
                 checkTag(lineNo, tags, "version",
                          mVersionFormatPattern, mVersionFormat);
 
-                List typeParamNames = CheckUtils.getTypeParameterNames(aAST);
+                final List typeParamNames =
+                    CheckUtils.getTypeParameterNames(aAST);
+
                 if (!mAllowMissingParamTags) {
                     //Check type parameters that should exist, do
-                    for (Iterator typeParamNameIt = typeParamNames.iterator();
+                    for (final Iterator typeParamNameIt =
+                             typeParamNames.iterator();
                          typeParamNameIt.hasNext();)
                     {
                         checkTypeParamTag(

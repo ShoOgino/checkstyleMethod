@@ -10,12 +10,12 @@
 
         //count variable defs only if they are direct child to a slist or
         // object block
-        int parentType = aAST.getParent().getType();
+        final int parentType = aAST.getParent().getType();
 
         if ((TokenTypes.SLIST == parentType)
             || (TokenTypes.OBJBLOCK == parentType))
         {
-            DetailAST prevSibling = aAST.getPreviousSibling();
+            final DetailAST prevSibling = aAST.getPreviousSibling();
 
             //is countable if no previous sibling is found or
             //the sibling is no COMMA.

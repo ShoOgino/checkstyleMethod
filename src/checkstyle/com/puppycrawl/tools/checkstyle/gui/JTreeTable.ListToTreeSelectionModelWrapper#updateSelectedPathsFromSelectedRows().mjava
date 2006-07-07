@@ -10,14 +10,14 @@
                 try {
                     // This is way expensive, ListSelectionModel needs an
                     // enumerator for iterating.
-                    int min = listSelectionModel.getMinSelectionIndex();
-                    int max = listSelectionModel.getMaxSelectionIndex();
+                    final int min = listSelectionModel.getMinSelectionIndex();
+                    final int max = listSelectionModel.getMaxSelectionIndex();
 
                     clearSelection();
                     if ((min != -1) && (max != -1)) {
                         for (int counter = min; counter <= max; counter++) {
                             if (listSelectionModel.isSelectedIndex(counter)) {
-                                TreePath selPath = tree.getPathForRow
+                                final TreePath selPath = tree.getPathForRow
                                         (counter);
 
                                 if (selPath != null) {

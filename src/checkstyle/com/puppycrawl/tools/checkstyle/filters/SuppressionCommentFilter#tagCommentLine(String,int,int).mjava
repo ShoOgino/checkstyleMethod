@@ -7,12 +7,12 @@
      */
     private void tagCommentLine(String aText, int aLine, int aColumn)
     {
-        Matcher offMatcher = mOffRegexp.matcher(aText);
+        final Matcher offMatcher = mOffRegexp.matcher(aText);
         if (offMatcher.find()) {
             addTag(offMatcher.group(0), aLine, aColumn, false);
         }
         else {
-            Matcher onMatcher = mOnRegexp.matcher(aText);
+            final Matcher onMatcher = mOnRegexp.matcher(aText);
             if (onMatcher.find()) {
                 addTag(onMatcher.group(0), aLine, aColumn, true);
             }

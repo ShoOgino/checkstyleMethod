@@ -20,7 +20,7 @@
                 final URL url = new URL(aConfig);
                 configStream = url.openStream();
             }
-            catch (MalformedURLException ex) {
+            catch (final MalformedURLException ex) {
                 configStream = new FileInputStream(aConfig);
             }
             bufferedStream = new BufferedInputStream(configStream);
@@ -28,13 +28,13 @@
             return loadConfiguration(bufferedStream, aOverridePropsResolver,
                     aOmitIgnoredModules);
         }
-        catch (FileNotFoundException e) {
+        catch (final FileNotFoundException e) {
             throw new CheckstyleException("unable to find " + aConfig, e);
         }
-        catch (IOException e) {
+        catch (final IOException e) {
             throw new CheckstyleException("unable to read " + aConfig, e);
         }
-        catch (CheckstyleException e) {
+        catch (final CheckstyleException e) {
                 //wrap again to add file name info
             throw new CheckstyleException("unable to read " + aConfig + " - "
                     + e.getMessage(), e);
@@ -44,7 +44,7 @@
                 try {
                     bufferedStream.close();
                 }
-                catch (IOException e) {
+                catch (final IOException e) {
                     // cannot throw another exception.
                     ;
                 }

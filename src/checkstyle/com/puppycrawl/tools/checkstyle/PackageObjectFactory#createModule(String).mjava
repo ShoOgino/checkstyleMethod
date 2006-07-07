@@ -14,12 +14,12 @@
         try {
             return doMakeObject(aName);
         }
-        catch (CheckstyleException ex) {
+        catch (final CheckstyleException ex) {
             //try again with suffix "Check"
             try {
                 return doMakeObject(aName + "Check");
             }
-            catch (CheckstyleException ex2) {
+            catch (final CheckstyleException ex2) {
                 throw new CheckstyleException(
                     "Unable to instantiate " + aName, ex2);
             }

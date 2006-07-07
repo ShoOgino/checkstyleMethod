@@ -12,7 +12,8 @@
     {
         final Set entrySet = aPropFiles.entrySet();
 
-        for (Iterator iterator = entrySet.iterator(); iterator.hasNext();) {
+        for (final Iterator iterator = entrySet.iterator(); iterator.hasNext();)
+        {
             final Map.Entry entry = (Map.Entry) iterator.next();
             final Set files = (Set) entry.getValue();
 
@@ -21,7 +22,7 @@
                 final Set keys = new HashSet();
                 final Map fileMap = new HashMap();
 
-                for (Iterator iter = files.iterator(); iter.hasNext();) {
+                for (final Iterator iter = files.iterator(); iter.hasNext();) {
                     final File file = (File) iter.next();
                     final Set fileKeys = loadKeys(file);
                     keys.addAll(fileKeys);

@@ -8,7 +8,7 @@
     {
         final Set fls = aFileMap.entrySet();
 
-        for (Iterator iter = fls.iterator(); iter.hasNext();) {
+        for (final Iterator iter = fls.iterator(); iter.hasNext();) {
             final Map.Entry entry = (Map.Entry) iter.next();
             final File currentFile = (File) entry.getKey();
             final MessageDispatcher dispatcher = getMessageDispatcher();
@@ -22,7 +22,7 @@
 
             // Remaining elements in the key set are missing in the current file
             if (!keysClone.isEmpty()) {
-                for (Iterator it = keysClone.iterator(); it.hasNext();) {
+                for (final Iterator it = keysClone.iterator(); it.hasNext();) {
                     final Object key = it.next();
                     log(0, "translation.missingKey", key);
                 }

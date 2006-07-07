@@ -13,17 +13,17 @@
             final Class clazz = Class.forName(aClassName, true, loader);
             return clazz.newInstance();
         }
-        catch (ClassNotFoundException e) {
+        catch (final ClassNotFoundException e) {
             throw new CheckstyleException(
                 "Unable to find class for " + aClassName, e);
         }
-        catch (InstantiationException e) {
+        catch (final InstantiationException e) {
             ///CLOVER:OFF
             throw new CheckstyleException(
                 "Unable to instantiate " + aClassName, e);
             ///CLOVER:ON
         }
-        catch (IllegalAccessException e) {
+        catch (final IllegalAccessException e) {
             ///CLOVER:OFF
             throw new CheckstyleException(
                 "Unable to instantiate " + aClassName, e);

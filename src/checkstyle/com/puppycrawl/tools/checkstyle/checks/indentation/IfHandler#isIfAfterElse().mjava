@@ -7,7 +7,7 @@
     private boolean isIfAfterElse()
     {
         // check if there is an 'else' and an 'if' on the same line
-        DetailAST parent = getMainAst().getParent();
+        final DetailAST parent = getMainAst().getParent();
         return (parent.getType() == TokenTypes.LITERAL_ELSE)
             && (parent.getLineNo() == getMainAst().getLineNo());
     }

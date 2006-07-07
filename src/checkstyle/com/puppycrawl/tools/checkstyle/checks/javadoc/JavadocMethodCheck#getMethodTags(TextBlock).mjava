@@ -13,14 +13,17 @@
 
         for (int i = 0; i < lines.length; i++) {
             currentLine++;
-            Matcher javadocArgMatcher = MATCH_JAVADOC_ARG.matcher(lines[i]);
-            Matcher javadocNoargMatcher = MATCH_JAVADOC_NOARG.matcher(lines[i]);
-            Matcher noargCurlyMatcher = MATCH_JAVADOC_NOARG_CURLY
-                    .matcher(lines[i]);
-            Matcher argMultilineStart = MATCH_JAVADOC_ARG_MULTILINE_START
-                    .matcher(lines[i]);
-            Matcher noargMultilineStart = MATCH_JAVADOC_NOARG_MULTILINE_START
-                    .matcher(lines[i]);
+            final Matcher javadocArgMatcher =
+                MATCH_JAVADOC_ARG.matcher(lines[i]);
+            final Matcher javadocNoargMatcher =
+                MATCH_JAVADOC_NOARG.matcher(lines[i]);
+            final Matcher noargCurlyMatcher =
+                MATCH_JAVADOC_NOARG_CURLY.matcher(lines[i]);
+            final Matcher argMultilineStart =
+                MATCH_JAVADOC_ARG_MULTILINE_START.matcher(lines[i]);
+            final Matcher noargMultilineStart =
+                MATCH_JAVADOC_NOARG_MULTILINE_START.matcher(lines[i]);
+
             if (javadocArgMatcher.find()) {
                 int col = javadocArgMatcher.start(1) - 1;
                 if (i == 0) {
@@ -59,11 +62,11 @@
                 // not whitespace or '*' characters.
                 int remIndex = i + 1;
                 while (remIndex < lines.length) {
-                    Matcher multilineCont = MATCH_JAVADOC_MULTILINE_CONT
+                    final Matcher multilineCont = MATCH_JAVADOC_MULTILINE_CONT
                             .matcher(lines[remIndex]);
                     if (multilineCont.find()) {
                         remIndex = lines.length;
-                        String lFin = multilineCont.group(1);
+                        final String lFin = multilineCont.group(1);
                         if (!lFin.equals(NEXT_TAG) && !lFin.equals(END_JAVADOC))
                         {
                             tags.add(new JavadocTag(currentLine, col, p1, p2));
@@ -85,11 +88,11 @@
                 // not whitespace or '*' characters.
                 int remIndex = i + 1;
                 while (remIndex < lines.length) {
-                    Matcher multilineCont = MATCH_JAVADOC_MULTILINE_CONT
+                    final Matcher multilineCont = MATCH_JAVADOC_MULTILINE_CONT
                             .matcher(lines[remIndex]);
                     if (multilineCont.find()) {
                         remIndex = lines.length;
-                        String lFin = multilineCont.group(1);
+                        final String lFin = multilineCont.group(1);
                         if (!lFin.equals(NEXT_TAG) && !lFin.equals(END_JAVADOC))
                         {
                             tags.add(new JavadocTag(currentLine, col, p1));

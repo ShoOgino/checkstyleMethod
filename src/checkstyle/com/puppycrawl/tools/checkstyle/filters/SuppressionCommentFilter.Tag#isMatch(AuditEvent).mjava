@@ -6,13 +6,13 @@
          */
         public boolean isMatch(AuditEvent aEvent)
         {
-            Matcher tagMatcher =
+            final Matcher tagMatcher =
                 mTagCheckRegexp.matcher(aEvent.getSourceName());
             if (tagMatcher.find()) {
                 return true;
             }
             if (mTagMessageRegexp != null) {
-                Matcher messageMatcher =
+                final Matcher messageMatcher =
                     mTagMessageRegexp.matcher(aEvent.getMessage());
                 return messageMatcher.find();
             }
