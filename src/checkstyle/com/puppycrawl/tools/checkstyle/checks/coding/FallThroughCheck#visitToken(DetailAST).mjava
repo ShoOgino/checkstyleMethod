@@ -3,7 +3,8 @@
     {
         final DetailAST nextGroup = (DetailAST) aAST.getNextSibling();
         final boolean isLastGroup =
-            (nextGroup == null || nextGroup.getType() != TokenTypes.CASE_GROUP);
+            ((nextGroup == null)
+             || (nextGroup.getType() != TokenTypes.CASE_GROUP));
         if (isLastGroup && !mCheckLastGroup) {
             // we do not need to check last group
             return;

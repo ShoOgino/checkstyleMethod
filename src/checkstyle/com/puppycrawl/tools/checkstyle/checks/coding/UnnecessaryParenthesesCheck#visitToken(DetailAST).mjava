@@ -5,15 +5,15 @@
         final boolean surrounded = isSurrounded(aAST);
         final DetailAST parent = aAST.getParent();
 
-        if (type == TokenTypes.ASSIGN
-            && parent.getType() == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
+        if ((type == TokenTypes.ASSIGN)
+            && (parent.getType() == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR))
         {
             // shouldn't process assign in annotation pairs
             return;
         }
 
         // An identifier surrounded by parentheses.
-        if (surrounded && type == TokenTypes.IDENT) {
+        if (surrounded && (type == TokenTypes.IDENT)) {
             mParentToSkip = aAST.getParent();
             log(aAST, "unnecessary.paren.ident", aAST.getText());
             return;

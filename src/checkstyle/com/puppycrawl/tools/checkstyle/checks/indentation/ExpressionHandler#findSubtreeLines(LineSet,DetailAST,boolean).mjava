@@ -13,7 +13,7 @@
         // the interface methods... I should ask about this
 
         if (getIndentCheck().getHandlerFactory().isHandledType(aTree.getType())
-            || aTree.getLineNo() < 0)
+            || (aTree.getLineNo() < 0))
         {
             return;
         }
@@ -29,7 +29,7 @@
         Integer colNum = aLines.getStartColumn(lineNum);
 
         int thisLineColumn = expandedTabsColumnNo(aTree);
-        if (colNum == null || (thisLineColumn < colNum.intValue())) {
+        if ((colNum == null) || (thisLineColumn < colNum.intValue())) {
             aLines.addLineAndCol(lineNum, thisLineColumn);
         }
 

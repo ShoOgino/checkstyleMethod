@@ -18,12 +18,12 @@
         final int type = aAST.getType();
         if (type == TokenTypes.RCURLY) {
             DetailAST grandParent = aAST.getParent().getParent();
-            return aParentType == TokenTypes.SLIST
-                && grandParent.getType() == aMatch;
+            return (aParentType == TokenTypes.SLIST)
+                && (grandParent.getType() == aMatch);
         }
 
-        return type == TokenTypes.SLIST
-            && aParentType == aMatch
-            && aAST.getFirstChild().getType() == TokenTypes.RCURLY;
+        return (type == TokenTypes.SLIST)
+            && (aParentType == aMatch)
+            && (aAST.getFirstChild().getType() == TokenTypes.RCURLY);
     }
 

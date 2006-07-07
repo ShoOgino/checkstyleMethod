@@ -9,12 +9,12 @@
         final int column = aPos.getColumnNo() + 1;
         final String text = aText[aPos.getLineNo()];
 
-        return (column < text.length()
+        return (((column < text.length())
                 && (((text.charAt(column) >= 'A')
                      && (text.charAt(column) <= 'Z'))
                     || ((text.charAt(column) >= 'a')
                         && (text.charAt(column) <= 'z'))
-                    || (text.charAt(column) == '/'))
-                || column >= text.length());
+                    || (text.charAt(column) == '/')))
+                || (column >= text.length()));
     }
 

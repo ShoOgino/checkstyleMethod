@@ -7,8 +7,8 @@
     private void processVariable(DetailAST aAST)
     {
         if (ScopeUtils.inInterfaceOrAnnotationBlock(aAST)
-            || !ScopeUtils.isLocalVariableDef(aAST)
-            && (aAST.getType() != TokenTypes.PARAMETER_DEF))
+            || (!ScopeUtils.isLocalVariableDef(aAST)
+            && (aAST.getType() != TokenTypes.PARAMETER_DEF)))
         {
             // do nothing
             return;

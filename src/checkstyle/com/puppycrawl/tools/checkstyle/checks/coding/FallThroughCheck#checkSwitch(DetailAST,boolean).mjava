@@ -9,8 +9,8 @@
     {
         DetailAST caseGroup = aAST.findFirstToken(TokenTypes.CASE_GROUP);
         boolean isTerminated = (caseGroup != null);
-        while (isTerminated && caseGroup != null
-               && caseGroup.getType() != TokenTypes.RCURLY)
+        while (isTerminated && (caseGroup != null)
+               && (caseGroup.getType() != TokenTypes.RCURLY))
         {
             final DetailAST caseBody =
                 caseGroup.findFirstToken(TokenTypes.SLIST);

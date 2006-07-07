@@ -6,7 +6,7 @@
         private AuditListener createDefaultLogger(Task aTask)
             throws IOException
         {
-            if (mToFile == null || !mUseFile) {
+            if ((mToFile == null) || !mUseFile) {
                 return new DefaultLogger(
                     new LogOutputStream(aTask, Project.MSG_DEBUG),
                     true, new LogOutputStream(aTask, Project.MSG_ERR), true);

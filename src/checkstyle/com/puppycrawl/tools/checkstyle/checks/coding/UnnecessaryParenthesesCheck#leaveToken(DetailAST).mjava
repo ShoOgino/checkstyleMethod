@@ -4,8 +4,8 @@
         final int type = aAST.getType();
         final DetailAST parent = aAST.getParent();
 
-        if (type == TokenTypes.ASSIGN
-            && parent.getType() == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
+        if ((type == TokenTypes.ASSIGN)
+            && (parent.getType() == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR))
         {
             // shouldn't process assign in annotation pairs
             return;
@@ -18,7 +18,7 @@
             // warning about an immediate child node in visitToken, so we don't
             // need to log another one here.
 
-            if (mParentToSkip != aAST && exprSurrounded(aAST)) {
+            if ((mParentToSkip != aAST) && exprSurrounded(aAST)) {
                 if (mAssignDepth >= 1) {
                     log(aAST, "unnecessary.paren.assign");
                 }

@@ -50,11 +50,11 @@
             log("To process the files took " + (endTime - startTime) + " ms.",
                 Project.MSG_VERBOSE);
             final int numWarnings = warningCounter.getCount();
-            final boolean ok = numErrs <= mMaxErrors
-                    && numWarnings <= mMaxWarnings;
+            final boolean ok = (numErrs <= mMaxErrors)
+                    && (numWarnings <= mMaxWarnings);
 
             // Handle the return status
-            if (!ok && mFailureProperty != null) {
+            if (!ok && (mFailureProperty != null)) {
                 getProject().setProperty(mFailureProperty, "true");
             }
 

@@ -18,7 +18,8 @@
             aModifiers.branchContains(TokenTypes.LITERAL_PRIVATE);
         final boolean isPackage = !(isPublic || isProtected || isPrivate);
 
-        return mApplyToPublic && isPublic || mApplyToProtected && isProtected
-            || mApplyToPackage && isPackage || mApplyToPrivate && isPrivate;
+        return (mApplyToPublic && isPublic)
+            || (mApplyToProtected && isProtected)
+            || (mApplyToPackage && isPackage) || (mApplyToPrivate && isPrivate);
     }
 

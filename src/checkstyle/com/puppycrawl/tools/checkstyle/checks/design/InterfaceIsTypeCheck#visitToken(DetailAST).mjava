@@ -8,9 +8,9 @@
         final DetailAST variableDef =
                 objBlock.findFirstToken(TokenTypes.VARIABLE_DEF);
         final boolean methodRequired =
-                !mAllowMarkerInterfaces || variableDef != null;
+                !mAllowMarkerInterfaces || (variableDef != null);
 
-        if (methodDef == null && methodRequired) {
+        if ((methodDef == null) && methodRequired) {
             log(aAST.getLineNo(), "interface.type");
         }
 

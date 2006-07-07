@@ -14,7 +14,7 @@
         final DetailAST elseStmt = (DetailAST) thenStmt.getNextSibling();
         boolean isTerminated = isTerminated(thenStmt, aUseBreak, aUseContinue);
 
-        if (isTerminated && elseStmt != null) {
+        if (isTerminated && (elseStmt != null)) {
             isTerminated = isTerminated((DetailAST) elseStmt.getFirstChild(),
                                         aUseBreak, aUseContinue);
         }
