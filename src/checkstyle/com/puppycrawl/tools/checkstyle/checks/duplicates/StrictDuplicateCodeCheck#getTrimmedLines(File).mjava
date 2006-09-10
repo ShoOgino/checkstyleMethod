@@ -1,0 +1,22 @@
+    /**
+     * Returns the trimmed lines of a given file.
+     * Caches the results, so when memory is available
+     * we try to avoid reading the file repeatedly.
+     *
+     * @param aFile the file
+     * @return the lines in aFile after applying {@link String#trim()}
+     * @throws IOException if the file content cannot be read
+     */
+    private String[] getTrimmedLines(File aFile) throws IOException
+    {
+        final String path = aFile.getPath();
+        final String[] cachedLines = (String[]) mTrimmedLineCache.get(path);
+        if (cachedLines != null) {
+            return cachedLines;
+        }
+        final String charset = getCharset();
+        final String[] lines = getTrimmed(Utils.getLines(path, charset));
+        mTrimmedLineCache.put(path, lines);
+        return lines;
+    }
+

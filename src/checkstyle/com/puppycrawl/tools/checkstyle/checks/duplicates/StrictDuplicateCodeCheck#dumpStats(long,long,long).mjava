@@ -6,13 +6,10 @@
      */
     private void dumpStats(long aStart, long aEndReading, long aEndSearching)
     {
-        if (LOG.isDebugEnabled()) {
-            final long cacheLookups = mCacheHits + mCacheMisses;
+        if (LOG.isInfoEnabled()) {
             final long initTime = aEndReading - aStart;
             final long workTime = aEndSearching - aEndReading;
-            LOG.debug("cache hits = " + mCacheHits + "/" + cacheLookups);
             LOG.debug("files = " + mFiles.length);
-            LOG.debug("loc = " + mLoc);
             LOG.debug("duplicates = " + mDuplicates);
             LOG.debug("Runtime = " + initTime + " + " + workTime);
         }

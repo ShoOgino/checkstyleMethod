@@ -5,16 +5,12 @@
          */
         protected long calcChecksum(String aLine)
         {
-            // important that it's larger than the length of most lines
-            // see http://www.utm.edu/research/primes/lists/small/1000.txt
-            final int bigPrime = 317;
-
             // TODO: Not sure that this algorithm makes it
             // sufficiently improbable to get false alarms
             long result = 0;
             for (int i = 0; i < aLine.length(); i++) {
                 final long c = aLine.charAt(i);
-                result += bigPrime * i + c;
+                result += BIG_PRIME * (i + 1) + c;
             }
             return result;
         }

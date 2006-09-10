@@ -1,39 +1,42 @@
     /**
      * Find and report a duplicate of the code starting from line aILine
-     * in file aI in the file aJ
+     * in file aI in the file aJ. The caller has already ensured that
+     * there are at least mMax duplicate lines, this method mainly analyzes
+     * how far the block of duplicates extends.
+     *
      * @param aI index of file that contains the candidate code
      * @param aJ index of file that is searched for a dup of the candidate
      * @param aILine starting line of the candidate in aI
-     * @return the next line in file i where
+     * @return the next block index in file i where
      * starting to search will make sense
      */
-    private int findDuplicateFromLine(int aI, int aJ, int aILine)
+    private int findDuplicateFromLine(
+        final int aI, final int aJ, final int aILine)
     {
         // Using something more advanced like Boyer-Moore might be a
         // good idea...
 
-        final int iFileLength = mLineChecksums[aI].length;
-        final int jFileLength = mLineChecksums[aJ].length;
+        final long checkSum = mLineBlockChecksums[aI][aILine];
 
-        for (int jLine = 0; jLine < jFileLength - mMin; jLine++) {
+        final int iBlockCount = mLineBlockChecksums[aI].length;
+        final int jBlockCount = mLineBlockChecksums[aJ].length;
 
-            if ((aI == aJ) && (aILine == jLine)) {
+        for (int jBlock = 0; jBlock < jBlockCount; jBlock++) {
+
+            if (aI == aJ && aILine >= jBlock) {
                 continue;
             }
 
-            int equivalent = 0;
-            while ((aILine + equivalent < iFileLength)
-                    && (jLine + equivalent < jFileLength)
-                    && (mLineChecksums[aI][aILine + equivalent] != IGNORE)
-                    && (mLineChecksums[aI][aILine + equivalent]
-                       == mLineChecksums[aJ][jLine + equivalent]))
-            {
-                equivalent += 1;
+            if (mLineBlockChecksums[aJ][jBlock] != checkSum) {
+                continue;
             }
 
-            if (((aI != aJ) || (aILine < jLine)) && (equivalent >= mMin)) {
-                reportDuplicate(equivalent, aILine, mFiles[aJ], jLine);
-                aILine += equivalent; // skip to end of equivalent section
+            int duplicateLines = verifiyDuplicateLines(aI, aJ, aILine, jBlock);
+            if (duplicateLines >= mMin) {
+                reportDuplicate(duplicateLines, aILine, mFiles[aJ], jBlock);
+
+                // skip to end of equivalent section
+                return aILine + duplicateLines;
             }
         }
         return aILine;

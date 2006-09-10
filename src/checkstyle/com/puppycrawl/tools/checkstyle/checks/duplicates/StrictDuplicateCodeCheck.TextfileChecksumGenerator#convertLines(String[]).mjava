@@ -1,11 +1,27 @@
         /** {@inheritDoc} */
         public long[] convertLines(String[] aOriginalLines)
         {
-            final long[] checkSums = new long[aOriginalLines.length];
-            for (int i = 0; i < aOriginalLines.length; i++) {
-                final String line = aOriginalLines[i].trim();
+            final int lineCount = aOriginalLines.length;
+            final long[] checkSums = new long[lineCount];
+            for (int i = 0; i < lineCount; i++) {
+                final String line = aOriginalLines[i];
                 checkSums[i] = calcChecksum(line);
             }
-            return checkSums;
+            final int retLen = Math.max(0, lineCount - mMin + 1);
+            final long[] ret = new long[retLen];
+
+            for (int i = 0; i < retLen; i++) {
+                long blockChecksum = 0;
+                for (int j = 0; j < mMin; j++) {
+                    final long checksum = checkSums[i + j];
+                    if (checksum == IGNORE) {
+                        blockChecksum = IGNORE;
+                        break;
+                    }
+                    blockChecksum += (j + 1) * BIG_PRIME * checksum;
+                }
+                ret[i] = blockChecksum;
+            }
+            return ret;
         }
 
