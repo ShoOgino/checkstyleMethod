@@ -1,0 +1,64 @@
+    /**
+     * Find and report a duplicate of the code starting from line aILine
+     * in file aI in the file aJ. The caller has already ensured that
+     * there are at least mMax duplicate lines, this method mainly analyzes
+     * how far the block of duplicates extends.
+     *
+     * @param aI index of file that contains the candidate code
+     * @param aJ index of file that is searched for a dup of the candidate
+     * @param aILine starting line of the candidate in aI
+     * @param aJLines lines in file aJ that have the same checksum as aILine
+     * @param aIgnore Bag from iLine to jLines, an entry indicates that
+     * this line i/j-combination has already been reported as part of another
+     * viloation
+     */
+    private void findDuplicateFromLine(
+        final int aI, final int aJ, final int aILine,
+        final int[] aJLines, final MultiMap aIgnore)
+    {
+        // Using something more advanced like Boyer-Moore might be a
+        // good idea...
+
+        final long[] iCheckSums = mLineBlockChecksums[aI];
+        final long[] jCheckSums = mLineBlockChecksums[aJ];
+
+        final int iBlockCount = iCheckSums.length;
+        final int jBlockCount = jCheckSums.length;
+
+        final long checkSum = iCheckSums[aILine];
+
+        final Integer iLine = new Integer(aILine);
+
+        for (int jLineIdx = 0; jLineIdx < aJLines.length; jLineIdx++) {
+
+            int jLine = aJLines[jLineIdx];
+
+            if (aI == aJ && aILine >= jLine) {
+                continue;
+            }
+
+            if (jCheckSums[jLine] != checkSum) {
+                continue;
+            }
+
+            final Collection ignoreEntries = (Collection) aIgnore.get(iLine);
+            // avoid Integer constructor whenever we can
+            if (ignoreEntries != null) {
+                if (ignoreEntries.contains(new Integer(jLine))) {
+                    continue;
+                }
+            }
+
+            int duplicateLines = verifiyDuplicateLines(aI, aJ, aILine, jLine);
+            if (duplicateLines >= mMin) {
+                reportDuplicate(duplicateLines, aILine, mFiles[aJ], jLine);
+                int extend = duplicateLines - mMin;
+                for (int i = 0; i < extend; i++) {
+                    final int offset = (i + 1);
+                    aIgnore.put(new Integer(aILine + offset),
+                            new Integer(jLine + offset));
+                }
+            }
+        }
+    }
+

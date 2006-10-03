@@ -9,19 +9,8 @@
     private void fillSortedRelevantChecksums()
     {
         for (int i = 0; i < mLineBlockChecksums.length; i++) {
-            int count = 0;
             final long[] checksums = mLineBlockChecksums[i];
-            final long[] relevant = new long[checksums.length];
-            for (int j = 0; j < checksums.length; j++) {
-                final long checksum = checksums[j];
-                if (checksum != IGNORE) {
-                    relevant[count++] = checksum;
-                }
-            }
-            Arrays.sort(relevant, 0, count);
-            final long[] result = new long[count];
-            System.arraycopy(relevant, 0, result, 0, count);
-            mSortedRelevantChecksums[i] = result;
+            mChecksumInfo[i] = new ChecksumInfo(checksums);
         }
     }
 

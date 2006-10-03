@@ -1,0 +1,39 @@
+    /**
+     * Returns the lines that start a block with a given checksum.
+     *
+     * @param aSum the checksum
+     * @return sorted line indices
+     */
+    int[] findLinesWithChecksum(final long aSum)
+    {
+        int idx = Arrays.binarySearch(mSortedChecksums, aSum);
+        if (idx < 0) {
+            return NO_LINES;
+        }
+
+        // binary search might have left us in the
+        // middle of a sequence of identical checksums
+
+        // rewind
+        while (idx > 0 && mSortedChecksums[idx - 1] == aSum) {
+            idx -= 1;
+        }
+        final int start = idx;
+
+        // forward
+        int end = start + 1;
+        while (end < mSortedChecksums.length
+                && mSortedChecksums[end] == mSortedChecksums[end - 1])
+        {
+            end += 1;
+        }
+
+        // find original lines through reverse mapping
+        final int[] ret = new int[end - start];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = mOrigIdx[start + i];
+        }
+        Arrays.sort(ret);
+        return ret;
+    }
+

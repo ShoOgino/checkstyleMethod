@@ -12,7 +12,11 @@
 
             for (int i = 0; i < retLen; i++) {
                 long blockChecksum = 0;
+                boolean onlyEmptyLines = true;
                 for (int j = 0; j < mMin; j++) {
+                    if (aOriginalLines[i + j].length() > 0) {
+                        onlyEmptyLines = false;
+                    }
                     final long checksum = checkSums[i + j];
                     if (checksum == IGNORE) {
                         blockChecksum = IGNORE;
@@ -20,7 +24,7 @@
                     }
                     blockChecksum += (j + 1) * BIG_PRIME * checksum;
                 }
-                ret[i] = blockChecksum;
+                ret[i] = onlyEmptyLines ? IGNORE : blockChecksum;
             }
             return ret;
         }

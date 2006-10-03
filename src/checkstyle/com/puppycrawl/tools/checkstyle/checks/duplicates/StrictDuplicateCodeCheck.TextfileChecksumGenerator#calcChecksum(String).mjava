@@ -5,13 +5,10 @@
          */
         protected long calcChecksum(String aLine)
         {
-            // TODO: Not sure that this algorithm makes it
-            // sufficiently improbable to get false alarms
-            long result = 0;
-            for (int i = 0; i < aLine.length(); i++) {
-                final long c = aLine.charAt(i);
-                result += BIG_PRIME * (i + 1) + c;
+            final int hashCode = aLine.hashCode();
+            if (hashCode == IGNORE) {
+                return Integer.MAX_VALUE / 2;
             }
-            return result;
+            return hashCode;
         }
 

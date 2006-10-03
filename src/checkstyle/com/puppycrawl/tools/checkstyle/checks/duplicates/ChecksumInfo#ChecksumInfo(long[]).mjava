@@ -1,0 +1,26 @@
+    /**
+     * Creates a new ChecksumInfo.
+     *
+     * @param aBlockChecksums the block checksums as caculated by
+     * the {@link StrictDuplicateCodeCheck}.ChecksumGenerator
+     */
+    ChecksumInfo(long[] aBlockChecksums)
+    {
+        final int csLen = aBlockChecksums.length;
+        final long[] relevant = new long[csLen];
+        final int[] reverse = new int[csLen];
+        int count = 0;
+        for (int j = 0; j < csLen; j++) {
+            final long checksum = aBlockChecksums[j];
+            if (checksum != StrictDuplicateCodeCheck.IGNORE) {
+                reverse[count] = j;
+                relevant[count++] = checksum;
+            }
+        }
+        mSortedChecksums = new long[count];
+        mOrigIdx = new int[count];
+        System.arraycopy(relevant, 0, mSortedChecksums, 0, count);
+        System.arraycopy(reverse, 0, mOrigIdx, 0, count);
+        sort();
+    }
+

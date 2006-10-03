@@ -1,0 +1,36 @@
+    /**
+     * Returns whether the same checksum occurs both in this ChecksumInfo and
+     * another one,
+     *
+     * @param aChecksumInfo the other ChecksumInfo
+     * @return true iff the same checksum occurs in both ChecksumInfos
+     */
+    boolean hasChecksumOverlapsWith(final ChecksumInfo aChecksumInfo)
+    {
+        final long[] jSortedrelevantChecksums =
+            aChecksumInfo.mSortedChecksums;
+        final int iLen = mSortedChecksums.length;
+        final int jLen = jSortedrelevantChecksums.length;
+
+        // Both arrays are sorted, so we walk them in parallel,
+        // increasing the index that points to the smaller value.
+        // If the values ever become the same we have found an overlap.
+        int jdx = 0;
+        int idx = 0;
+        while (jdx < jLen && idx < iLen) {
+            final long iSum = mSortedChecksums[idx];
+            final long jSum = jSortedrelevantChecksums[jdx];
+            if (iSum < jSum) {
+                idx += 1;
+            }
+            else if (iSum > jSum) {
+                jdx += 1;
+            }
+            else {
+                // files i and j contain a block with the same checksum
+                return true;
+            }
+        }
+        return false;
+    }
+
