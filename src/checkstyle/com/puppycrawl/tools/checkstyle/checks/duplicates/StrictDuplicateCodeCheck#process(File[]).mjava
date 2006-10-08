@@ -6,7 +6,7 @@
         final long start = System.currentTimeMillis();
         mDuplicates = 0;
         mFiles = filter(aFiles);
-        mLineBlockChecksums = new long[mFiles.length][];
+        mLineBlockChecksums = new int[mFiles.length][];
         mChecksumInfo = new ChecksumInfo[mFiles.length];
 
         if (LOG.isDebugEnabled()) {
@@ -27,7 +27,7 @@
                 // TODO: better to throw an exception here?
                 // it would be best to throw IOException from process(),
                 // but interface definition doesn't allow that...
-                mLineBlockChecksums = new long[0][0];
+                mLineBlockChecksums = new int[0][0];
             }
         }
         fillSortedRelevantChecksums();

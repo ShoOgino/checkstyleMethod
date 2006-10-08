@@ -11,7 +11,7 @@
             return;
         }
 
-        final long[] iLineBlockChecksums = mLineBlockChecksums[aI];
+        final int[] iLineBlockChecksums = mLineBlockChecksums[aI];
         final int iBlockCount = iLineBlockChecksums.length;
 
         // blocks of duplicate code might be longer than 'min'. We need to
@@ -24,7 +24,7 @@
         // check if the following mMin lines occur in jFile
         for (int iLine = 0; iLine < iBlockCount; iLine++) {
 
-            final long iSum = iLineBlockChecksums[iLine];
+            final int iSum = iLineBlockChecksums[iLine];
             int[] jLines = jChecksumInfo.findLinesWithChecksum(iSum);
             // detailed analysis only if the iLine block occurs in jFile at all
             if (jLines.length > 0) {

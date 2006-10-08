@@ -1,5 +1,5 @@
         /** {@inheritDoc} */
-        public long[] convertLines(String[] aOriginalLines)
+        public int[] convertLines(String[] aOriginalLines)
         {
             final int lineCount = aOriginalLines.length;
             final long[] checkSums = new long[lineCount];
@@ -8,10 +8,10 @@
                 checkSums[i] = calcChecksum(line);
             }
             final int retLen = Math.max(0, lineCount - mMin + 1);
-            final long[] ret = new long[retLen];
+            final int[] ret = new int[retLen];
 
             for (int i = 0; i < retLen; i++) {
-                long blockChecksum = 0;
+                int blockChecksum = 0;
                 boolean onlyEmptyLines = true;
                 for (int j = 0; j < mMin; j++) {
                     if (aOriginalLines[i + j].length() > 0) {
