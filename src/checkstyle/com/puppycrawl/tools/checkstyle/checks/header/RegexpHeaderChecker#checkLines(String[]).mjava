@@ -1,0 +1,47 @@
+    /**
+     * Checks the lines of an individual file against the
+     * {@link #getHeaderLines() header lines}.
+     *
+     * @param aLines the lines of an individual file
+     */
+    void checkLines(final String[] aLines)
+    {
+        final int headerSize = mHeaderLines.length;
+        final int fileSize = aLines.length;
+
+        if (headerSize - mMultiLines.length > fileSize) {
+            mViolationObserver.reportHeaderMissing();
+        }
+        else {
+            int headerLineNo = 0;
+            int i;
+            for (i = 0; (headerLineNo < headerSize) && (i < fileSize); i++) {
+                final String line = aLines[i];
+                boolean isMatch = isMatch(line, headerLineNo);
+                while (!isMatch && isMultiLine(headerLineNo)) {
+                    headerLineNo++;
+                    isMatch = (headerLineNo == headerSize)
+                        || isMatch(line, headerLineNo);
+                }
+                if (!isMatch) {
+                    mViolationObserver.reportHeaderMismatch(
+                            i + 1, mHeaderLines[headerLineNo]);
+                    break; // stop checking
+                }
+                if (!isMultiLine(headerLineNo)) {
+                    headerLineNo++;
+                }
+            }
+            if (i == fileSize) {
+                // if file finished, but we have at least one non-multi-line
+                // header isn't completed
+                for (; headerLineNo < headerSize; headerLineNo++) {
+                    if (!isMultiLine(headerLineNo)) {
+                        mViolationObserver.reportHeaderMissing();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+

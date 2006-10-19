@@ -1,0 +1,20 @@
+    public void testComplexHeaderConfigOnProperties()
+    throws Exception
+    {
+        final DefaultConfiguration checkConfig = createComplexHeaderConfig();
+        final String[] expected = {
+                "1: Missing a header - not enough lines in file.",
+        };
+        final File[] files = new File[] {
+                new File(getPath("header/H1.properties")),
+                new File(getPath("header/H2.properties")),
+                new File(getPath("header/H1.java")),
+                new File(getPath("header/H1.xml")),
+        };
+        verify(
+                createChecker(checkConfig),
+                files,
+                getPath("header/H2.properties"),
+                expected);
+    }
+

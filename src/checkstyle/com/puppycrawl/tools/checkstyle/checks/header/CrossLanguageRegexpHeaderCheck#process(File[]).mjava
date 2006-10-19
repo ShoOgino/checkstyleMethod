@@ -1,0 +1,25 @@
+    /** {@inheritDoc} */
+    public void process(File[] aFiles)
+    {
+
+        final MessageDispatcher msgDispatcher = getMessageDispatcher();
+        final RegexpHeaderChecker regexpHeaderChecker =
+            new RegexpHeaderChecker(
+                    mHeaderInfo, new FileSetCheckViolationMonitor());
+        File[] files = filter(aFiles);
+        for (int i = 0; i < files.length; i++) {
+            final File file = files[i];
+            final String path = file.getPath();
+            msgDispatcher.fireFileStarted(path);
+            try {
+                String[] lines = Utils.getLines(path);
+                regexpHeaderChecker.checkLines(lines);
+            }
+            catch (IOException ex) {
+                log(0, "unable to open file: " + ex);
+            }
+            fireErrors(path);
+            msgDispatcher.fireFileFinished(path);
+        }
+    }
+
