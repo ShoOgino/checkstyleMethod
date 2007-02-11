@@ -1,6 +1,9 @@
     /** {@inheritDoc} */
     public void visitToken(DetailAST aAST)
     {
+        if (isInIgnoreOccurrenceContext(aAST)) {
+            return;
+        }
         final String currentString = aAST.getText();
         if ((mPattern == null) || !mPattern.matcher(currentString).find()) {
             ArrayList hitList = (ArrayList) mStringMap.get(currentString);

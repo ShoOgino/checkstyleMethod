@@ -1,0 +1,14 @@
+    /**
+     * Adds a set of tokens the check is interested in.
+     * @param aStrRep the string representation of the tokens interested in
+     */
+    public final void setIgnoreOccurrenceContext(String[] aStrRep)
+    {
+        mIgnoreOccurrenceContext.clear();
+        for (int i = 0; i < aStrRep.length; i++) {
+            final String s = aStrRep[i];
+            final int type = TokenTypes.getTokenId(s);
+            mIgnoreOccurrenceContext.set(type);
+        }
+    }
+
