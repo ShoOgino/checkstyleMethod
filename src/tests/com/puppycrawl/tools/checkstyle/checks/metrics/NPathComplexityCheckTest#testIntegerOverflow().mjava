@@ -1,0 +1,12 @@
+    public void testIntegerOverflow() throws Exception {
+        DefaultConfiguration checkConfig =
+            createCheckConfig(NPathComplexityCheck.class);
+
+        checkConfig.addAttribute("max", "0");
+        String[] expected = {
+            "9:5: NPath Complexity is 3,486,784,401 (max allowed is 0)." // larger than MAXINT
+        };
+
+        verify(checkConfig, getPath("ComplexityOverflow.java"), expected);
+    }
+

@@ -5,10 +5,11 @@
      */
     private void leaveMethodDef(DetailAST aAST)
     {
-        if (mCurrentValue > mMax) {
+        BigInteger max = BigInteger.valueOf(mMax);
+        if (mCurrentValue.compareTo(max) > 0) {
             log(aAST, getMessageID(),
-                new Integer(mCurrentValue),
-                new Integer(mMax));
+                mCurrentValue,
+                max);
         }
         popValue();
     }
