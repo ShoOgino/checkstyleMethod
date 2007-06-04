@@ -1,0 +1,27 @@
+    /**
+     * Set the parameter for the url containing the import control
+     * configuration. It will cause the url to be loaded.
+     * @param aUrl the url of the file to load.
+     * @throws ConversionException on error loading the file.
+     */
+    public void setUrl(final String aUrl)
+    {
+        // Handle empty param
+        if ((aUrl == null) || (aUrl.trim().length() == 0)) {
+            return;
+        }
+        final URI uri;
+        try {
+            uri = URI.create(aUrl);
+        }
+        catch (final IllegalArgumentException ex) {
+            throw new ConversionException("syntax error in url " + aUrl, ex);
+        }
+        try {
+            mRoot = ImportControlLoader.load(uri);
+        }
+        catch (final CheckstyleException ex) {
+            throw new ConversionException("Unable to load " + aUrl, ex);
+        }
+    }
+

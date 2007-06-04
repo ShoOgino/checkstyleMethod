@@ -12,7 +12,7 @@
         }
 
         try {
-            mRoot = ImportControlLoader.load(aName);
+            mRoot = ImportControlLoader.load(new File(aName).toURI());
         }
         catch (final CheckstyleException ex) {
             throw new ConversionException("Unable to load " + aName, ex);

@@ -1,0 +1,22 @@
+    /**
+     * Loads the import control file from a file.
+     * @param aUri the uri of the file to load.
+     * @return the root {@link PkgControl} object.
+     * @throws CheckstyleException if an error occurs.
+     */
+    static PkgControl load(final URI aUri) throws CheckstyleException
+    {
+        InputStream is = null;
+        try {
+            is = aUri.toURL().openStream();
+        }
+        catch (final MalformedURLException e) {
+            throw new CheckstyleException("syntax error in url " + aUri, e);
+        }
+        catch (final IOException e) {
+            throw new CheckstyleException("unable to find " + aUri, e);
+        }
+        final InputSource source = new InputSource(is);
+        return load(source, aUri);
+    }
+
