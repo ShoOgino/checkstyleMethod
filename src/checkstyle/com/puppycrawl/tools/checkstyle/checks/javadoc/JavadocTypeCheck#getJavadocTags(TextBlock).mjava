@@ -3,10 +3,10 @@
      * @param aCmt teh Javadoc comment to process.
      * @return all standalone tags from the given javadoc.
      */
-    private Vector getJavadocTags(TextBlock aCmt)
+    private List getJavadocTags(TextBlock aCmt)
     {
         final String[] text = aCmt.getText();
-        final Vector tags = new Vector();
+        final List tags = new ArrayList();
         Pattern tagPattern = Utils.getPattern("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
         for (int i = 0; i < text.length; i++) {
             final String s = text[i];
