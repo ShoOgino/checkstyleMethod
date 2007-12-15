@@ -6,16 +6,17 @@
      * @param aReportExpectedTags whether we should report if do not find
      *            expected tag
      */
-    private void checkParamTags(final List aTags, final DetailAST aParent,
-        boolean aReportExpectedTags)
+    private void checkParamTags(final List<JavadocTag> aTags,
+            final DetailAST aParent, boolean aReportExpectedTags)
     {
-        final List params = getParameters(aParent);
-        final List typeParams = CheckUtils.getTypeParameters(aParent);
+        final List<DetailAST> params = getParameters(aParent);
+        final List<DetailAST> typeParams = CheckUtils
+                .getTypeParameters(aParent);
 
         // Loop over the tags, checking to see they exist in the params.
-        final ListIterator tagIt = aTags.listIterator();
+        final ListIterator<JavadocTag> tagIt = aTags.listIterator();
         while (tagIt.hasNext()) {
-            final JavadocTag tag = (JavadocTag) tagIt.next();
+            final JavadocTag tag = tagIt.next();
 
             if (!tag.isParamTag()) {
                 continue;
@@ -26,9 +27,9 @@
             boolean found = false;
 
             // Loop looking for matching param
-            final Iterator paramIt = params.iterator();
+            final Iterator<DetailAST> paramIt = params.iterator();
             while (paramIt.hasNext()) {
-                final DetailAST param = (DetailAST) paramIt.next();
+                final DetailAST param = paramIt.next();
                 if (param.getText().equals(tag.getArg1())) {
                     found = true;
                     paramIt.remove();
@@ -38,9 +39,9 @@
 
             if (tag.getArg1().startsWith("<") && tag.getArg1().endsWith(">")) {
                 // Loop looking for matching type param
-                final Iterator typeParamsIt = typeParams.iterator();
+                final Iterator<DetailAST> typeParamsIt = typeParams.iterator();
                 while (typeParamsIt.hasNext()) {
-                    final DetailAST typeParam = (DetailAST) typeParamsIt.next();
+                    final DetailAST typeParam = typeParamsIt.next();
                     if (typeParam.findFirstToken(TokenTypes.IDENT).getText()
                             .equals(
                                     tag.getArg1().substring(1,
@@ -64,15 +65,15 @@
         // Now dump out all type parameters/parameters without tags :- unless
         // the user has chosen to suppress these problems
         if (!mAllowMissingParamTags && aReportExpectedTags) {
-            final Iterator paramIt = params.iterator();
+            final Iterator<DetailAST> paramIt = params.iterator();
             while (paramIt.hasNext()) {
-                final DetailAST param = (DetailAST) paramIt.next();
+                final DetailAST param = paramIt.next();
                 log(param, "javadoc.expectedTag", "@param", param.getText());
             }
 
-            final Iterator typeParamsIt = typeParams.iterator();
+            final Iterator<DetailAST> typeParamsIt = typeParams.iterator();
             while (typeParamsIt.hasNext()) {
-                final DetailAST typeParam = (DetailAST) typeParamsIt.next();
+                final DetailAST typeParam = typeParamsIt.next();
                 log(typeParam, "javadoc.expectedTag", "@param", "<"
                         + typeParam.findFirstToken(TokenTypes.IDENT).getText()
                         + ">");

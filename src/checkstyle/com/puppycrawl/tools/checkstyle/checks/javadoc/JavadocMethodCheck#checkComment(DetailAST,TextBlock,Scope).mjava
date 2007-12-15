@@ -7,18 +7,18 @@
      */
     private void checkComment(DetailAST aAST, TextBlock aComment, Scope aScope)
     {
-        final List tags = getMethodTags(aComment);
+        final List<JavadocTag> tags = getMethodTags(aComment);
 
         if (hasShortCircuitTag(aAST, tags, aScope)) {
             return;
         }
 
-        Iterator it = tags.iterator();
+        Iterator<JavadocTag> it = tags.iterator();
         if (aAST.getType() != TokenTypes.ANNOTATION_FIELD_DEF) {
             // Check for inheritDoc
             boolean hasInheritDocTag = false;
             while (it.hasNext() && !hasInheritDocTag) {
-                hasInheritDocTag |= ((JavadocTag) it.next()).isInheritDocTag();
+                hasInheritDocTag |= (it.next()).isInheritDocTag();
             }
 
             checkParamTags(tags, aAST, !hasInheritDocTag);
@@ -31,7 +31,7 @@
         // Dump out all unused tags
         it = tags.iterator();
         while (it.hasNext()) {
-            final JavadocTag jt = (JavadocTag) it.next();
+            final JavadocTag jt = it.next();
             if (!jt.isSeeOrInheritDocTag()) {
                 log(jt.getLineNo(), "javadoc.unusedTagGeneral");
             }

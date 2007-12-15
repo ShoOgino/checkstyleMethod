@@ -10,9 +10,9 @@
     private void checkHtml(final DetailAST aAST, final TextBlock aComment)
     {
         final int lineno = aComment.getStartLineNo();
-        final Stack htmlStack = new Stack();
+        final Stack<HtmlTag> htmlStack = new Stack<HtmlTag>();
         final String[] text = aComment.getText();
-        final List typeParameters =
+        final List<String> typeParameters =
             CheckUtils.getTypeParameterNames(aAST);
 
         TagParser parser = null;
@@ -53,7 +53,7 @@
         // Identify any tags left on the stack.
         String lastFound = ""; // Skip multiples, like <b>...<b>
         for (int i = 0; i < htmlStack.size(); i++) {
-            final HtmlTag htag = (HtmlTag) htmlStack.elementAt(i);
+            final HtmlTag htag = htmlStack.elementAt(i);
             if (!isSingleTag(htag)
                 && !htag.getId().equals(lastFound)
                 && !typeParameters.contains(htag.getId()))

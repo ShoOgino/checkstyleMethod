@@ -7,12 +7,12 @@
      * @param aScope the scope of the construct
      * @return true if the construct has a short circuit tag.
      */
-    private boolean hasShortCircuitTag(final DetailAST aAST, final List aTags,
-        final Scope aScope)
+    private boolean hasShortCircuitTag(final DetailAST aAST,
+            final List<JavadocTag> aTags, final Scope aScope)
     {
         // Check if it contains {@inheritDoc} tag
         if ((aTags.size() != 1)
-                || !((JavadocTag) aTags.get(0)).isInheritDocTag())
+                || !(aTags.get(0)).isInheritDocTag())
         {
             return false;
         }

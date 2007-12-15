@@ -3,12 +3,12 @@
      * @param aNode the parameterised AST node
      * @return a list of type parameter names
      */
-    public static List getTypeParameters(final DetailAST aNode)
+    public static List<DetailAST> getTypeParameters(final DetailAST aNode)
     {
         final DetailAST typeParameters =
             aNode.findFirstToken(TokenTypes.TYPE_PARAMETERS);
 
-        final List typeParams = new ArrayList();
+        final List<DetailAST> typeParams = new ArrayList<DetailAST>();
         if (typeParameters != null) {
             final DetailAST typeParam =
                 typeParameters.findFirstToken(TokenTypes.TYPE_PARAMETER);

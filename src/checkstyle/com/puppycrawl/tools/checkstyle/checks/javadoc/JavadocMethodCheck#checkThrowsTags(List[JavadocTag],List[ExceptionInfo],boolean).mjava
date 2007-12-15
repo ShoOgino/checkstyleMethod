@@ -6,14 +6,15 @@
      * @param aReportExpectedTags whether we should report if do not find
      *            expected tag
      */
-    private void checkThrowsTags(List aTags, List aThrows,
-        boolean aReportExpectedTags)
+    private void checkThrowsTags(List<JavadocTag> aTags,
+            List<ExceptionInfo> aThrows, boolean aReportExpectedTags)
     {
         // Loop over the tags, checking to see they exist in the throws.
-        final Set foundThrows = new HashSet(); //used for performance only
-        final ListIterator tagIt = aTags.listIterator();
+        // The foundThrows used for performance only
+        final Set<String> foundThrows = new HashSet<String>();
+        final ListIterator<JavadocTag> tagIt = aTags.listIterator();
         while (tagIt.hasNext()) {
-            final JavadocTag tag = (JavadocTag) tagIt.next();
+            final JavadocTag tag = tagIt.next();
 
             if (!tag.isThrowsTag()) {
                 continue;
@@ -29,9 +30,9 @@
                     getCurrentClassName());
             boolean found = foundThrows.contains(documentedEx);
 
-            final ListIterator throwIt = aThrows.listIterator();
+            final ListIterator<ExceptionInfo> throwIt = aThrows.listIterator();
             while (!found && throwIt.hasNext()) {
-                final ExceptionInfo ei = (ExceptionInfo) throwIt.next();
+                final ExceptionInfo ei = throwIt.next();
 
                 if (documentedCI.getClazz() == ei.getClazz()) {
                     found = true;
@@ -61,9 +62,9 @@
         // Now dump out all throws without tags :- unless
         // the user has chosen to suppress these problems
         if (!mAllowMissingThrowsTags && aReportExpectedTags) {
-            final ListIterator throwIt = aThrows.listIterator();
+            final ListIterator<ExceptionInfo> throwIt = aThrows.listIterator();
             while (throwIt.hasNext()) {
-                final ExceptionInfo ei = (ExceptionInfo) throwIt.next();
+                final ExceptionInfo ei = throwIt.next();
                 if (!ei.isFound()) {
                     final Token fi = ei.getName();
                     log(fi.getLineNo(), fi.getColumnNo(),

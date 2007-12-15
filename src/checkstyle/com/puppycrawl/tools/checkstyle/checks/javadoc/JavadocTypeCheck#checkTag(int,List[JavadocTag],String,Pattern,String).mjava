@@ -6,7 +6,7 @@
      * @param aFormatPattern regexp for the tag value.
      * @param aFormat pattern for the tag value.
      */
-    private void checkTag(int aLineNo, List aTags, String aTag,
+    private void checkTag(int aLineNo, List<JavadocTag> aTags, String aTag,
                           Pattern aFormatPattern, String aFormat)
     {
         if (aFormatPattern == null) {
@@ -15,7 +15,7 @@
 
         int tagCount = 0;
         for (int i = aTags.size() - 1; i >= 0; i--) {
-            final JavadocTag tag = (JavadocTag) aTags.get(i);
+            final JavadocTag tag = aTags.get(i);
             if (tag.getTag().equals(aTag)) {
                 tagCount++;
                 if (!aFormatPattern.matcher(tag.getArg1()).find()) {

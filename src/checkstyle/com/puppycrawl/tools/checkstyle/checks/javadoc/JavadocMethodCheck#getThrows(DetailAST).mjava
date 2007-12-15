@@ -4,9 +4,9 @@
      * @param aAST the method node.
      * @return the list of exception nodes for aAST.
      */
-    private List getThrows(DetailAST aAST)
+    private List<ExceptionInfo> getThrows(DetailAST aAST)
     {
-        final List retVal = new ArrayList();
+        final List<ExceptionInfo> retVal = new ArrayList<ExceptionInfo>();
         final DetailAST throwsAST = aAST
                 .findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAST != null) {

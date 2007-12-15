@@ -6,9 +6,9 @@
     public void process(File[] aFiles)
     {
         final File[] javaFiles = filter(aFiles);
-        final Set directories = getParentDirs(javaFiles);
-        for (final Iterator it = directories.iterator(); it.hasNext();) {
-            final File dir = (File) it.next();
+        final Set<File> directories = getParentDirs(javaFiles);
+        for (final Iterator<File> it = directories.iterator(); it.hasNext();) {
+            final File dir = it.next();
             final File packageHtml = new File(dir, "package.html");
             final MessageDispatcher dispatcher = getMessageDispatcher();
             final String path = packageHtml.getPath();

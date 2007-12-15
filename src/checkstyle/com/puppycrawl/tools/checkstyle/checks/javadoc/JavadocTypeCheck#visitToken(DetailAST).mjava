@@ -1,4 +1,5 @@
     /** {@inheritDoc} */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         if (shouldCheck(aAST)) {
@@ -10,23 +11,23 @@
             }
             else if (ScopeUtils.isOuterMostType(aAST)) {
                 // don't check author/version for inner classes
-                final List tags = getJavadocTags(cmt);
+                final List<JavadocTag> tags = getJavadocTags(cmt);
                 checkTag(lineNo, tags, "author",
                          mAuthorFormatPattern, mAuthorFormat);
                 checkTag(lineNo, tags, "version",
                          mVersionFormatPattern, mVersionFormat);
 
-                final List typeParamNames =
+                final List<String> typeParamNames =
                     CheckUtils.getTypeParameterNames(aAST);
 
                 if (!mAllowMissingParamTags) {
                     //Check type parameters that should exist, do
-                    for (final Iterator typeParamNameIt =
+                    for (final Iterator<String> typeParamNameIt =
                              typeParamNames.iterator();
                          typeParamNameIt.hasNext();)
                     {
                         checkTypeParamTag(
-                            lineNo, tags, (String) typeParamNameIt.next());
+                            lineNo, tags, typeParamNameIt.next());
                     }
                 }
 

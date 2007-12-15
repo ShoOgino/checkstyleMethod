@@ -7,15 +7,15 @@
      * @param aReportExpectedTags whether we should report if do not find
      *            expected tag
      */
-    private void checkReturnTag(List aTags, int aLineNo,
+    private void checkReturnTag(List<JavadocTag> aTags, int aLineNo,
         boolean aReportExpectedTags)
     {
         // Loop over tags finding return tags. After the first one, report an
         // error.
         boolean found = false;
-        final ListIterator it = aTags.listIterator();
+        final ListIterator<JavadocTag> it = aTags.listIterator();
         while (it.hasNext()) {
-            final JavadocTag jt = (JavadocTag) it.next();
+            final JavadocTag jt = it.next();
             if (jt.isReturnTag()) {
                 if (found) {
                     log(jt.getLineNo(), jt.getColumnNo(),

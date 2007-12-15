@@ -4,10 +4,10 @@
      * @param aAST the method node.
      * @return the list of parameter nodes for aAST.
      */
-    private List getParameters(DetailAST aAST)
+    private List<DetailAST> getParameters(DetailAST aAST)
     {
         final DetailAST params = aAST.findFirstToken(TokenTypes.PARAMETERS);
-        final List retVal = new ArrayList();
+        final List<DetailAST> retVal = new ArrayList<DetailAST>();
 
         DetailAST child = (DetailAST) params.getFirstChild();
         while (child != null) {
