@@ -10,10 +10,11 @@
             tagSuppressions(contents.getCppComments().values());
         }
         if (mCheckC) {
-            final Collection cComments = contents.getCComments().values();
-            final Iterator iter = cComments.iterator();
+            final Collection<List<TextBlock>> cComments = contents
+                    .getCComments().values();
+            final Iterator<List<TextBlock>> iter = cComments.iterator();
             while (iter.hasNext()) {
-                final Collection element = (Collection) iter.next();
+                final List<TextBlock> element = iter.next();
                 tagSuppressions(element);
             }
         }

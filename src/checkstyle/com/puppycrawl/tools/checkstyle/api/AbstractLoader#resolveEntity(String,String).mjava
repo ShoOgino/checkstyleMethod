@@ -1,10 +1,11 @@
     /** {@inheritDoc} */
+    @Override
     public InputSource resolveEntity(String aPublicId, String aSystemId)
         throws SAXException
     {
         if (mPublicIdToResourceNameMap.keySet().contains(aPublicId)) {
             final String dtdResourceName =
-                    (String) mPublicIdToResourceNameMap.get(aPublicId);
+                    mPublicIdToResourceNameMap.get(aPublicId);
             final ClassLoader loader =
                 Thread.currentThread().getContextClassLoader();
             final InputStream dtdIS =

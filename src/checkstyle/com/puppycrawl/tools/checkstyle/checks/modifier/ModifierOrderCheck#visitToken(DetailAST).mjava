@@ -2,10 +2,10 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        final List<AST> mods = new ArrayList();
+        final List<DetailAST> mods = new ArrayList<DetailAST>();
         AST modifier = aAST.getFirstChild();
         while (modifier != null) {
-            mods.add(modifier);
+            mods.add((DetailAST) modifier);
             modifier = modifier.getNextSibling();
         }
 

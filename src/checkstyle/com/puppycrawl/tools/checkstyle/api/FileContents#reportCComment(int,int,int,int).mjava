@@ -6,21 +6,21 @@
      * @param aEndColNo the ending column number
      **/
     public void reportCComment(int aStartLineNo, int aStartColNo,
-                               int aEndLineNo, int aEndColNo)
+            int aEndLineNo, int aEndColNo)
     {
         final String[] cc = extractCComment(aStartLineNo, aStartColNo,
-                                            aEndLineNo, aEndColNo);
+                aEndLineNo, aEndColNo);
         final Comment comment = new Comment(cc, aStartColNo, aEndLineNo,
-                                            aEndColNo);
+                aEndColNo);
 
         // save the comment
         final Integer key = new Integer(aStartLineNo);
         if (mCComments.containsKey(key)) {
-            final List entries = (List) mCComments.get(key);
+            final List<TextBlock> entries = mCComments.get(key);
             entries.add(comment);
         }
         else {
-            final List entries = new ArrayList();
+            final List<TextBlock> entries = new ArrayList<TextBlock>();
             entries.add(comment);
             mCComments.put(key, entries);
         }

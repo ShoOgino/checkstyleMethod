@@ -18,6 +18,8 @@
      * @throws NullPointerException
      *             if <code>svalue</code> is <code>null</code>
      */
+    @SuppressWarnings("unchecked")
+    @Override
     protected List parseElements(final String aValue)
         throws NullPointerException
     {
@@ -33,7 +35,7 @@
         }
 
         final StringTokenizer st = new StringTokenizer(str, ",");
-        final List retVal = new ArrayList();
+        final List<String> retVal = new ArrayList<String>();
 
         while (st.hasMoreTokens()) {
             final String token = st.nextToken();

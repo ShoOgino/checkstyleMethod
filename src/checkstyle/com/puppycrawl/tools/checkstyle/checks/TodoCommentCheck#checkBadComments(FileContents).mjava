@@ -4,14 +4,15 @@
      */
     private void checkBadComments(FileContents aContents)
     {
-        final Map allComments = aContents.getCComments();
-        final Iterator allIter = allComments.keySet().iterator();
+        final Map<Integer, List<TextBlock>> allComments = aContents
+                .getCComments();
+        final Iterator<Integer> allIter = allComments.keySet().iterator();
         while (allIter.hasNext()) {
-            final Integer key = (Integer) allIter.next();
-            final List lineComments = (List) allComments.get(key);
-            final Iterator lineIter = lineComments.iterator();
+            final Integer key = allIter.next();
+            final List<TextBlock> lineComments = allComments.get(key);
+            final Iterator<TextBlock> lineIter = lineComments.iterator();
             while (lineIter.hasNext()) {
-                final String[] cmt = ((TextBlock) lineIter.next()).getText();
+                final String[] cmt = (lineIter.next()).getText();
                 for (int i = 0; i < cmt.length; i++) {
                     if (getRegexp().matcher(cmt[i]).find()) {
                         log(key.intValue() + i, "todo.match", getFormat());

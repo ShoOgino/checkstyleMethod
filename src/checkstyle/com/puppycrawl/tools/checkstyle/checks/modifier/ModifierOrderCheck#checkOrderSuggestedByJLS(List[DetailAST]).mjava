@@ -6,11 +6,11 @@
      * @return null if the order is correct, otherwise returns the offending
      * *       modifier AST.
      */
-    DetailAST checkOrderSuggestedByJLS(List aModifiers)
+    DetailAST checkOrderSuggestedByJLS(List<DetailAST> aModifiers)
     {
         int i = 0;
         DetailAST modifier;
-        final Iterator it = aModifiers.iterator();
+        final Iterator<DetailAST> it = aModifiers.iterator();
         //No modifiers, no problems
         if (!it.hasNext()) {
             return null;
@@ -18,7 +18,7 @@
 
         //Speed past all initial annotations
         do {
-            modifier = (DetailAST) it.next();
+            modifier = it.next();
         }
         while (it.hasNext() && (modifier.getType() == TokenTypes.ANNOTATION));
 
@@ -48,7 +48,7 @@
                 return null;
             }
             else {
-                modifier = (DetailAST) it.next();
+                modifier = it.next();
             }
         }
 

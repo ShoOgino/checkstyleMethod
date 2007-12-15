@@ -6,20 +6,20 @@
      * @param aEndColNo the ending column number
      * @return true if the positions intersects with a comment.
      **/
-    public boolean hasIntersectionWithComment(
-            int aStartLineNo, int aStartColNo, int aEndLineNo, int aEndColNo)
+    public boolean hasIntersectionWithComment(int aStartLineNo,
+            int aStartColNo, int aEndLineNo, int aEndColNo)
     {
         // Check C comments (all comments should be checked)
-        final Collection values = mCComments.values();
+        final Collection<List<TextBlock>> values = mCComments.values();
 
-        final Iterator it = values.iterator();
+        final Iterator<List<TextBlock>> it = values.iterator();
         while (it.hasNext()) {
-            final List row = (List) it.next();
-            final Iterator rowIterator = row.iterator();
+            final List<TextBlock> row = it.next();
+            final Iterator<TextBlock> rowIterator = row.iterator();
             while (rowIterator.hasNext()) {
-                final TextBlock comment = (TextBlock) rowIterator.next();
-                if (comment.intersects(
-                        aStartLineNo, aStartColNo, aEndLineNo, aEndColNo))
+                final TextBlock comment = rowIterator.next();
+                if (comment.intersects(aStartLineNo, aStartColNo, aEndLineNo,
+                        aEndColNo))
                 {
                     return true;
                 }
@@ -28,13 +28,13 @@
 
         // Check CPP comments (line searching is possible)
         for (int lineNumber = aStartLineNo; lineNumber <= aEndLineNo;
-            lineNumber++)
+             lineNumber++)
         {
-            final TextBlock comment =
-                (TextBlock) mCPlusPlusComments.get(new Integer(lineNumber));
+            final TextBlock comment = mCPlusPlusComments
+                    .get(new Integer(lineNumber));
             if ((comment != null)
-                && comment.intersects(aStartLineNo, aStartColNo,
-                                      aEndLineNo, aEndColNo))
+                    && comment.intersects(aStartLineNo, aStartColNo,
+                            aEndLineNo, aEndColNo))
             {
                 return true;
             }

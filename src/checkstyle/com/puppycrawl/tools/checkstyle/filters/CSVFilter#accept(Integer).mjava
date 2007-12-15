@@ -5,9 +5,9 @@
      */
     public boolean accept(Integer aInt)
     {
-        final Iterator it = getFilters().iterator();
+        final Iterator<IntFilter> it = getFilters().iterator();
         while (it.hasNext()) {
-            final IntFilter filter = (IntFilter) it.next();
+            final IntFilter filter = it.next();
             if (filter.accept(aInt)) {
                 return true;
             }
