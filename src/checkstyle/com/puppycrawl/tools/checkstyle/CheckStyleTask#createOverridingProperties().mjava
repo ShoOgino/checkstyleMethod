@@ -38,9 +38,8 @@
 
         // override with Ant properties like ${basedir}
         final Hashtable<?, ?> antProps = this.getProject().getProperties();
-        for (final Iterator<?> it = antProps.keySet().iterator(); it.hasNext();)
-        {
-            final String key = (String) it.next();
+        for (Object name : antProps.keySet()) {
+            final String key = (String) name;
             final String value = String.valueOf(antProps.get(key));
             retVal.put(key, value);
         }

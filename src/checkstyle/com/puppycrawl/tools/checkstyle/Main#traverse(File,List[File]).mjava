@@ -11,8 +11,8 @@
         if (aNode.canRead()) {
             if (aNode.isDirectory()) {
                 final File[] nodes = aNode.listFiles();
-                for (int i = 0; i < nodes.length; i++) {
-                    traverse(nodes[i], aFiles);
+                for (File element : nodes) {
+                    traverse(element, aFiles);
                 }
             }
             else if (aNode.isFile()) {

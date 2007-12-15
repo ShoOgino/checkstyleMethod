@@ -6,13 +6,10 @@
     {
         final Map<Integer, List<TextBlock>> allComments = aContents
                 .getCComments();
-        final Iterator<Integer> allIter = allComments.keySet().iterator();
-        while (allIter.hasNext()) {
-            final Integer key = allIter.next();
+        for (Integer key : allComments.keySet()) {
             final List<TextBlock> lineComments = allComments.get(key);
-            final Iterator<TextBlock> lineIter = lineComments.iterator();
-            while (lineIter.hasNext()) {
-                final String[] cmt = (lineIter.next()).getText();
+            for (TextBlock line : lineComments) {
+                final String[] cmt = line.getText();
                 for (int i = 0; i < cmt.length; i++) {
                     if (getRegexp().matcher(cmt[i]).find()) {
                         log(key.intValue() + i, "todo.match", getFormat());

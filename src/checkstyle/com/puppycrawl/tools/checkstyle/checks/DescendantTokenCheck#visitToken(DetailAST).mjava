@@ -10,11 +10,11 @@
         // name of this token
         final String name = TokenTypes.getTokenName(aAST.getType());
 
-        for (int i = 0; i < mLimitedTokens.length; i++) {
-            final int tokenCount = mCounts[mLimitedTokens[i] - 1];
+        for (int element : mLimitedTokens) {
+            final int tokenCount = mCounts[element - 1];
             if (tokenCount < mMinimumNumber) {
                 final String descendantName =
-                    TokenTypes.getTokenName(mLimitedTokens[i]);
+                    TokenTypes.getTokenName(element);
                 log(aAST.getLineNo(),
                     aAST.getColumnNo(),
                     mMinimumMessage,
@@ -27,7 +27,7 @@
             }
             if (tokenCount > mMaximumNumber) {
                 final String descendantName =
-                    TokenTypes.getTokenName(mLimitedTokens[i]);
+                    TokenTypes.getTokenName(element);
                 log(aAST.getLineNo(),
                     aAST.getColumnNo(),
                     mMaximumMessage,

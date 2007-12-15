@@ -5,10 +5,7 @@
      */
     private void tagSuppressions(Collection<TextBlock> aComments)
     {
-        for (final Iterator<TextBlock> iter = aComments.iterator(); iter
-                .hasNext();)
-        {
-            final TextBlock comment = iter.next();
+        for (TextBlock comment : aComments) {
             final int startLineNo = comment.getStartLineNo();
             final String[] text = comment.getText();
             tagCommentLine(text[0], startLineNo, comment.getStartColNo());

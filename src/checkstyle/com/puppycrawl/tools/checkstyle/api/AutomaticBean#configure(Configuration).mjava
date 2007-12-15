@@ -23,8 +23,7 @@
         // TODO: debug log messages
         final String[] attributes = aConfiguration.getAttributeNames();
 
-        for (int i = 0; i < attributes.length; i++) {
-            final String key = attributes[i];
+        for (final String key : attributes) {
             final String value = aConfiguration.getAttribute(key);
 
             try {
@@ -75,8 +74,7 @@
         finishLocalSetup();
 
         final Configuration[] childConfigs = aConfiguration.getChildren();
-        for (int i = 0; i < childConfigs.length; i++) {
-            final Configuration childConfig = childConfigs[i];
+        for (final Configuration childConfig : childConfigs) {
             setupChild(childConfig);
         }
     }

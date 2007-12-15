@@ -6,8 +6,8 @@
     protected final Set<File> getParentDirs(File[] aFiles)
     {
         final Set<File> directories = new HashSet<File>();
-        for (int i = 0; i < aFiles.length; i++) {
-            final File f = aFiles[i].getAbsoluteFile();
+        for (File element : aFiles) {
+            final File f = element.getAbsoluteFile();
             if (f.getName().endsWith(".java")) {
                 final File dir = f.getParentFile();
                 directories.add(dir); // duplicates are handled automatically

@@ -5,10 +5,7 @@
     private void checkCppComments(FileContents aContents)
     {
         final Map<Integer, TextBlock> comments = aContents.getCppComments();
-        for (final Iterator<Integer> it = comments.keySet().iterator(); it
-                .hasNext();)
-        {
-            final Integer key = it.next();
+        for (Integer key : comments.keySet()) {
             final String cmt = (comments.get(key)).getText()[0];
             if (getRegexp().matcher(cmt).find()) {
                 log(key.intValue(), "todo.match", getFormat());

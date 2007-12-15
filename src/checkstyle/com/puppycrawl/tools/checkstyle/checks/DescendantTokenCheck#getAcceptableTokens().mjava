@@ -6,11 +6,8 @@
         final Set<String> tokenNames = getTokenNames();
         final int[] result = new int[tokenNames.size()];
         int i = 0;
-        final Iterator<String> it = tokenNames.iterator();
-        while (it.hasNext()) {
-            final String name = it.next();
-            result[i] = TokenTypes.getTokenId(name);
-            i++;
+        for (String name : tokenNames) {
+            result[i++] = TokenTypes.getTokenId(name);
         }
         return result;
     }

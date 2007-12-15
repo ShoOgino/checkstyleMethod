@@ -18,8 +18,7 @@
         }
 
         final FieldDoc[] fields = classes[0].fields();
-        for (int j = 0; j < fields.length; j++) {
-            final FieldDoc field = fields[j];
+        for (final FieldDoc field : fields) {
             if (field.isStatic() && field.isPublic() && field.isFinal()
                 && "int".equals((field.type().qualifiedTypeName())))
             {

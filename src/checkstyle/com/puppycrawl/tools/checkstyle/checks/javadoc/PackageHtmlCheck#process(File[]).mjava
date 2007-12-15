@@ -7,8 +7,7 @@
     {
         final File[] javaFiles = filter(aFiles);
         final Set<File> directories = getParentDirs(javaFiles);
-        for (final Iterator<File> it = directories.iterator(); it.hasNext();) {
-            final File dir = it.next();
+        for (File dir : directories) {
             final File packageHtml = new File(dir, "package.html");
             final MessageDispatcher dispatcher = getMessageDispatcher();
             final String path = packageHtml.getPath();

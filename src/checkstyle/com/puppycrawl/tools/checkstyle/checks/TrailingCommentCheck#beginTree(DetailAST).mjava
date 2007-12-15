@@ -11,10 +11,7 @@
         lines.addAll(cppComments.keySet());
         lines.addAll(cComments.keySet());
 
-        final Iterator<Integer> linesIter = lines.iterator();
-        while (linesIter.hasNext()) {
-            final Integer lineNo = linesIter.next();
-
+        for (Integer lineNo : lines) {
             final String line = getLines()[lineNo.intValue() - 1];
             String lineBefore = "";
             TextBlock comment = null;

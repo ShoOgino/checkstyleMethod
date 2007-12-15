@@ -62,9 +62,7 @@
         // Now dump out all throws without tags :- unless
         // the user has chosen to suppress these problems
         if (!mAllowMissingThrowsTags && aReportExpectedTags) {
-            final ListIterator<ExceptionInfo> throwIt = aThrows.listIterator();
-            while (throwIt.hasNext()) {
-                final ExceptionInfo ei = throwIt.next();
+            for (ExceptionInfo ei : aThrows) {
                 if (!ei.isFound()) {
                     final Token fi = ei.getName();
                     log(fi.getLineNo(), fi.getColumnNo(),
