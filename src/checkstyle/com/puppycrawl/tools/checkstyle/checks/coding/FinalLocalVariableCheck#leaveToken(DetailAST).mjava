@@ -1,6 +1,7 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public void leaveToken(DetailAST aAST)
     {
         super.leaveToken(aAST);
@@ -13,13 +14,10 @@
         case TokenTypes.STATIC_INIT:
         case TokenTypes.INSTANCE_INIT:
         case TokenTypes.METHOD_DEF:
-            final HashMap state = (HashMap) mScopeStack.pop();
-            final Iterator finalVars = state.values().iterator();
-
-            while (finalVars.hasNext()) {
-                final DetailAST var = (DetailAST) finalVars.next();
-                log(var.getLineNo(), var.getColumnNo(),
-                    "final.variable", var.getText());
+            final Map<String, DetailAST> state = mScopeStack.pop();
+            for (DetailAST var : state.values()) {
+                log(var.getLineNo(), var.getColumnNo(), "final.variable", var
+                        .getText());
             }
             break;
 

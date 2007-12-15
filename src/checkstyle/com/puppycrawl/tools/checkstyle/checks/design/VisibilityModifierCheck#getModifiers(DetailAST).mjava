@@ -3,13 +3,13 @@
      * @param aVariableDefAST AST for a vraiable definition
      * @return the set of modifier Strings for variableDefAST
      */
-    private Set getModifiers(DetailAST aVariableDefAST)
+    private Set<String> getModifiers(DetailAST aVariableDefAST)
     {
         final AST modifiersAST = aVariableDefAST.getFirstChild();
         if (modifiersAST.getType() != TokenTypes.MODIFIERS) {
             throw new IllegalStateException("Strange parse tree");
         }
-        final Set retVal = new HashSet();
+        final Set<String> retVal = new HashSet<String>();
         AST modifier = modifiersAST.getFirstChild();
         while (modifier != null) {
             retVal.add(modifier.getText());

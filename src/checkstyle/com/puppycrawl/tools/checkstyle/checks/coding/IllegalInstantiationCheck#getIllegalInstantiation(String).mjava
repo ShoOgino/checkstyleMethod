@@ -15,9 +15,7 @@
         final int clsNameLen = aClassName.length();
         final int pkgNameLen = (mPkgName == null) ? 0 : mPkgName.length();
 
-        final Iterator illIter = mIllegalClasses.iterator();
-        while (illIter.hasNext()) {
-            final String illegal = (String) illIter.next();
+        for (String illegal : mIllegalClasses) {
             final int illegalLen = illegal.length();
 
             // class from java.lang
@@ -69,9 +67,7 @@
                 return illegal;
             }
             // import statements
-            final Iterator importIter = mImports.iterator();
-            while (importIter.hasNext()) {
-                final FullIdent importLineText = (FullIdent) importIter.next();
+            for (FullIdent importLineText : mImports) {
                 final String importArg = importLineText.getText();
                 if (importArg.endsWith(".*")) {
                     final String fqClass =

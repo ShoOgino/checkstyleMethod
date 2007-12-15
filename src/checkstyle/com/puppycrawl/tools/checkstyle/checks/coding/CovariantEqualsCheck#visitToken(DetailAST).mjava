@@ -1,4 +1,5 @@
     /** {@inheritDoc} */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         mEqualsMethods.clear();
@@ -24,15 +25,11 @@
 
             // report equals method definitions
             if (!hasEqualsObject) {
-                final Iterator it = mEqualsMethods.iterator();
-                while (it.hasNext()) {
-                    final DetailAST equalsAST = (DetailAST) it.next();
-                    final DetailAST nameNode =
-                        equalsAST.findFirstToken(TokenTypes.IDENT);
-                    log(
-                        nameNode.getLineNo(),
-                        nameNode.getColumnNo(),
-                        "covariant.equals");
+                for (DetailAST equalsAST : mEqualsMethods) {
+                    final DetailAST nameNode = equalsAST
+                            .findFirstToken(TokenTypes.IDENT);
+                    log(nameNode.getLineNo(), nameNode.getColumnNo(),
+                            "covariant.equals");
                 }
             }
         }

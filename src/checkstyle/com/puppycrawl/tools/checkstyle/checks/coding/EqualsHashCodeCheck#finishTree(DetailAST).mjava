@@ -1,14 +1,13 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public void finishTree(DetailAST aRootAST)
     {
-        final Set equalsDefs = mObjBlockEquals.keySet();
-        for (final Iterator it = equalsDefs.iterator(); it.hasNext();) {
-            final Object objBlock = it.next();
+        final Set<DetailAST> equalsDefs = mObjBlockEquals.keySet();
+        for (DetailAST objBlock : equalsDefs) {
             if (!mObjBlockWithHashCode.contains(objBlock)) {
-                final DetailAST equalsAST =
-                    (DetailAST) mObjBlockEquals.get(objBlock);
+                final DetailAST equalsAST = mObjBlockEquals.get(objBlock);
                 log(equalsAST.getLineNo(), equalsAST.getColumnNo(),
                         "equals.noHashCode");
             }

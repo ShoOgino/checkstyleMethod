@@ -5,7 +5,7 @@
     private void insertVariable(DetailAST aAST)
     {
         if (!aAST.branchContains(TokenTypes.FINAL)) {
-            final HashMap state = (HashMap) mScopeStack.peek();
+            final Map<String, DetailAST> state = mScopeStack.peek();
             final DetailAST ast = aAST.findFirstToken(TokenTypes.IDENT);
             state.put(ast.getText(), ast);
         }

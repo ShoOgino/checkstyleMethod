@@ -11,7 +11,8 @@
     public void process(File[] aFiles)
     {
         final File[] propertyFiles = filter(aFiles);
-        final Map propFilesMap = arrangePropertyFiles(propertyFiles);
+        final Map<String, Set<File>> propFilesMap =
+            arrangePropertyFiles(propertyFiles);
         checkPropertyFileSets(propFilesMap);
     }
 

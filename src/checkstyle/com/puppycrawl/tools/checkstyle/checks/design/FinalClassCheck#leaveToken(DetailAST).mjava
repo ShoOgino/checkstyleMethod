@@ -1,11 +1,12 @@
     /** {@inheritDoc} */
+    @Override
     public void leaveToken(DetailAST aAST)
     {
         if (aAST.getType() != TokenTypes.CLASS_DEF) {
             return;
         }
 
-        final ClassDesc desc = (ClassDesc) mClasses.pop();
+        final ClassDesc desc = mClasses.pop();
         if (!desc.isDeclaredAsFinal()
             && !desc.isDeclaredAsAbstract()
             && desc.hasPrivateCtor()

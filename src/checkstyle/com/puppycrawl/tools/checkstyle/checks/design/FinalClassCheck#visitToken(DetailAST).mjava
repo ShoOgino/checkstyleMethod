@@ -1,4 +1,5 @@
     /** {@inheritDoc} */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
@@ -11,7 +12,7 @@
             mClasses.push(new ClassDesc(isFinal, isAbstract));
         }
         else if (!ScopeUtils.inEnumBlock(aAST)) { //ctors in enums don't matter
-            final ClassDesc desc = (ClassDesc) mClasses.peek();
+            final ClassDesc desc = mClasses.peek();
             if ((modifiers != null)
                 && modifiers.branchContains(TokenTypes.LITERAL_PRIVATE))
             {

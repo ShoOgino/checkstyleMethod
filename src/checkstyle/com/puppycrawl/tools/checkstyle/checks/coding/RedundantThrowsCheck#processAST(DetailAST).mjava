@@ -2,9 +2,10 @@
      * Checks exceptions declared in throws for a method or constructor.
      * @param aAST the tree node for the method or constructor.
      */
+    @Override
     protected final void processAST(DetailAST aAST)
     {
-        final List knownExcs = new LinkedList();
+        final List<ClassInfo> knownExcs = new LinkedList<ClassInfo>();
         final DetailAST throwsAST =
             aAST.findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAST != null) {

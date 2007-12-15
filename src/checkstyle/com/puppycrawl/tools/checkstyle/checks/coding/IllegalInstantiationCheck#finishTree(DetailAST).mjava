@@ -1,10 +1,10 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public void finishTree(DetailAST aRootAST)
     {
-        for (final Iterator it = mInstantiations.iterator(); it.hasNext();) {
-            final DetailAST literalNewAST = (DetailAST) it.next();
+        for (DetailAST literalNewAST : mInstantiations) {
             postprocessLiteralNew(literalNewAST);
         }
     }

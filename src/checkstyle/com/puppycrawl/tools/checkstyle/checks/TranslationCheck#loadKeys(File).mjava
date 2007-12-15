@@ -3,9 +3,9 @@
      * @param aFile the property file
      * @return a Set object which holds the loaded keys
      */
-    private Set loadKeys(File aFile)
+    private Set<Object> loadKeys(File aFile)
     {
-        final Set keys = new HashSet();
+        final Set<Object> keys = new HashSet<Object>();
         InputStream inStream = null;
 
         try {
@@ -15,7 +15,7 @@
             props.load(inStream);
 
             // Gather the keys and put them into a set
-            final Enumeration e = props.propertyNames();
+            final Enumeration<?> e = props.propertyNames();
             while (e.hasMoreElements()) {
                 keys.add(e.nextElement());
             }

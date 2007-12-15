@@ -5,17 +5,19 @@
      * @param aPropFiles the set of property files
      * @return a Map object which holds the arranged property file sets
      */
-    private static Map arrangePropertyFiles(File[] aPropFiles)
+    private static Map<String, Set<File>> arrangePropertyFiles(
+            File[] aPropFiles)
     {
-        final Map propFileMap = new HashMap();
+        final Map<String, Set<File>> propFileMap =
+            new HashMap<String, Set<File>>();
 
         for (int i = 0; i < aPropFiles.length; i++) {
             final File f = aPropFiles[i];
             final String identifier = extractPropertyIdentifier(f);
 
-            Set fileSet = (Set) propFileMap.get(identifier);
+            Set<File> fileSet = propFileMap.get(identifier);
             if (fileSet == null) {
-                fileSet = new HashSet();
+                fileSet = new HashSet<File>();
                 propFileMap.put(identifier, fileSet);
             }
             fileSet.add(f);

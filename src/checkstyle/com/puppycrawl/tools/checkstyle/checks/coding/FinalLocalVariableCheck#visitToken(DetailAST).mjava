@@ -1,6 +1,7 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         switch(aAST.getType()) {
@@ -11,7 +12,7 @@
         case TokenTypes.CTOR_DEF:
         case TokenTypes.STATIC_INIT:
         case TokenTypes.INSTANCE_INIT:
-            mScopeStack.push(new HashMap());
+            mScopeStack.push(new HashMap<String, DetailAST>());
             break;
 
         case TokenTypes.PARAMETER_DEF:

@@ -1,4 +1,5 @@
     /** {@inheritDoc} */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         if ((aAST.getType() != TokenTypes.VARIABLE_DEF)
@@ -11,7 +12,7 @@
         final String varName = varNameAST.getText();
         final boolean inInterfaceOrAnnotationBlock =
             ScopeUtils.inInterfaceOrAnnotationBlock(aAST);
-        final Set mods = getModifiers(aAST);
+        final Set<String> mods = getModifiers(aAST);
         final String declaredScope = getVisibilityScope(mods);
         final String variableScope =
              inInterfaceOrAnnotationBlock ? "public" : declaredScope;

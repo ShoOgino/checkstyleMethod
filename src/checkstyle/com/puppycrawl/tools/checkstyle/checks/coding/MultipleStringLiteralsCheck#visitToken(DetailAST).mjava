@@ -1,4 +1,5 @@
     /** {@inheritDoc} */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         if (isInIgnoreOccurrenceContext(aAST)) {
@@ -6,9 +7,9 @@
         }
         final String currentString = aAST.getText();
         if ((mPattern == null) || !mPattern.matcher(currentString).find()) {
-            ArrayList hitList = (ArrayList) mStringMap.get(currentString);
+            List<StringInfo> hitList = mStringMap.get(currentString);
             if (hitList == null) {
-                hitList = new ArrayList();
+                hitList = new ArrayList<StringInfo>();
                 mStringMap.put(currentString, hitList);
             }
             final int line = aAST.getLineNo();

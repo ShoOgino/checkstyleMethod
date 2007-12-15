@@ -10,7 +10,7 @@
      * @param aExc <code>FullIdent</code> of exception to check
      * @param aKnownExcs list of already known exception
      */
-    private void checkException(FullIdent aExc, List aKnownExcs)
+    private void checkException(FullIdent aExc, List<ClassInfo> aKnownExcs)
     {
         // Let's try to load class.
         final ClassInfo newClassInfo =
@@ -24,8 +24,10 @@
         }
 
         boolean shouldAdd = true;
-        for (final Iterator known = aKnownExcs.iterator(); known.hasNext();) {
-            final ClassInfo ci = (ClassInfo) known.next();
+        for (final Iterator<ClassInfo> known = aKnownExcs.iterator(); known
+                .hasNext();)
+        {
+            final ClassInfo ci = known.next();
             final Token fi = ci.getName();
 
             if (ci.getClazz() == newClassInfo.getClazz()) {

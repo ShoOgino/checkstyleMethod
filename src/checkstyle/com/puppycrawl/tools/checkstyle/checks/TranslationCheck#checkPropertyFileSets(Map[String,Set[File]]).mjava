@@ -1,0 +1,41 @@
+    /**
+     * Tests whether the given property files (arranged by their prefixes
+     * in a Map) contain the proper keys.
+     *
+     * Each group of files must have the same keys. If this is not the case
+     * an error message is posted giving information which key misses in
+     * which file.
+     *
+     * @param aPropFiles the property files organized as Map
+     */
+    private void checkPropertyFileSets(Map<String, Set<File>> aPropFiles)
+    {
+        final Set<Entry<String, Set<File>>> entrySet = aPropFiles.entrySet();
+
+        for (final Iterator<Entry<String, Set<File>>> iterator = entrySet
+                .iterator(); iterator.hasNext();)
+        {
+            final Entry<String, Set<File>> entry = iterator.next();
+            final Set<File> files = entry.getValue();
+
+            if (files.size() >= 2) {
+                // build a map from files to the keys they contain
+                final Set<Object> keys = new HashSet<Object>();
+                final Map<File, Set<Object>> fileMap =
+                    new HashMap<File, Set<Object>>();
+
+                for (final Iterator<File> iter = files.iterator(); iter
+                        .hasNext();)
+                {
+                    final File file = iter.next();
+                    final Set<Object> fileKeys = loadKeys(file);
+                    keys.addAll(fileKeys);
+                    fileMap.put(file, fileKeys);
+                }
+
+                // check the map for consistency
+                compareKeySets(keys, fileMap);
+            }
+        }
+    }
+

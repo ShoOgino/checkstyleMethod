@@ -1,17 +1,16 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public int[] getAcceptableTokens()
     {
         // Any tokens set by property 'tokens' are acceptable
         int[] tokensToCopy = getDefaultTokens();
-        final Set tokenNames = getTokenNames();
+        final Set<String> tokenNames = getTokenNames();
         if (!tokenNames.isEmpty()) {
             tokensToCopy = new int[tokenNames.size()];
             int i = 0;
-            final Iterator it = tokenNames.iterator();
-            while (it.hasNext()) {
-                final String name = (String) it.next();
+            for (String name : tokenNames) {
                 tokensToCopy[i] = TokenTypes.getTokenId(name);
                 i++;
             }
