@@ -30,17 +30,17 @@
             return null;
         }
 
-        final List fragments = new ArrayList();
-        final List propertyRefs = new ArrayList();
+        final List<String> fragments = new ArrayList<String>();
+        final List<String> propertyRefs = new ArrayList<String>();
         parsePropertyString(aValue, fragments, propertyRefs);
 
         final StringBuffer sb = new StringBuffer();
-        final Iterator i = fragments.iterator();
-        final Iterator j = propertyRefs.iterator();
+        final Iterator<String> i = fragments.iterator();
+        final Iterator<String> j = propertyRefs.iterator();
         while (i.hasNext()) {
-            String fragment = (String) i.next();
+            String fragment = i.next();
             if (fragment == null) {
-                final String propertyName = (String) j.next();
+                final String propertyName = j.next();
                 fragment = aProps.resolve(propertyName);
                 if (fragment == null) {
                     if (aDefaultValue != null) {

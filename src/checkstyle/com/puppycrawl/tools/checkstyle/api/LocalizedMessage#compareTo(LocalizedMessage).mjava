@@ -1,0 +1,13 @@
+    /** {@inheritDoc} */
+    public int compareTo(LocalizedMessage aOther)
+    {
+        if (getLineNo() == aOther.getLineNo()) {
+            if (getColumnNo() == aOther.getColumnNo()) {
+                return getMessage().compareTo(aOther.getMessage());
+            }
+            return (getColumnNo() < aOther.getColumnNo()) ? -1 : 1;
+        }
+
+        return (getLineNo() < aOther.getLineNo()) ? -1 : 1;
+    }
+

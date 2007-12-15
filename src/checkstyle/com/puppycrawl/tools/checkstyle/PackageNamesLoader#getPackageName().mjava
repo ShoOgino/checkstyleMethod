@@ -5,9 +5,7 @@
     private String getPackageName()
     {
         final StringBuffer buf = new StringBuffer();
-        final Iterator it = mPackageStack.iterator();
-        while (it.hasNext()) {
-            final String subPackage = (String) it.next();
+        for (String subPackage : mPackageStack) {
             buf.append(subPackage);
             if (!subPackage.endsWith(".")) {
                 buf.append(".");

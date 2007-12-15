@@ -1,6 +1,7 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public void leaveToken(DetailAST aAST)
     {
         final int tokenType = aAST.getType();
@@ -10,7 +11,7 @@
             || (TokenTypes.INSTANCE_INIT == tokenType))
         {
             //pop counter from the stack
-            final Counter counter = (Counter) mCounters.pop();
+            final Counter counter = mCounters.pop();
 
             final int count = counter.getCount();
             if (count > mMethodMax) {
@@ -20,7 +21,7 @@
         }
         else if (TokenTypes.CLASS_DEF == tokenType) {
             //pop counter from the stack
-            final Counter counter = (Counter) mCounters.pop();
+            final Counter counter = mCounters.pop();
 
             final int count = counter.getCount();
             if (count > mClassMax) {

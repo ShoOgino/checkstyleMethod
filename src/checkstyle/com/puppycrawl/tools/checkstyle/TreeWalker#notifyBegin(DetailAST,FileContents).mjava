@@ -5,11 +5,9 @@
      */
     private void notifyBegin(DetailAST aRootAST, FileContents aContents)
     {
-        final Iterator it = mAllChecks.iterator();
-        while (it.hasNext()) {
-            final Check check = (Check) it.next();
-            check.setFileContents(aContents);
-            check.beginTree(aRootAST);
+        for (Check ch : mAllChecks) {
+            ch.setFileContents(aContents);
+            ch.beginTree(aRootAST);
         }
     }
 

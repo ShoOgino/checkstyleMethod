@@ -1,10 +1,10 @@
     /**
      * @see com.puppycrawl.tools.checkstyle.api.FileSetCheck
      */
+    @Override
     public void destroy()
     {
-        for (final Iterator it = mAllChecks.iterator(); it.hasNext();) {
-            final Check c = (Check) it.next();
+        for (Check c : mAllChecks) {
             c.destroy();
         }
         mCache.destroy();

@@ -37,16 +37,16 @@
         }
 
         // override with Ant properties like ${basedir}
-        final Hashtable antProps = this.getProject().getProperties();
-        for (final Iterator it = antProps.keySet().iterator(); it.hasNext();) {
+        final Hashtable<?, ?> antProps = this.getProject().getProperties();
+        for (final Iterator<?> it = antProps.keySet().iterator(); it.hasNext();)
+        {
             final String key = (String) it.next();
             final String value = String.valueOf(antProps.get(key));
             retVal.put(key, value);
         }
 
         // override with properties specified in subelements
-        for (final Iterator it = mOverrideProps.iterator(); it.hasNext();) {
-            final Property p = (Property) it.next();
+        for (Property p : mOverrideProps) {
             retVal.put(p.getKey(), p.getValue());
         }
 

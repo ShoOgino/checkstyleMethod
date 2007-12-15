@@ -1,10 +1,11 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public void finishTree(DetailAST aRootAST)
     {
         //pop counter from the stack
-        final Counter counter = (Counter) mCounters.pop();
+        final Counter counter = mCounters.pop();
 
         final int count = counter.getCount();
         if (count > mFileMax) {

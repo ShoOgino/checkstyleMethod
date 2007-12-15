@@ -5,11 +5,13 @@
      */
     public int[] getHandledTypes()
     {
-        final Set typeSet = mTypeHandlers.keySet();
+        final Set<Integer> typeSet = mTypeHandlers.keySet();
         final int[] types = new int[typeSet.size()];
         int index = 0;
-        for (final Iterator i = typeSet.iterator(); i.hasNext(); index++) {
-            types[index] = ((Integer) i.next()).intValue();
+        for (final Iterator<Integer> i = typeSet.iterator(); i.hasNext();
+            index++)
+        {
+            types[index] = (i.next()).intValue();
         }
 
         return types;

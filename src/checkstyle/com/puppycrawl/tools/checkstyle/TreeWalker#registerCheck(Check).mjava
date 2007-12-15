@@ -7,16 +7,14 @@
         throws CheckstyleException
     {
         int[] tokens = new int[] {}; //safety initialization
-        final Set checkTokens = aCheck.getTokenNames();
+        final Set<String> checkTokens = aCheck.getTokenNames();
         if (!checkTokens.isEmpty()) {
             tokens = aCheck.getRequiredTokens();
 
             //register configured tokens
             final int acceptableTokens[] = aCheck.getAcceptableTokens();
             Arrays.sort(acceptableTokens);
-            final Iterator it = checkTokens.iterator();
-            while (it.hasNext()) {
-                final String token = (String) it.next();
+            for (String token : checkTokens) {
                 try {
                     final int tokenId = TokenTypes.getTokenId(token);
                     if (Arrays.binarySearch(acceptableTokens, tokenId) >= 0) {

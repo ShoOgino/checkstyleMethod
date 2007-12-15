@@ -2,30 +2,22 @@
      * Creates a new <code>LocalizedMessage</code> instance.
      *
      * @param aLineNo line number associated with the message
-     * @param aColNo column number associated with the message
      * @param aBundle resource bundle name
      * @param aKey the key to locate the translation
      * @param aArgs arguments for the translation
      * @param aSeverityLevel severity level for the message
      * @param aModuleId the id of the module the message is associated with
-     * @param aSourceClass the Class that is the source of the message
+     * @param aSourceClass the source class for the message
      */
     public LocalizedMessage(int aLineNo,
-                            int aColNo,
                             String aBundle,
                             String aKey,
                             Object[] aArgs,
                             SeverityLevel aSeverityLevel,
                             String aModuleId,
-                            Class aSourceClass)
+                            Class<?> aSourceClass)
     {
-        mLineNo = aLineNo;
-        mColNo = aColNo;
-        mKey = aKey;
-        mArgs = aArgs;
-        mBundle = aBundle;
-        mSeverityLevel = aSeverityLevel;
-        mModuleId = aModuleId;
-        mSourceClass = aSourceClass;
+        this(aLineNo, 0, aBundle, aKey, aArgs, aSeverityLevel, aModuleId,
+                aSourceClass);
     }
 

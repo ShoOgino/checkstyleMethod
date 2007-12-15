@@ -1,11 +1,9 @@
     /** {@inheritDoc} */
+    @Override
     public void finishTree(DetailAST aRootAST)
     {
         // loop over all the imports to see if referenced.
-        final Iterator it = mImports.iterator();
-        while (it.hasNext()) {
-            final FullIdent imp = (FullIdent) it.next();
-
+        for (FullIdent imp : mImports) {
             if (!mReferenced.contains(Utils.baseClassname(imp.getText()))) {
                 log(imp.getLineNo(),
                     imp.getColumnNo(),

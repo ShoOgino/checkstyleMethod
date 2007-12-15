@@ -6,7 +6,7 @@
             new ByteArrayInputStream(bytes);
         final BufferedReader reader =
             new BufferedReader(new InputStreamReader(inStream));
-        final ArrayList lineList = new ArrayList();
+        final List<String> lineList = new ArrayList<String>();
         while (true) {
             final String line = reader.readLine();
             if (line == null) {
@@ -15,6 +15,6 @@
             lineList.add(line);
         }
         reader.close();
-        return (String[])lineList.toArray(new String[lineList.size()]);
+        return lineList.toArray(new String[lineList.size()]);
     }
 

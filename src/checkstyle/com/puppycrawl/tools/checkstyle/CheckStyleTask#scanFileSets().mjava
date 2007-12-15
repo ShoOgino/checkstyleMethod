@@ -4,7 +4,7 @@
      */
     protected File[] scanFileSets()
     {
-        final ArrayList list = new ArrayList();
+        final List<File> list = new ArrayList<File>();
         if (mFileName != null) {
             // oops we've got an additional one to process, don't
             // forget it. No sweat, it's fully resolved via the setter.
@@ -12,7 +12,7 @@
             list.add(new File(mFileName));
         }
         for (int i = 0; i < mFileSets.size(); i++) {
-            final FileSet fs = (FileSet) mFileSets.get(i);
+            final FileSet fs = mFileSets.get(i);
             final DirectoryScanner ds = fs.getDirectoryScanner(getProject());
             ds.scan();
 
@@ -27,6 +27,6 @@
             }
         }
 
-        return (File[]) list.toArray(new File[0]);
+        return list.toArray(new File[0]);
     }
 

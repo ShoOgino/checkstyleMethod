@@ -9,7 +9,7 @@
     public static String[] getLines(String aFileName, String aCharsetName)
         throws IOException
     {
-        final ArrayList lines = new ArrayList();
+        final List<String> lines = new ArrayList<String>();
         final FileInputStream fr = new FileInputStream(aFileName);
         LineNumberReader lnr = null;
         try {
@@ -36,7 +36,6 @@
                 ; // silently ignore
             }
         }
-
-        return (String[]) lines.toArray(new String[0]);
+        return lines.toArray(new String[0]);
     }
 

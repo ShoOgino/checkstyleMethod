@@ -10,7 +10,7 @@
         try {
             final ClassLoader loader = Thread.currentThread()
                     .getContextClassLoader();
-            final Class clazz = Class.forName(aClassName, true, loader);
+            final Class<?> clazz = Class.forName(aClassName, true, loader);
             return clazz.newInstance();
         }
         catch (final ClassNotFoundException e) {

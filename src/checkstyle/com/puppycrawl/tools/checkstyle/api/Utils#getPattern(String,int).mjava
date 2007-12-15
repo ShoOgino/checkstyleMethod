@@ -12,7 +12,7 @@
         throws PatternSyntaxException
     {
         final String key = aPattern + ":flags-" + aCompileFlags;
-        Pattern retVal = (Pattern) CREATED_RES.get(key);
+        Pattern retVal = CREATED_RES.get(key);
         if (retVal == null) {
             retVal = Pattern.compile(aPattern, aCompileFlags);
             CREATED_RES.put(key, retVal);

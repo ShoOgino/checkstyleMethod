@@ -13,9 +13,7 @@
         }
 
         // Check if any of the children match.
-        final Iterator it = mChildren.iterator();
-        while (it.hasNext()) {
-            final PkgControl pc = (PkgControl) it.next();
+        for (PkgControl pc : mChildren) {
             final PkgControl match = pc.locateFinest(aForPkg);
             if (match != null) {
                 return match;

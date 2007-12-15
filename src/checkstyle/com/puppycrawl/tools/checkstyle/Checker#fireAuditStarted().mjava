@@ -2,9 +2,7 @@
     protected void fireAuditStarted()
     {
         final AuditEvent evt = new AuditEvent(this);
-        final Iterator it = mListeners.iterator();
-        while (it.hasNext()) {
-            final AuditListener listener = (AuditListener) it.next();
+        for (AuditListener listener : mListeners) {
             listener.auditStarted(evt);
         }
     }

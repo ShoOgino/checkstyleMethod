@@ -9,11 +9,9 @@
     public int process(File[] aFiles)
     {
         fireAuditStarted();
-        for (int i = 0; i < mFileSetChecks.size(); i++) {
-            final FileSetCheck fileSetCheck =
-                (FileSetCheck) mFileSetChecks.get(i);
-            fileSetCheck.process(aFiles);
-            fileSetCheck.destroy();
+        for (FileSetCheck fsc : mFileSetChecks) {
+            fsc.process(aFiles);
+            fsc.destroy();
         }
         final int errorCount = mCounter.getCount();
         fireAuditFinished();

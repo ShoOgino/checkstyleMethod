@@ -1,4 +1,5 @@
     /** {@inheritDoc} */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
@@ -16,9 +17,7 @@
                     imp.getText());
             }
             // Check for a duplicate import
-            final Iterator it = mImports.iterator();
-            while (it.hasNext()) {
-                final FullIdent full = (FullIdent) it.next();
+            for (FullIdent full : mImports) {
                 if (imp.getText().equals(full.getText())) {
                     log(aAST.getLineNo(),
                         aAST.getColumnNo(),
@@ -35,9 +34,7 @@
             final FullIdent imp =
                 FullIdent.createFullIdent(
                     aAST.getLastChild().getPreviousSibling());
-            final Iterator it = mStaticImports.iterator();
-            while (it.hasNext()) {
-                final FullIdent full = (FullIdent) it.next();
+            for (FullIdent full : mStaticImports) {
                 if (imp.getText().equals(full.getText())) {
                     log(aAST.getLineNo(),
                         aAST.getColumnNo(),

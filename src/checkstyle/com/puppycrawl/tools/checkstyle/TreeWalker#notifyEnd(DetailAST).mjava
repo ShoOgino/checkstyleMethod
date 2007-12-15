@@ -4,10 +4,8 @@
      */
     private void notifyEnd(DetailAST aRootAST)
     {
-        final Iterator it = mAllChecks.iterator();
-        while (it.hasNext()) {
-            final Check check = (Check) it.next();
-            check.finishTree(aRootAST);
+        for (Check ch : mAllChecks) {
+            ch.finishTree(aRootAST);
         }
     }
 

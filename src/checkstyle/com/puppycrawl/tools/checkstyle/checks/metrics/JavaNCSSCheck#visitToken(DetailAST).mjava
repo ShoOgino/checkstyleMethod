@@ -1,6 +1,7 @@
     /**
      * {@inheritDoc}
      */
+    @Override
     public void visitToken(DetailAST aAST)
     {
         final int tokenType = aAST.getType();
@@ -20,7 +21,7 @@
             //increment the stacked counters
             final int size = mCounters.size();
             for (int i = 0; i < size; i++) {
-                ((Counter) mCounters.get(i)).increment();
+                (mCounters.get(i)).increment();
             }
         }
     }

@@ -8,9 +8,7 @@
     private AccessResult localCheckAccess(final String aForImport,
         final String aInPkg)
     {
-        final Iterator it = mGuards.iterator();
-        while (it.hasNext()) {
-            final Guard g = (Guard) it.next();
+        for (Guard g : mGuards) {
             // Check if a Guard is only meant to be applied locally.
             if (g.isLocalOnly() && !mFullPackage.equals(aInPkg)) {
                 continue;

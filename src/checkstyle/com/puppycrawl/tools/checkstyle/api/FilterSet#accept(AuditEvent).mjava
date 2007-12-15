@@ -1,9 +1,7 @@
     /** {@inheritDoc} */
     public boolean accept(AuditEvent aEvent)
     {
-        final Iterator it = mFilters.iterator();
-        while (it.hasNext()) {
-            final Filter filter = (Filter) it.next();
+        for (Filter filter : mFilters) {
             if (!filter.accept(aEvent)) {
                 return false;
             }

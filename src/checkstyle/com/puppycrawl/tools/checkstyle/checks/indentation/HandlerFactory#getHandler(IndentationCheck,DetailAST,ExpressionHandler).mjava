@@ -11,7 +11,7 @@
         DetailAST aAst, ExpressionHandler aParent)
     {
         final ExpressionHandler handler =
-            (ExpressionHandler) mCreatedHandlers.get(aAst);
+            mCreatedHandlers.get(aAst);
         if (handler != null) {
             return handler;
         }
@@ -24,8 +24,8 @@
 
         ExpressionHandler expHandler = null;
         try {
-            final Constructor handlerCtor =
-                (Constructor) mTypeHandlers.get(type);
+            final Constructor<?> handlerCtor =
+                mTypeHandlers.get(type);
             if (handlerCtor != null) {
                 expHandler = (ExpressionHandler) handlerCtor.newInstance(
                     new Object[] {

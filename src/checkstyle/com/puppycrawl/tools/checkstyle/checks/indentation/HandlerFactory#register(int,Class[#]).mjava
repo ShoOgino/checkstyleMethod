@@ -4,14 +4,14 @@
      * @param aType   type from TokenTypes
      * @param aHandlerClass  the handler to register
      */
-    private void register(int aType, Class aHandlerClass)
+    private void register(int aType, Class<?> aHandlerClass)
     {
         try {
-            final Constructor ctor = aHandlerClass.getConstructor(new Class[] {
-                IndentationCheck.class,
-                DetailAST.class,             // current AST
-                ExpressionHandler.class,     // parent
-            });
+            final Constructor<?> ctor = aHandlerClass
+                    .getConstructor(new Class[] {IndentationCheck.class,
+                        DetailAST.class, // current AST
+                        ExpressionHandler.class, // parent
+                    });
             mTypeHandlers.put(new Integer(aType), ctor);
         }
         ///CLOVER:OFF
