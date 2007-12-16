@@ -1,0 +1,14 @@
+    /** {@inheritDoc} */
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.GENERIC_START) {
+            processStart(aAST);
+            mDepth++;
+        }
+        else if (aAST.getType() == TokenTypes.GENERIC_END) {
+            processEnd(aAST);
+            mDepth--;
+        }
+    }
+
