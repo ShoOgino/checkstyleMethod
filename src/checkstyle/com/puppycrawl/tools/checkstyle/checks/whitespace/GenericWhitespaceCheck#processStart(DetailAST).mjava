@@ -19,7 +19,8 @@
             final DetailAST parent = aAST.getParent();
             final DetailAST grandparent = parent.getParent();
             if ((TokenTypes.TYPE_PARAMETERS == parent.getType())
-                && (TokenTypes.METHOD_DEF == grandparent.getType()))
+                && ((TokenTypes.CTOR_DEF == grandparent.getType())
+                    || (TokenTypes.METHOD_DEF == grandparent.getType())))
             {
                 // Require whitespace
                 if (!Character.isWhitespace(line.charAt(before))) {
