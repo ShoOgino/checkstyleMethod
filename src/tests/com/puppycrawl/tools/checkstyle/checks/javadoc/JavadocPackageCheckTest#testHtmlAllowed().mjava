@@ -1,0 +1,10 @@
+    public void testHtmlAllowed() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(JavadocPackageCheck.class);
+        checkConfig.addAttribute("allowLegacy", "true");
+        final String[] expected = {};
+        verify(createChecker(checkConfig),
+            getPath("javadoc/pkghtml/Ignored.java"),
+            getPath("javadoc/pkghtml/package-info.java"), expected);
+    }
+
