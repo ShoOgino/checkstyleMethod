@@ -1,0 +1,34 @@
+    /** {@inheritDoc} */
+    public void process(File[] aFiles)
+    {
+        final File[] javaFiles = filter(aFiles);
+        final Set<File> directories = getParentDirs(javaFiles);
+        for (File dir : directories) {
+            // Check for the preferred file.
+            final MessageDispatcher dispatcher = getMessageDispatcher();
+            final File packageInfo = new File(dir, "package-info.java");
+            final File packageHtml = new File(dir, "package.html");
+            final String path;
+
+            if (packageInfo.exists()) {
+                path = packageInfo.getPath();
+                dispatcher.fireFileStarted(path);
+                if (packageHtml.exists()) {
+                    log(0, "javadoc.legacyPackageHtml");
+                    System.out.println("PANIC");
+                }
+            }
+            else if (mAllowLegacy && packageHtml.exists()) {
+                path = packageHtml.getPath();
+                dispatcher.fireFileStarted(path);
+            }
+            else {
+                path = packageInfo.getPath();
+                dispatcher.fireFileStarted(path);
+                log(0, "javadoc.packageInfo");
+            }
+            fireErrors(path);
+            dispatcher.fireFileFinished(path);
+        }
+    }
+
