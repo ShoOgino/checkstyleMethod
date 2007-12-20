@@ -19,10 +19,8 @@
                     || (type == TokenTypes.LITERAL_STATIC)
                     || (type == TokenTypes.FINAL))
                 {
-                    log(modifier.getLineNo(),
-                        modifier.getColumnNo(),
-                        "redundantModifier",
-                        new String[] {modifier.getText()});
+                    log(modifier.getLineNo(), modifier.getColumnNo(),
+                            "redundantModifier", modifier.getText());
                     break;
                 }
 
@@ -52,10 +50,8 @@
                 while (modifier != null) {
                     final int type = modifier.getType();
                     if (type == TokenTypes.FINAL) {
-                        log(modifier.getLineNo(),
-                            modifier.getColumnNo(),
-                            "redundantModifier",
-                            new String[] {modifier.getText()});
+                        log(modifier.getLineNo(), modifier.getColumnNo(),
+                                "redundantModifier", modifier.getText());
                         break;
                     }
                     modifier = (DetailAST) modifier.getNextSibling();
