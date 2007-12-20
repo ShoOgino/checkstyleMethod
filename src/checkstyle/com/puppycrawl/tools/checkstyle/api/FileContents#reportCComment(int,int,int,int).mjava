@@ -14,20 +14,19 @@
                 aEndColNo);
 
         // save the comment
-        final Integer key = new Integer(aStartLineNo);
-        if (mCComments.containsKey(key)) {
-            final List<TextBlock> entries = mCComments.get(key);
+        if (mCComments.containsKey(aStartLineNo)) {
+            final List<TextBlock> entries = mCComments.get(aStartLineNo);
             entries.add(comment);
         }
         else {
             final List<TextBlock> entries = new ArrayList<TextBlock>();
             entries.add(comment);
-            mCComments.put(key, entries);
+            mCComments.put(aStartLineNo, entries);
         }
 
         // Remember if possible Javadoc comment
         if (mLines[aStartLineNo - 1].indexOf("/**", aStartColNo) != -1) {
-            mJavadocComments.put(new Integer(aEndLineNo - 1), comment);
+            mJavadocComments.put(aEndLineNo - 1, comment);
         }
     }
 

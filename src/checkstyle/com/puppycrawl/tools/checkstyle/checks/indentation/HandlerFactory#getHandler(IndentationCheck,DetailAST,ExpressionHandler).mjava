@@ -20,12 +20,10 @@
             return createMethodCallHandler(aIndentCheck, aAst, aParent);
         }
 
-        final Integer type = new Integer(aAst.getType());
-
         ExpressionHandler expHandler = null;
         try {
             final Constructor<?> handlerCtor =
-                mTypeHandlers.get(type);
+                mTypeHandlers.get(aAst.getType());
             if (handlerCtor != null) {
                 expHandler = (ExpressionHandler) handlerCtor.newInstance(
                         aIndentCheck, aAst, aParent);
@@ -48,7 +46,7 @@
                                        + aAst);
         }
         if (expHandler == null) {
-            throw new RuntimeException("no handler for type " + type);
+            throw new RuntimeException("no handler for type " + aAst.getType());
         }
         ///CLOVER:ON
         return expHandler;

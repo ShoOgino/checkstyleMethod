@@ -7,12 +7,8 @@
     {
         final int count = mContext.getCount();
         if (count > getMax()) {
-            log(
-                aAST.getLineNo(),
-                aAST.getColumnNo(),
-                "executableStatementCount",
-                new Integer(count),
-                new Integer(getMax()));
+            log(aAST.getLineNo(), aAST.getColumnNo(),
+                    "executableStatementCount", count, getMax());
         }
         mContext = mContextStack.pop();
     }

@@ -20,16 +20,14 @@
 
         // reject if line matches a line CSV value.
         if (mLineFilter != null) {
-            final Integer line = new Integer(aEvent.getLine());
-            if (mLineFilter.accept(line)) {
+            if (mLineFilter.accept(aEvent.getLine())) {
                 return false;
             }
         }
 
         // reject if column matches a column CSV value.
         if (mColumnFilter != null) {
-            final Integer column = new Integer(aEvent.getColumn());
-            if (mColumnFilter.accept(column)) {
+            if (mColumnFilter.accept(aEvent.getColumn())) {
                 return false;
             }
         }
