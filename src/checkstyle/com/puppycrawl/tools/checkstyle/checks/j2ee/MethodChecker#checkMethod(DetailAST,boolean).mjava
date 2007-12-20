@@ -10,19 +10,17 @@
     {
         // must be declared as public
         if (!Utils.isPublic(aMethodAST)) {
-            logName(aMethodAST, "nonpublicmethod.bean", new Object[] {});
+            logName(aMethodAST, "nonpublicmethod.bean");
         }
 
         // declared as final?
         if (!aAllowFinal && Utils.isFinal(aMethodAST)) {
-            logName(aMethodAST, "illegalmodifiermethod.bean",
-                new Object[] {"final"});
+            logName(aMethodAST, "illegalmodifiermethod.bean", "final");
         }
 
         // must not be declared as static
         if (Utils.isStatic(aMethodAST)) {
-            logName(aMethodAST, "illegalmodifiermethod.bean",
-                new Object[] {"static"});
+            logName(aMethodAST, "illegalmodifiermethod.bean", "static");
         }
     }
 
