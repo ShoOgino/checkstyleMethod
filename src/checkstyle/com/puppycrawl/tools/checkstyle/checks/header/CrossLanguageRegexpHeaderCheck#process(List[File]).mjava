@@ -1,12 +1,12 @@
     /** {@inheritDoc} */
-    public void process(File[] aFiles)
+    public void process(List<File> aFiles)
     {
 
         final MessageDispatcher msgDispatcher = getMessageDispatcher();
         final RegexpHeaderChecker regexpHeaderChecker =
             new RegexpHeaderChecker(
                     mHeaderInfo, new FileSetCheckViolationMonitor());
-        File[] files = filter(aFiles);
+        List<File> files = filter(aFiles);
         for (final File file : files) {
             final String path = file.getPath();
             msgDispatcher.fireFileStarted(path);

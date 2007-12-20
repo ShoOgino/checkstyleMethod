@@ -8,9 +8,9 @@
      * @param aFiles {@inheritDoc}
      * @see com.puppycrawl.tools.checkstyle.api.FileSetCheck
      */
-    public void process(File[] aFiles)
+    public void process(List<File> aFiles)
     {
-        final File[] propertyFiles = filter(aFiles);
+        final List<File> propertyFiles = filter(aFiles);
         final Map<String, Set<File>> propFilesMap =
             arrangePropertyFiles(propertyFiles);
         checkPropertyFileSets(propFilesMap);

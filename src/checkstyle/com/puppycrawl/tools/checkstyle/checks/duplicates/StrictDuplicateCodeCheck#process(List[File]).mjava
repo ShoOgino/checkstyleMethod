@@ -1,20 +1,20 @@
     /**
      * {@inheritDoc}
      */
-    public synchronized void process(File[] aFiles)
+    public synchronized void process(List<File> aFiles)
     {
         final long start = System.currentTimeMillis();
         mDuplicates = 0;
         mFiles = filter(aFiles);
-        mLineBlockChecksums = new int[mFiles.length][];
-        mChecksumInfo = new ChecksumInfo[mFiles.length];
+        mLineBlockChecksums = new int[mFiles.size()][];
+        mChecksumInfo = new ChecksumInfo[mFiles.size()];
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Reading " + mFiles.length + " input files");
+            LOG.debug("Reading " + mFiles.size() + " input files");
         }
 
-        for (int i = 0; i < mFiles.length; i++) {
-            final File file = mFiles[i];
+        for (int i = 0; i < mFiles.size(); i++) {
+            final File file = mFiles.get(i);
             try {
                 final String[] lines = getTrimmedLines(file);
                 final ChecksumGenerator transformer =

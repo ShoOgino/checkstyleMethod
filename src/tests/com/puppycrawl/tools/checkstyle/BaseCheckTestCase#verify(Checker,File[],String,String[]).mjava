@@ -5,7 +5,9 @@
         throws Exception
     {
         mStream.flush();
-        final int errs = aC.process(aProcessedFiles);
+        final List<File> theFiles = new ArrayList<File>();
+        Collections.addAll(theFiles, aProcessedFiles);
+        final int errs = aC.process(theFiles);
 
         // process each of the lines
         final ByteArrayInputStream bais =

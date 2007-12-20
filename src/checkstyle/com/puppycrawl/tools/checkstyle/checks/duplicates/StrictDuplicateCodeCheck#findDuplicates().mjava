@@ -15,10 +15,10 @@
         // It may be possible to do this *much* smarter,
         // but I don't have the Knuth bible at hand right now :-)
 
-        final int len = mFiles.length;
+        final int len = mFiles.size();
         for (int i = 0; i < len; i++) {
 
-            final String path = mFiles[i].getPath();
+            final String path = mFiles.get(i).getPath();
             getMessageCollector().reset();
             final MessageDispatcher dispatcher = getMessageDispatcher();
             dispatcher.fireFileStarted(path);
