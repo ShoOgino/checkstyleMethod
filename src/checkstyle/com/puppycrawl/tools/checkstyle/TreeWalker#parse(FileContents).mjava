@@ -8,19 +8,19 @@
     public static DetailAST parse(FileContents aContents)
         throws RecognitionException, TokenStreamException
     {
-        DetailAST rootAST = null;
+        final Reader sar = new StringArrayReader(aContents.getLines());
+        final GeneratedJavaLexer lexer = new GeneratedJavaLexer(sar);
+        lexer.setFilename(aContents.getFilename());
+        lexer.setCommentListener(aContents);
+        lexer.setTreatAssertAsKeyword(true);
+        lexer.setTreatEnumAsKeyword(true);
 
-        try {
-            rootAST = parse(aContents, true, true, true);
-        }
-        catch (final RecognitionException exception) {
-            try {
-                rootAST = parse(aContents, true, true, false);
-            }
-            catch (final RecognitionException exception2) {
-                rootAST = parse(aContents, false, false, false);
-            }
-        }
-        return rootAST;
+        final GeneratedJavaRecognizer parser =
+            new GeneratedJavaRecognizer(lexer);
+        parser.setFilename(aContents.getFilename());
+        parser.setASTNodeClass(DetailAST.class.getName());
+        parser.compilationUnit();
+
+        return (DetailAST) parser.getAST();
     }
 
