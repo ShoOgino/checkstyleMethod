@@ -11,7 +11,7 @@
      */
     protected boolean isMissingJavadocAllowed(final DetailAST aAST)
     {
-        return mAllowMissingJavadoc
+        return mAllowMissingJavadoc || isOverrideMethod(aAST)
             || (mAllowMissingPropertyJavadoc
                 && (isSetterMethod(aAST) || isGetterMethod(aAST)));
     }
