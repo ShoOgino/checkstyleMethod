@@ -1,3 +1,4 @@
+    @Test(expected = IllegalArgumentException.class)
     public void testMisc()
     {
         final Scope o = Scope.getInstance("public");
@@ -5,12 +6,6 @@
         assertEquals("Scope[1 (public)]", o.toString());
         assertEquals("public", o.getName());
 
-        try {
-            Scope.getInstance("unknown");
-            fail();
-        }
-        catch (IllegalArgumentException e) {
-            // As expected
-        }
+        Scope.getInstance("unknown"); // will fail
     }
 
