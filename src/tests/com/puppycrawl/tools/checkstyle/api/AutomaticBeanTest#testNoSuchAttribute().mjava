@@ -1,15 +1,7 @@
-    public void testNoSuchAttribute()
+    @Test(expected = CheckstyleException.class)
+    public void testNoSuchAttribute() throws CheckstyleException
     {
         mConf.addAttribute("NonExisting", "doesn't matter");
-        try {
-            mTestBean.configure(mConf);
-            fail("AutomaticBean.configure() accepted nonexisting attribute name");
-        }
-        catch (CheckstyleException ex)
-        {
-            // expected exception
-        }
-        assertEquals(mTestBean.mName, null);
-
+        mTestBean.configure(mConf);
     }
 
