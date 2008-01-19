@@ -1,10 +1,11 @@
+    @Test
     public void testOwnPattern() throws Exception
     {
         final String ownPattern = "Continue with next case";
         final DefaultConfiguration checkConfig =
             createCheckConfig(FallThroughCheck.class);
         checkConfig.addAttribute("reliefPattern", ownPattern);
-        
+
         final String[] expected = {
             "12:13: Fall through from previous branch of the switch statement.",
             "36:13: Fall through from previous branch of the switch statement.",
@@ -38,6 +39,6 @@
         verify(checkConfig,
                getPath("coding" + File.separator + "InputFallThrough.java"),
                expected);
-        
+
     }
 

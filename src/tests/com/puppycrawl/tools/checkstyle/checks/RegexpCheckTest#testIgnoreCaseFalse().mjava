@@ -1,3 +1,4 @@
+    @Test
     public void testIgnoreCaseFalse()
             throws Exception
     {
@@ -9,7 +10,7 @@
         final String[] expectedTrue = {
             "69: Line matches the illegal pattern '" + illegalTrue + "'."};
         verify(checkConfigTrue, getPath("InputSemantic.java"), expectedTrue);
-        
+
         final String illegalFalse = "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
         final DefaultConfiguration checkConfigFalse =
             createCheckConfig(RegexpCheck.class);
