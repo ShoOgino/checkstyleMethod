@@ -7,8 +7,11 @@
         Checker c = null;
         try {
             final Properties props = createOverridingProperties();
-            final Configuration config = ConfigurationLoader.loadConfiguration(
-                    mConfigLocation, new PropertiesExpander(props), true);
+            final Configuration config =
+                ConfigurationLoader.loadConfiguration(
+                    mConfigLocation,
+                    new PropertiesExpander(props),
+                    mOmitIgnoredModules);
 
             final DefaultContext context = new DefaultContext();
             final ClassLoader loader = new AntClassLoader(getProject(),
