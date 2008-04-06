@@ -1,0 +1,32 @@
+    @Override
+    public void visitToken(final DetailAST aMethodCall)
+    {
+        final AST dot = aMethodCall.getFirstChild();
+        if (dot.getType() != TokenTypes.DOT) {
+            return;
+        }
+
+        final AST objCalledOn = dot.getFirstChild();
+
+        //checks for calling equals on String literal and
+        //anon object which cannot be null
+        //Also, checks if calling using strange inner class
+        //syntax outter.inner.equals(otherObj) by looking
+        //for the dot operator which cannot be improved
+        if ((objCalledOn.getType() == TokenTypes.STRING_LITERAL)
+                || (objCalledOn.getType() == TokenTypes.LITERAL_NEW)
+                || (objCalledOn.getType() == TokenTypes.DOT))
+        {
+            return;
+        }
+
+        final AST method = objCalledOn.getNextSibling();
+        final AST expr = dot.getNextSibling().getFirstChild();
+        if ("equals".equals(method.getText()) && containsOneArg(expr)) {
+            if (containsAllSafeTokens(expr)) {
+                log(aMethodCall.getLineNo(), aMethodCall.getColumnNo(),
+                        "equals.avoid.null");
+            }
+        }
+    }
+

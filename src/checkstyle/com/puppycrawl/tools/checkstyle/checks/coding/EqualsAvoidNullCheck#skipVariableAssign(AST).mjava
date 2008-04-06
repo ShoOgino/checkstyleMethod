@@ -1,0 +1,15 @@
+    /**
+     * Skips over an inner assign portion of an argument expression.
+     * @param aCurrentAST current token in the argument expression
+     * @return the next relevant token
+     */
+    private AST skipVariableAssign(final AST aCurrentAST)
+    {
+        if ((aCurrentAST.getType() == TokenTypes.ASSIGN)
+                && (aCurrentAST.getFirstChild().getType() == TokenTypes.IDENT))
+        {
+            return aCurrentAST.getFirstChild().getNextSibling();
+        }
+        return aCurrentAST;
+    }
+
