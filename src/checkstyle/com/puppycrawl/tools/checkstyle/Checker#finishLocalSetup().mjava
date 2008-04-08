@@ -5,8 +5,17 @@
         LocalizedMessage.setLocale(locale);
 
         if (mModuleFactory == null) {
-            mModuleFactory = PackageNamesLoader.loadModuleFactory(Thread
-                    .currentThread().getContextClassLoader());
+
+            if (mModuleClassLoader == null) {
+                throw new CheckstyleException(
+                        "if no custom moduleFactory is set, "
+                        + "moduleClassLoader must be specified");
+            }
+
+            final Set<String> packageNames = PackageNamesLoader.getPackageNames(
+                    mModuleClassLoader);
+            mModuleFactory = new PackageObjectFactory(packageNames,
+                    mModuleClassLoader);
         }
 
         final DefaultContext context = new DefaultContext();

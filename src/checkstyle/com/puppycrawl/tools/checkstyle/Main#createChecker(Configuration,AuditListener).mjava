@@ -2,18 +2,19 @@
      * Creates the Checker object.
      *
      * @param aConfig the configuration to use
-     * @param aFactory the module factor to use
      * @param aNosy the sticky beak to track what happens
      * @return a nice new fresh Checker
      */
     private static Checker createChecker(Configuration aConfig,
-                                         ModuleFactory aFactory,
                                          AuditListener aNosy)
     {
         Checker c = null;
         try {
             c = new Checker();
-            c.setModuleFactory(aFactory);
+
+            final ClassLoader moduleClassLoader =
+                Checker.class.getClassLoader();
+            c.setModuleClassLoader(moduleClassLoader);
             c.configure(aConfig);
             c.addListener(aNosy);
         }

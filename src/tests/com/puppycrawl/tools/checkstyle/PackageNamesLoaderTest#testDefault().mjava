@@ -2,9 +2,9 @@
     public void testDefault()
         throws CheckstyleException
     {
-        ModuleFactory moduleFactory = PackageNamesLoader
-                .loadModuleFactory(Thread.currentThread()
+        Set<String> packageNames = PackageNamesLoader
+                .getPackageNames(Thread.currentThread()
                         .getContextClassLoader());
-        validateFactory(moduleFactory);
+        validatePackageNames(packageNames);
     }
 

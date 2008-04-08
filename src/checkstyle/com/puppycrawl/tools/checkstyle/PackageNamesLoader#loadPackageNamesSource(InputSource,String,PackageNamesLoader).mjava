@@ -1,0 +1,24 @@
+    /**
+     * Returns the list of package names in a specified source.
+     * @param aSource the source for the list.
+     * @param aSourceName the name of the source.
+     * @param aNameLoader the PackageNamesLoader instance
+     * @throws CheckstyleException if an error occurs.
+     */
+    private static void loadPackageNamesSource(
+            InputSource aSource, String aSourceName,
+            PackageNamesLoader aNameLoader)
+        throws CheckstyleException
+    {
+        try {
+            aNameLoader.parseInputSource(aSource);
+        }
+        catch (final SAXException e) {
+            throw new CheckstyleException("unable to parse "
+                    + aSourceName + " - " + e.getMessage(), e);
+        }
+        catch (final IOException e) {
+            throw new CheckstyleException("unable to read " + aSourceName, e);
+        }
+    }
+

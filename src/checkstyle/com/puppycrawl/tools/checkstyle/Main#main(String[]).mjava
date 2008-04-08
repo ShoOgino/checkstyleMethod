@@ -31,12 +31,6 @@
 
         final Configuration config = loadConfig(line, props);
 
-        //Load the set of package names
-        ModuleFactory moduleFactory = null;
-        if (line.hasOption("n")) {
-            moduleFactory = loadPackages(line);
-        }
-
         // setup the output stream
         OutputStream out = null;
         boolean closeOut = false;
@@ -58,7 +52,7 @@
 
         final AuditListener listener = createListener(line, out, closeOut);
         final List<File> files = getFilesToProcess(line);
-        final Checker c = createChecker(config, moduleFactory, listener);
+        final Checker c = createChecker(config, listener);
         final int numErrs = c.process(files);
         c.destroy();
         System.exit(numErrs);

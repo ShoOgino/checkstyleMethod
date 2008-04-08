@@ -2,15 +2,11 @@
     public void execute() throws BuildException
     {
         final long startTime = System.currentTimeMillis();
-        final ClassLoader loader = Thread.currentThread()
-                .getContextClassLoader();
+
         try {
-            Thread.currentThread().setContextClassLoader(
-                    getClass().getClassLoader());
             realExecute();
         }
         finally {
-            Thread.currentThread().setContextClassLoader(loader);
             final long endTime = System.currentTimeMillis();
             log("Total execution took " + (endTime - startTime) + " ms.",
                 Project.MSG_VERBOSE);

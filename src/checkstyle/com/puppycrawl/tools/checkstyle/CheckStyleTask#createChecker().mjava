@@ -18,14 +18,12 @@
                     mClasspath);
             context.add("classloader", loader);
 
+            final ClassLoader moduleClassLoader =
+                Checker.class.getClassLoader();
+            context.add("moduleClassLoader", moduleClassLoader);
+
             c = new Checker();
 
-            //load the set of package names
-            if (mPackageNamesFile != null) {
-                final ModuleFactory moduleFactory = PackageNamesLoader
-                        .loadModuleFactory(mPackageNamesFile.getAbsolutePath());
-                c.setModuleFactory(moduleFactory);
-            }
             c.contextualize(context);
             c.configure(config);
 
