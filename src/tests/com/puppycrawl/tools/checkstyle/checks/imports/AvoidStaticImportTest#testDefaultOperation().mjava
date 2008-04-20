@@ -1,0 +1,17 @@
+    @Test
+    public void testDefaultOperation()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(AvoidStaticImportCheck.class);
+        final String[] expected = {
+            "23: Using a static member import should be avoided - java.io.File.listRoots.",
+            "25: Using a static member import should be avoided - javax.swing.WindowConstants.*.",
+            "26: Using a static member import should be avoided - javax.swing.WindowConstants.*.",
+            "27: Using a static member import should be avoided - java.io.File.createTempFile.",
+            "28: Using a static member import should be avoided - sun.net.ftpclient.FtpClient.*.",
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator + "InputImport.java"), expected);
+    }
+
