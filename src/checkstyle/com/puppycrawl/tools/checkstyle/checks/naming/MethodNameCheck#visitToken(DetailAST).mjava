@@ -1,0 +1,20 @@
+    @Override
+    public void visitToken(DetailAST aAst)
+    {
+        super.visitToken(aAst); // Will check the name against the format.
+
+        if (!mAllowClassName) {
+            final DetailAST method =
+                aAst.findFirstToken(TokenTypes.IDENT);
+            //in all cases this will be the classDef type except anon inner
+            //with anon inner classes this will be the Literal_New keyword
+            final DetailAST classDefOrNew = aAst.getParent().getParent();
+            final DetailAST classIdent =
+                classDefOrNew.findFirstToken(TokenTypes.IDENT);
+            if (method.getText().equals(classIdent.getText())) {
+                log(method.getLineNo(), method.getColumnNo(),
+                    "method.name.equals.class.name", method.getText());
+            }
+        }
+    }
+

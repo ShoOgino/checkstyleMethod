@@ -1,0 +1,19 @@
+    @Test
+    public void testMethodEqClassAllow() throws Exception
+    {
+         final DefaultConfiguration checkConfig =
+             createCheckConfig(MethodNameCheck.class);
+         checkConfig.addAttribute("allowClassName", "true"); //allow method names and class names to equal
+
+         final String[] expected = {
+                 "12:16: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+                 "18:20: Name 'Inner' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+                 "23:20: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+                 "32:24: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+                 "42:9: Name 'SweetInterface' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+                 "48:17: Name 'Outter' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+         };
+
+         verify(checkConfig, getPath("InputMethNameEqualClsName.java"), expected);
+    }
+
