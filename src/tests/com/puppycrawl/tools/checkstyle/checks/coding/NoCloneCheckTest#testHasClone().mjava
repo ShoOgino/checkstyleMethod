@@ -1,0 +1,17 @@
+    @Test
+    public void testHasClone()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(NoCloneCheck.class);
+        final String[] expected = {
+            "10: Avoid using clone method.",
+            "27: Avoid using clone method.",
+            "35: Avoid using clone method.",
+            "39: Avoid using clone method.",
+            "52: Avoid using clone method.",
+            "60: Avoid using clone method.",
+        };
+        verify(checkConfig, getPath("coding" + File.separator + "InputClone.java"), expected);
+    }
+
