@@ -4,12 +4,10 @@
      */
     private void notifyVisit(DetailAST aAST)
     {
-        final List<Check> visitors = mTokenToChecks.get(TokenTypes
-                .getTokenName(aAST.getType()));
-        if (visitors != null) {
-            for (Check c : visitors) {
-                c.visitToken(aAST);
-            }
+        final Collection<Check> visitors =
+            mTokenToChecks.get(TokenTypes.getTokenName(aAST.getType()));
+        for (Check c : visitors) {
+            c.visitToken(aAST);
         }
     }
 

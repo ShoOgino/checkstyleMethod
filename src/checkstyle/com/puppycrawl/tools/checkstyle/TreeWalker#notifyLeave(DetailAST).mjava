@@ -1,15 +1,15 @@
     /**
      * Notify interested checks that leaving a node.
-     * @param aAST the node to notify for
+     *
+     * @param aAST
+     *                the node to notify for
      */
     private void notifyLeave(DetailAST aAST)
     {
-        final List<Check> visitors = mTokenToChecks.get(TokenTypes
-                .getTokenName(aAST.getType()));
-        if (visitors != null) {
-            for (Check ch : visitors) {
-                ch.leaveToken(aAST);
-            }
+        final Collection<Check> visitors =
+            mTokenToChecks.get(TokenTypes.getTokenName(aAST.getType()));
+        for (Check ch : visitors) {
+            ch.leaveToken(aAST);
         }
     }
 

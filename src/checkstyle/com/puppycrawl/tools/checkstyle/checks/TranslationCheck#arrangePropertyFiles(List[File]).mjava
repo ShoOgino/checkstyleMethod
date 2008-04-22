@@ -8,15 +8,14 @@
     private static Map<String, Set<File>> arrangePropertyFiles(
         List<File> aPropFiles)
     {
-        final Map<String, Set<File>> propFileMap =
-            new HashMap<String, Set<File>>();
+        final Map<String, Set<File>> propFileMap = Maps.newHashMap();
 
         for (final File f : aPropFiles) {
             final String identifier = extractPropertyIdentifier(f);
 
             Set<File> fileSet = propFileMap.get(identifier);
             if (fileSet == null) {
-                fileSet = new HashSet<File>();
+                fileSet = Sets.newHashSet();
                 propFileMap.put(identifier, fileSet);
             }
             fileSet.add(f);

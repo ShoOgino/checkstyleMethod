@@ -7,8 +7,8 @@
     protected AbstractLoader(Map<String, String> aPublicIdToResourceNameMap)
         throws SAXException, ParserConfigurationException
     {
-        mPublicIdToResourceNameMap = new HashMap<String, String>(
-                aPublicIdToResourceNameMap);
+        mPublicIdToResourceNameMap =
+            Maps.newHashMap(aPublicIdToResourceNameMap);
         final SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setValidating(true);
         factory.setNamespaceAware(true);

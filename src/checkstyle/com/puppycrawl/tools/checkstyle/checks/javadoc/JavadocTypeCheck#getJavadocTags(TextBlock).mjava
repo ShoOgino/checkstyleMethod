@@ -6,7 +6,7 @@
     private List<JavadocTag> getJavadocTags(TextBlock aCmt)
     {
         final String[] text = aCmt.getText();
-        final List<JavadocTag> tags = new ArrayList<JavadocTag>();
+        final List<JavadocTag> tags = Lists.newArrayList();
         Pattern tagPattern = Utils.getPattern("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
         for (int i = 0; i < text.length; i++) {
             final String s = text[i];
