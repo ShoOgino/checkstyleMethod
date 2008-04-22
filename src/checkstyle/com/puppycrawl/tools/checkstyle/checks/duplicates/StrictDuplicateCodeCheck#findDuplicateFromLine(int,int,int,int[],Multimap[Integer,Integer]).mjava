@@ -12,10 +12,9 @@
      * this line i/j-combination has already been reported as part of another
      * viloation
      */
-    @SuppressWarnings("unchecked")
     private void findDuplicateFromLine(
         final int aI, final int aJ, final int aILine,
-        final int[] aJLines, final MultiMap aIgnore)
+        final int[] aJLines, final Multimap<Integer, Integer> aIgnore)
     {
         // Using something more advanced like Boyer-Moore might be a
         // good idea...
@@ -34,7 +33,7 @@
                 continue;
             }
 
-            final Collection ignoreEntries = (Collection) aIgnore.get(aILine);
+            final Collection<Integer> ignoreEntries = aIgnore.get(aILine);
             // avoid Integer constructor whenever we can
             if (ignoreEntries != null) {
                 if (ignoreEntries.contains(jLine)) {

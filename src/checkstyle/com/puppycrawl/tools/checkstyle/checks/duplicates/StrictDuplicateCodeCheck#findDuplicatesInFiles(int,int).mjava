@@ -17,8 +17,8 @@
         // blocks of duplicate code might be longer than 'min'. We need to
         // remember the line combinations where we must ignore identical blocks
         // because we have already reported them for an earlier blockIdx.
-        // Note: MultiHashMap is deprecated in the latest releases of o.a.j.c.c
-        final MultiMap ignorePairs = new MultiHashMap();
+        final Multimap<Integer, Integer> ignorePairs =
+            Multimaps.newArrayListMultimap();
 
         // go through all the blocks in iFile and
         // check if the following mMin lines occur in jFile
