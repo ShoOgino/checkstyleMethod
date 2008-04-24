@@ -99,7 +99,7 @@
             }
         }
 
-        final Stack<String> s = new Stack<String>();
+        final FastStack<String> s = FastStack.newInstance();
         s.push(root);
         final StringTokenizer tok = new StringTokenizer(aPath, File.separator);
         while (tok.hasMoreTokens()) {
@@ -126,7 +126,7 @@
                 // already contains one
                 sb.append(File.separatorChar);
             }
-            sb.append(s.elementAt(i));
+            sb.append(s.get(i));
         }
 
 

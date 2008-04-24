@@ -7,9 +7,9 @@
      * @param aHtmlStack the stack of opened HTML tags.
      * @param aToken the current HTML tag name that has been closed.
      */
-    private void checkUnclosedTags(Stack<HtmlTag> aHtmlStack, String aToken)
+    private void checkUnclosedTags(FastStack<HtmlTag> aHtmlStack, String aToken)
     {
-        final Stack<HtmlTag> unclosedTags = new Stack<HtmlTag>();
+        final FastStack<HtmlTag> unclosedTags = FastStack.newInstance();
         HtmlTag lastOpenTag = aHtmlStack.pop();
         while (!aToken.equalsIgnoreCase(lastOpenTag.getId())) {
             // Find unclosed elements. Put them on a stack so the
@@ -25,8 +25,8 @@
 
         // Output the unterminated tags, if any
         String lastFound = ""; // Skip multiples, like <b>..<b>
-        for (int i = 0; i < unclosedTags.size(); i++) {
-            lastOpenTag = unclosedTags.get(i);
+        for (final HtmlTag htag : unclosedTags) {
+            lastOpenTag = htag;
             if (lastOpenTag.getId().equals(lastFound)) {
                 continue;
             }
