@@ -4,13 +4,14 @@
         final DetailAST mid = aAST.findFirstToken(TokenTypes.IDENT);
         final String methodName = mid.getText();
 
-        if ("clone".equals(methodName)) {
+        if (mMethodName.equals(methodName)) {
+
             final DetailAST params = aAST.findFirstToken(TokenTypes.PARAMETERS);
             final boolean hasEmptyParamList =
                 !params.branchContains(TokenTypes.PARAMETER_DEF);
 
             if (hasEmptyParamList) {
-                log(aAST.getLineNo(), "avoid.clone.method");
+                log(aAST.getLineNo(), mErrorKey);
             }
         }
     }
