@@ -6,14 +6,7 @@
     private Pattern getEndOfSentencePattern()
     {
         if (mEndOfSentencePattern == null) {
-            try {
-                mEndOfSentencePattern =
-                    Pattern.compile("([.?!][ \t\n\r\f<])|([.?!]$)");
-            }
-            catch (final PatternSyntaxException e) {
-                // This should never occur.
-                e.printStackTrace();
-            }
+            mEndOfSentencePattern = Pattern.compile(mEndOfSentenceFormat);
         }
         return mEndOfSentencePattern;
     }
