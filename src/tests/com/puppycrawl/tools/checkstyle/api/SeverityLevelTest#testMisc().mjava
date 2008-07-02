@@ -1,0 +1,11 @@
+    @Test(expected = IllegalArgumentException.class)
+    public void testMisc()
+    {
+        final SeverityLevel o = SeverityLevel.getInstance("info");
+        assertNotNull(o);
+        assertEquals("info", o.toString());
+        assertEquals("info", o.getName());
+
+        SeverityLevel.getInstance("unknown"); // will fail
+    }
+

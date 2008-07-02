@@ -1,0 +1,11 @@
+    @Test
+    public void testIsInPublic()
+    {
+        assertTrue(Scope.NOTHING.isIn(Scope.PUBLIC));
+        assertTrue(Scope.PUBLIC.isIn(Scope.PUBLIC));
+        assertTrue(!Scope.PROTECTED.isIn(Scope.PUBLIC));
+        assertTrue(!Scope.PACKAGE.isIn(Scope.PUBLIC));
+        assertTrue(!Scope.PRIVATE.isIn(Scope.PUBLIC));
+        assertTrue(!Scope.ANONINNER.isIn(Scope.PUBLIC));
+    }
+

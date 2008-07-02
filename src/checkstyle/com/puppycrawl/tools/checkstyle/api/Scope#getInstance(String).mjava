@@ -6,14 +6,6 @@
      */
     public static Scope getInstance(String aScopeName)
     {
-        // TODO: change scope....
-        // canonicalize argument
-        final String scopeName = aScopeName.trim().toLowerCase();
-
-        final Scope retVal = NAME_TO_SCOPE.get(scopeName);
-        if (retVal == null) {
-            throw new IllegalArgumentException(scopeName);
-        }
-        return retVal;
+        return valueOf(Scope.class, aScopeName.trim().toUpperCase());
     }
 

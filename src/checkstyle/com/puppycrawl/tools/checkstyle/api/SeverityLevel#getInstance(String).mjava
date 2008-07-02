@@ -1,20 +1,13 @@
     /**
      * SeverityLevel factory method.
      *
-     * @param aSeverityName severity name, such as "ignore", "info", etc.
-     * @return the <code>SeverityLevel</code> associated with
-     *          <code>aSeverityName</code>
+     * @param aSecurityLevelName level name, such as "ignore", "info", etc.
+     * @return the <code>SeverityLevel</code>
+     * associated with <code>aSecurityLevelName</code>
      */
-    public static SeverityLevel getInstance(String aSeverityName)
+    public static SeverityLevel getInstance(String aSecurityLevelName)
     {
-        // canonicalize argument
-        final String severityName = aSeverityName.trim().toLowerCase();
-
-        final SeverityLevel retVal =
-            NAME_TO_LEVEL.get(severityName);
-        if (retVal == null) {
-            throw new IllegalArgumentException(severityName);
-        }
-        return retVal;
+        return valueOf(SeverityLevel.class, aSecurityLevelName.trim()
+                .toUpperCase());
     }
 
