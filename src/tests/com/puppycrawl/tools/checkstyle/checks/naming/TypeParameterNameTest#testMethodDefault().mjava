@@ -1,0 +1,16 @@
+    @Test
+    public void testMethodDefault()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(MethodTypeParameterNameCheck.class);
+        final String[] expected = {
+            "5:13: Name 'TT' must match pattern '^[A-Z]$'.",
+            "7:6: Name 'e_e' must match pattern '^[A-Z]$'.",
+            "17:6: Name 'Tfo$o2T' must match pattern '^[A-Z]$'.",
+            "21:6: Name 'foo' must match pattern '^[A-Z]$'.",
+            "26:10: Name '_fo' must match pattern '^[A-Z]$'.",
+        };
+        verify(checkConfig, getPath("naming" + File.separator + "InputTypeParameterName.java"), expected);
+    }
+
