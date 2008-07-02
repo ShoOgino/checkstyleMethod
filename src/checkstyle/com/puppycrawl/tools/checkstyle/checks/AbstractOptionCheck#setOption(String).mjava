@@ -3,12 +3,13 @@
      * @param aOption string to decode option from
      * @throws ConversionException if unable to decode
      */
-    public void setOption(String aOption)
-        throws ConversionException
+    public void setOption(String aOption) throws ConversionException
     {
-        mOption = mOption.decode(aOption);
-        if (mOption == null) {
-            throw new ConversionException("unable to parse " + aOption);
+        try {
+            mOption = Enum.valueOf(mOptionClass, aOption.trim().toUpperCase());
+        }
+        catch (IllegalArgumentException iae) {
+            throw new ConversionException("unable to parse " + aOption, iae);
         }
     }
 

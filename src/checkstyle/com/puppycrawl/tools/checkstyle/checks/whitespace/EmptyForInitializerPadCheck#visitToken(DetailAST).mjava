@@ -9,13 +9,13 @@
             final int before = semi.getColumnNo() - 1;
             //don't check if semi at beginning of line
             if (!Utils.whitespaceBefore(before, line)) {
-                final AbstractOption abstractOption = getAbstractOption();
-                if ((PadOption.NOSPACE == abstractOption)
+                final PadOption option = getAbstractOption();
+                if ((PadOption.NOSPACE == option)
                     && (Character.isWhitespace(line.charAt(before))))
                 {
                     log(semi.getLineNo(), before, "ws.preceded", ";");
                 }
-                else if ((PadOption.SPACE == abstractOption)
+                else if ((PadOption.SPACE == option)
                          && !Character.isWhitespace(line.charAt(before)))
                 {
                     log(semi.getLineNo(), before, "ws.notPreceded", ";");
