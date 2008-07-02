@@ -12,16 +12,7 @@
                     .debug("Unable to save cache file.", e);
             }
             finally {
-                if (out != null) {
-                    try {
-                        out.flush();
-                        out.close();
-                    }
-                    catch (final IOException ex) {
-                        Utils.getExceptionLogger()
-                            .debug("Unable to close cache file.", ex);
-                    }
-                }
+                this.flushAndCloseOutStream(out);
             }
         }
     }

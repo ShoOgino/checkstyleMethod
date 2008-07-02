@@ -1,0 +1,26 @@
+    /**
+     * Flushes and closes output stream.
+     * @param aStream the output stream
+     */
+    private void flushAndCloseOutStream(OutputStream aStream)
+    {
+        if (aStream != null) {
+            try {
+                aStream.flush();
+            }
+            catch (final IOException ex) {
+                Utils.getExceptionLogger()
+                    .debug("Unable to flush output stream.", ex);
+            }
+            finally {
+                try {
+                    aStream.close();
+                }
+                catch (final IOException ex) {
+                    Utils.getExceptionLogger()
+                        .debug("Unable to close output stream.", ex);
+                }
+            }
+        }
+    }
+

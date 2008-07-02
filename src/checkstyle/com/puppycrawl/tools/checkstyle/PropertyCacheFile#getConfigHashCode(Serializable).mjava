@@ -10,10 +10,14 @@
             // im-memory serialization of Configuration
 
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final ObjectOutputStream oos = new ObjectOutputStream(baos);
-            oos.writeObject(aConfiguration);
-            oos.flush();
-            oos.close();
+            ObjectOutputStream oos = null;
+            try {
+                oos = new ObjectOutputStream(baos);
+                oos.writeObject(aConfiguration);
+            }
+            finally {
+                this.flushAndCloseOutStream(oos);
+            }
 
             // Instead of hexEncoding baos.toByteArray() directly we
             // use a message digest here to keep the length of the
