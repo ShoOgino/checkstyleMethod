@@ -28,7 +28,7 @@
                     "general.fileNotFound",
                     null,
                     getId(),
-                    this.getClass()));
+                    this.getClass(), null));
         }
         catch (final IOException ioe) {
             Utils.getExceptionLogger().debug("IOException occured.", ioe);
@@ -39,7 +39,7 @@
                     "general.exception",
                     new String[] {ioe.getMessage()},
                     getId(),
-                    this.getClass()));
+                    this.getClass(), null));
         }
         catch (final RecognitionException re) {
             Utils.getExceptionLogger()
@@ -52,7 +52,7 @@
                     "general.exception",
                     new String[] {re.getMessage()},
                     getId(),
-                    this.getClass()));
+                    this.getClass(), null));
         }
         catch (final TokenStreamRecognitionException tre) {
             Utils.getExceptionLogger()
@@ -67,7 +67,7 @@
                         "general.exception",
                         new String[] {re.getMessage()},
                         getId(),
-                        this.getClass()));
+                        this.getClass(), null));
             }
             else {
                 getMessageCollector().add(
@@ -78,7 +78,7 @@
                         new String[]
                         {"TokenStreamRecognitionException occured."},
                         getId(),
-                        this.getClass()));
+                        this.getClass(), null));
             }
         }
         catch (final TokenStreamException te) {
@@ -91,7 +91,7 @@
                     "general.exception",
                     new String[] {te.getMessage()},
                     getId(),
-                    this.getClass()));
+                    this.getClass(), null));
         }
         catch (final Throwable err) {
             Utils.getExceptionLogger().debug("Throwable occured.", err);
@@ -102,7 +102,7 @@
                     "general.exception",
                     new String[] {"" + err},
                     getId(),
-                    this.getClass()));
+                    this.getClass(), null));
         }
 
         if (getMessageCollector().size() == 0) {

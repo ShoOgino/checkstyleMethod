@@ -9,6 +9,7 @@
      * @param aSeverityLevel severity level for the message
      * @param aModuleId the id of the module the message is associated with
      * @param aSourceClass the Class that is the source of the message
+     * @param aCustomMessage optional custom message overriding the default
      */
     public LocalizedMessage(int aLineNo,
                             int aColNo,
@@ -17,7 +18,8 @@
                             Object[] aArgs,
                             SeverityLevel aSeverityLevel,
                             String aModuleId,
-                            Class<?> aSourceClass)
+                            Class<?> aSourceClass,
+                            String aCustomMessage)
     {
         mLineNo = aLineNo;
         mColNo = aColNo;
@@ -27,5 +29,6 @@
         mSeverityLevel = aSeverityLevel;
         mModuleId = aModuleId;
         mSourceClass = aSourceClass;
+        mCustomMessage = aCustomMessage;
     }
 

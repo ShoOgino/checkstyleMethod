@@ -42,5 +42,16 @@
                     mConfigStack.peek();
                 top.addAttribute(name, value);
             }
+            else if (aQName.equals(MESSAGE)) {
+
+                //extract key and value
+                final String key = aAtts.getValue(KEY);
+                final String value = aAtts.getValue(VALUE);
+
+                //add to messages of configuration
+                final DefaultConfiguration top =
+                    mConfigStack.peek();
+                top.addMessage(key, value);
+            }
         }
 
