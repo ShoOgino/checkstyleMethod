@@ -1,0 +1,15 @@
+    @Test
+    public void testBottom() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("option", "bottom");
+        final String[] expected = {
+                "15: Wrong order for 'java.io.File' import.",
+                "18: Wrong order for 'java.awt.Button.ABORT' import.",
+                "21: Wrong order for 'java.io.Reader' import."
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_Bottom.java"), expected);
+    }
+

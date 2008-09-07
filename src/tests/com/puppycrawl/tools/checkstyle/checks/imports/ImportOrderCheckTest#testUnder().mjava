@@ -1,0 +1,16 @@
+    @Test
+    public void testUnder() throws Exception
+    {
+        // is default (testDefault)
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("option", "under");
+        final String[] expected = {
+            "5: Wrong order for 'java.awt.Dialog' import.",
+            "11: Wrong order for 'java.awt.Button.ABORT' import.",
+            "14: Wrong order for 'java.io.File' import."
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_Under.java"), expected);
+    }
+

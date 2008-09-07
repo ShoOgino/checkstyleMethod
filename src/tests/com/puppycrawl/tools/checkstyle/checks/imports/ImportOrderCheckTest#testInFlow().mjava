@@ -1,0 +1,18 @@
+    @Test
+    public void testInFlow() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("option", "inflow");
+        final String[] expected = {
+            "6: Wrong order for 'java.awt.Dialog' import.",
+            "11: Wrong order for 'javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE' import.",
+            "12: Wrong order for 'javax.swing.WindowConstants.*' import.",
+            "13: Wrong order for 'javax.swing.JTable' import.",
+            "15: Wrong order for 'java.io.File.createTempFile' import.",
+            "16: Wrong order for 'java.io.File' import."
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_InFlow.java"), expected);
+    }
+
