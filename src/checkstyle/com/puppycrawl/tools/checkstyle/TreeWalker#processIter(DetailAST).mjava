@@ -8,10 +8,10 @@
         DetailAST curNode = aRoot;
         while (curNode != null) {
             notifyVisit(curNode);
-            DetailAST toVisit = (DetailAST) curNode.getFirstChild();
+            DetailAST toVisit = curNode.getFirstChild();
             while ((curNode != null) && (toVisit == null)) {
                 notifyLeave(curNode);
-                toVisit = (DetailAST) curNode.getNextSibling();
+                toVisit = curNode.getNextSibling();
                 if (toVisit == null) {
                     curNode = curNode.getParent();
                 }

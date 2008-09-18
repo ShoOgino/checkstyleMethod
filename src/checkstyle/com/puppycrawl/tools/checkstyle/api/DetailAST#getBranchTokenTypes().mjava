@@ -10,12 +10,12 @@
             mBranchTokenTypes.set(getType());
 
             // add union of all childs
-            DetailAST child = (DetailAST) getFirstChild();
+            DetailAST child = getFirstChild();
             while (child != null) {
                 final BitSet childTypes = child.getBranchTokenTypes();
                 mBranchTokenTypes.or(childTypes);
 
-                child = (DetailAST) child.getNextSibling();
+                child = child.getNextSibling();
             }
         }
         return mBranchTokenTypes;

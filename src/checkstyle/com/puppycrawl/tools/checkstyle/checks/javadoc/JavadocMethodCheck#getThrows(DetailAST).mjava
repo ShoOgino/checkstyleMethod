@@ -10,7 +10,7 @@
         final DetailAST throwsAST = aAST
                 .findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAST != null) {
-            DetailAST child = (DetailAST) throwsAST.getFirstChild();
+            DetailAST child = throwsAST.getFirstChild();
             while (child != null) {
                 if ((child.getType() == TokenTypes.IDENT)
                         || (child.getType() == TokenTypes.DOT))
@@ -20,7 +20,7 @@
                             getCurrentClassName());
                     retVal.add(ei);
                 }
-                child = (DetailAST) child.getNextSibling();
+                child = child.getNextSibling();
             }
         }
         return retVal;

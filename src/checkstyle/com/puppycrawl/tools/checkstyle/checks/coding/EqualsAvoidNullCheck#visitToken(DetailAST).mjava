@@ -1,12 +1,12 @@
     @Override
     public void visitToken(final DetailAST aMethodCall)
     {
-        final AST dot = aMethodCall.getFirstChild();
+        final DetailAST dot = aMethodCall.getFirstChild();
         if (dot.getType() != TokenTypes.DOT) {
             return;
         }
 
-        final AST objCalledOn = dot.getFirstChild();
+        final DetailAST objCalledOn = dot.getFirstChild();
 
         //checks for calling equals on String literal and
         //anon object which cannot be null
@@ -20,8 +20,8 @@
             return;
         }
 
-        final AST method = objCalledOn.getNextSibling();
-        final AST expr = dot.getNextSibling().getFirstChild();
+        final DetailAST method = objCalledOn.getNextSibling();
+        final DetailAST expr = dot.getNextSibling().getFirstChild();
         if ("equals".equals(method.getText()) && containsOneArg(expr)) {
             if (containsAllSafeTokens(expr)) {
                 log(aMethodCall.getLineNo(), aMethodCall.getColumnNo(),

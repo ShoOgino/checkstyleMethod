@@ -15,9 +15,9 @@
                                        boolean aAllowNesting)
     {
         Arrays.sort(aTokenTypes);
-        for (DetailAST child = (DetailAST) aParent.getFirstChild();
+        for (DetailAST child = aParent.getFirstChild();
                 child != null;
-                child = (DetailAST) child.getNextSibling())
+                child = child.getNextSibling())
         {
             if (Arrays.binarySearch(aTokenTypes, child.getType()) >= 0) {
                 checkExpressionSubtree(child, aStartLevel,

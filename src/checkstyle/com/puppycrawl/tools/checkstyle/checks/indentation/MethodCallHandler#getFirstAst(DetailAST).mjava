@@ -11,9 +11,9 @@
         // walk down the first child part of the dots that make up a method
         // call name
 
-        DetailAST ast = (DetailAST) aAst.getFirstChild();
+        DetailAST ast = aAst.getFirstChild();
         while ((ast != null) && (ast.getType() == TokenTypes.DOT)) {
-            ast = (DetailAST) ast.getFirstChild();
+            ast = ast.getFirstChild();
         }
 
         if (ast == null) {

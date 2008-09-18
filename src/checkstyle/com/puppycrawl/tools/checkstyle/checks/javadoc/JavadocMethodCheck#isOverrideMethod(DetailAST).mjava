@@ -15,7 +15,7 @@
 
         // Now loop over all nodes while they are annotations looking for
         // an "@Override".
-        DetailAST node = (DetailAST) aAST.getFirstChild().getFirstChild();
+        DetailAST node = aAST.getFirstChild().getFirstChild();
         while ((null != node) && (TokenTypes.ANNOTATION == node.getType())) {
             if ((node.getFirstChild().getType() == TokenTypes.AT)
                 && (node.getFirstChild().getNextSibling().getType()
@@ -25,7 +25,7 @@
             {
                 return true;
             }
-            node = (DetailAST) node.getNextSibling();
+            node = node.getNextSibling();
         }
         return false;
     }

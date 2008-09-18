@@ -1,7 +1,7 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        DetailAST nextNode = (DetailAST) aAST.getNextSibling();
+        DetailAST nextNode = aAST.getNextSibling();
         final boolean isCommaSeparated =
             ((nextNode != null) && (nextNode.getType() == TokenTypes.COMMA));
 
@@ -13,7 +13,7 @@
         if ((nextNode.getType() == TokenTypes.COMMA)
             || (nextNode.getType() == TokenTypes.SEMI))
         {
-            nextNode = (DetailAST) nextNode.getNextSibling();
+            nextNode = nextNode.getNextSibling();
         }
 
         if ((nextNode != null)

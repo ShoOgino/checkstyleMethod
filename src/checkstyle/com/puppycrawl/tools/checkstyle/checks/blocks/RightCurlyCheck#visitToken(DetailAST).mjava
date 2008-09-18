@@ -9,12 +9,12 @@
 
         switch (aAST.getType()) {
         case TokenTypes.LITERAL_TRY:
-            lcurly = (DetailAST) aAST.getFirstChild();
-            nextToken = (DetailAST) lcurly.getNextSibling();
+            lcurly = aAST.getFirstChild();
+            nextToken = lcurly.getNextSibling();
             rcurly = lcurly.getLastChild();
             break;
         case TokenTypes.LITERAL_CATCH:
-            nextToken = (DetailAST) aAST.getNextSibling();
+            nextToken = aAST.getNextSibling();
             lcurly = aAST.getLastChild();
             rcurly = lcurly.getLastChild();
             if (nextToken == null) {
@@ -38,13 +38,13 @@
         case TokenTypes.LITERAL_ELSE:
             shouldCheckLastRcurly = true;
             nextToken = getNextToken(aAST);
-            lcurly = (DetailAST) aAST.getFirstChild();
+            lcurly = aAST.getFirstChild();
             rcurly = lcurly.getLastChild();
             break;
         case TokenTypes.LITERAL_FINALLY:
             shouldCheckLastRcurly = true;
             nextToken = getNextToken(aAST);
-            lcurly = (DetailAST) aAST.getFirstChild();
+            lcurly = aAST.getFirstChild();
             rcurly = lcurly.getLastChild();
             break;
         default:

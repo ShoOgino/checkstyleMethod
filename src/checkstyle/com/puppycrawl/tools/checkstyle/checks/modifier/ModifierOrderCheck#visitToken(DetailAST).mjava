@@ -2,9 +2,9 @@
     public void visitToken(DetailAST aAST)
     {
         final List<DetailAST> mods = Lists.newArrayList();
-        AST modifier = aAST.getFirstChild();
+        DetailAST modifier = aAST.getFirstChild();
         while (modifier != null) {
-            mods.add((DetailAST) modifier);
+            mods.add(modifier);
             modifier = modifier.getNextSibling();
         }
 

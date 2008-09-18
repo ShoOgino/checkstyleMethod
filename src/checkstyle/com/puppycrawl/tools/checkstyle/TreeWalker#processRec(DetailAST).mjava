@@ -11,14 +11,14 @@
 
         notifyVisit(aAST);
 
-        final DetailAST child = (DetailAST) aAST.getFirstChild();
+        final DetailAST child = aAST.getFirstChild();
         if (child != null) {
             processRec(child);
         }
 
         notifyLeave(aAST);
 
-        final DetailAST sibling = (DetailAST) aAST.getNextSibling();
+        final DetailAST sibling = aAST.getNextSibling();
         if (sibling != null) {
             processRec(sibling);
         }

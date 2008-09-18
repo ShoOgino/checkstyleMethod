@@ -9,13 +9,13 @@
     private boolean checkIf(final DetailAST aAST, boolean aUseBreak,
                             boolean aUseContinue)
     {
-        final DetailAST thenStmt = (DetailAST)
-            aAST.findFirstToken(TokenTypes.RPAREN).getNextSibling();
-        final DetailAST elseStmt = (DetailAST) thenStmt.getNextSibling();
+        final DetailAST thenStmt = aAST.findFirstToken(TokenTypes.RPAREN)
+                .getNextSibling();
+        final DetailAST elseStmt = thenStmt.getNextSibling();
         boolean isTerminated = isTerminated(thenStmt, aUseBreak, aUseContinue);
 
         if (isTerminated && (elseStmt != null)) {
-            isTerminated = isTerminated((DetailAST) elseStmt.getFirstChild(),
+            isTerminated = isTerminated(elseStmt.getFirstChild(),
                                         aUseBreak, aUseContinue);
         }
         return isTerminated;

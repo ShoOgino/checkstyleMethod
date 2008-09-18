@@ -7,10 +7,10 @@
         //                new String[] {"method"}).toString());
         // will not have the right line num, so just get the child name
 
-        final DetailAST first = (DetailAST) getMainAst().getFirstChild();
+        final DetailAST first = getMainAst().getFirstChild();
         int indentLevel = getLineStart(first);
-        if (!areOnSameLine((DetailAST) aChild.getMainAst().getFirstChild(),
-                           (DetailAST) getMainAst().getFirstChild()))
+        if (!areOnSameLine(aChild.getMainAst().getFirstChild(),
+                           getMainAst().getFirstChild()))
         {
             indentLevel += getBasicOffset();
         }

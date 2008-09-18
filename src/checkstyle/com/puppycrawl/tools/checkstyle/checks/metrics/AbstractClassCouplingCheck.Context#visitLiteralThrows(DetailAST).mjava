@@ -4,9 +4,9 @@
          */
         public void visitLiteralThrows(DetailAST aThrows)
         {
-            for (DetailAST childAST = (DetailAST) aThrows.getFirstChild();
+            for (DetailAST childAST = aThrows.getFirstChild();
                  childAST != null;
-                 childAST = (DetailAST) childAST.getNextSibling())
+                 childAST = childAST.getNextSibling())
             {
                 if (childAST.getType() != TokenTypes.COMMA) {
                     addReferencedClassName(childAST);

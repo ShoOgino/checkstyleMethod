@@ -6,7 +6,7 @@
     public static DetailAST getFirstNode(final DetailAST aNode)
     {
         DetailAST currentNode = aNode;
-        DetailAST child = (DetailAST) aNode.getFirstChild();
+        DetailAST child = aNode.getFirstChild();
         while (child != null) {
             final DetailAST newNode = getFirstNode(child);
             if ((newNode.getLineNo() < currentNode.getLineNo())
@@ -15,7 +15,7 @@
             {
                 currentNode = newNode;
             }
-            child = (DetailAST) child.getNextSibling();
+            child = child.getNextSibling();
         }
 
         return currentNode;

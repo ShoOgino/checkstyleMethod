@@ -15,7 +15,7 @@
                                 aUseBreak, aUseContinue);
         }
 
-        boolean isTerminated = isTerminated((DetailAST) aAST.getFirstChild(),
+        boolean isTerminated = isTerminated(aAST.getFirstChild(),
                                             aUseBreak, aUseContinue);
 
         DetailAST catchStmt = aAST.findFirstToken(TokenTypes.LITERAL_CATCH);
@@ -23,7 +23,7 @@
             final DetailAST catchBody =
                 catchStmt.findFirstToken(TokenTypes.SLIST);
             isTerminated &= isTerminated(catchBody, aUseBreak, aUseContinue);
-            catchStmt = (DetailAST) catchStmt.getNextSibling();
+            catchStmt = catchStmt.getNextSibling();
         }
         return isTerminated;
     }

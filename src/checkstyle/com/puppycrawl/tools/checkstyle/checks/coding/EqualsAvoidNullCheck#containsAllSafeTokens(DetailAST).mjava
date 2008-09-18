@@ -12,11 +12,11 @@
      * @param aExpr the argument expression
      * @return - true if any child matches the set of tokens, false if not
      */
-    private boolean containsAllSafeTokens(final AST aExpr)
+    private boolean containsAllSafeTokens(final DetailAST aExpr)
     {
-        AST arg = aExpr.getFirstChild();
+        DetailAST arg = aExpr.getFirstChild();
 
-        if (((DetailAST) arg).branchContains(TokenTypes.METHOD_CALL)) {
+        if (arg.branchContains(TokenTypes.METHOD_CALL)) {
             return false;
         }
         arg = skipVariableAssign(arg);
@@ -30,8 +30,8 @@
         //(s += "SweetString").equals(s); //true
         //arg = skipVariablePlusAssign(arg);
 
-        if (((DetailAST) arg).branchContains(TokenTypes.PLUS_ASSIGN)
-                || ((DetailAST) arg).branchContains(TokenTypes.IDENT))
+        if ((arg).branchContains(TokenTypes.PLUS_ASSIGN)
+                || (arg).branchContains(TokenTypes.IDENT))
         {
             return false;
         }

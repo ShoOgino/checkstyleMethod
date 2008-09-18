@@ -11,10 +11,10 @@
         }
 
         if (aAST.getType() == TokenTypes.DOT) {
-            extractFullIdent(aFull, (DetailAST) aAST.getFirstChild());
+            extractFullIdent(aFull, aAST.getFirstChild());
             aFull.append(".");
             extractFullIdent(
-                aFull, (DetailAST) aAST.getFirstChild().getNextSibling());
+                aFull, aAST.getFirstChild().getNextSibling());
         }
         else {
             aFull.append(aAST);

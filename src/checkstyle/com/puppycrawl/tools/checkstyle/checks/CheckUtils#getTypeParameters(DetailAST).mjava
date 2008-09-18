@@ -14,12 +14,12 @@
                 typeParameters.findFirstToken(TokenTypes.TYPE_PARAMETER);
             typeParams.add(typeParam);
 
-            DetailAST sibling = (DetailAST) typeParam.getNextSibling();
+            DetailAST sibling = typeParam.getNextSibling();
             while (sibling != null) {
                 if (sibling.getType() == TokenTypes.TYPE_PARAMETER) {
                     typeParams.add(sibling);
                 }
-                sibling = (DetailAST) sibling.getNextSibling();
+                sibling = sibling.getNextSibling();
             }
         }
 

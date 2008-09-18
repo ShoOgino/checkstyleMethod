@@ -48,7 +48,7 @@
         boolean hasDefaultConstructor = true;
         boolean hasExplNonPrivateCtor = false;
 
-        DetailAST candidate = (DetailAST) objBlock.getFirstChild();
+        DetailAST candidate = objBlock.getFirstChild();
 
         while (candidate != null) {
             if (candidate.getType() == TokenTypes.CTOR_DEF) {
@@ -61,7 +61,7 @@
                     break;
                 }
             }
-            candidate = (DetailAST) candidate.getNextSibling();
+            candidate = candidate.getNextSibling();
         }
 
         if (hasDefaultConstructor || hasExplNonPrivateCtor) {

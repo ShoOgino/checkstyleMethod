@@ -15,13 +15,13 @@
             typeParamNames.add(
                 typeParam.findFirstToken(TokenTypes.IDENT).getText());
 
-            DetailAST sibling = (DetailAST) typeParam.getNextSibling();
+            DetailAST sibling = typeParam.getNextSibling();
             while (sibling != null) {
                 if (sibling.getType() == TokenTypes.TYPE_PARAMETER) {
                     typeParamNames.add(
                         sibling.findFirstToken(TokenTypes.IDENT).getText());
                 }
-                sibling = (DetailAST) sibling.getNextSibling();
+                sibling = sibling.getNextSibling();
             }
         }
 

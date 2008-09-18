@@ -7,7 +7,7 @@
     static DetailAST getFirstToken(DetailAST aAST)
     {
         DetailAST first = aAST;
-        DetailAST child = (DetailAST) aAST.getFirstChild();
+        DetailAST child = aAST.getFirstChild();
 
         while (child != null) {
             final DetailAST toTest = getFirstToken(child);
@@ -17,7 +17,7 @@
             {
                 first = toTest;
             }
-            child = (DetailAST) child.getNextSibling();
+            child = child.getNextSibling();
         }
 
         return first;
