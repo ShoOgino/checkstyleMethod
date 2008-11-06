@@ -1,0 +1,18 @@
+    /**
+     * Closes the supplied {@link Closeable} object ignoring an
+     * {@link IOException} if it is thrown. Honestly, what are you going to
+     * do if you cannot close a file.
+     * @param aShutting the object to be closed.
+     */
+    public static void closeQuietly(Closeable aShutting)
+    {
+        if (null != aShutting) {
+            try {
+                aShutting.close();
+            }
+            catch (IOException e) {
+                ; // ignore
+            }
+        }
+    }
+

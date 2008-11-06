@@ -24,15 +24,7 @@
                         + mPropertiesFile + "'", e, getLocation());
             }
             finally {
-                try {
-                    if (inStream != null) {
-                        inStream.close();
-                    }
-                }
-                catch (final IOException e) {
-                    throw new BuildException("Error closing Properties file '"
-                            + mPropertiesFile + "'", e, getLocation());
-                }
+                Utils.closeQuietly(inStream);
             }
         }
 

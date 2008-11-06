@@ -39,15 +39,7 @@
                         "unable to open " + aPackageFile, e);
             }
             finally {
-                if (stream != null) {
-                    try {
-                        stream.close();
-                    }
-                    catch (IOException e) {
-                        throw new CheckstyleException(
-                                "error closing stream", e);
-                    }
-                }
+                Utils.closeQuietly(stream);
             }
         }
         return namesLoader.getPackageNames();

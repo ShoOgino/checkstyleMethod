@@ -29,12 +29,7 @@
             }
         }
         finally {
-            try {
-                lnr.close();
-            }
-            catch (final IOException e) {
-                ; // silently ignore
-            }
+            Utils.closeQuietly(lnr);
         }
         return lines.toArray(new String[lines.size()]);
     }

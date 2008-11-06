@@ -37,15 +37,7 @@
                     .debug("Unable to open cache file, ignoring.", e);
             }
             finally {
-                if (inStream != null) {
-                    try {
-                        inStream.close();
-                    }
-                    catch (final IOException ex) {
-                        Utils.getExceptionLogger()
-                            .debug("Unable to close cache file.", ex);
-                    }
-                }
+                Utils.closeQuietly(inStream);
             }
         }
         mDetailsFile = (setInActive) ? null : aFileName;

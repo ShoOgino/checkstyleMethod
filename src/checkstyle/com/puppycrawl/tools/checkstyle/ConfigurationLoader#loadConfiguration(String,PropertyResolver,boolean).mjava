@@ -40,15 +40,7 @@
                     + e.getMessage(), e);
         }
         finally {
-            if (bufferedStream != null) {
-                try {
-                    bufferedStream.close();
-                }
-                catch (final IOException e) {
-                    // cannot throw another exception.
-                    ;
-                }
-            }
+            Utils.closeQuietly(bufferedStream);
         }
     }
 

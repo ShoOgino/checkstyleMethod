@@ -24,15 +24,7 @@
                     "unable to load header file " + aFileName, ex);
         }
         finally {
-            if (headerReader != null) {
-                try {
-                    headerReader.close();
-                }
-                catch (final IOException ex) {
-                    throw new ConversionException(
-                            "unable to close header file " + aFileName, ex);
-                }
-            }
+            Utils.closeQuietly(headerReader);
         }
     }
 

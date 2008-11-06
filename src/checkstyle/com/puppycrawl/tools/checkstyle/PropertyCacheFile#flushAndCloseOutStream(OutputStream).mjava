@@ -13,13 +13,7 @@
                     .debug("Unable to flush output stream.", ex);
             }
             finally {
-                try {
-                    aStream.close();
-                }
-                catch (final IOException ex) {
-                    Utils.getExceptionLogger()
-                        .debug("Unable to close output stream.", ex);
-                }
+                Utils.closeQuietly(aStream);
             }
         }
     }

@@ -19,19 +19,10 @@
             loadHeader(headerReader);
         }
         catch (final IOException ex) {
-            throw new ConversionException(
-                    "unable to load header", ex);
+            throw new ConversionException("unable to load header", ex);
         }
         finally {
-            try {
-                headerReader.close();
-            }
-            catch (final IOException ex) {
-                // shouldn't happen with StringReader
-                throw new ConversionException(
-                        "unable to close header", ex);
-            }
+            Utils.closeQuietly(headerReader);
         }
-
     }
 
