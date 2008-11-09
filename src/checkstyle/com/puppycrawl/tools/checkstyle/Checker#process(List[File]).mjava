@@ -11,7 +11,7 @@
         // Prepare to start
         fireAuditStarted();
         for (FileSetCheck fsc : mFileSetChecks) {
-            fsc.beginProcessing(getCharset());
+            fsc.beginProcessing(mCharset);
         }
 
         // Process each file
@@ -21,7 +21,7 @@
             final TreeSet<LocalizedMessage> fileMessages = Sets.newTreeSet();
             try {
                 final String[] lines = Utils.getLines(f.getAbsolutePath(),
-                        getCharset());
+                        mCharset);
                 final List<String> theLines = Lists.newArrayList(lines);
                 for (FileSetCheck fsc : mFileSetChecks) {
                     fileMessages.addAll(fsc.process(f, theLines));
