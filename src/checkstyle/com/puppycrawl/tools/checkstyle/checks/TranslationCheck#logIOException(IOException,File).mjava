@@ -19,7 +19,7 @@
                 args,
                 getId(),
                 this.getClass(), null);
-        final LocalizedMessage[] messages = new LocalizedMessage[] {message};
+        final TreeSet<LocalizedMessage> messages = Sets.newTreeSet(message);
         getMessageDispatcher().fireErrors(aFile.getPath(), messages);
         Utils.getExceptionLogger().debug("IOException occured.", aEx);
     }

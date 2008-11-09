@@ -6,7 +6,8 @@
      */
     protected final void fireErrors(String aFileName)
     {
-        final LocalizedMessage[] errors = getMessageCollector().getMessages();
+        final TreeSet<LocalizedMessage> errors = getMessageCollector()
+                .getMessages();
         getMessageCollector().reset();
         getMessageDispatcher().fireErrors(aFileName, errors);
     }

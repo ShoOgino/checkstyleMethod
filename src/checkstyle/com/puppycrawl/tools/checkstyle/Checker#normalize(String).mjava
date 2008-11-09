@@ -17,14 +17,14 @@
      */
     public String normalize(String aPath)
     {
-        final String osName =
-            System.getProperty("os.name").toLowerCase(Locale.US);
+        final String osName = System.getProperty("os.name").toLowerCase(
+                Locale.US);
         final boolean onNetWare = (osName.indexOf("netware") > -1);
 
         final String orig = aPath;
 
-        aPath = aPath.replace('/', File.separatorChar)
-            .replace('\\', File.separatorChar);
+        aPath = aPath.replace('/', File.separatorChar).replace('\\',
+                File.separatorChar);
 
         // make sure we are dealing with an absolute path
         final int colon = aPath.indexOf(":");
@@ -32,17 +32,14 @@
         if (!onNetWare) {
             if (!aPath.startsWith(File.separator)
                 && !((aPath.length() >= 2)
-                     && Character.isLetter(aPath.charAt(0))
-                     && (colon == 1)))
+                     && Character.isLetter(aPath.charAt(0)) && (colon == 1)))
             {
                 final String msg = aPath + " is not an absolute path";
                 throw new IllegalArgumentException(msg);
             }
         }
         else {
-            if (!aPath.startsWith(File.separator)
-                && (colon == -1))
-            {
+            if (!aPath.startsWith(File.separator) && (colon == -1)) {
                 final String msg = aPath + " is not an absolute path";
                 throw new IllegalArgumentException(msg);
             }
@@ -51,10 +48,8 @@
         boolean dosWithDrive = false;
         String root = null;
         // Eliminate consecutive slashes after the drive spec
-        if ((!onNetWare
-             && (aPath.length() >= 2)
-             && Character.isLetter(aPath.charAt(0))
-             && (aPath.charAt(1) == ':'))
+        if ((!onNetWare && (aPath.length() >= 2)
+             && Character.isLetter(aPath.charAt(0)) && (aPath.charAt(1) == ':'))
             || (onNetWare && (colon > -1)))
         {
 
@@ -74,8 +69,7 @@
             // Eliminate consecutive slashes after the drive spec
             final StringBuffer sbPath = new StringBuffer();
             for (int i = colon + 1; i < ca.length; i++) {
-                if ((ca[i] != '\\')
-                    || ((ca[i] == '\\') && (ca[i - 1] != '\\')))
+                if ((ca[i] != '\\') || ((ca[i] == '\\') && (ca[i - 1] != '\\')))
                 {
                     sbPath.append(ca[i]);
                 }
@@ -110,7 +104,7 @@
             else if ("..".equals(thisToken)) {
                 if (s.size() < 2) {
                     throw new IllegalArgumentException("Cannot resolve path "
-                                                       + orig);
+                            + orig);
                 }
                 s.pop();
             }
@@ -128,7 +122,6 @@
             }
             sb.append(s.peek(i));
         }
-
 
         aPath = sb.toString();
         if (dosWithDrive) {

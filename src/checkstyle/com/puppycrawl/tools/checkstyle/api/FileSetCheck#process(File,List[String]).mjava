@@ -1,0 +1,18 @@
+    /**
+     * Request to process a file. The implementation should use the supplied
+     * contents and not read the contents again. This reduces the amount of
+     * file I/O.
+     * <p>
+     * The file set to process might contain files that are not
+     * interesting to the FileSetCheck. Such files should be ignored,
+     * no error message should be fired for them. For example a FileSetCheck
+     * that checks java files should ignore HTML or properties files.
+     * <p>
+     * The method should return the set of messages to be logged.
+     *
+     * @param aFile the file to be processed
+     * @param aLines an immutable list of the contents of the file.
+     * @return the list of messages to be logged.
+     */
+    TreeSet<LocalizedMessage> process(File aFile, List<String> aLines);
+

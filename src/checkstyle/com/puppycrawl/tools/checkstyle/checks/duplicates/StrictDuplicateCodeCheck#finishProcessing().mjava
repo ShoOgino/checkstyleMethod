@@ -1,9 +1,9 @@
-    /** {@inheritDoc} */
-    public synchronized void process(List<File> aFiles)
+    @Override
+    public void finishProcessing()
     {
+        super.finishProcessing();
         final long start = System.currentTimeMillis();
         mDuplicates = 0;
-        mFiles = filter(aFiles);
         mLineBlockChecksums = new int[mFiles.size()][];
         mChecksumInfo = new ChecksumInfo[mFiles.size()];
 

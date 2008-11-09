@@ -1,0 +1,26 @@
+    @Override
+    protected void processFiltered(File aFile, List<String> aLines)
+    {
+        // Check if already processed directory
+        final File dir = aFile.getParentFile();
+        if (mDirectoriesChecked.contains(dir)) {
+            return;
+        }
+        mDirectoriesChecked.add(dir);
+        
+        // Check for the preferred file.
+        final File packageInfo = new File(dir, "package-info.java");
+        final File packageHtml = new File(dir, "package.html");
+
+        if (packageInfo.exists()) {
+            if (packageHtml.exists()) {
+                log(0, "javadoc.legacyPackageHtml");
+            }
+        }   
+        else if (mAllowLegacy && packageHtml.exists()) {
+        }
+        else {
+            log(0, "javadoc.packageInfo");
+        }
+    }
+

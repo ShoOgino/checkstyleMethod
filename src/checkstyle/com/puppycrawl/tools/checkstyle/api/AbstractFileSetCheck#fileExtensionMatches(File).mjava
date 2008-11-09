@@ -1,0 +1,34 @@
+    /**
+     * Returns whether the file extension matches what we are meant to
+     * process.
+     * @param aFile the file to be checked.
+     * @return whether there is a match.
+     */
+    private boolean fileExtensionMatches(File aFile)
+    {
+        if ((null == mFileExtensions) || (mFileExtensions.length == 0)) {
+            return true;
+        }
+
+        // normalize extensions so all of them have a leading dot
+        final String[] withDotExtensions = new String[mFileExtensions.length];
+        for (int i = 0; i < mFileExtensions.length; i++) {
+            final String extension = mFileExtensions[i];
+            if (extension.startsWith(".")) {
+                withDotExtensions[i] = extension;
+            }
+            else {
+                withDotExtensions[i] = "." + extension;
+            }
+        }
+
+        final String fileName = aFile.getName();
+        for (final String fileExtension : withDotExtensions) {
+            if (fileName.endsWith(fileExtension)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+

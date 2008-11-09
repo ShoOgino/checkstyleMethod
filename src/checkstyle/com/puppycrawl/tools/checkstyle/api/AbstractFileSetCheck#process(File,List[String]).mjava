@@ -1,0 +1,12 @@
+    /** {@inheritDoc} */
+    public final TreeSet<LocalizedMessage> process(File aFile,
+                                                   List<String> aLines)
+    {
+        getMessageCollector().reset();
+        // Process only what interested in
+        if (fileExtensionMatches(aFile)) {
+            processFiltered(aFile, aLines);
+        }
+        return getMessageCollector().getMessages();
+    }
+

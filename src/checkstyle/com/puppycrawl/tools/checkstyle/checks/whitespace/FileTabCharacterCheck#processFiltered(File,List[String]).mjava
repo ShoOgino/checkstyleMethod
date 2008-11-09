@@ -1,0 +1,19 @@
+    @Override
+    protected void processFiltered(File aFile, List<String> aLines)
+    {
+        int lineNum = 0;
+        for (final String line : aLines) {
+            lineNum++;
+            final int tabPosition = line.indexOf('\t');
+            if (tabPosition != -1) {
+                if (mEachLine) {
+                    log(lineNum, tabPosition + 1, "containsTab");
+                }
+                else {
+                    log(lineNum, tabPosition + 1, "file.containsTab");
+                    break;
+                }
+            }
+        }
+    }
+
