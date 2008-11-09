@@ -1,9 +1,14 @@
     @Test
     public void testAlarm() throws Exception
     {
+        DefaultConfiguration checkConfig =
+            createCheckConfig(FileLengthCheck.class);
+        checkConfig.addAttribute("max", "20");
         final String[] expected = {
             "1: File length is 225 lines (max allowed is 20)."
         };
-        runIt("20", expected);
+        verify(createChecker(checkConfig),
+                getPath("InputSimple.java"),
+                getPath("InputSimple.java"), expected);
     }
 

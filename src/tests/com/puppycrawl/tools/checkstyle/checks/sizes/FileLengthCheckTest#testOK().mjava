@@ -1,8 +1,13 @@
     @Test
     public void testOK() throws Exception
     {
+        DefaultConfiguration checkConfig =
+            createCheckConfig(FileLengthCheck.class);
+        checkConfig.addAttribute("max", "2000");
         final String[] expected = {
         };
-        runIt("2000", expected);
+        verify(createChecker(checkConfig),
+                getPath("InputSimple.java"),
+                getPath("InputSimple.java"), expected);
     }
 
