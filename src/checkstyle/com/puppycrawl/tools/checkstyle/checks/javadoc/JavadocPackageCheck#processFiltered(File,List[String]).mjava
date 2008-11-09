@@ -7,7 +7,7 @@
             return;
         }
         mDirectoriesChecked.add(dir);
-        
+
         // Check for the preferred file.
         final File packageInfo = new File(dir, "package-info.java");
         final File packageHtml = new File(dir, "package.html");
@@ -16,10 +16,8 @@
             if (packageHtml.exists()) {
                 log(0, "javadoc.legacyPackageHtml");
             }
-        }   
-        else if (mAllowLegacy && packageHtml.exists()) {
         }
-        else {
+        else if (!mAllowLegacy || !packageHtml.exists()) {
             log(0, "javadoc.packageInfo");
         }
     }
