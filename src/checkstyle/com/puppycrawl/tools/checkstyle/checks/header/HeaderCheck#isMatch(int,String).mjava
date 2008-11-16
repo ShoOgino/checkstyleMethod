@@ -1,13 +1,13 @@
     /**
      * Checks if a code line matches the required header line.
-     * @param aLineNumber the linenumber to check against the header
+     * @param aLineNumber the line number to check against the header
+     * @param aLine the line contents
      * @return true if and only if the line matches the required header line
      */
-    protected boolean isMatch(int aLineNumber)
+    protected boolean isMatch(int aLineNumber, String aLine)
     {
-        final String line = getLines()[aLineNumber];
         // skip lines we are meant to ignore
         return isIgnoreLine(aLineNumber + 1)
-            || getHeaderLines()[aLineNumber].equals(line);
+            || getHeaderLines().get(aLineNumber).equals(aLine);
     }
 

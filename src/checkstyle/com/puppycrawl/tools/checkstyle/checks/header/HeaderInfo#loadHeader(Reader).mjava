@@ -6,15 +6,14 @@
     private void loadHeader(final Reader aHeaderReader) throws IOException
     {
         final LineNumberReader lnr = new LineNumberReader(aHeaderReader);
-        final ArrayList<String> lines = Lists.newArrayList();
+        mHeaderLines.clear();
         while (true) {
             final String l = lnr.readLine();
             if (l == null) {
                 break;
             }
-            lines.add(l);
+            mHeaderLines.add(l);
         }
-        mHeaderLines = lines.toArray(new String[lines.size()]);
         postprocessHeaderLines();
     }
 
