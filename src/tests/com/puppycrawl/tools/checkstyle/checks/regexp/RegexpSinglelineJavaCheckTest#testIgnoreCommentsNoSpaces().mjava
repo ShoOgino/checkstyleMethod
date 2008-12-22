@@ -1,0 +1,13 @@
+    @Test
+    public void testIgnoreCommentsNoSpaces()
+            throws Exception
+    {
+        // make sure the comment is not turned into spaces
+        final String illegal = "long ms  ";
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("ignoreComments", "true");
+        final String[] expected = {
+        };
+        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
+    }
+

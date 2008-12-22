@@ -1,0 +1,9 @@
+    /** {@inheritDoc} */
+    public boolean shouldSuppress(int aStartLineNo, int aStartColNo,
+            int aEndLineNo, int aEndColNo)
+    {
+        return (null != mCurrentContents)
+                && mCurrentContents.hasIntersectionWithComment(aStartLineNo,
+                        aStartColNo, aEndLineNo, aEndColNo);
+    }
+

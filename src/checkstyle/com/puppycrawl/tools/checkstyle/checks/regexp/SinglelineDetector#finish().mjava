@@ -1,0 +1,14 @@
+    /** Perform processing at the end of a set of lines. */
+    private void finish()
+    {
+        if (mCurrentMatches < mOptions.getMinimum()) {
+            if ("".equals(mOptions.getMessage())) {
+                mOptions.getReporter().log(0, "illegal.regexp",
+                        mOptions.getFormat());
+            }
+            else {
+                mOptions.getReporter().log(0, mOptions.getMessage());
+            }
+        }
+    }
+

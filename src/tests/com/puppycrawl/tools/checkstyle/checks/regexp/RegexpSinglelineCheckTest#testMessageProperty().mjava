@@ -1,0 +1,14 @@
+    @Test
+    public void testMessageProperty()
+        throws Exception
+    {
+        final String illegal = "System\\.(out)|(err)\\.print(ln)?\\(";
+        final String message = "Bad line :(";
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("message", message);
+        final String[] expected = {
+            "69: " + message,
+        };
+        verify(mCheckConfig, getPath("InputSemantic.java"), expected);
+    }
+

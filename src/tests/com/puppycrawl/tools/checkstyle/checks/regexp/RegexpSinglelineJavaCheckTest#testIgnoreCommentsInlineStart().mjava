@@ -1,0 +1,12 @@
+    @Test
+    public void testIgnoreCommentsInlineStart()
+            throws Exception
+    {
+        final String illegal = "long ms /";
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("ignoreComments", "true");
+        final String[] expected = {
+        };
+        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
+    }
+

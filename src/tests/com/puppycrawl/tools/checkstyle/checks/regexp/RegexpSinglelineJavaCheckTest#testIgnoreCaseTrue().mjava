@@ -1,0 +1,13 @@
+    @Test
+    public void testIgnoreCaseTrue()
+            throws Exception
+    {
+        final String illegal = "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("ignoreCase", "true");
+        final String[] expected = {
+            "69: Line matches the illegal pattern '" + illegal + "'."
+        };
+        verify(mCheckConfig, getPath("InputSemantic.java"), expected);
+    }
+

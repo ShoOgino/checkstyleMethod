@@ -1,0 +1,12 @@
+    @Test
+    public void testIgnoreCommentsMultiLine()
+            throws Exception
+    {
+        final String illegal = "Let's check multi-line comments";
+        mCheckConfig.addAttribute("format", illegal);
+        mCheckConfig.addAttribute("ignoreComments", "true");
+        final String[] expected = {
+        };
+        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
+    }
+
