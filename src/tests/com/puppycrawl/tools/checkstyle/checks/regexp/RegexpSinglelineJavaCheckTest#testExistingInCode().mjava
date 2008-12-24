@@ -1,0 +1,12 @@
+    @Test
+    public void testExistingInCode() throws Exception
+    {
+        final String required = "package";
+        mCheckConfig.addAttribute("format", required);
+        mCheckConfig.addAttribute("minimum", "1");
+        mCheckConfig.addAttribute("maximum", "1000");
+        final String[] expected = {
+        };
+        verify(mCheckConfig, getPath("InputSemantic.java"), expected);
+    }
+
