@@ -31,7 +31,10 @@
                 continue;
             }
             if (!tag.isCloseTag()) {
-                htmlStack.push(tag);
+                //We only push html tags that are allowed
+                if (isAllowedTag(tag)) {
+                    htmlStack.push(tag);
+                }
             }
             else {
                 // We have found a close tag.

@@ -6,16 +6,10 @@
      */
     private boolean isSingleTag(HtmlTag aTag)
     {
-        boolean isSingleTag = false;
-        for (String element : SINGLE_TAG) {
-            // If its a singleton tag (<p>, <br>, etc.), ignore it
-            // Can't simply not put them on the stack, since singletons
-            // like <dt> and <dd> (unhappily) may either be terminated
-            // or not terminated. Both options are legal.
-            if (aTag.getId().equalsIgnoreCase(element)) {
-                isSingleTag = true;
-            }
-        }
-        return isSingleTag;
+        // If its a singleton tag (<p>, <br>, etc.), ignore it
+        // Can't simply not put them on the stack, since singletons
+        // like <dt> and <dd> (unhappily) may either be terminated
+        // or not terminated. Both options are legal.
+        return SINGLE_TAGS.contains(aTag.getId().toLowerCase());
     }
 
