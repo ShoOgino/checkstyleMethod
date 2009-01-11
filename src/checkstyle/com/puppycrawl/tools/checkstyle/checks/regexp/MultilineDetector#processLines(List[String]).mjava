@@ -1,0 +1,22 @@
+    /**
+     * Processes a set of lines looking for matches.
+     * @param aLines the lines to process.
+     */
+    public void processLines(List<String> aLines)
+    {
+        resetState();
+        final StringBuffer sb = new StringBuffer();
+        int lineno = 1;
+        for (String line : aLines) {
+            sb.append(line);
+            sb.append('\n');
+            for (int j = 0; j < (line.length() + 1); j++) {
+                mCharacters.add(new Integer[] {lineno, j});
+            }
+            lineno++;
+        }
+        mMatcher = mOptions.getPattern().matcher(sb.toString());
+        findMatch();
+        finish();
+    }
+

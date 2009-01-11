@@ -1,0 +1,34 @@
+    /** recursive method that finds the matches. */
+    private void findMatch()
+    {
+        final boolean foundMatch = mMatcher.find();
+        if (!foundMatch) {
+            return;
+        }
+
+        final int startLine = (mCharacters.get(mMatcher.start()))[0].intValue();
+        final int startColumn = (mCharacters.get(mMatcher.start()))[1]
+                .intValue();
+        final int endLine = (mCharacters.get(mMatcher.end() - 1))[0].intValue();
+        final int endColumn = (mCharacters.get(mMatcher.end() - 1))[1]
+                .intValue();
+
+
+        if (!mOptions.getSuppressor().shouldSuppress(startLine, startColumn,
+                endLine, endColumn))
+        {
+            mCurrentMatches++;
+            if (mCurrentMatches > mOptions.getMaximum()) {
+                if ("".equals(mOptions.getMessage())) {
+                    mOptions.getReporter().log(startLine, "regexp.exceeded",
+                            mMatcher.pattern().toString());
+                }
+                else {
+                    mOptions.getReporter()
+                            .log(startLine, mOptions.getMessage());
+                }
+            }
+        }
+        findMatch();
+    }
+
