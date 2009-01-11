@@ -5,6 +5,10 @@
      */
     private boolean shouldCheck(final DetailAST aAST)
     {
+        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
+            return inPackageInfo();
+        }
+
         if (ScopeUtils.inCodeBlock(aAST)) {
             return false;
         }
