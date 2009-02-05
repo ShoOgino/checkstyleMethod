@@ -1,19 +1,11 @@
     /**
-     * Set the header file to check against.
-     * @param aFileName the file that contains the header to check against.
+     * Load the header from a file.
+     * @param aFileName the file to load
      * @throws ConversionException if the file cannot be loaded
      */
-    final void setHeaderFile(String aFileName)
-        throws ConversionException
+    private void loadHeaderFile(String aFileName)
     {
-        // Handle empty param
-        if ((aFileName == null) || (aFileName.trim().length() == 0)) {
-            return;
-        }
-
         checkHeaderNotInitialized();
-
-        // load the file
         Reader headerReader = null;
         try {
             headerReader = new FileReader(aFileName);

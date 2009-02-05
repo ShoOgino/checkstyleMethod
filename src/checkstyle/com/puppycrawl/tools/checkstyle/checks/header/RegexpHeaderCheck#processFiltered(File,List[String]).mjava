@@ -1,11 +1,10 @@
     @Override
     protected void processFiltered(File aFile, List<String> aLines)
     {
-        final int headerSize = getRegexpHeaderInfo().getHeaderLines().size();
+        final int headerSize = getHeaderLines().size();
         final int fileSize = aLines.size();
 
-        if (headerSize - getRegexpHeaderInfo().getMultLines().length > fileSize)
-        {
+        if (headerSize - mMultiLines.length > fileSize) {
             log(1, "header.missing");
         }
         else {

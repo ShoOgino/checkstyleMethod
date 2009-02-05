@@ -6,6 +6,11 @@
     public void setHeaderFile(String aFileName)
         throws ConversionException
     {
-        mHeaderInfo.setHeaderFile(aFileName);
+        // Handle empty param
+        if ((aFileName == null) || (aFileName.trim().length() == 0)) {
+            return;
+        }
+
+        loadHeaderFile(aFileName);
     }
 
