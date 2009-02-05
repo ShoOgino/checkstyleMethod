@@ -1,6 +1,9 @@
     @Override
     protected final void finishLocalSetup() throws CheckstyleException
     {
+        if (mFilename != null) {
+            loadHeaderFile();
+        }
         if (mHeaderLines.isEmpty()) {
             throw new CheckstyleException(
                     "property 'headerFile' is missing or invalid in module "

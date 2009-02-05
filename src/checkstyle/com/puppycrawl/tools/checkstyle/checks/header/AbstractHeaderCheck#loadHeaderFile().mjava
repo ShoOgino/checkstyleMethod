@@ -1,0 +1,22 @@
+    /**
+     * Load the header from a file.
+     * @throws CheckstyleException if the file cannot be loaded
+     */
+    private void loadHeaderFile() throws CheckstyleException
+    {
+        checkHeaderNotInitialized();
+        Reader headerReader = null;
+        try {
+            headerReader = new InputStreamReader(new BufferedInputStream(
+                    new FileInputStream(mFilename)), mCharset);
+            loadHeader(headerReader);
+        }
+        catch (final IOException ex) {
+            throw new CheckstyleException(
+                    "unable to load header file " + mFilename, ex);
+        }
+        finally {
+            Utils.closeQuietly(headerReader);
+        }
+    }
+

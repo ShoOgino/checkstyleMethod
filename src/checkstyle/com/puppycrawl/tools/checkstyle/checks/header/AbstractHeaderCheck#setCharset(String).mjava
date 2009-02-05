@@ -1,0 +1,14 @@
+    /**
+     * Set the charset to use for loading the header from a file.
+     * @param aCharset the charset to use for loading the header from a file
+     * @throws UnsupportedEncodingException if aCharset is unsupported
+     */
+    public void setCharset(String aCharset) throws UnsupportedEncodingException
+    {
+        if (!Charset.isSupported(aCharset)) {
+            final String message = "unsupported charset: '" + aCharset + "'";
+            throw new UnsupportedEncodingException(message);
+        }
+        mCharset = aCharset;
+    }
+
