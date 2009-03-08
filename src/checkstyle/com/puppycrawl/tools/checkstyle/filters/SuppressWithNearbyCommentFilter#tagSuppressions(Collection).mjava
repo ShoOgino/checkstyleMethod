@@ -1,0 +1,18 @@
+    /**
+     * Appends the suppressions in a collection of comments to the full
+     * set of suppression tags.
+     * @param aComments the set of comments.
+     */
+    private void tagSuppressions(Collection aComments)
+    {
+        for (final Iterator iter = aComments.iterator(); iter.hasNext();) {
+            final TextBlock comment = (TextBlock) iter.next();
+            final int startLineNo = comment.getStartLineNo();
+            final String[] text = comment.getText();
+            tagCommentLine(text[0], startLineNo, comment.getStartColNo());
+            for (int i = 1; i < text.length; i++) {
+                tagCommentLine(text[i], startLineNo + i, 0);
+            }
+        }
+    }
+

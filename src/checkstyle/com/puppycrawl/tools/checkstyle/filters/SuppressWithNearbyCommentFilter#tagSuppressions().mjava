@@ -1,0 +1,22 @@
+    /**
+     * Collects all the suppression tags for all comments into a list and
+     * sorts the list.
+     */
+    private void tagSuppressions()
+    {
+        mTags.clear();
+        final FileContents contents = getFileContents();
+        if (mCheckCPP) {
+            tagSuppressions(contents.getCppComments().values());
+        }
+        if (mCheckC) {
+            final Collection cComments = contents.getCComments().values();
+            final Iterator iter = cComments.iterator();
+            while (iter.hasNext()) {
+                final Collection element = (Collection) iter.next();
+                tagSuppressions(element);
+            }
+        }
+        Collections.sort(mTags);
+    }
+

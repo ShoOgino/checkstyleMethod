@@ -1,0 +1,56 @@
+        /**
+         * Constructs a tag.
+         * @param aText the text of the suppression.
+         * @param aLine the line number.
+         * @throws ConversionException if unable to parse expanded aText.
+         * on.
+         */
+        public Tag(String aText, int aLine)
+            throws ConversionException
+        {
+            mText = aText;
+
+            mTagCheckRegexp = mCheckRegexp;
+            //Expand regexp for check and message
+            //Does not intern Patterns with Utils.getPattern()
+            String format = "";
+            try {
+                format = expandFromComment(aText, mCheckFormat, mCommentRegexp);
+                mTagCheckRegexp = Pattern.compile(format);
+                if (mMessageFormat != null) {
+                    format = expandFromComment(
+                         aText, mMessageFormat, mCommentRegexp);
+                    mTagMessageRegexp = Pattern.compile(format);
+                }
+                int influence = 0;
+                if (mInfluenceFormat != null) {
+                    format = expandFromComment(
+                        aText, mInfluenceFormat, mCommentRegexp);
+                    try {
+                        if (format.startsWith("+")) {
+                            format = format.substring(1);
+                        }
+                        influence = Integer.parseInt(format);
+                    }
+                    catch (NumberFormatException e) {
+                        throw new ConversionException(
+                            "unable to parse influence from '" + aText
+                                + "' using " + mInfluenceFormat, e);
+                    }
+                }
+                if (influence >= 0) {
+                    mFirstLine = aLine;
+                    mLastLine = aLine + influence;
+                }
+                else {
+                    mFirstLine = aLine + influence;
+                    mLastLine = aLine;
+                }
+            }
+            catch (final PatternSyntaxException e) {
+                throw new ConversionException(
+                    "unable to parse expanded comment " + format,
+                    e);
+            }
+        }
+

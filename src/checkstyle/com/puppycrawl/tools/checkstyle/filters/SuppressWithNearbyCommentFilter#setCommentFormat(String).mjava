@@ -1,0 +1,16 @@
+    /**
+     * Set the format for a comment that turns off reporting.
+     * @param aFormat a <code>String</code> value.
+     * @throws ConversionException unable to parse aFormat.
+     */
+    public void setCommentFormat(String aFormat)
+        throws ConversionException
+    {
+        try {
+            mCommentRegexp = Utils.getPattern(aFormat);
+        }
+        catch (final PatternSyntaxException e) {
+            throw new ConversionException("unable to parse " + aFormat, e);
+        }
+    }
+

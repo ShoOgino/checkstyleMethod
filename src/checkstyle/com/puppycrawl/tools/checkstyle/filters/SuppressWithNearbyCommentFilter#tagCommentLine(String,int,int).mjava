@@ -1,0 +1,15 @@
+    /**
+     * Tags a string if it matches the format for turning
+     * checkstyle reporting on or the format for turning reporting off.
+     * @param aText the string to tag.
+     * @param aLine the line number of aText.
+     * @param aColumn the column number of aText.
+     */
+    private void tagCommentLine(String aText, int aLine, int aColumn)
+    {
+        final Matcher matcher = mCommentRegexp.matcher(aText);
+        if (matcher.find()) {
+            addTag(matcher.group(0), aLine);
+        }
+    }
+

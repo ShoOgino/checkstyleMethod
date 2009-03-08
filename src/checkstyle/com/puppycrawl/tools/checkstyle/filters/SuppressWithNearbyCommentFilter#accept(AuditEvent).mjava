@@ -1,0 +1,28 @@
+    /** {@inheritDoc} */
+    public boolean accept(AuditEvent aEvent)
+    {
+        if (aEvent.getLocalizedMessage() == null) {
+            return true;        // A special event.
+        }
+
+        // Lazy update. If the first event for the current file, update file
+        // contents and tag suppressions
+        final FileContents currentContents = FileContentsHolder.getContents();
+        if (currentContents == null) {
+            // we have no contents, so we can not filter.
+            // TODO: perhaps we should notify user somehow?
+            return true;
+        }
+        if (getFileContents() != currentContents) {
+            setFileContents(currentContents);
+            tagSuppressions();
+        }
+        for (final Iterator iter = mTags.iterator(); iter.hasNext();) {
+            final Tag tag = (Tag) iter.next();
+            if (tag.isMatch(aEvent)) {
+                return false;
+            }
+        }
+        return true;
+    }
+

@@ -1,0 +1,18 @@
+    /**
+     * Set the format for the influence of this check.
+     * @param aFormat a <code>String</code> value
+     * @throws ConversionException unable to parse aFormat
+     */
+    public void setInfluenceFormat(String aFormat)
+        throws ConversionException
+    {
+        // check that aFormat parses
+        try {
+            Utils.getPattern(aFormat);
+        }
+        catch (final PatternSyntaxException e) {
+            throw new ConversionException("unable to parse " + aFormat, e);
+        }
+        mInfluenceFormat = aFormat;
+    }
+
