@@ -1,0 +1,17 @@
+    /**
+     * Find the last token of type <code>TokenTypes.ANNOTATION</code>
+     * under the given set of modifiers.
+     * @param aModifiers <code>DetailAST</code>.
+     * @return <code>DetailAST</code> or null if there are no annotations.
+     */
+    private DetailAST findLastAnnotation(DetailAST aModifiers)
+    {
+        DetailAST aAnnot = aModifiers.findFirstToken(TokenTypes.ANNOTATION);
+        while (aAnnot != null && aAnnot.getNextSibling() != null
+               && aAnnot.getNextSibling().getType() == TokenTypes.ANNOTATION)
+        {
+            aAnnot = aAnnot.getNextSibling();
+        }
+        return aAnnot;
+    }
+
