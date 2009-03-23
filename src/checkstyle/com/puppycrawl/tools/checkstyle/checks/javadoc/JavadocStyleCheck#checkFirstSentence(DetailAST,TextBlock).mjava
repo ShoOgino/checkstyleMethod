@@ -15,7 +15,7 @@
         if ((commentText.length() != 0)
             && !getEndOfSentencePattern().matcher(commentText).find()
             && !("{@inheritDoc}".equals(commentText)
-            && validForInheritDocOnly(aAST)))
+            && JavadocTagInfo.INHERIT_DOC.isValidOn(aAST)))
         {
             log(aComment.getStartLineNo(), "javadoc.noperiod");
         }

@@ -1,0 +1,43 @@
+    /**
+     * Checks to see if the AST is annotated with
+     * the passed in annotation and return the AST
+     * representing that annotation.
+     *
+     * @param aAST the current node
+     * @param aAnnotation the annotation name to check for
+     * @return the AST representing that annotation
+     * @throws NullPointerException if the aAST or
+     * aAnnotation is null
+     */
+    public static DetailAST getAnnotation(final DetailAST aAST,
+        String aAnnotation)
+    {
+        if (aAST == null) {
+            throw new NullPointerException("the aAST is null");
+        }
+
+        if (aAnnotation == null) {
+            throw new NullPointerException("the aAnnotation is null");
+        }
+
+        if (aAnnotation.trim().length() == 0) {
+            throw new IllegalArgumentException("the aAnnotation"
+                + "is empty or spaces");
+        }
+
+        final DetailAST holder = AnnotationUtility.getAnnotationHolder(aAST);
+
+        for (DetailAST child = holder.getFirstChild();
+            child != null; child = child.getNextSibling())
+        {
+            if (child.getType() == TokenTypes.ANNOTATION) {
+                final DetailAST aName = child.findFirstToken(TokenTypes.IDENT);
+                if (aAnnotation.equals(aName.getText())) {
+                    return child;
+                }
+            }
+        }
+
+        return null;
+    }
+

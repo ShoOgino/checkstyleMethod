@@ -11,9 +11,9 @@
             else if (ScopeUtils.isOuterMostType(aAST)) {
                 // don't check author/version for inner classes
                 final List<JavadocTag> tags = getJavadocTags(cmt);
-                checkTag(lineNo, tags, "author",
+                checkTag(lineNo, tags, JavadocTagInfo.AUTHOR.getName(),
                          mAuthorFormatPattern, mAuthorFormat);
-                checkTag(lineNo, tags, "version",
+                checkTag(lineNo, tags, JavadocTagInfo.VERSION.getName(),
                          mVersionFormatPattern, mVersionFormat);
 
                 final List<String> typeParamNames =

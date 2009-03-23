@@ -10,7 +10,7 @@
         final Pattern pattern = Utils.getPattern("\\s*<([^>]+)>.*");
         for (int i = aTags.size() - 1; i >= 0; i--) {
             final JavadocTag tag = aTags.get(i);
-            if ("param".equals(tag.getTag())) {
+            if (tag.isParamTag()) {
 
                 if (tag.getArg1() != null) {
 
@@ -22,7 +22,8 @@
                         if (!aTypeParamNames.contains(typeParamName)) {
                             log(tag.getLineNo(), tag.getColumnNo(),
                                 "javadoc.unusedTag",
-                                "@param", "<" + typeParamName + ">");
+                                JavadocTagInfo.PARAM.getText(),
+                                "<" + typeParamName + ">");
                         }
                     }
                     else {

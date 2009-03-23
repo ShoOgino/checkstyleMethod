@@ -1,0 +1,20 @@
+    void doFoo(Runnable r) {
+        doFoo(new Runnable() {
+
+            /**
+             * {@inheritDoc}
+             */
+            public void run() {
+                Throwable t = new Throwable() {
+
+                    /**
+                     * {@inheritDoc}
+                     */
+                    public String toString() {
+                        return "junk";
+                    }
+                };
+            }
+        });
+    }
+

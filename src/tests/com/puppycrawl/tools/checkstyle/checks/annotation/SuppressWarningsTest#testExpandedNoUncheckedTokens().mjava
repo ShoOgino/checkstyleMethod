@@ -1,0 +1,20 @@
+    /**
+     * Tests SuppressWarnings unchecked warning disabled on certain tokens.
+     * @throws Exception
+     */
+    @Test
+    public void testExpandedNoUncheckedTokens() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
+        checkConfig.addAttribute("format", "^unchecked$*");
+        checkConfig.addAttribute("tokens", "CLASS_DEF");
+        
+        final String[] expected = {
+            "5:26: The warning 'unchecked' cannot be suppressed at this location.",
+            
+            "64:40: The warning 'unchecked' cannot be suppressed at this location.",
+            "64:68: The warning 'unchecked' cannot be suppressed at this location.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsExpanded.java"), expected);
+    }
+

@@ -1,0 +1,23 @@
+    /**
+     * Tests SuppressWarnings with default regex.
+     * @throws Exception
+     */
+    @Test
+    public void testSingleDefault() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
+        
+        final String[] expected = {
+            "8:23: The warning '   ' cannot be suppressed at this location.",
+            "11:27: The warning '' cannot be suppressed at this location.",
+            "53:27: The warning '' cannot be suppressed at this location.",
+            "64:47: The warning '' cannot be suppressed at this location.",
+            "67:37: The warning '' cannot be suppressed at this location.",
+            "72:46: The warning '   ' cannot be suppressed at this location.",
+            "77:60: The warning '   ' cannot be suppressed at this location.",
+            "82:83: The warning '' cannot be suppressed at this location.",
+            "82:96: The warning '    ' cannot be suppressed at this location.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsSingle.java"), expected);
+    }
+

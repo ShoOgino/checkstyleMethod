@@ -12,9 +12,9 @@
         if (aComment == null) {
             /*checking for missing docs in JavadocStyleCheck is not consistent
             with the rest of CheckStyle...  Even though, I didn't think it
-            made sense to make another check just to ensure that the
+            made sense to make another csheck just to ensure that the
             package-info.java file actually contains package Javadocs.*/
-            if (inPackageInfo()) {
+            if (getFileContents().inPackageInfo()) {
                 log(aAST.getLineNo(), "javadoc.missing");
             }
             return;

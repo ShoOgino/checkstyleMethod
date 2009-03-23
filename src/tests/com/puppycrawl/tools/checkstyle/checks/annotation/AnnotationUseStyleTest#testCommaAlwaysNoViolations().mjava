@@ -1,0 +1,12 @@
+    @Test
+    public void testCommaAlwaysNoViolations() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "MIXED");
+        checkConfig.addAttribute("elementStyle", "MIXED");
+        checkConfig.addAttribute("trailingArrayComma", "ALWAYS");
+        final String[] expected = {
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "AnnotationUseWithTrailingComma.java"), expected);
+    }
+

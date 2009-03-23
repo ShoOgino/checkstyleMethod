@@ -1,0 +1,62 @@
+    /**
+     * Tests SuppressWarnings *, unchecked, unused warning disabled on everything.
+     * @throws Exception
+     */
+    @Test
+    public void testCompactNoUncheckedUnusedAll() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
+        checkConfig.addAttribute("format", "^unchecked$*|^unused$*|.*");
+        
+        final String[] expected = {
+            "5:20: The warning 'unchecked' cannot be suppressed at this location.",
+            "5:33: The warning 'unused' cannot be suppressed at this location.",
+            "8:24: The warning '   ' cannot be suppressed at this location.",
+            "11:28: The warning 'unchecked' cannot be suppressed at this location.",
+            "11:41: The warning '' cannot be suppressed at this location.",
+            "17:24: The warning 'unused' cannot be suppressed at this location.",
+            "20:28: The warning 'unforgiven' cannot be suppressed at this location.",
+            "20:42: The warning '    un' cannot be suppressed at this location.",
+            "25:32: The warning 'unused' cannot be suppressed at this location.",
+            "29:36: The warning 'unchecked' cannot be suppressed at this location.",
+            "37:24: The warning 'abcun' cannot be suppressed at this location.",
+            "44:23: The warning '' cannot be suppressed at this location.",
+            "47:28: The warning 'unused' cannot be suppressed at this location.",
+            "47:38: The warning 'bleh' cannot be suppressed at this location.",
+            "53:27: The warning '' cannot be suppressed at this location.",
+            "56:28: The warning 'unchecked' cannot be suppressed at this location.",
+            "59:49: The warning 'unchecked' cannot be suppressed at this location.",
+            
+            "64:34: The warning 'unchecked' cannot be suppressed at this location.",
+            "64:48: The warning '' cannot be suppressed at this location.",
+            "64:62: The warning 'unchecked' cannot be suppressed at this location.",
+            "64:76: The warning '' cannot be suppressed at this location.",
+            
+            "67:38: The warning '' cannot be suppressed at this location.",
+            "67:43: The warning 'unchecked' cannot be suppressed at this location.",
+            
+            "72:47: The warning '   ' cannot be suppressed at this location.",
+            "72:55: The warning 'unused' cannot be suppressed at this location.",
+            "72:66: The warning 'unchecked' cannot be suppressed at this location.",
+            "72:98: The warning '   ' cannot be suppressed at this location.",
+            "72:106: The warning 'unused' cannot be suppressed at this location.",
+            "72:117: The warning 'unchecked' cannot be suppressed at this location.",
+            
+            "77:38: The warning 'unchecked' cannot be suppressed at this location.",
+            "77:61: The warning '   ' cannot be suppressed at this location.",
+            "77:69: The warning 'unused' cannot be suppressed at this location.",
+            
+            "82:38: The warning 'unchecked' cannot be suppressed at this location.",
+            "82:84: The warning '' cannot be suppressed at this location.",
+            "82:89: The warning 'foo' cannot be suppressed at this location.",
+            "82:97: The warning '   ' cannot be suppressed at this location.",
+            "82:105: The warning 'unused' cannot be suppressed at this location.",
+            "82:125: The warning 'unchecked' cannot be suppressed at this location.",
+            "82:171: The warning '' cannot be suppressed at this location.",
+            "82:176: The warning 'foo' cannot be suppressed at this location.",
+            "82:184: The warning '   ' cannot be suppressed at this location.",
+            "82:192: The warning 'unused' cannot be suppressed at this location.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsCompact.java"), expected);
+    }
+

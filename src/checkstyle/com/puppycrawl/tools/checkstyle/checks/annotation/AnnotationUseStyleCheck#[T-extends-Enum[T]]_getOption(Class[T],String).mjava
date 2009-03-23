@@ -1,0 +1,18 @@
+    /**
+     * Retrieves an {@link Enum Enum} type from a @{link String String}.
+     * @param <T> the enum type
+     * @param aEnumClass the enum class
+     * @param aString the string representing the enum
+     * @return the enum type
+     */
+    private <T extends Enum<T>> T getOption(final Class<T> aEnumClass,
+        final String aString)
+    {
+        try {
+            return Enum.valueOf(aEnumClass, aString.trim().toUpperCase());
+        }
+        catch (final IllegalArgumentException iae) {
+            throw new ConversionException("unable to parse " + aString, iae);
+        }
+    }
+

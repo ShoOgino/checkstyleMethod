@@ -1,0 +1,19 @@
+    /**
+     * Test that annotation parens are never present.
+     * @throws Exception
+     */
+    @Test
+    public void testParansNever() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "NEVER");
+        checkConfig.addAttribute("elementStyle", "MIXED");
+        checkConfig.addAttribute("trailingArrayComma", "MIXED");
+        final String[] expected = {
+            "13: Annotation cannot have closing parenthesis.",
+            "30: Annotation cannot have closing parenthesis.",
+            "33: Annotation cannot have closing parenthesis.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "DifferentUseStyles.java"), expected);
+    }
+

@@ -1,0 +1,18 @@
+    /**
+     * This method looks for a warning that matches a configured expression.
+     * If found it logs a violation at the given line and column number.
+     *
+     * @param aLineNo the line number
+     * @param aColNum the column number
+     * @param aWarningText the warning.
+     */
+    private void logMatch(final int aLineNo,
+        final int aColNum, final String aWarningText)
+    {
+        final Matcher matcher = this.getRegexp().matcher(aWarningText);
+        if (matcher.matches()) {
+            this.log(aLineNo, aColNum,
+                "suppressed.warning.not.allowed", aWarningText);
+        }
+    }
+

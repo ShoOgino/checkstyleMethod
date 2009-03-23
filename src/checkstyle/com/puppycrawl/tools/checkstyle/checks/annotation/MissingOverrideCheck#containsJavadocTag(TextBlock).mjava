@@ -1,0 +1,25 @@
+    /**
+     * Checks to see if the text block contains a inheritDoc tag.
+     *
+     * @param aJavadoc the javadoc of the AST
+     * @return true if contains the tag
+     */
+    private boolean containsJavadocTag(final TextBlock aJavadoc)
+    {
+        if (aJavadoc == null) {
+            return false;
+        }
+
+        final String[] lines = aJavadoc.getText();
+
+        for (final String line : lines) {
+            final Matcher matchInheritDoc =
+                MissingOverrideCheck.MATCH_INHERITDOC.matcher(line);
+
+            if (matchInheritDoc.find()) {
+                return true;
+            }
+        }
+        return false;
+    }
+

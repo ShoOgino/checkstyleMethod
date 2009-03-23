@@ -1,0 +1,15 @@
+    /**
+     * This tests anonymous inner classes that are overriding methods are correctly flagged
+     * for only including the inheritDoc tag.
+     * @throws Exception
+     */
+    @Test
+    public void testGoodAnnonOverride() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
+        final String[] expected = {
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "GoodAnnonOverride.java"), expected);
+    }
+

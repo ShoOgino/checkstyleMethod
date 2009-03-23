@@ -1,0 +1,17 @@
+    /** {@inheritDoc} */
+    @Override
+    public void visitToken(final DetailAST aAST)
+    {
+        final TextBlock javadoc =
+            this.getFileContents().getJavadocBefore(aAST.getLineNo());
+
+        final boolean containsAnnotation =
+            AnnotationUtility.containsAnnotation(aAST, DEPRECATED);
+
+        final boolean containsJavadocTag = this.containsJavadocTag(javadoc);
+
+        if (containsAnnotation ^ containsJavadocTag) {
+            this.log(aAST.getLineNo(), "annotation.missing.deprecated");
+        }
+    }
+

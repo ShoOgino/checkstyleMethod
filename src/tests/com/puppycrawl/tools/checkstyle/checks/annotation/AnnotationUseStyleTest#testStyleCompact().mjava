@@ -1,0 +1,18 @@
+    /**
+     * Tests that annotation is always in compact style.
+     * @throws Exception
+     */
+    @Test
+    public void testStyleCompact() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "MIXED");
+        checkConfig.addAttribute("elementStyle", "COMPACT");
+        checkConfig.addAttribute("trailingArrayComma", "MIXED");
+        final String[] expected = {
+            "43: Annotation style must be 'COMPACT'.",
+            "47: Annotation style must be 'COMPACT'.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "DifferentUseStyles.java"), expected);
+    }
+

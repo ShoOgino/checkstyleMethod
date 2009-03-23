@@ -1,0 +1,17 @@
+    /**
+     * Tests that inheritDoc misuse is properly flagged or missing Javadocs do not cause a problem.
+     * @throws Exception
+     */
+    @Test
+    public void testNotOverride() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
+        final String[] expected = {
+            "8: The Javadoc {@inheritDoc} tag is not valid at this location.",
+            "15: The Javadoc {@inheritDoc} tag is not valid at this location.",
+            //this wont be flagged because this check only checks methods.
+            //"22: The Javadoc comment contains an {@inheritDoc} tag. The tag is not valid at this location.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "NotOverride.java"), expected);
+    }
+

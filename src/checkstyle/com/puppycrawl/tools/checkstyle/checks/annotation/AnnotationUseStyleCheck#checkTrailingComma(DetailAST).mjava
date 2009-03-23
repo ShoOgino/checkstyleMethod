@@ -1,0 +1,36 @@
+    /**
+     * Checks to see if the trailing comma is present if required or
+     * prohibited.
+     *
+     * @param aAnnotation the annotation token
+     */
+    private void checkTrailingComma(final DetailAST aAnnotation)
+    {
+        if (TrailingArrayComma.MIXED.equals(this.mComma)
+            || this.mComma == null)
+        {
+            return;
+        }
+
+        DetailAST child = aAnnotation.getFirstChild();
+
+        while (child != null) {
+            DetailAST arrayInit = null;
+
+            if (child.getType()
+                == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
+            {
+                arrayInit =
+                    child.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
+            }
+            else if (child.getType() == TokenTypes.ANNOTATION_ARRAY_INIT) {
+                arrayInit = child;
+            }
+
+            if (arrayInit != null) {
+                this.logCommaViolation(arrayInit);
+            }
+            child = child.getNextSibling();
+        }
+    }
+

@@ -1,0 +1,33 @@
+    /** {@inheritDoc} */
+    @Override
+    public void visitToken(final DetailAST aAST)
+    {
+        final TextBlock javadoc =
+            this.getFileContents().getJavadocBefore(aAST.getLineNo());
+
+
+        final boolean containsTag = this.containsJavadocTag(javadoc);
+        if (containsTag && !JavadocTagInfo.INHERIT_DOC.isValidOn(aAST)) {
+            this.log(aAST.getLineNo(), "tag.not.valid.on",
+                JavadocTagInfo.INHERIT_DOC.getText());
+            return;
+        }
+
+        if (this.mJavaFiveCompatibility) {
+            final DetailAST defOrNew = aAST.getParent().getParent();
+
+            if (defOrNew.branchContains(TokenTypes.EXTENDS_CLAUSE)
+                || defOrNew.branchContains(TokenTypes.IMPLEMENTS_CLAUSE)
+                || defOrNew.getType() == TokenTypes.LITERAL_NEW)
+            {
+                return;
+            }
+        }
+
+        if (containsTag
+            && !AnnotationUtility.containsAnnotation(aAST, OVERRIDE))
+        {
+            this.log(aAST.getLineNo(), "annotation.missing.override");
+        }
+    }
+

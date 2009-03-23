@@ -18,11 +18,7 @@
         }
 
         // Invalid if private, a constructor, or a static method
-        if ((aAST.getType() == TokenTypes.CTOR_DEF)
-                || (aScope == Scope.PRIVATE)
-                || (aAST.getType() == TokenTypes.METHOD_DEF
-                && aAST.branchContains(TokenTypes.LITERAL_STATIC)))
-        {
+        if (!JavadocTagInfo.INHERIT_DOC.isValidOn(aAST)) {
             log(aAST, "javadoc.invalidInheritDoc");
         }
 

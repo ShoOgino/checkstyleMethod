@@ -6,7 +6,7 @@
     private boolean shouldCheck(final DetailAST aAST)
     {
         if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
-            return inPackageInfo();
+            return getFileContents().inPackageInfo();
         }
 
         if (ScopeUtils.inCodeBlock(aAST)) {

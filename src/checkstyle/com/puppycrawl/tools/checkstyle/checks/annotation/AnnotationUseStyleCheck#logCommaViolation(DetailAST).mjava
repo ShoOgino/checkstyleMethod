@@ -1,0 +1,27 @@
+    /**
+     * logs a trailing array comma violation if one exists.
+     *
+     * @param aAST the array init
+     * {@link TokenTypes#ANNOTATION_ARRAY_INIT ANNOTATION_ARRAY_INIT}.
+     */
+    private void logCommaViolation(final DetailAST aAST)
+    {
+        final DetailAST rCurly = aAST.findFirstToken(TokenTypes.RCURLY);
+
+        //comma can be null if array is empty
+        final DetailAST comma = rCurly.getPreviousSibling();
+
+        if (TrailingArrayComma.ALWAYS.equals(this.mComma)
+            && (comma == null || comma.getType() != TokenTypes.COMMA))
+        {
+            this.log(rCurly.getLineNo(),
+                rCurly.getColumnNo(), "annotation.trailing.comma.missing");
+        }
+        else if (TrailingArrayComma.NEVER.equals(this.mComma)
+            && comma != null && comma.getType() == TokenTypes.COMMA)
+        {
+            this.log(comma.getLineNo(),
+                comma.getColumnNo(), "annotation.trailing.comma.present");
+        }
+    }
+

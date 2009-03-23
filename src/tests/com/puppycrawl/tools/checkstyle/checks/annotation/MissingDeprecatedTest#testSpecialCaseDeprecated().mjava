@@ -1,0 +1,27 @@
+    /**
+     * Tests various special deprecation conditions such as duplicate or empty tags.
+     */
+    @Test
+    public void testSpecialCaseDeprecated() throws Exception {
+        
+        DefaultConfiguration checkConfig = createCheckConfig(MissingDeprecatedCheck.class);
+        
+        final String[] expected = {
+            "5: Duplicate @deprecated tag.",
+            "12: Duplicate @deprecated tag.",
+            "14: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "17: Missing a Javadoc comment.",
+            "19: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "24: Missing a Javadoc comment.",
+            "32: Missing a Javadoc comment.",
+            "33: Duplicate @deprecated tag.",
+            "33: Missing a Javadoc comment.",
+            "42: Duplicate @deprecated tag.",
+            "42: Missing a Javadoc comment.",
+            "50: Missing a Javadoc comment.",
+            "51: Duplicate @deprecated tag.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "SpecialCaseDeprecated.java"), expected);
+    }
+

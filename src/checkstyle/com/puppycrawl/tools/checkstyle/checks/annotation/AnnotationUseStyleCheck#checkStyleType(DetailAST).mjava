@@ -1,0 +1,26 @@
+    /**
+     * Checks to see if the
+     * {@link ElementStyle AnnotationElementStyle}
+     * is correct.
+     *
+     * @param aAnnotation the annotation token
+     */
+    private void checkStyleType(final DetailAST aAnnotation)
+    {
+        if (ElementStyle.MIXED.equals(this.mStyle)
+            || this.mStyle == null)
+        {
+            return;
+        }
+
+        if (ElementStyle.COMPACT_NO_ARRAY.equals(this.mStyle)) {
+            this.checkCompactNoArrayStyle(aAnnotation);
+        }
+        else if (ElementStyle.COMPACT.equals(this.mStyle)) {
+            this.checkCompactStyle(aAnnotation);
+        }
+        else if (ElementStyle.EXPANDED.equals(this.mStyle)) {
+            this.checkExpandedStyle(aAnnotation);
+        }
+    }
+

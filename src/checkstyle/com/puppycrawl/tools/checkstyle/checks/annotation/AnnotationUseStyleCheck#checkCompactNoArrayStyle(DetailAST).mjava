@@ -1,0 +1,40 @@
+    /**
+     * Checks for compact no array style type violations.
+     *
+     * @param aAnnotation the annotation token
+     */
+    private void checkCompactNoArrayStyle(final DetailAST aAnnotation)
+    {
+        final DetailAST arrayInit =
+            aAnnotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
+
+        final int valuePairCount =
+            aAnnotation.getChildCount(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
+
+        final DetailAST valuePair =
+            aAnnotation.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
+
+        //in compact style with one value
+        if (arrayInit != null
+            && arrayInit.getChildCount(TokenTypes.EXPR) == 1)
+        {
+            this.log(aAnnotation.getLineNo(), "annotation.incorrect.style",
+                ElementStyle.COMPACT_NO_ARRAY);
+        }
+        //in expanded style with one value and the correct element name
+        else if (valuePairCount == 1) {
+            final DetailAST nestedArrayInit =
+                valuePair.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
+
+            if (nestedArrayInit != null
+                && AnnotationUseStyleCheck.
+                    ANNOTATION_ELEMENT_SINGLE_NAME.equals(
+                    valuePair.getFirstChild().getText())
+                    && nestedArrayInit.getChildCount(TokenTypes.EXPR) == 1)
+            {
+                this.log(aAnnotation.getLineNo(), "annotation.incorrect.style",
+                    ElementStyle.COMPACT_NO_ARRAY);
+            }
+        }
+    }
+

@@ -1,0 +1,12 @@
+    @Test
+    public void testEverythingMixed() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "MIXED");
+        checkConfig.addAttribute("elementStyle", "MIXED");
+        checkConfig.addAttribute("trailingArrayComma", "MIXED");
+        final String[] expected = {
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "DifferentUseStyles.java"), expected);
+    }
+

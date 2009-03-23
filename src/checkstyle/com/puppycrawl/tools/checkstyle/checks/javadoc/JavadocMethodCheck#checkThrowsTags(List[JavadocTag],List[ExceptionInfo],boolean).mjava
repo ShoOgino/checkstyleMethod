@@ -53,7 +53,8 @@
 
                 if (reqd) {
                     log(tag.getLineNo(), tag.getColumnNo(),
-                            "javadoc.unusedTag", "@throws", tag.getArg1());
+                        "javadoc.unusedTag",
+                        JavadocTagInfo.THROWS.getText(), tag.getArg1());
 
                 }
             }
@@ -66,7 +67,8 @@
                 if (!ei.isFound()) {
                     final Token fi = ei.getName();
                     log(fi.getLineNo(), fi.getColumnNo(),
-                            "javadoc.expectedTag", "@throws", fi.getText());
+                        "javadoc.expectedTag",
+                        JavadocTagInfo.THROWS.getText(), fi.getText());
                 }
             }
         }

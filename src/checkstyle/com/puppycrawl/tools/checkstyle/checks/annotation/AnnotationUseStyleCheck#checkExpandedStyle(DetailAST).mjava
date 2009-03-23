@@ -1,0 +1,18 @@
+    /**
+     * Checks for expanded style type violations.
+     *
+     * @param aAnnotation the annotation token
+     */
+    private void checkExpandedStyle(final DetailAST aAnnotation)
+    {
+        final int valuePairCount =
+            aAnnotation.getChildCount(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
+
+        if (valuePairCount == 0
+            && aAnnotation.branchContains(TokenTypes.EXPR))
+        {
+            this.log(aAnnotation.getLineNo(), "annotation.incorrect.style",
+                ElementStyle.EXPANDED);
+        }
+    }
+

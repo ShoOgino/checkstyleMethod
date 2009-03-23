@@ -1,0 +1,21 @@
+    /**
+     * Tests that annotation is always in compact no array style.
+     * @throws Exception
+     */
+    @Test
+    public void testStyleCompactNoArray() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "MIXED");
+        checkConfig.addAttribute("elementStyle", "COMPACT_NO_ARRAY");
+        checkConfig.addAttribute("trailingArrayComma", "MIXED");
+        final String[] expected = {
+            "5: Annotation style must be 'COMPACT_NO_ARRAY'.",
+            "20: Annotation style must be 'COMPACT_NO_ARRAY'.",
+            "41: Annotation style must be 'COMPACT_NO_ARRAY'.",
+            "43: Annotation style must be 'COMPACT_NO_ARRAY'.",
+            "47: Annotation style must be 'COMPACT_NO_ARRAY'.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "DifferentUseStyles.java"), expected);
+    }
+

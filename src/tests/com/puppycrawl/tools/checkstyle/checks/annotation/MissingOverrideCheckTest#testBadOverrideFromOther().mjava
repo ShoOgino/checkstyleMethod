@@ -1,0 +1,22 @@
+    /**
+     * This tests classes that are extending things explicitly will be correctly
+     * flagged for only including the inheritDoc tag.
+     * @throws Exception
+     */
+    @Test
+    public void testBadOverrideFromOther() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
+        final String[] expected = {
+            "10: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+            "26: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+            "34: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+            "40: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+            "47: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+            "53: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+            "63: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "BadOverrideFromOther.java"), expected);
+    }
+

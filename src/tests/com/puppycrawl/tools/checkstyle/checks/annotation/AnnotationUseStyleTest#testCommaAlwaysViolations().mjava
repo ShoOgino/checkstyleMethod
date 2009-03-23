@@ -1,0 +1,25 @@
+    @Test
+    public void testCommaAlwaysViolations() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "MIXED");
+        checkConfig.addAttribute("elementStyle", "MIXED");
+        checkConfig.addAttribute("trailingArrayComma", "ALWAYS");
+        final String[] expected = {
+            "3:20: Annotation array values must contain trailing comma.",
+            "6:30: Annotation array values must contain trailing comma.",
+            "10:40: Annotation array values must contain trailing comma.",
+            "13:44: Annotation array values must contain trailing comma.",
+            "16:54: Annotation array values must contain trailing comma.",
+            "24:37: Annotation array values must contain trailing comma.",
+            "24:65: Annotation array values must contain trailing comma.",
+            "26:21: Annotation array values must contain trailing comma.",
+            "26:30: Annotation array values must contain trailing comma.",
+            "29:39: Annotation array values must contain trailing comma.",
+            "29:49: Annotation array values must contain trailing comma.",
+            "32:21: Annotation array values must contain trailing comma.",
+            "32:56: Annotation array values must contain trailing comma.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "AnnotationUseNoTrailingComma.java"), expected);
+    }
+

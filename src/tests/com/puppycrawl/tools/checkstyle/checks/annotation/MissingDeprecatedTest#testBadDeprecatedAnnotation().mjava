@@ -1,0 +1,23 @@
+    /**
+     * Tests that memebers that are only deprecated via javadoc are flagged.
+     */
+    @Test
+    public void testBadDeprecatedAnnotation() throws Exception {
+        
+        DefaultConfiguration checkConfig = createCheckConfig(MissingDeprecatedCheck.class);
+        
+        final String[] expected = {
+            "7: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "12: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "19: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "26: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "31: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "38: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "43: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "51: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+            "56: Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "BadDeprecatedAnnotation.java"), expected);
+    }
+

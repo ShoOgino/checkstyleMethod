@@ -1,0 +1,24 @@
+    /** 
+     * Tests that annotation is always in expanded style.
+     * @throws Exception
+     */
+    @Test
+    public void testStyleExpanded() throws Exception {
+        
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "MIXED");
+        checkConfig.addAttribute("elementStyle", "EXPANDED");
+        checkConfig.addAttribute("trailingArrayComma", "MIXED");
+        final String[] expected = {
+            "5: Annotation style must be 'EXPANDED'.",
+            "12: Annotation style must be 'EXPANDED'.",
+            "20: Annotation style must be 'EXPANDED'.",
+            "26: Annotation style must be 'EXPANDED'.",
+            "39: Annotation style must be 'EXPANDED'.",
+            "41: Annotation style must be 'EXPANDED'.",
+            "58: Annotation style must be 'EXPANDED'.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "DifferentUseStyles.java"), expected);
+    }
+

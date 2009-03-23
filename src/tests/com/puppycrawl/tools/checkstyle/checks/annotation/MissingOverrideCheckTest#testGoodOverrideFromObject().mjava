@@ -1,0 +1,17 @@
+    /**
+     * This tests that classes not extending anything explicitly will be correctly
+     * flagged for only including the inheritDoc tag.
+     * @throws Exception
+     */
+    @Test
+    public void testGoodOverrideFromObject() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
+        checkConfig.addAttribute("javaFiveCompatibility", "false");
+        
+        final String[] expected = {
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "GoodOverrideFromObject.java"), expected);
+    }
+

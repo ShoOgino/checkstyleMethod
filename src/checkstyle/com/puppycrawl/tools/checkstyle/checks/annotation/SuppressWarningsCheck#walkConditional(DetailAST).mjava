@@ -1,0 +1,21 @@
+    /**
+     * Recursively walks a conditional expression checking the left
+     * and right sides, checking for matches and
+     * logging violations.
+     *
+     * @param aCond a Conditional type
+     * {@link TokenTypes#QUESTION QUESTION}
+     */
+    private void walkConditional(final DetailAST aCond)
+    {
+        if (aCond.getType() != TokenTypes.QUESTION) {
+            final String warningText =
+                this.removeQuotes(aCond.getText());
+            this.logMatch(aCond.getLineNo(), aCond.getColumnNo(), warningText);
+            return;
+        }
+
+        this.walkConditional(this.getCondLeft(aCond));
+        this.walkConditional(this.getCondRight(aCond));
+    }
+

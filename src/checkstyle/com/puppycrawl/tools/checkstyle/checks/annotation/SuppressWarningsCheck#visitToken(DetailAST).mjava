@@ -1,0 +1,51 @@
+    /** {@inheritDoc} */
+    @Override
+    public void visitToken(final DetailAST aAST)
+    {
+        final DetailAST annotation =
+            AnnotationUtility.getAnnotation(
+                aAST, SuppressWarningsCheck.SUPPRESS_WARNINGS);
+
+        if (annotation == null) {
+            return;
+        }
+
+        final DetailAST warningHolder =
+            this.findWarningsHolder(annotation);
+
+        DetailAST warning = warningHolder.findFirstToken(TokenTypes.EXPR);
+
+        //rare case with empty array ex: @SuppressWarnings({})
+        if (warning == null) {
+            //check to see if empty warnings are forbidden -- are by default
+            this.logMatch(warningHolder.getLineNo(),
+                warningHolder.getColumnNo(), "");
+            return;
+        }
+
+        while (warning != null) {
+            if (warning.getType() == TokenTypes.EXPR) {
+                final DetailAST fChild = warning.getFirstChild();
+
+                //typical case
+                if (fChild.getType() == TokenTypes.STRING_LITERAL) {
+                    final String warningText =
+                        this.removeQuotes(warning.getFirstChild().getText());
+                    this.logMatch(warning.getLineNo(),
+                        warning.getColumnNo(), warningText);
+
+     //conditional case
+     //ex: @SupressWarnings((false) ? (true) ? "unchecked" : "foo" : "unused")
+                }
+                else if (fChild.getType() == TokenTypes.QUESTION) {
+                    this.walkConditional(fChild);
+                }
+                else {
+                    assert false : "Should never get here, type: "
+                        + fChild.getType() + " text: " + fChild.getText();
+                }
+            }
+            warning = warning.getNextSibling();
+        }
+    }
+

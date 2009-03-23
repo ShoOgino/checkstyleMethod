@@ -1,0 +1,43 @@
+    /**
+     * Tests SuppressWarnings *, unchecked, unused warning disabled on everything.
+     * @throws Exception
+     */
+    @Test
+    public void testSingleNoUncheckedUnusedAll() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
+        checkConfig.addAttribute("format", "^unchecked$*|^unused$*|.*");
+        
+        final String[] expected = {
+            "5:19: The warning 'unchecked' cannot be suppressed at this location.",
+            "8:23: The warning '   ' cannot be suppressed at this location.",
+            "11:27: The warning '' cannot be suppressed at this location.",
+            "17:23: The warning 'unused' cannot be suppressed at this location.",
+            "20:27: The warning 'unforgiven' cannot be suppressed at this location.",
+            "25:31: The warning 'unused' cannot be suppressed at this location.",
+            "29:35: The warning 'unchecked' cannot be suppressed at this location.",
+            "37:23: The warning 'abcun' cannot be suppressed at this location.",
+            "44:23: The warning 'abcun' cannot be suppressed at this location.",
+            "47:27: The warning 'unused' cannot be suppressed at this location.",
+            "53:27: The warning '' cannot be suppressed at this location.",
+            "56:27: The warning 'unchecked' cannot be suppressed at this location.",
+            "59:48: The warning 'unchecked' cannot be suppressed at this location.",
+            "64:33: The warning 'unchecked' cannot be suppressed at this location.",
+            "64:47: The warning '' cannot be suppressed at this location.",
+            "67:37: The warning '' cannot be suppressed at this location.",
+            "67:42: The warning 'unchecked' cannot be suppressed at this location.",
+            "72:46: The warning '   ' cannot be suppressed at this location.",
+            "72:54: The warning 'unused' cannot be suppressed at this location.",
+            "72:65: The warning 'unchecked' cannot be suppressed at this location.",
+            "77:37: The warning 'unchecked' cannot be suppressed at this location.",
+            "77:60: The warning '   ' cannot be suppressed at this location.",
+            "77:68: The warning 'unused' cannot be suppressed at this location.",
+            "82:37: The warning 'unchecked' cannot be suppressed at this location.",
+            "82:83: The warning '' cannot be suppressed at this location.",
+            "82:88: The warning 'foo' cannot be suppressed at this location.",
+            "82:96: The warning '    ' cannot be suppressed at this location.",
+            "82:105: The warning 'unused' cannot be suppressed at this location.",
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsSingle.java"), expected);
+    }
+

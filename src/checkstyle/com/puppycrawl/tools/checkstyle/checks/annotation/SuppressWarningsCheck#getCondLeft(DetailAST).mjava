@@ -1,0 +1,14 @@
+    /**
+     * Retrieves the left side of a conditional.
+     *
+     * @param aCond aCond a conditional type
+     * {@link TokenTypes#QUESTION QUESTION}
+     * @return either the value
+     * or another conditional
+     */
+    private DetailAST getCondLeft(final DetailAST aCond)
+    {
+        final DetailAST colon = aCond.findFirstToken(TokenTypes.COLON);
+        return colon.getPreviousSibling();
+    }
+

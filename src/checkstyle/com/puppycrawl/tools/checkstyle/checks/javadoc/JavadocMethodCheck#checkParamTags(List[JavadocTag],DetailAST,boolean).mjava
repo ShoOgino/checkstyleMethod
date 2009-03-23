@@ -66,13 +66,15 @@
         // the user has chosen to suppress these problems
         if (!mAllowMissingParamTags && aReportExpectedTags) {
             for (DetailAST param : params) {
-                log(param, "javadoc.expectedTag", "@param", param.getText());
+                log(param, "javadoc.expectedTag",
+                    JavadocTagInfo.PARAM.getText(), param.getText());
             }
 
             for (DetailAST typeParam : typeParams) {
-                log(typeParam, "javadoc.expectedTag", "@param", "<"
-                        + typeParam.findFirstToken(TokenTypes.IDENT).getText()
-                        + ">");
+                log(typeParam, "javadoc.expectedTag",
+                    JavadocTagInfo.PARAM.getText(),
+                    "<" + typeParam.findFirstToken(TokenTypes.IDENT).getText()
+                    + ">");
             }
         }
     }

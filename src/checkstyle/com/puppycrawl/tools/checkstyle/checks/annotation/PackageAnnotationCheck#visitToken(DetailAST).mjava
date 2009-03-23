@@ -1,0 +1,14 @@
+    /** {@inheritDoc} */
+    @Override
+    public void visitToken(final DetailAST aAST)
+    {
+        final boolean containsAnnotation =
+            AnnotationUtility.containsAnnotation(aAST);
+        final boolean inPackageInfo =
+            this.getFileContents().inPackageInfo();
+
+        if (containsAnnotation && !inPackageInfo) {
+            this.log(aAST.getLine(), "annotation.package.location");
+        }
+    }
+
