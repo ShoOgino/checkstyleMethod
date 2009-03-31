@@ -1,0 +1,18 @@
+    /**
+     * Gets the {@link SuppressWarnings SuppressWarnings} annotation
+     * that is annotating the AST.  If the annotation does not exist
+     * this method will return {@code null}.
+     *
+     * @param aAST the AST
+     * @return the {@link SuppressWarnings SuppressWarnings} annotation
+     */
+    private DetailAST getSuppressWarnings(DetailAST aAST)
+    {
+        final DetailAST annotation = AnnotationUtility.getAnnotation(
+            aAST, SuppressWarningsCheck.SUPPRESS_WARNINGS);
+
+        return (annotation != null) ? annotation
+            : AnnotationUtility.getAnnotation(
+                aAST, SuppressWarningsCheck.FQ_SUPPRESS_WARNINGS);
+    }
+

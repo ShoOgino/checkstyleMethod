@@ -6,7 +6,8 @@
             this.getFileContents().getJavadocBefore(aAST.getLineNo());
 
         final boolean containsAnnotation =
-            AnnotationUtility.containsAnnotation(aAST, DEPRECATED);
+            AnnotationUtility.containsAnnotation(aAST, DEPRECATED)
+            || AnnotationUtility.containsAnnotation(aAST, FQ_DEPRECATED);
 
         final boolean containsJavadocTag = this.containsJavadocTag(javadoc);
 

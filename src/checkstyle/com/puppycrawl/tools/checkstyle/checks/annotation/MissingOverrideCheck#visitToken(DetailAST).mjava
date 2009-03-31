@@ -25,7 +25,8 @@
         }
 
         if (containsTag
-            && !AnnotationUtility.containsAnnotation(aAST, OVERRIDE))
+            && (!AnnotationUtility.containsAnnotation(aAST, OVERRIDE)
+            && !AnnotationUtility.containsAnnotation(aAST, FQ_OVERRIDE)))
         {
             this.log(aAST.getLineNo(), "annotation.missing.override");
         }

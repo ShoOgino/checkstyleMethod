@@ -2,9 +2,7 @@
     @Override
     public void visitToken(final DetailAST aAST)
     {
-        final DetailAST annotation =
-            AnnotationUtility.getAnnotation(
-                aAST, SuppressWarningsCheck.SUPPRESS_WARNINGS);
+        final DetailAST annotation = this.getSuppressWarnings(aAST);
 
         if (annotation == null) {
             return;
