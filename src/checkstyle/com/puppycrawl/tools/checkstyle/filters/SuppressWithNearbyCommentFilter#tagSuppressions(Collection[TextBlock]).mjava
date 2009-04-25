@@ -3,10 +3,9 @@
      * set of suppression tags.
      * @param aComments the set of comments.
      */
-    private void tagSuppressions(Collection aComments)
+    private void tagSuppressions(Collection<TextBlock> aComments)
     {
-        for (final Iterator iter = aComments.iterator(); iter.hasNext();) {
-            final TextBlock comment = (TextBlock) iter.next();
+        for (TextBlock comment : aComments) {
             final int startLineNo = comment.getStartLineNo();
             final String[] text = comment.getText();
             tagCommentLine(text[0], startLineNo, comment.getStartColNo());

@@ -1,19 +1,18 @@
         /**
          * Compares the position of this tag in the file
          * with the position of another tag.
-         * @param aObject the tag to compare with this one.
+         * @param aOther the tag to compare with this one.
          * @return a negative number if this tag is before the other tag,
          * 0 if they are at the same position, and a positive number if this
          * tag is after the other tag.
          * @see java.lang.Comparable#compareTo(java.lang.Object)
          */
-        public int compareTo(Object aObject)
+        public int compareTo(Tag aOther)
         {
-            final Tag other = (Tag) aObject;
-            if (mFirstLine == other.mFirstLine) {
-                return mLastLine - other.mLastLine;
+            if (mFirstLine == aOther.mFirstLine) {
+                return mLastLine - aOther.mLastLine;
             }
 
-            return (mFirstLine - other.mFirstLine);
+            return (mFirstLine - aOther.mFirstLine);
         }
 
