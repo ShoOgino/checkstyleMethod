@@ -16,7 +16,7 @@
         case TokenTypes.ANNOTATION_DEF :
         case TokenTypes.ENUM_DEF :
         case TokenTypes.ENUM_CONSTANT_DEF :
-            startToken = (DetailAST) skipAnnotationOnlyLines(aAST);
+            startToken = skipAnnotationOnlyLines(aAST);
             final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
             brace = (objBlock == null)
                 ? null
@@ -37,7 +37,7 @@
 
         case TokenTypes.LITERAL_ELSE :
             startToken = aAST;
-            final DetailAST candidate = (DetailAST) aAST.getFirstChild();
+            final DetailAST candidate = aAST.getFirstChild();
             brace =
                 (candidate.getType() == TokenTypes.SLIST)
                 ? candidate
