@@ -12,7 +12,12 @@
         for (int i = 0; i < aGroups.length; i++) {
             String pkg = aGroups[i];
 
-            if (!pkg.endsWith(".")) {
+            // if the pkg name is the wildcard, record the
+            // position for later reference
+            if (WILDCARD_GROUP_NAME.equals(pkg)) {
+                mWildcardGroupIndex = i;
+            }
+            else if (!pkg.endsWith(".")) {
                 pkg = pkg + ".";
             }
 
