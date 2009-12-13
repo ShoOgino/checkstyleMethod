@@ -8,33 +8,19 @@
      *            'ignore' should be omitted, <code>false</code> otherwise
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
+     *
+     * @deprecated As this method does not provide a valid system ID,
+     *   preventing resolution of external entities, a
+     *   {@link #loadConfiguration(InputSource,PropertyResolver,boolean)
+     *          version using an InputSource}
+     *   should be used instead
      */
+    @Deprecated
     public static Configuration loadConfiguration(InputStream aConfigStream,
         PropertyResolver aOverridePropsResolver, boolean aOmitIgnoredModules)
         throws CheckstyleException
     {
-        try {
-            final ConfigurationLoader loader =
-                new ConfigurationLoader(aOverridePropsResolver,
-                                        aOmitIgnoredModules);
-            loader.parseInputStream(aConfigStream);
-            return loader.getConfiguration();
-        }
-        catch (final ParserConfigurationException e) {
-            throw new CheckstyleException(
-                "unable to parse configuration stream", e);
-        }
-        catch (final SAXParseException e) {
-            throw new CheckstyleException("unable to parse configuration stream"
-                    + " - " + e.getMessage() + ":" + e.getLineNumber()
-                    + ":" + e.getColumnNumber(), e);
-        }
-        catch (final SAXException e) {
-            throw new CheckstyleException("unable to parse configuration stream"
-                    + " - " + e.getMessage(), e);
-        }
-        catch (final IOException e) {
-            throw new CheckstyleException("unable to read from stream", e);
-        }
+        return loadConfiguration(new InputSource(aConfigStream),
+                                 aOverridePropsResolver, aOmitIgnoredModules);
     }
 
