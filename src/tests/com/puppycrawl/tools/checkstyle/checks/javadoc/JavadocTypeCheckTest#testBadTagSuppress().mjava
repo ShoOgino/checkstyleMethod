@@ -1,0 +1,13 @@
+    @Test
+    public void testBadTagSuppress() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("allowUnknownTags", "true");
+        final String[] expected = {
+        };
+        verify(checkConfig,
+               getPath("javadoc" + File.separator + "InputBadTag.java"),
+               expected);
+    }
+
