@@ -1,0 +1,33 @@
+    @Test
+    public void testCheckAccess()
+    {
+        assertEquals(AccessResult.DISALLOWED, pcCommon.checkAccess(
+                "org.springframework.something",
+                "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon.checkAccess(
+                "org.luiframework.something",
+                "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon.checkAccess(
+                "de.springframework.something",
+                "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon.checkAccess(
+                "de.luiframework.something",
+                "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.ALLOWED, pcCommon
+                .checkAccess("org.apache.commons.something",
+                        "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.ALLOWED, pcCommon
+                .checkAccess("org.lui.commons.something",
+                        "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon.checkAccess(
+                "org.apache.commons", "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon.checkAccess(
+                "org.lui.commons", "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.ALLOWED, pcCommon.checkAccess(
+                "org.hibernate.something", "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.DISALLOWED, pcCommon.checkAccess(
+                "com.badpackage.something", "com.kazgroup.courtlink.common"));
+        assertEquals(AccessResult.DISALLOWED, pcRoot.checkAccess(
+                "org.hibernate.something", "com.kazgroup.courtlink"));
+    }
+

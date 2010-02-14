@@ -22,15 +22,18 @@
             final boolean isAllow = "allow".equals(aQName);
             final boolean isLocalOnly = (aAtts.getValue("local-only") != null);
             final String pkg = aAtts.getValue("pkg");
+            final boolean regex = (aAtts.getValue("regex") != null);
             final Guard g;
             if (pkg != null) {
                 final boolean exactMatch =
                     (aAtts.getValue("exact-match") != null);
-                g = new Guard(isAllow, isLocalOnly, pkg, exactMatch);
+                g = new Guard(isAllow, isLocalOnly, pkg, exactMatch, regex);
             }
             else {
+                // handle class names which can be normal class names or regular
+                // expressions
                 final String clazz = safeGet(aAtts, "class");
-                g = new Guard(isAllow, isLocalOnly, clazz);
+                g = new Guard(isAllow, isLocalOnly, clazz, regex);
             }
 
             final PkgControl pc = mStack.peek();

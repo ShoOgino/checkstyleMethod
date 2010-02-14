@@ -7,7 +7,9 @@
     {
         assert aForImport != null;
         if (mClassName != null) {
-            final boolean classMatch = mClassName.equals(aForImport);
+            final boolean classMatch = mRegExp
+                ? aForImport.matches(mClassName)
+                : aForImport.equals(mClassName);
             return calculateResult(classMatch);
         }
 
@@ -16,10 +18,19 @@
         // In this case, the text after the first "." must not contain
         // another "." as this indicates that it is not an exact match.
         assert mPkgName != null;
-        //boolean pkgMatch = aForImport.startsWith(mPkgName + ".");
-        boolean pkgMatch = aForImport.startsWith(mPkgName + ".");
-        if (pkgMatch && mExactMatch) {
-            pkgMatch = (aForImport.indexOf('.', (mPkgName.length() + 1)) == -1);
+        boolean pkgMatch;
+        if (mRegExp) {
+            pkgMatch = aForImport.matches(mPkgName + "\\..*");
+            if (pkgMatch && mExactMatch) {
+                pkgMatch = !aForImport.matches(mPkgName + "\\..*\\..*");
+            }
+        }
+        else {
+            pkgMatch = aForImport.startsWith(mPkgName + ".");
+            if (pkgMatch && mExactMatch) {
+                pkgMatch = (aForImport.indexOf('.',
+                    (mPkgName.length() + 1)) == -1);
+            }
         }
         return calculateResult(pkgMatch);
     }

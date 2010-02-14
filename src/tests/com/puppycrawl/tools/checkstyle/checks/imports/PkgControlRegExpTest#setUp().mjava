@@ -1,0 +1,10 @@
+    @Before
+    public void setUp() throws Exception
+    {
+        pcRoot.addGuard(new Guard(false, false, ".*\\.(spring|lui)framework", false, true));
+        pcRoot.addGuard(new Guard(false, false, "org\\.hibernate", false, true));
+        pcRoot.addGuard(new Guard(true, false, "org\\.(apache|lui)\\.commons", false, true));
+
+        pcCommon.addGuard(new Guard(true, false, "org\\.h.*", false, true));
+    }
+
