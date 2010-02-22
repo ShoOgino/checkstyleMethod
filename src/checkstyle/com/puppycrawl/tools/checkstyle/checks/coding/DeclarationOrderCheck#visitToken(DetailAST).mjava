@@ -16,7 +16,9 @@
 
             state = mScopeStates.peek();
             if (state.mScopeState > STATE_CTOR_DEF) {
-                log(aAST, "declaration.order.constructor");
+                if (!mIgnoreConstructors) {
+                    log(aAST, "declaration.order.constructor");
+                }
             }
             else {
                 state.mScopeState = STATE_CTOR_DEF;
@@ -30,7 +32,9 @@
             }
 
             if (state.mScopeState > STATE_METHOD_DEF) {
-                log(aAST, "declaration.order.method");
+                if (!mIgnoreMethods) {
+                    log(aAST, "declaration.order.method");
+                }
             }
             else {
                 state.mScopeState = STATE_METHOD_DEF;
@@ -48,7 +52,9 @@
             state = mScopeStates.peek();
             if (aAST.findFirstToken(TokenTypes.LITERAL_STATIC) != null) {
                 if (state.mScopeState > STATE_STATIC_VARIABLE_DEF) {
-                    log(aAST, "declaration.order.static");
+                    if (!mIgnoreModifiers) {
+                        log(aAST, "declaration.order.static");
+                    }
                 }
                 else {
                     state.mScopeState = STATE_STATIC_VARIABLE_DEF;
@@ -56,7 +62,9 @@
             }
             else {
                 if (state.mScopeState > STATE_INSTANCE_VARIABLE_DEF) {
-                    log(aAST, "declaration.order.instance");
+                    if (!mIgnoreModifiers) {
+                        log(aAST, "declaration.order.instance");
+                    }
                 }
                 else if (state.mScopeState == STATE_STATIC_VARIABLE_DEF) {
                     state.mDeclarationAccess = Scope.PUBLIC;
@@ -66,7 +74,9 @@
 
             final Scope access = ScopeUtils.getScopeFromMods(aAST);
             if (state.mDeclarationAccess.compareTo(access) > 0) {
-                log(aAST, "declaration.order.access");
+                if (!mIgnoreModifiers) {
+                    log(aAST, "declaration.order.access");
+                }
             }
             else {
                 state.mDeclarationAccess = access;

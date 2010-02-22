@@ -1,0 +1,16 @@
+    @Test
+    public void testOnlyConstructors() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(DeclarationOrderCheck.class);
+        checkConfig.addAttribute("ignoreConstructors", "false");
+        checkConfig.addAttribute("ignoreMethods", "true");
+        checkConfig.addAttribute("ignoreModifiers", "true");
+
+        final String[] expected = {
+            "54:5: Constructor definition in wrong order.",
+            "152:5: Constructor definition in wrong order.",
+        };
+        verify(checkConfig, getPath("coding/InputDeclarationOrder.java"), expected);
+    }
+
