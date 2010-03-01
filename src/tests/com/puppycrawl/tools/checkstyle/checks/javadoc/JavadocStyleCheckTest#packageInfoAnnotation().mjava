@@ -1,15 +1,15 @@
     @Test
-    public void packageInfoMissing() throws Exception
+    public void packageInfoAnnotation() throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocStyleCheck.class);
         final String[] expected =
         {
-        	"1: Missing a Javadoc comment."
         };
 
         String basePath = "javadoc" + File.separator +
-    	"bothfiles" + File.separator;
+    	"pkginfo" + File.separator +
+    	"annotation" + File.separator;
 
         verify(createChecker(checkConfig),
         	getPath(basePath + "package-info.java"),
