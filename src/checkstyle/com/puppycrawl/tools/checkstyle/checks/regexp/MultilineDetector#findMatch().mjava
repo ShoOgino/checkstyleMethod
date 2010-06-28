@@ -6,26 +6,21 @@
             return;
         }
 
-        final int startLine = (mCharacters.get(mMatcher.start()))[0].intValue();
-        final int startColumn = (mCharacters.get(mMatcher.start()))[1]
-                .intValue();
-        final int endLine = (mCharacters.get(mMatcher.end() - 1))[0].intValue();
-        final int endColumn = (mCharacters.get(mMatcher.end() - 1))[1]
-                .intValue();
+        final LineColumn start = mText.lineColumn(mMatcher.start());
+        final LineColumn end = mText.lineColumn(mMatcher.end());
 
-
-        if (!mOptions.getSuppressor().shouldSuppress(startLine, startColumn,
-                endLine, endColumn))
+        if (!mOptions.getSuppressor().shouldSuppress(start.getLine(),
+                start.getColumn(), end.getLine(), end.getColumn()))
         {
             mCurrentMatches++;
             if (mCurrentMatches > mOptions.getMaximum()) {
                 if ("".equals(mOptions.getMessage())) {
-                    mOptions.getReporter().log(startLine, "regexp.exceeded",
-                            mMatcher.pattern().toString());
+                    mOptions.getReporter().log(start.getLine(),
+                            "regexp.exceeded", mMatcher.pattern().toString());
                 }
                 else {
                     mOptions.getReporter()
-                            .log(startLine, mOptions.getMessage());
+                            .log(start.getLine(), mOptions.getMessage());
                 }
             }
         }

@@ -1,0 +1,25 @@
+    /**
+     * Find positions of line breaks in the full text.
+     * @return an array giving the first positions of each line.
+     */
+    private int[] lineBreaks()
+    {
+        if (mLineBreaks == null) {
+            final int[] lineBreaks = new int[size() + 1];
+            lineBreaks[0] = 0;
+            int lineNo = 1;
+            final Matcher matcher = LINE_TERMINATOR.matcher(mFullText);
+            while (matcher.find()) {
+                lineBreaks[lineNo++] = matcher.end();
+            }
+            if (lineNo < lineBreaks.length) {
+                lineBreaks[lineNo++] = mFullText.length();
+            }
+            if (lineNo != lineBreaks.length) {
+                throw new ConcurrentModificationException("Text changed.");
+            }
+            mLineBreaks = lineBreaks;
+        }
+        return mLineBreaks;
+    }
+

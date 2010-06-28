@@ -3,13 +3,15 @@
         if (aFile != null) {
             try {
                 Main.frame.setTitle("Checkstyle : " + aFile.getName());
-                final DetailAST parseTree = parseFile(aFile.getAbsolutePath());
+                final FileText text = new FileText(aFile.getAbsoluteFile(),
+                                                   getEncoding());
+                final DetailAST parseTree = parseFile(text);
                 mParseTreeModel.setParseTree(parseTree);
                 mCurrentFile = aFile;
                 mLastDirectory = aFile.getParentFile();
                 reloadAction.setEnabled(true);
 
-                final String[] sourceLines = Utils.getLines(aFile.getAbsolutePath());
+                final String[] sourceLines = text.toLinesArray();
                 //clean the text area before inserting the lines of the new file
                 if (mJTextArea.getText().length() != 0) {
                     mJTextArea.replaceRange("", 0, mJTextArea.getText()

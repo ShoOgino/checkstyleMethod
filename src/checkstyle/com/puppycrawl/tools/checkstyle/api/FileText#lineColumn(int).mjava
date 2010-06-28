@@ -1,0 +1,20 @@
+    /**
+     * Determine line and column numbers in full text.
+     * @param aPos the character position in the full text
+     * @return the line and column numbers of this character
+     */
+    public LineColumn lineColumn(int aPos)
+    {
+        final int[] lineBreaks = lineBreaks();
+        int lineNo = Arrays.binarySearch(lineBreaks, aPos);
+        if (lineNo < 0) {
+            // we have: lineNo = -(insertion point) - 1
+            // we want: lineNo =  (insertion point) - 1
+            lineNo = -lineNo - 2;
+        }
+        final int startOfLine = lineBreaks[lineNo];
+        final int columnNo = aPos - startOfLine;
+        // now we have lineNo and columnNo, both starting at zero.
+        return new LineColumn(lineNo + 1, columnNo);
+    }
+

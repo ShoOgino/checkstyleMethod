@@ -20,11 +20,10 @@
             fireFileStarted(fileName);
             final TreeSet<LocalizedMessage> fileMessages = Sets.newTreeSet();
             try {
-                final String[] lines = Utils.getLines(f.getAbsolutePath(),
+                final FileText theText = new FileText(f.getAbsoluteFile(),
                         mCharset);
-                final List<String> theLines = Lists.newArrayList(lines);
                 for (FileSetCheck fsc : mFileSetChecks) {
-                    fileMessages.addAll(fsc.process(f, theLines));
+                    fileMessages.addAll(fsc.process(f, theText));
                 }
             }
             catch (final FileNotFoundException fnfe) {

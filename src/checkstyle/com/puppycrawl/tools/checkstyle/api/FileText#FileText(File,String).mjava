@@ -1,0 +1,64 @@
+    /**
+     * Creates a new file text representation.
+     *
+     * The file will be read using the specified encoding, replacing
+     * malformed input and unmappable characters with the default
+     * replacement character.
+     *
+     * @param aFile the name of the file
+     * @param aCharsetName the encoding to use when reading the file
+     * @throws NullPointerException if the text is null
+     * @throws IOException if the file could not be read
+     */
+    public FileText(File aFile, String aCharsetName) throws IOException
+    {
+        mFile = aFile;
+
+        // We use our own decoder, to be sure we have complete control
+        // about replacements.
+        final CharsetDecoder decoder;
+        try {
+            mCharset = Charset.forName(aCharsetName);
+            decoder = mCharset.newDecoder();
+            decoder.onMalformedInput(CodingErrorAction.REPLACE);
+            decoder.onUnmappableCharacter(CodingErrorAction.REPLACE);
+        }
+        catch (UnsupportedCharsetException ex) {
+            final String message = "Unsuppored charset: " + aCharsetName;
+            final UnsupportedEncodingException ex2;
+            ex2 = new UnsupportedEncodingException(message);
+            ex2.initCause(ex);
+            throw ex2;
+        }
+
+        final char[] chars = new char[READ_BUFFER_SIZE];
+        final StringBuilder buf = new StringBuilder();
+        final FileInputStream stream = new FileInputStream(aFile);
+        final Reader reader = new InputStreamReader(stream, decoder);
+        try {
+            while (true) {
+                final int len = reader.read(chars);
+                if (len < 0) {
+                    break;
+                }
+                buf.append(chars, 0, len);
+            }
+        }
+        finally {
+            Utils.closeQuietly(reader);
+        }
+        // buf.trimToSize(); // could be used instead of toString().
+        mFullText = buf.toString();
+
+        final String[] lines = LINE_TERMINATOR.split(mFullText, -1);
+        if (lines.length > 0 && lines[lines.length - 1].length() == 0) {
+            // drop empty line after last newline
+            mLines = new String[lines.length - 1];
+            System.arraycopy(lines, 0, mLines, 0, lines.length - 1);
+        }
+        else {
+            // no newline at end, so we keep the last line as is
+            mLines = lines;
+        }
+    }
+

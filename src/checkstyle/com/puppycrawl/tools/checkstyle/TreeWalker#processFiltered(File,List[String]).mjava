@@ -9,8 +9,8 @@
         }
 
         try {
-            final FileContents contents = new FileContents(fileName, aLines
-                    .toArray(new String[aLines.size()]));
+            final FileText text = FileText.fromLines(aFile, aLines);
+            final FileContents contents = new FileContents(text);
             final DetailAST rootAST = TreeWalker.parse(contents);
             walk(rootAST, contents);
         }

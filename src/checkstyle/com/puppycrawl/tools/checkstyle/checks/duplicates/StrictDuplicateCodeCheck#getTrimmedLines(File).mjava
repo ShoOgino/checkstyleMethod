@@ -15,7 +15,8 @@
             return cachedLines;
         }
         final String charset = mCharset;
-        final String[] lines = getTrimmed(Utils.getLines(path, charset));
+        final FileText text = new FileText(aFile, charset);
+        final String[] lines = getTrimmed(text.toLinesArray());
         mTrimmedLineCache.put(path, lines);
         return lines;
     }

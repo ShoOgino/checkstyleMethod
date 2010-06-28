@@ -12,8 +12,9 @@
     public static DetailAST parse(FileContents aContents)
         throws RecognitionException, TokenStreamException
     {
-        final Reader sar = new StringArrayReader(aContents.getLines());
-        final GeneratedJavaLexer lexer = new GeneratedJavaLexer(sar);
+        final String fullText = aContents.getText().getFullText().toString();
+        final Reader sr = new StringReader(fullText);
+        final GeneratedJavaLexer lexer = new GeneratedJavaLexer(sr);
         lexer.setFilename(aContents.getFilename());
         lexer.setCommentListener(aContents);
         lexer.setTreatAssertAsKeyword(true);

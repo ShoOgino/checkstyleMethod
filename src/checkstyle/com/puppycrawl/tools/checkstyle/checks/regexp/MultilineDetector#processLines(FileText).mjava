@@ -1,0 +1,13 @@
+    /**
+     * Processes an entire text file looking for matches.
+     * @param aText the text to process
+     */
+    public void processLines(FileText aText)
+    {
+        mText = aText;
+        resetState();
+        mMatcher = mOptions.getPattern().matcher(mText.getFullText());
+        findMatch();
+        finish();
+    }
+
