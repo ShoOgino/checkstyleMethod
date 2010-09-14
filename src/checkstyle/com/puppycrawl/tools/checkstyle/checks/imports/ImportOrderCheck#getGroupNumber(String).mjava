@@ -6,15 +6,26 @@
      */
     private int getGroupNumber(String aName)
     {
+        int bestIndex = mGroups.length;
+        int bestLength = -1;
+        int bestPos = 0;
+
         // find out what group this belongs in
         // loop over mGroups and get index
         for (int i = 0; i < mGroups.length; i++) {
-            if (aName.startsWith(mGroups[i])) {
-                return i;
+            final Matcher matcher = mGroups[i].matcher(aName);
+            while (matcher.find()) {
+                final int length = matcher.end() - matcher.start();
+                if ((length > bestLength)
+                    || ((length == bestLength) && (matcher.start() < bestPos)))
+                {
+                    bestIndex = i;
+                    bestLength = length;
+                    bestPos = matcher.start();
+                }
             }
         }
 
-        // no match, so we return the wildcard group
-        return mWildcardGroupIndex;
+        return bestIndex;
     }
 

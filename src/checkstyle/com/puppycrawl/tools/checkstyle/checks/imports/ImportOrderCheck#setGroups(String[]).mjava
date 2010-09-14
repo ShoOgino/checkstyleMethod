@@ -2,29 +2,36 @@
      * Sets the list of package groups and the order they should occur in the
      * file.
      *
-     * @param aGroups
-     *            a comma-separated list of package names/prefixes.
+     * @param aGroups a comma-separated list of package names/prefixes.
      */
     public void setGroups(String[] aGroups)
     {
-        // set the default wildcard group to be after the last named group.
-        mWildcardGroupIndex = aGroups.length;
-
-        mGroups = new String[aGroups.length];
+        mGroups = new Pattern[aGroups.length];
 
         for (int i = 0; i < aGroups.length; i++) {
             String pkg = aGroups[i];
+            Pattern grp;
 
-            // if the pkg name is the wildcard, record the
-            // position for later reference
+            // if the pkg name is the wildcard, make it match zero chars
+            // from any name, so it will always be used as last resort.
             if (WILDCARD_GROUP_NAME.equals(pkg)) {
-                mWildcardGroupIndex = i;
+                grp = Pattern.compile(""); // matches any package
             }
-            else if (!pkg.endsWith(".")) {
-                pkg = pkg + ".";
+            else if (pkg.startsWith("/")) {
+                if (!pkg.endsWith("/")) {
+                    throw new IllegalArgumentException("Invalid group");
+                }
+                pkg = pkg.substring(1, pkg.length() - 1);
+                grp = Pattern.compile(pkg);
+            }
+            else {
+                if (!pkg.endsWith(".")) {
+                    pkg = pkg + ".";
+                }
+                grp = Pattern.compile("^" + Pattern.quote(pkg));
             }
 
-            mGroups[i] = pkg;
+            mGroups[i] = grp;
         }
     }
 
