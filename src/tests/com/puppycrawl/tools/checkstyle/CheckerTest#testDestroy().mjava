@@ -1,10 +1,10 @@
     @Test
     public void testDestroy() throws Exception
     {
-        DebugChecker c= new DebugChecker();
-        DebugAuditAdapter aa = new DebugAuditAdapter();
+        final DebugChecker c= new DebugChecker();
+        final DebugAuditAdapter aa = new DebugAuditAdapter();
         c.addListener(aa);
-        DebugFilter f = new DebugFilter();
+        final DebugFilter f = new DebugFilter();
         c.addFilter(f);
 
         c.destroy(); // should remove al listeners and filters
@@ -15,7 +15,7 @@
         c.fireFileStarted("Some File Name");
         c.fireFileFinished("Some File Name");
 
-        TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
+        final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
         c.fireErrors("Some File Name", msgs);

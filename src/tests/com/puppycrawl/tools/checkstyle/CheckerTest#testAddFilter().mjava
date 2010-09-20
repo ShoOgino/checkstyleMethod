@@ -1,8 +1,8 @@
     @Test
     public void testAddFilter() throws Exception
     {
-        DebugChecker c= new DebugChecker();
-        DebugFilter f = new DebugFilter();
+        final DebugChecker c= new DebugChecker();
+        final DebugFilter f = new DebugFilter();
 
         c.addFilter(f);
 
@@ -27,7 +27,7 @@
 //         assertTrue("Checker.fireFileFinished() doesn't call filter", f.wasCalled());
 
         f.resetFilter();
-        TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
+        final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
         c.fireErrors("Some File Name", msgs);

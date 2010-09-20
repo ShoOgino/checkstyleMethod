@@ -1,8 +1,8 @@
     @Test
     public void testAddListener() throws Exception
     {
-        DebugChecker c= new DebugChecker();
-        DebugAuditAdapter aa = new DebugAuditAdapter();
+        final DebugChecker c= new DebugChecker();
+        final DebugAuditAdapter aa = new DebugAuditAdapter();
         c.addListener(aa);
 
         // Let's try fire some events
@@ -22,7 +22,7 @@
         assertTrue("Checker.fireFileFinished() doesn't call listener", aa.wasCalled());
 
         aa.resetListener();
-        TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
+        final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
         c.fireErrors("Some File Name", msgs);

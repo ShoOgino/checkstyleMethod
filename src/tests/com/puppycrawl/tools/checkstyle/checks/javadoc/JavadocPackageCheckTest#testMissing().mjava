@@ -2,14 +2,14 @@
     public void testMissing()
          throws Exception
     {
-        Configuration checkConfig = createCheckConfig(JavadocPackageCheck.class);
+        final Configuration checkConfig = createCheckConfig(JavadocPackageCheck.class);
         final String[] expected = {
             "0: Missing package-info.java file.",
         };
         verify(
             createChecker(checkConfig),
-            getPath("javadoc/BadCls.java"),
-            getPath("javadoc/BadCls.java"),
+            getSrcPath("checks/javadoc/BadCls.java"),
+            getSrcPath("checks/javadoc/BadCls.java"),
             expected);
     }
 
