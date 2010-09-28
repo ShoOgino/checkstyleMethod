@@ -1,12 +1,10 @@
     @Test
-    public void testDefault1() throws Exception
+    public void testQuiet() throws Exception
     {
         DefaultConfiguration checkConfig = createCheckConfig(PackageDeclarationCheck.class);
-        final String dname = "com/puppycrawl/tools/checkstyle/checks/coding"
-            .replace('/', File.separatorChar);
+        checkConfig.addAttribute("ignoreDirectoryName", "true");
 
         String[] expected = {
-            "1:9: Package declaration does not match directory '" + dname + "'."
         };
 
         verify(checkConfig, getPath("coding" + File.separator + "InputIllegalCatchCheck.java"), expected);
