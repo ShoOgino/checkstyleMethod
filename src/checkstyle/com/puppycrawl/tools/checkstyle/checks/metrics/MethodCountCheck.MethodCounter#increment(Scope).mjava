@@ -4,6 +4,12 @@
          */
         void increment(Scope aScope)
         {
-            mCounts.put(aScope, 1 + value(aScope));
+            mTotal++;
+            if (mInInterface) {
+                mCounts.put(Scope.PUBLIC, 1 + value(Scope.PUBLIC));
+            }
+            else {
+                mCounts.put(aScope, 1 + value(aScope));
+            }
         }
 
