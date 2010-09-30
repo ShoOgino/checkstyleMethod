@@ -4,8 +4,8 @@
         if ((TokenTypes.CLASS_DEF == aAST.getType())
             || (TokenTypes.INTERFACE_DEF == aAST.getType()))
         {
-            checkCounters(aAST);
-            cleanupTypeDef();
+            final MethodCounter counter = mCounters.pop();
+            checkCounters(counter, aAST);
         }
     }
 

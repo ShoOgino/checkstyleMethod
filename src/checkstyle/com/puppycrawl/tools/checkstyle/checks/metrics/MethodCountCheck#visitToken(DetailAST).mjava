@@ -4,8 +4,7 @@
         if ((TokenTypes.CLASS_DEF == aAST.getType())
             || (TokenTypes.INTERFACE_DEF == aAST.getType()))
         {
-            initTypeDef();
-            resetCounters();
+            mCounters.push(new MethodCounter());
         }
         else if (TokenTypes.METHOD_DEF == aAST.getType()) {
             raiseCounter(aAST);

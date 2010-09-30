@@ -1,0 +1,14 @@
+    /**
+     * Utility for reporting if a maximum has been exceeded.
+     * @param aMax the maximum allowed value
+     * @param aValue the actual value
+     * @param aMsg the message to log. Takes two arguments of value and maximum.
+     * @param aAst the AST to associate with the message.
+     */
+    private void checkMax(int aMax, int aValue, String aMsg, DetailAST aAst)
+    {
+        if (aMax < aValue) {
+            log(aAst.getLineNo(), aMsg, aValue, aMax);
+        }
+    }
+
