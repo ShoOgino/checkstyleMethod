@@ -1,0 +1,18 @@
+    @Override
+    public void visitToken(DetailAST aAst)
+    {
+        switch (aAst.getType()) {
+        case TokenTypes.EXPR:
+            startStatement(aAst);
+            break;
+        case TokenTypes.SEMI:
+            startSemi(aAst);
+            break;
+        case TokenTypes.FOR_INIT:
+            mInForHeader = true;
+            break;
+        default:
+            break;
+        }
+    }
+

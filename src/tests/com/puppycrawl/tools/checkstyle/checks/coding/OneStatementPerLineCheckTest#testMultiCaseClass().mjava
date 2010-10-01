@@ -1,0 +1,12 @@
+    @Test
+    public void testMultiCaseClass() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(OneStatementPerLineCheck.class);
+        final String[] expected = {
+            "99:18: Only one statement per line allowed.",
+            "127:11: Only one statement per line allowed.",};
+
+        verify(checkConfig,
+            getSrcPath("checks/coding/OneStatementPerLineCheckInput.java"),
+            expected);
+    }
+

@@ -1,0 +1,13 @@
+    /**
+     * Mark the state-change for the statement (leaving) and remember the last
+     * line of the last statement.
+     * @param aAst for the {@link TokenTypes#SEMI}.
+     */
+    private void startSemi(DetailAST aAst)
+    {
+        mExprDepth--;
+        if (mExprDepth == 0) {
+            mLastStatementEnd = aAst.getLineNo();
+        }
+    }
+
