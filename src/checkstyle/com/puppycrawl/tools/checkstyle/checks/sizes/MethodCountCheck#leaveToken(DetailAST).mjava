@@ -2,7 +2,9 @@
     public void leaveToken(DetailAST aAST)
     {
         if ((TokenTypes.CLASS_DEF == aAST.getType())
-            || (TokenTypes.INTERFACE_DEF == aAST.getType()))
+            || (TokenTypes.INTERFACE_DEF == aAST.getType())
+            || (TokenTypes.ENUM_CONSTANT_DEF == aAST.getType())
+            || (TokenTypes.ENUM_DEF == aAST.getType()))
         {
             final MethodCounter counter = mCounters.pop();
             checkCounters(counter, aAST);

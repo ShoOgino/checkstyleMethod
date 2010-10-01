@@ -2,7 +2,9 @@
     public void visitToken(DetailAST aAST)
     {
         if ((TokenTypes.CLASS_DEF == aAST.getType())
-            || (TokenTypes.INTERFACE_DEF == aAST.getType()))
+            || (TokenTypes.INTERFACE_DEF == aAST.getType())
+            || (TokenTypes.ENUM_CONSTANT_DEF == aAST.getType())
+            || (TokenTypes.ENUM_DEF == aAST.getType()))
         {
             mCounters.push(new MethodCounter(
                 TokenTypes.INTERFACE_DEF == aAST.getType()));
