@@ -1,11 +1,9 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        if (inIgnoreList(aAST)) {
-            return;
-        }
-
-        if (mIgnoreHashCodeMethod && isInHashCodeMethod(aAST)) {
+        if (inIgnoreList(aAST)
+            || (mIgnoreHashCodeMethod && isInHashCodeMethod(aAST)))
+        {
             return;
         }
 

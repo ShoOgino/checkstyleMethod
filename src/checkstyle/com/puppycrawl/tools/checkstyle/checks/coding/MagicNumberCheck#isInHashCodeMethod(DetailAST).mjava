@@ -15,35 +15,35 @@
         if (!ScopeUtils.inCodeBlock(aAST)) {
             return false;
         }
-
+    
         // find the method definition AST
         DetailAST methodDefAST = aAST.getParent();
-        while (methodDefAST != null
-                && methodDefAST.getType() != TokenTypes.METHOD_DEF)
+        while ((null != methodDefAST)
+                && (TokenTypes.METHOD_DEF != methodDefAST.getType()))
         {
             methodDefAST = methodDefAST.getParent();
         }
-
-        if (methodDefAST == null) {
+    
+        if (null == methodDefAST) {
             return false;
         }
-
-        // chech for 'hashCode' name
+    
+        // Check for 'hashCode' name.
         final DetailAST identAST =
-                methodDefAST.findFirstToken(TokenTypes.IDENT);
-        System.out.println(identAST);
+            methodDefAST.findFirstToken(TokenTypes.IDENT);
         if (!"hashCode".equals(identAST.getText())) {
             return false;
         }
-
-        // check for no arguments
+    
+        // Check for no arguments.
         final DetailAST paramAST =
-                methodDefAST.findFirstToken(TokenTypes.PARAMETERS);
-        if (paramAST.getChildCount() != 0) {
+            methodDefAST.findFirstToken(TokenTypes.PARAMETERS);
+        if (0 != paramAST.getChildCount()) {
             return false;
         }
-
-        // we are in a 'public int hashCode()' method!
+    
+        // we are in a 'public int hashCode()' method! The compiler will ensure
+        // the method returns an 'int' and is public.
         return true;
     }
 
