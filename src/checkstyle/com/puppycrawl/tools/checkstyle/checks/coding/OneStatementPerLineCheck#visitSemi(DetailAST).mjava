@@ -3,9 +3,8 @@
      * line of the last statement.
      * @param aAst for the {@link TokenTypes#SEMI}.
      */
-    private void startSemi(DetailAST aAst)
+    private void visitSemi(DetailAST aAst)
     {
-        mExprDepth--;
         if (mExprDepth == 0) {
             mLastStatementEnd = aAst.getLineNo();
         }
