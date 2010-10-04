@@ -5,6 +5,10 @@
             return;
         }
 
+        if (mIgnoreHashCodeMethod && isInHashCodeMethod(aAST)) {
+            return;
+        }
+
         final DetailAST constantDefAST = findContainingConstantDef(aAST);
 
         if (constantDefAST == null) {
