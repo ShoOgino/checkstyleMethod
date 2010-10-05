@@ -4,13 +4,22 @@
      */
     private void visitClassDef(DetailAST aAST)
     {
+        final String className =
+            aAST.findFirstToken(TokenTypes.IDENT).getText();
         if (isAbstract(aAST)) {
-            final String className =
-                aAST.findFirstToken(TokenTypes.IDENT).getText();
-
-            if (!isMatchingClassName(className)) {
+            // if class has abstract modifier
+            if (mCheckName && !isMatchingClassName(className)) {
                 log(aAST.getLineNo(), aAST.getColumnNo(),
                     "illegal.abstract.class.name", className, getFormat());
+            }
+        }
+        else {
+            // if class without abstract modifier
+            if (mCheckAbstractModifier
+                    && isMatchingClassName(className))
+            {
+                log(aAST.getLineNo(), aAST.getColumnNo(),
+                        "no.abstract.class.modifier", className);
             }
         }
     }

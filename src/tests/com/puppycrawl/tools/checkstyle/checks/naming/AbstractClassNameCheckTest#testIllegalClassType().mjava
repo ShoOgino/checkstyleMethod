@@ -1,0 +1,15 @@
+    @Test
+    // ^Abstract.*$|^.*Factory$ --> abstract
+	public void testIllegalClassType() throws Exception {
+		final DefaultConfiguration checkConfig = createCheckConfig(AbstractClassNameCheck.class);
+        final String[] expected = {
+                "26:1: Class 'AbstractClass' must has abstract modifier.",
+                "29:1: Class 'Class1Factory' must has abstract modifier.",
+                "33:5: Class 'AbstractInnerClass' must has abstract modifier.",
+                "38:5: Class 'WellNamedFactory' must has abstract modifier.",
+                };
+        checkConfig.addAttribute("checkName", "false");
+        checkConfig.addAttribute("checkModifier", "true");
+		verify(checkConfig, getPath("naming" + File.separator + "InputAbstractClassName.java"), expected);
+    }
+
