@@ -1,12 +1,8 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        switch (aAST.getType()) {
-        case TokenTypes.CLASS_DEF:
+        if (TokenTypes.CLASS_DEF == aAST.getType()) {
             visitClassDef(aAST);
-            break;
-        default:
-            throw new IllegalStateException(aAST.toString());
         }
     }
 
