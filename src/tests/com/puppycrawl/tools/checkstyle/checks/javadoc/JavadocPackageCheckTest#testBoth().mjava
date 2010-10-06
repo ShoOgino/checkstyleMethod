@@ -2,7 +2,9 @@
     public void testBoth() throws Exception
     {
         final Configuration checkConfig = createCheckConfig(JavadocPackageCheck.class);
-        final String[] expected = {"0: Legacy package.html file should be removed.",};
+        final String[] expected = {
+            "0: Legacy package.html file should be removed.",
+        };
         verify(createChecker(checkConfig),
             getPath("javadoc/bothfiles/Ignored.java"),
             getPath("javadoc/bothfiles/Ignored.java"), expected);

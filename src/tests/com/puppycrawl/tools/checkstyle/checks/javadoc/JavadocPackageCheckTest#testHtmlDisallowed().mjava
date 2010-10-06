@@ -2,7 +2,9 @@
     public void testHtmlDisallowed() throws Exception
     {
         final Configuration checkConfig = createCheckConfig(JavadocPackageCheck.class);
-        final String[] expected = {"0: Missing package-info.java file.",};
+        final String[] expected = {
+            "0: Missing package-info.java file.",
+        };
         verify(createChecker(checkConfig),
             getPath("javadoc/pkghtml/Ignored.java"),
             getPath("javadoc/pkghtml/Ignored.java"), expected);

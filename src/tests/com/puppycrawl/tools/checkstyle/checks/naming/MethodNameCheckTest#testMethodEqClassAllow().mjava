@@ -1,20 +1,20 @@
     @Test
     public void testMethodEqClassAllow() throws Exception
     {
-         final DefaultConfiguration checkConfig =
-             createCheckConfig(MethodNameCheck.class);
-         checkConfig.addAttribute("allowClassName", "true"); //allow method names and class names to equal
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(MethodNameCheck.class);
+        checkConfig.addAttribute("allowClassName", "true"); //allow method names and class names to equal
 
-         final String[] expected = {
-                 "12:16: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-                 "17:17: Name 'PRIVATEInputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-                 "23:20: Name 'Inner' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-                 "28:20: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-                 "37:24: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-                 "47:9: Name 'SweetInterface' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-                 "53:17: Name 'Outter' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-         };
+        final String[] expected = {
+            "12:16: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "17:17: Name 'PRIVATEInputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "23:20: Name 'Inner' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "28:20: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "37:24: Name 'InputMethNameEqualClsName' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "47:9: Name 'SweetInterface' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "53:17: Name 'Outter' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+        };
 
-         verify(checkConfig, getPath("InputMethNameEqualClsName.java"), expected);
+        verify(checkConfig, getPath("InputMethNameEqualClsName.java"), expected);
     }
 

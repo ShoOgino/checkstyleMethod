@@ -3,14 +3,15 @@
      * @throws Exception
      */
     @Test
-    public void testExpandedNoUncheckedTokens() throws Exception {
+    public void testExpandedNoUncheckedTokens() throws Exception
+    {
         DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
         checkConfig.addAttribute("format", "^unchecked$*");
         checkConfig.addAttribute("tokens", "CLASS_DEF");
-        
+
         final String[] expected = {
             "5:26: The warning 'unchecked' cannot be suppressed at this location.",
-            
+
             "64:40: The warning 'unchecked' cannot be suppressed at this location.",
             "64:68: The warning 'unchecked' cannot be suppressed at this location.",
         };

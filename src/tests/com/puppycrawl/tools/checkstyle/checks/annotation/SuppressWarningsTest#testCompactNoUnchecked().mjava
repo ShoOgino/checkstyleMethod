@@ -3,10 +3,11 @@
      * @throws Exception
      */
     @Test
-    public void testCompactNoUnchecked() throws Exception {
+    public void testCompactNoUnchecked() throws Exception
+    {
         DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
         checkConfig.addAttribute("format", "^unchecked$*");
-        
+
         final String[] expected = {
             "5:20: The warning 'unchecked' cannot be suppressed at this location.",
             "11:28: The warning 'unchecked' cannot be suppressed at this location.",
@@ -24,6 +25,6 @@
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsCompact.java"), expected);
-        
+
     }
 

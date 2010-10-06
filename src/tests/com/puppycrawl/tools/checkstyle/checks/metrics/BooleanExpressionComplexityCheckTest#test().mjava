@@ -1,11 +1,12 @@
     @Test
-    public void test() throws Exception {
+    public void test() throws Exception
+    {
         DefaultConfiguration checkConfig =
             createCheckConfig(BooleanExpressionComplexityCheck.class);
 
         String[] expected = {
-                "13:9: Boolean expression complexity is 4 (max allowed is 3).",
-                "32:9: Boolean expression complexity is 6 (max allowed is 3).",
+            "13:9: Boolean expression complexity is 4 (max allowed is 3).",
+            "32:9: Boolean expression complexity is 6 (max allowed is 3).",
         };
 
         verify(checkConfig, getPath("metrics" + File.separator + "BooleanExpressionComplexityCheckTestInput.java"), expected);

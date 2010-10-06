@@ -1,5 +1,6 @@
     @Test
-    public void testIntegerOverflow() throws Exception {
+    public void testIntegerOverflow() throws Exception
+    {
         DefaultConfiguration checkConfig =
             createCheckConfig(NPathComplexityCheck.class);
 
@@ -10,7 +11,7 @@
         final String expectedComplexity = NumberFormat.getInstance().format(largerThanMaxInt);
 
         String[] expected = {
-            "9:5: NPath Complexity is " + expectedComplexity + " (max allowed is 0)."
+            "9:5: NPath Complexity is " + expectedComplexity + " (max allowed is 0).",
         };
 
         verify(checkConfig, getPath("ComplexityOverflow.java"), expected);

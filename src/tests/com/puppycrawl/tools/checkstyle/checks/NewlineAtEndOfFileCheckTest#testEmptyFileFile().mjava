@@ -1,12 +1,11 @@
     @Test
-    public void testEmptyFileFile()
-         throws Exception
+    public void testEmptyFileFile() throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(NewlineAtEndOfFileCheck.class);
         checkConfig.addAttribute("lineSeparator", LineSeparatorOption.LF.toString());
         final String[] expected = {
-            "0: File does not end with a newline."
+            "0: File does not end with a newline.",
         };
         verify(
             createChecker(checkConfig),

@@ -1,13 +1,12 @@
     @Test
-    public void testIllegalFailBelowErrorLimit()
-            throws Exception
+    public void testIllegalFailBelowErrorLimit() throws Exception
     {
         final String illegal = "^import";
         mCheckConfig.addAttribute("format", illegal);
         final String[] expected = {
             "7: Line matches the illegal pattern '" + illegal + "'.",
             "8: Line matches the illegal pattern '" + illegal + "'.",
-            "9: Line matches the illegal pattern '" + illegal + "'."
+            "9: Line matches the illegal pattern '" + illegal + "'.",
         };
         verify(mCheckConfig, getPath("InputSemantic.java"), expected);
     }

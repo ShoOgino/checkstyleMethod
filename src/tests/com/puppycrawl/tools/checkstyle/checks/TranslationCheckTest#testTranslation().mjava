@@ -1,14 +1,13 @@
     @Test
-    public void testTranslation()
-         throws Exception
+    public void testTranslation() throws Exception
     {
         final Configuration checkConfig = createCheckConfig(TranslationCheck.class);
         final String[] expected = {
-            "0: Key 'only.english' missing."
+            "0: Key 'only.english' missing.",
         };
         final File[] propertyFiles = new File[] {
             new File(getPath("messages_de.properties")),
-            new File(getPath("messages.properties"))
+            new File(getPath("messages.properties")),
         };
         verify(
             createChecker(checkConfig),

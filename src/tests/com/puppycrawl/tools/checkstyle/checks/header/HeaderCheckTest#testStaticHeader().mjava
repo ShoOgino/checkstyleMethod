@@ -1,13 +1,12 @@
     @Test
-    public void testStaticHeader()
-            throws Exception
+    public void testStaticHeader() throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(HeaderCheck.class);
         checkConfig.addAttribute("headerFile", getPath("java.header"));
         checkConfig.addAttribute("ignoreLines", "");
         final String[] expected = {
-            "1: Missing a header - not enough lines in file."
+            "1: Missing a header - not enough lines in file.",
         };
         verify(checkConfig, getPath("inputHeader.java"), expected);
     }

@@ -1,5 +1,6 @@
     @Test
-    public void test() throws Exception {
+    public void test() throws Exception
+    {
         DefaultConfiguration checkConfig = createCheckConfig(ClassFanOutComplexityCheck.class);
 
         checkConfig.addAttribute("max", "0");
@@ -10,6 +11,8 @@
             "27:1: Class Fan-Out Complexity is 4 (max allowed is 0).",
         };
 
-        verify(checkConfig, getPath("metrics" + File.separator +"ClassCouplingCheckTestInput.java"), expected);
+        verify(checkConfig,
+               getPath("metrics" + File.separator + "ClassCouplingCheckTestInput.java"),
+               expected);
     }
 

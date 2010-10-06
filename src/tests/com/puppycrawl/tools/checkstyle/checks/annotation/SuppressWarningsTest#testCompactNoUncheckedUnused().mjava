@@ -3,10 +3,11 @@
      * @throws Exception
      */
     @Test
-    public void testCompactNoUncheckedUnused() throws Exception {
+    public void testCompactNoUncheckedUnused() throws Exception
+    {
         DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
         checkConfig.addAttribute("format", "^unchecked$*|^unused$");
-        
+
         final String[] expected = {
             "5:20: The warning 'unchecked' cannot be suppressed at this location.",
             "5:33: The warning 'unused' cannot be suppressed at this location.",
@@ -16,7 +17,7 @@
             "29:36: The warning 'unchecked' cannot be suppressed at this location.",
             "47:28: The warning 'unused' cannot be suppressed at this location.",
             "56:28: The warning 'unchecked' cannot be suppressed at this location.",
-            "59:49: The warning 'unchecked' cannot be suppressed at this location.",       
+            "59:49: The warning 'unchecked' cannot be suppressed at this location.",
             "64:34: The warning 'unchecked' cannot be suppressed at this location.",
             "64:62: The warning 'unchecked' cannot be suppressed at this location.",
             "67:43: The warning 'unchecked' cannot be suppressed at this location.",
@@ -30,7 +31,7 @@
             "82:115: The warning 'unused' cannot be suppressed at this location.",
             "82:135: The warning 'unchecked' cannot be suppressed at this location.",
             "82:202: The warning 'unused' cannot be suppressed at this location.",
-            };
+        };
 
         verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsCompact.java"), expected);
     }

@@ -3,10 +3,11 @@
      * @throws Exception
      */
     @Test
-    public void testSingleNoUncheckedUnused() throws Exception {
+    public void testSingleNoUncheckedUnused() throws Exception
+    {
         DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
         checkConfig.addAttribute("format", "^unchecked$*|^unused$");
-        
+
         final String[] expected = {
             "5:19: The warning 'unchecked' cannot be suppressed at this location.",
             "17:23: The warning 'unused' cannot be suppressed at this location.",
@@ -15,7 +16,7 @@
             "47:27: The warning 'unused' cannot be suppressed at this location.",
             "56:27: The warning 'unchecked' cannot be suppressed at this location.",
             "59:48: The warning 'unchecked' cannot be suppressed at this location.",
-            
+
             "64:33: The warning 'unchecked' cannot be suppressed at this location.",
             "67:42: The warning 'unchecked' cannot be suppressed at this location.",
             "72:54: The warning 'unused' cannot be suppressed at this location.",

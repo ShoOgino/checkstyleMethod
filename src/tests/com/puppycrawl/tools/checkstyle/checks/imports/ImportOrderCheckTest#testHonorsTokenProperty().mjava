@@ -1,13 +1,13 @@
     @Test
     public void testHonorsTokenProperty() throws Exception
     {
-      final DefaultConfiguration checkConfig =
-        createCheckConfig(ImportOrderCheck.class);
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
         checkConfig.addAttribute("tokens", "IMPORT");
         final String[] expected = {
             "6: Wrong order for 'java.awt.Button' import.",
         };
 
-    verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_HonorsTokensProperty.java"), expected);
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_HonorsTokensProperty.java"), expected);
     }
 

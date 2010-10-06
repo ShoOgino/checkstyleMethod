@@ -1,13 +1,12 @@
     @Test
-    public void testIgnoreCommentsFalseCppStyle()
-            throws Exception
+    public void testIgnoreCommentsFalseCppStyle() throws Exception
     {
         // See if the comment is removed properly
         final String illegal = "don't use trailing comments";
         mCheckConfig.addAttribute("format", illegal);
         mCheckConfig.addAttribute("ignoreComments", "false");
         final String[] expected = {
-            "2: Line matches the illegal pattern '" + illegal + "'."
+            "2: Line matches the illegal pattern '" + illegal + "'.",
         };
         verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
     }

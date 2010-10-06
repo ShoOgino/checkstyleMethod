@@ -1,6 +1,5 @@
     @Test
-    public void testIgnoreCaseFalse()
-            throws Exception
+    public void testIgnoreCaseFalse() throws Exception
     {
         final String illegalTrue = "(?i)SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
         final DefaultConfiguration checkConfigTrue =
@@ -8,7 +7,8 @@
         checkConfigTrue.addAttribute("format", illegalTrue);
         checkConfigTrue.addAttribute("illegalPattern", "true");
         final String[] expectedTrue = {
-            "69: Line matches the illegal pattern '" + illegalTrue + "'."};
+            "69: Line matches the illegal pattern '" + illegalTrue + "'.",
+        };
         verify(checkConfigTrue, getPath("InputSemantic.java"), expectedTrue);
 
         final String illegalFalse = "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";

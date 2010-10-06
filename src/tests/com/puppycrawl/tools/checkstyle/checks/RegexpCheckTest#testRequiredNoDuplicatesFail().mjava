@@ -1,6 +1,5 @@
     @Test
-    public void testRequiredNoDuplicatesFail()
-            throws Exception
+    public void testRequiredNoDuplicatesFail() throws Exception
     {
         final String required = "Boolean x = new Boolean";
         final DefaultConfiguration checkConfig =
@@ -8,7 +7,7 @@
         checkConfig.addAttribute("format", required);
         checkConfig.addAttribute("duplicateLimit", "0");
         final String[] expected = {
-            "24: Found duplicate pattern '" + required + "'."
+            "24: Found duplicate pattern '" + required + "'.",
         };
         verify(checkConfig, getPath("InputSemantic.java"), expected);
     }
