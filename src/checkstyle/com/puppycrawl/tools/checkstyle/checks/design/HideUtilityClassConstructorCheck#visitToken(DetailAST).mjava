@@ -1,10 +1,17 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
+        if (isAbstract(aAST)) {
+            // abstract class could not have private constructor
+            return;
+        }
+
         final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
         DetailAST child = objBlock.getFirstChild();
+        final boolean hasStaticModifier = isStatic(aAST);
         boolean hasMethodOrField = false;
         boolean hasNonStaticMethodOrField = false;
+        boolean hasNonPrivateStaticMethodOrField = false;
         boolean hasDefaultCtor = true;
         boolean hasPublicCtor = false;
 
@@ -23,6 +30,9 @@
 
                 if (!isStatic && !isPrivate) {
                     hasNonStaticMethodOrField = true;
+                }
+                if (isStatic && !isPrivate) {
+                    hasNonPrivateStaticMethodOrField = true;
                 }
             }
             if (type == TokenTypes.CTOR_DEF) {
@@ -50,10 +60,10 @@
         final boolean extendsJLO = // J.Lo even made it into in our sources :-)
             aAST.findFirstToken(TokenTypes.EXTENDS_CLAUSE) == null;
 
-        final boolean isUtilClass =
-            extendsJLO && hasMethodOrField && !hasNonStaticMethodOrField;
+        final boolean isUtilClass = extendsJLO && hasMethodOrField
+            && !hasNonStaticMethodOrField && hasNonPrivateStaticMethodOrField;
 
-        if (isUtilClass && hasAccessibleCtor) {
+        if (isUtilClass && (hasAccessibleCtor && !hasStaticModifier)) {
             log(aAST.getLineNo(), aAST.getColumnNo(), "hide.utility.class");
         }
     }

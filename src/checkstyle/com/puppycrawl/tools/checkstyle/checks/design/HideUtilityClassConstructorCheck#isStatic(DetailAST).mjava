@@ -1,0 +1,10 @@
+    /**
+     * @param aAST class definition for check.
+     * @return true if a given class declared as static.
+     */
+    private boolean isStatic(DetailAST aAST)
+    {
+        return aAST.findFirstToken(TokenTypes.MODIFIERS)
+            .branchContains(TokenTypes.LITERAL_STATIC);
+    }
+
