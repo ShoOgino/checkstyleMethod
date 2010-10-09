@@ -1,0 +1,13 @@
+    /**
+     * Gets the full import identifier.  If the import is a starred import and
+     * it's not excluded then a violation is logged.
+     * @param aStartingDot the starting dot for the import statement
+     */
+    private void logsStarredImportViolation(DetailAST aStartingDot)
+    {
+        final FullIdent name = FullIdent.createFullIdent(aStartingDot);
+        if (isStaredImport(name) && !mExcludes.contains(name.getText())) {
+            log(aStartingDot.getLineNo(), "import.avoidStar", name.getText());
+        }
+    }
+

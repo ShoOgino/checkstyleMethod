@@ -6,6 +6,9 @@
      */
     public void setExcludes(String[] aExcludes)
     {
-        mExcludes = appendDotStar(aExcludes);
+        mExcludes.clear();
+        for (final String exclude : aExcludes) {
+            mExcludes.add(exclude.endsWith(".*") ? exclude : exclude + ".*");
+        }
     }
 

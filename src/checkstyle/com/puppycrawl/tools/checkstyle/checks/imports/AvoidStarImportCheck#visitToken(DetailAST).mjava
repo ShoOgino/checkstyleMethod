@@ -1,20 +1,16 @@
     @Override
     public void visitToken(final DetailAST aAST)
     {
-        if (!mAllowClassImports
-            && aAST.getType() == TokenTypes.IMPORT)
-        {
-            final DetailAST startingDot =
-                aAST.getFirstChild();
-            logsStarredImportViolation(startingDot, mExcludes);
+        if (!mAllowClassImports && (TokenTypes.IMPORT == aAST.getType())) {
+            final DetailAST startingDot = aAST.getFirstChild();
+            logsStarredImportViolation(startingDot);
         }
         else if (!mAllowStaticMemberImports
-            && aAST.getType() == TokenTypes.STATIC_IMPORT)
+            && (TokenTypes.STATIC_IMPORT == aAST.getType()))
         {
-            //must navigate past the static keyword
-            final DetailAST startingDot =
-                aAST.getFirstChild().getNextSibling();
-            logsStarredImportViolation(startingDot, mExcludes);
+            // must navigate past the static keyword
+            final DetailAST startingDot = aAST.getFirstChild().getNextSibling();
+            logsStarredImportViolation(startingDot);
         }
     }
 
