@@ -1,17 +1,20 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(final DetailAST aAST)
     {
-        final FullIdent name = FullIdent.createFullIdentBelow(aAST);
-        if ((name != null) && name.getText().endsWith(".*")) {
-            boolean exempt = false;
-            for (int i = 0; (i < mExcludes.length) && !exempt; i++) {
-                if (name.getText().equals(mExcludes[i])) {
-                    exempt = true;
-                }
-            }
-            if (!exempt) {
-                log(aAST.getLineNo(), "import.avoidStar", name.getText());
-            }
+        if (!mAllowClassImports
+            && aAST.getType() == TokenTypes.IMPORT)
+        {
+            final DetailAST startingDot =
+                aAST.getFirstChild();
+            logsStarredImportViolation(startingDot, mExcludes);
+        }
+        else if (!mAllowStaticMemberImports
+            && aAST.getType() == TokenTypes.STATIC_IMPORT)
+        {
+            //must navigate past the static keyword
+            final DetailAST startingDot =
+                aAST.getFirstChild().getNextSibling();
+            logsStarredImportViolation(startingDot, mExcludes);
         }
     }
 

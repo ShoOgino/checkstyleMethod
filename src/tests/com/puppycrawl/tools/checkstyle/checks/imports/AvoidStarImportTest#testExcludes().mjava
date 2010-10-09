@@ -4,10 +4,12 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(AvoidStarImportCheck.class);
-        checkConfig.addAttribute("excludes", "java.io,java.lang");
-        // allow the java.io/java.lang star imports
+        checkConfig.addAttribute("excludes",
+            "java.io,java.lang,javax.swing.WindowConstants.*, javax.swing.WindowConstants");
+        // allow the java.io/java.lang,javax.swing.WindowConstants star imports
         final String[] expected2 = new String[] {
             "7: Using the '.*' form of import should be avoided - com.puppycrawl.tools.checkstyle.imports.*.",
+            "28: Using the '.*' form of import should be avoided - sun.net.ftpclient.FtpClient.*.",
         };
         verify(checkConfig, getPath("imports" + File.separator + "InputImport.java"), expected2);
     }

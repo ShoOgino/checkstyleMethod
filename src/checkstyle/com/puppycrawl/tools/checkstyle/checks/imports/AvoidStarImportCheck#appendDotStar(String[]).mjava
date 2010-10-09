@@ -1,0 +1,20 @@
+    /**
+     * Appends a .* to the end of the string in a given
+     * array of excludes.
+     * @param aExcludes array of excludes (either package or class)
+     * @return array of excludes with .*
+     */
+    private String[] appendDotStar(String[] aExcludes)
+    {
+        final String[] excludes = new String[aExcludes.length];
+        for (int i = 0; i < aExcludes.length; i++) {
+            excludes[i] = aExcludes[i];
+            if (!excludes[i].endsWith(".*")) {
+                // force all package names to end with ".*" to disambiguate
+                // "java.io"
+                excludes[i] += ".*";
+            }
+        }
+        return excludes;
+    }
+
