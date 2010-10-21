@@ -10,19 +10,19 @@
     {
         // Prepare to start
         fireAuditStarted();
-        for (FileSetCheck fsc : mFileSetChecks) {
+        for (final FileSetCheck fsc : mFileSetChecks) {
             fsc.beginProcessing(mCharset);
         }
 
         // Process each file
-        for (File f : aFiles) {
+        for (final File f : aFiles) {
             final String fileName = f.getAbsolutePath();
             fireFileStarted(fileName);
             final TreeSet<LocalizedMessage> fileMessages = Sets.newTreeSet();
             try {
                 final FileText theText = new FileText(f.getAbsoluteFile(),
                         mCharset);
-                for (FileSetCheck fsc : mFileSetChecks) {
+                for (final FileSetCheck fsc : mFileSetChecks) {
                     fileMessages.addAll(fsc.process(f, theText));
                 }
             }
@@ -45,7 +45,7 @@
         }
 
         // Finish up
-        for (FileSetCheck fsc : mFileSetChecks) {
+        for (final FileSetCheck fsc : mFileSetChecks) {
             // They may also log!!!
             fsc.finishProcessing();
             fsc.destroy();

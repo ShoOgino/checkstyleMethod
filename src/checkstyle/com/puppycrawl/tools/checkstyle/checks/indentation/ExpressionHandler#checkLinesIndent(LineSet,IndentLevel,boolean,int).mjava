@@ -37,10 +37,11 @@
         // TODO: shouldIncreaseIndent() is a hack, should be removed
         //       after complete rewriting of checkExpressionSubtree()
 
+        IndentLevel theLevel = aIndentLevel;
         if (aFirstLineMatches
             || ((aFirstLine > mMainAst.getLineNo()) && shouldIncreaseIndent()))
         {
-            aIndentLevel = new IndentLevel(aIndentLevel, getBasicOffset());
+            theLevel = new IndentLevel(aIndentLevel, getBasicOffset());
         }
 
         // check following lines
@@ -51,7 +52,7 @@
             // checked by a child expression)
 
             if (col != null) {
-                checkSingleLine(i, col.intValue(), aIndentLevel, false);
+                checkSingleLine(i, col.intValue(), theLevel, false);
             }
         }
     }

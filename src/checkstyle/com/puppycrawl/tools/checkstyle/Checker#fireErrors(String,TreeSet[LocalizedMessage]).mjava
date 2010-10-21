@@ -7,10 +7,10 @@
     public void fireErrors(String aFileName, TreeSet<LocalizedMessage> aErrors)
     {
         final String stripped = getStrippedFileName(aFileName);
-        for (LocalizedMessage element : aErrors) {
+        for (final LocalizedMessage element : aErrors) {
             final AuditEvent evt = new AuditEvent(this, stripped, element);
             if (mFilters.accept(evt)) {
-                for (AuditListener listener : mListeners) {
+                for (final AuditListener listener : mListeners) {
                     listener.addError(evt);
                 }
             }

@@ -11,10 +11,10 @@
         // find line for this node
         // TODO: getLineNo should probably not return < 0, but it is for
         // the interface methods... I should ask about this
-
+        int realStart = aStartLine;
         final int currLine = aTree.getLineNo();
-        if (currLine < aStartLine) {
-            aStartLine = currLine;
+        if (currLine < realStart) {
+            realStart = currLine;
         }
 
         // check children
@@ -22,9 +22,9 @@
             node != null;
             node = node.getNextSibling())
         {
-            aStartLine = getFirstLine(aStartLine, node);
+            realStart = getFirstLine(realStart, node);
         }
 
-        return aStartLine;
+        return realStart;
     }
 
