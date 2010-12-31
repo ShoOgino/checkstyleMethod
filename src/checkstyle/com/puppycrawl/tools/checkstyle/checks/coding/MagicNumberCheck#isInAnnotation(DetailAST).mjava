@@ -1,0 +1,25 @@
+    /**
+     * Determines if the column displays a token type of annotation or
+     * annotation member
+     *
+     * @param aAST the AST from which to search for annotations
+     *
+     * @return {@code true} if the token type for this node is a annotation
+     */
+    private boolean isInAnnotation(DetailAST aAST)
+    {
+        if (aAST.getParent() == null || aAST.getParent().getParent() == null) {
+            return false;
+        }
+
+        if (TokenTypes.ANNOTATION == aAST.getParent().getParent().getType()
+                || TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR == aAST.getParent()
+                        .getParent().getType())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+

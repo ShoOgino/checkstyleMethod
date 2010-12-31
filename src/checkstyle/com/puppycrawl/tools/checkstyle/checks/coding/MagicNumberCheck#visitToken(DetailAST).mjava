@@ -1,6 +1,10 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
+        if (mIgnoreAnnotation && isInAnnotation(aAST)) {
+          return;
+        }
+
         if (inIgnoreList(aAST)
             || (mIgnoreHashCodeMethod && isInHashCodeMethod(aAST)))
         {
