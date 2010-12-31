@@ -1,8 +1,9 @@
     @Test
-    public void testIt() throws Exception
+    public void testEqualsWithoutEqualsIgnoreCase() throws Exception
     {
         final DefaultConfiguration checkConfig =
-            createCheckConfig(EqualsAvoidNullCheck.class);
+                createCheckConfig(EqualsAvoidNullCheck.class);
+        checkConfig.addAttribute("performEqualsIgnoreCaseCheck", "false");
 
         final String[] expected = {
             "18:17: String literal expressions should be on the left side of an equals comparison.",
@@ -11,6 +12,12 @@
             "24:17: String literal expressions should be on the left side of an equals comparison.",
             "26:17: String literal expressions should be on the left side of an equals comparison.",
             "28:17: String literal expressions should be on the left side of an equals comparison.",
+            "57:17: String literal expressions should be on the left side of an equals comparison.",
+            "59:17: String literal expressions should be on the left side of an equals comparison.",
+            "61:17: String literal expressions should be on the left side of an equals comparison.",
+            "63:17: String literal expressions should be on the left side of an equals comparison.",
+            "65:17: String literal expressions should be on the left side of an equals comparison.",
+            "67:17: String literal expressions should be on the left side of an equals comparison.",
         };
         verify(checkConfig, getPath("coding" + File.separator + "InputEqualsAvoidNull.java"), expected);
     }

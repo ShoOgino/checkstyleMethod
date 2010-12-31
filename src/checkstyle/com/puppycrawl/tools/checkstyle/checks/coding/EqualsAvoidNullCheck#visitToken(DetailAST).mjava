@@ -27,6 +27,13 @@
                 log(aMethodCall.getLineNo(), aMethodCall.getColumnNo(),
                         "equals.avoid.null");
             }
+        } else if(performEqualsIgnoreCaseCheck) {
+            if("equalsIgnoreCase".equals(method.getText()) && containsOneArg(expr)) {
+                if (containsAllSafeTokens(expr)) {
+                    log(aMethodCall.getLineNo(), aMethodCall.getColumnNo(),
+                            "equalsIgnoreCase.avoid.null");
+                }
+            }
         }
     }
 
