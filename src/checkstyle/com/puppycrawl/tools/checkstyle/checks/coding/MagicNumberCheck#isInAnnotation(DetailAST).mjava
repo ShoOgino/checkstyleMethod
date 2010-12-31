@@ -8,18 +8,14 @@
      */
     private boolean isInAnnotation(DetailAST aAST)
     {
-        if (aAST.getParent() == null || aAST.getParent().getParent() == null) {
+        if ((null == aAST.getParent())
+                || (null == aAST.getParent().getParent()))
+        {
             return false;
         }
 
-        if (TokenTypes.ANNOTATION == aAST.getParent().getParent().getType()
-                || TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR == aAST.getParent()
-                        .getParent().getType())
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (TokenTypes.ANNOTATION == aAST.getParent().getParent().getType())
+                || (TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR ==
+                    aAST.getParent().getParent().getType());
     }
 
