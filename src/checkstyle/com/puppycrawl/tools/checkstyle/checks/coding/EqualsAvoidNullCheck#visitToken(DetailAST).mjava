@@ -22,17 +22,16 @@
 
         final DetailAST method = objCalledOn.getNextSibling();
         final DetailAST expr = dot.getNextSibling().getFirstChild();
-        if ("equals".equals(method.getText()) && containsOneArg(expr)) {
-            if (containsAllSafeTokens(expr)) {
+
+        if ("equals".equals(method.getText())
+                || (mPerformEqualsIgnoreCaseCheck && "equalsIgnoreCase"
+                        .equals(method.getText())))
+        {
+            if (containsOneArg(expr) && containsAllSafeTokens(expr)) {
                 log(aMethodCall.getLineNo(), aMethodCall.getColumnNo(),
-                        "equals.avoid.null");
-            }
-        } else if(performEqualsIgnoreCaseCheck) {
-            if("equalsIgnoreCase".equals(method.getText()) && containsOneArg(expr)) {
-                if (containsAllSafeTokens(expr)) {
-                    log(aMethodCall.getLineNo(), aMethodCall.getColumnNo(),
-                            "equalsIgnoreCase.avoid.null");
-                }
+                    "equals".equals(method.getText())
+                    ? "equals.avoid.null"
+                    : "equalsIgnoreCase.avoid.null");
             }
         }
     }
