@@ -24,7 +24,7 @@
         final DetailAST expr = dot.getNextSibling().getFirstChild();
 
         if ("equals".equals(method.getText())
-                || (mPerformEqualsIgnoreCaseCheck && "equalsIgnoreCase"
+                || (!mIgnoreEqualsIgnoreCase && "equalsIgnoreCase"
                         .equals(method.getText())))
         {
             if (containsOneArg(expr) && containsAllSafeTokens(expr)) {
