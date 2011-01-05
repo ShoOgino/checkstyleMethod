@@ -1,0 +1,18 @@
+    /**
+     * Test to validate the IllegalThrowsCheck with ignoredMethodNames attribute
+     * @throws Exception
+     */
+    @Test
+    public void testIgnoreMethodNames() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        checkConfig.addAttribute("ignoredMethodNames", "methodTwo");
+
+        String[] expected = {
+            "9:51: Throwing 'RuntimeException' is not allowed.",
+            "18:35: Throwing 'Throwable' is not allowed.",
+        };
+
+        verify(checkConfig, getPath("coding" + File.separator + "InputIllegalThrowsCheck.java"), expected);
+    }
+
