@@ -1,0 +1,20 @@
+    /**
+     * Test to validate the IllegalThrowsCheck with both the attributes specified
+     * @throws Exception
+     */
+    @Test
+    public void testIllegalClassNamesWithIgnoreMethodNames() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        checkConfig.addAttribute("illegalClassNames",
+                                 "java.lang.Error, java.lang.Exception, NullPointerException, Throwable");
+        checkConfig.addAttribute("ignoredMethodNames", "methodTwo");
+
+        String[] expected = {
+            "5:33: Throwing 'NullPointerException' is not allowed.",
+            "18:35: Throwing 'Throwable' is not allowed.",
+        };
+
+        verify(checkConfig, getPath("coding" + File.separator + "InputIllegalThrowsCheck.java"), expected);
+    }
+
