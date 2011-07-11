@@ -7,14 +7,19 @@
     public static FilterSet loadSuppressions(String aFilename)
         throws CheckstyleException
     {
-        final FileInputStream fis;
+        InputStream fis;
         try {
             fis = new FileInputStream(aFilename);
         }
         catch (final FileNotFoundException e) {
-            throw new CheckstyleException(
-                "unable to find " + aFilename, e);
+            // check for the file in the classpath
+            fis = SuppressionsLoader.class.getResourceAsStream(aFilename);
+
+            if (fis == null) {
+                throw new CheckstyleException("unable to find " + aFilename, e);
+            }
         }
+
         final InputSource source = new InputSource(fis);
         return loadSuppressions(source, aFilename);
     }

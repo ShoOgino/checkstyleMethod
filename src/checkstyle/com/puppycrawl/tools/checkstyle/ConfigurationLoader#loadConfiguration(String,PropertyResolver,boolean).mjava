@@ -28,10 +28,23 @@
             }
             if (uri == null) {
                 final File file = new File(aConfig);
-                if (!file.exists()) {
-                    throw new FileNotFoundException(aConfig);
+                if (file.exists()) {
+                    uri = file.toURI();
                 }
-                uri = file.toURI();
+                else {
+                    // check to see if the file is in the classpath
+                    try {
+                        final URL configUrl = ConfigurationLoader.class
+                                .getResource(aConfig);
+                        if (configUrl == null) {
+                            throw new FileNotFoundException(aConfig);
+                        }
+                        uri = configUrl.toURI();
+                    }
+                    catch (final URISyntaxException e) {
+                        throw new FileNotFoundException(aConfig);
+                    }
+                }
             }
             final InputSource source = new InputSource(uri.toString());
             return loadConfiguration(source, aOverridePropsResolver,

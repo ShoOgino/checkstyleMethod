@@ -1,0 +1,9 @@
+    @Test
+    public void testResourceLoadConfiguration() throws Exception
+    {
+        // load config that's only found in the classpath
+        final DefaultConfiguration config = (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
+            "/checkstyle/checkstyle_checks.xml", new PropertiesExpander(new Properties()));
+        verifyConfigNode(config, "Checker", 3, new Properties());
+    }
+
