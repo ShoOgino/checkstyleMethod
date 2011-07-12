@@ -5,13 +5,14 @@
      */
     private List<JavadocTag> getJavadocTags(TextBlock aCmt)
     {
-        JavadocTags tags =
-            JavadocUtils.getJavadocTags(aCmt, JavadocTagType.BLOCK);
+        final JavadocTags tags = JavadocUtils.getJavadocTags(aCmt,
+            JavadocUtils.JavadocTagType.BLOCK);
         if (!mAllowUnknownTags) {
-            for (InvalidJavadocTag tag : tags.invalidTags) {
-                log(tag.line, tag.col, "javadoc.unknownTag", tag.name);
+            for (final InvalidJavadocTag tag : tags.getInvalidTags()) {
+                log(tag.getLine(), tag.getCol(), "javadoc.unknownTag",
+                    tag.getName());
             }
         }
-        return tags.validTags;
+        return tags.getValidTags();
     }
 

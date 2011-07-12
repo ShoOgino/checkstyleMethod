@@ -1,13 +1,16 @@
     @Test
-    public void testTagType() {
-        String [] text = { "/** @see block",
-                           " * {@link List inline}, {@link List#add(Object)}" };
-        Comment comment = new Comment(text, 1, 2, text[1].length());
-        JavadocTags blockTags =
+    public void testTagType()
+    {
+        final String [] text = {
+            "/** @see block",
+            " * {@link List inline}, {@link List#add(Object)}",
+        };
+        final Comment comment = new Comment(text, 1, 2, text[1].length());
+        final JavadocTags blockTags =
             JavadocUtils.getJavadocTags(comment, JavadocUtils.JavadocTagType.BLOCK);
-        JavadocTags inlineTags =
+        final JavadocTags inlineTags =
             JavadocUtils.getJavadocTags(comment, JavadocUtils.JavadocTagType.INLINE);
-        assertEquals(1, blockTags.validTags.size());
-        assertEquals(2, inlineTags.validTags.size());
+        assertEquals(1, blockTags.getValidTags().size());
+        assertEquals(2, inlineTags.getValidTags().size());
     }
 
