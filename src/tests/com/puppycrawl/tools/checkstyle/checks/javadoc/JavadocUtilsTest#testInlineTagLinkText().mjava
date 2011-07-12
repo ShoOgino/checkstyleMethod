@@ -1,0 +1,9 @@
+    @Test
+    public void testInlineTagLinkText() {
+        String [] text = { "/** {@link  List link text }" };
+        Comment comment = new Comment(text, 1, 1, text[0].length());
+        List<JavadocTag> tags = JavadocUtils.getJavadocTags(
+            comment, JavadocUtils.JavadocTagType.ALL).validTags;
+        assertEquals("List link text", tags.get(0).getArg1());
+    }
+

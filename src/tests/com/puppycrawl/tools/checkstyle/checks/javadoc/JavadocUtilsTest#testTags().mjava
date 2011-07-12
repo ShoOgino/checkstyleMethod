@@ -1,0 +1,12 @@
+    @Test
+    public void testTags() {
+        String [] text = { "/** @see elsewhere ",
+                           " * {@link List }, {@link  List link text }",
+                           "   {@link List#add(Object) link text}",
+                           " * {@link Class link text}"};
+        Comment comment = new Comment(text, 1, 4, text[3].length());
+        JavadocTags allTags =
+            JavadocUtils.getJavadocTags(comment, JavadocUtils.JavadocTagType.ALL);
+        assertEquals(5, allTags.validTags.size());
+    }
+

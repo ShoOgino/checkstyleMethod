@@ -1,0 +1,25 @@
+    @Test
+    public void testTagPositions() {
+        String [] text = { "/** @see elsewhere",
+                           "    also {@link Name value} */" };
+        Comment comment = new Comment(text, 1, 2, text[1].length());
+
+        List<JavadocTag> tags = JavadocUtils.getJavadocTags(
+            comment, JavadocUtils.JavadocTagType.ALL).validTags;
+
+        assertEquals(2, tags.size());
+        for (JavadocTag tag : tags) {
+            if (JavadocTagInfo.SEE.getName().equals(tag.getTagName())) {
+                assertEquals(1, tag.getLineNo());
+                assertEquals(5, tag.getColumnNo());
+            }
+            else if (JavadocTagInfo.LINK.getName().equals(tag.getTagName())) {
+                assertEquals(2, tag.getLineNo());
+                assertEquals(10, tag.getColumnNo());
+            }
+            else {
+                fail("Unexpected tag: " + tag);
+            }
+        }
+    }
+

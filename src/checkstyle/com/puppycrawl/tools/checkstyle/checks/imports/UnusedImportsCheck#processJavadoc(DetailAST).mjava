@@ -1,0 +1,26 @@
+    /**
+     * Collects references made in JavaDoc comments.
+     * @param aAST node to inspect for JavaDoc
+     */
+    private void processJavadoc(DetailAST aAST) {
+        final FileContents contents = getFileContents();
+        final int lineNo = aAST.getLineNo();
+        final TextBlock cmt = contents.getJavadocBefore(lineNo);
+        if (cmt != null) {
+            final JavadocTags tags =
+                JavadocUtils.getJavadocTags(cmt, JavadocUtils.JavadocTagType.ALL);
+            for (JavadocTag tag : tags.validTags) {
+                if (tag.canReferenceImports()) {
+                    String identifier = tag.getArg1();
+                    // Trim off method or link text
+                    Pattern pattern = Utils.getPattern("(.+?)(?:\\s+|#|\\$).*");
+                    Matcher matcher = pattern.matcher(identifier);
+                    if (matcher.find()) {
+                        identifier = matcher.group(1);
+                    }
+                    mReferenced.add(identifier);
+                }
+            }
+        }
+    }
+
