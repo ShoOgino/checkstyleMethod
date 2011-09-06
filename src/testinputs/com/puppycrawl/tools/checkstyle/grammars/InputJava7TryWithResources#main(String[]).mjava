@@ -1,0 +1,17 @@
+    public static void main(String[] args) throws Exception {
+        try (MyResource resource = new MyResource()) { }
+
+        try (MyResource resource = new MyResource()) { }
+        finally { }
+
+        try (MyResource resource = new MyResource()) { }
+        catch (Exception e) { }
+
+        try (MyResource resource = new MyResource()) { }
+        catch (Exception e) { }
+        catch (Throwable t) { }
+        finally { }
+
+        try (@SuppressWarnings("all") final MyResource resource = new MyResource()) { }
+    }
+
