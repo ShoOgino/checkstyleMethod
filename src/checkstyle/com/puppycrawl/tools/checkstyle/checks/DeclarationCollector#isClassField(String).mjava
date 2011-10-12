@@ -5,6 +5,8 @@
      */
     protected final boolean isClassField(String aName)
     {
-        return (mFrames.findFrame(aName) instanceof ClassFrame);
+        final LexicalFrame frame = mFrames.findFrame(aName);
+        return (frame instanceof ClassFrame)
+                && ((ClassFrame) frame).hasInstanceMember(aName);
     }
 
