@@ -1,0 +1,20 @@
+    /**
+     * Capitalizes a given property name the way we expect to see it in
+     * a setter name.
+     * @param aName a property name
+     * @return capitalized property name
+     */
+    private static String capitalize(final String aName)
+    {
+        if (aName == null || aName.length() == 0) {
+            return aName;
+        }
+        // we should not capitalize the first character if the second
+        // one is a capital one, since according to JavaBeans spec
+        // setXYzz() is a setter for XYzz property, not for xYzz one.
+        if (aName.length() > 1 && Character.isUpperCase(aName.charAt(1))) {
+            return aName;
+        }
+        return aName.substring(0, 1).toUpperCase() + aName.substring(1);
+    }
+

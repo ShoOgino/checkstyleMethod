@@ -5,10 +5,9 @@
          */
         public boolean containsStaticField(String aField)
         {
-            if (mStaticFields.contains(aField)) {
-                return true;
-            }
+            return mStaticFields.contains(aField)
+                    || (mParent != null)
+                    && mParent.containsStaticField(aField);
 
-            return (mParent != null) && mParent.containsStaticField(aField);
         }
 

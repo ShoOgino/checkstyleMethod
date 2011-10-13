@@ -9,7 +9,7 @@
      */
     private boolean isIgnoredSetterParam(DetailAST aAST, String aName)
     {
-        if (!(aAST.getType() == TokenTypes.PARAMETER_DEF)
+        if (aAST.getType() != TokenTypes.PARAMETER_DEF
             || !mIgnoreSetter)
         {
             return false;
@@ -24,17 +24,16 @@
         if (methodAST.getType() != TokenTypes.METHOD_DEF) {
             return false;
         }
-        //property setter name?
-        final String expectedName =
-            "set" + aName.substring(0, 1).toUpperCase() + aName.substring(1);
-        final DetailAST methodNameAST =
-            methodAST.findFirstToken(TokenTypes.IDENT);
-        final String methodName = methodNameAST.getText();
-        if (!methodName.equals(expectedName)) {
-            return false;
-        }
         //void?
         final DetailAST typeAST = methodAST.findFirstToken(TokenTypes.TYPE);
-        return typeAST.branchContains(TokenTypes.LITERAL_VOID);
+        if (!typeAST.branchContains(TokenTypes.LITERAL_VOID)) {
+            return false;
+        }
+
+        //property setter name?
+        final String methodName =
+                methodAST.findFirstToken(TokenTypes.IDENT).getText();
+        final String expectedName = "set" + capitalize(aName);
+        return methodName.equals(expectedName);
     }
 
