@@ -25,12 +25,18 @@
             return;
         }
 
-        //we do not want to check colon for cases and defaults
-        if ((type == TokenTypes.COLON)
-            && ((parentType == TokenTypes.LITERAL_DEFAULT)
-                || (parentType == TokenTypes.LITERAL_CASE)))
-        {
-            return;
+        if ((type == TokenTypes.COLON)) {
+            //we do not want to check colon for cases and defaults
+            if (parentType == TokenTypes.LITERAL_DEFAULT
+                || parentType == TokenTypes.LITERAL_CASE)
+            {
+                return;
+            }
+            else if (parentType == TokenTypes.FOR_EACH_CLAUSE
+                && this.mIgnoreEnhancedForColon)
+            {
+                return;
+            }
         }
 
         // Check for allowed empty method or ctor blocks.
