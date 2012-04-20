@@ -1,0 +1,11 @@
+    public void select() {
+        int start = lines2position.get(ast.getLineNo()) + ast.getColumnNo();
+        int end = findLastPosition(ast);
+
+        editor.setSelectedTextColor(Color.blue);
+        editor.requestFocusInWindow();
+        editor.setSelectionStart(start);
+        editor.setSelectionEnd(end);
+        editor.transferFocusBackward();
+    }
+

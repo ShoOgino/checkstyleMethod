@@ -12,6 +12,18 @@
                 reloadAction.setEnabled(true);
 
                 final String[] sourceLines = text.toLinesArray();
+
+                // clear for each new file
+                 getLines2position().clear();
+                 // starts line counting at 1
+                 getLines2position().add(0);
+                 // insert the contents of the file to the text area
+                 for (String element : sourceLines)
+                 {
+                   getLines2position().add(mJTextArea.getText().length());
+                   mJTextArea.append(element + "\n");
+                 }
+
                 //clean the text area before inserting the lines of the new file
                 if (mJTextArea.getText().length() != 0) {
                     mJTextArea.replaceRange("", 0, mJTextArea.getText()
