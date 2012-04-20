@@ -1,11 +1,12 @@
     @Test
-    public void testDefault()
+    public void shouldLogActualParameterNumber()
         throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(ParameterNumberCheck.class);
+        checkConfig.addMessage("maxParam", "{0},{1}");
         final String[] expected = {
-            "194:10: More than 7 parameters (found 9).",
+            "194:10: 7,9",
         };
         verify(checkConfig, getPath("InputSimple.java"), expected);
     }
