@@ -1,0 +1,10 @@
+    @Test
+    public void testAnnotation() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(JavadocPackageCheck.class);
+        final String[] expected = {};
+        verify(createChecker(checkConfig),
+            getPath("javadoc/pkginfo/annotation/package-info.java"),
+            getPath("javadoc/pkginfo/annotation/package-info.java"), expected);
+    }
+
