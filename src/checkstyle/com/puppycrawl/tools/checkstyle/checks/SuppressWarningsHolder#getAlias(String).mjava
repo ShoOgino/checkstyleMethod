@@ -1,0 +1,17 @@
+    /**
+     * Returns the alias for the source name of a check. If an alias has been
+     * explicitly registered via {@link #registerAlias(String, String)}, that
+     * alias is returned; otherwise, the default alias is used.
+     * @param aSourceName the source name of the check (generally the class
+     *        name)
+     * @return the current alias for the given check
+     */
+    public static String getAlias(String aSourceName)
+    {
+        String checkAlias = CHECK_ALIAS_MAP.get(aSourceName);
+        if (checkAlias == null) {
+            checkAlias = getDefaultAlias(aSourceName);
+        }
+        return checkAlias;
+    }
+

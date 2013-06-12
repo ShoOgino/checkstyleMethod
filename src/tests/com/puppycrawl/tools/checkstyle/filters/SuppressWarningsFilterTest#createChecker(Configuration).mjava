@@ -1,0 +1,33 @@
+    @Override
+    protected Checker createChecker(Configuration aFilterConfig)
+        throws Exception
+    {
+        final DefaultConfiguration checkerConfig =
+            new DefaultConfiguration("configuration");
+        final DefaultConfiguration checksConfig =
+            createCheckConfig(TreeWalker.class);
+        final DefaultConfiguration holderConfig =
+            createCheckConfig(SuppressWarningsHolder.class);
+        holderConfig.addAttribute("aliasList",
+            "com.puppycrawl.tools.checkstyle.checks.sizes."
+                + "ParameterNumberCheck=paramnum");
+        checksConfig.addChild(holderConfig);
+        checksConfig.addChild(createCheckConfig(MemberNameCheck.class));
+        checksConfig.addChild(createCheckConfig(ConstantNameCheck.class));
+        checksConfig.addChild(createCheckConfig(ParameterNumberCheck.class));
+        checksConfig.addChild(createCheckConfig(IllegalCatchCheck.class));
+        checkerConfig.addChild(checksConfig);
+        if (aFilterConfig != null) {
+            checkerConfig.addChild(aFilterConfig);
+        }
+        final Checker checker = new Checker();
+        final Locale locale = Locale.ENGLISH;
+        checker.setLocaleCountry(locale.getCountry());
+        checker.setLocaleLanguage(locale.getLanguage());
+        checker.setModuleClassLoader(Thread.currentThread()
+            .getContextClassLoader());
+        checker.configure(checkerConfig);
+        checker.addListener(new BriefLogger(mStream));
+        return checker;
+    }
+

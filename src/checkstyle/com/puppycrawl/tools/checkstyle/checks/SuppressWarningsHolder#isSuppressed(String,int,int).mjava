@@ -1,0 +1,34 @@
+    /**
+     * Checks for a suppression of a check with the given source name and
+     * location in the last file processed.
+     * @param aSourceName the source name of the check
+     * @param aLine the line number of the check
+     * @param aColumn the column number of the check
+     * @return whether the check with the given name is suppressed at the given
+     *         source location
+     */
+    public static boolean isSuppressed(String aSourceName, int aLine,
+        int aColumn)
+    {
+        final List<Entry> entries = ENTRIES.get();
+        final String checkAlias = getAlias(aSourceName);
+        if (entries != null && checkAlias != null) {
+            for (Entry entry : entries) {
+                final boolean afterStart =
+                    entry.getFirstLine() < aLine
+                        || (entry.getFirstLine() == aLine && entry
+                            .getFirstColumn() <= aColumn);
+                final boolean beforeEnd =
+                    entry.getLastLine() > aLine
+                        || (entry.getLastLine() == aLine && entry
+                            .getLastColumn() >= aColumn);
+                final boolean nameMatches =
+                    entry.getCheckName().equals(checkAlias);
+                if (afterStart && beforeEnd && nameMatches) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+

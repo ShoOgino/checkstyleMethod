@@ -1,0 +1,18 @@
+    /**
+     * Returns the default alias for the source name of a check, which is the
+     * source name in lower case with any dotted prefix or "Check" suffix
+     * removed.
+     * @param aSourceName the source name of the check (generally the class
+     *        name)
+     * @return the default alias for the given check
+     */
+    public static String getDefaultAlias(String aSourceName)
+    {
+        final int startIndex = aSourceName.lastIndexOf('.') + 1;
+        int endIndex = aSourceName.length();
+        if (aSourceName.endsWith(CHECK_SUFFIX)) {
+            endIndex -= CHECK_SUFFIX.length();
+        }
+        return aSourceName.substring(startIndex, endIndex).toLowerCase();
+    }
+

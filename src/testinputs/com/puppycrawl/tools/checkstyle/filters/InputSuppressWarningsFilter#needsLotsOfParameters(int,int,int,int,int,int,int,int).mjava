@@ -1,0 +1,14 @@
+    // test explicit warning alias
+    @SuppressWarnings("paramnum")
+    // should NOT fail ParameterNumberCheck
+    public void needsLotsOfParameters(@SuppressWarnings("unused") int a,
+        int b, int c, int d, int e, int f, int g, int h)
+    {
+        @SuppressWarnings("unused") int z;
+        try {
+        }
+        catch (Exception ex) {
+            // should fail IllegalCatchCheck
+        }
+    }
+

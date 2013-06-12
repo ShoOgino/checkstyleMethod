@@ -1,0 +1,21 @@
+    /**
+     * Returns the literal string expression represented by an AST.
+     * @param aAST an AST node for an EXPR
+     * @return the Java string represented by the given AST expression
+     * @throws IllegalArgumentException if the AST is invalid
+     */
+    private static String getStringExpr(DetailAST aAST)
+    {
+        if (aAST != null && aAST.getType() == TokenTypes.EXPR) {
+            final DetailAST firstChild = aAST.getFirstChild();
+            if (firstChild.getType() == TokenTypes.STRING_LITERAL) {
+                // NOTE: escaped characters are not unescaped
+                final String quotedText = firstChild.getText();
+                return quotedText.substring(1, quotedText.length() - 1);
+            }
+            throw new IllegalArgumentException("String literal AST expected: "
+                + firstChild);
+        }
+        throw new IllegalArgumentException("Expression AST expected: " + aAST);
+    }
+

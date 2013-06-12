@@ -1,0 +1,22 @@
+    /**
+     * Registers a list of source name aliases based on a comma-separated list
+     * of {@code source=alias} items, such as {@code
+     * com.puppycrawl.tools.checkstyle.checks.sizes.ParameterNumberCheck=
+     * paramnum}.
+     * @param aAliasList the list of comma-separated alias assigments
+     */
+    public void setAliasList(String aAliasList)
+    {
+        for (String sourceAlias : aAliasList.split(",")) {
+            final int index = sourceAlias.indexOf("=");
+            if (index > 0) {
+                registerAlias(sourceAlias.substring(0, index), sourceAlias
+                    .substring(index + 1));
+            }
+            else if (sourceAlias.length() > 0) {
+                throw new ConversionException(
+                    "'=' expected in alias list item: " + sourceAlias);
+            }
+        }
+    }
+
