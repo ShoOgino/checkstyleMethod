@@ -50,15 +50,19 @@
         // buf.trimToSize(); // could be used instead of toString().
         mFullText = buf.toString();
 
-        final String[] lines = LINE_TERMINATOR.split(mFullText, -1);
-        if (lines.length > 0 && lines[lines.length - 1].length() == 0) {
-            // drop empty line after last newline
-            mLines = new String[lines.length - 1];
-            System.arraycopy(lines, 0, mLines, 0, lines.length - 1);
+        // Use the BufferedReader to break down the lines as this
+        // is about 30% faster than using the
+        // LINE_TERMINATOR.split(mFullText, -1) method
+        final ArrayList<String> lines = new ArrayList<String>();
+        final BufferedReader br =
+            new BufferedReader(new StringReader(mFullText));
+        for (;;) {
+            final String l = br.readLine();
+            if (null == l) {
+                break;
+            }
+            lines.add(l);
         }
-        else {
-            // no newline at end, so we keep the last line as is
-            mLines = lines;
-        }
+        mLines = lines.toArray(new String[lines.size()]);
     }
 
