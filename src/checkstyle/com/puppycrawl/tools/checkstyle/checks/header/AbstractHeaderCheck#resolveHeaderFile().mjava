@@ -1,0 +1,43 @@
+    /**
+     * Resolve the specified filename param to a URI.
+     * @return resolved header file URI
+     * @throws IOException on failure
+     */
+    private URI resolveHeaderFile() throws IOException
+    {
+        // figure out if this is a File or a URL
+        URI uri;
+        try {
+            final URL url = new URL(mFilename);
+            uri = url.toURI();
+        }
+        catch (final MalformedURLException ex) {
+            uri = null;
+        }
+        catch (final URISyntaxException ex) {
+            // URL violating RFC 2396
+            uri = null;
+        }
+        if (uri == null) {
+            final File file = new File(mFilename);
+            if (file.exists()) {
+                uri = file.toURI();
+            }
+            else {
+                // check to see if the file is in the classpath
+                try {
+                    final URL configUrl = AbstractHeaderCheck.class
+                            .getResource(mFilename);
+                    if (configUrl == null) {
+                        throw new FileNotFoundException(mFilename);
+                    }
+                    uri = configUrl.toURI();
+                }
+                catch (final URISyntaxException e) {
+                    throw new FileNotFoundException(mFilename);
+                }
+            }
+        }
+        return uri;
+    }
+
