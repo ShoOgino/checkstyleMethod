@@ -52,19 +52,19 @@
                 //                                          ^
                 //   should be whitespace if followed by & -+
                 //
-                int indexOfAmp = line.indexOf('&', after);
-                if ((indexOfAmp != -1) && whitespaceBetween(after, indexOfAmp, line))
+                final int indexOfAmp = line.indexOf('&', after);
+                if ((indexOfAmp != -1)
+                    && whitespaceBetween(after, indexOfAmp, line))
                 {
-                    if (indexOfAmp - after == 0)
-                    {
+                    if (indexOfAmp - after == 0) {
                         log(aAST.getLineNo(), after, "ws.notPreceded", "&");
                     }
-                    else if (indexOfAmp - after != 1)
-                    {
+                    else if (indexOfAmp - after != 1) {
                         log(aAST.getLineNo(), after, "ws.followed", ">");
                     }
                 }
-                else if ((line.charAt(after) != '>') && (line.charAt(after) != ','))
+                else if ((line.charAt(after) != '>')
+                         && (line.charAt(after) != ','))
                 {
                     log(aAST.getLineNo(), after, "ws.followed", ">");
                 }
