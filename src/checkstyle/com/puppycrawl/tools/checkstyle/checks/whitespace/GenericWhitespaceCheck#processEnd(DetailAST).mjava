@@ -44,8 +44,27 @@
                 }
             }
             else {
-                // In a nested Generic type, so can only be a '>' or ','
-                if ((line.charAt(after) != '>') && (line.charAt(after) != ','))
+                // In a nested Generic type, so can only be a '>' or ',' or '&'
+
+                // In case of several extends definitions:
+                //
+                //   class IntEnumValueType<E extends Enum<E> & IntEnum>
+                //                                          ^
+                //   should be whitespace if followed by & -+
+                //
+                int indexOfAmp = line.indexOf('&', after);
+                if ((indexOfAmp != -1) && whitespaceBetween(after, indexOfAmp, line))
+                {
+                    if (indexOfAmp - after == 0)
+                    {
+                        log(aAST.getLineNo(), after, "ws.notPreceded", "&");
+                    }
+                    else if (indexOfAmp - after != 1)
+                    {
+                        log(aAST.getLineNo(), after, "ws.followed", ">");
+                    }
+                }
+                else if ((line.charAt(after) != '>') && (line.charAt(after) != ','))
                 {
                     log(aAST.getLineNo(), after, "ws.followed", ">");
                 }
