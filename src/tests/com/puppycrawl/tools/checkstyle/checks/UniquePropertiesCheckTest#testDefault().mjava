@@ -1,0 +1,21 @@
+    /**
+     * Tests the ordinal work of a check.
+     * @throws Exception
+     *             on error occurres
+     */
+    @Test
+    public void testDefault() throws Exception
+    {
+        final String[] expected =
+        {
+            buildMesssage(3, "general.exception", 2),
+            buildMesssage(5, "DefaultLogger.auditStarted", 2),
+            buildMesssage(11, "onlineManual", 3),
+            buildMesssage(22, "time stamp", 3),
+            buildMesssage(28, "Support Link ", 2),
+            buildMesssage(34, "failed", 2),
+        };
+        verify(mCheckConfig, getPath("InputUniquePropertiesCheck.properties"),
+                expected);
+    }
+

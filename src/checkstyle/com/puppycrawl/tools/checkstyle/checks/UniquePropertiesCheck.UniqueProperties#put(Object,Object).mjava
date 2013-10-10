@@ -1,0 +1,11 @@
+        @Override
+        public synchronized Object put(Object aKey, Object aValue)
+        {
+            final Object oldValue = super.put(aKey, aValue);
+            if (oldValue != null && aKey instanceof String) {
+                final String keyString = (String) aKey;
+                mDuplicatedStrings.add(keyString);
+            }
+            return oldValue;
+        }
+

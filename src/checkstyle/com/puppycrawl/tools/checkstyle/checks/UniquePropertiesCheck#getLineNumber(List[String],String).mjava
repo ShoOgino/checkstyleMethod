@@ -1,0 +1,31 @@
+    /**
+     * Method returns line number the key is detected in the checked properties
+     * files first.
+     *
+     * @param aLines
+     *            properties file lines list
+     * @param aKeyNane
+     *            key name to look for
+     * @return line number of first occurrence. If no key found in properties
+     *         file, 0 is returned
+     */
+    protected int getLineNumber(List<String> aLines, String aKeyNane)
+    {
+        final String keyPatternString =
+                "^" + aKeyNane.replace(" ", "\\\\ ") + "[\\s:=].*$";
+        final Pattern keyPattern = Pattern.compile(keyPatternString);
+        int lineNumber = 1;
+        final Matcher matcher = keyPattern.matcher("");
+        for (String line : aLines) {
+            matcher.reset(line);
+            if (matcher.matches()) {
+                break;
+            }
+            ++lineNumber;
+        }
+        if (lineNumber > aLines.size()) {
+            lineNumber = 0;
+        }
+        return lineNumber;
+    }
+
