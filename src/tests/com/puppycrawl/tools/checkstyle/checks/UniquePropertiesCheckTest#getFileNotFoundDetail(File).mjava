@@ -1,0 +1,22 @@
+    /**
+     * Method generates FileNotFound exception details. It tries to open file,
+     * that does not exist.
+     * @param file
+     * @return detail message of {@link FileNotFoundException}
+     * @throws Exception
+     *             on file exists
+     */
+    private String getFileNotFoundDetail(File file) throws Exception
+    {
+        // Create exception to know detail message we should wait in
+        // LocalisedMessage
+        try {
+            final InputStream stream = new FileInputStream(file);
+            stream.close();
+            throw new Exception("File " + file.getPath() + " should not exist");
+        }
+        catch (FileNotFoundException ex) {
+            return ex.getLocalizedMessage();
+        }
+    }
+

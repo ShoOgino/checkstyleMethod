@@ -1,0 +1,20 @@
+    /**
+     * Tests the {@link UniquePropertiesCheck#getLineNumber(List, String)}
+     * method return value
+     * @throws Exception
+     *             on error occurs
+     */
+    @Test
+    public void testNotFoundKey() throws Exception
+    {
+        final UniquePropertiesCheck check = new UniquePropertiesCheck();
+        final List<String> testStrings = new ArrayList<String>(3);
+        testStrings.add("");
+        testStrings.add("0 = 0");
+        testStrings.add("445");
+        final int stringNumber =
+                check.getLineNumber(testStrings,
+                        "some key");
+        Assert.assertEquals(stringNumber, 0);
+    }
+
