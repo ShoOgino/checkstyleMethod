@@ -1,0 +1,66 @@
+    /**
+     * Parse the next AST for declarations
+     *
+     * @param aFrameStack Stack containing the FrameTree being built
+     * @param aAST AST to parse
+     */
+    private void collectDeclarations(FrameStack aFrameStack, DetailAST aAST)
+    {
+        final LexicalFrame frame = aFrameStack.current();
+        switch (aAST.getType()) {
+        case TokenTypes.VARIABLE_DEF :  {
+            final String name =
+                    aAST.findFirstToken(TokenTypes.IDENT).getText();
+            if (frame instanceof ClassFrame) {
+                final DetailAST mods =
+                    aAST.findFirstToken(TokenTypes.MODIFIERS);
+                if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
+                    ((ClassFrame) frame).addStaticMember(name);
+                }
+                else {
+                    ((ClassFrame) frame).addInstanceMember(name);
+                }
+            }
+            else {
+                frame.addName(name);
+            }
+            break;
+        }
+        case TokenTypes.PARAMETER_DEF : {
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            frame.addName(nameAST.getText());
+            break;
+        }
+        case TokenTypes.CLASS_DEF :
+        case TokenTypes.INTERFACE_DEF :
+        case TokenTypes.ENUM_DEF :
+        case TokenTypes.ANNOTATION_DEF : {
+            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            frame.addName(nameAST.getText());
+            aFrameStack.enter(new ClassFrame(aFrameStack.current()));
+            break;
+        }
+        case TokenTypes.SLIST :
+            aFrameStack.enter(new BlockFrame(aFrameStack.current()));
+            break;
+        case TokenTypes.METHOD_DEF : {
+            final String name = aAST.findFirstToken(TokenTypes.IDENT).getText();
+            if (frame instanceof ClassFrame) {
+                final DetailAST mods =
+                    aAST.findFirstToken(TokenTypes.MODIFIERS);
+                if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
+                    ((ClassFrame) frame).addStaticMember(name);
+                }
+                else {
+                    ((ClassFrame) frame).addInstanceMember(name);
+                }
+            }
+        }
+        case TokenTypes.CTOR_DEF :
+            aFrameStack.enter(new MethodFrame(aFrameStack.current()));
+            break;
+        default:
+            // do nothing
+        }
+    }
+
