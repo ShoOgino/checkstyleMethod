@@ -1,0 +1,14 @@
+    @Test
+    public void testGithubIssue41() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(RequireThisCheck.class);
+        final String[] expected = {
+            "7:19: Reference to instance variable 'number' needs \"this.\".",
+            "8:16: Method call to 'other' needs \"this.\".",
+        };
+        verify(checkConfig,
+                getPath("coding" + File.separator + "InputRequireThis2.java"),
+                expected);
+    }
+

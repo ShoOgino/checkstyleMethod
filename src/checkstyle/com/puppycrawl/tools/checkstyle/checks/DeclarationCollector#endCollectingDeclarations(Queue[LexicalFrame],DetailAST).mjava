@@ -1,5 +1,11 @@
-    @Override
-    public void leaveToken(DetailAST aAST)
+    /**
+     * End parsing of the AST for declarations.
+     *
+     * @param aFrameStack Stack containing the FrameTree being built
+     * @param aAST AST that was parsed
+     */
+    private void endCollectingDeclarations(Queue<LexicalFrame> aFrameStack,
+        DetailAST aAST)
     {
         switch (aAST.getType()) {
         case TokenTypes.CLASS_DEF :
@@ -9,7 +15,7 @@
         case TokenTypes.SLIST :
         case TokenTypes.METHOD_DEF :
         case TokenTypes.CTOR_DEF :
-            this.mFrames.leave();
+            this.mFrames.put(aAST, aFrameStack.poll());
             break;
         default :
             // do nothing

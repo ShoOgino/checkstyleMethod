@@ -1,61 +1,18 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        final LexicalFrame frame = this.mFrames.current();
         switch (aAST.getType()) {
-        case TokenTypes.VARIABLE_DEF :  {
-            final String name =
-                    aAST.findFirstToken(TokenTypes.IDENT).getText();
-            if (frame instanceof ClassFrame) {
-                final DetailAST mods =
-                    aAST.findFirstToken(TokenTypes.MODIFIERS);
-                if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                    ((ClassFrame) frame).addStaticMember(name);
-                }
-                else {
-                    ((ClassFrame) frame).addInstanceMember(name);
-                }
-            }
-            else {
-                frame.addName(name);
-            }
-            break;
-        }
-        case TokenTypes.PARAMETER_DEF : {
-            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
-            frame.addName(nameAST.getText());
-            break;
-        }
         case TokenTypes.CLASS_DEF :
         case TokenTypes.INTERFACE_DEF :
         case TokenTypes.ENUM_DEF :
-        case TokenTypes.ANNOTATION_DEF : {
-            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
-            frame.addName(nameAST.getText());
-            this.mFrames.enter(new ClassFrame());
-            break;
-        }
+        case TokenTypes.ANNOTATION_DEF :
         case TokenTypes.SLIST :
-            this.mFrames.enter(new BlockFrame());
-            break;
-        case TokenTypes.METHOD_DEF : {
-            final String name = aAST.findFirstToken(TokenTypes.IDENT).getText();
-            if (frame instanceof ClassFrame) {
-                final DetailAST mods =
-                    aAST.findFirstToken(TokenTypes.MODIFIERS);
-                if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                    ((ClassFrame) frame).addStaticMember(name);
-                }
-                else {
-                    ((ClassFrame) frame).addInstanceMember(name);
-                }
-            }
-        }
+        case TokenTypes.METHOD_DEF :
         case TokenTypes.CTOR_DEF :
-            this.mFrames.enter(new MethodFrame());
+            this.mCurrent = this.mFrames.get(aAST);
             break;
-        default:
+        default :
             // do nothing
         }
-    }
+    } // end visitToken
 
