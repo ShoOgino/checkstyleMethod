@@ -3,13 +3,12 @@
      *
      * @param aAST the token for the method
      * @param aComment the Javadoc comment
-     * @param aScope the scope of the method.
      */
-    private void checkComment(DetailAST aAST, TextBlock aComment, Scope aScope)
+    private void checkComment(DetailAST aAST, TextBlock aComment)
     {
         final List<JavadocTag> tags = getMethodTags(aComment);
 
-        if (hasShortCircuitTag(aAST, tags, aScope)) {
+        if (hasShortCircuitTag(aAST, tags)) {
             return;
         }
 
