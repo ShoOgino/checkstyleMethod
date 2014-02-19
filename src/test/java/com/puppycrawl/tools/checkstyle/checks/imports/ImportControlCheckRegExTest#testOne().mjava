@@ -2,8 +2,8 @@
     public void testOne() throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
-        checkConfig.addAttribute("file", System.getProperty("testinputs.dir")
-                + "/import-control_one.xml");
+        checkConfig.addAttribute("file",
+                "src/test/resources/com/puppycrawl/tools/checkstyle/import-control_one-re.xml");
         final String[] expected = {"5:1: Disallowed import - java.io.File."};
 
         verify(checkConfig, getPath("imports" + File.separator

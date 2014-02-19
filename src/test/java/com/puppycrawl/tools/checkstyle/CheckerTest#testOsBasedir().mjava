@@ -5,9 +5,7 @@
 
         // we need something to create absolute path
         // let's take testinputs.dir
-        String testinputs_dir = System.getProperty("testinputs.dir")
-                .replace('/', File.separatorChar)
-                .replace('\\', File.separatorChar);
+        String testinputs_dir = new File("src/test/resources/com/puppycrawl/tools/checkstyle/").getCanonicalPath();
 
         if (!testinputs_dir.endsWith(File.separator)) {
             testinputs_dir += File.separator;

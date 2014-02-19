@@ -2,8 +2,8 @@
     public void testWrong() throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
-        checkConfig.addAttribute("file", System.getProperty("testinputs.dir")
-                + "/import-control_wrong.xml");
+        checkConfig.addAttribute("file",
+                "src/test/resources/com/puppycrawl/tools/checkstyle/import-control_wrong.xml");
         final String[] expected = {"1:40: Import control file does not handle this package."};
 
         verify(checkConfig, getPath("imports" + File.separator
