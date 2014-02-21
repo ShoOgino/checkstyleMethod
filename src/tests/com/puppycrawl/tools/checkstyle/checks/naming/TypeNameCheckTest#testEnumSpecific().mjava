@@ -1,0 +1,14 @@
+    @Test
+    public void testEnumSpecific()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(TypeNameCheck.class);
+        checkConfig.addAttribute("tokens", "ENUM_DEF");
+        final String[] expected = {
+                buildMesssage(7, 17, "inputHeaderEnum",
+                        TypeNameCheck.DEFAULT_PATTERN),
+        };
+        verify(checkConfig, inputFilename, expected);
+    }
+
