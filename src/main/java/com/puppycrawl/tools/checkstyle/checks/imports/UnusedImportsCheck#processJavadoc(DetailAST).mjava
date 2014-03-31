@@ -8,21 +8,7 @@
         final int lineNo = aAST.getLineNo();
         final TextBlock cmt = contents.getJavadocBefore(lineNo);
         if (cmt != null) {
-            final JavadocTags tags = JavadocUtils.getJavadocTags(cmt,
-                    JavadocUtils.JavadocTagType.ALL);
-            for (final JavadocTag tag : tags.getValidTags()) {
-                if (tag.canReferenceImports()) {
-                    String identifier = tag.getArg1();
-                    // Trim off method or link text
-                    final Pattern pattern =
-                        Utils.getPattern("(.+?)(?:\\s+|#|\\$).*");
-                    final Matcher matcher = pattern.matcher(identifier);
-                    if (matcher.find()) {
-                        identifier = matcher.group(1);
-                    }
-                    mReferenced.add(identifier);
-                }
-            }
+            mReferenced.addAll(processJavadoc(cmt));
         }
     }
 
