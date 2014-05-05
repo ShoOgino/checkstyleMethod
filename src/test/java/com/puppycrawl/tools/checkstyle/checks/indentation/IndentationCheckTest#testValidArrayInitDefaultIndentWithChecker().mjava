@@ -1,12 +1,10 @@
     @Test
-    public void testValidArrayInitWithChecker()
+    public void testValidArrayInitDefaultIndentWithChecker()
         throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
-        checkConfig.addAttribute("arrayInitIndent", Integer.valueOf(8).toString());
-
         final Checker c = createChecker(checkConfig);
-        final String fname = getPath("indentation/InputValidArrayInitIndent.java");
+        final String fname = getPath("indentation/InputValidArrayInitDefaultIndent.java");
         final String[] expected = {
         };
         verify(c, fname, expected);
