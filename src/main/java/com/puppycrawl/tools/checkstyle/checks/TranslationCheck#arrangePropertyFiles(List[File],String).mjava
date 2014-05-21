@@ -3,15 +3,17 @@
      * The method returns a Map object. The filename prefixes
      * work as keys each mapped to a set of files.
      * @param aPropFiles the set of property files
+     * @param aBasenameSeparator the basename separator
      * @return a Map object which holds the arranged property file sets
      */
     private static Map<String, Set<File>> arrangePropertyFiles(
-        List<File> aPropFiles)
+        List<File> aPropFiles, String aBasenameSeparator)
     {
         final Map<String, Set<File>> propFileMap = Maps.newHashMap();
 
         for (final File f : aPropFiles) {
-            final String identifier = extractPropertyIdentifier(f);
+            final String identifier = extractPropertyIdentifier(f,
+                aBasenameSeparator);
 
             Set<File> fileSet = propFileMap.get(identifier);
             if (fileSet == null) {
