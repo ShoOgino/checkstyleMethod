@@ -7,6 +7,12 @@
         switch(aAST.getType()) {
         case TokenTypes.OBJBLOCK:
             mScopeStates.push(new ScopeState());
+            if (mGroupOverloadMethods && (parentType == TokenTypes.CLASS_DEF
+                    || parentType == TokenTypes.ENUM_DEF
+                    || parentType == TokenTypes.INTERFACE_DEF))
+            {
+                checkOverloadMethodsGrouping(aAST);
+            }
             break;
 
         case TokenTypes.CTOR_DEF:
