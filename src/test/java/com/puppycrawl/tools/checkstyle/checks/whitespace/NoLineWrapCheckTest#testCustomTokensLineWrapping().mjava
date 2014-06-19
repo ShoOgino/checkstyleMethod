@@ -1,0 +1,15 @@
+    @Test
+    public void testCustomTokensLineWrapping()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(NoLineWrapCheck.class);
+        checkConfig.addAttribute("tokens", "IMPORT, CLASS_DEF, METHOD_DEF, ENUM_DEF");
+        final String[] expected = {
+            "6: import statement should not be line-wrapped.",
+            "10: CLASS_DEF statement should not be line-wrapped.",
+            "13: METHOD_DEF statement should not be line-wrapped.",
+            "20: ENUM_DEF statement should not be line-wrapped.",
+        };
+        verify(checkConfig, getPath("whitespace/NoLineWrapBadInput.java"), expected);
+    }
+

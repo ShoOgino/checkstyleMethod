@@ -1,0 +1,8 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        if (aAST.getLineNo() != aAST.getLastChild().getLineNo()) {
+            log(aAST.getLineNo(), "no.line.wrap", aAST.getText());
+        }
+    }
+
