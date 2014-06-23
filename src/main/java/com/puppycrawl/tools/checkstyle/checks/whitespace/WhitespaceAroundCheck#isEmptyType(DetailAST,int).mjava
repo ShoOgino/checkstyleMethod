@@ -1,0 +1,30 @@
+    /**
+     * Test if the given <code>DetailAST</code> is part of an empty block.
+     * An example empty block might look like the following
+     * <p>
+     * <pre>   class Foo {}</pre>
+     * <p>
+     * @param aAST aAST the <code>DetailAST</code> to test.
+     * @param aParentType the token type of <code>aAST</code>'s parent.
+     * @return <code>true</code> if <code>aAST</code> makes up part of an
+     *         empty block contained under a <code>aMatch</code> token type
+     *         node.
+     */
+    private boolean isEmptyType(DetailAST aAST, int aParentType)
+    {
+        final int type = aAST.getType();
+        if ((type == TokenTypes.RCURLY || type == TokenTypes.LCURLY)
+                && aParentType == TokenTypes.OBJBLOCK)
+        {
+            final DetailAST typeNode = aAST.getParent().getParent();
+            final int matchType = typeNode.getType();
+            if (matchType == TokenTypes.CLASS_DEF
+                    || matchType == TokenTypes.INTERFACE_DEF
+                    || matchType == TokenTypes.ENUM_DEF)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
