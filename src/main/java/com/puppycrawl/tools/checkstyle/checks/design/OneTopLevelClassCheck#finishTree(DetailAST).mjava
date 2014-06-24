@@ -1,0 +1,18 @@
+    @Override
+    public void finishTree(DetailAST aRootAST)
+    {
+        if (!mPublicTypeFound && !mLineNumberTypeMap.isEmpty()) {
+            // skip first top-level type.
+            mLineNumberTypeMap.remove(mLineNumberTypeMap.firstKey());
+        }
+
+        for (Map.Entry<Integer, String> entry
+                : mLineNumberTypeMap.entrySet())
+        {
+            log(entry.getKey(), "one.top.level.class", entry.getValue());
+        }
+
+        mLineNumberTypeMap.clear();
+        mPublicTypeFound = false;
+    }
+

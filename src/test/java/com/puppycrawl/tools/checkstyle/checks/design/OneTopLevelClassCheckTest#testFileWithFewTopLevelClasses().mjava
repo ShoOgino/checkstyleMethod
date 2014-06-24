@@ -1,0 +1,16 @@
+    @Test
+    public void testFileWithFewTopLevelClasses() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(OneTopLevelClassCheck.class);
+        final String[] expected = {
+            "25: Top-level class NoSuperClone has to reside in its own source file.",
+            "33: Top-level class InnerClone has to reside in its own source file.",
+            "50: Top-level class CloneWithTypeArguments has to reside in its own source file.",
+            "58: Top-level class CloneWithTypeArgumentsAndNoSuper has to reside in its own source file.",
+            "67: Top-level class MyClassWithGenericSuperMethod has to reside in its own source file.",
+            "84: Top-level class AnotherClass has to reside in its own source file.",
+        };
+        verify(checkConfig, getPath("coding" + File.separator + "InputClone.java"), expected);
+    }
+

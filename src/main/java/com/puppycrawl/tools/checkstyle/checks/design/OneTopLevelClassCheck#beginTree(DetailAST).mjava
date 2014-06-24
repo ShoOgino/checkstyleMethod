@@ -1,0 +1,23 @@
+    @Override
+    public void beginTree(DetailAST aRootAST)
+    {
+        DetailAST currentNode = aRootAST;
+        while (currentNode != null) {
+            if (currentNode.getType() == TokenTypes.CLASS_DEF
+                    || currentNode.getType() == TokenTypes.ENUM_DEF
+                    || currentNode.getType() == TokenTypes.INTERFACE_DEF)
+            {
+                if (isPublic(currentNode)) {
+                    mPublicTypeFound = true;
+                }
+
+                else {
+                    final String typeName = currentNode.
+                            findFirstToken(TokenTypes.IDENT).getText();
+                    mLineNumberTypeMap.put(currentNode.getLineNo(), typeName);
+                }
+            }
+            currentNode = currentNode.getNextSibling();
+        }
+    }
+

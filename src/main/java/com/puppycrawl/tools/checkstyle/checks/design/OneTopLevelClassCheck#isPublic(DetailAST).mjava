@@ -1,0 +1,12 @@
+    /**
+     * Checks if a type is public.
+     * @param aTypeDef type definition node.
+     * @return true if a type has a public access level modifier.
+     */
+    private boolean isPublic(DetailAST aTypeDef)
+    {
+        final DetailAST modifiers =
+                aTypeDef.findFirstToken(TokenTypes.MODIFIERS);
+        return modifiers.findFirstToken(TokenTypes.LITERAL_PUBLIC) != null;
+    }
+
