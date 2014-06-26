@@ -1,0 +1,11 @@
+    @Test
+    public void testMethodCtorNamedClassClosingBrace() throws Exception
+    {
+        mCheckConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
+        mCheckConfig.addAttribute("shouldStartLine", "false");
+        final String[] expected = {
+            "93:27: '}' should be alone on a line.",
+        };
+        verify(mCheckConfig, getPath("InputLeftCurlyOther.java"), expected);
+    }
+

@@ -47,6 +47,21 @@
             lcurly = aAST.getFirstChild();
             rcurly = lcurly.getLastChild();
             break;
+        case TokenTypes.CLASS_DEF:
+            lcurly = aAST.getLastChild().getFirstChild();
+            rcurly = aAST.getLastChild().getLastChild();
+            nextToken = aAST;
+            break;
+        case TokenTypes.CTOR_DEF:
+            lcurly = aAST.getLastChild();
+            rcurly = lcurly.getLastChild();
+            nextToken = aAST;
+            break;
+        case TokenTypes.METHOD_DEF:
+            lcurly = aAST.getLastChild();
+            rcurly = lcurly.getLastChild();
+            nextToken = aAST;
+            break;
         default:
             throw new RuntimeException("Unexpected token type ("
                     + TokenTypes.getTokenName(aAST.getType()) + ")");
@@ -63,12 +78,12 @@
             }
         }
         else if ((getAbstractOption() == RightCurlyOption.SAME)
-            && (rcurly.getLineNo() != nextToken.getLineNo()))
+                && (rcurly.getLineNo() != nextToken.getLineNo()))
         {
             log(rcurly, "line.same", "}");
         }
         else if ((getAbstractOption() == RightCurlyOption.ALONE)
-                 && (rcurly.getLineNo() == nextToken.getLineNo()))
+                && (rcurly.getLineNo() == nextToken.getLineNo()))
         {
             log(rcurly, "line.alone", "}");
         }
@@ -77,8 +92,8 @@
             return;
         }
         final boolean startsLine =
-            Utils.whitespaceBefore(rcurly.getColumnNo(),
-                                   getLines()[rcurly.getLineNo() - 1]);
+                Utils.whitespaceBefore(rcurly.getColumnNo(),
+                        getLines()[rcurly.getLineNo() - 1]);
 
         if (!startsLine && (lcurly.getLineNo() != rcurly.getLineNo())) {
             log(rcurly, "line.new", "}");

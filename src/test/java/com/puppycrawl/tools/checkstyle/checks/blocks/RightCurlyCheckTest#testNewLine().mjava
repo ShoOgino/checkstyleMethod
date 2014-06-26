@@ -1,0 +1,13 @@
+    @Test
+    public void testNewLine() throws Exception
+    {
+        mCheckConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
+        mCheckConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, CTOR_DEF");
+        final String[] expected = {
+            "111:10: '}' should be on a new line.",
+            "122:10: '}' should be on a new line.",
+            "136:10: '}' should be on a new line.",
+        };
+        verify(mCheckConfig, getPath("InputLeftCurlyOther.java"), expected);
+    }
+
