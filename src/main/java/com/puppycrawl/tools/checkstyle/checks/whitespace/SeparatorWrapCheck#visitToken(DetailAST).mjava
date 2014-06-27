@@ -1,0 +1,27 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        // TODO: It is a copy/paste from OperatorWrapCheck.
+        //It should be fixed in another issue
+        final String text = aAST.getText();
+        final int colNo = aAST.getColumnNo();
+        final int lineNo = aAST.getLineNo();
+        final String currentLine = getLines()[lineNo - 1];
+        final String substringAfterToken =
+                currentLine.substring(colNo + text.length()).trim();
+        final String substringBeforeToken =
+                currentLine.substring(0, colNo).trim();
+        final WrapOption wSp = getAbstractOption();
+
+        if (wSp == WrapOption.EOL
+                && (substringBeforeToken.length() == 0))
+        {
+            log(lineNo, colNo, "line.previous", text);
+        }
+        else if (wSp == WrapOption.NL
+                 && substringAfterToken.length() == 0)
+        {
+            log(lineNo, colNo, "line.new", text);
+        }
+    }
+

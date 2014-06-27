@@ -10,7 +10,7 @@
                 return;
             }
         }
-        final OperatorWrapOption wOp = getAbstractOption();
+        final WrapOption wOp = getAbstractOption();
 
         final String text = aAST.getText();
         final int colNo = aAST.getColumnNo();
@@ -21,14 +21,14 @@
         // Check if rest of line is whitespace, and not just the operator
         // by itself. This last bit is to handle the operator on a line by
         // itself.
-        if ((wOp == OperatorWrapOption.NL)
+        if ((wOp == WrapOption.NL)
             && !text.equals(currentLine.trim())
             && (currentLine.substring(colNo + text.length())
                 .trim().length() == 0))
         {
             log(lineNo, colNo, "line.new", text);
         }
-        else if ((wOp == OperatorWrapOption.EOL)
+        else if ((wOp == WrapOption.EOL)
                   && Utils.whitespaceBefore(colNo - 1, currentLine))
         {
             log(lineNo, colNo, "line.previous", text);

@@ -1,0 +1,12 @@
+    @Test
+    public void testDot()
+        throws Exception
+    {
+        checkConfig.addAttribute("option", "NL");
+        checkConfig.addAttribute("tokens", "DOT");
+        final String[] expected = {
+            "31:10: '.' should be on a new line.",
+        };
+        verify(checkConfig, getPath("whitespace/InputSeparatorWrap.java"), expected);
+    }
+
