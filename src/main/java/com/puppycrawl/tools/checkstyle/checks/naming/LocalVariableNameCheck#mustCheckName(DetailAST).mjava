@@ -5,6 +5,11 @@
             aAST.findFirstToken(TokenTypes.MODIFIERS);
         final boolean isFinal = (modifiersAST != null)
             && modifiersAST.branchContains(TokenTypes.FINAL);
+        if (mAllowOneCharVarInForLoop && isForLoopVariable(aAST)) {
+            final String variableName =
+                    aAST.findFirstToken(TokenTypes.IDENT).getText();
+            return !sSingleChar.matcher(variableName).find();
+        }
         return (!isFinal && ScopeUtils.isLocalVariableDef(aAST));
     }
 
