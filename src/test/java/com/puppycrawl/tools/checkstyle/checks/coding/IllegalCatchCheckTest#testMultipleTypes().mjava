@@ -1,0 +1,15 @@
+    @Test
+    public void testMultipleTypes() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(IllegalCatchCheck.class);
+
+        String[] expected = {
+            "6:11: Catching 'RuntimeException' is not allowed.",
+            "8:11: Catching 'RuntimeException' is not allowed.",
+            "10:11: Catching 'RuntimeException' is not allowed.",
+            "12:11: Catching 'RuntimeException' is not allowed.",
+        };
+
+        verify(checkConfig, getPath("coding" + File.separator + "InputIllegalCatchCheck2.java"), expected);
+    }
+

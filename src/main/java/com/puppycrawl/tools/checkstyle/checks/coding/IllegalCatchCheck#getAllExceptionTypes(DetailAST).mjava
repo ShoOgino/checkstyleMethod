@@ -1,0 +1,26 @@
+    /**
+     * Finds all exception types in current catch.
+     * We need it till we can have few different exception types into one catch.
+     * @param aParentToken - parent node for types (TYPE or BOR)
+     * @return list, that contains all exception types in current catch
+     */
+    public List<DetailAST> getAllExceptionTypes(DetailAST aParentToken)
+    {
+        DetailAST currentNode = aParentToken.getFirstChild();
+        final List<DetailAST> exceptionTypes = new LinkedList<DetailAST>();
+        if (currentNode.getType() == TokenTypes.BOR) {
+            exceptionTypes.addAll(getAllExceptionTypes(currentNode));
+            currentNode = currentNode.getNextSibling();
+            if (currentNode != null) {
+                exceptionTypes.add(currentNode);
+            }
+        }
+        else {
+            exceptionTypes.add(currentNode);
+            while ((currentNode = currentNode.getNextSibling()) != null) {
+                exceptionTypes.add(currentNode);
+            }
+        }
+        return exceptionTypes;
+    }
+
