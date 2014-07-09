@@ -1,0 +1,31 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST nextToken = aAST.getNextSibling();
+
+        if (nextToken != null && nextToken.getType() != TokenTypes.RCURLY) {
+            final int astType = aAST.getType();
+            switch (astType) {
+            case TokenTypes.VARIABLE_DEF:
+                if (isTypeField(aAST) && !hasBlankLineAfter(aAST)) {
+                    log(nextToken.getLineNo(),
+                            "empty.line.separator", nextToken.getText());
+                }
+                break;
+            case TokenTypes.IMPORT:
+                if (astType != nextToken.getType()
+                    && !hasBlankLineAfter(aAST))
+                {
+                    log(nextToken.getLineNo(),
+                            "empty.line.separator", nextToken.getText());
+                }
+                break;
+            default:
+                if (!hasBlankLineAfter(aAST)) {
+                    log(nextToken.getLineNo(),
+                            "empty.line.separator", nextToken.getText());
+                }
+            }
+        }
+    }
+

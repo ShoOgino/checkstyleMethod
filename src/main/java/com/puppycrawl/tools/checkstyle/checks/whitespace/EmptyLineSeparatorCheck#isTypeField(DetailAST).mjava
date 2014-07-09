@@ -1,0 +1,11 @@
+    /**
+     * If variable definition is a type field.
+     * @param aVariableDef variable definition.
+     * @return true variable definition is a type field.
+     */
+    private boolean isTypeField(DetailAST aVariableDef)
+    {
+        final int parentType = aVariableDef.getParent().getParent().getType();
+        return parentType == TokenTypes.CLASS_DEF;
+    }
+
