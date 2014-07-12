@@ -1,0 +1,12 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        final String[] lines = aAST.getText().split("\n");
+
+        for (int i = 0; i < lines.length; i++) {
+            if (mRegexp.matcher(lines[i]).find()) {
+                log(aAST.getLineNo() + i, "todo.match", mFormat);
+            }
+        }
+    }
+
