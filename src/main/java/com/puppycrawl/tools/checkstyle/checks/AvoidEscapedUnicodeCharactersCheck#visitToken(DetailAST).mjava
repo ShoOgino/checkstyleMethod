@@ -1,0 +1,16 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+
+        final String literal = aAST.getText();
+
+        if (hasUnicodeChar(literal)) {
+            if (!(hasTrailComment(aAST)
+                    || isAllCharactersEscaped(literal)
+                    || isOnlyUnicodeControlChars(literal)))
+            {
+                log(aAST.getLineNo(), "forbid.escaped.unicode.char");
+            }
+        }
+    }
+

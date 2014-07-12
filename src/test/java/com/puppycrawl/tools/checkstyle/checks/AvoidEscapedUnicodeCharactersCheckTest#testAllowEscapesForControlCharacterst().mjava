@@ -1,0 +1,22 @@
+    @Test
+    public void testAllowEscapesForControlCharacterst() throws Exception
+    {
+        DefaultConfiguration checkConfig =
+                createCheckConfig(AvoidEscapedUnicodeCharactersCheck.class);
+        checkConfig.addAttribute("allowEscapesForControlCharacters", "true");
+        final String[] expected = {
+            "5: " + MSG,
+            "7: " + MSG,
+            "10: " + MSG,
+            "15: " + MSG,
+            "16: " + MSG,
+            "24: " + MSG,
+            "25: " + MSG,
+            "31: " + MSG,
+            "32: " + MSG,
+            "33: " + MSG,
+            "34: " + MSG,
+        };
+        verify(checkConfig, getPath("InputAvoidEscapedUnicodeCharactersCheck.java"), expected);
+    }
+

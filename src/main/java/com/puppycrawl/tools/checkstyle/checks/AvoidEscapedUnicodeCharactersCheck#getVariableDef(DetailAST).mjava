@@ -1,0 +1,16 @@
+    /**
+     * Get variable definition.
+     * @param aAst current token.
+     * @return variable definition.
+     */
+    private DetailAST getVariableDef(DetailAST aAst)
+    {
+        DetailAST result = aAst.getParent();
+        while (result != null
+                && result.getType() != TokenTypes.VARIABLE_DEF)
+        {
+            result = result.getParent();
+        }
+        return result;
+    }
+

@@ -1,0 +1,28 @@
+    /**
+     * Check if trail comment is present after aAst token.
+     * @param aAst current token.
+     * @return true if trail comment is present after aAst token.
+     */
+    private boolean hasTrailComment(DetailAST aAst)
+    {
+        boolean result = false;
+        final DetailAST variableDef = getVariableDef(aAst);
+
+        if (variableDef != null) {
+
+            DetailAST comma = variableDef.getNextSibling();
+
+            if (comma.getType() != TokenTypes.COMMA) {
+                comma = variableDef.getLastChild();
+            }
+
+            final int lineNo = comma.getLineNo();
+            final String currentLine = getLines()[lineNo - 1];
+
+            if (sCommentRegexp.matcher(currentLine).find()) {
+                result = true;
+            }
+        }
+        return mAllowByTailComment && result;
+    }
+
