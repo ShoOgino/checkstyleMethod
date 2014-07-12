@@ -12,7 +12,14 @@
             final FileText text = FileText.fromLines(aFile, aLines);
             final FileContents contents = new FileContents(text);
             final DetailAST rootAST = TreeWalker.parse(contents);
-            walk(rootAST, contents);
+
+            getMessageCollector().reset();
+
+            walk(rootAST, contents, AstState.ORDINARY);
+
+            final DetailAST astWithComments = appendHiddenCommentNodes(rootAST);
+
+            walk(astWithComments, contents, AstState.WITH_COMMENTS);
         }
         catch (final RecognitionException re) {
             Utils.getExceptionLogger()
@@ -67,6 +74,7 @@
                     this.getClass(), null));
         }
         catch (final Throwable err) {
+            err.printStackTrace();
             Utils.getExceptionLogger().debug("Throwable occured.", err);
             getMessageCollector().add(
                 new LocalizedMessage(

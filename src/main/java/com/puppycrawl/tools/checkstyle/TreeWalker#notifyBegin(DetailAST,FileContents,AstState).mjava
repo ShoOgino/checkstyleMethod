@@ -1,0 +1,24 @@
+    /**
+     * Notify checks that we are about to begin walking a tree.
+     * @param aRootAST the root of the tree.
+     * @param aContents the contents of the file the AST was generated from.
+     * @param aAstState state of AST.
+     */
+    private void notifyBegin(DetailAST aRootAST, FileContents aContents
+            , AstState aAstState)
+    {
+        Set<Check> checks;
+
+        if (aAstState == AstState.WITH_COMMENTS) {
+            checks = mCommentChecks;
+        }
+        else {
+            checks = mOrdinaryChecks;
+        }
+
+        for (Check ch : checks) {
+            ch.setFileContents(aContents);
+            ch.beginTree(aRootAST);
+        }
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * Initiates the walk of an AST.
+     * @param aAST the root AST
+     * @param aContents the contents of the file the AST was generated from.
+     * @param aAstState state of AST.
+     */
+    private void walk(DetailAST aAST, FileContents aContents
+            , AstState aAstState)
+    {
+        notifyBegin(aAST, aContents, aAstState);
+
+        // empty files are not flagged by javac, will yield aAST == null
+        if (aAST != null) {
+            processIter(aAST, aAstState);
+        }
+
+        notifyEnd(aAST, aAstState);
+    }
+

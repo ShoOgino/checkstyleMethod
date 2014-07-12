@@ -1,0 +1,60 @@
+    /**
+     * Appends comment nodes to existing AST.
+     * It traverses each node in AST, looks for hidden comment tokens
+     * and appends found comment tokens as nodes in AST.
+     * @param aRoot
+     *        root of AST.
+     * @return root of AST with comment nodes.
+     */
+    private static DetailAST appendHiddenCommentNodes(DetailAST aRoot)
+    {
+        DetailAST result = aRoot;
+        DetailAST curNode = aRoot;
+        DetailAST lastNode = aRoot;
+
+        while (curNode != null) {
+            if (isPositionGreater(curNode, lastNode)) {
+                lastNode = curNode;
+            }
+
+            CommonHiddenStreamToken tokenBefore = curNode.getHiddenBefore();
+            DetailAST currentSibling = curNode;
+            while (tokenBefore != null) { // threat multiple comments
+                final DetailAST newCommentNode =
+                         createCommentAstFromToken(tokenBefore);
+
+                currentSibling.addPreviousSibling(newCommentNode);
+
+                if (currentSibling == result) {
+                    result = newCommentNode;
+                }
+
+                currentSibling = newCommentNode;
+                tokenBefore = tokenBefore.getHiddenBefore();
+            }
+
+            DetailAST toVisit = curNode.getFirstChild();
+            while ((curNode != null) && (toVisit == null)) {
+                toVisit = curNode.getNextSibling();
+                if (toVisit == null) {
+                    curNode = curNode.getParent();
+                }
+            }
+            curNode = toVisit;
+        }
+        if (lastNode != null) {
+            CommonHiddenStreamToken tokenAfter = lastNode.getHiddenAfter();
+            DetailAST currentSibling = lastNode;
+            while (tokenAfter != null) {
+                final DetailAST newCommentNode =
+                        createCommentAstFromToken(tokenAfter);
+
+                currentSibling.addNextSibling(newCommentNode);
+
+                currentSibling = newCommentNode;
+                tokenAfter = tokenAfter.getHiddenAfter();
+            }
+        }
+        return result;
+    }
+

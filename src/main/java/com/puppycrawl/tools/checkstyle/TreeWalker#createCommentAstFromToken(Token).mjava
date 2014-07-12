@@ -1,0 +1,19 @@
+    /**
+     * Create comment AST from token. Depending on token type
+     * SINGLE_LINE_COMMENT or BLOCK_COMMENT_BEGIN is created.
+     * @param aToken
+     *        Token object.
+     * @return DetailAST of comment node.
+     */
+    private static DetailAST createCommentAstFromToken(Token aToken)
+    {
+        switch (aToken.getType()) {
+        case TokenTypes.SINGLE_LINE_COMMENT:
+            return createSlCommentNode(aToken);
+        case TokenTypes.BLOCK_COMMENT_BEGIN:
+            return createBlockCommentNode(aToken);
+        default:
+            throw new IllegalArgumentException("Unknown comment type");
+        }
+    }
+

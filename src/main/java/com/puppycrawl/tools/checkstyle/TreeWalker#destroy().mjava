@@ -1,7 +1,10 @@
     @Override
     public void destroy()
     {
-        for (Check c : mAllChecks) {
+        for (Check c : mOrdinaryChecks) {
+            c.destroy();
+        }
+        for (Check c : mCommentChecks) {
             c.destroy();
         }
         mCache.destroy();

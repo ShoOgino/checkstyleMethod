@@ -10,7 +10,7 @@
      * @return the root of the AST
      */
     public static DetailAST parse(FileContents aContents)
-            throws RecognitionException, TokenStreamException
+        throws RecognitionException, TokenStreamException
     {
         final String fullText = aContents.getText().getFullText().toString();
         final Reader sr = new StringReader(fullText);
@@ -21,13 +21,13 @@
         lexer.setTreatEnumAsKeyword(true);
         lexer.setTokenObjectClass("antlr.CommonHiddenStreamToken");
 
-        TokenStreamHiddenTokenFilter filter = new TokenStreamHiddenTokenFilter(
-                lexer);
+        final TokenStreamHiddenTokenFilter filter =
+                new TokenStreamHiddenTokenFilter(lexer);
         filter.hide(TokenTypes.SINGLE_LINE_COMMENT);
         filter.hide(TokenTypes.BLOCK_COMMENT_BEGIN);
 
         final GeneratedJavaRecognizer parser =
-                new GeneratedJavaRecognizer(filter);
+            new GeneratedJavaRecognizer(filter);
         parser.setFilename(aContents.getFilename());
         parser.setASTNodeClass(DetailAST.class.getName());
         parser.compilationUnit();

@@ -1,0 +1,24 @@
+    /**
+     * Add previous sibling.
+     * @param aAST
+     *        DetailAST object.
+     */
+    public void addPreviousSibling(DetailAST aAST)
+    {
+        if (aAST != null) {
+            aAST.setParent(mParent);
+            final DetailAST previousSibling = this.getPreviousSibling();
+
+            if (previousSibling != null) {
+                aAST.setPreviousSibling(previousSibling);
+                previousSibling.setNextSibling(aAST);
+            }
+            else if (mParent != null) {
+                mParent.setFirstChild(aAST);
+            }
+
+            aAST.setNextSibling(this);
+            this.setPreviousSibling(aAST);
+        }
+    }
+

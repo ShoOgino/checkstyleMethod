@@ -1,0 +1,29 @@
+    /**
+     * Count lines and columns (in last line) in text.
+     * @param aText
+     *        String.
+     * @param aInitialLinesCnt
+     *        initial value of lines counter.
+     * @param aInitialColumnsCnt
+     *        initial value of columns counter.
+     * @return entry(pair), first element is lines counter, second - columns
+     *         counter.
+     */
+    private static Entry<Integer, Integer> countLinesColumns(
+            String aText, int aInitialLinesCnt, int aInitialColumnsCnt)
+    {
+        int lines = aInitialLinesCnt;
+        int columns = aInitialColumnsCnt;
+        for (char c : aText.toCharArray()) {
+            switch (c) {
+            case '\n':
+                lines++;
+                columns = 0;
+                break;
+            default:
+                columns++;
+            }
+        }
+        return new SimpleEntry<Integer, Integer>(lines, columns);
+    }
+

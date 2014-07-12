@@ -34,6 +34,11 @@
         for (int element : tokens) {
             registerCheck(element, aCheck);
         }
-        mAllChecks.add(aCheck);
+        if (aCheck.isCommentNodesRequired()) {
+            mCommentChecks.add(aCheck);
+        }
+        else {
+            mOrdinaryChecks.add(aCheck);
+        }
     }
 

@@ -5,6 +5,19 @@
      */
     private void registerCheck(String aToken, Check aCheck)
     {
-        mTokenToChecks.put(aToken, aCheck);
+        if (aCheck.isCommentNodesRequired()) {
+            mTokenToCommentChecks.put(aToken, aCheck);
+        }
+        else if (TokenTypes.isCommentType(aToken)) {
+            LOG.warn("Check '"
+                    + aCheck.getClass().getName()
+                    + "' waits for comment type token ('"
+                    + aToken
+                    + "') and should override 'isCommentNodesRequred()'"
+                    + " method to return 'true'");
+        }
+        else {
+            mTokenToOrdinaryChecks.put(aToken, aCheck);
+        }
     }
 

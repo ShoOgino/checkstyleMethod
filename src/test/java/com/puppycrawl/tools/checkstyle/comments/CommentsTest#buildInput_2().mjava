@@ -1,0 +1,222 @@
+    /*
+     * +--CLASS_DEF [2,0]
+     *     |
+     *     +--MODIFIERS [2,0]
+     *     +--SINGLE_LINE_COMMENT [1,0]
+     *         |
+     *         +--COMMENT_CONTENT [1,2]
+     *     +--LITERAL_CLASS [2,0]
+     *     +--IDENT [2,6]
+     *     +--OBJBLOCK [3,0]
+     *         |
+     *         +--LCURLY [3,0]
+     *         +--METHOD_DEF [9,4]
+     *                 |
+     *                 +--MODIFIERS [9,4]
+     *                     |
+     *                     +--BLOCK_COMMENT_BEGIN [4,4]
+     *                         |
+     *                         +--COMMENT_CONTENT [4,6]
+     *                         +--BLOCK_COMMENT_END [8,5]
+     *                     +--LITERAL_PROTECTED [9,4]
+     *                 +--TYPE [9,14]
+     *                     |
+     *                     +--IDENT [9,14]
+     *                 +--IDENT [9,21]
+     *                 +--LPAREN [9,25]
+     *                 +--PARAMETERS [9,26]
+     *                 +--RPAREN [9,26]
+     *                 +--SLIST [10,4]
+     *                     |
+     *                     +--RCURLY [11,4]
+     *         +--RCURLY [12,0]
+     */
+    private static DetailAST buildInput_2()
+    {
+        DetailAST classDef = new DetailAST();
+        classDef.setType(CLASS_DEF);
+        classDef.setText("CLASS_DEF");
+        classDef.setLineNo(2);
+        classDef.setColumnNo(0);
+
+        DetailAST modifiers = new DetailAST();
+        modifiers.setType(MODIFIERS);
+        modifiers.setText("MODIFIERS");
+        modifiers.setLineNo(2);
+        modifiers.setColumnNo(0);
+
+        classDef.setFirstChild(modifiers);
+
+        DetailAST slComment = new DetailAST();
+        slComment.setType(SINGLE_LINE_COMMENT);
+        slComment.setText("//");
+        slComment.setLineNo(1);
+        slComment.setColumnNo(0);
+
+        DetailAST slCommentContent = new DetailAST();
+        slCommentContent.setType(COMMENT_CONTENT);
+        slCommentContent.setText(" my class\n");
+        slCommentContent.setLineNo(1);
+        slCommentContent.setColumnNo(2);
+
+        slComment.setFirstChild(slCommentContent);
+        modifiers.setNextSibling(slComment);
+
+        DetailAST literalClass = new DetailAST();
+        literalClass.setType(LITERAL_CLASS);
+        literalClass.setText("class");
+        literalClass.setLineNo(2);
+        literalClass.setColumnNo(0);
+
+        slComment.setNextSibling(literalClass);
+
+        DetailAST identClassName = new DetailAST();
+        identClassName.setType(IDENT);
+        identClassName.setText("A");
+        identClassName.setLineNo(2);
+        identClassName.setColumnNo(6);
+
+        literalClass.setNextSibling(identClassName);
+
+        DetailAST objBlock = new DetailAST();
+        objBlock.setType(OBJBLOCK);
+        objBlock.setText("OBJBLOCK");
+        objBlock.setLineNo(3);
+        objBlock.setColumnNo(0);
+
+        identClassName.setNextSibling(objBlock);
+
+        DetailAST lcurly = new DetailAST();
+        lcurly.setType(LCURLY);
+        lcurly.setText("{");
+        lcurly.setLineNo(3);
+        lcurly.setColumnNo(0);
+
+        objBlock.setFirstChild(lcurly);
+
+        DetailAST methodDef = new DetailAST();
+        methodDef.setType(METHOD_DEF);
+        methodDef.setText("METHOD_DEF");
+        methodDef.setLineNo(9);
+        methodDef.setColumnNo(4);
+
+        lcurly.setNextSibling(methodDef);
+
+        DetailAST rcurly = new DetailAST();
+        rcurly.setType(RCURLY);
+        rcurly.setText("}");
+        rcurly.setLineNo(12);
+        rcurly.setColumnNo(0);
+
+        methodDef.setNextSibling(rcurly);
+
+        DetailAST methodModifiers = new DetailAST();
+        methodModifiers.setType(MODIFIERS);
+        methodModifiers.setText("MODIFIERS");
+        methodModifiers.setLineNo(9);
+        methodModifiers.setColumnNo(4);
+
+        methodDef.setFirstChild(methodModifiers);
+
+        DetailAST methodType = new DetailAST();
+        methodType.setType(TYPE);
+        methodType.setText("TYPE");
+        methodType.setLineNo(9);
+        methodType.setColumnNo(14);
+
+        methodModifiers.setNextSibling(methodType);
+
+        DetailAST identMethodType = new DetailAST();
+        identMethodType.setType(IDENT);
+        identMethodType.setText("String");
+        identMethodType.setLineNo(9);
+        identMethodType.setColumnNo(14);
+
+        methodType.setFirstChild(identMethodType);
+
+        DetailAST identMethodName = new DetailAST();
+        identMethodName.setType(IDENT);
+        identMethodName.setText("line");
+        identMethodName.setLineNo(9);
+        identMethodName.setColumnNo(21);
+
+        methodType.setNextSibling(identMethodName);
+
+        DetailAST lparen = new DetailAST();
+        lparen.setType(LPAREN);
+        lparen.setText("(");
+        lparen.setLineNo(9);
+        lparen.setColumnNo(25);
+
+        identMethodName.setNextSibling(lparen);
+
+        DetailAST parameters = new DetailAST();
+        parameters.setType(PARAMETERS);
+        parameters.setText("PARAMETERS");
+        parameters.setLineNo(9);
+        parameters.setColumnNo(26);
+
+        lparen.setNextSibling(parameters);
+
+        DetailAST rparen = new DetailAST();
+        rparen.setType(RPAREN);
+        rparen.setText(")");
+        rparen.setLineNo(9);
+        rparen.setColumnNo(26);
+
+        parameters.setNextSibling(rparen);
+
+        DetailAST slist = new DetailAST();
+        slist.setType(SLIST);
+        slist.setText("{");
+        slist.setLineNo(10);
+        slist.setColumnNo(4);
+
+        rparen.setNextSibling(slist);
+
+        DetailAST methodRcurly = new DetailAST();
+        methodRcurly.setType(RCURLY);
+        methodRcurly.setText("}");
+        methodRcurly.setLineNo(11);
+        methodRcurly.setColumnNo(4);
+
+        slist.setFirstChild(methodRcurly);
+
+        DetailAST blockCommentStart = new DetailAST();
+        blockCommentStart.setType(BLOCK_COMMENT_BEGIN);
+        blockCommentStart.setText("/*");
+        blockCommentStart.setLineNo(4);
+        blockCommentStart.setColumnNo(4);
+
+        DetailAST blockCommentContent = new DetailAST();
+        blockCommentContent.setType(COMMENT_CONTENT);
+        blockCommentContent.setText("*\n"
+                + "     * Lines <b>method</b>.\n"
+                + "     * \n"
+                + "     * @return string.\n"
+                + "     ");
+        blockCommentContent.setLineNo(4);
+        blockCommentContent.setColumnNo(6);
+
+        blockCommentStart.setFirstChild(blockCommentContent);
+
+        DetailAST blockCommentEnd = new DetailAST();
+        blockCommentEnd.setType(BLOCK_COMMENT_END);
+        blockCommentEnd.setText("*/");
+        blockCommentEnd.setLineNo(8);
+        blockCommentEnd.setColumnNo(5);
+
+        blockCommentContent.setNextSibling(blockCommentEnd);
+        methodModifiers.setFirstChild(blockCommentStart);
+
+        DetailAST literalProtected = new DetailAST();
+        literalProtected.setType(LITERAL_PROTECTED);
+        literalProtected.setText("protected");
+        literalProtected.setLineNo(9);
+        literalProtected.setColumnNo(4);
+
+        blockCommentStart.setNextSibling(literalProtected);
+
+        return classDef;
+    }
+

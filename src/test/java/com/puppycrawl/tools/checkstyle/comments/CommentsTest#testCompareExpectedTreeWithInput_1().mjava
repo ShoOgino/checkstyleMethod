@@ -1,0 +1,10 @@
+    @Test
+    public void testCompareExpectedTreeWithInput_1() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(CompareTreesWithComments.class);
+        CompareTreesWithComments.expectedTree = buildInput_1();
+        final String[] expected = {};
+        verify(checkConfig, getPath("comments" + File.separator
+                + "InputCommentsTest_1.java"), expected);
+    }
+
