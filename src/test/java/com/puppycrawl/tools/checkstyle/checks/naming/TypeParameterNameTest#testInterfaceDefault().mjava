@@ -1,0 +1,12 @@
+    @Test
+    public void testInterfaceDefault()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(InterfaceTypeParameterNameCheck.class);
+        final String[] expected = {
+            "48:15: Name 'Input' must match pattern '^[A-Z]$'.",
+        };
+        verify(checkConfig, getPath("naming" + File.separator + "InputTypeParameterName.java"), expected);
+    }
+

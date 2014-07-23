@@ -1,0 +1,15 @@
+    @Test
+    public void testInterfaceFooName()
+        throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(InterfaceTypeParameterNameCheck.class);
+        checkConfig.addAttribute("format", "^foo$");
+
+        final String[] expected = {
+            "48:15: Name 'Input' must match pattern '^foo$'.",
+            "52:24: Name 'T' must match pattern '^foo$'.",
+        };
+        verify(checkConfig, getPath("naming" + File.separator + "InputTypeParameterName.java"), expected);
+    }
+
