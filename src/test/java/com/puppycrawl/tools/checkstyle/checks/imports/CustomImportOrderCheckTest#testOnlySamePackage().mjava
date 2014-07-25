@@ -1,0 +1,19 @@
+    @Test
+    public void testOnlySamePackage() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(CustomImportOrderCheck.class);
+        checkConfig.addAttribute("customImportOrderRules", "SAME_PACKAGE(3)");
+        checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
+        final String[] expected = {
+            "4: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "6: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "7: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "8: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "9: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator
+                + "InputCustomImportOrderSamePackage2.java"), expected);
+    }
+

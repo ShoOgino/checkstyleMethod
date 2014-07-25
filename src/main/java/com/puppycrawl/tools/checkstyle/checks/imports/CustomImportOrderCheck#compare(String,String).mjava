@@ -1,0 +1,56 @@
+    /**
+     * Checks compare two import paths.
+     * @param aCurrentImport
+     *        current import.
+     * @param aPreviousImport
+     *        previous import.
+     * @return a negative integer, zero, or a positive integer as the
+     *        specified String is greater than, equal to, or less
+     *        than this String, ignoring case considerations.
+     */
+    private int compare(String aCurrentImport, String aPreviousImport)
+    {
+        int indexOfPreviousDotCurrent = 0;
+        int indexOfNextDotCurrent = 0;
+        String tokenCurrent = "";
+        int indexOfPreviousDotPrevious = 0;
+        int indexOfNextDotPrevious = 0;
+        String tokenPrevious = "";
+        final int currentImportDomainCount = countDomains(aCurrentImport);
+        final int previousImportDomainCount = countDomains(aPreviousImport);
+        int result = 0;
+
+        while (aCurrentImport.lastIndexOf(".") != indexOfPreviousDotCurrent - 1
+                && aPreviousImport.lastIndexOf(".") != indexOfPreviousDotPrevious - 1)
+        {
+            indexOfNextDotCurrent = aCurrentImport.indexOf(".", indexOfPreviousDotCurrent + 1);
+            indexOfNextDotPrevious = aPreviousImport.indexOf(".", indexOfPreviousDotPrevious + 1);
+            tokenCurrent = aCurrentImport.substring(indexOfPreviousDotCurrent,
+                    indexOfNextDotCurrent);
+            tokenPrevious = aPreviousImport.substring(indexOfPreviousDotPrevious,
+                    indexOfNextDotPrevious);
+            result = tokenCurrent.compareToIgnoreCase(tokenPrevious);
+            if (result != 0) {
+                return result;
+            }
+            indexOfPreviousDotCurrent = indexOfNextDotCurrent + 1;
+            indexOfPreviousDotPrevious = indexOfNextDotPrevious + 1;
+        }
+
+        if (result == 0 && (aCurrentImport.lastIndexOf(".") == indexOfPreviousDotCurrent - 1
+                || aPreviousImport.lastIndexOf(".") == indexOfPreviousDotPrevious - 1))
+        {
+            if (currentImportDomainCount != previousImportDomainCount) {
+                getClassName(indexOfNextDotPrevious, aPreviousImport);
+                return currentImportDomainCount - previousImportDomainCount;
+            }
+            else {
+                getClassName(indexOfNextDotPrevious, aPreviousImport);
+                return getClassName(indexOfNextDotCurrent,
+                        aCurrentImport).compareToIgnoreCase(getClassName(indexOfNextDotPrevious,
+                                aPreviousImport));
+            }
+        }
+        return 0;
+    }
+

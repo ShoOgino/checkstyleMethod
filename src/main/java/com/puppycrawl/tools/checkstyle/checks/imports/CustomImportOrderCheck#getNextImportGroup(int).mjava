@@ -1,0 +1,20 @@
+    /**
+     * Get next import group.
+     * @param aCurrentGroupNumber
+     *        current group number.
+     * @return
+     *        next import group.
+     */
+    private String getNextImportGroup(int aCurrentGroupNumber)
+    {
+        int nextGroupNumber = aCurrentGroupNumber;
+        for (; mCustomImportOrderRules.size() > nextGroupNumber; nextGroupNumber++)
+        {
+            if (hasAnyImportInCurrentGroup(mCustomImportOrderRules.get(nextGroupNumber)))
+            {
+                break;
+            }
+        }
+        return mCustomImportOrderRules.get(nextGroupNumber);
+    }
+

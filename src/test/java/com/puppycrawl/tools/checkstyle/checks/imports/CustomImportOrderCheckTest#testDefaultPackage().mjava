@@ -1,0 +1,26 @@
+    /**
+     * Checks different group orderings and imports which are out of those ones
+     * specified in the configuration.
+     * @throws Exception
+     */
+    @Test
+    public void testDefaultPackage() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(CustomImportOrderCheck.class);
+        checkConfig.addAttribute("thirdPartyPackageRegExp", "com.|org.");
+        checkConfig.addAttribute("customImportOrderRules",
+                "STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE");
+        checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
+        final String[] expected = {
+            "4: Wrong lexicographical order for 'java.awt.Button.ABORT' import.",
+            "9: Wrong lexicographical order for 'java.awt.Dialog' import.",
+            "13: Wrong lexicographical order for 'java.io.File' import.",
+            "15: Wrong lexicographical order for 'java.io.InputStream' import.",
+            "20: Wrong lexicographical order for 'com.google.common.*' import.",
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator
+                + "InputCustomImportOrder.java"), expected);
+    }
+

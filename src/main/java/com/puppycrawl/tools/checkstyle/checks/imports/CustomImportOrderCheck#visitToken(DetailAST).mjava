@@ -1,0 +1,21 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
+            if (mCustomImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)
+                    && mSamePackageMatchingDepth != -1)
+            {
+                mSamePackageDomainsRegExp = createSamePackageRegexp(
+                        mSamePackageMatchingDepth, aAST);
+            }
+        }
+        else {
+            final String importFullPath = getFullImportIdent(aAST);
+            final int lineNo = aAST.getLineNo();
+            final boolean isStatic = aAST.getType() == TokenTypes.STATIC_IMPORT;
+            mImportToGroupList.add(new ImportDetails(importFullPath,
+                    lineNo, getImportGroup(isStatic, importFullPath),
+                    isStatic));
+        }
+    }
+

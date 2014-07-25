@@ -1,0 +1,17 @@
+    /**
+     * Checks if the import is placed in the correct group.
+     * @param aStatic
+     *        if import is static.
+     * @param aCurrentImport
+     *        import full path.
+     * @param aCurrentGroup
+     *        current group.
+     * @return true, if the import is placed in the static group.
+     */
+    private boolean matchesSpecialImportsGroup(boolean aStatic,
+        String aCurrentImport, String aCurrentGroup)
+    {
+        return !aStatic && SPECIAL_IMPORTS_RULE_GROUP.equals(aCurrentGroup)
+                && mSpecialImportsRegExp.matcher(aCurrentImport).find();
+    }
+

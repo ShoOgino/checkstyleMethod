@@ -1,0 +1,24 @@
+    /**
+     * Sets a custom import order from the rules in the string format specified
+     * by user.
+     * @param aInputCustomImportOrder
+     *        user value.
+     */
+    public final void
+    setCustomImportOrderRules(final String aInputCustomImportOrder)
+    {
+        mCustomImportOrderRules.clear();
+        try {
+            for (String currentState : aInputCustomImportOrder
+                    .split("\\s*###\\s*"))
+            {
+                addRulesToList(currentState);
+            }
+            mCustomImportOrderRules.add(NON_GROUP_RULE_GROUP);
+        }
+        catch (StringIndexOutOfBoundsException exp) {
+            //if the structure of the input rule isn't correct
+            throw new RuntimeException("Unable to parse input rule: " + exp);
+        }
+    }
+

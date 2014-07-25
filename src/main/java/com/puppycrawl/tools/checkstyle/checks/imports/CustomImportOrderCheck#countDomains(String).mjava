@@ -1,0 +1,21 @@
+    /**
+     * Count number of domains.
+     * @param aImportPath current import.
+     * @return number of domains.
+     */
+    private static int countDomains(String aImportPath)
+    {
+        final StringTokenizer tokens = new StringTokenizer(aImportPath, ".");
+        int count = 0;
+
+        while (tokens.hasMoreTokens()) {
+            if (!Character.isUpperCase(tokens.nextToken().toString().charAt(0))) {
+                count++;
+            }
+            else {
+                break;
+            }
+        }
+        return count - 1;
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Return class name from import full path.
+     * @param aStartFrom number of start.
+     * @param aImport import full path.
+     * @return class name.
+     */
+    private String getClassName(int aStartFrom, String aImport)
+    {
+        String className = aImport;
+        className = className.substring(aStartFrom, className.length());
+        final StringTokenizer token = new StringTokenizer(className, ".\r");
+        return token.nextToken();
+    }
+

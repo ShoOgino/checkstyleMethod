@@ -1,0 +1,18 @@
+    /**
+     * Checks if the import is placed in the correct group.
+     * @param aStatic
+     *        if import is static.
+     * @param aCurrentImport
+     *        import full path.
+     * @param aCurrentGroup
+     *        current group.
+     * @return true, if the import is placed in the static group.
+     */
+    private boolean matchesThirdPartyImportGroup(boolean aStatic,
+        String aCurrentImport, String aCurrentGroup)
+    {
+        return !aStatic && THIRD_PARTY_PACKAGE_RULE_GROUP.equals(aCurrentGroup)
+                && mThirdPartyPackageRegExp.matcher(aCurrentImport).find()
+                && !mStandardPackageRegExp.matcher(aCurrentImport).find();
+    }
+

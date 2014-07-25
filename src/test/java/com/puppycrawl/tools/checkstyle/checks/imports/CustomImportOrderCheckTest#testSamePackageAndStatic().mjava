@@ -1,0 +1,23 @@
+    @Test
+    public void testSamePackageAndStatic() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(CustomImportOrderCheck.class);
+        checkConfig.addAttribute("thirdPartyPackageRegExp", "org.");
+        checkConfig.addAttribute("customImportOrderRules",
+                "STATIC###SAME_PACKAGE(3)");
+        checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
+        final String[] expected = {
+            "4: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "5: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "6: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "7: Import statement is in the wrong order. Should be in the 'STATIC' group.",
+            "8: Import statement is in the wrong order. Should be in the 'STATIC' group.",
+            "10: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
+            "11: Import statement is in the wrong order. Should be in the 'STATIC' group.",
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator
+                + "InputCustomImportOrderSamePackage.java"), expected);
+    }
+

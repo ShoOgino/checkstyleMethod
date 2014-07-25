@@ -1,0 +1,19 @@
+    /**
+     * Checks if the import is placed in the correct group.
+     * @param aStatic
+     *        if import is static.
+     * @param aImportPath
+     *        import full path.
+     * @param aCurrentGroup
+     *        current group.
+     * @return true, if import placed in the correct group.
+     */
+    private boolean matchesImportGroup(boolean aStatic, String aImportPath, String aCurrentGroup)
+    {
+        return matchesStaticImportGroup(aStatic, aCurrentGroup)
+                || matchesSamePackageImportGroup(aStatic, aImportPath, aCurrentGroup)
+                || matchesSpecialImportsGroup(aStatic, aImportPath, aCurrentGroup)
+                || matchesStandartImportGroup(aStatic, aImportPath, aCurrentGroup)
+                || matchesThirdPartyImportGroup(aStatic, aImportPath, aCurrentGroup);
+    }
+

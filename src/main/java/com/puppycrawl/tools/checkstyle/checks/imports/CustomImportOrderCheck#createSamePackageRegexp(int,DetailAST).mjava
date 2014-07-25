@@ -1,0 +1,22 @@
+    /**
+     * Creates mSamePackageDomainsRegExp of the first package domains.
+     * @param aCount
+     *        number of first package domains.
+     * @param aPackageNode
+     *        package node.
+     * @return same package regexp.
+     */
+    private static String createSamePackageRegexp(int aCount, DetailAST aPackageNode)
+    {
+        final StringBuilder builder = new StringBuilder();
+        final String packageFullPath = getFullImportIdent(aPackageNode);
+        final StringTokenizer tokens = new StringTokenizer(packageFullPath, ".");
+        int count = aCount;
+
+        while (tokens.hasMoreTokens() && count > 0) {
+            builder.append(tokens.nextToken()).append(".");
+            count--;
+        }
+        return builder.append("*").toString();
+    }
+

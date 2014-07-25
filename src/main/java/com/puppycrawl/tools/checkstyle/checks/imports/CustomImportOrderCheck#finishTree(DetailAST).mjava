@@ -1,0 +1,53 @@
+    @Override
+    public void finishTree(DetailAST aRootAST)
+    {
+
+        if (mImportToGroupList.isEmpty()) {
+            return;
+        }
+
+        final ImportDetails firstImport = mImportToGroupList.get(0);
+        String currentGroup = getImportGroup(firstImport.isStatic(),
+                firstImport.getImportFullPath());
+        int groupNumber = mCustomImportOrderRules.indexOf(currentGroup);
+        String previousImport = null;
+
+        for (ImportDetails importObject : mImportToGroupList) {
+            final String importGroup = importObject.getImportGroup();
+            final String fullImportIdent = importObject.mImportFullPath;
+
+            if (!importGroup.equals(currentGroup)) {
+                if (mCustomImportOrderRules.size() > groupNumber + 1) {
+                    final String nextGroup = getNextImportGroup(groupNumber + 1);
+                    if (importGroup.equals(nextGroup)) {
+                        if (mSeparateLineBetweenGroups && previousImport != null
+                                && !hasEmptyLineBefore(importObject.getLineNumber()))
+                        {
+                            log(importObject.getLineNumber(), "custom.import.order.line.separator",
+                                    fullImportIdent);
+                        }
+                        currentGroup = nextGroup;
+                        groupNumber = mCustomImportOrderRules.indexOf(nextGroup);
+                    }
+                    else {
+                        logWrongImportGroupOrder(importObject.getLineNumber(),
+                                importGroup);
+                    }
+                }
+                else {
+                    logWrongImportGroupOrder(importObject.getLineNumber(),
+                            importGroup);
+                }
+            }
+            else if (mSortImportsInGroupAlphabetically
+                    && previousImport != null
+                    && matchesImportGroup(importObject.isStatic(),
+                            fullImportIdent, currentGroup)
+                    && !(compare(fullImportIdent, previousImport) >= 0))
+            {
+                log(importObject.getLineNumber(), "custom.import.order.lex", fullImportIdent);
+            }
+            previousImport = fullImportIdent;
+        }
+    }
+

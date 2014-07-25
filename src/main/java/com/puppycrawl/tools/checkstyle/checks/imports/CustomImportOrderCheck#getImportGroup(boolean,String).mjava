@@ -1,0 +1,18 @@
+    /**
+     * Get import valid group.
+     * @param aStatic
+     *        is static import.
+     * @param aImportPath
+     *        full import path.
+     * @return import valid group.
+     */
+    private String getImportGroup(boolean aStatic, String aImportPath)
+    {
+        for (String group : mCustomImportOrderRules) {
+            if (matchesImportGroup(aStatic, aImportPath, group)) {
+                return group;
+            }
+        }
+        return NON_GROUP_RULE_GROUP;
+    }
+
