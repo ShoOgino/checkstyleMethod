@@ -1,0 +1,55 @@
+    /**
+     * Gets the disallowed abbreviation contained in given String.
+     * @param aString
+     *        the given String.
+     * @return the disallowed abbreviation contained in given String as a
+     *         separate String.
+     */
+    private String getDisallowedAbbreviation(String aString)
+    {
+        int beginIndex = 0;
+        boolean abbrStarted = false;
+        String result = null;
+
+        for (int index = 0; index < aString.length(); index++) {
+            final char symbol = aString.charAt(index);
+
+            if (Character.isUpperCase(symbol)) {
+                if (!abbrStarted) {
+                    abbrStarted = true;
+                    beginIndex = index;
+                }
+            }
+            else {
+                if (abbrStarted) {
+                    abbrStarted = false;
+
+                    // -1 as a first capital is usually beginning of next word
+                    final int endIndex = index - 1;
+                    final int abbrLength = endIndex - beginIndex;
+                    if (abbrLength > mAllowedAbbreviationLength) {
+                        result = aString.substring(beginIndex, endIndex);
+                        if (!mAllowedAbbreviations.contains(result)) {
+                            break;
+                        }
+                        else {
+                            result = null;
+                        }
+                    }
+                    beginIndex = -1;
+                }
+            }
+        }
+        if (abbrStarted) {
+            final int endIndex = aString.length();
+            final int abbrLength = endIndex - beginIndex;
+            if (abbrLength > 1 && abbrLength > mAllowedAbbreviationLength) {
+                result = aString.substring(beginIndex, endIndex);
+                if (mAllowedAbbreviations.contains(result)) {
+                    result = null;
+                }
+            }
+        }
+        return result;
+    }
+

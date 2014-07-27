@@ -1,0 +1,28 @@
+    @Test
+    public void testTypeAndVariablesAndMethodNamesWithIgnoresStatic() throws Exception
+    {
+
+        final int expectedCapitalCount = 5;
+        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
+        final DefaultConfiguration checkConfig = createCheckConfig(AbbreviationAsWordInNameCheck.class);
+        checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
+        checkConfig.addAttribute("allowedAbbreviations", "MARAZMATIC,VARIABLE");
+        checkConfig.addAttribute("ignoreStatic", "true");
+        checkConfig.addAttribute("ignoreFinal", "false");
+        checkConfig.addAttribute("targets", "CLASS_DEF"
+            + ",VARIABLE_DEF"
+            + ",METHOD_DEF,ENUM_DEF,ENUM_CONSTANT_DEF"
+            + ",PARAMETER_DEF,INTERFACE_DEF,ANNOTATION_DEF");
+        checkConfig.addAttribute("ignoreOverriddenMethods", "true");
+
+        final String[] expected = {
+            "32: " + warningMessage,
+            "37: " + warningMessage,
+            "38: " + warningMessage,
+            "58: " + warningMessage, // not in ignore list
+            "59: " + warningMessage, // no ignore for final
+        };
+
+        verify(checkConfig, getPath("InputAbbreviationAsWordInTypeNameCheck.java"), expected);
+    }
+

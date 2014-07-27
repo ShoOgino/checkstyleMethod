@@ -1,0 +1,27 @@
+    @Test
+    public void testTypeAndVariablesAndMethodNames() throws Exception
+    {
+
+        final int expectedCapitalCount = 5;
+        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
+        final DefaultConfiguration checkConfig = createCheckConfig(AbbreviationAsWordInNameCheck.class);
+        checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
+        checkConfig.addAttribute("allowedAbbreviations", "CLASS");
+        checkConfig.addAttribute("targets", "CLASS_DEF"
+            + ",VARIABLE_DEF"
+            + ",METHOD_DEF,ENUM_DEF,ENUM_CONSTANT_DEF"
+            + ",PARAMETER_DEF,INTERFACE_DEF,ANNOTATION_DEF");
+        checkConfig.addAttribute("ignoreOverriddenMethods", "true");
+
+        final String[] expected = {
+            "32: " + warningMessage,
+            "37: " + warningMessage,
+            "38: " + warningMessage,
+            "39: " + warningMessage,
+            "40: " + warningMessage,
+            "58: " + warningMessage,
+        };
+
+        verify(checkConfig, getPath("InputAbbreviationAsWordInTypeNameCheck.java"), expected);
+    }
+

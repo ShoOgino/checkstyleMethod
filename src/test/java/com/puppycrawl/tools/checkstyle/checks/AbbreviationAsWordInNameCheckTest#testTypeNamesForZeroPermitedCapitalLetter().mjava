@@ -1,0 +1,47 @@
+    @Test
+    public void testTypeNamesForZeroPermitedCapitalLetter() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(AbbreviationAsWordInNameCheck.class);
+        final int expectedCapitalCount = 0;
+        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
+        checkConfig.addAttribute("allowedAbbreviationLength",
+                String.valueOf(expectedCapitalCount));
+        checkConfig.addAttribute("allowedAbbreviations", "");
+        checkConfig.addAttribute("ignoreStatic", "false");
+        checkConfig.addAttribute("ignoreFinal", "false");
+        checkConfig.addAttribute("ignoreOverriddenMethods", "false");
+        checkConfig.addAttribute("targets", "CLASS_DEF,INTERFACE_DEF,ENUM_DEF,"
+            + "ANNOTATION_DEF,ANNOTATION_FIELD_DEF,ENUM_CONSTANT_DEF,"
+            + "PARAMETER_DEF,VARIABLE_DEF,METHOD_DEF");
+        final String[] expected = {
+            "3: " + warningMessage,
+            "6: " + warningMessage,
+            "9: " + warningMessage,
+            "12: " + warningMessage,
+            "32: " + warningMessage,
+            "37: " + warningMessage,
+            "38: " + warningMessage,
+            "39: " + warningMessage,
+            "40: " + warningMessage,
+            "46: " + warningMessage,
+            "47: " + warningMessage,
+            "48: " + warningMessage,
+            "49: " + warningMessage,
+            "57: " + warningMessage,
+            "58: " + warningMessage,
+            "59: " + warningMessage,
+            "60: " + warningMessage,
+            "61: " + warningMessage,
+            "66: " + warningMessage,
+            "72: " + warningMessage,
+            "78: " + warningMessage,
+            "84: " + warningMessage,
+            "88: " + warningMessage,
+            "90: " + warningMessage,
+            "98: " + warningMessage,
+        };
+        verify(checkConfig,
+                getPath("InputAbbreviationAsWordInTypeNameCheck.java"), expected);
+    }
+
