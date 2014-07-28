@@ -1,12 +1,12 @@
     @Test
-    public void testClassSpecific()
+    public void testAnnotationSpecific()
         throws Exception
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(TypeNameCheck.class);
-        checkConfig.addAttribute("tokens", TokenTypes.getTokenName(TokenTypes.CLASS_DEF));
+        checkConfig.addAttribute("tokens", TokenTypes.getTokenName(TokenTypes.ANNOTATION_DEF));
         final String[] expected = {
-                buildMesssage(3, 7, "inputHeaderClass",
+            buildMesssage(9, 23, "inputHeaderAnnotation",
                         TypeNameCheck.DEFAULT_PATTERN),
         };
         verify(checkConfig, inputFilename, expected);
