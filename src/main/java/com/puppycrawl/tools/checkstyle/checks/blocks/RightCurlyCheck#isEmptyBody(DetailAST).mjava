@@ -1,0 +1,19 @@
+    /**
+     * Checks if definition body is empty.
+     * @param aLcurly left curly.
+     * @return true if definition body is empty.
+     */
+    private boolean isEmptyBody(DetailAST aLcurly)
+    {
+        boolean result = false;
+        if (aLcurly.getParent().getType() == TokenTypes.OBJBLOCK) {
+            if (aLcurly.getNextSibling().getType() == TokenTypes.RCURLY) {
+                result = true;
+            }
+        }
+        else if (aLcurly.getFirstChild().getType() == TokenTypes.RCURLY) {
+            result = true;
+        }
+        return result;
+    }
+

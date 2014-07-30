@@ -83,7 +83,8 @@
             log(rcurly, "line.same", "}");
         }
         else if ((getAbstractOption() == RightCurlyOption.ALONE)
-                && (rcurly.getLineNo() == nextToken.getLineNo()))
+                && (rcurly.getLineNo() == nextToken.getLineNo())
+                && !isEmptyBody(lcurly))
         {
             log(rcurly, "line.alone", "}");
         }
