@@ -7,22 +7,29 @@
     {
         boolean result = false;
         final DetailAST variableDef = getVariableDef(aAst);
+        DetailAST semi;
 
         if (variableDef != null) {
 
-            DetailAST comma = variableDef.getNextSibling();
+            semi = variableDef.getNextSibling();
 
-            if (comma.getType() != TokenTypes.COMMA) {
-                comma = variableDef.getLastChild();
+            if (semi.getType() != TokenTypes.SEMI) {
+                semi = variableDef.getLastChild();
             }
+        }
+        else {
+            semi = getSemi(aAst);
+        }
 
-            final int lineNo = comma.getLineNo();
+        if (semi != null) {
+            final int lineNo = semi.getLineNo();
             final String currentLine = getLines()[lineNo - 1];
 
-            if (sCommentRegexp.matcher(currentLine).find()) {
+            if (currentLine != null && sCommentRegexp.matcher(currentLine).find()) {
                 result = true;
             }
         }
-        return mAllowByTailComment && result;
+
+        return result;
     }
 

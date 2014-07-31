@@ -1,0 +1,19 @@
+    /**
+     * Get semi token.
+     * @param aAst current token.
+     * @return semi token or null.
+     */
+    private DetailAST getSemi(DetailAST aAst)
+    {
+        DetailAST result = aAst.getParent();
+        while (result != null
+                && result.getLastChild().getType() != TokenTypes.SEMI)
+        {
+            result = result.getParent();
+        }
+        if (result != null) {
+            result = result.getLastChild();
+        }
+        return result;
+    }
+

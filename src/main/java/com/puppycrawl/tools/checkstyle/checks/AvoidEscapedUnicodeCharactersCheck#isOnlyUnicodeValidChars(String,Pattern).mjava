@@ -1,0 +1,15 @@
+    /**
+     * Check if String literal contains Unicode control chars.
+     * @param aLiteral String llteral.
+     * @param aPattern RegExp for valid characters.
+     * @return true, if String literal contains Unicode control chars.
+     */
+    private boolean isOnlyUnicodeValidChars(String aLiteral, Pattern aPattern)
+    {
+        final int unicodeMatchesCounter =
+                countMatches(sUnicodeRegexp, aLiteral);
+        final int unicodeValidMatchesCouter =
+                countMatches(aPattern, aLiteral);
+        return unicodeMatchesCounter - unicodeValidMatchesCouter == 0;
+    }
+

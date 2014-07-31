@@ -1,0 +1,16 @@
+    /**
+     * Count regexp matchers into String literal.
+     * @param aPattern pattern.
+     * @param aTarget String literal.
+     * @return count of regexp matchers.
+     */
+    private int countMatches(Pattern aPattern, String aTarget)
+    {
+        int matcherCounter = 0;
+        final Matcher matcher = aPattern.matcher(aTarget);
+        while (matcher.find()) {
+            matcherCounter++;
+        }
+        return matcherCounter;
+    }
+

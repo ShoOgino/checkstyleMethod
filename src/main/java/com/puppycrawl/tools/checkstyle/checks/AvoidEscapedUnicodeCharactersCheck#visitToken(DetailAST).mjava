@@ -5,9 +5,12 @@
         final String literal = aAST.getText();
 
         if (hasUnicodeChar(literal)) {
-            if (!(hasTrailComment(aAST)
+            if (!(mAllowByTailComment && hasTrailComment(aAST)
                     || isAllCharactersEscaped(literal)
-                    || isOnlyUnicodeControlChars(literal)))
+                    || (mAllowEscapesForControlCharacters
+                            && isOnlyUnicodeValidChars(literal, sUnicodeControl))
+                    || (mAllowNonPrintableEscapes
+                            && isOnlyUnicodeValidChars(literal, sNonPrintableChars))))
             {
                 log(aAST.getLineNo(), "forbid.escaped.unicode.char");
             }

@@ -1,28 +1,22 @@
     @Test
-    public void testAllowByTailComment() throws Exception
+    public void allowNonPrintableEscapes() throws Exception
     {
         DefaultConfiguration checkConfig =
                 createCheckConfig(AvoidEscapedUnicodeCharactersCheck.class);
-        checkConfig.addAttribute("allowByTailComment", "true");
+        checkConfig.addAttribute("allowNonPrintableEscapes", "true");
         final String[] expected = {
             "5: " + MSG,
+            "7: " + MSG,
+            "9: " + MSG,
             "13: " + MSG,
+            "14: " + MSG,
             "21: " + MSG,
+            "22: " + MSG,
             "27: " + MSG,
+            "28: " + MSG,
             "29: " + MSG,
             "30: " + MSG,
-            "54: " + MSG,
-            "55: " + MSG,
-            "56: " + MSG,
-            "57: " + MSG,
-            "68: " + MSG,
-            "69: " + MSG,
-            "70: " + MSG,
-            "71: " + MSG,
-            "72: " + MSG,
-            "73: " + MSG,
-            "75: " + MSG,
-            "78: " + MSG,
+            "38: " + MSG,
         };
         verify(checkConfig, getPath("InputAvoidEscapedUnicodeCharactersCheck.java"), expected);
     }
