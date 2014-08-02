@@ -1,29 +1,27 @@
     @Test
-    public void testTypeAndVariablesAndMethodNamesWithIgnoresFinal() throws Exception
+    public void testTypeAndVariablesAndMethodNames() throws Exception
     {
 
-        final int expectedCapitalCount = 4;
+        final int expectedCapitalCount = 5;
         warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         final DefaultConfiguration checkConfig = createCheckConfig(AbbreviationAsWordInNameCheck.class);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
-        checkConfig.addAttribute("allowedAbbreviations", "MARAZMATIC,VARIABLE");
-        checkConfig.addAttribute("ignoreStatic", "false");
-        checkConfig.addAttribute("ignoreFinal", "true");
-        checkConfig.addAttribute("targets", "CLASS_DEF"
+        checkConfig.addAttribute("allowedAbbreviations", "CLASS");
+        checkConfig.addAttribute("tokens", "CLASS_DEF"
             + ",VARIABLE_DEF"
             + ",METHOD_DEF,ENUM_DEF,ENUM_CONSTANT_DEF"
             + ",PARAMETER_DEF,INTERFACE_DEF,ANNOTATION_DEF");
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
 
         final String[] expected = {
-            "12: " + warningMessage,
             "32: " + warningMessage,
             "37: " + warningMessage,
             "38: " + warningMessage,
-            "58: " + warningMessage, // not in ignore list
-            "60: " + warningMessage, // no ignore for static
+            "39: " + warningMessage,
+            "40: " + warningMessage,
+            "58: " + warningMessage,
         };
 
-        verify(checkConfig, getPath("InputAbbreviationAsWordInTypeNameCheck.java"), expected);
+        verify(checkConfig, getPath("naming/InputAbbreviationAsWordInTypeNameCheck.java"), expected);
     }
 

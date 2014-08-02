@@ -1,5 +1,5 @@
     @Test
-    public void testTypeAndVariablesAndMethodNamesWithNoIgnores() throws Exception
+    public void testTypeAndVariablesAndMethodNamesWithIgnores() throws Exception
     {
 
         final int expectedCapitalCount = 5;
@@ -7,9 +7,9 @@
         final DefaultConfiguration checkConfig = createCheckConfig(AbbreviationAsWordInNameCheck.class);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
         checkConfig.addAttribute("allowedAbbreviations", "NUMBER,MARAZMATIC,VARIABLE");
-        checkConfig.addAttribute("ignoreStatic", "false");
-        checkConfig.addAttribute("ignoreFinal", "false");
-        checkConfig.addAttribute("targets", "CLASS_DEF"
+        checkConfig.addAttribute("ignoreStatic", "true");
+        checkConfig.addAttribute("ignoreFinal", "true");
+        checkConfig.addAttribute("tokens", "CLASS_DEF"
             + ",VARIABLE_DEF"
             + ",METHOD_DEF,ENUM_DEF,ENUM_CONSTANT_DEF"
             + ",PARAMETER_DEF,INTERFACE_DEF,ANNOTATION_DEF");
@@ -19,12 +19,8 @@
             "32: " + warningMessage,
             "37: " + warningMessage,
             "38: " + warningMessage,
-            "66: " + warningMessage,
-            "72: " + warningMessage,
-            "78: " + warningMessage,
-            "84: " + warningMessage,
         };
 
-        verify(checkConfig, getPath("InputAbbreviationAsWordInTypeNameCheck.java"), expected);
+        verify(checkConfig, getPath("naming/InputAbbreviationAsWordInTypeNameCheck.java"), expected);
     }
 

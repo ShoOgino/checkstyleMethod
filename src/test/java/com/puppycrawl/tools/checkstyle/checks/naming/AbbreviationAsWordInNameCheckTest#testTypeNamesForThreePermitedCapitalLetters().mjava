@@ -7,7 +7,7 @@
         warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
         checkConfig.addAttribute("allowedAbbreviations", "III");
-        checkConfig.addAttribute("targets", "CLASS_DEF");
+        checkConfig.addAttribute("tokens", "CLASS_DEF");
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
 
         final String[] expected = {
@@ -17,6 +17,6 @@
             "37: " + warningMessage,
         };
 
-        verify(checkConfig, getPath("InputAbbreviationAsWordInTypeNameCheck.java"), expected);
+        verify(checkConfig, getPath("naming/InputAbbreviationAsWordInTypeNameCheck.java"), expected);
     }
 
