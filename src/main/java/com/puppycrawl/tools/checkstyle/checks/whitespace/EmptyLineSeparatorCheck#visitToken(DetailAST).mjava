@@ -7,23 +7,25 @@
             final int astType = aAST.getType();
             switch (astType) {
             case TokenTypes.VARIABLE_DEF:
-                if (isTypeField(aAST) && !hasBlankLineAfter(aAST)) {
-                    log(nextToken.getLineNo(),
-                            "empty.line.separator", nextToken.getText());
+                if (isTypeField(aAST) && !hasEmptyLineAfter(aAST)) {
+                    log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
                 }
                 break;
             case TokenTypes.IMPORT:
-                if (astType != nextToken.getType()
-                    && !hasBlankLineAfter(aAST))
+                if (astType != nextToken.getType() && !hasEmptyLineAfter(aAST)
+                    || (aAST.getLineNo() > 1 && !hasEmptyLineBefore(aAST)
+                            && aAST.getPreviousSibling() == null))
                 {
-                    log(nextToken.getLineNo(),
-                            "empty.line.separator", nextToken.getText());
+                    log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
                 }
                 break;
+            case TokenTypes.PACKAGE_DEF:
+                if (aAST.getLineNo() > 1 && !hasEmptyLineBefore(aAST)) {
+                    log(aAST.getLineNo(), "empty.line.separator", aAST.getText());
+                }
             default:
-                if (!hasBlankLineAfter(aAST)) {
-                    log(nextToken.getLineNo(),
-                            "empty.line.separator", nextToken.getText());
+                if (!hasEmptyLineAfter(aAST)) {
+                    log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
                 }
             }
         }

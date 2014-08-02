@@ -1,0 +1,13 @@
+    /**
+     * Checks if a token has a empty line before.
+     * @param aToken token.
+     * @return true, if token have empty line before.
+     */
+    private boolean hasEmptyLineBefore(DetailAST aToken)
+    {
+        final int lineNo = aToken.getLineNo();
+        //  [lineNo - 2] is the number of the previous line because the numbering starts from zero.
+        final String lineBefore = getLines()[lineNo - 2];
+        return lineBefore.isEmpty();
+    }
+
