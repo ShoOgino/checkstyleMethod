@@ -1,0 +1,18 @@
+	public boolean isCheckBoxEnabled(TreePath path) {
+		DataLabelModel model = (DataLabelModel) getModel();
+		if (recursiveState) {
+			for (int index = 0; index < path.getPathCount(); ++index) {
+				int nodeIndex = model.getNodeIndex(path.getPathComponent(index));
+				if (disabled.contains(nodeIndex)) {
+					return false;
+				}
+			}
+		} else {
+			int nodeIndex = model.getNodeIndex(path.getLastPathComponent());
+			if (disabled.contains(nodeIndex)) {
+				return false;
+			}
+		}
+		return true;
+	}
+

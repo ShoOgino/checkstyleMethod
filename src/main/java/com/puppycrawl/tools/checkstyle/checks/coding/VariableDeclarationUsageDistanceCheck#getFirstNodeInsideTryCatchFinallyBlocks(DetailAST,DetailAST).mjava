@@ -1,0 +1,60 @@
+    /**
+     * Gets first Ast node inside TRY-CATCH-FINALLY blocks if variable usage is
+     * met only inside the block (not in its declaration!).
+     * @param aBlock
+     *        Ast node represents TRY-CATCH-FINALLY block.
+     * @param aVariable
+     *        Variable which is checked for content in block.
+     * @return If variable usage is met only inside the block
+     *         (not in its declaration!) than return the first Ast node
+     *         of this block, otherwise - null.
+     */
+    private static DetailAST getFirstNodeInsideTryCatchFinallyBlocks(
+            DetailAST aBlock, DetailAST aVariable)
+    {
+        DetailAST currentNode = aBlock.getFirstChild();
+        final List<DetailAST> variableUsageExpressions =
+                new ArrayList<DetailAST>();
+
+        // Checking variable usage inside TRY block.
+        if (isChild(currentNode, aVariable)) {
+            variableUsageExpressions.add(currentNode);
+        }
+
+        // Switch on CATCH block.
+        currentNode = currentNode.getNextSibling();
+
+        // Checking variable usage inside all CATCH blocks.
+        while (currentNode != null
+                && currentNode.getType() == TokenTypes.LITERAL_CATCH)
+        {
+            final DetailAST catchBlock = currentNode.getLastChild();
+
+            if (isChild(catchBlock, aVariable)) {
+                variableUsageExpressions.add(catchBlock);
+            }
+            currentNode = currentNode.getNextSibling();
+        }
+
+        // Checking variable usage inside FINALLY block.
+        if (currentNode != null) {
+            final DetailAST finalBlock = currentNode.getLastChild();
+
+            if (isChild(finalBlock, aVariable)) {
+                variableUsageExpressions.add(finalBlock);
+            }
+        }
+
+        DetailAST variableUsageNode = null;
+
+        // If variable usage exists in several related blocks, then
+        // firstNodeInsideBlock = null, otherwise if variable usage exists
+        // only inside one block, then get node from
+        // variableUsageExpressions.
+        if (variableUsageExpressions.size() == 1) {
+            variableUsageNode = variableUsageExpressions.get(0).getFirstChild();
+        }
+
+        return variableUsageNode;
+    }
+

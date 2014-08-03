@@ -1,0 +1,31 @@
+    public int testIssue32_11(File toDir)
+            throws IOException, FTPException,
+            ParseException, InterruptedException
+    {
+        int count = 0;
+        FTPFile[] files = client.dirDetails(".");
+
+        log.info("Data archivation started");
+        archiveOldData(archDir, files);
+        log.info("Data archivation finished");
+
+        if (files == null || files.length == 0) {
+            warn("No files on a remote site");
+        }
+        else {
+            log.debug("Files on remote site: " + files.length);
+
+            for (FTPFile ftpFile : files) {
+                if (!file.exists()) {
+                    getFile(client, ftpFile, file);
+                    file.setLastModified(ftpFile.lastModified().getTime());
+                    count++;
+                }
+            }
+        }
+
+        client.quit();
+
+        return count;
+    }
+

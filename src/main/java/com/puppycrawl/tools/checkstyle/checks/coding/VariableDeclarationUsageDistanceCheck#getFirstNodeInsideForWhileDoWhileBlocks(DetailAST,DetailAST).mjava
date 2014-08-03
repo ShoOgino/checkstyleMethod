@@ -1,0 +1,53 @@
+    /**
+     * Gets first Ast node inside FOR, WHILE or DO-WHILE blocks if variable
+     * usage is met only inside the block (not in its declaration!).
+     * @param aBlock
+     *        Ast node represents FOR, WHILE or DO-WHILE block.
+     * @param aVariable
+     *        Variable which is checked for content in block.
+     * @return If variable usage is met only inside the block
+     *         (not in its declaration!) than return the first Ast node
+     *         of this block, otherwise - null.
+     */
+    private DetailAST getFirstNodeInsideForWhileDoWhileBlocks(
+            DetailAST aBlock, DetailAST aVariable)
+    {
+        DetailAST firstNodeInsideBlock = null;
+
+        if (!isVariableInOperatorExpr(aBlock, aVariable)) {
+            DetailAST currentNode = null;
+
+            // Find currentNode for DO-WHILE block.
+            if (aBlock.getType() == TokenTypes.LITERAL_DO) {
+                currentNode = aBlock.getFirstChild();
+            }
+            // Find currentNode for FOR or WHILE block.
+            else {
+                // Looking for RPAREN ( ')' ) token to mark the end of operator
+                // expression.
+                currentNode = aBlock.findFirstToken(TokenTypes.RPAREN);
+                if (currentNode != null) {
+                    currentNode = currentNode.getNextSibling();
+                }
+            }
+
+            if (currentNode != null) {
+                final int currentNodeType = currentNode.getType();
+
+                if (currentNodeType == TokenTypes.SLIST) {
+                    firstNodeInsideBlock = currentNode.getFirstChild();
+                }
+                else if (currentNodeType == TokenTypes.VARIABLE_DEF
+                        || currentNodeType == TokenTypes.EXPR)
+                {
+                    ; // no code
+                }
+                else {
+                    firstNodeInsideBlock = currentNode;
+                }
+            }
+        }
+
+        return firstNodeInsideBlock;
+    }
+

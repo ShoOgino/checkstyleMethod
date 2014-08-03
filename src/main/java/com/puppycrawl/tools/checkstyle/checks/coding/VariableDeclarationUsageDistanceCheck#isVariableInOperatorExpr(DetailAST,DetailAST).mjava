@@ -1,0 +1,89 @@
+    /**
+     * Checks if variable is in operator declaration. For instance:
+     * <pre>
+     * boolean b = true;
+     * if (b) {...}
+     * </pre>
+     * Variable 'b' is in declaration of operator IF.
+     * @param aOperator
+     *        Ast node which represents operator.
+     * @param aVariable
+     *        Variable which is checked for content in operator.
+     * @return true if operator contains variable in its declaration, otherwise
+     *         - false.
+     */
+    private boolean isVariableInOperatorExpr(
+            DetailAST aOperator, DetailAST aVariable)
+    {
+        boolean isVarInOperatorDeclr = false;
+        final DetailAST openingBracket =
+                aOperator.findFirstToken(TokenTypes.LPAREN);
+
+        if (openingBracket != null) {
+            // Get EXPR between brackets
+            DetailAST exprBetweenBrackets = openingBracket
+                    .getNextSibling();
+
+            // Look if variable is in operator expression
+            while (exprBetweenBrackets.getType() != TokenTypes.RPAREN) {
+
+                if (isChild(exprBetweenBrackets, aVariable)) {
+                    isVarInOperatorDeclr = true;
+                    break;
+                }
+                exprBetweenBrackets = exprBetweenBrackets.getNextSibling();
+            }
+
+            // Variable may be met in ELSE declaration or in CASE declaration.
+            // So, check variable usage in these declarations.
+            if (!isVarInOperatorDeclr) {
+                switch (aOperator.getType()) {
+                case TokenTypes.LITERAL_IF:
+                    final DetailAST elseBlock = aOperator.getLastChild();
+
+                    if (elseBlock.getType() == TokenTypes.LITERAL_ELSE) {
+                        // Get IF followed by ELSE
+                        final DetailAST firstNodeInsideElseBlock = elseBlock
+                                .getFirstChild();
+
+                        if (firstNodeInsideElseBlock.getType()
+                                == TokenTypes.LITERAL_IF)
+                        {
+                            isVarInOperatorDeclr |=
+                                    isVariableInOperatorExpr(
+                                            firstNodeInsideElseBlock,
+                                            aVariable);
+                        }
+                    }
+                    break;
+
+                case TokenTypes.LITERAL_SWITCH:
+                    DetailAST currentCaseBlock = aOperator
+                            .findFirstToken(TokenTypes.CASE_GROUP);
+
+                    while (currentCaseBlock != null
+                            && currentCaseBlock.getType()
+                            == TokenTypes.CASE_GROUP)
+                    {
+                        final DetailAST firstNodeInsideCaseBlock =
+                                currentCaseBlock.getFirstChild();
+
+                        if (isChild(firstNodeInsideCaseBlock,
+                                aVariable))
+                        {
+                            isVarInOperatorDeclr = true;
+                            break;
+                        }
+                        currentCaseBlock = currentCaseBlock.getNextSibling();
+                    }
+                    break;
+
+                default:
+                    ;// no code
+                }
+            }
+        }
+
+        return isVarInOperatorDeclr;
+    }
+

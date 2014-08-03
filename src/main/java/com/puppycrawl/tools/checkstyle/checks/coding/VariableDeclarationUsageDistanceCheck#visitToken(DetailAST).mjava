@@ -1,0 +1,35 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        final int parentType = aAST.getParent().getType();
+        final DetailAST modifiers = aAST.getFirstChild();
+
+        if ((mIgnoreFinal && modifiers.branchContains(TokenTypes.FINAL))
+                || parentType == TokenTypes.OBJBLOCK)
+        {
+            ;// no code
+        }
+        else {
+            final DetailAST variable = aAST.findFirstToken(TokenTypes.IDENT);
+
+            if (!isVariableMatchesIgnorePattern(variable.getText())) {
+                final DetailAST semicolonAst = aAST.getNextSibling();
+                Entry<DetailAST, Integer> entry = null;
+                if (mValidateBetweenScopes) {
+                    entry = calculateDistanceBetweenScopes(semicolonAst, variable);
+                }
+                else {
+                    entry = calculateDistanceInSingleScope(semicolonAst, variable);
+                }
+                final DetailAST variableUsageAst = entry.getKey();
+                final int dist = entry.getValue();
+                if (dist > mAllowedDistance
+                        && !isInitializationSequence(variableUsageAst, variable.getText()))
+                {
+                    log(variable.getLineNo(),
+                            MSG_KEY, variable.getText(), dist, mAllowedDistance);
+                }
+            }
+        }
+    }
+
