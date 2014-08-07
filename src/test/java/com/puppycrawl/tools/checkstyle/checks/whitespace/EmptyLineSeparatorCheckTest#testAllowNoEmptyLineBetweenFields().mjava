@@ -1,12 +1,13 @@
     @Test
-    public void testDefault() throws Exception
+    public void testAllowNoEmptyLineBetweenFields() throws Exception
     {
+
         DefaultConfiguration checkConfig = createCheckConfig(EmptyLineSeparatorCheck.class);
+        checkConfig.addAttribute("allowNoEmptyLineBetweenFields", "true");
 
         final String[] expected = {
             "20: 'import' should be separated from previous statement.",
             "33: 'CLASS_DEF' should be separated from previous statement.",
-            "36: 'VARIABLE_DEF' should be separated from previous statement.",
             "37: 'STATIC_INIT' should be separated from previous statement.",
             "75: 'INTERFACE_DEF' should be separated from previous statement.",
         };

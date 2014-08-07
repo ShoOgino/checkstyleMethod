@@ -8,7 +8,14 @@
             switch (astType) {
             case TokenTypes.VARIABLE_DEF:
                 if (isTypeField(aAST) && !hasEmptyLineAfter(aAST)) {
-                    log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
+                    if (mAllowNoEmptyLineBetweenFields
+                            && nextToken.getType() != TokenTypes.VARIABLE_DEF)
+                    {
+                        log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
+                    }
+                    else if (!mAllowNoEmptyLineBetweenFields) {
+                        log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
+                    }
                 }
                 break;
             case TokenTypes.IMPORT:
