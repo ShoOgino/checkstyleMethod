@@ -6,7 +6,9 @@
     {
         boolean retVal = false;
 
-        final DetailAST rcurlyAST = aSlistAST.findFirstToken(TokenTypes.RCURLY);
+        final DetailAST rightCurly = aSlistAST.findFirstToken(TokenTypes.RCURLY);
+        final DetailAST rcurlyAST = rightCurly != null
+                ? rightCurly : aSlistAST.getParent().findFirstToken(TokenTypes.RCURLY);
         if (rcurlyAST != null) {
             final int slistLineNo = aSlistAST.getLineNo();
             final int slistColNo = aSlistAST.getColumnNo();

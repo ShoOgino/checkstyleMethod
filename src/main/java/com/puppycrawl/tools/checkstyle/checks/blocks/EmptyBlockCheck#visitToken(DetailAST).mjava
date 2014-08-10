@@ -1,21 +1,30 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        final DetailAST slistAST = aAST.findFirstToken(TokenTypes.SLIST);
-        if (slistAST != null) {
+        final DetailAST slistToken = aAST.findFirstToken(TokenTypes.SLIST);
+        final DetailAST leftCurly = slistToken != null
+                ? slistToken : aAST.findFirstToken(TokenTypes.LCURLY);
+        if (leftCurly != null) {
             if (getAbstractOption() == BlockOption.STMT) {
-                if (slistAST.getChildCount() <= 1) {
-                    log(slistAST.getLineNo(),
-                        slistAST.getColumnNo(),
+                boolean emptyBlock;
+                if (leftCurly.getType() == TokenTypes.LCURLY) {
+                    emptyBlock = leftCurly.getNextSibling().getType() != TokenTypes.CASE_GROUP;
+                }
+                else {
+                    emptyBlock = leftCurly.getChildCount() <= 1;
+                }
+                if (emptyBlock) {
+                    log(leftCurly.getLineNo(),
+                        leftCurly.getColumnNo(),
                         "block.noStmt",
                         aAST.getText());
                 }
             }
             else if (getAbstractOption() == BlockOption.TEXT
-                    && !hasText(slistAST))
+                    && !hasText(leftCurly))
             {
-                log(slistAST.getLineNo(),
-                    slistAST.getColumnNo(),
+                log(leftCurly.getLineNo(),
+                    leftCurly.getColumnNo(),
                     "block.empty",
                     aAST.getText());
             }
