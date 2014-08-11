@@ -1,0 +1,16 @@
+    @Test
+    public void testNPE() throws Exception
+    {
+
+        final DefaultConfiguration checkConfig = createCheckConfig(AbbreviationAsWordInNameCheck.class);
+        final int expectedCapitalCount = 1;
+        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
+        checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
+        checkConfig.addAttribute("ignoreFinal", "false");
+
+        final String[] expected = {
+        };
+
+        verify(checkConfig, getPath("naming/AbstractMultisetSetCountTester.java"), expected);
+    }
+
