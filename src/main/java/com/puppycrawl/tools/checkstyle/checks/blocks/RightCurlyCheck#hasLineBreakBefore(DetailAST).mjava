@@ -1,0 +1,18 @@
+    /**
+     * Checks if right curly has line break before.
+     * @param aRightCurly
+     *        Right curly token.
+     * @return
+     *        True, if right curly has line break before.
+     */
+    private boolean hasLineBreakBefore(DetailAST aRightCurly)
+    {
+        if (aRightCurly != null) {
+            final DetailAST previousToken = aRightCurly.getPreviousSibling();
+            if (previousToken != null && aRightCurly.getLineNo() == previousToken.getLineNo()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
