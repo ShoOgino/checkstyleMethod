@@ -36,6 +36,9 @@
                 log(aBrace.getLineNo(), aBrace.getColumnNo(),
                     "line.previous", "{");
             }
+            if (!hasLineBreakAfter(aBrace)) {
+                log(aBrace.getLineNo(), aBrace.getColumnNo(), "line.break.after");
+            }
         }
         else if (getAbstractOption() == LeftCurlyOption.NLOW) {
             if (aStartToken.getLineNo() == aBrace.getLineNo()) {
