@@ -1,24 +1,24 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        // Only check first declaration
-        if (mSeenFirstToken) {
-            return;
+        final String outerTypeName = aAST.findFirstToken(TokenTypes.IDENT).getText();
+        if (!mSeenFirstToken) {
+
+            if (mFileName.equals(outerTypeName)) {
+                mValidFirst = true;
+            }
+            else {
+                mWrongType = aAST;
+            }
+        }
+        else {
+            final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+            if (modifiers.findFirstToken(TokenTypes.LITERAL_PUBLIC) != null
+                    && aAST.getParent() == null)
+            {
+                mHasPublic = true;
+            }
         }
         mSeenFirstToken = true;
-
-        final String outerTypeName =
-            aAST.findFirstToken(TokenTypes.IDENT).getText();
-
-        // Calculate the file name without the leading path or
-        // the trailing .java suffix. Will be lax and just remove whatever
-        // is after the '.' character.
-        String fname = getFileContents().getFilename();
-        fname = fname.substring(fname.lastIndexOf(File.separatorChar) + 1);
-        fname = fname.replaceAll("\\.[^\\.]*$", "");
-
-        if (!(fname.equals(outerTypeName))) {
-            log(aAST.getLineNo(), "type.file.mismatch");
-        }
     }
 

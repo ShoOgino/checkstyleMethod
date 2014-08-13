@@ -1,0 +1,12 @@
+    /**
+     * Get source file name.
+     * @return source file name.
+     */
+    private String getFileName()
+    {
+        String fname = getFileContents().getFilename();
+        fname = fname.substring(fname.lastIndexOf(File.separatorChar) + 1);
+        fname = fname.replaceAll("\\.[^\\.]*$", "");
+        return fname;
+    }
+
