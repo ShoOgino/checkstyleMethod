@@ -15,7 +15,9 @@
             if (frame instanceof ClassFrame) {
                 final DetailAST mods =
                     aAST.findFirstToken(TokenTypes.MODIFIERS);
-                if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
+                if (ScopeUtils.inInterfaceBlock(aAST)
+                        || mods.branchContains(TokenTypes.LITERAL_STATIC))
+                {
                     ((ClassFrame) frame).addStaticMember(name);
                 }
                 else {
