@@ -1,8 +1,10 @@
     @Test
-    public void testScopes() throws Exception
+    public void testIgnoredVariableNames()
+        throws Exception
     {
         final DefaultConfiguration checkConfig =
-            createCheckConfig(JavadocVariableCheck.class);
+                createCheckConfig(JavadocVariableCheck.class);
+        checkConfig.addAttribute("ignoreNamePattern", "log|logger");
         final String[] expected = {
             "5:5: Missing a Javadoc comment.",
             "6:5: Missing a Javadoc comment.",
@@ -40,10 +42,9 @@
             "101:9: Missing a Javadoc comment.",
             "102:9: Missing a Javadoc comment.",
             "103:9: Missing a Javadoc comment.",
-            "113:9: Missing a Javadoc comment.",
         };
         verify(checkConfig,
-               getPath("javadoc" + File.separator + "InputNoJavadoc.java"),
-               expected);
+                getPath("javadoc" + File.separator + "InputNoJavadoc.java"),
+                expected);
     }
 

@@ -5,7 +5,7 @@
      */
     private boolean shouldCheck(final DetailAST aAST)
     {
-        if (ScopeUtils.inCodeBlock(aAST)) {
+        if (ScopeUtils.inCodeBlock(aAST) || isIgnored(aAST)) {
             return false;
         }
 
