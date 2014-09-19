@@ -1,0 +1,14 @@
+    @Test
+    public void testMembers() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        checkConfig.addAttribute("basicOffset", "2");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        final String[] expected = {
+            "10: '=' have incorrect indentation level 5, expected level should be 6.",
+            "45: 'class def rcurly' have incorrect indentation level 3, expected level should be 2.",
+        };
+
+        verify(checkConfig, getPath("indentation/InputMembers.java"), expected);
+    }
+

@@ -3,8 +3,9 @@
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
         checkConfig.addAttribute("basicOffset", Integer.valueOf(2).toString());
+        checkConfig.addAttribute("lineWrappingIndentation", Integer.valueOf(2).toString());
         final String[] expected = {
-            "25: ctor def child at indentation level 5 not at correct indentation, 4",
+            "25: 'ctor def' child have incorrect indentation level 5, expected level should be 4.",
         };
         verify(checkConfig, getPath("indentation/InputUseTwoSpaces.java"), expected);
     }

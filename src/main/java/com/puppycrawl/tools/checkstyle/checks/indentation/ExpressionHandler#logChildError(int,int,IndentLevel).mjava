@@ -9,7 +9,11 @@
                                int aActualLevel,
                                IndentLevel aExpectedLevel)
     {
-        mIndentCheck.indentationLog(aLine, "indentation.child.error",
-                mTypeName, aActualLevel, aExpectedLevel);
+        String messageKey = "indentation.child.error";
+        if (aExpectedLevel.isMultiLevel()) {
+            messageKey = "indentation.child.error.multi";
+        }
+        mIndentCheck.indentationLog(aLine, messageKey,
+            mTypeName, aActualLevel, aExpectedLevel);
     }
 

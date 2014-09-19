@@ -3,14 +3,12 @@
      */
     private void checkNonlistChild()
     {
-        // TODO: look for SEMI and check for it here?
         final DetailAST nonlist = getNonlistChild();
         if (nonlist == null) {
             return;
         }
 
-        final IndentLevel expected =
-            new IndentLevel(getLevel(), getBasicOffset());
+        final IndentLevel expected = new IndentLevel(getLevel(), getBasicOffset());
         checkExpressionSubtree(nonlist, expected, false, false);
     }
 

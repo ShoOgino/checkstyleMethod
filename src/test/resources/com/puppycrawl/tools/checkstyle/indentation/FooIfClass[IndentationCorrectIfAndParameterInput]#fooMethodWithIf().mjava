@@ -1,0 +1,24 @@
+  void fooMethodWithIf() { // indent:2 ; exp:2; ok
+
+    if (conditionFirst("Loooooooooooooooooong", new // indent:4 ; exp:4; ok
+        SecondClassWithVeryVeryVeryLongName("Loooooooooooooooooog"). // indent:8 ; exp:8; ok
+        getInteger(new FooIfClass(), "Loooooooooooooooooog"), // indent:8 ; exp:8; ok
+        new InnerClassFoo())) {}
+    
+    if (conditionSecond(10000000000.0, new // indent:4 ; exp:4; ok
+        SecondClassWithVeryVeryVeryLongName("Looooooooooooo" // indent:8 ; exp:8; ok
+        + "oooooooooooong").getString(new FooIfClass(), // indent:8 ; exp:8; ok
+        new SecondClassWithVeryVeryVeryLongName("loooooooooong"). // indent:8 ; exp:8; ok
+        getInteger(new FooIfClass(), "loooooooooooooong")), "loooooooooooong") // indent:8 ; exp:8; ok
+        || conditionThird(2048) || conditionFourth(new // indent:8 ; exp:8; ok
+        SecondClassWithVeryVeryVeryLongName("Looooooooooooooo" // indent:8 ; exp:8; ok
+        + "ooooooooooooong").getBoolean(new FooIfClass(), false)) || // indent:8 ; exp:8; ok
+        conditionFifth(true, new SecondClassWithVeryVeryVeryLongName(getString(2048, "Looo" // indent:8 ; exp:8; ok
+        + "ooooooooooooooooooooooooooooooooooooooooooong")).getBoolean( // indent:8 ; exp:8; ok
+        new FooIfClass(), true)) || conditionSixth(false, new // indent:8 ; exp:8; ok
+        SecondClassWithVeryVeryVeryLongName(getString(100000, "Loooooong" // indent:8 ; exp:8; ok
+        + "Fooooooo><"))) || conditionNoArg() // indent:8 ; exp:8; ok
+        || conditionNoArg() || // indent:8 ; exp:8; ok
+        conditionNoArg() || conditionNoArg()) {} // indent:8 ; exp:8; ok
+  } // indent:2 ; exp:2; ok
+

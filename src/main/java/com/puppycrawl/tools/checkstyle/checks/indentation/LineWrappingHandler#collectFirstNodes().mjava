@@ -1,0 +1,34 @@
+    /**
+     * Finds first nodes on line and puts them into Map.
+     *
+     * @return NavigableMap which contains lines numbers as a key and first
+     *         nodes on lines as a values.
+     */
+    private NavigableMap<Integer, DetailAST> collectFirstNodes()
+    {
+        final NavigableMap<Integer, DetailAST> result = new TreeMap<Integer, DetailAST>();
+
+        result.put(mFirstNode.getLineNo(), mFirstNode);
+        DetailAST curNode = mFirstNode.getFirstChild();
+
+        while (curNode != null && curNode != mLastNode) {
+
+            if (curNode.getType() == TokenTypes.OBJBLOCK) {
+                curNode = curNode.getNextSibling();
+            }
+
+            if (curNode != null) {
+                final DetailAST firstTokenOnLine = result.get(curNode.getLineNo());
+
+                if (firstTokenOnLine == null
+                        || firstTokenOnLine != null
+                        && firstTokenOnLine.getColumnNo() >= curNode.getColumnNo())
+                {
+                    result.put(curNode.getLineNo(), curNode);
+                }
+                curNode = getNextCurNode(curNode);
+            }
+        }
+        return result;
+    }
+

@@ -1,8 +1,27 @@
     @Override
     public void checkIndentation()
     {
-        checkModifiers();
-        checkType();
-        checkIdent();
+        final DetailAST modifiersNode = getMainAst().findFirstToken(TokenTypes.MODIFIERS);
+        if (modifiersNode.getChildCount() != 0) {
+            checkModifiers();
+        }
+        else {
+            checkType();
+        }
+        final LineWrappingHandler lineWrap =
+            new LineWrappingHandler(getIndentCheck(), getMainAst()) {
+                @Override
+                public DetailAST findLastNode(DetailAST aFirstNode)
+                {
+                    DetailAST lastNode = getFirstNode().getLastChild();
+                    if (lastNode.getType() != TokenTypes.SEMI) {
+                        lastNode = getFirstNode().getNextSibling();
+                    }
+                    return lastNode;
+                }
+            };
+        if (lineWrap.getLastNode() != null && !isArrayDeclaration(getMainAst())) {
+            lineWrap.checkIndentation();
+        }
     }
 

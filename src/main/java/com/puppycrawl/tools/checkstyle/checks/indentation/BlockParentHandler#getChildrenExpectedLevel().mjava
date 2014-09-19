@@ -10,12 +10,12 @@
             && !areOnSameLine(getLCurly(), getRCurly()))
         {
             if (startsLine(getLCurly())) {
-                return new IndentLevel(expandedTabsColumnNo(getLCurly())
-                                       + getBasicOffset());
+                return new IndentLevel(expandedTabsColumnNo(getLCurly()) + getBasicOffset());
             }
             else if (startsLine(getRCurly())) {
-                return new IndentLevel(expandedTabsColumnNo(getRCurly())
-                                       + getBasicOffset());
+                final IndentLevel level = new IndentLevel(curlyLevel(), getBasicOffset());
+                level.addAcceptedIndent(level.getFirstIndentLevel() + getLineWrappingIndent());
+                return level;
             }
         }
         return new IndentLevel(getLevel(), getBasicOffset());

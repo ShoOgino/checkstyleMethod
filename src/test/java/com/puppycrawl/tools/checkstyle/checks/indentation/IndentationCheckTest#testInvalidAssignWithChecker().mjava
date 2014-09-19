@@ -3,11 +3,10 @@
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
         final String[] expected = {
-            "8: method call child at indentation level 10 not at correct indentation, 12",
-            "10: method call child at indentation level 10 not at correct indentation, 12",
-            "12: method call child at indentation level 10 not at correct indentation, 12",
-            "14: assign at indentation level 9 not at correct indentation, 12",
-            "15: assign child at indentation level 10 not at correct indentation, 12",
+            "8: 'getLineNo' have incorrect indentation level 10, expected level should be 12.",
+            "10: 'getLine' have incorrect indentation level 10, expected level should be 12.",
+            "14: '=' have incorrect indentation level 9, expected level should be 12.",
+            "15: '1' have incorrect indentation level 10, expected level should be 12.",
         };
         verify(checkConfig, getPath("indentation/InputInvalidAssignIndent.java"), expected);
     }

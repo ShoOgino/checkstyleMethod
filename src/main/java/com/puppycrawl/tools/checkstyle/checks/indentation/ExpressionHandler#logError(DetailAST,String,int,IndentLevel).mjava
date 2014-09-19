@@ -11,7 +11,11 @@
     {
         final String typeStr =
             ("".equals(aSubtypeName) ? "" : (" " + aSubtypeName));
-        mIndentCheck.indentationLog(aAst.getLineNo(), "indentation.error",
-                mTypeName + typeStr, aActualLevel, aExpectedLevel);
+        String messageKey = "indentation.error";
+        if (aExpectedLevel.isMultiLevel()) {
+            messageKey = "indentation.error.multi";
+        }
+        mIndentCheck.indentationLog(aAst.getLineNo(), messageKey,
+            mTypeName + typeStr, aActualLevel, aExpectedLevel);
     }
 

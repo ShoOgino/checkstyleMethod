@@ -1,0 +1,10 @@
+    @Test
+    public void testCorrectIfAndParameters() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        checkConfig.addAttribute("basicOffset", "2");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        final String[] expected = {};
+        verify(checkConfig, getPath("indentation/IndentationCorrectIfAndParameterInput.java"), expected);
+    }
+

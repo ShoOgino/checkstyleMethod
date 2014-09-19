@@ -1,0 +1,20 @@
+    /**
+     * Returns next curNode node.
+     *
+     * @param aCurNode current node.
+     * @return next curNode node.
+     */
+    private DetailAST getNextCurNode(DetailAST aCurNode)
+    {
+        DetailAST nodeToVisit = aCurNode.getFirstChild();
+        DetailAST currentNode = aCurNode;
+
+        while ((currentNode != null) && (nodeToVisit == null)) {
+            nodeToVisit = currentNode.getNextSibling();
+            if (nodeToVisit == null) {
+                currentNode = currentNode.getParent();
+            }
+        }
+        return nodeToVisit;
+    }
+

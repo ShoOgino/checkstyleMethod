@@ -2,13 +2,16 @@
     public void checkIndentation()
     {
         checkModifiers();
-        checkIdent();
-        checkThrows();
-        if (getMainAst().getType() != TokenTypes.CTOR_DEF) {
-            checkType();
-        }
-        checkParameters();
 
+        final LineWrappingHandler lineWrap =
+            new LineWrappingHandler(getIndentCheck(), getMainAst()) {
+                @Override
+                public DetailAST findLastNode(DetailAST aFirstNode)
+                {
+                    return aFirstNode.getLastChild().getPreviousSibling();
+                }
+            };
+        lineWrap.checkIndentation();
         if (getLCurly() == null) {
             // asbtract method def -- no body
             return;

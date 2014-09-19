@@ -1,0 +1,17 @@
+    /**
+     * Logs warning message if indentation is incorrect.
+     *
+     * @param aCurrentNode
+     *            current node which probably invoked an error.
+     * @param aCurrentIndent
+     *            correct indentation.
+     */
+    private void logWarningMessage(DetailAST aCurrentNode, int aCurrentIndent)
+    {
+        if (aCurrentNode.getColumnNo() < aCurrentIndent) {
+            mIndentCheck.indentationLog(aCurrentNode.getLineNo(),
+                    "indentation.error", aCurrentNode.getText(),
+                    aCurrentNode.getColumnNo(), aCurrentIndent);
+        }
+    }
+

@@ -1,7 +1,7 @@
     /**
      * Check the indentation level of modifiers.
      */
-    protected final void checkModifiers()
+    protected void checkModifiers()
     {
         final DetailAST modifiers =
             mMainAst.findFirstToken(TokenTypes.MODIFIERS);
@@ -9,11 +9,6 @@
              modifier != null;
              modifier = modifier.getNextSibling())
         {
-            /*
-            if (!areOnSameLine(modifier, prevExpr)) {
-                continue;
-            }
-            */
             if (startsLine(modifier)
                 && !getLevel().accept(expandedTabsColumnNo(modifier)))
             {

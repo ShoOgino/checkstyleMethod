@@ -1,15 +1,9 @@
     @Override
     protected IndentLevel getChildrenExpectedLevel()
     {
-        // now we accept
-        // new int[] {1,
-        //            2};
-        // and
-        // new int[] {1, 2,
-        //     3};
-
         final IndentLevel expectedIndent =
-            new IndentLevel(getLevel(), getIndentCheck().getArrayInitIndent());
+            new IndentLevel(getLevel(), getIndentCheck().getArrayInitIndent(),
+                    getIndentCheck().getLineWrappingIndentation());
 
         final int firstLine = getFirstLine(Integer.MAX_VALUE, getListChild());
         if (hasCurlys() && (firstLine == getLCurly().getLineNo())) {
@@ -18,6 +12,7 @@
                 getNextFirstNonblankOnLineAfter(firstLine, lcurlyPos);
             if (firstChildPos >= 0) {
                 expectedIndent.addAcceptedIndent(firstChildPos);
+                expectedIndent.addAcceptedIndent(lcurlyPos + getLineWrappingIndent());
             }
         }
         return expectedIndent;

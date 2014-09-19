@@ -1,0 +1,14 @@
+    /**
+     * Creates new instance for nested structure.
+     * @param aBase parent's level
+     * @param aOffsets offsets from parent's level.
+     */
+    public IndentLevel(IndentLevel aBase, int... aOffsets)
+    {
+        for (Integer base : aBase.mLevels) {
+            for (int offset : aOffsets) {
+                mLevels.add(base + offset);
+            }
+        }
+    }
+

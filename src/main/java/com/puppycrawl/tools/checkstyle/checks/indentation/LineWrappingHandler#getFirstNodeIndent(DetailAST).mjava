@@ -1,0 +1,29 @@
+    /**
+     * Calculates indentation of first node.
+     *
+     * @param aNode
+     *            first node.
+     * @return indentation of first node.
+     */
+    private int getFirstNodeIndent(DetailAST aNode)
+    {
+        int indentLevel = aNode.getColumnNo();
+
+        if (aNode.getType() == TokenTypes.LITERAL_IF
+                && aNode.getParent().getType() == TokenTypes.LITERAL_ELSE)
+        {
+            final DetailAST lcurly = aNode.getParent().getPreviousSibling();
+            final DetailAST rcurly = lcurly.getLastChild();
+
+            if (lcurly.getType() == TokenTypes.SLIST
+                    && rcurly.getLineNo() == aNode.getLineNo())
+            {
+                indentLevel = rcurly.getColumnNo();
+            }
+            else {
+                indentLevel = aNode.getParent().getColumnNo();
+            }
+        }
+        return indentLevel;
+    }
+

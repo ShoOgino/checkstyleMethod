@@ -1,0 +1,17 @@
+    @Override
+    protected void checkRCurly()
+    {
+        final DetailAST lcurly = getLCurly();
+        final DetailAST rcurly = getRCurly();
+        final int rcurlyPos = expandedTabsColumnNo(rcurly);
+        final IndentLevel level = curlyLevel();
+        level.addAcceptedIndent(level.getFirstIndentLevel() + getLineWrappingIndent());
+
+        if ((rcurly != null) && !level.accept(rcurlyPos)
+            && (rcurlyMustStart() || startsLine(rcurly))
+                && !areOnSameLine(rcurly, lcurly))
+        {
+            logError(rcurly, "rcurly", rcurlyPos, curlyLevel());
+        }
+    }
+
