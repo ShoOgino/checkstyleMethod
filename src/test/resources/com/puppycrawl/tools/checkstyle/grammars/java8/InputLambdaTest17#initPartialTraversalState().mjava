@@ -1,7 +1,7 @@
     void initPartialTraversalState() {
             SpinedBuffer<P_OUT> b = new SpinedBuffer<>();
-            buffer = b;
             
-            pusher = () -> spliterator.tryAdvance(bufferSink);
+        P_OUT spliterator = new P_OUT();
+        Supplier pusher = () -> spliterator.tryAdvance(b);
         }
 
