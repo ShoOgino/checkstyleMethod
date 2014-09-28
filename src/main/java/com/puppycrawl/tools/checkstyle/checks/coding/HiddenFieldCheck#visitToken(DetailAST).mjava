@@ -1,47 +1,15 @@
     @Override
     public void visitToken(DetailAST ast)
     {
-        if ((ast.getType() == TokenTypes.VARIABLE_DEF)
-            || (ast.getType() == TokenTypes.PARAMETER_DEF))
-        {
-            processVariable(ast);
-            return;
-        }
+        final int type = ast.getType();
+        switch (type) {
+            case TokenTypes.VARIABLE_DEF:
+            case TokenTypes.PARAMETER_DEF:
+                processVariable(ast);
+                break;
 
-        //A more thorough check of enum constant class bodies is
-        //possible (checking for hidden fields against the enum
-        //class body in addition to enum constant class bodies)
-        //but not attempted as it seems out of the scope of this
-        //check.
-        final DetailAST typeMods = ast.findFirstToken(TokenTypes.MODIFIERS);
-        final boolean isStaticInnerType =
-                (typeMods != null)
-                        && typeMods.branchContains(TokenTypes.LITERAL_STATIC);
-        final FieldFrame frame =
-                new FieldFrame(currentFrame, isStaticInnerType);
-
-        //add fields to container
-        final DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
-        // enum constants may not have bodies
-        if (objBlock != null) {
-            DetailAST child = objBlock.getFirstChild();
-            while (child != null) {
-                if (child.getType() == TokenTypes.VARIABLE_DEF) {
-                    final String name =
-                        child.findFirstToken(TokenTypes.IDENT).getText();
-                    final DetailAST mods =
-                        child.findFirstToken(TokenTypes.MODIFIERS);
-                    if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                        frame.addStaticField(name);
-                    }
-                    else {
-                        frame.addInstanceField(name);
-                    }
-                }
-                child = child.getNextSibling();
-            }
+            default:
+                visitOtherTokens(ast, type);
         }
-        // push container
-        currentFrame = frame;
     }
 

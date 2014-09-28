@@ -8,16 +8,16 @@
      */
     private boolean isIgnoredParamOfAbstractMethod(DetailAST ast)
     {
-        if ((ast.getType() != TokenTypes.PARAMETER_DEF)
-            || !ignoreAbstractMethods)
+        boolean result = false;
+        if ((ast.getType() == TokenTypes.PARAMETER_DEF)
+            && ignoreAbstractMethods)
         {
-            return false;
+            final DetailAST method = ast.getParent().getParent();
+            if (method.getType() == TokenTypes.METHOD_DEF) {
+                final DetailAST mods = method.findFirstToken(TokenTypes.MODIFIERS);
+                result = ((mods != null) && mods.branchContains(TokenTypes.ABSTRACT));
+            }
         }
-        final DetailAST method = ast.getParent().getParent();
-        if (method.getType() != TokenTypes.METHOD_DEF) {
-            return false;
-        }
-        final DetailAST mods = method.findFirstToken(TokenTypes.MODIFIERS);
-        return ((mods != null) && mods.branchContains(TokenTypes.ABSTRACT));
+        return result;
     }
 

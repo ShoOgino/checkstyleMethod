@@ -3,17 +3,18 @@
      * constructor.
      * @param ast the AST to check.
      * @return true if ast should be ignored because check property
-     * ignoreConstructorPnameter is true and ast is a constructor parameter.
+     * ignoreConstructorParameter is true and ast is a constructor parameter.
      */
     private boolean isIgnoredConstructorParam(DetailAST ast)
     {
-        if ((ast.getType() != TokenTypes.PARAMETER_DEF)
-            || !ignoreConstructorParameter)
+        boolean result = false;
+        if ((ast.getType() == TokenTypes.PARAMETER_DEF)
+            && ignoreConstructorParameter)
         {
-            return false;
+            final DetailAST parametersAST = ast.getParent();
+            final DetailAST constructorAST = parametersAST.getParent();
+            result = (constructorAST.getType() == TokenTypes.CTOR_DEF);
         }
-        final DetailAST parametersAST = ast.getParent();
-        final DetailAST constructorAST = parametersAST.getParent();
-        return (constructorAST.getType() == TokenTypes.CTOR_DEF);
+        return result;
     }
 

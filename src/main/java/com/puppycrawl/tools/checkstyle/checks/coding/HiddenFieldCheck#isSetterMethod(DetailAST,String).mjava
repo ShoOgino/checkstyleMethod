@@ -1,0 +1,42 @@
+    /**
+     * Determine if a specific method identified by methodAST and a single
+     * variable name aName is a setter. This recognition partially depends
+     * on mSetterCanReturnItsClass property.
+     *
+     * @param aMethodAST AST corresponding to a method call
+     * @param aName name of single parameter of this method.
+     * @return true of false indicating of method is a setter or not.
+     */
+    private boolean isSetterMethod(DetailAST aMethodAST, String aName)
+    {
+        final String methodName =
+            aMethodAST.findFirstToken(TokenTypes.IDENT).getText();
+        boolean isSetterMethod = false;
+
+        if (methodName.equals("set" + capitalize(aName))) {
+            // method name did match set${Name}(${anyType} ${aName})
+            // where ${Name} is capitalized version of ${aName}
+            // therefore this method is potentially a setter
+            final DetailAST typeAST = aMethodAST.findFirstToken(TokenTypes.TYPE);
+            final String returnType = typeAST.getFirstChild().getText();
+            if (typeAST.branchContains(TokenTypes.LITERAL_VOID)
+                || (setterCanReturnItsClass && currentFrame.embeddedIn(returnType)))
+            {
+                // this method has signature
+                //
+                //     void set${Name}(${anyType} ${name})
+                //
+                // and therefore considered to be a setter
+                //
+                // or
+                //
+                // return type is not void, but it is the same as the class
+                // where method is declared and and mSetterCanReturnItsClass
+                // is set to true
+                isSetterMethod = true;
+            }
+        }
+
+        return isSetterMethod;
+    }
+
