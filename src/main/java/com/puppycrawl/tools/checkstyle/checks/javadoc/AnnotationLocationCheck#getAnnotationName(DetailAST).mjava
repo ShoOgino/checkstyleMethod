@@ -1,0 +1,14 @@
+    /**
+     * Some javadoc.
+     * @param aAnnotation Some javadoc.
+     * @return Some javadoc.
+     */
+    private static String getAnnotationName(DetailAST aAnnotation)
+    {
+        DetailAST idenNode = aAnnotation.findFirstToken(TokenTypes.IDENT);
+        if (idenNode == null) {
+            idenNode = aAnnotation.findFirstToken(TokenTypes.DOT).findFirstToken(TokenTypes.IDENT);
+        }
+        return idenNode.getText();
+    }
+

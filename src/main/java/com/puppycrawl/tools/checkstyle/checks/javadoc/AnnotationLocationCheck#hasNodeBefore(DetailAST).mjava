@@ -1,0 +1,13 @@
+    /**
+     * Some javadoc.
+     * @param aAnnotation Some javadoc.
+     * @return Some javadoc.
+     */
+    private static boolean hasNodeBefore(DetailAST aAnnotation)
+    {
+        final int annotationLineNo = aAnnotation.getLineNo();
+        final DetailAST previousNode = aAnnotation.getPreviousSibling();
+
+        return previousNode != null && annotationLineNo == previousNode.getLineNo();
+    }
+

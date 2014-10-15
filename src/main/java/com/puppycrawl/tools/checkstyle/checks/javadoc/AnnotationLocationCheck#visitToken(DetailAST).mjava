@@ -1,0 +1,10 @@
+    @Override
+    public void visitToken(DetailAST aAST)
+    {
+        final DetailAST modifiersNode = aAST.findFirstToken(TokenTypes.MODIFIERS);
+
+        if (hasAnnotations(modifiersNode)) {
+            checkAnnotations(modifiersNode, getAnnotationLevel(modifiersNode));
+        }
+    }
+

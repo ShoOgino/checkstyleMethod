@@ -1,0 +1,24 @@
+    /**
+     * Some javadoc.
+     * @param aModifierNode Some javadoc.
+     * @param aCorrectLevel Some javadoc.
+     */
+    private void checkAnnotations(DetailAST aModifierNode, int aCorrectLevel)
+    {
+        DetailAST annotation = aModifierNode.getFirstChild();
+
+        while (annotation != null && annotation.getType() == TokenTypes.ANNOTATION) {
+            final boolean hasParameters = isParameterized(annotation);
+
+            if (!isCorrectLocation(annotation, hasParameters)) {
+                log(annotation.getLineNo(),
+                    "annotation.location.alone", getAnnotationName(annotation));
+            }
+            else if (annotation.getColumnNo() != aCorrectLevel && !hasNodeBefore(annotation)) {
+                log(annotation.getLineNo(), "annotation.location",
+                    getAnnotationName(annotation), annotation.getColumnNo(), aCorrectLevel);
+            }
+            annotation = annotation.getNextSibling();
+        }
+    }
+

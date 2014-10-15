@@ -1,0 +1,17 @@
+    /**
+     * Some javadoc.
+     * @param aAnnotation Some javadoc.
+     * @return Some javadoc.
+     */
+    private static boolean hasNodeAfter(DetailAST aAnnotation)
+    {
+        final int annotationLineNo = aAnnotation.getLineNo();
+        DetailAST nextNode = aAnnotation.getNextSibling();
+
+        if (nextNode == null) {
+            nextNode = aAnnotation.getParent().getNextSibling();
+        }
+
+        return nextNode != null && annotationLineNo == nextNode.getLineNo();
+    }
+
