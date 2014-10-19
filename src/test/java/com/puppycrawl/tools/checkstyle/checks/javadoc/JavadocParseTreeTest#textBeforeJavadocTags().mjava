@@ -1,0 +1,10 @@
+    @Test
+    public void textBeforeJavadocTags()
+        throws IOException
+    {
+        String filename = folderWithInputFiles + "/javadocTags/TextBeforeJavadocTags.txt";
+        ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
+        ParseTree expectedTree = ParseTreeBuilder.treeTextBeforeJavadocTags();
+        compareTrees(expectedTree, generatedTree);
+    }
+

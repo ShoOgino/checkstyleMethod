@@ -1,0 +1,20 @@
+    public ParseTree parseJavadoc(String aBlockComment)
+        throws IOException
+    {
+        final Charset utf8Charset = Charset.forName("UTF-8");
+        final InputStream in = new ByteArrayInputStream(aBlockComment.getBytes(utf8Charset));
+
+        final ANTLRInputStream input = new ANTLRInputStream(in);
+        final JavadocLexer lexer = new JavadocLexer(input);
+        lexer.removeErrorListeners();
+        lexer.addErrorListener(mErrorListener);
+
+        final CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+        parser = new JavadocParser(tokens);
+        parser.removeErrorListeners();
+        parser.addErrorListener(mErrorListener);
+
+        return parser.javadoc();
+    }
+

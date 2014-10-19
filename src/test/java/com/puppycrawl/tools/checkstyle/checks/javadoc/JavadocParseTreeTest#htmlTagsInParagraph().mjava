@@ -1,0 +1,10 @@
+    @Test
+    public void htmlTagsInParagraph()
+        throws IOException
+    {
+        String filename = folderWithInputFiles + "/htmlTags/HtmlTagsInParagraph.txt";
+        ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
+        ParseTree expectedTree = ParseTreeBuilder.treeHtmlTagsInParagraph();
+        compareTrees(expectedTree, generatedTree);
+    }
+

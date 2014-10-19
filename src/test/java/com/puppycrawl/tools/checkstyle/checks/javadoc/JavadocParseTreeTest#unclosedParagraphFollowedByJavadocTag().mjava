@@ -1,0 +1,10 @@
+    @Test
+    public void unclosedParagraphFollowedByJavadocTag()
+        throws IOException
+    {
+        String filename = folderWithInputFiles + "/htmlTags/UnclosedParagraphFollowedByJavadocTag.txt";
+        ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
+        ParseTree expectedTree = ParseTreeBuilder.treeUnclosedParagraphFollowedByJavadocTag();
+        compareTrees(expectedTree, generatedTree);
+    }
+

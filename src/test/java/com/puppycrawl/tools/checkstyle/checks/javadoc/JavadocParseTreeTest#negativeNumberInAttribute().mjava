@@ -1,0 +1,10 @@
+    @Test
+    public void negativeNumberInAttribute()
+        throws IOException
+    {
+        String filename = folderWithInputFiles + "/htmlTags/NegativeNumberInAttribute.txt";
+        ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
+        ParseTree expectedTree = ParseTreeBuilder.treeNegativeNumberInAttribute();
+        compareTrees(expectedTree, generatedTree);
+    }
+
