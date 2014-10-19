@@ -1,17 +1,19 @@
     /**
      * Gets validTags from a given piece of Javadoc.
-     * @param aCmt the Javadoc comment to process.
-     * @param aTagType the type of validTags we're interested in
+     * @param aCmt
+     *        the Javadoc comment to process.
+     * @param aTagType
+     *        the type of validTags we're interested in
      * @return all standalone validTags from the given javadoc.
      */
     public static JavadocTags getJavadocTags(TextBlock aCmt,
-                                             JavadocTagType aTagType)
+            JavadocTagType aTagType)
     {
         final String[] text = aCmt.getText();
         final List<JavadocTag> tags = Lists.newArrayList();
         final List<InvalidJavadocTag> invalidTags = Lists.newArrayList();
         Pattern blockTagPattern =
-            Utils.getPattern("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
+                Utils.getPattern("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
         for (int i = 0; i < text.length; i++) {
             final String s = text[i];
             final Matcher blockTagMatcher = blockTagPattern.matcher(s);
@@ -30,7 +32,7 @@
                 }
                 if (JavadocTagInfo.isValidName(tagName)) {
                     tags.add(
-                        new JavadocTag(line, col, tagName, content.trim()));
+                            new JavadocTag(line, col, tagName, content.trim()));
                 }
                 else {
                     invalidTags.add(new InvalidJavadocTag(line, col, tagName));
@@ -42,7 +44,7 @@
             {
                 // Match JavaDoc text after comment characters
                 final Pattern commentPattern =
-                    Utils.getPattern("^\\s*(?:/\\*{2,}|\\*+)\\s*(.*)");
+                        Utils.getPattern("^\\s*(?:/\\*{2,}|\\*+)\\s*(.*)");
                 final Matcher commentMatcher = commentPattern.matcher(s);
                 final String commentContents;
                 final int commentOffset; // offset including comment characters
@@ -55,7 +57,7 @@
                     commentOffset = commentMatcher.start(1) - 1;
                 }
                 final Pattern tagPattern =
-                    Utils.getPattern(".*?\\{@(\\p{Alpha}+)\\s+(.*?)\\}");
+                        Utils.getPattern(".*?\\{@(\\p{Alpha}+)\\s+(.*?)\\}");
                 final Matcher tagMatcher = tagPattern.matcher(commentContents);
                 while (tagMatcher.find()) {
                     if (tagMatcher.groupCount() == 2) {
@@ -80,7 +82,7 @@
                 }
             }
             blockTagPattern =
-                Utils.getPattern("^\\s*\\**\\s*@(\\p{Alpha}+)\\s");
+                    Utils.getPattern("^\\s*\\**\\s*@(\\p{Alpha}+)\\s");
         }
         return new JavadocTags(tags, invalidTags);
     }

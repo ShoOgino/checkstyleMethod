@@ -1,0 +1,20 @@
+    /**
+     * Returns the first child token that has a specified type.
+     * @param aNode
+     *        Javadoc AST node
+     * @param aType
+     *        the token type to match
+     * @return the matching token, or null if no match
+     */
+    public static DetailNode findFirstToken(DetailNode aNode, int aType)
+    {
+        DetailNode retVal = null;
+        for (DetailNode i = getFirstChild(aNode); i != null; i = getNextSibling(i)) {
+            if (i.getType() == aType) {
+                retVal = i;
+                break;
+            }
+        }
+        return retVal;
+    }
+

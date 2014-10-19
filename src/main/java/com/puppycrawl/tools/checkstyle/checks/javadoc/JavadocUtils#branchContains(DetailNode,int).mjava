@@ -1,0 +1,34 @@
+    /**
+     * Checks whether aNode contains any node of specified type among children on any deep level.
+     *
+     * @param aNode DetailNode
+     * @param aType token type
+     * @return true if aNode contains any node of aType type among children on any deep level.
+     */
+    public static boolean branchContains(DetailNode aNode, int aType)
+    {
+        DetailNode curNode = aNode;
+        while (curNode != null) {
+
+            if (aType == curNode.getType()) {
+                return true;
+            }
+
+            DetailNode toVisit = getFirstChild(curNode);
+            while ((curNode != null) && (toVisit == null)) {
+                toVisit = getNextSibling(curNode);
+                if (toVisit == null) {
+                    curNode = curNode.getParent();
+                }
+            }
+
+            if (curNode == toVisit) {
+                break;
+            }
+
+            curNode = toVisit;
+        }
+
+        return false;
+    }
+

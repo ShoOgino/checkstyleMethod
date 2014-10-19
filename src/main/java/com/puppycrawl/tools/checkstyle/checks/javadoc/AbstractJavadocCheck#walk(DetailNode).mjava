@@ -1,0 +1,36 @@
+    /**
+     * Processes a node calling Check at interested nodes.
+     * @param aRoot
+     *        the root of tree for process
+     */
+    private void walk(DetailNode aRoot)
+    {
+        final int[] defaultTokenTypes = getDefaultJavadocTokens();
+
+        if (defaultTokenTypes == null) {
+            return;
+        }
+
+        DetailNode curNode = aRoot;
+        while (curNode != null) {
+            final boolean waitsFor = Ints.contains(defaultTokenTypes, curNode.getType());
+
+            if (waitsFor) {
+                visitJavadocToken(curNode);
+            }
+            DetailNode toVisit = JavadocUtils.getFirstChild(curNode);
+            while ((curNode != null) && (toVisit == null)) {
+
+                if (waitsFor) {
+                    leaveJavadocToken(curNode);
+                }
+
+                toVisit = JavadocUtils.getNextSibling(curNode);
+                if (toVisit == null) {
+                    curNode = curNode.getParent();
+                }
+            }
+            curNode = toVisit;
+        }
+    }
+

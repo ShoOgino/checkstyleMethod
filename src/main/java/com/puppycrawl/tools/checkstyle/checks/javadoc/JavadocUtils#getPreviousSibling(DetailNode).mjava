@@ -1,0 +1,18 @@
+    /**
+     * Gets previous sibling of specified node.
+     * @param aNode DetailNode
+     * @return previous sibling
+     */
+    public static DetailNode getPreviousSibling(DetailNode aNode)
+    {
+        final DetailNode parent = aNode.getParent();
+        if (parent != null) {
+            final int previousSiblingIndex = aNode.getIndex() - 1;
+            final DetailNode[] children = parent.getChildren();
+            if (previousSiblingIndex >= 0) {
+                return children[previousSiblingIndex];
+            }
+        }
+        return null;
+    }
+

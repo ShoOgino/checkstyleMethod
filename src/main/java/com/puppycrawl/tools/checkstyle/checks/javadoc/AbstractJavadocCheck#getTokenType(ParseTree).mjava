@@ -1,0 +1,22 @@
+    /**
+     * Gets token type of ParseTree node from JavadocTokenTypes class.
+     * @param aNode ParseTree node.
+     * @return token type from JavadocTokenTypes
+     */
+    private static int getTokenType(ParseTree aNode)
+    {
+        int tokenType = Integer.MIN_VALUE;
+
+        if (aNode.getChildCount() == 0) {
+            tokenType = ((TerminalNode) aNode).getSymbol().getType();
+        }
+        else {
+            final String className = getNodeClassNameWithoutContext(aNode);
+            final String typeName =
+                    CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, className);
+            tokenType = JavadocUtils.getTokenId(typeName);
+        }
+
+        return tokenType;
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * Gets next sibling of specified node.
+     *
+     * @param aNode DetailNode
+     * @return next sibling.
+     */
+    public static DetailNode getNextSibling(DetailNode aNode)
+    {
+        final DetailNode parent = aNode.getParent();
+        if (parent != null) {
+            final int nextSiblingIndex = aNode.getIndex() + 1;
+            final DetailNode[] children = parent.getChildren();
+            if (nextSiblingIndex <= children.length - 1) {
+                return children[nextSiblingIndex];
+            }
+        }
+        return null;
+    }
+

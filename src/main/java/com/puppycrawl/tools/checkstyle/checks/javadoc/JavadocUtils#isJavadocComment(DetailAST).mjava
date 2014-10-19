@@ -1,0 +1,14 @@
+    /**
+     * Checks block comment content starts with '*' javadoc comment identifier.
+     * @param aBlockCommentBegin
+     *        block comment AST
+     * @return true if block comment content starts with '*' javadoc comment
+     *         identifier.
+     */
+    public static boolean isJavadocComment(DetailAST aBlockCommentBegin)
+    {
+        final char docCommentIdentificator = getBlockCommentContent(
+                aBlockCommentBegin).charAt(0);
+        return docCommentIdentificator == '*';
+    }
+

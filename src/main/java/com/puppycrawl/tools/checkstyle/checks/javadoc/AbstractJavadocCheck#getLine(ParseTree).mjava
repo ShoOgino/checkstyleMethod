@@ -1,0 +1,17 @@
+    /**
+     * Gets line number from ParseTree node.
+     * @param aTree
+     *        ParseTree node
+     * @return line number
+     */
+    private static int getLine(ParseTree aTree)
+    {
+        if (aTree instanceof TerminalNode) {
+            return ((TerminalNode) aTree).getSymbol().getLine() - 1;
+        }
+        else {
+            final ParserRuleContext rule = (ParserRuleContext) aTree;
+            return rule.start.getLine() - 1;
+        }
+    }
+

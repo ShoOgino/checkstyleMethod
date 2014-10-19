@@ -1,0 +1,42 @@
+        /**
+         * Logs parser errors in Checkstyle manner. Parser can generate error
+         * messages. There is special error that parser can generate. It is
+         * missed close HTML tag. This case is special because parser prints
+         * error like {@code "no viable alternative at input 'b \n *\n'"} and it
+         * is not clear that error is about missed close HTML tag. Other error
+         * messages are not special and logged simply as "Parse Error...".
+         * <p>
+         * {@inheritDoc}
+         */
+        @Override
+        public void syntaxError(
+                Recognizer<?, ?> aRecognizer, Object aOffendingSymbol,
+                int aLine, int aCharPositionInLine,
+                String aMsg, RecognitionException aEx)
+        {
+            final int lineNumber = mOffset + aLine;
+            final Token token = (Token) aOffendingSymbol;
+
+            if (JAVADOC_MISSED_HTML_CLOSE.equals(aMsg)) {
+                log(lineNumber, JAVADOC_MISSED_HTML_CLOSE, token.getText());
+                throw new ParseCancellationException();
+            }
+            else if (JAVADOC_WRONG_SINGLETON_TAG.equals(aMsg)) {
+                log(lineNumber, JAVADOC_WRONG_SINGLETON_TAG, token.getText());
+                throw new ParseCancellationException();
+            }
+            else {
+                final RuleContext ruleContext = aEx.getCtx();
+                if (ruleContext != null) {
+                    final int ruleIndex = aEx.getCtx().getRuleIndex();
+                    final String ruleName = aRecognizer.getRuleNames()[ruleIndex];
+                    final String upperCaseRuleName = CaseFormat.UPPER_CAMEL.to(
+                            CaseFormat.UPPER_UNDERSCORE, ruleName);
+                    log(lineNumber, "javadoc.parse.rule.error", aMsg, upperCaseRuleName);
+                }
+                else {
+                    log(lineNumber, "javadoc.parse.token.error", aMsg);
+                }
+            }
+        }
+
