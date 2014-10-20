@@ -1,0 +1,10 @@
+    @Override
+    public void visitJavadocToken(DetailNode aAst)
+    {
+        final int parentType = getParentType(getBlockCommentAst());
+
+        if (mTarget.contains(parentType)) {
+            checkOrderInTagSection(aAst);
+        }
+    }
+

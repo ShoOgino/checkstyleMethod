@@ -1,0 +1,15 @@
+    /**
+     * Some javadoc.
+     * @param aCommentBlock Some javadoc.
+     * @return Some javadoc.
+     */
+    private int getParentType(DetailAST aCommentBlock)
+    {
+        final DetailAST parentNode = aCommentBlock.getParent();
+        int type = parentNode.getType();
+        if (type == TokenTypes.TYPE || type == TokenTypes.MODIFIERS) {
+            type = parentNode.getParent().getType();
+        }
+        return type;
+    }
+

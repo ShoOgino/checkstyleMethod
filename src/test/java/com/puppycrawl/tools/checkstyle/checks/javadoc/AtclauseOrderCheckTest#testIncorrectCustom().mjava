@@ -1,0 +1,17 @@
+    @Test
+    public void testIncorrectCustom() throws Exception
+    {
+        final String tagOrder = "'[@author, @version, @param, @return, @throws, @exception, @see,"
+                + " @since, @serial, @serialField, @serialData, @deprecated]'.";
+        DefaultConfiguration checkConfig = createCheckConfig(AtclauseOrderCheck.class);
+        checkConfig.addAttribute("target", "CLASS_DEF");
+
+        final String[] expected = {
+            "9: At-clauses have to appear in the order " + tagOrder,
+            "11: At-clauses have to appear in the order " + tagOrder,
+            "12: At-clauses have to appear in the order " + tagOrder,
+            "115: At-clauses have to appear in the order " + tagOrder,
+        };
+        verify(checkConfig, getPath("javadoc/InputIncorrectAtClauseOrderCheck.java"), expected);
+    }
+

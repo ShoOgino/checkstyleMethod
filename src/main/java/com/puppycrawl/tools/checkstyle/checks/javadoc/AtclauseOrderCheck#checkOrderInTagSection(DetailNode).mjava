@@ -1,0 +1,24 @@
+    /**
+     * Some javadoc.
+     * @param aJavadoc Some javadoc.
+     */
+    private void checkOrderInTagSection(DetailNode aJavadoc)
+    {
+        int indexOrderOfPreviousTag = 0;
+        int indexOrderOfCurrentTag = 0;
+
+        for (DetailNode node : aJavadoc.getChildren()) {
+            if (node.getType() == JavadocTokenTypes.JAVADOC_TAG) {
+                final String tagText = JavadocUtils.getFirstChild(node).getText();
+                indexOrderOfCurrentTag = mTagOrder.indexOf(tagText);
+
+                if (mTagOrder.contains(tagText)
+                        && indexOrderOfCurrentTag < indexOrderOfPreviousTag)
+                {
+                    log(node.getLineNumber(), "at.clause.order", mTagOrder.toString());
+                }
+                indexOrderOfPreviousTag = indexOrderOfCurrentTag;
+            }
+        }
+    }
+
