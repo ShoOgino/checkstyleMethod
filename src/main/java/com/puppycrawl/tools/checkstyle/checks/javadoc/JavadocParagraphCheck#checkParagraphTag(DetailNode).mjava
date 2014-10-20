@@ -1,0 +1,13 @@
+    /**
+     * Some javadoc.
+     * @param aTag Some javadoc.
+     */
+    private void checkParagraphTag(DetailNode aTag)
+    {
+        final DetailNode newLine = getNearestEmptyLine(aTag);
+        if (newLine == null || aTag.getLineNumber() - newLine.getLineNumber() != 1)
+        {
+            log(aTag.getLineNumber(), "javadoc.paragraph.line.before");
+        }
+    }
+

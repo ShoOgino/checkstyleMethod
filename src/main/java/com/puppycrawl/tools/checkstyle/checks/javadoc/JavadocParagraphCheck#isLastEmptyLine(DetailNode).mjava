@@ -1,0 +1,25 @@
+    /**
+     * Some javadoc.
+     * @param aNewLine Some javadoc.
+     * @return Some javadoc.
+     */
+    private boolean isLastEmptyLine(DetailNode aNewLine)
+    {
+        boolean result = false;
+        DetailNode nextSibling = JavadocUtils.getNextSibling(aNewLine);
+        if (nextSibling.getType() == JavadocTokenTypes.TEXT
+                && nextSibling.getChildren().length == 1)
+        {
+            result =  true;
+        }
+        else {
+            nextSibling = JavadocUtils.getNextSibling(nextSibling);
+            if (JavadocUtils.getNextSibling(nextSibling).getType()
+                    == JavadocTokenTypes.JAVADOC_TAG)
+            {
+                result =  true;
+            }
+        }
+        return result;
+    }
+

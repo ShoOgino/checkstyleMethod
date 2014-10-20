@@ -1,0 +1,20 @@
+    /**
+     * Some javadoc.
+     * @param aNode Some javadoc.
+     * @return Some javadoc.
+     */
+    private DetailNode getNearestEmptyLine(DetailNode aNode)
+    {
+        DetailNode newLine = JavadocUtils.getPreviousSibling(aNode);
+        while (newLine != null) {
+            final DetailNode previousSibling = JavadocUtils.getPreviousSibling(newLine);
+            if (newLine.getType() == JavadocTokenTypes.NEWLINE && previousSibling != null
+                && previousSibling.getType() == JavadocTokenTypes.LEADING_ASTERISK)
+            {
+                break;
+            }
+            newLine = previousSibling;
+        }
+        return newLine;
+    }
+

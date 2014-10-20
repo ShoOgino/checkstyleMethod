@@ -1,0 +1,19 @@
+    /**
+     * Some javadoc.
+     * @param aNode Some javadoc.
+     * @return Some javadoc.
+     */
+    private DetailNode getNearestToken(DetailNode aNode)
+    {
+        DetailNode tag = JavadocUtils.getNextSibling(aNode);
+        while (tag != null) {
+            if (tag.getType() == JavadocTokenTypes.HTML_ELEMENT
+                && JavadocUtils.getFirstChild(tag).getType() == JavadocTokenTypes.P_TAG_OPEN)
+            {
+                break;
+            }
+            tag = JavadocUtils.getNextSibling(tag);
+        }
+        return tag;
+    }
+

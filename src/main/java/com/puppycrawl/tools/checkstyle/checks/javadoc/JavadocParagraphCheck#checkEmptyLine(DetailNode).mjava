@@ -1,0 +1,15 @@
+    /**
+     * Some javadoc.
+     * @param aNewline Some javadoc.
+     */
+    private void checkEmptyLine(DetailNode aNewline)
+    {
+        final DetailNode nearestToken = getNearestToken(aNewline);
+        if (!isLastEmptyLine(aNewline)
+            && (nearestToken == null || nearestToken.getType() != JavadocTokenTypes.JAVADOC_TAG
+                && nearestToken.getLineNumber() - aNewline.getLineNumber() != 1))
+        {
+            log(aNewline.getLineNumber(), "javadoc.paragraph.tag.after");
+        }
+    }
+

@@ -1,0 +1,16 @@
+    @Override
+    public void visitJavadocToken(DetailNode aAst)
+    {
+        final DetailNode previousSibling = JavadocUtils.getPreviousSibling(aAst);
+        if (aAst.getType() == JavadocTokenTypes.NEWLINE && previousSibling != null
+            && previousSibling.getType() == JavadocTokenTypes.LEADING_ASTERISK)
+        {
+            checkEmptyLine(aAst);
+        }
+        else if (aAst.getType() == JavadocTokenTypes.HTML_ELEMENT
+                && JavadocUtils.getFirstChild(aAst).getType() == JavadocTokenTypes.P_TAG_OPEN)
+        {
+            checkParagraphTag(aAst);
+        }
+    }
+
