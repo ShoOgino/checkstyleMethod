@@ -1,0 +1,16 @@
+    @Override
+    public void visitJavadocToken(DetailNode aAst)
+    {
+        final List<DetailNode> textNodes = getAllTextNodes(aAst);
+
+        for (DetailNode textNode : textNodes.subList(1, textNodes.size())) {
+            final DetailNode whitespaceNode = JavadocUtils.getFirstChild(textNode);
+
+            if (whitespaceNode.getType() == JavadocTokenTypes.WS
+                    && whitespaceNode.getText().length() - 1 != mOffset)
+            {
+                log(textNode.getLineNumber(), "tag.continuation.indent", mOffset);
+            }
+        }
+    }
+

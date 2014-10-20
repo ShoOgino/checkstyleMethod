@@ -1,0 +1,18 @@
+    /**
+     * Some javadoc.
+     * @param aDescriptionNode Some javadoc.
+     * @return Some javadoc.
+     */
+    private List<DetailNode> getAllTextNodes(DetailNode aDescriptionNode)
+    {
+        final List<DetailNode> textNodes = new ArrayList<DetailNode>();
+        DetailNode node = JavadocUtils.getFirstChild(aDescriptionNode);
+        while (JavadocUtils.getNextSibling(node) != null) {
+            if (node.getType() == JavadocTokenTypes.TEXT) {
+                textNodes.add(node);
+            }
+            node = JavadocUtils.getNextSibling(node);
+        }
+        return textNodes;
+    }
+

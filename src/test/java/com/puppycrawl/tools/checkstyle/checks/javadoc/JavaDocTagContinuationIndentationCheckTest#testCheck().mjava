@@ -1,0 +1,22 @@
+    @Test
+    public void testCheck() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(JavaDocTagContinuationIndentationCheck.class);
+        final String[] expected = {
+            "47: Line continuation have incorrect indentation level, expected level should be 4.",
+            "109: Line continuation have incorrect indentation level, expected level should be 4.",
+            "112: Line continuation have incorrect indentation level, expected level should be 4.",
+            "203: Line continuation have incorrect indentation level, expected level should be 4.",
+            "206: Line continuation have incorrect indentation level, expected level should be 4.",
+            "221: Line continuation have incorrect indentation level, expected level should be 4.",
+            "223: Line continuation have incorrect indentation level, expected level should be 4.",
+            "285: Line continuation have incorrect indentation level, expected level should be 4.",
+            "288: Line continuation have incorrect indentation level, expected level should be 4.",
+            "290: Line continuation have incorrect indentation level, expected level should be 4.",
+            "310: Line continuation have incorrect indentation level, expected level should be 4.",
+            "322: Line continuation have incorrect indentation level, expected level should be 4.",
+        };
+        verify(checkConfig, getPath("javadoc/InputJavaDocTagContinuationIndentation.java"), expected);
+    }
+
