@@ -1,0 +1,22 @@
+    /**
+     * Some javadoc.
+     * @param aAst Some javadoc.
+     * @return Some javadoc.
+     */
+    private String getFirstSentence(DetailNode aAst)
+    {
+        final StringBuilder result = new StringBuilder();
+        for (DetailNode child : aAst.getChildren()) {
+            if (child.getType() != JavadocTokenTypes.JAVADOC_INLINE_TAG
+                && child.getText().contains(". "))
+            {
+                result.append(getCharsTillDot(child));
+                break;
+            }
+            else {
+                result.append(child.getText());
+            }
+        }
+        return result.toString();
+    }
+

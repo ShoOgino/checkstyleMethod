@@ -1,0 +1,19 @@
+    /**
+     * Some javadoc.
+     * @param aTextNode Some javadoc.
+     * @return Some javadoc.
+     */
+    private String getCharsTillDot(DetailNode aTextNode)
+    {
+        final StringBuilder result = new StringBuilder();
+        for (DetailNode child : aTextNode.getChildren()) {
+            result.append(child.getText());
+            if (".".equals(child.getText())
+                && JavadocUtils.getNextSibling(child).getType() == JavadocTokenTypes.WS)
+            {
+                break;
+            }
+        }
+        return result.toString();
+    }
+

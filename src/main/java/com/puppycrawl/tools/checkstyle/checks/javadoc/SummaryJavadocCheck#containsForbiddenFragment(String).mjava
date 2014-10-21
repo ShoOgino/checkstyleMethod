@@ -1,0 +1,13 @@
+    /**
+     * Some javadoc.
+     * @param aFirstSentence Some javadoc.
+     * @return Some javadoc.
+     */
+    private boolean containsForbiddenFragment(String aFirstSentence)
+    {
+        // This regexp is used to convert multiline javadoc to single line without stars.
+        String javadocText = aFirstSentence.replaceAll("\n[ ]+(\\*)|^[ ]+(\\*)", " ");
+        javadocText = CharMatcher.WHITESPACE.trimAndCollapseFrom(javadocText, ' ');
+        return mForbiddenSummaryFragments.matcher(javadocText).find();
+    }
+

@@ -1,0 +1,16 @@
+    @Override
+    public void visitJavadocToken(DetailNode aAst)
+    {
+        String firstSentence = getFirstSentence(aAst);
+        final int endOfSentence = firstSentence.lastIndexOf(".");
+        if (endOfSentence == -1) {
+            log(aAst.getLineNumber(), "summary.first.sentence");
+        }
+        else {
+            firstSentence = firstSentence.substring(0, endOfSentence);
+            if (containsForbiddenFragment(firstSentence)) {
+                log(aAst.getLineNumber(), "summary.javaDoc");
+            }
+        }
+    }
+

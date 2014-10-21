@@ -1,0 +1,17 @@
+    @Test
+    public void testIncorrect() throws Exception
+    {
+        mCheckConfig.addAttribute("forbiddenSummaryFragments",
+                "^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )");
+        final String[] expected = {
+            "14: First sentence should be present.",
+            "37: First sentence should be present.",
+            "47: Forbidden summary fragment.",
+            "58: Forbidden summary fragment.",
+            "69: First sentence should be present.",
+            "83: Forbidden summary fragment.",
+            "103: First sentence should be present.",
+        };
+        verify(mCheckConfig, getPath("javadoc/InputIncorrectSummaryJavaDocCheck.java"), expected);
+    }
+
