@@ -1,0 +1,23 @@
+    /**
+     * Some javadoc.
+     * @param aMethodDef Some javadoc.
+     * @return Some javadoc.
+     */
+    private boolean hasAllowedAnnotations(DetailAST aMethodDef)
+    {
+        final DetailAST modifiersNode = aMethodDef.findFirstToken(TokenTypes.MODIFIERS);
+        DetailAST annotationNode = modifiersNode.findFirstToken(TokenTypes.ANNOTATION);
+        while (annotationNode != null && annotationNode.getType() == TokenTypes.ANNOTATION) {
+            DetailAST identNode = annotationNode.findFirstToken(TokenTypes.IDENT);
+            if (identNode == null) {
+                identNode = annotationNode.findFirstToken(TokenTypes.DOT)
+                    .findFirstToken(TokenTypes.IDENT);
+            }
+            if (mAllowedAnnotations.contains(identNode.getText())) {
+                return true;
+            }
+            annotationNode = annotationNode.getNextSibling();
+        }
+        return false;
+    }
+

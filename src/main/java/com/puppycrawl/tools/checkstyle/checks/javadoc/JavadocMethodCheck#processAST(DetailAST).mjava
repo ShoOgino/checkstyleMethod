@@ -1,6 +1,12 @@
     @Override
     protected final void processAST(DetailAST aAST)
     {
+        if ((aAST.getType() == TokenTypes.METHOD_DEF || aAST.getType() == TokenTypes.CTOR_DEF)
+            && (getMethodsNumberOfLine(aAST) <= mMinLineCount)
+            || hasAllowedAnnotations(aAST))
+        {
+            return;
+        }
         final Scope theScope = calculateScope(aAST);
         if (shouldCheck(aAST, theScope)) {
             final FileContents contents = getFileContents();
