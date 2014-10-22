@@ -1,0 +1,17 @@
+    /**
+     * Some javadoc.
+     * @param aDescription Some javadoc.
+     * @return Some javadoc.
+     */
+    private boolean isInlineDescription(DetailNode aDescription)
+    {
+        DetailNode inlineTag = aDescription.getParent();
+        while (inlineTag != null) {
+            if (inlineTag.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG) {
+                return true;
+            }
+            inlineTag = inlineTag.getParent();
+        }
+        return false;
+    }
+

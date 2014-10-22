@@ -3,12 +3,12 @@
      * @param aDescriptionNode Some javadoc.
      * @return Some javadoc.
      */
-    private List<DetailNode> getAllTextNodes(DetailNode aDescriptionNode)
+    private List<DetailNode> getAllNewlineNodes(DetailNode aDescriptionNode)
     {
         final List<DetailNode> textNodes = new ArrayList<DetailNode>();
         DetailNode node = JavadocUtils.getFirstChild(aDescriptionNode);
         while (JavadocUtils.getNextSibling(node) != null) {
-            if (node.getType() == JavadocTokenTypes.TEXT) {
+            if (node.getType() == JavadocTokenTypes.NEWLINE) {
                 textNodes.add(node);
             }
             node = JavadocUtils.getNextSibling(node);
