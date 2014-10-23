@@ -1,0 +1,10 @@
+    @Override
+    public void visitJavadocToken(DetailNode aAst)
+    {
+        if (isSingleLineJavadoc()
+                && (hasJavadocTags(aAst) || hasJavadocInlineTags(aAst)))
+        {
+            log(aAst.getLineNumber(), "singleline.javadoc");
+        }
+    }
+

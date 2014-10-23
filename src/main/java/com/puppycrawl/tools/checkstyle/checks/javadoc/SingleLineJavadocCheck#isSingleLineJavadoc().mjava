@@ -1,0 +1,13 @@
+    /**
+     * Checks if comment is single line comment.
+     *
+     * @return true, if comment is single line comment.
+     */
+    private boolean isSingleLineJavadoc()
+    {
+        final DetailAST blockCommentStart = getBlockCommentAst();
+        final DetailAST blockCommentEnd = blockCommentStart.getLastChild();
+
+        return blockCommentStart.getLineNo() == blockCommentEnd.getLineNo();
+    }
+

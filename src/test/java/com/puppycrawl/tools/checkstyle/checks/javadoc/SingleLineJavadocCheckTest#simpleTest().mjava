@@ -1,0 +1,12 @@
+    @Test
+    public void simpleTest() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(SingleLineJavadocCheck.class);
+        final String[] expected = {
+            "3: Single-line Javadoc comment should be multi-line.",
+            "11: Single-line Javadoc comment should be multi-line.",
+        };
+        verify(checkConfig, getPath("javadoc/InputSingleLineJavadocCheck.java"), expected);
+    }
+
