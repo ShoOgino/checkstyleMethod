@@ -5,8 +5,10 @@
     private void checkParagraphTag(DetailNode aTag)
     {
         final DetailNode newLine = getNearestEmptyLine(aTag);
-        if (newLine == null || aTag.getLineNumber() - newLine.getLineNumber() != 1)
-        {
+        if (isFirstParagraph(aTag)) {
+            log(aTag.getLineNumber(), "javadoc.paragraph.redundant.paragraph");
+        }
+        else if (newLine == null || aTag.getLineNumber() - newLine.getLineNumber() != 1) {
             log(aTag.getLineNumber(), "javadoc.paragraph.line.before");
         }
     }

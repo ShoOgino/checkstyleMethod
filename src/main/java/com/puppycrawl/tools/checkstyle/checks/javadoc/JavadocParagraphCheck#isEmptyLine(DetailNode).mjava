@@ -1,0 +1,22 @@
+    /**
+     * Some javadoc.
+     * @param aNewLine Some javadoc.
+     * @return Some javadoc.
+     */
+    private boolean isEmptyLine(DetailNode aNewLine)
+    {
+        DetailNode previousSibling = JavadocUtils.getPreviousSibling(aNewLine);
+        if (previousSibling == null
+                || previousSibling.getParent().getType() != JavadocTokenTypes.JAVADOC)
+        {
+            return false;
+        }
+        if (previousSibling.getType() == JavadocTokenTypes.TEXT
+                && previousSibling.getChildren().length == 1)
+        {
+            previousSibling = JavadocUtils.getPreviousSibling(previousSibling);
+        }
+        return previousSibling != null
+                && previousSibling.getType() == JavadocTokenTypes.LEADING_ASTERISK;
+    }
+

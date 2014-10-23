@@ -5,21 +5,16 @@
      */
     private boolean isLastEmptyLine(DetailNode aNewLine)
     {
-        boolean result = false;
-        DetailNode nextSibling = JavadocUtils.getNextSibling(aNewLine);
-        if (nextSibling.getType() == JavadocTokenTypes.TEXT
-                && nextSibling.getChildren().length == 1)
-        {
-            result =  true;
-        }
-        else {
-            nextSibling = JavadocUtils.getNextSibling(nextSibling);
-            if (JavadocUtils.getNextSibling(nextSibling).getType()
-                    == JavadocTokenTypes.JAVADOC_TAG)
+        DetailNode nextNode = JavadocUtils.getNextSibling(aNewLine);
+        while (nextNode != null && nextNode.getType() != JavadocTokenTypes.JAVADOC_TAG) {
+            if (nextNode.getType() == JavadocTokenTypes.TEXT
+                    && nextNode.getChildren().length > 1
+                    || nextNode.getType() == JavadocTokenTypes.HTML_ELEMENT)
             {
-                result =  true;
+                return false;
             }
+            nextNode = JavadocUtils.getNextSibling(nextNode);
         }
-        return result;
+        return true;
     }
 

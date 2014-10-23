@@ -1,0 +1,16 @@
+    /**
+     * Some javadoc.
+     * @param aNode Some javadoc.
+     * @return Some javadoc.
+     */
+    private DetailNode getNearestNode(DetailNode aNode)
+    {
+        DetailNode tag = JavadocUtils.getNextSibling(aNode);
+        while (tag != null && (tag.getType() == JavadocTokenTypes.LEADING_ASTERISK
+                || tag.getType() == JavadocTokenTypes.NEWLINE))
+        {
+            tag = JavadocUtils.getNextSibling(tag);
+        }
+        return tag;
+    }
+

@@ -1,0 +1,22 @@
+    /**
+     * Some javadoc.
+     * @param aParagraphTag Some javadoc.
+     * @return Some javadoc.
+     */
+    private boolean isFirstParagraph(DetailNode aParagraphTag)
+    {
+        DetailNode previousNode = JavadocUtils.getPreviousSibling(aParagraphTag);
+        while (previousNode != null) {
+            if (previousNode.getType() == JavadocTokenTypes.TEXT
+                    && previousNode.getChildren().length > 1
+                || previousNode.getType() != JavadocTokenTypes.LEADING_ASTERISK
+                    && previousNode.getType() != JavadocTokenTypes.NEWLINE
+                    && previousNode.getType() != JavadocTokenTypes.TEXT)
+            {
+                return false;
+            }
+            previousNode = JavadocUtils.getPreviousSibling(previousNode);
+        }
+        return true;
+    }
+

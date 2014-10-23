@@ -1,10 +1,7 @@
     @Override
     public void visitJavadocToken(DetailNode aAst)
     {
-        final DetailNode previousSibling = JavadocUtils.getPreviousSibling(aAst);
-        if (aAst.getType() == JavadocTokenTypes.NEWLINE && previousSibling != null
-            && previousSibling.getType() == JavadocTokenTypes.LEADING_ASTERISK)
-        {
+        if (aAst.getType() == JavadocTokenTypes.NEWLINE && isEmptyLine(aAst)) {
             checkEmptyLine(aAst);
         }
         else if (aAst.getType() == JavadocTokenTypes.HTML_ELEMENT
