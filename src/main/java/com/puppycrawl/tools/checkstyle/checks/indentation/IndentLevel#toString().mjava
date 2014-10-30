@@ -1,6 +1,18 @@
     @Override
     public String toString()
     {
-        return Joiner.on(", ").join(mLevels);
+        if (mLevels.cardinality() == 1) {
+            return String.valueOf(mLevels.nextSetBit(0));
+        }
+        final StringBuilder sb = new StringBuilder();
+        for (int i = mLevels.nextSetBit(0); i >= 0;
+            i = mLevels.nextSetBit(i + 1))
+        {
+            if (sb.length() > 0) {
+                sb.append(", ");
+            }
+            sb.append(i);
+        }
+        return sb.toString();
     }
 

@@ -5,9 +5,10 @@
      */
     public IndentLevel(IndentLevel aBase, int... aOffsets)
     {
-        for (Integer base : aBase.mLevels) {
+        final BitSet src = aBase.mLevels;
+        for (int i = src.nextSetBit(0); i >= 0; i = src.nextSetBit(i + 1)) {
             for (int offset : aOffsets) {
-                mLevels.add(base + offset);
+                mLevels.set(i + offset);
             }
         }
     }
