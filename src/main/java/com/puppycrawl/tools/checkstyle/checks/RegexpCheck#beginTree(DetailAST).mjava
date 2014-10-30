@@ -1,18 +1,8 @@
     @Override
     public void beginTree(DetailAST aRootAST)
     {
-        mCharacters.clear();
         final Pattern pattern = getRegexp();
-        final String[] lines = getLines();
-        final StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < lines.length; i++) {
-            sb.append(lines[i]);
-            sb.append('\n');
-            for (int j = 0; j < (lines[i].length() + 1); j++) {
-                mCharacters.add(new Integer[] {i + 1, j});
-            }
-        }
-        mMatcher = pattern.matcher(sb.toString());
+        mMatcher = pattern.matcher(getFileContents().getText().getFullText());
         mMatchCount = 0;
         mErrorCount = 0;
         findMatch();

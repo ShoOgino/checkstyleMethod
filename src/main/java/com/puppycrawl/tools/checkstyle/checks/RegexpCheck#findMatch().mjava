@@ -13,14 +13,13 @@
             logMessage(0);
         }
         else if (foundMatch) {
-            startLine = (mCharacters.get(mMatcher.start()))[0].
-                    intValue();
-            startColumn = (mCharacters.get(mMatcher.start()))[1].
-                    intValue();
-            endLine = (mCharacters.get(mMatcher.end() - 1))[0].
-                    intValue();
-            endColumn = (mCharacters.get(mMatcher.end() - 1))[1].
-                    intValue();
+            final FileText text = getFileContents().getText();
+            final LineColumn start = text.lineColumn(mMatcher.start());
+            final LineColumn end = text.lineColumn(mMatcher.end() - 1);
+            startLine = start.getLine();
+            startColumn = start.getColumn();
+            endLine = end.getLine();
+            endColumn = end.getColumn();
             if (mIgnoreComments) {
                 final FileContents theFileContents = getFileContents();
                 ignore = theFileContents.hasIntersectionWithComment(startLine,
