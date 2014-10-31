@@ -1,37 +1,31 @@
     @Override
     public final void visitToken(DetailAST aBlockCommentAst)
     {
-        mBlockCommentAst = aBlockCommentAst;
+        if (JavadocUtils.isJavadocComment(aBlockCommentAst)) {
+            mBlockCommentAst = aBlockCommentAst;
 
-        final String commentContent = JavadocUtils.getBlockCommentContent(aBlockCommentAst);
+            final String treeCacheKey = aBlockCommentAst.getLineNo() + ":"
+                    + aBlockCommentAst.getColumnNo();
 
-        if (JavadocUtils.isJavadocComment(commentContent)) {
+            ParseStatus ps;
 
-            final String javadocComment = commentContent.substring(1);
-
-            // Log messages should have line number in scope of file,
-            // not in scope of Javadoc comment.
-            // Offset is line number of beginning of Javadoc comment.
-            mErrorListener.setOffset(aBlockCommentAst.getLineNo() - 1);
-
-            try {
-                final ParseTree parseTree = parseJavadoc(javadocComment);
-
-                final DetailNode node = convertParseTree2DetailNode(parseTree);
-
-                processTree(node);
+            if (TREE_CACHE.containsKey(treeCacheKey)) {
+                ps = TREE_CACHE.get(treeCacheKey);
             }
-            catch (IOException e) {
-                // Antlr can not initiate its ANTLRInputStream
-                log(aBlockCommentAst.getLineNo(), "javadoc.parse.error",
-                        e.getMessage());
+            else {
+                ps = parseJavadocAsDetailNode(aBlockCommentAst);
+                TREE_CACHE.put(treeCacheKey, ps);
             }
-            catch (ParseCancellationException e) {
-                // If syntax error occurs then message is printed by error listener
-                // and parser throws this runtime exception to stop parsing.
-                // Just stop processing current Javadoc comment.
-                return;
+
+            if (ps.getParseErrorMessage() == null) {
+                processTree(ps.getTree());
+            }
+            else {
+                final LocalizedMessage parseErrorMessage = ps.getParseErrorMessage();
+                log(parseErrorMessage.getLineNo(), parseErrorMessage.getColumnNo()
+                        , parseErrorMessage.getMessage());
             }
         }
+
     }
 
