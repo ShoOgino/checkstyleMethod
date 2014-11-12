@@ -1,0 +1,8 @@
+    static WildcardType getWildcardType(String methodName) throws Exception {
+      ParameterizedType parameterType = (ParameterizedType)
+          WildcardType.class
+              .getDeclaredMethod(methodName, List.class)
+              .getGenericParameterTypes()[0];
+      return (WildcardType) parameterType.getActualTypeArguments()[0];
+    }
+
