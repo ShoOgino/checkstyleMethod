@@ -1,0 +1,21 @@
+    @Test
+    public void testEmptyJavadocCommentAst()
+    {
+        DetailAST commentBegin = new DetailAST();
+        commentBegin.setType(TokenTypes.BLOCK_COMMENT_BEGIN);
+        commentBegin.setText("/*");
+
+        DetailAST javadocCommentContent = new DetailAST();
+        javadocCommentContent.setType(TokenTypes.COMMENT_CONTENT);
+        javadocCommentContent.setText("*");
+
+        DetailAST commentEnd = new DetailAST();
+        commentEnd.setType(TokenTypes.BLOCK_COMMENT_END);
+        commentEnd.setText("*/");
+
+        commentBegin.setFirstChild(javadocCommentContent);
+        javadocCommentContent.setNextSibling(commentEnd);
+
+        assertTrue(JavadocUtils.isJavadocComment(commentBegin));
+    }
+
