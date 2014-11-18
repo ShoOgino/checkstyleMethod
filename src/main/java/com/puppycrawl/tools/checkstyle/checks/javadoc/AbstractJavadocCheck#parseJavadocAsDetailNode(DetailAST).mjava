@@ -15,14 +15,14 @@
 
         final ParseStatus result = new ParseStatus();
         ParseTree parseTree = null;
-        LocalizedMessage parseErrorMessage = null;
+        ParseErrorMessage parseErrorMessage = null;
 
         try {
             parseTree = parseJavadocAsParseTree(javadocComment);
         }
         catch (IOException e) {
             // Antlr can not initiate its ANTLRInputStream
-            parseErrorMessage = createLogMessage(aJavadocCommentAst.getLineNo(),
+            parseErrorMessage = new ParseErrorMessage(aJavadocCommentAst.getLineNo(),
                     "javadoc.parse.error",
                     aJavadocCommentAst.getColumnNo(), e.getMessage());
         }

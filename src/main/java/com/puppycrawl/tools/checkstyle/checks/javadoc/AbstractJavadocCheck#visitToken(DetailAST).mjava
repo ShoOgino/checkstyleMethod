@@ -21,8 +21,10 @@
                 processTree(ps.getTree());
             }
             else {
-                final LocalizedMessage parseErrorMessage = ps.getParseErrorMessage();
-                log(parseErrorMessage.getLineNo(), parseErrorMessage.getMessage());
+                final ParseErrorMessage parseErrorMessage = ps.getParseErrorMessage();
+                log(parseErrorMessage.getLineNumber(),
+                        parseErrorMessage.getMessageKey(),
+                        parseErrorMessage.getMessageArguments());
             }
         }
 

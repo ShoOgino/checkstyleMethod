@@ -18,13 +18,13 @@
             final Token token = (Token) aOffendingSymbol;
 
             if (JAVADOC_MISSED_HTML_CLOSE.equals(aMsg)) {
-                mErrorMessage = createLogMessage(lineNumber,
+                mErrorMessage = new ParseErrorMessage(lineNumber,
                         JAVADOC_MISSED_HTML_CLOSE, aCharPositionInLine, token.getText());
 
                 throw new ParseCancellationException();
             }
             else if (JAVADOC_WRONG_SINGLETON_TAG.equals(aMsg)) {
-                mErrorMessage = createLogMessage(lineNumber,
+                mErrorMessage = new ParseErrorMessage(lineNumber,
                         JAVADOC_WRONG_SINGLETON_TAG, aCharPositionInLine, token.getText());
 
                 throw new ParseCancellationException();
@@ -37,11 +37,11 @@
                     final String upperCaseRuleName = CaseFormat.UPPER_CAMEL.to(
                             CaseFormat.UPPER_UNDERSCORE, ruleName);
 
-                    mErrorMessage = createLogMessage(lineNumber,
+                    mErrorMessage = new ParseErrorMessage(lineNumber,
                             JAVADOC_PARSE_RULE_ERROR, aCharPositionInLine, aMsg, upperCaseRuleName);
                 }
                 else {
-                    mErrorMessage = createLogMessage(lineNumber, JAVADOC_PARSE_TOKEN_ERROR,
+                    mErrorMessage = new ParseErrorMessage(lineNumber, JAVADOC_PARSE_TOKEN_ERROR,
                             aCharPositionInLine, aMsg, aCharPositionInLine);
                 }
             }
