@@ -23,7 +23,7 @@
         catch (IOException e) {
             // Antlr can not initiate its ANTLRInputStream
             parseErrorMessage = new ParseErrorMessage(aJavadocCommentAst.getLineNo(),
-                    "javadoc.parse.error",
+                    PARSE_ERROR_MESSAGE_KEY,
                     aJavadocCommentAst.getColumnNo(), e.getMessage());
         }
         catch (ParseCancellationException e) {
@@ -31,6 +31,13 @@
             // and parser throws this runtime exception to stop parsing.
             // Just stop processing current Javadoc comment.
             parseErrorMessage = mErrorListener.getErrorMessage();
+
+            // There are cases when antlr error listener does not handle syntax error
+            if (parseErrorMessage == null) {
+                parseErrorMessage = new ParseErrorMessage(aJavadocCommentAst.getLineNo(),
+                        UNRECOGNIZED_ANTLR_ERROR_MESSAGE_KEY,
+                        aJavadocCommentAst.getColumnNo(), e.getMessage());
+            }
         }
 
         if (parseErrorMessage == null) {
