@@ -1,10 +1,10 @@
     //////////////////////////////////////////////////
     // False positive. Will be fixed in future.
     //////////////////////////////////////////////////
-    private TreeMapNode buildTree(List<Object[]> tree)
-    {
-        state.clear();
-        revState.clear();
+    private TreeMapNode buildTree(Object[][] tree)
+    {   
+        int k = 0;
+        tree.notify();
         TreeMapNode root = null;
         for (Object[] s : tree) {
             Integer id = (Integer) s[0];
@@ -23,13 +23,13 @@
             else {
                 node = new TreeMapNode(label);
             }
-            state.put(id, node);
-            revState.put(node, id);
+            System.out.println(id.toString() + node);
+            System.out.println(node.toString() + id);
             if (parentId == null || parentId == -1) { ///!!!!!!!
                 root = node;
             }
             else {
-                state.get(parentId).add(node);
+                System.out.println(parentId.toString() +node);
             }
         }
         return root;
