@@ -21,84 +21,168 @@
     */
     private static DetailAST buildInput_1()
     {
+        DetailAST packageDef = new DetailAST();
+        packageDef.setType(PACKAGE_DEF);
+        packageDef.setText("package");
+        packageDef.setLineNo(1);
+        packageDef.setColumnNo(0);
+
+        DetailAST annotationsDef = new DetailAST();
+        annotationsDef.setType(ANNOTATIONS);
+        annotationsDef.setText("ANNOTATIONS");
+        annotationsDef.setLineNo(1);
+        annotationsDef.setColumnNo(39);
+
+        DetailAST dotDef = new DetailAST();
+        dotDef.setType(DOT);
+        dotDef.setText(".");
+        dotDef.setLineNo(1);
+        dotDef.setColumnNo(39);
+
+        DetailAST subDotDef = new DetailAST();
+        subDotDef.setType(DOT);
+        subDotDef.setText(".");
+        subDotDef.setLineNo(1);
+        subDotDef.setColumnNo(28);
+
+        DetailAST subDotDef1 = new DetailAST();
+        subDotDef1.setType(DOT);
+        subDotDef1.setText(".");
+        subDotDef1.setLineNo(1);
+        subDotDef1.setColumnNo(22);
+
+        DetailAST subDotDef2 = new DetailAST();
+        subDotDef2.setType(DOT);
+        subDotDef2.setText(".");
+        subDotDef2.setLineNo(1);
+        subDotDef2.setColumnNo(11);
+
+        DetailAST identDef = new DetailAST();
+        identDef.setType(IDENT);
+        identDef.setText("com");
+        identDef.setLineNo(1);
+        identDef.setColumnNo(8);
+
+        DetailAST identDef2 = new DetailAST();
+        identDef2.setType(IDENT);
+        identDef2.setText("puppycrawl");
+        identDef2.setLineNo(1);
+        identDef2.setColumnNo(12);
+
+        DetailAST identDef3 = new DetailAST();
+        identDef3.setType(IDENT);
+        identDef3.setText("tools");
+        identDef3.setLineNo(1);
+        identDef3.setColumnNo(23);
+
+        DetailAST semiDef = new DetailAST();
+        semiDef.setType(SEMI);
+        semiDef.setText(";");
+        semiDef.setLineNo(1);
+        semiDef.setColumnNo(48);
+
+        DetailAST identDef4 = new DetailAST();
+        identDef4.setType(IDENT);
+        identDef4.setText("checkstyle");
+        identDef4.setLineNo(1);
+        identDef4.setColumnNo(29);
+
+        DetailAST identDef5 = new DetailAST();
+        identDef5.setType(IDENT);
+        identDef5.setText("comments");
+        identDef5.setLineNo(1);
+        identDef5.setColumnNo(40);
+
         DetailAST classDef = new DetailAST();
         classDef.setType(CLASS_DEF);
         classDef.setText("CLASS_DEF");
-        classDef.setLineNo(1);
+        classDef.setLineNo(2);
         classDef.setColumnNo(0);
 
         DetailAST modifiers = new DetailAST();
         modifiers.setType(MODIFIERS);
         modifiers.setText("MODIFIERS");
-        modifiers.setLineNo(1);
+        modifiers.setLineNo(2);
         modifiers.setColumnNo(0);
 
         DetailAST literalPublic = new DetailAST();
         literalPublic.setType(LITERAL_PUBLIC);
         literalPublic.setText("public");
-        literalPublic.setLineNo(1);
+        literalPublic.setLineNo(2);
         literalPublic.setColumnNo(0);
 
         DetailAST literalClass = new DetailAST();
         literalClass.setType(LITERAL_CLASS);
         literalClass.setText("class");
-        literalClass.setLineNo(1);
+        literalClass.setLineNo(2);
         literalClass.setColumnNo(7);
 
         DetailAST blockCommentStart = new DetailAST();
         blockCommentStart.setType(BLOCK_COMMENT_BEGIN);
         blockCommentStart.setText("/*");
-        blockCommentStart.setLineNo(1);
+        blockCommentStart.setLineNo(2);
         blockCommentStart.setColumnNo(13);
 
         DetailAST blockCommentContent = new DetailAST();
         blockCommentContent.setType(COMMENT_CONTENT);
         blockCommentContent.setText("\n    i'mcomment567\n    ");
-        blockCommentContent.setLineNo(1);
+        blockCommentContent.setLineNo(2);
         blockCommentContent.setColumnNo(15);
 
         DetailAST blockCommentEnd = new DetailAST();
         blockCommentEnd.setType(BLOCK_COMMENT_END);
         blockCommentEnd.setText("*/");
-        blockCommentEnd.setLineNo(3);
+        blockCommentEnd.setLineNo(4);
         blockCommentEnd.setColumnNo(4);
 
         DetailAST ident = new DetailAST();
         ident.setType(IDENT);
-        ident.setText("InputCommentsTest");
-        ident.setLineNo(4);
+        ident.setText("InputCommentsTest_1");
+        ident.setLineNo(5);
         ident.setColumnNo(0);
 
         DetailAST objBlock = new DetailAST();
         objBlock.setType(OBJBLOCK);
         objBlock.setText("OBJBLOCK");
-        objBlock.setLineNo(5);
+        objBlock.setLineNo(6);
         objBlock.setColumnNo(0);
 
         DetailAST lcurly = new DetailAST();
         lcurly.setType(LCURLY);
         lcurly.setText("{");
-        lcurly.setLineNo(5);
+        lcurly.setLineNo(6);
         lcurly.setColumnNo(0);
 
         DetailAST slComment = new DetailAST();
         slComment.setType(SINGLE_LINE_COMMENT);
         slComment.setText("//");
-        slComment.setLineNo(5);
+        slComment.setLineNo(6);
         slComment.setColumnNo(2);
 
         DetailAST slCommentContent = new DetailAST();
         slCommentContent.setType(COMMENT_CONTENT);
         slCommentContent.setText(" comment to left curly brace\n");
-        slCommentContent.setLineNo(5);
+        slCommentContent.setLineNo(6);
         slCommentContent.setColumnNo(4);
 
         DetailAST rcurly = new DetailAST();
         rcurly.setType(RCURLY);
         rcurly.setText("}");
-        rcurly.setLineNo(6);
+        rcurly.setLineNo(7);
         rcurly.setColumnNo(0);
 
+        packageDef.setFirstChild(annotationsDef);
+        annotationsDef.setNextSibling(dotDef);
+        dotDef.setFirstChild(subDotDef);
+        subDotDef.setFirstChild(subDotDef1);
+        subDotDef1.setFirstChild(subDotDef2);
+        subDotDef2.setFirstChild(identDef);
+        identDef.setNextSibling(identDef2);
+        subDotDef2.setNextSibling(identDef3);
+        subDotDef1.setNextSibling(identDef4);
+        subDotDef.setNextSibling(identDef5);
+        dotDef.setNextSibling(semiDef);
+        packageDef.setNextSibling(classDef);
         classDef.setFirstChild(modifiers);
         modifiers.setNextSibling(literalClass);
         literalClass.setNextSibling(blockCommentStart);
@@ -116,6 +200,6 @@
 
         slComment.setFirstChild(slCommentContent);
 
-        return classDef;
+        return packageDef;
     }
 
