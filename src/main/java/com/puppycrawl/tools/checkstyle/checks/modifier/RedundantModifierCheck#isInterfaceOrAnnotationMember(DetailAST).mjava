@@ -1,0 +1,12 @@
+    /**
+     * Checks if current AST node is member of Interface or Annotation, not of their subnodes.
+     * @param aAST AST node
+     * @return true or false
+     */
+    private static boolean isInterfaceOrAnnotationMember(DetailAST aAST)
+    {
+        final DetailAST parentTypeDef = aAST.getParent().getParent();
+        return parentTypeDef.getType() == TokenTypes.INTERFACE_DEF
+               || parentTypeDef.getType() == TokenTypes.ANNOTATION_DEF;
+    }
+

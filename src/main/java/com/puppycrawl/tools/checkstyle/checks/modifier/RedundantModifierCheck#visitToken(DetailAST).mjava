@@ -18,10 +18,8 @@
                 }
             }
         }
-        else if (ScopeUtils.inInterfaceOrAnnotationBlock(aAST)) {
-            final DetailAST modifiers =
-                aAST.findFirstToken(TokenTypes.MODIFIERS);
-
+        else if (isInterfaceOrAnnotationMember(aAST)) {
+            final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
             DetailAST modifier = modifiers.getFirstChild();
             while (modifier != null) {
 
