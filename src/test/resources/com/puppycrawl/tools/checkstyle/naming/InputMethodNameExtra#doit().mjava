@@ -1,11 +1,15 @@
     public void doit()
     {
-        createNameHistoryDetails(historyDetails, previousNameService, entityId,
+        Object historyDetails = null;
+		Object previousNameService = null;
+		Object entityId = null;
+		Object agencyName = null;
+		createNameHistoryDetails(historyDetails, previousNameService, entityId,
             new More.ViewChangeHistoryBaseAction.ChangeHistoryDisplayName(agencyName)
             {
                 String getDisplayName()
                 {//comment
-                    return getPreviousName(TypeOfName.AGENCY_NAME);
+                    return getPreviousName();
                 }
             });
     }
