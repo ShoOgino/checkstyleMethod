@@ -9,8 +9,9 @@
         // allow the java.io/java.lang,javax.swing.WindowConstants star imports
         final String[] expected2 = new String[] {
             "7: Using the '.*' form of import should be avoided - com.puppycrawl.tools.checkstyle.imports.*.",
-            "28: Using the '.*' form of import should be avoided - sun.net.ftpclient.FtpClient.*.",
+            "28: Using the '.*' form of import should be avoided - java.io.File.*.",
         };
-        verify(checkConfig, getPath("imports" + File.separator + "InputImport.java"), expected2);
+        verify(checkConfig, getPath("imports" + File.separator + "InputAvoidStarImportCheck.java"),
+                expected2);
     }
 
