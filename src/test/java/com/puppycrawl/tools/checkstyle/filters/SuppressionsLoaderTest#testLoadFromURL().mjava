@@ -2,6 +2,10 @@
     public void testLoadFromURL()
         throws CheckstyleException, InterruptedException
     {
+        boolean online = isInternetReachable();
+
+        Assume.assumeTrue(online);
+
         FilterSet fc = null;
 
         int attemptCount = 0;
