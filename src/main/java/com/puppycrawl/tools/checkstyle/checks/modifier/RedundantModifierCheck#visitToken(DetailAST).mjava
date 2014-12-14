@@ -60,7 +60,7 @@
                 }
                 parent = parent.getParent();
             }
-            if (checkFinal) {
+            if (checkFinal && !isAnnotatedWithSafeVarargs(aAST)) {
                 DetailAST modifier = modifiers.getFirstChild();
                 while (modifier != null) {
                     final int type = modifier.getType();
