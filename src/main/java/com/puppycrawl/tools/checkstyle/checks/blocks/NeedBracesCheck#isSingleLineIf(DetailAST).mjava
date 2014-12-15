@@ -1,0 +1,24 @@
+    /**
+     * Checks if current if-statement is single-line statement, e.g.:
+     * <p>
+     * <code>
+     * if (obj.isValid()) return true;
+     * </code>
+     * </p>
+     * @param aLiteralIf {@link TokenTypes#LITERAL_IF LITERAL_IF}
+     * @return true if current if-statement is single-line statement
+     */
+    private static boolean isSingleLineIf(DetailAST aLiteralIf)
+    {
+        boolean result = false;
+        final DetailAST ifBlock = aLiteralIf.getLastChild();
+        final DetailAST lastElementInIfBlock = ifBlock.getLastChild();
+        if (lastElementInIfBlock != null
+            && lastElementInIfBlock.getFirstChild() == null
+            && aLiteralIf.getLineNo() == lastElementInIfBlock.getLineNo())
+        {
+            result = true;
+        }
+        return result;
+    }
+

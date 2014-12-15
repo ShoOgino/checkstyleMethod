@@ -8,7 +8,11 @@
         {
             isElseIf = true;
         }
-        if ((slistAST == null) && !isElseIf) {
+        boolean skipStatement = false;
+        if (aAST.getType() == TokenTypes.LITERAL_IF) {
+            skipStatement = isSkipIfBlock(aAST);
+        }
+        if ((slistAST == null) && !isElseIf && !skipStatement) {
             log(aAST.getLineNo(), "needBraces", aAST.getText());
         }
     }
