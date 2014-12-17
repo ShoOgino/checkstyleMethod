@@ -1,0 +1,27 @@
+    /**
+     * Gets imported type's
+     * <a href="http://docs.oracle.com/javase/specs/jls/se8/html/jls-6.html#jls-6.7">
+     *  canonical name</a>.
+     * @param aImport {@link TokenTypes#IMPORT Import}
+     * @return Imported canonical type's name.
+     */
+    private static String getCanonicalName(DetailAST aImport)
+    {
+        final StringBuilder canonicalNameBuilder = new StringBuilder();
+        DetailAST toVisit = aImport;
+        while (toVisit != null) {
+            toVisit = getNextSubTreeNode(toVisit, aImport);
+            if (toVisit != null
+                   && (toVisit.getType() == TokenTypes.IDENT
+                      || toVisit.getType() == TokenTypes.STAR))
+            {
+                canonicalNameBuilder.append(toVisit.getText());
+                final DetailAST nextSubTreeNode = getNextSubTreeNode(toVisit, aImport);
+                if (nextSubTreeNode.getType() != TokenTypes.SEMI) {
+                    canonicalNameBuilder.append('.');
+                }
+            }
+        }
+        return canonicalNameBuilder.toString();
+    }
+

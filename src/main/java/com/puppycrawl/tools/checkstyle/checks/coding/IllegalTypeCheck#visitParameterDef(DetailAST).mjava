@@ -1,15 +1,15 @@
     /**
      * Checks type of parameters.
-     * @param aAST parameter list for check.
+     * @param aParamDef parameter list for check.
      */
-    private void visitParameterDef(DetailAST aAST)
+    private void visitParameterDef(DetailAST aParamDef)
     {
-        final DetailAST grandParentAST = aAST.getParent().getParent();
+        final DetailAST grandParentAST = aParamDef.getParent().getParent();
 
         if ((grandParentAST.getType() == TokenTypes.METHOD_DEF)
             && isCheckedMethod(grandParentAST))
         {
-            checkClassName(aAST);
+            checkClassName(aParamDef);
         }
     }
 

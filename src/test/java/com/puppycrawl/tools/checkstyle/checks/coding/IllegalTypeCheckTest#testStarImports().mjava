@@ -1,0 +1,13 @@
+    @Test
+    public void testStarImports() throws Exception
+    {
+        mCheckConfig.addAttribute("illegalClassNames", "List");
+
+        String[] expected = {
+            "10:5: Declaring variables, return values or parameters of type 'List' is not allowed.",
+        };
+
+        verify(mCheckConfig, getPath("coding" + File.separator
+                + "InputIllegalTypeStarImports.java"), expected);
+    }
+

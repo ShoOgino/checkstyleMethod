@@ -1,0 +1,15 @@
+    @Test
+    public void testStaticImports() throws Exception
+    {
+        mCheckConfig.addAttribute("illegalClassNames", "SomeStaticClass");
+        mCheckConfig.addAttribute("ignoredMethodNames", "foo1");
+
+        String[] expected = {
+            "13:6: Declaring variables, return values or parameters of type 'SomeStaticClass' is not allowed.",
+            "15:31: Declaring variables, return values or parameters of type 'SomeStaticClass' is not allowed.",
+        };
+
+        verify(mCheckConfig, getPath("coding" + File.separator
+                + "InputIllegalTypeStaticImports.java"), expected);
+    }
+

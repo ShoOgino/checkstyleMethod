@@ -5,7 +5,9 @@
      */
     private boolean isMatchingClassName(String aClassName)
     {
-        return mIllegalClassNames.contains(aClassName)
+        final String shortName = aClassName.substring(aClassName.lastIndexOf(".") + 1);
+        return (mIllegalClassNames.contains(aClassName)
+                || mIllegalClassNames.contains(shortName))
             || (!mLegalAbstractClassNames.contains(aClassName)
                 && getRegexp().matcher(aClassName).find());
     }
