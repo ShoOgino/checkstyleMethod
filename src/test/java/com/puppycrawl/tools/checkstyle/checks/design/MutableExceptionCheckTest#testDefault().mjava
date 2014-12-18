@@ -1,11 +1,11 @@
     @Test
-    public void test() throws Exception
+    public void testDefault() throws Exception
     {
         DefaultConfiguration checkConfig = createCheckConfig(MutableExceptionCheck.class);
 
         String[] expected = {
-            "6:9: The field '_errorCode' must be declared final.",
-            "23:9: The field '_errorCode' must be declared final.",
+            "6:9: The field 'errorCode' must be declared final.",
+            "23:9: The field 'errorCode' must be declared final.",
         };
 
         verify(checkConfig, getPath("design" + File.separator + "InputMutableException.java"), expected);

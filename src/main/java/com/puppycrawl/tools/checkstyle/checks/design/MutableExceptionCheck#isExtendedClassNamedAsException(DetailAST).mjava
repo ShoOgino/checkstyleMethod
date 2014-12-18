@@ -1,0 +1,17 @@
+    /**
+     * @param aAST class definition node
+     * @return true if extended class name conforms to specified format
+     */
+    private boolean isExtendedClassNamedAsException(DetailAST aAST)
+    {
+        final DetailAST extendsClause = aAST.findFirstToken(TokenTypes.EXTENDS_CLAUSE);
+        if (extendsClause != null) {
+            final DetailAST extendedClass = extendsClause.findFirstToken(TokenTypes.IDENT);
+            if (extendedClass != null) {
+                final String extendedClassName = extendedClass.getText();
+                return extendedClassName.matches(mExtendedClassNameFormat);
+            }
+        }
+        return false;
+    }
+

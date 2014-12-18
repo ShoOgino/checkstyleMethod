@@ -5,7 +5,6 @@
     private void visitClassDef(DetailAST aAST)
     {
         mCheckingStack.push(mChecking ? Boolean.TRUE : Boolean.FALSE);
-        mChecking =
-            isExceptionClass(aAST.findFirstToken(TokenTypes.IDENT).getText());
+        mChecking = isNamedAsException(aAST) && isExtendedClassNamedAsException(aAST);
     }
 

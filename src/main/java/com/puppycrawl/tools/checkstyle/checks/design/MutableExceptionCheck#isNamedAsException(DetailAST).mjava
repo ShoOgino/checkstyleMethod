@@ -1,0 +1,10 @@
+    /**
+     * @param aAST class definition node
+     * @return true if a class name conforms to specified format
+     */
+    private boolean isNamedAsException(DetailAST aAST)
+    {
+        final String className = aAST.findFirstToken(TokenTypes.IDENT).getText();
+        return getRegexp().matcher(className).find();
+    }
+
