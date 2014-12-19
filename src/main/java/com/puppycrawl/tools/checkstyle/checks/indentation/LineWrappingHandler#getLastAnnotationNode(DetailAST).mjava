@@ -1,0 +1,16 @@
+    /**
+     * Finds and returns last annotation node.
+     * @param aAtNode first at-clause node.
+     * @return last annotation node.
+     */
+    private DetailAST getLastAnnotationNode(DetailAST aAtNode)
+    {
+        DetailAST lastAnnotation = aAtNode.getParent();
+        while (lastAnnotation.getNextSibling() != null
+                && lastAnnotation.getNextSibling().getType() == TokenTypes.ANNOTATION)
+        {
+            lastAnnotation = lastAnnotation.getNextSibling();
+        }
+        return lastAnnotation.getLastChild();
+    }
+

@@ -1,37 +1,41 @@
     /**
      * Checks line wrapping into annotations.
      *
-     * @param aModifiersNode modifiers node.
+     * @param aAtNode at-clause node.
      * @param aFirstNodesOnLines map which contains
      *     first nodes as values and line numbers as keys.
      */
-    private void checkAnnotationIndentation(DetailAST aModifiersNode,
+    private void checkAnnotationIndentation(DetailAST aAtNode,
             NavigableMap<Integer, DetailAST> aFirstNodesOnLines)
     {
-        final int currentIndent = aModifiersNode.getColumnNo() + mIndentLevel;
-        final int firstNodeIndent = aModifiersNode.getColumnNo();
+        final int currentIndent = aAtNode.getColumnNo() + mIndentLevel;
+        final int firstNodeIndent = aAtNode.getColumnNo();
         final Collection<DetailAST> values = aFirstNodesOnLines.values();
+        final DetailAST lastAnnotationNode = getLastAnnotationNode(aAtNode);
+        final int lastAnnotationLine = lastAnnotationNode.getLineNo();
+        final int lastAnnotattionColumn = lastAnnotationNode.getColumnNo();
 
         final Iterator<DetailAST> itr = values.iterator();
         while (itr.hasNext() && aFirstNodesOnLines.size() > 1) {
             final DetailAST node = itr.next();
-            final int parentType = node.getParent().getType();
 
-            if (node.getType() == TokenTypes.AT) {
-
-                if (isAnnotationAloneOnLine(node.getParent())) {
-                    logWarningMessage(node, firstNodeIndent);
-                    itr.remove();
-                }
-            }
-            else if (parentType != TokenTypes.MODIFIERS
-                    && !hasTypeNodeAsParent(node)
-                    && parentType != TokenTypes.ENUM_DEF
-                    && parentType != TokenTypes.CTOR_DEF
-                    && node.getType() != TokenTypes.LITERAL_CLASS)
+            if (node.getLineNo() < lastAnnotationLine
+                    || node.getLineNo() == lastAnnotationLine
+                    && node.getColumnNo() <= lastAnnotattionColumn)
             {
-                logWarningMessage(node, currentIndent);
+                final DetailAST parentNode = node.getParent();
+                if (node.getType() == TokenTypes.AT
+                        && parentNode.getParent().getType() == TokenTypes.MODIFIERS)
+                {
+                    logWarningMessage(node, firstNodeIndent);
+                }
+                else {
+                    logWarningMessage(node, currentIndent);
+                }
                 itr.remove();
+            }
+            else {
+                break;
             }
         }
     }
