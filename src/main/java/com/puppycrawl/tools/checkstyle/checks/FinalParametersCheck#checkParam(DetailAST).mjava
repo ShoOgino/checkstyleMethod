@@ -4,7 +4,7 @@
      */
     private void checkParam(final DetailAST aParam)
     {
-        if (!aParam.branchContains(TokenTypes.FINAL)) {
+        if (!aParam.branchContains(TokenTypes.FINAL) && !isIgnoredParam(aParam)) {
             final DetailAST paramName = aParam.findFirstToken(TokenTypes.IDENT);
             final DetailAST firstNode = CheckUtils.getFirstNode(aParam);
             log(firstNode.getLineNo(), firstNode.getColumnNo(),
