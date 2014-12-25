@@ -1,11 +1,10 @@
     @Override
     public void visitToken(DetailAST aDetailAST)
     {
+        final DetailAST methodDef = aDetailAST.getParent();
         DetailAST token = aDetailAST.getFirstChild();
         // Check if the method with the given name should be ignored.
-        if (!(shouldIgnoreMethod(aDetailAST.getParent().findFirstToken(
-                                     TokenTypes.IDENT).getText())))
-        {
+        if (!isIgnorableMethod(methodDef)) {
             while (token != null) {
                 if (token.getType() != TokenTypes.COMMA) {
                     final FullIdent ident = FullIdent.createFullIdent(token);
