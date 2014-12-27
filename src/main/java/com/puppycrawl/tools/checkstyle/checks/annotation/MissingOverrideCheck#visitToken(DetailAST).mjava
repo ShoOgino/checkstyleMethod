@@ -8,7 +8,7 @@
 
         final boolean containsTag = this.containsJavadocTag(javadoc);
         if (containsTag && !JavadocTagInfo.INHERIT_DOC.isValidOn(aAST)) {
-            this.log(aAST.getLineNo(), "tag.not.valid.on",
+            this.log(aAST.getLineNo(), MSG_KEY_TAG_NOT_VALID_ON,
                 JavadocTagInfo.INHERIT_DOC.getText());
             return;
         }
@@ -28,7 +28,7 @@
             && (!AnnotationUtility.containsAnnotation(aAST, OVERRIDE)
             && !AnnotationUtility.containsAnnotation(aAST, FQ_OVERRIDE)))
         {
-            this.log(aAST.getLineNo(), "annotation.missing.override");
+            this.log(aAST.getLineNo(), MSG_KEY_ANNOTATION_MISSING_OVERRIDE);
         }
     }
 

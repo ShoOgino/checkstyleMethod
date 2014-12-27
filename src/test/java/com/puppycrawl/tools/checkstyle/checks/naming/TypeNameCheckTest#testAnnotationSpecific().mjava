@@ -6,8 +6,8 @@
             createCheckConfig(TypeNameCheck.class);
         checkConfig.addAttribute("tokens", TokenTypes.getTokenName(TokenTypes.ANNOTATION_DEF));
         final String[] expected = {
-            buildMesssage(9, 23, "inputHeaderAnnotation",
-                        TypeNameCheck.DEFAULT_PATTERN),
+            "9:23: " + getCheckMessage(MSG_INVALID_PATTERN,
+                "inputHeaderAnnotation", DEFAULT_PATTERN),
         };
         verify(checkConfig, inputFilename, expected);
     }

@@ -6,8 +6,8 @@
         checkConfig.addAttribute("elementStyle", "COMPACT");
         checkConfig.addAttribute("trailingArrayComma", "ignore");
         final String[] expected = {
-            "43: Annotation style must be 'COMPACT'.",
-            "47: Annotation style must be 'COMPACT'.",
+            "43: " + getCheckMessage(MSG_KEY_ANNOTATION_INCORRECT_STYLE, "COMPACT"),
+            "47: " + getCheckMessage(MSG_KEY_ANNOTATION_INCORRECT_STYLE, "COMPACT"),
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "DifferentUseStyles.java"), expected);

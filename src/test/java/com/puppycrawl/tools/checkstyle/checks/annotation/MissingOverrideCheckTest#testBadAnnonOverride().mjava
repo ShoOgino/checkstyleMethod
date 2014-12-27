@@ -8,10 +8,10 @@
     {
         DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
         final String[] expected = {
-            "10: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
-            "16: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
-            "29: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
-            "35: Must include @java.lang.Override annotation when {@inheritDoc} Javadoc tag exists.",
+            "10: " + getCheckMessage(MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
+            "16: " + getCheckMessage(MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
+            "29: " + getCheckMessage(MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
+            "35: " + getCheckMessage(MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "BadAnnonOverride.java"), expected);

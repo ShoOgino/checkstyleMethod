@@ -12,10 +12,10 @@
 
             if (!isCorrectLocation(annotation, hasParameters)) {
                 log(annotation.getLineNo(),
-                    "annotation.location.alone", getAnnotationName(annotation));
+                        MSG_KEY_ANNOTATION_LOCATION_ALONE, getAnnotationName(annotation));
             }
             else if (annotation.getColumnNo() != aCorrectLevel && !hasNodeBefore(annotation)) {
-                log(annotation.getLineNo(), "annotation.location",
+                log(annotation.getLineNo(), MSG_KEY_ANNOTATION_LOCATION,
                     getAnnotationName(annotation), annotation.getColumnNo(), aCorrectLevel);
             }
             annotation = annotation.getNextSibling();

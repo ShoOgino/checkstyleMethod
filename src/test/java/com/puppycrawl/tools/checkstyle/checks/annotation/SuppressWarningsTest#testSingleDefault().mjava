@@ -8,15 +8,15 @@
         DefaultConfiguration checkConfig = createCheckConfig(SuppressWarningsCheck.class);
 
         final String[] expected = {
-            "8:23: The warning '   ' cannot be suppressed at this location.",
-            "11:27: The warning '' cannot be suppressed at this location.",
-            "53:27: The warning '' cannot be suppressed at this location.",
-            "64:47: The warning '' cannot be suppressed at this location.",
-            "67:37: The warning '' cannot be suppressed at this location.",
-            "72:46: The warning '   ' cannot be suppressed at this location.",
-            "77:60: The warning '   ' cannot be suppressed at this location.",
-            "82:93: The warning '' cannot be suppressed at this location.",
-            "82:106: The warning '    ' cannot be suppressed at this location.",
+            "8:23: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, "   "),
+            "11:27: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, ""),
+            "53:27: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, ""),
+            "64:47: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, ""),
+            "67:37: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, ""),
+            "72:46: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, "   "),
+            "77:60: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, "   "),
+            "82:93: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, ""),
+            "82:106: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, "    "),
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsSingle.java"), expected);

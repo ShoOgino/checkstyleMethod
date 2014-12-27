@@ -7,10 +7,8 @@
     {
         DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
         final String[] expected = {
-            "8: The Javadoc {@inheritDoc} tag is not valid at this location.",
-            "15: The Javadoc {@inheritDoc} tag is not valid at this location.",
-            //this wont be flagged because this check only checks methods.
-            //"22: The Javadoc comment contains an {@inheritDoc} tag. The tag is not valid at this location.",
+            "8: " + getCheckMessage(MSG_KEY_TAG_NOT_VALID_ON, "{@inheritDoc}"),
+            "15: " + getCheckMessage(MSG_KEY_TAG_NOT_VALID_ON, "{@inheritDoc}"),
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "NotOverride.java"), expected);

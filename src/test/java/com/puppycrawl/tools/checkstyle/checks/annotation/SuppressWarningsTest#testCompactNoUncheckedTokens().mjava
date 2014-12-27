@@ -10,10 +10,10 @@
         checkConfig.addAttribute("tokens", "CLASS_DEF");
 
         final String[] expected = {
-            "5:20: The warning 'unchecked' cannot be suppressed at this location.",
+            "5:20: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, "unchecked"),
 
-            "64:34: The warning 'unchecked' cannot be suppressed at this location.",
-            "64:62: The warning 'unchecked' cannot be suppressed at this location.",
+            "64:34: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, "unchecked"),
+            "64:62: " + getCheckMessage(MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, "unchecked"),
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "SuppressWarningsCompact.java"), expected);

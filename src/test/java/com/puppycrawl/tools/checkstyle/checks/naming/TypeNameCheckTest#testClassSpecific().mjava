@@ -6,8 +6,8 @@
             createCheckConfig(TypeNameCheck.class);
         checkConfig.addAttribute("tokens", TokenTypes.getTokenName(TokenTypes.CLASS_DEF));
         final String[] expected = {
-                buildMesssage(3, 7, "inputHeaderClass",
-                        TypeNameCheck.DEFAULT_PATTERN),
+            "3:7: " + getCheckMessage(MSG_INVALID_PATTERN,
+                    "inputHeaderClass", DEFAULT_PATTERN),
         };
         verify(checkConfig, inputFilename, expected);
     }

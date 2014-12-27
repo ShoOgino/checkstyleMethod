@@ -1,0 +1,17 @@
+    /**
+     * Gets the check message 'as is' from appropriate 'messages.properties'
+     * file.
+     *
+     * @param messageKey the key of message in 'messages.properties' file.
+     * @param arguments  the arguments of message in 'messages.properties' file.
+     */
+    public String getCheckMessage(String messageKey, Object... arguments) {
+        Properties pr = new Properties();
+        try {
+            pr.load(getClass().getResourceAsStream("messages.properties"));
+        } catch (IOException e) {
+            return null;
+        }
+        return format(pr.getProperty(messageKey), arguments);
+    }
+
