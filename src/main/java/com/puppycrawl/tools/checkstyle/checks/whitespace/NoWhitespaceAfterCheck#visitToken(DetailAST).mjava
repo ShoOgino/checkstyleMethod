@@ -5,30 +5,9 @@
         if (targetAST.getType() == TokenTypes.TYPECAST) {
             targetAST = targetAST.findFirstToken(TokenTypes.RPAREN);
         }
-        else {
-            if (targetAST.getType() == TokenTypes.ARRAY_DECLARATOR) {
-                final DetailAST arrayType = targetAST.getFirstChild();
-                if (!isCstyleArrayDeclaration(targetAST)) {
-                    targetAST = arrayType;
-                }
-                else {
-                    targetAST = targetAST.getParent().getNextSibling();
-                }
-            }
-        }
         final String line = getLine(aAST.getLineNo() - 1);
-        int after = 0;
-        //If target of possible redundant whitespace is in method definition
-        if (targetAST.getType() == TokenTypes.IDENT
-                && targetAST.getNextSibling().getType() == TokenTypes.LPAREN)
-        {
-            final DetailAST methodDef = targetAST.getParent();
-            final DetailAST endOfParams = methodDef.findFirstToken(TokenTypes.RPAREN);
-            after = endOfParams.getColumnNo() + 1;
-        }
-        else {
-            after = targetAST.getColumnNo() + targetAST.getText().length();
-        }
+        final int after =
+            targetAST.getColumnNo() + targetAST.getText().length();
 
         if ((after >= line.length())
             || Character.isWhitespace(line.charAt(after)))
