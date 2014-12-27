@@ -1,0 +1,20 @@
+    /**
+     * Works with multidimensional arrays.
+     * @param aArrayDeclaration {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR}
+     * @return true if multidimensional array is declared in C style.
+     */
+    private static boolean isCstyleMultiDimensionalArrayDeclaration(DetailAST aArrayDeclaration)
+    {
+        boolean result = false;
+        DetailAST parentArrayDeclaration = aArrayDeclaration;
+        while (parentArrayDeclaration != null) {
+            if (parentArrayDeclaration.getParent() != null
+                    && parentArrayDeclaration.getParent().getType() == TokenTypes.TYPE)
+            {
+                result = isCstyleArrayDeclaration(parentArrayDeclaration);
+            }
+            parentArrayDeclaration = parentArrayDeclaration.getParent();
+        }
+        return result;
+    }
+

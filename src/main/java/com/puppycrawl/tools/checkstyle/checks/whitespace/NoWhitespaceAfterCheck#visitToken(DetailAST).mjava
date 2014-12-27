@@ -1,27 +1,21 @@
     @Override
     public void visitToken(DetailAST aAST)
     {
-        DetailAST targetAST = aAST;
-        if (targetAST.getType() == TokenTypes.TYPECAST) {
-            targetAST = targetAST.findFirstToken(TokenTypes.RPAREN);
-        }
-        final String line = getLine(aAST.getLineNo() - 1);
-        final int after =
-            targetAST.getColumnNo() + targetAST.getText().length();
-
-        if ((after >= line.length())
-            || Character.isWhitespace(line.charAt(after)))
+        DetailAST ast = aAST;
+        if (aAST.getType() == TokenTypes.ARRAY_DECLARATOR
+                 || aAST.getType() == TokenTypes.TYPECAST)
         {
-            boolean flag = !mAllowLineBreaks;
-            for (int i = after + 1; !flag && (i < line.length()); i++) {
-                if (!Character.isWhitespace(line.charAt(i))) {
-                    flag = true;
-                }
-            }
-            if (flag) {
-                log(targetAST.getLineNo(), after,
-                    "ws.followed", targetAST.getText());
-            }
+            ast = getPreceded(aAST);
+        }
+
+        final String line = getLine(aAST.getLineNo() - 1);
+        final int after = getPositionAfter(ast);
+
+        if ((after >= line.length() || Character.isWhitespace(line.charAt(after)))
+                 && hasRedundantWhitespace(line, after))
+        {
+            log(ast.getLineNo(), after,
+                "ws.followed", ast.getText());
         }
     }
 

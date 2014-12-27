@@ -1,0 +1,23 @@
+    /**
+     * Gets position after token (place of possible redundant whitespace).
+     * @param aAST Node representing token.
+     * @return position after token.
+     */
+    private static int getPositionAfter(DetailAST aAST)
+    {
+        int after;
+        //If target of possible redundant whitespace is in method definition
+        if (aAST.getType() == TokenTypes.IDENT
+                && aAST.getNextSibling() != null
+                && aAST.getNextSibling().getType() == TokenTypes.LPAREN)
+        {
+            final DetailAST methodDef = aAST.getParent();
+            final DetailAST endOfParams = methodDef.findFirstToken(TokenTypes.RPAREN);
+            after = endOfParams.getColumnNo() + 1;
+        }
+        else {
+            after = aAST.getColumnNo() + aAST.getText().length();
+        }
+        return after;
+    }
+

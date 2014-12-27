@@ -1,0 +1,37 @@
+    /**
+     * Gets target place of possible redundant whitespace (array's type or identifier)
+     *  after which {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR} is set.
+     * @param aArrayDeclarator {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR}
+     * @return target place before possible redundant whitespace.
+     */
+    private static DetailAST getArrayTypeOrIdentifier(DetailAST aArrayDeclarator)
+    {
+        DetailAST typeOrIdent = aArrayDeclarator;
+        if (isArrayInstantiation(aArrayDeclarator)) {
+            typeOrIdent = aArrayDeclarator.getParent().getFirstChild();
+        }
+        else if (isMultiDimensionalArray(aArrayDeclarator)) {
+            if (isCstyleMultiDimensionalArrayDeclaration(aArrayDeclarator)) {
+                if (aArrayDeclarator.getParent().getType() != TokenTypes.ARRAY_DECLARATOR) {
+                    typeOrIdent = getArrayIdentifier(aArrayDeclarator);
+                }
+            }
+            else {
+                DetailAST arrayIdentifier = aArrayDeclarator.getFirstChild();
+                while (arrayIdentifier != null) {
+                    typeOrIdent = arrayIdentifier;
+                    arrayIdentifier = arrayIdentifier.getFirstChild();
+                }
+            }
+        }
+        else {
+            if (isCstyleArrayDeclaration(aArrayDeclarator)) {
+                typeOrIdent = getArrayIdentifier(aArrayDeclarator);
+            }
+            else {
+                typeOrIdent = aArrayDeclarator.getFirstChild();
+            }
+        }
+        return typeOrIdent;
+    }
+

@@ -1,0 +1,11 @@
+    /**
+     * Checks if current array is multidimensional.
+     * @param aArrayDeclaration {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR}
+     * @return true if current array is multidimensional.
+     */
+    private static boolean isMultiDimensionalArray(DetailAST aArrayDeclaration)
+    {
+        return aArrayDeclaration.getParent().getType() == TokenTypes.ARRAY_DECLARATOR
+                || aArrayDeclaration.getFirstChild().getType() == TokenTypes.ARRAY_DECLARATOR;
+    }
+
