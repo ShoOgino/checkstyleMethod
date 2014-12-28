@@ -1,7 +1,11 @@
     @Override
     public void visitToken(DetailAST aAst)
     {
-        super.visitToken(aAst); // Will check the name against the format.
+        if (!AnnotationUtility.containsAnnotation(aAst, OVERRIDE)
+            && !AnnotationUtility.containsAnnotation(aAst, CANONICAL_OVERRIDE))
+        {
+            super.visitToken(aAst); // Will check the name against the format.
+        }
 
         if (!mAllowClassName) {
             final DetailAST method =
