@@ -12,7 +12,7 @@
                     .get(aBundleName);
             if (bundle == null) {
                 bundle = ResourceBundle.getBundle(aBundleName, sLocale,
-                        mSourceClass.getClassLoader());
+                        mSourceClass.getClassLoader(), new UTF8Control());
                 BUNDLE_CACHE.put(aBundleName, bundle);
             }
             return bundle;
