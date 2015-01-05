@@ -8,10 +8,19 @@
      */
     private void logWarningMessage(DetailAST aCurrentNode, int aCurrentIndent)
     {
-        if (aCurrentNode.getColumnNo() < aCurrentIndent) {
-            mIndentCheck.indentationLog(aCurrentNode.getLineNo(),
-                    "indentation.error", aCurrentNode.getText(),
-                    aCurrentNode.getColumnNo(), aCurrentIndent);
+        if (mForceStrictCondition) {
+            if (aCurrentNode.getColumnNo() != aCurrentIndent) {
+                mIndentCheck.indentationLog(aCurrentNode.getLineNo(),
+                        "indentation.error", aCurrentNode.getText(),
+                        aCurrentNode.getColumnNo(), aCurrentIndent);
+            }
+        }
+        else {
+            if (aCurrentNode.getColumnNo() < aCurrentIndent) {
+                mIndentCheck.indentationLog(aCurrentNode.getLineNo(),
+                        "indentation.error", aCurrentNode.getText(),
+                        aCurrentNode.getColumnNo(), aCurrentIndent);
+            }
         }
     }
 
