@@ -1,12 +1,12 @@
     /**
      * Checks that method has final and static modifiers.
-     * @param aMethod the METHOD_DEF node
+     * @param method the METHOD_DEF node
      * @return true if check passed, false otherwise
      */
-    private boolean checkModifiers(DetailAST aMethod)
+    private boolean checkModifiers(DetailAST method)
     {
         final DetailAST modifiers =
-            aMethod.findFirstToken(TokenTypes.MODIFIERS);
+            method.findFirstToken(TokenTypes.MODIFIERS);
 
         return modifiers.branchContains(TokenTypes.LITERAL_PUBLIC)
             && modifiers.branchContains(TokenTypes.LITERAL_STATIC);

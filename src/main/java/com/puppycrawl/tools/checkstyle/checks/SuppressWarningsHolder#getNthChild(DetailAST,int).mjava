@@ -1,14 +1,14 @@
     /**
      * Returns the n'th child of an AST node.
-     * @param aAST the AST node to get the child of
-     * @param aIndex the index of the child to get
+     * @param ast the AST node to get the child of
+     * @param index the index of the child to get
      * @return the n'th child of the given AST node, or {@code null} if none
      */
-    private static DetailAST getNthChild(DetailAST aAST, int aIndex)
+    private static DetailAST getNthChild(DetailAST ast, int index)
     {
-        DetailAST child = aAST.getFirstChild();
+        DetailAST child = ast.getFirstChild();
         if (child != null) {
-            for (int i = 0; i < aIndex && child != null; ++i) {
+            for (int i = 0; i < index && child != null; ++i) {
                 child = child.getNextSibling();
             }
         }

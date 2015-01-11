@@ -1,9 +1,9 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         // check whether annotation is SuppressWarnings
         // expected children: AT ( IDENT | DOT ) LPAREN <values> RPAREN
-        String identifier = getIdentifier(getNthChild(aAST, 1));
+        String identifier = getIdentifier(getNthChild(ast, 1));
         if (identifier.startsWith(JAVA_LANG_PREFIX)) {
             identifier = identifier.substring(JAVA_LANG_PREFIX.length());
         }
@@ -11,7 +11,7 @@
 
             // get values of annotation
             List<String> values = null;
-            final DetailAST lparenAST = aAST.findFirstToken(TokenTypes.LPAREN);
+            final DetailAST lparenAST = ast.findFirstToken(TokenTypes.LPAREN);
             if (lparenAST != null) {
                 final DetailAST nextAST = lparenAST.getNextSibling();
                 if (nextAST != null) {
@@ -38,13 +38,13 @@
                 }
             }
             if (values == null) {
-                log(aAST, "suppress.warnings.missing.value");
+                log(ast, "suppress.warnings.missing.value");
                 return;
             }
 
             // get target of annotation
             DetailAST targetAST = null;
-            DetailAST parentAST = aAST.getParent();
+            DetailAST parentAST = ast.getParent();
             if (parentAST != null) {
                 switch (parentAST.getType()) {
                 case TokenTypes.MODIFIERS:
@@ -76,7 +76,7 @@
                 }
             }
             if (targetAST == null) {
-                log(aAST, "suppress.warnings.invalid.target");
+                log(ast, "suppress.warnings.invalid.target");
                 return;
             }
 

@@ -1,20 +1,20 @@
     /**
      * Process type params (if any) for given class, enum or method.
-     * @param aAST class, enum or method to process.
+     * @param ast class, enum or method to process.
      */
-    private void processTypeParams(DetailAST aAST)
+    private void processTypeParams(DetailAST ast)
     {
-        final DetailAST typeParams =
-            aAST.findFirstToken(TokenTypes.TYPE_PARAMETERS);
+        final DetailAST params =
+            ast.findFirstToken(TokenTypes.TYPE_PARAMETERS);
 
         final Map<String, ClassInfo> paramsMap = Maps.newHashMap();
-        mTypeParams.push(paramsMap);
+        typeParams.push(paramsMap);
 
-        if (typeParams == null) {
+        if (params == null) {
             return;
         }
 
-        for (DetailAST child = typeParams.getFirstChild();
+        for (DetailAST child = params.getFirstChild();
              child != null;
              child = child.getNextSibling())
         {

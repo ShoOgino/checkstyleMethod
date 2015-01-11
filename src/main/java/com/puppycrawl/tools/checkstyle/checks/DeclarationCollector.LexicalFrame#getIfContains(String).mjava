@@ -1,14 +1,14 @@
         /** check whether the frame contains a given name.
-         * @param aNameToFind  the name we're looking for
+         * @param nameToFind  the name we're looking for
          * @return whether it was found
          */
-        LexicalFrame getIfContains(String aNameToFind)
+        LexicalFrame getIfContains(String nameToFind)
         {
-            if (contains(aNameToFind)) {
+            if (contains(nameToFind)) {
                 return this;
             }
-            else if (mParent != null) {
-                return mParent.getIfContains(aNameToFind);
+            else if (parent != null) {
+                return parent.getIfContains(nameToFind);
             }
             else {
                 return null;

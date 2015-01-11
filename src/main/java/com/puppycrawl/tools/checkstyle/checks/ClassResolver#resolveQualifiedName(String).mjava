@@ -1,19 +1,19 @@
     /**
      * Tries to resolve a class for fully-specified name.
-     * @param aName a given name of class.
+     * @param name a given name of class.
      * @return Class object for the given name or null.
      */
-    private Class<?> resolveQualifiedName(final String aName)
+    private Class<?> resolveQualifiedName(final String name)
     {
         try {
-            if (isLoadable(aName)) {
-                return safeLoad(aName);
+            if (isLoadable(name)) {
+                return safeLoad(name);
             }
             //Perhaps it's fully-qualified inner class
-            final int dot = aName.lastIndexOf(".");
+            final int dot = name.lastIndexOf(".");
             if (dot != -1) {
                 final String innerName =
-                    aName.substring(0, dot) + "$" + aName.substring(dot + 1);
+                    name.substring(0, dot) + "$" + name.substring(dot + 1);
                 if (isLoadable(innerName)) {
                     return safeLoad(innerName);
                 }

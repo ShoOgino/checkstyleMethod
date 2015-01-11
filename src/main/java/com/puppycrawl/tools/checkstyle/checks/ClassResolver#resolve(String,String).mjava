@@ -5,27 +5,27 @@
      * - explicit imports
      * - enclosing package
      * - star imports
-     * @param aName name of the class to resolve
-     * @param aCurrentClass name of current class (for inner classes).
+     * @param name name of the class to resolve
+     * @param currentClass name of current class (for inner classes).
      * @return the resolved class
      * @throws ClassNotFoundException if unable to resolve the class
      */
-    public Class<?> resolve(String aName, String aCurrentClass)
+    public Class<?> resolve(String name, String currentClass)
         throws ClassNotFoundException
     {
         // See if the class is full qualified
-        Class<?> clazz = resolveQualifiedName(aName);
+        Class<?> clazz = resolveQualifiedName(name);
         if (clazz != null) {
             return clazz;
         }
 
         // try matching explicit imports
-        for (String imp : mImports) {
+        for (String imp : imports) {
             // Very important to add the "." in the check below. Otherwise you
             // when checking for "DataException", it will match on
             // "SecurityDataException". This has been the cause of a very
             // difficult bug to resolve!
-            if (imp.endsWith("." + aName)) {
+            if (imp.endsWith("." + name)) {
                 clazz = resolveQualifiedName(imp);
                 if (clazz != null) {
                     return clazz;
@@ -35,27 +35,27 @@
         }
 
         // See if in the package
-        if (!"".equals(mPkg)) {
-            clazz = resolveQualifiedName(mPkg + "." + aName);
+        if (!"".equals(pkg)) {
+            clazz = resolveQualifiedName(pkg + "." + name);
             if (clazz != null) {
                 return clazz;
             }
         }
 
         //inner class of this class???
-        if (!"".equals(aCurrentClass)) {
-            final String innerClass = (!"".equals(mPkg) ? (mPkg + ".") : "")
-                + aCurrentClass + "$" + aName;
+        if (!"".equals(currentClass)) {
+            final String innerClass = (!"".equals(pkg) ? (pkg + ".") : "")
+                + currentClass + "$" + name;
             if (isLoadable(innerClass)) {
                 return safeLoad(innerClass);
             }
         }
 
         // try star imports
-        for (String imp : mImports) {
+        for (String imp : imports) {
             if (imp.endsWith(".*")) {
                 final String fqn = imp.substring(0, imp.lastIndexOf('.') + 1)
-                    + aName;
+                    + name;
                 clazz = resolveQualifiedName(fqn);
                 if (clazz != null) {
                     return clazz;
@@ -65,6 +65,6 @@
 
         // Giving up, the type is unknown, so load the class to generate an
         // exception
-        return safeLoad(aName);
+        return safeLoad(name);
     }
 

@@ -1,14 +1,14 @@
     /**
      * Creates <code>FullIdent</code> for given type node.
-     * @param aTypeAST a type node.
+     * @param typeAST a type node.
      * @return <code>FullIdent</code> for given type.
      */
-    public static FullIdent createFullType(DetailAST aTypeAST)
+    public static FullIdent createFullType(DetailAST typeAST)
     {
         final DetailAST arrayDeclAST =
-            aTypeAST.findFirstToken(TokenTypes.ARRAY_DECLARATOR);
+            typeAST.findFirstToken(TokenTypes.ARRAY_DECLARATOR);
 
-        return createFullTypeNoArrays(arrayDeclAST == null ? aTypeAST
+        return createFullTypeNoArrays(arrayDeclAST == null ? typeAST
                                                            : arrayDeclAST);
     }
 

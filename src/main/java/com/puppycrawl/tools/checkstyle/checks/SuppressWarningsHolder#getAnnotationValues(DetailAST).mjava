@@ -1,19 +1,19 @@
     /**
      * Returns the annotation values represented by an AST.
-     * @param aAST an AST node for an EXPR or ANNOTATION_ARRAY_INIT
+     * @param ast an AST node for an EXPR or ANNOTATION_ARRAY_INIT
      * @return the list of Java string represented by the given AST for an
      *         expression or annotation array initializer
      * @throws IllegalArgumentException if the AST is invalid
      */
-    private static List<String> getAnnotationValues(DetailAST aAST)
+    private static List<String> getAnnotationValues(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.EXPR:
-            return ImmutableList.of(getStringExpr(aAST));
+            return ImmutableList.of(getStringExpr(ast));
 
         case TokenTypes.ANNOTATION_ARRAY_INIT:
             final List<String> valueList = Lists.newLinkedList();
-            DetailAST childAST = aAST.getFirstChild();
+            DetailAST childAST = ast.getFirstChild();
             while (childAST != null) {
                 if (childAST.getType() == TokenTypes.EXPR) {
                     valueList.add(getStringExpr(childAST));
@@ -25,6 +25,6 @@
         default:
         }
         throw new IllegalArgumentException(
-            "Expression or annotation array initializer AST expected: " + aAST);
+            "Expression or annotation array initializer AST expected: " + ast);
     }
 

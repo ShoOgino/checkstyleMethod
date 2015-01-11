@@ -1,18 +1,18 @@
     /**
      * Updates the regular expression using the supplied format and compiler
      * flags. Will also update the member variables.
-     * @param aFormat the format of the regular expression.
-     * @param aCompileFlags the compiler flags to use.
+     * @param format the format of the regular expression.
+     * @param compileFlags the compiler flags to use.
      */
-    private void updateRegexp(String aFormat, int aCompileFlags)
+    private void updateRegexp(String format, int compileFlagsParam)
     {
         try {
-            mRegexp = Utils.getPattern(aFormat, aCompileFlags);
-            mFormat = aFormat;
-            mCompileFlags |= aCompileFlags;
+            regexp = Utils.getPattern(format, compileFlagsParam);
+            this.format = format;
+            compileFlags |= compileFlagsParam;
         }
         catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + aFormat, e);
+            throw new ConversionException("unable to parse " + format, e);
         }
     }
 

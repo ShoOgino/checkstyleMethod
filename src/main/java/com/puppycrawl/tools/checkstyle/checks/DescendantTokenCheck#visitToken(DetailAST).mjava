@@ -1,56 +1,56 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         //reset counts
-        Arrays.fill(mCounts, 0);
-        countTokens(aAST, 0);
+        Arrays.fill(counts, 0);
+        countTokens(ast, 0);
 
         // name of this token
-        final String name = TokenTypes.getTokenName(aAST.getType());
+        final String name = TokenTypes.getTokenName(ast.getType());
 
-        if (mSumTokenCounts) {
+        if (sumTokenCounts) {
             int total = 0;
-            for (int element : mLimitedTokens) {
-                total += mCounts[element - 1];
+            for (int element : limitedTokens) {
+                total += counts[element - 1];
             }
-            if (total < mMinimumNumber) {
-                log(aAST.getLineNo(), aAST.getColumnNo(),
-                        (null == mMinimumMessage) ? "descendant.token.sum.min"
-                                : mMinimumMessage,
+            if (total < minimumNumber) {
+                log(ast.getLineNo(), ast.getColumnNo(),
+                        (null == minimumMessage) ? "descendant.token.sum.min"
+                                : minimumMessage,
                         String.valueOf(total),
-                        String.valueOf(mMinimumNumber), name);
+                        String.valueOf(minimumNumber), name);
             }
-            if (total > mMaximumNumber) {
-                log(aAST.getLineNo(), aAST.getColumnNo(),
-                        (null == mMaximumMessage) ? "descendant.token.sum.max"
-                                : mMaximumMessage,
+            if (total > maximumNumber) {
+                log(ast.getLineNo(), ast.getColumnNo(),
+                        (null == maximumMessage) ? "descendant.token.sum.max"
+                                : maximumMessage,
                         String.valueOf(total),
-                        String.valueOf(mMaximumNumber),
+                        String.valueOf(maximumNumber),
                         name);
             }
         }
         else {
-            for (int element : mLimitedTokens) {
-                final int tokenCount = mCounts[element - 1];
-                if (tokenCount < mMinimumNumber) {
+            for (int element : limitedTokens) {
+                final int tokenCount = counts[element - 1];
+                if (tokenCount < minimumNumber) {
                     final String descendantName = TokenTypes
                             .getTokenName(element);
-                    log(aAST.getLineNo(), aAST.getColumnNo(),
-                            (null == mMinimumMessage) ? "descendant.token.min"
-                                    : mMinimumMessage,
+                    log(ast.getLineNo(), ast.getColumnNo(),
+                            (null == minimumMessage) ? "descendant.token.min"
+                                    : minimumMessage,
                             String.valueOf(tokenCount),
-                            String.valueOf(mMinimumNumber),
+                            String.valueOf(minimumNumber),
                             name,
                             descendantName);
                 }
-                if (tokenCount > mMaximumNumber) {
+                if (tokenCount > maximumNumber) {
                     final String descendantName = TokenTypes
                             .getTokenName(element);
-                    log(aAST.getLineNo(), aAST.getColumnNo(),
-                            (null == mMaximumMessage) ? "descendant.token.max"
-                                    : mMaximumMessage,
+                    log(ast.getLineNo(), ast.getColumnNo(),
+                            (null == maximumMessage) ? "descendant.token.max"
+                                    : maximumMessage,
                             String.valueOf(tokenCount),
-                            String.valueOf(mMaximumNumber),
+                            String.valueOf(maximumNumber),
                             name,
                             descendantName);
                 }

@@ -1,7 +1,7 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.CLASS_DEF :
         case TokenTypes.INTERFACE_DEF :
         case TokenTypes.ENUM_DEF :
@@ -9,7 +9,7 @@
         case TokenTypes.SLIST :
         case TokenTypes.METHOD_DEF :
         case TokenTypes.CTOR_DEF :
-            this.mCurrent = this.mFrames.get(aAST);
+            this.current = this.frames.get(ast);
             break;
         default :
             // do nothing

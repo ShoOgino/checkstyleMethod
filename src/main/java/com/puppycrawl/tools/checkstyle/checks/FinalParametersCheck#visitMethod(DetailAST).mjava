@@ -1,24 +1,24 @@
     /**
      * Checks parameters of the method or ctor.
-     * @param aMethod method or ctor to check.
+     * @param method method or ctor to check.
      */
-    private void visitMethod(final DetailAST aMethod)
+    private void visitMethod(final DetailAST method)
     {
         // exit on fast lane if there is nothing to check here
-        if (!aMethod.branchContains(TokenTypes.PARAMETER_DEF)) {
+        if (!method.branchContains(TokenTypes.PARAMETER_DEF)) {
             return;
         }
 
         // ignore abstract method
         final DetailAST modifiers =
-            aMethod.findFirstToken(TokenTypes.MODIFIERS);
+            method.findFirstToken(TokenTypes.MODIFIERS);
         if (modifiers.branchContains(TokenTypes.ABSTRACT)) {
             return;
         }
 
         // we can now be sure that there is at least one parameter
         final DetailAST parameters =
-            aMethod.findFirstToken(TokenTypes.PARAMETERS);
+            method.findFirstToken(TokenTypes.PARAMETERS);
         DetailAST child = parameters.getFirstChild();
         while (child != null) {
             // childs are PARAMETER_DEF and COMMA

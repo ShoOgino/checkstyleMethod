@@ -1,11 +1,11 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final String[] lines = aAST.getText().split("\n");
+        final String[] lines = ast.getText().split("\n");
 
         for (int i = 0; i < lines.length; i++) {
-            if (mRegexp.matcher(lines[i]).find()) {
-                log(aAST.getLineNo() + i, "todo.match", mFormat);
+            if (regexp.matcher(lines[i]).find()) {
+                log(ast.getLineNo() + i, "todo.match", format);
             }
         }
     }

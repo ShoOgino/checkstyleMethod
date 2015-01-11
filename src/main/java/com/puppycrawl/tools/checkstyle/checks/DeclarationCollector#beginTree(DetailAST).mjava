@@ -1,17 +1,17 @@
     @Override
-    public void beginTree(DetailAST aRootAST)
+    public void beginTree(DetailAST rootAST)
     {
-        final Deque<LexicalFrame> aFrameStack = Lists.newLinkedList();
-        aFrameStack.add(new GlobalFrame());
+        final Deque<LexicalFrame> frameStack = Lists.newLinkedList();
+        frameStack.add(new GlobalFrame());
 
-        mFrames = Maps.newHashMap();
+        frames = Maps.newHashMap();
 
-        DetailAST curNode = aRootAST;
+        DetailAST curNode = rootAST;
         while (curNode != null) {
-            collectDeclarations(aFrameStack, curNode);
+            collectDeclarations(frameStack, curNode);
             DetailAST toVisit = curNode.getFirstChild();
             while (curNode != null && toVisit == null) {
-                endCollectingDeclarations(aFrameStack, curNode);
+                endCollectingDeclarations(frameStack, curNode);
                 toVisit = curNode.getNextSibling();
                 if (toVisit == null) {
                     curNode = curNode.getParent();

@@ -1,19 +1,19 @@
     /**
      * Common implementation for logLoadError() method.
-     * @param aLineNo line number of the problem.
-     * @param aColumnNo column number of the problem.
-     * @param aMsgKey message key to use.
-     * @param aValues values to fill the message out.
+     * @param lineNo line number of the problem.
+     * @param columnNo column number of the problem.
+     * @param msgKey message key to use.
+     * @param values values to fill the message out.
      */
-    protected final void logLoadErrorImpl(int aLineNo, int aColumnNo,
-                                          String aMsgKey, Object... aValues)
+    protected final void logLoadErrorImpl(int lineNo, int columnNo,
+                                          String msgKey, Object... values)
     {
-        if (!mLogLoadErrors) {
-            final LocalizedMessage msg = new LocalizedMessage(aLineNo,
-                                                    aColumnNo,
+        if (!logLoadErrors) {
+            final LocalizedMessage msg = new LocalizedMessage(lineNo,
+                                                    columnNo,
                                                     getMessageBundle(),
-                                                    aMsgKey,
-                                                    aValues,
+                                                    msgKey,
+                                                    values,
                                                     getSeverityLevel(),
                                                     getId(),
                                                     this.getClass(),
@@ -21,8 +21,8 @@
             throw new RuntimeException(msg.getMessage());
         }
 
-        if (!mSuppressLoadErrors) {
-            log(aLineNo, aColumnNo, aMsgKey, aValues);
+        if (!suppressLoadErrors) {
+            log(lineNo, columnNo, msgKey, values);
         }
     }
 

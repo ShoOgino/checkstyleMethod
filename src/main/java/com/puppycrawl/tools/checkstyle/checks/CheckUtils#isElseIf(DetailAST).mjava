@@ -1,13 +1,13 @@
     /**
      * Returns whether a token represents an ELSE as part of an ELSE / IF set.
-     * @param aAST the token to check
+     * @param ast the token to check
      * @return whether it is
      */
-    public static boolean isElseIf(DetailAST aAST)
+    public static boolean isElseIf(DetailAST ast)
     {
-        final DetailAST parentAST = aAST.getParent();
+        final DetailAST parentAST = ast.getParent();
 
-        return (aAST.getType() == TokenTypes.LITERAL_IF)
+        return (ast.getType() == TokenTypes.LITERAL_IF)
             && (isElse(parentAST) || isElseWithCurlyBraces(parentAST));
     }
 

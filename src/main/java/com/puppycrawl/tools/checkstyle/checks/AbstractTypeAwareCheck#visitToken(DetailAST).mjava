@@ -1,23 +1,23 @@
     @Override
-    public final void visitToken(DetailAST aAST)
+    public final void visitToken(DetailAST ast)
     {
-        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
-            processPackage(aAST);
+        if (ast.getType() == TokenTypes.PACKAGE_DEF) {
+            processPackage(ast);
         }
-        else if (aAST.getType() == TokenTypes.IMPORT) {
-            processImport(aAST);
+        else if (ast.getType() == TokenTypes.IMPORT) {
+            processImport(ast);
         }
-        else if ((aAST.getType() == TokenTypes.CLASS_DEF)
-                 || (aAST.getType() == TokenTypes.INTERFACE_DEF)
-                 || (aAST.getType() == TokenTypes.ENUM_DEF))
+        else if ((ast.getType() == TokenTypes.CLASS_DEF)
+                 || (ast.getType() == TokenTypes.INTERFACE_DEF)
+                 || (ast.getType() == TokenTypes.ENUM_DEF))
         {
-            processClass(aAST);
+            processClass(ast);
         }
         else {
-            if (aAST.getType() == TokenTypes.METHOD_DEF) {
-                processTypeParams(aAST);
+            if (ast.getType() == TokenTypes.METHOD_DEF) {
+                processTypeParams(ast);
             }
-            processAST(aAST);
+            processAST(ast);
         }
     }
 

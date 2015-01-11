@@ -1,11 +1,11 @@
     @Override
-    public void leaveToken(DetailAST aAst)
+    public void leaveToken(DetailAST ast)
     {
-        if (aAst.getType() == TokenTypes.CLASS_DEF) {
-            if (mClassDepth == 1) {
-                mCurrentClass = null;
+        if (ast.getType() == TokenTypes.CLASS_DEF) {
+            if (classDepth == 1) {
+                currentClass = null;
             }
-            mClassDepth--;
+            classDepth--;
         }
     }
 

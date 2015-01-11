@@ -1,18 +1,18 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
 
-        final String literal = aAST.getText();
+        final String literal = ast.getText();
 
         if (hasUnicodeChar(literal)) {
-            if (!(mAllowByTailComment && hasTrailComment(aAST)
+            if (!(allowByTailComment && haastrailComment(ast)
                     || isAllCharactersEscaped(literal)
-                    || (mAllowEscapesForControlCharacters
+                    || (allowEscapesForControlCharacters
                             && isOnlyUnicodeValidChars(literal, sUnicodeControl))
-                    || (mAllowNonPrintableEscapes
+                    || (allowNonPrintableEscapes
                             && isOnlyUnicodeValidChars(literal, sNonPrintableChars))))
             {
-                log(aAST.getLineNo(), "forbid.escaped.unicode.char");
+                log(ast.getLineNo(), "forbid.escaped.unicode.char");
             }
         }
     }

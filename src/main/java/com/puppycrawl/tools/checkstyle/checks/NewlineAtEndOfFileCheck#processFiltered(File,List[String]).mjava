@@ -1,16 +1,16 @@
     @Override
-    protected void processFiltered(File aFile, List<String> aLines)
+    protected void processFiltered(File file, List<String> lines)
     {
-        // Cannot use aLines as the line separators have been removed!
+        // Cannot use lines as the line separators have been removed!
         RandomAccessFile randomAccessFile = null;
         try {
-            randomAccessFile = new RandomAccessFile(aFile, "r");
+            randomAccessFile = new RandomAccessFile(file, "r");
             if (!endsWithNewline(randomAccessFile)) {
-                log(0, "noNewlineAtEOF", aFile.getPath());
+                log(0, "noNewlineAtEOF", file.getPath());
             }
         }
         catch (final IOException e) {
-            log(0, "unable.open", aFile.getPath());
+            log(0, "unable.open", file.getPath());
         }
         finally {
             Utils.closeQuietly(randomAccessFile);

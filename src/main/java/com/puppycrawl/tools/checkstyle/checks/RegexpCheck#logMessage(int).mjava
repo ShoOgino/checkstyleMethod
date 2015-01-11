@@ -1,22 +1,22 @@
     /**
      * Displays the right message.
-     * @param aLineNumber the line number the message relates to.
+     * @param lineNumber the line number the message relates to.
      */
-    private void logMessage(int aLineNumber)
+    private void logMessage(int lineNumber)
     {
-        String message = "".equals(getMessage()) ? getFormat() : mMessage;
-        if (mErrorCount >= mErrorLimit) {
-            message = ERROR_LIMIT_EXCEEDED_MESSAGE + message;
+        String msg = "".equals(getMessage()) ? getFormat() : message;
+        if (errorCount >= errorLimit) {
+            msg = ERROR_LIMIT_EXCEEDED_MESSAGE + msg;
         }
-        if (mIllegalPattern) {
-            log(aLineNumber, "illegal.regexp", message);
+        if (illegalPattern) {
+            log(lineNumber, "illegal.regexp", msg);
         }
         else {
-            if (aLineNumber > 0) {
-                log(aLineNumber, "duplicate.regexp", message);
+            if (lineNumber > 0) {
+                log(lineNumber, "duplicate.regexp", msg);
             }
             else {
-                log(aLineNumber, "required.regexp", message);
+                log(lineNumber, "required.regexp", msg);
             }
         }
     }

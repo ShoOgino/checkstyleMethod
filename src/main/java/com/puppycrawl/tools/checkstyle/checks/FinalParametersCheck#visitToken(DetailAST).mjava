@@ -1,20 +1,20 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         // don't flag interfaces
-        final DetailAST container = aAST.getParent().getParent();
+        final DetailAST container = ast.getParent().getParent();
         if (container.getType() == TokenTypes.INTERFACE_DEF) {
             return;
         }
 
-        if (aAST.getType() == TokenTypes.LITERAL_CATCH) {
-            visitCatch(aAST);
+        if (ast.getType() == TokenTypes.LITERAL_CATCH) {
+            visitCatch(ast);
         }
-        else if (aAST.getType() == TokenTypes.FOR_EACH_CLAUSE) {
-            visitForEachClause(aAST);
+        else if (ast.getType() == TokenTypes.FOR_EACH_CLAUSE) {
+            visitForEachClause(ast);
         }
         else {
-            visitMethod(aAST);
+            visitMethod(ast);
         }
     }
 

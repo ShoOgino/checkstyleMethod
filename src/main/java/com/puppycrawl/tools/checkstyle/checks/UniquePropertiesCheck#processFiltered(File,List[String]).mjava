@@ -1,14 +1,14 @@
     @Override
-    protected void processFiltered(File aFile, List<String> aLines)
+    protected void processFiltered(File file, List<String> lines)
     {
         final UniqueProperties properties = new UniqueProperties();
 
         try {
             // As file is already read, there should not be any exceptions.
-            properties.load(new FileInputStream(aFile));
+            properties.load(new FileInputStream(file));
         }
         catch (IOException e) {
-            log(0, IO_EXCEPTION_KEY, aFile.getPath(),
+            log(0, IO_EXCEPTION_KEY, file.getPath(),
                     e.getLocalizedMessage());
         }
 
@@ -16,7 +16,7 @@
                 .getDuplicatedStrings().entrySet())
         {
             final String keyName = duplication.getElement();
-            final int lineNumber = getLineNumber(aLines, keyName);
+            final int lineNumber = getLineNumber(lines, keyName);
             // Number of occurrences is number of duplications + 1
             log(lineNumber, MSG_KEY, keyName, duplication.getCount() + 1);
         }

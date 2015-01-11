@@ -1,18 +1,18 @@
     /**
      * Sets the tokens which occurance as descendant is limited.
-     * @param aLimitedTokens - list of tokens to ignore.
+     * @param limitedTokens - list of tokens to ignore.
      */
-    public void setLimitedTokens(String[] aLimitedTokens)
+    public void setLimitedTokens(String[] limitedTokensParam)
     {
-        mLimitedTokens = new int[aLimitedTokens.length];
+        limitedTokens = new int[limitedTokensParam.length];
 
         int maxToken = 0;
-        for (int i = 0; i < aLimitedTokens.length; i++) {
-            mLimitedTokens[i] = TokenTypes.getTokenId(aLimitedTokens[i]);
-            if (mLimitedTokens[i] > maxToken) {
-                maxToken = mLimitedTokens[i];
+        for (int i = 0; i < limitedTokensParam.length; i++) {
+            limitedTokens[i] = TokenTypes.getTokenId(limitedTokensParam[i]);
+            if (limitedTokens[i] > maxToken) {
+                maxToken = limitedTokens[i];
             }
         }
-        mCounts = new int[maxToken];
+        counts = new int[maxToken];
     }
 

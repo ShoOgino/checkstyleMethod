@@ -1,15 +1,15 @@
     /**
      * Set the option to enforce.
-     * @param aOption string to decode option from
+     * @param option string to decode option from
      * @throws ConversionException if unable to decode
      */
-    public void setOption(String aOption) throws ConversionException
+    public void setOption(String optionStr) throws ConversionException
     {
         try {
-            mOption = Enum.valueOf(mOptionClass, aOption.trim().toUpperCase());
+            option = Enum.valueOf(optionClass, optionStr.trim().toUpperCase());
         }
         catch (IllegalArgumentException iae) {
-            throw new ConversionException("unable to parse " + aOption, iae);
+            throw new ConversionException("unable to parse " + option, iae);
         }
     }
 

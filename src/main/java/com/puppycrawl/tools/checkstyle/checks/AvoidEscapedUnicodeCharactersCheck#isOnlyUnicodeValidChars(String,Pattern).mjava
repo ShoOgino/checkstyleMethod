@@ -1,15 +1,15 @@
     /**
      * Check if String literal contains Unicode control chars.
-     * @param aLiteral String llteral.
-     * @param aPattern RegExp for valid characters.
+     * @param literal String llteral.
+     * @param pattern RegExp for valid characters.
      * @return true, if String literal contains Unicode control chars.
      */
-    private boolean isOnlyUnicodeValidChars(String aLiteral, Pattern aPattern)
+    private boolean isOnlyUnicodeValidChars(String literal, Pattern pattern)
     {
         final int unicodeMatchesCounter =
-                countMatches(sUnicodeRegexp, aLiteral);
+                countMatches(sUnicodeRegexp, literal);
         final int unicodeValidMatchesCouter =
-                countMatches(aPattern, aLiteral);
+                countMatches(pattern, literal);
         return unicodeMatchesCounter - unicodeValidMatchesCouter == 0;
     }
 

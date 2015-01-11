@@ -1,7 +1,7 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final DetailAST typeAST = aAST.getParent();
+        final DetailAST typeAST = ast.getParent();
         if (typeAST.getType() != TokenTypes.TYPE) {
             return;
         }
@@ -15,11 +15,11 @@
         final DetailAST variableAST = typeAST.getNextSibling();
         if (variableAST != null) {
             final boolean isJavaStyle =
-                (variableAST.getLineNo() > aAST.getLineNo())
-                || (variableAST.getColumnNo() > aAST.getColumnNo());
+                (variableAST.getLineNo() > ast.getLineNo())
+                || (variableAST.getColumnNo() > ast.getColumnNo());
 
-            if (isJavaStyle != mJavaStyle) {
-                log(aAST.getLineNo(), aAST.getColumnNo(), "array.type.style");
+            if (isJavaStyle != javaStyle) {
+                log(ast.getLineNo(), ast.getColumnNo(), "array.type.style");
             }
         }
     }

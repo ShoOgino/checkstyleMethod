@@ -2,18 +2,18 @@
      * Arranges a set of property files by their prefix.
      * The method returns a Map object. The filename prefixes
      * work as keys each mapped to a set of files.
-     * @param aPropFiles the set of property files
-     * @param aBasenameSeparator the basename separator
+     * @param propFiles the set of property files
+     * @param basenameSeparator the basename separator
      * @return a Map object which holds the arranged property file sets
      */
     private static Map<String, Set<File>> arrangePropertyFiles(
-        List<File> aPropFiles, String aBasenameSeparator)
+        List<File> propFiles, String basenameSeparator)
     {
         final Map<String, Set<File>> propFileMap = Maps.newHashMap();
 
-        for (final File f : aPropFiles) {
+        for (final File f : propFiles) {
             final String identifier = extractPropertyIdentifier(f,
-                aBasenameSeparator);
+                basenameSeparator);
 
             Set<File> fileSet = propFileMap.get(identifier);
             if (fileSet == null) {

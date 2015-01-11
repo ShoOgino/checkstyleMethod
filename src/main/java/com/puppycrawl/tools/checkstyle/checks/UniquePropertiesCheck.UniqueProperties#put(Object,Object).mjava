@@ -1,10 +1,10 @@
         @Override
-        public synchronized Object put(Object aKey, Object aValue)
+        public synchronized Object put(Object key, Object value)
         {
-            final Object oldValue = super.put(aKey, aValue);
-            if (oldValue != null && aKey instanceof String) {
-                final String keyString = (String) aKey;
-                mDuplicatedStrings.add(keyString);
+            final Object oldValue = super.put(key, value);
+            if (oldValue != null && key instanceof String) {
+                final String keyString = (String) key;
+                duplicatedStrings.add(keyString);
             }
             return oldValue;
         }

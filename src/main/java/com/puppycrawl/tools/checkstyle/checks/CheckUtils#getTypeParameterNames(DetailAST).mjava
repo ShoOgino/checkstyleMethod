@@ -1,30 +1,30 @@
     /**
      * Retrieves the names of the type parameters to the node.
-     * @param aNode the parameterised AST node
+     * @param node the parameterised AST node
      * @return a list of type parameter names
      */
-    public static List<String> getTypeParameterNames(final DetailAST aNode)
+    public static List<String> getTypeParameterNames(final DetailAST node)
     {
         final DetailAST typeParameters =
-            aNode.findFirstToken(TokenTypes.TYPE_PARAMETERS);
+            node.findFirstToken(TokenTypes.TYPE_PARAMETERS);
 
-        final List<String> typeParamNames = Lists.newArrayList();
+        final List<String> typeParanames = Lists.newArrayList();
         if (typeParameters != null) {
             final DetailAST typeParam =
                 typeParameters.findFirstToken(TokenTypes.TYPE_PARAMETER);
-            typeParamNames.add(
+            typeParanames.add(
                 typeParam.findFirstToken(TokenTypes.IDENT).getText());
 
             DetailAST sibling = typeParam.getNextSibling();
             while (sibling != null) {
                 if (sibling.getType() == TokenTypes.TYPE_PARAMETER) {
-                    typeParamNames.add(
+                    typeParanames.add(
                         sibling.findFirstToken(TokenTypes.IDENT).getText());
                 }
                 sibling = sibling.getNextSibling();
             }
         }
 
-        return typeParamNames;
+        return typeParanames;
     }
 

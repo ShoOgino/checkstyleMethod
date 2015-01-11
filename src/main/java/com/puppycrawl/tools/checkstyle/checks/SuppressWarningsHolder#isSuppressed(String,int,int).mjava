@@ -1,27 +1,27 @@
     /**
      * Checks for a suppression of a check with the given source name and
      * location in the last file processed.
-     * @param aSourceName the source name of the check
-     * @param aLine the line number of the check
-     * @param aColumn the column number of the check
+     * @param sourceName the source name of the check
+     * @param line the line number of the check
+     * @param column the column number of the check
      * @return whether the check with the given name is suppressed at the given
      *         source location
      */
-    public static boolean isSuppressed(String aSourceName, int aLine,
-        int aColumn)
+    public static boolean isSuppressed(String sourceName, int line,
+        int column)
     {
         final List<Entry> entries = ENTRIES.get();
-        final String checkAlias = getAlias(aSourceName);
+        final String checkAlias = getAlias(sourceName);
         if (entries != null && checkAlias != null) {
             for (Entry entry : entries) {
                 final boolean afterStart =
-                    entry.getFirstLine() < aLine
-                        || (entry.getFirstLine() == aLine && entry
-                            .getFirstColumn() <= aColumn);
+                    entry.getFirstLine() < line
+                        || (entry.getFirstLine() == line && entry
+                            .getFirstColumn() <= column);
                 final boolean beforeEnd =
-                    entry.getLastLine() > aLine
-                        || (entry.getLastLine() == aLine && entry
-                            .getLastColumn() >= aColumn);
+                    entry.getLastLine() > line
+                        || (entry.getLastLine() == line && entry
+                            .getLastColumn() >= column);
                 final boolean nameMatches =
                     entry.getCheckName().equals(checkAlias);
                 if (afterStart && beforeEnd && nameMatches) {

@@ -1,16 +1,16 @@
     /**
      * Loads the keys of the specified property file into a set.
-     * @param aFile the property file
+     * @param file the property file
      * @return a Set object which holds the loaded keys
      */
-    private Set<Object> loadKeys(File aFile)
+    private Set<Object> loadKeys(File file)
     {
         final Set<Object> keys = Sets.newHashSet();
         InputStream inStream = null;
 
         try {
             // Load file and properties.
-            inStream = new FileInputStream(aFile);
+            inStream = new FileInputStream(file);
             final Properties props = new Properties();
             props.load(inStream);
 
@@ -21,7 +21,7 @@
             }
         }
         catch (final IOException e) {
-            logIOException(e, aFile);
+            logIOException(e, file);
         }
         finally {
             Utils.closeQuietly(inStream);

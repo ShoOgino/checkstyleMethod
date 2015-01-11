@@ -1,20 +1,20 @@
     /**
      * Returns the Java identifier represented by an AST.
-     * @param aAST an AST node for an IDENT or DOT
+     * @param ast an AST node for an IDENT or DOT
      * @return the Java identifier represented by the given AST subtree
      * @throws IllegalArgumentException if the AST is invalid
      */
-    private static String getIdentifier(DetailAST aAST)
+    private static String getIdentifier(DetailAST ast)
     {
-        if (aAST != null) {
-            if (aAST.getType() == TokenTypes.IDENT) {
-                return aAST.getText();
+        if (ast != null) {
+            if (ast.getType() == TokenTypes.IDENT) {
+                return ast.getText();
             }
-            else if (aAST.getType() == TokenTypes.DOT) {
-                return getIdentifier(aAST.getFirstChild()) + "."
-                    + getIdentifier(aAST.getLastChild());
+            else if (ast.getType() == TokenTypes.DOT) {
+                return getIdentifier(ast.getFirstChild()) + "."
+                    + getIdentifier(ast.getLastChild());
             }
         }
-        throw new IllegalArgumentException("Identifier AST expected: " + aAST);
+        throw new IllegalArgumentException("Identifier AST expected: " + ast);
     }
 

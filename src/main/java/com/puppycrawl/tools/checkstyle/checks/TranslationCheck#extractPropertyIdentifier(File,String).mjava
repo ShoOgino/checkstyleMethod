@@ -3,17 +3,17 @@
      * "xyz/messages" is the basename of "xyz/messages.properties",
      * "xyz/messages_de_AT.properties", "xyz/messages_en.properties", etc.
      *
-     * @param aFile the file
-     * @param aBasenameSeparator the basename separator
+     * @param file the file
+     * @param basenameSeparator the basename separator
      * @return the extracted basename
      */
-    private static String extractPropertyIdentifier(final File aFile,
-            final String aBasenameSeparator)
+    private static String extractPropertyIdentifier(final File file,
+            final String basenameSeparator)
     {
-        final String filePath = aFile.getPath();
+        final String filePath = file.getPath();
         final int dirNameEnd = filePath.lastIndexOf(File.separatorChar);
         final int baseNameStart = dirNameEnd + 1;
-        final int underscoreIdx = filePath.indexOf(aBasenameSeparator,
+        final int underscoreIdx = filePath.indexOf(basenameSeparator,
             baseNameStart);
         final int dotIdx = filePath.indexOf('.', baseNameStart);
         final int cutoffIdx = (underscoreIdx != -1) ? underscoreIdx : dotIdx;

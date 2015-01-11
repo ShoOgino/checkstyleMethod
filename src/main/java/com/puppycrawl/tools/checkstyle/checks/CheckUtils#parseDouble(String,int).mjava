@@ -1,16 +1,16 @@
     /**
      * Returns the value represented by the specified string of the specified
      * type. Returns 0 for types other than float, double, int, and long.
-     * @param aText the string to be parsed.
-     * @param aType the token type of the text. Should be a constant of
+     * @param text the string to be parsed.
+     * @param type the token type of the text. Should be a constant of
      * {@link com.puppycrawl.tools.checkstyle.api.TokenTypes}.
      * @return the double value represented by the string argument.
      */
-    public static double parseDouble(String aText, int aType)
+    public static double parseDouble(String text, int type)
     {
-        String txt = aText.replaceAll("_", "");
+        String txt = text.replaceAll("_", "");
         double result = 0;
-        switch (aType) {
+        switch (type) {
         case TokenTypes.NUM_FLOAT:
         case TokenTypes.NUM_DOUBLE:
             result = Double.parseDouble(txt);
@@ -30,7 +30,7 @@
                 txt = txt.substring(0, txt.length() - 1);
             }
             if (txt.length() > 0) {
-                if (aType == TokenTypes.NUM_INT) {
+                if (type == TokenTypes.NUM_INT) {
                     result = parseInt(txt, radix);
                 }
                 else {

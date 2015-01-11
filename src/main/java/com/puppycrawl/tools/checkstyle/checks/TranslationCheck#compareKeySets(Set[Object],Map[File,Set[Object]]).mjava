@@ -1,13 +1,13 @@
     /**
      * Compares the key sets of the given property files (arranged in a map)
      * with the specified key set. All missing keys are reported.
-     * @param aKeys the set of keys to compare with
-     * @param aFileMap a Map from property files to their key sets
+     * @param keys the set of keys to compare with
+     * @param fileMap a Map from property files to their key sets
      */
-    private void compareKeySets(Set<Object> aKeys,
-            Map<File, Set<Object>> aFileMap)
+    private void compareKeySets(Set<Object> keys,
+            Map<File, Set<Object>> fileMap)
     {
-        final Set<Entry<File, Set<Object>>> fls = aFileMap.entrySet();
+        final Set<Entry<File, Set<Object>>> fls = fileMap.entrySet();
 
         for (Entry<File, Set<Object>> entry : fls) {
             final File currentFile = entry.getKey();
@@ -17,7 +17,7 @@
             final Set<Object> currentKeys = entry.getValue();
 
             // Clone the keys so that they are not lost
-            final Set<Object> keysClone = Sets.newHashSet(aKeys);
+            final Set<Object> keysClone = Sets.newHashSet(keys);
             keysClone.removeAll(currentKeys);
 
             // Remaining elements in the key set are missing in the current file

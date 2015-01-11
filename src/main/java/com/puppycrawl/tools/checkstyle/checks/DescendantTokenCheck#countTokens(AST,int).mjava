@@ -1,20 +1,20 @@
     /**
      * Counts the number of occurrences of descendant tokens.
-     * @param aAST the root token for descendants.
-     * @param aDepth the maximum depth of the counted descendants.
+     * @param ast the root token for descendants.
+     * @param depth the maximum depth of the counted descendants.
      */
-    private void countTokens(AST aAST, int aDepth)
+    private void countTokens(AST ast, int depth)
     {
-        if (aDepth <= mMaximumDepth) {
+        if (depth <= maximumDepth) {
             //update count
-            if (aDepth >= mMinimumDepth) {
-                final int type = aAST.getType();
-                if (type <= mCounts.length) {
-                    mCounts[type - 1]++;
+            if (depth >= minimumDepth) {
+                final int type = ast.getType();
+                if (type <= counts.length) {
+                    counts[type - 1]++;
                 }
             }
-            AST child = aAST.getFirstChild();
-            final int nextDepth = aDepth + 1;
+            AST child = ast.getFirstChild();
+            final int nextDepth = depth + 1;
             while (child != null) {
                 countTokens(child, nextDepth);
                 child = child.getNextSibling();

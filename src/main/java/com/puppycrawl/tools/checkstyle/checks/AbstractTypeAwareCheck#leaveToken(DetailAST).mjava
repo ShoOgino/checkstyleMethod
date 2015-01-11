@@ -1,31 +1,31 @@
     @Override
-    public final void leaveToken(DetailAST aAST)
+    public final void leaveToken(DetailAST ast)
     {
-        if ((aAST.getType() == TokenTypes.CLASS_DEF)
-            || (aAST.getType() == TokenTypes.ENUM_DEF))
+        if ((ast.getType() == TokenTypes.CLASS_DEF)
+            || (ast.getType() == TokenTypes.ENUM_DEF))
         {
             // perhaps it was inner class
-            int dotIdx = mCurrentClass.lastIndexOf("$");
+            int dotIdx = currentClass.lastIndexOf("$");
             if (dotIdx == -1) {
                 // perhaps just a class
-                dotIdx = mCurrentClass.lastIndexOf(".");
+                dotIdx = currentClass.lastIndexOf(".");
             }
             if (dotIdx == -1) {
                 // looks like a topmost class
-                mCurrentClass = "";
+                currentClass = "";
             }
             else {
-                mCurrentClass = mCurrentClass.substring(0, dotIdx);
+                currentClass = currentClass.substring(0, dotIdx);
             }
-            mTypeParams.pop();
+            typeParams.pop();
         }
-        else if (aAST.getType() == TokenTypes.METHOD_DEF) {
-            mTypeParams.pop();
+        else if (ast.getType() == TokenTypes.METHOD_DEF) {
+            typeParams.pop();
         }
-        else if ((aAST.getType() != TokenTypes.PACKAGE_DEF)
-                 && (aAST.getType() != TokenTypes.IMPORT))
+        else if ((ast.getType() != TokenTypes.PACKAGE_DEF)
+                 && (ast.getType() != TokenTypes.IMPORT))
         {
-            leaveAST(aAST);
+            leaveAST(ast);
         }
     }
 

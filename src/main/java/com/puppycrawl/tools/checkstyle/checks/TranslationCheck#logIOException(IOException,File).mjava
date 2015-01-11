@@ -1,14 +1,14 @@
     /**
      * helper method to log an io exception.
-     * @param aEx the exception that occured
-     * @param aFile the file that could not be processed
+     * @param ex the exception that occured
+     * @param file the file that could not be processed
      */
-    private void logIOException(IOException aEx, File aFile)
+    private void logIOException(IOException ex, File file)
     {
         String[] args = null;
         String key = "general.fileNotFound";
-        if (!(aEx instanceof FileNotFoundException)) {
-            args = new String[] {aEx.getMessage()};
+        if (!(ex instanceof FileNotFoundException)) {
+            args = new String[] {ex.getMessage()};
             key = "general.exception";
         }
         final LocalizedMessage message =
@@ -21,7 +21,7 @@
                 this.getClass(), null);
         final TreeSet<LocalizedMessage> messages = Sets.newTreeSet();
         messages.add(message);
-        getMessageDispatcher().fireErrors(aFile.getPath(), messages);
-        Utils.getExceptionLogger().debug("IOException occured.", aEx);
+        getMessageDispatcher().fireErrors(file.getPath(), messages);
+        Utils.getExceptionLogger().debug("IOException occured.", ex);
     }
 

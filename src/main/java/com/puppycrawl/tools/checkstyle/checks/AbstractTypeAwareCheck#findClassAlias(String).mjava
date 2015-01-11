@@ -1,14 +1,14 @@
     /**
      * Looking if a given name is alias.
-     * @param aName given name
+     * @param name given name
      * @return ClassInfo for alias if it exists, null otherwise
      */
-    protected final ClassInfo findClassAlias(final String aName)
+    protected final ClassInfo findClassAlias(final String name)
     {
         ClassInfo ci = null;
-        for (int i = mTypeParams.size() - 1; i >= 0; i--) {
-            final Map<String, ClassInfo> paramMap = mTypeParams.peek(i);
-            ci = paramMap.get(aName);
+        for (int i = typeParams.size() - 1; i >= 0; i--) {
+            final Map<String, ClassInfo> paramMap = typeParams.peek(i);
+            ci = paramMap.get(name);
             if (ci != null) {
                 break;
             }

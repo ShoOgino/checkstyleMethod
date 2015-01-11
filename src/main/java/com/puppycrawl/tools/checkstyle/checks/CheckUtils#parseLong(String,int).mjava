@@ -3,19 +3,19 @@
      * the second argument. The characters in the string must all be digits of
      * the specified radix. Handles negative values, which method
      * java.lang.Integer.parseInt(String, int) does not.
-     * @param aText the String containing the integer representation to be
-     * parsed. Precondition: aText contains a parsable int.
-     * @param aRadix the radix to be used while parsing aText.
+     * @param text the String containing the integer representation to be
+     * parsed. Precondition: text contains a parsable int.
+     * @param radix the radix to be used while parsing text.
      * @return the long represented by the string argument in the specified
      * radix.
      */
-    public static long parseLong(String aText, int aRadix)
+    public static long parseLong(String text, int radix)
     {
         long result = 0;
-        final int max = aText.length();
+        final int max = text.length();
         for (int i = 0; i < max; i++) {
-            final int digit = Character.digit(aText.charAt(i), aRadix);
-            result *= aRadix;
+            final int digit = Character.digit(text.charAt(i), radix);
+            result *= radix;
             result += digit;
         }
         return result;

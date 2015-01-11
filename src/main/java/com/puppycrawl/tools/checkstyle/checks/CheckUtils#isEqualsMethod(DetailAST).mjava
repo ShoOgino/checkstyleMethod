@@ -1,18 +1,18 @@
     /**
      * Tests whether a method definition AST defines an equals covariant.
-     * @param aAST the method definition AST to test.
-     * Precondition: aAST is a TokenTypes.METHOD_DEF node.
-     * @return true if aAST defines an equals covariant.
+     * @param ast the method definition AST to test.
+     * Precondition: ast is a TokenTypes.METHOD_DEF node.
+     * @return true if ast defines an equals covariant.
      */
-    public static boolean isEqualsMethod(DetailAST aAST)
+    public static boolean isEqualsMethod(DetailAST ast)
     {
-        if (aAST.getType() != TokenTypes.METHOD_DEF) {
+        if (ast.getType() != TokenTypes.METHOD_DEF) {
             // A node must be method def
             return false;
         }
 
         // non-static, non-abstract?
-        final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
         if (modifiers.branchContains(TokenTypes.LITERAL_STATIC)
             || modifiers.branchContains(TokenTypes.ABSTRACT))
         {
@@ -20,14 +20,14 @@
         }
 
         // named "equals"?
-        final DetailAST nameNode = aAST.findFirstToken(TokenTypes.IDENT);
+        final DetailAST nameNode = ast.findFirstToken(TokenTypes.IDENT);
         final String name = nameNode.getText();
         if (!"equals".equals(name)) {
             return false;
         }
 
         // one parameter?
-        final DetailAST paramsNode = aAST.findFirstToken(TokenTypes.PARAMETERS);
+        final DetailAST paramsNode = ast.findFirstToken(TokenTypes.PARAMETERS);
         return (paramsNode.getChildCount() == 1);
     }
 

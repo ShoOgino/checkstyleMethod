@@ -1,12 +1,12 @@
     /**
      * Checks if the given parameter is final.
-     * @param aParam parameter to check.
+     * @param param parameter to check.
      */
-    private void checkParam(final DetailAST aParam)
+    private void checkParam(final DetailAST param)
     {
-        if (!aParam.branchContains(TokenTypes.FINAL) && !isIgnoredParam(aParam)) {
-            final DetailAST paramName = aParam.findFirstToken(TokenTypes.IDENT);
-            final DetailAST firstNode = CheckUtils.getFirstNode(aParam);
+        if (!param.branchContains(TokenTypes.FINAL) && !isIgnoredParam(param)) {
+            final DetailAST paramName = param.findFirstToken(TokenTypes.IDENT);
+            final DetailAST firstNode = CheckUtils.getFirstNode(param);
             log(firstNode.getLineNo(), firstNode.getColumnNo(),
                 "final.parameter", paramName.getText());
         }

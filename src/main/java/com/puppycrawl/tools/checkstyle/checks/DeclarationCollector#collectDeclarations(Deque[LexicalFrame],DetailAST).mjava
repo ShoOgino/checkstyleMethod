@@ -1,21 +1,21 @@
     /**
      * Parse the next AST for declarations
      *
-     * @param aFrameStack Stack containing the FrameTree being built
-     * @param aAST AST to parse
+     * @param frameStack Stack containing the FrameTree being built
+     * @param ast AST to parse
      */
-    private void collectDeclarations(Deque<LexicalFrame> aFrameStack,
-        DetailAST aAST)
+    private void collectDeclarations(Deque<LexicalFrame> frameStack,
+        DetailAST ast)
     {
-        final LexicalFrame frame = aFrameStack.peek();
-        switch (aAST.getType()) {
+        final LexicalFrame frame = frameStack.peek();
+        switch (ast.getType()) {
         case TokenTypes.VARIABLE_DEF :  {
             final String name =
-                    aAST.findFirstToken(TokenTypes.IDENT).getText();
+                    ast.findFirstToken(TokenTypes.IDENT).getText();
             if (frame instanceof ClassFrame) {
                 final DetailAST mods =
-                    aAST.findFirstToken(TokenTypes.MODIFIERS);
-                if (ScopeUtils.inInterfaceBlock(aAST)
+                    ast.findFirstToken(TokenTypes.MODIFIERS);
+                if (ScopeUtils.inInterfaceBlock(ast)
                         || mods.branchContains(TokenTypes.LITERAL_STATIC))
                 {
                     ((ClassFrame) frame).addStaticMember(name);
@@ -30,7 +30,7 @@
             break;
         }
         case TokenTypes.PARAMETER_DEF : {
-            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             frame.addName(nameAST.getText());
             break;
         }
@@ -38,19 +38,19 @@
         case TokenTypes.INTERFACE_DEF :
         case TokenTypes.ENUM_DEF :
         case TokenTypes.ANNOTATION_DEF : {
-            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+            final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             frame.addName(nameAST.getText());
-            aFrameStack.addFirst(new ClassFrame(frame));
+            frameStack.addFirst(new ClassFrame(frame));
             break;
         }
         case TokenTypes.SLIST :
-            aFrameStack.addFirst(new BlockFrame(frame));
+            frameStack.addFirst(new BlockFrame(frame));
             break;
         case TokenTypes.METHOD_DEF : {
-            final String name = aAST.findFirstToken(TokenTypes.IDENT).getText();
+            final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
             if (frame instanceof ClassFrame) {
                 final DetailAST mods =
-                    aAST.findFirstToken(TokenTypes.MODIFIERS);
+                    ast.findFirstToken(TokenTypes.MODIFIERS);
                 if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
                     ((ClassFrame) frame).addStaticMethod(name);
                 }
@@ -60,7 +60,7 @@
             }
         }
         case TokenTypes.CTOR_DEF :
-            aFrameStack.addFirst(new MethodFrame(frame));
+            frameStack.addFirst(new MethodFrame(frame));
             break;
         default:
             // do nothing

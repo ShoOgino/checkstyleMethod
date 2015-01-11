@@ -1,19 +1,19 @@
     /**
      * Sets the line separator to one of 'crlf', 'lf' or 'cr'.
      *
-     * @param aLineSeparator The line separator to set
+     * @param lineSeparator The line separator to set
      * @throws IllegalArgumentException If the specified line separator is not
      *         one of 'crlf', 'lf' or 'cr'
      */
-    public void setLineSeparator(String aLineSeparator)
+    public void setLineSeparator(String lineSeparatorParam)
     {
         try {
-            mLineSeparator =
-                Enum.valueOf(LineSeparatorOption.class, aLineSeparator.trim()
+            lineSeparator =
+                Enum.valueOf(LineSeparatorOption.class, lineSeparatorParam.trim()
                     .toUpperCase());
         }
         catch (IllegalArgumentException iae) {
-            throw new ConversionException("unable to parse " + aLineSeparator,
+            throw new ConversionException("unable to parse " + lineSeparatorParam,
                 iae);
         }
     }

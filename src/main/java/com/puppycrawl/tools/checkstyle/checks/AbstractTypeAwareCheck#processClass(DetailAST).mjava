@@ -1,13 +1,13 @@
     /**
      * Processes class definition.
-     * @param aAST class definition to process.
+     * @param ast class definition to process.
      */
-    private void processClass(DetailAST aAST)
+    private void processClass(DetailAST ast)
     {
-        final DetailAST ident = aAST.findFirstToken(TokenTypes.IDENT);
-        mCurrentClass += ("".equals(mCurrentClass) ? "" : "$")
+        final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
+        currentClass += ("".equals(currentClass) ? "" : "$")
             + ident.getText();
 
-        processTypeParams(aAST);
+        processTypeParams(ast);
     }
 

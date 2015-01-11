@@ -1,18 +1,18 @@
     /**
      * Checks that method has only <code>String[]</code> param
-     * @param aMethod the METHOD_DEF node
+     * @param method the METHOD_DEF node
      * @return true if check passed, false otherwise
      */
-    private boolean checkParams(DetailAST aMethod)
+    private boolean checkParams(DetailAST method)
     {
-        final DetailAST params = aMethod.findFirstToken(TokenTypes.PARAMETERS);
+        final DetailAST params = method.findFirstToken(TokenTypes.PARAMETERS);
         if (params.getChildCount() != 1) {
             return false;
         }
-        final DetailAST paramType = (params.getFirstChild())
+        final DetailAST paratype = (params.getFirstChild())
             .findFirstToken(TokenTypes.TYPE);
         final DetailAST arrayDecl =
-            paramType.findFirstToken(TokenTypes.ARRAY_DECLARATOR);
+            paratype.findFirstToken(TokenTypes.ARRAY_DECLARATOR);
         if (arrayDecl == null) {
             return false;
         }
