@@ -3,11 +3,11 @@
     {
         // See if the comment is removed properly
         final String illegal = "don't use trailing comments";
-        mCheckConfig.addAttribute("format", illegal);
-        mCheckConfig.addAttribute("ignoreComments", "false");
+        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("ignoreComments", "false");
         final String[] expected = {
             "4: Line matches the illegal pattern '" + illegal + "'.",
         };
-        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
+        verify(checkConfig, getPath("InputTrailingComment.java"), expected);
     }
 

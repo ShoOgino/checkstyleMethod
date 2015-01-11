@@ -2,11 +2,11 @@
     public void testIgnoreCommentsFalseCStyle() throws Exception
     {
         final String illegal = "c-style 1";
-        mCheckConfig.addAttribute("format", illegal);
-        mCheckConfig.addAttribute("ignoreComments", "false");
+        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("ignoreComments", "false");
         final String[] expected = {
             "19: Line matches the illegal pattern '" + illegal + "'.",
         };
-        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
+        verify(checkConfig, getPath("InputTrailingComment.java"), expected);
     }
 

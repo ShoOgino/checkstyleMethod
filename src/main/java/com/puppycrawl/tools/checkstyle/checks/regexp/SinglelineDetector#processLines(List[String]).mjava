@@ -1,14 +1,14 @@
     /**
      * Processes a set of lines looking for matches.
-     * @param aLines the lines to process.
+     * @param lines the lines to process.
      */
-    public void processLines(List<String> aLines)
+    public void processLines(List<String> lines)
     {
         resetState();
         int lineno = 0;
-        for (String line : aLines) {
+        for (String line : lines) {
             lineno++;
-            checkLine(lineno, line, mOptions.getPattern().matcher(line), 0);
+            checkLine(lineno, line, options.getPattern().matcher(line), 0);
         }
         finish();
     }

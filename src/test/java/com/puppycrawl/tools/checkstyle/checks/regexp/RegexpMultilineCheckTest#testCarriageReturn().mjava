@@ -3,13 +3,13 @@
     public void testCarriageReturn() throws Exception
     {
         final String illegal = "\\r";
-        mCheckConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", illegal);
         final String[] expected = {
             "14: Line matches the illegal pattern '" + illegal + "'.",
             "16: Line matches the illegal pattern '" + illegal + "'.",
             "19: Line matches the illegal pattern '" + illegal + "'.",
             "21: Line matches the illegal pattern '" + illegal + "'.",
         };
-        verify(mCheckConfig, getPath("InputLineBreaks.java"), expected);
+        verify(checkConfig, getPath("InputLineBreaks.java"), expected);
     }
 

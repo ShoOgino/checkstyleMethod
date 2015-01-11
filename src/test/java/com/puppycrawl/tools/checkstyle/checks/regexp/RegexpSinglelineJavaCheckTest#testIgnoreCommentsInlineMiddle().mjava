@@ -2,11 +2,11 @@
     public void testIgnoreCommentsInlineMiddle() throws Exception
     {
         final String illegal = "int y";
-        mCheckConfig.addAttribute("format", illegal);
-        mCheckConfig.addAttribute("ignoreComments", "true");
+        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("ignoreComments", "true");
         final String[] expected = {
             "23: Line matches the illegal pattern '" + illegal + "'.",
         };
-        verify(mCheckConfig, getPath("InputTrailingComment.java"), expected);
+        verify(checkConfig, getPath("InputTrailingComment.java"), expected);
     }
 
