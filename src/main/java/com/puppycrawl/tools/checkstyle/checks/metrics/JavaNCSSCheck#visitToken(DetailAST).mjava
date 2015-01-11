@@ -1,7 +1,7 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final int tokenType = aAST.getType();
+        final int tokenType = ast.getType();
 
         if ((TokenTypes.CLASS_DEF == tokenType)
             || (TokenTypes.METHOD_DEF == tokenType)
@@ -10,13 +10,13 @@
             || (TokenTypes.INSTANCE_INIT == tokenType))
         {
             //add a counter for this class/method
-            mCounters.push(new Counter());
+            counters.push(new Counter());
         }
 
         //check if token is countable
-        if (isCountable(aAST)) {
+        if (isCountable(ast)) {
             //increment the stacked counters
-            for (final Counter c : mCounters) {
+            for (final Counter c : counters) {
                 c.increment();
             }
         }

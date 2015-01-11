@@ -1,14 +1,14 @@
     /**
      * Creates new context for a given class.
-     * @param aClassDef class definition node.
+     * @param classDef class definition node.
      */
-    private void visitClassDef(DetailAST aClassDef)
+    private void visitClassDef(DetailAST classDef)
     {
-        mContextStack.push(mContext);
+        contextStack.push(context);
         final String className =
-            aClassDef.findFirstToken(TokenTypes.IDENT).getText();
-        mContext = new Context(className,
-                               aClassDef.getLineNo(),
-                               aClassDef.getColumnNo());
+            classDef.findFirstToken(TokenTypes.IDENT).getText();
+        context = new Context(className,
+                               classDef.getLineNo(),
+                               classDef.getColumnNo());
     }
 

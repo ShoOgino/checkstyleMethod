@@ -1,13 +1,13 @@
     @Override
-    public void finishTree(DetailAST aRootAST)
+    public void finishTree(DetailAST rootAST)
     {
         //pop counter from the stack
-        final Counter counter = mCounters.pop();
+        final Counter counter = counters.pop();
 
         final int count = counter.getCount();
-        if (count > mFileMax) {
-            log(aRootAST.getLineNo(), aRootAST.getColumnNo(), "ncss.file",
-                    count, mFileMax);
+        if (count > fileMax) {
+            log(rootAST.getLineNo(), rootAST.getColumnNo(), "ncss.file",
+                    count, fileMax);
         }
     }
 

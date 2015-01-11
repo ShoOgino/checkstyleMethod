@@ -1,14 +1,14 @@
         /**
          * Checks if we violates maximum allowed complexity.
-         * @param aAST a node we check now.
+         * @param ast a node we check now.
          */
-        public void checkCount(DetailAST aAST)
+        public void checkCount(DetailAST ast)
         {
-            if (mChecking && (mCount > getMax())) {
-                final DetailAST parentAST = aAST.getParent();
+            if (checking && (count > getMax())) {
+                final DetailAST parentAST = ast.getParent();
 
                 log(parentAST.getLineNo(), parentAST.getColumnNo(),
-                    "booleanExpressionComplexity", mCount, getMax());
+                    "booleanExpressionComplexity", count, getMax());
             }
         }
 

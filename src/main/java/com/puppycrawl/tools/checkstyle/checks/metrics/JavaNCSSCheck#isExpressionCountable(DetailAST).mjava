@@ -1,17 +1,17 @@
     /**
      * Checks if an expression is countable for the ncss metric.
      *
-     * @param aAST the AST
+     * @param ast the AST
      * @return true if the expression is countable, false otherwise
      */
-    private boolean isExpressionCountable(DetailAST aAST)
+    private boolean isExpressionCountable(DetailAST ast)
     {
         boolean countable = true;
 
         //count expressions only if they are direct child to a slist (method
         // body, for loop...)
         //or direct child of label,if,else,do,while,for
-        final int parentType = aAST.getParent().getType();
+        final int parentType = ast.getParent().getType();
         switch (parentType) {
         case TokenTypes.SLIST :
         case TokenTypes.LABELED_STAT :
@@ -21,7 +21,7 @@
         case TokenTypes.LITERAL_IF :
         case TokenTypes.LITERAL_ELSE :
             //don't count if or loop conditions
-            final DetailAST prevSibling = aAST.getPreviousSibling();
+            final DetailAST prevSibling = ast.getPreviousSibling();
             countable = (prevSibling == null)
                 || (TokenTypes.LPAREN != prevSibling.getType());
             break;

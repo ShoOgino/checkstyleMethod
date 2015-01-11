@@ -1,13 +1,13 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.CTOR_DEF:
         case TokenTypes.METHOD_DEF:
             leaveMethodDef();
             break;
         case TokenTypes.EXPR:
-            leaveExpr(aAST);
+            leaveExpr(ast);
             break;
         default:
             // Do nothing
