@@ -1,12 +1,12 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         final DetailAST parenAST;
-        if ((aAST.getType() == TokenTypes.METHOD_CALL)) {
-            parenAST = aAST;
+        if ((ast.getType() == TokenTypes.METHOD_CALL)) {
+            parenAST = ast;
         }
         else {
-            parenAST = aAST.findFirstToken(TokenTypes.LPAREN);
+            parenAST = ast.findFirstToken(TokenTypes.LPAREN);
             // array construction => parenAST == null
             if (parenAST == null) {
                 return;
@@ -15,7 +15,7 @@
 
         final String line = getLines()[parenAST.getLineNo() - 1];
         if (Utils.whitespaceBefore(parenAST.getColumnNo(), line)) {
-            if (!mAllowLineBreaks) {
+            if (!allowLineBreaks) {
                 log(parenAST, "line.previous", parenAST.getText());
             }
         }

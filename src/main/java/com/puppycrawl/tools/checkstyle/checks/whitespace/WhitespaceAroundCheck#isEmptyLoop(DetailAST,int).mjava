@@ -1,17 +1,17 @@
     /**
      *
-     * @param aAST aAST the <code>DetailAST</code> to test.
-     * @param aParentType the token type of <code>aAST</code>'s parent.
-     * @return <code>true</code> if <code>aAST</code> makes up part of an
+     * @param ast ast the <code>DetailAST</code> to test.
+     * @param parentType the token type of <code>ast</code>'s parent.
+     * @return <code>true</code> if <code>ast</code> makes up part of an
      *         allowed empty loop block.
      */
-    private boolean isEmptyLoop(DetailAST aAST, int aParentType)
+    private boolean isEmptyLoop(DetailAST ast, int parentType)
     {
-        return mAllowEmptyLoops
-            && (isEmptyBlock(aAST, aParentType, TokenTypes.LITERAL_FOR)
-                    || isEmptyBlock(aAST,
-                            aParentType, TokenTypes.LITERAL_WHILE)
-                            || isEmptyBlock(aAST,
-                                    aParentType, TokenTypes.LITERAL_DO));
+        return allowEmptyLoops
+            && (isEmptyBlock(ast, parentType, TokenTypes.LITERAL_FOR)
+                    || isEmptyBlock(ast,
+                            parentType, TokenTypes.LITERAL_WHILE)
+                            || isEmptyBlock(ast,
+                                    parentType, TokenTypes.LITERAL_DO));
     }
 

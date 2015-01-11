@@ -1,8 +1,8 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final int currentType = aAST.getType();
-        final int parentType = aAST.getParent().getType();
+        final int currentType = ast.getType();
+        final int parentType = ast.getParent().getType();
 
         // Check for CURLY in array initializer
         if (((currentType == TokenTypes.RCURLY)
@@ -35,32 +35,32 @@
                 return;
             }
             else if (parentType == TokenTypes.FOR_EACH_CLAUSE
-                && this.mIgnoreEnhancedForColon)
+                && this.ignoreEnhancedForColon)
             {
                 return;
             }
         }
 
         // Checks if empty methods, ctors or loops are allowed.
-        if (isEmptyMethodBlock(aAST, parentType)
-                || isEmptyCtorBlock(aAST, parentType)
-                || isEmptyLoop(aAST, parentType))
+        if (isEmptyMethodBlock(ast, parentType)
+                || isEmptyCtorBlock(ast, parentType)
+                || isEmptyLoop(ast, parentType))
         {
             return;
         }
 
         // Checks if empty classes, interfaces or enums are allowed
-        if (mAllowEmptyTypes && (isEmptyType(aAST, parentType))) {
+        if (allowEmptyTypes && (isEmptyType(ast, parentType))) {
             return;
         }
 
-        final String line = getLine(aAST.getLineNo() - 1);
-        final int before = aAST.getColumnNo() - 1;
-        final int after = aAST.getColumnNo() + aAST.getText().length();
+        final String line = getLine(ast.getLineNo() - 1);
+        final int before = ast.getColumnNo() - 1;
+        final int after = ast.getColumnNo() + ast.getText().length();
 
         if ((before >= 0) && !Character.isWhitespace(line.charAt(before))) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
-                    "ws.notPreceded", aAST.getText());
+            log(ast.getLineNo(), ast.getColumnNo(),
+                    "ws.notPreceded", ast.getText());
         }
 
         if (after >= line.length()) {
@@ -71,7 +71,7 @@
         if (!Character.isWhitespace(nextChar)
             // Check for "return;"
             && !((currentType == TokenTypes.LITERAL_RETURN)
-                && (aAST.getFirstChild().getType() == TokenTypes.SEMI))
+                && (ast.getFirstChild().getType() == TokenTypes.SEMI))
             // Check for "})" or "};" or "},". Happens with anon-inners
             && !((currentType == TokenTypes.RCURLY)
                 && ((nextChar == ')')
@@ -79,8 +79,8 @@
                     || (nextChar == ',')
                     || (nextChar == '.'))))
         {
-            log(aAST.getLineNo(), aAST.getColumnNo() + aAST.getText().length(),
-                    "ws.notFollowed", aAST.getText());
+            log(ast.getLineNo(), ast.getColumnNo() + ast.getText().length(),
+                    "ws.notFollowed", ast.getText());
         }
     }
 

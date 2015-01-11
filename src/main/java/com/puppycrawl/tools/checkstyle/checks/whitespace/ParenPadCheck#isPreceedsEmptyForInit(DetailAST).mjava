@@ -1,11 +1,11 @@
     /**
-     * @param aAST the token to check
+     * @param ast the token to check
      * @return whether a token preceeds an empty for initializer
      */
-    private boolean isPreceedsEmptyForInit(DetailAST aAST)
+    private boolean isPreceedsEmptyForInit(DetailAST ast)
     {
         boolean preceedsEmptyForInintializer = false;
-        final DetailAST parent = aAST.getParent();
+        final DetailAST parent = ast.getParent();
         //Only traditional for statements are examined, not for-each statements
         if ((parent != null)
             && (parent.getType() == TokenTypes.LITERAL_FOR)
@@ -14,7 +14,7 @@
             final DetailAST forIterator =
                     parent.findFirstToken(TokenTypes.FOR_INIT);
             preceedsEmptyForInintializer = (forIterator.getChildCount() == 0)
-                    && (aAST == forIterator.getPreviousSibling());
+                    && (ast == forIterator.getPreviousSibling());
         }
         return preceedsEmptyForInintializer;
     }

@@ -1,21 +1,21 @@
     /**
      * Gets possible place where redundant whitespace could be.
-     * @param aArrayOrTypeCast {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR}
+     * @param arrayOrTypeCast {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR}
      *  or {@link TokenTypes#TYPECAST TYPECAST}.
      * @return possible place of redundant whitespace.
      */
-    private static DetailAST getPreceded(DetailAST aArrayOrTypeCast)
+    private static DetailAST getPreceded(DetailAST arrayOrTypeCast)
     {
-        DetailAST preceded = aArrayOrTypeCast;
-        switch (aArrayOrTypeCast.getType()) {
+        DetailAST preceded = arrayOrTypeCast;
+        switch (arrayOrTypeCast.getType()) {
         case TokenTypes.TYPECAST:
-            preceded = aArrayOrTypeCast.findFirstToken(TokenTypes.RPAREN);
+            preceded = arrayOrTypeCast.findFirstToken(TokenTypes.RPAREN);
             break;
         case TokenTypes.ARRAY_DECLARATOR:
-            preceded = getArrayTypeOrIdentifier(aArrayOrTypeCast);
+            preceded = getArrayTypeOrIdentifier(arrayOrTypeCast);
             break;
         default:
-            throw new IllegalStateException(aArrayOrTypeCast.toString());
+            throw new IllegalStateException(arrayOrTypeCast.toString());
         }
         return preceded;
     }

@@ -1,14 +1,14 @@
     /**
      * Checks if token have empty line after.
-     * @param aToken token.
+     * @param token token.
      * @return true if token have empty line after.
      */
-    private boolean hasEmptyLineAfter(DetailAST aToken)
+    private boolean hasEmptyLineAfter(DetailAST token)
     {
-        DetailAST lastToken = aToken.getLastChild().getLastChild();
+        DetailAST lastToken = token.getLastChild().getLastChild();
         if (null == lastToken) {
-            lastToken = aToken.getLastChild();
+            lastToken = token.getLastChild();
         }
-        return aToken.getNextSibling().getLineNo() - lastToken.getLineNo() > 1;
+        return token.getNextSibling().getLineNo() - lastToken.getLineNo() > 1;
     }
 

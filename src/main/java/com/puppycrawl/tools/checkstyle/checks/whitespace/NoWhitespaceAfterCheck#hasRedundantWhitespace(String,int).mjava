@@ -1,14 +1,14 @@
     /**
      * Checks if current line has redundant whitespace after specified index.
-     * @param aLine line of java source.
-     * @param aAfter specified index.
+     * @param line line of java source.
+     * @param after specified index.
      * @return true if line contains redundant whitespace.
      */
-    private boolean hasRedundantWhitespace(String aLine, int aAfter)
+    private boolean hasRedundantWhitespace(String line, int after)
     {
-        boolean result = !mAllowLineBreaks;
-        for (int i = aAfter + 1; !result && (i < aLine.length()); i++) {
-            if (!Character.isWhitespace(aLine.charAt(i))) {
+        boolean result = !allowLineBreaks;
+        for (int i = after + 1; !result && (i < line.length()); i++) {
+            if (!Character.isWhitespace(line.charAt(i))) {
                 result = true;
             }
         }

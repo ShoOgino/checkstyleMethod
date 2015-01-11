@@ -1,37 +1,37 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final DetailAST nextToken = aAST.getNextSibling();
+        final DetailAST nextToken = ast.getNextSibling();
 
         if (nextToken != null && nextToken.getType() != TokenTypes.RCURLY) {
-            final int astType = aAST.getType();
+            final int astType = ast.getType();
             switch (astType) {
             case TokenTypes.VARIABLE_DEF:
-                if (isTypeField(aAST) && !hasEmptyLineAfter(aAST)) {
-                    if (mAllowNoEmptyLineBetweenFields
+                if (iastypeField(ast) && !hasEmptyLineAfter(ast)) {
+                    if (allowNoEmptyLineBetweenFields
                             && nextToken.getType() != TokenTypes.VARIABLE_DEF)
                     {
                         log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
                     }
-                    else if (!mAllowNoEmptyLineBetweenFields) {
+                    else if (!allowNoEmptyLineBetweenFields) {
                         log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
                     }
                 }
                 break;
             case TokenTypes.IMPORT:
-                if (astType != nextToken.getType() && !hasEmptyLineAfter(aAST)
-                    || (aAST.getLineNo() > 1 && !hasEmptyLineBefore(aAST)
-                            && aAST.getPreviousSibling() == null))
+                if (astType != nextToken.getType() && !hasEmptyLineAfter(ast)
+                    || (ast.getLineNo() > 1 && !hasEmptyLineBefore(ast)
+                            && ast.getPreviousSibling() == null))
                 {
                     log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
                 }
                 break;
             case TokenTypes.PACKAGE_DEF:
-                if (aAST.getLineNo() > 1 && !hasEmptyLineBefore(aAST)) {
-                    log(aAST.getLineNo(), "empty.line.separator", aAST.getText());
+                if (ast.getLineNo() > 1 && !hasEmptyLineBefore(ast)) {
+                    log(ast.getLineNo(), "empty.line.separator", ast.getText());
                 }
             default:
-                if (!hasEmptyLineAfter(aAST)) {
+                if (!hasEmptyLineAfter(ast)) {
                     log(nextToken.getLineNo(), "empty.line.separator", nextToken.getText());
                 }
             }

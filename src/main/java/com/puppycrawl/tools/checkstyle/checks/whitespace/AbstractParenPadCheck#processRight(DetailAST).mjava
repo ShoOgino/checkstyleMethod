@@ -1,23 +1,23 @@
     /**
      * Process a token representing a right parentheses.
-     * @param aAST the token representing a right parentheses
+     * @param ast the token representing a right parentheses
      */
-    protected void processRight(DetailAST aAST)
+    protected void processRight(DetailAST ast)
     {
-        final String line = getLines()[aAST.getLineNo() - 1];
-        final int before = aAST.getColumnNo() - 1;
+        final String line = getLines()[ast.getLineNo() - 1];
+        final int before = ast.getColumnNo() - 1;
         if (before >= 0) {
             if ((PadOption.NOSPACE == getAbstractOption())
                 && Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line))
             {
-                log(aAST.getLineNo(), before, "ws.preceded", ")");
+                log(ast.getLineNo(), before, "ws.preceded", ")");
             }
             else if ((PadOption.SPACE == getAbstractOption())
                 && !Character.isWhitespace(line.charAt(before))
                 && (line.charAt(before) != '('))
             {
-                log(aAST.getLineNo(), aAST.getColumnNo(),
+                log(ast.getLineNo(), ast.getColumnNo(),
                     "ws.notPreceded", ")");
             }
         }

@@ -1,12 +1,12 @@
     /**
      * Checks the token for the start of Generics.
-     * @param aAST the token to check
+     * @param ast the token to check
      */
-    private void processStart(DetailAST aAST)
+    private void processStart(DetailAST ast)
     {
-        final String line = getLine(aAST.getLineNo() - 1);
-        final int before = aAST.getColumnNo() - 1;
-        final int after = aAST.getColumnNo() + 1;
+        final String line = getLine(ast.getLineNo() - 1);
+        final int before = ast.getColumnNo() - 1;
+        final int after = ast.getColumnNo() + 1;
 
         // Need to handle two cases as in:
         //
@@ -16,7 +16,7 @@
         //
         if (0 <= before) {
             // Detect if the first case
-            final DetailAST parent = aAST.getParent();
+            final DetailAST parent = ast.getParent();
             final DetailAST grandparent = parent.getParent();
             if ((TokenTypes.TYPE_PARAMETERS == parent.getType())
                 && ((TokenTypes.CTOR_DEF == grandparent.getType())
@@ -24,21 +24,21 @@
             {
                 // Require whitespace
                 if (!Character.isWhitespace(line.charAt(before))) {
-                    log(aAST.getLineNo(), before, "ws.notPreceded", "<");
+                    log(ast.getLineNo(), before, "ws.notPreceded", "<");
                 }
             }
             // Whitespace not required
             else if (Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line))
             {
-                log(aAST.getLineNo(), before, "ws.preceded", "<");
+                log(ast.getLineNo(), before, "ws.preceded", "<");
             }
         }
 
         if ((after < line.length())
                 && Character.isWhitespace(line.charAt(after)))
         {
-            log(aAST.getLineNo(), after, "ws.followed", "<");
+            log(ast.getLineNo(), after, "ws.followed", "<");
         }
     }
 

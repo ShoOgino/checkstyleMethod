@@ -1,14 +1,14 @@
     /**
      * Test if the given <code>DetailAST</code> is part of an allowed empty
      * constructor (ctor) block.
-     * @param aAST the <code>DetailAST</code> to test.
-     * @param aParentType the token type of <code>aAST</code>'s parent.
-     * @return <code>true</code> if <code>aAST</code> makes up part of an
+     * @param ast the <code>DetailAST</code> to test.
+     * @param parentType the token type of <code>ast</code>'s parent.
+     * @return <code>true</code> if <code>ast</code> makes up part of an
      *         allowed empty constructor block.
      */
-    private boolean isEmptyCtorBlock(DetailAST aAST, int aParentType)
+    private boolean isEmptyCtorBlock(DetailAST ast, int parentType)
     {
-        return mAllowEmptyCtors
-            && isEmptyBlock(aAST, aParentType, TokenTypes.CTOR_DEF);
+        return allowEmptyCtors
+            && isEmptyBlock(ast, parentType, TokenTypes.CTOR_DEF);
     }
 

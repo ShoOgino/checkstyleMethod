@@ -1,13 +1,13 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (aAST.getType() == TokenTypes.GENERIC_START) {
-            processStart(aAST);
-            mDepth++;
+        if (ast.getType() == TokenTypes.GENERIC_START) {
+            processStart(ast);
+            depth++;
         }
-        else if (aAST.getType() == TokenTypes.GENERIC_END) {
-            processEnd(aAST);
-            mDepth--;
+        else if (ast.getType() == TokenTypes.GENERIC_END) {
+            processEnd(ast);
+            depth--;
         }
     }
 

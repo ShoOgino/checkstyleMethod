@@ -1,21 +1,21 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        DetailAST ast = aAST;
-        if (aAST.getType() == TokenTypes.ARRAY_DECLARATOR
-                 || aAST.getType() == TokenTypes.TYPECAST)
+        DetailAST astNode = ast;
+        if (ast.getType() == TokenTypes.ARRAY_DECLARATOR
+                 || ast.getType() == TokenTypes.TYPECAST)
         {
-            ast = getPreceded(aAST);
+            astNode = getPreceded(ast);
         }
 
-        final String line = getLine(aAST.getLineNo() - 1);
-        final int after = getPositionAfter(ast);
+        final String line = getLine(ast.getLineNo() - 1);
+        final int after = getPositionAfter(astNode);
 
         if ((after >= line.length() || Character.isWhitespace(line.charAt(after)))
                  && hasRedundantWhitespace(line, after))
         {
-            log(ast.getLineNo(), after,
-                "ws.followed", ast.getText());
+            log(astNode.getLineNo(), after,
+                "ws.followed", astNode.getText());
         }
     }
 
