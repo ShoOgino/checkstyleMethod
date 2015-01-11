@@ -12,15 +12,15 @@
             // the GlobalProperties object. This is because the class loader in
             // the GlobalProperties is specified by the user for resolving
             // custom classes.
-            final ResourceBundle bundle = getBundle(mBundle);
-            final String pattern = bundle.getString(mKey);
-            return MessageFormat.format(pattern, mArgs);
+            final ResourceBundle bundle = getBundle(this.bundle);
+            final String pattern = bundle.getString(key);
+            return MessageFormat.format(pattern, args);
         }
         catch (final MissingResourceException ex) {
             // If the Check author didn't provide i18n resource bundles
             // and logs error messages directly, this will return
             // the author's original message
-            return MessageFormat.format(mKey, mArgs);
+            return MessageFormat.format(key, args);
         }
     }
 

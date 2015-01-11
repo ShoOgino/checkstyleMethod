@@ -1,12 +1,12 @@
     /** {@inheritDoc} */
     @Override
-    public final TreeSet<LocalizedMessage> process(File aFile,
-                                                   List<String> aLines)
+    public final TreeSet<LocalizedMessage> process(File file,
+                                                   List<String> lines)
     {
         getMessageCollector().reset();
         // Process only what interested in
-        if (fileExtensionMatches(aFile)) {
-            processFiltered(aFile, aLines);
+        if (fileExtensionMatches(file)) {
+            processFiltered(file, lines);
         }
         return getMessageCollector().getMessages();
     }

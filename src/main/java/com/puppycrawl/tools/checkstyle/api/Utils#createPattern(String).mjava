@@ -1,19 +1,19 @@
     /**
      * Helper method to create a regular expression.
-     * @param aPattern the pattern to match
+     * @param pattern the pattern to match
      * @return a created regexp object
      * @throws ConversionException if unable to create Pattern object.
      **/
-    public static Pattern createPattern(String aPattern)
+    public static Pattern createPattern(String pattern)
         throws ConversionException
     {
         Pattern retVal = null;
         try {
-            retVal = getPattern(aPattern);
+            retVal = getPattern(pattern);
         }
         catch (final PatternSyntaxException e) {
             throw new ConversionException(
-                "Failed to initialise regexp expression " + aPattern, e);
+                "Failed to initialise regexp expression " + pattern, e);
         }
         return retVal;
     }

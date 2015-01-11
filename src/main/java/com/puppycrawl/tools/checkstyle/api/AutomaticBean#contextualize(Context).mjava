@@ -1,20 +1,20 @@
     /**
      * Implements the Contextualizable interface using bean introspection.
-     * @param aContext {@inheritDoc}
+     * @param context {@inheritDoc}
      * @throws CheckstyleException {@inheritDoc}
      * @see Contextualizable
      */
     @Override
-    public final void contextualize(Context aContext)
+    public final void contextualize(Context context)
         throws CheckstyleException
     {
         final BeanUtilsBean beanUtils = createBeanUtilsBean();
 
         // TODO: debug log messages
-        final Collection<String> attributes = aContext.getAttributeNames();
+        final Collection<String> attributes = context.getAttributeNames();
 
         for (final String key : attributes) {
-            final Object value = aContext.get(key);
+            final Object value = context.get(key);
 
             try {
                 beanUtils.copyProperty(this, key, value);

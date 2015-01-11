@@ -4,22 +4,22 @@
      */
     private int[] lineBreaks()
     {
-        if (mLineBreaks == null) {
+        if (lineBreaks == null) {
             final int[] lineBreaks = new int[size() + 1];
             lineBreaks[0] = 0;
             int lineNo = 1;
-            final Matcher matcher = LINE_TERMINATOR.matcher(mFullText);
+            final Matcher matcher = LINE_TERMINATOR.matcher(fullText);
             while (matcher.find()) {
                 lineBreaks[lineNo++] = matcher.end();
             }
             if (lineNo < lineBreaks.length) {
-                lineBreaks[lineNo++] = mFullText.length();
+                lineBreaks[lineNo++] = fullText.length();
             }
             if (lineNo != lineBreaks.length) {
                 throw new ConcurrentModificationException("Text changed.");
             }
-            mLineBreaks = lineBreaks;
+            this.lineBreaks = lineBreaks;
         }
-        return mLineBreaks;
+        return lineBreaks;
     }
 

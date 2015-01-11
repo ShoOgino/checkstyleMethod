@@ -1,21 +1,21 @@
     /**
      * Add next sibling.
-     * @param aAST
+     * @param ast
      *        DetailAST object.
      */
-    public void addNextSibling(DetailAST aAST)
+    public void addNextSibling(DetailAST ast)
     {
-        if (aAST != null) {
-            aAST.setParent(mParent);
+        if (ast != null) {
+            ast.setParent(parent);
             final DetailAST nextSibling = this.getNextSibling();
 
             if (nextSibling != null) {
-                aAST.setNextSibling(nextSibling);
-                nextSibling.setPreviousSibling(aAST);
+                ast.setNextSibling(nextSibling);
+                nextSibling.setPreviousSibling(ast);
             }
 
-            aAST.setPreviousSibling(this);
-            this.setNextSibling(aAST);
+            ast.setPreviousSibling(this);
+            this.setNextSibling(ast);
         }
     }
 

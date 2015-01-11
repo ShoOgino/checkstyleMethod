@@ -1,10 +1,10 @@
     @Override
-    public InputSource resolveEntity(String aPublicId, String aSystemId)
+    public InputSource resolveEntity(String publicId, String systemId)
         throws SAXException, IOException
     {
-        if (mPublicIdToResourceNameMap.keySet().contains(aPublicId)) {
+        if (publicIdToResourceNameMap.keySet().contains(publicId)) {
             final String dtdResourceName =
-                    mPublicIdToResourceNameMap.get(aPublicId);
+                    publicIdToResourceNameMap.get(publicId);
             final ClassLoader loader =
                 this.getClass().getClassLoader();
             final InputStream dtdIS =
@@ -15,6 +15,6 @@
             }
             return new InputSource(dtdIS);
         }
-        return super.resolveEntity(aPublicId, aSystemId);
+        return super.resolveEntity(publicId, systemId);
     }
 

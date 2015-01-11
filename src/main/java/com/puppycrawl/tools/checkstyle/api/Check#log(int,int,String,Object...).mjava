@@ -1,19 +1,19 @@
     @Override
-    public final void log(int aLineNo, int aColNo, String aKey,
-            Object... aArgs)
+    public final void log(int lineNo, int colNo, String key,
+            Object... args)
     {
         final int col = 1 + Utils.lengthExpandedTabs(
-            getLines()[aLineNo - 1], aColNo, getTabWidth());
-        mMessages.add(
+            getLines()[lineNo - 1], colNo, getTabWidth());
+        messages.add(
             new LocalizedMessage(
-                aLineNo,
+                lineNo,
                 col,
                 getMessageBundle(),
-                aKey,
-                aArgs,
+                key,
+                args,
                 getSeverityLevel(),
                 getId(),
                 this.getClass(),
-                this.getCustomMessages().get(aKey)));
+                this.getCustomMessages().get(key)));
     }
 

@@ -7,14 +7,14 @@
     public ByteBuffer getBytes() throws IOException
     {
         // We might decide to cache file bytes in the future.
-        if (mFile == null) {
+        if (file == null) {
             return null;
         }
-        if (mFile.length() > Integer.MAX_VALUE) {
+        if (file.length() > Integer.MAX_VALUE) {
             throw new IOException("File too large.");
         }
-        byte[] bytes = new byte[(int) mFile.length() + 1];
-        final FileInputStream stream = new FileInputStream(mFile);
+        byte[] bytes = new byte[(int) file.length() + 1];
+        final FileInputStream stream = new FileInputStream(file);
         try {
             int fill = 0;
             while (true) {

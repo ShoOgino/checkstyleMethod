@@ -1,21 +1,21 @@
     /**
      * returns a JavadocTag from the tag name.
-     * @param aName String name of the tag
+     * @param name String name of the tag
      * @return Returns a JavadocTag type from a String representing the tag
      * @throws NullPointerException if the text is null
      * @throws IllegalArgumentException if the text is not a valid tag. The name
      *    can be checked using {@link JavadocTagInfo#isValidName(String)}
      */
-    public static JavadocTagInfo fromName(final String aName)
+    public static JavadocTagInfo fromName(final String name)
     {
-        if (aName == null) {
+        if (name == null) {
             throw new NullPointerException("the name is null");
         }
 
-        final JavadocTagInfo tag = NAME_TO_TAG.get(aName);
+        final JavadocTagInfo tag = NAME_TO_TAG.get(name);
 
         if (tag == null) {
-            throw new IllegalArgumentException("the name [" + aName
+            throw new IllegalArgumentException("the name [" + name
                 + "] is not a valid Javadoc tag name");
         }
 

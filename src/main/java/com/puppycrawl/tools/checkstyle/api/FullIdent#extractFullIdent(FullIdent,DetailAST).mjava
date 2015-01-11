@@ -1,23 +1,23 @@
     /**
      * Recursively extract a FullIdent.
      *
-     * @param aFull the FullIdent to add to
-     * @param aAST the node to recurse from
+     * @param full the FullIdent to add to
+     * @param ast the node to recurse from
      */
-    private static void extractFullIdent(FullIdent aFull, DetailAST aAST)
+    private static void extractFullIdent(FullIdent full, DetailAST ast)
     {
-        if (aAST == null) {
+        if (ast == null) {
             return;
         }
 
-        if (aAST.getType() == TokenTypes.DOT) {
-            extractFullIdent(aFull, aAST.getFirstChild());
-            aFull.append(".");
+        if (ast.getType() == TokenTypes.DOT) {
+            extractFullIdent(full, ast.getFirstChild());
+            full.append(".");
             extractFullIdent(
-                aFull, aAST.getFirstChild().getNextSibling());
+                full, ast.getFirstChild().getNextSibling());
         }
         else {
-            aFull.append(aAST);
+            full.append(ast);
         }
     }
 

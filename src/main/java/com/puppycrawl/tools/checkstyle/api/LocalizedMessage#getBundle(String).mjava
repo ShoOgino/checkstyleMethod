@@ -2,18 +2,18 @@
      * Find a ResourceBundle for a given bundle name. Uses the classloader
      * of the class emitting this message, to be sure to get the correct
      * bundle.
-     * @param aBundleName the bundle name
+     * @param bundleName the bundle name
      * @return a ResourceBundle
      */
-    private ResourceBundle getBundle(String aBundleName)
+    private ResourceBundle getBundle(String bundleName)
     {
         synchronized (BUNDLE_CACHE) {
             ResourceBundle bundle = BUNDLE_CACHE
-                    .get(aBundleName);
+                    .get(bundleName);
             if (bundle == null) {
-                bundle = ResourceBundle.getBundle(aBundleName, sLocale,
-                        mSourceClass.getClassLoader(), new UTF8Control());
-                BUNDLE_CACHE.put(aBundleName, bundle);
+                bundle = ResourceBundle.getBundle(bundleName, sLocale,
+                        sourceClass.getClassLoader(), new UTF8Control());
+                BUNDLE_CACHE.put(bundleName, bundle);
             }
             return bundle;
         }

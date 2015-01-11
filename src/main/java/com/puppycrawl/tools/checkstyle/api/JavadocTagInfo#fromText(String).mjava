@@ -1,20 +1,20 @@
     /**
      * returns a JavadocTag from the tag text.
-     * @param aText String representing the tag text
+     * @param text String representing the tag text
      * @return Returns a JavadocTag type from a String representing the tag
      * @throws NullPointerException if the text is null
      * @throws IllegalArgumentException if the text is not a valid tag
      */
-    public static JavadocTagInfo fromText(final String aText)
+    public static JavadocTagInfo fromText(final String text)
     {
-        if (aText == null) {
+        if (text == null) {
             throw new NullPointerException("the text is null");
         }
 
-        final JavadocTagInfo tag = TEXT_TO_TAG.get(aText);
+        final JavadocTagInfo tag = TEXT_TO_TAG.get(text);
 
         if (tag == null) {
-            throw new IllegalArgumentException("the text [" + aText
+            throw new IllegalArgumentException("the text [" + text
                 + "] is not a valid Javadoc tag text");
         }
 

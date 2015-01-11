@@ -4,20 +4,20 @@
     private BitSet getBranchTokenTypes()
     {
         // lazy init
-        if (mBranchTokenTypes == null) {
+        if (branchTokenTypes == null) {
 
-            mBranchTokenTypes = new BitSet();
-            mBranchTokenTypes.set(getType());
+            branchTokenTypes = new BitSet();
+            branchTokenTypes.set(getType());
 
             // add union of all childs
             DetailAST child = getFirstChild();
             while (child != null) {
                 final BitSet childTypes = child.getBranchTokenTypes();
-                mBranchTokenTypes.or(childTypes);
+                branchTokenTypes.or(childTypes);
 
                 child = child.getNextSibling();
             }
         }
-        return mBranchTokenTypes;
+        return branchTokenTypes;
     }
 

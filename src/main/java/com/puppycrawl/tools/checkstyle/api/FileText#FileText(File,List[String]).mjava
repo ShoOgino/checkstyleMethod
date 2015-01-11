@@ -5,21 +5,21 @@
      * lines with linefeed characters. This process does not restore
      * the original line terminators and should therefore be avoided.
      *
-     * @param aFile the name of the file
-     * @param aLines the lines of the text, without terminators
+     * @param file the name of the file
+     * @param lines the lines of the text, without terminators
      * @throws NullPointerException if the lines array is null
      */
-    private FileText(File aFile, List<String> aLines)
+    private FileText(File file, List<String> lines)
     {
         final StringBuilder buf = new StringBuilder();
-        for (final String line : aLines) {
+        for (final String line : lines) {
             buf.append(line).append('\n');
         }
         buf.trimToSize();
 
-        mFile = aFile;
-        mCharset = null;
-        mFullText = buf.toString();
-        mLines = aLines.toArray(new String[aLines.size()]);
+        this.file = file;
+        charset = null;
+        fullText = buf.toString();
+        this.lines = lines.toArray(new String[lines.size()]);
     }
 

@@ -1,24 +1,24 @@
     /**
      * Sets the file extensions that identify the files that pass the
      * filter of this FileSetCheck.
-     * @param aExtensions the set of file extensions. A missing
+     * @param extensions the set of file extensions. A missing
      * initial '.' character of an extension is automatically added.
      */
-    public final void setFileExtensions(String[] aExtensions)
+    public final void setFileExtensions(String[] extensions)
     {
-        if (aExtensions == null) {
-            mFileExtensions = null;
+        if (extensions == null) {
+            fileExtensions = null;
             return;
         }
 
-        mFileExtensions = new String[aExtensions.length];
-        for (int i = 0; i < aExtensions.length; i++) {
-            final String extension = aExtensions[i];
+        fileExtensions = new String[extensions.length];
+        for (int i = 0; i < extensions.length; i++) {
+            final String extension = extensions[i];
             if (extension.startsWith(".")) {
-                mFileExtensions[i] = extension;
+                fileExtensions[i] = extension;
             }
             else {
-                mFileExtensions[i] = "." + extension;
+                fileExtensions[i] = "." + extension;
             }
         }
     }

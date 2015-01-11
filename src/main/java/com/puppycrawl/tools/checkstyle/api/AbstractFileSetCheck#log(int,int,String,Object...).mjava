@@ -1,16 +1,16 @@
     @Override
-    public final void log(int aLineNo, int aColNo, String aKey,
-            Object... aArgs)
+    public final void log(int lineNo, int colNo, String key,
+            Object... args)
     {
         getMessageCollector().add(
-            new LocalizedMessage(aLineNo,
-                                 aColNo,
+            new LocalizedMessage(lineNo,
+                                 colNo,
                                  getMessageBundle(),
-                                 aKey,
-                                 aArgs,
+                                 key,
+                                 args,
                                  getSeverityLevel(),
                                  getId(),
                                  this.getClass(),
-                                 this.getCustomMessages().get(aKey)));
+                                 this.getCustomMessages().get(key)));
     }
 

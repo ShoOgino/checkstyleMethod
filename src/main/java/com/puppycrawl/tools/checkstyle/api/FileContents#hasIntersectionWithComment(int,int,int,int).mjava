@@ -1,20 +1,20 @@
     /**
      * Checks if the specified position intersects with a comment.
-     * @param aStartLineNo the starting line number
-     * @param aStartColNo the starting column number
-     * @param aEndLineNo the ending line number
-     * @param aEndColNo the ending column number
+     * @param startLineNo the starting line number
+     * @param startColNo the starting column number
+     * @param endLineNo the ending line number
+     * @param endColNo the ending column number
      * @return true if the positions intersects with a comment.
      **/
-    public boolean hasIntersectionWithComment(int aStartLineNo,
-            int aStartColNo, int aEndLineNo, int aEndColNo)
+    public boolean hasIntersectionWithComment(int startLineNo,
+            int startColNo, int endLineNo, int endColNo)
     {
         // Check C comments (all comments should be checked)
-        final Collection<List<TextBlock>> values = mCComments.values();
+        final Collection<List<TextBlock>> values = cComments.values();
         for (final List<TextBlock> row : values) {
             for (final TextBlock comment : row) {
-                if (comment.intersects(aStartLineNo, aStartColNo, aEndLineNo,
-                        aEndColNo))
+                if (comment.intersects(startLineNo, startColNo, endLineNo,
+                        endColNo))
                 {
                     return true;
                 }
@@ -22,13 +22,13 @@
         }
 
         // Check CPP comments (line searching is possible)
-        for (int lineNumber = aStartLineNo; lineNumber <= aEndLineNo;
+        for (int lineNumber = startLineNo; lineNumber <= endLineNo;
              lineNumber++)
         {
-            final TextBlock comment = mCPlusPlusComments.get(lineNumber);
+            final TextBlock comment = cPlusPlusComments.get(lineNumber);
             if ((comment != null)
-                    && comment.intersects(aStartLineNo, aStartColNo,
-                            aEndLineNo, aEndColNo))
+                    && comment.intersects(startLineNo, startColNo,
+                            endLineNo, endColNo))
             {
                 return true;
             }

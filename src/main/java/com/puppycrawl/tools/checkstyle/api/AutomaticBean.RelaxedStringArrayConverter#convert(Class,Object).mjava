@@ -1,15 +1,15 @@
         /** {@inheritDoc} */
         @Override
-        public Object convert(@SuppressWarnings("rawtypes") Class aType,
-            Object aValue)
+        public Object convert(@SuppressWarnings("rawtypes") Class type,
+            Object value)
         {
-            if (null == aType) {
+            if (null == type) {
                 throw new ConversionException("Cannot convert from null.");
             }
 
             // Convert to a String and trim it for the tokenizer.
             final StringTokenizer st = new StringTokenizer(
-                aValue.toString().trim(), ",");
+                value.toString().trim(), ",");
             final List<String> result = Lists.newArrayList();
 
             while (st.hasMoreTokens()) {

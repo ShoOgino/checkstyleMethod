@@ -1,20 +1,20 @@
     /**
      * Creates a new instance.
-     * @param aPublicIdToResourceNameMap maps public IDs to DTD resource names
+     * @param publicIdToResourceNameMap maps public IDs to DTD resource names
      * @throws SAXException if an error occurs
      * @throws ParserConfigurationException if an error occurs
      */
-    protected AbstractLoader(Map<String, String> aPublicIdToResourceNameMap)
+    protected AbstractLoader(Map<String, String> publicIdToResourceNameMap)
         throws SAXException, ParserConfigurationException
     {
-        mPublicIdToResourceNameMap =
-            Maps.newHashMap(aPublicIdToResourceNameMap);
+        this.publicIdToResourceNameMap =
+            Maps.newHashMap(publicIdToResourceNameMap);
         final SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setValidating(true);
         factory.setNamespaceAware(true);
-        mParser = factory.newSAXParser().getXMLReader();
-        mParser.setContentHandler(this);
-        mParser.setEntityResolver(this);
-        mParser.setErrorHandler(this);
+        parser = factory.newSAXParser().getXMLReader();
+        parser.setContentHandler(this);
+        parser.setEntityResolver(this);
+        parser.setErrorHandler(this);
     }
 

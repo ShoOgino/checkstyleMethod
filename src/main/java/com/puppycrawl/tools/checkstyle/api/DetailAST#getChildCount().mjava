@@ -6,15 +6,15 @@
     public int getChildCount()
     {
         // lazy init
-        if (mChildCount == NOT_INITIALIZED) {
-            mChildCount = 0;
+        if (childCount == NOT_INITIALIZED) {
+            childCount = 0;
             AST child = getFirstChild();
 
             while (child != null) {
-                mChildCount += 1;
+                childCount += 1;
                 child = child.getNextSibling();
             }
         }
-        return mChildCount;
+        return childCount;
     }
 

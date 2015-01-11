@@ -1,9 +1,9 @@
     /** {@inheritDoc} */
     @Override
-    public boolean accept(AuditEvent aEvent)
+    public boolean accept(AuditEvent event)
     {
-        for (Filter filter : mFilters) {
-            if (!filter.accept(aEvent)) {
+        for (Filter filter : filters) {
+            if (!filter.accept(event)) {
                 return false;
             }
         }

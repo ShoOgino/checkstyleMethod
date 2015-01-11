@@ -1,32 +1,32 @@
     /**
      * Report the location of a C-style comment.
-     * @param aStartLineNo the starting line number
-     * @param aStartColNo the starting column number
-     * @param aEndLineNo the ending line number
-     * @param aEndColNo the ending column number
+     * @param startLineNo the starting line number
+     * @param startColNo the starting column number
+     * @param endLineNo the ending line number
+     * @param endColNo the ending column number
      **/
-    public void reportCComment(int aStartLineNo, int aStartColNo,
-            int aEndLineNo, int aEndColNo)
+    public void reportCComment(int startLineNo, int startColNo,
+            int endLineNo, int endColNo)
     {
-        final String[] cc = extractCComment(aStartLineNo, aStartColNo,
-                aEndLineNo, aEndColNo);
-        final Comment comment = new Comment(cc, aStartColNo, aEndLineNo,
-                aEndColNo);
+        final String[] cc = extractCComment(startLineNo, startColNo,
+                endLineNo, endColNo);
+        final Comment comment = new Comment(cc, startColNo, endLineNo,
+                endColNo);
 
         // save the comment
-        if (mCComments.containsKey(aStartLineNo)) {
-            final List<TextBlock> entries = mCComments.get(aStartLineNo);
+        if (cComments.containsKey(startLineNo)) {
+            final List<TextBlock> entries = cComments.get(startLineNo);
             entries.add(comment);
         }
         else {
             final List<TextBlock> entries = Lists.newArrayList();
             entries.add(comment);
-            mCComments.put(aStartLineNo, entries);
+            cComments.put(startLineNo, entries);
         }
 
         // Remember if possible Javadoc comment
-        if (line(aStartLineNo - 1).indexOf("/**", aStartColNo) != -1) {
-            mJavadocComments.put(aEndLineNo - 1, comment);
+        if (line(startLineNo - 1).indexOf("/**", startColNo) != -1) {
+            javadocComments.put(endLineNo - 1, comment);
         }
     }
 

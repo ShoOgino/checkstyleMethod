@@ -1,14 +1,14 @@
     /** {@inheritDoc} */
     @Override
-    public int compareTo(LocalizedMessage aOther)
+    public int compareTo(LocalizedMessage other)
     {
-        if (getLineNo() == aOther.getLineNo()) {
-            if (getColumnNo() == aOther.getColumnNo()) {
-                return getMessage().compareTo(aOther.getMessage());
+        if (getLineNo() == other.getLineNo()) {
+            if (getColumnNo() == other.getColumnNo()) {
+                return getMessage().compareTo(other.getMessage());
             }
-            return (getColumnNo() < aOther.getColumnNo()) ? -1 : 1;
+            return (getColumnNo() < other.getColumnNo()) ? -1 : 1;
         }
 
-        return (getLineNo() < aOther.getLineNo()) ? -1 : 1;
+        return (getLineNo() < other.getLineNo()) ? -1 : 1;
     }
 

@@ -16,38 +16,38 @@
      * name given.
      * </p>
      *
-     * @param aAST the current node
-     * @param aAnnotation the annotation name to check for
+     * @param ast the current node
+     * @param annotation the annotation name to check for
      * @return the AST representing that annotation
-     * @throws NullPointerException if the aAST or
-     * aAnnotation is null
+     * @throws NullPointerException if the ast or
+     * annotation is null
      */
-    public static DetailAST getAnnotation(final DetailAST aAST,
-        String aAnnotation)
+    public static DetailAST getAnnotation(final DetailAST ast,
+        String annotation)
     {
-        if (aAST == null) {
-            throw new NullPointerException("the aAST is null");
+        if (ast == null) {
+            throw new NullPointerException("the ast is null");
         }
 
-        if (aAnnotation == null) {
-            throw new NullPointerException("the aAnnotation is null");
+        if (annotation == null) {
+            throw new NullPointerException("the annotation is null");
         }
 
-        if (aAnnotation.trim().length() == 0) {
-            throw new IllegalArgumentException("the aAnnotation"
+        if (annotation.trim().length() == 0) {
+            throw new IllegalArgumentException("the annotation"
                 + "is empty or spaces");
         }
 
-        final DetailAST holder = AnnotationUtility.getAnnotationHolder(aAST);
+        final DetailAST holder = AnnotationUtility.getAnnotationHolder(ast);
 
         for (DetailAST child = holder.getFirstChild();
             child != null; child = child.getNextSibling())
         {
             if (child.getType() == TokenTypes.ANNOTATION) {
                 final DetailAST at = child.getFirstChild();
-                final String aName =
+                final String name =
                     FullIdent.createFullIdent(at.getNextSibling()).getText();
-                if (aAnnotation.equals(aName)) {
+                if (annotation.equals(name)) {
                     return child;
                 }
             }
