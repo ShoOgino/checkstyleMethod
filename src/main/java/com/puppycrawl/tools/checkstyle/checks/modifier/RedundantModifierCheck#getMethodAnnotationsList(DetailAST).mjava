@@ -1,12 +1,12 @@
     /**
      * Gets the list of annotations on method definition
-     * @param aMethodDef method definition node
+     * @param methodDef method definition node
      * @return List of annotations
      */
-    private static List<DetailAST> getMethodAnnotationsList(DetailAST aMethodDef)
+    private static List<DetailAST> getMethodAnnotationsList(DetailAST methodDef)
     {
         final List<DetailAST> annotationsList = new ArrayList<>();
-        final DetailAST modifiers = aMethodDef.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
         DetailAST modifier = modifiers.getFirstChild();
         while (modifier != null) {
             if (modifier.getType() == TokenTypes.ANNOTATION) {

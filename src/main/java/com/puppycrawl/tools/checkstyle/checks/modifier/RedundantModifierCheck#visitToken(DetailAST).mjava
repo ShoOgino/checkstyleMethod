@@ -1,9 +1,9 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (TokenTypes.INTERFACE_DEF == aAST.getType()) {
+        if (TokenTypes.INTERFACE_DEF == ast.getType()) {
             final DetailAST modifiers =
-                aAST.findFirstToken(TokenTypes.MODIFIERS);
+                ast.findFirstToken(TokenTypes.MODIFIERS);
             if (null != modifiers) {
                 for (final int tokenType : new int[] {
                     TokenTypes.LITERAL_STATIC,
@@ -18,8 +18,8 @@
                 }
             }
         }
-        else if (isInterfaceOrAnnotationMember(aAST)) {
-            final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        else if (isInterfaceOrAnnotationMember(ast)) {
+            final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
             DetailAST modifier = modifiers.getFirstChild();
             while (modifier != null) {
 
@@ -30,7 +30,7 @@
                 final int type = modifier.getType();
                 if ((type == TokenTypes.LITERAL_PUBLIC)
                     || ((type == TokenTypes.LITERAL_STATIC)
-                            && aAST.getType() != TokenTypes.METHOD_DEF)
+                            && ast.getType() != TokenTypes.METHOD_DEF)
                     || (type == TokenTypes.ABSTRACT)
                     || (type == TokenTypes.FINAL))
                 {
@@ -42,14 +42,14 @@
                 modifier = modifier.getNextSibling();
             }
         }
-        else if (aAST.getType() == TokenTypes.METHOD_DEF) {
+        else if (ast.getType() == TokenTypes.METHOD_DEF) {
             final DetailAST modifiers =
-                            aAST.findFirstToken(TokenTypes.MODIFIERS);
+                            ast.findFirstToken(TokenTypes.MODIFIERS);
             // private method?
             boolean checkFinal =
                 modifiers.branchContains(TokenTypes.LITERAL_PRIVATE);
             // declared in a final class?
-            DetailAST parent = aAST.getParent();
+            DetailAST parent = ast.getParent();
             while (parent != null) {
                 if (parent.getType() == TokenTypes.CLASS_DEF) {
                     final DetailAST classModifiers =
@@ -60,7 +60,7 @@
                 }
                 parent = parent.getParent();
             }
-            if (checkFinal && !isAnnotatedWithSafeVarargs(aAST)) {
+            if (checkFinal && !isAnnotatedWithSafeVarargs(ast)) {
                 DetailAST modifier = modifiers.getFirstChild();
                 while (modifier != null) {
                     final int type = modifier.getType();

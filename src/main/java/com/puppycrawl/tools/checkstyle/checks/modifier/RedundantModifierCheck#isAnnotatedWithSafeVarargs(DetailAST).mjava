@@ -2,13 +2,13 @@
      * Checks if method definition is annotated with
      * <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/SafeVarargs.html">
      * SafeVarargs</a> annotation
-     * @param aMethodDef method definition node
+     * @param methodDef method definition node
      * @return true or false
      */
-    private static boolean isAnnotatedWithSafeVarargs(DetailAST aMethodDef)
+    private static boolean isAnnotatedWithSafeVarargs(DetailAST methodDef)
     {
         boolean result = false;
-        final List<DetailAST> methodAnnotationsList = getMethodAnnotationsList(aMethodDef);
+        final List<DetailAST> methodAnnotationsList = getMethodAnnotationsList(methodDef);
         for (DetailAST annotationNode : methodAnnotationsList) {
             if ("SafeVarargs".equals(annotationNode.getLastChild().getText())) {
                 result = true;
