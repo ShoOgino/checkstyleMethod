@@ -1,19 +1,19 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        if (aAST.getType() != TokenTypes.CLASS_DEF) {
+        if (ast.getType() != TokenTypes.CLASS_DEF) {
             return;
         }
 
-        final ClassDesc desc = mClasses.pop();
+        final ClassDesc desc = classes.pop();
         if (!desc.isDeclaredAsFinal()
             && !desc.isDeclaredAsAbstract()
             && desc.hasPrivateCtor()
             && !desc.hasNonPrivateCtor())
         {
             final String className =
-                aAST.findFirstToken(TokenTypes.IDENT).getText();
-            log(aAST.getLineNo(), "final.class", className);
+                ast.findFirstToken(TokenTypes.IDENT).getText();
+            log(ast.getLineNo(), "final.class", className);
         }
     }
 

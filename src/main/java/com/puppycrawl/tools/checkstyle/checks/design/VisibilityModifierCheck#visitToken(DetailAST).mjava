@@ -1,17 +1,17 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if ((aAST.getType() != TokenTypes.VARIABLE_DEF)
-            || (aAST.getParent().getType() != TokenTypes.OBJBLOCK))
+        if ((ast.getType() != TokenTypes.VARIABLE_DEF)
+            || (ast.getParent().getType() != TokenTypes.OBJBLOCK))
         {
             return;
         }
 
-        final DetailAST varNameAST = getVarNameAST(aAST);
+        final DetailAST varNameAST = getVarNameAST(ast);
         final String varName = varNameAST.getText();
         final boolean inInterfaceOrAnnotationBlock =
-            ScopeUtils.inInterfaceOrAnnotationBlock(aAST);
-        final Set<String> mods = getModifiers(aAST);
+            ScopeUtils.inInterfaceOrAnnotationBlock(ast);
+        final Set<String> mods = getModifiers(ast);
         final String declaredScope = getVisibilityScope(mods);
         final String variableScope =
              inInterfaceOrAnnotationBlock ? "public" : declaredScope;

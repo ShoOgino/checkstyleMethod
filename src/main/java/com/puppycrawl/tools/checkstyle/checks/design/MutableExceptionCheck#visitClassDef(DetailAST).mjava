@@ -1,10 +1,10 @@
     /**
      * Called when we start processing class definition.
-     * @param aAST class definition node
+     * @param ast class definition node
      */
-    private void visitClassDef(DetailAST aAST)
+    private void visitClassDef(DetailAST ast)
     {
-        mCheckingStack.push(mChecking ? Boolean.TRUE : Boolean.FALSE);
-        mChecking = isNamedAsException(aAST) && isExtendedClassNamedAsException(aAST);
+        checkingStack.push(checking ? Boolean.TRUE : Boolean.FALSE);
+        checking = isNamedAsException(ast) && isExtendedClassNamedAsException(ast);
     }
 

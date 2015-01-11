@@ -1,17 +1,17 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
 
-        if (aAST.getType() == TokenTypes.CLASS_DEF) {
+        if (ast.getType() == TokenTypes.CLASS_DEF) {
             final boolean isFinal = (modifiers != null)
                     && modifiers.branchContains(TokenTypes.FINAL);
             final boolean isAbstract = (modifiers != null)
                     && modifiers.branchContains(TokenTypes.ABSTRACT);
-            mClasses.push(new ClassDesc(isFinal, isAbstract));
+            classes.push(new ClassDesc(isFinal, isAbstract));
         }
-        else if (!ScopeUtils.inEnumBlock(aAST)) { //ctors in enums don't matter
-            final ClassDesc desc = mClasses.peek();
+        else if (!ScopeUtils.inEnumBlock(ast)) { //ctors in enums don't matter
+            final ClassDesc desc = classes.peek();
             if ((modifiers != null)
                 && modifiers.branchContains(TokenTypes.LITERAL_PRIVATE))
             {
