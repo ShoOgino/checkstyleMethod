@@ -1,19 +1,19 @@
     /**
      * Processes statements until usage of variable to detect sequence of
      * initialization methods.
-     * @param aVariableUsageAst
-     *        DetailAST of expression that uses variable named aVariableName.
-     * @param aVariableName
+     * @param variableUsageAst
+     *        DetailAST of expression that uses variable named variableName.
+     * @param variableName
      *        name of considered variable.
      * @return true if statements between declaration and usage of variable are
      *         initialization methods.
      */
     private static boolean isInitializationSequence(
-            DetailAST aVariableUsageAst, String aVariableName)
+            DetailAST variableUsageAst, String variableName)
     {
         boolean result = true;
         boolean isUsedVariableDeclarationFound = false;
-        DetailAST currentSiblingAst = aVariableUsageAst;
+        DetailAST currentSiblingAst = variableUsageAst;
         String initInstanceName = "";
 
         while (result
@@ -53,7 +53,7 @@
             case TokenTypes.VARIABLE_DEF:
                 final String currentVariableName = currentSiblingAst.
                         findFirstToken(TokenTypes.IDENT).getText();
-                isUsedVariableDeclarationFound = aVariableName.equals(currentVariableName);
+                isUsedVariableDeclarationFound = variableName.equals(currentVariableName);
                 break;
 
             case TokenTypes.SEMI:

@@ -5,19 +5,19 @@
      * if (b) {...}
      * </pre>
      * Variable 'b' is in declaration of operator IF.
-     * @param aOperator
+     * @param operator
      *        Ast node which represents operator.
-     * @param aVariable
+     * @param variable
      *        Variable which is checked for content in operator.
      * @return true if operator contains variable in its declaration, otherwise
      *         - false.
      */
     private boolean isVariableInOperatorExpr(
-            DetailAST aOperator, DetailAST aVariable)
+            DetailAST operator, DetailAST variable)
     {
         boolean isVarInOperatorDeclr = false;
         final DetailAST openingBracket =
-                aOperator.findFirstToken(TokenTypes.LPAREN);
+                operator.findFirstToken(TokenTypes.LPAREN);
 
         if (openingBracket != null) {
             // Get EXPR between brackets
@@ -27,7 +27,7 @@
             // Look if variable is in operator expression
             while (exprBetweenBrackets.getType() != TokenTypes.RPAREN) {
 
-                if (isChild(exprBetweenBrackets, aVariable)) {
+                if (isChild(exprBetweenBrackets, variable)) {
                     isVarInOperatorDeclr = true;
                     break;
                 }
@@ -37,9 +37,9 @@
             // Variable may be met in ELSE declaration or in CASE declaration.
             // So, check variable usage in these declarations.
             if (!isVarInOperatorDeclr) {
-                switch (aOperator.getType()) {
+                switch (operator.getType()) {
                 case TokenTypes.LITERAL_IF:
-                    final DetailAST elseBlock = aOperator.getLastChild();
+                    final DetailAST elseBlock = operator.getLastChild();
 
                     if (elseBlock.getType() == TokenTypes.LITERAL_ELSE) {
                         // Get IF followed by ELSE
@@ -52,13 +52,13 @@
                             isVarInOperatorDeclr |=
                                     isVariableInOperatorExpr(
                                             firstNodeInsideElseBlock,
-                                            aVariable);
+                                            variable);
                         }
                     }
                     break;
 
                 case TokenTypes.LITERAL_SWITCH:
-                    DetailAST currentCaseBlock = aOperator
+                    DetailAST currentCaseBlock = operator
                             .findFirstToken(TokenTypes.CASE_GROUP);
 
                     while (currentCaseBlock != null
@@ -69,7 +69,7 @@
                                 currentCaseBlock.getFirstChild();
 
                         if (isChild(firstNodeInsideCaseBlock,
-                                aVariable))
+                                variable))
                         {
                             isVarInOperatorDeclr = true;
                             break;

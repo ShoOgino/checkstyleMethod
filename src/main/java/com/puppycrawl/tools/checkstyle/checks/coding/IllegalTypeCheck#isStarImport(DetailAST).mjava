@@ -5,15 +5,15 @@
      * import java.util.*;
      * </code>
      * </p>
-     * @param aImport {@link TokenTypes#IMPORT Import}
+     * @param import {@link TokenTypes#IMPORT Import}
      * @return true if it is star import
      */
-    private static boolean isStarImport(DetailAST aImport)
+    private static boolean isStarImport(DetailAST importAst)
     {
         boolean result = false;
-        DetailAST toVisit = aImport;
+        DetailAST toVisit = importAst;
         while (toVisit != null) {
-            toVisit = getNextSubTreeNode(toVisit, aImport);
+            toVisit = getNextSubTreeNode(toVisit, importAst);
             if (toVisit != null && toVisit.getType() == TokenTypes.STAR) {
                 result = true;
                 break;

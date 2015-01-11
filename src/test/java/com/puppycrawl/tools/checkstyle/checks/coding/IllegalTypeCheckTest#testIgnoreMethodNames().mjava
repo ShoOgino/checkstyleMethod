@@ -1,7 +1,7 @@
     @Test
     public void testIgnoreMethodNames() throws Exception
     {
-        mCheckConfig.addAttribute("ignoredMethodNames", "table2");
+        checkConfig.addAttribute("ignoredMethodNames", "table2");
 
         String[] expected = {
             "6:13: Declaring variables, return values or parameters of type 'AbstractClass' is not allowed.",
@@ -11,6 +11,6 @@
             "16:13: Declaring variables, return values or parameters of type 'java.util.Hashtable' is not allowed.",
         };
 
-        verify(mCheckConfig, getPath("coding" + File.separator + "InputIllegalType.java"), expected);
+        verify(checkConfig, getPath("coding" + File.separator + "InputIllegalType.java"), expected);
     }
 

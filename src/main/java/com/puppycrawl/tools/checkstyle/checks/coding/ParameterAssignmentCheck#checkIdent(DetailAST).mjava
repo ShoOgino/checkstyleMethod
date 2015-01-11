@@ -1,17 +1,17 @@
     /**
      * Check if ident is parameter.
-     * @param aAST ident to check.
+     * @param ast ident to check.
      */
-    private void checkIdent(DetailAST aAST)
+    private void checkIdent(DetailAST ast)
     {
-        if ((mParameterNames != null) && !mParameterNames.isEmpty()) {
-            final DetailAST identAST = aAST.getFirstChild();
+        if ((parameterNames != null) && !parameterNames.isEmpty()) {
+            final DetailAST identAST = ast.getFirstChild();
 
             if ((identAST != null)
                 && (identAST.getType() == TokenTypes.IDENT)
-                && mParameterNames.contains(identAST.getText()))
+                && parameterNames.contains(identAST.getText()))
             {
-                log(aAST.getLineNo(), aAST.getColumnNo(),
+                log(ast.getLineNo(), ast.getColumnNo(),
                     "parameter.assignment", identAST.getText());
             }
         }

@@ -1,21 +1,21 @@
     /**
      * Gets first Ast node inside IF block if variable usage is met
      * only inside the block (not in its declaration!).
-     * @param aBlock
+     * @param block
      *        Ast node represents IF block.
-     * @param aVariable
+     * @param variable
      *        Variable which is checked for content in block.
      * @return If variable usage is met only inside the block
      *         (not in its declaration!) than return the first Ast node
      *         of this block, otherwise - null.
      */
     private DetailAST getFirstNodeInsideIfBlock(
-            DetailAST aBlock, DetailAST aVariable)
+            DetailAST block, DetailAST variable)
     {
         DetailAST firstNodeInsideBlock = null;
 
-        if (!isVariableInOperatorExpr(aBlock, aVariable)) {
-            DetailAST currentNode = aBlock.getLastChild();
+        if (!isVariableInOperatorExpr(block, variable)) {
+            DetailAST currentNode = block.getLastChild();
             final List<DetailAST> variableUsageExpressions =
                     new ArrayList<DetailAST>();
 
@@ -26,7 +26,7 @@
                         currentNode.getPreviousSibling();
 
                 // Checking variable usage inside IF block.
-                if (isChild(previousNode, aVariable)) {
+                if (isChild(previousNode, variable)) {
                     variableUsageExpressions.add(previousNode);
                 }
 
@@ -36,7 +36,7 @@
                 if (currentNode.getType() == TokenTypes.LITERAL_IF) {
                     currentNode = currentNode.getLastChild();
                 }
-                else if (isChild(currentNode, aVariable)) {
+                else if (isChild(currentNode, variable)) {
                     variableUsageExpressions.add(currentNode);
                     currentNode = null;
                 }
@@ -45,7 +45,7 @@
             // If IF block doesn't include ELSE than analyze variable usage
             // only inside IF block.
             if (currentNode != null
-                    && isChild(currentNode, aVariable))
+                    && isChild(currentNode, variable))
             {
                 variableUsageExpressions.add(currentNode);
             }

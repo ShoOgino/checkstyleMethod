@@ -1,15 +1,15 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.FOR_ITERATOR:
-            leaveForIter(aAST.getParent());
+            leaveForIter(ast.getParent());
             break;
         case TokenTypes.FOR_EACH_CLAUSE:
-            leaveForEach(aAST);
+            leaveForEach(ast);
             break;
         case TokenTypes.LITERAL_FOR:
-            leaveForDef(aAST);
+            leaveForDef(ast);
             break;
         case TokenTypes.OBJBLOCK:
             exitBlock();
@@ -33,7 +33,7 @@
             // Do nothing
             break;
         default:
-            throw new IllegalStateException(aAST.toString());
+            throw new IllegalStateException(ast.toString());
         }
     }
 

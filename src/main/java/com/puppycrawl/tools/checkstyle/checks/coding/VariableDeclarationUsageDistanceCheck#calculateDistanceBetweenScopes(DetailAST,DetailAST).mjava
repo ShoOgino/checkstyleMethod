@@ -1,18 +1,18 @@
     /**
      * Calculates distance between declaration of variable and its first usage
      * in multiple scopes.
-     * @param aAST
+     * @param ast
      *        Regular node of Ast which is checked for content of checking
      *        variable.
-     * @param aVariable
+     * @param variable
      *        Variable which distance is calculated for.
      * @return entry which contains expression with variable usage and distance.
      */
     private Entry<DetailAST, Integer> calculateDistanceBetweenScopes(
-            DetailAST aAST, DetailAST aVariable)
+            DetailAST ast, DetailAST variable)
     {
         int dist = 0;
-        DetailAST currentScopeAst = aAST;
+        DetailAST currentScopeAst = ast;
         DetailAST variableUsageAst = null;
         while (currentScopeAst != null) {
             final List<DetailAST> variableUsageExpressions = new ArrayList<DetailAST>();
@@ -22,7 +22,7 @@
                     && currentStatementAst.getType() != TokenTypes.RCURLY)
             {
                 if (currentStatementAst.getFirstChild() != null) {
-                    if (isChild(currentStatementAst, aVariable)) {
+                    if (isChild(currentStatementAst, variable)) {
                         variableUsageExpressions.add(currentStatementAst);
                     }
                     // If expression doesn't contain variable and this variable
@@ -50,19 +50,19 @@
                 case TokenTypes.LITERAL_WHILE:
                 case TokenTypes.LITERAL_DO:
                     exprWithVariableUsage = getFirstNodeInsideForWhileDoWhileBlocks(
-                            blockWithVariableUsage, aVariable);
+                            blockWithVariableUsage, variable);
                     break;
                 case TokenTypes.LITERAL_IF:
                     exprWithVariableUsage = getFirstNodeInsideIfBlock(
-                            blockWithVariableUsage, aVariable);
+                            blockWithVariableUsage, variable);
                     break;
                 case TokenTypes.LITERAL_SWITCH:
                     exprWithVariableUsage = getFirstNodeInsideSwitchBlock(
-                            blockWithVariableUsage, aVariable);
+                            blockWithVariableUsage, variable);
                     break;
                 case TokenTypes.LITERAL_TRY:
                     exprWithVariableUsage =
-                        getFirstNodeInsideTryCatchFinallyBlocks(blockWithVariableUsage, aVariable);
+                        getFirstNodeInsideTryCatchFinallyBlocks(blockWithVariableUsage, variable);
                     break;
                 default:
                     exprWithVariableUsage = blockWithVariableUsage.getFirstChild();

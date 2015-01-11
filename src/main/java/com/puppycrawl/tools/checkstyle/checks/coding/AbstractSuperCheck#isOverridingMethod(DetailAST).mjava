@@ -1,22 +1,22 @@
     /**
      * Determines whether an AST is a method definition for this check,
      * with 0 parameters.
-     * @param aAST the method definition AST.
-     * @return true if the method of aAST is a method for this check.
+     * @param ast the method definition AST.
+     * @return true if the method of ast is a method for this check.
      */
-    private boolean isOverridingMethod(DetailAST aAST)
+    private boolean isOverridingMethod(DetailAST ast)
     {
-        if ((aAST.getType() != TokenTypes.METHOD_DEF)
-            || ScopeUtils.inInterfaceOrAnnotationBlock(aAST))
+        if ((ast.getType() != TokenTypes.METHOD_DEF)
+            || ScopeUtils.inInterfaceOrAnnotationBlock(ast))
         {
             return false;
         }
-        final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
         final String name = nameAST.getText();
         if (!getMethodName().equals(name)) {
             return false;
         }
-        final DetailAST params = aAST.findFirstToken(TokenTypes.PARAMETERS);
+        final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
         return (params.getChildCount() == 0);
     }
 

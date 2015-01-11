@@ -2,12 +2,12 @@
      * Checks imported type (as static and star imports are not supported by Check,
      *  only type is in the consideration).<br>
      * If this type is illegal due to Check's options - puts violation on it.
-     * @param aImport {@link TokenTypes#IMPORT Import}
+     * @param import {@link TokenTypes#IMPORT Import}
      */
-    private void visitImport(DetailAST aImport)
+    private void visitImport(DetailAST importAst)
     {
-        if (!isStarImport(aImport)) {
-            final String canonicalName = getCanonicalName(aImport);
+        if (!isStarImport(importAst)) {
+            final String canonicalName = getCanonicalName(importAst);
             extendIllegalClassNamesWithShortName(canonicalName);
         }
     }

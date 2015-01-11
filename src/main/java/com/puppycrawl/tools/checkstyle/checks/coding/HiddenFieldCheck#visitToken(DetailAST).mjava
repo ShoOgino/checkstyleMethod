@@ -1,10 +1,10 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if ((aAST.getType() == TokenTypes.VARIABLE_DEF)
-            || (aAST.getType() == TokenTypes.PARAMETER_DEF))
+        if ((ast.getType() == TokenTypes.VARIABLE_DEF)
+            || (ast.getType() == TokenTypes.PARAMETER_DEF))
         {
-            processVariable(aAST);
+            processVariable(ast);
             return;
         }
 
@@ -13,15 +13,15 @@
         //class body in addition to enum constant class bodies)
         //but not attempted as it seems out of the scope of this
         //check.
-        final DetailAST typeMods = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST typeMods = ast.findFirstToken(TokenTypes.MODIFIERS);
         final boolean isStaticInnerType =
                 (typeMods != null)
                         && typeMods.branchContains(TokenTypes.LITERAL_STATIC);
         final FieldFrame frame =
-                new FieldFrame(mCurrentFrame, isStaticInnerType);
+                new FieldFrame(currentFrame, isStaticInnerType);
 
         //add fields to container
-        final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
+        final DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
         // enum constants may not have bodies
         if (objBlock != null) {
             DetailAST child = objBlock.getFirstChild();
@@ -42,6 +42,6 @@
             }
         }
         // push container
-        mCurrentFrame = frame;
+        currentFrame = frame;
     }
 

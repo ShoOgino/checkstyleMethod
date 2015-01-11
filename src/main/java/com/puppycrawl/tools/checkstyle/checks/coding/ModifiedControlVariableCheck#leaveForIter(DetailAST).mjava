@@ -1,10 +1,10 @@
     /**
      * Push current variables to the stack.
-     * @param aAST a for definition.
+     * @param ast a for definition.
      */
-    private void leaveForIter(DetailAST aAST)
+    private void leaveForIter(DetailAST ast)
     {
-        final DetailAST forInitAST = aAST.findFirstToken(TokenTypes.FOR_INIT);
+        final DetailAST forInitAST = ast.findFirstToken(TokenTypes.FOR_INIT);
         DetailAST parameterDefAST =
             forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
 
@@ -14,7 +14,7 @@
             if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
                 final DetailAST param =
                     parameterDefAST.findFirstToken(TokenTypes.IDENT);
-                mCurrentVariables.push(param.getText());
+                currentVariables.push(param.getText());
             }
         }
     }

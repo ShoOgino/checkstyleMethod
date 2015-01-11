@@ -1,14 +1,14 @@
     /**
      * Decides whether the number of an AST is in the ignore list of this
      * check.
-     * @param aAST the AST to check
-     * @return true if the number of aAST is in the ignore list of this
+     * @param ast the AST to check
+     * @return true if the number of ast is in the ignore list of this
      * check.
      */
-    private boolean inIgnoreList(DetailAST aAST)
+    private boolean inIgnoreList(DetailAST ast)
     {
-        double value = CheckUtils.parseDouble(aAST.getText(), aAST.getType());
-        final DetailAST parent = aAST.getParent();
+        double value = CheckUtils.parseDouble(ast.getText(), ast.getType());
+        final DetailAST parent = ast.getParent();
         if (parent.getType() == TokenTypes.UNARY_MINUS) {
             value = -1 * value;
         }

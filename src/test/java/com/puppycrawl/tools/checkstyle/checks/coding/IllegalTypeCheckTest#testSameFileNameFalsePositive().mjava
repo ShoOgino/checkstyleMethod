@@ -1,7 +1,7 @@
     @Test
     public void testSameFileNameFalsePositive() throws Exception
     {
-        mCheckConfig.addAttribute("illegalClassNames", "java.util.GregorianCalendar, SubCalendar, "
+        checkConfig.addAttribute("illegalClassNames", "java.util.GregorianCalendar, SubCalendar, "
                 + "java.util.List");
 
         String[] expected = {
@@ -9,7 +9,7 @@
             "27:5: Declaring variables, return values or parameters of type 'java.util.List' is not allowed.",
         };
 
-        verify(mCheckConfig, getPath("coding" + File.separator
+        verify(checkConfig, getPath("coding" + File.separator
                 + "InputIllegalTypeSameFileName.java"), expected);
     }
 

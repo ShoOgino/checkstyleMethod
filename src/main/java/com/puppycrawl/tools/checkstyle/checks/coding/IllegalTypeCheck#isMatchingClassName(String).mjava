@@ -1,14 +1,14 @@
     /**
-     * @param aClassName class name to check.
+     * @param className class name to check.
      * @return true if given class name is one of illegal classes
      *         or if it matches to abstract class names pattern.
      */
-    private boolean isMatchingClassName(String aClassName)
+    private boolean isMatchingClassName(String className)
     {
-        final String shortName = aClassName.substring(aClassName.lastIndexOf(".") + 1);
-        return (mIllegalClassNames.contains(aClassName)
-                || mIllegalClassNames.contains(shortName))
-            || (!mLegalAbstractClassNames.contains(aClassName)
-                && getRegexp().matcher(aClassName).find());
+        final String shortName = className.substring(className.lastIndexOf(".") + 1);
+        return (illegalClassNames.contains(className)
+                || illegalClassNames.contains(shortName))
+            || (!legalAbstractClassNames.contains(className)
+                && getRegexp().matcher(className).find());
     }
 

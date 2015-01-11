@@ -1,18 +1,18 @@
     /**
      * Decides whether to ignore an AST node that is the parameter of a
      * constructor.
-     * @param aAST the AST to check.
-     * @return true if aAST should be ignored because check property
-     * ignoreConstructorParameter is true and aAST is a constructor parameter.
+     * @param ast the AST to check.
+     * @return true if ast should be ignored because check property
+     * ignoreConstructorPnameter is true and ast is a constructor parameter.
      */
-    private boolean isIgnoredConstructorParam(DetailAST aAST)
+    private boolean isIgnoredConstructorParam(DetailAST ast)
     {
-        if ((aAST.getType() != TokenTypes.PARAMETER_DEF)
-            || !mIgnoreConstructorParameter)
+        if ((ast.getType() != TokenTypes.PARAMETER_DEF)
+            || !ignoreConstructorParameter)
         {
             return false;
         }
-        final DetailAST parametersAST = aAST.getParent();
+        final DetailAST parametersAST = ast.getParent();
         final DetailAST constructorAST = parametersAST.getParent();
         return (constructorAST.getType() == TokenTypes.CTOR_DEF);
     }

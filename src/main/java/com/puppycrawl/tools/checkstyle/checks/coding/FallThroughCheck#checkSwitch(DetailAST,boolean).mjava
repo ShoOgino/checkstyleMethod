@@ -1,20 +1,20 @@
     /**
      * Checks if a given switch terminated by return, throw or,
      * if allowed break, continue.
-     * @param aAST loop to check
-     * @param aUseContinue should we consider continue as terminator.
+     * @param ast loop to check
+     * @param useContinue should we consider continue as terminator.
      * @return true if switch is terminated.
      */
-    private boolean checkSwitch(final DetailAST aAST, boolean aUseContinue)
+    private boolean checkSwitch(final DetailAST ast, boolean useContinue)
     {
-        DetailAST caseGroup = aAST.findFirstToken(TokenTypes.CASE_GROUP);
+        DetailAST caseGroup = ast.findFirstToken(TokenTypes.CASE_GROUP);
         boolean isTerminated = (caseGroup != null);
         while (isTerminated && (caseGroup != null)
                && (caseGroup.getType() != TokenTypes.RCURLY))
         {
             final DetailAST caseBody =
                 caseGroup.findFirstToken(TokenTypes.SLIST);
-            isTerminated &= isTerminated(caseBody, false, aUseContinue);
+            isTerminated &= isTerminated(caseBody, false, useContinue);
             caseGroup = caseGroup.getNextSibling();
         }
         return isTerminated;

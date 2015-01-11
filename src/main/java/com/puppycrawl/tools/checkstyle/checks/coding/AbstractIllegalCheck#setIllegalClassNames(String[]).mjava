@@ -1,20 +1,20 @@
     /**
      * Set the list of illegal classes.
      *
-     * @param aClassNames
+     * @param classNames
      *            array of illegal exception classes
      */
-    public final void setIllegalClassNames(final String[] aClassNames)
+    public final void setIllegalClassNames(final String[] classNames)
     {
-        assert aClassNames != null;
-        mIllegalClassNames.clear();
-        for (final String name : aClassNames) {
-            mIllegalClassNames.add(name);
+        assert classNames != null;
+        illegalClassNames.clear();
+        for (final String name : classNames) {
+            illegalClassNames.add(name);
             final int lastDot = name.lastIndexOf(".");
             if ((lastDot > 0) && (lastDot < (name.length() - 1))) {
                 final String shortName = name
                         .substring(name.lastIndexOf(".") + 1);
-                mIllegalClassNames.add(shortName);
+                illegalClassNames.add(shortName);
             }
         }
     }

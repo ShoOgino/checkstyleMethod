@@ -1,23 +1,23 @@
     /**
      * Gets first Ast node inside TRY-CATCH-FINALLY blocks if variable usage is
      * met only inside the block (not in its declaration!).
-     * @param aBlock
+     * @param block
      *        Ast node represents TRY-CATCH-FINALLY block.
-     * @param aVariable
+     * @param variable
      *        Variable which is checked for content in block.
      * @return If variable usage is met only inside the block
      *         (not in its declaration!) than return the first Ast node
      *         of this block, otherwise - null.
      */
     private static DetailAST getFirstNodeInsideTryCatchFinallyBlocks(
-            DetailAST aBlock, DetailAST aVariable)
+            DetailAST block, DetailAST variable)
     {
-        DetailAST currentNode = aBlock.getFirstChild();
+        DetailAST currentNode = block.getFirstChild();
         final List<DetailAST> variableUsageExpressions =
                 new ArrayList<DetailAST>();
 
         // Checking variable usage inside TRY block.
-        if (isChild(currentNode, aVariable)) {
+        if (isChild(currentNode, variable)) {
             variableUsageExpressions.add(currentNode);
         }
 
@@ -30,7 +30,7 @@
         {
             final DetailAST catchBlock = currentNode.getLastChild();
 
-            if (isChild(catchBlock, aVariable)) {
+            if (isChild(catchBlock, variable)) {
                 variableUsageExpressions.add(catchBlock);
             }
             currentNode = currentNode.getNextSibling();
@@ -40,7 +40,7 @@
         if (currentNode != null) {
             final DetailAST finalBlock = currentNode.getLastChild();
 
-            if (isChild(finalBlock, aVariable)) {
+            if (isChild(finalBlock, variable)) {
                 variableUsageExpressions.add(finalBlock);
             }
         }

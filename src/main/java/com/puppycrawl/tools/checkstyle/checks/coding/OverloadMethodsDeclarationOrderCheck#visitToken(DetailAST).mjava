@@ -1,13 +1,13 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final int parentType = aAST.getParent().getType();
+        final int parentType = ast.getParent().getType();
         if (parentType == TokenTypes.CLASS_DEF
                 || parentType == TokenTypes.ENUM_DEF
                 || parentType == TokenTypes.INTERFACE_DEF
                 || parentType == TokenTypes.LITERAL_NEW)
         {
-            checkOverloadMethodsGrouping(aAST);
+            checkOverloadMethodsGrouping(ast);
         }
     }
 

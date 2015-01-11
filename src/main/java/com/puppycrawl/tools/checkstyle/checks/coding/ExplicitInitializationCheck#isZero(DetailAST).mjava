@@ -1,16 +1,16 @@
     /**
-     * @param aExpr node to check.
+     * @param expr node to check.
      * @return true if given node contains numeric constant for zero.
      */
-    private boolean isZero(DetailAST aExpr)
+    private boolean isZero(DetailAST expr)
     {
-        final int type = aExpr.getType();
+        final int type = expr.getType();
         switch (type) {
         case TokenTypes.NUM_FLOAT:
         case TokenTypes.NUM_DOUBLE:
         case TokenTypes.NUM_INT:
         case TokenTypes.NUM_LONG:
-            final String text = aExpr.getText();
+            final String text = expr.getText();
             return (0 == CheckUtils.parseFloat(text, type));
         default:
             return false;

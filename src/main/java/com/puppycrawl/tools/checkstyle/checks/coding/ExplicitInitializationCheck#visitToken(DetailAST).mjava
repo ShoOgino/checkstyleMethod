@@ -1,21 +1,21 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         // do not check local variables and
         // fields declared in interface/annotations
-        if (ScopeUtils.isLocalVariableDef(aAST)
-            || ScopeUtils.inInterfaceOrAnnotationBlock(aAST))
+        if (ScopeUtils.isLocalVariableDef(ast)
+            || ScopeUtils.inInterfaceOrAnnotationBlock(ast))
         {
             return;
         }
 
-        final DetailAST assign = aAST.findFirstToken(TokenTypes.ASSIGN);
+        final DetailAST assign = ast.findFirstToken(TokenTypes.ASSIGN);
         if (assign == null) {
             // no assign - no check
             return;
         }
 
-        final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
         if ((modifiers != null)
             && modifiers.branchContains(TokenTypes.FINAL))
         {
@@ -23,8 +23,8 @@
             return;
         }
 
-        final DetailAST type = aAST.findFirstToken(TokenTypes.TYPE);
-        final DetailAST ident = aAST.findFirstToken(TokenTypes.IDENT);
+        final DetailAST type = ast.findFirstToken(TokenTypes.TYPE);
+        final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
         final DetailAST exprStart =
             assign.getFirstChild().getFirstChild();
         if (isObjectType(type)

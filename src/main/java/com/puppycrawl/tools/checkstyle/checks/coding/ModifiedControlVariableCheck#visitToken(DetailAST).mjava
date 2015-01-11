@@ -1,7 +1,7 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.OBJBLOCK:
             enterBlock();
             break;
@@ -25,10 +25,10 @@
         case TokenTypes.POST_INC:
         case TokenTypes.DEC:
         case TokenTypes.POST_DEC:
-            checkIdent(aAST);
+            checkIdent(ast);
             break;
         default:
-            throw new IllegalStateException(aAST.toString());
+            throw new IllegalStateException(ast.toString());
         }
     }
 

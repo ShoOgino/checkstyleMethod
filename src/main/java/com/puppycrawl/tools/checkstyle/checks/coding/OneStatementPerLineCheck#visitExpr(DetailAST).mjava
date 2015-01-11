@@ -3,16 +3,16 @@
      * first line of the last statement. If the first line of the new
      * statement is the same as the last line of the last statement and we are
      * not within a for-statement, then the rule is violated.
-     * @param aAst token for the {@link TokenTypes#EXPR}.
+     * @param ast token for the {@link TokenTypes#EXPR}.
      */
-    private void visitExpr(DetailAST aAst)
+    private void visitExpr(DetailAST ast)
     {
-        mExprDepth++;
-        if (mExprDepth == 1
-                && !mInForHeader
-                && (mLastStatementEnd == aAst.getLineNo()))
+        exprDepth++;
+        if (exprDepth == 1
+                && !inForHeader
+                && (lastStatementEnd == ast.getLineNo()))
         {
-            log(aAst, "multiple.statements.line");
+            log(ast, "multiple.statements.line");
         }
     }
 

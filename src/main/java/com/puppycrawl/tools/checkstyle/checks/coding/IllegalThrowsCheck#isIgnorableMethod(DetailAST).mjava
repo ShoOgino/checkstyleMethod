@@ -1,13 +1,13 @@
     /**
      * Checks if current method is ignorable due to Check's properties.
-     * @param aMethodDef {@link TokenTypes#METHOD_DEF METHOD_DEF}
+     * @param methodDef {@link TokenTypes#METHOD_DEF METHOD_DEF}
      * @return true if method is ignorable.
      */
-    private boolean isIgnorableMethod(DetailAST aMethodDef)
+    private boolean isIgnorableMethod(DetailAST methodDef)
     {
-        return shouldIgnoreMethod(aMethodDef.findFirstToken(TokenTypes.IDENT).getText())
-            || mIgnoreOverridenMethods
-               && (AnnotationUtility.containsAnnotation(aMethodDef, "Override")
-                  || AnnotationUtility.containsAnnotation(aMethodDef, "java.lang.Override"));
+        return shouldIgnoreMethod(methodDef.findFirstToken(TokenTypes.IDENT).getText())
+            || ignoreOverridenMethods
+               && (AnnotationUtility.containsAnnotation(methodDef, "Override")
+                  || AnnotationUtility.containsAnnotation(methodDef, "java.lang.Override"));
     }
 

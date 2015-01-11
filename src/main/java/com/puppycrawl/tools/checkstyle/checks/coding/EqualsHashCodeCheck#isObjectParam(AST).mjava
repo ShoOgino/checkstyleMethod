@@ -1,11 +1,11 @@
     /**
      * Determines if an AST is a formal param of type Object (or subclass).
-     * @param aFirstChild the AST to check
-     * @return true iff aFirstChild is a parameter of an Object type.
+     * @param firstChild the AST to check
+     * @return true iff firstChild is a parameter of an Object type.
      */
-    private boolean isObjectParam(AST aFirstChild)
+    private boolean isObjectParam(AST firstChild)
     {
-        final AST modifiers = aFirstChild.getFirstChild();
+        final AST modifiers = firstChild.getFirstChild();
         final AST type = modifiers.getNextSibling();
         switch (type.getFirstChild().getType()) {
         case TokenTypes.LITERAL_BOOLEAN:

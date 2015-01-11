@@ -1,11 +1,11 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (isOverridingMethod(aAST)) {
-            mMethodStack.add(new MethodNode(aAST));
+        if (isOverridingMethod(ast)) {
+            methodStack.add(new MethodNode(ast));
         }
-        else if (isSuperCall(aAST)) {
-            final MethodNode methodNode = mMethodStack.getLast();
+        else if (isSuperCall(ast)) {
+            final MethodNode methodNode = methodStack.getLast();
             methodNode.setCallsSuper();
         }
     }

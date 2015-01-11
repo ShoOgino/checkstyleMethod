@@ -1,21 +1,21 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.METHOD_DEF:
-            visitMethodDef(aAST);
+            visitMethodDef(ast);
             break;
         case TokenTypes.VARIABLE_DEF:
-            visitVariableDef(aAST);
+            visitVariableDef(ast);
             break;
         case TokenTypes.PARAMETER_DEF:
-            visitParameterDef(aAST);
+            visitParameterDef(ast);
             break;
         case TokenTypes.IMPORT:
-            visitImport(aAST);
+            visitImport(ast);
             break;
         default:
-            throw new IllegalStateException(aAST.toString());
+            throw new IllegalStateException(ast.toString());
         }
     }
 

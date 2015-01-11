@@ -1,10 +1,10 @@
     /**
      * Checks type of given method, parameter or variable.
-     * @param aAST node to check.
+     * @param ast node to check.
      */
-    private void checkClassName(DetailAST aAST)
+    private void checkClassName(DetailAST ast)
     {
-        final DetailAST type = aAST.findFirstToken(TokenTypes.TYPE);
+        final DetailAST type = ast.findFirstToken(TokenTypes.TYPE);
         final FullIdent ident = CheckUtils.createFullType(type);
 
         if (isMatchingClassName(ident.getText())) {

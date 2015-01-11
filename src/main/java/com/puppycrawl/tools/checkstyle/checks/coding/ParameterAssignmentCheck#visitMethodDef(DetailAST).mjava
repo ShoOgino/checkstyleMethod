@@ -1,12 +1,12 @@
     /**
      * Creates new set of parameters and store old one in stack.
-     * @param aAST a method to process.
+     * @param ast a method to process.
      */
-    private void visitMethodDef(DetailAST aAST)
+    private void visitMethodDef(DetailAST ast)
     {
-        mParameterNamesStack.push(mParameterNames);
-        mParameterNames = Sets.newHashSet();
+        parameterNamesStack.push(parameterNames);
+        parameterNames = Sets.newHashSet();
 
-        visitMethodParameters(aAST.findFirstToken(TokenTypes.PARAMETERS));
+        visitMethodParameters(ast.findFirstToken(TokenTypes.PARAMETERS));
     }
 

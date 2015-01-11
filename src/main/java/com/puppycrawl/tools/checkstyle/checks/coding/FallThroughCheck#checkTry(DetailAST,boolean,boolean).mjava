@@ -1,28 +1,28 @@
     /**
      * Checks if a given try/catch/finally block terminated by return, throw or,
      * if allowed break, continue.
-     * @param aAST loop to check
-     * @param aUseBreak should we consider break as terminator.
-     * @param aUseContinue should we consider continue as terminator.
+     * @param ast loop to check
+     * @param useBreak should we consider break as terminator.
+     * @param useContinue should we consider continue as terminator.
      * @return true if try/cath/finally block is terminated.
      */
-    private boolean checkTry(final DetailAST aAST, boolean aUseBreak,
-                             boolean aUseContinue)
+    private boolean checkTry(final DetailAST ast, boolean useBreak,
+                             boolean useContinue)
     {
-        final DetailAST finalStmt = aAST.getLastChild();
+        final DetailAST finalStmt = ast.getLastChild();
         if (finalStmt.getType() == TokenTypes.LITERAL_FINALLY) {
             return isTerminated(finalStmt.findFirstToken(TokenTypes.SLIST),
-                                aUseBreak, aUseContinue);
+                                useBreak, useContinue);
         }
 
-        boolean isTerminated = isTerminated(aAST.getFirstChild(),
-                                            aUseBreak, aUseContinue);
+        boolean isTerminated = isTerminated(ast.getFirstChild(),
+                                            useBreak, useContinue);
 
-        DetailAST catchStmt = aAST.findFirstToken(TokenTypes.LITERAL_CATCH);
+        DetailAST catchStmt = ast.findFirstToken(TokenTypes.LITERAL_CATCH);
         while ((catchStmt != null) && isTerminated) {
             final DetailAST catchBody =
                 catchStmt.findFirstToken(TokenTypes.SLIST);
-            isTerminated &= isTerminated(catchBody, aUseBreak, aUseContinue);
+            isTerminated &= isTerminated(catchBody, useBreak, useContinue);
             catchStmt = catchStmt.getNextSibling();
         }
         return isTerminated;

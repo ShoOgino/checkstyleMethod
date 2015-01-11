@@ -1,21 +1,21 @@
     /**
      * Tests if the given expression node is surrounded by parentheses.
-     * @param aAST a <code>DetailAST</code> whose type is
+     * @param ast a <code>DetailAST</code> whose type is
      *        <code>TokenTypes.EXPR</code>.
      * @return <code>true</code> if the expression is surrounded by
      *         parentheses.
-     * @throws IllegalArgumentException if <code>aAST.getType()</code> is not
+     * @throws IllegalArgumentException if <code>ast.getType()</code> is not
      *         equal to <code>TokenTypes.EXPR</code>.
      */
-    private boolean exprSurrounded(DetailAST aAST)
+    private boolean exprSurrounded(DetailAST ast)
     {
-        if (aAST.getType() != TokenTypes.EXPR) {
+        if (ast.getType() != TokenTypes.EXPR) {
             throw new IllegalArgumentException("Not an expression node.");
         }
         boolean surrounded = false;
-        if (aAST.getChildCount() >= MIN_CHILDREN_FOR_MATCH) {
-            final AST n1 = aAST.getFirstChild();
-            final AST nn = aAST.getLastChild();
+        if (ast.getChildCount() >= MIN_CHILDREN_FOR_MATCH) {
+            final AST n1 = ast.getFirstChild();
+            final AST nn = ast.getLastChild();
 
             surrounded = (n1.getType() == TokenTypes.LPAREN)
                 && (nn.getType() == TokenTypes.RPAREN);

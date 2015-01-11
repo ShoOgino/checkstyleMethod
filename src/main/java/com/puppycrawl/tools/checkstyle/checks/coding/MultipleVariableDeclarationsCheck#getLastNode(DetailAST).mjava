@@ -1,12 +1,12 @@
     /**
      * Finds sub-node for given node maximum (line, column) pair.
-     * @param aNode the root of tree for search.
+     * @param node the root of tree for search.
      * @return sub-node with maximum (line, column) pair.
      */
-    private static DetailAST getLastNode(final DetailAST aNode)
+    private static DetailAST getLastNode(final DetailAST node)
     {
-        DetailAST currentNode = aNode;
-        DetailAST child = aNode.getFirstChild();
+        DetailAST currentNode = node;
+        DetailAST child = node.getFirstChild();
         while (child != null) {
             final DetailAST newNode = getLastNode(child);
             if ((newNode.getLineNo() > currentNode.getLineNo())

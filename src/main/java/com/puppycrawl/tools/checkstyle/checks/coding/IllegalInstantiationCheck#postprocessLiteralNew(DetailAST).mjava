@@ -1,23 +1,23 @@
     /**
      * Processes one of the collected "new" tokens when treewalking
      * has finished.
-     * @param aAST the "new" token.
+     * @param ast the "new" token.
      */
-    private void postprocessLiteralNew(DetailAST aAST)
+    private void postprocessLiteralNew(DetailAST ast)
     {
-        final DetailAST typeNameAST = aAST.getFirstChild();
+        final DetailAST typeNameAST = ast.getFirstChild();
         final AST nameSibling = typeNameAST.getNextSibling();
         if ((nameSibling != null)
                 && (nameSibling.getType() == TokenTypes.ARRAY_DECLARATOR))
         {
-            // aAST == "new Boolean[]"
+            // ast == "new Boolean[]"
             return;
         }
 
         final FullIdent typeIdent = FullIdent.createFullIdent(typeNameAST);
         final String typeName = typeIdent.getText();
-        final int lineNo = aAST.getLineNo();
-        final int colNo = aAST.getColumnNo();
+        final int lineNo = ast.getLineNo();
+        final int colNo = ast.getColumnNo();
         final String fqClassName = getIllegalInstantiation(typeName);
         if (fqClassName != null) {
             log(lineNo, colNo, "instantiation.avoid", fqClassName);

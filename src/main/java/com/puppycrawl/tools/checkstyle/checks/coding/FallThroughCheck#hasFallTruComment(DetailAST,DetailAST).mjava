@@ -1,18 +1,18 @@
     /**
-     * Determines if the fall through case between <code>aCurrentCase</code> and
-     * <code>aNextCase</code> is reliefed by a appropriate comment.
+     * Determines if the fall through case between <code>currentCase</code> and
+     * <code>nextCase</code> is reliefed by a appropriate comment.
      *
-     * @param aCurrentCase AST of the case that falls through to the next case.
-     * @param aNextCase AST of the next case.
+     * @param currentCase AST of the case that falls through to the next case.
+     * @param nextCase AST of the next case.
      * @return True if a relief comment was found
      */
-    private boolean hasFallTruComment(DetailAST aCurrentCase,
-            DetailAST aNextCase)
+    private boolean hasFallTruComment(DetailAST currentCase,
+            DetailAST nextCase)
     {
 
-        final int startLineNo = aCurrentCase.getLineNo();
-        final int endLineNo = aNextCase.getLineNo();
-        final int endColNo = aNextCase.getColumnNo();
+        final int startLineNo = currentCase.getLineNo();
+        final int endLineNo = nextCase.getLineNo();
+        final int endColNo = nextCase.getColumnNo();
 
         /*
          * Remember: The lines number returned from the AST is 1-based, but
@@ -32,7 +32,7 @@
          *    /+ FALLTHRU +/}
          */
         final String linepart = lines[endLineNo - 1].substring(0, endColNo);
-        if (commentMatch(mRegExp, linepart, endLineNo)) {
+        if (commentMatch(regExp, linepart, endLineNo)) {
             return true;
         }
 
@@ -51,7 +51,7 @@
          */
         for (int i = endLineNo - 2; i > startLineNo - 1; i--) {
             if (lines[i].trim().length() != 0) {
-                return commentMatch(mRegExp, lines[i], i + 1);
+                return commentMatch(regExp, lines[i], i + 1);
             }
         }
 

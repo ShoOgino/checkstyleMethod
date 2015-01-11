@@ -1,12 +1,12 @@
     /**
      * Creates new method context and places old one on the stack.
-     * @param aAST method definition for check.
+     * @param ast method definition for check.
      */
-    private void visitMethodDef(DetailAST aAST)
+    private void visitMethodDef(DetailAST ast)
     {
-        mContextStack.push(mContext);
-        final DetailAST methodNameAST = aAST.findFirstToken(TokenTypes.IDENT);
-        mContext =
+        contextStack.push(context);
+        final DetailAST methodNameAST = ast.findFirstToken(TokenTypes.IDENT);
+        context =
             new Context(!getRegexp().matcher(methodNameAST.getText()).find());
     }
 

@@ -1,18 +1,18 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (isInContext(aAST, ALLOWED_ASSIGMENT_CONTEXT)) {
+        if (isInContext(ast, ALLOWED_ASSIGMENT_CONTEXT)) {
             return;
         }
 
-        if (isInNoBraceControlStatement(aAST)) {
+        if (isInNoBraceControlStatement(ast)) {
             return;
         }
 
-        if (isInWhileIdiom(aAST)) {
+        if (isInWhileIdiom(ast)) {
             return;
         }
 
-        log(aAST.getLineNo(), aAST.getColumnNo(), "assignment.inner.avoid");
+        log(ast.getLineNo(), ast.getColumnNo(), "assignment.inner.avoid");
     }
 

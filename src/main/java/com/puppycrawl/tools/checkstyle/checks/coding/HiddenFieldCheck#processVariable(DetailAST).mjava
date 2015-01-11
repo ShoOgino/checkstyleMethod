@@ -1,27 +1,27 @@
     /**
      * Process a variable token.
-     * Check whether a local variable or parameter shadows a field.
-     * Store a field for later comparison with local variables and parameters.
-     * @param aAST the variable token.
+     * Check whether a local variable or pnameter shadows a field.
+     * Store a field for later comparison with local variables and pnameters.
+     * @param ast the variable token.
      */
-    private void processVariable(DetailAST aAST)
+    private void processVariable(DetailAST ast)
     {
-        if (ScopeUtils.inInterfaceOrAnnotationBlock(aAST)
-            || (!ScopeUtils.isLocalVariableDef(aAST)
-            && (aAST.getType() != TokenTypes.PARAMETER_DEF)))
+        if (ScopeUtils.inInterfaceOrAnnotationBlock(ast)
+            || (!ScopeUtils.isLocalVariableDef(ast)
+            && (ast.getType() != TokenTypes.PARAMETER_DEF)))
         {
             // do nothing
             return;
         }
-        //local variable or parameter. Does it shadow a field?
-        final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        //local variable or pnameter. Does it shadow a field?
+        final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
         final String name = nameAST.getText();
-        if ((mCurrentFrame.containsStaticField(name)
-             || (!inStatic(aAST) && mCurrentFrame.containsInstanceField(name)))
-            && ((mRegexp == null) || (!getRegexp().matcher(name).find()))
-            && !isIgnoredSetterParam(aAST, name)
-            && !isIgnoredConstructorParam(aAST)
-            && !isIgnoredParamOfAbstractMethod(aAST))
+        if ((currentFrame.containsStaticField(name)
+             || (!inStatic(ast) && currentFrame.containsInstanceField(name)))
+            && ((regexp == null) || (!getRegexp().matcher(name).find()))
+            && !isIgnoredSetterParam(ast, name)
+            && !isIgnoredConstructorParam(ast)
+            && !isIgnoredParamOfAbstractMethod(ast))
         {
             log(nameAST, "hidden.field", name);
         }

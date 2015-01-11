@@ -1,7 +1,7 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        DetailAST nextNode = aAST.getNextSibling();
+        DetailAST nextNode = ast.getNextSibling();
         final boolean isCommaSeparated =
             ((nextNode != null) && (nextNode.getType() == TokenTypes.COMMA));
 
@@ -19,7 +19,7 @@
         if ((nextNode != null)
             && (nextNode.getType() == TokenTypes.VARIABLE_DEF))
         {
-            final DetailAST firstNode = CheckUtils.getFirstNode(aAST);
+            final DetailAST firstNode = CheckUtils.getFirstNode(ast);
             if (isCommaSeparated) {
                 // Check if the multiple variable declarations are in a
                 // for loop initializer. If they are, then no warning
@@ -27,13 +27,13 @@
                 // a for loop initializer is a good way to minimize
                 // variable scope. Refer Feature Request Id - 2895985
                 // for more details
-                if (aAST.getParent().getType() != TokenTypes.FOR_INIT) {
+                if (ast.getParent().getType() != TokenTypes.FOR_INIT) {
                     log(firstNode, "multiple.variable.declarations.comma");
                 }
                 return;
             }
 
-            final DetailAST lastNode = getLastNode(aAST);
+            final DetailAST lastNode = getLastNode(ast);
             final DetailAST firstNextNode = CheckUtils.getFirstNode(nextNode);
 
             if (firstNextNode.getLineNo() == lastNode.getLineNo()) {

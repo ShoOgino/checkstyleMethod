@@ -1,13 +1,13 @@
     /**
      * Get name of instance whose method is called.
-     * @param aMethodCallAst
+     * @param methodCallAst
      *        DetailAST of METHOD_CALL.
      * @return name of instance.
      */
-    private static String getInstanceName(DetailAST aMethodCallAst)
+    private static String getInstanceName(DetailAST methodCallAst)
     {
         final String methodCallName =
-                FullIdent.createFullIdentBelow(aMethodCallAst).getText();
+                FullIdent.createFullIdentBelow(methodCallAst).getText();
         final int lastDotIndex = methodCallName.lastIndexOf('.');
         String instanceName = "";
         if (lastDotIndex != -1) {

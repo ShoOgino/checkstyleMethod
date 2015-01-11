@@ -1,17 +1,17 @@
     /**
      * Check if ident is parameter.
-     * @param aAST ident to check.
+     * @param ast ident to check.
      */
-    private void checkIdent(DetailAST aAST)
+    private void checkIdent(DetailAST ast)
     {
-        if ((mCurrentVariables != null) && !mCurrentVariables.isEmpty()) {
-            final DetailAST identAST = aAST.getFirstChild();
+        if ((currentVariables != null) && !currentVariables.isEmpty()) {
+            final DetailAST identAST = ast.getFirstChild();
 
             if ((identAST != null)
                 && (identAST.getType() == TokenTypes.IDENT)
-                && mCurrentVariables.contains(identAST.getText()))
+                && currentVariables.contains(identAST.getText()))
             {
-                log(aAST.getLineNo(), aAST.getColumnNo(),
+                log(ast.getLineNo(), ast.getColumnNo(),
                     "modified.control.variable", identAST.getText());
             }
         }

@@ -1,34 +1,34 @@
     /**
      * Checks if a given subtree terminated by return, throw or,
      * if allowed break, continue.
-     * @param aAST root of given subtree
-     * @param aUseBreak should we consider break as terminator.
-     * @param aUseContinue should we consider continue as terminator.
+     * @param ast root of given subtree
+     * @param useBreak should we consider break as terminator.
+     * @param useContinue should we consider continue as terminator.
      * @return true if the subtree is terminated.
      */
-    private boolean isTerminated(final DetailAST aAST, boolean aUseBreak,
-                                 boolean aUseContinue)
+    private boolean isTerminated(final DetailAST ast, boolean useBreak,
+                                 boolean useContinue)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.LITERAL_RETURN:
         case TokenTypes.LITERAL_THROW:
             return true;
         case TokenTypes.LITERAL_BREAK:
-            return aUseBreak;
+            return useBreak;
         case TokenTypes.LITERAL_CONTINUE:
-            return aUseContinue;
+            return useContinue;
         case TokenTypes.SLIST:
-            return checkSlist(aAST, aUseBreak, aUseContinue);
+            return checkSlist(ast, useBreak, useContinue);
         case TokenTypes.LITERAL_IF:
-            return checkIf(aAST, aUseBreak, aUseContinue);
+            return checkIf(ast, useBreak, useContinue);
         case TokenTypes.LITERAL_FOR:
         case TokenTypes.LITERAL_WHILE:
         case TokenTypes.LITERAL_DO:
-            return checkLoop(aAST);
+            return checkLoop(ast);
         case TokenTypes.LITERAL_TRY:
-            return checkTry(aAST, aUseBreak, aUseContinue);
+            return checkTry(ast, useBreak, useContinue);
         case TokenTypes.LITERAL_SWITCH:
-            return checkSwitch(aAST, aUseContinue);
+            return checkSwitch(ast, useContinue);
         default:
             return false;
         }

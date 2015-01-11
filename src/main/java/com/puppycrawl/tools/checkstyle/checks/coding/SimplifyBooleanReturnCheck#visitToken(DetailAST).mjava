@@ -1,5 +1,5 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         // LITERAL_IF has the following four or five children:
         // '('
@@ -10,7 +10,7 @@
 
         // don't bother if this is not if then else
         final AST elseLiteral =
-            aAST.findFirstToken(TokenTypes.LITERAL_ELSE);
+            ast.findFirstToken(TokenTypes.LITERAL_ELSE);
         if (elseLiteral == null) {
             return;
         }
@@ -18,13 +18,13 @@
 
         // skip '(' and ')'
         // TODO: Introduce helpers in DetailAST
-        final AST condition = aAST.getFirstChild().getNextSibling();
+        final AST condition = ast.getFirstChild().getNextSibling();
         final AST thenStatement = condition.getNextSibling().getNextSibling();
 
         if (returnsOnlyBooleanLiteral(thenStatement)
             && returnsOnlyBooleanLiteral(elseStatement))
         {
-            log(aAST.getLineNo(), aAST.getColumnNo(), "simplify.boolreturn");
+            log(ast.getLineNo(), ast.getColumnNo(), "simplify.boolreturn");
         }
     }
 

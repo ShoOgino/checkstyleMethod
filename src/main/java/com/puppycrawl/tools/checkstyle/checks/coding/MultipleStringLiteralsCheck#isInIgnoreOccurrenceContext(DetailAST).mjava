@@ -1,19 +1,19 @@
     /**
      * Analyses the path from the AST root to a given AST for occurrences
-     * of the token types in {@link #mIgnoreOccurrenceContext}.
+     * of the token types in {@link #ignoreOccurrenceContext}.
      *
-     * @param aAST the node from where to start searching towards the root node
-     * @return whether the path from the root node to aAST contains one of the
-     * token type in {@link #mIgnoreOccurrenceContext}.
+     * @param ast the node from where to start searching towards the root node
+     * @return whether the path from the root node to ast contains one of the
+     * token type in {@link #ignoreOccurrenceContext}.
      */
-    private boolean isInIgnoreOccurrenceContext(DetailAST aAST)
+    private boolean isInIgnoreOccurrenceContext(DetailAST ast)
     {
-        for (DetailAST token = aAST;
+        for (DetailAST token = ast;
              token.getParent() != null;
              token = token.getParent())
         {
             final int type = token.getType();
-            if (mIgnoreOccurrenceContext.get(type)) {
+            if (ignoreOccurrenceContext.get(type)) {
                 return true;
             }
         }

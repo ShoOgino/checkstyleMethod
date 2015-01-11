@@ -1,27 +1,27 @@
     /**
      * Checks illegal instantiations.
-     * @param aClassName instantiated class, may or may not be qualified
-     * @return the fully qualified class name of aClassName
-     * or null if instantiation of aClassName is OK
+     * @param className instantiated class, may or may not be qualified
+     * @return the fully qualified class name of className
+     * or null if instantiation of className is OK
      */
-    private String getIllegalInstantiation(String aClassName)
+    private String getIllegalInstantiation(String className)
     {
-        final String javaLang = "java.lang.";
+        final String javlang = "java.lang.";
 
-        if (mIllegalClasses.contains(aClassName)) {
-            return aClassName;
+        if (illegalClasses.contains(className)) {
+            return className;
         }
 
-        final int clsNameLen = aClassName.length();
-        final int pkgNameLen = (mPkgName == null) ? 0 : mPkgName.length();
+        final int clsNameLen = className.length();
+        final int pkgNameLen = (pkgName == null) ? 0 : pkgName.length();
 
-        for (String illegal : mIllegalClasses) {
+        for (String illegal : illegalClasses) {
             final int illegalLen = illegal.length();
 
             // class from java.lang
-            if (((illegalLen - javaLang.length()) == clsNameLen)
-                && illegal.endsWith(aClassName)
-                && illegal.startsWith(javaLang))
+            if (((illegalLen - javlang.length()) == clsNameLen)
+                && illegal.endsWith(className)
+                && illegal.startsWith(javlang))
             {
                 // java.lang needs no import, but a class without import might
                 // also come from the same file or be in the same package.
@@ -29,13 +29,13 @@
                 // the expression "new Boolean()" refers to that class,
                 // not to java.lang.Boolean
 
-                final boolean isSameFile = mClassNames.contains(aClassName);
+                final boolean isSameFile = classNames.contains(className);
 
                 boolean isSamePackage = false;
                 try {
                     final ClassLoader classLoader = getClassLoader();
                     if (classLoader != null) {
-                        final String fqName = mPkgName + "." + aClassName;
+                        final String fqName = pkgName + "." + className;
                         classLoader.loadClass(fqName);
                         // no ClassNotFoundException, fqName is a known class
                         isSamePackage = true;
@@ -53,35 +53,35 @@
 
             // class from same package
 
-            // the toplevel package (mPkgName == null) is covered by the
-            // "illegalInsts.contains(aClassName)" check above
+            // the toplevel package (pkgName == null) is covered by the
+            // "illegalInsts.contains(className)" check above
 
             // the test is the "no garbage" version of
-            // illegal.equals(mPkgName + "." + aClassName)
-            if ((mPkgName != null)
+            // illegal.equals(pkgName + "." + className)
+            if ((pkgName != null)
                 && (clsNameLen == illegalLen - pkgNameLen - 1)
                 && (illegal.charAt(pkgNameLen) == '.')
-                && illegal.endsWith(aClassName)
-                && illegal.startsWith(mPkgName))
+                && illegal.endsWith(className)
+                && illegal.startsWith(pkgName))
             {
                 return illegal;
             }
             // import statements
-            for (FullIdent importLineText : mImports) {
+            for (FullIdent importLineText : imports) {
                 final String importArg = importLineText.getText();
                 if (importArg.endsWith(".*")) {
                     final String fqClass =
                         importArg.substring(0, importArg.length() - 1)
-                        + aClassName;
+                        + className;
                     // assume that illegalInsts only contain existing classes
                     // or else we might create a false alarm here
-                    if (mIllegalClasses.contains(fqClass)) {
+                    if (illegalClasses.contains(fqClass)) {
                         return fqClass;
                     }
                 }
                 else {
-                    if (Utils.baseClassname(importArg).equals(aClassName)
-                        && mIllegalClasses.contains(importArg))
+                    if (Utils.baseClassname(importArg).equals(className)
+                        && illegalClasses.contains(importArg))
                     {
                         return importArg;
                     }

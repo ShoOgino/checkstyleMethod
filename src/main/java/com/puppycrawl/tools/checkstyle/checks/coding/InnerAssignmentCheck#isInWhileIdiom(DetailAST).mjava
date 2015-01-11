@@ -9,15 +9,15 @@
      * </pre>
      * </p>
      *
-     * @param aAST assignment AST
+     * @param ast assignment AST
      * @return whether the context of the assignemt AST indicates the idiom
      */
-    private boolean isInWhileIdiom(DetailAST aAST)
+    private boolean isInWhileIdiom(DetailAST ast)
     {
-        if (!isComparison(aAST.getParent())) {
+        if (!isComparison(ast.getParent())) {
             return false;
         }
         return isInContext(
-                aAST.getParent(), ALLOWED_ASSIGMENT_IN_COMPARISON_CONTEXT);
+                ast.getParent(), ALLOWED_ASSIGMENT_IN_COMPARISON_CONTEXT);
     }
 

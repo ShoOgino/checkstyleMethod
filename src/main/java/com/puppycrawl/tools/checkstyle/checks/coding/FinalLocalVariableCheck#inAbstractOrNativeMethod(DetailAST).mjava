@@ -1,11 +1,11 @@
     /**
      * Determines whether an AST is a descendant of an abstract or native method.
-     * @param aAST the AST to check.
-     * @return true if aAST is a descendant of an abstract or native method.
+     * @param ast the AST to check.
+     * @return true if ast is a descendant of an abstract or native method.
      */
-    private static boolean inAbstractOrNativeMethod(DetailAST aAST)
+    private static boolean inAbstractOrNativeMethod(DetailAST ast)
     {
-        DetailAST parent = aAST.getParent();
+        DetailAST parent = ast.getParent();
         while (parent != null) {
             if (parent.getType() == TokenTypes.METHOD_DEF) {
                 final DetailAST modifiers =

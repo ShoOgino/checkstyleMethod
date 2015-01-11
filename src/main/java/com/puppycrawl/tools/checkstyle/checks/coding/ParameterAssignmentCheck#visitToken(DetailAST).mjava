@@ -1,10 +1,10 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.CTOR_DEF:
         case TokenTypes.METHOD_DEF:
-            visitMethodDef(aAST);
+            visitMethodDef(ast);
             break;
         case TokenTypes.ASSIGN:
         case TokenTypes.PLUS_ASSIGN:
@@ -18,16 +18,16 @@
         case TokenTypes.BAND_ASSIGN:
         case TokenTypes.BXOR_ASSIGN:
         case TokenTypes.BOR_ASSIGN:
-            visitAssign(aAST);
+            visitAssign(ast);
             break;
         case TokenTypes.INC:
         case TokenTypes.POST_INC:
         case TokenTypes.DEC:
         case TokenTypes.POST_DEC:
-            visitIncDec(aAST);
+            visitIncDec(ast);
             break;
         default:
-            throw new IllegalStateException(aAST.toString());
+            throw new IllegalStateException(ast.toString());
         }
     }
 

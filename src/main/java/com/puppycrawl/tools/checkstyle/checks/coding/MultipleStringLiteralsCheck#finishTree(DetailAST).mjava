@@ -1,10 +1,10 @@
     @Override
-    public void finishTree(DetailAST aRootAST)
+    public void finishTree(DetailAST rootAST)
     {
-        final Set<String> keys = mStringMap.keySet();
+        final Set<String> keys = stringMap.keySet();
         for (String key : keys) {
-            final List<StringInfo> hits = mStringMap.get(key);
-            if (hits.size() > mAllowedDuplicates) {
+            final List<StringInfo> hits = stringMap.get(key);
+            if (hits.size() > allowedDuplicates) {
                 final StringInfo firstFinding = hits.get(0);
                 final int line = firstFinding.getLine();
                 final int col = firstFinding.getCol();

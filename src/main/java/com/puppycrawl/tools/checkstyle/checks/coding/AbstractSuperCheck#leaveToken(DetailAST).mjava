@@ -1,9 +1,9 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        if (isOverridingMethod(aAST)) {
+        if (isOverridingMethod(ast)) {
             final MethodNode methodNode =
-                mMethodStack.removeLast();
+                methodStack.removeLast();
             if (!methodNode.getCallsSuper()) {
                 final DetailAST methodAST = methodNode.getMethod();
                 final DetailAST nameAST =

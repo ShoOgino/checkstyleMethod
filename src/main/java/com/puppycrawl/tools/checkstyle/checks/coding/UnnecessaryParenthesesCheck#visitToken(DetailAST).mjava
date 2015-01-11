@@ -1,9 +1,9 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final int type = aAST.getType();
-        final boolean surrounded = isSurrounded(aAST);
-        final DetailAST parent = aAST.getParent();
+        final int type = ast.getType();
+        final boolean surrounded = isSurrounded(ast);
+        final DetailAST parent = ast.getParent();
 
         if ((type == TokenTypes.ASSIGN)
             && (parent.getType() == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR))
@@ -14,30 +14,30 @@
 
         // An identifier surrounded by parentheses.
         if (surrounded && (type == TokenTypes.IDENT)) {
-            mParentToSkip = aAST.getParent();
-            log(aAST, "unnecessary.paren.ident", aAST.getText());
+            parentToSkip = ast.getParent();
+            log(ast, "unnecessary.paren.ident", ast.getText());
             return;
         }
 
         // A literal (numeric or string) surrounded by parentheses.
         if (surrounded && inTokenList(type, LITERALS)) {
-            mParentToSkip = aAST.getParent();
+            parentToSkip = ast.getParent();
             if (type == TokenTypes.STRING_LITERAL) {
-                log(aAST, "unnecessary.paren.string",
-                    chopString(aAST.getText()));
+                log(ast, "unnecessary.paren.string",
+                    chopString(ast.getText()));
             }
             else {
-                log(aAST, "unnecessary.paren.literal", aAST.getText());
+                log(ast, "unnecessary.paren.literal", ast.getText());
             }
             return;
         }
 
         // The rhs of an assignment surrounded by parentheses.
         if (inTokenList(type, ASSIGNMENTS)) {
-            mAssignDepth++;
-            final DetailAST last = aAST.getLastChild();
+            assignDepth++;
+            final DetailAST last = ast.getLastChild();
             if (last.getType() == TokenTypes.RPAREN) {
-                log(aAST, "unnecessary.paren.assign");
+                log(ast, "unnecessary.paren.assign");
             }
         }
     }

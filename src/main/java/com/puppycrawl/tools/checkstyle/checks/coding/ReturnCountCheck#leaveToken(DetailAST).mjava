@@ -1,16 +1,16 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.CTOR_DEF:
         case TokenTypes.METHOD_DEF:
-            leaveMethodDef(aAST);
+            leaveMethodDef(ast);
             break;
         case TokenTypes.LITERAL_RETURN:
             // Do nothing
             break;
         default:
-            throw new IllegalStateException(aAST.toString());
+            throw new IllegalStateException(ast.toString());
         }
     }
 

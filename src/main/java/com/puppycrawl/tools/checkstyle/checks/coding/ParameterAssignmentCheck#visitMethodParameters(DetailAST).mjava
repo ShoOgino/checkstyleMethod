@@ -1,11 +1,11 @@
     /**
      * Creates new parameter set for given method.
-     * @param aAST a method for process.
+     * @param ast a method for process.
      */
-    private void visitMethodParameters(DetailAST aAST)
+    private void visitMethodParameters(DetailAST ast)
     {
         DetailAST parameterDefAST =
-            aAST.findFirstToken(TokenTypes.PARAMETER_DEF);
+            ast.findFirstToken(TokenTypes.PARAMETER_DEF);
 
         for (; parameterDefAST != null;
              parameterDefAST = parameterDefAST.getNextSibling())
@@ -13,7 +13,7 @@
             if (parameterDefAST.getType() == TokenTypes.PARAMETER_DEF) {
                 final DetailAST param =
                     parameterDefAST.findFirstToken(TokenTypes.IDENT);
-                mParameterNames.add(param.getText());
+                parameterNames.add(param.getText());
             }
         }
     }

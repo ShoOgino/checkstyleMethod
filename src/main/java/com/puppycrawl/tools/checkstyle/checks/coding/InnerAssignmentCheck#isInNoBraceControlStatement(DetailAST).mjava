@@ -1,5 +1,5 @@
     /**
-     * Determines if aAST is in the body of a flow control statement without
+     * Determines if ast is in the body of a flow control statement without
      * braces. An example of such a statement would be
      * <p>
      * <pre>
@@ -21,18 +21,18 @@
      * </pre>
      * </p>
      * <p>
-     * We need to ensure that aAST is in the body and not in the test.
+     * We need to ensure that ast is in the body and not in the test.
      * </p>
      *
-     * @param aAST an assignment operator AST
-     * @return whether aAST is in the body of a flow control statement
+     * @param ast an assignment operator AST
+     * @return whether ast is in the body of a flow control statement
      */
-    private static boolean isInNoBraceControlStatement(DetailAST aAST)
+    private static boolean isInNoBraceControlStatement(DetailAST ast)
     {
-        if (!isInContext(aAST, CONTROL_CONTEXT)) {
+        if (!isInContext(ast, CONTROL_CONTEXT)) {
             return false;
         }
-        final DetailAST expr = aAST.getParent();
+        final DetailAST expr = ast.getParent();
         final AST exprNext = expr.getNextSibling();
         return (exprNext != null) && (exprNext.getType() == TokenTypes.SEMI);
     }

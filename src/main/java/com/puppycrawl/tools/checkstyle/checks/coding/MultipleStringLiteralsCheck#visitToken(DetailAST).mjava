@@ -1,18 +1,18 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (isInIgnoreOccurrenceContext(aAST)) {
+        if (isInIgnoreOccurrenceContext(ast)) {
             return;
         }
-        final String currentString = aAST.getText();
-        if ((mPattern == null) || !mPattern.matcher(currentString).find()) {
-            List<StringInfo> hitList = mStringMap.get(currentString);
+        final String currentString = ast.getText();
+        if ((pattern == null) || !pattern.matcher(currentString).find()) {
+            List<StringInfo> hitList = stringMap.get(currentString);
             if (hitList == null) {
                 hitList = Lists.newArrayList();
-                mStringMap.put(currentString, hitList);
+                stringMap.put(currentString, hitList);
             }
-            final int line = aAST.getLineNo();
-            final int col = aAST.getColumnNo();
+            final int line = ast.getLineNo();
+            final int col = ast.getColumnNo();
             hitList.add(new StringInfo(line, col));
         }
     }

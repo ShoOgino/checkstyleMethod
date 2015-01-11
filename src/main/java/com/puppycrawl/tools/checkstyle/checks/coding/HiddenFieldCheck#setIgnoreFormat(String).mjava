@@ -1,16 +1,16 @@
     /**
      * Set the ignore format to the specified regular expression.
-     * @param aFormat a <code>String</code> value
-     * @throws ConversionException unable to parse aFormat
+     * @param format a <code>String</code> value
+     * @throws ConversionException unable to parse format
      */
-    public void setIgnoreFormat(String aFormat)
+    public void setIgnoreFormat(String format)
         throws ConversionException
     {
         try {
-            mRegexp = Utils.getPattern(aFormat);
+            regexp = Utils.getPattern(format);
         }
         catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + aFormat, e);
+            throw new ConversionException("unable to parse " + format, e);
         }
     }
 

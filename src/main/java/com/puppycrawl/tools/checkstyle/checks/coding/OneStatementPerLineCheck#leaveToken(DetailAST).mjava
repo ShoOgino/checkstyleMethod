@@ -1,12 +1,12 @@
     @Override
-    public void leaveToken(DetailAST aAst)
+    public void leaveToken(DetailAST ast)
     {
-        switch (aAst.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.FOR_ITERATOR:
-            mInForHeader = false;
+            inForHeader = false;
             break;
         case TokenTypes.EXPR:
-            mExprDepth--;
+            exprDepth--;
             break;
         default:
             break;

@@ -1,12 +1,12 @@
     /**
      * Push current variables to the stack.
-     * @param aForEach a for-each clause
+     * @param forEach a for-each clause
      */
-    private void leaveForEach(DetailAST aForEach)
+    private void leaveForEach(DetailAST forEach)
     {
         final DetailAST paramDef =
-            aForEach.findFirstToken(TokenTypes.VARIABLE_DEF);
+            forEach.findFirstToken(TokenTypes.VARIABLE_DEF);
         final DetailAST paramName = paramDef.findFirstToken(TokenTypes.IDENT);
-        mCurrentVariables.push(paramName.getText());
+        currentVariables.push(paramName.getText());
     }
 

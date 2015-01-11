@@ -1,24 +1,24 @@
     /**
      * Checks if Ast node contains given element.
-     * @param aParent
+     * @param parent
      *        Node of AST.
-     * @param aAST
+     * @param ast
      *        Ast element which is checked for content in Ast node.
      * @return true if Ast element was found in Ast node, otherwise - false.
      */
-    private static boolean isChild(DetailAST aParent, DetailAST aAST)
+    private static boolean isChild(DetailAST parent, DetailAST ast)
     {
         boolean isChild = false;
-        final ASTEnumeration astList = aParent.findAllPartial(aAST);
+        final ASTEnumeration astList = parent.findAllPartial(ast);
 
         while (astList.hasMoreNodes()) {
-            final DetailAST ast = (DetailAST) astList.nextNode();
-            DetailAST astParent = ast.getParent();
+            final DetailAST astNode = (DetailAST) astList.nextNode();
+            DetailAST astParent = astNode.getParent();
 
             while (astParent != null) {
 
-                if (astParent.equals(aParent)
-                        && astParent.getLineNo() == aParent.getLineNo())
+                if (astParent.equals(parent)
+                        && astParent.getLineNo() == parent.getLineNo())
                 {
                     isChild = true;
                     break;

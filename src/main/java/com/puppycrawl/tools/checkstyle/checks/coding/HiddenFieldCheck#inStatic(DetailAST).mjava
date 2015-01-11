@@ -1,12 +1,12 @@
     /**
      * Determines whether an AST node is in a static method or static
      * initializer.
-     * @param aAST the node to check.
-     * @return true if aAST is in a static method or a static block;
+     * @param ast the node to check.
+     * @return true if ast is in a static method or a static block;
      */
-    private static boolean inStatic(DetailAST aAST)
+    private static boolean inStatic(DetailAST ast)
     {
-        DetailAST parent = aAST.getParent();
+        DetailAST parent = ast.getParent();
         while (parent != null) {
             switch (parent.getType()) {
             case TokenTypes.STATIC_INIT:

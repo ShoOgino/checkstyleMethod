@@ -1,8 +1,8 @@
     @Override
-    public void visitToken(DetailAST aDetailAST)
+    public void visitToken(DetailAST detailAST)
     {
-        final DetailAST methodDef = aDetailAST.getParent();
-        DetailAST token = aDetailAST.getFirstChild();
+        final DetailAST methodDef = detailAST.getParent();
+        DetailAST token = detailAST.getFirstChild();
         // Check if the method with the given name should be ignored.
         if (!isIgnorableMethod(methodDef)) {
             while (token != null) {

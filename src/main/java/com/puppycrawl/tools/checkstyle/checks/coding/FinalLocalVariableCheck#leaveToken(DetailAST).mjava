@@ -1,9 +1,9 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        super.leaveToken(aAST);
+        super.leaveToken(ast);
 
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.OBJBLOCK:
         case TokenTypes.SLIST:
         case TokenTypes.LITERAL_FOR:
@@ -11,7 +11,7 @@
         case TokenTypes.STATIC_INIT:
         case TokenTypes.INSTANCE_INIT:
         case TokenTypes.METHOD_DEF:
-            final Map<String, DetailAST> state = mScopeStack.pop();
+            final Map<String, DetailAST> state = scopeStack.pop();
             for (DetailAST var : state.values()) {
                 log(var.getLineNo(), var.getColumnNo(), "final.variable", var
                         .getText());

@@ -1,7 +1,7 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.OBJBLOCK:
         case TokenTypes.SLIST:
         case TokenTypes.LITERAL_FOR:
@@ -9,25 +9,25 @@
         case TokenTypes.CTOR_DEF:
         case TokenTypes.STATIC_INIT:
         case TokenTypes.INSTANCE_INIT:
-            mScopeStack.push(new HashMap<String, DetailAST>());
+            scopeStack.push(new HashMap<String, DetailAST>());
             break;
 
         case TokenTypes.PARAMETER_DEF:
-            if (ScopeUtils.inInterfaceBlock(aAST)
-                || inAbstractOrNativeMethod(aAST))
+            if (ScopeUtils.inInterfaceBlock(ast)
+                || inAbstractOrNativeMethod(ast))
             {
                 break;
             }
         case TokenTypes.VARIABLE_DEF:
-            if ((aAST.getParent().getType() != TokenTypes.OBJBLOCK)
-                && (aAST.getParent().getType() != TokenTypes.FOR_EACH_CLAUSE))
+            if ((ast.getParent().getType() != TokenTypes.OBJBLOCK)
+                && (ast.getParent().getType() != TokenTypes.FOR_EACH_CLAUSE))
             {
-                insertVariable(aAST);
+                insertVariable(ast);
             }
             break;
 
         case TokenTypes.IDENT:
-            final int parentType = aAST.getParent().getType();
+            final int parentType = ast.getParent().getType();
             if ((TokenTypes.POST_DEC        == parentType)
                 || (TokenTypes.DEC          == parentType)
                 || (TokenTypes.POST_INC     == parentType)
@@ -45,10 +45,10 @@
                 || (TokenTypes.BOR_ASSIGN   == parentType)
                 || (TokenTypes.BAND_ASSIGN  == parentType))
             {
-                // TODO: is there better way to check is aAST
+                // TODO: is there better way to check is ast
                 // in left part of assignment?
-                if (aAST.getParent().getFirstChild() == aAST) {
-                    removeVariable(aAST);
+                if (ast.getParent().getFirstChild() == ast) {
+                    removeVariable(ast);
                 }
             }
             break;

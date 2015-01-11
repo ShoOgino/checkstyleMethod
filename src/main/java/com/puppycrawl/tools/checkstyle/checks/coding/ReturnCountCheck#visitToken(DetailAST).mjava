@@ -1,16 +1,16 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.CTOR_DEF:
         case TokenTypes.METHOD_DEF:
-            visitMethodDef(aAST);
+            visitMethodDef(ast);
             break;
         case TokenTypes.LITERAL_RETURN:
-            mContext.visitLiteralReturn();
+            context.visitLiteralReturn();
             break;
         default:
-            throw new IllegalStateException(aAST.toString());
+            throw new IllegalStateException(ast.toString());
         }
     }
 

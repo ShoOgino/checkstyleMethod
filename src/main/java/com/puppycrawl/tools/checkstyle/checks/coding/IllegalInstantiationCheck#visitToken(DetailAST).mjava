@@ -1,21 +1,21 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.LITERAL_NEW:
-            processLiteralNew(aAST);
+            processLiteralNew(ast);
             break;
         case TokenTypes.PACKAGE_DEF:
-            processPackageDef(aAST);
+            processPackageDef(ast);
             break;
         case TokenTypes.IMPORT:
-            processImport(aAST);
+            processImport(ast);
             break;
         case TokenTypes.CLASS_DEF:
-            processClassDef(aAST);
+            processClassDef(ast);
             break;
         default:
-            throw new IllegalArgumentException("Unknown type " + aAST);
+            throw new IllegalArgumentException("Unknown type " + ast);
         }
     }
 

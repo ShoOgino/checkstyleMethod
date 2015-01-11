@@ -1,17 +1,17 @@
     @Override
-    public void visitToken(DetailAST aDetailAST)
+    public void visitToken(DetailAST detailAST)
     {
-        final DetailAST paramDef =
-            aDetailAST.findFirstToken(TokenTypes.PARAMETER_DEF);
+        final DetailAST paradef =
+            detailAST.findFirstToken(TokenTypes.PARAMETER_DEF);
         final DetailAST excTypeParent =
-                paramDef.findFirstToken(TokenTypes.TYPE);
+                paradef.findFirstToken(TokenTypes.TYPE);
         final List<DetailAST> excTypes = getAllExceptionTypes(excTypeParent);
 
         for (DetailAST excType : excTypes) {
             final FullIdent ident = FullIdent.createFullIdent(excType);
 
             if (isIllegalClassName(ident.getText())) {
-                log(aDetailAST, "illegal.catch", ident.getText());
+                log(detailAST, "illegal.catch", ident.getText());
             }
         }
     }

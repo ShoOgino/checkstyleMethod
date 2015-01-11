@@ -1,15 +1,15 @@
     /**
      * Skips over an inner assign portion of an argument expression.
-     * @param aCurrentAST current token in the argument expression
+     * @param currentAST current token in the argument expression
      * @return the next relevant token
      */
-    private DetailAST skipVariableAssign(final DetailAST aCurrentAST)
+    private DetailAST skipVariableAssign(final DetailAST currentAST)
     {
-        if ((aCurrentAST.getType() == TokenTypes.ASSIGN)
-                && (aCurrentAST.getFirstChild().getType() == TokenTypes.IDENT))
+        if ((currentAST.getType() == TokenTypes.ASSIGN)
+                && (currentAST.getFirstChild().getType() == TokenTypes.IDENT))
         {
-            return aCurrentAST.getFirstChild().getNextSibling();
+            return currentAST.getFirstChild().getNextSibling();
         }
-        return aCurrentAST;
+        return currentAST;
     }
 

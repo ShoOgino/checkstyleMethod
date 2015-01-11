@@ -1,8 +1,8 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        final int type = aAST.getType();
-        final DetailAST parent = aAST.getParent();
+        final int type = ast.getType();
+        final DetailAST parent = ast.getParent();
 
         if ((type == TokenTypes.ASSIGN)
             && (parent.getType() == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR))
@@ -14,30 +14,30 @@
         // An expression is surrounded by parentheses.
         if (type == TokenTypes.EXPR) {
 
-            // If 'mParentToSkip' == 'aAST', then we've already logged a
+            // If 'parentToSkip' == 'ast', then we've already logged a
             // warning about an immediate child node in visitToken, so we don't
             // need to log another one here.
 
-            if ((mParentToSkip != aAST) && exprSurrounded(aAST)) {
-                if (mAssignDepth >= 1) {
-                    log(aAST, "unnecessary.paren.assign");
+            if ((parentToSkip != ast) && exprSurrounded(ast)) {
+                if (assignDepth >= 1) {
+                    log(ast, "unnecessary.paren.assign");
                 }
-                else if (aAST.getParent().getType()
+                else if (ast.getParent().getType()
                     == TokenTypes.LITERAL_RETURN)
                 {
-                    log(aAST, "unnecessary.paren.return");
+                    log(ast, "unnecessary.paren.return");
                 }
                 else {
-                    log(aAST, "unnecessary.paren.expr");
+                    log(ast, "unnecessary.paren.expr");
                 }
             }
 
-            mParentToSkip = null;
+            parentToSkip = null;
         }
         else if (inTokenList(type, ASSIGNMENTS)) {
-            mAssignDepth--;
+            assignDepth--;
         }
 
-        super.leaveToken(aAST);
+        super.leaveToken(ast);
     }
 

@@ -3,21 +3,21 @@
      * A valid hash code method is considered to be a method of the signature
      * {@code public int hashCode()}.
      *
-     * @param aAST the AST from which to search for an enclosing hash code
+     * @param ast the AST from which to search for an enclosing hash code
      * method definition
      *
-     * @return {@code true} if {@code aAST} is in the scope of a valid hash
+     * @return {@code true} if {@code ast} is in the scope of a valid hash
      * code method
      */
-    private boolean isInHashCodeMethod(DetailAST aAST)
+    private boolean isInHashCodeMethod(DetailAST ast)
     {
         // if not in a code block, can't be in hashCode()
-        if (!ScopeUtils.inCodeBlock(aAST)) {
+        if (!ScopeUtils.inCodeBlock(ast)) {
             return false;
         }
 
         // find the method definition AST
-        DetailAST methodDefAST = aAST.getParent();
+        DetailAST methodDefAST = ast.getParent();
         while ((null != methodDefAST)
                 && (TokenTypes.METHOD_DEF != methodDefAST.getType()))
         {
