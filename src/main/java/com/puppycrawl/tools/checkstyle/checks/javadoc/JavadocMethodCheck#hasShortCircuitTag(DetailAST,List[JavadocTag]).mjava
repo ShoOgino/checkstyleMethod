@@ -2,23 +2,23 @@
      * Validates whether the Javadoc has a short circuit tag. Currently this is
      * the inheritTag. Any errors are logged.
      *
-     * @param aAST the construct being checked
-     * @param aTags the list of Javadoc tags associated with the construct
+     * @param ast the construct being checked
+     * @param tags the list of Javadoc tags associated with the construct
      * @return true if the construct has a short circuit tag.
      */
-    private boolean hasShortCircuitTag(final DetailAST aAST,
-            final List<JavadocTag> aTags)
+    private boolean hasShortCircuitTag(final DetailAST ast,
+            final List<JavadocTag> tags)
     {
         // Check if it contains {@inheritDoc} tag
-        if ((aTags.size() != 1)
-                || !(aTags.get(0)).isInheritDocTag())
+        if ((tags.size() != 1)
+                || !(tags.get(0)).isInheritDocTag())
         {
             return false;
         }
 
         // Invalid if private, a constructor, or a static method
-        if (!JavadocTagInfo.INHERIT_DOC.isValidOn(aAST)) {
-            log(aAST, "javadoc.invalidInheritDoc");
+        if (!JavadocTagInfo.INHERIT_DOC.isValidOn(ast)) {
+            log(ast, "javadoc.invalidInheritDoc");
         }
 
         return true;

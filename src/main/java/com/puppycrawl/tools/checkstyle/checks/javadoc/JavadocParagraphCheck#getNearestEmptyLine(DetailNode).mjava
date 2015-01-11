@@ -1,11 +1,11 @@
     /**
      * Finds and returns nearest empty line in javadoc.
-     * @param aNode DetailNode node.
+     * @param node DetailNode node.
      * @return Some nearest empty line in javadoc.
      */
-    private DetailNode getNearestEmptyLine(DetailNode aNode)
+    private DetailNode getNearestEmptyLine(DetailNode node)
     {
-        DetailNode newLine = JavadocUtils.getPreviousSibling(aNode);
+        DetailNode newLine = JavadocUtils.getPreviousSibling(node);
         while (newLine != null) {
             final DetailNode previousSibling = JavadocUtils.getPreviousSibling(newLine);
             if (newLine.getType() == JavadocTokenTypes.NEWLINE && isEmptyLine(newLine))

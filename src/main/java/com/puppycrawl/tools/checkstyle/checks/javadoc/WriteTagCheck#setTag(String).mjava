@@ -1,17 +1,17 @@
     /**
      * Sets the tag to check.
-     * @param aTag tag to check
+     * @param tag tag to check
      * @throws ConversionException If the tag is not a valid regular exception.
      */
-    public void setTag(String aTag)
+    public void setTag(String tag)
         throws ConversionException
     {
         try {
-            mTag = aTag;
-            mTagRE = Utils.getPattern(aTag + "\\s*(.*$)");
+            this.tag = tag;
+            tagRE = Utils.getPattern(tag + "\\s*(.*$)");
         }
         catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + aTag, e);
+            throw new ConversionException("unable to parse " + tag, e);
         }
     }
 

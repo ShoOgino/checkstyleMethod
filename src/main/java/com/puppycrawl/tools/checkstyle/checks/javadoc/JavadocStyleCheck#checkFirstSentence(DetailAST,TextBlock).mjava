@@ -5,19 +5,19 @@
      * HTML element, or the end of string. This method ignores {_AT_inheritDoc}
      * comments for TokenTypes that are valid for {_AT_inheritDoc}.
      *
-     * @param aAST the current node
-     * @param aComment the source lines that make up the Javadoc comment.
+     * @param ast the current node
+     * @param comment the source lines that make up the Javadoc comment.
      */
-    private void checkFirstSentence(final DetailAST aAST, TextBlock aComment)
+    private void checkFirstSentence(final DetailAST ast, TextBlock comment)
     {
-        final String commentText = getCommentText(aComment.getText());
+        final String commentText = getCommentText(comment.getText());
 
         if ((commentText.length() != 0)
             && !getEndOfSentencePattern().matcher(commentText).find()
             && !("{@inheritDoc}".equals(commentText)
-            && JavadocTagInfo.INHERIT_DOC.isValidOn(aAST)))
+            && JavadocTagInfo.INHERIT_DOC.isValidOn(ast)))
         {
-            log(aComment.getStartLineNo(), "javadoc.noperiod");
+            log(comment.getStartLineNo(), "javadoc.noperiod");
         }
     }
 

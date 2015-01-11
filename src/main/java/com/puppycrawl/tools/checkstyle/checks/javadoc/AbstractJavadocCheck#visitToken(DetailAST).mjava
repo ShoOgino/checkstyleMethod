@@ -1,11 +1,11 @@
     @Override
-    public final void visitToken(DetailAST aBlockCommentAst)
+    public final void visitToken(DetailAST blockCommentAst)
     {
-        if (JavadocUtils.isJavadocComment(aBlockCommentAst)) {
-            mBlockCommentAst = aBlockCommentAst;
+        if (JavadocUtils.isJavadocComment(blockCommentAst)) {
+            this.blockCommentAst = blockCommentAst;
 
-            final String treeCacheKey = aBlockCommentAst.getLineNo() + ":"
-                    + aBlockCommentAst.getColumnNo();
+            final String treeCacheKey = blockCommentAst.getLineNo() + ":"
+                    + blockCommentAst.getColumnNo();
 
             ParseStatus ps;
 
@@ -13,7 +13,7 @@
                 ps = TREE_CACHE.get(treeCacheKey);
             }
             else {
-                ps = parseJavadocAsDetailNode(aBlockCommentAst);
+                ps = parseJavadocAsDetailNode(blockCommentAst);
                 TREE_CACHE.put(treeCacheKey, ps);
             }
 

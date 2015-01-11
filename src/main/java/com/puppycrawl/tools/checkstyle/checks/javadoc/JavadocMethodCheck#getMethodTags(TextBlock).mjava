@@ -3,13 +3,13 @@
      * param, return and see tags.
      *
      * @return the tags found
-     * @param aComment the Javadoc comment
+     * @param comment the Javadoc comment
      */
-    private List<JavadocTag> getMethodTags(TextBlock aComment)
+    private List<JavadocTag> getMethodTags(TextBlock comment)
     {
-        final String[] lines = aComment.getText();
+        final String[] lines = comment.getText();
         final List<JavadocTag> tags = Lists.newArrayList();
-        int currentLine = aComment.getStartLineNo() - 1;
+        int currentLine = comment.getStartLineNo() - 1;
 
         for (int i = 0; i < lines.length; i++) {
             currentLine++;
@@ -27,7 +27,7 @@
             if (javadocArgMatcher.find()) {
                 int col = javadocArgMatcher.start(1) - 1;
                 if (i == 0) {
-                    col += aComment.getStartColNo();
+                    col += comment.getStartColNo();
                 }
                 tags.add(new JavadocTag(currentLine, col, javadocArgMatcher
                         .group(1), javadocArgMatcher.group(2)));
@@ -35,7 +35,7 @@
             else if (javadocNoargMatcher.find()) {
                 int col = javadocNoargMatcher.start(1) - 1;
                 if (i == 0) {
-                    col += aComment.getStartColNo();
+                    col += comment.getStartColNo();
                 }
                 tags.add(new JavadocTag(currentLine, col, javadocNoargMatcher
                         .group(1)));
@@ -43,7 +43,7 @@
             else if (noargCurlyMatcher.find()) {
                 int col = noargCurlyMatcher.start(1) - 1;
                 if (i == 0) {
-                    col += aComment.getStartColNo();
+                    col += comment.getStartColNo();
                 }
                 tags.add(new JavadocTag(currentLine, col, noargCurlyMatcher
                         .group(1)));
@@ -53,7 +53,7 @@
                 final String p2 = argMultilineStart.group(2);
                 int col = argMultilineStart.start(1) - 1;
                 if (i == 0) {
-                    col += aComment.getStartColNo();
+                    col += comment.getStartColNo();
                 }
 
                 // Look for the rest of the comment if all we saw was
@@ -80,7 +80,7 @@
                 final String p1 = noargMultilineStart.group(1);
                 int col = noargMultilineStart.start(1) - 1;
                 if (i == 0) {
-                    col += aComment.getStartColNo();
+                    col += comment.getStartColNo();
                 }
 
                 // Look for the rest of the comment if all we saw was

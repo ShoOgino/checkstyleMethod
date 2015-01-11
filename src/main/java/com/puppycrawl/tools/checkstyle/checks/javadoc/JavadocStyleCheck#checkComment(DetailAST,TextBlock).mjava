@@ -1,35 +1,35 @@
     /**
      * Performs the various checks agains the Javadoc comment.
      *
-     * @param aAST the AST of the element being documented
-     * @param aComment the source lines that make up the Javadoc comment.
+     * @param ast the AST of the element being documented
+     * @param comment the source lines that make up the Javadoc comment.
      *
      * @see #checkFirstSentence(DetailAST, TextBlock)
      * @see #checkHtml(DetailAST, TextBlock)
      */
-    private void checkComment(final DetailAST aAST, final TextBlock aComment)
+    private void checkComment(final DetailAST ast, final TextBlock comment)
     {
-        if (aComment == null) {
+        if (comment == null) {
             /*checking for missing docs in JavadocStyleCheck is not consistent
             with the rest of CheckStyle...  Even though, I didn't think it
             made sense to make another csheck just to ensure that the
             package-info.java file actually contains package Javadocs.*/
             if (getFileContents().inPackageInfo()) {
-                log(aAST.getLineNo(), "javadoc.missing");
+                log(ast.getLineNo(), "javadoc.missing");
             }
             return;
         }
 
-        if (mCheckFirstSentence) {
-            checkFirstSentence(aAST, aComment);
+        if (checkFirstSentence) {
+            checkFirstSentence(ast, comment);
         }
 
-        if (mCheckHtml) {
-            checkHtml(aAST, aComment);
+        if (checkHtml) {
+            checkHtml(ast, comment);
         }
 
-        if (mCheckEmptyJavadoc) {
-            checkEmptyJavadoc(aComment);
+        if (checkEmptyJavadoc) {
+            checkEmptyJavadoc(comment);
         }
     }
 

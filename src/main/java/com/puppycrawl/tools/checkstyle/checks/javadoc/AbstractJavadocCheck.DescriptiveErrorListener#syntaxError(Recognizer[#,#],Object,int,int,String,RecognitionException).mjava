@@ -10,39 +10,39 @@
          */
         @Override
         public void syntaxError(
-                Recognizer<?, ?> aRecognizer, Object aOffendingSymbol,
-                int aLine, int aCharPositionInLine,
-                String aMsg, RecognitionException aEx)
+                Recognizer<?, ?> recognizer, Object offendingSymbol,
+                int line, int charPositionInLine,
+                String msg, RecognitionException ex)
         {
-            final int lineNumber = mOffset + aLine;
-            final Token token = (Token) aOffendingSymbol;
+            final int lineNumber = offset + line;
+            final Token token = (Token) offendingSymbol;
 
-            if (JAVADOC_MISSED_HTML_CLOSE.equals(aMsg)) {
-                mErrorMessage = new ParseErrorMessage(lineNumber,
-                        JAVADOC_MISSED_HTML_CLOSE, aCharPositionInLine, token.getText());
+            if (JAVADOC_MISSED_HTML_CLOSE.equals(msg)) {
+                errorMessage = new ParseErrorMessage(lineNumber,
+                        JAVADOC_MISSED_HTML_CLOSE, charPositionInLine, token.getText());
 
                 throw new ParseCancellationException();
             }
-            else if (JAVADOC_WRONG_SINGLETON_TAG.equals(aMsg)) {
-                mErrorMessage = new ParseErrorMessage(lineNumber,
-                        JAVADOC_WRONG_SINGLETON_TAG, aCharPositionInLine, token.getText());
+            else if (JAVADOC_WRONG_SINGLETON_TAG.equals(msg)) {
+                errorMessage = new ParseErrorMessage(lineNumber,
+                        JAVADOC_WRONG_SINGLETON_TAG, charPositionInLine, token.getText());
 
                 throw new ParseCancellationException();
             }
             else {
-                final RuleContext ruleContext = aEx.getCtx();
+                final RuleContext ruleContext = ex.getCtx();
                 if (ruleContext != null) {
-                    final int ruleIndex = aEx.getCtx().getRuleIndex();
-                    final String ruleName = aRecognizer.getRuleNames()[ruleIndex];
+                    final int ruleIndex = ex.getCtx().getRuleIndex();
+                    final String ruleName = recognizer.getRuleNames()[ruleIndex];
                     final String upperCaseRuleName = CaseFormat.UPPER_CAMEL.to(
                             CaseFormat.UPPER_UNDERSCORE, ruleName);
 
-                    mErrorMessage = new ParseErrorMessage(lineNumber,
-                            JAVADOC_PARSE_RULE_ERROR, aCharPositionInLine, aMsg, upperCaseRuleName);
+                    errorMessage = new ParseErrorMessage(lineNumber,
+                            JAVADOC_PARSE_RULE_ERROR, charPositionInLine, msg, upperCaseRuleName);
                 }
                 else {
-                    mErrorMessage = new ParseErrorMessage(lineNumber, JAVADOC_PARSE_TOKEN_ERROR,
-                            aCharPositionInLine, aMsg, aCharPositionInLine);
+                    errorMessage = new ParseErrorMessage(lineNumber, JAVADOC_PARSE_TOKEN_ERROR,
+                            charPositionInLine, msg, charPositionInLine);
                 }
             }
         }

@@ -1,15 +1,15 @@
     /**
      * Determines whether or not the line with paragraph tag has previous empty line.
-     * @param aTag html tag.
+     * @param tag html tag.
      */
-    private void checkParagraphTag(DetailNode aTag)
+    private void checkParagraphTag(DetailNode tag)
     {
-        final DetailNode newLine = getNearestEmptyLine(aTag);
-        if (isFirstParagraph(aTag)) {
-            log(aTag.getLineNumber(), "javadoc.paragraph.redundant.paragraph");
+        final DetailNode newLine = getNearestEmptyLine(tag);
+        if (isFirstPtagraph(tag)) {
+            log(tag.getLineNumber(), "javadoc.paragraph.redundant.paragraph");
         }
-        else if (newLine == null || aTag.getLineNumber() - newLine.getLineNumber() != 1) {
-            log(aTag.getLineNumber(), "javadoc.paragraph.line.before");
+        else if (newLine == null || tag.getLineNumber() - newLine.getLineNumber() != 1) {
+            log(tag.getLineNumber(), "javadoc.paragraph.line.before");
         }
     }
 

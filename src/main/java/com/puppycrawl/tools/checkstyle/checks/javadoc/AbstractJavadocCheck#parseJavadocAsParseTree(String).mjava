@@ -1,16 +1,16 @@
     /**
      * Parses block comment content as javadoc comment.
-     * @param aBlockComment
+     * @param blockComment
      *        block comment content.
      * @return parse tree
      * @throws IOException
      *         errors in ANTLRInputStream
      */
-    private ParseTree parseJavadocAsParseTree(String aBlockComment)
+    private ParseTree parseJavadocAsParseTree(String blockComment)
         throws IOException
     {
         final Charset utf8Charset = Charset.forName("UTF-8");
-        final InputStream in = new ByteArrayInputStream(aBlockComment.getBytes(utf8Charset));
+        final InputStream in = new ByteArrayInputStream(blockComment.getBytes(utf8Charset));
 
         final ANTLRInputStream input = new ANTLRInputStream(in);
 
@@ -20,7 +20,7 @@
         lexer.removeErrorListeners();
 
         // add custom error listener that logs parsing errors
-        lexer.addErrorListener(mErrorListener);
+        lexer.addErrorListener(errorListener);
 
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
 
@@ -30,7 +30,7 @@
         parser.removeErrorListeners();
 
         // add custom error listener that logs syntax errors
-        parser.addErrorListener(mErrorListener);
+        parser.addErrorListener(errorListener);
 
         // This strategy stops parsing when parser error occurs.
         // By default it uses Error Recover Strategy which is slow and useless.

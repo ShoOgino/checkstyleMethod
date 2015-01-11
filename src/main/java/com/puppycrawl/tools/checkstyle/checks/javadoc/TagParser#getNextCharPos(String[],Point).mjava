@@ -1,21 +1,21 @@
     /**
      * Returns position of next comment character, skips
      * whitespaces and asterisks.
-     * @param aText to search.
-     * @param aFrom location to search from
+     * @param text to search.
+     * @param from location to search from
      * @return location of the next character.
      */
-    private Point getNextCharPos(String[] aText, Point aFrom)
+    private Point getNextCharPos(String[] text, Point from)
     {
-        int line = aFrom.getLineNo();
-        int column = aFrom.getColumnNo() + 1;
-        while ((line < aText.length) && (column >= aText[line].length())) {
+        int line = from.getLineNo();
+        int column = from.getColumnNo() + 1;
+        while ((line < text.length) && (column >= text[line].length())) {
             // go to the next line
             line++;
             column = 0;
-            if (line < aText.length) {
+            if (line < text.length) {
                 //skip beginning spaces and stars
-                final String currentLine = aText[line];
+                final String currentLine = text[line];
                 while ((column < currentLine.length())
                        && (Character.isWhitespace(currentLine.charAt(column))
                            || (currentLine.charAt(column) == '*')))

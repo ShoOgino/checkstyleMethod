@@ -1,30 +1,30 @@
     @Override
-    protected void verify(Checker aC,
-                          File[] aProcessedFiles,
-                          String aMessageFileName,
-                          String[] aExpected)
+    protected void verify(Checker c,
+                          File[] processedFiles,
+                          String messageFileName,
+                          String[] expected)
         throws Exception
     {
-        mStream.flush();
+        stream.flush();
         final List<File> theFiles = Lists.newArrayList();
-        Collections.addAll(theFiles, aProcessedFiles);
-        final int errs = aC.process(theFiles);
+        Collections.addAll(theFiles, processedFiles);
+        final int errs = c.process(theFiles);
 
         // process each of the lines
         final ByteArrayInputStream bais =
-            new ByteArrayInputStream(mBAOS.toByteArray());
+            new ByteArrayInputStream(BAOS.toByteArray());
         final LineNumberReader lnr =
             new LineNumberReader(new InputStreamReader(bais));
 
-        for (int i = 0; i < aExpected.length; i++) {
-            final String expected = aMessageFileName + ":" + aExpected[i];
+        for (int i = 0; i < expected.length; i++) {
+            final String expectedResult = messageFileName + ":" + expected[i];
             final String actual = lnr.readLine();
-            assertEquals("error message " + i, expected, actual);
+            assertEquals("error message " + i, expectedResult, actual);
         }
 
         assertTrue("unexpected output: " + lnr.readLine(),
-                   aExpected.length >= errs);
+                   expected.length >= errs);
 
-        aC.destroy();
+        c.destroy();
     }
 

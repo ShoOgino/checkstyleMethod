@@ -1,16 +1,16 @@
     /**
      * Gets column number from ParseTree node.
-     * @param aTree
+     * @param tree
      *        ParseTree node
      * @return column number
      */
-    private static int getColumn(ParseTree aTree)
+    private static int getColumn(ParseTree tree)
     {
-        if (aTree instanceof TerminalNode) {
-            return ((TerminalNode) aTree).getSymbol().getCharPositionInLine();
+        if (tree instanceof TerminalNode) {
+            return ((TerminalNode) tree).getSymbol().getCharPositionInLine();
         }
         else {
-            final ParserRuleContext rule = (ParserRuleContext) aTree;
+            final ParserRuleContext rule = (ParserRuleContext) tree;
             return rule.start.getCharPositionInLine();
         }
     }

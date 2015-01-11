@@ -1,8 +1,8 @@
     @Test
     public void testExcludeScope() throws Exception
     {
-        mCheckConfig.addAttribute("scope", Scope.PRIVATE.getName());
-        mCheckConfig.addAttribute("excludeScope", Scope.PROTECTED.getName());
+        checkConfig.addAttribute("scope", Scope.PRIVATE.getName());
+        checkConfig.addAttribute("excludeScope", Scope.PROTECTED.getName());
         final String[] expected = {
             "12:5: Missing a Javadoc comment.",
             "13:5: Missing a Javadoc comment.",
@@ -36,7 +36,7 @@
             "106:9: Missing a Javadoc comment.",
             "107:9: Missing a Javadoc comment.",
             "108:9: Missing a Javadoc comment.", };
-        verify(mCheckConfig, getPath("javadoc" + File.separator
+        verify(checkConfig, getPath("javadoc" + File.separator
                                     + "InputNoJavadoc.java"), expected);
     }
 

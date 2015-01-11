@@ -1,12 +1,12 @@
     /**
      * Finds and returns first sentence.
-     * @param aAst Javadoc root node.
+     * @param ast Javadoc root node.
      * @return first sentence.
      */
-    private String getFirstSentence(DetailNode aAst)
+    private String getFirstSentence(DetailNode ast)
     {
         final StringBuilder result = new StringBuilder();
-        for (DetailNode child : aAst.getChildren()) {
+        for (DetailNode child : ast.getChildren()) {
             if (child.getType() != JavadocTokenTypes.JAVADOC_INLINE_TAG
                 && child.getText().contains(". "))
             {

@@ -1,22 +1,22 @@
     /**
      * Trims any trailing whitespace or the end of Javadoc comment string.
-     * @param aBuffer the StringBuffer to trim.
+     * @param buffer the StringBuffer to trim.
      */
-    private void trimTail(StringBuffer aBuffer)
+    private void trimTail(StringBuffer buffer)
     {
-        for (int i = aBuffer.length() - 1; i >= 0; i--) {
-            if (Character.isWhitespace(aBuffer.charAt(i))) {
-                aBuffer.deleteCharAt(i);
+        for (int i = buffer.length() - 1; i >= 0; i--) {
+            if (Character.isWhitespace(buffer.charAt(i))) {
+                buffer.deleteCharAt(i);
             }
             else if ((i > 0)
-                     && (aBuffer.charAt(i - 1) == '*')
-                     && (aBuffer.charAt(i) == '/'))
+                     && (buffer.charAt(i - 1) == '*')
+                     && (buffer.charAt(i) == '/'))
             {
-                aBuffer.deleteCharAt(i);
-                aBuffer.deleteCharAt(i - 1);
+                buffer.deleteCharAt(i);
+                buffer.deleteCharAt(i - 1);
                 i--;
-                while (aBuffer.charAt(i - 1) == '*') {
-                    aBuffer.deleteCharAt(i - 1);
+                while (buffer.charAt(i - 1) == '*') {
+                    buffer.deleteCharAt(i - 1);
                     i--;
                 }
             }

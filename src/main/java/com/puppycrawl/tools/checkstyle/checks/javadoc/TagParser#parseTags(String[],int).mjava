@@ -1,45 +1,45 @@
     /**
      * Parses the text line for any HTML tags and adds them to the internal
      * List of tags.
-     * @param aText the source line to parse.
-     * @param aLineNo the source line number.
+     * @param text the source line to parse.
+     * @param lineNo the source line number.
      */
-    private void parseTags(String[] aText, int aLineNo)
+    private void parseTags(String[] text, int lineNo)
     {
-        final int nLines = aText.length;
+        final int nLines = text.length;
         Point position = new Point(0, 0);
 
-        position = findChar(aText, '<', position);
+        position = findChar(text, '<', position);
         while (position.getLineNo() < nLines) {
             // if this is html comment then skip it
-            if (isCommentTag(aText, position)) {
-                position = skipHtmlComment(aText, position);
+            if (isCommentTag(text, position)) {
+                position = skipHtmlComment(text, position);
             }
-            else if (!isTag(aText, position)) {
-                position = getNextCharPos(aText, position);
+            else if (!isTag(text, position)) {
+                position = getNextCharPos(text, position);
             }
             else {
                 // find end of tag
-                final Point endTag = findChar(aText, '>', position);
+                final Point endTag = findChar(text, '>', position);
                 final boolean incompleteTag = (endTag.getLineNo() >= nLines);
                 // get tag id (one word)
                 final String tagId =
-                    (incompleteTag ? "" : getTagId(aText, position));
+                    (incompleteTag ? "" : getTagId(text, position));
                 // is this closed tag
                 final boolean closedTag =
                     ((endTag.getLineNo() < nLines) && (endTag.getColumnNo() > 0)
-                     && (aText[endTag.getLineNo()]
+                     && (text[endTag.getLineNo()]
                      .charAt(endTag.getColumnNo() - 1) == '/'));
                 // add new tag
                 add(new HtmlTag(tagId,
-                                position.getLineNo() + aLineNo,
+                                position.getLineNo() + lineNo,
                                 position.getColumnNo(),
                                 closedTag,
                                 incompleteTag,
-                                aText[position.getLineNo()]));
+                                text[position.getLineNo()]));
                 position = endTag;
             }
-            position = findChar(aText, '<', position);
+            position = findChar(text, '<', position);
         }
     }
 

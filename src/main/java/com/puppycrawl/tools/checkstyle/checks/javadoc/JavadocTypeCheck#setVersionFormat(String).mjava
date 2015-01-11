@@ -1,17 +1,17 @@
     /**
      * Set the version format pattern.
-     * @param aFormat a <code>String</code> value
+     * @param format a <code>String</code> value
      * @throws ConversionException unable to parse aFormat
      */
-    public void setVersionFormat(String aFormat)
+    public void setVersionFormat(String format)
         throws ConversionException
     {
         try {
-            mVersionFormat = aFormat;
-            mVersionFormatPattern = Utils.getPattern(aFormat);
+            versionFormat = format;
+            versionFormatPattern = Utils.getPattern(format);
         }
         catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + aFormat, e);
+            throw new ConversionException("unable to parse " + format, e);
         }
 
     }

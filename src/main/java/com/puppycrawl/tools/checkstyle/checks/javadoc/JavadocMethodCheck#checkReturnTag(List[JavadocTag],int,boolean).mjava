@@ -2,18 +2,18 @@
      * Checks for only one return tag. All return tags will be removed from the
      * supplied list.
      *
-     * @param aTags the tags to check
-     * @param aLineNo the line number of the expected tag
-     * @param aReportExpectedTags whether we should report if do not find
+     * @param tags the tags to check
+     * @param lineNo the line number of the expected tag
+     * @param reportExpectedTags whether we should report if do not find
      *            expected tag
      */
-    private void checkReturnTag(List<JavadocTag> aTags, int aLineNo,
-        boolean aReportExpectedTags)
+    private void checkReturnTag(List<JavadocTag> tags, int lineNo,
+        boolean reportExpectedTags)
     {
         // Loop over tags finding return tags. After the first one, report an
         // error.
         boolean found = false;
-        final ListIterator<JavadocTag> it = aTags.listIterator();
+        final ListIterator<JavadocTag> it = tags.listIterator();
         while (it.hasNext()) {
             final JavadocTag jt = it.next();
             if (jt.isReturnTag()) {
@@ -29,8 +29,8 @@
 
         // Handle there being no @return tags :- unless
         // the user has chosen to suppress these problems
-        if (!found && !mAllowMissingReturnTag && aReportExpectedTags) {
-            log(aLineNo, "javadoc.return.expected");
+        if (!found && !allowMissingReturnTag && reportExpectedTags) {
+            log(lineNo, "javadoc.return.expected");
         }
     }
 

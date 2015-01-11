@@ -1,29 +1,29 @@
     /**
      * Checks the Javadoc for a method.
      *
-     * @param aAST the token for the method
-     * @param aComment the Javadoc comment
+     * @param ast the token for the method
+     * @param comment the Javadoc comment
      */
-    private void checkComment(DetailAST aAST, TextBlock aComment)
+    private void checkComment(DetailAST ast, TextBlock comment)
     {
-        final List<JavadocTag> tags = getMethodTags(aComment);
+        final List<JavadocTag> tags = getMethodTags(comment);
 
-        if (hasShortCircuitTag(aAST, tags)) {
+        if (hasShortCircuitTag(ast, tags)) {
             return;
         }
 
         Iterator<JavadocTag> it = tags.iterator();
-        if (aAST.getType() != TokenTypes.ANNOTATION_FIELD_DEF) {
+        if (ast.getType() != TokenTypes.ANNOTATION_FIELD_DEF) {
             // Check for inheritDoc
             boolean hasInheritDocTag = false;
             while (it.hasNext() && !hasInheritDocTag) {
                 hasInheritDocTag |= (it.next()).isInheritDocTag();
             }
 
-            checkParamTags(tags, aAST, !hasInheritDocTag);
-            checkThrowsTags(tags, getThrows(aAST), !hasInheritDocTag);
-            if (isFunction(aAST)) {
-                checkReturnTag(tags, aAST.getLineNo(), !hasInheritDocTag);
+            checkParamTags(tags, ast, !hasInheritDocTag);
+            checkThrowsTags(tags, getThrows(ast), !hasInheritDocTag);
+            if (isFunction(ast)) {
+                checkReturnTag(tags, ast.getLineNo(), !hasInheritDocTag);
             }
         }
 

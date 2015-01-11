@@ -1,21 +1,21 @@
     /**
      * Creates JavadocNodeImpl node on base of ParseTree node.
      *
-     * @param aParseTree ParseTree node
-     * @param aParent DetailNode that will be parent of new node
-     * @param aIndex child index that has new node
+     * @param parseTree ParseTree node
+     * @param parent DetailNode that will be parent of new node
+     * @param index child index that has new node
      * @return JavadocNodeImpl node on base of ParseTree node.
      */
-    private JavadocNodeImpl createJavadocNode(ParseTree aParseTree, DetailNode aParent, int aIndex)
+    private JavadocNodeImpl createJavadocNode(ParseTree parseTree, DetailNode parent, int index)
     {
         final JavadocNodeImpl node = new JavadocNodeImpl();
-        node.setText(aParseTree.getText());
-        node.setColumnNumber(getColumn(aParseTree));
-        node.setLineNumber(getLine(aParseTree) + mBlockCommentAst.getLineNo());
-        node.setIndex(aIndex);
-        node.setType(getTokenType(aParseTree));
-        node.setParent(aParent);
-        node.setChildren(new JavadocNodeImpl[aParseTree.getChildCount()]);
+        node.setText(parseTree.getText());
+        node.setColumnNumber(getColumn(parseTree));
+        node.setLineNumber(getLine(parseTree) + blockCommentAst.getLineNo());
+        node.setIndex(index);
+        node.setType(getTokenType(parseTree));
+        node.setParent(parent);
+        node.setChildren(new JavadocNodeImpl[parseTree.getChildCount()]);
         return node;
     }
 

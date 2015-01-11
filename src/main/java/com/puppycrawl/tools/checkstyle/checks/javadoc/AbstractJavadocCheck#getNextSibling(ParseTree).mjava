@@ -1,20 +1,20 @@
     /**
      * Gets next sibling of ParseTree node.
-     * @param aNode ParseTree node
+     * @param node ParseTree node
      * @return next sibling of ParseTree node.
      */
-    private static ParseTree getNextSibling(ParseTree aNode)
+    private static ParseTree getNextSibling(ParseTree node)
     {
-        if (aNode.getParent() == null) {
+        if (node.getParent() == null) {
             return null;
         }
 
-        final ParseTree parent = aNode.getParent();
+        final ParseTree parent = node.getParent();
         final int childCount = parent.getChildCount();
 
         for (int i = 0; i < childCount; i++) {
             final ParseTree currentNode = parent.getChild(i);
-            if (currentNode.equals(aNode)) {
+            if (currentNode.equals(node)) {
                 if (i == childCount - 1) {
                     return null;
                 }

@@ -1,12 +1,12 @@
     /**
      * Decides whether the variable name of an AST is in the ignore list.
-     * @param aAST the AST to check
-     * @return true if the variable name of aAST is in the ignore list.
+     * @param ast the AST to check
+     * @return true if the variable name of ast is in the ignore list.
      */
-    private boolean isIgnored(DetailAST aAST)
+    private boolean isIgnored(DetailAST ast)
     {
-        final String name = aAST.findFirstToken(TokenTypes.IDENT).getText();
-        return mIgnoreNamePattern != null
-                && mIgnoreNamePattern.matcher(name).matches();
+        final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
+        return ignoreNamePattern != null
+                && ignoreNamePattern.matcher(name).matches();
     }
 

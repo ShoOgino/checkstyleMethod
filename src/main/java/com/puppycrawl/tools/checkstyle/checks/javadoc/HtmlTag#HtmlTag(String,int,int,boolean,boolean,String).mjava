@@ -1,21 +1,21 @@
     /**
      * Construct the HtmlTag.
-     * @param aId the HTML tag name.
-     * @param aLineNo the source line number of this tag.
-     * @param aPosition the position within the text of this tag.
-     * @param aClosedTag if this tag is self-closed (XHTML style)
-     * @param aIncomplete is the tag is incomplete.
-     * @param aText the line of comment text for this tag.
+     * @param id the HTML tag name.
+     * @param lineNo the source line number of this tag.
+     * @param position the position within the text of this tag.
+     * @param closedTag if this tag is self-closed (XHTML style)
+     * @param incomplete is the tag is incomplete.
+     * @param text the line of comment text for this tag.
      */
-    HtmlTag(String aId, int aLineNo, int aPosition, boolean aClosedTag,
-            boolean aIncomplete, String aText)
+    HtmlTag(String id, int lineNo, int position, boolean closedTag,
+            boolean incomplete, String text)
     {
-        mId = (!"".equals(aId) && (aId.charAt(0) == '/'))
-            ? aId.substring(1) : aId;
-        mLineNo = aLineNo;
-        mPosition = aPosition;
-        mText = aText;
-        mClosedTag = aClosedTag;
-        mIncomplete = aIncomplete;
+        this.id = (!"".equals(id) && (id.charAt(0) == '/'))
+            ? id.substring(1) : id;
+        this.lineNo = lineNo;
+        this.position = position;
+        this.text = text;
+        this.closedTag = closedTag;
+        this.incomplete = incomplete;
     }
 

@@ -1,37 +1,37 @@
     /**
      * Whether we should check this node.
-     * @param aAST a given node.
+     * @param ast a given node.
      * @return whether we should check a given node.
      */
-    private boolean shouldCheck(final DetailAST aAST)
+    private boolean shouldCheck(final DetailAST ast)
     {
-        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
+        if (ast.getType() == TokenTypes.PACKAGE_DEF) {
             return getFileContents().inPackageInfo();
         }
 
-        if (ScopeUtils.inCodeBlock(aAST)) {
+        if (ScopeUtils.inCodeBlock(ast)) {
             return false;
         }
 
         final Scope declaredScope;
-        if (aAST.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
+        if (ast.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
             declaredScope = Scope.PUBLIC;
         }
         else {
             declaredScope = ScopeUtils.getScopeFromMods(
-                aAST.findFirstToken(TokenTypes.MODIFIERS));
+                ast.findFirstToken(TokenTypes.MODIFIERS));
         }
 
         final Scope scope =
-            ScopeUtils.inInterfaceOrAnnotationBlock(aAST)
+            ScopeUtils.inInterfaceOrAnnotationBlock(ast)
             ? Scope.PUBLIC : declaredScope;
-        final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
+        final Scope surroundingScope = ScopeUtils.getSurroundingScope(ast);
 
-        return scope.isIn(mScope)
-            && ((surroundingScope == null) || surroundingScope.isIn(mScope))
-            && ((mExcludeScope == null)
-                || !scope.isIn(mExcludeScope)
+        return scope.isIn(this.scope)
+            && ((surroundingScope == null) || surroundingScope.isIn(this.scope))
+            && ((excludeScope == null)
+                || !scope.isIn(excludeScope)
                 || ((surroundingScope != null)
-                && !surroundingScope.isIn(mExcludeScope)));
+                && !surroundingScope.isIn(excludeScope)));
     }
 

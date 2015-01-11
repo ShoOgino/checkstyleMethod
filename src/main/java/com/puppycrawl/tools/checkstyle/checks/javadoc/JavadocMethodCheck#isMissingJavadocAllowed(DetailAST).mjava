@@ -4,16 +4,16 @@
      * in some situations.  The default implementation checks
      * <code>allowMissingJavadoc</code> and
      * <code>allowMissingPropertyJavadoc</code> properties, do not forget
-     * to call <code>super.isMissingJavadocAllowed(aAST)</code> in case
+     * to call <code>super.isMissingJavadocAllowed(ast)</code> in case
      * you want to keep this logic.
-     * @param aAST the tree node for the method or constructor.
+     * @param ast the tree node for the method or constructor.
      * @return True if this method or constructor doesn't need Javadoc.
      */
-    protected boolean isMissingJavadocAllowed(final DetailAST aAST)
+    protected boolean isMissingJavadocAllowed(final DetailAST ast)
     {
-        return mAllowMissingJavadoc
-            || (mAllowMissingPropertyJavadoc
-                && (isSetterMethod(aAST) || isGetterMethod(aAST)))
-            || matchesSkipRegex(aAST);
+        return allowMissingJavadoc
+            || (allowMissingPropertyJavadoc
+                && (isSetterMethod(ast) || isGetterMethod(ast)))
+            || matchesSkipRegex(ast);
     }
 

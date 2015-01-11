@@ -1,13 +1,13 @@
     /**
      * Computes the exception nodes for a method.
      *
-     * @param aAST the method node.
-     * @return the list of exception nodes for aAST.
+     * @param ast the method node.
+     * @return the list of exception nodes for ast.
      */
-    private List<ExceptionInfo> getThrows(DetailAST aAST)
+    private List<ExceptionInfo> getThrows(DetailAST ast)
     {
         final List<ExceptionInfo> retVal = Lists.newArrayList();
-        final DetailAST throwsAST = aAST
+        final DetailAST throwsAST = ast
                 .findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAST != null) {
             DetailAST child = throwsAST.getFirstChild();

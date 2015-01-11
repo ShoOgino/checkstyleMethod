@@ -1,24 +1,24 @@
     @Override
-    protected final void processAST(DetailAST aAST)
+    protected final void processAST(DetailAST ast)
     {
-        if ((aAST.getType() == TokenTypes.METHOD_DEF || aAST.getType() == TokenTypes.CTOR_DEF)
-            && (getMethodsNumberOfLine(aAST) <= mMinLineCount)
-            || hasAllowedAnnotations(aAST))
+        if ((ast.getType() == TokenTypes.METHOD_DEF || ast.getType() == TokenTypes.CTOR_DEF)
+            && (getMethodsNumberOfLine(ast) <= minLineCount)
+            || hasAllowedAnnotations(ast))
         {
             return;
         }
-        final Scope theScope = calculateScope(aAST);
-        if (shouldCheck(aAST, theScope)) {
+        final Scope theScope = calculateScope(ast);
+        if (shouldCheck(ast, theScope)) {
             final FileContents contents = getFileContents();
-            final TextBlock cmt = contents.getJavadocBefore(aAST.getLineNo());
+            final TextBlock cmt = contents.getJavadocBefore(ast.getLineNo());
 
             if (cmt == null) {
-                if (!isMissingJavadocAllowed(aAST)) {
-                    log(aAST, "javadoc.missing");
+                if (!isMissingJavadocAllowed(ast)) {
+                    log(ast, "javadoc.missing");
                 }
             }
             else {
-                checkComment(aAST, cmt);
+                checkComment(ast, cmt);
             }
         }
     }

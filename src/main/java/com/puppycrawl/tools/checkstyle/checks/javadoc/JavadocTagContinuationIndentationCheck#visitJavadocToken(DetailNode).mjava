@@ -1,8 +1,8 @@
     @Override
-    public void visitJavadocToken(DetailNode aAst)
+    public void visitJavadocToken(DetailNode ast)
     {
-        final List<DetailNode> textNodes = getAllNewlineNodes(aAst);
-        if (isInlineDescription(aAst)) {
+        final List<DetailNode> textNodes = getAllNewlineNodes(ast);
+        if (isInlineDescription(ast)) {
             return;
         }
         for (DetailNode newlineNode : textNodes) {
@@ -13,9 +13,9 @@
             {
                 final DetailNode whitespace = JavadocUtils.getFirstChild(textNode);
                 if (whitespace.getType() == JavadocTokenTypes.WS
-                        && whitespace.getText().length() - 1 < mOffset)
+                        && whitespace.getText().length() - 1 < offset)
                 {
-                    log(textNode.getLineNumber(), "tag.continuation.indent", mOffset);
+                    log(textNode.getLineNumber(), "tag.continuation.indent", offset);
                 }
             }
         }

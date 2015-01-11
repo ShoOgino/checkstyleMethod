@@ -1,25 +1,25 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (shouldCheck(aAST)) {
+        if (shouldCheck(ast)) {
             final FileContents contents = getFileContents();
-            final int lineNo = aAST.getLineNo();
+            final int lineNo = ast.getLineNo();
             final TextBlock cmt = contents.getJavadocBefore(lineNo);
             if (cmt == null) {
                 log(lineNo, "javadoc.missing");
             }
-            else if (ScopeUtils.isOuterMostType(aAST)) {
+            else if (ScopeUtils.isOuterMostType(ast)) {
                 // don't check author/version for inner classes
                 final List<JavadocTag> tags = getJavadocTags(cmt);
                 checkTag(lineNo, tags, JavadocTagInfo.AUTHOR.getName(),
-                         mAuthorFormatPattern, mAuthorFormat);
+                         authorFormatPattern, authorFormat);
                 checkTag(lineNo, tags, JavadocTagInfo.VERSION.getName(),
-                         mVersionFormatPattern, mVersionFormat);
+                         versionFormatPattern, versionFormat);
 
                 final List<String> typeParamNames =
-                    CheckUtils.getTypeParameterNames(aAST);
+                    CheckUtils.getTypeParameterNames(ast);
 
-                if (!mAllowMissingParamTags) {
+                if (!allowMissingParamTags) {
                     //Check type parameters that should exist, do
                     for (final String string : typeParamNames) {
                         checkTypeParamTag(

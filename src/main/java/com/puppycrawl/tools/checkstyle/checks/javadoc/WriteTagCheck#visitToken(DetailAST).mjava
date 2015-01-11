@@ -1,16 +1,16 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         final FileContents contents = getFileContents();
-        final int lineNo = aAST.getLineNo();
+        final int lineNo = ast.getLineNo();
         final TextBlock cmt =
             contents.getJavadocBefore(lineNo);
         if (cmt == null) {
-            log(lineNo, "type.missingTag", mTag);
+            log(lineNo, "type.missingTag", tag);
         }
         else {
-            checkTag(lineNo, cmt.getText(), mTag, mTagRE, mTagFormatRE,
-                mTagFormat);
+            checkTag(lineNo, cmt.getText(), tag, tagRE, tagFormatRE,
+                tagFormat);
         }
     }
 

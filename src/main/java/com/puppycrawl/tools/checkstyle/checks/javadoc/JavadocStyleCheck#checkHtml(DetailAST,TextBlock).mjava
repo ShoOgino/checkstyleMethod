@@ -3,17 +3,17 @@
      * tag or a close tag that has no previous open tag.  This code was
      * primarily copied from the DocCheck checkHtml method.
      *
-     * @param aAST the node with the Javadoc
-     * @param aComment the <code>TextBlock</code> which represents
+     * @param ast the node with the Javadoc
+     * @param comment the <code>TextBlock</code> which represents
      *                 the Javadoc comment.
      */
-    private void checkHtml(final DetailAST aAST, final TextBlock aComment)
+    private void checkHtml(final DetailAST ast, final TextBlock comment)
     {
-        final int lineno = aComment.getStartLineNo();
+        final int lineno = comment.getStartLineNo();
         final FastStack<HtmlTag> htmlStack = FastStack.newInstance();
-        final String[] text = aComment.getText();
+        final String[] text = comment.getText();
         final List<String> typeParameters =
-            CheckUtils.getTypeParameterNames(aAST);
+            CheckUtils.getTypeParameterNames(ast);
 
         TagParser parser = null;
         parser = new TagParser(text, lineno);

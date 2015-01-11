@@ -1,17 +1,17 @@
     /**
      * Parses Javadoc comment as DetailNode tree.
-     * @param aJavadocCommentAst
+     * @param javadocCommentAst
      *        DetailAST of Javadoc comment
      * @return DetailNode tree of Javadoc comment
      */
-    private ParseStatus parseJavadocAsDetailNode(DetailAST aJavadocCommentAst)
+    private ParseStatus parseJavadocAsDetailNode(DetailAST javadocCommentAst)
     {
-        final String javadocComment = JavadocUtils.getJavadocCommentContent(aJavadocCommentAst);
+        final String javadocComment = JavadocUtils.getJavadocCommentContent(javadocCommentAst);
 
         // Log messages should have line number in scope of file,
         // not in scope of Javadoc comment.
         // Offset is line number of beginning of Javadoc comment.
-        mErrorListener.setOffset(aJavadocCommentAst.getLineNo() - 1);
+        errorListener.setOffset(javadocCommentAst.getLineNo() - 1);
 
         final ParseStatus result = new ParseStatus();
         ParseTree parseTree = null;
@@ -22,21 +22,21 @@
         }
         catch (IOException e) {
             // Antlr can not initiate its ANTLRInputStream
-            parseErrorMessage = new ParseErrorMessage(aJavadocCommentAst.getLineNo(),
+            parseErrorMessage = new ParseErrorMessage(javadocCommentAst.getLineNo(),
                     PARSE_ERROR_MESSAGE_KEY,
-                    aJavadocCommentAst.getColumnNo(), e.getMessage());
+                    javadocCommentAst.getColumnNo(), e.getMessage());
         }
         catch (ParseCancellationException e) {
             // If syntax error occurs then message is printed by error listener
             // and parser throws this runtime exception to stop parsing.
             // Just stop processing current Javadoc comment.
-            parseErrorMessage = mErrorListener.getErrorMessage();
+            parseErrorMessage = errorListener.getErrorMessage();
 
             // There are cases when antlr error listener does not handle syntax error
             if (parseErrorMessage == null) {
-                parseErrorMessage = new ParseErrorMessage(aJavadocCommentAst.getLineNo(),
+                parseErrorMessage = new ParseErrorMessage(javadocCommentAst.getLineNo(),
                         UNRECOGNIZED_ANTLR_ERROR_MESSAGE_KEY,
-                        aJavadocCommentAst.getColumnNo(), e.getMessage());
+                        javadocCommentAst.getColumnNo(), e.getMessage());
             }
         }
 

@@ -1,18 +1,18 @@
     /**
      * Checks a set of tags for matching throws.
      *
-     * @param aTags the tags to check
-     * @param aThrows the throws to check
-     * @param aReportExpectedTags whether we should report if do not find
+     * @param tags the tags to check
+     * @param throws the throws to check
+     * @param reportExpectedTags whether we should report if do not find
      *            expected tag
      */
-    private void checkThrowsTags(List<JavadocTag> aTags,
-            List<ExceptionInfo> aThrows, boolean aReportExpectedTags)
+    private void checkThrowsTags(List<JavadocTag> tags,
+            List<ExceptionInfo> throwsList, boolean reportExpectedTags)
     {
         // Loop over the tags, checking to see they exist in the throws.
         // The foundThrows used for performance only
         final Set<String> foundThrows = Sets.newHashSet();
-        final ListIterator<JavadocTag> tagIt = aTags.listIterator();
+        final ListIterator<JavadocTag> tagIt = tags.listIterator();
         while (tagIt.hasNext()) {
             final JavadocTag tag = tagIt.next();
 
@@ -31,7 +31,7 @@
             boolean found = foundThrows.contains(documentedEx);
 
             // First look for matches on the exception name
-            ListIterator<ExceptionInfo> throwIt = aThrows.listIterator();
+            ListIterator<ExceptionInfo> throwIt = throwsList.listIterator();
             while (!found && throwIt.hasNext()) {
                 final ExceptionInfo ei = throwIt.next();
 
@@ -45,7 +45,7 @@
             }
 
             // Now match on the exception type
-            throwIt = aThrows.listIterator();
+            throwIt = throwsList.listIterator();
             while (!found && throwIt.hasNext()) {
                 final ExceptionInfo ei = throwIt.next();
 
@@ -54,7 +54,7 @@
                     ei.setFound();
                     foundThrows.add(documentedEx);
                 }
-                else if (mAllowThrowsTagsForSubclasses) {
+                else if (allowThrowsTagsForSubclasses) {
                     found = isSubclass(documentedCI.getClazz(), ei.getClazz());
                 }
             }
@@ -62,11 +62,11 @@
             // Handle extra JavadocTag.
             if (!found) {
                 boolean reqd = true;
-                if (mAllowUndeclaredRTE) {
+                if (allowUndeclaredRTE) {
                     reqd = !isUnchecked(documentedCI.getClazz());
                 }
 
-                if (reqd && mValidateThrows) {
+                if (reqd && validateThrows) {
                     log(tag.getLineNo(), tag.getColumnNo(),
                         "javadoc.unusedTag",
                         JavadocTagInfo.THROWS.getText(), tag.getArg1());
@@ -77,8 +77,8 @@
 
         // Now dump out all throws without tags :- unless
         // the user has chosen to suppress these problems
-        if (!mAllowMissingThrowsTags && aReportExpectedTags) {
-            for (ExceptionInfo ei : aThrows) {
+        if (!allowMissingThrowsTags && reportExpectedTags) {
+            for (ExceptionInfo ei : throwsList) {
                 if (!ei.isFound()) {
                     final Token fi = ei.getName();
                     log(fi.getLineNo(), fi.getColumnNo(),

@@ -1,21 +1,21 @@
     /**
      * Checks order of atclauses in tag section node.
-     * @param aJavadoc Javadoc root node.
+     * @param javadoc Javadoc root node.
      */
-    private void checkOrderInTagSection(DetailNode aJavadoc)
+    private void checkOrderInTagSection(DetailNode javadoc)
     {
         int indexOrderOfPreviousTag = 0;
         int indexOrderOfCurrentTag = 0;
 
-        for (DetailNode node : aJavadoc.getChildren()) {
+        for (DetailNode node : javadoc.getChildren()) {
             if (node.getType() == JavadocTokenTypes.JAVADOC_TAG) {
                 final String tagText = JavadocUtils.getFirstChild(node).getText();
-                indexOrderOfCurrentTag = mTagOrder.indexOf(tagText);
+                indexOrderOfCurrentTag = tagOrder.indexOf(tagText);
 
-                if (mTagOrder.contains(tagText)
+                if (tagOrder.contains(tagText)
                         && indexOrderOfCurrentTag < indexOrderOfPreviousTag)
                 {
-                    log(node.getLineNumber(), "at.clause.order", mTagOrder.toString());
+                    log(node.getLineNumber(), "at.clause.order", tagOrder.toString());
                 }
                 indexOrderOfPreviousTag = indexOrderOfCurrentTag;
             }

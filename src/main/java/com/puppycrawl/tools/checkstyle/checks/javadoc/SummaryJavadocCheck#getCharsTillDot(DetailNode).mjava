@@ -1,12 +1,12 @@
     /**
      * Finds and returns chars till first dot.
-     * @param aTextNode node with javadoc text.
+     * @param textNode node with javadoc text.
      * @return String with chars till first dot.
      */
-    private String getCharsTillDot(DetailNode aTextNode)
+    private String getCharsTillDot(DetailNode textNode)
     {
         final StringBuilder result = new StringBuilder();
-        for (DetailNode child : aTextNode.getChildren()) {
+        for (DetailNode child : textNode.getChildren()) {
             result.append(child.getText());
             if (".".equals(child.getText())
                 && JavadocUtils.getNextSibling(child).getType() == JavadocTokenTypes.WS)

@@ -1,18 +1,18 @@
     /**
      * Skips HTML comments.
-     * @param aText text of javadoc comments.
-     * @param aFrom start position of HTML-comments
+     * @param text text of javadoc comments.
+     * @param from start position of HTML-comments
      * @return position after HTML-comments
      */
-    private Point skipHtmlComment(String[] aText, Point aFrom)
+    private Point skipHtmlComment(String[] text, Point from)
     {
-        Point to = aFrom;
-        to = findChar(aText, '>', to);
-        while ((to.getLineNo() < aText.length)
-               && !aText[to.getLineNo()]
+        Point to = from;
+        to = findChar(text, '>', to);
+        while ((to.getLineNo() < text.length)
+               && !text[to.getLineNo()]
                .substring(0, to.getColumnNo() + 1).endsWith("-->"))
         {
-            to = findChar(aText, '>', getNextCharPos(aText, to));
+            to = findChar(text, '>', getNextCharPos(text, to));
         }
         return to;
     }

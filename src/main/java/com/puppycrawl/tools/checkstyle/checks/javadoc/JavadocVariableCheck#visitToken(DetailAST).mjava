@@ -1,13 +1,13 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (shouldCheck(aAST)) {
+        if (shouldCheck(ast)) {
             final FileContents contents = getFileContents();
             final TextBlock cmt =
-                contents.getJavadocBefore(aAST.getLineNo());
+                contents.getJavadocBefore(ast.getLineNo());
 
             if (cmt == null) {
-                log(aAST, "javadoc.missing");
+                log(ast, "javadoc.missing");
             }
         }
     }

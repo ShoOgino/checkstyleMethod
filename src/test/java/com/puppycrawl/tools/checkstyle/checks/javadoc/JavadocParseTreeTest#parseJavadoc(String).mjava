@@ -7,13 +7,13 @@
         final ANTLRInputStream input = new ANTLRInputStream(in);
         final JavadocLexer lexer = new JavadocLexer(input);
         lexer.removeErrorListeners();
-        lexer.addErrorListener(mErrorListener);
+        lexer.addErrorListener(errorListener);
 
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
 
         parser = new JavadocParser(tokens);
         parser.removeErrorListeners();
-        parser.addErrorListener(mErrorListener);
+        parser.addErrorListener(errorListener);
 
         return parser.javadoc();
     }

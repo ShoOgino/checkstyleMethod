@@ -1,9 +1,9 @@
     /**
      * Processes a node calling Check at interested nodes.
-     * @param aRoot
+     * @param root
      *        the root of tree for process
      */
-    private void walk(DetailNode aRoot)
+    private void walk(DetailNode root)
     {
         final int[] defaultTokenTypes = getDefaultJavadocTokens();
 
@@ -11,7 +11,7 @@
             return;
         }
 
-        DetailNode curNode = aRoot;
+        DetailNode curNode = root;
         while (curNode != null) {
             final boolean waitsFor = Ints.contains(defaultTokenTypes, curNode.getType());
 

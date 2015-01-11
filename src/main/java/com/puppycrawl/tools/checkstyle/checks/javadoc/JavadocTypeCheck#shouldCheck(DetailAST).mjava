@@ -1,22 +1,22 @@
     /**
      * Whether we should check this node.
-     * @param aAST a given node.
+     * @param ast a given node.
      * @return whether we should check a given node.
      */
-    private boolean shouldCheck(final DetailAST aAST)
+    private boolean shouldCheck(final DetailAST ast)
     {
-        final DetailAST mods = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
         final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
         final Scope scope =
-            ScopeUtils.inInterfaceOrAnnotationBlock(aAST)
+            ScopeUtils.inInterfaceOrAnnotationBlock(ast)
                 ? Scope.PUBLIC : declaredScope;
-        final Scope surroundingScope = ScopeUtils.getSurroundingScope(aAST);
+        final Scope surroundingScope = ScopeUtils.getSurroundingScope(ast);
 
-        return scope.isIn(mScope)
-            && ((surroundingScope == null) || surroundingScope.isIn(mScope))
-            && ((mExcludeScope == null)
-                || !scope.isIn(mExcludeScope)
+        return scope.isIn(this.scope)
+            && ((surroundingScope == null) || surroundingScope.isIn(this.scope))
+            && ((excludeScope == null)
+                || !scope.isIn(excludeScope)
                 || ((surroundingScope != null)
-                && !surroundingScope.isIn(mExcludeScope)));
+                && !surroundingScope.isIn(excludeScope)));
     }
 
