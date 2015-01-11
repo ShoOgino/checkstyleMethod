@@ -1,19 +1,19 @@
     /**
      * Log child indentation error.
      *
-     * @param aLine           the expression that caused the error
-     * @param aActualLevel   the actual indent level of the expression
-     * @param aExpectedLevel the expected indent level of the expression
+     * @param line           the expression that caused the error
+     * @param actualLevel   the actual indent level of the expression
+     * @param expectedLevel the expected indent level of the expression
      */
-    private void logChildError(int aLine,
-                               int aActualLevel,
-                               IndentLevel aExpectedLevel)
+    private void logChildError(int line,
+                               int actualLevel,
+                               IndentLevel expectedLevel)
     {
         String messageKey = "indentation.child.error";
-        if (aExpectedLevel.isMultiLevel()) {
+        if (expectedLevel.isMultiLevel()) {
             messageKey = "indentation.child.error.multi";
         }
-        mIndentCheck.indentationLog(aLine, messageKey,
-            mTypeName, aActualLevel, aExpectedLevel);
+        indentCheck.indentationLog(line, messageKey,
+            typeName, actualLevel, expectedLevel);
     }
 

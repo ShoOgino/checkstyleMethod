@@ -2,20 +2,20 @@
      * Check the indentation of consecutive lines for the expression we are
      * handling.
      *
-     * @param aStartLine     the first line to check
-     * @param aEndLine       the last line to check
-     * @param aIndentLevel   the required indent level
+     * @param startLine     the first line to check
+     * @param endLine       the last line to check
+     * @param indentLevel   the required indent level
      */
-    protected final void checkLinesIndent(int aStartLine, int aEndLine,
-        IndentLevel aIndentLevel)
+    protected final void checkLinesIndent(int startLine, int endLine,
+        IndentLevel indentLevel)
     {
         // check first line
-        checkSingleLine(aStartLine, aIndentLevel);
+        checkSingleLine(startLine, indentLevel);
 
         // check following lines
         final IndentLevel offsetLevel =
-            new IndentLevel(aIndentLevel, getBasicOffset());
-        for (int i = aStartLine + 1; i <= aEndLine; i++) {
+            new IndentLevel(indentLevel, getBasicOffset());
+        for (int i = startLine + 1; i <= endLine; i++) {
             checkSingleLine(i, offsetLevel);
         }
     }

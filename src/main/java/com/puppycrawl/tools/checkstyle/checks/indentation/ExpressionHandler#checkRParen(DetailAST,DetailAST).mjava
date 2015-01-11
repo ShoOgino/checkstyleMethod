@@ -1,28 +1,28 @@
     /**
      * Check the indentation of the right parenthesis.
-     * @param aRparen parenthesis to check
-     * @param aLparen left parenthesis associated with aRparen
+     * @param rparen parenthesis to check
+     * @param lparen left parenthesis associated with aRparen
      */
-    protected final void checkRParen(DetailAST aLparen, DetailAST aRparen)
+    protected final void checkRParen(DetailAST lparen, DetailAST rparen)
     {
         // no paren - no check :)
-        if (aRparen == null) {
+        if (rparen == null) {
             return;
         }
 
         // the rcurly can either be at the correct indentation,
         // or not first on the line ...
-        final int rparenLevel = expandedTabsColumnNo(aRparen);
-        if (getLevel().accept(rparenLevel) || !startsLine(aRparen)) {
+        final int rparenLevel = expandedTabsColumnNo(rparen);
+        if (getLevel().accept(rparenLevel) || !startsLine(rparen)) {
             return;
         }
 
         // or has <lparen level> + 1 indentation
-        final int lparenLevel = expandedTabsColumnNo(aLparen);
+        final int lparenLevel = expandedTabsColumnNo(lparen);
         if (rparenLevel == (lparenLevel + 1)) {
             return;
         }
 
-        logError(aRparen, "rparen", rparenLevel);
+        logError(rparen, "rparen", rparenLevel);
     }
 

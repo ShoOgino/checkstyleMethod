@@ -1,18 +1,18 @@
     /**
      * Get the start of the specified line.
      *
-     * @param aLine   the specified line number
+     * @param line   the specified line number
      *
      * @return the start of the specified line
      */
-    protected final int getLineStart(String aLine)
+    protected final int getLineStart(String line)
     {
-        for (int start = 0; start < aLine.length(); start++) {
-            final char c = aLine.charAt(start);
+        for (int start = 0; start < line.length(); start++) {
+            final char c = line.charAt(start);
 
             if (!Character.isWhitespace(c)) {
                 return Utils.lengthExpandedTabs(
-                    aLine, start, mIndentCheck.getIndentationTabWidth());
+                    line, start, indentCheck.getIndentationTabWidth());
             }
         }
         return 0;

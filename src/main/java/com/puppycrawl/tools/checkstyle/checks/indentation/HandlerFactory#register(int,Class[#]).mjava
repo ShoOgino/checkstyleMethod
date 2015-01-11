@@ -1,30 +1,30 @@
     /**
      * registers a handler
      *
-     * @param aType
+     * @param type
      *                type from TokenTypes
-     * @param aHandlerClass
+     * @param handlerClass
      *                the handler to register
      */
-    private void register(int aType, Class<?> aHandlerClass)
+    private void register(int type, Class<?> handlerClass)
     {
         try {
-            final Constructor<?> ctor = aHandlerClass
+            final Constructor<?> ctor = handlerClass
                     .getConstructor(new Class[] {IndentationCheck.class,
                         DetailAST.class, // current AST
                         ExpressionHandler.class, // parent
                     });
-            mTypeHandlers.put(aType, ctor);
+            typeHandlers.put(type, ctor);
         }
         ///CLOVER:OFF
         catch (final NoSuchMethodException e) {
             throw new RuntimeException("couldn't find ctor for "
-                                       + aHandlerClass);
+                                       + handlerClass);
         }
         catch (final SecurityException e) {
-            LOG.debug("couldn't find ctor for " + aHandlerClass, e);
+            LOG.debug("couldn't find ctor for " + handlerClass, e);
             throw new RuntimeException("couldn't find ctor for "
-                                       + aHandlerClass);
+                                       + handlerClass);
         }
         ///CLOVER:ON
     }

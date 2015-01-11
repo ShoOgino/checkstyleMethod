@@ -1,9 +1,9 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final ExpressionHandler handler = mHandlerFactory.getHandler(this, aAST,
-            mHandlers.peek());
-        mHandlers.push(handler);
+        final ExpressionHandler handler = handlerFactory.getHandler(this, ast,
+            handlers.peek());
+        handlers.push(handler);
         try {
             handler.checkIndentation();
         }

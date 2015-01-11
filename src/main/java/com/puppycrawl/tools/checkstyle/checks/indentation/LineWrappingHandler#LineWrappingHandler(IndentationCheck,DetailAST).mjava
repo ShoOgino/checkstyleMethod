@@ -1,17 +1,17 @@
     /**
      * Sets values of class field, finds last node and calculates indentation level.
      *
-     * @param aInstance
+     * @param instance
      *            instance of IndentationCheck.
-     * @param aFirstNode
+     * @param firstNode
      *            root node for current expression..
      */
-    public LineWrappingHandler(IndentationCheck aInstance, DetailAST aFirstNode)
+    public LineWrappingHandler(IndentationCheck instance, DetailAST firstNode)
     {
-        mIndentCheck = aInstance;
-        mFirstNode = aFirstNode;
-        mLastNode = findLastNode(mFirstNode);
-        mIndentLevel = mIndentCheck.getLineWrappingIndentation();
-        mForceStrictCondition = mIndentCheck.getForceStrictCondition();
+        indentCheck = instance;
+        this.firstNode = firstNode;
+        lastNode = findLastNode(firstNode);
+        indentLevel = indentCheck.getLineWrappingIndentation();
+        forceStrictCondition = indentCheck.getForceStrictCondition();
     }
 

@@ -1,15 +1,15 @@
     /**
      * Check the indent level for a single line.
      *
-     * @param aLineNum       the line number to check
-     * @param aIndentLevel   the required indent level
+     * @param lineNum       the line number to check
+     * @param indentLevel   the required indent level
      */
-    private void checkSingleLine(int aLineNum, IndentLevel aIndentLevel)
+    private void checkSingleLine(int lineNum, IndentLevel indentLevel)
     {
-        final String line = mIndentCheck.getLine(aLineNum - 1);
+        final String line = indentCheck.getLine(lineNum - 1);
         final int start = getLineStart(line);
-        if (aIndentLevel.gt(start)) {
-            logChildError(aLineNum, start, aIndentLevel);
+        if (indentLevel.gt(start)) {
+            logChildError(lineNum, start, indentLevel);
         }
     }
 

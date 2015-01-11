@@ -2,17 +2,17 @@
      * Construct an instance of this handler with the given indentation check,
      * abstract syntax tree, and parent handler.
      *
-     * @param aIndentCheck   the indentation check
-     * @param aAST           the abstract syntax tree
-     * @param aParent        the parent handler
+     * @param indentCheck   the indentation check
+     * @param ast           the abstract syntax tree
+     * @param parent        the parent handler
      */
-    public MethodCallHandler(IndentationCheck aIndentCheck,
-        DetailAST aAST, ExpressionHandler aParent)
+    public MethodCallHandler(IndentationCheck indentCheck,
+        DetailAST ast, ExpressionHandler parent)
     {
-        super(aIndentCheck,
-            aAST.getType() == TokenTypes.METHOD_CALL
+        super(indentCheck,
+            ast.getType() == TokenTypes.METHOD_CALL
                 ? "method call" : "ctor call",
-            aAST,
-            aParent);
+            ast,
+            parent);
     }
 

@@ -1,17 +1,17 @@
     /**
      * Check the indentation of the left parenthesis.
-     * @param aLparen parenthesis to check
+     * @param lparen parenthesis to check
      */
-    protected final void checkLParen(final DetailAST aLparen)
+    protected final void checkLParen(final DetailAST lparen)
     {
         // the rcurly can either be at the correct indentation, or on the
         // same line as the lcurly
-        if ((aLparen == null)
-            || getLevel().accept(expandedTabsColumnNo(aLparen))
-            || !startsLine(aLparen))
+        if ((lparen == null)
+            || getLevel().accept(expandedTabsColumnNo(lparen))
+            || !startsLine(lparen))
         {
             return;
         }
-        logError(aLparen, "lparen", expandedTabsColumnNo(aLparen));
+        logError(lparen, "lparen", expandedTabsColumnNo(lparen));
     }
 

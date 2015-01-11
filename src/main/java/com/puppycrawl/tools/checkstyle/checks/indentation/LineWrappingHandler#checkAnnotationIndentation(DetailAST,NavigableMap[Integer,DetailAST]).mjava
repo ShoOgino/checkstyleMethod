@@ -1,22 +1,22 @@
     /**
      * Checks line wrapping into annotations.
      *
-     * @param aAtNode at-clause node.
-     * @param aFirstNodesOnLines map which contains
+     * @param atNode at-clause node.
+     * @param firstNodesOnLines map which contains
      *     first nodes as values and line numbers as keys.
      */
-    private void checkAnnotationIndentation(DetailAST aAtNode,
-            NavigableMap<Integer, DetailAST> aFirstNodesOnLines)
+    private void checkAnnotationIndentation(DetailAST atNode,
+            NavigableMap<Integer, DetailAST> firstNodesOnLines)
     {
-        final int currentIndent = aAtNode.getColumnNo() + mIndentLevel;
-        final int firstNodeIndent = aAtNode.getColumnNo();
-        final Collection<DetailAST> values = aFirstNodesOnLines.values();
-        final DetailAST lastAnnotationNode = getLastAnnotationNode(aAtNode);
+        final int currentIndent = atNode.getColumnNo() + indentLevel;
+        final int firstNodeIndent = atNode.getColumnNo();
+        final Collection<DetailAST> values = firstNodesOnLines.values();
+        final DetailAST lastAnnotationNode = getLastAnnotationNode(atNode);
         final int lastAnnotationLine = lastAnnotationNode.getLineNo();
         final int lastAnnotattionColumn = lastAnnotationNode.getColumnNo();
 
         final Iterator<DetailAST> itr = values.iterator();
-        while (itr.hasNext() && aFirstNodesOnLines.size() > 1) {
+        while (itr.hasNext() && firstNodesOnLines.size() > 1) {
             final DetailAST node = itr.next();
 
             if (node.getLineNo() < lastAnnotationLine

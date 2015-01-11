@@ -1,21 +1,21 @@
     /**
      * Get the first line for a given expression.
      *
-     * @param aStartLine   the line we are starting from
-     * @param aTree        the expression to find the first line for
+     * @param startLine   the line we are starting from
+     * @param tree        the expression to find the first line for
      *
      * @return the first line of the expression
      */
-    protected final int getFirstLine(int aStartLine, DetailAST aTree)
+    protected final int getFirstLine(int startLine, DetailAST tree)
     {
-        int realStart = aStartLine;
-        final int currLine = aTree.getLineNo();
+        int realStart = startLine;
+        final int currLine = tree.getLineNo();
         if (currLine < realStart) {
             realStart = currLine;
         }
 
         // check children
-        for (DetailAST node = aTree.getFirstChild();
+        for (DetailAST node = tree.getFirstChild();
             node != null;
             node = node.getNextSibling())
         {

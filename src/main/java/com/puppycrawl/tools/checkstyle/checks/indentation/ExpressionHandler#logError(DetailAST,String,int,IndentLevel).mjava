@@ -1,21 +1,21 @@
     /**
      * Log an indentation error.
      *
-     * @param aAst           the expression that caused the error
-     * @param aSubtypeName   the type of the expression
-     * @param aActualLevel   the actual indent level of the expression
-     * @param aExpectedLevel the expected indent level of the expression
+     * @param ast           the expression that caused the error
+     * @param subtypeName   the type of the expression
+     * @param actualLevel   the actual indent level of the expression
+     * @param expectedLevel the expected indent level of the expression
      */
-    protected final void logError(DetailAST aAst, String aSubtypeName,
-                                  int aActualLevel, IndentLevel aExpectedLevel)
+    protected final void logError(DetailAST ast, String subtypeName,
+                                  int actualLevel, IndentLevel expectedLevel)
     {
         final String typeStr =
-            ("".equals(aSubtypeName) ? "" : (" " + aSubtypeName));
+            ("".equals(subtypeName) ? "" : (" " + subtypeName));
         String messageKey = "indentation.error";
-        if (aExpectedLevel.isMultiLevel()) {
+        if (expectedLevel.isMultiLevel()) {
             messageKey = "indentation.error.multi";
         }
-        mIndentCheck.indentationLog(aAst.getLineNo(), messageKey,
-            mTypeName + typeStr, aActualLevel, aExpectedLevel);
+        indentCheck.indentationLog(ast.getLineNo(), messageKey,
+            typeName + typeStr, actualLevel, expectedLevel);
     }
 

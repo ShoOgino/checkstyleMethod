@@ -1,22 +1,22 @@
     /**
-     * @param aLineNo   number of line on which we search
-     * @param aColumnNo number of column after which we search
+     * @param lineNo   number of line on which we search
+     * @param columnNo number of column after which we search
      *
      * @return column number of first non-blank char after
      *         specified column on specified line or -1 if
      *         such char doesn't exist.
      */
-    private int getNextFirstNonblankOnLineAfter(int aLineNo, int aColumnNo)
+    private int getNextFirstNonblankOnLineAfter(int lineNo, int columnNo)
     {
-        int columnNo = aColumnNo + 1;
-        final String line = getIndentCheck().getLines()[aLineNo - 1];
+        int realColumnNo = columnNo + 1;
+        final String line = getIndentCheck().getLines()[lineNo - 1];
         final int lineLength = line.length();
-        while ((columnNo < lineLength)
-               && Character.isWhitespace(line.charAt(columnNo)))
+        while ((realColumnNo < lineLength)
+               && Character.isWhitespace(line.charAt(realColumnNo)))
         {
-            columnNo++;
+            realColumnNo++;
         }
 
-        return (columnNo == lineLength) ? -1 : columnNo;
+        return (realColumnNo == lineLength) ? -1 : realColumnNo;
     }
 

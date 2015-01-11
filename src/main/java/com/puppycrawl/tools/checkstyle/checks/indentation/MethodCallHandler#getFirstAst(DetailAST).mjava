@@ -1,25 +1,25 @@
     /**
      * Get the first AST of the specified method call.
      *
-     * @param aAst
+     * @param ast
      *            the method call
      *
      * @return the first AST of the specified method call
      */
-    private DetailAST getFirstAst(DetailAST aAst)
+    private DetailAST getFirstAst(DetailAST ast)
     {
         // walk down the first child part of the dots that make up a method
         // call name
 
-        DetailAST ast = aAst.getFirstChild();
-        while ((ast != null) && (ast.getType() == TokenTypes.DOT)) {
-            ast = ast.getFirstChild();
+        DetailAST astNode = ast.getFirstChild();
+        while ((astNode != null) && (astNode.getType() == TokenTypes.DOT)) {
+            astNode = astNode.getFirstChild();
         }
 
-        if (ast == null) {
-            ast = aAst;
+        if (astNode == null) {
+            astNode = ast;
         }
 
-        return ast;
+        return astNode;
     }
 

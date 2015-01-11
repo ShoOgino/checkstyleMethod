@@ -1,24 +1,24 @@
     /**
      * Create new instance of handler for METHOD_CALL.
      *
-     * @param aIndentCheck   the indentation check
-     * @param aAst           ast to handle
-     * @param aParent        the handler parent of this AST
+     * @param indentCheck   the indentation check
+     * @param ast           ast to handle
+     * @param parent        the handler parent of this AST
      *
      * @return new instance.
      */
-    ExpressionHandler createMethodCallHandler(IndentationCheck aIndentCheck,
-        DetailAST aAst, ExpressionHandler aParent)
+    ExpressionHandler createMethodCallHandler(IndentationCheck indentCheck,
+        DetailAST ast, ExpressionHandler parent)
     {
-        ExpressionHandler theParent = aParent;
-        DetailAST ast = aAst.getFirstChild();
-        while ((ast != null) && (ast.getType() == TokenTypes.DOT)) {
-            ast = ast.getFirstChild();
+        ExpressionHandler theParent = parent;
+        DetailAST astNode = ast.getFirstChild();
+        while ((astNode != null) && (astNode.getType() == TokenTypes.DOT)) {
+            astNode = astNode.getFirstChild();
         }
-        if ((ast != null) && isHandledType(ast.getType())) {
-            theParent = getHandler(aIndentCheck, ast, theParent);
-            mCreatedHandlers.put(ast, theParent);
+        if ((astNode != null) && isHandledType(astNode.getType())) {
+            theParent = getHandler(indentCheck, astNode, theParent);
+            createdHandlers.put(astNode, theParent);
         }
-        return new MethodCallHandler(aIndentCheck, aAst, theParent);
+        return new MethodCallHandler(indentCheck, ast, theParent);
     }
 

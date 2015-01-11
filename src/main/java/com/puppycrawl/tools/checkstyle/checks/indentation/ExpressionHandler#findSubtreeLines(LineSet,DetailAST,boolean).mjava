@@ -1,33 +1,33 @@
     /**
      * Find the set of lines for a given subtree.
      *
-     * @param aLines          the set of lines to add to
-     * @param aTree           the subtree to examine
-     * @param aAllowNesting   whether or not to allow nested subtrees
+     * @param lines          the set of lines to add to
+     * @param tree           the subtree to examine
+     * @param allowNesting   whether or not to allow nested subtrees
      */
-    protected final void findSubtreeLines(LineSet aLines, DetailAST aTree,
-        boolean aAllowNesting)
+    protected final void findSubtreeLines(LineSet lines, DetailAST tree,
+        boolean allowNesting)
     {
-        if (getIndentCheck().getHandlerFactory().isHandledType(aTree.getType())
-            || (aTree.getLineNo() < 0))
+        if (getIndentCheck().getHandlerFactory().isHandledType(tree.getType())
+            || (tree.getLineNo() < 0))
         {
             return;
         }
 
-        final int lineNum = aTree.getLineNo();
-        final Integer colNum = aLines.getStartColumn(lineNum);
+        final int lineNum = tree.getLineNo();
+        final Integer colNum = lines.getStartColumn(lineNum);
 
-        final int thisLineColumn = expandedTabsColumnNo(aTree);
+        final int thisLineColumn = expandedTabsColumnNo(tree);
         if ((colNum == null) || (thisLineColumn < colNum.intValue())) {
-            aLines.addLineAndCol(lineNum, thisLineColumn);
+            lines.addLineAndCol(lineNum, thisLineColumn);
         }
 
         // check children
-        for (DetailAST node = aTree.getFirstChild();
+        for (DetailAST node = tree.getFirstChild();
             node != null;
             node = node.getNextSibling())
         {
-            findSubtreeLines(aLines, node, aAllowNesting);
+            findSubtreeLines(lines, node, allowNesting);
         }
     }
 

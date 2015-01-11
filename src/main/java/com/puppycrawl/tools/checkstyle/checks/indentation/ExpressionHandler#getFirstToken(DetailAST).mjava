@@ -1,13 +1,13 @@
     /**
      * Searchs in given sub-tree (including given node) for the token
      * which represents first symbol for this sub-tree in file.
-     * @param aAST a root of sub-tree in which the search shoul be performed.
+     * @param ast a root of sub-tree in which the search shoul be performed.
      * @return a token which occurs first in the file.
      */
-    static DetailAST getFirstToken(DetailAST aAST)
+    static DetailAST getFirstToken(DetailAST ast)
     {
-        DetailAST first = aAST;
-        DetailAST child = aAST.getFirstChild();
+        DetailAST first = ast;
+        DetailAST child = ast.getFirstChild();
 
         while (child != null) {
             final DetailAST toTest = getFirstToken(child);
