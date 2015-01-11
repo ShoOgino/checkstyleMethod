@@ -1,15 +1,15 @@
     /** {@inheritDoc} */
     @Override
-    public void addException(AuditEvent aEvt, Throwable aThrowable)
+    public void addException(AuditEvent evt, Throwable throwable)
     {
         final StringWriter sw = new StringWriter();
         final PrintWriter pw = new PrintWriter(sw);
         pw.println("<exception>");
         pw.println("<![CDATA[");
-        aThrowable.printStackTrace(pw);
+        throwable.printStackTrace(pw);
         pw.println("]]>");
         pw.println("</exception>");
         pw.flush();
-        mWriter.println(encode(sw.toString()));
+        writer.println(encode(sw.toString()));
     }
 

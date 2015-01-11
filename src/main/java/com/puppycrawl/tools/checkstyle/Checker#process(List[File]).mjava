@@ -2,27 +2,27 @@
      * Processes a set of files with all FileSetChecks.
      * Once this is done, it is highly recommended to call for
      * the destroy method to close and remove the listeners.
-     * @param aFiles the list of files to be audited.
+     * @param files the list of files to be audited.
      * @return the total number of errors found
      * @see #destroy()
      */
-    public int process(List<File> aFiles)
+    public int process(List<File> files)
     {
         // Prepare to start
         fireAuditStarted();
-        for (final FileSetCheck fsc : mFileSetChecks) {
-            fsc.beginProcessing(mCharset);
+        for (final FileSetCheck fsc : fileSetChecks) {
+            fsc.beginProcessing(charset);
         }
 
         // Process each file
-        for (final File f : aFiles) {
+        for (final File f : files) {
             final String fileName = f.getAbsolutePath();
             fireFileStarted(fileName);
             final SortedSet<LocalizedMessage> fileMessages = Sets.newTreeSet();
             try {
                 final FileText theText = new FileText(f.getAbsoluteFile(),
-                        mCharset);
-                for (final FileSetCheck fsc : mFileSetChecks) {
+                        charset);
+                for (final FileSetCheck fsc : fileSetChecks) {
                     fileMessages.addAll(fsc.process(f, theText));
                 }
             }
@@ -45,13 +45,13 @@
         }
 
         // Finish up
-        for (final FileSetCheck fsc : mFileSetChecks) {
+        for (final FileSetCheck fsc : fileSetChecks) {
             // They may also log!!!
             fsc.finishProcessing();
             fsc.destroy();
         }
 
-        final int errorCount = mCounter.getCount();
+        final int errorCount = counter.getCount();
         fireAuditFinished();
         return errorCount;
     }

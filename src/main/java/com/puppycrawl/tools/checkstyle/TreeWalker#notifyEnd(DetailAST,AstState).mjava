@@ -1,21 +1,21 @@
     /**
      * Notify checks that we have finished walking a tree.
-     * @param aRootAST the root of the tree.
-     * @param aAstState state of AST.
+     * @param rootAST the root of the tree.
+     * @param astState state of AST.
      */
-    private void notifyEnd(DetailAST aRootAST, AstState aAstState)
+    private void notifyEnd(DetailAST rootAST, AstState astState)
     {
         Set<Check> checks;
 
-        if (aAstState == AstState.WITH_COMMENTS) {
-            checks = mCommentChecks;
+        if (astState == AstState.WITH_COMMENTS) {
+            checks = commentChecks;
         }
         else {
-            checks = mOrdinaryChecks;
+            checks = ordinaryChecks;
         }
 
         for (Check ch : checks) {
-            ch.finishTree(aRootAST);
+            ch.finishTree(rootAST);
         }
     }
 

@@ -1,24 +1,24 @@
     /**
      * Create the audit listener
      *
-     * @param aLine command line options supplied
-     * @param aOut the stream to log to
-     * @param aCloseOut whether the stream should be closed
+     * @param line command line options supplied
+     * @param out the stream to log to
+     * @param closeOut whether the stream should be closed
      * @return a fresh new <code>AuditListener</code>
      */
-    private static AuditListener createListener(CommandLine aLine,
-                                                OutputStream aOut,
-                                                boolean aCloseOut)
+    private static AuditListener createListener(CommandLine line,
+                                                OutputStream out,
+                                                boolean closeOut)
     {
         final String format =
-            aLine.hasOption("f") ? aLine.getOptionValue("f") : "plain";
+            line.hasOption("f") ? line.getOptionValue("f") : "plain";
 
         AuditListener listener = null;
         if ("xml".equals(format)) {
-            listener = new XMLLogger(aOut, aCloseOut);
+            listener = new XMLLogger(out, closeOut);
         }
         else if ("plain".equals(format)) {
-            listener = new DefaultLogger(aOut, aCloseOut);
+            listener = new DefaultLogger(out, closeOut);
         }
         else {
             System.out.println("Invalid format: (" + format

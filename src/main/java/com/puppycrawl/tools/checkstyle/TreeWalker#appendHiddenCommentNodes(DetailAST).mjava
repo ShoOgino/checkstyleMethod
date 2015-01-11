@@ -2,15 +2,15 @@
      * Appends comment nodes to existing AST.
      * It traverses each node in AST, looks for hidden comment tokens
      * and appends found comment tokens as nodes in AST.
-     * @param aRoot
+     * @param root
      *        root of AST.
      * @return root of AST with comment nodes.
      */
-    private static DetailAST appendHiddenCommentNodes(DetailAST aRoot)
+    private static DetailAST appendHiddenCommentNodes(DetailAST root)
     {
-        DetailAST result = aRoot;
-        DetailAST curNode = aRoot;
-        DetailAST lastNode = aRoot;
+        DetailAST result = root;
+        DetailAST curNode = root;
+        DetailAST lastNode = root;
 
         while (curNode != null) {
             if (isPositionGreater(curNode, lastNode)) {

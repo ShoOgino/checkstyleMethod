@@ -3,22 +3,22 @@
      * Note that if the source does wrap an open byte or character
      * stream, clients are required to close that stream by themselves
      *
-     * @param aConfigSource the input stream to the Checkstyle configuration
-     * @param aOverridePropsResolver overriding properties
-     * @param aOmitIgnoredModules <code>true</code> if modules with severity
+     * @param configSource the input stream to the Checkstyle configuration
+     * @param overridePropsResolver overriding properties
+     * @param omitIgnoredModules <code>true</code> if modules with severity
      *            'ignore' should be omitted, <code>false</code> otherwise
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
-    public static Configuration loadConfiguration(InputSource aConfigSource,
-        PropertyResolver aOverridePropsResolver, boolean aOmitIgnoredModules)
+    public static Configuration loadConfiguration(InputSource configSource,
+        PropertyResolver overridePropsResolver, boolean omitIgnoredModules)
         throws CheckstyleException
     {
         try {
             final ConfigurationLoader loader =
-                new ConfigurationLoader(aOverridePropsResolver,
-                                        aOmitIgnoredModules);
-            loader.parseInputSource(aConfigSource);
+                new ConfigurationLoader(overridePropsResolver,
+                                        omitIgnoredModules);
+            loader.parseInputSource(configSource);
             return loader.getConfiguration();
         }
         catch (final ParserConfigurationException e) {

@@ -1,13 +1,13 @@
     /** {@inheritDoc} */
     @Override
-    public void auditFinished(AuditEvent aEvt)
+    public void auditFinished(AuditEvent evt)
     {
-        mWriter.println("</checkstyle>");
-        if (mCloseStream) {
-            mWriter.close();
+        writer.println("</checkstyle>");
+        if (closeStream) {
+            writer.close();
         }
         else {
-            mWriter.flush();
+            writer.flush();
         }
     }
 

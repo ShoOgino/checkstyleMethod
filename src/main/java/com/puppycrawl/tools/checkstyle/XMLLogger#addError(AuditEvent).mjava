@@ -1,20 +1,20 @@
     /** {@inheritDoc} */
     @Override
-    public void addError(AuditEvent aEvt)
+    public void addError(AuditEvent evt)
     {
-        if (!SeverityLevel.IGNORE.equals(aEvt.getSeverityLevel())) {
-            mWriter.print("<error" + " line=\"" + aEvt.getLine() + "\"");
-            if (aEvt.getColumn() > 0) {
-                mWriter.print(" column=\"" + aEvt.getColumn() + "\"");
+        if (!SeverityLevel.IGNORE.equals(evt.getSeverityLevel())) {
+            writer.print("<error" + " line=\"" + evt.getLine() + "\"");
+            if (evt.getColumn() > 0) {
+                writer.print(" column=\"" + evt.getColumn() + "\"");
             }
-            mWriter.print(" severity=\""
-                + aEvt.getSeverityLevel().getName()
+            writer.print(" severity=\""
+                + evt.getSeverityLevel().getName()
                 + "\"");
-            mWriter.print(" message=\""
-                + encode(aEvt.getMessage())
+            writer.print(" message=\""
+                + encode(evt.getMessage())
                 + "\"");
-            mWriter.println(" source=\""
-                + encode(aEvt.getSourceName())
+            writer.println(" source=\""
+                + encode(evt.getSourceName())
                 + "\"/>");
         }
     }

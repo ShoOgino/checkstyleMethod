@@ -1,31 +1,31 @@
     /**
      * Creates a new instance of a named class.
-     * @param aClassName the name of the class to instantiate.
-     * @return the <code>Object</code> created by mLoader.
+     * @param className the name of the class to instantiate.
+     * @return the <code>Object</code> created by loader.
      * @throws CheckstyleException if an error occurs.
      */
-    private Object createObject(String aClassName)
+    private Object createObject(String className)
         throws CheckstyleException
     {
         try {
-            final Class<?> clazz = Class.forName(aClassName, true,
-                    mModuleClassLoader);
+            final Class<?> clazz = Class.forName(className, true,
+                    moduleClassLoader);
             return clazz.newInstance();
         }
         catch (final ClassNotFoundException e) {
             throw new CheckstyleException(
-                "Unable to find class for " + aClassName, e);
+                "Unable to find class for " + className, e);
         }
         catch (final InstantiationException e) {
             ///CLOVER:OFF
             throw new CheckstyleException(
-                "Unable to instantiate " + aClassName, e);
+                "Unable to instantiate " + className, e);
             ///CLOVER:ON
         }
         catch (final IllegalAccessException e) {
             ///CLOVER:OFF
             throw new CheckstyleException(
-                "Unable to instantiate " + aClassName, e);
+                "Unable to instantiate " + className, e);
             ///CLOVER:ON
         }
     }

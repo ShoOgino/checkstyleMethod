@@ -1,13 +1,13 @@
         @Override
-        public void endElement(String aNamespaceURI,
-                               String aLocalName,
-                               String aQName)
+        public void endElement(String namespaceURI,
+                               String localName,
+                               String qName)
             throws SAXException
         {
-            if (aQName.equals(MODULE)) {
+            if (qName.equals(MODULE)) {
 
                 final Configuration recentModule =
-                    mConfigStack.pop();
+                    configStack.pop();
 
                 // remove modules with severity ignore if these modules should
                 // be omitted
@@ -23,12 +23,12 @@
 
                 // omit this module if these should be omitted and the module
                 // has the severity 'ignore'
-                final boolean omitModule = mOmitIgnoredModules
+                final boolean omitModule = omitIgnoredModules
                     && SeverityLevel.IGNORE.equals(level);
 
-                if (omitModule && !mConfigStack.isEmpty()) {
+                if (omitModule && !configStack.isEmpty()) {
                     final DefaultConfiguration parentModule =
-                        mConfigStack.peek();
+                        configStack.peek();
                     parentModule.removeChild(recentModule);
                 }
             }

@@ -1,17 +1,17 @@
     /**
      * Print an Emacs compliant line on the error stream.
      * If the column number is non zero, then also display it.
-     * @param aEvt {@inheritDoc}
+     * @param evt {@inheritDoc}
      * @see AuditListener
      **/
     @Override
-    public void addError(AuditEvent aEvt)
+    public void addError(AuditEvent evt)
     {
-        final SeverityLevel severityLevel = aEvt.getSeverityLevel();
+        final SeverityLevel severityLevel = evt.getSeverityLevel();
         if (!SeverityLevel.IGNORE.equals(severityLevel)) {
 
-            final String fileName = aEvt.getFileName();
-            final String message = aEvt.getMessage();
+            final String fileName = evt.getFileName();
+            final String message = evt.getMessage();
 
             // avoid StringBuffer.expandCapacity
             final int bufLen = fileName.length() + message.length()
@@ -19,15 +19,15 @@
             final StringBuffer sb = new StringBuffer(bufLen);
 
             sb.append(fileName);
-            sb.append(':').append(aEvt.getLine());
-            if (aEvt.getColumn() > 0) {
-                sb.append(':').append(aEvt.getColumn());
+            sb.append(':').append(evt.getLine());
+            if (evt.getColumn() > 0) {
+                sb.append(':').append(evt.getColumn());
             }
             if (SeverityLevel.WARNING.equals(severityLevel)) {
                 sb.append(": warning");
             }
             sb.append(": ").append(message);
-            mErrorWriter.println(sb.toString());
+            errorWriter.println(sb.toString());
         }
     }
 

@@ -1,33 +1,33 @@
     /**
      * Create block comment from token.
-     * @param aToken
+     * @param token
      *        Token object.
      * @return DetailAST with BLOCK_COMMENT type.
      */
-    private static DetailAST createBlockCommentNode(Token aToken)
+    private static DetailAST createBlockCommentNode(Token token)
     {
         final DetailAST blockComment = new DetailAST();
         blockComment.initialize(TokenTypes.BLOCK_COMMENT_BEGIN, "/*");
 
         // column counting begins from 0
-        blockComment.setColumnNo(aToken.getColumn() - 1);
-        blockComment.setLineNo(aToken.getLine());
+        blockComment.setColumnNo(token.getColumn() - 1);
+        blockComment.setLineNo(token.getLine());
 
         final DetailAST blockCommentContent = new DetailAST();
-        blockCommentContent.initialize(aToken);
+        blockCommentContent.initialize(token);
         blockCommentContent.setType(TokenTypes.COMMENT_CONTENT);
 
         // column counting begins from 0
         // plus length of '/*'
-        blockCommentContent.setColumnNo(aToken.getColumn() - 1 + 2);
-        blockCommentContent.setLineNo(aToken.getLine());
-        blockCommentContent.setText(aToken.getText());
+        blockCommentContent.setColumnNo(token.getColumn() - 1 + 2);
+        blockCommentContent.setLineNo(token.getLine());
+        blockCommentContent.setText(token.getText());
 
         final DetailAST blockCommentClose = new DetailAST();
         blockCommentClose.initialize(TokenTypes.BLOCK_COMMENT_END, "*/");
 
         final Entry<Integer, Integer> linesColumns = countLinesColumns(
-                aToken.getText(), aToken.getLine(), aToken.getColumn());
+                token.getText(), token.getLine(), token.getColumn());
         blockCommentClose.setLineNo(linesColumns.getKey());
         blockCommentClose.setColumnNo(linesColumns.getValue());
 

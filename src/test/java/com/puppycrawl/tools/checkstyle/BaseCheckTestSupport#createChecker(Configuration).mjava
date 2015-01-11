@@ -1,6 +1,6 @@
-    protected Checker createChecker(Configuration aCheckConfig)
+    protected Checker createChecker(Configuration checkConfig)
             throws Exception {
-        final DefaultConfiguration dc = createCheckerConfig(aCheckConfig);
+        final DefaultConfiguration dc = createCheckerConfig(checkConfig);
         final Checker c = new Checker();
         // make sure the tests always run with english error messages
         // so the tests don't fail in supported locales like german
@@ -9,7 +9,7 @@
         c.setLocaleLanguage(locale.getLanguage());
         c.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
         c.configure(dc);
-        c.addListener(new BriefLogger(mStream));
+        c.addListener(new BriefLogger(stream));
         return c;
     }
 

@@ -1,28 +1,28 @@
     /**
      * Create single-line comment from token.
-     * @param aToken
+     * @param token
      *        Token object.
      * @return DetailAST with SINGLE_LINE_COMMENT type.
      */
-    private static DetailAST createSlCommentNode(Token aToken)
+    private static DetailAST createSlCommentNode(Token token)
     {
         final DetailAST slComment = new DetailAST();
         slComment.setType(TokenTypes.SINGLE_LINE_COMMENT);
         slComment.setText("//");
 
         // column counting begins from 0
-        slComment.setColumnNo(aToken.getColumn() - 1);
-        slComment.setLineNo(aToken.getLine());
+        slComment.setColumnNo(token.getColumn() - 1);
+        slComment.setLineNo(token.getLine());
 
         final DetailAST slCommentContent = new DetailAST();
-        slCommentContent.initialize(aToken);
+        slCommentContent.initialize(token);
         slCommentContent.setType(TokenTypes.COMMENT_CONTENT);
 
         // column counting begins from 0
         // plus length of '//'
-        slCommentContent.setColumnNo(aToken.getColumn() - 1 + 2);
-        slCommentContent.setLineNo(aToken.getLine());
-        slCommentContent.setText(aToken.getText());
+        slCommentContent.setColumnNo(token.getColumn() - 1 + 2);
+        slCommentContent.setLineNo(token.getLine());
+        slCommentContent.setText(token.getText());
 
         slComment.addChild(slCommentContent);
         return slComment;

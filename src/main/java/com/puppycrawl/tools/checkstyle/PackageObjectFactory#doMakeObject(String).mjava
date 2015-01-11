@@ -3,25 +3,25 @@
      * a classname, creates an instance of the named class. Otherwise, creates
      * an instance of a classname obtained by concatenating the given
      * to a package name from a given list of package names.
-     * @param aName the name of a class.
+     * @param name the name of a class.
      * @return the <code>Object</code>
      * @throws CheckstyleException if an error occurs.
      */
-    private Object doMakeObject(String aName)
+    private Object doMakeObject(String name)
         throws CheckstyleException
     {
-        //try aName first
+        //try name first
         try {
-            return createObject(aName);
+            return createObject(name);
         }
         catch (final CheckstyleException ex) {
             ; // keep looking
         }
 
         //now try packages
-        for (String packageName : mPackages) {
+        for (String packageName : packages) {
 
-            final String className = packageName + aName;
+            final String className = packageName + name;
             try {
                 return createObject(className);
             }
@@ -30,6 +30,6 @@
             }
         }
 
-        throw new CheckstyleException("Unable to instantiate " + aName);
+        throw new CheckstyleException("Unable to instantiate " + name);
     }
 

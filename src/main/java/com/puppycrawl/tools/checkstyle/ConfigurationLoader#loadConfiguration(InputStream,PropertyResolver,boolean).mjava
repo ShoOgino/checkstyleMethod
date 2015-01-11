@@ -2,9 +2,9 @@
      * Returns the module configurations from a specified input stream.
      * Note that clients are required to close the given stream by themselves
      *
-     * @param aConfigStream the input stream to the Checkstyle configuration
-     * @param aOverridePropsResolver overriding properties
-     * @param aOmitIgnoredModules <code>true</code> if modules with severity
+     * @param configStream the input stream to the Checkstyle configuration
+     * @param overridePropsResolver overriding properties
+     * @param omitIgnoredModules <code>true</code> if modules with severity
      *            'ignore' should be omitted, <code>false</code> otherwise
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
@@ -16,11 +16,11 @@
      *   should be used instead
      */
     @Deprecated
-    public static Configuration loadConfiguration(InputStream aConfigStream,
-        PropertyResolver aOverridePropsResolver, boolean aOmitIgnoredModules)
+    public static Configuration loadConfiguration(InputStream configStream,
+        PropertyResolver overridePropsResolver, boolean omitIgnoredModules)
         throws CheckstyleException
     {
-        return loadConfiguration(new InputSource(aConfigStream),
-                                 aOverridePropsResolver, aOmitIgnoredModules);
+        return loadConfiguration(new InputSource(configStream),
+                                 overridePropsResolver, omitIgnoredModules);
     }
 

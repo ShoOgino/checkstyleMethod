@@ -1,7 +1,7 @@
     /**
      * Static helper method to parses a Java source file.
      *
-     * @param aContents
+     * @param contents
      *                contains the contents of the file
      * @throws TokenStreamException
      *                 if lexing failed
@@ -9,14 +9,14 @@
      *                 if parsing failed
      * @return the root of the AST
      */
-    public static DetailAST parse(FileContents aContents)
+    public static DetailAST parse(FileContents contents)
         throws RecognitionException, TokenStreamException
     {
-        final String fullText = aContents.getText().getFullText().toString();
+        final String fullText = contents.getText().getFullText().toString();
         final Reader sr = new StringReader(fullText);
         final GeneratedJavaLexer lexer = new GeneratedJavaLexer(sr);
-        lexer.setFilename(aContents.getFilename());
-        lexer.setCommentListener(aContents);
+        lexer.setFilename(contents.getFilename());
+        lexer.setCommentListener(contents);
         lexer.setTreatAssertAsKeyword(true);
         lexer.setTreatEnumAsKeyword(true);
         lexer.setTokenObjectClass("antlr.CommonHiddenStreamToken");
@@ -28,7 +28,7 @@
 
         final GeneratedJavaRecognizer parser =
             new GeneratedJavaRecognizer(filter);
-        parser.setFilename(aContents.getFilename());
+        parser.setFilename(contents.getFilename());
         parser.setASTNodeClass(DetailAST.class.getName());
         parser.compilationUnit();
 

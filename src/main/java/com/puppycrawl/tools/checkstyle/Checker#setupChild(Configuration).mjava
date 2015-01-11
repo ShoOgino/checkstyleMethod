@@ -1,14 +1,14 @@
     @Override
-    protected void setupChild(Configuration aChildConf)
+    protected void setupChild(Configuration childConf)
         throws CheckstyleException
     {
-        final String name = aChildConf.getName();
+        final String name = childConf.getName();
         try {
-            final Object child = mModuleFactory.createModule(name);
+            final Object child = moduleFactory.createModule(name);
             if (child instanceof AutomaticBean) {
                 final AutomaticBean bean = (AutomaticBean) child;
-                bean.contextualize(mChildContext);
-                bean.configure(aChildConf);
+                bean.contextualize(childContext);
+                bean.configure(childConf);
             }
             if (child instanceof FileSetCheck) {
                 final FileSetCheck fsc = (FileSetCheck) child;

@@ -1,14 +1,14 @@
     /** {@inheritDoc} */
     @Override
-    public void auditStarted(AuditEvent aEvt)
+    public void auditStarted(AuditEvent evt)
     {
-        mWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
         final ResourceBundle compilationProperties =
             ResourceBundle.getBundle("checkstylecompilation");
         final String version =
             compilationProperties.getString("checkstyle.compile.version");
 
-        mWriter.println("<checkstyle version=\"" + version + "\">");
+        writer.println("<checkstyle version=\"" + version + "\">");
     }
 

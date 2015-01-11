@@ -1,23 +1,23 @@
     /**
      * @return whether the given argument a character or entity reference
-     * @param aEnt the possible entity to look for.
+     * @param ent the possible entity to look for.
      */
-    public boolean isReference(String aEnt)
+    public boolean isReference(String ent)
     {
-        if (!(aEnt.charAt(0) == '&') || !aEnt.endsWith(";")) {
+        if (!(ent.charAt(0) == '&') || !ent.endsWith(";")) {
             return false;
         }
 
-        if (aEnt.charAt(1) == '#') {
+        if (ent.charAt(1) == '#') {
             int prefixLength = 2; // "&#"
             int radix = BASE_10;
-            if (aEnt.charAt(2) == 'x') {
+            if (ent.charAt(2) == 'x') {
                 prefixLength++;
                 radix = BASE_16;
             }
             try {
                 Integer.parseInt(
-                    aEnt.substring(prefixLength, aEnt.length() - 1), radix);
+                    ent.substring(prefixLength, ent.length() - 1), radix);
                 return true;
             }
             catch (final NumberFormatException nfe) {
@@ -25,7 +25,7 @@
             }
         }
 
-        final String name = aEnt.substring(1, aEnt.length() - 1);
+        final String name = ent.substring(1, ent.length() - 1);
         for (String element : ENTITIES) {
             if (name.equals(element)) {
                 return true;

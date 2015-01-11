@@ -1,13 +1,13 @@
     /**
      * Determines the files to process.
      *
-     * @param aLine the command line options specifying what files to process
+     * @param line the command line options specifying what files to process
      * @return list of files to process
      */
-    private static List<File> getFilesToProcess(CommandLine aLine)
+    private static List<File> getFilesToProcess(CommandLine line)
     {
         final List<File> files = Lists.newLinkedList();
-        final String[] remainingArgs = aLine.getArgs();
+        final String[] remainingArgs = line.getArgs();
         for (String element : remainingArgs) {
             traverse(new File(element), files);
         }

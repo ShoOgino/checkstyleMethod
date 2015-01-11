@@ -9,12 +9,12 @@
     protected AuditListener[] getListeners() throws ClassNotFoundException,
             InstantiationException, IllegalAccessException, IOException
     {
-        final int formatterCount = Math.max(1, mFormatters.size());
+        final int formatterCount = Math.max(1, formatters.size());
 
         final AuditListener[] listeners = new AuditListener[formatterCount];
 
         // formatters
-        if (mFormatters.isEmpty()) {
+        if (formatters.isEmpty()) {
             final OutputStream debug = new LogOutputStream(this,
                     Project.MSG_DEBUG);
             final OutputStream err = new LogOutputStream(this, Project.MSG_ERR);
@@ -22,7 +22,7 @@
         }
         else {
             for (int i = 0; i < formatterCount; i++) {
-                final Formatter f = mFormatters.get(i);
+                final Formatter f = formatters.get(i);
                 listeners[i] = f.createListener(this);
             }
         }

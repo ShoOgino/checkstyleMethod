@@ -14,13 +14,13 @@
         log("compiled on " + compileTimestamp, Project.MSG_VERBOSE);
 
         // Check for no arguments
-        if ((mFileName == null) && mFileSets.isEmpty()) {
+        if ((fileName == null) && fileSets.isEmpty()) {
             throw new BuildException(
                     "Must specify at least one of 'file' or nested 'fileset'.",
                     getLocation());
         }
 
-        if (mConfigLocation == null) {
+        if (configLocation == null) {
             throw new BuildException("Must specify 'config'.", getLocation());
         }
 
@@ -42,7 +42,7 @@
 
             log("Running Checkstyle " + version + " on " + files.size()
                     + " files", Project.MSG_INFO);
-            log("Using configuration " + mConfigLocation, Project.MSG_VERBOSE);
+            log("Using configuration " + configLocation, Project.MSG_VERBOSE);
 
             startTime = System.currentTimeMillis();
             final int numErrs = c.process(files);
@@ -50,19 +50,19 @@
             log("To process the files took " + (endTime - startTime) + " ms.",
                 Project.MSG_VERBOSE);
             final int numWarnings = warningCounter.getCount();
-            final boolean ok = (numErrs <= mMaxErrors)
-                    && (numWarnings <= mMaxWarnings);
+            final boolean ok = (numErrs <= maxErrors)
+                    && (numWarnings <= maxWarnings);
 
             // Handle the return status
             if (!ok) {
                 final String failureMsg =
                         "Got " + numErrs + " errors and " + numWarnings
                                 + " warnings.";
-                if (mFailureProperty != null) {
-                    getProject().setProperty(mFailureProperty, failureMsg);
+                if (failureProperty != null) {
+                    getProject().setProperty(failureProperty, failureMsg);
                 }
 
-                if (mFailOnViolation) {
+                if (failOnViolation) {
                     throw new BuildException(failureMsg, getLocation());
                 }
             }

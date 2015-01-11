@@ -1,12 +1,12 @@
     /**
      * Hex-encodes a byte array.
-     * @param aByteArray the byte array
-     * @return hex encoding of <code>aByteArray</code>
+     * @param byteArray the byte array
+     * @return hex encoding of <code>byteArray</code>
      */
-    private static String hexEncode(byte[] aByteArray)
+    private static String hexEncode(byte[] byteArray)
     {
-        final StringBuffer buf = new StringBuffer(2 * aByteArray.length);
-        for (final byte b : aByteArray) {
+        final StringBuffer buf = new StringBuffer(2 * byteArray.length);
+        for (final byte b : byteArray) {
             final int low = b & MASK_0X0F;
             final int high = (b >> SHIFT_4) & MASK_0X0F;
             buf.append(HEX_CHARS[high]);

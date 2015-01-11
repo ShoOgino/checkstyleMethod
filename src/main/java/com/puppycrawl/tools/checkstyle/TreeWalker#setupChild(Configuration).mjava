@@ -1,17 +1,17 @@
     @Override
-    public void setupChild(Configuration aChildConf)
+    public void setupChild(Configuration childConf)
         throws CheckstyleException
     {
         // TODO: improve the error handing
-        final String name = aChildConf.getName();
-        final Object module = mModuleFactory.createModule(name);
+        final String name = childConf.getName();
+        final Object module = moduleFactory.createModule(name);
         if (!(module instanceof Check)) {
             throw new CheckstyleException(
                 "TreeWalker is not allowed as a parent of " + name);
         }
         final Check c = (Check) module;
-        c.contextualize(mChildContext);
-        c.configure(aChildConf);
+        c.contextualize(childContext);
+        c.configure(childConf);
         c.init();
 
         registerCheck(c);

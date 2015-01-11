@@ -1,17 +1,17 @@
     @Override
-    public void startElement(String aNamespaceURI,
-                             String aLocalName,
-                             String aQName,
-                             Attributes aAtts)
+    public void startElement(String namespaceURI,
+                             String localName,
+                             String qName,
+                             Attributes atts)
         throws SAXException
     {
-        if ("package".equals(aQName)) {
+        if ("package".equals(qName)) {
             //push package name
-            final String name = aAtts.getValue("name");
+            final String name = atts.getValue("name");
             if (name == null) {
                 throw new SAXException("missing package name");
             }
-            mPackageStack.push(name);
+            packageStack.push(name);
         }
     }
 

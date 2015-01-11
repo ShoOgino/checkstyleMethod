@@ -1,29 +1,29 @@
     @Override
     public void finishLocalSetup() throws CheckstyleException
     {
-        final Locale locale = new Locale(mLocaleLanguage, mLocaleCountry);
+        final Locale locale = new Locale(localeLanguage, localeCountry);
         LocalizedMessage.setLocale(locale);
 
-        if (mModuleFactory == null) {
+        if (moduleFactory == null) {
 
-            if (mModuleClassLoader == null) {
+            if (moduleClassLoader == null) {
                 throw new CheckstyleException(
                         "if no custom moduleFactory is set, "
                                 + "moduleClassLoader must be specified");
             }
 
             final Set<String> packageNames = PackageNamesLoader
-                    .getPackageNames(mModuleClassLoader);
-            mModuleFactory = new PackageObjectFactory(packageNames,
-                    mModuleClassLoader);
+                    .getPackageNames(moduleClassLoader);
+            moduleFactory = new PackageObjectFactory(packageNames,
+                    moduleClassLoader);
         }
 
         final DefaultContext context = new DefaultContext();
-        context.add("charset", mCharset);
-        context.add("classLoader", mLoader);
-        context.add("moduleFactory", mModuleFactory);
-        context.add("severity", mSeverityLevel.getName());
-        context.add("basedir", mBasedir);
-        mChildContext = context;
+        context.add("charset", charset);
+        context.add("classLoader", loader);
+        context.add("moduleFactory", moduleFactory);
+        context.add("severity", severityLevel.getName());
+        context.add("basedir", basedir);
+        childContext = context;
     }
 

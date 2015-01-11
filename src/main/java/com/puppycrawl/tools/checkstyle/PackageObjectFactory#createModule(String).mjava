@@ -4,25 +4,25 @@
      * a classname, creates an instance of the named class. Otherwise, creates
      * an instance of a classname obtained by concatenating the given name
      * to a package name from a given list of package names.
-     * @param aName the name of a class.
-     * @return the <code>Object</code> created by aLoader.
+     * @param name the name of a class.
+     * @return the <code>Object</code> created by loader.
      * @throws CheckstyleException if an error occurs.
      */
     @Override
-    public Object createModule(String aName)
+    public Object createModule(String name)
         throws CheckstyleException
     {
         try {
-            return doMakeObject(aName);
+            return doMakeObject(name);
         }
         catch (final CheckstyleException ex) {
             //try again with suffix "Check"
             try {
-                return doMakeObject(aName + "Check");
+                return doMakeObject(name + "Check");
             }
             catch (final CheckstyleException ex2) {
                 throw new CheckstyleException(
-                    "Unable to instantiate " + aName, ex2);
+                    "Unable to instantiate " + name, ex2);
             }
         }
     }

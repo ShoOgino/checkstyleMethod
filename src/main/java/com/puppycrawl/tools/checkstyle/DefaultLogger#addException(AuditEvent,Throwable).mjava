@@ -1,10 +1,10 @@
     /** {@inheritDoc} */
     @Override
-    public void addException(AuditEvent aEvt, Throwable aThrowable)
+    public void addException(AuditEvent evt, Throwable throwable)
     {
-        synchronized (mErrorWriter) {
-            mErrorWriter.println("Error auditing " + aEvt.getFileName());
-            aThrowable.printStackTrace(mErrorWriter);
+        synchronized (errorWriter) {
+            errorWriter.println("Error auditing " + evt.getFileName());
+            throwable.printStackTrace(errorWriter);
         }
     }
 

@@ -1,23 +1,23 @@
     /**
      * Register a check for a specified token name
-     * @param aToken the name of the token
-     * @param aCheck the check to register
+     * @param token the name of the token
+     * @param check the check to register
      */
-    private void registerCheck(String aToken, Check aCheck)
+    private void registerCheck(String token, Check check)
     {
-        if (aCheck.isCommentNodesRequired()) {
-            mTokenToCommentChecks.put(aToken, aCheck);
+        if (check.isCommentNodesRequired()) {
+            tokenToCommentChecks.put(token, check);
         }
-        else if (TokenTypes.isCommentType(aToken)) {
+        else if (TokenTypes.isCommentType(token)) {
             LOG.warn("Check '"
-                    + aCheck.getClass().getName()
+                    + check.getClass().getName()
                     + "' waits for comment type token ('"
-                    + aToken
+                    + token
                     + "') and should override 'isCommentNodesRequred()'"
                     + " method to return 'true'");
         }
         else {
-            mTokenToOrdinaryChecks.put(aToken, aCheck);
+            tokenToOrdinaryChecks.put(token, check);
         }
     }
 

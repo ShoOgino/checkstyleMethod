@@ -3,20 +3,20 @@
      * files are added to a specified list. Subdirectories are also
      * traversed.
      *
-     * @param aNode the node to process
-     * @param aFiles list to add found files to
+     * @param node the node to process
+     * @param files list to add found files to
      */
-    private static void traverse(File aNode, List<File> aFiles)
+    private static void traverse(File node, List<File> files)
     {
-        if (aNode.canRead()) {
-            if (aNode.isDirectory()) {
-                final File[] nodes = aNode.listFiles();
+        if (node.canRead()) {
+            if (node.isDirectory()) {
+                final File[] nodes = node.listFiles();
                 for (File element : nodes) {
-                    traverse(element, aFiles);
+                    traverse(element, files);
                 }
             }
-            else if (aNode.isFile()) {
-                aFiles.add(aNode);
+            else if (node.isFile()) {
+                files.add(node);
             }
         }
     }

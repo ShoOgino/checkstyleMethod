@@ -1,37 +1,37 @@
         @Override
-        public void startElement(String aNamespaceURI,
-                                 String aLocalName,
-                                 String aQName,
-                                 Attributes aAtts)
+        public void startElement(String namespaceURI,
+                                 String localName,
+                                 String qName,
+                                 Attributes atts)
             throws SAXException
         {
             // TODO: debug logging for support purposes
-            if (aQName.equals(MODULE)) {
+            if (qName.equals(MODULE)) {
                 //create configuration
-                final String name = aAtts.getValue(NAME);
+                final String name = atts.getValue(NAME);
                 final DefaultConfiguration conf =
                     new DefaultConfiguration(name);
 
-                if (mConfiguration == null) {
-                    mConfiguration = conf;
+                if (configuration == null) {
+                    configuration = conf;
                 }
 
                 //add configuration to it's parent
-                if (!mConfigStack.isEmpty()) {
+                if (!configStack.isEmpty()) {
                     final DefaultConfiguration top =
-                        mConfigStack.peek();
+                        configStack.peek();
                     top.addChild(conf);
                 }
 
-                mConfigStack.push(conf);
+                configStack.push(conf);
             }
-            else if (aQName.equals(PROPERTY)) {
+            else if (qName.equals(PROPERTY)) {
                 //extract name and value
-                final String name = aAtts.getValue(NAME);
+                final String name = atts.getValue(NAME);
                 final String value;
                 try {
-                    value = replaceProperties(aAtts.getValue(VALUE),
-                        mOverridePropsResolver, aAtts.getValue(DEFAULT));
+                    value = replaceProperties(atts.getValue(VALUE),
+                        overridePropsResolver, atts.getValue(DEFAULT));
                 }
                 catch (final CheckstyleException ex) {
                     throw new SAXException(ex.getMessage());
@@ -39,16 +39,16 @@
 
                 //add to attributes of configuration
                 final DefaultConfiguration top =
-                    mConfigStack.peek();
+                    configStack.peek();
                 top.addAttribute(name, value);
             }
-            else if (aQName.equals(MESSAGE)) {
+            else if (qName.equals(MESSAGE)) {
                 //extract key and value
-                final String key = aAtts.getValue(KEY);
-                final String value = aAtts.getValue(VALUE);
+                final String key = atts.getValue(KEY);
+                final String value = atts.getValue(VALUE);
 
                 //add to messages of configuration
-                final DefaultConfiguration top = mConfigStack.peek();
+                final DefaultConfiguration top = configStack.peek();
                 top.addMessage(key, value);
             }
         }

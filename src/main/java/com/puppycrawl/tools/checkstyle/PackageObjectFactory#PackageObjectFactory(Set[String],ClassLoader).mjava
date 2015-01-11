@@ -1,19 +1,19 @@
     /**
      * Creates a new <code>PackageObjectFactory</code> instance.
-     * @param aPackageNames the list of package names to use
-     * @param aModuleClassLoader class loader used to load Checkstyle
+     * @param packageNames the list of package names to use
+     * @param moduleClassLoader class loader used to load Checkstyle
      *          core and custom modules
      */
-    public PackageObjectFactory(Set<String> aPackageNames,
-            ClassLoader aModuleClassLoader)
+    public PackageObjectFactory(Set<String> packageNames,
+            ClassLoader moduleClassLoader)
     {
-        if (aModuleClassLoader == null) {
+        if (moduleClassLoader == null) {
             throw new IllegalArgumentException(
-                    "aModuleClassLoader must not be null");
+                    "moduleClassLoader must not be null");
         }
 
         //create a copy of the given set, but retain ordering
-        mPackages = Sets.newLinkedHashSet(aPackageNames);
-        mModuleClassLoader = aModuleClassLoader;
+        packages = Sets.newLinkedHashSet(packageNames);
+        this.moduleClassLoader = moduleClassLoader;
     }
 

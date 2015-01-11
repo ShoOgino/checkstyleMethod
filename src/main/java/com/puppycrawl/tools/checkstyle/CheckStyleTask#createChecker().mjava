@@ -9,13 +9,13 @@
             final Properties props = createOverridingProperties();
             final Configuration config =
                 ConfigurationLoader.loadConfiguration(
-                    mConfigLocation,
+                    configLocation,
                     new PropertiesExpander(props),
-                    mOmitIgnoredModules);
+                    omitIgnoredModules);
 
             final DefaultContext context = new DefaultContext();
             final ClassLoader loader = new AntClassLoader(getProject(),
-                    mClasspath);
+                    classpath);
             context.add("classloader", loader);
 
             final ClassLoader moduleClassLoader =

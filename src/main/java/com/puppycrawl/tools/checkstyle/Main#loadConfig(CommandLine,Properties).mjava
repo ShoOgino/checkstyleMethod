@@ -1,16 +1,16 @@
     /**
      * Loads the configuration file. Will exit if unable to load.
      *
-     * @param aLine specifies the location of the configuration
-     * @param aProps the properties to resolve with the configuration
+     * @param line specifies the location of the configuration
+     * @param props the properties to resolve with the configuration
      * @return a fresh new configuration
      */
-    private static Configuration loadConfig(CommandLine aLine,
-                                            Properties aProps)
+    private static Configuration loadConfig(CommandLine line,
+                                            Properties props)
     {
         try {
             return ConfigurationLoader.loadConfiguration(
-                    aLine.getOptionValue("c"), new PropertiesExpander(aProps));
+                    line.getOptionValue("c"), new PropertiesExpander(props));
         }
         catch (final CheckstyleException e) {
             System.out.println("Error loading configuration file");

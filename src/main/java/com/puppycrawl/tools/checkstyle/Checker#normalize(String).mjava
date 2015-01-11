@@ -11,23 +11,23 @@
      * </ul>
      * <p>
      *
-     * @param aPath a path for &quot;normalizing&quot;
+     * @param normalizingPath a path for &quot;normalizing&quot;
      * @return &quot;normalized&quot; file name
      * @throws java.lang.NullPointerException if the file path is
      * equal to null.
      */
-    public String normalize(String aPath)
+    public String normalize(String normalizingPath)
     {
 
-        if (aPath == null) {
-            return aPath;
+        if (normalizingPath == null) {
+            return normalizingPath;
         }
 
         final String osName = System.getProperty("os.name").toLowerCase(
                 Locale.US);
         final boolean onNetWare = (osName.indexOf("netware") > -1);
 
-        String path = aPath.replace('/', File.separatorChar).replace('\\',
+        String path = normalizingPath.replace('/', File.separatorChar).replace('\\',
             File.separatorChar);
 
         // make sure we are dealing with an absolute path
@@ -108,7 +108,7 @@
             else if ("..".equals(thisToken)) {
                 if (s.size() < 2) {
                     throw new IllegalArgumentException("Cannot resolve path "
-                            + aPath);
+                            + path);
                 }
                 s.pop();
             }

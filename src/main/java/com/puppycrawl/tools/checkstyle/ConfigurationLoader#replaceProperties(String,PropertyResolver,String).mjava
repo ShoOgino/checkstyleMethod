@@ -4,13 +4,13 @@
      *
      * The method is package visible to facilitate testing.
      *
-     * @param aValue The string to be scanned for property references.
+     * @param value The string to be scanned for property references.
      *              May be <code>null</code>, in which case this
      *              method returns immediately with no effect.
-     * @param aProps  Mapping (String to String) of property names to their
+     * @param props  Mapping (String to String) of property names to their
      *              values. Must not be <code>null</code>.
-     * @param aDefaultValue default to use if one of the properties in aValue
-     *              cannot be resolved from aProps.
+     * @param defaultValue default to use if one of the properties in value
+     *              cannot be resolved from props.
      *
      * @throws CheckstyleException if the string contains an opening
      *                           <code>${</code> without a closing
@@ -23,16 +23,16 @@
      */
     // Package visible for testing purposes
     static String replaceProperties(
-            String aValue, PropertyResolver aProps, String aDefaultValue)
+            String value, PropertyResolver props, String defaultValue)
         throws CheckstyleException
     {
-        if (aValue == null) {
+        if (value == null) {
             return null;
         }
 
         final List<String> fragments = Lists.newArrayList();
         final List<String> propertyRefs = Lists.newArrayList();
-        parsePropertyString(aValue, fragments, propertyRefs);
+        parsePropertyString(value, fragments, propertyRefs);
 
         final StringBuffer sb = new StringBuffer();
         final Iterator<String> i = fragments.iterator();
@@ -41,10 +41,10 @@
             String fragment = i.next();
             if (fragment == null) {
                 final String propertyName = j.next();
-                fragment = aProps.resolve(propertyName);
+                fragment = props.resolve(propertyName);
                 if (fragment == null) {
-                    if (aDefaultValue != null) {
-                        return aDefaultValue;
+                    if (defaultValue != null) {
+                        return defaultValue;
                     }
                     throw new CheckstyleException(
                         "Property ${" + propertyName + "} has not been set");

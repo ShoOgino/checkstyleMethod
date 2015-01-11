@@ -1,12 +1,12 @@
     /**
      * Creates the Checker object.
      *
-     * @param aConfig the configuration to use
-     * @param aNosy the sticky beak to track what happens
+     * @param config the configuration to use
+     * @param nosy the sticky beak to track what happens
      * @return a nice new fresh Checker
      */
-    private static Checker createChecker(Configuration aConfig,
-                                         AuditListener aNosy)
+    private static Checker createChecker(Configuration config,
+                                         AuditListener nosy)
     {
         Checker c = null;
         try {
@@ -15,8 +15,8 @@
             final ClassLoader moduleClassLoader =
                 Checker.class.getClassLoader();
             c.setModuleClassLoader(moduleClassLoader);
-            c.configure(aConfig);
-            c.addListener(aNosy);
+            c.configure(config);
+            c.addListener(nosy);
         }
         catch (final Exception e) {
             System.out.println("Unable to create Checker: "

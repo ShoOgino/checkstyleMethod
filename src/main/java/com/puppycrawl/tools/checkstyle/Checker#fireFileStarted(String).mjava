@@ -1,15 +1,15 @@
     /**
      * Notify all listeners about the beginning of a file audit.
      *
-     * @param aFileName
+     * @param fileName
      *            the file to be audited
      */
     @Override
-    public void fireFileStarted(String aFileName)
+    public void fireFileStarted(String fileName)
     {
-        final String stripped = getStrippedFileName(aFileName);
+        final String stripped = getStrippedFileName(fileName);
         final AuditEvent evt = new AuditEvent(this, stripped);
-        for (final AuditListener listener : mListeners) {
+        for (final AuditListener listener : listeners) {
             listener.fileStarted(evt);
         }
     }

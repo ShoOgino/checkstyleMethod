@@ -9,19 +9,19 @@
         final Properties retVal = new Properties();
 
         // Load the properties file if specified
-        if (mPropertiesFile != null) {
+        if (propertiesFile != null) {
             FileInputStream inStream = null;
             try {
-                inStream = new FileInputStream(mPropertiesFile);
+                inStream = new FileInputStream(propertiesFile);
                 retVal.load(inStream);
             }
             catch (final FileNotFoundException e) {
                 throw new BuildException("Could not find Properties file '"
-                        + mPropertiesFile + "'", e, getLocation());
+                        + propertiesFile + "'", e, getLocation());
             }
             catch (final IOException e) {
                 throw new BuildException("Error loading Properties file '"
-                        + mPropertiesFile + "'", e, getLocation());
+                        + propertiesFile + "'", e, getLocation());
             }
             finally {
                 Utils.closeQuietly(inStream);
@@ -37,7 +37,7 @@
         }
 
         // override with properties specified in subelements
-        for (Property p : mOverrideProps) {
+        for (Property p : overrideProps) {
             retVal.put(p.getKey(), p.getValue());
         }
 

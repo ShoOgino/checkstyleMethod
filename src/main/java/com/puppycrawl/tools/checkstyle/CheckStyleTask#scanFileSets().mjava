@@ -5,14 +5,14 @@
     protected List<File> scanFileSets()
     {
         final List<File> list = Lists.newArrayList();
-        if (mFileName != null) {
+        if (fileName != null) {
             // oops we've got an additional one to process, don't
             // forget it. No sweat, it's fully resolved via the setter.
             log("Adding standalone file for audit", Project.MSG_VERBOSE);
-            list.add(new File(mFileName));
+            list.add(new File(fileName));
         }
-        for (int i = 0; i < mFileSets.size(); i++) {
-            final FileSet fs = mFileSets.get(i);
+        for (int i = 0; i < fileSets.size(); i++) {
+            final FileSet fs = fileSets.get(i);
             final DirectoryScanner ds = fs.getDirectoryScanner(getProject());
             ds.scan();
 

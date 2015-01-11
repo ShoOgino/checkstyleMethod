@@ -1,28 +1,28 @@
     /**
      * Notify checks that visiting a node.
-     * @param aAST the node to notify for.
-     * @param aAstState state of AST.
+     * @param ast the node to notify for.
+     * @param astState state of AST.
      */
-    private void notifyVisit(DetailAST aAST, AstState aAstState)
+    private void notifyVisit(DetailAST ast, AstState astState)
     {
         Collection<Check> visitors;
-        final String tokenType = TokenTypes.getTokenName(aAST.getType());
+        final String tokenType = TokenTypes.getTokenName(ast.getType());
 
-        if (aAstState == AstState.WITH_COMMENTS) {
-            if (!mTokenToCommentChecks.containsKey(tokenType)) {
+        if (astState == AstState.WITH_COMMENTS) {
+            if (!tokenToCommentChecks.containsKey(tokenType)) {
                 return;
             }
-            visitors = mTokenToCommentChecks.get(tokenType);
+            visitors = tokenToCommentChecks.get(tokenType);
         }
         else {
-            if (!mTokenToOrdinaryChecks.containsKey(tokenType)) {
+            if (!tokenToOrdinaryChecks.containsKey(tokenType)) {
                 return;
             }
-            visitors = mTokenToOrdinaryChecks.get(tokenType);
+            visitors = tokenToOrdinaryChecks.get(tokenType);
         }
 
         for (Check c : visitors) {
-            c.visitToken(aAST);
+            c.visitToken(ast);
         }
     }
 

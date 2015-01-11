@@ -1,14 +1,14 @@
         /**
          * @return an XMLLogger instance
-         * @param aTask the task to possibly log to
+         * @param task the task to possibly log to
          * @throws IOException if an error occurs
          */
-        private AuditListener createXMLLogger(Task aTask) throws IOException
+        private AuditListener createXMLLogger(Task task) throws IOException
         {
-            if ((mToFile == null) || !mUseFile) {
-                return new XMLLogger(new LogOutputStream(aTask,
+            if ((toFile == null) || !useFile) {
+                return new XMLLogger(new LogOutputStream(task,
                         Project.MSG_INFO), true);
             }
-            return new XMLLogger(new FileOutputStream(mToFile), true);
+            return new XMLLogger(new FileOutputStream(toFile), true);
         }
 

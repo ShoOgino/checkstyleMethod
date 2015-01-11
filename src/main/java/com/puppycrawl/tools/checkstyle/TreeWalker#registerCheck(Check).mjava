@@ -1,44 +1,44 @@
     /**
      * Register a check for a given configuration.
-     * @param aCheck the check to register
+     * @param check the check to register
      * @throws CheckstyleException if an error occurs
      */
-    private void registerCheck(Check aCheck)
+    private void registerCheck(Check check)
         throws CheckstyleException
     {
         final int[] tokens;
-        final Set<String> checkTokens = aCheck.getTokenNames();
+        final Set<String> checkTokens = check.getTokenNames();
         if (!checkTokens.isEmpty()) {
-            tokens = aCheck.getRequiredTokens();
+            tokens = check.getRequiredTokens();
 
             //register configured tokens
-            final int[] acceptableTokens = aCheck.getAcceptableTokens();
+            final int[] acceptableTokens = check.getAcceptableTokens();
             Arrays.sort(acceptableTokens);
             for (String token : checkTokens) {
                 try {
                     final int tokenId = TokenTypes.getTokenId(token);
                     if (Arrays.binarySearch(acceptableTokens, tokenId) >= 0) {
-                        registerCheck(token, aCheck);
+                        registerCheck(token, check);
                     }
                     // TODO: else log warning
                 }
                 catch (final IllegalArgumentException ex) {
                     throw new CheckstyleException("illegal token \""
-                        + token + "\" in check " + aCheck, ex);
+                        + token + "\" in check " + check, ex);
                 }
             }
         }
         else {
-            tokens = aCheck.getDefaultTokens();
+            tokens = check.getDefaultTokens();
         }
         for (int element : tokens) {
-            registerCheck(element, aCheck);
+            registerCheck(element, check);
         }
-        if (aCheck.isCommentNodesRequired()) {
-            mCommentChecks.add(aCheck);
+        if (check.isCommentNodesRequired()) {
+            commentChecks.add(check);
         }
         else {
-            mOrdinaryChecks.add(aCheck);
+            ordinaryChecks.add(check);
         }
     }
 

@@ -1,21 +1,21 @@
     /**
      * Creates a new <code>DefaultLogger</code> instance.
      *
-     * @param aInfoStream the <code>OutputStream</code> for info messages
-     * @param aCloseInfoAfterUse auditFinished should close aInfoStream
-     * @param aErrorStream the <code>OutputStream</code> for error messages
-     * @param aCloseErrorAfterUse auditFinished should close aErrorStream
+     * @param infoStream the <code>OutputStream</code> for info messages
+     * @param closeInfoAfterUse auditFinished should close infoStream
+     * @param errorStream the <code>OutputStream</code> for error messages
+     * @param closeErrorAfterUse auditFinished should close errorStream
      */
-    public DefaultLogger(OutputStream aInfoStream,
-                         boolean aCloseInfoAfterUse,
-                         OutputStream aErrorStream,
-                         boolean aCloseErrorAfterUse)
+    public DefaultLogger(OutputStream infoStream,
+                         boolean closeInfoAfterUse,
+                         OutputStream errorStream,
+                         boolean closeErrorAfterUse)
     {
-        mCloseInfo = aCloseInfoAfterUse;
-        mCloseError = aCloseErrorAfterUse;
-        mInfoWriter = new PrintWriter(aInfoStream);
-        mErrorWriter = (aInfoStream == aErrorStream)
-            ? mInfoWriter
-            : new PrintWriter(aErrorStream);
+        closeInfo = closeInfoAfterUse;
+        closeError = closeErrorAfterUse;
+        infoWriter = new PrintWriter(infoStream);
+        errorWriter = (infoStream == errorStream)
+            ? infoWriter
+            : new PrintWriter(errorStream);
     }
 
