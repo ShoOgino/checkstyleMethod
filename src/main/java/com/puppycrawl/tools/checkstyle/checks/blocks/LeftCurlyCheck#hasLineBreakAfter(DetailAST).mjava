@@ -1,26 +1,26 @@
     /**
      * Checks if left curly has line break after.
-     * @param aLeftCurly
+     * @param leftCurly
      *        Left curly token.
      * @return
      *        True, left curly has line break after.
      */
-    private boolean hasLineBreakAfter(DetailAST aLeftCurly)
+    private boolean hasLineBreakAfter(DetailAST leftCurly)
     {
         DetailAST nextToken = null;
-        if (aLeftCurly.getType() == TokenTypes.SLIST) {
-            nextToken = aLeftCurly.getFirstChild();
+        if (leftCurly.getType() == TokenTypes.SLIST) {
+            nextToken = leftCurly.getFirstChild();
         }
         else {
-            if (aLeftCurly.getParent().getParent().getType() == TokenTypes.ENUM_DEF)
+            if (leftCurly.getParent().getParent().getType() == TokenTypes.ENUM_DEF)
             {
-                if (!mIgnoreEnums) {
-                    nextToken = aLeftCurly.getNextSibling();
+                if (!ignoreEnums) {
+                    nextToken = leftCurly.getNextSibling();
                 }
             }
         }
         if (nextToken != null && nextToken.getType() != TokenTypes.RCURLY) {
-            if (aLeftCurly.getLineNo() == nextToken.getLineNo()) {
+            if (leftCurly.getLineNo() == nextToken.getLineNo()) {
                 return false;
             }
         }

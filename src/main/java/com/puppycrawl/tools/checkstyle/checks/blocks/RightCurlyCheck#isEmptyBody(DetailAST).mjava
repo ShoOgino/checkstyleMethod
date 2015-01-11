@@ -1,17 +1,17 @@
     /**
      * Checks if definition body is empty.
-     * @param aLcurly left curly.
+     * @param lcurly left curly.
      * @return true if definition body is empty.
      */
-    private boolean isEmptyBody(DetailAST aLcurly)
+    private boolean isEmptyBody(DetailAST lcurly)
     {
         boolean result = false;
-        if (aLcurly.getParent().getType() == TokenTypes.OBJBLOCK) {
-            if (aLcurly.getNextSibling().getType() == TokenTypes.RCURLY) {
+        if (lcurly.getParent().getType() == TokenTypes.OBJBLOCK) {
+            if (lcurly.getNextSibling().getType() == TokenTypes.RCURLY) {
                 result = true;
             }
         }
-        else if (aLcurly.getFirstChild().getType() == TokenTypes.RCURLY) {
+        else if (lcurly.getFirstChild().getType() == TokenTypes.RCURLY) {
             result = true;
         }
         return result;

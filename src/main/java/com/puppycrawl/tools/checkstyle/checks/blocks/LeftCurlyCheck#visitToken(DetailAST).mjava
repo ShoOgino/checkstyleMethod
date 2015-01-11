@@ -1,14 +1,14 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         final DetailAST startToken;
         final DetailAST brace;
 
-        switch (aAST.getType()) {
+        switch (ast.getType()) {
         case TokenTypes.CTOR_DEF :
         case TokenTypes.METHOD_DEF :
-            startToken = skipAnnotationOnlyLines(aAST);
-            brace = aAST.findFirstToken(TokenTypes.SLIST);
+            startToken = skipAnnotationOnlyLines(ast);
+            brace = ast.findFirstToken(TokenTypes.SLIST);
             break;
 
         case TokenTypes.INTERFACE_DEF :
@@ -16,8 +16,8 @@
         case TokenTypes.ANNOTATION_DEF :
         case TokenTypes.ENUM_DEF :
         case TokenTypes.ENUM_CONSTANT_DEF :
-            startToken = skipAnnotationOnlyLines(aAST);
-            final DetailAST objBlock = aAST.findFirstToken(TokenTypes.OBJBLOCK);
+            startToken = skipAnnotationOnlyLines(ast);
+            final DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
             brace = (objBlock == null)
                 ? null
                 : objBlock.getFirstChild();
@@ -31,13 +31,13 @@
         case TokenTypes.LITERAL_FINALLY:
         case TokenTypes.LITERAL_DO:
         case TokenTypes.LITERAL_IF :
-            startToken = aAST;
-            brace = aAST.findFirstToken(TokenTypes.SLIST);
+            startToken = ast;
+            brace = ast.findFirstToken(TokenTypes.SLIST);
             break;
 
         case TokenTypes.LITERAL_ELSE :
-            startToken = aAST;
-            final DetailAST candidate = aAST.getFirstChild();
+            startToken = ast;
+            final DetailAST candidate = ast.getFirstChild();
             brace =
                 (candidate.getType() == TokenTypes.SLIST)
                 ? candidate
@@ -45,8 +45,8 @@
             break;
 
         case TokenTypes.LITERAL_SWITCH :
-            startToken = aAST;
-            brace = aAST.findFirstToken(TokenTypes.LCURLY);
+            startToken = ast;
+            brace = ast.findFirstToken(TokenTypes.LCURLY);
             break;
 
         default :

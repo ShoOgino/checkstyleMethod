@@ -1,19 +1,19 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final DetailAST slistAST = aAST.findFirstToken(TokenTypes.SLIST);
+        final DetailAST slistAST = ast.findFirstToken(TokenTypes.SLIST);
         boolean isElseIf = false;
-        if ((aAST.getType() == TokenTypes.LITERAL_ELSE)
-            && (aAST.findFirstToken(TokenTypes.LITERAL_IF) != null))
+        if ((ast.getType() == TokenTypes.LITERAL_ELSE)
+            && (ast.findFirstToken(TokenTypes.LITERAL_IF) != null))
         {
             isElseIf = true;
         }
         boolean skipStatement = false;
-        if (aAST.getType() == TokenTypes.LITERAL_IF) {
-            skipStatement = isSkipIfBlock(aAST);
+        if (ast.getType() == TokenTypes.LITERAL_IF) {
+            skipStatement = isSkipIfBlock(ast);
         }
         if ((slistAST == null) && !isElseIf && !skipStatement) {
-            log(aAST.getLineNo(), MSG_KEY_NEED_BRACES, aAST.getText());
+            log(ast.getLineNo(), MSG_KEY_NEED_BRACES, ast.getText());
         }
     }
 

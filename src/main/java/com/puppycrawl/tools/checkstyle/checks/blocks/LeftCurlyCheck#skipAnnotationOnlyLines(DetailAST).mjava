@@ -5,19 +5,19 @@
      * of the first token afer all annotations is return. This might be
      * an annotation.
      * Otherwise, the received <code>DetailAST</code> is returned.
-     * @param aAST <code>DetailAST</code>.
+     * @param ast <code>DetailAST</code>.
      * @return <code>DetailAST</code>.
      */
-    private DetailAST skipAnnotationOnlyLines(DetailAST aAST)
+    private DetailAST skipAnnotationOnlyLines(DetailAST ast)
     {
-        final DetailAST modifiers = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
         if (modifiers == null) {
-            return aAST;
+            return ast;
         }
         DetailAST lastAnnot = findLastAnnotation(modifiers);
         if (lastAnnot == null) {
             // There are no annotations.
-            return aAST;
+            return ast;
         }
         final DetailAST tokenAfterLast = lastAnnot.getNextSibling() != null
                                        ? lastAnnot.getNextSibling()

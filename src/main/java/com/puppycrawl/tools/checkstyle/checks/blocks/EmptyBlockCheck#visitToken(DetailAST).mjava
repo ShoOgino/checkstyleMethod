@@ -1,9 +1,9 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final DetailAST slistToken = aAST.findFirstToken(TokenTypes.SLIST);
+        final DetailAST slistToken = ast.findFirstToken(TokenTypes.SLIST);
         final DetailAST leftCurly = slistToken != null
-                ? slistToken : aAST.findFirstToken(TokenTypes.LCURLY);
+                ? slistToken : ast.findFirstToken(TokenTypes.LCURLY);
         if (leftCurly != null) {
             if (getAbstractOption() == BlockOption.STMT) {
                 boolean emptyBlock;
@@ -16,8 +16,8 @@
                 if (emptyBlock) {
                     log(leftCurly.getLineNo(),
                         leftCurly.getColumnNo(),
-                            MSG_KEY_BLOCK_NO_STMT,
-                        aAST.getText());
+                        MSG_KEY_BLOCK_NO_STMT,
+                        ast.getText());
                 }
             }
             else if (getAbstractOption() == BlockOption.TEXT
@@ -25,8 +25,8 @@
             {
                 log(leftCurly.getLineNo(),
                     leftCurly.getColumnNo(),
-                        MSG_KEY_BLOCK_EMPTY,
-                    aAST.getText());
+                    MSG_KEY_BLOCK_EMPTY,
+                    ast.getText());
             }
         }
     }

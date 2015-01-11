@@ -1,7 +1,7 @@
     @Test
     public void testNLOW() throws Exception
     {
-        mCheckConfig.addAttribute("option", LeftCurlyOption.NLOW.toString());
+        checkConfig.addAttribute("option", LeftCurlyOption.NLOW.toString());
         final String[] expected = {
             "8:1: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
             "12:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
@@ -15,6 +15,6 @@
             "67:12: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
             "72:18: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
         };
-        verify(mCheckConfig, getPath("InputScopeInnerInterfaces.java"), expected);
+        verify(checkConfig, getPath("InputScopeInnerInterfaces.java"), expected);
     }
 

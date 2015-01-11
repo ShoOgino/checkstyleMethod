@@ -1,13 +1,13 @@
     @Test
     public void testNewLine() throws Exception
     {
-        mCheckConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
-        mCheckConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, CTOR_DEF");
+        checkConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
+        checkConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, CTOR_DEF");
         final String[] expected = {
             "111:10: " + getCheckMessage(MSG_KEY_LINE_NEW, "}"),
             "122:10: " + getCheckMessage(MSG_KEY_LINE_NEW, "}"),
             "136:10: " + getCheckMessage(MSG_KEY_LINE_NEW, "}"),
         };
-        verify(mCheckConfig, getPath("InputLeftCurlyOther.java"), expected);
+        verify(checkConfig, getPath("InputLeftCurlyOther.java"), expected);
     }
 
