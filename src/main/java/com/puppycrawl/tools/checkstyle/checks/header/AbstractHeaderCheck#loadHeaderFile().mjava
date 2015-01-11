@@ -9,12 +9,12 @@
         try {
             final URI uri = resolveHeaderFile();
             headerReader = new InputStreamReader(new BufferedInputStream(
-                    uri.toURL().openStream()), mCharset);
+                    uri.toURL().openStream()), charset);
             loadHeader(headerReader);
         }
         catch (final IOException ex) {
             throw new CheckstyleException(
-                    "unable to load header file " + mFilename, ex);
+                    "unable to load header file " + filename, ex);
         }
         finally {
             Utils.closeQuietly(headerReader);

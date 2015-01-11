@@ -1,12 +1,12 @@
     @Override
-    protected void processFiltered(File aFile, List<String> aLines)
+    protected void processFiltered(File file, List<String> lines)
     {
-        if (getHeaderLines().size() > aLines.size()) {
+        if (getHeaderLines().size() > lines.size()) {
             log(1, "header.missing");
         }
         else {
             for (int i = 0; i < getHeaderLines().size(); i++) {
-                if (!isMatch(i, aLines.get(i))) {
+                if (!isMatch(i, lines.get(i))) {
                     log(i + 1, "header.mismatch", getHeaderLines().get(i));
                     break; // stop checking
                 }

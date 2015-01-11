@@ -8,7 +8,7 @@
         // figure out if this is a File or a URL
         URI uri;
         try {
-            final URL url = new URL(mFilename);
+            final URL url = new URL(filename);
             uri = url.toURI();
         }
         catch (final MalformedURLException ex) {
@@ -19,7 +19,7 @@
             uri = null;
         }
         if (uri == null) {
-            final File file = new File(mFilename);
+            final File file = new File(filename);
             if (file.exists()) {
                 uri = file.toURI();
             }
@@ -27,14 +27,14 @@
                 // check to see if the file is in the classpath
                 try {
                     final URL configUrl = AbstractHeaderCheck.class
-                            .getResource(mFilename);
+                            .getResource(filename);
                     if (configUrl == null) {
-                        throw new FileNotFoundException(mFilename);
+                        throw new FileNotFoundException(filename);
                     }
                     uri = configUrl.toURI();
                 }
                 catch (final URISyntaxException e) {
-                    throw new FileNotFoundException(mFilename);
+                    throw new FileNotFoundException(filename);
                 }
             }
         }

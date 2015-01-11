@@ -2,15 +2,15 @@
     protected void postprocessHeaderLines()
     {
         final List<String> headerLines = getHeaderLines();
-        mHeaderRegexps.clear();
+        headerRegexps.clear();
         for (String line : headerLines) {
             try {
                 // TODO: Not sure if cache in Utils is still necessary
-                mHeaderRegexps.add(Utils.getPattern(line));
+                headerRegexps.add(Utils.getPattern(line));
             }
             catch (final PatternSyntaxException ex) {
                 throw new ConversionException("line "
-                        + (mHeaderRegexps.size() + 1)
+                        + (headerRegexps.size() + 1)
                         + " in header specification"
                         + " is not a regular expression");
             }

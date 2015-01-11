@@ -1,18 +1,18 @@
     /**
      * Set the header to check against. Individual lines in the header
      * must be separated by '\n' characters.
-     * @param aHeader header content to check against.
+     * @param header header content to check against.
      * @throws ConversionException if the header cannot be interpreted
      */
-    public void setHeader(String aHeader)
+    public void setHeader(String header)
     {
-        if ((aHeader == null) || (aHeader.trim().length() == 0)) {
+        if ((header == null) || (header.trim().length() == 0)) {
             return;
         }
 
         checkHeaderNotInitialized();
 
-        final String headerExpandedNewLines = aHeader.replaceAll("\\\\n", "\n");
+        final String headerExpandedNewLines = header.replaceAll("\\\\n", "\n");
 
         final Reader headerReader = new StringReader(headerExpandedNewLines);
         try {
