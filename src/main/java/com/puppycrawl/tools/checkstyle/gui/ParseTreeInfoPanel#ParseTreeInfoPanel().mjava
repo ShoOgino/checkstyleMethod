@@ -6,9 +6,9 @@
         setLayout(new BorderLayout());
 
         final DetailAST treeRoot = null;
-        mParseTreeModel = new ParseTreeModel(treeRoot);
-        mTreeTable = new JTreeTable(mParseTreeModel);
-        final JScrollPane sp = new JScrollPane(mTreeTable);
+        parseTreeModel = new ParseTreeModel(treeRoot);
+        treeTable = new JTreeTable(parseTreeModel);
+        final JScrollPane sp = new JScrollPane(treeTable);
         this.add(sp, BorderLayout.NORTH);
 
         final JButton fileSelectionButton =
@@ -18,12 +18,12 @@
         reloadAction.setEnabled(false);
         final JButton reloadButton = new JButton(reloadAction);
 
-        mJTextArea = new JTextArea(20, 15);
-        mJTextArea.setEditable(false);
-        mTreeTable.setEditor(mJTextArea);
-        mTreeTable.setLinePositionMap(lines2position);
+        jTextArea = new JTextArea(20, 15);
+        jTextArea.setEditable(false);
+        treeTable.setEditor(jTextArea);
+        treeTable.setLinePositionMap(lines2position);
 
-        final JScrollPane sp2 = new JScrollPane(mJTextArea);
+        final JScrollPane sp2 = new JScrollPane(jTextArea);
         this.add(sp2, BorderLayout.CENTER);
 
         final JPanel p = new JPanel(new GridLayout(1,2));

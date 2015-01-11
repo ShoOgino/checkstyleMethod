@@ -1,14 +1,14 @@
-    public void openFile(File aFile, final Component aParent)
+    public void openFile(File file, final Component parent)
     {
-        if (aFile != null) {
+        if (file != null) {
             try {
-                Main.frame.setTitle("Checkstyle : " + aFile.getName());
-                final FileText text = new FileText(aFile.getAbsoluteFile(),
+                Main.frame.setTitle("Checkstyle : " + file.getName());
+                final FileText text = new FileText(file.getAbsoluteFile(),
                                                    getEncoding());
                 final DetailAST parseTree = parseFile(text);
-                mParseTreeModel.setParseTree(parseTree);
-                mCurrentFile = aFile;
-                mLastDirectory = aFile.getParentFile();
+                parseTreeModel.setParseTree(parseTree);
+                currentFile = file;
+                lastDirectory = file.getParentFile();
                 reloadAction.setEnabled(true);
 
                 final String[] sourceLines = text.toLinesArray();
@@ -20,33 +20,33 @@
                  // insert the contents of the file to the text area
                  for (String element : sourceLines)
                  {
-                   getLines2position().add(mJTextArea.getText().length());
-                   mJTextArea.append(element + "\n");
+                   getLines2position().add(jTextArea.getText().length());
+                   jTextArea.append(element + "\n");
                  }
 
                 //clean the text area before inserting the lines of the new file
-                if (mJTextArea.getText().length() != 0) {
-                    mJTextArea.replaceRange("", 0, mJTextArea.getText()
+                if (jTextArea.getText().length() != 0) {
+                    jTextArea.replaceRange("", 0, jTextArea.getText()
                             .length());
                 }
 
                 // insert the contents of the file to the text area
                 for (final String element : sourceLines) {
-                    mJTextArea.append(element + "\n");
+                    jTextArea.append(element + "\n");
                 }
 
                 // move back to the top of the file
-                mJTextArea.moveCaretPosition(0);
+                jTextArea.moveCaretPosition(0);
             }
             catch (final IOException ex) {
                 showErrorDialog(
-                        aParent,
-                        "Could not open " + aFile + ": " + ex.getMessage());
+                        parent,
+                        "Could not open " + file + ": " + ex.getMessage());
             }
             catch (final ANTLRException ex) {
                 showErrorDialog(
-                        aParent,
-                        "Could not parse " + aFile + ": " + ex.getMessage());
+                        parent,
+                        "Could not parse " + file + ": " + ex.getMessage());
             }
         }
     }
