@@ -1,23 +1,23 @@
     /**
      * Checks for compact style type violations.
      *
-     * @param aAnnotation the annotation token
+     * @param annotation the annotation token
      */
-    private void checkCompactStyle(final DetailAST aAnnotation)
+    private void checkCompactStyle(final DetailAST annotation)
     {
         final int valuePairCount =
-            aAnnotation.getChildCount(
+            annotation.getChildCount(
                 TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
 
         final DetailAST valuePair =
-            aAnnotation.findFirstToken(
+            annotation.findFirstToken(
                 TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
 
         if (valuePairCount == 1
             && AnnotationUseStyleCheck.ANNOTATION_ELEMENT_SINGLE_NAME.equals(
                 valuePair.getFirstChild().getText()))
         {
-            this.log(aAnnotation.getLineNo(), "annotation.incorrect.style",
+            this.log(annotation.getLineNo(), "annotation.incorrect.style",
                 ElementStyle.COMPACT);
         }
     }

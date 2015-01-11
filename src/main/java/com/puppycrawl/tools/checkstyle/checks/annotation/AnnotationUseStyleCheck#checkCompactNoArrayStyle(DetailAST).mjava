@@ -1,24 +1,24 @@
     /**
      * Checks for compact no array style type violations.
      *
-     * @param aAnnotation the annotation token
+     * @param annotation the annotation token
      */
-    private void checkCompactNoArrayStyle(final DetailAST aAnnotation)
+    private void checkCompactNoArrayStyle(final DetailAST annotation)
     {
         final DetailAST arrayInit =
-            aAnnotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
+            annotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
 
         final int valuePairCount =
-            aAnnotation.getChildCount(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
+            annotation.getChildCount(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
 
         final DetailAST valuePair =
-            aAnnotation.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
+            annotation.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
 
         //in compact style with one value
         if (arrayInit != null
             && arrayInit.getChildCount(TokenTypes.EXPR) == 1)
         {
-            this.log(aAnnotation.getLineNo(), "annotation.incorrect.style",
+            this.log(annotation.getLineNo(), "annotation.incorrect.style",
                 ElementStyle.COMPACT_NO_ARRAY);
         }
         //in expanded style with one value and the correct element name
@@ -32,7 +32,7 @@
                     valuePair.getFirstChild().getText())
                     && nestedArrayInit.getChildCount(TokenTypes.EXPR) == 1)
             {
-                this.log(aAnnotation.getLineNo(), "annotation.incorrect.style",
+                this.log(annotation.getLineNo(), "annotation.incorrect.style",
                     ElementStyle.COMPACT_NO_ARRAY);
             }
         }

@@ -1,17 +1,17 @@
     /**
      * Checks for expanded style type violations.
      *
-     * @param aAnnotation the annotation token
+     * @param annotation the annotation token
      */
-    private void checkExpandedStyle(final DetailAST aAnnotation)
+    private void checkExpandedStyle(final DetailAST annotation)
     {
         final int valuePairCount =
-            aAnnotation.getChildCount(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
+            annotation.getChildCount(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
 
         if (valuePairCount == 0
-            && aAnnotation.branchContains(TokenTypes.EXPR))
+            && annotation.branchContains(TokenTypes.EXPR))
         {
-            this.log(aAnnotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
+            this.log(annotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
                 ElementStyle.EXPANDED);
         }
     }

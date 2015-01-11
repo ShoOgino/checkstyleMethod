@@ -2,17 +2,17 @@
      * This method looks for a warning that matches a configured expression.
      * If found it logs a violation at the given line and column number.
      *
-     * @param aLineNo the line number
-     * @param aColNum the column number
-     * @param aWarningText the warning.
+     * @param lineNo the line number
+     * @param colNum the column number
+     * @param warningText the warning.
      */
-    private void logMatch(final int aLineNo,
-        final int aColNum, final String aWarningText)
+    private void logMatch(final int lineNo,
+        final int colNum, final String warningText)
     {
-        final Matcher matcher = this.getRegexp().matcher(aWarningText);
+        final Matcher matcher = this.getRegexp().matcher(warningText);
         if (matcher.matches()) {
-            this.log(aLineNo, aColNum,
-                    MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, aWarningText);
+            this.log(lineNo, colNum,
+                    MSG_KEY_SUPPRESSED_WARNING_NOT_ALLOWED, warningText);
         }
     }
 

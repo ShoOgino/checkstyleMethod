@@ -2,17 +2,17 @@
      * Checks to see if the trailing comma is present if required or
      * prohibited.
      *
-     * @param aAnnotation the annotation token
+     * @param annotation the annotation token
      */
-    private void checkTrailingComma(final DetailAST aAnnotation)
+    private void checkTrailingComma(final DetailAST annotation)
     {
-        if (TrailingArrayComma.IGNORE.equals(this.mComma)
-            || this.mComma == null)
+        if (TrailingArrayComma.IGNORE.equals(this.comma)
+            || this.comma == null)
         {
             return;
         }
 
-        DetailAST child = aAnnotation.getFirstChild();
+        DetailAST child = annotation.getFirstChild();
 
         while (child != null) {
             DetailAST arrayInit = null;

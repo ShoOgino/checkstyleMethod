@@ -1,7 +1,7 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final DetailAST modifiersNode = aAST.findFirstToken(TokenTypes.MODIFIERS);
+        final DetailAST modifiersNode = ast.findFirstToken(TokenTypes.MODIFIERS);
 
         if (hasAnnotations(modifiersNode)) {
             checkAnnotations(modifiersNode, getAnnotationLevel(modifiersNode));

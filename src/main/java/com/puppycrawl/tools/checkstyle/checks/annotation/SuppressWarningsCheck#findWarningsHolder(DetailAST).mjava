@@ -1,13 +1,13 @@
     /**
      * Find the parent (holder) of the of the warnings (Expr).
      *
-     * @param aAnnotation the annotation
+     * @param annotation the annotation
      * @return a Token representing the expr.
      */
-    private DetailAST findWarningsHolder(final DetailAST aAnnotation)
+    private DetailAST findWarningsHolder(final DetailAST annotation)
     {
         final DetailAST annValuePair =
-            aAnnotation.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
+            annotation.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
         final DetailAST annArrayInit;
 
         if (annValuePair != null) {
@@ -16,13 +16,13 @@
         }
         else {
             annArrayInit =
-                aAnnotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
+                annotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
         }
 
         if (annArrayInit != null) {
             return annArrayInit;
         }
 
-        return aAnnotation;
+        return annotation;
     }
 

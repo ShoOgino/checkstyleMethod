@@ -3,19 +3,19 @@
      * and right sides, checking for matches and
      * logging violations.
      *
-     * @param aCond a Conditional type
+     * @param cond a Conditional type
      * {@link TokenTypes#QUESTION QUESTION}
      */
-    private void walkConditional(final DetailAST aCond)
+    private void walkConditional(final DetailAST cond)
     {
-        if (aCond.getType() != TokenTypes.QUESTION) {
+        if (cond.getType() != TokenTypes.QUESTION) {
             final String warningText =
-                this.removeQuotes(aCond.getText());
-            this.logMatch(aCond.getLineNo(), aCond.getColumnNo(), warningText);
+                this.removeQuotes(cond.getText());
+            this.logMatch(cond.getLineNo(), cond.getColumnNo(), warningText);
             return;
         }
 
-        this.walkConditional(this.getCondLeft(aCond));
-        this.walkConditional(this.getCondRight(aCond));
+        this.walkConditional(this.getCondLeft(cond));
+        this.walkConditional(this.getCondRight(cond));
     }
 

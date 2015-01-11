@@ -1,18 +1,18 @@
     /** {@inheritDoc} */
     @Override
-    public void visitToken(final DetailAST aAST)
+    public void visitToken(final DetailAST ast)
     {
         final TextBlock javadoc =
-            this.getFileContents().getJavadocBefore(aAST.getLineNo());
+            this.getFileContents().getJavadocBefore(ast.getLineNo());
 
         final boolean containsAnnotation =
-            AnnotationUtility.containsAnnotation(aAST, DEPRECATED)
-            || AnnotationUtility.containsAnnotation(aAST, FQ_DEPRECATED);
+            AnnotationUtility.containsAnnotation(ast, DEPRECATED)
+            || AnnotationUtility.containsAnnotation(ast, FQ_DEPRECATED);
 
         final boolean containsJavadocTag = this.containsJavadocTag(javadoc);
 
         if (containsAnnotation ^ containsJavadocTag) {
-            this.log(aAST.getLineNo(), MSG_KEY_ANNOTATION_MISSING_DEPRECATED);
+            this.log(ast.getLineNo(), MSG_KEY_ANNOTATION_MISSING_DEPRECATED);
         }
     }
 

@@ -2,31 +2,31 @@
      * Checks to see if the closing parenthesis are present if required or
      * prohibited.
      *
-     * @param aAST the annotation token
+     * @param ast the annotation token
      */
-    private void checkCheckClosingParens(final DetailAST aAST)
+    private void checkCheckClosingParens(final DetailAST ast)
     {
-        if (ClosingParens.IGNORE.equals(this.mParens)
-            || this.mParens == null)
+        if (ClosingParens.IGNORE.equals(this.parens)
+            || this.parens == null)
         {
             return;
         }
 
-        final DetailAST paren = aAST.getLastChild();
+        final DetailAST paren = ast.getLastChild();
         final boolean parenExists = paren.getType() == TokenTypes.RPAREN;
 
-        if (ClosingParens.ALWAYS.equals(this.mParens)
+        if (ClosingParens.ALWAYS.equals(this.parens)
             && !parenExists)
         {
-            this.log(aAST.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
+            this.log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
         }
-        else if (ClosingParens.NEVER.equals(this.mParens)
-            && !aAST.branchContains(TokenTypes.EXPR)
-            && !aAST.branchContains(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
-            && !aAST.branchContains(TokenTypes.ANNOTATION_ARRAY_INIT)
+        else if (ClosingParens.NEVER.equals(this.parens)
+            && !ast.branchContains(TokenTypes.EXPR)
+            && !ast.branchContains(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
+            && !ast.branchContains(TokenTypes.ANNOTATION_ARRAY_INIT)
             && parenExists)
         {
-            this.log(aAST.getLineNo(), MSG_KEY_ANNOTATION_PARENS_PRESENT);
+            this.log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_PRESENT);
         }
     }
 

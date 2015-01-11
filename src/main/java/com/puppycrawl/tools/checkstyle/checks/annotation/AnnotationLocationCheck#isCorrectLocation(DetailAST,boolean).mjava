@@ -1,15 +1,15 @@
     /**
      * Some javadoc.
-     * @param aAnnotation Some javadoc.
-     * @param aHasParams Some javadoc.
+     * @param annotation Some javadoc.
+     * @param hasParams Some javadoc.
      * @return Some javadoc.
      */
-    private boolean isCorrectLocation(DetailAST aAnnotation, boolean aHasParams)
+    private boolean isCorrectLocation(DetailAST annotation, boolean hasParams)
     {
-        final boolean allowingCondition = aHasParams ? mAllowSamelineParametrizedAnnotation
-            : mAllowSamelineSingleParameterlessAnnotation;
-        return allowingCondition && !hasNodeBefore(aAnnotation)
-            || !allowingCondition && !hasNodeBeside(aAnnotation)
-            || mAllowSamelineMultipleAnnotations;
+        final boolean allowingCondition = hasParams ? allowSamelineParametrizedAnnotation
+            : allowSamelineSingleParameterlessAnnotation;
+        return allowingCondition && !hasNodeBefore(annotation)
+            || !allowingCondition && !hasNodeBeside(annotation)
+            || allowSamelineMultipleAnnotations;
     }
 
