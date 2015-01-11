@@ -1,5 +1,5 @@
     @Override
-    public void beginTree(DetailAST aRootAST)
+    public void beginTree(DetailAST rootAST)
     {
         final String[] lines = getLines();
         for (int i = 0; i < lines.length; i++) {
@@ -9,10 +9,10 @@
                 line, line.length(), getTabWidth());
 
 
-            if ((realLength > mMax)
-                && !mIgnorePattern.matcher(line).find())
+            if ((realLength > max)
+                && !ignorePattern.matcher(line).find())
             {
-                log(i + 1, "maxLineLen", mMax, realLength);
+                log(i + 1, "maxLineLen", max, realLength);
             }
         }
     }

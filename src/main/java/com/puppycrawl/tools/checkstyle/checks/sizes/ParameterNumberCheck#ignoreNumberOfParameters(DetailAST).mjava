@@ -1,14 +1,14 @@
     /** Determine whether to ignore number of parameters for the method.
      *
-     * @param aAST the token to process
+     * @param ast the token to process
      * @return true if this is overridden method and number of parameters should be ignored
      *         false otherwise
      */
-    private boolean ignoreNumberOfParameters(DetailAST aAST)
+    private boolean ignoreNumberOfParameters(DetailAST ast)
     {
         //if you override a method, you have no power over the number of parameters
-        return mIgnoreOverriddenMethods
-                && (AnnotationUtility.containsAnnotation(aAST, OVERRIDE)
-                || AnnotationUtility.containsAnnotation(aAST, CANONICAL_OVERRIDE));
+        return ignoreOverriddenMethods
+                && (AnnotationUtility.containsAnnotation(ast, OVERRIDE)
+                || AnnotationUtility.containsAnnotation(ast, CANONICAL_OVERRIDE));
     }
 

@@ -1,15 +1,15 @@
     /**
      * Process the end of a member definition.
      *
-     * @param aAST the token representing the member definition.
+     * @param ast the token representing the member definition.
      */
-    private void leaveMemberDef(DetailAST aAST)
+    private void leaveMemberDef(DetailAST ast)
     {
-        final int count = mContext.getCount();
+        final int count = context.getCount();
         if (count > getMax()) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
+            log(ast.getLineNo(), ast.getColumnNo(),
                     "executableStatementCount", count, getMax());
         }
-        mContext = mContextStack.pop();
+        context = contextStack.pop();
     }
 

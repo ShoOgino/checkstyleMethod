@@ -1,16 +1,16 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if ((TokenTypes.CLASS_DEF == aAST.getType())
-            || (TokenTypes.INTERFACE_DEF == aAST.getType())
-            || (TokenTypes.ENUM_CONSTANT_DEF == aAST.getType())
-            || (TokenTypes.ENUM_DEF == aAST.getType()))
+        if ((TokenTypes.CLASS_DEF == ast.getType())
+            || (TokenTypes.INTERFACE_DEF == ast.getType())
+            || (TokenTypes.ENUM_CONSTANT_DEF == ast.getType())
+            || (TokenTypes.ENUM_DEF == ast.getType()))
         {
-            mCounters.push(new MethodCounter(
-                TokenTypes.INTERFACE_DEF == aAST.getType()));
+            counters.push(new MethodCounter(
+                TokenTypes.INTERFACE_DEF == ast.getType()));
         }
-        else if (TokenTypes.METHOD_DEF == aAST.getType()) {
-            raiseCounter(aAST);
+        else if (TokenTypes.METHOD_DEF == ast.getType()) {
+            raiseCounter(ast);
         }
     }
 

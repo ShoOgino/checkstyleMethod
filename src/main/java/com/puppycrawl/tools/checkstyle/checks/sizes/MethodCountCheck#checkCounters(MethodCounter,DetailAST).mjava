@@ -1,18 +1,18 @@
     /**
      * Check the counters and report violations.
-     * @param aCounter the method counters to check
-     * @param aAst to report errors against.
+     * @param counter the method counters to check
+     * @param ast to report errors against.
      */
-    private void checkCounters(MethodCounter aCounter, DetailAST aAst)
+    private void checkCounters(MethodCounter counter, DetailAST ast)
     {
-        checkMax(mMaxPrivate, aCounter.value(Scope.PRIVATE),
-                 "too.many.privateMethods", aAst);
-        checkMax(mMaxPackage, aCounter.value(Scope.PACKAGE),
-                 "too.many.packageMethods", aAst);
-        checkMax(mMaxProtected, aCounter.value(Scope.PROTECTED),
-                 "too.many.protectedMethods", aAst);
-        checkMax(mMaxPublic, aCounter.value(Scope.PUBLIC),
-                 "too.many.publicMethods", aAst);
-        checkMax(mMaxTotal, aCounter.getTotal(), "too.many.methods", aAst);
+        checkMax(maxPrivate, counter.value(Scope.PRIVATE),
+                 "too.many.privateMethods", ast);
+        checkMax(maxPackage, counter.value(Scope.PACKAGE),
+                 "too.many.packageMethods", ast);
+        checkMax(maxProtected, counter.value(Scope.PROTECTED),
+                 "too.many.protectedMethods", ast);
+        checkMax(maxPublic, counter.value(Scope.PUBLIC),
+                 "too.many.publicMethods", ast);
+        checkMax(maxTotal, counter.getTotal(), "too.many.methods", ast);
     }
 

@@ -1,14 +1,14 @@
     /**
      * Process the end of a statement list.
      *
-     * @param aAST the token representing the statement list.
+     * @param ast the token representing the statement list.
      */
-    private void visitSlist(DetailAST aAST)
+    private void visitSlist(DetailAST ast)
     {
-        if (mContext != null) {
+        if (context != null) {
             // find member AST for the statement list
-            final DetailAST contextAST = mContext.getAST();
-            DetailAST parent = aAST.getParent();
+            final DetailAST contextAST = context.getAST();
+            DetailAST parent = ast.getParent();
             while (parent != null) {
                 final int type = parent.getType();
                 if ((type == TokenTypes.CTOR_DEF)
@@ -17,7 +17,7 @@
                     || (type == TokenTypes.STATIC_INIT))
                 {
                     if (parent == contextAST) {
-                        mContext.addCount(aAST.getChildCount() / 2);
+                        context.addCount(ast.getChildCount() / 2);
                     }
                     break;
                 }

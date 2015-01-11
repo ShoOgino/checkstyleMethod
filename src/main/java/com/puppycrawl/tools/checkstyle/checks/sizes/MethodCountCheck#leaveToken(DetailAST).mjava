@@ -1,13 +1,13 @@
     @Override
-    public void leaveToken(DetailAST aAST)
+    public void leaveToken(DetailAST ast)
     {
-        if ((TokenTypes.CLASS_DEF == aAST.getType())
-            || (TokenTypes.INTERFACE_DEF == aAST.getType())
-            || (TokenTypes.ENUM_CONSTANT_DEF == aAST.getType())
-            || (TokenTypes.ENUM_DEF == aAST.getType()))
+        if ((TokenTypes.CLASS_DEF == ast.getType())
+            || (TokenTypes.INTERFACE_DEF == ast.getType())
+            || (TokenTypes.ENUM_CONSTANT_DEF == ast.getType())
+            || (TokenTypes.ENUM_DEF == ast.getType()))
         {
-            final MethodCounter counter = mCounters.pop();
-            checkCounters(counter, aAST);
+            final MethodCounter counter = counters.pop();
+            checkCounters(counter, ast);
         }
     }
 

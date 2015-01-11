@@ -1,14 +1,14 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        final DetailAST openingBrace = aAST.findFirstToken(TokenTypes.SLIST);
+        final DetailAST openingBrace = ast.findFirstToken(TokenTypes.SLIST);
         if (openingBrace != null) {
             final DetailAST closingBrace =
                 openingBrace.findFirstToken(TokenTypes.RCURLY);
             int length =
                 closingBrace.getLineNo() - openingBrace.getLineNo() + 1;
 
-            if (!mCountEmpty) {
+            if (!countEmpty) {
                 final FileContents contents = getFileContents();
                 final int lastLine = closingBrace.getLineNo();
                 for (int i = openingBrace.getLineNo() - 1; i < lastLine; i++) {
@@ -17,9 +17,9 @@
                     }
                 }
             }
-            if (length > mMax) {
-                log(aAST.getLineNo(), aAST.getColumnNo(), "maxLen.method",
-                        length, mMax);
+            if (length > max) {
+                log(ast.getLineNo(), ast.getColumnNo(), "maxLen.method",
+                        length, max);
             }
         }
     }

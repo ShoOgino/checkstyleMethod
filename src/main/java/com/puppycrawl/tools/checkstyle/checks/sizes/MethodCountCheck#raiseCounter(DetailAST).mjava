@@ -1,12 +1,12 @@
     /**
      * Determine the visibility modifier and raise the corresponding counter.
-     * @param aMethod
+     * @param method
      *            The method-subtree from the AbstractSyntaxTree.
      */
-    private void raiseCounter(DetailAST aMethod)
+    private void raiseCounter(DetailAST method)
     {
-        final MethodCounter actualCounter = mCounters.peek();
-        final DetailAST temp = aMethod.findFirstToken(TokenTypes.MODIFIERS);
+        final MethodCounter actualCounter = counters.peek();
+        final DetailAST temp = method.findFirstToken(TokenTypes.MODIFIERS);
         final Scope scope = ScopeUtils.getScopeFromMods(temp);
         actualCounter.increment(scope);
     }
