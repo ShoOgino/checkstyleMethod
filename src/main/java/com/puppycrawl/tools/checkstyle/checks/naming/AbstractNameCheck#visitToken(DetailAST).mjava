@@ -1,8 +1,8 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (mustCheckName(aAST)) {
-            final DetailAST nameAST = aAST.findFirstToken(TokenTypes.IDENT);
+        if (mustCheckName(ast)) {
+            final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             if (!getRegexp().matcher(nameAST.getText()).find()) {
                 log(nameAST.getLineNo(),
                     nameAST.getColumnNo(),

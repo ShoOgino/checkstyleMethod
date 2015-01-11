@@ -1,18 +1,18 @@
     /**
      * Gets the disallowed abbreviation contained in given String.
-     * @param aString
+     * @param string
      *        the given String.
      * @return the disallowed abbreviation contained in given String as a
      *         separate String.
      */
-    private String getDisallowedAbbreviation(String aString)
+    private String getDisallowedAbbreviation(String string)
     {
         int beginIndex = 0;
         boolean abbrStarted = false;
         String result = null;
 
-        for (int index = 0; index < aString.length(); index++) {
-            final char symbol = aString.charAt(index);
+        for (int index = 0; index < string.length(); index++) {
+            final char symbol = string.charAt(index);
 
             if (Character.isUpperCase(symbol)) {
                 if (!abbrStarted) {
@@ -27,9 +27,9 @@
                     // -1 as a first capital is usually beginning of next word
                     final int endIndex = index - 1;
                     final int abbrLength = endIndex - beginIndex;
-                    if (abbrLength > mAllowedAbbreviationLength) {
-                        result = aString.substring(beginIndex, endIndex);
-                        if (!mAllowedAbbreviations.contains(result)) {
+                    if (abbrLength > allowedAbbreviationLength) {
+                        result = string.substring(beginIndex, endIndex);
+                        if (!allowedAbbreviations.contains(result)) {
                             break;
                         }
                         else {
@@ -41,11 +41,11 @@
             }
         }
         if (abbrStarted) {
-            final int endIndex = aString.length();
+            final int endIndex = string.length();
             final int abbrLength = endIndex - beginIndex;
-            if (abbrLength > 1 && abbrLength > mAllowedAbbreviationLength) {
-                result = aString.substring(beginIndex, endIndex);
-                if (mAllowedAbbreviations.contains(result)) {
+            if (abbrLength > 1 && abbrLength > allowedAbbreviationLength) {
+                result = string.substring(beginIndex, endIndex);
+                if (allowedAbbreviations.contains(result)) {
                     result = null;
                 }
             }

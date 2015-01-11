@@ -1,20 +1,20 @@
     /**
      * Checks class definition.
-     * @param aAST class definition for check.
+     * @param ast class definition for check.
      */
-    private void visitClassDef(DetailAST aAST)
+    private void visitClassDef(DetailAST ast)
     {
         final String className =
-            aAST.findFirstToken(TokenTypes.IDENT).getText();
-        if (isAbstract(aAST)) {
+            ast.findFirstToken(TokenTypes.IDENT).getText();
+        if (isAbstract(ast)) {
             // if class has abstract modifier
-            if (!mIgnoreName && !isMatchingClassName(className)) {
-                log(aAST.getLineNo(), aAST.getColumnNo(),
+            if (!ignoreName && !isMatchingClassName(className)) {
+                log(ast.getLineNo(), ast.getColumnNo(),
                     "illegal.abstract.class.name", className, getFormat());
             }
         }
-        else if (!mIgnoreModifier && isMatchingClassName(className)) {
-            log(aAST.getLineNo(), aAST.getColumnNo(),
+        else if (!ignoreModifier && isMatchingClassName(className)) {
+            log(ast.getLineNo(), ast.getColumnNo(),
                 "no.abstract.class.modifier", className);
         }
     }

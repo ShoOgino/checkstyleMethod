@@ -1,30 +1,30 @@
     /**
      * Checks if it is an ignore situation.
-     * @param aAst input DetailAST node.
+     * @param ast input DetailAST node.
      * @return true if it is an ignore situation found for given input DetailAST
      *         node.
      */
-    private boolean isIgnoreSituation(DetailAST aAst)
+    private boolean isIgnoreSituation(DetailAST ast)
     {
-        final DetailAST modifiers = aAst.getFirstChild();
+        final DetailAST modifiers = ast.getFirstChild();
 
         boolean result = false;
-        if (aAst.getType() == TokenTypes.VARIABLE_DEF) {
-            if ((mIgnoreFinal || mIgnoreStatic)
-                    && isInterfaceDeclaration(aAst))
+        if (ast.getType() == TokenTypes.VARIABLE_DEF) {
+            if ((ignoreFinal || ignoreStatic)
+                    && isInterfaceDeclaration(ast))
             {
                 // field declarations in interface are static/final
                 result = true;
             }
             else {
-                result = (mIgnoreFinal
+                result = (ignoreFinal
                           && modifiers.branchContains(TokenTypes.FINAL))
-                    || (mIgnoreStatic
+                    || (ignoreStatic
                         && modifiers.branchContains(TokenTypes.LITERAL_STATIC));
             }
         }
-        else if (aAst.getType() == TokenTypes.METHOD_DEF) {
-            result = mIgnoreOverriddenMethods
+        else if (ast.getType() == TokenTypes.METHOD_DEF) {
+            result = ignoreOverriddenMethods
                     && hasOverrideAnnotation(modifiers);
         }
         return result;

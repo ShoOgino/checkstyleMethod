@@ -1,14 +1,14 @@
     /**
      * Checks that the method has "@Override" annotation.
-     * @param aMethodModifiersAST
+     * @param methodModifiersAST
      *        A DetailAST nod is related to the given method modifiers
      *        (MODIFIERS type).
      * @return true if method has "@Override" annotation.
      */
-    private static boolean hasOverrideAnnotation(DetailAST aMethodModifiersAST)
+    private static boolean hasOverrideAnnotation(DetailAST methodModifiersAST)
     {
         boolean result = false;
-        for (DetailAST child : getChildren(aMethodModifiersAST)) {
+        for (DetailAST child : getChildren(methodModifiersAST)) {
             if (child.getType() == TokenTypes.ANNOTATION) {
                 final DetailAST annotationIdent = child.findFirstToken(TokenTypes.IDENT);
                 if (annotationIdent != null && "Override".equals(annotationIdent.getText())) {

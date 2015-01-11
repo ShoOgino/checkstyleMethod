@@ -1,15 +1,15 @@
     @Override
-    public void visitToken(DetailAST aAst)
+    public void visitToken(DetailAST ast)
     {
 
-        if (!isIgnoreSituation(aAst)) {
+        if (!isIgnoreSituation(ast)) {
 
-            final DetailAST nameAst = aAst.findFirstToken(TokenTypes.IDENT);
+            final DetailAST nameAst = ast.findFirstToken(TokenTypes.IDENT);
             final String typeName = nameAst.getText();
 
             final String abbr = getDisallowedAbbreviation(typeName);
             if (abbr != null) {
-                log(nameAst.getLineNo(), MSG_KEY, mAllowedAbbreviationLength);
+                log(nameAst.getLineNo(), MSG_KEY, allowedAbbreviationLength);
             }
         }
     }
