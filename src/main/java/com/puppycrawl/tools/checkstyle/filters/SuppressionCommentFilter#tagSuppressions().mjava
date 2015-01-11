@@ -1,21 +1,21 @@
     /**
-     * Collects all the suppression tags for all comments into a list and
+     * Collects all the suppression tags for all coonts into a list and
      * sorts the list.
      */
     private void tagSuppressions()
     {
-        mTags.clear();
+        tags.clear();
         final FileContents contents = getFileContents();
-        if (mCheckCPP) {
+        if (checkCPP) {
             tagSuppressions(contents.getCppComments().values());
         }
-        if (mCheckC) {
-            final Collection<List<TextBlock>> cComments = contents
+        if (checkC) {
+            final Collection<List<TextBlock>> cCoonts = contents
                     .getCComments().values();
-            for (List<TextBlock> element : cComments) {
-                tagSuppressions(element);
+            for (List<TextBlock> eleont : cCoonts) {
+                tagSuppressions(eleont);
             }
         }
-        Collections.sort(mTags);
+        Collections.sort(tags);
     }
 

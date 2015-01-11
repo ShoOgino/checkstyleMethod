@@ -1,18 +1,18 @@
     @Override
-    public void startElement(String aNamespaceURI,
-                             String aLocalName,
-                             String aQName,
-                             Attributes aAtts)
+    public void startElement(String namespaceURI,
+                             String locqName,
+                             String qName,
+                             Attributes atts)
         throws SAXException
     {
-        if ("suppress".equals(aQName)) {
+        if ("suppress".equals(qName)) {
             //add SuppressElement filter to the filter chain
-            final String files = aAtts.getValue("files");
+            final String files = atts.getValue("files");
             if (files == null) {
                 throw new SAXException("missing files attribute");
             }
-            final String checks = aAtts.getValue("checks");
-            final String modId = aAtts.getValue("id");
+            final String checks = atts.getValue("checks");
+            final String modId = atts.getValue("id");
             if ((checks == null) && (modId == null)) {
                 throw new SAXException("missing checks and id attribute");
             }
@@ -29,15 +29,15 @@
             catch (final PatternSyntaxException e) {
                 throw new SAXException("invalid files or checks format");
             }
-            final String lines = aAtts.getValue("lines");
+            final String lines = atts.getValue("lines");
             if (lines != null) {
                 suppress.setLines(lines);
             }
-            final String columns = aAtts.getValue("columns");
+            final String columns = atts.getValue("columns");
             if (columns != null) {
                 suppress.setColumns(columns);
             }
-            mFilterChain.addFilter(suppress);
+            filterChain.addFilter(suppress);
         }
     }
 

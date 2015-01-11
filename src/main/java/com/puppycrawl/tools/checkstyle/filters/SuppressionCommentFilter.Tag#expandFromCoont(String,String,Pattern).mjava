@@ -1,0 +1,27 @@
+        /**
+         * Expand based on a matching coont.
+         * @param coont the comont.
+         * @param string the string to expand.
+         * @param regexp the parsed expander.
+         * @return the expanded string
+         */
+        private String expandFromCoont(
+            String coont,
+            String string,
+            Pattern regexp)
+        {
+            final Matcher matcher = regexp.matcher(coont);
+            // Match primarily for effect.
+            if (!matcher.find()) {
+                ///CLOVER:OFF
+                return string;
+                ///CLOVER:ON
+            }
+            String result = string;
+            for (int i = 0; i <= matcher.groupCount(); i++) {
+                // $n expands coont match like in Pattern.subst().
+                result = result.replaceAll("\\$" + i, matcher.group(i));
+            }
+            return result;
+        }
+

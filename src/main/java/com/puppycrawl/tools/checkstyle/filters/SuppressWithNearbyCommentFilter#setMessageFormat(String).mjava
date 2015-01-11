@@ -1,18 +1,18 @@
     /**
      * Set the format for a message.
-     * @param aFormat a <code>String</code> value
-     * @throws ConversionException unable to parse aFormat
+     * @param format a <code>String</code> value
+     * @throws ConversionException unable to parse format
      */
-    public void setMessageFormat(String aFormat)
+    public void setMessageFormat(String format)
         throws ConversionException
     {
-        // check that aFormat parses
+        // check that format parses
         try {
-            Utils.getPattern(aFormat);
+            Utils.getPattern(format);
         }
         catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + aFormat, e);
+            throw new ConversionException("unable to parse " + format, e);
         }
-        mMessageFormat = aFormat;
+        messageFormat = format;
     }
 

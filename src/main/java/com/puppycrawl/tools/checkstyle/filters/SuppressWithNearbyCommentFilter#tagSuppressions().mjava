@@ -4,18 +4,18 @@
      */
     private void tagSuppressions()
     {
-        mTags.clear();
+        tags.clear();
         final FileContents contents = getFileContents();
-        if (mCheckCPP) {
+        if (checkCPP) {
             tagSuppressions(contents.getCppComments().values());
         }
-        if (mCheckC) {
+        if (checkC) {
             final Collection<List<TextBlock>> cComments =
                 contents.getCComments().values();
             for (final List<TextBlock> element : cComments) {
                 tagSuppressions(element);
             }
         }
-        Collections.sort(mTags);
+        Collections.sort(tags);
     }
 

@@ -1,36 +1,36 @@
     /**
      * Returns the suppression filters in a specified source.
-     * @param aSource the source for the suppressions.
-     * @param aSourceName the name of the source.
-     * @return the filter chain of suppression elements in aSource.
+     * @param source the source for the suppressions.
+     * @param sourceName the name of the source.
+     * @return the filter chain of suppression elements in source.
      * @throws CheckstyleException if an error occurs.
      */
     private static FilterSet loadSuppressions(
-            InputSource aSource, String aSourceName)
+            InputSource source, String sourceName)
         throws CheckstyleException
     {
         try {
             final SuppressionsLoader suppressionsLoader =
                 new SuppressionsLoader();
-            suppressionsLoader.parseInputSource(aSource);
+            suppressionsLoader.parseInputSource(source);
             return suppressionsLoader.getFilterChain();
         }
         catch (final FileNotFoundException e) {
-            throw new CheckstyleException("unable to find " + aSourceName, e);
+            throw new CheckstyleException("unable to find " + sourceName, e);
         }
         catch (final ParserConfigurationException e) {
-            throw new CheckstyleException("unable to parse " + aSourceName, e);
+            throw new CheckstyleException("unable to parse " + sourceName, e);
         }
         catch (final SAXException e) {
             throw new CheckstyleException("unable to parse "
-                    + aSourceName + " - " + e.getMessage(), e);
+                    + sourceName + " - " + e.getMessage(), e);
         }
         catch (final IOException e) {
-            throw new CheckstyleException("unable to read " + aSourceName, e);
+            throw new CheckstyleException("unable to read " + sourceName, e);
         }
         catch (final NumberFormatException e) {
             throw new CheckstyleException("number format exception "
-                + aSourceName + " - " + e.getMessage(), e);
+                + sourceName + " - " + e.getMessage(), e);
         }
     }
 

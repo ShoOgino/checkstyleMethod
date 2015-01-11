@@ -1,31 +1,31 @@
         /**
          * Constructs a tag.
-         * @param aText the text of the suppression.
-         * @param aLine the line number.
-         * @throws ConversionException if unable to parse expanded aText.
+         * @param text the text of the suppression.
+         * @param line the line number.
+         * @throws ConversionException if unable to parse expanded text.
          * on.
          */
-        public Tag(String aText, int aLine)
+        public Tag(String text, int line)
             throws ConversionException
         {
-            mText = aText;
+            this.text = text;
 
-            mTagCheckRegexp = mCheckRegexp;
+            tagCheckRegexp = checkRegexp;
             //Expand regexp for check and message
             //Does not intern Patterns with Utils.getPattern()
             String format = "";
             try {
-                format = expandFromComment(aText, mCheckFormat, mCommentRegexp);
-                mTagCheckRegexp = Pattern.compile(format);
-                if (mMessageFormat != null) {
-                    format = expandFromComment(
-                         aText, mMessageFormat, mCommentRegexp);
-                    mTagMessageRegexp = Pattern.compile(format);
+                format = expandFrocomment(text, checkFormat, commentRegexp);
+                tagCheckRegexp = Pattern.compile(format);
+                if (messageFormat != null) {
+                    format = expandFrocomment(
+                         text, messageFormat, commentRegexp);
+                    tagMessageRegexp = Pattern.compile(format);
                 }
                 int influence = 0;
-                if (mInfluenceFormat != null) {
-                    format = expandFromComment(
-                        aText, mInfluenceFormat, mCommentRegexp);
+                if (influenceFormat != null) {
+                    format = expandFrocomment(
+                        text, influenceFormat, commentRegexp);
                     try {
                         if (format.startsWith("+")) {
                             format = format.substring(1);
@@ -34,17 +34,17 @@
                     }
                     catch (final NumberFormatException e) {
                         throw new ConversionException(
-                            "unable to parse influence from '" + aText
-                                + "' using " + mInfluenceFormat, e);
+                            "unable to parse influence from '" + text
+                                + "' using " + influenceFormat, e);
                     }
                 }
                 if (influence >= 0) {
-                    mFirstLine = aLine;
-                    mLastLine = aLine + influence;
+                    firstLine = line;
+                    lastLine = line + influence;
                 }
                 else {
-                    mFirstLine = aLine + influence;
-                    mLastLine = aLine;
+                    firstLine = line + influence;
+                    lastLine = line;
                 }
             }
             catch (final PatternSyntaxException e) {

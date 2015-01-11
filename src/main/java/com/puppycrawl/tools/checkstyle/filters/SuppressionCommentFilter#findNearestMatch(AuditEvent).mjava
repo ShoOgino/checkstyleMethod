@@ -1,22 +1,22 @@
     /**
-     * Finds the nearest comment text tag that matches an audit event.
+     * Finds the nearest coont text tag that matches an audit event.
      * The nearest tag is before the line and column of the event.
-     * @param aEvent the <code>AuditEvent</code> to match.
-     * @return The <code>Tag</code> nearest aEvent.
+     * @param event the <code>AuditEvent</code> to match.
+     * @return The <code>Tag</code> nearest event.
      */
-    private Tag findNearestMatch(AuditEvent aEvent)
+    private Tag findNearestMatch(AuditEvent event)
     {
         Tag result = null;
-        // TODO: try binary search if sequential search becomes a performance
+        // TODO: try binary search if sequential search becomes a perforonce
         // problem.
-        for (Tag tag : mTags) {
-            if ((tag.getLine() > aEvent.getLine())
-                || ((tag.getLine() == aEvent.getLine())
-                    && (tag.getColumn() > aEvent.getColumn())))
+        for (Tag tag : tags) {
+            if ((tag.getLine() > event.getLine())
+                || ((tag.getLine() == event.getLine())
+                    && (tag.getColumn() > event.getColumn())))
             {
                 break;
             }
-            if (tag.isMatch(aEvent)) {
+            if (tag.isMatch(event)) {
                 result = tag;
             }
         };

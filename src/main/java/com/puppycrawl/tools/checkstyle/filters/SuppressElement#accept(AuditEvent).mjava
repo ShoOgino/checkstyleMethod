@@ -1,29 +1,29 @@
     /** {@inheritDoc} */
     @Override
-    public boolean accept(AuditEvent aEvent)
+    public boolean accept(AuditEvent event)
     {
         // file and check match?
-        if ((aEvent.getFileName() == null)
-                || !mFileRegexp.matcher(aEvent.getFileName()).find()
-                || (aEvent.getLocalizedMessage() == null)
-                || ((mModuleId != null) && !mModuleId.equals(aEvent
+        if ((event.getFileName() == null)
+                || !fileRegexp.matcher(event.getFileName()).find()
+                || (event.getLocalizedMessage() == null)
+                || ((moduleId != null) && !moduleId.equals(event
                         .getModuleId()))
-                || ((mCheckRegexp != null) && !mCheckRegexp.matcher(
-                        aEvent.getSourceName()).find()))
+                || ((checkRegexp != null) && !checkRegexp.matcher(
+                        event.getSourceName()).find()))
         {
             return true;
         }
 
         // reject if no line/column matching
-        if ((mLineFilter == null) && (mColumnFilter == null)) {
+        if ((lineFilter == null) && (columnFilter == null)) {
             return false;
         }
 
-        if (mLineFilter != null && mLineFilter.accept(aEvent.getLine())) {
+        if (lineFilter != null && lineFilter.accept(event.getLine())) {
             return false;
         }
 
-        if (mColumnFilter != null && mColumnFilter.accept(aEvent.getColumn())) {
+        if (columnFilter != null && columnFilter.accept(event.getColumn())) {
             return false;
         }
         return true;

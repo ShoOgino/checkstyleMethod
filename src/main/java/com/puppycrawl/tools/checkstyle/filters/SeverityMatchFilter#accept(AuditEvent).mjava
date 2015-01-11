@@ -1,9 +1,9 @@
     /** {@inheritDoc} */
     @Override
-    public boolean accept(AuditEvent aEvent)
+    public boolean accept(AuditEvent event)
     {
-        final boolean result = mSeverityLevel.equals(aEvent.getSeverityLevel());
-        if (mAcceptOnMatch) {
+        final boolean result = severityLevel.equals(event.getSeverityLevel());
+        if (acceptOnMatch) {
             return result;
         }
         return !result;

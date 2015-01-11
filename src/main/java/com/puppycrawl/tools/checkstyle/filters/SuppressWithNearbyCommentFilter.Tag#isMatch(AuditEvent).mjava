@@ -1,26 +1,26 @@
         /**
          * Determines whether the source of an audit event
          * matches the text of this tag.
-         * @param aEvent the <code>AuditEvent</code> to check.
-         * @return true if the source of aEvent matches the text of this tag.
+         * @param event the <code>AuditEvent</code> to check.
+         * @return true if the source of event matches the text of this tag.
          */
-        public boolean isMatch(AuditEvent aEvent)
+        public boolean isMatch(AuditEvent event)
         {
-            final int line = aEvent.getLine();
-            if (line < mFirstLine) {
+            final int line = event.getLine();
+            if (line < firstLine) {
                 return false;
             }
-            if (line > mLastLine) {
+            if (line > lastLine) {
                 return false;
             }
             final Matcher tagMatcher =
-                mTagCheckRegexp.matcher(aEvent.getSourceName());
+                tagCheckRegexp.matcher(event.getSourceName());
             if (tagMatcher.find()) {
                 return true;
             }
-            if (mTagMessageRegexp != null) {
+            if (tagMessageRegexp != null) {
                 final Matcher messageMatcher =
-                    mTagMessageRegexp.matcher(aEvent.getMessage());
+                    tagMessageRegexp.matcher(event.getMessage());
                 return messageMatcher.find();
             }
             return false;

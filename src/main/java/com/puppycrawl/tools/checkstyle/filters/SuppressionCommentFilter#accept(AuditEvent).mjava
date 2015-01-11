@@ -1,8 +1,8 @@
     /** {@inheritDoc} */
     @Override
-    public boolean accept(AuditEvent aEvent)
+    public boolean accept(AuditEvent event)
     {
-        if (aEvent.getLocalizedMessage() == null) {
+        if (event.getLocalizedMessage() == null) {
             return true;        // A special event.
         }
 
@@ -18,7 +18,7 @@
             setFileContents(currentContents);
             tagSuppressions();
         }
-        final Tag matchTag = findNearestMatch(aEvent);
+        final Tag matchTag = findNearestMatch(event);
         if ((matchTag != null) && !matchTag.isOn()) {
             return false;
         }

@@ -1,52 +1,52 @@
         /**
          * Constructs a tag.
-         * @param aLine the line number.
-         * @param aColumn the column number.
-         * @param aText the text of the suppression.
-         * @param aOn <code>true</code> if the tag turns checkstyle reporting.
-         * @throws ConversionException if unable to parse expanded aText.
+         * @param line the line number.
+         * @param column the column number.
+         * @param text the text of the suppression.
+         * @param on <code>true</code> if the tag turns checkstyle reporting.
+         * @throws ConversionException if unable to parse expanded text.
          * on.
          */
-        public Tag(int aLine, int aColumn, String aText, boolean aOn)
+        public Tag(int line, int column, String text, boolean on)
             throws ConversionException
         {
-            mLine = aLine;
-            mColumn = aColumn;
-            mText = aText;
-            mOn = aOn;
+            this.line = line;
+            this.column = column;
+            this.text = text;
+            this.on = on;
 
-            mTagCheckRegexp = mCheckRegexp;
+            tagCheckRegexp = checkRegexp;
             //Expand regexp for check and message
             //Does not intern Patterns with Utils.getPattern()
             String format = "";
             try {
-                if (aOn) {
+                if (on) {
                     format =
-                        expandFromComment(aText, mCheckFormat, mOnRegexp);
-                    mTagCheckRegexp = Pattern.compile(format);
-                    if (mMessageFormat != null) {
+                        expandFromCoont(text, checkFormat, onRegexp);
+                    tagCheckRegexp = Pattern.compile(format);
+                    if (messageFormat != null) {
                         format =
-                            expandFromComment(aText, mMessageFormat, mOnRegexp);
-                        mTagMessageRegexp = Pattern.compile(format);
+                            expandFromCoont(text, messageFormat, onRegexp);
+                        tagMessageRegexp = Pattern.compile(format);
                     }
                 }
                 else {
                     format =
-                        expandFromComment(aText, mCheckFormat, mOffRegexp);
-                    mTagCheckRegexp = Pattern.compile(format);
-                    if (mMessageFormat != null) {
+                        expandFromCoont(text, checkFormat, offRegexp);
+                    tagCheckRegexp = Pattern.compile(format);
+                    if (messageFormat != null) {
                         format =
-                            expandFromComment(
-                                aText,
-                                mMessageFormat,
-                                mOffRegexp);
-                        mTagMessageRegexp = Pattern.compile(format);
+                            expandFromCoont(
+                                text,
+                                messageFormat,
+                                offRegexp);
+                        tagMessageRegexp = Pattern.compile(format);
                     }
                 }
             }
             catch (final PatternSyntaxException e) {
                 throw new ConversionException(
-                    "unable to parse expanded comment " + format,
+                    "unable to parse expanded coont " + format,
                     e);
             }
         }

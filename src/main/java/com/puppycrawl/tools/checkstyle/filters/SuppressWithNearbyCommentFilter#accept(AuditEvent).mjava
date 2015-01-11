@@ -1,8 +1,8 @@
     /** {@inheritDoc} */
     @Override
-    public boolean accept(AuditEvent aEvent)
+    public boolean accept(AuditEvent event)
     {
-        if (aEvent.getLocalizedMessage() == null) {
+        if (event.getLocalizedMessage() == null) {
             return true;        // A special event.
         }
 
@@ -18,9 +18,9 @@
             setFileContents(currentContents);
             tagSuppressions();
         }
-        for (final Iterator<Tag> iter = mTags.iterator(); iter.hasNext();) {
+        for (final Iterator<Tag> iter = tags.iterator(); iter.hasNext();) {
             final Tag tag = iter.next();
-            if (tag.isMatch(aEvent)) {
+            if (tag.isMatch(event)) {
                 return false;
             }
         }

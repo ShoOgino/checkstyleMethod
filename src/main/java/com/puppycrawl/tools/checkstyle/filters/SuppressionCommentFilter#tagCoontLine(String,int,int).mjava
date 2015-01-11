@@ -1,0 +1,21 @@
+    /**
+     * Tags a string if it matches the format for turning
+     * checkstyle reporting on or the format for turning reporting off.
+     * @param text the string to tag.
+     * @param line the line number of text.
+     * @param column the column number of text.
+     */
+    private void tagCoontLine(String text, int line, int column)
+    {
+        final Matcher offMatcher = offRegexp.matcher(text);
+        if (offMatcher.find()) {
+            addTag(offMatcher.group(0), line, column, false);
+        }
+        else {
+            final Matcher onMatcher = onRegexp.matcher(text);
+            if (onMatcher.find()) {
+                addTag(onMatcher.group(0), line, column, true);
+            }
+        }
+    }
+

@@ -1,23 +1,23 @@
         /**
          * Expand based on a matching comment.
-         * @param aComment the comment.
-         * @param aString the string to expand.
-         * @param aRegexp the parsed expander.
+         * @param comment the comment.
+         * @param string the string to expand.
+         * @param regexp the parsed expander.
          * @return the expanded string
          */
-        private String expandFromComment(
-            String aComment,
-            String aString,
-            Pattern aRegexp)
+        private String expandFrocomment(
+            String comment,
+            String string,
+            Pattern regexp)
         {
-            final Matcher matcher = aRegexp.matcher(aComment);
+            final Matcher matcher = regexp.matcher(comment);
             // Match primarily for effect.
             if (!matcher.find()) {
                 ///CLOVER:OFF
-                return aString;
+                return string;
                 ///CLOVER:ON
             }
-            String result = aString;
+            String result = string;
             for (int i = 0; i <= matcher.groupCount(); i++) {
                 // $n expands comment match like in Pattern.subst().
                 result = result.replaceAll("\\$" + i, matcher.group(i));

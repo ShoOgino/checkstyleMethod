@@ -1,5 +1,5 @@
     @Override
-    protected Checker createChecker(Configuration aFilterConfig)
+    protected Checker createChecker(Configuration filterConfig)
         throws CheckstyleException
     {
         final DefaultConfiguration checkerConfig =
@@ -10,8 +10,8 @@
         checksConfig.addChild(createCheckConfig(ConstantNameCheck.class));
         checksConfig.addChild(createCheckConfig(IllegalCatchCheck.class));
         checkerConfig.addChild(checksConfig);
-        if (aFilterConfig != null) {
-            checkerConfig.addChild(aFilterConfig);
+        if (filterConfig != null) {
+            checkerConfig.addChild(filterConfig);
         }
         final Checker checker = new Checker();
         final Locale locale = Locale.ENGLISH;
@@ -19,7 +19,7 @@
         checker.setLocaleLanguage(locale.getLanguage());
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
         checker.configure(checkerConfig);
-        checker.addListener(new BriefLogger(mStream));
+        checker.addListener(new BriefLogger(stream));
         return checker;
     }
 
