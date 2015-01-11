@@ -1,21 +1,21 @@
     /**
      * Get next import group.
-     * @param aCurrentGroupNumber
+     * @param currentGroupNumber
      *        current group number.
      * @return
      *        next import group.
      */
-    private String getNextImportGroup(int aCurrentGroupNumber)
+    private String getNextImportGroup(int currentGroupNumber)
     {
-        int nextGroupNumber = aCurrentGroupNumber;
+        int nextGroupNumber = currentGroupNumber;
 
-        while (mCustomImportOrderRules.size() > nextGroupNumber + 1) {
-            if (hasAnyImportInCurrentGroup(mCustomImportOrderRules.get(nextGroupNumber)))
+        while (customImportOrderRules.size() > nextGroupNumber + 1) {
+            if (hasAnyImportInCurrentGroup(customImportOrderRules.get(nextGroupNumber)))
             {
                 break;
             }
             nextGroupNumber++;
         }
-        return mCustomImportOrderRules.get(nextGroupNumber);
+        return customImportOrderRules.get(nextGroupNumber);
     }
 

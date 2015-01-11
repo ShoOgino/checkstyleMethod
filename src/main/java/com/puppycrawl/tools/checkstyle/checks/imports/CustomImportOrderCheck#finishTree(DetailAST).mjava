@@ -1,33 +1,33 @@
     @Override
-    public void finishTree(DetailAST aRootAST)
+    public void finishTree(DetailAST rootAST)
     {
 
-        if (mImportToGroupList.isEmpty()) {
+        if (importToGroupList.isEmpty()) {
             return;
         }
 
-        final ImportDetails firstImport = mImportToGroupList.get(0);
+        final ImportDetails firstImport = importToGroupList.get(0);
         String currentGroup = getImportGroup(firstImport.isStatic(),
                 firstImport.getImportFullPath());
-        int groupNumber = mCustomImportOrderRules.indexOf(currentGroup);
+        int groupNumber = customImportOrderRules.indexOf(currentGroup);
         String previousImport = null;
 
-        for (ImportDetails importObject : mImportToGroupList) {
+        for (ImportDetails importObject : importToGroupList) {
             final String importGroup = importObject.getImportGroup();
-            final String fullImportIdent = importObject.mImportFullPath;
+            final String fullImportIdent = importObject.importFullPath;
 
             if (!importGroup.equals(currentGroup)) {
-                if (mCustomImportOrderRules.size() > groupNumber + 1) {
+                if (customImportOrderRules.size() > groupNumber + 1) {
                     final String nextGroup = getNextImportGroup(groupNumber + 1);
                     if (importGroup.equals(nextGroup)) {
-                        if (mSeparateLineBetweenGroups && previousImport != null
+                        if (separateLineBetweenGroups && previousImport != null
                                 && !hasEmptyLineBefore(importObject.getLineNumber()))
                         {
                             log(importObject.getLineNumber(), "custom.import.order.line.separator",
                                     fullImportIdent);
                         }
                         currentGroup = nextGroup;
-                        groupNumber = mCustomImportOrderRules.indexOf(nextGroup);
+                        groupNumber = customImportOrderRules.indexOf(nextGroup);
                     }
                     else {
                         logWrongImportGroupOrder(importObject.getLineNumber(),
@@ -39,7 +39,7 @@
                             importGroup);
                 }
             }
-            else if (mSortImportsInGroupAlphabetically
+            else if (sortImportsInGroupAlphabetically
                     && previousImport != null
                     && matchesImportGroup(importObject.isStatic(),
                             fullImportIdent, currentGroup)

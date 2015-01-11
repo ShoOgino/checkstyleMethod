@@ -1,15 +1,15 @@
     /**
      * Verifies whether a package name be used.
-     * @param aForImport the package to check.
+     * @param forImport the package to check.
      * @return a result {@link AccessResult} indicating whether it can be used.
      */
-    AccessResult verifyImport(final String aForImport)
+    AccessResult verifyImport(final String forImport)
     {
-        assert aForImport != null;
-        if (mClassName != null) {
-            final boolean classMatch = mRegExp
-                ? aForImport.matches(mClassName)
-                : aForImport.equals(mClassName);
+        assert forImport != null;
+        if (className != null) {
+            final boolean classMatch = regExp
+                ? forImport.matches(className)
+                : forImport.equals(className);
             return calculateResult(classMatch);
         }
 
@@ -17,19 +17,19 @@
         // the package. Then check if matched and we must be an exact match.
         // In this case, the text after the first "." must not contain
         // another "." as this indicates that it is not an exact match.
-        assert mPkgName != null;
+        assert pkgName != null;
         boolean pkgMatch;
-        if (mRegExp) {
-            pkgMatch = aForImport.matches(mPkgName + "\\..*");
-            if (pkgMatch && mExactMatch) {
-                pkgMatch = !aForImport.matches(mPkgName + "\\..*\\..*");
+        if (regExp) {
+            pkgMatch = forImport.matches(pkgName + "\\..*");
+            if (pkgMatch && exactMatch) {
+                pkgMatch = !forImport.matches(pkgName + "\\..*\\..*");
             }
         }
         else {
-            pkgMatch = aForImport.startsWith(mPkgName + ".");
-            if (pkgMatch && mExactMatch) {
-                pkgMatch = (aForImport.indexOf('.',
-                    (mPkgName.length() + 1)) == -1);
+            pkgMatch = forImport.startsWith(pkgName + ".");
+            if (pkgMatch && exactMatch) {
+                pkgMatch = (forImport.indexOf('.',
+                    (pkgName.length() + 1)) == -1);
             }
         }
         return calculateResult(pkgMatch);

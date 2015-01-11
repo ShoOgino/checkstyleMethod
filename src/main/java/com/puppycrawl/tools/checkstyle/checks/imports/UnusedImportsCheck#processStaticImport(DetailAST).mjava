@@ -1,14 +1,14 @@
     /**
      * Collects the details of static imports.
-     * @param aAST node containing the static import details
+     * @param ast node containing the static import details
      */
-    private void processStaticImport(DetailAST aAST)
+    private void processStaticImport(DetailAST ast)
     {
         final FullIdent name =
             FullIdent.createFullIdent(
-                aAST.getFirstChild().getNextSibling());
+                ast.getFirstChild().getNextSibling());
         if ((name != null) && !name.getText().endsWith(".*")) {
-            mImports.add(name);
+            imports.add(name);
         }
     }
 

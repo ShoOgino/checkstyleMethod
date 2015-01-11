@@ -1,15 +1,15 @@
     /**
      * Get import valid group.
-     * @param aStatic
+     * @param isStatic
      *        is static import.
-     * @param aImportPath
+     * @param importPath
      *        full import path.
      * @return import valid group.
      */
-    private String getImportGroup(boolean aStatic, String aImportPath)
+    private String getImportGroup(boolean isStatic, String importPath)
     {
-        for (String group : mCustomImportOrderRules) {
-            if (matchesImportGroup(aStatic, aImportPath, group)) {
+        for (String group : customImportOrderRules) {
+            if (matchesImportGroup(isStatic, importPath, group)) {
                 return group;
             }
         }

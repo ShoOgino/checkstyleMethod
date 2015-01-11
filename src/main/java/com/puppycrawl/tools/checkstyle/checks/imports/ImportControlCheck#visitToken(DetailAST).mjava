@@ -1,34 +1,34 @@
     @Override
-    public void visitToken(final DetailAST aAST)
+    public void visitToken(final DetailAST ast)
     {
-        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
-            final DetailAST nameAST = aAST.getLastChild().getPreviousSibling();
+        if (ast.getType() == TokenTypes.PACKAGE_DEF) {
+            final DetailAST nameAST = ast.getLastChild().getPreviousSibling();
             final FullIdent full = FullIdent.createFullIdent(nameAST);
-            if (mRoot == null) {
+            if (root == null) {
                 log(nameAST, "import.control.missing.file");
             }
             else {
-                mInPkg = full.getText();
-                mCurrentLeaf = mRoot.locateFinest(mInPkg);
-                if (mCurrentLeaf == null) {
+                inPkg = full.getText();
+                currentLeaf = root.locateFinest(inPkg);
+                if (currentLeaf == null) {
                     log(nameAST, "import.control.unknown.pkg");
                 }
             }
         }
-        else if (mCurrentLeaf != null) {
+        else if (currentLeaf != null) {
             final FullIdent imp;
-            if (aAST.getType() == TokenTypes.IMPORT) {
-                imp = FullIdent.createFullIdentBelow(aAST);
+            if (ast.getType() == TokenTypes.IMPORT) {
+                imp = FullIdent.createFullIdentBelow(ast);
             }
             else {
                 // know it is a static import
-                imp = FullIdent.createFullIdent(aAST
+                imp = FullIdent.createFullIdent(ast
                         .getFirstChild().getNextSibling());
             }
-            final AccessResult access = mCurrentLeaf.checkAccess(imp.getText(),
-                    mInPkg);
+            final AccessResult access = currentLeaf.checkAccess(imp.getText(),
+                    inPkg);
             if (!AccessResult.ALLOWED.equals(access)) {
-                log(aAST, "import.control.disallowed", imp.getText());
+                log(ast, "import.control.disallowed", imp.getText());
             }
         }
     }

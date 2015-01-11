@@ -1,19 +1,19 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
-            if (mCustomImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)
-                    && mSamePackageMatchingDepth != -1)
+        if (ast.getType() == TokenTypes.PACKAGE_DEF) {
+            if (customImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)
+                    && samePackageMatchingDepth != -1)
             {
-                mSamePackageDomainsRegExp = createSamePackageRegexp(
-                        mSamePackageMatchingDepth, aAST);
+                samePackageDomainsRegExp = createSamePackageRegexp(
+                        samePackageMatchingDepth, ast);
             }
         }
         else {
-            final String importFullPath = getFullImportIdent(aAST);
-            final int lineNo = aAST.getLineNo();
-            final boolean isStatic = aAST.getType() == TokenTypes.STATIC_IMPORT;
-            mImportToGroupList.add(new ImportDetails(importFullPath,
+            final String importFullPath = getFullImportIdent(ast);
+            final int lineNo = ast.getLineNo();
+            final boolean isStatic = ast.getType() == TokenTypes.STATIC_IMPORT;
+            importToGroupList.add(new ImportDetails(importFullPath,
                     lineNo, getImportGroup(isStatic, importFullPath),
                     isStatic));
         }

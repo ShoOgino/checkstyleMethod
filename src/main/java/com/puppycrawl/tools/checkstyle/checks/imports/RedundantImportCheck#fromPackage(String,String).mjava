@@ -1,21 +1,21 @@
     /**
      * Determines if an import statement is for types from a specified package.
-     * @param aImport the import name
-     * @param aPkg the package name
+     * @param importName the import name
+     * @param pkg the package name
      * @return whether from the package
      */
-    private static boolean fromPackage(String aImport, String aPkg)
+    private static boolean fromPackage(String importName, String pkg)
     {
         boolean retVal = false;
-        if (aPkg == null) {
+        if (pkg == null) {
             // If not package, then check for no package in the import.
-            retVal = (aImport.indexOf('.') == -1);
+            retVal = (importName.indexOf('.') == -1);
         }
         else {
-            final int index = aImport.lastIndexOf('.');
+            final int index = importName.lastIndexOf('.');
             if (index != -1) {
-                final String front = aImport.substring(0, index);
-                retVal = front.equals(aPkg);
+                final String front = importName.substring(0, index);
+                retVal = front.equals(pkg);
             }
         }
         return retVal;

@@ -1,37 +1,37 @@
     /**
      * Shares processing...
      *
-     * @param aIdent the import to process.
-     * @param aIsStatic whether the token is static or not.
-     * @param aPrevious previous non-static but current is static (above), or
+     * @param ident the import to process.
+     * @param isStatic whether the token is static or not.
+     * @param previous previous non-static but current is static (above), or
      *                  previous static but current is non-static (under).
      */
-    private void doVisitToken(FullIdent aIdent, boolean aIsStatic,
-            boolean aPrevious)
+    private void doVisitToken(FullIdent ident, boolean isStatic,
+            boolean previous)
     {
-        if (aIdent != null) {
-            final String name = aIdent.getText();
+        if (ident != null) {
+            final String name = ident.getText();
             final int groupIdx = getGroupNumber(name);
-            final int line = aIdent.getLineNo();
+            final int line = ident.getLineNo();
 
-            if (groupIdx > mLastGroup) {
-                if (!mBeforeFirstImport && mSeparated) {
+            if (groupIdx > lastGroup) {
+                if (!beforeFirstImport && separated) {
                     // This check should be made more robust to handle
                     // comments and imports that span more than one line.
-                    if ((line - mLastImportLine) < 2) {
+                    if ((line - lastImportLine) < 2) {
                         log(line, "import.separation", name);
                     }
                 }
             }
-            else if (groupIdx == mLastGroup) {
-                doVisitTokenInSameGroup(aIsStatic, aPrevious, name, line);
+            else if (groupIdx == lastGroup) {
+                doVisitTokenInSameGroup(isStatic, previous, name, line);
             }
             else {
                 log(line, "import.ordering", name);
             }
 
-            mLastGroup = groupIdx;
-            mLastImport = name;
+            lastGroup = groupIdx;
+            lastImport = name;
         }
     }
 

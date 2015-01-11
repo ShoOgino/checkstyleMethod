@@ -1,19 +1,19 @@
     /**
      * Finds out what group the specified import belongs to.
      *
-     * @param aName the import name to find.
+     * @param name the import name to find.
      * @return group number for given import name.
      */
-    private int getGroupNumber(String aName)
+    private int getGroupNumber(String name)
     {
-        int bestIndex = mGroups.length;
+        int bestIndex = groups.length;
         int bestLength = -1;
         int bestPos = 0;
 
         // find out what group this belongs in
-        // loop over mGroups and get index
-        for (int i = 0; i < mGroups.length; i++) {
-            final Matcher matcher = mGroups[i].matcher(aName);
+        // loop over groups and get index
+        for (int i = 0; i < groups.length; i++) {
+            final Matcher matcher = groups[i].matcher(name);
             while (matcher.find()) {
                 final int length = matcher.end() - matcher.start();
                 if ((length > bestLength)

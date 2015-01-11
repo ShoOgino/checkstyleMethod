@@ -1,8 +1,8 @@
     @Override
-    public void visitToken(final DetailAST aAST)
+    public void visitToken(final DetailAST ast)
     {
         final DetailAST startingDot =
-            aAST.getFirstChild().getNextSibling();
+            ast.getFirstChild().getNextSibling();
         final FullIdent name = FullIdent.createFullIdent(startingDot);
 
         if ((null != name) && !isExempt(name.getText())) {

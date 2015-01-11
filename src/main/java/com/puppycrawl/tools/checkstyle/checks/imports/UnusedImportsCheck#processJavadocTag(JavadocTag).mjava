@@ -1,12 +1,12 @@
     /**
      * Returns a list of references found in a javadoc {@link JavadocTag}
-     * @param aTag The javadoc tag to parse
+     * @param tag The javadoc tag to parse
      * @return A list of references found in this tag
      */
-    private Set<String> processJavadocTag(JavadocTag aTag)
+    private Set<String> processJavadocTag(JavadocTag tag)
     {
         final Set<String> references = new HashSet<String>();
-        final String identifier = aTag.getArg1().trim();
+        final String identifier = tag.getArg1().trim();
         for (Pattern pattern : new Pattern[]
         {FIRST_CLASS_NAME, ARGUMENT_NAME})
         {

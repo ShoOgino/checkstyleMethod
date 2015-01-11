@@ -1,0 +1,33 @@
+    /**
+     * Parses ordering rule and adds it to the list with rules.
+     * @param ruleStr
+     *        String with rule.
+     */
+    private void addRuleastoList(String ruleStr)
+    {
+        if (STATIC_RULE_GROUP.equals(ruleStr)
+                || THIRD_PARTY_PACKAGE_RULE_GROUP.equals(ruleStr)
+                || STANDARD_JAVA_PACKAGE_RULE_GROUP.equals(ruleStr)
+                || SPECIAL_IMPORTS_RULE_GROUP.equals(ruleStr))
+        {
+            customImportOrderRules.add(ruleStr);
+
+        }
+        else if (ruleStr.startsWith(SAME_PACKAGE_RULE_GROUP)) {
+
+            final String rule = ruleStr.substring(ruleStr.indexOf("(") + 1,
+                    ruleStr.indexOf(")"));
+            try {
+                samePackageMatchingDepth = Integer.parseInt(rule);
+            }
+            catch (Exception e) {
+                samePackageDomainsRegExp = rule;
+            }
+            customImportOrderRules.add(SAME_PACKAGE_RULE_GROUP);
+
+        }
+        else {
+            throw new RuntimeException("Unexpected rule: " + ruleStr);
+        }
+    }
+

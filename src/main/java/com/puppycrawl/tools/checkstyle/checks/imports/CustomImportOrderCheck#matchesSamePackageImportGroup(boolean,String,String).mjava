@@ -1,18 +1,18 @@
     /**
      * Checks if the import is placed in the correct group.
-     * @param aStatic
+     * @param isStatic
      *        if import is static.
-     * @param aImportPath
+     * @param importFullPath
      *        import full path.
-     * @param aCurrentGroup
+     * @param currentGroup
      *        current group.
      * @return true, if the import is placed in the static group.
      */
-    private boolean matchesSamePackageImportGroup(boolean aStatic,
-        String aImportPath, String aCurrentGroup)
+    private boolean matchesSamePackageImportGroup(boolean isStatic,
+        String importFullPath, String currentGroup)
     {
-        final String importPath = aImportPath.substring(0, aImportPath.lastIndexOf("."));
-        return !aStatic && SAME_PACKAGE_RULE_GROUP.equals(aCurrentGroup)
-                && mSamePackageDomainsRegExp.contains(importPath);
+        final String importPath = importFullPath.substring(0, importFullPath.lastIndexOf("."));
+        return !isStatic && SAME_PACKAGE_RULE_GROUP.equals(currentGroup)
+                && samePackageDomainsRegExp.contains(importPath);
     }
 

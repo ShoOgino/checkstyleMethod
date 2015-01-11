@@ -1,14 +1,14 @@
     /**
      * Extracts a list of texts matching a {@link Pattern} from a
      * {@link String}.
-     * @param aIdentifier The String to match the pattern against
-     * @param aPattern The Pattern used to extract the texts
+     * @param identifier The String to match the pattern against
+     * @param pattern The Pattern used to extract the texts
      * @return A list of texts which matched the pattern
      */
-    private Set<String> matchPattern(String aIdentifier, Pattern aPattern)
+    private Set<String> matchPattern(String identifier, Pattern pattern)
     {
         final Set<String> references = new HashSet<String>();
-        final Matcher matcher = aPattern.matcher(aIdentifier);
+        final Matcher matcher = pattern.matcher(identifier);
         while (matcher.find()) {
             references.add(matcher.group(1));
         }

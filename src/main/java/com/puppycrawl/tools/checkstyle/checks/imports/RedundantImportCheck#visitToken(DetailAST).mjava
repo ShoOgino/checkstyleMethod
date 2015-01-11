@@ -1,44 +1,44 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (aAST.getType() == TokenTypes.PACKAGE_DEF) {
-            mPkgName = FullIdent.createFullIdent(
-                    aAST.getLastChild().getPreviousSibling()).getText();
+        if (ast.getType() == TokenTypes.PACKAGE_DEF) {
+            pkgName = FullIdent.createFullIdent(
+                    ast.getLastChild().getPreviousSibling()).getText();
         }
-        else if (aAST.getType() == TokenTypes.IMPORT) {
-            final FullIdent imp = FullIdent.createFullIdentBelow(aAST);
+        else if (ast.getType() == TokenTypes.IMPORT) {
+            final FullIdent imp = FullIdent.createFullIdentBelow(ast);
             if (fromPackage(imp.getText(), "java.lang")) {
-                log(aAST.getLineNo(), aAST.getColumnNo(), "import.lang",
+                log(ast.getLineNo(), ast.getColumnNo(), "import.lang",
                     imp.getText());
             }
-            else if (fromPackage(imp.getText(), mPkgName)) {
-                log(aAST.getLineNo(), aAST.getColumnNo(), "import.same",
+            else if (fromPackage(imp.getText(), pkgName)) {
+                log(ast.getLineNo(), ast.getColumnNo(), "import.same",
                     imp.getText());
             }
             // Check for a duplicate import
-            for (FullIdent full : mImports) {
+            for (FullIdent full : imports) {
                 if (imp.getText().equals(full.getText())) {
-                    log(aAST.getLineNo(), aAST.getColumnNo(),
+                    log(ast.getLineNo(), ast.getColumnNo(),
                             "import.duplicate", full.getLineNo(),
                             imp.getText());
                 }
             }
 
-            mImports.add(imp);
+            imports.add(imp);
         }
         else {
             // Check for a duplicate static import
             final FullIdent imp =
                 FullIdent.createFullIdent(
-                    aAST.getLastChild().getPreviousSibling());
-            for (FullIdent full : mStaticImports) {
+                    ast.getLastChild().getPreviousSibling());
+            for (FullIdent full : staticImports) {
                 if (imp.getText().equals(full.getText())) {
-                    log(aAST.getLineNo(), aAST.getColumnNo(),
+                    log(ast.getLineNo(), ast.getColumnNo(),
                         "import.duplicate", full.getLineNo(), imp.getText());
                 }
             }
 
-            mStaticImports.add(imp);
+            staticImports.add(imp);
         }
     }
 

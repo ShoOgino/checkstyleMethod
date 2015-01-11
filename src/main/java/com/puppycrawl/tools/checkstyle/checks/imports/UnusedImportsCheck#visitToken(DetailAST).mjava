@@ -1,21 +1,21 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
-        if (aAST.getType() == TokenTypes.IDENT) {
-            if (mCollect) {
-                processIdent(aAST);
+        if (ast.getType() == TokenTypes.IDENT) {
+            if (collect) {
+                processIdent(ast);
             }
         }
-        else if (aAST.getType() == TokenTypes.IMPORT) {
-            processImport(aAST);
+        else if (ast.getType() == TokenTypes.IMPORT) {
+            processImport(ast);
         }
-        else if (aAST.getType() == TokenTypes.STATIC_IMPORT) {
-            processStaticImport(aAST);
+        else if (ast.getType() == TokenTypes.STATIC_IMPORT) {
+            processStaticImport(ast);
         }
         else {
-            mCollect = true;
-            if (mProcessJavadoc) {
-                processJavadoc(aAST);
+            collect = true;
+            if (processJavadoc) {
+                processJavadoc(ast);
             }
         }
     }

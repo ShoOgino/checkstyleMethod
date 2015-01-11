@@ -1,17 +1,17 @@
     /**
      * Collects references made by IDENT.
-     * @param aAST the IDENT node to process
+     * @param ast the IDENT node to process
      */
-    private void processIdent(DetailAST aAST)
+    private void processIdent(DetailAST ast)
     {
-        final DetailAST parent = aAST.getParent();
+        final DetailAST parent = ast.getParent();
         final int parentType = parent.getType();
         if (((parentType != TokenTypes.DOT)
             && (parentType != TokenTypes.METHOD_DEF))
             || ((parentType == TokenTypes.DOT)
-                && (aAST.getNextSibling() != null)))
+                && (ast.getNextSibling() != null)))
         {
-            mReferenced.add(aAST.getText());
+            referenced.add(ast.getText());
         }
     }
 

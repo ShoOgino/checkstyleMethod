@@ -1,42 +1,42 @@
     @Override
-    public void startElement(final String aNamespaceURI,
-                             final String aLocalName,
-                             final String aQName,
-                             final Attributes aAtts)
+    public void startElement(final String namespaceURI,
+                             final String locqName,
+                             final String qName,
+                             final Attributes atts)
         throws SAXException
     {
-        if ("import-control".equals(aQName)) {
-            final String pkg = safeGet(aAtts, "pkg");
-            mStack.push(new PkgControl(pkg));
+        if ("import-control".equals(qName)) {
+            final String pkg = safeGet(atts, "pkg");
+            stack.push(new PkgControl(pkg));
         }
-        else if ("subpackage".equals(aQName)) {
-            assert !mStack.isEmpty();
-            final String name = safeGet(aAtts, "name");
-            mStack.push(new PkgControl(mStack.peek(), name));
+        else if ("subpackage".equals(qName)) {
+            assert !stack.isEmpty();
+            final String name = safeGet(atts, "name");
+            stack.push(new PkgControl(stack.peek(), name));
         }
-        else if ("allow".equals(aQName) || "disallow".equals(aQName)) {
-            assert !mStack.isEmpty();
+        else if ("allow".equals(qName) || "disallow".equals(qName)) {
+            assert !stack.isEmpty();
             // Need to handle either "pkg" or "class" attribute.
             // May have "exact-match" for "pkg"
             // May have "local-only"
-            final boolean isAllow = "allow".equals(aQName);
-            final boolean isLocalOnly = (aAtts.getValue("local-only") != null);
-            final String pkg = aAtts.getValue("pkg");
-            final boolean regex = (aAtts.getValue("regex") != null);
+            final boolean isAllow = "allow".equals(qName);
+            final boolean isLocalOnly = (atts.getValue("local-only") != null);
+            final String pkg = atts.getValue("pkg");
+            final boolean regex = (atts.getValue("regex") != null);
             final Guard g;
             if (pkg != null) {
                 final boolean exactMatch =
-                    (aAtts.getValue("exact-match") != null);
+                    (atts.getValue("exact-match") != null);
                 g = new Guard(isAllow, isLocalOnly, pkg, exactMatch, regex);
             }
             else {
                 // handle class names which can be normal class names or regular
                 // expressions
-                final String clazz = safeGet(aAtts, "class");
+                final String clazz = safeGet(atts, "class");
                 g = new Guard(isAllow, isLocalOnly, clazz, regex);
             }
 
-            final PkgControl pc = mStack.peek();
+            final PkgControl pc = stack.peek();
             pc.addGuard(g);
         }
     }

@@ -1,21 +1,21 @@
     /**
-     * Set the parameter for the file containing the import control
+     * Set the pnameter for the file containing the import control
      * configuration. It will cause the file to be loaded.
-     * @param aName the name of the file to load.
+     * @param name the name of the file to load.
      * @throws ConversionException on error loading the file.
      */
-    public void setFile(final String aName)
+    public void setFile(final String name)
     {
         // Handle empty param
-        if ((aName == null) || (aName.trim().length() == 0)) {
+        if ((name == null) || (name.trim().length() == 0)) {
             return;
         }
 
         try {
-            mRoot = ImportControlLoader.load(new File(aName).toURI());
+            root = ImportControlLoader.load(new File(name).toURI());
         }
         catch (final CheckstyleException ex) {
-            throw new ConversionException("Unable to load " + aName, ex);
+            throw new ConversionException("Unable to load " + name, ex);
         }
     }
 

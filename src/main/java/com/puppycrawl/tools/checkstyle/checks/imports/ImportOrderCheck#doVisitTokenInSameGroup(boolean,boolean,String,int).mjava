@@ -1,41 +1,41 @@
     /**
      * Shares processing...
      *
-     * @param aIsStatic whether the token is static or not.
-     * @param aPrevious previous non-static but current is static (above), or
+     * @param isStatic whether the token is static or not.
+     * @param previous previous non-static but current is static (above), or
      *    previous static but current is non-static (under).
-     * @param aName the name of the current import.
-     * @param aLine the line of the current import.
+     * @param name the name of the current import.
+     * @param line the line of the current import.
      */
-    private void doVisitTokenInSameGroup(boolean aIsStatic,
-            boolean aPrevious, String aName, int aLine)
+    private void doVisitTokenInSameGroup(boolean isStatic,
+            boolean previous, String name, int line)
     {
-        if (!mOrdered) {
+        if (!ordered) {
             return;
         }
 
         if (getAbstractOption().equals(ImportOrderOption.INFLOW)) {
             // out of lexicographic order
-            if (compare(mLastImport, aName, mCaseSensitive) > 0) {
-                log(aLine, "import.ordering", aName);
+            if (compare(lastImport, name, caseSensitive) > 0) {
+                log(line, "import.ordering", name);
             }
         }
         else {
             final boolean shouldFireError =
                 // current and previous static or current and
                 // previous non-static
-                (!(mLastImportStatic ^ aIsStatic)
+                (!(lastImportStatic ^ isStatic)
                 &&
                 // and out of lexicographic order
-                (compare(mLastImport, aName, mCaseSensitive) > 0))
+                (compare(lastImport, name, caseSensitive) > 0))
                 ||
                 // previous non-static but current is static (above)
                 // or
                 // previous static but current is non-static (under)
-                aPrevious;
+                previous;
 
             if (shouldFireError) {
-                log(aLine, "import.ordering", aName);
+                log(line, "import.ordering", name);
             }
         }
     }

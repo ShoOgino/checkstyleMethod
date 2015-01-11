@@ -1,14 +1,14 @@
     /**
      * Sets the list of packages or classes to be exempt from the check.
      * The excludes can contain a .* or not.
-     * @param aExcludes a list of package names/fully-qualifies class names
+     * @param excludes a list of package names/fully-qualifies class names
      * where star imports are ok
      */
-    public void setExcludes(String[] aExcludes)
+    public void setExcludes(String[] excludesParam)
     {
-        mExcludes.clear();
-        for (final String exclude : aExcludes) {
-            mExcludes.add(exclude.endsWith(".*") ? exclude : exclude + ".*");
+        excludes.clear();
+        for (final String exclude : excludesParam) {
+            excludes.add(exclude.endsWith(".*") ? exclude : exclude + ".*");
         }
     }
 

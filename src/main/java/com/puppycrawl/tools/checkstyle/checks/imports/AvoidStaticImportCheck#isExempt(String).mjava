@@ -1,14 +1,14 @@
     /**
      * Checks if a class or static member is exempt from known excludes.
      *
-     * @param aClassOrStaticMember
+     * @param classOrStaticMember
      *                the class or static member
      * @return true if except false if not
      */
-    private boolean isExempt(String aClassOrStaticMember)
+    private boolean isExempt(String classOrStaticMember)
     {
-        for (String exclude : mExcludes) {
-            if (aClassOrStaticMember.equals(exclude)) {
+        for (String exclude : excludes) {
+            if (classOrStaticMember.equals(exclude)) {
                 return true;
             }
             else if (exclude.endsWith(".*")) {
@@ -17,9 +17,9 @@
                 //a starred import
                 final String excludeMinusDotStar =
                     exclude.substring(0, exclude.length() - 2);
-                if (aClassOrStaticMember.startsWith(excludeMinusDotStar)) {
+                if (classOrStaticMember.startsWith(excludeMinusDotStar)) {
                     final String member =
-                        aClassOrStaticMember.substring(
+                        classOrStaticMember.substring(
                             excludeMinusDotStar.length() + 1);
                     //if it contains a dot then it is not a member but a package
                     if (member.indexOf('.') == -1) {

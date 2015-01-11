@@ -1,30 +1,30 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         final FullIdent ident;
         final boolean isStatic;
 
-        if (aAST.getType() == TokenTypes.IMPORT) {
-            ident = FullIdent.createFullIdentBelow(aAST);
+        if (ast.getType() == TokenTypes.IMPORT) {
+            ident = FullIdent.createFullIdentBelow(ast);
             isStatic = false;
         }
         else {
-            ident = FullIdent.createFullIdent(aAST.getFirstChild()
+            ident = FullIdent.createFullIdent(ast.getFirstChild()
                     .getNextSibling());
             isStatic = true;
         }
 
         switch (getAbstractOption()) {
         case TOP:
-            if (!isStatic && mLastImportStatic) {
-                mLastGroup = Integer.MIN_VALUE;
-                mLastImport = "";
+            if (!isStatic && lastImportStatic) {
+                lastGroup = Integer.MIN_VALUE;
+                lastImport = "";
             }
             // no break;
 
         case ABOVE:
             // previous non-static but current is static
-            doVisitToken(ident, isStatic, (!mLastImportStatic && isStatic));
+            doVisitToken(ident, isStatic, (!lastImportStatic && isStatic));
             break;
 
         case INFLOW:
@@ -33,23 +33,23 @@
             break;
 
         case BOTTOM:
-            if (isStatic && !mLastImportStatic) {
-                mLastGroup = Integer.MIN_VALUE;
-                mLastImport = "";
+            if (isStatic && !lastImportStatic) {
+                lastGroup = Integer.MIN_VALUE;
+                lastImport = "";
             }
             // no break;
 
         case UNDER:
             // previous static but current is non-static
-            doVisitToken(ident, isStatic, (mLastImportStatic && !isStatic));
+            doVisitToken(ident, isStatic, (lastImportStatic && !isStatic));
             break;
 
         default:
             break;
         }
 
-        mLastImportLine = aAST.findFirstToken(TokenTypes.SEMI).getLineNo();
-        mLastImportStatic = isStatic;
-        mBeforeFirstImport = false;
+        lastImportLine = ast.findFirstToken(TokenTypes.SEMI).getLineNo();
+        lastImportStatic = isStatic;
+        beforeFirstImport = false;
     }
 

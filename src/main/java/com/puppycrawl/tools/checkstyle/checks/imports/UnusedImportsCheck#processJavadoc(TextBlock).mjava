@@ -1,16 +1,16 @@
     /**
      * Process a javadoc {@link TextBlock} and return the set of classes
      * referenced within.
-     * @param aCmt The javadoc block to parse
+     * @param cmt The javadoc block to parse
      * @return a set of classes referenced in the javadoc block
      */
-    private Set<String> processJavadoc(TextBlock aCmt)
+    private Set<String> processJavadoc(TextBlock cmt)
     {
         final Set<String> references = new HashSet<String>();
         // process all the @link type tags
         // INLINEs inside BLOCKs get hidden when using ALL
         for (final JavadocTag tag
-                : getValidTags(aCmt, JavadocUtils.JavadocTagType.INLINE))
+                : getValidTags(cmt, JavadocUtils.JavadocTagType.INLINE))
         {
             if (tag.canReferenceImports()) {
                 references.addAll(processJavadocTag(tag));
@@ -18,7 +18,7 @@
         }
         // process all the @throws type tags
         for (final JavadocTag tag
-                : getValidTags(aCmt, JavadocUtils.JavadocTagType.BLOCK))
+                : getValidTags(cmt, JavadocUtils.JavadocTagType.BLOCK))
         {
             if (tag.canReferenceImports()) {
                 references.addAll(

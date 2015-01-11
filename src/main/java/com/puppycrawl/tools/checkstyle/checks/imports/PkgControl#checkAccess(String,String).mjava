@@ -4,21 +4,21 @@
      * its parent looking for a match. This will recurse looking for match.
      * If there is no clear result then {@link AccessResult#UNKNOWN} is
      * returned.
-     * @param aForImport the package to check on.
-     * @param aInPkg the package doing the import.
+     * @param forImport the package to check on.
+     * @param inPkg the package doing the import.
      * @return an {@link AccessResult}.
      */
-    AccessResult checkAccess(final String aForImport, final String aInPkg)
+    AccessResult checkAccess(final String forImport, final String inPkg)
     {
-        final AccessResult retVal = localCheckAccess(aForImport, aInPkg);
+        final AccessResult retVal = localCheckAccess(forImport, inPkg);
         if (retVal != AccessResult.UNKNOWN) {
             return retVal;
         }
-        else if (mParent == null) {
+        else if (parent == null) {
             // we are the top, so default to not allowed.
             return AccessResult.DISALLOWED;
         }
 
-        return mParent.checkAccess(aForImport, aInPkg);
+        return parent.checkAccess(forImport, inPkg);
     }
 

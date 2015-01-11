@@ -8,10 +8,11 @@
      *        current group.
      * @return true, if the import is placed in the static group.
      */
-    private boolean matchesSpecialImportsGroup(boolean isStatic,
+    private boolean matcheasthirdPartyImportGroup(boolean isStatic,
         String currentImport, String currentGroup)
     {
-        return !isStatic && SPECIAL_IMPORTS_RULE_GROUP.equals(currentGroup)
-                && specialImportsRegExp.matcher(currentImport).find();
+        return !isStatic && THIRD_PARTY_PACKAGE_RULE_GROUP.equals(currentGroup)
+                && thirdPartyPackageRegExp.matcher(currentImport).find()
+                && !standardPackageRegExp.matcher(currentImport).find();
     }
 

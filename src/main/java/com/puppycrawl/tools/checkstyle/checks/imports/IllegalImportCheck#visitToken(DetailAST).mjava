@@ -1,17 +1,17 @@
     @Override
-    public void visitToken(DetailAST aAST)
+    public void visitToken(DetailAST ast)
     {
         final FullIdent imp;
-        if (aAST.getType() == TokenTypes.IMPORT) {
-            imp = FullIdent.createFullIdentBelow(aAST);
+        if (ast.getType() == TokenTypes.IMPORT) {
+            imp = FullIdent.createFullIdentBelow(ast);
         }
         else {
             imp = FullIdent.createFullIdent(
-                aAST.getFirstChild().getNextSibling());
+                ast.getFirstChild().getNextSibling());
         }
         if (isIllegalImport(imp.getText())) {
-            log(aAST.getLineNo(),
-                aAST.getColumnNo(),
+            log(ast.getLineNo(),
+                ast.getColumnNo(),
                 "import.illegal",
                 imp.getText());
         }

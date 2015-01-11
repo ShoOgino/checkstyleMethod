@@ -2,14 +2,14 @@
      * Sets the list of package groups and the order they should occur in the
      * file.
      *
-     * @param aGroups a comma-separated list of package names/prefixes.
+     * @param groups a comma-separated list of package names/prefixes.
      */
-    public void setGroups(String[] aGroups)
+    public void setGroups(String[] packageGroups)
     {
-        mGroups = new Pattern[aGroups.length];
+        groups = new Pattern[packageGroups.length];
 
-        for (int i = 0; i < aGroups.length; i++) {
-            String pkg = aGroups[i];
+        for (int i = 0; i < packageGroups.length; i++) {
+            String pkg = packageGroups[i];
             Pattern grp;
 
             // if the pkg name is the wildcard, make it match zero chars
@@ -31,7 +31,7 @@
                 grp = Pattern.compile("^" + Pattern.quote(pkg));
             }
 
-            mGroups[i] = grp;
+            groups[i] = grp;
         }
     }
 
