@@ -4,21 +4,21 @@
         mCheckConfig.addAttribute("option", LeftCurlyOption.EOL.toString());
         mCheckConfig.addAttribute("maxLineLength", "100");
         final String[] expected = {
-            "9:1: '{' should be on the previous line.",
-            "12:5: '{' should be on the previous line.",
-            "16:9: '{' should be on the previous line.",
-            "18:13: '{' should be on the previous line.",
-            "20:17: '{' should be on the previous line.",
-            "26:22: '{' should have line break after.",
-            "28:17: '{' should be on the previous line.",
-            "35:33: '{' should have line break after.",
-            "36:21: '{' should have line break after.",
-            "39:29: '{' should have line break after.",
-            "39:34: '{' should have line break after.",
-            "45:37: '{' should have line break after.",
-            "54:5: '{' should be on the previous line.",
-            "56:27: '{' should have line break after.",
-            "66:1: '{' should be on the previous line.",
+            "9:1: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "12:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "16:9: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "18:13: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "20:17: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "26:22: " + getCheckMessage(MSG_KEY_LINE_BREAK_AFTER, "{"),
+            "28:17: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "35:33: " + getCheckMessage(MSG_KEY_LINE_BREAK_AFTER, "{"),
+            "36:21: " + getCheckMessage(MSG_KEY_LINE_BREAK_AFTER, "{"),
+            "39:29: " + getCheckMessage(MSG_KEY_LINE_BREAK_AFTER, "{"),
+            "39:34: " + getCheckMessage(MSG_KEY_LINE_BREAK_AFTER, "{"),
+            "45:37: " + getCheckMessage(MSG_KEY_LINE_BREAK_AFTER, "{"),
+            "54:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "56:27: " + getCheckMessage(MSG_KEY_LINE_BREAK_AFTER, "{"),
+            "66:1: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
         };
         verify(mCheckConfig, getPath("InputLeftCurlyLineBreakAfter.java"), expected);
     }

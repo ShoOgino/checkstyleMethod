@@ -25,7 +25,7 @@
         else if (getAbstractOption() == LeftCurlyOption.NL) {
             if (!Utils.whitespaceBefore(aBrace.getColumnNo(), braceLine)) {
                 log(aBrace.getLineNo(), aBrace.getColumnNo(),
-                    "line.new", "{");
+                        MSG_KEY_LINE_NEW, "{");
             }
         }
         else if (getAbstractOption() == LeftCurlyOption.EOL) {
@@ -33,10 +33,10 @@
                 && ((prevLineLen + 2) <= mMaxLineLength))
             {
                 log(aBrace.getLineNo(), aBrace.getColumnNo(),
-                    "line.previous", "{");
+                        MSG_KEY_LINE_PREVIOUS, "{");
             }
             if (!hasLineBreakAfter(aBrace)) {
-                log(aBrace.getLineNo(), aBrace.getColumnNo(), "line.break.after");
+                log(aBrace.getLineNo(), aBrace.getColumnNo(), MSG_KEY_LINE_BREAK_AFTER);
             }
         }
         else if (getAbstractOption() == LeftCurlyOption.NLOW) {
@@ -46,16 +46,16 @@
             else if ((aStartToken.getLineNo() + 1) == aBrace.getLineNo()) {
                 if (!Utils.whitespaceBefore(aBrace.getColumnNo(), braceLine)) {
                     log(aBrace.getLineNo(), aBrace.getColumnNo(),
-                        "line.new", "{");
+                        MSG_KEY_LINE_NEW, "{");
                 }
                 else if ((prevLineLen + 2) <= mMaxLineLength) {
                     log(aBrace.getLineNo(), aBrace.getColumnNo(),
-                        "line.previous", "{");
+                        MSG_KEY_LINE_PREVIOUS, "{");
                 }
             }
             else if (!Utils.whitespaceBefore(aBrace.getColumnNo(), braceLine)) {
                 log(aBrace.getLineNo(), aBrace.getColumnNo(),
-                    "line.new", "{");
+                    MSG_KEY_LINE_NEW, "{");
             }
         }
     }

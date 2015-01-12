@@ -8,10 +8,10 @@
                 + "LITERAL_FINALLY, LITERAL_DO, LITERAL_IF,"
                 + "LITERAL_ELSE, INSTANCE_INIT, STATIC_INIT, LITERAL_SWITCH");
         final String[] expected = {
-            "16:29: Empty if block.",
-            "19:42: Empty if block.",
-            "22:29: Empty if block.",
-            "23:28: Empty switch block.",
+            "16:29: " + getCheckMessage(MSG_KEY_BLOCK_EMPTY, "if"),
+            "19:42: " + getCheckMessage(MSG_KEY_BLOCK_EMPTY, "if"),
+            "22:29: " + getCheckMessage(MSG_KEY_BLOCK_EMPTY, "if"),
+            "23:28: " + getCheckMessage(MSG_KEY_BLOCK_EMPTY, "switch"),
         };
         verify(checkConfig, getPath("InputSemantic2.java"), expected);
     }

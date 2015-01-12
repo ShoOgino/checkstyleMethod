@@ -3,17 +3,17 @@
     {
         mCheckConfig.addAttribute("option", LeftCurlyOption.NLOW.toString());
         final String[] expected = {
-            "8:1: '{' should be on the previous line.",
-            "12:5: '{' should be on the previous line.",
-            "21:5: '{' should be on the previous line.",
-            "30:5: '{' should be on the previous line.",
-            "39:5: '{' should be on the previous line.",
-            "49:14: '{' should be on a new line.",
-            "53:14: '{' should be on a new line.",
-            "58:18: '{' should be on a new line.",
-            "62:18: '{' should be on a new line.",
-            "67:12: '{' should be on a new line.",
-            "72:18: '{' should be on a new line.",
+            "8:1: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "12:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "21:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "30:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "39:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{"),
+            "49:14: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
+            "53:14: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
+            "58:18: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
+            "62:18: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
+            "67:12: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
+            "72:18: " + getCheckMessage(MSG_KEY_LINE_NEW, "{"),
         };
         verify(mCheckConfig, getPath("InputScopeInnerInterfaces.java"), expected);
     }

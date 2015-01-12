@@ -5,9 +5,9 @@
         mCheckConfig.addAttribute("tokens", "LITERAL_FOR,"
                 + "LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT");
         final String[] expected = {
-            "35:43: '}' should be alone on a line.",
-            "41:71: '}' should be alone on a line.",
-            "47:25: '}' should be alone on a line.",
+            "35:43: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}"),
+            "41:71: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}"),
+            "47:25: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}"),
         };
         verify(mCheckConfig, getPath("InputRightCurlyLineBreakBefore.java"), expected);
     }

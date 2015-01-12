@@ -5,8 +5,8 @@
             createCheckConfig(NeedBracesCheck.class);
         checkConfig.addAttribute("allowSingleLineIf", "true");
         final String[] expected = {
-            "23: 'if' construct must use '{}'s." ,
-            "29: 'if' construct must use '{}'s." ,
+            "23: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
+            "29: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
         };
         verify(checkConfig, getPath("InputBracesSingleLineIfBlock.java"), expected);
     }
