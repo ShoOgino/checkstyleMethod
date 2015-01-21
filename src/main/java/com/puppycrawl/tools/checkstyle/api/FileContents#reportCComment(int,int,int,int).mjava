@@ -14,14 +14,14 @@
                 endColNo);
 
         // save the comment
-        if (cComments.containsKey(startLineNo)) {
-            final List<TextBlock> entries = cComments.get(startLineNo);
+        if (clangComments.containsKey(startLineNo)) {
+            final List<TextBlock> entries = clangComments.get(startLineNo);
             entries.add(comment);
         }
         else {
             final List<TextBlock> entries = Lists.newArrayList();
             entries.add(comment);
-            cComments.put(startLineNo, entries);
+            clangComments.put(startLineNo, entries);
         }
 
         // Remember if possible Javadoc comment
