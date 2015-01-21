@@ -16,6 +16,9 @@
 
         // Process each file
         for (final File f : files) {
+            if (!fileExtensionMatches(f, fileExtensions)) {
+                continue;
+            }
             final String fileName = f.getAbsolutePath();
             fireFileStarted(fileName);
             final SortedSet<LocalizedMessage> fileMessages = Sets.newTreeSet();

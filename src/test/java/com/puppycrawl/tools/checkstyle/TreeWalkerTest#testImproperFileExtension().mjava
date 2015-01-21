@@ -1,0 +1,17 @@
+    @Test
+    public void testImproperFileExtension() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(ConstantNameCheck.class);
+        final File file = File.createTempFile("file", ".pdf");
+        final String content = "public class Main { public static final int k = 5 + 4; }";
+        final BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(content);
+        writer.close();
+        final String[] expected = {
+
+        };
+        verify(checkConfig, file.getCanonicalPath(), expected);
+        file.delete();
+    }
+

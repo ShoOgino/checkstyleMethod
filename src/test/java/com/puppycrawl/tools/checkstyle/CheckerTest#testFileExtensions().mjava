@@ -1,0 +1,15 @@
+    @Test
+    public void testFileExtensions() throws Exception
+    {
+        final Checker c = new Checker();
+        final List<File> files = new ArrayList<>();
+        File f = new File("file.pdf");
+        files.add(f);
+        f = new File("file.java");
+        files.add(f);
+        final String[] fileExtensions = {"java", "xml", "properties"};
+        c.setFileExtensions(fileExtensions);
+        final int counter = c.process(files);
+        assertEquals(counter, 1); // comparing to 1 as there is only one legal file in input
+    }
+

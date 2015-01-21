@@ -4,7 +4,9 @@
         // check if already checked and passed the file
         final String fileName = file.getPath();
         final long timestamp = file.lastModified();
-        if (cache.alreadyChecked(fileName, timestamp)) {
+        if (cache.alreadyChecked(fileName, timestamp)
+                 || !fileExtensionMatches(file, fileExtensions))
+        {
             return;
         }
 
