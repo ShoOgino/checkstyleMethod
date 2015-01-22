@@ -17,23 +17,23 @@
                 if (nextAST != null) {
                     final int nextType = nextAST.getType();
                     switch (nextType) {
-                    case TokenTypes.EXPR:
-                    case TokenTypes.ANNOTATION_ARRAY_INIT:
-                        values = getAnnotationValues(nextAST);
-                        break;
+                        case TokenTypes.EXPR:
+                        case TokenTypes.ANNOTATION_ARRAY_INIT:
+                            values = getAnnotationValues(nextAST);
+                            break;
 
-                    case TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR:
-                        // expected children: IDENT ASSIGN ( EXPR |
-                        // ANNOTATION_ARRAY_INIT )
-                        values = getAnnotationValues(getNthChild(nextAST, 2));
-                        break;
+                        case TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR:
+                            // expected children: IDENT ASSIGN ( EXPR |
+                            // ANNOTATION_ARRAY_INIT )
+                            values = getAnnotationValues(getNthChild(nextAST, 2));
+                            break;
 
-                    case TokenTypes.RPAREN:
-                        // no value present (not valid Java)
-                        break;
+                        case TokenTypes.RPAREN:
+                            // no value present (not valid Java)
+                            break;
 
-                    default:
-                        // unknown annotation value type (new syntax?)
+                        default:
+                            // unknown annotation value type (new syntax?)
                     }
                 }
             }
@@ -47,32 +47,32 @@
             DetailAST parentAST = ast.getParent();
             if (parentAST != null) {
                 switch (parentAST.getType()) {
-                case TokenTypes.MODIFIERS:
-                case TokenTypes.ANNOTATIONS:
-                    parentAST = parentAST.getParent();
-                    if (parentAST != null) {
-                        switch (parentAST.getType()) {
-                        case TokenTypes.ANNOTATION_DEF:
-                        case TokenTypes.PACKAGE_DEF:
-                        case TokenTypes.CLASS_DEF:
-                        case TokenTypes.INTERFACE_DEF:
-                        case TokenTypes.ENUM_DEF:
-                        case TokenTypes.ENUM_CONSTANT_DEF:
-                        case TokenTypes.CTOR_DEF:
-                        case TokenTypes.METHOD_DEF:
-                        case TokenTypes.PARAMETER_DEF:
-                        case TokenTypes.VARIABLE_DEF:
-                            targetAST = parentAST;
-                            break;
+                    case TokenTypes.MODIFIERS:
+                    case TokenTypes.ANNOTATIONS:
+                        parentAST = parentAST.getParent();
+                        if (parentAST != null) {
+                            switch (parentAST.getType()) {
+                                case TokenTypes.ANNOTATION_DEF:
+                                case TokenTypes.PACKAGE_DEF:
+                                case TokenTypes.CLASS_DEF:
+                                case TokenTypes.INTERFACE_DEF:
+                                case TokenTypes.ENUM_DEF:
+                                case TokenTypes.ENUM_CONSTANT_DEF:
+                                case TokenTypes.CTOR_DEF:
+                                case TokenTypes.METHOD_DEF:
+                                case TokenTypes.PARAMETER_DEF:
+                                case TokenTypes.VARIABLE_DEF:
+                                    targetAST = parentAST;
+                                    break;
 
-                        default:
-                            // unexpected target type
+                                default:
+                                    // unexpected target type
+                            }
                         }
-                    }
-                    break;
+                        break;
 
-                default:
-                    // unexpected container type
+                    default:
+                        // unexpected container type
                 }
             }
             if (targetAST == null) {

@@ -8,21 +8,21 @@
     private static List<String> getAnnotationValues(DetailAST ast)
     {
         switch (ast.getType()) {
-        case TokenTypes.EXPR:
-            return ImmutableList.of(getStringExpr(ast));
+            case TokenTypes.EXPR:
+                return ImmutableList.of(getStringExpr(ast));
 
-        case TokenTypes.ANNOTATION_ARRAY_INIT:
-            final List<String> valueList = Lists.newLinkedList();
-            DetailAST childAST = ast.getFirstChild();
-            while (childAST != null) {
-                if (childAST.getType() == TokenTypes.EXPR) {
-                    valueList.add(getStringExpr(childAST));
+            case TokenTypes.ANNOTATION_ARRAY_INIT:
+                final List<String> valueList = Lists.newLinkedList();
+                DetailAST childAST = ast.getFirstChild();
+                while (childAST != null) {
+                    if (childAST.getType() == TokenTypes.EXPR) {
+                        valueList.add(getStringExpr(childAST));
+                    }
+                    childAST = childAST.getNextSibling();
                 }
-                childAST = childAST.getNextSibling();
-            }
-            return valueList;
+                return valueList;
 
-        default:
+            default:
         }
         throw new IllegalArgumentException(
             "Expression or annotation array initializer AST expected: " + ast);

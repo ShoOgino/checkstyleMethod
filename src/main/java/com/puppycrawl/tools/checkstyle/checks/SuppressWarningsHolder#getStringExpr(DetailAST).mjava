@@ -9,15 +9,15 @@
         if (ast != null && ast.getType() == TokenTypes.EXPR) {
             final DetailAST firstChild = ast.getFirstChild();
             switch (firstChild.getType()) {
-            case TokenTypes.STRING_LITERAL:
-                // NOTE: escaped characters are not unescaped
-                final String quotedText = firstChild.getText();
-                return quotedText.substring(1, quotedText.length() - 1);
-            case TokenTypes.IDENT:
-                return firstChild.getText();
-            default:
-                throw new IllegalArgumentException("String literal AST expected: "
-                        + firstChild);
+                case TokenTypes.STRING_LITERAL:
+                    // NOTE: escaped characters are not unescaped
+                    final String quotedText = firstChild.getText();
+                    return quotedText.substring(1, quotedText.length() - 1);
+                case TokenTypes.IDENT:
+                    return firstChild.getText();
+                default:
+                    throw new IllegalArgumentException("String literal AST expected: "
+                            + firstChild);
             }
         }
         throw new IllegalArgumentException("Expression AST expected: " + ast);
