@@ -2,22 +2,22 @@
     public void visitToken(DetailAST ast)
     {
         switch (ast.getType()) {
-        case TokenTypes.CTOR_DEF:
-        case TokenTypes.METHOD_DEF:
-            visitMethodDef(ast);
-            break;
-        case TokenTypes.EXPR:
-            visitExpr();
-            break;
-        case TokenTypes.LAND:
-        case TokenTypes.BAND:
-        case TokenTypes.LOR:
-        case TokenTypes.BOR:
-        case TokenTypes.BXOR:
-            context.visitBooleanOperator();
-            break;
-        default:
-            throw new IllegalStateException(ast.toString());
+            case TokenTypes.CTOR_DEF:
+            case TokenTypes.METHOD_DEF:
+                visitMethodDef(ast);
+                break;
+            case TokenTypes.EXPR:
+                visitExpr();
+                break;
+            case TokenTypes.LAND:
+            case TokenTypes.BAND:
+            case TokenTypes.LOR:
+            case TokenTypes.BOR:
+            case TokenTypes.BXOR:
+                context.visitBooleanOperator();
+                break;
+            default:
+                throw new IllegalStateException(ast.toString());
         }
     }
 
