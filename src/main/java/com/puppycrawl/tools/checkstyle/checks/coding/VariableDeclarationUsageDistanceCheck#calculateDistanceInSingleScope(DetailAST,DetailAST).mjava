@@ -24,32 +24,32 @@
                 if (isChild(currentAst, variableIdentAst)) {
 
                     switch (currentAst.getType()) {
-                    case TokenTypes.VARIABLE_DEF:
-                        dist++;
-                        break;
-                    case TokenTypes.SLIST:
-                        dist = 0;
-                        break;
-                    case TokenTypes.LITERAL_FOR:
-                    case TokenTypes.LITERAL_WHILE:
-                    case TokenTypes.LITERAL_DO:
-                    case TokenTypes.LITERAL_IF:
-                    case TokenTypes.LITERAL_SWITCH:
-                        if (isVariableInOperatorExpr(currentAst, variableIdentAst)) {
+                        case TokenTypes.VARIABLE_DEF:
                             dist++;
-                        }
-                        else { // variable usage is in inner scope
-                            // reset counters, because we can't determine distance
+                            break;
+                        case TokenTypes.SLIST:
                             dist = 0;
-                        }
-                        break;
-                    default:
-                        if (currentAst.branchContains(TokenTypes.SLIST)) {
-                            dist = 0;
-                        }
-                        else {
-                            dist++;
-                        }
+                            break;
+                        case TokenTypes.LITERAL_FOR:
+                        case TokenTypes.LITERAL_WHILE:
+                        case TokenTypes.LITERAL_DO:
+                        case TokenTypes.LITERAL_IF:
+                        case TokenTypes.LITERAL_SWITCH:
+                            if (isVariableInOperatorExpr(currentAst, variableIdentAst)) {
+                                dist++;
+                            }
+                            else { // variable usage is in inner scope
+                                // reset counters, because we can't determine distance
+                                dist = 0;
+                            }
+                            break;
+                        default:
+                            if (currentAst.branchContains(TokenTypes.SLIST)) {
+                                dist = 0;
+                            }
+                            else {
+                                dist++;
+                            }
                     }
                     variableUsageAst = currentAst;
                     firstUsageFound = true;

@@ -4,21 +4,21 @@
         super.leaveToken(ast);
 
         switch (ast.getType()) {
-        case TokenTypes.OBJBLOCK:
-        case TokenTypes.SLIST:
-        case TokenTypes.LITERAL_FOR:
-        case TokenTypes.CTOR_DEF:
-        case TokenTypes.STATIC_INIT:
-        case TokenTypes.INSTANCE_INIT:
-        case TokenTypes.METHOD_DEF:
-            final Map<String, DetailAST> state = scopeStack.pop();
-            for (DetailAST var : state.values()) {
-                log(var.getLineNo(), var.getColumnNo(), "final.variable", var
+            case TokenTypes.OBJBLOCK:
+            case TokenTypes.SLIST:
+            case TokenTypes.LITERAL_FOR:
+            case TokenTypes.CTOR_DEF:
+            case TokenTypes.STATIC_INIT:
+            case TokenTypes.INSTANCE_INIT:
+            case TokenTypes.METHOD_DEF:
+                final Map<String, DetailAST> state = scopeStack.pop();
+                for (DetailAST var : state.values()) {
+                    log(var.getLineNo(), var.getColumnNo(), "final.variable", var
                         .getText());
-            }
-            break;
+                }
+                break;
 
-        default:
+            default:
         }
     }
 

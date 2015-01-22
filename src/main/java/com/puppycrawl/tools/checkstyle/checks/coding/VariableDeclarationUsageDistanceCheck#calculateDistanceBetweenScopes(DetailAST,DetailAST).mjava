@@ -42,30 +42,31 @@
                         .get(0);
                 DetailAST exprWithVariableUsage = null;
                 switch (blockWithVariableUsage.getType()) {
-                case TokenTypes.VARIABLE_DEF:
-                case TokenTypes.EXPR:
-                    dist++;
-                    break;
-                case TokenTypes.LITERAL_FOR:
-                case TokenTypes.LITERAL_WHILE:
-                case TokenTypes.LITERAL_DO:
-                    exprWithVariableUsage = getFirstNodeInsideForWhileDoWhileBlocks(
+                    case TokenTypes.VARIABLE_DEF:
+                    case TokenTypes.EXPR:
+                        dist++;
+                        break;
+                    case TokenTypes.LITERAL_FOR:
+                    case TokenTypes.LITERAL_WHILE:
+                    case TokenTypes.LITERAL_DO:
+                        exprWithVariableUsage = getFirstNodeInsideForWhileDoWhileBlocks(
                             blockWithVariableUsage, variable);
-                    break;
-                case TokenTypes.LITERAL_IF:
-                    exprWithVariableUsage = getFirstNodeInsideIfBlock(
+                        break;
+                    case TokenTypes.LITERAL_IF:
+                        exprWithVariableUsage = getFirstNodeInsideIfBlock(
                             blockWithVariableUsage, variable);
-                    break;
-                case TokenTypes.LITERAL_SWITCH:
-                    exprWithVariableUsage = getFirstNodeInsideSwitchBlock(
+                        break;
+                    case TokenTypes.LITERAL_SWITCH:
+                        exprWithVariableUsage = getFirstNodeInsideSwitchBlock(
                             blockWithVariableUsage, variable);
-                    break;
-                case TokenTypes.LITERAL_TRY:
-                    exprWithVariableUsage =
-                        getFirstNodeInsideTryCatchFinallyBlocks(blockWithVariableUsage, variable);
-                    break;
-                default:
-                    exprWithVariableUsage = blockWithVariableUsage.getFirstChild();
+                        break;
+                    case TokenTypes.LITERAL_TRY:
+                        exprWithVariableUsage =
+                            getFirstNodeInsideTryCatchFinallyBlocks(blockWithVariableUsage,
+                                variable);
+                        break;
+                    default:
+                        exprWithVariableUsage = blockWithVariableUsage.getFirstChild();
                 }
                 currentScopeAst = exprWithVariableUsage;
                 if (exprWithVariableUsage != null) {

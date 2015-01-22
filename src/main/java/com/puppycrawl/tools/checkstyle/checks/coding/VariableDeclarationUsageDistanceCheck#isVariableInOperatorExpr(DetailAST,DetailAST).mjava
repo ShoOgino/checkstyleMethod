@@ -38,48 +38,48 @@
             // So, check variable usage in these declarations.
             if (!isVarInOperatorDeclr) {
                 switch (operator.getType()) {
-                case TokenTypes.LITERAL_IF:
-                    final DetailAST elseBlock = operator.getLastChild();
+                    case TokenTypes.LITERAL_IF:
+                        final DetailAST elseBlock = operator.getLastChild();
 
-                    if (elseBlock.getType() == TokenTypes.LITERAL_ELSE) {
-                        // Get IF followed by ELSE
-                        final DetailAST firstNodeInsideElseBlock = elseBlock
+                        if (elseBlock.getType() == TokenTypes.LITERAL_ELSE) {
+                            // Get IF followed by ELSE
+                            final DetailAST firstNodeInsideElseBlock = elseBlock
                                 .getFirstChild();
 
-                        if (firstNodeInsideElseBlock.getType()
+                            if (firstNodeInsideElseBlock.getType()
                                 == TokenTypes.LITERAL_IF)
-                        {
-                            isVarInOperatorDeclr |=
+                            {
+                                isVarInOperatorDeclr |=
                                     isVariableInOperatorExpr(
-                                            firstNodeInsideElseBlock,
+                                        firstNodeInsideElseBlock,
                                             variable);
+                            }
                         }
-                    }
-                    break;
+                        break;
 
-                case TokenTypes.LITERAL_SWITCH:
-                    DetailAST currentCaseBlock = operator
+                    case TokenTypes.LITERAL_SWITCH:
+                        DetailAST currentCaseBlock = operator
                             .findFirstToken(TokenTypes.CASE_GROUP);
 
-                    while (currentCaseBlock != null
+                        while (currentCaseBlock != null
                             && currentCaseBlock.getType()
                             == TokenTypes.CASE_GROUP)
-                    {
-                        final DetailAST firstNodeInsideCaseBlock =
+                        {
+                            final DetailAST firstNodeInsideCaseBlock =
                                 currentCaseBlock.getFirstChild();
 
-                        if (isChild(firstNodeInsideCaseBlock,
+                            if (isChild(firstNodeInsideCaseBlock,
                                 variable))
-                        {
-                            isVarInOperatorDeclr = true;
-                            break;
+                            {
+                                isVarInOperatorDeclr = true;
+                                break;
+                            }
+                            currentCaseBlock = currentCaseBlock.getNextSibling();
                         }
-                        currentCaseBlock = currentCaseBlock.getNextSibling();
-                    }
-                    break;
+                        break;
 
-                default:
-                    ;// no code
+                    default:
+                        ;// no code
                 }
             }
         }
