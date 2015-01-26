@@ -1,0 +1,17 @@
+    @Test
+    public void testThirdPartyAndSpecialImports() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(CustomImportOrderCheck.class);
+        checkConfig.addAttribute("specialImportsRegExp", "antlr.*");
+        checkConfig.addAttribute("customImportOrderRules",
+                "SAME_PACKAGE(3)###THIRD_PARTY_PACKAGE###STATIC###"
+                + "SPECIAL_IMPORTS");
+        final String[] expected = {
+            "11: Import statement is in the wrong order. Should be in the 'THIRD_PARTY_PACKAGE' group.",
+        };
+
+        verify(checkConfig, getPath("imports" + File.separator
+                + "InputCustomImportOrderThirdPartyAndSpecial.java"), expected);
+    }
+
