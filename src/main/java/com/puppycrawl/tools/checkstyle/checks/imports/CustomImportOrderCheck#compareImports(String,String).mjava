@@ -1,0 +1,29 @@
+    /**
+     * Checks compare two import paths.
+     * @param import1
+     *        current import.
+     * @param import2
+     *        previous import.
+     * @return a negative integer, zero, or a positive integer as the
+     *        specified String is greater than, equal to, or less
+     *        than this String, ignoring case considerations.
+     */
+    private static int compareImports(String import1, String import2)
+    {
+        int result = 0;
+        final String[] import1Tokens = import1.split("\\.");
+        final String[] import2Tokens = import2.split("\\.");
+        for (int i = 0; i < import1Tokens.length; i++) {
+            if (i == import2Tokens.length) {
+                break;
+            }
+            final String import1Token = import1Tokens[i];
+            final String import2Token = import2Tokens[i];
+            result = import1Token.compareToIgnoreCase(import2Token);
+            if (result != 0) {
+                break;
+            }
+        }
+        return result;
+    }
+
