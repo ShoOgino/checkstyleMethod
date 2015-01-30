@@ -1,0 +1,13 @@
+    /**
+     * Set the list of member modifiers (of methods and fields) which should be checked.
+     * @param modifiers String contains modifiers.
+     */
+    public void setMemberModifiers(String modifiers)
+    {
+        final List<Integer> modifiersList = new ArrayList<Integer>(modifiers.length());
+        for (String modifier : modifiers.split(", ")) {
+            modifiersList.add(TokenTypes.getTokenId(modifier));
+        }
+        this.memberModifiers = modifiersList;
+    }
+

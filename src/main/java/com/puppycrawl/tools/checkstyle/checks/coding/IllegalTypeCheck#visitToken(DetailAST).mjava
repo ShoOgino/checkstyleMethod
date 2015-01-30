@@ -3,10 +3,14 @@
     {
         switch (ast.getType()) {
             case TokenTypes.METHOD_DEF:
-                visitMethodDef(ast);
+                if (isVerifiable(ast)) {
+                    visitMethodDef(ast);
+                }
                 break;
             case TokenTypes.VARIABLE_DEF:
-                visitVariableDef(ast);
+                if (isVerifiable(ast)) {
+                    visitVariableDef(ast);
+                }
                 break;
             case TokenTypes.PARAMETER_DEF:
                 visitParameterDef(ast);
