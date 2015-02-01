@@ -1,0 +1,14 @@
+    /**
+     * Checks if a token has empty pre-previous line.
+     * @param token DetailAST token.
+     * @return true, if token has empty lines before.
+     */
+    private boolean isPrePreviousLineEmpty(DetailAST token)
+    {
+        final int lineNo = token.getLineNo();
+        // 3 is the number of the pre-previous line because the numbering starts from zero.
+        final int number = 3;
+        final String prePreviousLine = getLines()[lineNo - number];
+        return prePreviousLine.trim().isEmpty();
+    }
+
