@@ -1,0 +1,27 @@
+    /**
+     * Gets the first line of comment in catch block. If comment is single-line -
+     *  returns it fully, else if comment is multi-line - returns the first line.
+     * @param catchAst {@link TokenTypes#LITERAL_CATCH LITERAL_CATCH}
+     * @return the first line of comment in catch block, "" if no comment was found.
+     */
+    private static String getCommentFirstLine(DetailAST catchAst)
+    {
+        final DetailAST slistToken = catchAst.getLastChild();
+        final DetailAST firstElementInBlock = slistToken.getFirstChild();
+        String commentContent = "";
+        if (firstElementInBlock.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+            commentContent = firstElementInBlock.getFirstChild().getText();
+        }
+        else if (firstElementInBlock.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
+            commentContent = firstElementInBlock.getFirstChild().getText();
+            final String[] lines = commentContent.split(System.getProperty("line.separator"));
+            for (int i = 0; i < lines.length; i++) {
+                if (!lines[i].isEmpty()) {
+                    commentContent = lines[i];
+                    break;
+                }
+            }
+        }
+        return commentContent;
+    }
+

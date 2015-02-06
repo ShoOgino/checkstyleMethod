@@ -1,0 +1,17 @@
+    /**
+     * Checks if current empty catch block is verifiable according to Check's options
+     *  (exception's variable name and comment format are both in consideration).
+     * @param emptyCatchAst empty catch {@link TokenTypes#LITERAL_CATCH LITERAL_CATCH} block.
+     * @param commentContent text of comment.
+     * @return true if empty catch block is verifiable by Check.
+     */
+    private boolean isVerifiable(DetailAST emptyCatchAst, String commentContent)
+    {
+        final String exceptionVariableName = getExceptionVariableName(emptyCatchAst);
+        final boolean isMatchingVariableName = variableNameRegexp.
+                matcher(exceptionVariableName).find();
+        final boolean isMatchingCommentContent = !commentContent.isEmpty()
+                 && commentRegexp.matcher(commentContent).find();
+        return !isMatchingVariableName && !isMatchingCommentContent;
+    }
+

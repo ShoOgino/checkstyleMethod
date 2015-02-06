@@ -1,0 +1,12 @@
+    @Test
+    public void testDefault() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(EmptyCatchBlockCheck.class);
+        final String[] expected = {
+            "35: Empty catch block.",
+            "42: Empty catch block.",
+        };
+        verify(checkConfig, getPath("InputEmptyCatchBlockCheck.java"), expected);
+    }
+
