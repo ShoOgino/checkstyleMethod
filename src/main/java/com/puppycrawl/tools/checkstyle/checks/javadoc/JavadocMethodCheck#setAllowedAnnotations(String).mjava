@@ -5,9 +5,7 @@
     public void setAllowedAnnotations(String userAnnotations)
     {
         final List<String> annotations = new ArrayList<String>();
-        for (String annotation : userAnnotations.split(", ")) {
-            annotations.add(annotation);
-        }
+        Collections.addAll(annotations, userAnnotations.split(", "));
         allowedAnnotations = annotations;
     }
 
