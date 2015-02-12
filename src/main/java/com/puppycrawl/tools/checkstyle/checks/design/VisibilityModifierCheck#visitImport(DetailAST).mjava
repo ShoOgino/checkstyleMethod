@@ -1,0 +1,24 @@
+    /**
+     * Checks imported type. If type's canonical name was not specified in
+     * <b>immutableClassCanonicalNames</b>, but it's short name collides with one from
+     * <b>immutableClassShortNames</b> - removes it from the last one.
+     * @param importAst {@link TokenTypes#IMPORT Import}
+     */
+    private void visitImport(DetailAST importAst)
+    {
+        if (!isStarImport(importAst)) {
+            final DetailAST type = importAst.getFirstChild();
+            final String canonicalName = getCanonicalName(type);
+            final String shortName = getClassShortName(canonicalName);
+
+            // If imported canonical class name is not specified as allowed immutable class,
+            // but its short name collides with one of specified class - removes the short name
+            // from list to avoid names collision
+            if (!immutableClassCanonicalNames.contains(canonicalName)
+                     && immutableClassShortNames.contains(shortName))
+            {
+                immutableClassShortNames.remove(shortName);
+            }
+        }
+    }
+

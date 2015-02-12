@@ -1,0 +1,11 @@
+    @Test
+    public void testImmutableStarImportFalseNegative() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(VisibilityModifierCheck.class);
+        checkConfig.addAttribute("immutableClassNames", "java.util.Arrays");
+        final String[] expected = {
+        };
+        verify(checkConfig, getPath("InputImmutableStarImport.java"), expected);
+    }
+

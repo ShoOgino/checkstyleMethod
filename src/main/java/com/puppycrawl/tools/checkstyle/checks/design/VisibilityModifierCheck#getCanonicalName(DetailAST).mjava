@@ -1,0 +1,23 @@
+    /**
+     * Gets canonical type's name from given {@link TokenTypes#TYPE TYPE} node.
+     * @param type DetailAST {@link TokenTypes#TYPE TYPE} node.
+     * @return canonical type's name
+     */
+    private static String getCanonicalName(DetailAST type)
+    {
+        final StringBuilder canonicalNameBuilder = new StringBuilder();
+        DetailAST toVisit = type.getFirstChild();
+        while (toVisit != null) {
+            toVisit = getNextSubTreeNode(toVisit, type);
+            if (toVisit != null && toVisit.getType() == TokenTypes.IDENT) {
+                canonicalNameBuilder.append(toVisit.getText());
+                final DetailAST nextSubTreeNode = getNextSubTreeNode(toVisit,
+                         type);
+                if (nextSubTreeNode != null && nextSubTreeNode.getType() != TokenTypes.SEMI) {
+                    canonicalNameBuilder.append('.');
+                }
+            }
+        }
+        return canonicalNameBuilder.toString();
+    }
+

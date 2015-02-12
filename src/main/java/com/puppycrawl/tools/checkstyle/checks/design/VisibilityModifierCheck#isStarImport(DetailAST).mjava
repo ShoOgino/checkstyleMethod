@@ -1,0 +1,24 @@
+    /**
+     * Checks if current import is star import. E.g.:
+     * <p>
+     * <code>
+     * import java.util.*;
+     * </code>
+     * </p>
+     * @param importAst {@link TokenTypes#IMPORT Import}
+     * @return true if it is star import
+     */
+    private static boolean isStarImport(DetailAST importAst)
+    {
+        boolean result = false;
+        DetailAST toVisit = importAst;
+        while (toVisit != null) {
+            toVisit = getNextSubTreeNode(toVisit, importAst);
+            if (toVisit != null && toVisit.getType() == TokenTypes.STAR) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+

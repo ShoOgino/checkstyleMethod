@@ -1,0 +1,20 @@
+    /**
+     * Checks access modifier of given variable.
+     * If it is not proper according to Check - puts violation on it.
+     * @param variableDef variable to check.
+     */
+    private void visitVariableDef(DetailAST variableDef)
+    {
+        final boolean inInterfaceOrAnnotationBlock =
+                ScopeUtils.inInterfaceOrAnnotationBlock(variableDef);
+
+        if (!inInterfaceOrAnnotationBlock) {
+            final DetailAST varNameAST = getVarNameAST(variableDef);
+            final String varName = varNameAST.getText();
+            if (!hasProperAccessModifier(variableDef, varName)) {
+                log(varNameAST.getLineNo(), varNameAST.getColumnNo(),
+                        MSG_KEY, varName);
+            }
+        }
+    }
+

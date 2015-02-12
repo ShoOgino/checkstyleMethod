@@ -1,21 +1,20 @@
     /**
-     * Returns the set of modifier Strings for a VARIABLE_DEF AST.
-     * @param variableDefAST AST for a vraiable definition
-     * @return the set of modifier Strings for variableDefAST
+     * Returns the set of modifier Strings for a VARIABLE_DEF or CLASS_DEF AST.
+     * @param defAST AST for a variable or class definition.
+     * @return the set of modifier Strings for defAST.
      */
-    private Set<String> getModifiers(DetailAST variableDefAST)
+    private static Set<String> getModifiers(DetailAST defAST)
     {
-        final AST modifiersAST = variableDefAST.getFirstChild();
-        if (modifiersAST.getType() != TokenTypes.MODIFIERS) {
-            throw new IllegalStateException("Strange parse tree");
+        final AST modifiersAST = defAST.findFirstToken(TokenTypes.MODIFIERS);
+        final Set<String> modifiersSet = new HashSet<>();
+        if (modifiersAST != null) {
+            AST modifier = modifiersAST.getFirstChild();
+            while (modifier != null) {
+                modifiersSet.add(modifier.getText());
+                modifier = modifier.getNextSibling();
+            }
         }
-        final Set<String> retVal = Sets.newHashSet();
-        AST modifier = modifiersAST.getFirstChild();
-        while (modifier != null) {
-            retVal.add(modifier.getText());
-            modifier = modifier.getNextSibling();
-        }
-        return retVal;
+        return modifiersSet;
 
     }
 

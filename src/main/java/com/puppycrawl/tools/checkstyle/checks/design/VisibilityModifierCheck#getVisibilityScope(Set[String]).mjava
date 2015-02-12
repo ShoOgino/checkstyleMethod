@@ -3,14 +3,15 @@
      * @param modifiers the set of modifier Strings
      * @return one of "public", "private", "protected", "package"
      */
-    private String getVisibilityScope(Set<String> modifiers)
+    private static String getVisibilityScope(Set<String> modifiers)
     {
-        final String[] explicitModifiers = {"public", "private", "protected"};
-        for (final String candidate : explicitModifiers) {
-            if (modifiers.contains(candidate)) {
-                return candidate;
+        String accessModifier = "package";
+        for (final String modifier : EXPLICIT_MODS) {
+            if (modifiers.contains(modifier)) {
+                accessModifier = modifier;
+                break;
             }
         }
-        return "package";
+        return accessModifier;
     }
 

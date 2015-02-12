@@ -1,0 +1,10 @@
+    /**
+     * Checks if current variable definition is definition of an anonymous class.
+     * @param variableDef {@link TokenTypes#VARIABLE_DEF VARIABLE_DEF}
+     * @return true if current variable definition is definition of an anonymous class.
+     */
+    private static boolean isAnonymousClassVariable(DetailAST variableDef)
+    {
+        return variableDef.getParent().getType() != TokenTypes.OBJBLOCK;
+    }
+

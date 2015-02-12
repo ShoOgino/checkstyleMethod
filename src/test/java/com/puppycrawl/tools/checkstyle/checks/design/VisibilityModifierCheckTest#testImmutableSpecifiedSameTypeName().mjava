@@ -1,0 +1,15 @@
+    @Test
+    public void testImmutableSpecifiedSameTypeName() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(VisibilityModifierCheck.class);
+        checkConfig.addAttribute("immutableClassNames",
+                 "com.puppycrawl.tools.checkstyle.coding.GregorianCalendar,"
+                 + "com.puppycrawl.tools.checkstyle.InetSocketAddress");
+        final String[] expected = {
+            "7:46: " + getCheckMessage(MSG_KEY, "calendar"),
+            "11:45: " + getCheckMessage(MSG_KEY, "adr"),
+        };
+        verify(checkConfig, getPath("InputImmutableSameTypeName.java"), expected);
+    }
+

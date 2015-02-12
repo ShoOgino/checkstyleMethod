@@ -3,16 +3,18 @@
      * @param variableDefAST an AST where type == VARIABLE_DEF AST.
      * @return the variable name in variableDefAST
      */
-    private DetailAST getVarNameAST(DetailAST variableDefAST)
+    private static DetailAST getVarNameAST(DetailAST variableDefAST)
     {
         DetailAST ast = variableDefAST.getFirstChild();
+        DetailAST varNameAst = null;
         while (ast != null) {
             final DetailAST nextSibling = ast.getNextSibling();
             if (ast.getType() == TokenTypes.TYPE) {
-                return nextSibling;
+                varNameAst = nextSibling;
+                break;
             }
             ast = nextSibling;
         }
-        return null;
+        return varNameAst;
     }
 

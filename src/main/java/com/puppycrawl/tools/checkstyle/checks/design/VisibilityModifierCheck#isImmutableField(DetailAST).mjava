@@ -1,0 +1,27 @@
+    /**
+     * Checks if current field is immutable:
+     * has final modifier and either a primitive type or instance of class
+     * known to be immutable (such as String, ImmutableCollection from Guava and etc).
+     * Classes known to be immutable are listed in
+     * {@link VisibilityModifierCheck#immutableClassCanonicalNames}
+     * @param variableDef Field in consideration.
+     * @return true if field is immutable.
+     */
+    private boolean isImmutableField(DetailAST variableDef)
+    {
+        boolean result = false;
+
+        final DetailAST modifiers = variableDef.findFirstToken(TokenTypes.MODIFIERS);
+        final boolean isFinal = modifiers.branchContains(TokenTypes.FINAL);
+        if (isFinal) {
+            final DetailAST type = variableDef.findFirstToken(TokenTypes.TYPE);
+            final boolean isCanonicalName = type.getFirstChild().getType() == TokenTypes.DOT;
+            final String typeName = getTypeName(type, isCanonicalName);
+
+            result = (!isCanonicalName && isPrimitive(type))
+                     || immutableClassShortNames.contains(typeName)
+                     || (isCanonicalName && immutableClassCanonicalNames.contains(typeName));
+        }
+        return result;
+    }
+

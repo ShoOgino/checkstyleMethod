@@ -1,0 +1,30 @@
+    /**
+     * Checks if current variable has proper access modifier according to Check's options.
+     * @param variableDef Variable definition node.
+     * @param variableName Variable's name.
+     * @return true if variable has proper access modifier.
+     */
+    private boolean hasProperAccessModifier(DetailAST variableDef, String variableName)
+    {
+        boolean result = true;
+
+        final Set<String> mods = getModifiers(variableDef);
+        final String variableScope = getVisibilityScope(mods);
+
+        if (!"private".equals(variableScope)) {
+            final DetailAST classDef = variableDef.getParent().getParent();
+            final Set<String> classModifiers = getModifiers(classDef);
+
+            result =
+                (mods.contains("static") && mods.contains("final"))
+                || (isPackageAllowed() && "package".equals(variableScope))
+                || (isProtectedAllowed() && "protected".equals(variableScope))
+                || ("public".equals(variableScope)
+                   && getPublicMemberRegexp().matcher(variableName).find()
+                   || (allowPublicImmutableFields
+                      && classModifiers.contains("final") && isImmutableField(variableDef)));
+        }
+
+        return result;
+    }
+
