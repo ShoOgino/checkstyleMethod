@@ -1,6 +1,7 @@
     @Test
     public void testUnexpectedChar() throws IOException, Exception
     {
+        Assume.assumeFalse(SystemUtils.IS_OS_WINDOWS); // Encoding problems can occur in Windows
         final DefaultConfiguration checkConfig =
             createCheckConfig(MemberNameCheck.class);
         final String[] expected = {
