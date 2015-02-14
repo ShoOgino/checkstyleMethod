@@ -15,7 +15,7 @@
         DetailAST currentScopeAst = ast;
         DetailAST variableUsageAst = null;
         while (currentScopeAst != null) {
-            final List<DetailAST> variableUsageExpressions = new ArrayList<DetailAST>();
+            final List<DetailAST> variableUsageExpressions = new ArrayList<>();
             DetailAST currentStatementAst = currentScopeAst;
             currentScopeAst = null;
             while (currentStatementAst != null
@@ -87,6 +87,6 @@
                 variableUsageAst = null;
             }
         }
-        return new SimpleEntry<DetailAST, Integer>(variableUsageAst, dist);
+        return new SimpleEntry<>(variableUsageAst, dist);
     }
 
