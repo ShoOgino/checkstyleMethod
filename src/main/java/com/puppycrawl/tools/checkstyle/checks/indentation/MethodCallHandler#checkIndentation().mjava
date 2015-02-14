@@ -25,30 +25,8 @@
 
         checkRParen(lparen, rparen);
         final LineWrappingHandler lineWrap =
-            new LineWrappingHandler(getIndentCheck(), getMainAst()) {
-                @Override
-                public DetailAST findLastNode(DetailAST firstNode)
-                {
-                    DetailAST lastNode;
-                    if (getFirstNode().getNextSibling() == null) {
-                        lastNode = getFirstNode().getLastChild();
-                    }
-                    else {
-                        lastNode = getFirstNode().getNextSibling();
-                    }
-                    return lastNode;
-                }
-
-                @Override
-                public int getCurrentIndentation()
-                {
-                    DetailAST curNode = getFirstNode();
-                    while (curNode.getType() != TokenTypes.IDENT) {
-                        curNode = curNode.getFirstChild();
-                    }
-                    return curNode.getColumnNo() + getIndentLevel();
-                }
-            };
+            new LineWrappingHandler(getIndentCheck(), getMainAst(),
+                    getMethodCallLastNode(getMainAst()));
         lineWrap.checkIndentation();
     }
 

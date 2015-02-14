@@ -9,17 +9,8 @@
             checkType();
         }
         final LineWrappingHandler lineWrap =
-            new LineWrappingHandler(getIndentCheck(), getMainAst()) {
-                @Override
-                public DetailAST findLastNode(DetailAST firstNode)
-                {
-                    DetailAST lastNode = getFirstNode().getLastChild();
-                    if (lastNode.getType() != TokenTypes.SEMI) {
-                        lastNode = getFirstNode().getNextSibling();
-                    }
-                    return lastNode;
-                }
-            };
+            new LineWrappingHandler(getIndentCheck(), getMainAst(),
+                getVarDefStatementSemicolon(getMainAst()));
         if (lineWrap.getLastNode() != null && !isArrayDeclaration(getMainAst())) {
             lineWrap.checkIndentation();
         }

@@ -4,13 +4,15 @@
      * @param instance
      *            instance of IndentationCheck.
      * @param firstNode
-     *            root node for current expression..
+     *            root node for current expression.
+     * @param lastNode
+     *            last node for current expression.
      */
-    public LineWrappingHandler(IndentationCheck instance, DetailAST firstNode)
+    public LineWrappingHandler(IndentationCheck instance, DetailAST firstNode, DetailAST lastNode)
     {
         indentCheck = instance;
         this.firstNode = firstNode;
-        lastNode = findLastNode(firstNode);
+        this.lastNode = lastNode;
         indentLevel = indentCheck.getLineWrappingIndentation();
         forceStrictCondition = indentCheck.getForceStrictCondition();
     }

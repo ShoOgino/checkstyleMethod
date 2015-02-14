@@ -4,13 +4,8 @@
         checkModifiers();
 
         final LineWrappingHandler lineWrap =
-            new LineWrappingHandler(getIndentCheck(), getMainAst()) {
-                @Override
-                public DetailAST findLastNode(DetailAST firstNode)
-                {
-                    return firstNode.getLastChild().getPreviousSibling();
-                }
-            };
+            new LineWrappingHandler(getIndentCheck(), getMainAst(),
+                getMethodDefParamRightParen(getMainAst()));
         lineWrap.checkIndentation();
         if (getLCurly() == null) {
             // asbtract method def -- no body
