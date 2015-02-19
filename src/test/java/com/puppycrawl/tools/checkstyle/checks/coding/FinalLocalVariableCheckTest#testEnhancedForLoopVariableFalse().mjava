@@ -1,0 +1,12 @@
+    @Test
+    public void testEnhancedForLoopVariableFalse() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(FinalLocalVariableCheck.class);
+        checkConfig.addAttribute("tokens", "VARIABLE_DEF, PARAMETER_DEF");
+        final String[] expected = {
+            "15:13: " + "Variable 'x' should be declared final.",
+        };
+        verify(checkConfig, getPath("coding/InputFinalLocalVariableEnhancedForLoopVariable.java"), expected);
+    }
+

@@ -1,0 +1,11 @@
+    /**
+     * Determines whether enhanced for-loop variable should be checked or not.
+     * @param ast The ast to compare.
+     * @return true if enhanced for-loop variable should be checked.
+     */
+    private boolean shouldCheckEnhancedForLoopVariable(DetailAST ast)
+    {
+        return validateEnhancedForLoopVariable
+                || ast.getParent().getType() != TokenTypes.FOR_EACH_CLAUSE;
+    }
+
