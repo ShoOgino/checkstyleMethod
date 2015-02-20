@@ -4,10 +4,13 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(ClassTypeParameterNameCheck.class);
+
+        final String pattern = "^[A-Z]$";
+
         final String[] expected = {
-            "5:38: Name 't' must match pattern '^[A-Z]$'.",
-            "13:14: Name 'foo' must match pattern '^[A-Z]$'.",
-            "27:24: Name 'foo' must match pattern '^[A-Z]$'.",
+            "5:38: " + getCheckMessage(MSG_INVALID_PATTERN, "t", pattern),
+            "13:14: " + getCheckMessage(MSG_INVALID_PATTERN, "foo", pattern),
+            "27:24: " + getCheckMessage(MSG_INVALID_PATTERN, "foo", pattern),
         };
         verify(checkConfig, getPath("naming" + File.separator + "InputTypeParameterName.java"), expected);
     }

@@ -4,11 +4,14 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(MemberNameCheck.class);
         checkConfig.addAttribute("format", "^_[a-z]*$");
+
+        final String pattern = "^_[a-z]*$";
+
         final String[] expected = {
-            "5:16: Name 'mPublic' must match pattern '^_[a-z]*$'.",
-            "6:19: Name 'mProtected' must match pattern '^_[a-z]*$'.",
-            "7:9: Name 'mPackage' must match pattern '^_[a-z]*$'.",
-            "8:17: Name 'mPrivate' must match pattern '^_[a-z]*$'.",
+            "5:16: " + getCheckMessage(MSG_INVALID_PATTERN, "mPublic", pattern),
+            "6:19: " + getCheckMessage(MSG_INVALID_PATTERN, "mProtected", pattern),
+            "7:9: " + getCheckMessage(MSG_INVALID_PATTERN, "mPackage", pattern),
+            "8:17: " + getCheckMessage(MSG_INVALID_PATTERN, "mPrivate", pattern),
         };
         verify(checkConfig,
                getPath("naming" + File.separator + "InputMemberName.java"),

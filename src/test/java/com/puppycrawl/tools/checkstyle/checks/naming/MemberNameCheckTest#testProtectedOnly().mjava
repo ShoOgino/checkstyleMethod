@@ -7,8 +7,11 @@
         checkConfig.addAttribute("applyToPublic", "false");
         checkConfig.addAttribute("applyToPackage", "false");
         checkConfig.addAttribute("applyToPrivate", "false");
+
+        final String pattern = "^_[a-z]*$";
+
         final String[] expected = {
-            "6:19: Name 'mProtected' must match pattern '^_[a-z]*$'.",
+            "6:19: " + getCheckMessage(MSG_INVALID_PATTERN, "mProtected", pattern),
         };
         verify(checkConfig,
                getPath("naming" + File.separator + "InputMemberName.java"),

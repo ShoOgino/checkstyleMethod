@@ -6,9 +6,12 @@
             createCheckConfig(LocalVariableNameCheck.class);
         checkConfig.addAttribute("format", "^[a-z]{2,}[a-zA-Z0-9]*$");
         checkConfig.addAttribute("allowOneCharVarInForLoop", "true");
+
+        final String pattern = "^[a-z]{2,}[a-zA-Z0-9]*$";
+
         final String[] expected = {
-            "19:21: Name 'i' must match pattern '^[a-z]{2,}[a-zA-Z0-9]*$'.",
-            "25:17: Name 'Index' must match pattern '^[a-z]{2,}[a-zA-Z0-9]*$'.",
+            "19:21: " + getCheckMessage(MSG_INVALID_PATTERN, "i", pattern),
+            "25:17: " + getCheckMessage(MSG_INVALID_PATTERN, "Index", pattern),
         };
         verify(checkConfig, getPath("InputOneCharInintVarName.java"), expected);
     }

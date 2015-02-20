@@ -4,8 +4,11 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(InterfaceTypeParameterNameCheck.class);
+
+        final String pattern = "^[A-Z]$";
+
         final String[] expected = {
-            "48:15: Name 'Input' must match pattern '^[A-Z]$'.",
+            "48:15: " + getCheckMessage(MSG_INVALID_PATTERN, "Input", pattern),
         };
         verify(checkConfig, getPath("naming" + File.separator + "InputTypeParameterName.java"), expected);
     }

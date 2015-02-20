@@ -4,9 +4,12 @@
     {
         final DefaultConfiguration checkConfig =
             createCheckConfig(ConstantNameCheck.class);
+
+        final String pattern = "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$";
+
         final String[] expected = {
-            "25:29: Name 'badConstant' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
-            "142:30: Name 'BAD__NAME' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+            "25:29: " + getCheckMessage(MSG_INVALID_PATTERN, "badConstant", pattern),
+            "142:30: " + getCheckMessage(MSG_INVALID_PATTERN, "BAD__NAME", pattern),
         };
         verify(checkConfig, getPath("InputSimple.java"), expected);
     }
