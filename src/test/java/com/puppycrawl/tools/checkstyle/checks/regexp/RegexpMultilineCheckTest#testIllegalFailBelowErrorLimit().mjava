@@ -4,9 +4,9 @@
         final String illegal = "^import";
         checkConfig.addAttribute("format", illegal);
         final String[] expected = {
-            "7: Line matches the illegal pattern '" + illegal + "'.",
-            "8: Line matches the illegal pattern '" + illegal + "'.",
-            "9: Line matches the illegal pattern '" + illegal + "'.",
+            "7: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
+            "8: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
+            "9: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
         };
         verify(checkConfig, getPath("InputSemantic.java"), expected);
     }

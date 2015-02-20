@@ -5,10 +5,10 @@
         final String illegal = "\\r";
         checkConfig.addAttribute("format", illegal);
         final String[] expected = {
-            "14: Line matches the illegal pattern '" + illegal + "'.",
-            "16: Line matches the illegal pattern '" + illegal + "'.",
-            "19: Line matches the illegal pattern '" + illegal + "'.",
-            "21: Line matches the illegal pattern '" + illegal + "'.",
+            "14: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
+            "16: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
+            "19: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
+            "21: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
         };
         verify(checkConfig, getPath("InputLineBreaks.java"), expected);
     }
