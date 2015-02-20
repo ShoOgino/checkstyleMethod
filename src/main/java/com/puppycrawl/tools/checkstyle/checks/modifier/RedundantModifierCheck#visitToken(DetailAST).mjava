@@ -13,7 +13,7 @@
                             modifiers.findFirstToken(tokenType);
                     if (null != modifier) {
                         log(modifier.getLineNo(), modifier.getColumnNo(),
-                                "redundantModifier", modifier.getText());
+                                MSG_KEY, modifier.getText());
                     }
                 }
             }
@@ -35,7 +35,7 @@
                     || (type == TokenTypes.FINAL))
                 {
                     log(modifier.getLineNo(), modifier.getColumnNo(),
-                            "redundantModifier", modifier.getText());
+                            MSG_KEY, modifier.getText());
                     break;
                 }
 
@@ -66,7 +66,7 @@
                     final int type = modifier.getType();
                     if (type == TokenTypes.FINAL) {
                         log(modifier.getLineNo(), modifier.getColumnNo(),
-                                "redundantModifier", modifier.getText());
+                                MSG_KEY, modifier.getText());
                         break;
                     }
                     modifier = modifier.getNextSibling();
