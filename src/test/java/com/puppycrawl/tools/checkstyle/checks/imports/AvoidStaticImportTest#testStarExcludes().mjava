@@ -7,8 +7,8 @@
         checkConfig.addAttribute("excludes", "java.io.File.*,sun.net.ftpclient.FtpClient.*");
         // allow the java.io.File.*/sun.net.ftpclient.FtpClient.* star imports
         final String[] expected = {
-            "25: Using a static member import should be avoided - javax.swing.WindowConstants.*.",
-            "26: Using a static member import should be avoided - javax.swing.WindowConstants.*.",
+            "25: " + getCheckMessage(MSG_KEY, "javax.swing.WindowConstants.*"),
+            "26: " + getCheckMessage(MSG_KEY, "javax.swing.WindowConstants.*"),
         };
         verify(checkConfig, getPath("imports" + File.separator + "InputAvoidStaticImportCheck.java"), expected);
     }

@@ -5,8 +5,8 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(IllegalImportCheck.class);
         final String[] expected = {
-            "15:1: Import from illegal package - sun.applet.*.",
-            "28:1: Import from illegal package - sun.*.",
+            "15:1: " + getCheckMessage(MSG_KEY, "sun.applet.*"),
+            "28:1: " + getCheckMessage(MSG_KEY, "sun.*"),
         };
         verify(checkConfig, getPath("imports" + File.separator + "InputIllegalImportCheck.java"),
                 expected);

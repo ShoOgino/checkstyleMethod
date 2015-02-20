@@ -7,8 +7,8 @@
         checkConfig.addAttribute("option", "under");
         final String[] expected = {
             "5: Wrong order for 'java.awt.Dialog' import.",
-            "11: Wrong order for 'java.awt.Button.ABORT' import.",
-            "14: Wrong order for 'java.io.File' import.",
+            "11: " + getCheckMessage(MSG_ORDERING, "java.awt.Button.ABORT"),
+            "14: " + getCheckMessage(MSG_ORDERING, "java.io.File"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_Under.java"), expected);

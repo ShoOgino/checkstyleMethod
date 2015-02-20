@@ -8,13 +8,13 @@
                 "STATIC###SAME_PACKAGE(3)");
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
-            "4: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
-            "5: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
-            "6: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
-            "7: Import statement is in the wrong order. Should be in the 'STATIC' group.",
-            "8: Import statement is in the wrong order. Should be in the 'STATIC' group.",
-            "10: Import statement is in the wrong order. Should be in the 'SAME_PACKAGE' group.",
-            "11: Import statement is in the wrong order. Should be in the 'STATIC' group.",
+            "4: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
+            "5: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
+            "6: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
+            "7: " + getCheckMessage(MSG_ORDER, "STATIC"),
+            "8: " + getCheckMessage(MSG_ORDER, "STATIC"),
+            "10: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
+            "11: " + getCheckMessage(MSG_ORDER, "STATIC"),
         };
 
         verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"

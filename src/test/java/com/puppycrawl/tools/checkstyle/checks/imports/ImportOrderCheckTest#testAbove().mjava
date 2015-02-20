@@ -5,10 +5,10 @@
             createCheckConfig(ImportOrderCheck.class);
         checkConfig.addAttribute("option", "above");
         final String[] expected = {
-            "5: Wrong order for 'java.awt.Button.ABORT' import.",
-            "8: Wrong order for 'java.awt.Dialog' import.",
-            "13: Wrong order for 'java.io.File' import.",
-            "14: Wrong order for 'java.io.File.createTempFile' import.",
+            "5: " + getCheckMessage(MSG_ORDERING, "java.awt.Button.ABORT"),
+            "8: " + getCheckMessage(MSG_ORDERING, "java.awt.Dialog"),
+            "13: " + getCheckMessage(MSG_ORDERING, "java.io.File"),
+            "14: " + getCheckMessage(MSG_ORDERING, "java.io.File.createTempFile"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_Above.java"), expected);

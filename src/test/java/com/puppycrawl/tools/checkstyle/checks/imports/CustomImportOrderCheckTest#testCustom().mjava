@@ -13,17 +13,17 @@
                         "STATIC###SAME_PACKAGE(3)###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE");
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
-            "4: Wrong lexicographical order for 'java.awt.Button.ABORT' import.",
-            "7: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "8: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "9: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "10: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "11: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "12: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "13: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "14: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "15: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
-            "16: Import statement is in the wrong order. Should be in the 'STANDARD_JAVA_PACKAGE' group.",
+            "4: " + getCheckMessage(MSG_LEX, "java.awt.Button.ABORT"),
+            "7: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "8: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "9: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "10: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "11: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "12: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "13: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "14: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "15: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
+            "16: " + getCheckMessage(MSG_ORDER, "STANDARD_JAVA_PACKAGE"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator

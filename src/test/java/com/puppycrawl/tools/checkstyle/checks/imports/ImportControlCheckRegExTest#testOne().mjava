@@ -4,7 +4,7 @@
         final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
         checkConfig.addAttribute("file",
                 "src/test/resources/com/puppycrawl/tools/checkstyle/import-control_one-re.xml");
-        final String[] expected = {"5:1: Disallowed import - java.io.File."};
+        final String[] expected = {"5:1: " + getCheckMessage(MSG_DISALLOWED, "java.io.File")};
 
         verify(checkConfig, getPath("imports" + File.separator
                 + "InputImportControl.java"), expected);

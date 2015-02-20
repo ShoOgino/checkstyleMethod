@@ -6,9 +6,9 @@
         checkConfig.addAttribute("separated", "true");
         checkConfig.addAttribute("ordered", "false");
         final String[] expected = {
-            "9: 'javax.swing.JComponent' should be separated from previous imports.",
-            "11: 'java.io.File' should be separated from previous imports.",
-            "16: Wrong order for 'javax.swing.WindowConstants.*' import.",
+            "9: " + getCheckMessage(MSG_SEPARATION, "javax.swing.JComponent"),
+            "11: " + getCheckMessage(MSG_SEPARATION, "java.io.File"),
+            "16: " + getCheckMessage(MSG_ORDERING, "javax.swing.WindowConstants.*"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder.java"), expected);

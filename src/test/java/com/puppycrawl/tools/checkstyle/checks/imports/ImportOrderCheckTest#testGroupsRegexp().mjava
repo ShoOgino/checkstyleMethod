@@ -5,7 +5,7 @@
         checkConfig.addAttribute("groups", "java, /^javax?\\.(awt|swing)\\./");
         checkConfig.addAttribute("ordered", "false");
         final String[] expected = {
-            "11: Wrong order for 'java.io.File' import.",
+            "11: " + getCheckMessage(MSG_ORDERING, "java.io.File"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder.java"), expected);

@@ -8,18 +8,18 @@
         else if (ast.getType() == TokenTypes.IMPORT) {
             final FullIdent imp = FullIdent.createFullIdentBelow(ast);
             if (fromPackage(imp.getText(), "java.lang")) {
-                log(ast.getLineNo(), ast.getColumnNo(), "import.lang",
+                log(ast.getLineNo(), ast.getColumnNo(), MSG_LANG,
                     imp.getText());
             }
             else if (fromPackage(imp.getText(), pkgName)) {
-                log(ast.getLineNo(), ast.getColumnNo(), "import.same",
+                log(ast.getLineNo(), ast.getColumnNo(), MSG_SAME,
                     imp.getText());
             }
             // Check for a duplicate import
             for (FullIdent full : imports) {
                 if (imp.getText().equals(full.getText())) {
                     log(ast.getLineNo(), ast.getColumnNo(),
-                            "import.duplicate", full.getLineNo(),
+                            MSG_DUPLICATE, full.getLineNo(),
                             imp.getText());
                 }
             }
@@ -34,7 +34,7 @@
             for (FullIdent full : staticImports) {
                 if (imp.getText().equals(full.getText())) {
                     log(ast.getLineNo(), ast.getColumnNo(),
-                        "import.duplicate", full.getLineNo(), imp.getText());
+                        MSG_DUPLICATE, full.getLineNo(), imp.getText());
                 }
             }
 

@@ -5,7 +5,7 @@
             createCheckConfig(ImportOrderCheck.class);
         checkConfig.addAttribute("tokens", "IMPORT");
         final String[] expected = {
-            "6: Wrong order for 'java.awt.Button' import.",
+            "6: " + getCheckMessage(MSG_ORDERING, "java.awt.Button"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_HonorsTokensProperty.java"), expected);

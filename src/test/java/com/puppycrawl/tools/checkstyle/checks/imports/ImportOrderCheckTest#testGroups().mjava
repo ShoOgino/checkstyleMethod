@@ -6,9 +6,9 @@
         checkConfig.addAttribute("groups", "javax.swing");
         checkConfig.addAttribute("groups", "java.io");
         final String[] expected = {
-            "5: Wrong order for 'java.awt.Dialog' import.",
-            "13: Wrong order for 'java.io.IOException' import.",
-            "16: Wrong order for 'javax.swing.WindowConstants.*' import.",
+            "5: " + getCheckMessage(MSG_ORDERING, "java.awt.Dialog"),
+            "13: " + getCheckMessage(MSG_ORDERING, "java.io.IOException"),
+            "16: " + getCheckMessage(MSG_ORDERING, "javax.swing.WindowConstants.*"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder.java"), expected);

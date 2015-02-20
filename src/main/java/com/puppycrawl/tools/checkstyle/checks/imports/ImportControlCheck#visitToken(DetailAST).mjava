@@ -5,13 +5,13 @@
             final DetailAST nameAST = ast.getLastChild().getPreviousSibling();
             final FullIdent full = FullIdent.createFullIdent(nameAST);
             if (root == null) {
-                log(nameAST, "import.control.missing.file");
+                log(nameAST, MSG_MISSING_FILE);
             }
             else {
                 inPkg = full.getText();
                 currentLeaf = root.locateFinest(inPkg);
                 if (currentLeaf == null) {
-                    log(nameAST, "import.control.unknown.pkg");
+                    log(nameAST, MSG_UNKNOWN_PKG);
                 }
             }
         }
@@ -28,7 +28,7 @@
             final AccessResult access = currentLeaf.checkAccess(imp.getText(),
                     inPkg);
             if (!AccessResult.ALLOWED.equals(access)) {
-                log(ast, "import.control.disallowed", imp.getText());
+                log(ast, MSG_DISALLOWED, imp.getText());
             }
         }
     }
