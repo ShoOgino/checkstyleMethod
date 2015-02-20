@@ -3,12 +3,12 @@
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
         final String[] expected = {
-            "20: 'label' child have incorrect indentation level 10, expected level should be one of the following: 8, 12.",
-            "29: 'label' child have incorrect indentation level 2, expected level should be one of the following: 4, 8.",
-            "32: 'label' child have incorrect indentation level 18, expected level should be one of the following: 8, 12.",
-            "33: 'ctor def' child have incorrect indentation level 18, expected level should be 8.",
-            "35: 'label' child have incorrect indentation level 6, expected level should be one of the following: 8, 12.",
-            "37: 'label' child have incorrect indentation level 6, expected level should be one of the following: 8, 12.",
+            "20: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "label", 10, "8, 12"),
+            "29: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "label", 2, "4, 8"),
+            "32: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "label", 18, "8, 12"),
+            "33: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 18, 8),
+            "35: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "label", 6, "8, 12"),
+            "37: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "label", 6, "8, 12"),
         };
         verify(checkConfig, getPath("indentation/InputInvalidLabelIndent.java"), expected);
     }

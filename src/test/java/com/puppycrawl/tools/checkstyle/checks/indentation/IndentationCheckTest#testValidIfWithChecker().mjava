@@ -5,7 +5,7 @@
         final Checker c = createChecker(checkConfig);
         final String fname = getPath("indentation/InputValidIfIndent.java");
         final String[] expected = {
-            "229: '(' have incorrect indentation level 8, expected level should be 12.",
+            "229: " + getCheckMessage(MSG_ERROR, "(", 8, 12),
         };
         verify(c, fname, expected);
     }

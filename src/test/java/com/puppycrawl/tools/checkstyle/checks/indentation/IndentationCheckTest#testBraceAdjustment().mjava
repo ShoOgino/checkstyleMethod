@@ -4,7 +4,7 @@
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
         checkConfig.addAttribute("braceAdjustment", Integer.valueOf(2).toString());
         final String[] expected = {
-            "24: 'if rcurly' have incorrect indentation level 8, expected level should be 10.",
+            "24: " + getCheckMessage(MSG_ERROR, "if rcurly", 8, 10),
         };
         verify(checkConfig, getPath("indentation/InputBraceAdjustment.java"), expected);
     }

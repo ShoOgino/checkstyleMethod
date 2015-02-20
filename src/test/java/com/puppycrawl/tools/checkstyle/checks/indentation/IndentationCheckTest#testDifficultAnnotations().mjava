@@ -3,9 +3,9 @@
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
         final String[] expected = {
-            "29: '@' have incorrect indentation level 0, expected level should be 4.",
-            "30: '@' have incorrect indentation level 0, expected level should be 4.",
-            "39: '@' have incorrect indentation level 6, expected level should be 8.",
+            "29: " + getCheckMessage(MSG_ERROR, "@", 0, 4),
+            "30: " + getCheckMessage(MSG_ERROR, "@", 0, 4),
+            "39: " + getCheckMessage(MSG_ERROR, "@", 6, 8),
         };
         verify(checkConfig, getPath("indentation/InputDifficultAnnotations.java"), expected);
     }

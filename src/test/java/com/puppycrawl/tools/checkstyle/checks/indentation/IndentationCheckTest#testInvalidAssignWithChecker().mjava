@@ -3,10 +3,10 @@
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
         final String[] expected = {
-            "8: 'getLineNo' have incorrect indentation level 10, expected level should be 12.",
-            "10: 'getLine' have incorrect indentation level 10, expected level should be 12.",
-            "14: '=' have incorrect indentation level 9, expected level should be 12.",
-            "15: '1' have incorrect indentation level 10, expected level should be 12.",
+            "8: " + getCheckMessage(MSG_ERROR, "getLineNo", 10, 12),
+            "10: " + getCheckMessage(MSG_ERROR, "getLine", 10, 12),
+            "14: " + getCheckMessage(MSG_ERROR, "=", 9, 12),
+            "15: " + getCheckMessage(MSG_ERROR, "1", 10, 12),
         };
         verify(checkConfig, getPath("indentation/InputInvalidAssignIndent.java"), expected);
     }

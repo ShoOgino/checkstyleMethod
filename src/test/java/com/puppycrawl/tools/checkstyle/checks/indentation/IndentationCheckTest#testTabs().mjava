@@ -5,7 +5,7 @@
         checkConfig.addAttribute("basicOffset", Integer.valueOf(4).toString());
         checkConfig.addAttribute("tabWidth", Integer.valueOf(4).toString());
         final String[] expected = {
-            "25: 'ctor def' child have incorrect indentation level 9, expected level should be 8.",
+            "25: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 9, 8),
         };
         verify(checkConfig, getPath("indentation/InputUseTabs.java"), expected);
     }

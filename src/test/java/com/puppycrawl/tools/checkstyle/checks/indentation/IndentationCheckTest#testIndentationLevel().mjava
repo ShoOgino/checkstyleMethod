@@ -5,7 +5,7 @@
         checkConfig.addAttribute("basicOffset", Integer.valueOf(2).toString());
         checkConfig.addAttribute("lineWrappingIndentation", Integer.valueOf(2).toString());
         final String[] expected = {
-            "25: 'ctor def' child have incorrect indentation level 5, expected level should be 4.",
+            "25: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 5, 4),
         };
         verify(checkConfig, getPath("indentation/InputUseTwoSpaces.java"), expected);
     }
