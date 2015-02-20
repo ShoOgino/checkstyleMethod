@@ -5,7 +5,7 @@
             createCheckConfig(RegexpHeaderCheck.class);
         checkConfig.addAttribute("headerFile", getPath("regexp.header"));
         final String[] expected = {
-            "3: Line does not match expected header line of '// Created: 2002'.",
+            "3: " + getCheckMessage(MSG_MISMATCH, "// Created: 2002"),
         };
         verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
     }

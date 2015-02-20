@@ -6,7 +6,7 @@
         URI uri = (new File(getPath("regexp.header"))).toURI();
         checkConfig.addAttribute("headerFile", uri.toString());
         final String[] expected = {
-            "3: Line does not match expected header line of '// Created: 2002'.",
+            "3: " + getCheckMessage(MSG_MISMATCH, "// Created: 2002"),
         };
         verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
     }
