@@ -6,8 +6,8 @@
             createCheckConfig(UncommentedMainCheck.class);
         checkConfig.addAttribute("excludedClasses", "\\.Main.*$");
         final String[] expected = {
-            "14: Uncommented main method found.",
-            "32: Uncommented main method found.",
+            "14: " + getCheckMessage(MSG_KEY),
+            "32: " + getCheckMessage(MSG_KEY),
         };
         verify(checkConfig, getPath("InputUncommentedMain.java"), expected);
     }

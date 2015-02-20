@@ -4,17 +4,17 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(FinalParametersCheck.class);
         final String[] expected = {
-            "23:26: Parameter s should be final.",
-            "38:26: Parameter i should be final.",
-            "43:26: Parameter s should be final.",
-            "53:17: Parameter s should be final.",
-            "69:17: Parameter s should be final.",
-            "75:17: Parameter s should be final.",
-            "90:45: Parameter e should be final.",
-            "93:36: Parameter e should be final.",
-            "110:18: Parameter aParam should be final.",
-            "113:18: Parameter args should be final.",
-            "116:18: Parameter args should be final.",
+            "23:26: " + getCheckMessage(MSG_KEY, "s"),
+            "38:26: " + getCheckMessage(MSG_KEY, "i"),
+            "43:26: " + getCheckMessage(MSG_KEY, "s"),
+            "53:17: " + getCheckMessage(MSG_KEY, "s"),
+            "69:17: " + getCheckMessage(MSG_KEY, "s"),
+            "75:17: " + getCheckMessage(MSG_KEY, "s"),
+            "90:45: " + getCheckMessage(MSG_KEY, "e"),
+            "93:36: " + getCheckMessage(MSG_KEY, "e"),
+            "110:18: " + getCheckMessage(MSG_KEY, "aParam"),
+            "113:18: " + getCheckMessage(MSG_KEY, "args"),
+            "116:18: " + getCheckMessage(MSG_KEY, "args"),
         };
         verify(checkConfig, getPath("InputFinalParameters.java"), expected);
     }

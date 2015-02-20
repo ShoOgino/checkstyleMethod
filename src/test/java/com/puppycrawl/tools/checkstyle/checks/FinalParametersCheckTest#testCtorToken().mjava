@@ -5,9 +5,9 @@
             createCheckConfig(FinalParametersCheck.class);
         checkConfig.addAttribute("tokens", "CTOR_DEF");
         final String[] expected = {
-            "23:26: Parameter s should be final.",
-            "38:26: Parameter i should be final.",
-            "43:26: Parameter s should be final.",
+            "23:26: " + getCheckMessage(MSG_KEY, "s"),
+            "38:26: " + getCheckMessage(MSG_KEY, "i"),
+            "43:26: " + getCheckMessage(MSG_KEY, "s"),
         };
         verify(checkConfig, getPath("InputFinalParameters.java"), expected);
     }

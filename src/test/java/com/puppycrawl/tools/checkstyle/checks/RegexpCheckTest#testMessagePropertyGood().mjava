@@ -10,7 +10,7 @@
         checkConfig.addAttribute("illegalPattern", "true");
         checkConfig.addAttribute("message", message);
         final String[] expected = {
-            "69: Line matches the illegal pattern '" + message + "'.",
+            "69: " + getCheckMessage(MSG_ILLEGAL_REGEXP, message),
         };
         verify(checkConfig, getPath("InputSemantic.java"), expected);
     }

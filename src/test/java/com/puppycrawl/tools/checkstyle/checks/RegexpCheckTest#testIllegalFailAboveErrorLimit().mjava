@@ -10,9 +10,9 @@
         checkConfig.addAttribute("illegalPattern", "true");
         checkConfig.addAttribute("errorLimit", "3");
         final String[] expected = {
-            "7: Line matches the illegal pattern '" + illegal + "'.",
-            "8: Line matches the illegal pattern '" + illegal + "'.",
-            "9: Line matches the illegal pattern '" + error + illegal + "'.",
+            "7: " + getCheckMessage(MSG_ILLEGAL_REGEXP, illegal),
+            "8: " + getCheckMessage(MSG_ILLEGAL_REGEXP, illegal),
+            "9: " + getCheckMessage(MSG_ILLEGAL_REGEXP, error + illegal),
         };
         verify(checkConfig, getPath("InputSemantic.java"), expected);
     }
