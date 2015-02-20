@@ -17,7 +17,7 @@
                 state = scopeStates.peek();
                 if (state.scopeState > STATE_CTOR_DEF) {
                     if (!ignoreConstructors) {
-                        log(ast, "declaration.order.constructor");
+                        log(ast, MSG_CONSTRUCTOR);
                     }
                 }
                 else {
@@ -33,7 +33,7 @@
 
                 if (state.scopeState > STATE_METHOD_DEF) {
                     if (!ignoreMethods) {
-                        log(ast, "declaration.order.method");
+                        log(ast, MSG_METHOD);
                     }
                 }
                 else {
@@ -55,7 +55,7 @@
                         if (!ignoreModifiers
                             || state.scopeState > STATE_INSTANCE_VARIABLE_DEF)
                         {
-                            log(ast, "declaration.order.static");
+                            log(ast, MSG_STATIC);
                         }
                     }
                     else {
@@ -64,7 +64,7 @@
                 }
                 else {
                     if (state.scopeState > STATE_INSTANCE_VARIABLE_DEF) {
-                        log(ast, "declaration.order.instance");
+                        log(ast, MSG_INSTANCE);
                     }
                     else if (state.scopeState == STATE_STATIC_VARIABLE_DEF) {
                         state.declarationAccess = Scope.PUBLIC;
@@ -75,7 +75,7 @@
                 final Scope access = ScopeUtils.getScopeFromMods(ast);
                 if (state.declarationAccess.compareTo(access) > 0) {
                     if (!ignoreModifiers) {
-                        log(ast, "declaration.order.access");
+                        log(ast, MSG_ACCESS);
                     }
                 }
                 else {

@@ -4,17 +4,13 @@
         checkConfig.addAttribute("memberModifiers", "LITERAL_PRIVATE, LITERAL_PROTECTED,"
                 + " LITERAL_STATIC");
         String[] expected = {
-            "6:13: Declaring variables, return values or parameters of type 'AbstractClass' is not allowed.",
-            "9:13: Declaring variables, return values or parameters of type "
-                + "'com.puppycrawl.tools.checkstyle.coding.InputIllegalTypeMemberModifiers.AbstractClass'"
-                + " is not allowed.",
-            "16:13: Declaring variables, return values or parameters of type 'java.util.TreeSet' is not allowed.",
-            "17:13: Declaring variables, return values or parameters of type 'TreeSet' is not allowed.",
-            "23:15: Declaring variables, return values or parameters of type "
-                    + "'com.puppycrawl.tools.checkstyle.coding.InputIllegalTypeMemberModifiers.AbstractClass'"
-                    + " is not allowed.",
-            "25:25: Declaring variables, return values or parameters of type 'java.util.TreeSet' is not allowed.",
-            "33:15: Declaring variables, return values or parameters of type 'AbstractClass' is not allowed.",
+            "6:13: " + getCheckMessage(MSG_KEY, "AbstractClass"),
+            "9:13: " + getCheckMessage(MSG_KEY, "com.puppycrawl.tools.checkstyle.coding.InputIllegalTypeMemberModifiers.AbstractClass"),
+            "16:13: " + getCheckMessage(MSG_KEY, "java.util.TreeSet"),
+            "17:13: " + getCheckMessage(MSG_KEY, "TreeSet"),
+            "23:15: " + getCheckMessage(MSG_KEY, "com.puppycrawl.tools.checkstyle.coding.InputIllegalTypeMemberModifiers.AbstractClass"),
+            "25:25: " + getCheckMessage(MSG_KEY, "java.util.TreeSet"),
+            "33:15: " + getCheckMessage(MSG_KEY, "AbstractClass"),
         };
 
         verify(checkConfig, getPath("coding" + File.separator

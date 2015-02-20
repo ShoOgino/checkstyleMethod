@@ -3,12 +3,12 @@
     {
         checkConfig.addAttribute("illegalClassNames", "List, GregorianCalendar, java.io.File, ArrayList");
         String[] expected = {
-            "10:5: Declaring variables, return values or parameters of type 'GregorianCalendar' is not allowed.",
-            "16:23: Declaring variables, return values or parameters of type 'GregorianCalendar' is not allowed.",
-            "24:9: Declaring variables, return values or parameters of type 'List' is not allowed.",
-            "25:9: Declaring variables, return values or parameters of type 'java.io.File' is not allowed.",
-            "27:5: Declaring variables, return values or parameters of type 'java.util.List' is not allowed.",
-            "28:13: Declaring variables, return values or parameters of type 'ArrayList' is not allowed.",
+            "10:5: " + getCheckMessage(MSG_KEY, "GregorianCalendar"),
+            "16:23: " + getCheckMessage(MSG_KEY, "GregorianCalendar"),
+            "24:9: " + getCheckMessage(MSG_KEY, "List"),
+            "25:9: " + getCheckMessage(MSG_KEY, "java.io.File"),
+            "27:5: " + getCheckMessage(MSG_KEY, "java.util.List"),
+            "28:13: " + getCheckMessage(MSG_KEY, "ArrayList"),
         };
         verify(checkConfig, getPath("coding" + File.separator
                 + "InputIllegalTypeSameFileName.java"), expected);

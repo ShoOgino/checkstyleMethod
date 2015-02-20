@@ -7,7 +7,7 @@
         checkConfig.addAttribute("tokens", "STRING_LITERAL");
         checkConfig.addAttribute("format", "a href");
         final String[] expected = {
-            "24:28: Token text matches the illegal pattern 'a href'.",
+            "24:28: " + getCheckMessage(MSG_KEY, "a href"),
         };
         verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
     }

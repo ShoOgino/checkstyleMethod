@@ -9,8 +9,8 @@
         checkConfig.addAttribute("ignoredMethodNames", "methodTwo");
 
         String[] expected = {
-            "9:51: Throwing 'RuntimeException' is not allowed.",
-            "18:35: Throwing 'Throwable' is not allowed.",
+            "9:51: " + getCheckMessage(MSG_KEY, "RuntimeException"),
+            "18:35: " + getCheckMessage(MSG_KEY, "Throwable"),
         };
 
         verify(checkConfig, getPath("coding" + File.separator + "InputIllegalThrowsCheck.java"), expected);

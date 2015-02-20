@@ -5,7 +5,7 @@
             createCheckConfig(IllegalTokenCheck.class);
         checkConfig.addAttribute("tokens", "LITERAL_NATIVE");
         final String[] expected = {
-            "20:12: Using 'native' is not allowed.",
+            "20:12: " + getCheckMessage(MSG_KEY, "native"),
         };
         verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
     }

@@ -15,7 +15,7 @@
         // An identifier surrounded by parentheses.
         if (surrounded && (type == TokenTypes.IDENT)) {
             parentToSkip = ast.getParent();
-            log(ast, "unnecessary.paren.ident", ast.getText());
+            log(ast, MSG_IDENT, ast.getText());
             return;
         }
 
@@ -23,11 +23,11 @@
         if (surrounded && inTokenList(type, LITERALS)) {
             parentToSkip = ast.getParent();
             if (type == TokenTypes.STRING_LITERAL) {
-                log(ast, "unnecessary.paren.string",
+                log(ast, MSG_STRING,
                     chopString(ast.getText()));
             }
             else {
-                log(ast, "unnecessary.paren.literal", ast.getText());
+                log(ast, MSG_LITERAL, ast.getText());
             }
             return;
         }
@@ -37,7 +37,7 @@
             assignDepth++;
             final DetailAST last = ast.getLastChild();
             if (last.getType() == TokenTypes.RPAREN) {
-                log(ast, "unnecessary.paren.assign");
+                log(ast, MSG_ASSIGN);
             }
         }
     }

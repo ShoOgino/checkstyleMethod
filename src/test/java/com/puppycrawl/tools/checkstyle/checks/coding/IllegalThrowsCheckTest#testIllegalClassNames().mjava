@@ -6,8 +6,8 @@
                                  "java.lang.Error, java.lang.Exception, NullPointerException");
 
         String[] expected = {
-            "5:33: Throwing 'NullPointerException' is not allowed.",
-            "14:73: Throwing 'java.lang.Error' is not allowed.",
+            "5:33: " + getCheckMessage(MSG_KEY, "NullPointerException"),
+            "14:73: " + getCheckMessage(MSG_KEY, "java.lang.Error"),
         };
 
         verify(checkConfig, getPath("coding" + File.separator + "InputIllegalThrowsCheck.java"), expected);

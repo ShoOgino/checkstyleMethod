@@ -8,8 +8,8 @@
         checkConfig.addAttribute("format", "a href");
         checkConfig.addAttribute("ignoreCase", "true");
         final String[] expected = {
-            "24:28: Token text matches the illegal pattern 'a href'.",
-            "25:32: Token text matches the illegal pattern 'a href'.",
+            "24:28: " + getCheckMessage(MSG_KEY, "a href"),
+            "25:32: " + getCheckMessage(MSG_KEY, "a href"),
         };
         verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
     }

@@ -5,10 +5,10 @@
             createCheckConfig(RequireThisCheck.class);
         checkConfig.addAttribute("checkMethods", "false");
         final String[] expected = {
-            "11:9: Reference to instance variable 'i' needs \"this.\".",
-            "31:9: Reference to instance variable 'i' needs \"this.\".",
-            "49:13: Reference to instance variable 'z' needs \"this.\".",
-            "56:9: Reference to instance variable 'z' needs \"this.\".",
+            "11:9: " + getCheckMessage(MSG_VARIABLE, "i", "\"this\""),
+            "31:9: " + getCheckMessage(MSG_VARIABLE, "i", "\"this\""),
+            "49:13: " + getCheckMessage(MSG_VARIABLE, "z", "\"this\""),
+            "56:9: " + getCheckMessage(MSG_VARIABLE, "z", "\"this\""),
         };
         verify(checkConfig,
                getPath("coding" + File.separator + "InputRequireThis.java"),

@@ -5,8 +5,8 @@
         checkConfig.addAttribute("ignoredMethodNames", "foo1");
 
         String[] expected = {
-            "13:6: Declaring variables, return values or parameters of type 'SomeStaticClass' is not allowed.",
-            "15:31: Declaring variables, return values or parameters of type 'SomeStaticClass' is not allowed.",
+            "13:6: " + getCheckMessage(MSG_KEY, "SomeStaticClass"),
+            "15:31: " + getCheckMessage(MSG_KEY, "SomeStaticClass"),
         };
 
         verify(checkConfig, getPath("coding" + File.separator

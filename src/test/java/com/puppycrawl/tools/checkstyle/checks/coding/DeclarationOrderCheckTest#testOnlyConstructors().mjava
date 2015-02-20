@@ -8,13 +8,13 @@
         checkConfig.addAttribute("ignoreModifiers", "true");
 
         final String[] expected = {
-            "45:9: Static variable definition in wrong order.",
-            "54:5: Constructor definition in wrong order.",
-            "80:5: Instance variable definition in wrong order.",
-            "100:9: Static variable definition in wrong order.",
-            "143:9: Static variable definition in wrong order.",
-            "152:5: Constructor definition in wrong order.",
-            "178:5: Instance variable definition in wrong order.",
+            "45:9: " + getCheckMessage(MSG_STATIC),
+            "54:5: " + getCheckMessage(MSG_CONSTRUCTOR),
+            "80:5: " + getCheckMessage(MSG_INSTANCE),
+            "100:9: " + getCheckMessage(MSG_STATIC),
+            "143:9: " + getCheckMessage(MSG_STATIC),
+            "152:5: " + getCheckMessage(MSG_CONSTRUCTOR),
+            "178:5: " + getCheckMessage(MSG_INSTANCE),
         };
         verify(checkConfig, getPath("coding/InputDeclarationOrder.java"), expected);
     }
