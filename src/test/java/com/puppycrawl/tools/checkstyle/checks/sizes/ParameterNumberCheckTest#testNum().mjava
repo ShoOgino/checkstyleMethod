@@ -6,8 +6,8 @@
             createCheckConfig(ParameterNumberCheck.class);
         checkConfig.addAttribute("max", "2");
         final String[] expected = {
-            "71:9: More than 2 parameters (found 3).",
-            "194:10: More than 2 parameters (found 9).",
+            "71:9: " + getCheckMessage(MSG_KEY, 2, 3),
+            "194:10: " + getCheckMessage(MSG_KEY, 2, 9),
         };
         verify(checkConfig, getPath("InputSimple.java"), expected);
     }

@@ -5,7 +5,7 @@
             createCheckConfig(MethodLengthCheck.class);
         checkConfig.addAttribute("max", "19");
         final String[] expected = {
-            "79:5: Method length is 20 lines (max allowed is 19).",
+            "79:5: " + getCheckMessage(MSG_KEY, 20, 19),
         };
         verify(checkConfig, getPath("InputSimple.java"), expected);
     }

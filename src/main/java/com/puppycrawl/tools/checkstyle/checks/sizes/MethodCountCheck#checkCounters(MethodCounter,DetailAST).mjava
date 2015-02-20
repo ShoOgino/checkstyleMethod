@@ -6,13 +6,13 @@
     private void checkCounters(MethodCounter counter, DetailAST ast)
     {
         checkMax(maxPrivate, counter.value(Scope.PRIVATE),
-                 "too.many.privateMethods", ast);
+                 MSG_PRIVATE_METHODS, ast);
         checkMax(maxPackage, counter.value(Scope.PACKAGE),
-                 "too.many.packageMethods", ast);
+                 MSG_PACKAGE_METHODS, ast);
         checkMax(maxProtected, counter.value(Scope.PROTECTED),
-                 "too.many.protectedMethods", ast);
+                 MSG_PROTECTED_METHODS, ast);
         checkMax(maxPublic, counter.value(Scope.PUBLIC),
-                 "too.many.publicMethods", ast);
-        checkMax(maxTotal, counter.getTotal(), "too.many.methods", ast);
+                 MSG_PUBLIC_METHODS, ast);
+        checkMax(maxTotal, counter.getTotal(), MSG_MANY_METHODS, ast);
     }
 

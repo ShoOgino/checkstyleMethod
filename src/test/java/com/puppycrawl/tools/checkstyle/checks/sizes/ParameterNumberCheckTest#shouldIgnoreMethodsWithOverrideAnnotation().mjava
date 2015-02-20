@@ -6,8 +6,8 @@
                 createCheckConfig(ParameterNumberCheck.class);
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
         final String[] expected = {
-            "6:10: More than 7 parameters (found 8).",
-            "11:10: More than 7 parameters (found 8).",
+            "6:10: " + getCheckMessage(MSG_KEY, 7, 8),
+            "11:10: " + getCheckMessage(MSG_KEY, 7, 8),
         };
         verify(checkConfig, getPath("InputParameterNumberCheck.java"), expected);
     }

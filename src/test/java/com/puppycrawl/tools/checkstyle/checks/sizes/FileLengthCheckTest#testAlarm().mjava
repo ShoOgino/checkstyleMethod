@@ -5,7 +5,7 @@
             createCheckConfig(FileLengthCheck.class);
         checkConfig.addAttribute("max", "20");
         final String[] expected = {
-            "1: File length is 225 lines (max allowed is 20).",
+            "1: " + getCheckMessage(MSG_KEY, 225, 20),
         };
         verify(createChecker(checkConfig),
                 getPath("InputSimple.java"),
