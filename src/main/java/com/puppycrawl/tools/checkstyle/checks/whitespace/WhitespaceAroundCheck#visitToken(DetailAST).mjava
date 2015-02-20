@@ -60,7 +60,7 @@
 
         if ((before >= 0) && !Character.isWhitespace(line.charAt(before))) {
             log(ast.getLineNo(), ast.getColumnNo(),
-                    "ws.notPreceded", ast.getText());
+                    WS_NOT_PRECEDED, ast.getText());
         }
 
         if (after >= line.length()) {
@@ -80,7 +80,7 @@
                     || (nextChar == '.'))))
         {
             log(ast.getLineNo(), ast.getColumnNo() + ast.getText().length(),
-                    "ws.notFollowed", ast.getText());
+                    WS_NOT_FOLLOWED, ast.getText());
         }
     }
 

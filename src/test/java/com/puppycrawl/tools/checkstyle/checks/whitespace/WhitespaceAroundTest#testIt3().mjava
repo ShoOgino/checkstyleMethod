@@ -3,14 +3,14 @@
         throws Exception
     {
         final String[] expected = {
-            "41:14: 'while' is not followed by whitespace.",
-            "58:12: 'for' is not followed by whitespace.",
+            "41:14: " + getCheckMessage(WS_NOT_FOLLOWED, "while"),
+            "58:12: " + getCheckMessage(WS_NOT_FOLLOWED, "for"),
             // + ":58:23: ';' is not followed by whitespace.",
             //  + ":58:29: ';' is not followed by whitespace.",
-            "115:27: '{' is not followed by whitespace.",
-            "115:27: '}' is not preceded with whitespace.",
-            "118:40: '{' is not followed by whitespace.",
-            "118:40: '}' is not preceded with whitespace.",
+            "115:27: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "115:27: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "118:40: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "118:40: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
         };
         verify(checkConfig, getPath("InputBraces.java"), expected);
     }

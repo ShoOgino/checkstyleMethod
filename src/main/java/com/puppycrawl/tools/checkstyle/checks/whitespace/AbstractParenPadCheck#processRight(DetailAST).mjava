@@ -11,14 +11,14 @@
                 && Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line))
             {
-                log(ast.getLineNo(), before, "ws.preceded", ")");
+                log(ast.getLineNo(), before, WS_PRECEDED, ")");
             }
             else if ((PadOption.SPACE == getAbstractOption())
                 && !Character.isWhitespace(line.charAt(before))
                 && (line.charAt(before) != '('))
             {
                 log(ast.getLineNo(), ast.getColumnNo(),
-                    "ws.notPreceded", ")");
+                    WS_NOT_PRECEDED, ")");
             }
         }
     }

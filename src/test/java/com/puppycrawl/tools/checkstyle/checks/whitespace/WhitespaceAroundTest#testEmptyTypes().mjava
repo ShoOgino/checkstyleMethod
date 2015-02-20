@@ -3,12 +3,12 @@
     {
         checkConfig.addAttribute("allowEmptyTypes", "true");
         final String[] expected = {
-            "29:95: '{' is not followed by whitespace.",
-            "29:95: '}' is not preceded with whitespace.",
-            "30:33: '{' is not followed by whitespace.",
-            "30:33: '}' is not preceded with whitespace.",
-            "31:21: '{' is not followed by whitespace.",
-            "31:21: '}' is not preceded with whitespace.",
+            "29:95: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "29:95: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "30:33: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "30:33: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "31:21: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "31:21: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
         };
         verify(checkConfig, getPath("whitespace/InputEmptyTypesAndCycles.java"),
                expected);

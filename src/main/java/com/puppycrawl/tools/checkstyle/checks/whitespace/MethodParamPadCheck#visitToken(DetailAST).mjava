@@ -16,7 +16,7 @@
         final String line = getLines()[parenAST.getLineNo() - 1];
         if (Utils.whitespaceBefore(parenAST.getColumnNo(), line)) {
             if (!allowLineBreaks) {
-                log(parenAST, "line.previous", parenAST.getText());
+                log(parenAST, LINE_PREVIOUS, parenAST.getText());
             }
         }
         else {
@@ -24,12 +24,12 @@
             if ((PadOption.NOSPACE == getAbstractOption())
                 && (Character.isWhitespace(line.charAt(before))))
             {
-                log(parenAST , "ws.preceded", parenAST.getText());
+                log(parenAST , WS_PRECEDED, parenAST.getText());
             }
             else if ((PadOption.SPACE == getAbstractOption())
                      && !Character.isWhitespace(line.charAt(before)))
             {
-                log(parenAST, "ws.notPreceded", parenAST.getText());
+                log(parenAST, WS_NOT_PRECEDED, parenAST.getText());
             }
         }
     }

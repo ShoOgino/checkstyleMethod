@@ -4,11 +4,11 @@
         DefaultConfiguration checkConfig = createCheckConfig(EmptyLineSeparatorCheck.class);
         checkConfig.addAttribute("allowMultipleEmptyLines", "false");
         final String[] expected = {
-            "21: 'package' has more than 1 empty lines before.",
-            "24: 'import' has more than 1 empty lines before.",
-            "33: 'VARIABLE_DEF' has more than 1 empty lines before.",
-            "38: 'VARIABLE_DEF' has more than 1 empty lines before.",
-            "43: 'METHOD_DEF' has more than 1 empty lines before.",
+            "21: " + getCheckMessage(MSG_MULTIPLE_LINES, "package"),
+            "24: " + getCheckMessage(MSG_MULTIPLE_LINES, "import"),
+            "33: " + getCheckMessage(MSG_MULTIPLE_LINES, "VARIABLE_DEF"),
+            "38: " + getCheckMessage(MSG_MULTIPLE_LINES, "VARIABLE_DEF"),
+            "43: " + getCheckMessage(MSG_MULTIPLE_LINES, "METHOD_DEF"),
         };
         verify(checkConfig, getPath("whitespace/InputEmptyLineSeparatorCheckMultipleEmptyLines.java"), expected);
     }

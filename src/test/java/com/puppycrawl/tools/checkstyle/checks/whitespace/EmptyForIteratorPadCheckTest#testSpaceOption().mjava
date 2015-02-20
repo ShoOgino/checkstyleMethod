@@ -3,7 +3,7 @@
     {
         checkConfig.addAttribute("option", PadOption.SPACE.toString());
         final String[] expected = {
-            "23:31: ';' is not followed by whitespace.",
+            "23:31: " + getCheckMessage(WS_NOT_FOLLOWED, ";"),
         };
         verify(checkConfig, getPath("InputForWhitespace.java"), expected);
     }

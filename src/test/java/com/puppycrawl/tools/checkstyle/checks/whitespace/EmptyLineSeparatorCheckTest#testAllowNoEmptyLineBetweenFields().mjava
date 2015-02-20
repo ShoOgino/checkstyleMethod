@@ -6,10 +6,10 @@
         checkConfig.addAttribute("allowNoEmptyLineBetweenFields", "true");
 
         final String[] expected = {
-            "21: 'import' should be separated from previous statement.",
-            "35: 'CLASS_DEF' should be separated from previous statement.",
-            "39: 'STATIC_INIT' should be separated from previous statement.",
-            "77: 'INTERFACE_DEF' should be separated from previous statement.",
+            "21: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "import"),
+            "35: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "CLASS_DEF"),
+            "39: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "STATIC_INIT"),
+            "77: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "INTERFACE_DEF"),
         };
         verify(checkConfig, getPath("whitespace/InputEmptyLineSeparatorCheck.java"), expected);
     }

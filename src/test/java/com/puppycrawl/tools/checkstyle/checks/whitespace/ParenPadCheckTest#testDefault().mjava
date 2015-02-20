@@ -5,13 +5,13 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(ParenPadCheck.class);
         final String[] expected = {
-            "58:12: '(' is followed by whitespace.",
-            "58:36: ')' is preceded with whitespace.",
-            "74:13: '(' is followed by whitespace.",
-            "74:18: ')' is preceded with whitespace.",
-            "232:27: ')' is preceded with whitespace.",
-            "241:24: '(' is followed by whitespace.",
-            "241:30: ')' is preceded with whitespace.",
+            "58:12: " + getCheckMessage(WS_FOLLOWED, "("),
+            "58:36: " + getCheckMessage(WS_PRECEDED, ")"),
+            "74:13: " + getCheckMessage(WS_FOLLOWED, "("),
+            "74:18: " + getCheckMessage(WS_PRECEDED, ")"),
+            "232:27: " + getCheckMessage(WS_PRECEDED, ")"),
+            "241:24: " + getCheckMessage(WS_FOLLOWED, "("),
+            "241:30: " + getCheckMessage(WS_PRECEDED, ")"),
         };
         verify(checkConfig, getPath("InputWhitespace.java"), expected);
     }

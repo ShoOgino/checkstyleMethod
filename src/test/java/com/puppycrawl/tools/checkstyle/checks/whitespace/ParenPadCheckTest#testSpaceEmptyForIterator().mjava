@@ -6,15 +6,15 @@
             createCheckConfig(ParenPadCheck.class);
         checkConfig.addAttribute("option", PadOption.SPACE.toString());
         final String[] expected = {
-            "11:14: '(' is not followed by whitespace.",
-            "11:35: ')' is not preceded with whitespace.",
-            "14:14: '(' is not followed by whitespace.",
-            "14:34: ')' is not preceded with whitespace.",
-            "17:14: '(' is not followed by whitespace.",
-            "20:14: '(' is not followed by whitespace.",
-            "23:14: '(' is not followed by whitespace.",
-            "27:14: '(' is not followed by whitespace.",
-            "32:14: '(' is not followed by whitespace.",
+            "11:14: " + getCheckMessage(WS_NOT_FOLLOWED, "("),
+            "11:35: " + getCheckMessage(WS_NOT_PRECEDED, ")"),
+            "14:14: " + getCheckMessage(WS_NOT_FOLLOWED, "("),
+            "14:34: " + getCheckMessage(WS_NOT_PRECEDED, ")"),
+            "17:14: " + getCheckMessage(WS_NOT_FOLLOWED, "("),
+            "20:14: " + getCheckMessage(WS_NOT_FOLLOWED, "("),
+            "23:14: " + getCheckMessage(WS_NOT_FOLLOWED, "("),
+            "27:14: " + getCheckMessage(WS_NOT_FOLLOWED, "("),
+            "32:14: " + getCheckMessage(WS_NOT_FOLLOWED, "("),
         };
         verify(checkConfig, getPath("InputForWhitespace.java"), expected);
     }

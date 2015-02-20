@@ -5,8 +5,8 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(TypecastParenPadCheck.class);
         final String[] expected = {
-            "89:14: '(' is followed by whitespace.",
-            "89:21: ')' is preceded with whitespace.",
+            "89:14: " + getCheckMessage(WS_FOLLOWED, "("),
+            "89:21: " + getCheckMessage(WS_PRECEDED, ")"),
         };
         verify(checkConfig, getPath("InputWhitespace.java"), expected);
     }

@@ -5,8 +5,8 @@
         checkConfig.addAttribute("allowEmptyMethods", "true");
         checkConfig.addAttribute("allowEmptyConstructors", "true");
         final String[] expected = {
-            "41:14: 'while' is not followed by whitespace.",
-            "58:12: 'for' is not followed by whitespace.",
+            "41:14: " + getCheckMessage(WS_NOT_FOLLOWED, "while"),
+            "58:12: " + getCheckMessage(WS_NOT_FOLLOWED, "for"),
         };
         verify(checkConfig, getPath("InputBraces.java"), expected);
     }

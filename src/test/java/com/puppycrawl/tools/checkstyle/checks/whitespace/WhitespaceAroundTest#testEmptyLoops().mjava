@@ -3,16 +3,16 @@
     {
         checkConfig.addAttribute("allowEmptyLoops", "true");
         final String[] expected = {
-            "40:65: '{' is not followed by whitespace.",
-            "40:65: '}' is not preceded with whitespace.",
-            "42:17: '{' is not followed by whitespace.",
-            "42:17: '}' is not preceded with whitespace.",
-            "44:20: '{' is not followed by whitespace.",
-            "44:20: '}' is not preceded with whitespace.",
-            "50:44: '{' is not followed by whitespace.",
-            "50:44: '}' is not preceded with whitespace.",
-            "60:18: '{' is not followed by whitespace.",
-            "60:18: '}' is not preceded with whitespace.",
+            "40:65: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "40:65: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "42:17: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "42:17: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "44:20: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "44:20: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "50:44: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "50:44: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "60:18: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "60:18: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
         };
         verify(checkConfig, getPath("whitespace/InputEmptyTypesAndCycles.java"),
                expected);

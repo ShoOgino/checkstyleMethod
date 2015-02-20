@@ -11,7 +11,7 @@
         if ((0 <= before) && Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line))
         {
-            log(ast.getLineNo(), before, "ws.preceded", ">");
+            log(ast.getLineNo(), before, WS_PRECEDED, ">");
         }
 
         if (after < line.length()) {
@@ -32,7 +32,7 @@
                         == TokenTypes.METHOD_CALL))
                 {
                     if (Character.isWhitespace(charAfter)) {
-                        log(ast.getLineNo(), after, "ws.followed", ">");
+                        log(ast.getLineNo(), after, WS_FOLLOWED, ">");
                     }
                 }
                 else if (!Character.isWhitespace(charAfter)
@@ -40,7 +40,7 @@
                     && (',' != charAfter) && ('[' != charAfter)
                     && ('.' != charAfter) && (':' != charAfter))
                 {
-                    log(ast.getLineNo(), after, "ws.illegalFollow", ">");
+                    log(ast.getLineNo(), after, WS_ILLEGAL_FOLLOW, ">");
                 }
             }
             else {
@@ -57,14 +57,14 @@
                     && whitespaceBetween(after, indexOfAmp, line))
                 {
                     if (indexOfAmp - after == 0) {
-                        log(ast.getLineNo(), after, "ws.notPreceded", "&");
+                        log(ast.getLineNo(), after, WS_NOT_PRECEDED, "&");
                     }
                     else if (indexOfAmp - after != 1) {
-                        log(ast.getLineNo(), after, "ws.followed", ">");
+                        log(ast.getLineNo(), after, WS_FOLLOWED, ">");
                     }
                 }
                 else if (line.charAt(after) == ' ') {
-                    log(ast.getLineNo(), after, "ws.followed", ">");
+                    log(ast.getLineNo(), after, WS_FOLLOWED, ">");
                 }
             }
         }

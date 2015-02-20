@@ -4,9 +4,9 @@
     {
         checkConfig.addAttribute("option", WrapOption.EOL.toString());
         final String[] expected = {
-            "18:13: '-' should be on the previous line.",
-            "22:13: '&&' should be on the previous line.",
-            "27:13: '&&' should be on the previous line.",
+            "18:13: " + getCheckMessage(LINE_PREVIOUS, "-"),
+            "22:13: " + getCheckMessage(LINE_PREVIOUS, "&&"),
+            "27:13: " + getCheckMessage(LINE_PREVIOUS, "&&"),
         };
         verify(checkConfig, getPath("InputOpWrap.java"), expected);
     }
