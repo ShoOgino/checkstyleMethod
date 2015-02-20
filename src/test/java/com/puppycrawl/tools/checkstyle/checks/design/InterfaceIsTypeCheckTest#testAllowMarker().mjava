@@ -6,8 +6,8 @@
             createCheckConfig(InterfaceIsTypeCheck.class);
         checkConfig.addAttribute("allowMarkerInterfaces", "false");
         final String[] expected = {
-            "20: interfaces should describe a type and hence have methods.",
-            "25: interfaces should describe a type and hence have methods.",
+            "20: " + getCheckMessage(MSG_KEY),
+            "25: " + getCheckMessage(MSG_KEY),
         };
         verify(checkConfig, getPath("InputInterfaceIsType.java"), expected);
     }

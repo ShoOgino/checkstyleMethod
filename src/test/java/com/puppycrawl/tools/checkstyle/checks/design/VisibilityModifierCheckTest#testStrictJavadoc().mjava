@@ -2,9 +2,9 @@
     public void testStrictJavadoc() throws Exception
     {
         final String[] expected = {
-            "44:9: Variable 'mLen' must be private and have accessor methods.",
-            "45:19: Variable 'mDeer' must be private and have accessor methods.",
-            "46:16: Variable 'aFreddo' must be private and have accessor methods.",
+            "44:9: " + getCheckMessage(MSG_KEY, "mLen"),
+            "45:19: " + getCheckMessage(MSG_KEY, "mDeer"),
+            "46:16: " + getCheckMessage(MSG_KEY, "aFreddo"),
         };
         verify(getChecker(), getPath("InputPublicOnly.java"), expected);
     }

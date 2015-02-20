@@ -8,8 +8,8 @@
         checkConfig.addAttribute("protectedAllowed", "true");
         checkConfig.addAttribute("packageAllowed", "true");
         final String[] expected = {
-            "17:20: Variable 'fData' must be private and have accessor methods.",
-            "77:20: Variable 'someValue' must be private and have accessor methods.",
+            "17:20: " + getCheckMessage(MSG_KEY, "fData"),
+            "77:20: " + getCheckMessage(MSG_KEY, "someValue"),
         };
         verify(checkConfig, getPath("InputInner.java"), expected);
     }

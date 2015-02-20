@@ -4,8 +4,8 @@
         DefaultConfiguration checkConfig = createCheckConfig(MutableExceptionCheck.class);
 
         String[] expected = {
-            "6:9: The field 'errorCode' must be declared final.",
-            "23:9: The field 'errorCode' must be declared final.",
+            "6:9: " + getCheckMessage(MSG_KEY, "errorCode"),
+            "23:9: " + getCheckMessage(MSG_KEY, "errorCode"),
         };
 
         verify(checkConfig, getPath("design" + File.separator + "InputMutableException.java"), expected);
