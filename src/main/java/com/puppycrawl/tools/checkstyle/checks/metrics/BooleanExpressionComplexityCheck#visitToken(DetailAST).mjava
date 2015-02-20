@@ -9,10 +9,14 @@
             case TokenTypes.EXPR:
                 visitExpr();
                 break;
+            case TokenTypes.BOR:
+                if (!isPipeOperator(ast)) {
+                    context.visitBooleanOperator();
+                }
+                break;
             case TokenTypes.LAND:
             case TokenTypes.BAND:
             case TokenTypes.LOR:
-            case TokenTypes.BOR:
             case TokenTypes.BXOR:
                 context.visitBooleanOperator();
                 break;
