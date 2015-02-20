@@ -5,10 +5,10 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocVariableCheck.class);
         final String[] expected = {
-            "11:5: Missing a Javadoc comment.",
-            "304:5: Missing a Javadoc comment.",
-            "311:5: Missing a Javadoc comment.",
-            "330:5: Missing a Javadoc comment.",
+            "11:5: " + getCheckMessage(JAVADOC_MISSING),
+            "304:5: " + getCheckMessage(JAVADOC_MISSING),
+            "311:5: " + getCheckMessage(JAVADOC_MISSING),
+            "330:5: " + getCheckMessage(JAVADOC_MISSING),
         };
         verify(checkConfig, getSrcPath("checks/javadoc/InputTags.java"), expected);
     }

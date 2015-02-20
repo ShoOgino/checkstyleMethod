@@ -2,8 +2,8 @@
     public void testTypeParamsTags() throws Exception
     {
         final String[] expected = {
-            "26:8: Unused @param tag for '<BB>'.",
-            "28:13: Expected @param tag for '<Z>'.", };
+            "26:8: " + getCheckMessage(MSG_UNUSED_TAG, "@param", "<BB>"),
+            "28:13: " + getCheckMessage(MSG_EXCPECTED_TAG, "@param", "<Z>"), };
         verify(checkConfig, getPath("InputTypeParamsTags.java"), expected);
     }
 

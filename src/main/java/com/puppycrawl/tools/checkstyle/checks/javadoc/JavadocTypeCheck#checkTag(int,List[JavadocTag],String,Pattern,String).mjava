@@ -19,12 +19,12 @@
             if (tag.getTagName().equals(tagName)) {
                 tagCount++;
                 if (!formatPattern.matcher(tag.getArg1()).find()) {
-                    log(lineNo, "type.tagFormat", "@" + tagName, format);
+                    log(lineNo, TAG_FORMAT, "@" + tagName, format);
                 }
             }
         }
         if (tagCount == 0) {
-            log(lineNo, "type.missingTag", "@" + tagName);
+            log(lineNo, MISSING_TAG, "@" + tagName);
         }
     }
 

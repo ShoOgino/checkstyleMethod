@@ -6,16 +6,16 @@
         checkConfig.addAttribute("checkHtml", "true");
         final String[] expected =
         {
-            "63:11: Unclosed HTML tag found: <b>This guy is missing end of bold tag",
-            "66:7: Extra HTML tag found: </td>Extra tag shouldn't be here",
-            "68:19: Unclosed HTML tag found: <code>dummy.",
-            "75:23: Unclosed HTML tag found: <b>should fail",
-            "82:31: Unclosed HTML tag found: <b>should fail",
-            "89:31: Extra HTML tag found: </code>",
-            "90: Incomplete HTML tag found:     * should fail <",
-            "109:39: Extra HTML tag found: </img>",
-            "186:8: Unclosed HTML tag found: <blockquote>",
-            "335:33: Extra HTML tag found: </string>",
+            "63:11: " + getCheckMessage(UNCLOSED_HTML, "<b>This guy is missing end of bold tag"),
+            "66:7: " + getCheckMessage(EXTRA_HTML, "</td>Extra tag shouldn't be here"),
+            "68:19: " + getCheckMessage(UNCLOSED_HTML, "<code>dummy."),
+            "75:23: " + getCheckMessage(UNCLOSED_HTML, "<b>should fail"),
+            "82:31: " + getCheckMessage(UNCLOSED_HTML, "<b>should fail"),
+            "89:31: " + getCheckMessage(EXTRA_HTML, "</code>"),
+            "90: " + getCheckMessage(INCOMPLETE_TAG, "    * should fail <"),
+            "109:39: " + getCheckMessage(EXTRA_HTML, "</img>"),
+            "186:8: " + getCheckMessage(UNCLOSED_HTML, "<blockquote>"),
+            "335:33: " + getCheckMessage(EXTRA_HTML, "</string>"),
         };
 
         verify(checkConfig, getPath("InputJavadocStyleCheck.java"), expected);

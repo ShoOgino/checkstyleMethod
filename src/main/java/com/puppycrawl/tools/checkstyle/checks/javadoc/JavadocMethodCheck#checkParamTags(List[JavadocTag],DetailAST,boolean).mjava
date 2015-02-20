@@ -57,7 +57,7 @@
 
             // Handle extra JavadocTag
             if (!found) {
-                log(tag.getLineNo(), tag.getColumnNo(), "javadoc.unusedTag",
+                log(tag.getLineNo(), tag.getColumnNo(), MSG_UNUSED_TAG,
                         "@param", tag.getArg1());
             }
         }
@@ -66,12 +66,12 @@
         // the user has chosen to suppress these problems
         if (!allowMissingParamTags && reportExpectedTags) {
             for (DetailAST param : params) {
-                log(param, "javadoc.expectedTag",
+                log(param, MSG_EXCPECTED_TAG,
                     JavadocTagInfo.PARAM.getText(), param.getText());
             }
 
             for (DetailAST typeParam : typeParams) {
-                log(typeParam, "javadoc.expectedTag",
+                log(typeParam, MSG_EXCPECTED_TAG,
                     JavadocTagInfo.PARAM.getText(),
                     "<" + typeParam.findFirstToken(TokenTypes.IDENT).getText()
                     + ">");

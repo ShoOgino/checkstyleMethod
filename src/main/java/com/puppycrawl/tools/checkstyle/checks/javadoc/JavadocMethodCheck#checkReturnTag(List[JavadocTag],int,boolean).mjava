@@ -19,7 +19,7 @@
             if (jt.isReturnTag()) {
                 if (found) {
                     log(jt.getLineNo(), jt.getColumnNo(),
-                        "javadoc.duplicateTag",
+                        MSG_DUPLICATE_TAG,
                         JavadocTagInfo.RETURN.getText());
                 }
                 found = true;
@@ -30,7 +30,7 @@
         // Handle there being no @return tags :- unless
         // the user has chosen to suppress these problems
         if (!found && !allowMissingReturnTag && reportExpectedTags) {
-            log(lineNo, "javadoc.return.expected");
+            log(lineNo, MSG_RETURN_EXPECTED);
         }
     }
 

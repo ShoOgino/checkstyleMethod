@@ -6,7 +6,7 @@
             final int lineNo = ast.getLineNo();
             final TextBlock cmt = contents.getJavadocBefore(lineNo);
             if (cmt == null) {
-                log(lineNo, "javadoc.missing");
+                log(lineNo, JAVADOC_MISSING);
             }
             else if (ScopeUtils.isOuterMostType(ast)) {
                 // don't check author/version for inner classes

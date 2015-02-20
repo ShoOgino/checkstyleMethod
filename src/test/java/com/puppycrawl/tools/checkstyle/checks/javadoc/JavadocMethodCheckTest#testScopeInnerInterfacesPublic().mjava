@@ -3,8 +3,8 @@
     {
         checkConfig.addAttribute("scope", Scope.PUBLIC.getName());
         final String[] expected = {
-            "43:9: Missing a Javadoc comment.",
-            "44:9: Missing a Javadoc comment.",
+            "43:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "44:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
         };
         verify(checkConfig, getPath("InputScopeInnerInterfaces.java"), expected);
     }

@@ -28,7 +28,7 @@
                 final int contentStart = matcher.start(1);
                 final String content = s.substring(contentStart);
                 if ((formatRE != null) && !formatRE.matcher(content).find()) {
-                    log(lineNo + i - comment.length, "type.tagFormat", tag,
+                    log(lineNo + i - comment.length, TAG_FORMAT, tag,
                         format);
                 }
                 else {
@@ -38,7 +38,7 @@
             }
         }
         if (tagCount == 0) {
-            log(lineNo, "type.missingTag", tag);
+            log(lineNo, MISSING_TAG, tag);
         }
 
     }

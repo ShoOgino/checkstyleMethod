@@ -6,18 +6,18 @@
             createCheckConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("versionFormat", "\\$Revision.*\\$");
         final String[] expected = {
-            "13: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "22: Type Javadoc comment is missing an @version tag.",
-            "31: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "40: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "49: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "58: Type Javadoc comment is missing an @version tag.",
-            "67: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "76: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "85: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "94: Type Javadoc comment is missing an @version tag.",
-            "103: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
-            "112: Type Javadoc tag @version must match pattern '\\$Revision.*\\$'.",
+            "13: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "22: " + getCheckMessage(MISSING_TAG, "@version"),
+            "31: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "40: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "49: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "58: " + getCheckMessage(MISSING_TAG, "@version"),
+            "67: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "76: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "85: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "94: " + getCheckMessage(MISSING_TAG, "@version"),
+            "103: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
+            "112: " + getCheckMessage(TAG_FORMAT, "@version", "\\$Revision.*\\$"),
         };
         verify(checkConfig, getPath("InputJavadoc.java"), expected);
     }

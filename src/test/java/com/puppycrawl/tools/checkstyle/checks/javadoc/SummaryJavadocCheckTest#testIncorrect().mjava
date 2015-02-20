@@ -4,13 +4,13 @@
         checkConfig.addAttribute("forbiddenSummaryFragments",
                 "^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )");
         final String[] expected = {
-            "14: First sentence should be present.",
-            "37: First sentence should be present.",
-            "47: Forbidden summary fragment.",
-            "58: Forbidden summary fragment.",
-            "69: First sentence should be present.",
-            "83: Forbidden summary fragment.",
-            "103: First sentence should be present.",
+            "14: " + getCheckMessage(SUMMARY_FIRST_SENTENCE),
+            "37: " + getCheckMessage(SUMMARY_FIRST_SENTENCE),
+            "47: " + getCheckMessage(SUMMARY_JAVADOC),
+            "58: " + getCheckMessage(SUMMARY_JAVADOC),
+            "69: " + getCheckMessage(SUMMARY_FIRST_SENTENCE),
+            "83: " + getCheckMessage(SUMMARY_JAVADOC),
+            "103: " + getCheckMessage(SUMMARY_FIRST_SENTENCE),
         };
         verify(checkConfig, getPath("javadoc/InputIncorrectSummaryJavaDocCheck.java"), expected);
     }

@@ -5,7 +5,7 @@
         config.addAttribute("allowedAnnotations", "MyAnnotation, Override");
         config.addAttribute("minLineCount", "2");
         final String[] expected = {
-            "57:5: Missing a Javadoc comment.",
+            "57:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
         };
         verify(config, getPath("javadoc/InputJavadocMethodCheck_SmallMethods.java"), expected);
     }

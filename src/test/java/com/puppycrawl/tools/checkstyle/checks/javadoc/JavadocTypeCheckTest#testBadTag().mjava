@@ -4,7 +4,7 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocTypeCheck.class);
         final String[] expected = {
-            "5:4: Unknown tag 'mytag'.",
+            "5:4: " + getCheckMessage(UNKNOWN_TAG, "mytag"),
         };
         verify(checkConfig,
                getPath("javadoc" + File.separator + "InputBadTag.java"),

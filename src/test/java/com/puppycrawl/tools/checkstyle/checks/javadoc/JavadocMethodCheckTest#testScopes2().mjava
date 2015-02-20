@@ -3,10 +3,10 @@
     {
         checkConfig.addAttribute("scope", Scope.PROTECTED.getName());
         final String[] expected = {
-            "10:5: Missing a Javadoc comment.",
-            "11:5: Missing a Javadoc comment.",
-            "21:9: Missing a Javadoc comment.",
-            "22:9: Missing a Javadoc comment.", };
+            "10:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "11:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "21:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "22:9: " + getCheckMessage(MSG_JAVADOC_MISSING), };
         verify(checkConfig, getPath("javadoc" + File.separator
                                     + "InputNoJavadoc.java"), expected);
     }

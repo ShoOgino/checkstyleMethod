@@ -6,9 +6,9 @@
             createCheckConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("authorFormat", "0*");
         final String[] expected = {
-            "22: Type Javadoc comment is missing an @author tag.",
-            "58: Type Javadoc comment is missing an @author tag.",
-            "94: Type Javadoc comment is missing an @author tag.",
+            "22: " + getCheckMessage(MISSING_TAG, "@author"),
+            "58: " + getCheckMessage(MISSING_TAG, "@author"),
+            "94: " + getCheckMessage(MISSING_TAG, "@author"),
         };
         verify(checkConfig, getPath("InputJavadoc.java"), expected);
     }

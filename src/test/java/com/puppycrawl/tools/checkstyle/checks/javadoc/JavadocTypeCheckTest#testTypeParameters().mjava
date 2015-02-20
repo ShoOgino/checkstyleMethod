@@ -4,8 +4,8 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocTypeCheck.class);
         final String[] expected = {
-            "7:4: Unused @param tag for '<D123>'.",
-            "11: Type Javadoc comment is missing an @param <C456> tag.",
+            "7:4: " + getCheckMessage(UNUSED_TAG, "@param", "<D123>"),
+            "11: " + getCheckMessage(MISSING_TAG, "@param <C456>"),
         };
         verify(checkConfig, getPath("InputTypeParamsTags.java"), expected);
     }

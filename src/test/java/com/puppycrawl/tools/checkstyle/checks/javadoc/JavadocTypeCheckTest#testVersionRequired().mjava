@@ -6,7 +6,7 @@
             createCheckConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("versionFormat", "\\S");
         final String[] expected = {
-            "13: Type Javadoc comment is missing an @version tag.",
+            "13: " + getCheckMessage(MISSING_TAG, "@version"),
         };
         verify(checkConfig, getPath("InputWhitespace.java"), expected);
     }
