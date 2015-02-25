@@ -10,14 +10,18 @@
                 visitExpr();
                 break;
             case TokenTypes.BOR:
-                if (!isPipeOperator(ast)) {
+                if (!isPipeOperator(ast) && !isPassedInParameter(ast)) {
+                    context.visitBooleanOperator();
+                }
+                break;
+            case TokenTypes.BAND:
+            case TokenTypes.BXOR:
+                if (!isPassedInParameter(ast)) {
                     context.visitBooleanOperator();
                 }
                 break;
             case TokenTypes.LAND:
-            case TokenTypes.BAND:
             case TokenTypes.LOR:
-            case TokenTypes.BXOR:
                 context.visitBooleanOperator();
                 break;
             default:
