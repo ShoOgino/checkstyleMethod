@@ -1,0 +1,25 @@
+    /**
+     * Determines whether or not the given AST is field declaration
+     *
+     * @param ast AST from which to search for an enclosing field declaration
+     *
+     * @return {@code true} if {@code ast} is in the scope of field declaration
+     */
+    private boolean isFieldDeclaration(DetailAST ast)
+    {
+        DetailAST varDefAST = ast;
+        while ((varDefAST != null)
+                && (varDefAST.getType() != TokenTypes.VARIABLE_DEF))
+        {
+            varDefAST = varDefAST.getParent();
+        }
+
+        // contains variable declaration
+        // and it is directly inside class declaration
+        return varDefAST != null
+                && varDefAST.getParent() != null
+                && varDefAST.getParent().getParent() != null
+                && varDefAST.getParent().getParent().getType()
+                == TokenTypes.CLASS_DEF;
+    }
+

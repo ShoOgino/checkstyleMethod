@@ -14,7 +14,9 @@
         final DetailAST constantDefAST = findContainingConstantDef(ast);
 
         if (constantDefAST == null) {
-            reportMagicNumber(ast);
+            if (!(ignoreFieldDeclaration && isFieldDeclaration(ast))) {
+                reportMagicNumber(ast);
+            }
         }
         else {
             DetailAST astNode = ast.getParent();
