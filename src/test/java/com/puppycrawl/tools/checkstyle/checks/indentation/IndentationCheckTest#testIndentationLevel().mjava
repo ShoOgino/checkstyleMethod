@@ -2,11 +2,18 @@
     public void testIndentationLevel() throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
-        checkConfig.addAttribute("basicOffset", Integer.valueOf(2).toString());
-        checkConfig.addAttribute("lineWrappingIndentation", Integer.valueOf(2).toString());
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "2");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "2");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
         final String[] expected = {
-            "25: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 5, 4),
+            "29: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 5, 4),
         };
-        verify(checkConfig, getPath("indentation/InputUseTwoSpaces.java"), expected);
+        verifyWarns(checkConfig, getPath("indentation/InputUseTwoSpaces.java"), expected);
     }
 

@@ -3,36 +3,44 @@
         throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
-        final Checker c = createChecker(checkConfig);
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
         final String fname = getPath("indentation/InputInvalidTryIndent.java");
         final String[] expected = {
-            "21: " + getCheckMessage(MSG_ERROR, "try", 9, 8),
-            "22: " + getCheckMessage(MSG_ERROR, "try rcurly", 7, 8),
-            "24: " + getCheckMessage(MSG_ERROR, "catch rcurly", 7, 8),
-            "26: " + getCheckMessage(MSG_ERROR, "try", 4, 8),
-            "27: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 8, 12),
-            "27: " + getCheckMessage(MSG_CHILD_ERROR, "try", 8, 12),
-            "28: " + getCheckMessage(MSG_ERROR, "try rcurly", 4, 8),
-            "29: " + getCheckMessage(MSG_CHILD_ERROR, "finally", 8, 12),
-            "29: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 8, 12),
-            "34: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 8, 12),
-            "34: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 8, 12),
-            "39: " + getCheckMessage(MSG_ERROR, "try rcurly", 10, 8),
-            "41: " + getCheckMessage(MSG_ERROR, "catch rcurly", 6, 8),
-            "48: " + getCheckMessage(MSG_ERROR, "catch rcurly", 5, 8),
-            "55: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 10, 12),
-            "55: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
-            "56: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 14, 12),
-            "57: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 10, 12),
-            "57: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
-            "59: " + getCheckMessage(MSG_ERROR, "catch", 6, 8),
-            "66: " + getCheckMessage(MSG_ERROR, "try lcurly", 10, 8),
-            "68: " + getCheckMessage(MSG_ERROR, "try rcurly", 10, 8),
-            "70: " + getCheckMessage(MSG_ERROR, "catch lcurly", 6, 8),
-            "73: " + getCheckMessage(MSG_ERROR, "catch rcurly", 10, 8),
-            "76: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 10, 12),
-            "76: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
+            "25: " + getCheckMessage(MSG_ERROR, "try", 9, 8),
+            "26: " + getCheckMessage(MSG_ERROR, "try rcurly", 7, 8),
+            "28: " + getCheckMessage(MSG_ERROR, "catch rcurly", 7, 8),
+            "30: " + getCheckMessage(MSG_ERROR, "try", 4, 8),
+            "31: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 8, 12),
+            "31: " + getCheckMessage(MSG_CHILD_ERROR, "try", 8, 12),
+            "32: " + getCheckMessage(MSG_ERROR, "try rcurly", 4, 8),
+            "33: " + getCheckMessage(MSG_CHILD_ERROR, "finally", 8, 12),
+            "33: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 8, 12),
+            "38: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 8, 12),
+            "38: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 8, 12),
+            "43: " + getCheckMessage(MSG_ERROR, "try rcurly", 10, 8),
+            "45: " + getCheckMessage(MSG_ERROR, "catch rcurly", 6, 8),
+            "52: " + getCheckMessage(MSG_ERROR, "catch rcurly", 5, 8),
+            "59: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 10, 12),
+            "59: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
+            "60: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 14, 12),
+            "61: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 10, 12),
+            "61: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
+            "63: " + getCheckMessage(MSG_ERROR, "catch", 6, 8),
+            "70: " + getCheckMessage(MSG_ERROR, "try lcurly", 10, 8),
+            "72: " + getCheckMessage(MSG_ERROR, "try rcurly", 10, 8),
+            "74: " + getCheckMessage(MSG_ERROR, "catch lcurly", 6, 8),
+            "77: " + getCheckMessage(MSG_ERROR, "catch rcurly", 10, 8),
+            "80: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 10, 12),
+            "80: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
         };
-        verify(c, fname, expected);
+        verifyWarns(checkConfig, fname, expected, 6);
     }
 

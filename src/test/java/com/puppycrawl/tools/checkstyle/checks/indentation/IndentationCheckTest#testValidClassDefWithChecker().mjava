@@ -3,12 +3,20 @@
         throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
-        final Checker c = createChecker(checkConfig);
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
         final String fname = getPath("indentation/InputValidClassDefIndent.java");
         final String[] expected = {
-            "46: " + getCheckMessage(MSG_ERROR, "class", 0, 4),
-            "68: " + getCheckMessage(MSG_ERROR, "int", 8, 12),
+            "49: " + getCheckMessage(MSG_ERROR, "class", 0, 4),
+            "71: " + getCheckMessage(MSG_ERROR, "int", 8, 12),
         };
-        verify(c, fname, expected);
+        verifyWarns(checkConfig, fname, expected);
     }
 

@@ -3,49 +3,57 @@
         throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
-        final Checker c = createChecker(checkConfig);
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
         final String fname = getPath("indentation/InputInvalidMethodIndent.java");
         final String[] expected = {
-            "17: " + getCheckMessage(MSG_ERROR, "ctor def rcurly", 6, 4),
-            "20: " + getCheckMessage(MSG_ERROR, "ctor def modifier", 6, 4),
-            "21: " + getCheckMessage(MSG_ERROR, "ctor def lcurly", 2, 4),
-            "22: " + getCheckMessage(MSG_ERROR, "ctor def rcurly", 6, 4),
-            "25: " + getCheckMessage(MSG_ERROR, "method def modifier", 2, 4),
-            "26: " + getCheckMessage(MSG_ERROR, "method def rcurly", 6, 4),
-            "63: " + getCheckMessage(MSG_ERROR, "method def modifier", 5, 4),
-            "64: " + getCheckMessage(MSG_ERROR, "final", 5, 9),
-            "65: " + getCheckMessage(MSG_ERROR, "void", 5, 9),
-            "66: " + getCheckMessage(MSG_ERROR, "method5", 4, 9),
-            "74: " + getCheckMessage(MSG_ERROR, "method def modifier", 3, 4),
-            "75: " + getCheckMessage(MSG_ERROR, "final", 3, 7),
-            "76: " + getCheckMessage(MSG_ERROR, "void", 3, 7),
-            "77: " + getCheckMessage(MSG_ERROR, "method6", 5, 7),
-            "87: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 4, 8),
-            "87: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 4, 8),
-            "92: " + getCheckMessage(MSG_ERROR, "member def type", 6, 8),
-            "92: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 6, 8),
-            "93: " + getCheckMessage(MSG_ERROR, "if", 6, 8),
-            "94: " + getCheckMessage(MSG_CHILD_ERROR, "if", 10, 12),
-            "94: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
-            "95: " + getCheckMessage(MSG_ERROR, "if rcurly", 6, 8),
-            "98: " + getCheckMessage(MSG_ERROR, "Arrays", 10, 12),
-            "107: " + getCheckMessage(MSG_ERROR, "+", 10, 12),
-            "107: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
-            "116: " + getCheckMessage(MSG_ERROR, "new", 10, 12),
-            "120: " + getCheckMessage(MSG_ERROR, "new", 10, 12),
-            "121: " + getCheckMessage(MSG_ERROR, ")", 6, 8),
-            "125: " + getCheckMessage(MSG_ERROR, "method call rparen", 6, 8),
-            "139: " + getCheckMessage(MSG_ERROR, "6", 10, 12),
-            "139: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
-            "142: " + getCheckMessage(MSG_ERROR, "6", 10, 12),
-            "142: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
-            "152: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 6, 12),
-            "164: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 4, 8),
-            "169: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 4, 8),
-            "173: " + getCheckMessage(MSG_ERROR, "int", 0, 8),
-            "174: " + getCheckMessage(MSG_ERROR, "method9", 4, 8),
-            "184: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
+            "23: " + getCheckMessage(MSG_ERROR, "ctor def rcurly", 6, 4),
+            "26: " + getCheckMessage(MSG_ERROR, "ctor def modifier", 6, 4),
+            "27: " + getCheckMessage(MSG_ERROR, "ctor def lcurly", 2, 4),
+            "28: " + getCheckMessage(MSG_ERROR, "ctor def rcurly", 6, 4),
+            "31: " + getCheckMessage(MSG_ERROR, "method def modifier", 2, 4),
+            "32: " + getCheckMessage(MSG_ERROR, "method def rcurly", 6, 4),
+            "69: " + getCheckMessage(MSG_ERROR, "method def modifier", 5, 4),
+            "70: " + getCheckMessage(MSG_ERROR, "final", 5, 9),
+            "71: " + getCheckMessage(MSG_ERROR, "void", 5, 9),
+            "72: " + getCheckMessage(MSG_ERROR, "method5", 4, 9),
+            "80: " + getCheckMessage(MSG_ERROR, "method def modifier", 3, 4),
+            "81: " + getCheckMessage(MSG_ERROR, "final", 3, 7),
+            "82: " + getCheckMessage(MSG_ERROR, "void", 3, 7),
+            "83: " + getCheckMessage(MSG_ERROR, "method6", 5, 7),
+            "93: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 4, 8),
+            "93: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 4, 8),
+            "98: " + getCheckMessage(MSG_ERROR, "member def type", 6, 8),
+            "98: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 6, 8),
+            "99: " + getCheckMessage(MSG_ERROR, "if", 6, 8),
+            "100: " + getCheckMessage(MSG_CHILD_ERROR, "if", 10, 12),
+            "100: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
+            "101: " + getCheckMessage(MSG_ERROR, "if rcurly", 6, 8),
+            "104: " + getCheckMessage(MSG_ERROR, "Arrays", 10, 12),
+            "113: " + getCheckMessage(MSG_ERROR, "+", 10, 12),
+            "113: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
+            "122: " + getCheckMessage(MSG_ERROR, "new", 10, 12),
+            "126: " + getCheckMessage(MSG_ERROR, "new", 10, 12),
+            "127: " + getCheckMessage(MSG_ERROR, ")", 6, 8),
+            "131: " + getCheckMessage(MSG_ERROR, "method call rparen", 6, 8),
+            "145: " + getCheckMessage(MSG_ERROR, "6", 10, 12),
+            "145: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
+            "148: " + getCheckMessage(MSG_ERROR, "6", 10, 12),
+            "148: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
+            "158: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 6, 12),
+            "170: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 4, 8),
+            "175: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 4, 8),
+            "179: " + getCheckMessage(MSG_ERROR, "int", 0, 8),
+            "180: " + getCheckMessage(MSG_ERROR, "method9", 4, 8),
+            "190: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
         };
-        verify(c, fname, expected);
+        verifyWarns(checkConfig, fname, expected, 6);
     }
 

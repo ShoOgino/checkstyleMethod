@@ -1,60 +1,60 @@
-    // test ifs
-    public void emptyIfTest()
-    {
-        boolean test = true;
-                
-        // lcurly on same line
- if (test) {
-        }
-        
-        // lcurly on next line -- if, rcurly indented too far, lcurly not far enough
-        // 
-         if (test) 
-         {
-       }
-        
-      if (test) 
-     {
-     }
-                
-        // lcurly for if and else on same line -- too much space after if on same line -- ALLOWED
-        if (test)      {
-          } else {      // this is not allowed
-       }
-        
-        // lcurly for if and else on same line
-         if (test) 
-       {
-        } 
-         else 
-        {
-         }
+    // test ifs //indent:4 exp:4
+    public void emptyIfTest() //indent:4 exp:4
+    { //indent:4 exp:4
+        boolean test = true; //indent:8 exp:8
 
-        // lcurly for if and else on same line -- mixed braces
-          if (test) {
-       } 
-         else 
-       {
-         }
-        
+        // lcurly on same line //indent:8 exp:8
+ if (test) { //indent:1 exp:8 warn
+        } //indent:8 exp:8
 
-        // lcurly for if and else on same line -- mixed braces
-         if (test) 
-         {
-         } else 
-       {
-          }
-        
-        // lcurly for if and else on same line -- mixed braces
-      if (test) 
-          {
-          } else {
-       }
-        
-        // lcurly for if and else on same line -- mixed braces, unnested
-     if (test) {
-           } 
-     else {
-           }
-    }
+        // lcurly on next line -- if, rcurly indented too far, lcurly not far enough //indent:8 exp:8
+        //  //indent:8 exp:8
+         if (test)  //indent:9 exp:8 warn
+         { //indent:9 exp:8 warn
+       } //indent:7 exp:8 warn
+
+      if (test)  //indent:6 exp:8 warn
+     { //indent:5 exp:8 warn
+     } //indent:5 exp:8 warn
+
+        // lcurly for if and else on same line -- too much space after if on same line -- ALLOWED //indent:8 exp:8
+        if (test)      { //indent:8 exp:8
+          } else {      // this is not allowed //indent:10 exp:8 warn
+       } //indent:7 exp:8 warn
+
+        // lcurly for if and else on same line //indent:8 exp:8
+         if (test)  //indent:9 exp:8 warn
+       { //indent:7 exp:8 warn
+        }  //indent:8 exp:8
+         else  //indent:9 exp:8 warn
+        { //indent:8 exp:8
+         } //indent:9 exp:8 warn
+
+        // lcurly for if and else on same line -- mixed braces //indent:8 exp:8
+          if (test) { //indent:10 exp:8 warn
+       }  //indent:7 exp:8 warn
+         else  //indent:9 exp:8 warn
+       { //indent:7 exp:8 warn
+         } //indent:9 exp:8 warn
+
+
+        // lcurly for if and else on same line -- mixed braces //indent:8 exp:8
+         if (test)  //indent:9 exp:8 warn
+         { //indent:9 exp:8 warn
+         } else  //indent:9 exp:8 warn
+       { //indent:7 exp:9 warn
+          } //indent:10 exp:8 warn
+
+        // lcurly for if and else on same line -- mixed braces //indent:8 exp:8
+      if (test)  //indent:6 exp:8 warn
+          { //indent:10 exp:8 warn
+          } else { //indent:10 exp:8 warn
+       } //indent:7 exp:8 warn
+
+        // lcurly for if and else on same line -- mixed braces, unnested //indent:8 exp:8
+     if (test) { //indent:5 exp:8 warn
+           }  //indent:11 exp:8 warn
+     else { //indent:5 exp:8 warn
+           } //indent:11 exp:8 warn
+    } //indent:4 exp:4
 

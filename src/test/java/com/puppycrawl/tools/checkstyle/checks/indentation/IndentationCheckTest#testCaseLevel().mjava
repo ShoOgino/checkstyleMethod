@@ -2,10 +2,18 @@
     public void testCaseLevel() throws Exception
     {
         final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
-        checkConfig.addAttribute("caseIndent", Integer.valueOf(0).toString());
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "0");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
         final String[] expected = {
-            "23: " + getCheckMessage(MSG_CHILD_ERROR, "case", 10, 8),
+            "27: " + getCheckMessage(MSG_CHILD_ERROR, "case", 10, 8),
         };
-        verify(checkConfig, getPath("indentation/InputCaseLevel.java"), expected);
+        verifyWarns(checkConfig, getPath("indentation/InputCaseLevel.java"), expected);
     }
 

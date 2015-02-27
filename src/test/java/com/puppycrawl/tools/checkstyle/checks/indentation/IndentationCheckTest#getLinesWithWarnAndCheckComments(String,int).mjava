@@ -1,0 +1,48 @@
+    protected static Integer[] getLinesWithWarnAndCheckComments(String aFileName,
+                    final int tabWidth)
+                    throws IOException
+    {
+        int lineNumber = 1;
+        List<Integer> result = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(aFileName))) {
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
+                Matcher match = LINE_WITH_COMMENT_REGEX.matcher(line);
+                if (match.matches()) {
+                    final String comment = match.group(1);
+                    final int indentInComment = getIndentFromComment(comment);
+                    final int actualIndent = getLineStart(line, tabWidth);
+
+                    if (actualIndent != indentInComment) {
+                        throw new RuntimeException(String.format(
+                                        "File \"%1$s\" has incorrect indentation in comment."
+                                                        + "Line %2$d: comment:%3$d, actual:%4$d.",
+                                        aFileName,
+                                        lineNumber,
+                                        indentInComment,
+                                        actualIndent));
+                    }
+
+                    if (isWarnComment(comment)) {
+                        result.add(lineNumber);
+                    }
+
+                    if (!isCommentConsistent(comment)) {
+                        throw new RuntimeException(String.format(
+                                        "File \"%1$s\" has inconsistent comment on line %2$d",
+                                        aFileName,
+                                        lineNumber));
+                    }
+                }
+                else if (NONEMPTY_LINE_REGEX.matcher(line).matches()) {
+                    throw new RuntimeException(String.format(
+                                    "File \"%1$s\" has no indentation comment or its format "
+                                                    + "malformed. Error on line: %2$d",
+                                    aFileName,
+                                    lineNumber));
+                }
+                lineNumber++;
+            }
+        }
+        return result.toArray(new Integer[result.size()]);
+    }
+

@@ -1,81 +1,81 @@
-    private void method1()
-    {
-        boolean test = true;
-         while (test) {
-       }
+    private void method1() //indent:4 exp:4
+    { //indent:4 exp:4
+        boolean test = true; //indent:8 exp:8
+         while (test) { //indent:9 exp:8 warn
+       } //indent:7 exp:8 warn
 
-       while (test) 
-         {
-         }
+       while (test)  //indent:7 exp:8 warn
+         { //indent:9 exp:8 warn
+         } //indent:9 exp:8 warn
 
-         while (test) 
-      {
-              System.getProperty("foo");
-      }
+         while (test)  //indent:9 exp:8 warn
+      { //indent:6 exp:8 warn
+              System.getProperty("foo"); //indent:14 exp:12 warn
+      } //indent:6 exp:8 warn
 
-          while (test)  {
-            System.getProperty("foo");
-          }
-        
-          while (test)  {
-            System.getProperty("foo");
-            System.getProperty("foo");
-          }
-        
-      while (test)  
-          {
-            System.getProperty("foo");
-            System.getProperty("foo");
-      }
+          while (test)  { //indent:10 exp:8 warn
+            System.getProperty("foo"); //indent:12 exp:12
+          } //indent:10 exp:8 warn
 
-        while (test)      {        // TODO: this is allowed
-              if (test) {
-                  System.getProperty("foo");
-              }
-              System.getProperty("foo");
-          }
-        
-        while (test 
-          && 4 < 7 && 8 < 9
-            && 3 < 4) {
-        }
+          while (test)  { //indent:10 exp:8 warn
+            System.getProperty("foo"); //indent:12 exp:12
+            System.getProperty("foo"); //indent:12 exp:12
+          } //indent:10 exp:8 warn
 
-        while (test 
-            && 4 < 7 && 8 < 9
-          && 3 < 4) {
-        }
+      while (test)   //indent:6 exp:8 warn
+          { //indent:10 exp:8 warn
+            System.getProperty("foo"); //indent:12 exp:12
+            System.getProperty("foo"); //indent:12 exp:12
+      } //indent:6 exp:8 warn
 
-        while (test 
-            && 4 < 7 && 8 < 9
-          && 3 < 4) 
-        {
-        }
-        
-        while (test 
-            && 4 < 7 && 8 < 9
-            && 3 < 4
-     ) {
-            
-        }
-        
-        while (test 
-            && 4 < 7 && 8 < 9
-            && 3 < 4
-          ) {
-            
-        }
+        while (test)      {        // TODO: this is allowed //indent:8 exp:8
+              if (test) { //indent:14 exp:12 warn
+                  System.getProperty("foo"); //indent:18 exp:16 warn
+              } //indent:14 exp:12 warn
+              System.getProperty("foo"); //indent:14 exp:12 warn
+          } //indent:10 exp:8 warn
 
-        while (test 
-            && 4 < 7 && 8 < 9
-            && 3 < 4
-          ) 
-        {
-            
-        }
+        while (test  //indent:8 exp:8
+          && 4 < 7 && 8 < 9 //indent:10 exp:12 warn
+            && 3 < 4) { //indent:12 exp:>=12
+        } //indent:8 exp:8
 
-        while (true)
-        {
-        continue;
-        }
-    }
+        while (test  //indent:8 exp:8
+            && 4 < 7 && 8 < 9 //indent:12 exp:>=12
+          && 3 < 4) { //indent:10 exp:12 warn
+        } //indent:8 exp:8
+
+        while (test  //indent:8 exp:8
+            && 4 < 7 && 8 < 9 //indent:12 exp:>=12
+          && 3 < 4)  //indent:10 exp:12 warn
+        { //indent:8 exp:8
+        } //indent:8 exp:8
+
+        while (test  //indent:8 exp:8
+            && 4 < 7 && 8 < 9 //indent:12 exp:>=12
+            && 3 < 4 //indent:12 exp:>=12
+     ) { //indent:5 exp:8 warn
+
+        } //indent:8 exp:8
+
+        while (test  //indent:8 exp:8
+            && 4 < 7 && 8 < 9 //indent:12 exp:>=12
+            && 3 < 4 //indent:12 exp:>=12
+          ) { //indent:10 exp:8 warn
+
+        } //indent:8 exp:8
+
+        while (test  //indent:8 exp:8
+            && 4 < 7 && 8 < 9 //indent:12 exp:>=12
+            && 3 < 4 //indent:12 exp:>=12
+          )  //indent:10 exp:8 warn
+        { //indent:8 exp:8
+
+        } //indent:8 exp:8
+
+        while (true) //indent:8 exp:8
+        { //indent:8 exp:8
+        continue; //indent:8 exp:12 warn
+        } //indent:8 exp:8
+    } //indent:4 exp:4
 

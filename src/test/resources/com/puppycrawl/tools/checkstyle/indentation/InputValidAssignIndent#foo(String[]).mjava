@@ -1,39 +1,39 @@
-    void foo(String[] args)
-    {
-        int i = 1 +
-            2 +
-            3;
-        String line = mIndentCheck[
-            getLineNo()];
-        String line1 =
-            getLine();
-        line1 =
-            getLine();
-        int i1 
-            =
-            1;
-        i = 3;
+    void foo(String[] args) //indent:4 exp:4
+    { //indent:4 exp:4
+        int i = 1 + //indent:8 exp:8
+            2 + //indent:12 exp:>=12
+            3; //indent:12 exp:>=12
+        String line = mIndentCheck[ //indent:8 exp:8
+            getLineNo()]; //indent:12 exp:>=12
+        String line1 = //indent:8 exp:8
+            getLine(); //indent:12 exp:>=12
+        line1 = //indent:8 exp:8
+            getLine(); //indent:12 exp:>=12
+        int i1  //indent:8 exp:8
+            = //indent:12 exp:>=12
+            1; //indent:12 exp:>=12
+        i = 3; //indent:8 exp:8
 
-        Integer brace =
-            (candidate == SLIST)
-            ? candidate : null;
+        Integer brace = //indent:8 exp:8
+            (candidate == SLIST) //indent:12 exp:>=12
+            ? candidate : null; //indent:12 exp:>=12
 
-        AnInterfaceFooWithALongName f =
-            new AnInterfaceFooWithALongName() {
-                public void bar() {
-                }
-            };
+        AnInterfaceFooWithALongName f = //indent:8 exp:8
+            new AnInterfaceFooWithALongName() { //indent:12 exp:>=12
+                public void bar() { //indent:16 exp:16
+                } //indent:16 exp:16
+            }; //indent:12 exp:12
 
-        AnInterfaceFooWithALongName f1
-            = new AnInterfaceFooWithALongName() {
-                public void bar() {
-                }
-            };
-// XXX: need to be fixed
-//         function.lastArgument().candidate = parameters;
-//         function.lastArgument().candidate
-//             =
-//             parameters;
-        // TODO: add more testing
-    }
+        AnInterfaceFooWithALongName f1 //indent:8 exp:8
+            = new AnInterfaceFooWithALongName() { //indent:12 exp:>=12
+                public void bar() { //indent:16 exp:16
+                } //indent:16 exp:16
+            }; //indent:12 exp:12
+// XXX: need to be fixed //indent:0 exp:0
+//         function.lastArgument().candidate = parameters; //indent:0 exp:0
+//         function.lastArgument().candidate //indent:0 exp:0
+//             = //indent:0 exp:0
+//             parameters; //indent:0 exp:0
+        // TODO: add more testing //indent:8 exp:8
+    } //indent:4 exp:4
 
