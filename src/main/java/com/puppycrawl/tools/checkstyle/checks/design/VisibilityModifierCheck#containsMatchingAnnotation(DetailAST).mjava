@@ -1,0 +1,48 @@
+    /**
+     * Checks whether the AST is annotated with
+     * an annotation containing the passed in regular
+     * expression and return the AST representing that
+     * annotation.
+     *
+     * <p>
+     * This method will not look for imports or package
+     * statements to detect the passed in annotation.
+     * </p>
+     *
+     * <p>
+     * To check if an AST contains a passed in annotation
+     * taking into account fully-qualified names
+     * (ex: java.lang.Override, Override)
+     * this method will need to be called twice. Once for each
+     * name given.
+     * </p>
+     *
+     * @param variableDef {@link TokenTypes#VARIABLE_DEF variable def node}.
+     * @return the AST representing the first such annotation or null if
+     *         no such annotation was found
+     */
+    private DetailAST containsMatchingAnnotation(DetailAST variableDef)
+    {
+        DetailAST matchingAnnotation = null;
+
+        final DetailAST holder = AnnotationUtility.getAnnotationHolder(variableDef);
+
+        for (DetailAST child = holder.getFirstChild();
+            child != null; child = child.getNextSibling())
+        {
+            if (child.getType() == TokenTypes.ANNOTATION) {
+                final DetailAST at = child.getFirstChild();
+                final String name =
+                    FullIdent.createFullIdent(at.getNextSibling()).getText();
+                if (ignoreAnnotationCanonicalNames.contains(name)
+                         || ignoreAnnotationShortNames.contains(name))
+                {
+                    matchingAnnotation = child;
+                    break;
+                }
+            }
+        }
+
+        return matchingAnnotation;
+    }
+

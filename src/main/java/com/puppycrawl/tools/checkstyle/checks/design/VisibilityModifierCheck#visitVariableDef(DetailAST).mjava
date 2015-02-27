@@ -8,7 +8,7 @@
         final boolean inInterfaceOrAnnotationBlock =
                 ScopeUtils.inInterfaceOrAnnotationBlock(variableDef);
 
-        if (!inInterfaceOrAnnotationBlock) {
+        if (!inInterfaceOrAnnotationBlock && !hasIgnoreAnnotation(variableDef)) {
             final DetailAST varNameAST = getVarNameAST(variableDef);
             final String varName = varNameAST.getText();
             if (!hasProperAccessModifier(variableDef, varName)) {

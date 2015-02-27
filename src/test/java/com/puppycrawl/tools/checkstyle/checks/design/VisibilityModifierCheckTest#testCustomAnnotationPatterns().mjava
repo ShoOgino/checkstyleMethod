@@ -1,0 +1,23 @@
+    @Test
+    public void testCustomAnnotationPatterns() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(VisibilityModifierCheck.class);
+        checkConfig.addAttribute("ignoreAnnotationCanonicalNames",
+                "com.puppycrawl.tools.checkstyle.AnnotatedVisibility.CustomAnnotation");
+        final String[] expected = {
+            "15:28: " + getCheckMessage(MSG_KEY, "publicJUnitRule"),
+            "18:28: " + getCheckMessage(MSG_KEY, "fqPublicJUnitRule"),
+            "21:19: " + getCheckMessage(MSG_KEY, "googleCommonsAnnotatedPublic"),
+            "24:12: " + getCheckMessage(MSG_KEY, "googleCommonsAnnotatedPackage"),
+            "27:22: " + getCheckMessage(MSG_KEY, "googleCommonsAnnotatedProtected"),
+            "30:19: " + getCheckMessage(MSG_KEY, "fqGoogleCommonsAnnotatedPublic"),
+            "33:12: " + getCheckMessage(MSG_KEY, "fqGoogleCommonsAnnotatedPackage"),
+            "36:22: " + getCheckMessage(MSG_KEY, "fqGoogleCommonsAnnotatedProtected"),
+            "47:19: " + getCheckMessage(MSG_KEY, "unannotatedPublic"),
+            "48:12: " + getCheckMessage(MSG_KEY, "unannotatedPackage"),
+            "49:22: " + getCheckMessage(MSG_KEY, "unannotatedProtected"),
+        };
+        verify(checkConfig, getPath("AnnotatedVisibility.java"), expected);
+    }
+

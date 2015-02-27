@@ -2,7 +2,13 @@
     public void beginTree(DetailAST rootAst)
     {
         immutableClassShortNames.clear();
-        final List<String> shortNames = getClassShortNames(immutableClassCanonicalNames);
-        immutableClassShortNames.addAll(shortNames);
+        final List<String> classShortNames =
+                getClassShortNames(immutableClassCanonicalNames);
+        immutableClassShortNames.addAll(classShortNames);
+
+        ignoreAnnotationShortNames.clear();
+        final List<String> annotationShortNames =
+                getClassShortNames(ignoreAnnotationCanonicalNames);
+        ignoreAnnotationShortNames.addAll(annotationShortNames);
     }
 
