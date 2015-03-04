@@ -8,10 +8,9 @@
         {
             isElseIf = true;
         }
-        boolean skipStatement = false;
-        if (ast.getType() == TokenTypes.LITERAL_IF) {
-            skipStatement = isSkipIfBlock(ast);
-        }
+
+        final boolean skipStatement = isSkipStatement(ast);
+
         if ((slistAST == null) && !isElseIf && !skipStatement) {
             log(ast.getLineNo(), MSG_KEY_NEED_BRACES, ast.getText());
         }

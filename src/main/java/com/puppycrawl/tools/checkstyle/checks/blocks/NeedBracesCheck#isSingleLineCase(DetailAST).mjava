@@ -1,0 +1,26 @@
+    /**
+     * Checks if current case statement is single-line statement, e.g.:
+     * <p>
+     * <code>
+     * case 1: dosomeStuff(); break;
+     * case 2: dosomeStuff(); break;
+     * </code>
+     * </p>
+     * @param literalCase {@link TokenTypes#LITERAL_CASE case statement}.
+     * @return true if current case statement is single-line statement.
+     */
+    private static boolean isSingleLineCase(DetailAST literalCase)
+    {
+        boolean result = false;
+        final DetailAST slist = literalCase.getNextSibling();
+        final DetailAST block = slist.getFirstChild();
+        if (block.getType() != TokenTypes.SLIST) {
+            final DetailAST caseBreak = slist.findFirstToken(TokenTypes.LITERAL_BREAK);
+            final boolean atOneLine = literalCase.getLineNo() == block.getLineNo();
+            if (caseBreak != null) {
+                result = atOneLine && (block.getLineNo() == caseBreak.getLineNo());
+            }
+        }
+        return result;
+    }
+
