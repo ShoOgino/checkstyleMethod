@@ -8,8 +8,8 @@
         // Check have a method with exactly 7 children which are all that
         // is allowed in a proper setter method which does not throw any
         // exceptions.
-        if ((ast.getType() != TokenTypes.METHOD_DEF)
-                || (ast.getChildCount() != MAX_CHILDREN))
+        if (ast.getType() != TokenTypes.METHOD_DEF
+                || ast.getChildCount() != MAX_CHILDREN)
         {
             return false;
         }
@@ -30,8 +30,8 @@
 
         // Check that is had only one parameter
         final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-        if ((params == null)
-                || (params.getChildCount(TokenTypes.PARAMETER_DEF) != 1))
+        if (params == null
+                || params.getChildCount(TokenTypes.PARAMETER_DEF) != 1)
         {
             return false;
         }
@@ -41,13 +41,13 @@
         // SEMI
         // RCURLY
         final DetailAST slist = ast.findFirstToken(TokenTypes.SLIST);
-        if ((slist == null) || (slist.getChildCount() != BODY_SIZE)) {
+        if (slist == null || slist.getChildCount() != BODY_SIZE) {
             return false;
         }
 
         final AST expr = slist.getFirstChild();
-        if ((expr.getType() != TokenTypes.EXPR)
-                || (expr.getFirstChild().getType() != TokenTypes.ASSIGN))
+        if (expr.getType() != TokenTypes.EXPR
+                || expr.getFirstChild().getType() != TokenTypes.ASSIGN)
         {
             return false;
         }

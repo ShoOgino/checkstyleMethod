@@ -12,8 +12,8 @@
     protected boolean isMissingJavadocAllowed(final DetailAST ast)
     {
         return allowMissingJavadoc
-            || (allowMissingPropertyJavadoc
-                && (isSetterMethod(ast) || isGetterMethod(ast)))
+            || allowMissingPropertyJavadoc
+                && (isSetterMethod(ast) || isGetterMethod(ast))
             || matchesSkipRegex(ast);
     }
 

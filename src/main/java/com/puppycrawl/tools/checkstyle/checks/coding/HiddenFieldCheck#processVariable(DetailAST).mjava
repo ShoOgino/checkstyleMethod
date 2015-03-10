@@ -8,15 +8,15 @@
     {
         if (!ScopeUtils.inInterfaceOrAnnotationBlock(ast)
             && (ScopeUtils.isLocalVariableDef(ast)
-                || (ast.getType() == TokenTypes.PARAMETER_DEF)))
+                || ast.getType() == TokenTypes.PARAMETER_DEF))
         {
             // local variable or parameter. Does it shadow a field?
             final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             final String name = nameAST.getText();
 
             if ((currentFrame.containsStaticField(name)
-                || (!inStatic(ast) && currentFrame.containsInstanceField(name)))
-                && ((regexp == null) || (!getRegexp().matcher(name).find()))
+                || !inStatic(ast) && currentFrame.containsInstanceField(name))
+                && (regexp == null || !getRegexp().matcher(name).find())
                 && !isIgnoredSetterParam(ast, name)
                 && !isIgnoredConstructorParam(ast)
                 && !isIgnoredParamOfAbstractMethod(ast))

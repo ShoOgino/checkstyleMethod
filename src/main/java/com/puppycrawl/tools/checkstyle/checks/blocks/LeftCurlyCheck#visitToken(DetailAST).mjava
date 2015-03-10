@@ -18,7 +18,7 @@
             case TokenTypes.ENUM_CONSTANT_DEF :
                 startToken = skipAnnotationOnlyLines(ast);
                 final DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
-                brace = (objBlock == null)
+                brace = objBlock == null
                     ? null
                     : objBlock.getFirstChild();
                 break;
@@ -39,7 +39,7 @@
                 startToken = ast;
                 final DetailAST candidate = ast.getFirstChild();
                 brace =
-                    (candidate.getType() == TokenTypes.SLIST)
+                    candidate.getType() == TokenTypes.SLIST
                     ? candidate
                     : null; // silently ignore
                 break;
@@ -54,7 +54,7 @@
                 brace = null;
         }
 
-        if ((brace != null) && (startToken != null)) {
+        if (brace != null && startToken != null) {
             verifyBrace(brace, startToken);
         }
     }

@@ -2,10 +2,10 @@
     public void leaveToken(DetailAST ast)
     {
         final int tokenType = ast.getType();
-        if ((TokenTypes.METHOD_DEF == tokenType)
-            || (TokenTypes.CTOR_DEF == tokenType)
-            || (TokenTypes.STATIC_INIT == tokenType)
-            || (TokenTypes.INSTANCE_INIT == tokenType))
+        if (TokenTypes.METHOD_DEF == tokenType
+            || TokenTypes.CTOR_DEF == tokenType
+            || TokenTypes.STATIC_INIT == tokenType
+            || TokenTypes.INSTANCE_INIT == tokenType)
         {
             //pop counter from the stack
             final Counter counter = counters.pop();

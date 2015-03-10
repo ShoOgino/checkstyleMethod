@@ -36,7 +36,7 @@
 
         IndentLevel theLevel = indentLevel;
         if (firstLineMatches
-            || ((firstLine > mainAst.getLineNo()) && shouldIncreaseIndent()))
+            || firstLine > mainAst.getLineNo() && shouldIncreaseIndent())
         {
             theLevel = new IndentLevel(indentLevel, getBasicOffset());
         }

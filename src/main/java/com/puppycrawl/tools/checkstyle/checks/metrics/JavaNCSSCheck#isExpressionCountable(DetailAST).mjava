@@ -22,8 +22,8 @@
             case TokenTypes.LITERAL_ELSE :
                 //don't count if or loop conditions
                 final DetailAST prevSibling = ast.getPreviousSibling();
-                countable = (prevSibling == null)
-                    || (TokenTypes.LPAREN != prevSibling.getType());
+                countable = prevSibling == null
+                    || TokenTypes.LPAREN != prevSibling.getType();
                 break;
             default :
                 countable = false;

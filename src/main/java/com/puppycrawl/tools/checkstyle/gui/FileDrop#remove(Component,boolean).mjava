@@ -10,7 +10,7 @@
     static void remove(Component c, boolean recursive)
     {
         c.setDropTarget(null);
-        if (recursive && (c instanceof Container)) {
+        if (recursive && c instanceof Container) {
             final Component[] comps = ((Container) c).getComponents();
             for (Component element : comps) {
                 remove(element, recursive);

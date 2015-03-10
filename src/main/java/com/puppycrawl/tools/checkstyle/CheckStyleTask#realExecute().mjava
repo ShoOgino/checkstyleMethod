@@ -14,7 +14,7 @@
         log("compiled on " + compileTimestamp, Project.MSG_VERBOSE);
 
         // Check for no arguments
-        if ((fileName == null) && fileSets.isEmpty()) {
+        if (fileName == null && fileSets.isEmpty()) {
             throw new BuildException(
                     "Must specify at least one of 'file' or nested 'fileset'.",
                     getLocation());
@@ -50,8 +50,8 @@
             log("To process the files took " + (endTime - startTime) + " ms.",
                 Project.MSG_VERBOSE);
             final int numWarnings = warningCounter.getCount();
-            final boolean ok = (numErrs <= maxErrors)
-                    && (numWarnings <= maxWarnings);
+            final boolean ok = numErrs <= maxErrors
+                    && numWarnings <= maxWarnings;
 
             // Handle the return status
             if (!ok) {

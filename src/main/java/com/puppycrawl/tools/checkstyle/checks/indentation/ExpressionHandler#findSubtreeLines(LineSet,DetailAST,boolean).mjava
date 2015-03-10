@@ -9,7 +9,7 @@
         boolean allowNesting)
     {
         if (getIndentCheck().getHandlerFactory().isHandledType(tree.getType())
-            || (tree.getLineNo() < 0))
+            || tree.getLineNo() < 0)
         {
             return;
         }
@@ -18,7 +18,7 @@
         final Integer colNum = lines.getStartColumn(lineNum);
 
         final int thisLineColumn = expandedTabsColumnNo(tree);
-        if ((colNum == null) || (thisLineColumn < colNum.intValue())) {
+        if (colNum == null || thisLineColumn < colNum.intValue()) {
             lines.addLineAndCol(lineNum, thisLineColumn);
         }
 

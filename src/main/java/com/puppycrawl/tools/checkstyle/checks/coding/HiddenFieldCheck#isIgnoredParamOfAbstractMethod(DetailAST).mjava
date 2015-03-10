@@ -9,13 +9,13 @@
     private boolean isIgnoredParamOfAbstractMethod(DetailAST ast)
     {
         boolean result = false;
-        if ((ast.getType() == TokenTypes.PARAMETER_DEF)
+        if (ast.getType() == TokenTypes.PARAMETER_DEF
             && ignoreAbstractMethods)
         {
             final DetailAST method = ast.getParent().getParent();
             if (method.getType() == TokenTypes.METHOD_DEF) {
                 final DetailAST mods = method.findFirstToken(TokenTypes.MODIFIERS);
-                result = ((mods != null) && mods.branchContains(TokenTypes.ABSTRACT));
+                result = mods != null && mods.branchContains(TokenTypes.ABSTRACT);
             }
         }
         return result;

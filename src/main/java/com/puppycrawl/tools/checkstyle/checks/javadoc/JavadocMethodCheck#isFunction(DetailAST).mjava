@@ -9,8 +9,8 @@
         boolean retVal = false;
         if (ast.getType() == TokenTypes.METHOD_DEF) {
             final DetailAST typeAST = ast.findFirstToken(TokenTypes.TYPE);
-            if ((typeAST != null)
-                && (typeAST.findFirstToken(TokenTypes.LITERAL_VOID) == null))
+            if (typeAST != null
+                && typeAST.findFirstToken(TokenTypes.LITERAL_VOID) == null)
             {
                 retVal = true;
             }

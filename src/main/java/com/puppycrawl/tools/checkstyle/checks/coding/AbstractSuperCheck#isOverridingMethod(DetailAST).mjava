@@ -6,7 +6,7 @@
      */
     private boolean isOverridingMethod(DetailAST ast)
     {
-        if ((ast.getType() != TokenTypes.METHOD_DEF)
+        if (ast.getType() != TokenTypes.METHOD_DEF
             || ScopeUtils.inInterfaceOrAnnotationBlock(ast))
         {
             return false;
@@ -17,6 +17,6 @@
             return false;
         }
         final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-        return (params.getChildCount() == 0);
+        return params.getChildCount() == 0;
     }
 

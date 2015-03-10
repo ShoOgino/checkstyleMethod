@@ -11,12 +11,12 @@
         int realColumnNo = columnNo + 1;
         final String line = getIndentCheck().getLines()[lineNo - 1];
         final int lineLength = line.length();
-        while ((realColumnNo < lineLength)
+        while (realColumnNo < lineLength
                && Character.isWhitespace(line.charAt(realColumnNo)))
         {
             realColumnNo++;
         }
 
-        return (realColumnNo == lineLength) ? -1 : realColumnNo;
+        return realColumnNo == lineLength ? -1 : realColumnNo;
     }
 

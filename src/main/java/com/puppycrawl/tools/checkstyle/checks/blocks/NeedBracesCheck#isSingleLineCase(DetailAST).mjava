@@ -18,7 +18,7 @@
             final DetailAST caseBreak = slist.findFirstToken(TokenTypes.LITERAL_BREAK);
             final boolean atOneLine = literalCase.getLineNo() == block.getLineNo();
             if (caseBreak != null) {
-                result = atOneLine && (block.getLineNo() == caseBreak.getLineNo());
+                result = atOneLine && block.getLineNo() == caseBreak.getLineNo();
             }
         }
         return result;

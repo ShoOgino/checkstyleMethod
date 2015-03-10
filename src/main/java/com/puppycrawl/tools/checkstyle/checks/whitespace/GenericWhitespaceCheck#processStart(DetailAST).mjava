@@ -18,9 +18,9 @@
             // Detect if the first case
             final DetailAST parent = ast.getParent();
             final DetailAST grandparent = parent.getParent();
-            if ((TokenTypes.TYPE_PARAMETERS == parent.getType())
-                && ((TokenTypes.CTOR_DEF == grandparent.getType())
-                    || (TokenTypes.METHOD_DEF == grandparent.getType())))
+            if (TokenTypes.TYPE_PARAMETERS == parent.getType()
+                && (TokenTypes.CTOR_DEF == grandparent.getType()
+                    || TokenTypes.METHOD_DEF == grandparent.getType()))
             {
                 // Require whitespace
                 if (!Character.isWhitespace(line.charAt(before))) {
@@ -35,7 +35,7 @@
             }
         }
 
-        if ((after < line.length())
+        if (after < line.length()
                 && Character.isWhitespace(line.charAt(after)))
         {
             log(ast.getLineNo(), after, WS_FOLLOWED, "<");

@@ -8,12 +8,12 @@
     private boolean isIgnoredConstructorParam(DetailAST ast)
     {
         boolean result = false;
-        if ((ast.getType() == TokenTypes.PARAMETER_DEF)
+        if (ast.getType() == TokenTypes.PARAMETER_DEF
             && ignoreConstructorParameter)
         {
             final DetailAST parametersAST = ast.getParent();
             final DetailAST constructorAST = parametersAST.getParent();
-            result = (constructorAST.getType() == TokenTypes.CTOR_DEF);
+            result = constructorAST.getType() == TokenTypes.CTOR_DEF;
         }
         return result;
     }

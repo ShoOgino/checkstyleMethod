@@ -2,7 +2,7 @@
     protected final void processAST(DetailAST ast)
     {
         if ((ast.getType() == TokenTypes.METHOD_DEF || ast.getType() == TokenTypes.CTOR_DEF)
-            && (getMethodsNumberOfLine(ast) <= minLineCount)
+            && getMethodsNumberOfLine(ast) <= minLineCount
             || hasAllowedAnnotations(ast))
         {
             return;

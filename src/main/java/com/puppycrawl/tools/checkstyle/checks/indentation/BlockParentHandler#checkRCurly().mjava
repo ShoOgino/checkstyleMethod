@@ -9,9 +9,9 @@
         final DetailAST rcurly = getRCurly();
         final int rcurlyPos = expandedTabsColumnNo(rcurly);
 
-        if ((rcurly == null)
+        if (rcurly == null
             || curlyLevel().accept(rcurlyPos)
-            || (!rcurlyMustStart() && !startsLine(rcurly))
+            || !rcurlyMustStart() && !startsLine(rcurly)
             || areOnSameLine(rcurly, lcurly))
         {
             return;

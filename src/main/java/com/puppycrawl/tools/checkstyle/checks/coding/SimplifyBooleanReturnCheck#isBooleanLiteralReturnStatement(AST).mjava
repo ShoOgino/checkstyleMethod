@@ -12,13 +12,13 @@
      */
     private static boolean isBooleanLiteralReturnStatement(AST ast)
     {
-        if ((ast == null) || (ast.getType() != TokenTypes.LITERAL_RETURN)) {
+        if (ast == null || ast.getType() != TokenTypes.LITERAL_RETURN) {
             return false;
         }
 
         final AST expr = ast.getFirstChild();
 
-        if ((expr == null) || (expr.getType() == TokenTypes.SEMI)) {
+        if (expr == null || expr.getType() == TokenTypes.SEMI) {
             return false;
         }
 

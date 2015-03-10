@@ -16,13 +16,13 @@
             final Set<String> classModifiers = getModifiers(classDef);
 
             result =
-                (mods.contains("static") && mods.contains("final"))
-                || (isPackageAllowed() && "package".equals(variableScope))
-                || (isProtectedAllowed() && "protected".equals(variableScope))
-                || ("public".equals(variableScope)
+                mods.contains("static") && mods.contains("final")
+                || isPackageAllowed() && "package".equals(variableScope)
+                || isProtectedAllowed() && "protected".equals(variableScope)
+                || "public".equals(variableScope)
                    && getPublicMemberRegexp().matcher(variableName).find()
-                   || (allowPublicImmutableFields
-                      && classModifiers.contains("final") && isImmutableField(variableDef)));
+                   || allowPublicImmutableFields
+                      && classModifiers.contains("final") && isImmutableField(variableDef);
         }
 
         return result;

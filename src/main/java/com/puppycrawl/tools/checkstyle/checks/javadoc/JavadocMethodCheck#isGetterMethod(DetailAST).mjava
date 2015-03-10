@@ -8,8 +8,8 @@
         // Check have a method with exactly 7 children which are all that
         // is allowed in a proper getter method which does not throw any
         // exceptions.
-        if ((ast.getType() != TokenTypes.METHOD_DEF)
-                || (ast.getChildCount() != MAX_CHILDREN))
+        if (ast.getType() != TokenTypes.METHOD_DEF
+                || ast.getChildCount() != MAX_CHILDREN)
         {
             return false;
         }
@@ -29,8 +29,8 @@
 
         // Check that is had only one parameter
         final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-        if ((params == null)
-                || (params.getChildCount(TokenTypes.PARAMETER_DEF) > 0))
+        if (params == null
+                || params.getChildCount(TokenTypes.PARAMETER_DEF) > 0)
         {
             return false;
         }
@@ -39,13 +39,13 @@
         // SLIST -> RETURN
         // RCURLY
         final DetailAST slist = ast.findFirstToken(TokenTypes.SLIST);
-        if ((slist == null) || (slist.getChildCount() != 2)) {
+        if (slist == null || slist.getChildCount() != 2) {
             return false;
         }
 
         final AST expr = slist.getFirstChild();
-        if ((expr.getType() != TokenTypes.LITERAL_RETURN)
-                || (expr.getFirstChild().getType() != TokenTypes.EXPR))
+        if (expr.getType() != TokenTypes.LITERAL_RETURN
+                || expr.getFirstChild().getType() != TokenTypes.EXPR)
         {
             return false;
         }

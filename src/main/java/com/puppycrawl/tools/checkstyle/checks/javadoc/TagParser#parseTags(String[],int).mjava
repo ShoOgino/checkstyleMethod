@@ -21,15 +21,15 @@
             else {
                 // find end of tag
                 final Point endTag = findChar(text, '>', position);
-                final boolean incompleteTag = (endTag.getLineNo() >= nLines);
+                final boolean incompleteTag = endTag.getLineNo() >= nLines;
                 // get tag id (one word)
                 final String tagId =
-                    (incompleteTag ? "" : getTagId(text, position));
+                        incompleteTag ? "" : getTagId(text, position);
                 // is this closed tag
                 final boolean closedTag =
-                    ((endTag.getLineNo() < nLines) && (endTag.getColumnNo() > 0)
-                     && (text[endTag.getLineNo()]
-                     .charAt(endTag.getColumnNo() - 1) == '/'));
+                        endTag.getLineNo() < nLines && endTag.getColumnNo() > 0
+                         && text[endTag.getLineNo()]
+                         .charAt(endTag.getColumnNo() - 1) == '/';
                 // add new tag
                 add(new HtmlTag(tagId,
                                 position.getLineNo() + lineNo,

@@ -6,8 +6,8 @@
      */
     private static boolean isElseWithCurlyBraces(DetailAST ast)
     {
-        return (ast.getType() == TokenTypes.SLIST)
-            && (ast.getChildCount() == 2)
+        return ast.getType() == TokenTypes.SLIST
+            && ast.getChildCount() == 2
             && isElse(ast.getParent());
     }
 

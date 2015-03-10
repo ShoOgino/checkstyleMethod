@@ -12,13 +12,13 @@
         // calculate the previous line length without trailing whitespace. Need
         // to handle the case where there is no previous line, cause the line
         // being check is the first line in the file.
-        final int prevLineLen = (brace.getLineNo() == 1)
+        final int prevLineLen = brace.getLineNo() == 1
             ? maxLineLength
             : Utils.lengthMinusTrailingWhitespace(getLine(brace.getLineNo() - 2));
 
         // Check for being told to ignore, or have '{}' which is a special case
-        if ((braceLine.length() > (brace.getColumnNo() + 1))
-            && (braceLine.charAt(brace.getColumnNo() + 1) == '}'))
+        if (braceLine.length() > brace.getColumnNo() + 1
+            && braceLine.charAt(brace.getColumnNo() + 1) == '}')
         {
             ; // ignore
         }
@@ -30,7 +30,7 @@
         }
         else if (getAbstractOption() == LeftCurlyOption.EOL) {
             if (Utils.whitespaceBefore(brace.getColumnNo(), braceLine)
-                && ((prevLineLen + 2) <= maxLineLength))
+                && prevLineLen + 2 <= maxLineLength)
             {
                 log(brace.getLineNo(), brace.getColumnNo(),
                     MSG_KEY_LINE_PREVIOUS, "{");
@@ -43,12 +43,12 @@
             if (startToken.getLineNo() == brace.getLineNo()) {
                 ; // all ok as on the same line
             }
-            else if ((startToken.getLineNo() + 1) == brace.getLineNo()) {
+            else if (startToken.getLineNo() + 1 == brace.getLineNo()) {
                 if (!Utils.whitespaceBefore(brace.getColumnNo(), braceLine)) {
                     log(brace.getLineNo(), brace.getColumnNo(),
                         MSG_KEY_LINE_NEW, "{");
                 }
-                else if ((prevLineLen + 2) <= maxLineLength) {
+                else if (prevLineLen + 2 <= maxLineLength) {
                     log(brace.getLineNo(), brace.getColumnNo(),
                         MSG_KEY_LINE_PREVIOUS, "{");
                 }

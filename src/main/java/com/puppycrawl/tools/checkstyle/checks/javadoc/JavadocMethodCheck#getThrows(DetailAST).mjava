@@ -12,8 +12,8 @@
         if (throwsAST != null) {
             DetailAST child = throwsAST.getFirstChild();
             while (child != null) {
-                if ((child.getType() == TokenTypes.IDENT)
-                        || (child.getType() == TokenTypes.DOT))
+                if (child.getType() == TokenTypes.IDENT
+                        || child.getType() == TokenTypes.DOT)
                 {
                     final FullIdent fi = FullIdent.createFullIdent(child);
                     final ExceptionInfo ei = new ExceptionInfo(new Token(fi),

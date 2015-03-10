@@ -10,12 +10,12 @@
         else {
             int headerLineNo = 0;
             int i;
-            for (i = 0; (headerLineNo < headerSize) && (i < fileSize); i++) {
+            for (i = 0; headerLineNo < headerSize && i < fileSize; i++) {
                 final String line = lines.get(i);
                 boolean isMatch = isMatch(line, headerLineNo);
                 while (!isMatch && isMultiLine(headerLineNo)) {
                     headerLineNo++;
-                    isMatch = (headerLineNo == headerSize)
+                    isMatch = headerLineNo == headerSize
                             || isMatch(line, headerLineNo);
                 }
                 if (!isMatch) {

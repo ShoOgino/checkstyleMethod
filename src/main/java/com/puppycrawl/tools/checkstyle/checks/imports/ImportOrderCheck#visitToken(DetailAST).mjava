@@ -24,7 +24,7 @@
 
             case ABOVE:
                 // previous non-static but current is static
-                doVisitToken(ident, isStatic, (!lastImportStatic && isStatic));
+                doVisitToken(ident, isStatic, !lastImportStatic && isStatic);
                 break;
 
             case INFLOW:
@@ -41,7 +41,7 @@
 
             case UNDER:
                 // previous static but current is non-static
-                doVisitToken(ident, isStatic, (lastImportStatic && !isStatic));
+                doVisitToken(ident, isStatic, lastImportStatic && !isStatic);
                 break;
 
             default:

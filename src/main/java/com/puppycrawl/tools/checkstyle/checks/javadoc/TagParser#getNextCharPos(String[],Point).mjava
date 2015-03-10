@@ -9,21 +9,21 @@
     {
         int line = from.getLineNo();
         int column = from.getColumnNo() + 1;
-        while ((line < text.length) && (column >= text[line].length())) {
+        while (line < text.length && column >= text[line].length()) {
             // go to the next line
             line++;
             column = 0;
             if (line < text.length) {
                 //skip beginning spaces and stars
                 final String currentLine = text[line];
-                while ((column < currentLine.length())
+                while (column < currentLine.length()
                        && (Character.isWhitespace(currentLine.charAt(column))
-                           || (currentLine.charAt(column) == '*')))
+                           || currentLine.charAt(column) == '*'))
                 {
                     column++;
-                    if ((column < currentLine.length())
-                        && (currentLine.charAt(column - 1) == '*')
-                        && (currentLine.charAt(column) == '/'))
+                    if (column < currentLine.length()
+                        && currentLine.charAt(column - 1) == '*'
+                        && currentLine.charAt(column) == '/')
                     {
                         // this is end of comment
                         column = currentLine.length();

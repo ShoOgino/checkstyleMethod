@@ -3,15 +3,15 @@
     {
         final DetailAST slistAST = ast.findFirstToken(TokenTypes.SLIST);
         boolean isElseIf = false;
-        if ((ast.getType() == TokenTypes.LITERAL_ELSE)
-            && (ast.findFirstToken(TokenTypes.LITERAL_IF) != null))
+        if (ast.getType() == TokenTypes.LITERAL_ELSE
+            && ast.findFirstToken(TokenTypes.LITERAL_IF) != null)
         {
             isElseIf = true;
         }
 
         final boolean skipStatement = isSkipStatement(ast);
 
-        if ((slistAST == null) && !isElseIf && !skipStatement) {
+        if (slistAST == null && !isElseIf && !skipStatement) {
             log(ast.getLineNo(), MSG_KEY_NEED_BRACES, ast.getText());
         }
     }

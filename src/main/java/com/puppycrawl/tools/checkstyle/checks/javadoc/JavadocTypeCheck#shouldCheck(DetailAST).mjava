@@ -13,10 +13,10 @@
         final Scope surroundingScope = ScopeUtils.getSurroundingScope(ast);
 
         return scope.isIn(this.scope)
-            && ((surroundingScope == null) || surroundingScope.isIn(this.scope))
-            && ((excludeScope == null)
+            && (surroundingScope == null || surroundingScope.isIn(this.scope))
+            && (excludeScope == null
                 || !scope.isIn(excludeScope)
-                || ((surroundingScope != null)
-                && !surroundingScope.isIn(excludeScope)));
+                || surroundingScope != null
+                && !surroundingScope.isIn(excludeScope));
     }
 

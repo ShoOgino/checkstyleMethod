@@ -7,14 +7,14 @@
         boolean preceedsEmptyForInintializer = false;
         final DetailAST parent = ast.getParent();
         //Only traditional for statements are examined, not for-each statements
-        if ((parent != null)
-            && (parent.getType() == TokenTypes.LITERAL_FOR)
-            && (parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null))
+        if (parent != null
+            && parent.getType() == TokenTypes.LITERAL_FOR
+            && parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null)
         {
             final DetailAST forIterator =
                     parent.findFirstToken(TokenTypes.FOR_INIT);
-            preceedsEmptyForInintializer = (forIterator.getChildCount() == 0)
-                    && (ast == forIterator.getPreviousSibling());
+            preceedsEmptyForInintializer = forIterator.getChildCount() == 0
+                    && ast == forIterator.getPreviousSibling();
         }
         return preceedsEmptyForInintializer;
     }

@@ -8,14 +8,14 @@
      */
     private boolean isInAnnotation(DetailAST ast)
     {
-        if ((null == ast.getParent())
-                || (null == ast.getParent().getParent()))
+        if (null == ast.getParent()
+                || null == ast.getParent().getParent())
         {
             return false;
         }
 
-        return (TokenTypes.ANNOTATION == ast.getParent().getParent().getType())
-                || (TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR
-                        == ast.getParent().getParent().getType());
+        return TokenTypes.ANNOTATION == ast.getParent().getParent().getType()
+                || TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR
+                        == ast.getParent().getParent().getType();
     }
 

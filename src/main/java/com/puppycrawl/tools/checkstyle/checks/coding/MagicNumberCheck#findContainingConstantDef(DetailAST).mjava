@@ -7,9 +7,9 @@
     private DetailAST findContainingConstantDef(DetailAST ast)
     {
         DetailAST varDefAST = ast;
-        while ((varDefAST != null)
-                && (varDefAST.getType() != TokenTypes.VARIABLE_DEF)
-                && (varDefAST.getType() != TokenTypes.ENUM_CONSTANT_DEF))
+        while (varDefAST != null
+                && varDefAST.getType() != TokenTypes.VARIABLE_DEF
+                && varDefAST.getType() != TokenTypes.ENUM_CONSTANT_DEF)
         {
             varDefAST = varDefAST.getParent();
         }
@@ -21,7 +21,7 @@
 
         // implicit constant?
         if (ScopeUtils.inInterfaceOrAnnotationBlock(varDefAST)
-            || (varDefAST.getType() == TokenTypes.ENUM_CONSTANT_DEF))
+            || varDefAST.getType() == TokenTypes.ENUM_CONSTANT_DEF)
         {
             return varDefAST;
         }

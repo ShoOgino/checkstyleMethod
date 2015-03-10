@@ -10,7 +10,7 @@
         while (curNode != null) {
             notifyVisit(curNode, astState);
             DetailAST toVisit = curNode.getFirstChild();
-            while ((curNode != null) && (toVisit == null)) {
+            while (curNode != null && toVisit == null) {
                 notifyLeave(curNode, astState);
                 toVisit = curNode.getNextSibling();
                 if (toVisit == null) {

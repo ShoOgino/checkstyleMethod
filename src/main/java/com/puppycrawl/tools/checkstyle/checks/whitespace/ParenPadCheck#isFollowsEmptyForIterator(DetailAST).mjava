@@ -7,14 +7,14 @@
         boolean followsEmptyForIterator = false;
         final DetailAST parent = ast.getParent();
         //Only traditional for statements are examined, not for-each statements
-        if ((parent != null)
-            && (parent.getType() == TokenTypes.LITERAL_FOR)
-            && (parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null))
+        if (parent != null
+            && parent.getType() == TokenTypes.LITERAL_FOR
+            && parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null)
         {
             final DetailAST forIterator =
                 parent.findFirstToken(TokenTypes.FOR_ITERATOR);
-            followsEmptyForIterator = (forIterator.getChildCount() == 0)
-                && (ast == forIterator.getNextSibling());
+            followsEmptyForIterator = forIterator.getChildCount() == 0
+                && ast == forIterator.getNextSibling();
         }
         return followsEmptyForIterator;
     }

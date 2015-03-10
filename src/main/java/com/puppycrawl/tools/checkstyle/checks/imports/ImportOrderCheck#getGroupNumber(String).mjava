@@ -16,8 +16,8 @@
             final Matcher matcher = groups[i].matcher(name);
             while (matcher.find()) {
                 final int length = matcher.end() - matcher.start();
-                if ((length > bestLength)
-                    || ((length == bestLength) && (matcher.start() < bestPos)))
+                if (length > bestLength
+                    || length == bestLength && matcher.start() < bestPos)
                 {
                     bestIndex = i;
                     bestLength = length;

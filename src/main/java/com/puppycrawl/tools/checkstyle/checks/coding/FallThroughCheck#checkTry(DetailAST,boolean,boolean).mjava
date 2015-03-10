@@ -19,7 +19,7 @@
                                             useBreak, useContinue);
 
         DetailAST catchStmt = ast.findFirstToken(TokenTypes.LITERAL_CATCH);
-        while ((catchStmt != null) && isTerminated) {
+        while (catchStmt != null && isTerminated) {
             final DetailAST catchBody =
                 catchStmt.findFirstToken(TokenTypes.SLIST);
             isTerminated &= isTerminated(catchBody, useBreak, useContinue);

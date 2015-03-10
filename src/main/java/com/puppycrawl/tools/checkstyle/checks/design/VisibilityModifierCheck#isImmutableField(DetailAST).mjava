@@ -18,9 +18,9 @@
             final boolean isCanonicalName = type.getFirstChild().getType() == TokenTypes.DOT;
             final String typeName = getTypeName(type, isCanonicalName);
 
-            result = (!isCanonicalName && isPrimitive(type))
+            result = !isCanonicalName && isPrimitive(type)
                      || immutableClassShortNames.contains(typeName)
-                     || (isCanonicalName && immutableClassCanonicalNames.contains(typeName));
+                     || isCanonicalName && immutableClassCanonicalNames.contains(typeName);
         }
         return result;
     }

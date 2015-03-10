@@ -18,7 +18,7 @@
                 final String cachedConfigHash =
                     details.getProperty(CONFIG_HASH_KEY);
                 setInActive = false;
-                if ((cachedConfigHash == null)
+                if (cachedConfigHash == null
                     || !cachedConfigHash.equals(currentConfigHash))
                 {
                     // Detected configuration change - clear cache
@@ -40,6 +40,6 @@
                 Utils.closeQuietly(inStream);
             }
         }
-        detailsFile = (setInActive) ? null : fileName;
+        detailsFile = setInActive ? null : fileName;
     }
 
