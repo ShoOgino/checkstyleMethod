@@ -1,0 +1,25 @@
+    /**
+     * Get all variables initialized In init part of for loop.
+     * @param ast for loop iteral
+     * @return set of variables initialized in for loop
+     */
+    private static Set<String> getForInitVariables(DetailAST ast)
+    {
+        assert ast.getType() == TokenTypes.LITERAL_FOR;
+        final Set<String> initializedVariables = new HashSet<>();
+        final DetailAST forInitAST = ast.findFirstToken(TokenTypes.FOR_INIT);
+
+        for (DetailAST parameterDefAST = forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
+             parameterDefAST != null;
+             parameterDefAST = parameterDefAST.getNextSibling())
+        {
+            if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
+                final DetailAST param =
+                        parameterDefAST.findFirstToken(TokenTypes.IDENT);
+
+                initializedVariables.add(param.getText());
+            }
+        }
+        return initializedVariables;
+    }
+

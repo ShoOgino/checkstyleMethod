@@ -4,18 +4,9 @@
      */
     private void leaveForIter(DetailAST ast)
     {
-        final DetailAST forInitAST = ast.findFirstToken(TokenTypes.FOR_INIT);
-        DetailAST parameterDefAST =
-            forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
-
-        for (; parameterDefAST != null;
-             parameterDefAST = parameterDefAST.getNextSibling())
-        {
-            if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
-                final DetailAST param =
-                    parameterDefAST.findFirstToken(TokenTypes.IDENT);
-                currentVariables.push(param.getText());
-            }
+        final Set<String> variablesToPutInScope = getVariablesManagedByForLoop(ast);
+        for (String variableName : variablesToPutInScope) {
+            getCurrentVariables().push(variableName);
         }
     }
 

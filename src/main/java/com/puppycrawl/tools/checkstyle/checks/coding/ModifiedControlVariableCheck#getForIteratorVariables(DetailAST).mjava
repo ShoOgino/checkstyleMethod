@@ -1,0 +1,24 @@
+    /**
+     * Get all variables which for loop iterating part change in every loop.
+     * @param ast for loop literal(TokenTypes.LITERAL_FOR)
+     * @return names of variables change in iterating part of for
+     */
+    private static Set<String> getForIteratorVariables(DetailAST ast)
+    {
+        final Set<String> iteratorVariables = new HashSet<>();
+        final DetailAST forIteratorAST = ast.findFirstToken(TokenTypes.FOR_ITERATOR);
+        final DetailAST forUpdateListAST = forIteratorAST.findFirstToken(TokenTypes.ELIST);
+
+        for (DetailAST iteratingExpressionAST : findChildrenOfExpressionType(forUpdateListAST)) {
+
+            if (MUTATION_OPERATIONS.contains(iteratingExpressionAST.getType())) {
+                final DetailAST oneVariableOperatorChild = iteratingExpressionAST.getFirstChild();
+                if (oneVariableOperatorChild.getType() == TokenTypes.IDENT) {
+                    iteratorVariables.add(oneVariableOperatorChild.getText());
+                }
+            }
+        }
+
+        return iteratorVariables;
+    }
+

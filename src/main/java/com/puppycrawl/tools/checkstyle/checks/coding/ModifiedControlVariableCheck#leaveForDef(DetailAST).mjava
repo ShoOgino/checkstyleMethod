@@ -6,20 +6,13 @@
     {
         final DetailAST forInitAST = ast.findFirstToken(TokenTypes.FOR_INIT);
         if (forInitAST != null) {
-            DetailAST parameterDefAST =
-                forInitAST.findFirstToken(TokenTypes.VARIABLE_DEF);
+            final Set<String> variablesManagedByForLoop = getVariablesManagedByForLoop(ast);
+            popCurrentVariables(variablesManagedByForLoop.size());
 
-            for (; parameterDefAST != null;
-                 parameterDefAST = parameterDefAST.getNextSibling())
-            {
-                if (parameterDefAST.getType() == TokenTypes.VARIABLE_DEF) {
-                    currentVariables.pop();
-                }
-            }
         }
         else {
             // this is for-each loop, just pop veriables
-            currentVariables.pop();
+            getCurrentVariables().pop();
         }
     }
 

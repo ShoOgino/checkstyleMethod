@@ -4,12 +4,12 @@
      */
     private void checkIdent(DetailAST ast)
     {
-        if (currentVariables != null && !currentVariables.isEmpty()) {
+        if (!getCurrentVariables().isEmpty()) {
             final DetailAST identAST = ast.getFirstChild();
 
             if (identAST != null
                 && identAST.getType() == TokenTypes.IDENT
-                && currentVariables.contains(identAST.getText()))
+                && getCurrentVariables().contains(identAST.getText()))
             {
                 log(ast.getLineNo(), ast.getColumnNo(),
                     MSG_KEY, identAST.getText());

@@ -8,6 +8,7 @@
             case TokenTypes.LITERAL_FOR:
             case TokenTypes.FOR_ITERATOR:
             case TokenTypes.FOR_EACH_CLAUSE:
+                //we need that Tokens only at leaveToken()
                 break;
             case TokenTypes.ASSIGN:
             case TokenTypes.PLUS_ASSIGN:
@@ -28,7 +29,7 @@
                 checkIdent(ast);
                 break;
             default:
-                throw new IllegalStateException(ast.toString());
+                throw new IllegalStateException(ILLEGAL_TYPE_OF_TOKEN + ast.toString());
         }
     }
 
