@@ -12,13 +12,17 @@
      *         than the string2; and a value greater than <code>0</code> if
      *         string1 is lexicographically greater than string2.
      */
-    private int compare(String string1, String string2,
+    private static int compare(String string1, String string2,
             boolean caseSensitive)
     {
+        int result;
         if (caseSensitive) {
-            return string1.compareTo(string2);
+            result = string1.compareTo(string2);
+        }
+        else {
+            result = string1.compareToIgnoreCase(string2);
         }
 
-        return string1.compareToIgnoreCase(string2);
+        return result;
     }
 

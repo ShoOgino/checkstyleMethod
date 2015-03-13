@@ -23,7 +23,9 @@
                     }
                 }
             }
-            else if (groupIdx == lastGroup) {
+            else if (groupIdx == lastGroup || (sortStaticImportsAlphabetically
+                     && isAlphabeticallySortableStaticImport(isStatic)))
+            {
                 doVisitTokenInSameGroup(isStatic, previous, name, line);
             }
             else {

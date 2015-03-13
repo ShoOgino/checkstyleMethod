@@ -1,0 +1,13 @@
+    @Test
+    public void testStaticGroupsOrder() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("option", "top");
+        checkConfig.addAttribute("groups", "org, java");
+        final String[] expected = {
+            "4: " + getCheckMessage(MSG_ORDERING, "org.abego.treelayout.Configuration.AlignmentInLevel"),
+        };
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrderStaticGroupOrder.java"), expected);
+    }
+

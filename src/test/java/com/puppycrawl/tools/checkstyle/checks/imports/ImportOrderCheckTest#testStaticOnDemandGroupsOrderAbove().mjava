@@ -1,0 +1,16 @@
+    @Test
+    public void testStaticOnDemandGroupsOrderAbove() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("option", "above");
+        checkConfig.addAttribute("groups", "org, java");
+        checkConfig.addAttribute("sortStaticImportsAlphabetically", "true");
+        final String[] expected = {
+            "7: " + getCheckMessage(MSG_ORDERING, "java.lang.Math.*"),
+            "8: " + getCheckMessage(MSG_ORDERING, "org.abego.treelayout.Configuration.*"),
+        };
+        verify(checkConfig, getPath("imports" + File.separator
+                 + "InputImportOrderStaticOnDemandGroupOrderBottom.java"), expected);
+    }
+
