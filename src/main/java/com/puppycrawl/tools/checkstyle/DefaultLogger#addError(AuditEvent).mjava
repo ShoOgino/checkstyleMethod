@@ -23,8 +23,8 @@
             if (evt.getColumn() > 0) {
                 sb.append(':').append(evt.getColumn());
             }
-            if (SeverityLevel.WARNING == severityLevel) {
-                sb.append(": warning");
+            if (printSeverity) {
+                sb.append(": ").append(severityLevel.getName());
             }
             sb.append(": ").append(message);
             errorWriter.println(sb.toString());
