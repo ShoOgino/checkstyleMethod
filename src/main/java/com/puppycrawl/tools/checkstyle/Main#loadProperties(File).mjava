@@ -6,9 +6,8 @@
     private static Properties loadProperties(File file)
     {
         final Properties properties = new Properties();
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
+
+        try (final FileInputStream fis = new FileInputStream(file)) {
             properties.load(fis);
         }
         catch (final IOException ex) {
@@ -16,9 +15,6 @@
                 + file.getAbsolutePath());
             ex.printStackTrace(System.out);
             System.exit(1);
-        }
-        finally {
-            Utils.closeQuietly(fis);
         }
 
         return properties;
