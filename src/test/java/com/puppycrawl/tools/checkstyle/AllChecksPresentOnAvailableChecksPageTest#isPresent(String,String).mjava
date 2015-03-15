@@ -1,0 +1,8 @@
+    private static boolean isPresent(String availableChecks, String checkName)
+    {
+        final String linkPattern = String.format(LINK_TEMPLATE, checkName);
+        final String namingLinkPattern = String.format(NAMING_LINK_TEMPLATE, checkName);
+        return availableChecks.matches(linkPattern)
+                || checkName.endsWith("Name") && availableChecks.matches(namingLinkPattern);
+    }
+
