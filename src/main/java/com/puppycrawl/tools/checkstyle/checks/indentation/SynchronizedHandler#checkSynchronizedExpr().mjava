@@ -1,0 +1,12 @@
+    /**
+     * Check identation of expression we synchronized on
+     */
+    private void checkSynchronizedExpr()
+    {
+        final DetailAST syncAst = getMainAst().findFirstToken(TokenTypes.LPAREN)
+                .getNextSibling();
+        final IndentLevel expected =
+                new IndentLevel(getLevel(), getBasicOffset());
+        checkExpressionSubtree(syncAst, expected, false, false);
+    }
+

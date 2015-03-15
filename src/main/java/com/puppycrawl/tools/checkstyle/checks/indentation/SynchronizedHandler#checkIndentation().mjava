@@ -1,0 +1,13 @@
+    @Override
+    public void checkIndentation()
+    {
+        if (!isMethodModifier) {
+            super.checkIndentation();
+            checkSynchronizedExpr();
+            final LineWrappingHandler lineWrap =
+                    new LineWrappingHandler(getIndentCheck(), getMainAst(),
+                            getSynchronizedStatementRightParen(getMainAst()));
+            lineWrap.checkIndentation();
+        }
+    }
+
