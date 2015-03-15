@@ -10,7 +10,7 @@
     private void checkHtml(final DetailAST ast, final TextBlock comment)
     {
         final int lineno = comment.getStartLineNo();
-        final FastStack<HtmlTag> htmlStack = FastStack.newInstance();
+        final Deque<HtmlTag> htmlStack = new ArrayDeque<>();
         final String[] text = comment.getText();
         final List<String> typeParameters =
             CheckUtils.getTypeParameterNames(ast);

@@ -7,9 +7,9 @@
      * @param htmlStack the stack of opened HTML tags.
      * @param token the current HTML tag name that has been closed.
      */
-    private void checkUnclosedTags(FastStack<HtmlTag> htmlStack, String token)
+    private void checkUnclosedTags(Deque<HtmlTag> htmlStack, String token)
     {
-        final FastStack<HtmlTag> unclosedTags = FastStack.newInstance();
+        final Deque<HtmlTag> unclosedTags = new ArrayDeque<>();
         HtmlTag lastOpenTag = htmlStack.pop();
         while (!token.equalsIgnoreCase(lastOpenTag.getId())) {
             // Find unclosed elements. Put them on a stack so the
