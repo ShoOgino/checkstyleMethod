@@ -5,13 +5,11 @@
      * @param closeInfoAfterUse auditFinished should close infoStream
      * @param errorStream the <code>OutputStream</code> for error messages
      * @param closeErrorAfterUse auditFinished should close errorStream
-     * @param printSeverity if severity level should be printed
      */
     public DefaultLogger(OutputStream infoStream,
                          boolean closeInfoAfterUse,
                          OutputStream errorStream,
-                         boolean closeErrorAfterUse,
-                         boolean printSeverity)
+                         boolean closeErrorAfterUse)
     {
         closeInfo = closeInfoAfterUse;
         closeError = closeErrorAfterUse;
@@ -19,6 +17,5 @@
         errorWriter = infoStream == errorStream
             ? infoWriter
             : new PrintWriter(errorStream);
-        this.printSeverity = printSeverity;
     }
 
