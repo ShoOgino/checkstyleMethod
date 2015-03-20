@@ -15,10 +15,6 @@
                 inStream = new FileInputStream(propertiesFile);
                 retVal.load(inStream);
             }
-            catch (final FileNotFoundException e) {
-                throw new BuildException("Could not find Properties file '"
-                        + propertiesFile + "'", e, getLocation());
-            }
             catch (final IOException e) {
                 throw new BuildException("Error loading Properties file '"
                         + propertiesFile + "'", e, getLocation());

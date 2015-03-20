@@ -13,12 +13,9 @@
         try {
             nameLoader.parseInputSource(source);
         }
-        catch (final SAXException e) {
-            throw new CheckstyleException("unable to parse "
+        catch (final SAXException | IOException e) {
+            throw new CheckstyleException("Unable to parse "
                     + sourceName + " - " + e.getMessage(), e);
-        }
-        catch (final IOException e) {
-            throw new CheckstyleException("unable to read " + sourceName, e);
         }
     }
 

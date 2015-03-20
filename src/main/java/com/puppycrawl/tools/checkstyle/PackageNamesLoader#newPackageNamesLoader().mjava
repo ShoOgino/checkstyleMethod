@@ -9,11 +9,7 @@
         try {
             return new PackageNamesLoader();
         }
-        catch (final ParserConfigurationException e) {
-            throw new CheckstyleException(
-                    "unable to create PackageNamesLoader ", e);
-        }
-        catch (final SAXException e) {
+        catch (final ParserConfigurationException | SAXException e) {
             throw new CheckstyleException(
                     "unable to create PackageNamesLoader - "
                     + e.getMessage(), e);
