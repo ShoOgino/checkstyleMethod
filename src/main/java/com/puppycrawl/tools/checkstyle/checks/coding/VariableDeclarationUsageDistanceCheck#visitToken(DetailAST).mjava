@@ -4,12 +4,9 @@
         final int parentType = ast.getParent().getType();
         final DetailAST modifiers = ast.getFirstChild();
 
-        if (ignoreFinal && modifiers.branchContains(TokenTypes.FINAL)
-                || parentType == TokenTypes.OBJBLOCK)
+        if (!(ignoreFinal && modifiers.branchContains(TokenTypes.FINAL)
+                || parentType == TokenTypes.OBJBLOCK))
         {
-            // no code
-        }
-        else {
             final DetailAST variable = ast.findFirstToken(TokenTypes.IDENT);
 
             if (!isVariableMatchesIgnorePattern(variable.getText())) {

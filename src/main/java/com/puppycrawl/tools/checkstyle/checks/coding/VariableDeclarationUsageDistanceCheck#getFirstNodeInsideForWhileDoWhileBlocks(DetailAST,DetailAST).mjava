@@ -37,12 +37,9 @@
                 if (currentNodeType == TokenTypes.SLIST) {
                     firstNodeInsideBlock = currentNode.getFirstChild();
                 }
-                else if (currentNodeType == TokenTypes.VARIABLE_DEF
-                        || currentNodeType == TokenTypes.EXPR)
+                else if (currentNodeType != TokenTypes.VARIABLE_DEF
+                        && currentNodeType != TokenTypes.EXPR)
                 {
-                    // no code
-                }
-                else {
                     firstNodeInsideBlock = currentNode;
                 }
             }
