@@ -1,10 +1,13 @@
     /**
      * Setter for todo comment format.
-     * @param format format of todo comment.
+     * @param format
+     *        format of todo comment.
+     * @throws org.apache.commons.beanutils.ConversionException
+     *         if unable to create Pattern object.
      */
     public void setFormat(String format)
     {
         this.format = format;
-        regexp = Pattern.compile(format);
+        regexp = Utils.createPattern(format);
     }
 

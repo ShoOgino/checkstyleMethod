@@ -7,14 +7,12 @@
     public static Pattern createPattern(String pattern)
         throws ConversionException
     {
-        Pattern retVal = null;
         try {
-            retVal = getPattern(pattern);
+            return Pattern.compile(pattern);
         }
         catch (final PatternSyntaxException e) {
             throw new ConversionException(
                 "Failed to initialise regexp expression " + pattern, e);
         }
-        return retVal;
     }
 

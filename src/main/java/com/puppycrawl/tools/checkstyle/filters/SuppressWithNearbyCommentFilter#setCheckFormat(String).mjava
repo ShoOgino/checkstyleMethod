@@ -1,17 +1,12 @@
     /**
      * Set the format for a check.
      * @param format a <code>String</code> value
-     * @throws ConversionException unable to parse format
+     * @throws ConversionException if unable to create Pattern object
      */
     public void setCheckFormat(String format)
         throws ConversionException
     {
-        try {
-            checkRegexp = Utils.getPattern(format);
-            checkFormat = format;
-        }
-        catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + format, e);
-        }
+        checkRegexp = Utils.createPattern(format);
+        checkFormat = format;
     }
 

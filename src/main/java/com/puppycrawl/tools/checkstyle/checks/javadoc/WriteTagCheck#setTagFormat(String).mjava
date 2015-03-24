@@ -1,17 +1,12 @@
     /**
      * Set the tag format.
      * @param format a <code>String</code> value
-     * @throws ConversionException unable to parse format
+     * @throws ConversionException if unable to create Pattern object
      */
     public void setTagFormat(String format)
         throws ConversionException
     {
-        try {
-            tagFormat = format;
-            tagFormatRE = Utils.getPattern(format);
-        }
-        catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + format, e);
-        }
+        tagFormat = format;
+        tagFormatRE = Utils.createPattern(format);
     }
 

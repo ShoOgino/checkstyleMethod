@@ -2,9 +2,11 @@
      * Sets specialImportsRegExp specified by user.
      * @param regexp
      *        user value.
+     * @throws org.apache.commons.beanutils.ConversionException
+     *         if unable to create Pattern object.
      */
     public final void setSpecialImportsRegExp(String regexp)
     {
-        specialImportsRegExp = Utils.getPattern(regexp);
+        specialImportsRegExp = Utils.createPattern(regexp);
     }
 

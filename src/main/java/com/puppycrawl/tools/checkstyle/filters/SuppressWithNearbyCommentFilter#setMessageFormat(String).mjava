@@ -1,14 +1,12 @@
     /**
      * Set the format for a message.
      * @param format a <code>String</code> value
-     * @throws ConversionException unable to parse format
+     * @throws ConversionException if unable to create Pattern object
      */
     public void setMessageFormat(String format)
         throws ConversionException
     {
-        if (!Utils.isPatternValid(format)) {
-            throw new ConversionException("Unable to parse format: " + format);
-        }
+        Utils.createPattern(format);
         messageFormat = format;
     }
 

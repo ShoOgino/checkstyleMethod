@@ -1,13 +1,16 @@
     /**
-     * Sets regexp pattern for ignored strings.
-     * @param ignoreStringsRegexp regexp pattern for ignored strings
+     * Sets regular expression pattern for ignored strings.
+     * @param ignoreStringsRegexp
+     *        regular expression pattern for ignored strings
+     * @throws org.apache.commons.beanutils.ConversionException
+     *         if unable to create Pattern object
      */
     public void setIgnoreStringsRegexp(String ignoreStringsRegexp)
     {
         if (ignoreStringsRegexp != null
             && ignoreStringsRegexp.length() > 0)
         {
-            pattern = Utils.getPattern(ignoreStringsRegexp);
+            pattern = Utils.createPattern(ignoreStringsRegexp);
         }
         else {
             pattern = null;

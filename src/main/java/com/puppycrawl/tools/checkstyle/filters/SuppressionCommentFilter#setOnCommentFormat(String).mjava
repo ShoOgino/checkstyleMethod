@@ -1,16 +1,11 @@
     /**
      * Set the format for a comment that turns on reporting.
      * @param format a <code>String</code> value
-     * @throws ConversionException unable to parse format
+     * @throws ConversionException if unable to create Pattern object.
      */
     public void setOnCommentFormat(String format)
         throws ConversionException
     {
-        try {
-            onRegexp = Utils.getPattern(format);
-        }
-        catch (final PatternSyntaxException e) {
-            throw new ConversionException("unable to parse " + format, e);
-        }
+        onRegexp = Utils.createPattern(format);
     }
 

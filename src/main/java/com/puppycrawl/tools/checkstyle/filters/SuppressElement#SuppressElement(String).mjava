@@ -3,12 +3,12 @@
      * file name pattern. Must either call {@link #setColumns(String)} or
      * {@link #setModuleId(String)} before using this object.
      * @param files regular expression for names of filtered files.
-     * @throws PatternSyntaxException if there is an error.
+     * @throws ConversionException if unable to create Pattern object.
      */
     public SuppressElement(String files)
-        throws PatternSyntaxException
+        throws ConversionException
     {
         filePattern = files;
-        fileRegexp = Utils.getPattern(files);
+        fileRegexp = Pattern.compile(files);
     }
 

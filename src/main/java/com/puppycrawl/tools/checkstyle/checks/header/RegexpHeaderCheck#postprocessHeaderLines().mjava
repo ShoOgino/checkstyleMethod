@@ -5,8 +5,7 @@
         headerRegexps.clear();
         for (String line : headerLines) {
             try {
-                // TODO: Not sure if cache in Utils is still necessary
-                headerRegexps.add(Utils.getPattern(line));
+                headerRegexps.add(Pattern.compile(line));
             }
             catch (final PatternSyntaxException ex) {
                 throw new ConversionException("line "
