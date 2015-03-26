@@ -37,7 +37,7 @@
                     .debug("Unable to open cache file, ignoring.", e);
             }
             finally {
-                Utils.closeQuietly(inStream);
+                Closeables.closeQuietly(inStream);
             }
         }
         detailsFile = setInActive ? null : fileName;
