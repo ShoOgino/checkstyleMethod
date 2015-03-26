@@ -15,7 +15,7 @@
             return createObject(name);
         }
         catch (final CheckstyleException ex) {
-            // keep looking
+            LOG.debug("Keep looking, ignoring exception", ex);
         }
 
         //now try packages
@@ -26,7 +26,7 @@
                 return createObject(className);
             }
             catch (final CheckstyleException ex) {
-                // keep looking
+                LOG.debug("Keep looking, ignoring exception", ex);
             }
         }
 
