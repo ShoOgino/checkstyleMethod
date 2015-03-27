@@ -5,10 +5,9 @@
      * @param errors the audit errors from the file
      */
     @Override
-    public void fireErrors(String fileName,
-        SortedSet<LocalizedMessage> errors)
+    public void fireErrors(String fileName, SortedSet<LocalizedMessage> errors)
     {
-        final String stripped = getStrippedFileName(fileName);
+        final String stripped = Utils.relativizeAndNormalizePath(basedir, fileName);
         for (final LocalizedMessage element : errors) {
             final AuditEvent evt = new AuditEvent(this, stripped, element);
             if (filters.accept(evt)) {
