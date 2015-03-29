@@ -1,0 +1,33 @@
+    /**
+     * Creates the audit listener.
+     *
+     * @param format format of the auditt listener
+     * @param out the stream to log to
+     * @param closeOut whether the stream should be closed
+     * @return a fresh new <code>AuditListener</code>
+     * @exception UnsupportedEncodingException if there is problem to use UTf-8
+     * @exception CheckstyleException when provided parameters are not supported
+     */
+    private static AuditListener createListener(String format,
+                                                OutputStream out,
+                                                boolean closeOut)
+            throws UnsupportedEncodingException, CheckstyleException
+    {
+        AuditListener listener = null;
+        switch (format) {
+            case "xml":
+                listener = new XMLLogger(out, closeOut);
+                break;
+
+            case "plain":
+                listener = new DefaultLogger(out, closeOut);
+                break;
+
+            default:
+                throw new CheckstyleException("Invalid output format. Found '" + format
+                        + "' but expected 'plain' or 'xml'.");
+        }
+
+        return listener;
+    }
+

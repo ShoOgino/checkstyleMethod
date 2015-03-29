@@ -6,62 +6,25 @@
      **/
     public static void main(String[] args) throws UnsupportedEncodingException
     {
-        // parse the parameters
-        final CommandLineParser clp = new PosixParser();
-        CommandLine line = null;
+        boolean parseResult = false;
         try {
-            line = clp.parse(OPTS, args);
+            processCommandLine(parseCli(args));
+            parseResult = true;
         }
         catch (final ParseException e) {
-            usage();
+            System.err.println("Could not parse parameters: " + e.getMessage());
+            e.printStackTrace();
         }
-        assert line != null;
-
-        // show version and exit
-        if (line.hasOption("v")) {
-            System.out.println("Checkstyle version: "
-                    + Main.class.getPackage().getImplementationVersion());
-            System.exit(0);
+        catch (final Exception e) {
+            System.err.println("Could not execute Checkstyle: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        // setup the properties
-        final Properties props =
-            line.hasOption("p")
-                ? loadProperties(new File(line.getOptionValue("p")))
-                : System.getProperties();
-
-        // ensure a config file is specified
-        if (!line.hasOption("c")) {
-            System.out.println("Must specify a config XML file.");
-            usage();
-        }
-
-        final Configuration config = loadConfig(line, props);
-
-        // setup the output stream
-        OutputStream out = null;
-        boolean closeOut = false;
-        if (line.hasOption("o")) {
-            final String fname = line.getOptionValue("o");
-            try {
-                out = new FileOutputStream(fname);
-                closeOut = true;
+        finally {
+            if (!parseResult) {
+                usage();
             }
-            catch (final FileNotFoundException e) {
-                System.out.println("Could not find file: '" + fname + "'");
-                System.exit(1);
-            }
+            // provide proper exit code based on results.
+            System.exit(parseResult ? 0 : 1);
         }
-        else {
-            out = System.out;
-            closeOut = false;
-        }
-
-        final AuditListener listener = createListener(line, out, closeOut);
-        final List<File> files = getFilesToProcess(line);
-        final Checker c = createChecker(config, listener);
-        final int numErrs = c.process(files);
-        c.destroy();
-        System.exit(numErrs);
     }
 

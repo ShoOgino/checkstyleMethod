@@ -1,0 +1,26 @@
+    /**
+     * Traverses a specified node looking for files to check. Found files are added to a specified
+     * list. Subdirectories are also traversed.
+     * @param node
+     *        the node to process
+     * @return found files
+     */
+    private static List<File> listFiles(File node)
+    {
+        // could be replaced with org.apache.commons.io.FileUtils.list() method
+        // if only we add commons-io library
+        final List<File> files = Lists.newLinkedList();
+
+        if (node.canRead()) {
+            if (node.isDirectory()) {
+                for (File element : node.listFiles()) {
+                    files.addAll(listFiles(element));
+                }
+            }
+            else if (node.isFile()) {
+                files.add(node);
+            }
+        }
+        return files;
+    }
+

@@ -2,11 +2,7 @@
     private static void usage()
     {
         final HelpFormatter hf = new HelpFormatter();
-        hf.printHelp(
-            "java "
-                + Main.class.getName()
-                + " [options] -c <config.xml> file...",
-            OPTS);
-        System.exit(1);
+        hf.printHelp(String.format("java %s [options] -c <config.xml> file...",
+                Main.class.getName()), buildOptions());
     }
 

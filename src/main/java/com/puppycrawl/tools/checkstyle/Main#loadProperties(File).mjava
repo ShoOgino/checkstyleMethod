@@ -1,20 +1,22 @@
     /**
      * Loads properties from a File.
-     * @param file the properties file
+     * @param file
+     *        the properties file
      * @return the properties in file
+     * @throws CheckstyleException
+     *         when could not load properties file
      */
     private static Properties loadProperties(File file)
+            throws CheckstyleException
     {
         final Properties properties = new Properties();
 
         try (FileInputStream fis = new FileInputStream(file)) {
             properties.load(fis);
         }
-        catch (final IOException ex) {
-            System.out.println("Unable to load properties from file: "
-                + file.getAbsolutePath());
-            ex.printStackTrace(System.out);
-            System.exit(1);
+        catch (final IOException e) {
+            throw new CheckstyleException(String.format(
+                    "Unable to load properties from file '%s'.", file.getAbsolutePath()), e);
         }
 
         return properties;
