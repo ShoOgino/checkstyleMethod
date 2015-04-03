@@ -8,8 +8,8 @@
     private boolean isFieldDeclaration(DetailAST ast)
     {
         DetailAST varDefAST = ast;
-        while ((varDefAST != null)
-                && (varDefAST.getType() != TokenTypes.VARIABLE_DEF))
+        while (varDefAST != null
+                && varDefAST.getType() != TokenTypes.VARIABLE_DEF)
         {
             varDefAST = varDefAST.getParent();
         }
@@ -17,9 +17,7 @@
         // contains variable declaration
         // and it is directly inside class declaration
         return varDefAST != null
-                && varDefAST.getParent() != null
-                && varDefAST.getParent().getParent() != null
                 && varDefAST.getParent().getParent().getType()
-                == TokenTypes.CLASS_DEF;
+                    == TokenTypes.CLASS_DEF;
     }
 
