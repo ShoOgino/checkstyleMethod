@@ -25,11 +25,10 @@
         }
 
         // override with Ant properties like ${basedir}
-        final Hashtable<?, ?> antProps = this.getProject().getProperties();
-        for (Object name : antProps.keySet()) {
-            final String key = (String) name;
-            final String value = String.valueOf(antProps.get(key));
-            retVal.put(key, value);
+        final Map<String, Object> antProps = this.getProject().getProperties();
+        for (Map.Entry<String, Object> entry : antProps.entrySet()) {
+            final String value = String.valueOf(entry.getValue());
+            retVal.put(entry.getKey(), value);
         }
 
         // override with properties specified in subelements
