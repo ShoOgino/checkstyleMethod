@@ -11,8 +11,9 @@
         final File destDir = new File(getDestDir(root.options()));
 
         final File checksIndexFile = new File(destDir, "checks.xml");
-        final PrintWriter fileWriter = new PrintWriter(
-                new FileWriter(checksIndexFile));
+        final Writer writer =
+                new OutputStreamWriter(new FileOutputStream(checksIndexFile), "UTF-8");
+        final PrintWriter fileWriter = new PrintWriter(writer);
         writeXdocsHeader(fileWriter, "Available Checks");
 
         fileWriter.println("<p>Checkstyle provides many checks that you can"
