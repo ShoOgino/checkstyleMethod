@@ -2,8 +2,10 @@
      * Creates a new <code>DefaultLogger</code> instance.
      * @param os where to log infos and errors
      * @param closeStreamsAfterUse if oS should be closed in auditFinished()
+     * @exception UnsupportedEncodingException if there is a problem to use UTF-8 encoding
      */
     public DefaultLogger(OutputStream os, boolean closeStreamsAfterUse)
+            throws UnsupportedEncodingException
     {
         // no need to close oS twice
         this(os, closeStreamsAfterUse, os, false);
