@@ -28,7 +28,7 @@
         catch (final TokenStreamRecognitionException tre) {
             final String exceptionMsg = String.format(msg, "TokenStreamRecognitionException",
                      fileName);
-            Utils.getExceptionLogger().error(exceptionMsg);
+            LOG.error(exceptionMsg);
             final RecognitionException re = tre.recog;
             String message = "TokenStreamRecognitionException occured";
             if (re != null) {
@@ -39,7 +39,7 @@
         // RecognitionException and any other (need to check if needed)
         catch (Throwable ex) {
             final String exceptionMsg = String.format(msg, ex.getClass().getSimpleName(), fileName);
-            Utils.getExceptionLogger().error(exceptionMsg);
+            LOG.error(exceptionMsg);
             getMessageCollector().add(createLocalizedMessage(ex.getMessage()));
         }
 

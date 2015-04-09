@@ -29,8 +29,7 @@
             return hexEncode(md.digest());
         }
         catch (final Exception ex) { // IO, NoSuchAlgorithm
-            Utils.getExceptionLogger()
-                .debug("Unable to calculate hashcode.", ex);
+            LOG.debug("Unable to calculate hashcode.", ex);
             return "ALWAYS FRESH: " + System.currentTimeMillis();
         }
     }

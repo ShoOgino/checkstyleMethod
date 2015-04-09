@@ -33,8 +33,7 @@
                 details.put(CONFIG_HASH_KEY, currentConfigHash);
             }
             catch (final IOException e) {
-                Utils.getExceptionLogger()
-                    .debug("Unable to open cache file, ignoring.", e);
+                LOG.debug("Unable to open cache file, ignoring.", e);
             }
             finally {
                 Closeables.closeQuietly(inStream);

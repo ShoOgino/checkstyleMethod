@@ -9,12 +9,10 @@
             tokenToCommentChecks.put(token, check);
         }
         else if (TokenTypes.isCommentType(token)) {
-            LOG.warn("Check '"
-                    + check.getClass().getName()
-                    + "' waits for comment type token ('"
-                    + token
-                    + "') and should override 'isCommentNodesRequred()'"
-                    + " method to return 'true'");
+            final String message = String.format("Check '%s' waits for comment type "
+                    + "token ('%s') and should override 'isCommentNodesRequred()' "
+                    + "method to return 'true'", check.getClass().getName(), token);
+            LOG.warn(message);
         }
         else {
             tokenToOrdinaryChecks.put(token, check);

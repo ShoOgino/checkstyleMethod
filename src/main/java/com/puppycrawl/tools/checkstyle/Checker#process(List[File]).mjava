@@ -30,14 +30,13 @@
                 }
             }
             catch (final FileNotFoundException fnfe) {
-                Utils.getExceptionLogger().debug(
-                        "FileNotFoundException occured.", fnfe);
+                LOG.debug("FileNotFoundException occured.", fnfe);
                 fileMessages.add(new LocalizedMessage(0,
                         Defn.CHECKSTYLE_BUNDLE, "general.fileNotFound", null,
                         null, this.getClass(), null));
             }
             catch (final IOException ioe) {
-                Utils.getExceptionLogger().debug("IOException occured.", ioe);
+                LOG.debug("IOException occured.", ioe);
                 fileMessages.add(new LocalizedMessage(0,
                         Defn.CHECKSTYLE_BUNDLE, "general.exception",
                         new String[] {ioe.getMessage()}, null, this.getClass(),
