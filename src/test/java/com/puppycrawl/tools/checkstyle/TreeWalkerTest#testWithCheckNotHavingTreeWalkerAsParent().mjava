@@ -1,0 +1,16 @@
+    @Test
+    public void testWithCheckNotHavingTreeWalkerAsParent() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(JavadocPackageCheck.class);
+        final String[] expected = {
+        };
+
+        try {
+            verify(checkConfig, temporaryFolder.newFile().getPath(), expected);
+            fail();
+        }
+        catch (CheckstyleException exception) {
+            assertTrue(exception.getMessage().contains("TreeWalker is not allowed as a parent of"));
+        }
+    }
+
