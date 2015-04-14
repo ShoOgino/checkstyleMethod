@@ -16,8 +16,8 @@
                         || child.getType() == TokenTypes.DOT)
                 {
                     final FullIdent fi = FullIdent.createFullIdent(child);
-                    final ExceptionInfo ei = new ExceptionInfo(new Token(fi),
-                            getCurrentClassName());
+                    final ExceptionInfo ei = new ExceptionInfo(createClassInfo(new Token(fi),
+                            getCurrentClassName()));
                     retVal.add(ei);
                 }
                 child = child.getNextSibling();
