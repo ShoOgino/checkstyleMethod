@@ -29,7 +29,12 @@
                 typeOrIdent = getArrayIdentifier(arrayDeclarator);
             }
             else {
-                typeOrIdent = arrayDeclarator.getFirstChild();
+                if (isArrayUsedAsTypeForGenericBoundedWildcard(arrayDeclarator)) {
+                    typeOrIdent = arrayDeclarator.getParent();
+                }
+                else {
+                    typeOrIdent = arrayDeclarator.getFirstChild();
+                }
             }
         }
         return typeOrIdent;
