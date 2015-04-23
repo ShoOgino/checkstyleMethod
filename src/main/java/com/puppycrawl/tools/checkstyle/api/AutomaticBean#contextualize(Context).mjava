@@ -10,7 +10,6 @@
     {
         final BeanUtilsBean beanUtils = createBeanUtilsBean();
 
-        // TODO: debug log messages
         final Collection<String> attributes = context.getAttributeNames();
 
         for (final String key : attributes) {
@@ -20,8 +19,6 @@
                 beanUtils.copyProperty(this, key, value);
             }
             catch (final InvocationTargetException e) {
-                // TODO: log.debug("The bean " + this.getClass()
-                // + " is not interested in " + value)
                 throw new CheckstyleException("cannot set property "
                     + key + " to value " + value + " in bean "
                     + this.getClass().getName(), e);
