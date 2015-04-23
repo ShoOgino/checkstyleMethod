@@ -9,7 +9,7 @@
         final String string)
     {
         try {
-            return Enum.valueOf(enuclass, string.trim().toUpperCase());
+            return Enum.valueOf(enuclass, string.trim().toUpperCase(Locale.ENGLISH));
         }
         catch (final IllegalArgumentException iae) {
             throw new ConversionException("unable to parse " + string, iae);
