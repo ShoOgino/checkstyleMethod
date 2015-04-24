@@ -4,7 +4,7 @@
         if (isOverridingMethod(ast)) {
             final MethodNode methodNode =
                 methodStack.removeLast();
-            if (!methodNode.getCallsSuper()) {
+            if (!methodNode.isCallingSuper()) {
                 final DetailAST methodAST = methodNode.getMethod();
                 final DetailAST nameAST =
                     methodAST.findFirstToken(TokenTypes.IDENT);
