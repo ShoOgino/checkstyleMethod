@@ -1,0 +1,29 @@
+    /**
+     * Tests whether the provided AST is in
+     * one of the given contexts.
+     *
+     * @param ast the AST from which to start walking towards root
+     * @param contextSet the contexts to test against.
+     *
+     * @return whether the parents nodes of ast match
+     * one of the allowed type paths
+     */
+    private static boolean isInContext(DetailAST ast, int[]... contextSet)
+    {
+        for (int[] element : contextSet) {
+            DetailAST current = ast;
+            final int len = element.length;
+            for (int j = 0; j < len; j++) {
+                current = current.getParent();
+                final int expectedType = element[j];
+                if (current == null || current.getType() != expectedType) {
+                    break;
+                }
+                if (j == len - 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+

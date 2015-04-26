@@ -1,0 +1,30 @@
+    /**
+     * Loops over the files specified checking them for errors. The exit code
+     * is the number of errors found in all the files.
+     * @param args the command line arguments
+     * @exception UnsupportedEncodingException if there is a problem to use UTF-8
+     **/
+    public static void main(String... args) throws UnsupportedEncodingException
+    {
+        boolean parseResult = false;
+        try {
+            processCommandLine(parseCli(args));
+            parseResult = true;
+        }
+        catch (final ParseException e) {
+            System.err.println("Could not parse parameters: " + e.getMessage());
+            e.printStackTrace();
+        }
+        catch (final Exception e) {
+            System.err.println("Could not execute Checkstyle: " + e.getMessage());
+            e.printStackTrace();
+        }
+        finally {
+            if (!parseResult) {
+                usage();
+            }
+            // provide proper exit code based on results.
+            System.exit(parseResult ? 0 : 1);
+        }
+    }
+

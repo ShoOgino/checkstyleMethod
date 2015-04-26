@@ -1,0 +1,25 @@
+    /**
+     * Returns the comment text from the Javadoc.
+     * @param comments the lines of Javadoc.
+     * @return a comment text String.
+     */
+    private String getCommentText(String... comments)
+    {
+        final StringBuffer buffer = new StringBuffer();
+        for (final String line : comments) {
+            final int textStart = findTextStart(line);
+
+            if (textStart != -1) {
+                if (line.charAt(textStart) == '@') {
+                    //we have found the tag section
+                    break;
+                }
+                buffer.append(line.substring(textStart));
+                trimTail(buffer);
+                buffer.append('\n');
+            }
+        }
+
+        return buffer.toString().trim();
+    }
+
