@@ -1,0 +1,12 @@
+    @Test
+    public void testFileWithThreeTopLevelInterface() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(OneTopLevelClassCheck.class);
+        final String[] expected = {
+            "3: " + getCheckMessage(MSG_KEY, "InputOneTopLevelInterface2inner1"),
+            "11: " + getCheckMessage(MSG_KEY, "InputOneTopLevelInterface2inner2"),
+        };
+        verify(checkConfig, getPath("design" + File.separator + "InputOneTopLevelInterface2.java"), expected);
+    }
+

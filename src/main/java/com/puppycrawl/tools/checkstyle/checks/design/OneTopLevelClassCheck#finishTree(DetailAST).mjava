@@ -1,7 +1,7 @@
     @Override
     public void finishTree(DetailAST rootAST)
     {
-        if (!publicTypeFound && !lineNumberTypeMap.isEmpty()) {
+        if (!publicTypeFound) {
             // skip first top-level type.
             lineNumberTypeMap.remove(lineNumberTypeMap.firstKey());
         }
@@ -12,7 +12,5 @@
             log(entry.getKey(), MSG_KEY, entry.getValue());
         }
 
-        lineNumberTypeMap.clear();
-        publicTypeFound = false;
     }
 

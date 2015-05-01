@@ -1,0 +1,11 @@
+    @Test
+    public void testFileWithNoPublicTopLevelClass() throws Exception
+    {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(OneTopLevelClassCheck.class);
+        final String[] expected = {
+            "8: " + getCheckMessage(MSG_KEY, "InputOneTopLevelClassNoPublic2"),
+        };
+        verify(checkConfig, getPath("design" + File.separator + "InputOneTopLevelClassNoPublic.java"), expected);
+    }
+
