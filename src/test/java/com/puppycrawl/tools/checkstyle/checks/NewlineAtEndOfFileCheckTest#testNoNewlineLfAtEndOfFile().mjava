@@ -1,8 +1,8 @@
     @Test
-    public void testNoNewlineAtEndOfFile() throws Exception {
+    public void testNoNewlineLfAtEndOfFile() throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(NewlineAtEndOfFileCheck.class);
-        checkConfig.addAttribute("lineSeparator", LineSeparatorOption.LF_CR_CRLF.toString());
+        checkConfig.addAttribute("lineSeparator", LineSeparatorOption.LF.toString());
         final String[] expected = {
             "0: " + getCheckMessage(MSG_KEY_NO_NEWLINE_EOF),
         };

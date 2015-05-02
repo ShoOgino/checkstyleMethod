@@ -1,0 +1,12 @@
+    @Test
+    public void testNewlineCrlfAtEndOfFile() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(NewlineAtEndOfFileCheck.class);
+        checkConfig.addAttribute("lineSeparator", LineSeparatorOption.CRLF.toString());
+        final String[] expected = {};
+        verify(
+            createChecker(checkConfig),
+            getPath("InputNewlineCrlfAtEndOfFile.java"),
+            expected);
+    }
+
