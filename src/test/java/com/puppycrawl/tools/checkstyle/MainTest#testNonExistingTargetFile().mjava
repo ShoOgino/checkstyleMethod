@@ -1,0 +1,16 @@
+    @Test
+    public void testNonExistingTargetFile()
+            throws Exception
+    {
+        exit.expectSystemExitWithStatus(1);
+        exit.checkAssertionAfterwards(new Assertion()
+        {
+            public void checkAssertion()
+            {
+                assertEquals("Must specify files to process, found 0.\n", standardLog.getLog());
+                assertEquals("", errorLog.getLog());
+            }
+        });
+        Main.main("-c", "/google_checks.xml", "NonexistingFile.java");
+    }
+

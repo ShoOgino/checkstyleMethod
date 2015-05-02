@@ -1,0 +1,19 @@
+    @Test
+    public void testExistingTargetFilePlainOutputToNonExistingFile()
+            throws Exception
+    {
+        exit.expectSystemExitWithStatus(1);
+        exit.checkAssertionAfterwards(new Assertion()
+        {
+            public void checkAssertion()
+            {
+                assertEquals("Could not find file 'myjava.java'.\n", standardLog.getLog());
+                assertEquals("", errorLog.getLog());
+            }
+        });
+        Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname.xml"
+                , "-f", "plain"
+                , "-o", "myjava.java"
+                , "src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java");
+    }
+

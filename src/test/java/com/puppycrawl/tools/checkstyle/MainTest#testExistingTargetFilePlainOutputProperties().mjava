@@ -1,0 +1,20 @@
+    @Test
+    public void testExistingTargetFilePlainOutputProperties()
+            throws Exception
+    {
+        exit.expectSystemExitWithStatus(0);
+        exit.checkAssertionAfterwards(new Assertion()
+        {
+            public void checkAssertion()
+            {
+                assertEquals("Starting audit...\n"
+                        + "Audit done.\n", standardLog.getLog());
+                assertEquals("", errorLog.getLog());
+            }
+        });
+        Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/"
+                + "config-classname-prop.xml"
+                , "-p", "src/test/resources/com/puppycrawl/tools/checkstyle/mycheckstyle.properties"
+                , "src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java");
+    }
+

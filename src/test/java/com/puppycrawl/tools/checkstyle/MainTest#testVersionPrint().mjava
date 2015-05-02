@@ -1,0 +1,16 @@
+    @Test
+    public void testVersionPrint()
+            throws Exception
+    {
+        exit.expectSystemExitWithStatus(0);
+        exit.checkAssertionAfterwards(new Assertion()
+        {
+            public void checkAssertion()
+            {
+                assertEquals("Checkstyle version: null\n", standardLog.getLog());
+                assertEquals("", errorLog.getLog());
+            }
+        });
+        Main.main("-v");
+    }
+

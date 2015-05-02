@@ -2,17 +2,29 @@
      * Creates the audit listener.
      *
      * @param format format of the auditt listener
-     * @param out the stream to log to
-     * @param closeOut whether the stream should be closed
+     * @param outputLocation the location of output
      * @return a fresh new <code>AuditListener</code>
      * @exception UnsupportedEncodingException if there is problem to use UTf-8
-     * @exception CheckstyleException when provided parameters are not supported
+     * @exception FileNotFoundException when provided output location is not found
      */
     private static AuditListener createListener(String format,
-                                                OutputStream out,
-                                                boolean closeOut)
-            throws UnsupportedEncodingException, CheckstyleException
+                                                String outputLocation)
+            throws UnsupportedEncodingException, FileNotFoundException
     {
+
+        // setup the output stream
+        OutputStream out = null;
+        boolean closeOut = false;
+        if (outputLocation != null) {
+            out = new FileOutputStream(outputLocation);
+            closeOut = true;
+        }
+        else {
+            out = System.out;
+            closeOut = false;
+        }
+
+        // setup a listener
         AuditListener listener = null;
         switch (format) {
             case "xml":
@@ -24,7 +36,7 @@
                 break;
 
             default:
-                throw new CheckstyleException("Invalid output format. Found '" + format
+                throw new IllegalStateException("Invalid output format. Found '" + format
                         + "' but expected 'plain' or 'xml'.");
         }
 

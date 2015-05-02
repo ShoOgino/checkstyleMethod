@@ -1,0 +1,50 @@
+    /**
+     * Executes required Checkstyle actions based on passed parameters.
+     * @param cliOptions
+     *        pojo object that contains all options
+     * @return number of violations of ERROR level
+     * @throws FileNotFoundException
+     *         when output file could not be found
+     * @throws CheckstyleException
+     *         when properties file could not be loaded
+     * @throws UnsupportedEncodingException
+     *         if there is problem to use UTf-8
+     */
+    private static int runCheckstyle(CliOptions cliOptions)
+            throws CheckstyleException, UnsupportedEncodingException, FileNotFoundException
+    {
+        // setup the properties
+        final Properties props =
+                cliOptions.propertiesLocation != null
+                        ? loadProperties(new File(cliOptions.propertiesLocation))
+                        : System.getProperties();
+
+        // create a configuration
+        final Configuration config = ConfigurationLoader.loadConfiguration(
+                cliOptions.configLocation, new PropertiesExpander(props));
+
+        // create a listener for output
+        final AuditListener listener = createListener(cliOptions.format, cliOptions.outputLocation);
+
+        // create Checker object and run it
+        int errorCounter = 0;
+        final Checker checker = new Checker();
+
+        try {
+
+            final ClassLoader moduleClassLoader = Checker.class.getClassLoader();
+            checker.setModuleClassLoader(moduleClassLoader);
+            checker.configure(config);
+            checker.addListener(listener);
+
+            // run Checker
+            errorCounter = checker.process(cliOptions.files);
+
+        }
+        finally {
+            checker.destroy();
+        }
+
+        return errorCounter;
+    }
+

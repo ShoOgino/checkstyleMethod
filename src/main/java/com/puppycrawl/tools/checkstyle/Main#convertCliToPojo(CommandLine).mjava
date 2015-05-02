@@ -1,0 +1,19 @@
+    /**
+     * Util method to convert ComandLine type to POJO object
+     * @param cmdLine command line object
+     * @return command line option as POJO object
+     */
+    private static CliOptions convertCliToPojo(CommandLine cmdLine)
+    {
+        final CliOptions conf = new CliOptions();
+        conf.format = cmdLine.getOptionValue("f");
+        if (conf.format == null) {
+            conf.format = "plain";
+        }
+        conf.outputLocation = cmdLine.getOptionValue("o");
+        conf.configLocation = cmdLine.getOptionValue("c");
+        conf.propertiesLocation = cmdLine.getOptionValue("p");
+        conf.files = getFilesToProcess(cmdLine.getArgs());
+        return conf;
+    }
+

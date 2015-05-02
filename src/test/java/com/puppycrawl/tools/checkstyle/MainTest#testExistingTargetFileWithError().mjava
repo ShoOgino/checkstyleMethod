@@ -1,0 +1,27 @@
+    @Test
+    public void testExistingTargetFileWithError()
+            throws Exception
+    {
+        exit.expectSystemExitWithStatus(2);
+        exit.checkAssertionAfterwards(new Assertion()
+        {
+            public void checkAssertion() throws IOException
+            {
+                String currentPath = new File(".").getCanonicalPath();
+                assertEquals("Starting audit...\n"
+                        + currentPath
+                        + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java:3:14: "
+                        + "Name 'InputMain' must match pattern '^[a-z0-9]*$'.\n"
+                        + currentPath
+                        + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java:5:7: "
+                        + "Name 'InputMainInner' must match pattern '^[a-z0-9]*$'.\n"
+                        + "Audit done.\n"
+                        + "Checkstyle ends with 2 errors.\n", standardLog.getLog());
+                assertEquals("", errorLog.getLog());
+            }
+        });
+        Main.main("-c"
+                , "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname2-error.xml"
+                , "src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java");
+    }
+

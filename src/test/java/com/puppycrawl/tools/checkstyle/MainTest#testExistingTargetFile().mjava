@@ -1,0 +1,18 @@
+    @Test
+    public void testExistingTargetFile()
+            throws Exception
+    {
+        exit.expectSystemExitWithStatus(0);
+        exit.checkAssertionAfterwards(new Assertion()
+        {
+            public void checkAssertion()
+            {
+                assertEquals("Starting audit...\n"
+                        + "Audit done.\n", standardLog.getLog());
+                assertEquals("", errorLog.getLog());
+            }
+        });
+        Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname.xml"
+                , "src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java");
+    }
+

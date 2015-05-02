@@ -1,0 +1,19 @@
+    @Test
+    public void testNonExistingOutputFormat()
+            throws Exception
+    {
+        exit.expectSystemExitWithStatus(1);
+        exit.checkAssertionAfterwards(new Assertion()
+        {
+            public void checkAssertion()
+            {
+                assertEquals("Invalid output format."
+                        + " Found '" + "xmlp" + "' but expected 'plain' or 'xml'.\n"
+                        , standardLog.getLog());
+                assertEquals("", errorLog.getLog());
+            }
+        });
+        Main.main("-c", "/google_checks.xml", "-f" , "xmlp"
+                , "src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java");
+    }
+
