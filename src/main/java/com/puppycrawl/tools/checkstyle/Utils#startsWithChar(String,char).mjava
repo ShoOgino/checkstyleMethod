@@ -1,0 +1,17 @@
+    /**
+     * Tests if this string starts with the specified prefix.
+     * <p/>
+     * It is faster version of {@link String#startsWith(String)} optimized for one-character
+     * prefixes at the expense of some readability. Suggested by SimplifyStartsWith PMD rule:
+     * http://pmd.sourceforge.net/pmd-5.3.1/pmd-java/rules/java/optimizations.html#SimplifyStartsWith
+     *
+     * @param string the <code>String</code> to check
+     * @param prefix the prefix to find
+     * @return <code>true</code> if the <code>char</code> is a prefix of the given
+     * <code>String</code>; <code>false</code> otherwise.
+     */
+    public static boolean startsWithChar(String string, char prefix)
+    {
+        return string.length() > 0 && string.charAt(0) == prefix;
+    }
+

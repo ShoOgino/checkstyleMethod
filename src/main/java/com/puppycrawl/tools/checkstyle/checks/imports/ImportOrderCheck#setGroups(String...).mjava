@@ -17,15 +17,15 @@
             if (WILDCARD_GROUP_NAME.equals(pkg)) {
                 grp = Pattern.compile(""); // matches any package
             }
-            else if (pkg.startsWith("/")) {
-                if (!pkg.endsWith("/")) {
+            else if (Utils.startsWithChar(pkg, '/')) {
+                if (!Utils.endsWithChar(pkg, '/')) {
                     throw new IllegalArgumentException("Invalid group");
                 }
                 pkg = pkg.substring(1, pkg.length() - 1);
                 grp = Pattern.compile(pkg);
             }
             else {
-                if (!pkg.endsWith(".")) {
+                if (!Utils.endsWithChar(pkg, '.')) {
                     pkg = pkg + ".";
                 }
                 grp = Pattern.compile("^" + Pattern.quote(pkg));
