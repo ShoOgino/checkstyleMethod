@@ -1,7 +1,7 @@
     @Override
     public void visitToken(DetailAST ast)
     {
-        if (ignoreAnnotation && isInAnnotation(ast)) {
+        if (ignoreAnnotation && isChildOf(ast, TokenTypes.ANNOTATION)) {
             return;
         }
 

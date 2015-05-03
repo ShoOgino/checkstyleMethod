@@ -1,0 +1,22 @@
+    /**
+     * Determines if the given AST node has a parent node with given token type code.
+     *
+     * @param ast the AST from which to search for annotations
+     * @param type the type code of parent token
+     *
+     * @return {@code true} if the AST node has a parent with given token type.
+     */
+    private static boolean isChildOf(DetailAST ast, int type)
+    {
+        boolean result = false;
+        DetailAST node = ast;
+        do {
+            if (node.getType() == type) {
+                result = true;
+            }
+            node = node.getParent();
+        } while (node != null && !result);
+
+        return result;
+    }
+
