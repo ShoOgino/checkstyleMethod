@@ -1,0 +1,24 @@
+    /**
+     * Checks to see what the passed in AST (representing
+     * an annotation) is annotating.
+     *
+     * @param ast the AST representing an annotation.
+     * @return the AST the annotation is annotating.
+     * @throws NullPointerException if the ast is null
+     * @throws IllegalArgumentException if the ast is not
+     * an {@link TokenTypes#ANNOTATION}
+     */
+    public static DetailAST annotatingWhat(DetailAST ast)
+    {
+        if (ast == null) {
+            throw new IllegalArgumentException("the ast is null");
+        }
+
+        if (ast.getType() != TokenTypes.ANNOTATION) {
+            throw new IllegalArgumentException(
+                "The ast is not an annotation. AST: " + ast);
+        }
+
+        return ast.getParent().getParent();
+    }
+

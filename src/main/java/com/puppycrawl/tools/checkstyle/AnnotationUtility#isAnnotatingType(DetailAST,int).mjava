@@ -1,0 +1,17 @@
+    /**
+     * Checks to see if the passed in AST (representing
+     * an annotation) is annotating the passed in type.
+     * @param ast the AST representing an annotation
+     * @param tokenType the passed in type
+     * @return true if the annotation is annotating a type
+     * equal to the passed in type
+     * @throws NullPointerException if the ast is null
+     * @throws IllegalArgumentException if the ast is not
+     * an {@link TokenTypes#ANNOTATION}
+     */
+    public static boolean isAnnotatingType(DetailAST ast, int tokenType)
+    {
+        final DetailAST astNode = AnnotationUtility.annotatingWhat(ast);
+        return astNode.getType() == tokenType;
+    }
+

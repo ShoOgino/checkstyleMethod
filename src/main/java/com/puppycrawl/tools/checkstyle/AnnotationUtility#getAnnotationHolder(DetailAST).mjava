@@ -1,0 +1,29 @@
+    /**
+     * Gets the AST that holds a series of annotations for the
+     * potentially annotated AST.  Returns <code>null</code>
+     * the passed in AST is not have an Annotation Holder.
+     *
+     * @param ast the current node
+     * @return the Annotation Holder
+     * @throws NullPointerException if the ast is null
+     */
+    public static DetailAST getAnnotationHolder(DetailAST ast)
+    {
+        if (ast == null) {
+            throw new IllegalArgumentException("the ast is null");
+        }
+
+        final DetailAST annotationHolder;
+
+        if (ast.getType() == TokenTypes.ENUM_CONSTANT_DEF
+            || ast.getType() == TokenTypes.PACKAGE_DEF)
+        {
+            annotationHolder = ast.findFirstToken(TokenTypes.ANNOTATIONS);
+        }
+        else {
+            annotationHolder = ast.findFirstToken(TokenTypes.MODIFIERS);
+        }
+
+        return annotationHolder;
+    }
+

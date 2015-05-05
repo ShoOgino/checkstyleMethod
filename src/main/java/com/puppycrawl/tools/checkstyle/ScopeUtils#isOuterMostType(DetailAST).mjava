@@ -1,0 +1,26 @@
+    /**
+     * Returns whether a node is contained in the outer most type block.
+     *
+     * @param aAST the node to check
+     * @return a <code>boolean</code> value
+     */
+    public static boolean isOuterMostType(DetailAST aAST)
+    {
+        boolean retVal = true;
+        for (DetailAST parent = aAST.getParent();
+             parent != null;
+             parent = parent.getParent())
+        {
+            if (parent.getType() == TokenTypes.CLASS_DEF
+                || parent.getType() == TokenTypes.INTERFACE_DEF
+                || parent.getType() == TokenTypes.ANNOTATION_DEF
+                || parent.getType() == TokenTypes.ENUM_DEF)
+            {
+                retVal = false;
+                break;
+            }
+        }
+
+        return retVal;
+    }
+
