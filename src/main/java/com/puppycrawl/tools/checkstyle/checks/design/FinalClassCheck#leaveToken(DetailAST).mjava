@@ -8,8 +8,8 @@
         final ClassDesc desc = classes.pop();
         if (!desc.isDeclaredAsFinal()
             && !desc.isDeclaredAsAbstract()
-            && desc.hasPrivateCtor()
-            && !desc.hasNonPrivateCtor())
+            && desc.isWithPrivateCtor()
+            && !desc.isWithNonPrivateCtor())
         {
             final String className =
                 ast.findFirstToken(TokenTypes.IDENT).getText();

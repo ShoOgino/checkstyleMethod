@@ -5,7 +5,7 @@
      */
     public LineColumn lineColumn(int pos)
     {
-        final int[] lineBreaks = lineBreaks();
+        final int[] lineBreaks = findLineBreaks();
         int lineNo = Arrays.binarySearch(lineBreaks, pos);
         if (lineNo < 0) {
             // we have: lineNo = -(insertion point) - 1
