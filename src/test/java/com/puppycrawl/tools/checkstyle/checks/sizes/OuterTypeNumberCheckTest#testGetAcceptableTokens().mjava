@@ -1,0 +1,15 @@
+    @Test
+    public void testGetAcceptableTokens()
+    {
+        OuterTypeNumberCheck outerTypeNumberObj =
+            new OuterTypeNumberCheck();
+        int[] actual = outerTypeNumberObj.getAcceptableTokens();
+        int[] expected = {
+            TokenTypes.CLASS_DEF,
+            TokenTypes.INTERFACE_DEF, TokenTypes.ENUM_DEF,
+            TokenTypes.ANNOTATION_DEF,
+        };
+
+        assertArrayEquals(expected, actual);
+    }
+
