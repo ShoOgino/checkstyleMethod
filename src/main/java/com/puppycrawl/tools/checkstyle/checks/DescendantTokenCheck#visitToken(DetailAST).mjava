@@ -6,7 +6,7 @@
         countTokens(ast, 0);
 
         // name of this token
-        final String name = TokenTypes.getTokenName(ast.getType());
+        final String name = Utils.getTokenName(ast.getType());
 
         if (sumTokenCounts) {
             int total = 0;
@@ -33,7 +33,7 @@
             for (int element : limitedTokens) {
                 final int tokenCount = counts[element - 1];
                 if (tokenCount < minimumNumber) {
-                    final String descendantName = TokenTypes
+                    final String descendantName = Utils
                             .getTokenName(element);
                     log(ast.getLineNo(), ast.getColumnNo(),
                             null == minimumMessage ? MSG_KEY_MIN
@@ -44,7 +44,7 @@
                             descendantName);
                 }
                 if (tokenCount > maximumNumber) {
-                    final String descendantName = TokenTypes
+                    final String descendantName = Utils
                             .getTokenName(element);
                     log(ast.getLineNo(), ast.getColumnNo(),
                             null == maximumMessage ? MSG_KEY_MAX
