@@ -1,13 +1,6 @@
     private void showErrorDialog(final Component parent, final String msg)
     {
-        final Runnable showError = new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                JOptionPane.showMessageDialog(parent, msg);
-            }
-        };
+        final Runnable showError = new FrameShower(parent, msg);
         SwingUtilities.invokeLater(showError);
     }
 
