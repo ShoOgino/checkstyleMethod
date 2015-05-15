@@ -1,0 +1,15 @@
+    int methodWithTwoReturnWithLambdas(final int number) {
+        if (hashCode() > 0) {
+            new Thread(
+                () -> {
+                }
+            ).start();
+            return number;
+        } else {
+            return Optional.of(hashCode()).orElseGet(() -> {
+                if (number > 0) return number;
+                else return 0;
+            });
+        }
+    }
+

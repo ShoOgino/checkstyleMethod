@@ -4,7 +4,8 @@
         switch (ast.getType()) {
             case TokenTypes.CTOR_DEF:
             case TokenTypes.METHOD_DEF:
-                leaveMethodDef(ast);
+            case TokenTypes.LAMBDA:
+                leave(ast);
                 break;
             case TokenTypes.LITERAL_RETURN:
                 // Do nothing

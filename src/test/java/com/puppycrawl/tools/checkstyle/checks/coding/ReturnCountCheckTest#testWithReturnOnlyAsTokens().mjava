@@ -1,0 +1,11 @@
+    @Test
+    public void testWithReturnOnlyAsTokens() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(ReturnCountCheck.class);
+        checkConfig.addAttribute("tokens", "LITERAL_RETURN");
+        final String[] expected = {
+        };
+        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"
+            + "checkstyle/coding/InputReturnCountLambda.java").getCanonicalPath(), expected);
+    }
+

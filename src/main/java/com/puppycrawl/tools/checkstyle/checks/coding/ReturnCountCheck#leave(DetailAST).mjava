@@ -1,0 +1,10 @@
+    /**
+     * Checks number of return statements and restore previous context.
+     * @param ast node to leave.
+     */
+    private void leave(DetailAST ast)
+    {
+        context.checkCount(ast);
+        context = contextStack.pop();
+    }
+

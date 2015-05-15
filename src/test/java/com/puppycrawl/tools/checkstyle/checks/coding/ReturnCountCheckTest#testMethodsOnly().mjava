@@ -1,0 +1,15 @@
+    @Test
+    public void testMethodsOnly() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(ReturnCountCheck.class);
+        checkConfig.addAttribute("tokens", "METHOD_DEF");
+        final String[] expected = {
+            "25:5: " + getCheckMessage(MSG_KEY, 3, 2),
+            "32:5: " + getCheckMessage(MSG_KEY, 4, 2),
+            "40:5: " + getCheckMessage(MSG_KEY, 4, 2),
+            "55:5: " + getCheckMessage(MSG_KEY, 3, 2),
+        };
+        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"
+            + "checkstyle/coding/InputReturnCountLambda.java").getCanonicalPath(), expected);
+    }
+

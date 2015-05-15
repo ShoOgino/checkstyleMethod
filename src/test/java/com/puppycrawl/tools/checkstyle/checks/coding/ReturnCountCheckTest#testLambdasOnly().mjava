@@ -1,0 +1,12 @@
+    @Test
+    public void testLambdasOnly() throws Exception
+    {
+        final DefaultConfiguration checkConfig = createCheckConfig(ReturnCountCheck.class);
+        checkConfig.addAttribute("tokens", "LAMBDA");
+        final String[] expected = {
+            "33:42: " + getCheckMessage(MSG_KEY, 3, 2),
+        };
+        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"
+            + "checkstyle/coding/InputReturnCountLambda.java").getCanonicalPath(), expected);
+    }
+
