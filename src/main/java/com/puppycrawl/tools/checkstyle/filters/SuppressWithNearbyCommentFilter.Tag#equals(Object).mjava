@@ -1,0 +1,18 @@
+        /** {@inheritDoc} */
+        @Override
+        public boolean equals(Object o)
+        {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            final Tag tag = (Tag) o;
+            return Objects.equals(firstLine, tag.firstLine)
+                    && Objects.equals(lastLine, tag.lastLine)
+                    && Objects.equals(text, tag.text)
+                    && Objects.equals(tagCheckRegexp, tag.tagCheckRegexp)
+                    && Objects.equals(tagMessageRegexp, tag.tagMessageRegexp);
+        }
+
