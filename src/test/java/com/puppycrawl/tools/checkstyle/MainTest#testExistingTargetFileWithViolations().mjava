@@ -8,14 +8,15 @@
             public void checkAssertion() throws IOException
             {
                 String currentPath = new File(".").getCanonicalPath();
-                assertEquals("Starting audit...\n"
-                    + currentPath
-                    + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java:3:14: "
-                    + "warning: Name 'InputMain' must match pattern '^[a-z0-9]*$'.\n"
-                    + currentPath
-                    + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java:5:7: "
-                    + "warning: Name 'InputMainInner' must match pattern '^[a-z0-9]*$'.\n"
-                    + "Audit done.\n",
+                String expectedPath = currentPath
+                    + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java"
+                    .replace("/", File.separator);
+                assertEquals(String.format("Starting audit...%n"
+                    + expectedPath + ":3:14: "
+                    + "warning: Name 'InputMain' must match pattern '^[a-z0-9]*$'.%n"
+                    + expectedPath + ":5:7: "
+                    + "warning: Name 'InputMainInner' must match pattern '^[a-z0-9]*$'.%n"
+                    + "Audit done.%n"),
                     standardLog.getLog());
                 assertEquals("", errorLog.getLog());
             }

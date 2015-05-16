@@ -7,14 +7,14 @@
         {
             public void checkAssertion()
             {
-                String usage = "Unrecognized option: -w\n"
-                    + "usage: java com.puppycrawl.tools.checkstyle.Main [options] -c <config.xml>\n"
-                    + "            file...\n"
-                    + " -c <arg>   Sets the check configuration file to use.\n"
-                    + " -f <arg>   Sets the output format. (plain|xml). Defaults to plain\n"
-                    + " -o <arg>   Sets the output file. Defaults to stdout\n"
-                    + " -p <arg>   Loads the properties file\n"
-                    + " -v         Print product version and exit\n";
+                String usage = String.format("Unrecognized option: -w%n"
+                    + "usage: java com.puppycrawl.tools.checkstyle.Main [options] -c <config.xml>%n"
+                    + "            file...%n"
+                    + " -c <arg>   Sets the check configuration file to use.%n"
+                    + " -f <arg>   Sets the output format. (plain|xml). Defaults to plain%n"
+                    + " -o <arg>   Sets the output file. Defaults to stdout%n"
+                    + " -p <arg>   Loads the properties file%n"
+                    + " -v         Print product version and exit%n");
 
                 assertEquals(usage, standardLog.getLog());
                 assertEquals("", errorLog.getLog());
