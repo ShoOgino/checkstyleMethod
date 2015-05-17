@@ -1,12 +1,10 @@
     @Override
-    protected void processFiltered(File file, List<String> lines)
-    {
+    protected void processFiltered(File file, List<String> lines) {
         // check if already checked and passed the file
         final String fileName = file.getPath();
         final long timestamp = file.lastModified();
         if (cache.alreadyChecked(fileName, timestamp)
-                 || !Utils.fileExtensionMatches(file, getFileExtensions()))
-        {
+                 || !Utils.fileExtensionMatches(file, getFileExtensions())) {
             return;
         }
 

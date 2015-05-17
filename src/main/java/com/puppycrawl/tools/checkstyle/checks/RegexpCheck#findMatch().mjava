@@ -1,6 +1,5 @@
     /** recursive method that finds the matches. */
-    private void findMatch()
-    {
+    private void findMatch() {
         int startLine;
         int startColumn;
         int endLine;
@@ -28,15 +27,13 @@
             if (!ignore) {
                 matchCount++;
                 if (illegalPattern || checkForDuplicates
-                        && matchCount - 1 > duplicateLimit)
-                {
+                        && matchCount - 1 > duplicateLimit) {
                     errorCount++;
                     logMessage(startLine);
                 }
             }
             if (errorCount < errorLimit
-                    && (ignore || illegalPattern || checkForDuplicates))
-            {
+                    && (ignore || illegalPattern || checkForDuplicates)) {
                 findMatch();
             }
         }

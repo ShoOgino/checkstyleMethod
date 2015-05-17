@@ -3,13 +3,11 @@
      * @param node DetailNode node.
      * @return Some nearest empty line in javadoc.
      */
-    private DetailNode getNearestEmptyLine(DetailNode node)
-    {
+    private DetailNode getNearestEmptyLine(DetailNode node) {
         DetailNode newLine = JavadocUtils.getPreviousSibling(node);
         while (newLine != null) {
             final DetailNode previousSibling = JavadocUtils.getPreviousSibling(newLine);
-            if (newLine.getType() == JavadocTokenTypes.NEWLINE && isEmptyLine(newLine))
-            {
+            if (newLine.getType() == JavadocTokenTypes.NEWLINE && isEmptyLine(newLine)) {
                 break;
             }
             newLine = previousSibling;

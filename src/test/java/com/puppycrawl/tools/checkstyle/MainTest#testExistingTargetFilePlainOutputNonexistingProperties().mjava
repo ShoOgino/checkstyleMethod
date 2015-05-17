@@ -1,12 +1,9 @@
     @Test
     public void testExistingTargetFilePlainOutputNonexistingProperties()
-            throws Exception
-    {
+            throws Exception {
         exit.expectSystemExitWithStatus(1);
-        exit.checkAssertionAfterwards(new Assertion()
-        {
-            public void checkAssertion()
-            {
+        exit.checkAssertionAfterwards(new Assertion() {
+            public void checkAssertion() {
                 assertEquals("Could not find file 'nonexisting.properties'."
                     + System.lineSeparator(), standardLog.getLog());
                 assertEquals("", errorLog.getLog());

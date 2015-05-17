@@ -2,14 +2,12 @@
      * Check the indentation of the left parenthesis.
      * @param lparen parenthesis to check
      */
-    protected final void checkLParen(final DetailAST lparen)
-    {
+    protected final void checkLParen(final DetailAST lparen) {
         // the rcurly can either be at the correct indentation, or on the
         // same line as the lcurly
         if (lparen == null
             || getLevel().accept(expandedTabsColumnNo(lparen))
-            || !startsLine(lparen))
-        {
+            || !startsLine(lparen)) {
             return;
         }
         logError(lparen, "lparen", expandedTabsColumnNo(lparen));

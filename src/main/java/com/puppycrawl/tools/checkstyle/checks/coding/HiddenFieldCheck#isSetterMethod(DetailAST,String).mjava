@@ -7,8 +7,7 @@
      * @param aName name of single parameter of this method.
      * @return true of false indicating of method is a setter or not.
      */
-    private boolean isSetterMethod(DetailAST aMethodAST, String aName)
-    {
+    private boolean isSetterMethod(DetailAST aMethodAST, String aName) {
         final String methodName =
             aMethodAST.findFirstToken(TokenTypes.IDENT).getText();
         boolean isSetterMethod = false;
@@ -20,8 +19,7 @@
             final DetailAST typeAST = aMethodAST.findFirstToken(TokenTypes.TYPE);
             final String returnType = typeAST.getFirstChild().getText();
             if (typeAST.branchContains(TokenTypes.LITERAL_VOID)
-                || setterCanReturnItsClass && currentFrame.embeddedIn(returnType))
-            {
+                || setterCanReturnItsClass && currentFrame.embeddedIn(returnType)) {
                 // this method has signature
                 //
                 //     void set${Name}(${anyType} ${name})

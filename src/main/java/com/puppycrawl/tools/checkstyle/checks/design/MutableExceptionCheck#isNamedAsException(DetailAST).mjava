@@ -2,8 +2,7 @@
      * @param ast class definition node
      * @return true if a class name conforms to specified format
      */
-    private boolean isNamedAsException(DetailAST ast)
-    {
+    private boolean isNamedAsException(DetailAST ast) {
         final String className = ast.findFirstToken(TokenTypes.IDENT).getText();
         return getRegexp().matcher(className).find();
     }

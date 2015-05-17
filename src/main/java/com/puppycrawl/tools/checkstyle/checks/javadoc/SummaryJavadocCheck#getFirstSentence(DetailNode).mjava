@@ -3,13 +3,11 @@
      * @param ast Javadoc root node.
      * @return first sentence.
      */
-    private String getFirstSentence(DetailNode ast)
-    {
+    private String getFirstSentence(DetailNode ast) {
         final StringBuilder result = new StringBuilder();
         for (DetailNode child : ast.getChildren()) {
             if (child.getType() != JavadocTokenTypes.JAVADOC_INLINE_TAG
-                && child.getText().contains(". "))
-            {
+                && child.getText().contains(". ")) {
                 result.append(getCharsTillDot(child));
                 break;
             }

@@ -5,8 +5,7 @@
      *            the file to be audited
      */
     @Override
-    public void fireFileStarted(String fileName)
-    {
+    public void fireFileStarted(String fileName) {
         final String stripped = Utils.relativizeAndNormalizePath(basedir, fileName);
         final AuditEvent evt = new AuditEvent(this, stripped);
         for (final AuditListener listener : listeners) {

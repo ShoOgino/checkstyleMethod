@@ -4,8 +4,7 @@
      * @param currentConfig the current configuration, not null
      * @param fileName the cache file
      */
-    PropertyCacheFile(Configuration currentConfig, String fileName)
-    {
+    PropertyCacheFile(Configuration currentConfig, String fileName) {
         boolean setInActive = true;
         if (fileName != null) {
             FileInputStream inStream = null;
@@ -19,8 +18,7 @@
                     details.getProperty(CONFIG_HASH_KEY);
                 setInActive = false;
                 if (cachedConfigHash == null
-                    || !cachedConfigHash.equals(currentConfigHash))
-                {
+                    || !cachedConfigHash.equals(currentConfigHash)) {
                     // Detected configuration change - clear cache
                     details.clear();
                     details.put(CONFIG_HASH_KEY, currentConfigHash);

@@ -9,8 +9,7 @@
     private void checkLinesIndent(LineSet lines,
                                   IndentLevel indentLevel,
                                   boolean firstLineMatches,
-                                  int firstLine)
-    {
+                                  int firstLine) {
         if (lines.isEmpty()) {
             return;
         }
@@ -36,8 +35,7 @@
 
         IndentLevel theLevel = indentLevel;
         if (firstLineMatches
-            || firstLine > mainAst.getLineNo() && shouldIncreaseIndent())
-        {
+            || firstLine > mainAst.getLineNo() && shouldIncreaseIndent()) {
             theLevel = new IndentLevel(indentLevel, getBasicOffset());
         }
 

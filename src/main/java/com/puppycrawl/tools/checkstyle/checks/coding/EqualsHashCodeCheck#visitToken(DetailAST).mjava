@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final DetailAST modifiers = ast.getFirstChild();
         final AST type = ast.findFirstToken(TokenTypes.TYPE);
         final AST methodName = ast.findFirstToken(TokenTypes.IDENT);
@@ -11,15 +10,13 @@
                 && modifiers.branchContains(TokenTypes.LITERAL_PUBLIC)
                 && parameters.getChildCount() == 1
                 && isObjectParam(parameters.getFirstChild())
-            )
-        {
+            ) {
             objBlockEquals.put(ast.getParent(), ast);
         }
         else if (type.getFirstChild().getType() == TokenTypes.LITERAL_INT
                 && "hashCode".equals(methodName.getText())
                 && modifiers.branchContains(TokenTypes.LITERAL_PUBLIC)
-                && parameters.getFirstChild() == null) // no params
-        {
+                && parameters.getFirstChild() == null) { // no params
             objBlockWithHashCode.add(ast.getParent());
         }
     }

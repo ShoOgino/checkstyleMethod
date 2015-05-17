@@ -6,8 +6,7 @@
      *        Ast element which is checked for content in Ast node.
      * @return true if Ast element was found in Ast node, otherwise - false.
      */
-    private static boolean isChild(DetailAST parent, DetailAST ast)
-    {
+    private static boolean isChild(DetailAST parent, DetailAST ast) {
         boolean isChild = false;
         final ASTEnumeration astList = parent.findAllPartial(ast);
 
@@ -18,8 +17,7 @@
             while (astParent != null) {
 
                 if (astParent.equals(parent)
-                        && astParent.getLineNo() == parent.getLineNo())
-                {
+                        && astParent.getLineNo() == parent.getLineNo()) {
                     isChild = true;
                     break;
                 }

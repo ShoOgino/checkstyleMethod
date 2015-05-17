@@ -4,11 +4,9 @@
      * @param ast the method definition AST.
      * @return true if the method of ast is a method for this check.
      */
-    private boolean isOverridingMethod(DetailAST ast)
-    {
+    private boolean isOverridingMethod(DetailAST ast) {
         if (ast.getType() != TokenTypes.METHOD_DEF
-            || ScopeUtils.inInterfaceOrAnnotationBlock(ast))
-        {
+            || ScopeUtils.inInterfaceOrAnnotationBlock(ast)) {
             return false;
         }
         final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);

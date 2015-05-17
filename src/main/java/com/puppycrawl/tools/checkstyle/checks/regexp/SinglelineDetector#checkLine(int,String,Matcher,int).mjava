@@ -6,8 +6,7 @@
      * @param startPosition the position to start searching from.
      */
     private void checkLine(int lineno, String line, Matcher matcher,
-            int startPosition)
-    {
+            int startPosition) {
         final boolean foundMatch = matcher.find(startPosition);
         if (!foundMatch) {
             return;
@@ -21,8 +20,7 @@
         // needs column number of the last character.
         // So we need to use (endCol - 1) here.
         if (options.getSuppressor()
-                .shouldSuppress(lineno, startCol, lineno, endCol - 1))
-        {
+                .shouldSuppress(lineno, startCol, lineno, endCol - 1)) {
             if (endCol < line.length()) {
                 // check if the expression is on the rest of the line
                 checkLine(lineno, line, matcher, endCol);

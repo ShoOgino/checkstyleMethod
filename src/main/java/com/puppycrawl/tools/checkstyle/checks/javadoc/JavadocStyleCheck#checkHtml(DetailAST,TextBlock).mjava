@@ -7,8 +7,7 @@
      * @param comment the <code>TextBlock</code> which represents
      *                 the Javadoc comment.
      */
-    private void checkHtml(final DetailAST ast, final TextBlock comment)
-    {
+    private void checkHtml(final DetailAST ast, final TextBlock comment) {
         final int lineno = comment.getStartLineNo();
         final Deque<HtmlTag> htmlStack = new ArrayDeque<>();
         final String[] text = comment.getText();
@@ -57,8 +56,7 @@
         for (final HtmlTag htag : htmlStack) {
             if (!isSingleTag(htag)
                 && !htag.getId().equals(lastFound)
-                && !typeParameters.contains(htag.getId()))
-            {
+                && !typeParameters.contains(htag.getId())) {
                 log(htag.getLineNo(), htag.getPosition(), UNCLOSED_HTML, htag);
                 lastFound = htag.getId();
             }

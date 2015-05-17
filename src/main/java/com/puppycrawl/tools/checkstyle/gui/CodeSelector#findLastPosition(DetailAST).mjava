@@ -1,12 +1,9 @@
-    private int findLastPosition(final DetailAST ast)
-    {
-        if (ast.getChildCount() == 0)
-        {
+    private int findLastPosition(final DetailAST ast) {
+        if (ast.getChildCount() == 0) {
             return lines2position.get(ast.getLineNo()) + ast.getColumnNo()
                 + ast.getText().length();
         }
-        else
-        {
+        else {
             return findLastPosition(ast.getLastChild());
         }
     }

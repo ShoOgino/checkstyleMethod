@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         if (ast.getChildCount() == 0) {
             //empty for iterator. test pad after semi.
             final DetailAST semi = ast.getPreviousSibling();
@@ -9,13 +8,11 @@
             //don't check if at end of line
             if (after < line.length()) {
                 if (PadOption.NOSPACE == getAbstractOption()
-                    && Character.isWhitespace(line.charAt(after)))
-                {
+                    && Character.isWhitespace(line.charAt(after))) {
                     log(semi.getLineNo(), after, WS_FOLLOWED, ";");
                 }
                 else if (PadOption.SPACE == getAbstractOption()
-                         && !Character.isWhitespace(line.charAt(after)))
-                {
+                         && !Character.isWhitespace(line.charAt(after))) {
                     log(semi.getLineNo(), after, WS_NOT_FOLLOWED, ";");
                 }
             }

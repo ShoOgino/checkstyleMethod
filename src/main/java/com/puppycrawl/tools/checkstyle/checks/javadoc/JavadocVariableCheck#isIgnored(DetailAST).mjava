@@ -3,8 +3,7 @@
      * @param ast the AST to check
      * @return true if the variable name of ast is in the ignore list.
      */
-    private boolean isIgnored(DetailAST ast)
-    {
+    private boolean isIgnored(DetailAST ast) {
         final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
         return ignoreNamePattern != null
                 && ignoreNamePattern.matcher(name).matches();

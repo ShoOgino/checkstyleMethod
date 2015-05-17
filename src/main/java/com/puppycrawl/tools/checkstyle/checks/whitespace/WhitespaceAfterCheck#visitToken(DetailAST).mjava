@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final Object[] message;
         final DetailAST targetAST;
         if (ast.getType() == TokenTypes.TYPECAST) {
@@ -19,8 +18,7 @@
 
             final char charAfter = line.charAt(after);
             if (targetAST.getType() == TokenTypes.SEMI
-                && (charAfter == ';' || charAfter == ')'))
-            {
+                && (charAfter == ';' || charAfter == ')')) {
                 return;
             }
             if (!Character.isWhitespace(charAfter)) {
@@ -30,8 +28,7 @@
                         targetAST.getNextSibling();
                     if (sibling != null
                         && sibling.getType() == TokenTypes.FOR_ITERATOR
-                        && sibling.getChildCount() == 0)
-                    {
+                        && sibling.getChildCount() == 0) {
                         return;
                     }
                 }

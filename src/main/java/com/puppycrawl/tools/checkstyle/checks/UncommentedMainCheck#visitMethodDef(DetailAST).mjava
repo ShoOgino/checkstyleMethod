@@ -3,8 +3,7 @@
      * <code>public static void main(String[])</code>.
      * @param method method definition node
      */
-    private void visitMethodDef(DetailAST method)
-    {
+    private void visitMethodDef(DetailAST method) {
         if (classDepth != 1) {
             // method in inner class or in interface definition
             return;
@@ -14,8 +13,7 @@
             && checkName(method)
             && checkModifiers(method)
             && checkType(method)
-            && checkParams(method))
-        {
+            && checkParams(method)) {
             log(method.getLineNo(), MSG_KEY);
         }
     }

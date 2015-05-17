@@ -2,15 +2,13 @@
      * @param ast the token to check
      * @return whether a token follows an empty for iterator
      */
-    private boolean isFollowsEmptyForIterator(DetailAST ast)
-    {
+    private boolean isFollowsEmptyForIterator(DetailAST ast) {
         boolean followsEmptyForIterator = false;
         final DetailAST parent = ast.getParent();
         //Only traditional for statements are examined, not for-each statements
         if (parent != null
             && parent.getType() == TokenTypes.LITERAL_FOR
-            && parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null)
-        {
+            && parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null) {
             final DetailAST forIterator =
                 parent.findFirstToken(TokenTypes.FOR_ITERATOR);
             followsEmptyForIterator = forIterator.getChildCount() == 0

@@ -5,13 +5,11 @@
      * @param useContinue should we consider continue as terminator.
      * @return true if switch is terminated.
      */
-    private boolean checkSwitch(final DetailAST ast, boolean useContinue)
-    {
+    private boolean checkSwitch(final DetailAST ast, boolean useContinue) {
         DetailAST caseGroup = ast.findFirstToken(TokenTypes.CASE_GROUP);
         boolean isTerminated = caseGroup != null;
         while (isTerminated && caseGroup != null
-               && caseGroup.getType() != TokenTypes.RCURLY)
-        {
+               && caseGroup.getType() != TokenTypes.RCURLY) {
             final DetailAST caseBody =
                 caseGroup.findFirstToken(TokenTypes.SLIST);
             isTerminated = caseBody != null && isTerminated(caseBody, false, useContinue);

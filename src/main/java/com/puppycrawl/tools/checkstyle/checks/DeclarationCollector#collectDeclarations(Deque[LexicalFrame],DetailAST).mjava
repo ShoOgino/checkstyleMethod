@@ -5,8 +5,7 @@
      * @param ast AST to parse
      */
     private void collectDeclarations(Deque<LexicalFrame> frameStack,
-        DetailAST ast)
-    {
+        DetailAST ast) {
         final LexicalFrame frame = frameStack.peek();
         switch (ast.getType()) {
             case TokenTypes.VARIABLE_DEF :  {
@@ -16,8 +15,7 @@
                     final DetailAST mods =
                             ast.findFirstToken(TokenTypes.MODIFIERS);
                     if (ScopeUtils.inInterfaceBlock(ast)
-                            || mods.branchContains(TokenTypes.LITERAL_STATIC))
-                    {
+                            || mods.branchContains(TokenTypes.LITERAL_STATIC)) {
                         ((ClassFrame) frame).addStaticMember(name);
                     }
                     else {

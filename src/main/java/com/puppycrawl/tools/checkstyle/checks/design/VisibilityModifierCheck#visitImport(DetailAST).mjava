@@ -4,8 +4,7 @@
      * <b>immutableClassShortNames</b> - removes it from the last one.
      * @param importAst {@link TokenTypes#IMPORT Import}
      */
-    private void visitImport(DetailAST importAst)
-    {
+    private void visitImport(DetailAST importAst) {
         if (!isStarImport(importAst)) {
             final DetailAST type = importAst.getFirstChild();
             final String canonicalName = getCanonicalName(type);
@@ -15,13 +14,11 @@
             // but its short name collides with one of specified class - removes the short name
             // from list to avoid names collision
             if (!immutableClassCanonicalNames.contains(canonicalName)
-                     && immutableClassShortNames.contains(shortName))
-            {
+                     && immutableClassShortNames.contains(shortName)) {
                 immutableClassShortNames.remove(shortName);
             }
             if (!ignoreAnnotationCanonicalNames.contains(canonicalName)
-                     && ignoreAnnotationShortNames.contains(shortName))
-            {
+                     && ignoreAnnotationShortNames.contains(shortName)) {
                 ignoreAnnotationShortNames.remove(shortName);
             }
         }

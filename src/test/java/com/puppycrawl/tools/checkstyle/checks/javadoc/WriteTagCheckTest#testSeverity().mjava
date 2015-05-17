@@ -1,11 +1,9 @@
     @Test
-    public void testSeverity() throws Exception
-    {
+    public void testSeverity() throws Exception {
         checkConfig.addAttribute("tag", "@author");
         checkConfig.addAttribute("tagFormat", "\\S");
         checkConfig.addAttribute("severity", "ignore");
-        final String[] expected =
-        {
+        final String[] expected = {
             "10: " + getCheckMessage(WRITE_TAG, "@author", "Daniel Grenner"),
         };
         verify(checkConfig, getPath("InputWriteTag.java"), expected);

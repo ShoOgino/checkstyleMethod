@@ -5,13 +5,11 @@
      * not within a for-statement, then the rule is violated.
      * @param ast token for the {@link TokenTypes#EXPR}.
      */
-    private void visitExpr(DetailAST ast)
-    {
+    private void visitExpr(DetailAST ast) {
         exprDepth++;
         if (exprDepth == 1
                 && !inForHeader
-                && lastStatementEnd == ast.getLineNo())
-        {
+                && lastStatementEnd == ast.getLineNo()) {
             log(ast, MSG_KEY);
         }
     }

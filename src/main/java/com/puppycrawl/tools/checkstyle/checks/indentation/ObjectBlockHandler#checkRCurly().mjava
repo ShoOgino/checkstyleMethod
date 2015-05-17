@@ -1,6 +1,5 @@
     @Override
-    protected void checkRCurly()
-    {
+    protected void checkRCurly() {
         final DetailAST lcurly = getLCurly();
         final DetailAST rcurly = getRCurly();
         final int rcurlyPos = expandedTabsColumnNo(rcurly);
@@ -9,8 +8,7 @@
 
         if (!level.accept(rcurlyPos)
             && (rcurlyMustStart() || startsLine(rcurly))
-                && !areOnSameLine(rcurly, lcurly))
-        {
+                && !areOnSameLine(rcurly, lcurly)) {
             logError(rcurly, "rcurly", rcurlyPos, curlyLevel());
         }
     }

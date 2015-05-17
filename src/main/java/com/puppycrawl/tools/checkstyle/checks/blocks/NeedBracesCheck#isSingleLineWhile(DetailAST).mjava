@@ -8,12 +8,10 @@
      * @param literalWhile {@link TokenTypes#LITERAL_WHILE while statement}.
      * @return true if current while statement is single-line statement.
      */
-    private static boolean isSingleLineWhile(DetailAST literalWhile)
-    {
+    private static boolean isSingleLineWhile(DetailAST literalWhile) {
         boolean result = false;
         if (literalWhile.getParent().getType() == TokenTypes.SLIST
-                && literalWhile.getLastChild().getType() != TokenTypes.SLIST)
-        {
+                && literalWhile.getLastChild().getType() != TokenTypes.SLIST) {
             final DetailAST block = literalWhile.getLastChild().getPreviousSibling();
             result = literalWhile.getLineNo() == block.getLineNo();
         }

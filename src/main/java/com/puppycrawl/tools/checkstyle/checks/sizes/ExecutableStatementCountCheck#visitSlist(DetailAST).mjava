@@ -3,8 +3,7 @@
      *
      * @param ast the token representing the statement list.
      */
-    private void visitSlist(DetailAST ast)
-    {
+    private void visitSlist(DetailAST ast) {
         if (context.getAST() != null) {
             // find member AST for the statement list
             final DetailAST contextAST = context.getAST();
@@ -14,8 +13,7 @@
                 if (type == TokenTypes.CTOR_DEF
                     || type == TokenTypes.METHOD_DEF
                     || type == TokenTypes.INSTANCE_INIT
-                    || type == TokenTypes.STATIC_INIT)
-                {
+                    || type == TokenTypes.STATIC_INIT) {
                     if (parent == contextAST) {
                         context.addCount(ast.getChildCount() / 2);
                     }

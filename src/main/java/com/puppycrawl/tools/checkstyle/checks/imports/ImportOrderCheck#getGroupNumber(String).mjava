@@ -4,8 +4,7 @@
      * @param name the import name to find.
      * @return group number for given import name.
      */
-    private int getGroupNumber(String name)
-    {
+    private int getGroupNumber(String name) {
         int bestIndex = groups.length;
         int bestLength = -1;
         int bestPos = 0;
@@ -17,8 +16,7 @@
             while (matcher.find()) {
                 final int length = matcher.end() - matcher.start();
                 if (length > bestLength
-                    || length == bestLength && matcher.start() < bestPos)
-                {
+                    || length == bestLength && matcher.start() < bestPos) {
                     bestIndex = i;
                     bestLength = length;
                     bestPos = matcher.start();

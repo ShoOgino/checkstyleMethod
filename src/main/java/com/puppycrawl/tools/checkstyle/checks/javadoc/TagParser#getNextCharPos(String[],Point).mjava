@@ -5,8 +5,7 @@
      * @param from location to search from
      * @return location of the next character.
      */
-    private Point getNextCharPos(String[] text, Point from)
-    {
+    private Point getNextCharPos(String[] text, Point from) {
         int line = from.getLineNo();
         int column = from.getColumnNo() + 1;
         while (line < text.length && column >= text[line].length()) {
@@ -18,13 +17,11 @@
                 final String currentLine = text[line];
                 while (column < currentLine.length()
                        && (Character.isWhitespace(currentLine.charAt(column))
-                           || currentLine.charAt(column) == '*'))
-                {
+                           || currentLine.charAt(column) == '*')) {
                     column++;
                     if (column < currentLine.length()
                         && currentLine.charAt(column - 1) == '*'
-                        && currentLine.charAt(column) == '/')
-                    {
+                        && currentLine.charAt(column) == '/') {
                         // this is end of comment
                         column = currentLine.length();
                     }

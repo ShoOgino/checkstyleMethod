@@ -1,7 +1,6 @@
     /** {@inheritDoc} */
     @Override
-    public boolean accept(AuditEvent event)
-    {
+    public boolean accept(AuditEvent event) {
         // file and check match?
         if (event.getFileName() == null
                 || !fileRegexp.matcher(event.getFileName()).find()
@@ -9,8 +8,7 @@
                 || moduleId != null && !moduleId.equals(event
                         .getModuleId())
                 || checkRegexp != null && !checkRegexp.matcher(
-                        event.getSourceName()).find())
-        {
+                        event.getSourceName()).find()) {
             return true;
         }
 

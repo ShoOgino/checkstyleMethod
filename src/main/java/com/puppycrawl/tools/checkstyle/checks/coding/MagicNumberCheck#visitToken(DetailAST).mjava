@@ -1,13 +1,11 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         if (ignoreAnnotation && isChildOf(ast, TokenTypes.ANNOTATION)) {
             return;
         }
 
         if (inIgnoreList(ast)
-            || ignoreHashCodeMethod && isInHashCodeMethod(ast))
-        {
+            || ignoreHashCodeMethod && isInHashCodeMethod(ast)) {
             return;
         }
 

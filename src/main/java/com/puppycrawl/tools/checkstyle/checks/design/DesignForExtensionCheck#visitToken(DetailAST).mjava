@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         // nothing to do for Interfaces
         if (ScopeUtils.inInterfaceOrAnnotationBlock(ast)) {
             return;
@@ -11,8 +10,7 @@
         if (modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)
             || modifiers.branchContains(TokenTypes.ABSTRACT)
             || modifiers.branchContains(TokenTypes.FINAL)
-            || modifiers.branchContains(TokenTypes.LITERAL_STATIC))
-        {
+            || modifiers.branchContains(TokenTypes.LITERAL_STATIC)) {
             return;
         }
 
@@ -27,8 +25,7 @@
         // implementation can be null even if method not abstract
         final DetailAST implementation = ast.findFirstToken(TokenTypes.SLIST);
         if (implementation != null
-            && implementation.getFirstChild().getType() == TokenTypes.RCURLY)
-        {
+            && implementation.getFirstChild().getType() == TokenTypes.RCURLY) {
             return;
         }
 
@@ -37,8 +34,7 @@
         final DetailAST classMods =
             classDef.findFirstToken(TokenTypes.MODIFIERS);
         if (classDef.getType() == TokenTypes.ENUM_DEF
-            || classMods.branchContains(TokenTypes.FINAL))
-        {
+            || classMods.branchContains(TokenTypes.FINAL)) {
             return;
         }
 

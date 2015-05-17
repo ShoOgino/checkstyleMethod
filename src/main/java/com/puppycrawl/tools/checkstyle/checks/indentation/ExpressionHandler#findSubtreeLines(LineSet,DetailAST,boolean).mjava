@@ -6,11 +6,9 @@
      * @param allowNesting   whether or not to allow nested subtrees
      */
     protected final void findSubtreeLines(LineSet lines, DetailAST tree,
-        boolean allowNesting)
-    {
+        boolean allowNesting) {
         if (getIndentCheck().getHandlerFactory().isHandledType(tree.getType())
-            || tree.getLineNo() < 0)
-        {
+            || tree.getLineNo() < 0) {
             return;
         }
 
@@ -25,8 +23,7 @@
         // check children
         for (DetailAST node = tree.getFirstChild();
             node != null;
-            node = node.getNextSibling())
-        {
+            node = node.getNextSibling()) {
             findSubtreeLines(lines, node, allowNesting);
         }
     }

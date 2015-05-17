@@ -3,8 +3,7 @@
      * @param base parent's level
      * @param offsets offsets from parent's level.
      */
-    public IndentLevel(IndentLevel base, int... offsets)
-    {
+    public IndentLevel(IndentLevel base, int... offsets) {
         final BitSet src = base.levels;
         for (int i = src.nextSetBit(0); i >= 0; i = src.nextSetBit(i + 1)) {
             for (int offset : offsets) {

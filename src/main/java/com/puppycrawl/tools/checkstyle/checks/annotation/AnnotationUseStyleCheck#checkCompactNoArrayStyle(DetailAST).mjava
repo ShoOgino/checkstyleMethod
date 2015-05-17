@@ -3,8 +3,7 @@
      *
      * @param annotation the annotation token
      */
-    private void checkCompactNoArrayStyle(final DetailAST annotation)
-    {
+    private void checkCompactNoArrayStyle(final DetailAST annotation) {
         final DetailAST arrayInit =
             annotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
 
@@ -16,8 +15,7 @@
 
         //in compact style with one value
         if (arrayInit != null
-            && arrayInit.getChildCount(TokenTypes.EXPR) == 1)
-        {
+            && arrayInit.getChildCount(TokenTypes.EXPR) == 1) {
             this.log(annotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
                 ElementStyle.COMPACT_NO_ARRAY);
         }
@@ -30,8 +28,7 @@
                 && AnnotationUseStyleCheck
                     .ANNOTATION_ELEMENT_SINGLE_NAME.equals(
                     valuePair.getFirstChild().getText())
-                    && nestedArrayInit.getChildCount(TokenTypes.EXPR) == 1)
-            {
+                    && nestedArrayInit.getChildCount(TokenTypes.EXPR) == 1) {
                 this.log(annotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
                     ElementStyle.COMPACT_NO_ARRAY);
             }

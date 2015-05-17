@@ -2,8 +2,7 @@
      * Checks the token for the start of Generics.
      * @param ast the token to check
      */
-    private void processStart(DetailAST ast)
-    {
+    private void processStart(DetailAST ast) {
         final String line = getLine(ast.getLineNo() - 1);
         final int before = ast.getColumnNo() - 1;
         final int after = ast.getColumnNo() + 1;
@@ -20,8 +19,7 @@
             final DetailAST grandparent = parent.getParent();
             if (TokenTypes.TYPE_PARAMETERS == parent.getType()
                 && (TokenTypes.CTOR_DEF == grandparent.getType()
-                    || TokenTypes.METHOD_DEF == grandparent.getType()))
-            {
+                    || TokenTypes.METHOD_DEF == grandparent.getType())) {
                 // Require whitespace
                 if (!Character.isWhitespace(line.charAt(before))) {
                     log(ast.getLineNo(), before, WS_NOT_PRECEDED, "<");
@@ -29,15 +27,13 @@
             }
             // Whitespace not required
             else if (Character.isWhitespace(line.charAt(before))
-                && !Utils.whitespaceBefore(before, line))
-            {
+                && !Utils.whitespaceBefore(before, line)) {
                 log(ast.getLineNo(), before, WS_PRECEDED, "<");
             }
         }
 
         if (after < line.length()
-                && Character.isWhitespace(line.charAt(after)))
-        {
+                && Character.isWhitespace(line.charAt(after))) {
             log(ast.getLineNo(), after, WS_FOLLOWED, "<");
         }
     }

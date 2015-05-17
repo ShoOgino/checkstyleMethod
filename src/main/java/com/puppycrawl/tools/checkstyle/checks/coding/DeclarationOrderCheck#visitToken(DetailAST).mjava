@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final int parentType = ast.getParent().getType();
         ScopeState state;
 
@@ -44,8 +43,7 @@
             case TokenTypes.MODIFIERS:
                 if (parentType != TokenTypes.VARIABLE_DEF
                     || ast.getParent().getParent().getType()
-                        != TokenTypes.OBJBLOCK)
-                {
+                        != TokenTypes.OBJBLOCK) {
                     return;
                 }
 
@@ -53,8 +51,7 @@
                 if (ast.findFirstToken(TokenTypes.LITERAL_STATIC) != null) {
                     if (state.currentScopeState > STATE_STATIC_VARIABLE_DEF) {
                         if (!ignoreModifiers
-                            || state.currentScopeState > STATE_INSTANCE_VARIABLE_DEF)
-                        {
+                            || state.currentScopeState > STATE_INSTANCE_VARIABLE_DEF) {
                             log(ast, MSG_STATIC);
                         }
                     }

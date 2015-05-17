@@ -9,8 +9,7 @@
      *         initialization methods.
      */
     private static boolean isInitializationSequence(
-            DetailAST variableUsageAst, String variableName)
-    {
+            DetailAST variableUsageAst, String variableName) {
         boolean result = true;
         boolean isUsedVariableDeclarationFound = false;
         DetailAST currentSiblingAst = variableUsageAst;
@@ -18,8 +17,7 @@
 
         while (result
                 && !isUsedVariableDeclarationFound
-                && currentSiblingAst != null)
-        {
+                && currentSiblingAst != null) {
 
             switch (currentSiblingAst.getType()) {
 
@@ -27,8 +25,7 @@
                     final DetailAST methodCallAst = currentSiblingAst.getFirstChild();
 
                     if (methodCallAst != null
-                        && methodCallAst.getType() == TokenTypes.METHOD_CALL)
-                    {
+                        && methodCallAst.getType() == TokenTypes.METHOD_CALL) {
                         final String instanceName =
                             getInstanceName(methodCallAst);
                         // method is called without instance

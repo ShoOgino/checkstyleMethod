@@ -1,8 +1,7 @@
     /**
      * Check the indentation of the right curly brace.
      */
-    protected void checkRCurly()
-    {
+    protected void checkRCurly() {
         // the rcurly can either be at the correct indentation, or
         // on the same line as the lcurly
         final DetailAST lcurly = getLCurly();
@@ -11,8 +10,7 @@
 
         if (curlyLevel().accept(rcurlyPos)
             || !rcurlyMustStart() && !startsLine(rcurly)
-            || areOnSameLine(rcurly, lcurly))
-        {
+            || areOnSameLine(rcurly, lcurly)) {
             return;
         }
         logError(rcurly, "rcurly", rcurlyPos, curlyLevel());

@@ -7,8 +7,7 @@
      *                  previous static but current is non-static (under).
      */
     private void doVisitToken(FullIdent ident, boolean isStatic,
-            boolean previous)
-    {
+            boolean previous) {
         if (ident != null) {
             final String name = ident.getText();
             final int groupIdx = getGroupNumber(name);
@@ -22,8 +21,7 @@
                 }
             }
             else if (groupIdx == lastGroup || sortStaticImportsAlphabetically
-                     && isAlphabeticallySortableStaticImport(isStatic))
-            {
+                     && isAlphabeticallySortableStaticImport(isStatic)) {
                 doVisitTokenInSameGroup(isStatic, previous, name, line);
             }
             else {

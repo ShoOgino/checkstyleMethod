@@ -1,10 +1,8 @@
     @Override
-    protected final void processAST(DetailAST ast)
-    {
+    protected final void processAST(DetailAST ast) {
         if ((ast.getType() == TokenTypes.METHOD_DEF || ast.getType() == TokenTypes.CTOR_DEF)
             && getMethodsNumberOfLine(ast) <= minLineCount
-            || hasAllowedAnnotations(ast))
-        {
+            || hasAllowedAnnotations(ast)) {
             return;
         }
         final Scope theScope = calculateScope(ast);

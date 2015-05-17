@@ -10,8 +10,7 @@
      *         of this block, otherwise - null.
      */
     private DetailAST getFirstNodeInsideForWhileDoWhileBlocks(
-            DetailAST block, DetailAST variable)
-    {
+            DetailAST block, DetailAST variable) {
         DetailAST firstNodeInsideBlock = null;
 
         if (!isVariableInOperatorExpr(block, variable)) {
@@ -38,8 +37,7 @@
                     firstNodeInsideBlock = currentNode.getFirstChild();
                 }
                 else if (currentNodeType != TokenTypes.VARIABLE_DEF
-                        && currentNodeType != TokenTypes.EXPR)
-                {
+                        && currentNodeType != TokenTypes.EXPR) {
                     firstNodeInsideBlock = currentNode;
                 }
             }

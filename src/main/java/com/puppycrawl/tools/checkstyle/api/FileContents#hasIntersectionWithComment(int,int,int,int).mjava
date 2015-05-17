@@ -7,15 +7,13 @@
      * @return true if the positions intersects with a comment.
      **/
     public boolean hasIntersectionWithComment(int startLineNo,
-            int startColNo, int endLineNo, int endColNo)
-    {
+            int startColNo, int endLineNo, int endColNo) {
         // Check C comments (all comments should be checked)
         final Collection<List<TextBlock>> values = clangComments.values();
         for (final List<TextBlock> row : values) {
             for (final TextBlock comment : row) {
                 if (comment.intersects(startLineNo, startColNo, endLineNo,
-                        endColNo))
-                {
+                        endColNo)) {
                     return true;
                 }
             }
@@ -23,13 +21,11 @@
 
         // Check CPP comments (line searching is possible)
         for (int lineNumber = startLineNo; lineNumber <= endLineNo;
-             lineNumber++)
-        {
+             lineNumber++) {
             final TextBlock comment = cppComments.get(lineNumber);
             if (comment != null
                     && comment.intersects(startLineNo, startColNo,
-                            endLineNo, endColNo))
-            {
+                            endLineNo, endColNo)) {
                 return true;
             }
         }

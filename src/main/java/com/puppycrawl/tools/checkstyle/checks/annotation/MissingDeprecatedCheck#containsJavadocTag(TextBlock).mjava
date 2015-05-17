@@ -4,8 +4,7 @@
      * @param javadoc the javadoc of the AST
      * @return true if contains the tag
      */
-    private boolean containsJavadocTag(final TextBlock javadoc)
-    {
+    private boolean containsJavadocTag(final TextBlock javadoc) {
         if (javadoc == null) {
             return false;
         }
@@ -40,8 +39,7 @@
                 // not whitespace or '*' characters.
 
                 for (int reindex = i + 1;
-                    reindex < lines.length; reindex++)
-                {
+                    reindex < lines.length; reindex++) {
                     final Matcher multilineCont =
                         MissingDeprecatedCheck.MATCH_DEPRECATED_MULTILINE_CONT
                         .matcher(lines[reindex]);
@@ -50,8 +48,7 @@
                         reindex = lines.length;
                         final String lFin = multilineCont.group(1);
                         if (!lFin.equals(MissingDeprecatedCheck.NEXT_TAG)
-                            && !lFin.equals(MissingDeprecatedCheck.END_JAVADOC))
-                        {
+                            && !lFin.equals(MissingDeprecatedCheck.END_JAVADOC)) {
                             if (found) {
                                 this.log(currentLine, MSG_KEY_JAVADOC_DUPLICATE_TAG,
                                     JavadocTagInfo.DEPRECATED.getText());

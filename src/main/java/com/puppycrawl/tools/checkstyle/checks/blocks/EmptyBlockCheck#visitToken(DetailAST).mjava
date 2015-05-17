@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final DetailAST slistToken = ast.findFirstToken(TokenTypes.SLIST);
         final DetailAST leftCurly = slistToken != null
                 ? slistToken : ast.findFirstToken(TokenTypes.LCURLY);
@@ -21,8 +20,7 @@
                 }
             }
             else if (getAbstractOption() == BlockOption.TEXT
-                    && !hasText(leftCurly))
-            {
+                    && !hasText(leftCurly)) {
                 log(leftCurly.getLineNo(),
                     leftCurly.getColumnNo(),
                     MSG_KEY_BLOCK_EMPTY,

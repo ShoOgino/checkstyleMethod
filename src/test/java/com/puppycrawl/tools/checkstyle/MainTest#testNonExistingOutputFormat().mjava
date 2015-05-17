@@ -1,12 +1,9 @@
     @Test
     public void testNonExistingOutputFormat()
-            throws Exception
-    {
+            throws Exception {
         exit.expectSystemExitWithStatus(1);
-        exit.checkAssertionAfterwards(new Assertion()
-        {
-            public void checkAssertion()
-            {
+        exit.checkAssertionAfterwards(new Assertion() {
+            public void checkAssertion() {
                 assertEquals(String.format("Invalid output format. "
                     + "Found 'xmlp' but expected 'plain' or 'xml'.%n"), standardLog.getLog());
                 assertEquals("", errorLog.getLog());

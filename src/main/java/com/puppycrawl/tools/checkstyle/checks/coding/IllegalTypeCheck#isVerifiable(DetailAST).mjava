@@ -4,8 +4,7 @@
      * @param methodOrVariableDef METHOD_DEF or VARIABLE_DEF ast node.
      * @return true if member is verifiable according to <b>memberModifiers</b> option.
      */
-    private boolean isVerifiable(DetailAST methodOrVariableDef)
-    {
+    private boolean isVerifiable(DetailAST methodOrVariableDef) {
         boolean result = true;
         if (memberModifiers != null) {
             result = false;
@@ -13,8 +12,7 @@
                     .findFirstToken(TokenTypes.MODIFIERS);
             if (modifiersAst.getFirstChild() != null) {
                 for (DetailAST modifier = modifiersAst.getFirstChild(); modifier != null;
-                         modifier = modifier.getNextSibling())
-                {
+                         modifier = modifier.getNextSibling()) {
                     if (memberModifiers.contains(modifier.getType())) {
                         result = true;
                     }

@@ -1,7 +1,6 @@
     /** {@inheritDoc} */
     @Override
-    public void visitToken(final DetailAST ast)
-    {
+    public void visitToken(final DetailAST ast) {
         final TextBlock javadoc =
             this.getFileContents().getJavadocBefore(ast.getLineNo());
 
@@ -18,16 +17,14 @@
 
             if (defOrNew.branchContains(TokenTypes.EXTENDS_CLAUSE)
                 || defOrNew.branchContains(TokenTypes.IMPLEMENTS_CLAUSE)
-                || defOrNew.getType() == TokenTypes.LITERAL_NEW)
-            {
+                || defOrNew.getType() == TokenTypes.LITERAL_NEW) {
                 return;
             }
         }
 
         if (containastag
             && !AnnotationUtility.containsAnnotation(ast, OVERRIDE)
-            && !AnnotationUtility.containsAnnotation(ast, FQ_OVERRIDE))
-        {
+            && !AnnotationUtility.containsAnnotation(ast, FQ_OVERRIDE)) {
             this.log(ast.getLineNo(), MSG_KEY_ANNOTATION_MISSING_OVERRIDE);
         }
     }

@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         equalsMethods.clear();
         boolean hasEqualsObject = false;
 
@@ -10,8 +9,7 @@
             DetailAST child = objBlock.getFirstChild();
             while (child != null) {
                 if (child.getType() == TokenTypes.METHOD_DEF
-                        && CheckUtils.isEqualsMethod(child))
-                {
+                        && CheckUtils.isEqualsMethod(child)) {
                     if (hasObjectParameter(child)) {
                         hasEqualsObject = true;
                     }

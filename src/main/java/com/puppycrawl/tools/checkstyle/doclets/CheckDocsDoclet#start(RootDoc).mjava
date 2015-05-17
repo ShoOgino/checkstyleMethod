@@ -4,8 +4,7 @@
      * @return boolean value
      * @throws IOException if there are problems writing output
      */
-    public static boolean start(RootDoc root) throws IOException
-    {
+    public static boolean start(RootDoc root) throws IOException {
         final ClassDoc[] classDocs = root.classes();
 
         final File destDir = new File(getDestDir(root.options()));
@@ -27,8 +26,7 @@
         for (final ClassDoc classDoc : classDocs) {
 
             if (classDoc.typeName().endsWith("Check")
-                    && !classDoc.isAbstract())
-            {
+                    && !classDoc.isAbstract()) {
                 String pageName = getPageName(classDoc);
 
                 // allow checks to override pageName when

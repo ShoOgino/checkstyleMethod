@@ -5,19 +5,16 @@
      *            first node.
      * @return indentation of first node.
      */
-    private int getFirstNodeIndent(DetailAST node)
-    {
+    private int getFirstNodeIndent(DetailAST node) {
         int indentLevel = node.getColumnNo();
 
         if (node.getType() == TokenTypes.LITERAL_IF
-                && node.getParent().getType() == TokenTypes.LITERAL_ELSE)
-        {
+                && node.getParent().getType() == TokenTypes.LITERAL_ELSE) {
             final DetailAST lcurly = node.getParent().getPreviousSibling();
             final DetailAST rcurly = lcurly.getLastChild();
 
             if (lcurly.getType() == TokenTypes.SLIST
-                    && rcurly.getLineNo() == node.getLineNo())
-            {
+                    && rcurly.getLineNo() == node.getLineNo()) {
                 indentLevel = rcurly.getColumnNo();
             }
             else {

@@ -3,8 +3,7 @@
      *
      * @param annotation the annotation token
      */
-    private void checkCompactStyle(final DetailAST annotation)
-    {
+    private void checkCompactStyle(final DetailAST annotation) {
         final int valuePairCount =
             annotation.getChildCount(
                 TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
@@ -15,8 +14,7 @@
 
         if (valuePairCount == 1
             && AnnotationUseStyleCheck.ANNOTATION_ELEMENT_SINGLE_NAME.equals(
-                valuePair.getFirstChild().getText()))
-        {
+                valuePair.getFirstChild().getText())) {
             this.log(annotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
                 ElementStyle.COMPACT);
         }

@@ -5,21 +5,19 @@
      * @return
      *        True, left curly has line break after.
      */
-    private boolean hasLineBreakAfter(DetailAST leftCurly)
-    {
+    private boolean hasLineBreakAfter(DetailAST leftCurly) {
         DetailAST nextToken = null;
         if (leftCurly.getType() == TokenTypes.SLIST) {
             nextToken = leftCurly.getFirstChild();
         }
         else {
-            if (leftCurly.getParent().getParent().getType() == TokenTypes.ENUM_DEF && !ignoreEnums)
-            {
+            if (leftCurly.getParent().getParent().getType() == TokenTypes.ENUM_DEF
+                    && !ignoreEnums) {
                 nextToken = leftCurly.getNextSibling();
             }
         }
         if (nextToken != null && nextToken.getType() != TokenTypes.RCURLY
-                && leftCurly.getLineNo() == nextToken.getLineNo())
-        {
+                && leftCurly.getLineNo() == nextToken.getLineNo()) {
             return false;
         }
         return true;

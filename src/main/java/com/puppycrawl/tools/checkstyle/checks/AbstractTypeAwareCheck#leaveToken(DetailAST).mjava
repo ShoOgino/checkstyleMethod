@@ -1,9 +1,7 @@
     @Override
-    public final void leaveToken(DetailAST ast)
-    {
+    public final void leaveToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.CLASS_DEF
-            || ast.getType() == TokenTypes.ENUM_DEF)
-        {
+            || ast.getType() == TokenTypes.ENUM_DEF) {
             // perhaps it was inner class
             int dotIdx = currentClass.lastIndexOf('$');
             if (dotIdx == -1) {
@@ -23,8 +21,7 @@
             typeParams.pop();
         }
         else if (ast.getType() != TokenTypes.PACKAGE_DEF
-                 && ast.getType() != TokenTypes.IMPORT)
-        {
+                 && ast.getType() != TokenTypes.IMPORT) {
             leaveAST(ast);
         }
     }

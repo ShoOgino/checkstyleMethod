@@ -2,14 +2,12 @@
      * Creates new parameter set for given method.
      * @param ast a method for process.
      */
-    private void visitMethodParameters(DetailAST ast)
-    {
+    private void visitMethodParameters(DetailAST ast) {
         DetailAST parameterDefAST =
             ast.findFirstToken(TokenTypes.PARAMETER_DEF);
 
         for (; parameterDefAST != null;
-             parameterDefAST = parameterDefAST.getNextSibling())
-        {
+             parameterDefAST = parameterDefAST.getNextSibling()) {
             if (parameterDefAST.getType() == TokenTypes.PARAMETER_DEF) {
                 final DetailAST param =
                     parameterDefAST.findFirstToken(TokenTypes.IDENT);

@@ -1,13 +1,11 @@
     @Override
-    public String toString()
-    {
+    public String toString() {
         if (levels.cardinality() == 1) {
             return String.valueOf(levels.nextSetBit(0));
         }
         final StringBuilder sb = new StringBuilder();
         for (int i = levels.nextSetBit(0); i >= 0;
-            i = levels.nextSetBit(i + 1))
-        {
+            i = levels.nextSetBit(i + 1)) {
             if (sb.length() > 0) {
                 sb.append(", ");
             }

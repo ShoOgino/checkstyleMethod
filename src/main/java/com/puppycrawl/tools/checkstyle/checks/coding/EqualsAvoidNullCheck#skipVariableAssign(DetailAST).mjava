@@ -3,11 +3,9 @@
      * @param currentAST current token in the argument expression
      * @return the next relevant token
      */
-    private DetailAST skipVariableAssign(final DetailAST currentAST)
-    {
+    private DetailAST skipVariableAssign(final DetailAST currentAST) {
         if (currentAST.getType() == TokenTypes.ASSIGN
-                && currentAST.getFirstChild().getType() == TokenTypes.IDENT)
-        {
+                && currentAST.getFirstChild().getType() == TokenTypes.IDENT) {
             return currentAST.getFirstChild().getNextSibling();
         }
         return currentAST;

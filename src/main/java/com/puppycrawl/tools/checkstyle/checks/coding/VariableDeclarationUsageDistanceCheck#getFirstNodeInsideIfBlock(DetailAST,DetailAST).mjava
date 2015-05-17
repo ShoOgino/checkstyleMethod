@@ -10,8 +10,7 @@
      *         of this block, otherwise - null.
      */
     private DetailAST getFirstNodeInsideIfBlock(
-            DetailAST block, DetailAST variable)
-    {
+            DetailAST block, DetailAST variable) {
         DetailAST firstNodeInsideBlock = null;
 
         if (!isVariableInOperatorExpr(block, variable)) {
@@ -20,8 +19,7 @@
                     new ArrayList<>();
 
             while (currentNode != null
-                    && currentNode.getType() == TokenTypes.LITERAL_ELSE)
-            {
+                    && currentNode.getType() == TokenTypes.LITERAL_ELSE) {
                 final DetailAST previousNode =
                         currentNode.getPreviousSibling();
 
@@ -45,8 +43,7 @@
             // If IF block doesn't include ELSE than analyze variable usage
             // only inside IF block.
             if (currentNode != null
-                    && isChild(currentNode, variable))
-            {
+                    && isChild(currentNode, variable)) {
                 variableUsageExpressions.add(currentNode);
             }
 

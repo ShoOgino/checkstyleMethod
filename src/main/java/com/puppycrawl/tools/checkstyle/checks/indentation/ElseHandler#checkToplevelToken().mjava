@@ -1,6 +1,5 @@
     @Override
-    protected void checkToplevelToken()
-    {
+    protected void checkToplevelToken() {
         // check if else is nested with rcurly of if:
         //
         //  } else ...
@@ -11,8 +10,7 @@
             if (slist != null) {
                 final DetailAST lcurly = slist.getLastChild();
                 if (lcurly != null
-                    && lcurly.getLineNo() == getMainAst().getLineNo())
-                {
+                    && lcurly.getLineNo() == getMainAst().getLineNo()) {
                     // indentation checked as part of LITERAL IF check
                     return;
                 }

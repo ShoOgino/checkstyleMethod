@@ -4,8 +4,7 @@
      * @return NavigableMap which contains lines numbers as a key and first
      *         nodes on lines as a values.
      */
-    private NavigableMap<Integer, DetailAST> collectFirstNodes()
-    {
+    private NavigableMap<Integer, DetailAST> collectFirstNodes() {
         final NavigableMap<Integer, DetailAST> result = new TreeMap<>();
 
         result.put(firstNode.getLineNo(), firstNode);
@@ -22,8 +21,7 @@
 
                 if (firstTokenOnLine == null
                         || firstTokenOnLine != null
-                        && firstTokenOnLine.getColumnNo() >= curNode.getColumnNo())
-                {
+                        && firstTokenOnLine.getColumnNo() >= curNode.getColumnNo()) {
                     result.put(curNode.getLineNo(), curNode);
                 }
                 curNode = getNextCurNode(curNode);

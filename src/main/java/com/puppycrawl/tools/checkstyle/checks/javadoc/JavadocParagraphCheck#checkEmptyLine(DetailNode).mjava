@@ -2,13 +2,11 @@
      * Determines whether or not the next line after empty line has paragraph tag in the beginning.
      * @param newline NEWLINE node.
      */
-    private void checkEmptyLine(DetailNode newline)
-    {
+    private void checkEmptyLine(DetailNode newline) {
         final DetailNode nearestToken = getNearestNode(newline);
         if (!isLastEmptyLine(newline) && nearestToken != null
                 && nearestToken.getType() == JavadocTokenTypes.TEXT
-                && nearestToken.getChildren().length > 1)
-        {
+                && nearestToken.getChildren().length > 1) {
             log(newline.getLineNumber(), MSG_TAG_AFTER);
         }
     }

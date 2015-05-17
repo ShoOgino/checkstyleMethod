@@ -4,15 +4,13 @@
      * @return true if it is an ignore situation found for given input DetailAST
      *         node.
      */
-    private boolean isIgnoreSituation(DetailAST ast)
-    {
+    private boolean isIgnoreSituation(DetailAST ast) {
         final DetailAST modifiers = ast.getFirstChild();
 
         boolean result = false;
         if (ast.getType() == TokenTypes.VARIABLE_DEF) {
             if ((ignoreFinal || ignoreStatic)
-                    && isInterfaceDeclaration(ast))
-            {
+                    && isInterfaceDeclaration(ast)) {
                 // field declarations in interface are static/final
                 result = true;
             }

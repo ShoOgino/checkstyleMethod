@@ -4,8 +4,7 @@
      * @return the fully qualified class name of className
      * or null if instantiation of className is OK
      */
-    private String getIllegalInstantiation(String className)
-    {
+    private String getIllegalInstantiation(String className) {
         if (illegalClasses.contains(className)) {
             return className;
         }
@@ -19,8 +18,7 @@
             // class from java.lang
             if (illegalLen - JAVA_LANG.length() == clsNameLen
                 && illegal.endsWith(className)
-                && illegal.startsWith(JAVA_LANG))
-            {
+                && illegal.startsWith(JAVA_LANG)) {
                 // java.lang needs no import, but a class without import might
                 // also come from the same file or be in the same package.
                 // E.g. if a class defines an inner class "Boolean",
@@ -60,8 +58,7 @@
                 && clsNameLen == illegalLen - pkgNameLen - 1
                 && illegal.charAt(pkgNameLen) == '.'
                 && illegal.endsWith(className)
-                && illegal.startsWith(pkgName))
-            {
+                && illegal.startsWith(pkgName)) {
                 return illegal;
             }
             // import statements
@@ -79,8 +76,7 @@
                 }
                 else {
                     if (Utils.baseClassname(importArg).equals(className)
-                        && illegalClasses.contains(importArg))
-                    {
+                        && illegalClasses.contains(importArg)) {
                         return importArg;
                     }
                 }

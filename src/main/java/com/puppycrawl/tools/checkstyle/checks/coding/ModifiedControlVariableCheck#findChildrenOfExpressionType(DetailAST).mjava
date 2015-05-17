@@ -3,14 +3,12 @@
      * @param ast parent of expressions to find
      * @return all child of given ast
      */
-    private static List<DetailAST> findChildrenOfExpressionType(DetailAST ast)
-    {
+    private static List<DetailAST> findChildrenOfExpressionType(DetailAST ast) {
         final List<DetailAST> foundExpressions = new LinkedList<>();
         if (ast != null) {
             for (DetailAST iteratingExpressionAST = ast.findFirstToken(TokenTypes.EXPR);
                  iteratingExpressionAST != null;
-                 iteratingExpressionAST = iteratingExpressionAST.getNextSibling())
-            {
+                 iteratingExpressionAST = iteratingExpressionAST.getNextSibling()) {
                 if (iteratingExpressionAST.getType() == TokenTypes.EXPR) {
                     foundExpressions.add(iteratingExpressionAST.getFirstChild());
                 }

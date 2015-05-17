@@ -3,16 +3,14 @@
      * @param paragraphTag paragraph tag.
      * @return true, if line with paragraph tag is first line in javadoc.
      */
-    private boolean isFirstParagraph(DetailNode paragraphTag)
-    {
+    private boolean isFirstParagraph(DetailNode paragraphTag) {
         DetailNode previousNode = JavadocUtils.getPreviousSibling(paragraphTag);
         while (previousNode != null) {
             if (previousNode.getType() == JavadocTokenTypes.TEXT
                     && previousNode.getChildren().length > 1
                 || previousNode.getType() != JavadocTokenTypes.LEADING_ASTERISK
                     && previousNode.getType() != JavadocTokenTypes.NEWLINE
-                    && previousNode.getType() != JavadocTokenTypes.TEXT)
-            {
+                    && previousNode.getType() != JavadocTokenTypes.TEXT) {
                 return false;
             }
             previousNode = JavadocUtils.getPreviousSibling(previousNode);

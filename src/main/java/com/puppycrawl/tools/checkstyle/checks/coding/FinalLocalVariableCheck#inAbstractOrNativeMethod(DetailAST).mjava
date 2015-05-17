@@ -3,8 +3,7 @@
      * @param ast the AST to check.
      * @return true if ast is a descendant of an abstract or native method.
      */
-    private static boolean inAbstractOrNativeMethod(DetailAST ast)
-    {
+    private static boolean inAbstractOrNativeMethod(DetailAST ast) {
         DetailAST parent = ast.getParent();
         while (parent != null) {
             if (parent.getType() == TokenTypes.METHOD_DEF) {

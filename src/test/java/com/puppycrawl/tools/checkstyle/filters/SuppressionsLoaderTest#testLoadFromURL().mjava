@@ -1,7 +1,6 @@
     @Test
     public void testLoadFromURL()
-        throws CheckstyleException, InterruptedException
-    {
+        throws CheckstyleException, InterruptedException {
         boolean online = isInternetReachable();
 
         Assume.assumeTrue(online);
@@ -21,8 +20,7 @@
             catch (CheckstyleException ex) {
                 // for some reason Travis CI failed some times(unstable) on reading this file
                 if (attemptCount < attemptLimit
-                        && ex.getMessage().contains("unable to read"))
-                {
+                        && ex.getMessage().contains("unable to read")) {
                     attemptCount++;
                     // wait for bad/disconnection time to pass
                     Thread.sleep(1000);

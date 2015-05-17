@@ -2,8 +2,7 @@
      * Inserts a variable at the topmost scope stack
      * @param ast the variable to insert
      */
-    private void insertVariable(DetailAST ast)
-    {
+    private void insertVariable(DetailAST ast) {
         if (!ast.branchContains(TokenTypes.FINAL)) {
             final Map<String, DetailAST> state = scopeStack.peek();
             final DetailAST astNode = ast.findFirstToken(TokenTypes.IDENT);

@@ -2,15 +2,13 @@
      * Check if ident is parameter.
      * @param ast ident to check.
      */
-    private void checkIdent(DetailAST ast)
-    {
+    private void checkIdent(DetailAST ast) {
         if (!getCurrentVariables().isEmpty()) {
             final DetailAST identAST = ast.getFirstChild();
 
             if (identAST != null
                 && identAST.getType() == TokenTypes.IDENT
-                && getCurrentVariables().contains(identAST.getText()))
-            {
+                && getCurrentVariables().contains(identAST.getText())) {
                 log(ast.getLineNo(), ast.getColumnNo(),
                     MSG_KEY, identAST.getText());
             }

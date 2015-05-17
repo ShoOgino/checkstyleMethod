@@ -1,13 +1,11 @@
     @Test
-    public void testEclipse() throws Exception
-    {
+    public void testEclipse() throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute(
             "scope",
             Scope.getInstance("public").getName());
-        final String[] expected =
-        {
+        final String[] expected = {
             "18: " + getCheckMessage(JAVADOC_MISSING),
         };
         verify(checkConfig, getPath("InputScopeInnerClasses.java"), expected);

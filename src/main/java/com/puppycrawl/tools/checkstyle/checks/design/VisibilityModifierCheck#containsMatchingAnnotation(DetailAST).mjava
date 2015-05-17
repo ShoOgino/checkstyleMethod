@@ -21,22 +21,19 @@
      * @return the AST representing the first such annotation or null if
      *         no such annotation was found
      */
-    private DetailAST containsMatchingAnnotation(DetailAST variableDef)
-    {
+    private DetailAST containsMatchingAnnotation(DetailAST variableDef) {
         DetailAST matchingAnnotation = null;
 
         final DetailAST holder = AnnotationUtility.getAnnotationHolder(variableDef);
 
         for (DetailAST child = holder.getFirstChild();
-            child != null; child = child.getNextSibling())
-        {
+            child != null; child = child.getNextSibling()) {
             if (child.getType() == TokenTypes.ANNOTATION) {
                 final DetailAST at = child.getFirstChild();
                 final String name =
                     FullIdent.createFullIdent(at.getNextSibling()).getText();
                 if (ignoreAnnotationCanonicalNames.contains(name)
-                         || ignoreAnnotationShortNames.contains(name))
-                {
+                         || ignoreAnnotationShortNames.contains(name)) {
                     matchingAnnotation = child;
                     break;
                 }

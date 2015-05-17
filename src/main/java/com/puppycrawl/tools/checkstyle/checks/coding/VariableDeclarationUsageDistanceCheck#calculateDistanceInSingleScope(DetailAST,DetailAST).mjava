@@ -9,16 +9,14 @@
      * @return entry which contains expression with variable usage and distance.
      */
     private Entry<DetailAST, Integer> calculateDistanceInSingleScope(
-            DetailAST semicolonAst, DetailAST variableIdentAst)
-    {
+            DetailAST semicolonAst, DetailAST variableIdentAst) {
         int dist = 0;
         boolean firstUsageFound = false;
         DetailAST currentAst = semicolonAst;
         DetailAST variableUsageAst = null;
 
         while (!firstUsageFound && currentAst != null
-                && currentAst.getType() != TokenTypes.RCURLY)
-        {
+                && currentAst.getType() != TokenTypes.RCURLY) {
             if (currentAst.getFirstChild() != null) {
 
                 if (isChild(currentAst, variableIdentAst)) {

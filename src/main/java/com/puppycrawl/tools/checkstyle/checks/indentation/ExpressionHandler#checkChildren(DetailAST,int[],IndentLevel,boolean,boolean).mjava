@@ -12,13 +12,11 @@
                                        int[] tokenTypes,
                                        IndentLevel startLevel,
                                        boolean firstLineMatches,
-                                       boolean allowNesting)
-    {
+                                       boolean allowNesting) {
         Arrays.sort(tokenTypes);
         for (DetailAST child = parent.getFirstChild();
                 child != null;
-                child = child.getNextSibling())
-        {
+                child = child.getNextSibling()) {
             if (Arrays.binarySearch(tokenTypes, child.getType()) >= 0) {
                 checkExpressionSubtree(child, startLevel,
                     firstLineMatches, allowNesting);

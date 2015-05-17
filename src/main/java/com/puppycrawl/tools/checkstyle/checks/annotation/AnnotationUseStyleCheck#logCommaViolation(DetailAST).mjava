@@ -4,22 +4,19 @@
      * @param ast the array init
      * {@link TokenTypes#ANNOTATION_ARRAY_INIT ANNOTATION_ARRAY_INIT}.
      */
-    private void logCommaViolation(final DetailAST ast)
-    {
+    private void logCommaViolation(final DetailAST ast) {
         final DetailAST rCurly = ast.findFirstToken(TokenTypes.RCURLY);
 
         //comma can be null if array is empty
         final DetailAST comma = rCurly.getPreviousSibling();
 
         if (TrailingArrayComma.ALWAYS == this.comma
-            && (comma == null || comma.getType() != TokenTypes.COMMA))
-        {
+            && (comma == null || comma.getType() != TokenTypes.COMMA)) {
             this.log(rCurly.getLineNo(),
                 rCurly.getColumnNo(), MSG_KEY_ANNOTATION_TRAILING_COMMA_MISSING);
         }
         else if (TrailingArrayComma.NEVER == this.comma
-            && comma != null && comma.getType() == TokenTypes.COMMA)
-        {
+            && comma != null && comma.getType() == TokenTypes.COMMA) {
             this.log(comma.getLineNo(),
                 comma.getColumnNo(), MSG_KEY_ANNOTATION_TRAILING_COMMA_PRESENT);
         }

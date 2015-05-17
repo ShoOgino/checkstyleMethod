@@ -2,12 +2,10 @@
          * Visits throws clause and collects all exceptions we throw.
          * @param literalThrows throws to process.
          */
-        public void visitLiteralThrows(DetailAST literalThrows)
-        {
+        public void visitLiteralThrows(DetailAST literalThrows) {
             for (DetailAST childAST = literalThrows.getFirstChild();
                  childAST != null;
-                 childAST = childAST.getNextSibling())
-            {
+                 childAST = childAST.getNextSibling()) {
                 if (childAST.getType() != TokenTypes.COMMA) {
                     addReferencedClassName(childAST);
                 }

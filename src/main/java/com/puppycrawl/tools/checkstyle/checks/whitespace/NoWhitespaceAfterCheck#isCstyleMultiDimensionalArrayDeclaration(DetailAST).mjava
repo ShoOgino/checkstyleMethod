@@ -3,14 +3,12 @@
      * @param arrayDeclaration {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR}
      * @return true if multidimensional array is declared in C style.
      */
-    private static boolean isCstyleMultiDimensionalArrayDeclaration(DetailAST arrayDeclaration)
-    {
+    private static boolean isCstyleMultiDimensionalArrayDeclaration(DetailAST arrayDeclaration) {
         boolean result = false;
         DetailAST parentArrayDeclaration = arrayDeclaration;
         while (parentArrayDeclaration != null) {
             if (parentArrayDeclaration.getParent() != null
-                    && parentArrayDeclaration.getParent().getType() == TokenTypes.TYPE)
-            {
+                    && parentArrayDeclaration.getParent().getType() == TokenTypes.TYPE) {
                 result = isCstyleArrayDeclaration(parentArrayDeclaration);
             }
             parentArrayDeclaration = parentArrayDeclaration.getParent();

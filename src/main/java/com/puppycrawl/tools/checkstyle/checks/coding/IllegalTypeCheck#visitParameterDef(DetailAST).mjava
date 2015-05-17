@@ -2,13 +2,11 @@
      * Checks type of parameters.
      * @param paradef parameter list for check.
      */
-    private void visitParameterDef(DetailAST paradef)
-    {
+    private void visitParameterDef(DetailAST paradef) {
         final DetailAST grandParentAST = paradef.getParent().getParent();
 
         if (grandParentAST.getType() == TokenTypes.METHOD_DEF
-            && isCheckedMethod(grandParentAST))
-        {
+            && isCheckedMethod(grandParentAST)) {
             checkClassName(paradef);
         }
     }

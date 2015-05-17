@@ -1,14 +1,12 @@
     /**
      * @return indentation level expected for children
      */
-    protected IndentLevel getChildrenExpectedLevel()
-    {
+    protected IndentLevel getChildrenExpectedLevel() {
         // if we have multileveled expected level then we should
         // try to suggest single level to children using curlies'
         // levels.
         if (getLevel().isMultiLevel() && hasCurlys()
-            && !areOnSameLine(getLCurly(), getRCurly()))
-        {
+            && !areOnSameLine(getLCurly(), getRCurly())) {
             if (startsLine(getLCurly())) {
                 return new IndentLevel(expandedTabsColumnNo(getLCurly()) + getBasicOffset());
             }

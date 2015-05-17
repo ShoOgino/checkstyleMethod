@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
 
         if (ast.getType() == TokenTypes.CLASS_DEF) {
@@ -13,8 +12,7 @@
         else if (!ScopeUtils.inEnumBlock(ast)) { //ctors in enums don't matter
             final ClassDesc desc = classes.peek();
             if (modifiers != null
-                && modifiers.branchContains(TokenTypes.LITERAL_PRIVATE))
-            {
+                && modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)) {
                 desc.reportPrivateCtor();
             }
             else {

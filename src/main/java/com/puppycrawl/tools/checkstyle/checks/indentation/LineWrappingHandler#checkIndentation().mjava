@@ -1,8 +1,7 @@
     /**
      * Checks line wrapping into expressions and definitions.
      */
-    public void checkIndentation()
-    {
+    public void checkIndentation() {
         final NavigableMap<Integer, DetailAST> firstNodesOnLines = collectFirstNodes();
 
         final DetailAST firstNode = firstNodesOnLines.get(firstNodesOnLines.firstKey());
@@ -20,8 +19,7 @@
 
             if (currentType == TokenTypes.RCURLY
                     || currentType == TokenTypes.RPAREN
-                    || currentType == TokenTypes.ARRAY_INIT)
-            {
+                    || currentType == TokenTypes.ARRAY_INIT) {
                 logWarningMessage(node, firstNodeIndent);
             }
             else if (currentType == TokenTypes.LITERAL_IF) {

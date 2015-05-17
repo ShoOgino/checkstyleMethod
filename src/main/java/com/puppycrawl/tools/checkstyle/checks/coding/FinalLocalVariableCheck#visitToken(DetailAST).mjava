@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         switch (ast.getType()) {
             case TokenTypes.OBJBLOCK:
             case TokenTypes.SLIST:
@@ -15,15 +14,13 @@
             case TokenTypes.PARAMETER_DEF:
                 if (ScopeUtils.inInterfaceBlock(ast)
                     || inAbstractOrNativeMethod(ast)
-                    || inLambda(ast))
-                {
+                    || inLambda(ast)) {
                     break;
                 }
             case TokenTypes.VARIABLE_DEF:
                 if (ast.getParent().getType() != TokenTypes.OBJBLOCK
                     && shouldCheckEnhancedForLoopVariable(ast)
-                    && isVariableInForInit(ast))
-                {
+                    && isVariableInForInit(ast)) {
                     insertVariable(ast);
                 }
                 break;
@@ -46,8 +43,7 @@
                         || TokenTypes.BXOR_ASSIGN == parentType
                         || TokenTypes.BOR_ASSIGN == parentType
                         || TokenTypes.BAND_ASSIGN == parentType)
-                        && ast.getParent().getFirstChild() == ast)
-                {
+                        && ast.getParent().getFirstChild() == ast) {
                     removeVariable(ast);
                 }
                 break;

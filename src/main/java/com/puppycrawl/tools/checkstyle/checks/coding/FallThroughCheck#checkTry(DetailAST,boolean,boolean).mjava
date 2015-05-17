@@ -7,8 +7,7 @@
      * @return true if try/cath/finally block is terminated.
      */
     private boolean checkTry(final DetailAST ast, boolean useBreak,
-                             boolean useContinue)
-    {
+                             boolean useContinue) {
         final DetailAST finalStmt = ast.getLastChild();
         if (finalStmt.getType() == TokenTypes.LITERAL_FINALLY) {
             return isTerminated(finalStmt.findFirstToken(TokenTypes.SLIST),

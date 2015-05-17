@@ -4,11 +4,9 @@
      *
      * @param annotation the annotation token
      */
-    private void checkTrailingComma(final DetailAST annotation)
-    {
+    private void checkTrailingComma(final DetailAST annotation) {
         if (TrailingArrayComma.IGNORE == this.comma
-            || this.comma == null)
-        {
+            || this.comma == null) {
             return;
         }
 
@@ -18,8 +16,7 @@
             DetailAST arrayInit = null;
 
             if (child.getType()
-                == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
-            {
+                == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR) {
                 arrayInit =
                     child.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
             }

@@ -1,11 +1,9 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final DetailAST slistAST = ast.findFirstToken(TokenTypes.SLIST);
         boolean isElseIf = false;
         if (ast.getType() == TokenTypes.LITERAL_ELSE
-            && ast.findFirstToken(TokenTypes.LITERAL_IF) != null)
-        {
+            && ast.findFirstToken(TokenTypes.LITERAL_IF) != null) {
             isElseIf = true;
         }
 

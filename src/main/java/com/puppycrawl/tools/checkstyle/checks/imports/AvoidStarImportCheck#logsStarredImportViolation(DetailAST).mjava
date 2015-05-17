@@ -3,8 +3,7 @@
      * it's not excluded then a violation is logged.
      * @param startingDot the starting dot for the import statement
      */
-    private void logsStarredImportViolation(DetailAST startingDot)
-    {
+    private void logsStarredImportViolation(DetailAST startingDot) {
         final FullIdent name = FullIdent.createFullIdent(startingDot);
         if (isStaredImport(name) && !excludes.contains(name.getText())) {
             log(startingDot.getLineNo(), MSG_KEY, name.getText());

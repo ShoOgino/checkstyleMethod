@@ -1,6 +1,5 @@
     @Override
-    public void leaveToken(DetailAST ast)
-    {
+    public void leaveToken(DetailAST ast) {
         if (ast.getType() != TokenTypes.CLASS_DEF) {
             return;
         }
@@ -9,8 +8,7 @@
         if (!desc.isDeclaredAsFinal()
             && !desc.isDeclaredAsAbstract()
             && desc.isWithPrivateCtor()
-            && !desc.isWithNonPrivateCtor())
-        {
+            && !desc.isWithNonPrivateCtor()) {
             final String className =
                 ast.findFirstToken(TokenTypes.IDENT).getText();
             log(ast.getLineNo(), MSG_KEY, className);

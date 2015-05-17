@@ -7,16 +7,14 @@
      *        method returns null
      */
     private static DetailAST
-        getNextSubTreeNode(DetailAST currentNodeAst, DetailAST subTreeRootAst)
-    {
+        getNextSubTreeNode(DetailAST currentNodeAst, DetailAST subTreeRootAst) {
         DetailAST currentNode = currentNodeAst;
         DetailAST toVisitAst = currentNode.getFirstChild();
         while (toVisitAst == null) {
             toVisitAst = currentNode.getNextSibling();
             if (toVisitAst == null) {
                 if (currentNode.getParent().equals(subTreeRootAst)
-                         && currentNode.getParent().getColumnNo() == subTreeRootAst.getColumnNo())
-                {
+                         && currentNode.getParent().getColumnNo() == subTreeRootAst.getColumnNo()) {
                     break;
                 }
                 currentNode = currentNode.getParent();

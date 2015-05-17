@@ -3,13 +3,11 @@
      * has finished.
      * @param ast the "new" token.
      */
-    private void postprocessLiteralNew(DetailAST ast)
-    {
+    private void postprocessLiteralNew(DetailAST ast) {
         final DetailAST typeNameAST = ast.getFirstChild();
         final AST nameSibling = typeNameAST.getNextSibling();
         if (nameSibling != null
-                && nameSibling.getType() == TokenTypes.ARRAY_DECLARATOR)
-        {
+                && nameSibling.getType() == TokenTypes.ARRAY_DECLARATOR) {
             // ast == "new Boolean[]"
             return;
         }

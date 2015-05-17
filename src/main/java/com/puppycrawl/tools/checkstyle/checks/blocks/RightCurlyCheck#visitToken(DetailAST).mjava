@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final Details details = getDetails(ast);
         final DetailAST rcurly = details.rcurly;
 
@@ -23,14 +22,12 @@
             }
         }
         else if (getAbstractOption() == RightCurlyOption.SAME
-                && rcurly.getLineNo() != nextToken.getLineNo())
-        {
+                && rcurly.getLineNo() != nextToken.getLineNo()) {
             log(rcurly, MSG_KEY_LINE_SAME, "}");
         }
         else if (getAbstractOption() == RightCurlyOption.ALONE
                 && rcurly.getLineNo() == nextToken.getLineNo()
-                && !isEmptyBody(lcurly))
-        {
+                && !isEmptyBody(lcurly)) {
             log(rcurly, MSG_KEY_LINE_ALONE, "}");
         }
 

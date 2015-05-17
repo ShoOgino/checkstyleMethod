@@ -8,8 +8,7 @@
      * @param ast <code>DetailAST</code>.
      * @return <code>DetailAST</code>.
      */
-    private DetailAST skipAnnotationOnlyLines(DetailAST ast)
-    {
+    private DetailAST skipAnnotationOnlyLines(DetailAST ast) {
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
         if (modifiers == null) {
             return ast;
@@ -28,8 +27,7 @@
         final int lastAnnotLineNumber = lastAnnot.getLineNo();
         while (lastAnnot.getPreviousSibling() != null
                && lastAnnot.getPreviousSibling().getLineNo()
-                    == lastAnnotLineNumber)
-        {
+                    == lastAnnotLineNumber) {
             lastAnnot = lastAnnot.getPreviousSibling();
         }
         return lastAnnot;

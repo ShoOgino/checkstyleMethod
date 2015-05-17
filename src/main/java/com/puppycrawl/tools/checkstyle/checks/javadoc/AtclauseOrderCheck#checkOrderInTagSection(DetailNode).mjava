@@ -2,8 +2,7 @@
      * Checks order of atclauses in tag section node.
      * @param javadoc Javadoc root node.
      */
-    private void checkOrderInTagSection(DetailNode javadoc)
-    {
+    private void checkOrderInTagSection(DetailNode javadoc) {
         int indexOrderOfPreviousTag = 0;
         int indexOrderOfCurrentTag = 0;
 
@@ -13,8 +12,7 @@
                 indexOrderOfCurrentTag = tagOrder.indexOf(tagText);
 
                 if (tagOrder.contains(tagText)
-                        && indexOrderOfCurrentTag < indexOrderOfPreviousTag)
-                {
+                        && indexOrderOfCurrentTag < indexOrderOfPreviousTag) {
                     log(node.getLineNumber(), MSG_KEY, tagOrder.toString());
                 }
                 indexOrderOfPreviousTag = indexOrderOfCurrentTag;

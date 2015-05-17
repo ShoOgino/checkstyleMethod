@@ -1,10 +1,8 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         DetailAST astNode = ast;
         if (ast.getType() == TokenTypes.ARRAY_DECLARATOR
-                 || ast.getType() == TokenTypes.TYPECAST)
-        {
+                 || ast.getType() == TokenTypes.TYPECAST) {
             astNode = getPreceded(ast);
         }
 
@@ -12,8 +10,7 @@
         final int after = getPositionAfter(astNode);
 
         if ((after >= line.length() || Character.isWhitespace(line.charAt(after)))
-                 && hasRedundantWhitespace(line, after))
-        {
+                 && hasRedundantWhitespace(line, after)) {
             log(astNode.getLineNo(), after,
                 MSG_KEY, astNode.getText());
         }

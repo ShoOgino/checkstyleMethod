@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         // LITERAL_IF has the following four or five children:
         // '('
         // condition
@@ -21,8 +20,7 @@
         final AST thenStatement = condition.getNextSibling().getNextSibling();
 
         if (returnsOnlyBooleanLiteral(thenStatement)
-            && returnsOnlyBooleanLiteral(elseStatement))
-        {
+            && returnsOnlyBooleanLiteral(elseStatement)) {
             log(ast.getLineNo(), ast.getColumnNo(), MSG_KEY);
         }
     }

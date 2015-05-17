@@ -2,15 +2,13 @@
      * Checks the token for the end of Generics.
      * @param ast the token to check
      */
-    private void processEnd(DetailAST ast)
-    {
+    private void processEnd(DetailAST ast) {
         final String line = getLine(ast.getLineNo() - 1);
         final int before = ast.getColumnNo() - 1;
         final int after = ast.getColumnNo() + 1;
 
         if (0 <= before && Character.isWhitespace(line.charAt(before))
-                && !Utils.whitespaceBefore(before, line))
-        {
+                && !Utils.whitespaceBefore(before, line)) {
             log(ast.getLineNo(), before, WS_PRECEDED, ">");
         }
 
@@ -30,8 +28,7 @@
                             == TokenTypes.DOT
                         && ast.getParent().getParent().getParent().getType()
                             == TokenTypes.METHOD_CALL
-                        || isAfterMethodReference(ast))
-                {
+                        || isAfterMethodReference(ast)) {
                     if (Character.isWhitespace(charAfter)) {
                         log(ast.getLineNo(), after, WS_FOLLOWED, ">");
                     }
@@ -40,8 +37,7 @@
                     && '(' != charAfter && ')' != charAfter
                     && ',' != charAfter && '[' != charAfter
                     && '.' != charAfter && ':' != charAfter
-                    && !isAfterMethodReference(ast))
-                {
+                    && !isAfterMethodReference(ast)) {
                     log(ast.getLineNo(), after, WS_ILLEGAL_FOLLOW, ">");
                 }
             }
@@ -56,8 +52,7 @@
                 //
                 final int indexOfAmp = line.indexOf('&', after);
                 if (indexOfAmp != -1
-                    && whitespaceBetween(after, indexOfAmp, line))
-                {
+                    && whitespaceBetween(after, indexOfAmp, line)) {
                     if (indexOfAmp - after == 0) {
                         log(ast.getLineNo(), after, WS_NOT_PRECEDED, "&");
                     }

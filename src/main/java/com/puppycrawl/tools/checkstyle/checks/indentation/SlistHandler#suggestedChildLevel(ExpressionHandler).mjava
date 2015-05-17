@@ -1,6 +1,5 @@
     @Override
-    public IndentLevel suggestedChildLevel(ExpressionHandler child)
-    {
+    public IndentLevel suggestedChildLevel(ExpressionHandler child) {
         // this is:
         //  switch (var) {
         //     case 3: {
@@ -14,8 +13,7 @@
         if (getParent() instanceof BlockParentHandler
                 && !(getParent() instanceof SlistHandler)
             || getParent() instanceof CaseHandler
-                && child instanceof SlistHandler)
-        {
+                && child instanceof SlistHandler) {
             return getParent().suggestedChildLevel(child);
         }
         return super.suggestedChildLevel(child);

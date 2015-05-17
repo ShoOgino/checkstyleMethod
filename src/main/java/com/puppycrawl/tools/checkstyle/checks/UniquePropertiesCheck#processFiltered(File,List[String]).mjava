@@ -1,6 +1,5 @@
     @Override
-    protected void processFiltered(File file, List<String> lines)
-    {
+    protected void processFiltered(File file, List<String> lines) {
         final UniqueProperties properties = new UniqueProperties();
 
         try {
@@ -19,8 +18,7 @@
         }
 
         for (Entry<String> duplication : properties
-                .getDuplicatedStrings().entrySet())
-        {
+                .getDuplicatedStrings().entrySet()) {
             final String keyName = duplication.getElement();
             final int lineNumber = getLineNumber(lines, keyName);
             // Number of occurrences is number of duplications + 1

@@ -8,15 +8,13 @@
      * @param literalFor {@link TokenTypes#LITERAL_FOR for statement}.
      * @return true if current for statement is single-line statement.
      */
-    private static boolean isSingleLineFor(DetailAST literalFor)
-    {
+    private static boolean isSingleLineFor(DetailAST literalFor) {
         boolean result = false;
         if (literalFor.getLastChild().getType() == TokenTypes.EMPTY_STAT) {
             result = true;
         }
         else if (literalFor.getParent().getType() == TokenTypes.SLIST
-                && literalFor.getLastChild().getType() != TokenTypes.SLIST)
-        {
+                && literalFor.getLastChild().getType() != TokenTypes.SLIST) {
             final DetailAST block = literalFor.findFirstToken(TokenTypes.EXPR);
             if (block != null) {
                 result = literalFor.getLineNo() == block.getLineNo();

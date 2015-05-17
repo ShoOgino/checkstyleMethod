@@ -4,14 +4,12 @@
      *
      * @param ast IDENT to check.
      */
-    private void processIDENT(DetailAST ast)
-    {
+    private void processIDENT(DetailAST ast) {
         final int parentType = ast.getParent().getType();
 
         if (parentType == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR
             || parentType == TokenTypes.ANNOTATION
-            || parentType == TokenTypes.ANNOTATION_FIELD_DEF)
-        {
+            || parentType == TokenTypes.ANNOTATION_FIELD_DEF) {
             //cannot refer to 'this' from annotations
             return;
         }
@@ -38,14 +36,12 @@
         }
 
         if (parentType == TokenTypes.DOT
-            && ast.getPreviousSibling() != null)
-        {
+            && ast.getPreviousSibling() != null) {
             // it's the method name in a method call; no problem
             return;
         }
         if (parentType == TokenTypes.TYPE
-            || parentType == TokenTypes.LITERAL_NEW)
-        {
+            || parentType == TokenTypes.LITERAL_NEW) {
             // it's a type name; no problem
             return;
         }
@@ -56,8 +52,7 @@
             || parentType == TokenTypes.ENUM_DEF
             || parentType == TokenTypes.INTERFACE_DEF
             || parentType == TokenTypes.PARAMETER_DEF
-            || parentType == TokenTypes.TYPE_ARGUMENT)
-        {
+            || parentType == TokenTypes.TYPE_ARGUMENT) {
             // it's being declared; no problem
             return;
         }

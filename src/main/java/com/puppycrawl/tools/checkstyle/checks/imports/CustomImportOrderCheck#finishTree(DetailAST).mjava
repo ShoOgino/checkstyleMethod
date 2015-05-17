@@ -1,6 +1,5 @@
     @Override
-    public void finishTree(DetailAST rootAST)
-    {
+    public void finishTree(DetailAST rootAST) {
 
         if (importToGroupList.isEmpty()) {
             return;
@@ -21,8 +20,7 @@
                     final String nextGroup = getNextImportGroup(groupNumber + 1);
                     if (importGroup.equals(nextGroup)) {
                         if (separateLineBetweenGroups && previousImport != null
-                                && !hasEmptyLineBefore(importObject.getLineNumber()))
-                        {
+                                && !hasEmptyLineBefore(importObject.getLineNumber())) {
                             log(importObject.getLineNumber(), MSG_LINE_SEPARATOR,
                                     fullImportIdent);
                         }
@@ -43,8 +41,7 @@
                     && previousImport != null
                     && matchesImportGroup(importObject.isStaticImport(),
                             fullImportIdent, currentGroup)
-                    && compareImports(fullImportIdent, previousImport) < 0)
-            {
+                    && compareImports(fullImportIdent, previousImport) < 0) {
                 log(importObject.getLineNumber(), MSG_LEX, fullImportIdent);
             }
             previousImport = fullImportIdent;

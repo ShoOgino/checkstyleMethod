@@ -1,6 +1,5 @@
     @Override
-    public final void visitToken(DetailAST ast)
-    {
+    public final void visitToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.PACKAGE_DEF) {
             processPackage(ast);
         }
@@ -9,8 +8,7 @@
         }
         else if (ast.getType() == TokenTypes.CLASS_DEF
                  || ast.getType() == TokenTypes.INTERFACE_DEF
-                 || ast.getType() == TokenTypes.ENUM_DEF)
-        {
+                 || ast.getType() == TokenTypes.ENUM_DEF) {
             processClass(ast);
         }
         else {

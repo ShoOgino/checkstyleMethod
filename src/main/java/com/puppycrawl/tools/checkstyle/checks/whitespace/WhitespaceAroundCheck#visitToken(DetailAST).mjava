@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final int currentType = ast.getType();
         final int parentType = ast.getParent().getType();
 
@@ -8,35 +7,30 @@
         if ((currentType == TokenTypes.RCURLY
                 || currentType == TokenTypes.LCURLY)
             && (parentType == TokenTypes.ARRAY_INIT
-                || parentType == TokenTypes.ANNOTATION_ARRAY_INIT))
-        {
+                || parentType == TokenTypes.ANNOTATION_ARRAY_INIT)) {
             return;
         }
 
         // Check for import pkg.name.*;
         if (currentType == TokenTypes.STAR
-            && parentType == TokenTypes.DOT)
-        {
+            && parentType == TokenTypes.DOT) {
             return;
         }
 
         // Check for an SLIST that has a parent CASE_GROUP. It is not a '{'.
         if (currentType == TokenTypes.SLIST
-            && parentType == TokenTypes.CASE_GROUP)
-        {
+            && parentType == TokenTypes.CASE_GROUP) {
             return;
         }
 
         if (currentType == TokenTypes.COLON) {
             //we do not want to check colon for cases and defaults
             if (parentType == TokenTypes.LITERAL_DEFAULT
-                || parentType == TokenTypes.LITERAL_CASE)
-            {
+                || parentType == TokenTypes.LITERAL_CASE) {
                 return;
             }
             else if (parentType == TokenTypes.FOR_EACH_CLAUSE
-                && this.ignoreEnhancedForColon)
-            {
+                && this.ignoreEnhancedForColon) {
                 return;
             }
         }
@@ -44,8 +38,7 @@
         // Checks if empty methods, ctors or loops are allowed.
         if (isEmptyMethodBlock(ast, parentType)
                 || isEmptyCtorBlock(ast, parentType)
-                || isEmptyLoop(ast, parentType))
-        {
+                || isEmptyLoop(ast, parentType)) {
             return;
         }
 
@@ -77,8 +70,7 @@
                 && (nextChar == ')'
                     || nextChar == ';'
                     || nextChar == ','
-                    || nextChar == '.')))
-        {
+                    || nextChar == '.'))) {
             log(ast.getLineNo(), ast.getColumnNo() + ast.getText().length(),
                     WS_NOT_FOLLOWED, ast.getText());
         }

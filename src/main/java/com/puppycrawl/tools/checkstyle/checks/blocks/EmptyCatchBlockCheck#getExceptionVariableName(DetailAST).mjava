@@ -3,8 +3,7 @@
      * @param catchAst {@link TokenTypes#LITERAL_CATCH LITERAL_CATCH}
      * @return Variable's name associated with exception.
      */
-    private static String getExceptionVariableName(DetailAST catchAst)
-    {
+    private static String getExceptionVariableName(DetailAST catchAst) {
         final DetailAST parameterDef = catchAst.findFirstToken(TokenTypes.PARAMETER_DEF);
         final DetailAST variableName = parameterDef.findFirstToken(TokenTypes.IDENT);
         return variableName.getText();

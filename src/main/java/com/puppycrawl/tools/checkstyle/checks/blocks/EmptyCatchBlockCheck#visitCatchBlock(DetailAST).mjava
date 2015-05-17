@@ -4,8 +4,7 @@
      *   specified regexp - skips from consideration, else - puts violation.
      * @param catchAst {@link TokenTypes#LITERAL_CATCH LITERAL_CATCH}
      */
-    private void visitCatchBlock(DetailAST catchAst)
-    {
+    private void visitCatchBlock(DetailAST catchAst) {
         if (isEmptyCatchBlock(catchAst)) {
             final String commentContent = getCommentFirstLine(catchAst);
             if (isVerifiable(catchAst, commentContent)) {

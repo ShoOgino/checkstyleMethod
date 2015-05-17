@@ -1,6 +1,5 @@
     /** recursive method that finds the matches. */
-    private void findMatch()
-    {
+    private void findMatch() {
         final boolean foundMatch = matcher.find();
         if (!foundMatch) {
             return;
@@ -10,8 +9,7 @@
         final LineColumn end = text.lineColumn(matcher.end());
 
         if (!options.getSuppressor().shouldSuppress(start.getLine(),
-                start.getColumn(), end.getLine(), end.getColumn()))
-        {
+                start.getColumn(), end.getLine(), end.getColumn())) {
             currentMatches++;
             if (currentMatches > options.getMaximum()) {
                 if ("".equals(options.getMessage())) {

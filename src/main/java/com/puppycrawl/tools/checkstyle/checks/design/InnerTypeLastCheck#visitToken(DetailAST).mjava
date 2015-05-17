@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         /** First root class */
         if (rootClass) {
             rootClass = false;
@@ -10,8 +9,7 @@
             while (null != nextSibling) {
                 if (!ScopeUtils.inCodeBlock(ast)
                     && (nextSibling.getType() == TokenTypes.VARIABLE_DEF
-                        || nextSibling.getType() == TokenTypes.METHOD_DEF))
-                {
+                        || nextSibling.getType() == TokenTypes.METHOD_DEF)) {
                     log(nextSibling.getLineNo(), nextSibling.getColumnNo(),
                         MSG_KEY);
                 }

@@ -3,12 +3,10 @@
      * @param atNode first at-clause node.
      * @return last annotation node.
      */
-    private DetailAST getLastAnnotationNode(DetailAST atNode)
-    {
+    private DetailAST getLastAnnotationNode(DetailAST atNode) {
         DetailAST lastAnnotation = atNode.getParent();
         while (lastAnnotation.getNextSibling() != null
-                && lastAnnotation.getNextSibling().getType() == TokenTypes.ANNOTATION)
-        {
+                && lastAnnotation.getNextSibling().getType() == TokenTypes.ANNOTATION) {
             lastAnnotation = lastAnnotation.getNextSibling();
         }
         return lastAnnotation.getLastChild();

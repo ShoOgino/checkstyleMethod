@@ -4,14 +4,12 @@
      * @param ast the method node.
      * @return whether the method is a function.
      */
-    private boolean isFunction(DetailAST ast)
-    {
+    private boolean isFunction(DetailAST ast) {
         boolean retVal = false;
         if (ast.getType() == TokenTypes.METHOD_DEF) {
             final DetailAST typeAST = ast.findFirstToken(TokenTypes.TYPE);
             if (typeAST != null
-                && typeAST.findFirstToken(TokenTypes.LITERAL_VOID) == null)
-            {
+                && typeAST.findFirstToken(TokenTypes.LITERAL_VOID) == null) {
                 retVal = true;
             }
         }

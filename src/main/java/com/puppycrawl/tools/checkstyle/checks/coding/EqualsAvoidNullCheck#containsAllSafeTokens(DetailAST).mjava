@@ -12,8 +12,7 @@
      * @param expr the argument expression
      * @return - true if any child matches the set of tokens, false if not
      */
-    private boolean containsAllSafeTokens(final DetailAST expr)
-    {
+    private boolean containsAllSafeTokens(final DetailAST expr) {
         DetailAST arg = expr.getFirstChild();
 
         if (arg.branchContains(TokenTypes.METHOD_CALL)) {
@@ -31,8 +30,7 @@
         //arg = skipVariablePlusAssign(arg);
 
         if (arg.branchContains(TokenTypes.PLUS_ASSIGN)
-                || arg.branchContains(TokenTypes.IDENT))
-        {
+                || arg.branchContains(TokenTypes.IDENT)) {
             return false;
         }
 

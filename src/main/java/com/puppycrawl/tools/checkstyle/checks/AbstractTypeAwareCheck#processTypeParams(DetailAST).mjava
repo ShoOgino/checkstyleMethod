@@ -2,8 +2,7 @@
      * Process type params (if any) for given class, enum or method.
      * @param ast class, enum or method to process.
      */
-    private void processTypeParams(DetailAST ast)
-    {
+    private void processTypeParams(DetailAST ast) {
         final DetailAST params =
             ast.findFirstToken(TokenTypes.TYPE_PARAMETERS);
 
@@ -16,8 +15,7 @@
 
         for (DetailAST child = params.getFirstChild();
              child != null;
-             child = child.getNextSibling())
-        {
+             child = child.getNextSibling()) {
             if (child.getType() == TokenTypes.TYPE_PARAMETER) {
                 final DetailAST param = child;
                 final String alias =

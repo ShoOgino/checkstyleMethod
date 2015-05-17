@@ -2,8 +2,7 @@
      * @param slistAST a <code>DetailAST</code> value
      * @return whether the SLIST token contains any text.
      */
-    protected boolean hasText(final DetailAST slistAST)
-    {
+    protected boolean hasText(final DetailAST slistAST) {
         boolean retVal = false;
 
         final DetailAST rightCurly = slistAST.findFirstToken(TokenTypes.RCURLY);
@@ -28,8 +27,7 @@
                 if (lines[slistLineNo - 1]
                      .substring(slistColNo + 1).trim().length() != 0
                     || lines[rcurlyLineNo - 1]
-                        .substring(0, rcurlyColNo).trim().length() != 0)
-                {
+                        .substring(0, rcurlyColNo).trim().length() != 0) {
                     retVal = true;
                 }
                 else {

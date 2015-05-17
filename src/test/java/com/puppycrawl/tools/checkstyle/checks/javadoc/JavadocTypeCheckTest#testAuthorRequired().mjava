@@ -1,11 +1,9 @@
     @Test
-    public void testAuthorRequired() throws Exception
-    {
+    public void testAuthorRequired() throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("authorFormat", "\\S");
-        final String[] expected =
-        {
+        final String[] expected = {
             "13: " + getCheckMessage(MISSING_TAG, "@author"),
         };
         verify(checkConfig, getPath("InputWhitespace.java"), expected);

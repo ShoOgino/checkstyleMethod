@@ -9,8 +9,7 @@
      * @return true, if the import is placed in the third party group.
      */
     private boolean matchesThirdPartyImportGroup(boolean isStatic,
-        String currentImport, String currentGroup)
-    {
+        String currentImport, String currentGroup) {
         return !isStatic && THIRD_PARTY_PACKAGE_RULE_GROUP.equals(currentGroup)
                 && thirdPartyPackageRegExp.matcher(currentImport).find()
                 && !standardPackageRegExp.matcher(currentImport).find()

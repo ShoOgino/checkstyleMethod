@@ -5,20 +5,17 @@
      * block
      * @return a <code>boolean</code> value
      */
-    public static boolean inAnnotationBlock(DetailAST aAST)
-    {
+    public static boolean inAnnotationBlock(DetailAST aAST) {
         boolean retVal = false;
 
         // Loop up looking for a containing interface block
         for (DetailAST token = aAST.getParent();
              token != null;
-             token = token.getParent())
-        {
+             token = token.getParent()) {
             final int type = token.getType();
             if (type == TokenTypes.CLASS_DEF
                 || type == TokenTypes.ENUM_DEF
-                || type == TokenTypes.INTERFACE_DEF)
-            {
+                || type == TokenTypes.INTERFACE_DEF) {
                 break; // in a class, enum or interface
             }
             else if (type == TokenTypes.LITERAL_NEW) {

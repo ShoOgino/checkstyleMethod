@@ -5,8 +5,7 @@
      * @param startToken token for start of expression
      */
     private void verifyBrace(final DetailAST brace,
-                             final DetailAST startToken)
-    {
+                             final DetailAST startToken) {
         final String braceLine = getLine(brace.getLineNo() - 1);
 
         // calculate the previous line length without trailing whitespace. Need
@@ -18,8 +17,7 @@
 
         // Check for being told to ignore, or have '{}' which is a special case
         if (braceLine.length() <= brace.getColumnNo() + 1
-                || braceLine.charAt(brace.getColumnNo() + 1) != '}')
-        {
+                || braceLine.charAt(brace.getColumnNo() + 1) != '}') {
             if (getAbstractOption() == LeftCurlyOption.NL) {
                 if (!Utils.whitespaceBefore(brace.getColumnNo(), braceLine)) {
                     log(brace.getLineNo(), brace.getColumnNo(),
@@ -28,8 +26,7 @@
             }
             else if (getAbstractOption() == LeftCurlyOption.EOL) {
                 if (Utils.whitespaceBefore(brace.getColumnNo(), braceLine)
-                    && prevLineLen + 2 <= maxLineLength)
-                {
+                    && prevLineLen + 2 <= maxLineLength) {
                     log(brace.getLineNo(), brace.getColumnNo(),
                         MSG_KEY_LINE_PREVIOUS, "{");
                 }
@@ -38,8 +35,7 @@
                 }
             }
             else if (getAbstractOption() == LeftCurlyOption.NLOW
-                    && startToken.getLineNo() != brace.getLineNo())
-            {
+                    && startToken.getLineNo() != brace.getLineNo()) {
                 // not on the same line
                 if (startToken.getLineNo() + 1 == brace.getLineNo()) {
                     if (!Utils.whitespaceBefore(brace.getColumnNo(), braceLine)) {

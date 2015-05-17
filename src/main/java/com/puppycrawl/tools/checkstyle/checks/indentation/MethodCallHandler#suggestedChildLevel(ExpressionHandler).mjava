@@ -1,6 +1,5 @@
     @Override
-    public IndentLevel suggestedChildLevel(ExpressionHandler child)
-    {
+    public IndentLevel suggestedChildLevel(ExpressionHandler child) {
         // for whatever reason a method that crosses lines, like asList
         // here:
         //            System.out.println("methods are: " + Arrays.asList(
@@ -10,8 +9,7 @@
         final DetailAST first = getMainAst().getFirstChild();
         int indentLevel = getLineStart(first);
         if (!areOnSameLine(child.getMainAst().getFirstChild(),
-                           getMainAst().getFirstChild()))
-        {
+                           getMainAst().getFirstChild())) {
             indentLevel += getBasicOffset();
         }
         return new IndentLevel(indentLevel);

@@ -23,8 +23,7 @@
      * annotation is null
      */
     public static DetailAST getAnnotation(final DetailAST ast,
-        String annotation)
-    {
+        String annotation) {
         if (ast == null) {
             throw new IllegalArgumentException("the ast is null");
         }
@@ -41,8 +40,7 @@
         final DetailAST holder = AnnotationUtility.getAnnotationHolder(ast);
 
         for (DetailAST child = holder.getFirstChild();
-            child != null; child = child.getNextSibling())
-        {
+            child != null; child = child.getNextSibling()) {
             if (child.getType() == TokenTypes.ANNOTATION) {
                 final DetailAST at = child.getFirstChild();
                 final String name =

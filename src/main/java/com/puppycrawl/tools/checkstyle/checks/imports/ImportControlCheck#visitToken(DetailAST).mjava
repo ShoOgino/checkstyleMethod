@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(final DetailAST ast)
-    {
+    public void visitToken(final DetailAST ast) {
         if (ast.getType() == TokenTypes.PACKAGE_DEF) {
             final DetailAST nameAST = ast.getLastChild().getPreviousSibling();
             final FullIdent full = FullIdent.createFullIdent(nameAST);

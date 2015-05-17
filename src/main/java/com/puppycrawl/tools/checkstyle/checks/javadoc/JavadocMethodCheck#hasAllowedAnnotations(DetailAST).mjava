@@ -3,8 +3,7 @@
      * @param methodDef Some javadoc.
      * @return Some javadoc.
      */
-    private boolean hasAllowedAnnotations(DetailAST methodDef)
-    {
+    private boolean hasAllowedAnnotations(DetailAST methodDef) {
         final DetailAST modifiersNode = methodDef.findFirstToken(TokenTypes.MODIFIERS);
         DetailAST annotationNode = modifiersNode.findFirstToken(TokenTypes.ANNOTATION);
         while (annotationNode != null && annotationNode.getType() == TokenTypes.ANNOTATION) {

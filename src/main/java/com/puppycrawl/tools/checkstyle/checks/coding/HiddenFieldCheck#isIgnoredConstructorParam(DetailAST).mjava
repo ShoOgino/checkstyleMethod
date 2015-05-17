@@ -5,12 +5,10 @@
      * @return true if ast should be ignored because check property
      * ignoreConstructorParameter is true and ast is a constructor parameter.
      */
-    private boolean isIgnoredConstructorParam(DetailAST ast)
-    {
+    private boolean isIgnoredConstructorParam(DetailAST ast) {
         boolean result = false;
         if (ast.getType() == TokenTypes.PARAMETER_DEF
-            && ignoreConstructorParameter)
-        {
+            && ignoreConstructorParameter) {
             final DetailAST parametersAST = ast.getParent();
             final DetailAST constructorAST = parametersAST.getParent();
             result = constructorAST.getType() == TokenTypes.CTOR_DEF;

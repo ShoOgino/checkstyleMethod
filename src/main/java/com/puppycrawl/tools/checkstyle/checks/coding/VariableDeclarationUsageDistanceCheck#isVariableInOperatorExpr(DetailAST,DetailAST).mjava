@@ -13,8 +13,7 @@
      *         - false.
      */
     private boolean isVariableInOperatorExpr(
-            DetailAST operator, DetailAST variable)
-    {
+            DetailAST operator, DetailAST variable) {
         boolean isVarInOperatorDeclr = false;
         final DetailAST openingBracket =
                 operator.findFirstToken(TokenTypes.LPAREN);
@@ -47,8 +46,7 @@
                                 .getFirstChild();
 
                             if (firstNodeInsideElseBlock.getType()
-                                == TokenTypes.LITERAL_IF)
-                            {
+                                == TokenTypes.LITERAL_IF) {
                                 isVarInOperatorDeclr |=
                                     isVariableInOperatorExpr(
                                         firstNodeInsideElseBlock,
@@ -63,14 +61,12 @@
 
                         while (currentCaseBlock != null
                             && currentCaseBlock.getType()
-                            == TokenTypes.CASE_GROUP)
-                        {
+                            == TokenTypes.CASE_GROUP) {
                             final DetailAST firstNodeInsideCaseBlock =
                                 currentCaseBlock.getFirstChild();
 
                             if (isChild(firstNodeInsideCaseBlock,
-                                variable))
-                            {
+                                variable)) {
                                 isVarInOperatorDeclr = true;
                                 break;
                             }

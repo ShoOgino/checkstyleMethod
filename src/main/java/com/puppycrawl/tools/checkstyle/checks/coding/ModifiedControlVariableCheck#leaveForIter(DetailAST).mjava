@@ -2,8 +2,7 @@
      * Push current variables to the stack.
      * @param ast a for definition.
      */
-    private void leaveForIter(DetailAST ast)
-    {
+    private void leaveForIter(DetailAST ast) {
         final Set<String> variablesToPutInScope = getVariablesManagedByForLoop(ast);
         for (String variableName : variablesToPutInScope) {
             getCurrentVariables().push(variableName);

@@ -10,8 +10,7 @@
      *         of this block, otherwise - null.
      */
     private DetailAST getFirstNodeInsideSwitchBlock(
-            DetailAST block, DetailAST variable)
-    {
+            DetailAST block, DetailAST variable) {
         DetailAST firstNodeInsideBlock = null;
 
         if (!isVariableInOperatorExpr(block, variable)) {
@@ -22,8 +21,7 @@
 
             // Checking variable usage inside all CASE blocks.
             while (currentNode != null
-                    && currentNode.getType() == TokenTypes.CASE_GROUP)
-            {
+                    && currentNode.getType() == TokenTypes.CASE_GROUP) {
                 final DetailAST lastNodeInCaseGroup =
                         currentNode.getLastChild();
 

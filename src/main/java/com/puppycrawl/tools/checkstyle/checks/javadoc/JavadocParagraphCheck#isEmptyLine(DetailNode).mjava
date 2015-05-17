@@ -3,17 +3,14 @@
      * @param newLine NEWLINE node.
      * @return true, if line is empty line.
      */
-    private boolean isEmptyLine(DetailNode newLine)
-    {
+    private boolean isEmptyLine(DetailNode newLine) {
         DetailNode previousSibling = JavadocUtils.getPreviousSibling(newLine);
         if (previousSibling == null
-                || previousSibling.getParent().getType() != JavadocTokenTypes.JAVADOC)
-        {
+                || previousSibling.getParent().getType() != JavadocTokenTypes.JAVADOC) {
             return false;
         }
         if (previousSibling.getType() == JavadocTokenTypes.TEXT
-                && previousSibling.getChildren().length == 1)
-        {
+                && previousSibling.getChildren().length == 1) {
             previousSibling = JavadocUtils.getPreviousSibling(previousSibling);
         }
         return previousSibling != null

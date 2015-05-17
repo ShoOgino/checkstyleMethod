@@ -1,14 +1,12 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         if (TokenTypes.INTERFACE_DEF == ast.getType()) {
             final DetailAST modifiers =
                 ast.findFirstToken(TokenTypes.MODIFIERS);
             if (null != modifiers) {
                 for (final int tokenType : new int[] {
                     TokenTypes.LITERAL_STATIC,
-                    TokenTypes.ABSTRACT, })
-                {
+                    TokenTypes.ABSTRACT, }) {
                     final DetailAST modifier =
                             modifiers.findFirstToken(tokenType);
                     if (null != modifier) {
@@ -32,8 +30,7 @@
                     || type == TokenTypes.LITERAL_STATIC
                             && ast.getType() != TokenTypes.METHOD_DEF
                     || type == TokenTypes.ABSTRACT
-                    || type == TokenTypes.FINAL)
-                {
+                    || type == TokenTypes.FINAL) {
                     log(modifier.getLineNo(), modifier.getColumnNo(),
                             MSG_KEY, modifier.getText());
                     break;

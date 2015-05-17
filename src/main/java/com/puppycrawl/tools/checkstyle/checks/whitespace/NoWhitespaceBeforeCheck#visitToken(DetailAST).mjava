@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final String line = getLine(ast.getLineNo() - 1);
         final int before = ast.getColumnNo() - 1;
 
@@ -11,8 +10,7 @@
                 final DetailAST sibling = ast.getPreviousSibling();
                 if (sibling != null
                         && sibling.getType() == TokenTypes.FOR_INIT
-                        && sibling.getChildCount() == 0)
-                {
+                        && sibling.getChildCount() == 0) {
                     return;
                 }
             }

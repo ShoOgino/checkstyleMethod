@@ -7,8 +7,7 @@
      * @return all standalone validTags from the given javadoc.
      */
     public static JavadocTags getJavadocTags(TextBlock cmt,
-            JavadocTagType tagType)
-    {
+            JavadocTagType tagType) {
         final String[] text = cmt.getText();
         final List<JavadocTag> tags = Lists.newArrayList();
         final List<InvalidJavadocTag> invalidTags = Lists.newArrayList();
@@ -17,8 +16,7 @@
             final String s = text[i];
             final Matcher blockTagMatcher = blockTagPattern.matcher(s);
             if ((tagType == JavadocTagType.ALL || tagType == JavadocTagType.BLOCK)
-                    && blockTagMatcher.find())
-            {
+                    && blockTagMatcher.find()) {
                 final String tagName = blockTagMatcher.group(1);
                 String content = s.substring(blockTagMatcher.end(1));
                 if (content.endsWith("*/")) {
@@ -38,8 +36,7 @@
                 }
             }
             // No block tag, so look for inline validTags
-            else if (tagType == JavadocTagType.ALL || tagType == JavadocTagType.INLINE)
-            {
+            else if (tagType == JavadocTagType.ALL || tagType == JavadocTagType.INLINE) {
                 // Match Javadoc text after comment characters
                 final Pattern commentPattern = Pattern.compile("^\\s*(?:/\\*{2,}|\\*+)\\s*(.*)");
                 final Matcher commentMatcher = commentPattern.matcher(s);

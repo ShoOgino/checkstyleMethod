@@ -1,12 +1,10 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         final int parentType = ast.getParent().getType();
         final DetailAST modifiers = ast.getFirstChild();
 
         if (!(ignoreFinal && modifiers.branchContains(TokenTypes.FINAL)
-                || parentType == TokenTypes.OBJBLOCK))
-        {
+                || parentType == TokenTypes.OBJBLOCK)) {
             final DetailAST variable = ast.findFirstToken(TokenTypes.IDENT);
 
             if (!isVariableMatchesIgnorePattern(variable.getText())) {
@@ -21,8 +19,7 @@
                 final DetailAST variableUsageAst = entry.getKey();
                 final int dist = entry.getValue();
                 if (dist > allowedDistance
-                        && !isInitializationSequence(variableUsageAst, variable.getText()))
-                {
+                        && !isInitializationSequence(variableUsageAst, variable.getText())) {
                     if (ignoreFinal) {
                         log(variable.getLineNo(),
                                 MSG_KEY_EXT, variable.getText(), dist, allowedDistance);

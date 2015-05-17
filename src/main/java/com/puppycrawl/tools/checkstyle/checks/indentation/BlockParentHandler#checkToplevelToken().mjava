@@ -1,13 +1,11 @@
     /**
      * Check the indent of the top level token.
      */
-    protected void checkToplevelToken()
-    {
+    protected void checkToplevelToken() {
         final DetailAST toplevel = getToplevelAST();
 
         if (toplevel == null
-            || getLevel().accept(expandedTabsColumnNo(toplevel)) || hasLabelBefore())
-        {
+            || getLevel().accept(expandedTabsColumnNo(toplevel)) || hasLabelBefore()) {
             return;
         }
         if (!toplevelMustStartLine() && !startsLine(toplevel)) {

@@ -1,6 +1,5 @@
     @Override
-    public void checkIndentation()
-    {
+    public void checkIndentation() {
         final DetailAST type = getMainAst().getFirstChild();
         if (type != null) {
             checkExpressionSubtree(type, getLevel(), false, false);
@@ -11,8 +10,7 @@
         checkLParen(lparen);
 
         if (rparen == null || lparen == null
-            || rparen.getLineNo() == lparen.getLineNo())
-        {
+            || rparen.getLineNo() == lparen.getLineNo()) {
             return;
         }
 

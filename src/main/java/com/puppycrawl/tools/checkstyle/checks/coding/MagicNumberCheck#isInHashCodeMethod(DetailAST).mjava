@@ -9,8 +9,7 @@
      * @return {@code true} if {@code ast} is in the scope of a valid hash
      * code method
      */
-    private boolean isInHashCodeMethod(DetailAST ast)
-    {
+    private boolean isInHashCodeMethod(DetailAST ast) {
         // if not in a code block, can't be in hashCode()
         if (!ScopeUtils.inCodeBlock(ast)) {
             return false;
@@ -19,8 +18,7 @@
         // find the method definition AST
         DetailAST methodDefAST = ast.getParent();
         while (null != methodDefAST
-                && TokenTypes.METHOD_DEF != methodDefAST.getType())
-        {
+                && TokenTypes.METHOD_DEF != methodDefAST.getType()) {
             methodDefAST = methodDefAST.getParent();
         }
 

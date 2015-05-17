@@ -4,8 +4,7 @@
      * If this type is illegal due to Check's options - puts violation on it.
      * @param importAst {@link TokenTypes#IMPORT Import}
      */
-    private void visitImport(DetailAST importAst)
-    {
+    private void visitImport(DetailAST importAst) {
         if (!isStarImport(importAst)) {
             final String canonicalName = getCanonicalName(importAst);
             extendIllegalClassNamesWithShortName(canonicalName);

@@ -5,8 +5,7 @@
      * @param comment the Javadoc comment
      * @return the tags found
      */
-    private List<JavadocTag> getMethodTags(TextBlock comment)
-    {
+    private List<JavadocTag> getMethodTags(TextBlock comment) {
         final String[] lines = comment.getText();
         final List<JavadocTag> tags = Lists.newArrayList();
         int currentLine = comment.getStartLineNo() - 1;
@@ -68,8 +67,7 @@
                         remIndex = lines.length;
                         final String lFin = multilineCont.group(1);
                         if (!lFin.equals(NEXT_TAG)
-                            && !lFin.equals(END_JAVADOC))
-                        {
+                            && !lFin.equals(END_JAVADOC)) {
                             tags.add(new JavadocTag(currentLine, col, p1, p2));
                         }
                     }
@@ -95,8 +93,7 @@
                         remIndex = lines.length;
                         final String lFin = multilineCont.group(1);
                         if (!lFin.equals(NEXT_TAG)
-                            && !lFin.equals(END_JAVADOC))
-                        {
+                            && !lFin.equals(END_JAVADOC)) {
                             tags.add(new JavadocTag(currentLine, col, p1));
                         }
                     }

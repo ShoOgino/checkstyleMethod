@@ -4,8 +4,7 @@
      * @param arrayDeclarator {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR}
      * @return target place before possible redundant whitespace.
      */
-    private static DetailAST getArrayTypeOrIdentifier(DetailAST arrayDeclarator)
-    {
+    private static DetailAST getArrayTypeOrIdentifier(DetailAST arrayDeclarator) {
         DetailAST typeOrIdent = arrayDeclarator;
         if (isArrayInstantiation(arrayDeclarator)) {
             typeOrIdent = arrayDeclarator.getParent().getFirstChild();

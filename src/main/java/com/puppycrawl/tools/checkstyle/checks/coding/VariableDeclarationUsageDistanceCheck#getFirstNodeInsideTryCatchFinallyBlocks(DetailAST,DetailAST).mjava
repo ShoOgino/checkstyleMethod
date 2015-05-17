@@ -10,8 +10,7 @@
      *         of this block, otherwise - null.
      */
     private static DetailAST getFirstNodeInsideTryCatchFinallyBlocks(
-            DetailAST block, DetailAST variable)
-    {
+            DetailAST block, DetailAST variable) {
         DetailAST currentNode = block.getFirstChild();
         final List<DetailAST> variableUsageExpressions =
                 new ArrayList<>();
@@ -26,8 +25,7 @@
 
         // Checking variable usage inside all CATCH blocks.
         while (currentNode != null
-                && currentNode.getType() == TokenTypes.LITERAL_CATCH)
-        {
+                && currentNode.getType() == TokenTypes.LITERAL_CATCH) {
             final DetailAST catchBlock = currentNode.getLastChild();
 
             if (isChild(catchBlock, variable)) {

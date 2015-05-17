@@ -5,12 +5,10 @@
      *
      * @return {@code true} if {@code ast} is in the scope of field declaration
      */
-    private boolean isFieldDeclaration(DetailAST ast)
-    {
+    private boolean isFieldDeclaration(DetailAST ast) {
         DetailAST varDefAST = ast;
         while (varDefAST != null
-                && varDefAST.getType() != TokenTypes.VARIABLE_DEF)
-        {
+                && varDefAST.getType() != TokenTypes.VARIABLE_DEF) {
             varDefAST = varDefAST.getParent();
         }
 

@@ -6,8 +6,7 @@
      *     first nodes as values and line numbers as keys.
      */
     private void checkAnnotationIndentation(DetailAST atNode,
-            NavigableMap<Integer, DetailAST> firstNodesOnLines)
-    {
+            NavigableMap<Integer, DetailAST> firstNodesOnLines) {
         final int currentIndent = atNode.getColumnNo() + indentLevel;
         final int firstNodeIndent = atNode.getColumnNo();
         final Collection<DetailAST> values = firstNodesOnLines.values();
@@ -21,12 +20,10 @@
 
             if (node.getLineNo() < lastAnnotationLine
                     || node.getLineNo() == lastAnnotationLine
-                    && node.getColumnNo() <= lastAnnotattionColumn)
-            {
+                    && node.getColumnNo() <= lastAnnotattionColumn) {
                 final DetailAST parentNode = node.getParent();
                 if (node.getType() == TokenTypes.AT
-                        && parentNode.getParent().getType() == TokenTypes.MODIFIERS)
-                {
+                        && parentNode.getParent().getType() == TokenTypes.MODIFIERS) {
                     logWarningMessage(node, firstNodeIndent);
                 }
                 else {

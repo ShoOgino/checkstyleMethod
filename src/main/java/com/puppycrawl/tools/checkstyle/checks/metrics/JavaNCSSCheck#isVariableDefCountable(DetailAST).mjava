@@ -4,8 +4,7 @@
      * @param ast the AST
      * @return true if the variable definition is countable, false otherwise
      */
-    private boolean isVariableDefCountable(DetailAST ast)
-    {
+    private boolean isVariableDefCountable(DetailAST ast) {
         boolean countable = false;
 
         //count variable defs only if they are direct child to a slist or
@@ -13,8 +12,7 @@
         final int parentType = ast.getParent().getType();
 
         if (TokenTypes.SLIST == parentType
-            || TokenTypes.OBJBLOCK == parentType)
-        {
+            || TokenTypes.OBJBLOCK == parentType) {
             final DetailAST prevSibling = ast.getPreviousSibling();
 
             //is countable if no previous sibling is found or

@@ -3,8 +3,7 @@
      * @param methodDef {@link TokenTypes#METHOD_DEF METHOD_DEF}
      * @return true if method is ignorable.
      */
-    private boolean isIgnorableMethod(DetailAST methodDef)
-    {
+    private boolean isIgnorableMethod(DetailAST methodDef) {
         return shouldIgnoreMethod(methodDef.findFirstToken(TokenTypes.IDENT).getText())
             || ignoreOverriddenMethods
                && (AnnotationUtility.containsAnnotation(methodDef, "Override")

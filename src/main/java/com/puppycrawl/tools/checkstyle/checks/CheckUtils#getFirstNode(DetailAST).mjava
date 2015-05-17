@@ -3,16 +3,14 @@
      * @param node the root of tree for search.
      * @return sub-node with minimal (line, column) pair.
      */
-    public static DetailAST getFirstNode(final DetailAST node)
-    {
+    public static DetailAST getFirstNode(final DetailAST node) {
         DetailAST currentNode = node;
         DetailAST child = node.getFirstChild();
         while (child != null) {
             final DetailAST newNode = getFirstNode(child);
             if (newNode.getLineNo() < currentNode.getLineNo()
                 || newNode.getLineNo() == currentNode.getLineNo()
-                    && newNode.getColumnNo() < currentNode.getColumnNo())
-            {
+                    && newNode.getColumnNo() < currentNode.getColumnNo()) {
                 currentNode = newNode;
             }
             child = child.getNextSibling();

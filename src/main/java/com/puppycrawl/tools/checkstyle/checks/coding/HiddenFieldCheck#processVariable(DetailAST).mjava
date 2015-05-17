@@ -4,12 +4,10 @@
      * Store a field for later comparison with local variables and parameters.
      * @param ast the variable token.
      */
-    private void processVariable(DetailAST ast)
-    {
+    private void processVariable(DetailAST ast) {
         if (!ScopeUtils.inInterfaceOrAnnotationBlock(ast)
             && (ScopeUtils.isLocalVariableDef(ast)
-                || ast.getType() == TokenTypes.PARAMETER_DEF))
-        {
+                || ast.getType() == TokenTypes.PARAMETER_DEF)) {
             // local variable or parameter. Does it shadow a field?
             final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             final String name = nameAST.getText();
@@ -19,8 +17,7 @@
                 && (regexp == null || !getRegexp().matcher(name).find())
                 && !isIgnoredSetterParam(ast, name)
                 && !isIgnoredConstructorParam(ast)
-                && !isIgnoredParamOfAbstractMethod(ast))
-            {
+                && !isIgnoredParamOfAbstractMethod(ast)) {
                 log(nameAST, MSG_KEY, name);
             }
         }

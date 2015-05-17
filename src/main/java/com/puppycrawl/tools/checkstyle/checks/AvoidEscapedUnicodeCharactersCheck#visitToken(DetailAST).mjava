@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
 
         final String literal = ast.getText();
 
@@ -9,8 +8,7 @@
                 || allowEscapesForControlCharacters
                         && isOnlyUnicodeValidChars(literal, sUnicodeControl)
                 || allowNonPrintableEscapes
-                        && isOnlyUnicodeValidChars(literal, sNonPrintableChars)))
-        {
+                        && isOnlyUnicodeValidChars(literal, sNonPrintableChars))) {
             log(ast.getLineNo(), "forbid.escaped.unicode.char");
         }
     }

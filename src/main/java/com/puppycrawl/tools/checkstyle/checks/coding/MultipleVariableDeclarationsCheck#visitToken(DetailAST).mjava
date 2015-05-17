@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         DetailAST nextNode = ast.getNextSibling();
 
         if (nextNode == null) {
@@ -11,14 +10,12 @@
         final boolean isCommaSeparated = nextNode.getType() == TokenTypes.COMMA;
 
         if (nextNode.getType() == TokenTypes.COMMA
-            || nextNode.getType() == TokenTypes.SEMI)
-        {
+            || nextNode.getType() == TokenTypes.SEMI) {
             nextNode = nextNode.getNextSibling();
         }
 
         if (nextNode != null
-            && nextNode.getType() == TokenTypes.VARIABLE_DEF)
-        {
+            && nextNode.getType() == TokenTypes.VARIABLE_DEF) {
             final DetailAST firstNode = CheckUtils.getFirstNode(ast);
             if (isCommaSeparated) {
                 // Check if the multiple variable declarations are in a

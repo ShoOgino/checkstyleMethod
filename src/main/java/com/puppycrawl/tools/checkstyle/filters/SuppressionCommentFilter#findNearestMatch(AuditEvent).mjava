@@ -4,14 +4,12 @@
      * @param event the <code>AuditEvent</code> to match.
      * @return The <code>Tag</code> nearest event.
      */
-    private Tag findNearestMatch(AuditEvent event)
-    {
+    private Tag findNearestMatch(AuditEvent event) {
         Tag result = null;
         for (Tag tag : tags) {
             if (tag.getLine() > event.getLine()
                 || tag.getLine() == event.getLine()
-                    && tag.getColumn() > event.getColumn())
-            {
+                    && tag.getColumn() > event.getColumn()) {
                 break;
             }
             if (tag.isMatch(event)) {

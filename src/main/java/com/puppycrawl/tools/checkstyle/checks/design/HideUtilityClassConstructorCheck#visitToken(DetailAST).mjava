@@ -1,6 +1,5 @@
     @Override
-    public void visitToken(DetailAST ast)
-    {
+    public void visitToken(DetailAST ast) {
         if (isAbstract(ast)) {
             // abstract class could not have private constructor
             return;
@@ -18,8 +17,7 @@
         while (child != null) {
             final int type = child.getType();
             if (type == TokenTypes.METHOD_DEF
-                    || type == TokenTypes.VARIABLE_DEF)
-            {
+                    || type == TokenTypes.VARIABLE_DEF) {
                 hasMethodOrField = true;
                 final DetailAST modifiers =
                     child.findFirstToken(TokenTypes.MODIFIERS);
@@ -40,8 +38,7 @@
                 final DetailAST modifiers =
                     child.findFirstToken(TokenTypes.MODIFIERS);
                 if (!modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)
-                    && !modifiers.branchContains(TokenTypes.LITERAL_PROTECTED))
-                {
+                    && !modifiers.branchContains(TokenTypes.LITERAL_PROTECTED)) {
                     // treat package visible as public
                     // for the purpose of this Check
                     hasPublicCtor = true;
