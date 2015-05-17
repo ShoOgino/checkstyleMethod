@@ -10,7 +10,6 @@
             throws ConversionException {
             this.text = text;
 
-            tagCheckRegexp = filter.checkRegexp;
             //Expand regexp for check and message
             //Does not intern Patterns with Utils.getPattern()
             String format = "";
@@ -21,6 +20,9 @@
                     format = expandFrocomment(
                          text, filter.messageFormat, filter.commentRegexp);
                     tagMessageRegexp = Pattern.compile(format);
+                }
+                else {
+                    tagMessageRegexp = null;
                 }
                 int influence = 0;
                 if (filter.influenceFormat != null) {
