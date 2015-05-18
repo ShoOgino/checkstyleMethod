@@ -1,0 +1,14 @@
+    @Test
+    public void testWrongTokenType() {
+        ThrowsCountCheck obj = new ThrowsCountCheck();
+        DetailAST ast = new DetailAST();
+        ast.initialize(new CommonHiddenStreamToken(TokenTypes.CLASS_DEF, "class"));
+        try {
+            obj.visitToken(ast);
+            fail();
+        }
+        catch (IllegalStateException e) {
+            assertEquals(ast.toString(), e.getMessage());
+        }
+    }
+
