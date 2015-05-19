@@ -1,0 +1,14 @@
+    @Test
+    public void testWrongTokenType() {
+        MutableExceptionCheck obj = new MutableExceptionCheck();
+        DetailAST ast = new DetailAST();
+        ast.initialize(new CommonHiddenStreamToken(TokenTypes.INTERFACE_DEF, "interface"));
+        try {
+            obj.visitToken(ast);
+            fail();
+        }
+        catch (IllegalStateException e) {
+            //expected
+        }
+    }
+
