@@ -8,7 +8,8 @@
                 ScopeUtils.inInterfaceOrAnnotationBlock(variableDef);
 
         if (!inInterfaceOrAnnotationBlock && !hasIgnoreAnnotation(variableDef)) {
-            final DetailAST varNameAST = getVarNameAST(variableDef);
+            final DetailAST varNameAST = variableDef.findFirstToken(TokenTypes.TYPE)
+                .getNextSibling();
             final String varName = varNameAST.getText();
             if (!hasProperAccessModifier(variableDef, varName)) {
                 log(varNameAST.getLineNo(), varNameAST.getColumnNo(),
