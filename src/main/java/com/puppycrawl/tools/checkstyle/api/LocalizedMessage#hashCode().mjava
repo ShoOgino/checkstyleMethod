@@ -1,12 +1,6 @@
     @Override
     public int hashCode() {
-        int result;
-        result = lineNo;
-        result = HASH_MULT * result + colNo;
-        result = HASH_MULT * result + key.hashCode();
-        for (final Object element : args) {
-            result = HASH_MULT * result + element.hashCode();
-        }
-        return result;
+        return Objects.hash(lineNo, colNo, severityLevel, moduleId, key, bundle, sourceClass,
+                customMessage, Arrays.hashCode(args));
     }
 

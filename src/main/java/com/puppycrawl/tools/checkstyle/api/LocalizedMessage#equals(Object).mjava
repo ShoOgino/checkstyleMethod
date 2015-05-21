@@ -3,29 +3,18 @@
         if (this == object) {
             return true;
         }
-        if (!(object instanceof LocalizedMessage)) {
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
-
-        final LocalizedMessage localizedMessage = (LocalizedMessage) object;
-
-        if (colNo != localizedMessage.colNo) {
-            return false;
-        }
-        if (lineNo != localizedMessage.lineNo) {
-            return false;
-        }
-        if (!key.equals(localizedMessage.key)) {
-            return false;
-        }
-
-        if (!Arrays.equals(args, localizedMessage.args)) {
-            return false;
-        }
-        // ignoring bundle for perf reasons.
-
-        // we currently never load the same error from different bundles.
-
-        return true;
+        final LocalizedMessage that = (LocalizedMessage) object;
+        return Objects.equals(lineNo, that.lineNo)
+                && Objects.equals(colNo, that.colNo)
+                && Objects.equals(severityLevel, that.severityLevel)
+                && Objects.equals(moduleId, that.moduleId)
+                && Objects.equals(key, that.key)
+                && Objects.equals(bundle, that.bundle)
+                && Objects.equals(sourceClass, that.sourceClass)
+                && Objects.equals(customMessage, that.customMessage)
+                && Arrays.equals(args, that.args);
     }
 
