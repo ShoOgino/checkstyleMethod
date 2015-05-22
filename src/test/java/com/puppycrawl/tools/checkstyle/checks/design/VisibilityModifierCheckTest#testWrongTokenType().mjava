@@ -1,0 +1,8 @@
+    @Test(expected = IllegalArgumentException.class)
+    public void testWrongTokenType() {
+        VisibilityModifierCheck obj = new VisibilityModifierCheck();
+        DetailAST ast = new DetailAST();
+        ast.initialize(new CommonHiddenStreamToken(TokenTypes.CLASS_DEF, "class"));
+        obj.visitToken(ast);
+    }
+
