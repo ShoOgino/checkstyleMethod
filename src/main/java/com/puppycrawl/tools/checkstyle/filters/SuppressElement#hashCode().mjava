@@ -1,18 +1,5 @@
     @Override
     public int hashCode() {
-        int result = HASH_MULT * filePattern.hashCode();
-        if (checkPattern != null) {
-            result = HASH_MULT * result + checkPattern.hashCode();
-        }
-        if (moduleId != null) {
-            result = HASH_MULT * result + moduleId.hashCode();
-        }
-        if (linesCSV != null) {
-            result = HASH_MULT * result + linesCSV.hashCode();
-        }
-        if (columnsCSV != null) {
-            result = HASH_MULT * result + columnsCSV.hashCode();
-        }
-        return result;
+        return Objects.hash(filePattern, checkPattern, moduleId, linesCSV, columnsCSV);
     }
 
