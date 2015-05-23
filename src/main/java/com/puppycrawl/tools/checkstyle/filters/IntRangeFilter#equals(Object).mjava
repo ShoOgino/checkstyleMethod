@@ -1,10 +1,13 @@
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof IntRangeFilter) {
-            final IntRangeFilter other = (IntRangeFilter) object;
-            return this.lowerBound.equals(other.lowerBound)
-                && this.upperBound.equals(other.upperBound);
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
-        return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final IntRangeFilter that = (IntRangeFilter) o;
+        return Objects.equals(lowerBound, that.lowerBound)
+                && Objects.equals(upperBound, that.upperBound);
     }
 
