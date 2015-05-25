@@ -1,0 +1,16 @@
+    @Test
+    public void testGetAcceptableTokens() {
+        ModifierOrderCheck modifierOrderCheckObj = new ModifierOrderCheck();
+        int[] actual = modifierOrderCheckObj.getAcceptableTokens();
+        int[] expected = new int[] {TokenTypes.MODIFIERS};
+        int[] unexpectedEmptyArray = new int[] {};
+        int[] unexpectedArray = new int[] {
+            TokenTypes.MODIFIERS,
+            TokenTypes.OBJBLOCK,
+        };
+        Assert.assertArrayEquals(expected, actual);
+        Assert.assertNotSame(unexpectedEmptyArray, actual);
+        Assert.assertNotSame(unexpectedArray, actual);
+        Assert.assertNotNull(actual);
+    }
+
