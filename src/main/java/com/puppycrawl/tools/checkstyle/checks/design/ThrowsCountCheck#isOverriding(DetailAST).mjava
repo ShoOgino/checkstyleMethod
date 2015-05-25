@@ -1,0 +1,21 @@
+    /**
+     * Check if a method has annotation @Override.
+     * @param ast throws, which is being checked.
+     * @return true, if a method has annotation @Override.
+     */
+    private static boolean isOverriding(DetailAST ast) {
+        final DetailAST modifiers = ast.getParent().findFirstToken(TokenTypes.MODIFIERS);
+        boolean isOverriding = false;
+        if (modifiers.branchContains(TokenTypes.ANNOTATION)) {
+            DetailAST child = modifiers.getFirstChild();
+            while (child != null) {
+                if (child.getType() == TokenTypes.ANNOTATION
+                        && "Override".equals(getAnnotationName(child))) {
+                    isOverriding = true;
+                }
+                child = child.getNextSibling();
+            }
+        }
+        return isOverriding;
+    }
+

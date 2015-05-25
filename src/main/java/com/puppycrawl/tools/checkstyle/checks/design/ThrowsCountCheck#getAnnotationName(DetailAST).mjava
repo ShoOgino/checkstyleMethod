@@ -1,0 +1,17 @@
+    /**
+     * Gets name of an annotation.
+     * @param annotation to get name of.
+     * @return name of an annotation.
+     */
+    private static String getAnnotationName(DetailAST annotation) {
+        final DetailAST dotAst = annotation.findFirstToken(TokenTypes.DOT);
+        String name;
+        if (dotAst != null) {
+            name = dotAst.findFirstToken(TokenTypes.IDENT).getText();
+        }
+        else {
+            name = annotation.findFirstToken(TokenTypes.IDENT).getText();
+        }
+        return name;
+    }
+
