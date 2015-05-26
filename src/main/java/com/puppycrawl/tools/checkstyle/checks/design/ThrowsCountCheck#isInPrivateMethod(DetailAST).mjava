@@ -1,0 +1,10 @@
+    /**
+     * Checks if method, which throws an exception is private.
+     * @param ast throws, which is being checked.
+     * @return true, if method, which throws an exception is private.
+     */
+    private static boolean isInPrivateMethod(DetailAST ast) {
+        final DetailAST methodModifiers = ast.getParent().findFirstToken(TokenTypes.MODIFIERS);
+        return methodModifiers.findFirstToken(TokenTypes.LITERAL_PRIVATE) != null;
+    }
+

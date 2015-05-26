@@ -3,7 +3,8 @@
      * @param ast throws for check.
      */
     private void visitLiteralThrows(DetailAST ast) {
-        if (!isOverriding(ast)) {
+        if ((!ignorePrivateMethods || !isInPrivateMethod(ast))
+                && !isOverriding(ast)) {
             // Account for all the commas!
             final int count = (ast.getChildCount() + 1) / 2;
             if (count > getMax()) {
