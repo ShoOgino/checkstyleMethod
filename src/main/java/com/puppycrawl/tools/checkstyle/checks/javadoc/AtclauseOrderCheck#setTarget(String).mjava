@@ -4,8 +4,9 @@
      */
     public void setTarget(String target) {
         final List<Integer> customTarget = new ArrayList<>();
-        for (String type : target.split(", ")) {
-            customTarget.add(Utils.getTokenId(type));
+        final String[] sTarget = target.split(",");
+        for (int i = 0; i < sTarget.length; i++) {
+            customTarget.add(Utils.getTokenId(sTarget[i].trim()));
         }
         this.target = customTarget;
     }

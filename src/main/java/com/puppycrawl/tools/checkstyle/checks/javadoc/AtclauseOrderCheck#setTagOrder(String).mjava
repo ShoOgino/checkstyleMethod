@@ -4,7 +4,10 @@
      */
     public void setTagOrder(String order) {
         final List<String> customOrder = new ArrayList<>();
-        Collections.addAll(customOrder, order.split(", "));
-        tagOrder = customOrder;
+        final String[] sOrder = order.split(",");
+        for (int i = 0; i < sOrder.length; i++) {
+            customOrder.add(sOrder[i].trim());
+        }
+        this.tagOrder = customOrder;
     }
 
