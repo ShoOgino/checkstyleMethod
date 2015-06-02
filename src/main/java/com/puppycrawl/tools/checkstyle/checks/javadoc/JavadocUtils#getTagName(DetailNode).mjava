@@ -1,0 +1,18 @@
+    /**
+     * Gets tag name from javadocTagSection.
+     *
+     * @param javadocTagSection to get tag name from.
+     * @return name, of the javadocTagSection's tag.
+     */
+    public static String getTagName(DetailNode javadocTagSection) {
+        String javadocTagName;
+        if (javadocTagSection.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG) {
+            javadocTagName = JavadocUtils.getNextSibling(
+                    JavadocUtils.getFirstChild(javadocTagSection)).getText();
+        }
+        else {
+            javadocTagName = JavadocUtils.getFirstChild(javadocTagSection).getText();
+        }
+        return javadocTagName;
+    }
+

@@ -1,12 +1,11 @@
     /**
      * Checks if comment is single line comment.
      *
+     * @param blockCommentStart the AST tree in which a block comment starts
      * @return true, if comment is single line comment.
      */
-    private boolean isSingleLineJavadoc() {
-        final DetailAST blockCommentStart = getBlockCommentAst();
+    private static boolean isSingleLineJavadoc(DetailAST blockCommentStart) {
         final DetailAST blockCommentEnd = blockCommentStart.getLastChild();
-
         return blockCommentStart.getLineNo() == blockCommentEnd.getLineNo();
     }
 

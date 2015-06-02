@@ -1,12 +1,17 @@
     /**
-     * Checks if comment has javadoc tags.
+     * Checks if comment has javadoc tags which are not ignored. Also works
+     * on custom tags. As block tags can be interpreted only at the beginning of a line,
+     * only the first instance is checked.
      *
      * @param javadocRoot javadoc root node.
-     * @return true, if comment has javadoc tags.
+     * @return true, if comment has javadoc tags which are not ignored.
+     * @see <a href=
+     * http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#blockandinlinetags>
+     * Block and inline tags</a>
      */
     private boolean hasJavadocTags(DetailNode javadocRoot) {
         final DetailNode javadocTagSection =
                 JavadocUtils.findFirstToken(javadocRoot, JavadocTokenTypes.JAVADOC_TAG);
-        return javadocTagSection != null;
+        return javadocTagSection != null && !isTagIgnored(javadocTagSection);
     }
 

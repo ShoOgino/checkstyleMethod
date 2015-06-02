@@ -1,10 +1,24 @@
     /**
-     * Checks if comment has in-line tags tags.
+     * Checks if comment has in-line tags which are not ignored.
      *
      * @param javadocRoot javadoc root node.
-     * @return true, if comment has in-line tags tags.
+     * @return true, if comment has in-line tags which are not ignored.
+     * @see <a href=
+     * http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#javadoctags>
+     * JavadocTags</a>
      */
     private boolean hasJavadocInlineTags(DetailNode javadocRoot) {
-        return JavadocUtils.branchContains(javadocRoot, JavadocTokenTypes.JAVADOC_INLINE_TAG);
+        DetailNode javadocTagSection =
+                JavadocUtils.findFirstToken(javadocRoot, JavadocTokenTypes.JAVADOC_INLINE_TAG);
+        boolean foundTag = false;
+        while (javadocTagSection != null) {
+            if (!isTagIgnored(javadocTagSection)) {
+                foundTag = true;
+                break;
+            }
+            javadocTagSection = JavadocUtils.getNextSibling(
+                    javadocTagSection, JavadocTokenTypes.JAVADOC_INLINE_TAG);
+        }
+        return foundTag;
     }
 

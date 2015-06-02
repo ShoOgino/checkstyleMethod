@@ -1,0 +1,15 @@
+    /**
+     * Gets next sibling of specified node with the specified type.
+     *
+     * @param node DetailNode
+     * @param tokenType javadoc token type
+     * @return next sibling.
+     */
+    public static DetailNode getNextSibling(DetailNode node, int tokenType) {
+        DetailNode nextSibling = JavadocUtils.getNextSibling(node);
+        while (nextSibling != null && nextSibling.getType() != tokenType) {
+            nextSibling = JavadocUtils.getNextSibling(nextSibling);
+        }
+        return nextSibling;
+    }
+

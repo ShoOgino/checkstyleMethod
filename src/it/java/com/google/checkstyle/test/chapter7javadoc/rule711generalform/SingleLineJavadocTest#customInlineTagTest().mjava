@@ -1,0 +1,15 @@
+    @Test(expected = Exception.class)
+    public void customInlineTagTest() throws IOException, Exception{
+        String msg = getCheckMessage(SingleLineJavadocCheck.class, "singleline.javadoc");
+        
+        Configuration checkConfig = builder.getCheckConfig("SingleLineJavadocCheck");
+        String filePath = builder.getFilePath("InputSingleLineJavadocCheckError");
+
+        final String[] expected = {
+            "4: " + msg,
+        };
+
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
