@@ -1,12 +1,11 @@
     @Test
-    public void testDefault()
+    public void testCheckWithDefaultSettings()
         throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(IllegalTokenCheck.class);
         final String[] expected = {
-            "11:9: " + getCheckMessage(MSG_KEY, "switch"),
-            "14:18: " + getCheckMessage(MSG_KEY, "--"),
-            "15:18: " + getCheckMessage(MSG_KEY, "++"),
+            "29:14: " + getCheckMessage(MSG_KEY, "label:"),
+            "31:25: " + getCheckMessage(MSG_KEY, "anotherLabel:"),
         };
         verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
     }
