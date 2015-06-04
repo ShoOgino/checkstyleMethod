@@ -1,7 +1,11 @@
     @Override
     public void finishTree(DetailAST ast) {
         if (!defined) {
-            log(ast.getLineNo(), MSG_KEY);
+            int lineNumber = DEFAULT_LINE_NUMBER;
+            if (ast != null) {
+                lineNumber = ast.getLineNo();
+            }
+            log(lineNumber, MSG_KEY);
         }
     }
 

@@ -1,0 +1,11 @@
+    @Test
+    public void testOnFileWithCommentOnly() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(PackageDeclarationCheck.class);
+
+        String[] expected = {
+            "1: " + getCheckMessage(MSG_KEY),
+        };
+
+        verify(checkConfig, getPath("InputWithCommentOnly.java"), expected);
+    }
+
