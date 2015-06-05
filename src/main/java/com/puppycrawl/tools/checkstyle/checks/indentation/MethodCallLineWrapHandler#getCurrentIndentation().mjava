@@ -1,9 +1,0 @@
-    @Override
-    protected int getCurrentIndentation() {
-        DetailAST curNode = getFirstNode();
-        while (curNode.getType() != TokenTypes.IDENT) {
-            curNode = curNode.getFirstChild();
-        }
-        return curNode.getColumnNo() + getIndentLevel();
-    }
-
