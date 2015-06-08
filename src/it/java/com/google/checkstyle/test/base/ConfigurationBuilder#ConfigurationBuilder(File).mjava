@@ -1,0 +1,8 @@
+	public ConfigurationBuilder(File aROOT)
+			throws CheckstyleException, IOException {
+		ConfigurationGetter.getInstance().updateConfiguration();
+		this.mROOT = aROOT;
+		mConfig = getConfigurationFromXML(mXmlName, System.getProperties());
+		listFiles(mFiles, mROOT, "java");
+	}
+

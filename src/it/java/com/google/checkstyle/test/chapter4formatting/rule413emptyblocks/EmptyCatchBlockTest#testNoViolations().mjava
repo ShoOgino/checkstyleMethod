@@ -1,0 +1,14 @@
+    @Test
+    public void testNoViolations() throws IOException, Exception
+    {
+        
+        final String[] expected = {
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("EmptyCatchBlock");
+        String filePath = builder.getFilePath("EmptyCatchBlockNoViolationsInput");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

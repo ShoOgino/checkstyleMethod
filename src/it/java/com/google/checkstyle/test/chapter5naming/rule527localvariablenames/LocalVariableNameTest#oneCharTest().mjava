@@ -1,0 +1,19 @@
+    @Test
+    public void oneCharTest() throws IOException, Exception {
+
+        final String[] expected = {
+            "15:13: " + getCheckMessage(checkConfig.getMessages(), msgKey, "i", format),
+            "21:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "I_ndex", format),
+            "45:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "i_ndex", format),
+            "49:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "ii_i1", format),
+            "53:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "$index", format),
+            "57:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "in$dex", format),
+            "61:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "index$", format),
+        };
+
+        String filePath = builder.getFilePath("LocalVariableNameInput_OneCharVarName");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

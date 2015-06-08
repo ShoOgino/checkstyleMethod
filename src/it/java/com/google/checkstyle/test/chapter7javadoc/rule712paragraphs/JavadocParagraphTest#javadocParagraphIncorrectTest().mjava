@@ -1,0 +1,31 @@
+    @Test
+    public void javadocParagraphIncorrectTest() throws IOException, Exception {
+
+        String msgBefore = getCheckMessage(JavadocParagraphCheck.class, "javadoc.paragraph.line.before");
+        String msgRed = getCheckMessage(JavadocParagraphCheck.class, "javadoc.paragraph.redundant.paragraph");
+
+        final String[] expected = {
+        	"5: " + msgBefore,
+        	"6: " + msgBefore,
+        	"12: " + msgBefore,
+        	"21: " + msgBefore,
+        	"30: " + msgRed,
+        	"31: " + msgBefore,
+        	"32: " + msgBefore,
+        	"33: " + msgBefore,
+        	"37: " + msgBefore,
+        	"43: " + msgRed,
+        	"48: " + msgBefore,
+        	"49: " + msgBefore,
+        	"59: " + msgRed,
+        	"68: " + msgBefore,
+        	"73: " + msgBefore,
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("JavadocParagraph");
+        String filePath = builder.getFilePath("InputIncorrectJavadocParagraphCheck");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

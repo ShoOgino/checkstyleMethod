@@ -1,0 +1,12 @@
+    @Test
+    public void correctTest() throws IOException, Exception {
+
+        final String[] expected = {};
+
+        Configuration checkConfig = builder.getCheckConfig("Indentation");
+        String filePath = builder.getFilePath("IndentationCorrectInput");
+
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

@@ -1,0 +1,18 @@
+    @Test
+    public void rightCurlyTestAlone() throws Exception {
+        DefaultConfiguration newCheckConfig = createCheckConfig(RightCurlyCheck.class);
+        newCheckConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
+        newCheckConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, CTOR_DEF");
+        
+        String checkMessageNew = getCheckMessage(RightCurlyCheck.class, "line.new", "}");
+        final String[] expected = {
+            "97:6: " + checkMessageNew,
+            "108:6: " + checkMessageNew,
+            "122:6: " + checkMessageNew,
+        };
+
+        String filePath = builder.getFilePath("RightCurlyInput_Other");
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(newCheckConfig, filePath, expected, warnList);
+    }
+

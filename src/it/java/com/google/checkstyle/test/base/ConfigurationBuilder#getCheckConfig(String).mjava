@@ -1,0 +1,15 @@
+	public Configuration getCheckConfig(String aCheckName) {
+		for (Configuration config : mConfig.getChildren()) {
+			if ("TreeWalker".equals(config.getName())) {
+				for (Configuration checkConfig : config.getChildren()) {
+					if (aCheckName.equals(checkConfig.getName())) {
+						return checkConfig;
+					}
+				}
+			} else if (aCheckName.equals(config.getName())) {
+				return config;
+			}
+		}
+		return null;
+	}
+

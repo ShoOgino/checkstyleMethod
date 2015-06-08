@@ -1,0 +1,13 @@
+    @Test
+    public void validTest() throws IOException, Exception {
+        
+        final String[] expected = {
+        };
+        
+        Configuration checkConfig = builder.getCheckConfig("CustomImportOrder");
+        String filePath = builder.getFilePath("CustomImportOrderValidInput");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

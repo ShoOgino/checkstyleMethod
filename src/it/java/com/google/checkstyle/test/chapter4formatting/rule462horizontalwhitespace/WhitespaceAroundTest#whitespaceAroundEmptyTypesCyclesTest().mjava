@@ -1,0 +1,12 @@
+    @Test
+    public void whitespaceAroundEmptyTypesCyclesTest() throws IOException, Exception {
+        
+        final String[] expected = {};
+
+        Configuration checkConfig = builder.getCheckConfig("WhitespaceAround");
+        String filePath = builder.getFilePath("WhitespaceAroundnput_EmptyTypesAndCycles");
+
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

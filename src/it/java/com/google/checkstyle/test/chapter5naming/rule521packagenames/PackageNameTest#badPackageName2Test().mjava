@@ -1,0 +1,17 @@
+    @Test
+    public void badPackageName2Test() throws IOException, Exception {
+        
+        
+        String packagePath = "com.google.checkstyle.test.chapter5naming.rule521_packagenames";
+        String msg = getCheckMessage(checkConfig.getMessages(), msgKey, packagePath, format);
+
+        final String[] expected = {
+            "1:9: " + msg,
+        };
+        
+        String filePath = builder.getFilePath("BadPackageNameInput2");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

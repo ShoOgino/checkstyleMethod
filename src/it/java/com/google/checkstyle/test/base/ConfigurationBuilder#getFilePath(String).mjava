@@ -1,0 +1,12 @@
+	public String getFilePath(String aFileName) {
+		String absoluteRootPath = mROOT.getAbsolutePath();
+		String rootPath = absoluteRootPath.substring(0,
+				absoluteRootPath.lastIndexOf("src"));
+		for (File file : mFiles) {
+			if (file.toString().contains(aFileName)) {
+				return rootPath + file.toString();
+			}
+		}
+		return null;
+	}
+

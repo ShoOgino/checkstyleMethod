@@ -1,0 +1,34 @@
+    protected void verify(Checker aC,
+                          File[] aProcessedFiles,
+                          String aMessageFileName,
+                          String[] aExpected,
+                          Integer[] aWarnsExpected)
+        throws Exception
+    {
+        mStream.flush();
+        final List<File> theFiles = Lists.newArrayList();
+        Collections.addAll(theFiles, aProcessedFiles);
+        final int errs = aC.process(theFiles);
+
+        // process each of the lines
+        final ByteArrayInputStream bais =
+            new ByteArrayInputStream(mBAOS.toByteArray());
+        final LineNumberReader lnr =
+            new LineNumberReader(new InputStreamReader(bais));
+       
+        for (int i = 0; i < aExpected.length; i++) {
+            final String expected = aMessageFileName + ":" + aExpected[i];
+            String actual = lnr.readLine();
+            assertEquals("error message " + i, expected, actual);
+            String parseInt = actual.substring(actual.indexOf(":") + 1);
+            parseInt = parseInt.substring(0, parseInt.indexOf(":"));
+            int lineNumber = Integer.parseInt(parseInt);
+			Integer integer = Arrays.asList(aWarnsExpected).contains(lineNumber) ? lineNumber : 0;
+            assertEquals("error message " + i, (long) integer, (long) lineNumber);
+        }
+
+        assertEquals("unexpected output: " + lnr.readLine(),
+                     aExpected.length, errs);
+        aC.destroy();
+    }
+

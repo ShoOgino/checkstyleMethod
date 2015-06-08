@@ -1,0 +1,15 @@
+    @Test
+    public void testClassDefault() throws IOException, Exception {
+
+        final String[] expected = {
+            "5:31: " + getCheckMessage(checkConfig.getMessages(), msgKey, "t", format),
+            "13:14: " + getCheckMessage(checkConfig.getMessages(), msgKey, "foo", format),
+            "27:24: " + getCheckMessage(checkConfig.getMessages(), msgKey, "$foo", format),
+        };
+
+        String filePath = builder.getFilePath("ClassTypeParameterNameInput");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

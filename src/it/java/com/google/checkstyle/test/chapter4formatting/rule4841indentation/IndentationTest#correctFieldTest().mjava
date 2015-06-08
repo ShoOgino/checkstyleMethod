@@ -1,0 +1,12 @@
+    @Test
+    public void correctFieldTest() throws IOException, Exception {
+
+        final String[] expected = {};
+
+        Configuration checkConfig = builder.getCheckConfig("Indentation");
+        String filePath = builder.getFilePath("IndentationCorrectFieldAndParameterInput");
+
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

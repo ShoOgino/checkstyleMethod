@@ -1,0 +1,21 @@
+  public void foo() { //indent:2 exp:2
+    int i = 0; //indent:4 exp:4
+    for (; i < 9; i++) { //indent:4 exp:4
+      if (veryLongLongLongCondition() //indent:6 exp:6
+              || veryLongLongLongCondition2()) { //indent:14 exp:>=10
+        someFooMethod("longString", "veryLongString", //indent:8 exp:8
+            "superVeryExtraLongString"); //indent:12 exp:12
+        if (veryLongLongLongCondition()) { //indent:8 exp:8
+          while (veryLongLongLongCondition2() //indent:10 exp:10
+                && veryLongLongLongCondition2()) { //indent:16 exp:>=14
+            try { //indent:12 exp:12
+              doSmth(); //indent:14 exp:14
+            } catch (Exception e) { //indent:12 exp:12
+              throw new AssertionError(e); //indent:14 exp:14
+            } //indent:12 exp:12
+          } //indent:10 exp:10
+        } //indent:8 exp:8
+      } //indent:6 exp:6
+    } //indent:4 exp:4
+  } //indent:2 exp:2
+

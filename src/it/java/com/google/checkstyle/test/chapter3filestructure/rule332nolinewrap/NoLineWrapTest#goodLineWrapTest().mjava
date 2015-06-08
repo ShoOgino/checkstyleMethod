@@ -1,0 +1,12 @@
+    @Test
+    public void goodLineWrapTest() throws IOException, Exception {
+        
+        final String[] expected = {};
+        
+        Configuration checkConfig = builder.getCheckConfig("NoLineWrap");
+        String filePath = builder.getFilePath("NoLineWrap_Good");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

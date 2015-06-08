@@ -1,0 +1,20 @@
+    @Test
+    public void customImportTest_3() throws IOException, Exception {
+        
+        final String[] expected = {
+                "4: " + getCheckMessage(clazz, msgLex, "java.awt.Button.ABORT"),
+                "8: " + getCheckMessage(clazz, msgOrder, "STANDARD_JAVA_PACKAGE"),
+                "9: " + getCheckMessage(clazz, msgOrder, "STANDARD_JAVA_PACKAGE"),
+                "10: " + getCheckMessage(clazz, msgOrder, "STANDARD_JAVA_PACKAGE"),
+                "11: " + getCheckMessage(clazz, msgOrder, "STANDARD_JAVA_PACKAGE"),
+                "14: " + getCheckMessage(clazz, msgSeparator, "com.sun.xml.internal.xsom.impl.scd.Iterators"),
+                "16: " + getCheckMessage(clazz, msgOrder, "SPECIAL_IMPORTS"),
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("CustomImportOrder");
+        String filePath = builder.getFilePath("CustomImportOrderInput_3");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

@@ -1,0 +1,17 @@
+    /** Test while loops **/
+    void testWhile()
+    {
+        // Valid
+        while (condition()) {
+            testWhile();
+        }
+
+        // Invalid
+        while(condition()); //warn
+        while (condition()) //warn
+            testWhile();
+        while (condition()) //warn
+            if (condition()) //warn
+                testWhile();
+    }
+

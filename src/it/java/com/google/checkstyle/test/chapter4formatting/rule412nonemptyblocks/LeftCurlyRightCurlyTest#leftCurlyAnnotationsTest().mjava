@@ -1,0 +1,19 @@
+    @Test
+    public void leftCurlyAnnotationsTest() throws IOException, Exception {
+        
+        String checkMessagePrevious = getCheckMessage(LeftCurlyCheck.class, "line.previous", "{");
+        final String[] expected = {
+            "10:1: " + checkMessagePrevious,
+            "14:5: " + checkMessagePrevious,
+            "21:5: " + checkMessagePrevious,
+            "27:5: " + checkMessagePrevious,
+            "50:5: " + checkMessagePrevious,
+        };
+        
+        Configuration checkConfig = builder.getCheckConfig("LeftCurly");
+        String filePath = builder.getFilePath("LeftCurlyInput_Annotations");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

@@ -1,0 +1,13 @@
+    @Test
+    public void javadocParagraphCorrectTest() throws IOException, Exception {
+
+        final String[] expected = {
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("JavadocParagraph");
+        String filePath = builder.getFilePath("InputCorrectJavadocParagraphCheck");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

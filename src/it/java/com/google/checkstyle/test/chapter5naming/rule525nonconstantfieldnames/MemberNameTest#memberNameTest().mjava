@@ -1,0 +1,25 @@
+    @Test
+    public void memberNameTest() throws IOException, Exception {
+        
+        final String[] expected = {
+            "5:16: " + getCheckMessage(checkConfig.getMessages(), msgKey, "mPublic", format),
+            "6:19: " + getCheckMessage(checkConfig.getMessages(), msgKey, "mProtected", format),
+            "7:9: " + getCheckMessage(checkConfig.getMessages(), msgKey, "mPackage", format),
+            "8:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "mPrivate", format),
+            "10:16: " + getCheckMessage(checkConfig.getMessages(), msgKey, "_public", format),
+            "11:19: " + getCheckMessage(checkConfig.getMessages(), msgKey, "prot_ected", format),
+            "12:9: " + getCheckMessage(checkConfig.getMessages(), msgKey, "package_", format),
+            "13:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "priva$te", format),
+            "20:9: " + getCheckMessage(checkConfig.getMessages(), msgKey, "ABC", format),
+            "21:15: " + getCheckMessage(checkConfig.getMessages(), msgKey, "C_D_E", format),
+            "23:16: " + getCheckMessage(checkConfig.getMessages(), msgKey, "$mPublic", format),
+            "24:19: " + getCheckMessage(checkConfig.getMessages(), msgKey, "mPro$tected", format),
+            "25:9: " + getCheckMessage(checkConfig.getMessages(), msgKey, "mPackage$", format),
+        };
+
+        String filePath = builder.getFilePath("MemberNameInput_Basic");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

@@ -1,0 +1,17 @@
+    @Test
+    public void singleLineJavadocTest() throws IOException, Exception {
+        
+        String msg = getCheckMessage(SingleLineJavadocCheck.class, "singleline.javadoc");
+
+        final String[] expected = {
+            "5: " + msg,
+            "13: " + msg,
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("SingleLineJavadoc");
+        String filePath = builder.getFilePath("InputSingleLineJavadocCheck");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

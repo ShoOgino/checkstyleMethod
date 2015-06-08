@@ -1,0 +1,12 @@
+    @Test
+    public void goodTest() throws IOException, Exception {
+        
+        final String[] expected = {};
+        
+        Configuration checkConfig = builder.getCheckConfig("OneTopLevelClass");
+        String filePath = builder.getFilePath("OneTopLevelClassInputGood");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

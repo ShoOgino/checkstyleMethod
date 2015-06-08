@@ -1,0 +1,24 @@
+	public static Color darker(Color color, double fraction) {
+        int red = (int) Math.round(color.getRed() * (1.0 - fraction));
+        int green = (int) Math.round(color.getGreen() * (1.0 - fraction));
+        int blue = (int) Math.round(color.getBlue() * (1.0 - fraction));
+
+        if (red < 0) {
+            red = 0;
+        } else if (red > 255) {
+            red = 255;
+        }
+        if (green < 0) { // DECLARATION OF VARIABLE 'green' SHOULD BE HERE (distance = 2)
+            green = 0;
+        } else if (green > 255) {
+            green = 255;
+        }
+        if (blue < 0) { // DECLARATION OF VARIABLE 'blue' SHOULD BE HERE (distance = 3)
+            // blue = 0;
+        }
+
+        int alpha = color.getAlpha();
+
+        return new Color(red, green, blue, alpha);
+    }
+

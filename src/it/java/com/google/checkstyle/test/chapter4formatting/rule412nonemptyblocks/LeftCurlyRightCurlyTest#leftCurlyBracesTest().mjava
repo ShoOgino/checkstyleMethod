@@ -1,0 +1,21 @@
+    @Test
+    public void leftCurlyBracesTest() throws IOException, Exception {
+        
+        String checkMessage = getCheckMessage(LeftCurlyCheck.class, "line.previous", "{");
+        final String[] expected = {
+            "4:1: " + checkMessage,
+            "7:5: " + checkMessage,
+            "13:5: " + checkMessage,
+            "26:5: " + checkMessage,
+            "43:5: " + checkMessage,
+            "61:5: " + checkMessage,
+            "97:5: " + checkMessage,
+        };
+        
+        Configuration checkConfig = builder.getCheckConfig("LeftCurly");
+        String filePath = builder.getFilePath("LeftCurlyInput_Braces");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
