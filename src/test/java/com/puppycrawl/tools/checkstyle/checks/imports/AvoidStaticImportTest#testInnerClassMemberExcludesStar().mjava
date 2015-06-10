@@ -1,12 +1,11 @@
     @Test
-    public void testBogusMemberExcludes()
+    public void testInnerClassMemberExcludesStar()
         throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(AvoidStaticImportCheck.class);
         checkConfig.addAttribute(
-            "excludes", //should NOT mask anything
-            "java.io.File.listRoots.listRoots, javax.swing.WindowConstants, javax.swing.*,"
-            + "sun.net.ftpclient.FtpClient.*FtpClient, sun.net.ftpclient.FtpClientjunk, java.io.File.listRootsmorejunk");
+            "excludes", //should mask com.puppycrawl.tools.checkstyle.imports.InputAvoidStaticImportNestedClass.InnerClass.one
+            "com.puppycrawl.tools.checkstyle.imports.InputAvoidStaticImportNestedClass.InnerClass.*");
         final String[] expected = {
             "23: " + getCheckMessage(MSG_KEY, "java.io.File.listRoots"),
             "25: " + getCheckMessage(MSG_KEY, "javax.swing.WindowConstants.*"),
@@ -14,7 +13,6 @@
             "27: " + getCheckMessage(MSG_KEY, "java.io.File.createTempFile"),
             "28: " + getCheckMessage(MSG_KEY, "java.io.File.pathSeparator"),
             "29: " + getCheckMessage(MSG_KEY, "com.puppycrawl.tools.checkstyle.imports.InputAvoidStaticImportNestedClass.InnerClass"),
-            "30: " + getCheckMessage(MSG_KEY, "com.puppycrawl.tools.checkstyle.imports.InputAvoidStaticImportNestedClass.InnerClass.one"),
         };
         verify(checkConfig, getPath("imports" + File.separator + "InputAvoidStaticImportCheck.java"), expected);
     }
