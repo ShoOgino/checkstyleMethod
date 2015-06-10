@@ -4,7 +4,7 @@
         final File file = temporaryFolder.newFile("file.output");
         file.setReadable(false, false);
         file.setWritable(false, false);
-        exit.expectSystemExitWithStatus(1);
+        exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() throws IOException {
                 assertEquals("Permission denied : '" + file.getCanonicalPath() + "'."
