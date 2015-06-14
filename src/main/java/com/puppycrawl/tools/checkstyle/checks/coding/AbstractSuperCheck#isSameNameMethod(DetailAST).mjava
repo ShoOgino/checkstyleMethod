@@ -1,0 +1,23 @@
+    /**
+     * is same name of method
+     * @param ast method AST
+     * @return true if method name is the same
+     */
+    private boolean isSameNameMethod(DetailAST ast) {
+
+        AST sibling = ast.getNextSibling();
+        // ignore type parameters
+        if (sibling != null
+            && sibling.getType() == TokenTypes.TYPE_ARGUMENTS) {
+            sibling = sibling.getNextSibling();
+        }
+        if (sibling == null || sibling.getType() != TokenTypes.IDENT) {
+            return true;
+        }
+        final String name = sibling.getText();
+        if (!getMethodName().equals(name)) {
+            return true;
+        }
+        return false;
+    }
+

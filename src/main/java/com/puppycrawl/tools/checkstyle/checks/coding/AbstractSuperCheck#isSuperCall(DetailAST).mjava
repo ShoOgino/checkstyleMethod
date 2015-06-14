@@ -15,27 +15,10 @@
             return false;
         }
 
-        // same name of method
-        AST sibling = ast.getNextSibling();
-        // ignore type parameters
-        if (sibling != null
-            && sibling.getType() == TokenTypes.TYPE_ARGUMENTS) {
-            sibling = sibling.getNextSibling();
-        }
-        if (sibling == null || sibling.getType() != TokenTypes.IDENT) {
+        if (isSameNameMethod(ast)) {
             return false;
         }
-        final String name = sibling.getText();
-        if (!getMethodName().equals(name)) {
-            return false;
-        }
-
-        // 0 parameters?
-        final DetailAST args = parent.getNextSibling();
-        if (args == null || args.getType() != TokenTypes.ELIST) {
-            return false;
-        }
-        if (args.getChildCount() != 0) {
+        if (isZeroParameters(parent)) {
             return false;
         }
 

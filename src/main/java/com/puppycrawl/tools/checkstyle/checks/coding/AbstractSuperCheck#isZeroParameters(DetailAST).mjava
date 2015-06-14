@@ -1,0 +1,17 @@
+    /**
+     * is 0 parameters?
+     * @param parent parent AST
+     * @return tru if no parameters found
+     */
+    private boolean isZeroParameters(DetailAST parent) {
+
+        final DetailAST args = parent.getNextSibling();
+        if (args == null || args.getType() != TokenTypes.ELIST) {
+            return true;
+        }
+        if (args.getChildCount() != 0) {
+            return true;
+        }
+        return false;
+    }
+
