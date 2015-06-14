@@ -1,0 +1,28 @@
+    /**
+     * do validation of interface of annotation
+     * @param ast token AST
+     */
+    private void processInterfaceOrAnnotation(DetailAST ast) {
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
+        DetailAST modifier = modifiers.getFirstChild();
+        while (modifier != null) {
+
+            // javac does not allow final or static in interface methods
+            // order annotation fields hence no need to check that this
+            // is not a method or annotation field
+
+            final int type = modifier.getType();
+            if (type == TokenTypes.LITERAL_PUBLIC
+                || type == TokenTypes.LITERAL_STATIC
+                        && ast.getType() != TokenTypes.METHOD_DEF
+                || type == TokenTypes.ABSTRACT
+                || type == TokenTypes.FINAL) {
+                log(modifier.getLineNo(), modifier.getColumnNo(),
+                        MSG_KEY, modifier.getText());
+                break;
+            }
+
+            modifier = modifier.getNextSibling();
+        }
+    }
+
