@@ -9,27 +9,8 @@
         }
 
         final DetailAST lcurly = details.lcurly;
-        final DetailAST nextToken = details.nextToken;
-        final boolean shouldCheckLastRcurly = details.shouldCheckLastRcurly;
 
-        if (getAbstractOption() == RightCurlyOption.SAME && !hasLineBreakBefore(rcurly)) {
-            log(rcurly, MSG_KEY_LINE_BREAK_BEFORE);
-        }
-
-        if (shouldCheckLastRcurly) {
-            if (rcurly.getLineNo() == nextToken.getLineNo()) {
-                log(rcurly, MSG_KEY_LINE_ALONE, "}");
-            }
-        }
-        else if (getAbstractOption() == RightCurlyOption.SAME
-                && rcurly.getLineNo() != nextToken.getLineNo()) {
-            log(rcurly, MSG_KEY_LINE_SAME, "}");
-        }
-        else if (getAbstractOption() == RightCurlyOption.ALONE
-                && rcurly.getLineNo() == nextToken.getLineNo()
-                && !isEmptyBody(lcurly)) {
-            log(rcurly, MSG_KEY_LINE_ALONE, "}");
-        }
+        validate(details, rcurly, lcurly);
 
         if (!shouldStartLine) {
             return;
