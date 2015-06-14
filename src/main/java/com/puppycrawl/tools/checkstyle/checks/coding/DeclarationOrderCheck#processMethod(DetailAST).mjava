@@ -1,0 +1,17 @@
+    /**
+     * process Method Token
+     * @param ast ,ethod token AST
+     */
+    private void processMethod(DetailAST ast) {
+
+        final ScopeState state = scopeStates.peek();
+        if (state.currentScopeState > STATE_METHOD_DEF) {
+            if (!ignoreMethods) {
+                log(ast, MSG_METHOD);
+            }
+        }
+        else {
+            state.currentScopeState = STATE_METHOD_DEF;
+        }
+    }
+
