@@ -25,14 +25,8 @@
                 }
             }
             else if (getAbstractOption() == LeftCurlyOption.EOL) {
-                if (Utils.whitespaceBefore(brace.getColumnNo(), braceLine)
-                    && prevLineLen + 2 <= maxLineLength) {
-                    log(brace.getLineNo(), brace.getColumnNo(),
-                        MSG_KEY_LINE_PREVIOUS, "{");
-                }
-                if (!hasLineBreakAfter(brace)) {
-                    log(brace.getLineNo(), brace.getColumnNo(), MSG_KEY_LINE_BREAK_AFTER);
-                }
+
+                validateEol(brace, braceLine, prevLineLen);
             }
             else if (getAbstractOption() == LeftCurlyOption.NLOW
                     && startToken.getLineNo() != brace.getLineNo()) {
