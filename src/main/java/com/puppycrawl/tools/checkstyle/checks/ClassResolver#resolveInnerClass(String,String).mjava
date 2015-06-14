@@ -1,0 +1,20 @@
+    /**
+     * see if inner class of this class
+     * @param name name of the search Class to search
+     * @param currentClass class where search in
+     * @return class if found , or null if not resolved
+     * @throws ClassNotFoundException  if an error occurs
+     */
+    private Class<?> resolveInnerClass(String name, String currentClass)
+            throws ClassNotFoundException {
+        Class<?> clazz = null;
+        if (!"".equals(currentClass)) {
+            final String innerClass = (!"".equals(pkg) ? pkg + "." : "")
+                + currentClass + "$" + name;
+            if (isLoadable(innerClass)) {
+                clazz = safeLoad(innerClass);
+            }
+        }
+        return clazz;
+    }
+

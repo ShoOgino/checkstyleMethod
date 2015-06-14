@@ -41,26 +41,17 @@
             }
         }
 
-        //inner class of this class???
-        if (!"".equals(currentClass)) {
-            final String innerClass = (!"".equals(pkg) ? pkg + "." : "")
-                + currentClass + "$" + name;
-            if (isLoadable(innerClass)) {
-                return safeLoad(innerClass);
-            }
+        // see if inner class of this class
+        clazz = resolveInnerClass(name, currentClass);
+        if (clazz != null) {
+            return clazz;
         }
 
-        // try star imports
-        for (String imp : imports) {
-            if (imp.endsWith(".*")) {
-                final String fqn = imp.substring(0, imp.lastIndexOf('.') + 1)
-                    + name;
-                clazz = resolveQualifiedName(fqn);
-                if (clazz != null) {
-                    return clazz;
-                }
-            }
+        clazz = resolveByStarImports(name);
+        if (clazz != null) {
+            return clazz;
         }
+
 
         // Giving up, the type is unknown, so load the class to generate an
         // exception
