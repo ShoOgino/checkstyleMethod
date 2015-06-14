@@ -1,0 +1,20 @@
+    /**
+     * Check if both the Variable are same.
+     * @param ast1 Variable to compare
+     * @param ast2 Variable to compare
+     * @return true if both the variable are same, otherwise false
+     */
+    private static boolean isSameVariables(DetailAST ast1, DetailAST ast2) {
+        final DetailAST classOrMethodOfAst1 =
+            findClassOrMethodInWhichItIsDefined(ast1);
+        final DetailAST classOrMethodOfAst2 =
+            findClassOrMethodInWhichItIsDefined(ast2);
+
+        final String identifierOfAst1 =
+            classOrMethodOfAst1.findFirstToken(TokenTypes.IDENT).getText();
+        final String identifierOfAst2 =
+            classOrMethodOfAst2.findFirstToken(TokenTypes.IDENT).getText();
+
+        return identifierOfAst1.equals(identifierOfAst2);
+    }
+

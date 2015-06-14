@@ -6,8 +6,9 @@
         final Iterator<Map<String, DetailAST>> iterator = scopeStack.descendingIterator();
         while (iterator.hasNext()) {
             final Map<String, DetailAST> state = iterator.next();
-            final Object obj = state.remove(ast.getText());
-            if (obj != null) {
+            final DetailAST storedVariable = state.get(ast.getText());
+            if (storedVariable != null && isSameVariables(storedVariable, ast)) {
+                state.remove(ast.getText());
                 break;
             }
         }

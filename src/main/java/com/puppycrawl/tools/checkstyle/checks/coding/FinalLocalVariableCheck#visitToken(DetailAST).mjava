@@ -19,8 +19,9 @@
                 }
             case TokenTypes.VARIABLE_DEF:
                 if (ast.getParent().getType() != TokenTypes.OBJBLOCK
-                    && shouldCheckEnhancedForLoopVariable(ast)
-                    && isVariableInForInit(ast)) {
+                        && shouldCheckEnhancedForLoopVariable(ast)
+                        && isVariableInForInit(ast)
+                        && !ast.branchContains(TokenTypes.FINAL)) {
                     insertVariable(ast);
                 }
                 break;
