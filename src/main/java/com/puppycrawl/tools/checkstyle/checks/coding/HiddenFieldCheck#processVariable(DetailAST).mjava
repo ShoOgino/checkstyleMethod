@@ -12,9 +12,8 @@
             final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             final String name = nameAST.getText();
 
-            if ((currentFrame.containsStaticField(name)
-                || !inStatic(ast) && currentFrame.containsInstanceField(name))
-                && (regexp == null || !getRegexp().matcher(name).find())
+            if (isStaticOrOnstanceField(ast, name)
+                && !isMatchingRegexp(name)
                 && !isIgnoredSetterParam(ast, name)
                 && !isIgnoredConstructorParam(ast)
                 && !isIgnoredParamOfAbstractMethod(ast)) {

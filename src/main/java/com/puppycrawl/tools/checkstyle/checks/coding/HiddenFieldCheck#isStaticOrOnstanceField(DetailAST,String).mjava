@@ -1,0 +1,11 @@
+    /**
+     * check for static or instance field.
+     * @param ast token
+     * @param name identifier of token
+     * @return true if static or instance field
+     */
+    private boolean isStaticOrOnstanceField(DetailAST ast, String name) {
+        return currentFrame.containsStaticField(name)
+            || !inStatic(ast) && currentFrame.containsInstanceField(name);
+    }
+
