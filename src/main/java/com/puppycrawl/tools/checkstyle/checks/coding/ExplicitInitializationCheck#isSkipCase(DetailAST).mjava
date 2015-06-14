@@ -1,0 +1,28 @@
+    /**
+     * chekc for cases that should be skipped: no assignment, local variable, final variables
+     * @param ast Variable def AST
+     * @return true is that is a case that need to be skipped.
+     */
+    private boolean isSkipCase(DetailAST ast) {
+        // do not check local variables and
+        // fields declared in interface/annotations
+        if (ScopeUtils.isLocalVariableDef(ast)
+            || ScopeUtils.inInterfaceOrAnnotationBlock(ast)) {
+            return true;
+        }
+
+        final DetailAST assign = ast.findFirstToken(TokenTypes.ASSIGN);
+        if (assign == null) {
+            // no assign - no check
+            return true;
+        }
+
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
+        if (modifiers != null
+            && modifiers.branchContains(TokenTypes.FINAL)) {
+            // do not check final variables
+            return true;
+        }
+        return false;
+    }
+
