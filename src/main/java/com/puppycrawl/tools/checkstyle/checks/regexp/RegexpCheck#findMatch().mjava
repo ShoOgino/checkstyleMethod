@@ -1,35 +1,17 @@
     /** recursive method that finds the matches. */
     private void findMatch() {
         int startLine;
-        int startColumn;
-        int endLine;
-        int endColumn;
         boolean foundMatch;
         boolean ignore = false;
 
         foundMatch = matcher.find();
-        if (!foundMatch && !illegalPattern && matchCount == 0) {
-            logMessage(0);
-        }
-        else if (foundMatch) {
+        if (foundMatch) {
             final FileText text = getFileContents().getText();
             final LineColumn start = text.lineColumn(matcher.start());
-            final LineColumn end;
-            if (matcher.end() == 0) {
-                end = text.lineColumn(0);
-            }
-            else {
-                end = text.lineColumn(matcher.end() - 1);
-            }
             startLine = start.getLine();
-            startColumn = start.getColumn();
-            endLine = end.getLine();
-            endColumn = end.getColumn();
-            if (ignoreComments) {
-                final FileContents theFileContents = getFileContents();
-                ignore = theFileContents.hasIntersectionWithComment(startLine,
-                    startColumn, endLine, endColumn);
-            }
+
+            ignore = isIgnore(startLine, text, start);
+
             if (!ignore) {
                 matchCount++;
                 if (illegalPattern || checkForDuplicates
@@ -38,10 +20,13 @@
                     logMessage(startLine);
                 }
             }
-            if (errorCount < errorLimit
-                    && (ignore || illegalPattern || checkForDuplicates)) {
+            if (canContinueValidation(ignore)) {
                 findMatch();
             }
         }
+        else if (!illegalPattern && matchCount == 0) {
+            logMessage(0);
+        }
+
     }
 

@@ -1,0 +1,30 @@
+    /**
+     * detect ignore situation
+     * @param startLine position of line
+     * @param text file text
+     * @param start line colun
+     * @return true is that need to be ignored
+     */
+    private boolean isIgnore(int startLine, FileText text, LineColumn start) {
+        int startColumn;
+        boolean ignore = false;
+        int endLine;
+        int endColumn;
+        final LineColumn end;
+        if (matcher.end() == 0) {
+            end = text.lineColumn(0);
+        }
+        else {
+            end = text.lineColumn(matcher.end() - 1);
+        }
+        startColumn = start.getColumn();
+        endLine = end.getLine();
+        endColumn = end.getColumn();
+        if (ignoreComments) {
+            final FileContents theFileContents = getFileContents();
+            ignore = theFileContents.hasIntersectionWithComment(startLine,
+                startColumn, endLine, endColumn);
+        }
+        return ignore;
+    }
+
