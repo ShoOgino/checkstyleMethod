@@ -1,0 +1,29 @@
+    /**
+     * check import statements
+     * @param className name of the class
+     * @return value of illegal instatiated type
+     */
+    private String checkImportStatements(String className) {
+        // import statements
+        for (FullIdent importLineText : imports) {
+            final String importArg = importLineText.getText();
+            if (importArg.endsWith(".*")) {
+                final String fqClass =
+                    importArg.substring(0, importArg.length() - 1)
+                    + className;
+                // assume that illegalInsts only contain existing classes
+                // or else we might create a false alarm here
+                if (illegalClasses.contains(fqClass)) {
+                    return fqClass;
+                }
+            }
+            else {
+                if (Utils.baseClassname(importArg).equals(className)
+                    && illegalClasses.contains(importArg)) {
+                    return importArg;
+                }
+            }
+        }
+        return null;
+    }
+

@@ -1,0 +1,28 @@
+    /**
+     * check that type is of the sme package
+     * @param className class name
+     * @param clsNameLen lengh of class name
+     * @param pkgNameLen package name
+     * @param illegal illegal value
+     * @param illegalLen illegal value length
+     * @return true if type of the same package
+     */
+    private boolean isSamePackage(String className, int clsNameLen, int pkgNameLen,
+                                  String illegal, int illegalLen) {
+        // class from same package
+
+        // the toplevel package (pkgName == null) is covered by the
+        // "illegalInsts.contains(className)" check above
+
+        // the test is the "no garbage" version of
+        // illegal.equals(pkgName + "." + className)
+        if (pkgName != null
+            && clsNameLen == illegalLen - pkgNameLen - 1
+            && illegal.charAt(pkgNameLen) == '.'
+            && illegal.endsWith(className)
+            && illegal.startsWith(pkgName)) {
+            return true;
+        }
+        return false;
+    }
+

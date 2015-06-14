@@ -13,73 +13,17 @@
         final int pkgNameLen = pkgName == null ? 0 : pkgName.length();
 
         for (String illegal : illegalClasses) {
+
             final int illegalLen = illegal.length();
-
-            // class from java.lang
-            if (illegalLen - JAVA_LANG.length() == clsNameLen
-                && illegal.endsWith(className)
-                && illegal.startsWith(JAVA_LANG)) {
-                // java.lang needs no import, but a class without import might
-                // also come from the same file or be in the same package.
-                // E.g. if a class defines an inner class "Boolean",
-                // the expression "new Boolean()" refers to that class,
-                // not to java.lang.Boolean
-
-                final boolean isSameFile = classNames.contains(className);
-
-                boolean isSamePackage = false;
-                try {
-                    final ClassLoader classLoader = getClassLoader();
-                    if (classLoader != null) {
-                        final String fqName = pkgName + "." + className;
-                        classLoader.loadClass(fqName);
-                        // no ClassNotFoundException, fqName is a known class
-                        isSamePackage = true;
-                    }
-                }
-                catch (final ClassNotFoundException ex) {
-                    // not a class from the same package
-                    isSamePackage = false;
-                }
-
-                if (!(isSameFile || isSamePackage)) {
-                    return illegal;
-                }
-            }
-
-            // class from same package
-
-            // the toplevel package (pkgName == null) is covered by the
-            // "illegalInsts.contains(className)" check above
-
-            // the test is the "no garbage" version of
-            // illegal.equals(pkgName + "." + className)
-            if (pkgName != null
-                && clsNameLen == illegalLen - pkgNameLen - 1
-                && illegal.charAt(pkgNameLen) == '.'
-                && illegal.endsWith(className)
-                && illegal.startsWith(pkgName)) {
+            if (isStandardClass(className, clsNameLen, illegal, illegalLen)) {
                 return illegal;
             }
-            // import statements
-            for (FullIdent importLineText : imports) {
-                final String importArg = importLineText.getText();
-                if (importArg.endsWith(".*")) {
-                    final String fqClass =
-                        importArg.substring(0, importArg.length() - 1)
-                        + className;
-                    // assume that illegalInsts only contain existing classes
-                    // or else we might create a false alarm here
-                    if (illegalClasses.contains(fqClass)) {
-                        return fqClass;
-                    }
-                }
-                else {
-                    if (Utils.baseClassname(importArg).equals(className)
-                        && illegalClasses.contains(importArg)) {
-                        return importArg;
-                    }
-                }
+            if (isSamePackage(className, clsNameLen, pkgNameLen, illegal, illegalLen)) {
+                return illegal;
+            }
+            final String importArg = checkImportStatements(className);
+            if (importArg != null) {
+                return importArg;
             }
         }
         return null;

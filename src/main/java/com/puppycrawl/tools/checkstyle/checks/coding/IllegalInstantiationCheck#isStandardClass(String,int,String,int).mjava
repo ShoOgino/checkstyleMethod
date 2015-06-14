@@ -1,0 +1,30 @@
+    /**
+     * is Standard Class
+     * @param className class name
+     * @param clsNameLen class name length
+     * @param illegal illegal value
+     * @param illegalLen illegal value length
+     * @return true if type is standard
+     */
+    private boolean isStandardClass(String className, int clsNameLen, String illegal,
+                                    int illegalLen) {
+        // class from java.lang
+        if (illegalLen - JAVA_LANG.length() == clsNameLen
+            && illegal.endsWith(className)
+            && illegal.startsWith(JAVA_LANG)) {
+            // java.lang needs no import, but a class without import might
+            // also come from the same file or be in the same package.
+            // E.g. if a class defines an inner class "Boolean",
+            // the expression "new Boolean()" refers to that class,
+            // not to java.lang.Boolean
+
+            final boolean isSameFile = classNames.contains(className);
+            final boolean isSamePackage = isSamePackage(className);
+
+            if (!(isSameFile || isSamePackage)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
