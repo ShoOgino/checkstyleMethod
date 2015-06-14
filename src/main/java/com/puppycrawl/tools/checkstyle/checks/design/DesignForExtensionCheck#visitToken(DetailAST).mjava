@@ -4,13 +4,7 @@
         if (ScopeUtils.inInterfaceOrAnnotationBlock(ast)) {
             return;
         }
-
-        // method is ok if it is private or abstract or final
-        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
-        if (modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)
-            || modifiers.branchContains(TokenTypes.ABSTRACT)
-            || modifiers.branchContains(TokenTypes.FINAL)
-            || modifiers.branchContains(TokenTypes.LITERAL_STATIC)) {
+        if (isPrivateOrFinalOrAbstract(ast)) {
             return;
         }
 
@@ -38,35 +32,10 @@
             return;
         }
 
-        // check if subclassing is prevented by having only private ctors
-        final DetailAST objBlock = classDef.findFirstToken(TokenTypes.OBJBLOCK);
-
-        boolean hasDefaultConstructor = true;
-        boolean hasExplNonPrivateCtor = false;
-
-        DetailAST candidate = objBlock.getFirstChild();
-
-        while (candidate != null) {
-            if (candidate.getType() == TokenTypes.CTOR_DEF) {
-                hasDefaultConstructor = false;
-
-                final DetailAST ctorMods =
-                    candidate.findFirstToken(TokenTypes.MODIFIERS);
-                if (!ctorMods.branchContains(TokenTypes.LITERAL_PRIVATE)) {
-                    hasExplNonPrivateCtor = true;
-                    break;
-                }
-            }
-            candidate = candidate.getNextSibling();
-        }
-
-        if (hasDefaultConstructor || hasExplNonPrivateCtor) {
+        if (hasDefaultOrExplNonPrivateCtor(classDef)) {
             final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
             log(ast.getLineNo(), ast.getColumnNo(),
                 MSG_KEY, name);
         }
-
-
-
     }
 
