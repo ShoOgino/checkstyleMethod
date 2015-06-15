@@ -1,0 +1,27 @@
+    /**
+     * process Single-generic
+     * @param ast token
+     * @param line line content
+     * @param after position after
+     */
+    private void processSingleGeneric(DetailAST ast, String line, int after) {
+        final char charAfter = line.charAt(after);
+
+        // Need to handle a number of cases. First is:
+        //    Collections.<Object>emptySet();
+        //                        ^
+        //                        +--- whitespace not allowed
+        if (isGenericBeforeMethod(ast)) {
+            if (Character.isWhitespace(charAfter)) {
+                log(ast.getLineNo(), after, WS_FOLLOWED, ">");
+            }
+        }
+        else if (!Character.isWhitespace(charAfter)
+            && '(' != charAfter && ')' != charAfter
+            && ',' != charAfter && '[' != charAfter
+            && '.' != charAfter && ':' != charAfter
+            && !isAfterMethodReference(ast)) {
+            log(ast.getLineNo(), after, WS_ILLEGAL_FOLLOW, ">");
+        }
+    }
+

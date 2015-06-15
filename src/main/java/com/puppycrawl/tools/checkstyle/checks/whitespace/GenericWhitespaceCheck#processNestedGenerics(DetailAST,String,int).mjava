@@ -1,0 +1,30 @@
+    /**
+     * process Nested generics
+     * @param ast token
+     * @param line line content
+     * @param after position after
+     */
+    private void processNestedGenerics(DetailAST ast, String line, int after) {
+        // In a nested Generic type, so can only be a '>' or ',' or '&'
+
+        // In case of several extends definitions:
+        //
+        //   class IntEnumValueType<E extends Enum<E> & IntEnum>
+        //                                          ^
+        //   should be whitespace if followed by & -+
+        //
+        final int indexOfAmp = line.indexOf('&', after);
+        if (indexOfAmp != -1
+            && whitespaceBetween(after, indexOfAmp, line)) {
+            if (indexOfAmp - after == 0) {
+                log(ast.getLineNo(), after, WS_NOT_PRECEDED, "&");
+            }
+            else if (indexOfAmp - after != 1) {
+                log(ast.getLineNo(), after, WS_FOLLOWED, ">");
+            }
+        }
+        else if (line.charAt(after) == ' ') {
+            log(ast.getLineNo(), after, WS_FOLLOWED, ">");
+        }
+    }
+
