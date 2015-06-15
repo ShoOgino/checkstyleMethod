@@ -1,0 +1,43 @@
+    /**
+     * is ast is not a target of Check
+     * @param ast ast
+     * @param currentType type of ast
+     * @return true is ok to skip validation
+     */
+    private boolean isNotRelevantSituation(DetailAST ast, int currentType) {
+        final int parentType = ast.getParent().getType();
+
+        // Check for CURLY in array initializer
+        if (isArrayInitialization(currentType, parentType)) {
+            return true;
+        }
+
+        // Check for import pkg.name.*;
+        if (currentType == TokenTypes.STAR
+            && parentType == TokenTypes.DOT) {
+            return true;
+        }
+
+        // Check for an SLIST that has a parent CASE_GROUP. It is not a '{'.
+        if (currentType == TokenTypes.SLIST
+            && parentType == TokenTypes.CASE_GROUP) {
+            return true;
+        }
+
+        if (isColonOfCaseOrDefault(currentType, parentType)) {
+            return true;
+        }
+
+        // Checks if empty methods, ctors or loops are allowed.
+        if (isEmptyBlock(ast, parentType)) {
+            return true;
+        }
+
+        // Checks if empty classes, interfaces or enums are allowed
+        if (allowEmptyTypes && isEmptyType(ast, parentType)) {
+            return true;
+        }
+
+        return false;
+    }
+

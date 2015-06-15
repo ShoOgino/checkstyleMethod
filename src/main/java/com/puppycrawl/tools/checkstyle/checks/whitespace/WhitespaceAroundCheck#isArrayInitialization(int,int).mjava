@@ -1,0 +1,13 @@
+    /**
+     * is array initialization
+     * @param currentType curret token
+     * @param parentType parent token
+     * @return true is current token inside array initialization
+     */
+    private boolean isArrayInitialization(int currentType, int parentType) {
+        return (currentType == TokenTypes.RCURLY
+                || currentType == TokenTypes.LCURLY)
+            && (parentType == TokenTypes.ARRAY_INIT
+                || parentType == TokenTypes.ANNOTATION_ARRAY_INIT);
+    }
+

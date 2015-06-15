@@ -1,0 +1,14 @@
+    /**
+     * Check for "})" or "};" or "},". Happens with anon-inners
+     * @param currentType token
+     * @param nextChar next symbol
+     * @return true is that is end of anon inner class
+     */
+    private boolean isAnnonimousInnerClassEnd(int currentType, char nextChar) {
+        return currentType == TokenTypes.RCURLY
+            && (nextChar == ')'
+                || nextChar == ';'
+                || nextChar == ','
+                || nextChar == '.');
+    }
+
