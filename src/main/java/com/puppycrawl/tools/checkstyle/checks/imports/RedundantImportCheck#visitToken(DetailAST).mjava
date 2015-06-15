@@ -10,7 +10,9 @@
                 log(ast.getLineNo(), ast.getColumnNo(), MSG_LANG,
                     imp.getText());
             }
-            else if (fromPackage(imp.getText(), pkgName)) {
+            // imports from unnamed package are not allowed,
+            // so we are checking SAME rule only for named packages
+            else if (pkgName != null && fromPackage(imp.getText(), pkgName)) {
                 log(ast.getLineNo(), ast.getColumnNo(), MSG_SAME,
                     imp.getText());
             }
