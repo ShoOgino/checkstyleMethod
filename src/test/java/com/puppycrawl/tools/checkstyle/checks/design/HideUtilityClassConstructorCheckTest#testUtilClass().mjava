@@ -1,11 +1,10 @@
-    /** only static methods and no constructor - default ctor is visible */
     @Test
     public void testUtilClass() throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(HideUtilityClassConstructorCheck.class);
         final String[] expected = {
-            "11:1: " + getCheckMessage(MSG_KEY),
+            "3:1: " + getCheckMessage(MSG_KEY),
         };
-        verify(checkConfig, getPath("InputArrayTypeStyle.java"), expected);
+        verify(checkConfig, getPath("design" + File.separator + "UtilityClassConstructor.java"), expected);
     }
 
