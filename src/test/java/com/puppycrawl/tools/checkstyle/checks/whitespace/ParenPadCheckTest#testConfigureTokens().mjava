@@ -1,0 +1,15 @@
+    @Test
+    public void testConfigureTokens() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(ParenPadCheck.class);
+        checkConfig.addAttribute("tokens", "METHOD_CALL");
+        final String[] expected = {
+            "90:38: " + getCheckMessage(WS_PRECEDED, ")"),
+            "112:17: " + getCheckMessage(WS_FOLLOWED, "("),
+            "113:23: " + getCheckMessage(WS_FOLLOWED, "("),
+            "115:53: " + getCheckMessage(WS_PRECEDED, ")"),
+            "115:55: " + getCheckMessage(WS_PRECEDED, ")"),
+        };
+        verify(checkConfig, getPath("whitespace/InputParenPad.java"), expected);
+    }
+

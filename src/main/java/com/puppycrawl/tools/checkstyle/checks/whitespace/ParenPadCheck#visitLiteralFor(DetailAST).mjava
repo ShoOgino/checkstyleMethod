@@ -1,0 +1,15 @@
+    /**
+     * Checks parens in {@link TokenTypes#FOR_LITERAL}.
+     * @param ast the token to check.
+     */
+    private void visitLiteralFor(DetailAST ast) {
+        DetailAST parenAst = ast.findFirstToken(TokenTypes.LPAREN);
+        if (!isPreceedsEmptyForInit(parenAst)) {
+            processLeft(parenAst);
+        }
+        parenAst = ast.findFirstToken(TokenTypes.RPAREN);
+        if (!isFollowsEmptyForIterator(parenAst)) {
+            processRight(parenAst);
+        }
+    }
+
