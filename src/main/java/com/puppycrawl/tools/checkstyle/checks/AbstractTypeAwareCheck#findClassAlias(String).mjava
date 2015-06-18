@@ -3,11 +3,11 @@
      * @param name given name
      * @return ClassInfo for alias if it exists, null otherwise
      */
-    protected final ClassInfo findClassAlias(final String name) {
-        ClassInfo ci = null;
-        final Iterator<Map<String, ClassInfo>> iterator = typeParams.descendingIterator();
+    protected final AbstractClassInfo findClassAlias(final String name) {
+        AbstractClassInfo ci = null;
+        final Iterator<Map<String, AbstractClassInfo>> iterator = typeParams.descendingIterator();
         while (iterator.hasNext()) {
-            final Map<String, ClassInfo> paramMap = iterator.next();
+            final Map<String, AbstractClassInfo> paramMap = iterator.next();
             ci = paramMap.get(name);
             if (ci != null) {
                 break;

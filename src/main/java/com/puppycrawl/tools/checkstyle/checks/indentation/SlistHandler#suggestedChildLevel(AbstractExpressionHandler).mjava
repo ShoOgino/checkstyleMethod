@@ -1,0 +1,21 @@
+    @Override
+    public IndentLevel suggestedChildLevel(AbstractExpressionHandler child) {
+        // this is:
+        //  switch (var) {
+        //     case 3: {
+        //        break;
+        //     }
+        //  }
+        //  ... the case SLIST is followed by a user-created SLIST and
+        //  preceded by a switch
+
+        // if our parent is a block handler we want to be transparent
+        if (getParent() instanceof BlockParentHandler
+                && !(getParent() instanceof SlistHandler)
+            || getParent() instanceof CaseHandler
+                && child instanceof SlistHandler) {
+            return getParent().suggestedChildLevel(child);
+        }
+        return super.suggestedChildLevel(child);
+    }
+

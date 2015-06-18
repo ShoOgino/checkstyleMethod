@@ -1,0 +1,17 @@
+    @Override
+    public IndentLevel suggestedChildLevel(AbstractExpressionHandler child) {
+        // for whatever reason a method that crosses lines, like asList
+        // here:
+        //            System.out.println("methods are: " + Arrays.asList(
+        //                new String[] {"method"}).toString());
+        // will not have the right line num, so just get the child name
+
+        final DetailAST first = getMainAst().getFirstChild();
+        int indentLevel = getLineStart(first);
+        if (!areOnSameLine(child.getMainAst().getFirstChild(),
+                           getMainAst().getFirstChild())) {
+            indentLevel += getBasicOffset();
+        }
+        return new IndentLevel(indentLevel);
+    }
+

@@ -1,0 +1,23 @@
+    /**
+     * Create new instance of handler for METHOD_CALL.
+     *
+     * @param indentCheck   the indentation check
+     * @param ast           ast to handle
+     * @param parent        the handler parent of this AST
+     *
+     * @return new instance.
+     */
+    AbstractExpressionHandler createMethodCallHandler(IndentationCheck indentCheck,
+        DetailAST ast, AbstractExpressionHandler parent) {
+        AbstractExpressionHandler theParent = parent;
+        DetailAST astNode = ast.getFirstChild();
+        while (astNode != null && astNode.getType() == TokenTypes.DOT) {
+            astNode = astNode.getFirstChild();
+        }
+        if (astNode != null && isHandledType(astNode.getType())) {
+            theParent = getHandler(indentCheck, astNode, theParent);
+            createdHandlers.put(astNode, theParent);
+        }
+        return new MethodCallHandler(indentCheck, ast, theParent);
+    }
+
