@@ -1,0 +1,15 @@
+    @Test
+    public void testNoStackOverflowError() throws Exception {
+        // http://madbean.com/2004/mb2004-20/
+        checkConfig.addAttribute("format", "(x|y)*");
+
+        final String[] expected = {
+            "0: " + getCheckMessage(STACKOVERFLOW),
+        };
+
+        final File file = temporaryFolder.newFile();
+        Files.write(makeLargeXYString(), file, Charsets.UTF_8);
+
+        verify(checkConfig, file.getPath(), expected);
+    }
+
