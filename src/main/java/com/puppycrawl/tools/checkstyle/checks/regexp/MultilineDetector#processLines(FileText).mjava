@@ -5,8 +5,14 @@
     public void processLines(FileText text) {
         this.text = text;
         resetState();
-        matcher = options.getPattern().matcher(text.getFullText());
-        findMatch();
-        finish();
+
+        if (!Strings.isNullOrEmpty(options.getFormat())) {
+            matcher = options.getPattern().matcher(text.getFullText());
+            findMatch();
+            finish();
+        }
+        else {
+            options.getReporter().log(0, EMPTY);
+        }
     }
 
