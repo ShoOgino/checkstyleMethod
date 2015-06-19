@@ -5,10 +5,16 @@
                 leaveForIter(ast.getParent());
                 break;
             case TokenTypes.FOR_EACH_CLAUSE:
-                leaveForEach(ast);
+                final DetailAST paramDef =
+                    ast.findFirstToken(TokenTypes.VARIABLE_DEF);
+                if (shouldCheckEnhancedForLoopVariable(paramDef)) {
+                    leaveForEach(paramDef);
+                }
                 break;
             case TokenTypes.LITERAL_FOR:
-                leaveForDef(ast);
+                if (!getCurrentVariables().isEmpty()) {
+                    leaveForDef(ast);
+                }
                 break;
             case TokenTypes.OBJBLOCK:
                 exitBlock();
