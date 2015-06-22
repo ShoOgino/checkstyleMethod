@@ -1,10 +1,10 @@
     @Test
     public void testMax() throws Exception {
         DefaultConfiguration checkConfig = createCheckConfig(ThrowsCountCheck.class);
-        checkConfig.addAttribute("max", "2");
+        checkConfig.addAttribute("max", "5");
 
         String[] expected = {
-            "22:20: " + getCheckMessage(MSG_KEY, 3, 2),
+            "27:20: " + getCheckMessage(MSG_KEY, 6, 5),
         };
 
         verify(checkConfig, getPath("design" + File.separator + "InputThrowsCount.java"), expected);

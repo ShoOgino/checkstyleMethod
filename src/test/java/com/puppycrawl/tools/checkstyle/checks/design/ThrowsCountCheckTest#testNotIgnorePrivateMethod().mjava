@@ -3,11 +3,11 @@
         DefaultConfiguration checkConfig = createCheckConfig(ThrowsCountCheck.class);
         checkConfig.addAttribute("ignorePrivateMethods", "false");
         String[] expected = {
-            "14:20: " + getCheckMessage(MSG_KEY, 2, 1),
-            "18:20: " + getCheckMessage(MSG_KEY, 2, 1),
-            "22:20: " + getCheckMessage(MSG_KEY, 3, 1),
-            "29:28: " + getCheckMessage(MSG_KEY, 3, 1),
-            "48:43: " + getCheckMessage(MSG_KEY, 2, 1),
+            "17:20: " + getCheckMessage(MSG_KEY, 5, 4),
+            "22:20: " + getCheckMessage(MSG_KEY, 5, 4),
+            "27:20: " + getCheckMessage(MSG_KEY, 6, 4),
+            "35:28: " + getCheckMessage(MSG_KEY, 5, 4),
+            "55:43: " + getCheckMessage(MSG_KEY, 5, 4),
         };
         verify(checkConfig, getPath("design" + File.separator + "InputThrowsCount.java"), expected);
     }
