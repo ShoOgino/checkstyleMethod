@@ -1,0 +1,26 @@
+    /**
+     * checks whether token is followed by a whitespace.
+     * @param targetAST Ast token.
+     * @param line The line associated with the ast token.
+     * @return true if ast token is followed by a whitespace.
+     */
+    private static boolean isFollowedByWhitespace(DetailAST targetAST, String line) {
+        final int after =
+            targetAST.getColumnNo() + targetAST.getText().length();
+        boolean followedByWhitespace = true;
+
+        if (after < line.length()) {
+
+            final char charAfter = line.charAt(after);
+            if (targetAST.getType() == TokenTypes.SEMI
+                && (charAfter == ';' || charAfter == ')')) {
+                followedByWhitespace = true;
+            }
+            else if (!Character.isWhitespace(charAfter) && !isEmptyForIterator(targetAST)) {
+                followedByWhitespace = false;
+            }
+        }
+
+        return followedByWhitespace;
+    }
+
