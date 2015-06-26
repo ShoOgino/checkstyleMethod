@@ -1,0 +1,22 @@
+    @Test
+    // UT uses Reflection to avoid removing null-validation from static method,
+    // which is a candidate for utility method in the future
+    public void testGetFullImportIdent() {
+        Object actual;
+        try {
+            Class<?> c = Class.forName(
+                    "com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck");
+            Object t = c.newInstance();
+            Method m = c.getDeclaredMethod("getFullImportIdent", DetailAST.class);
+            m.setAccessible(true);
+            actual = m.invoke(t, (DetailAST) null);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            actual = null;
+        }
+
+        String expected = "";
+        assertEquals(expected, (String) actual);
+    }
+

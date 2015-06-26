@@ -15,12 +15,7 @@
 
             final String rule = ruleStr.substring(ruleStr.indexOf('(') + 1,
                     ruleStr.indexOf(')'));
-            try {
-                samePackageMatchingDepth = Integer.parseInt(rule);
-            }
-            catch (NumberFormatException e) {
-                samePackageDomainsRegExp = rule;
-            }
+            samePackageMatchingDepth = Integer.parseInt(rule);
             if (samePackageMatchingDepth <= 0) {
                 throw new IllegalArgumentException(
                         "SAME_PACKAGE rule parameter should be positive integer: " + ruleStr);

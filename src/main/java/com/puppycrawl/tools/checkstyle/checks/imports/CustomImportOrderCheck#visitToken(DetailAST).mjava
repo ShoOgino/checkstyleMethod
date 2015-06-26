@@ -1,8 +1,7 @@
     @Override
     public void visitToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.PACKAGE_DEF) {
-            if (customImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)
-                    && samePackageMatchingDepth != -1) {
+            if (customImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)) {
                 samePackageDomainsRegExp = createSamePackageRegexp(
                         samePackageMatchingDepth, ast);
             }
