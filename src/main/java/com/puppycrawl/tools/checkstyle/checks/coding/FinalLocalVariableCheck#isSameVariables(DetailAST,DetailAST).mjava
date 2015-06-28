@@ -6,9 +6,9 @@
      */
     private static boolean isSameVariables(DetailAST ast1, DetailAST ast2) {
         final DetailAST classOrMethodOfAst1 =
-            findClassOrMethodInWhichItIsDefined(ast1);
+            findClassOrConstructorOrMethodInWhichItIsDefined(ast1);
         final DetailAST classOrMethodOfAst2 =
-            findClassOrMethodInWhichItIsDefined(ast2);
+            findClassOrConstructorOrMethodInWhichItIsDefined(ast2);
 
         final String identifierOfAst1 =
             classOrMethodOfAst1.findFirstToken(TokenTypes.IDENT).getText();
