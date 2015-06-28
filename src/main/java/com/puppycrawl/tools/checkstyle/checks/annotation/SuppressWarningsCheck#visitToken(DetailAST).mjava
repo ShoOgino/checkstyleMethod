@@ -53,8 +53,9 @@
                     case TokenTypes.DOT:
                         break;
                     default:
-                        // #1252 - cases like @SuppressWarnings("un" + "used") or
-                        // @SuppressWarnings((String) "unused")
+                        // Known limitation: cases like @SuppressWarnings("un" + "used") or
+                        // @SuppressWarnings((String) "unused") are not properly supported,
+                        // but they should not cause exceptions.
                 }
             }
             warning = warning.getNextSibling();
