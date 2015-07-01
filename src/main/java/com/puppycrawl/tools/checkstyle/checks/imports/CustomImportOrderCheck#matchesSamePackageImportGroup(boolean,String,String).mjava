@@ -10,8 +10,9 @@
      */
     private boolean matchesSamePackageImportGroup(boolean isStatic,
         String importFullPath, String currentGroup) {
-        final String importPath = importFullPath.substring(0, importFullPath.lastIndexOf('.'));
+        final String importPathTrimmedToSamePackageDepth =
+                getFirstNDomainsFromIdent(this.samePackageMatchingDepth, importFullPath);
         return !isStatic && SAME_PACKAGE_RULE_GROUP.equals(currentGroup)
-                && samePackageDomainsRegExp.contains(importPath);
+                && samePackageDomainsRegExp.equals(importPathTrimmedToSamePackageDepth);
     }
 
