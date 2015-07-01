@@ -4,7 +4,8 @@
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
-                assertEquals(String.format("unable to find 'src/main/resources/non_existing_config.xml'.%n"),
+                assertEquals(String.format("unable to find src/main/resources/non_existing_config.xml%n"
+                        + "Checkstyle ends with 1 errors.%n"),
                     standardLog.getLog());
                 assertEquals("", errorLog.getLog());
             }
