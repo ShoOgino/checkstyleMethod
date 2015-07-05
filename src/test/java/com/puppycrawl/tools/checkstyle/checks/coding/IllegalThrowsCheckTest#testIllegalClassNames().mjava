@@ -4,6 +4,10 @@
         checkConfig.addAttribute("illegalClassNames",
                                  "java.lang.Error, java.lang.Exception, NullPointerException");
 
+        // check that incorrect names don't break the Check
+        checkConfig.addAttribute("illegalClassNames",
+                "java.lang.IOException.");
+
         String[] expected = {
             "5:33: " + getCheckMessage(MSG_KEY, "NullPointerException"),
             "14:73: " + getCheckMessage(MSG_KEY, "java.lang.Error"),
