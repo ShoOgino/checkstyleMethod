@@ -9,10 +9,9 @@
      *         parentheses.
      */
     private boolean isSurrounded(DetailAST ast) {
+        // if previous sibling is left parenthesis,
+        // next sibling can't be other than right parenthesis
         final DetailAST prev = ast.getPreviousSibling();
-        final DetailAST next = ast.getNextSibling();
-
-        return prev != null && prev.getType() == TokenTypes.LPAREN
-            && next != null && next.getType() == TokenTypes.RPAREN;
+        return prev != null && prev.getType() == TokenTypes.LPAREN;
     }
 
