@@ -1,0 +1,10 @@
+    @Test
+    public void testIsProperUtilsClass() throws ReflectiveOperationException {
+        try {
+            assertUtilsClassHasPrivateConstructor(AnnotationUtility.class);
+        }
+        catch (InvocationTargetException ex) {
+            Assert.assertTrue("do not instantiate.".equals(ex.getCause().getMessage()));
+        }
+    }
+

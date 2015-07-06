@@ -18,11 +18,12 @@
      * @param ast the current node
      * @param annotation the annotation name to check for
      * @return true if contains the annotation
-     * @throws NullPointerException if the ast or
-     * annotation is null
      */
     public static boolean containsAnnotation(final DetailAST ast,
         String annotation) {
+        if (ast == null) {
+            throw new IllegalArgumentException(THE_AST_IS_NULL);
+        }
         return AnnotationUtility.getAnnotation(ast, annotation) != null;
     }
 

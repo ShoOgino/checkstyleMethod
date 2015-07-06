@@ -19,13 +19,11 @@
      * @param ast the current node
      * @param annotation the annotation name to check for
      * @return the AST representing that annotation
-     * @throws NullPointerException if the ast or
-     * annotation is null
      */
     public static DetailAST getAnnotation(final DetailAST ast,
         String annotation) {
         if (ast == null) {
-            throw new IllegalArgumentException("the ast is null");
+            throw new IllegalArgumentException(THE_AST_IS_NULL);
         }
 
         if (annotation == null) {
@@ -33,8 +31,8 @@
         }
 
         if (StringUtils.isBlank(annotation)) {
-            throw new IllegalArgumentException("the annotation"
-                + "is empty or spaces");
+            throw new IllegalArgumentException(
+                    "the annotation is empty or spaces");
         }
 
         final DetailAST holder = AnnotationUtility.getAnnotationHolder(ast);

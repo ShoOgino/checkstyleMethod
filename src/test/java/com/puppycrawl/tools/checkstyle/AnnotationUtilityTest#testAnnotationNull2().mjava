@@ -1,0 +1,11 @@
+    @Test
+    public void testAnnotationNull2() throws ReflectiveOperationException {
+        try {
+            AnnotationUtility.getAnnotation(new DetailAST(), null);
+            Assert.fail();
+        }
+        catch (IllegalArgumentException ex) {
+            Assert.assertTrue("the annotation is null".equals(ex.getMessage()));
+        }
+    }
+

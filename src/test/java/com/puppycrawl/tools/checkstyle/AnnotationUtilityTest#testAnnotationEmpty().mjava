@@ -1,0 +1,12 @@
+    @Test
+    public void testAnnotationEmpty() throws ReflectiveOperationException {
+        try {
+            AnnotationUtility.getAnnotation(new DetailAST(), "");
+            Assert.fail();
+        }
+        catch (IllegalArgumentException ex) {
+            Assert.assertTrue("the annotation is empty or spaces"
+                    .equals(ex.getMessage()));
+        }
+    }
+
