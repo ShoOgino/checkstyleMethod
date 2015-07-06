@@ -1,0 +1,23 @@
+    /**
+     * Checks whether statement is multiline.
+     * @param ast token for the current statement.
+     * @return true if one statement is distributed over two or more lines.
+     */
+    private static boolean isMultilineStatement(DetailAST ast) {
+        final boolean multiline;
+        if (ast.getPreviousSibling() != null) {
+            final DetailAST prevSibling = ast.getPreviousSibling();
+            if (prevSibling.getLineNo() != ast.getLineNo()
+                    && ast.getParent() != null) {
+                multiline = true;
+            }
+            else {
+                multiline = false;
+            }
+        }
+        else {
+            multiline = false;
+        }
+        return multiline;
+    }
+

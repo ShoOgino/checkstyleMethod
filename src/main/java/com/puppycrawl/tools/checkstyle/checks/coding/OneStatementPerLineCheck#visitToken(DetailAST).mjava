@@ -1,16 +1,21 @@
     @Override
     public void visitToken(DetailAST ast) {
         switch (ast.getType()) {
-            case TokenTypes.EXPR:
-                visitExpr(ast);
-                break;
             case TokenTypes.SEMI:
-                visitSemi(ast);
+                DetailAST currentStatement = ast;
+                if (isMultilineStatement(currentStatement)) {
+                    currentStatement = ast.getPreviousSibling();
+                }
+                if (isOnTheSameLine(currentStatement, lastStatementEnd,
+                        forStatementEnd) && !inForHeader) {
+                    log(ast, MSG_KEY);
+                }
                 break;
-            case TokenTypes.FOR_INIT:
-                inForHeader = true;
+            case TokenTypes.FOR_ITERATOR:
+                forStatementEnd = ast.getLineNo();
                 break;
             default:
+                inForHeader = true;
                 break;
         }
     }
