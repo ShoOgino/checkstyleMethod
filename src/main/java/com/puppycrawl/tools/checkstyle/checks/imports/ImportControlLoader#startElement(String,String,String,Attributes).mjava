@@ -9,12 +9,10 @@
             stack.push(new PkgControl(pkg));
         }
         else if ("subpackage".equals(qName)) {
-            assert !stack.isEmpty();
             final String name = safeGet(atts, "name");
             stack.push(new PkgControl(stack.peek(), name));
         }
         else if ("allow".equals(qName) || "disallow".equals(qName)) {
-            assert !stack.isEmpty();
             // Need to handle either "pkg" or "class" attribute.
             // May have "exact-match" for "pkg"
             // May have "local-only"
