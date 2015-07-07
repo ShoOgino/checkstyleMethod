@@ -6,12 +6,6 @@
     private boolean isZeroParameters(DetailAST parent) {
 
         final DetailAST args = parent.getNextSibling();
-        if (args == null || args.getType() != TokenTypes.ELIST) {
-            return true;
-        }
-        if (args.getChildCount() != 0) {
-            return true;
-        }
-        return false;
+        return args == null || args.getType() != TokenTypes.ELIST || args.getChildCount() != 0;
     }
 

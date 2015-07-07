@@ -43,11 +43,7 @@
         }
 
         final AST expr = slist.getFirstChild();
-        if (expr.getType() != TokenTypes.EXPR
-                || expr.getFirstChild().getType() != TokenTypes.ASSIGN) {
-            return false;
-        }
-
-        return true;
+        return expr.getType() == TokenTypes.EXPR
+                && expr.getFirstChild().getType() == TokenTypes.ASSIGN;
     }
 

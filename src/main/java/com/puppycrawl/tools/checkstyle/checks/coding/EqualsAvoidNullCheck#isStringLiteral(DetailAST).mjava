@@ -8,11 +8,8 @@
      * @return if it is string literal
      */
     private boolean isStringLiteral(DetailAST objCalledOn) {
-        if (objCalledOn.getType() == TokenTypes.STRING_LITERAL
+        return objCalledOn.getType() == TokenTypes.STRING_LITERAL
                 || objCalledOn.getType() == TokenTypes.LITERAL_NEW
-                || objCalledOn.getType() == TokenTypes.DOT) {
-            return true;
-        }
-        return false;
+                || objCalledOn.getType() == TokenTypes.DOT;
     }
 
