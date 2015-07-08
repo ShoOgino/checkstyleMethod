@@ -1,0 +1,16 @@
+    /**
+     * @param constructor to invoke
+     * @param parameters to pass to constructor
+     * @param <T> type of constructor
+     * @return new instance of class or {@link IllegalStateException} if any exception occurs
+     * @see Constructor#newInstance(Object...)
+     */
+    public static <T> T invokeConstructor(Constructor<T> constructor, Object... parameters) {
+        try {
+            return constructor.newInstance(parameters);
+        }
+        catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+

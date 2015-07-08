@@ -1,0 +1,11 @@
+    @Test
+    public void testGetNonExistingConstructor() throws NoSuchMethodException {
+        try {
+            Utils.getConstructor(Math.class);
+            fail();
+        }
+        catch (IllegalStateException expected) {
+            assertEquals(NoSuchMethodException.class, expected.getCause().getClass());
+        }
+    }
+

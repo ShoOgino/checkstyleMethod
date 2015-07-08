@@ -20,26 +20,11 @@
         }
 
         AbstractExpressionHandler expHandler = null;
-        try {
-            final Constructor<?> handlerCtor =
-                typeHandlers.get(ast.getType());
-            if (handlerCtor != null) {
-                expHandler = (AbstractExpressionHandler) handlerCtor.newInstance(
-                        indentCheck, ast, parent);
-            }
-        }
-        catch (final InstantiationException | InvocationTargetException e) {
-            final String message = "couldn't instantiate constructor for " + ast;
-            LOG.debug(message, e);
-            throw new RuntimeException(message);
-        }
-        catch (final IllegalAccessException e) {
-            final String message = "couldn't access constructor for " + ast;
-            LOG.debug(message, e);
-            throw new RuntimeException(message);
-        }
-        if (expHandler == null) {
-            throw new RuntimeException("no handler for type " + ast.getType());
+        final Constructor<?> handlerCtor =
+            typeHandlers.get(ast.getType());
+        if (handlerCtor != null) {
+            expHandler = (AbstractExpressionHandler) Utils.invokeConstructor(
+                    handlerCtor, indentCheck, ast, parent);
         }
         return expHandler;
     }
