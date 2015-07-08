@@ -1,0 +1,8 @@
+    @Test(expected = CheckstyleException.class)
+    public void testWrongFormatURI() throws CheckstyleException, URISyntaxException {
+        final PkgControl root =
+                ImportControlLoader.load(
+                        new URI("aaa://src/test/resources/com/puppycrawl/tools/checkstyle/import-control_complete.xml"));
+        assertNotNull(root);
+    }
+

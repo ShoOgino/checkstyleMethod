@@ -1,0 +1,25 @@
+    @Test(expected = InvocationTargetException.class)
+    // UT uses Reflection to avoid removing null-validation from static method
+    public void testSafeGetThrowsException() throws InvocationTargetException {
+        AttributesImpl attr = new AttributesImpl() {
+            @Override
+            public String getValue(int index) {
+                return null;
+                }
+            };
+        try {
+            Class<?> c = Class.forName(
+                    "com.puppycrawl.tools.checkstyle.checks.imports.ImportControlLoader");
+            Method privateMethod = c.getDeclaredMethod("safeGet", Attributes.class, String.class);
+            privateMethod.setAccessible(true);
+            privateMethod.invoke(null, attr, "you_cannot_find_me");
+        }
+        catch (IllegalAccessException | IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | SecurityException e) {
+            e.printStackTrace();
+        }
+
+    }
+

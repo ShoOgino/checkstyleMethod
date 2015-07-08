@@ -1,0 +1,23 @@
+    @Test(expected = InvocationTargetException.class)
+    // UT uses Reflection to cover IOException from 'loader.parseInputSource(source);'
+    // because this is possible situation (though highly unlikely), which depends on hardware
+    // and is difficult to emulate
+    public void testLoadThrowsException() throws InvocationTargetException {
+        InputSource source = new InputSource();
+        try {
+            Class<?> c = Class.forName(
+                    "com.puppycrawl.tools.checkstyle.checks.imports.ImportControlLoader");
+            Method privateMethod = c.getDeclaredMethod("load", InputSource.class, URI.class);
+            privateMethod.setAccessible(true);
+            privateMethod.invoke(null, source, new File(
+                    "src/test/resources/com/puppycrawl/tools/checkstyle/import-control_complete.xml").toURI());
+        }
+        catch (IllegalAccessException | IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | SecurityException e) {
+            e.printStackTrace();
+        }
+
+    }
+
