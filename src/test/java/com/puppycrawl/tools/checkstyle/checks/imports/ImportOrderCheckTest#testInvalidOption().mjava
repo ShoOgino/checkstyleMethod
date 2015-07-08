@@ -1,0 +1,10 @@
+    @Test(expected = CheckstyleException.class)
+    public void testInvalidOption() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("option", "invalid_option");
+        final String[] expected = {};
+
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_Top.java"), expected);
+    }
+

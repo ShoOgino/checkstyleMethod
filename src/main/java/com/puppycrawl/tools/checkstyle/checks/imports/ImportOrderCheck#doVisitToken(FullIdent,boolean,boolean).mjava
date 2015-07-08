@@ -8,28 +8,26 @@
      */
     private void doVisitToken(FullIdent ident, boolean isStatic,
             boolean previous) {
-        if (ident != null) {
-            final String name = ident.getText();
-            final int groupIdx = getGroupNumber(name);
-            final int line = ident.getLineNo();
+        final String name = ident.getText();
+        final int groupIdx = getGroupNumber(name);
+        final int line = ident.getLineNo();
 
-            if (groupIdx > lastGroup) {
-                // This check should be made more robust to handle
-                // comments and imports that span more than one line.
-                if (!beforeFirstImport && separated && line - lastImportLine < 2) {
-                    log(line, MSG_SEPARATION, name);
-                }
+        if (groupIdx > lastGroup) {
+            // This check should be made more robust to handle
+            // comments and imports that span more than one line.
+            if (!beforeFirstImport && separated && line - lastImportLine < 2) {
+                log(line, MSG_SEPARATION, name);
             }
-            else if (groupIdx == lastGroup || sortStaticImportsAlphabetically
-                     && isAlphabeticallySortableStaticImport(isStatic)) {
-                doVisitTokenInSameGroup(isStatic, previous, name, line);
-            }
-            else {
-                log(line, MSG_ORDERING, name);
-            }
-
-            lastGroup = groupIdx;
-            lastImport = name;
         }
+        else if (groupIdx == lastGroup || sortStaticImportsAlphabetically
+                 && isAlphabeticallySortableStaticImport(isStatic)) {
+            doVisitTokenInSameGroup(isStatic, previous, name, line);
+        }
+        else {
+            log(line, MSG_ORDERING, name);
+        }
+
+        lastGroup = groupIdx;
+        lastImport = name;
     }
 

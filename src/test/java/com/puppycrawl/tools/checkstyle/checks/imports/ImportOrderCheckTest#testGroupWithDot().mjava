@@ -1,0 +1,9 @@
+    @Test
+    public void testGroupWithDot() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("groups", "java.awt.");
+        final String[] expected = {};
+
+        verify(checkConfig, getPath("imports" + File.separator + "InputImportOrder_NoFailureForRedundantImports.java"), expected);
+    }
+

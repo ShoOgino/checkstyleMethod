@@ -1,0 +1,11 @@
+    @Test
+    public void testMultiplePatternMatches() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportOrderCheck.class);
+        checkConfig.addAttribute("groups", "/java/,/rga/,/myO/,/org/,/organ./");
+        final String[] expected = {};
+
+        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"
+                + "checkstyle/imports/"
+                + "InputImportOrder_MultiplePatternMatches.java").getCanonicalPath(), expected);
+    }
+

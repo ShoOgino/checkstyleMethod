@@ -5,7 +5,9 @@
         checkConfig.addAttribute("option", "top");
         checkConfig.addAttribute("groups", "org, java");
         checkConfig.addAttribute("sortStaticImportsAlphabetically", "true");
-        final String[] expected = {};
+        final String[] expected = {
+            "9: " + getCheckMessage(MSG_ORDERING, "org.junit.Test"),
+        };
         verify(checkConfig, getPath("imports" + File.separator
                  + "InputImportOrderStaticOnDemandGroupOrder.java"), expected);
     }
