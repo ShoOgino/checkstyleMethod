@@ -5,8 +5,8 @@
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
                 assertEquals("Must specify files to process, found 0." + System.lineSeparator(),
-                    standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                        systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "/google_checks.xml", "NonexistingFile.java");

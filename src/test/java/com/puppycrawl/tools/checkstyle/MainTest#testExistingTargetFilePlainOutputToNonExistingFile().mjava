@@ -4,8 +4,8 @@
         exit.expectSystemExitWithStatus(0);
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
-                assertEquals("", standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                assertEquals("", systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname.xml",

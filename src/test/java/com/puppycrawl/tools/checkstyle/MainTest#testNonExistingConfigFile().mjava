@@ -5,9 +5,9 @@
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
                 assertEquals(String.format("unable to find src/main/resources/non_existing_config.xml%n"
-                        + "Checkstyle ends with 1 errors.%n"),
-                    standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                                + "Checkstyle ends with 1 errors.%n"),
+                        systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "src/main/resources/non_existing_config.xml",

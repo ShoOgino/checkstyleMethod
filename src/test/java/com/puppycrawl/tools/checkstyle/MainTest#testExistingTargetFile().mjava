@@ -5,8 +5,8 @@
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
                 assertEquals(String.format("Starting audit...%n"
-                        + "Audit done.%n"), standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                        + "Audit done.%n"), systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname.xml",

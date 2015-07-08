@@ -9,13 +9,13 @@
                     + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java"
                     .replace("/", File.separator);
                 assertEquals(String.format("Starting audit...%n"
-                    + expectedPath + ":3:14: "
-                    + "warning: Name 'InputMain' must match pattern '^[a-z0-9]*$'.%n"
-                    + expectedPath + ":5:7: "
-                    + "warning: Name 'InputMainInner' must match pattern '^[a-z0-9]*$'.%n"
-                    + "Audit done.%n"),
-                    standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                                + expectedPath + ":3:14: "
+                                + "warning: Name 'InputMain' must match pattern '^[a-z0-9]*$'.%n"
+                                + expectedPath + ":5:7: "
+                                + "warning: Name 'InputMainInner' must match pattern '^[a-z0-9]*$'.%n"
+                                + "Audit done.%n"),
+                        systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname2.xml",

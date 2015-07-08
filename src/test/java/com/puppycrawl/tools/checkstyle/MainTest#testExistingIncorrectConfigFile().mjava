@@ -5,8 +5,8 @@
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
                 assertEquals(String.format("unable to parse configuration stream - Content is not allowed in prolog.:7:1%n"
-                        + "Checkstyle ends with 1 errors.%n"), standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                        + "Checkstyle ends with 1 errors.%n"), systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/"

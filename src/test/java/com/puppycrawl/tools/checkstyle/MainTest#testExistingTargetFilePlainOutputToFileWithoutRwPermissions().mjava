@@ -8,8 +8,8 @@
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() throws IOException {
                 assertEquals("Permission denied : '" + file.getCanonicalPath() + "'."
-                    + System.lineSeparator(), standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                        + System.lineSeparator(), systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname.xml",

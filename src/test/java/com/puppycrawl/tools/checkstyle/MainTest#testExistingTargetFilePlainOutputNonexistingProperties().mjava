@@ -5,8 +5,8 @@
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
                 assertEquals("Could not find file 'nonexisting.properties'."
-                    + System.lineSeparator(), standardLog.getLog());
-                assertEquals("", errorLog.getLog());
+                        + System.lineSeparator(), systemOut.getLog());
+                assertEquals("", systemErr.getLog());
             }
         });
         Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/"
