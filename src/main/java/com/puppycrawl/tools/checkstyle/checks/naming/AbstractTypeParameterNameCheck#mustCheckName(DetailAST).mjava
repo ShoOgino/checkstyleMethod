@@ -1,12 +1,7 @@
     @Override
     protected final boolean mustCheckName(DetailAST ast) {
-        DetailAST location =
+        final DetailAST location =
             ast.getParent().getParent();
-
-        if (location.getType() == TokenTypes.MODIFIERS) {
-            location = location.getParent();
-        }
-
-        return location.getType() == this.location;
+        return location.getType() == getLocation();
     }
 
