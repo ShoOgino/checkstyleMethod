@@ -1,12 +1,8 @@
     @Override
     public void visitToken(DetailAST ast) {
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
-        if (modifiers != null
-            && modifiers.branchContains(TokenTypes.ABSTRACT)) {
-            // should apply the check to abstract class
-            return;
+        if (!modifiers.branchContains(TokenTypes.ABSTRACT)) {
+            super.visitToken(ast);
         }
-
-        super.visitToken(ast);
     }
 
