@@ -1,0 +1,11 @@
+    @Test
+    public void testDoAllowMissingJavadocTagsByDefault() throws Exception {
+        final String[] expected = {
+            "10: " + getCheckMessage(MSG_RETURN_EXPECTED),
+            "20:26: " + getCheckMessage(MSG_EXCPECTED_TAG, "@param", "number"),
+            "30:42: " + getCheckMessage(MSG_EXCPECTED_TAG, "@throws", "ThreadDeath"),
+        };
+        verify(checkConfig, getPath("javadoc" + File.separator
+                + "InputMissingJavadocTags.java"), expected);
+    }
+

@@ -1,0 +1,10 @@
+    @Test
+    public void testAllowMissingJavadocTags() throws Exception {
+        checkConfig.addAttribute("allowMissingParamTags", "true");
+        checkConfig.addAttribute("allowMissingThrowsTags", "true");
+        checkConfig.addAttribute("allowMissingReturnTag", "true");
+        final String[] expected = {};
+        verify(checkConfig, getPath("javadoc" + File.separator
+                                    + "InputMissingJavadocTags.java"), expected);
+    }
+
