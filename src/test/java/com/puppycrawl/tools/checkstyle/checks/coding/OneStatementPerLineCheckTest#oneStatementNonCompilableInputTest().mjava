@@ -1,0 +1,13 @@
+    @Test
+    public void oneStatementNonCompilableInputTest() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(OneStatementPerLineCheck.class);
+        final String[] expected = {
+            "24:6: " + getCheckMessage(MSG_KEY),
+        };
+
+        verify(checkConfig, new File("src/test/resources-noncompilable/"
+                + "com/puppycrawl/tools/checkstyle/coding/"
+                + "InputOneStatementPerLineCheck.java").getCanonicalPath(),
+            expected);
+    }
+

@@ -1,0 +1,18 @@
+    @Test
+    public void oneStatementNonCompilableInputTest() throws Exception {
+
+        String msg = getCheckMessage(OneStatementPerLineCheck.class, "multiple.statements.line");
+
+        final String[] expected = {
+            "24:6: " + msg,
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("OneStatementPerLine");
+        String filePath = new File("src/test/resources-noncompilable/"
+            + "com/puppycrawl/tools/checkstyle/coding/"
+            + "InputOneStatementPerLineCheck.java").getCanonicalPath();
+
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
