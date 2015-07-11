@@ -14,11 +14,9 @@
             privateMethod.setAccessible(true);
             privateMethod.invoke(null, attr, "you_cannot_find_me");
         }
-        catch (IllegalAccessException | IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
+        catch (IllegalAccessException | IllegalArgumentException
+                | ClassNotFoundException | NoSuchMethodException | SecurityException e) {
+            throw new IllegalStateException(e);
         }
 
     }

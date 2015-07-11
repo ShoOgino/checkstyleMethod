@@ -10,13 +10,11 @@
             Method privateMethod = c.getDeclaredMethod("load", InputSource.class, URI.class);
             privateMethod.setAccessible(true);
             privateMethod.invoke(null, source, new File(
-                    "src/test/resources/com/puppycrawl/tools/checkstyle/import-control_complete.xml").toURI());
+                    "src/test/resources/com/puppycrawl/tools/checkstyle/imports/import-control_complete.xml").toURI());
         }
-        catch (IllegalAccessException | IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
+        catch (IllegalAccessException | IllegalArgumentException
+                | ClassNotFoundException | NoSuchMethodException | SecurityException e) {
+            throw new IllegalStateException(e);
         }
 
     }
