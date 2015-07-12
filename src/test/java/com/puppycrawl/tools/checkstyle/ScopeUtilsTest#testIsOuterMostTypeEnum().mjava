@@ -1,0 +1,11 @@
+    @Test
+    public void testIsOuterMostTypeEnum() throws ReflectiveOperationException {
+        DetailAST ast = new DetailAST();
+        ast.setType(TokenTypes.ENUM_DEF);
+        DetailAST ast2 = new DetailAST();
+        ast2.setType(TokenTypes.MODIFIERS);
+        ast.addChild(ast2);
+
+        Assert.assertFalse(ScopeUtils.isOuterMostType(ast2));
+    }
+
