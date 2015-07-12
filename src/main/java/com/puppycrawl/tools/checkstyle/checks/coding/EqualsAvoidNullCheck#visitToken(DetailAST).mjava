@@ -15,14 +15,14 @@
         final DetailAST expr = dot.getNextSibling().getFirstChild();
 
         if ("equals".equals(method.getText())
-            && containsOneArg(expr) && containsAllSafeTokens(expr)) {
+            && containsOneArgument(methodCall) && containsAllSafeTokens(expr)) {
             log(methodCall.getLineNo(), methodCall.getColumnNo(),
                 MSG_EQUALS_AVOID_NULL);
         }
 
         if (!ignoreEqualsIgnoreCase
             && "equalsIgnoreCase".equals(method.getText())
-            && containsOneArg(expr) && containsAllSafeTokens(expr)) {
+            && containsOneArgument(methodCall) && containsAllSafeTokens(expr)) {
             log(methodCall.getLineNo(), methodCall.getColumnNo(),
                 MSG_EQUALS_IGNORE_CASE_AVOID_NULL);
         }

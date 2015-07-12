@@ -1,0 +1,11 @@
+    /**
+     * Verify that method call has one argument.
+     *
+     * @param methodCall METHOD_CALL DetailAST
+     * @return true if method call has one argument.
+     */
+    private static boolean containsOneArgument(DetailAST methodCall) {
+        final DetailAST elist = methodCall.findFirstToken(TokenTypes.ELIST);
+        return elist.getChildCount() == 1;
+    }
+
