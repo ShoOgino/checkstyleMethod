@@ -2,11 +2,11 @@
     public void testFileExtensions() {
         final String[] fileExtensions = {"java"};
         File file = new File("file.pdf");
-        assertFalse(fileExtensionMatches(file, fileExtensions));
-        assertTrue(fileExtensionMatches(file, null));
+        assertFalse(Utils.fileExtensionMatches(file, fileExtensions));
+        assertTrue(Utils.fileExtensionMatches(file, null));
         file = new File("file.java");
-        assertTrue(fileExtensionMatches(file, fileExtensions));
+        assertTrue(Utils.fileExtensionMatches(file, fileExtensions));
         file = new File("file.");
-        assertTrue(fileExtensionMatches(file, ""));
+        assertTrue(Utils.fileExtensionMatches(file, ""));
     }
 
