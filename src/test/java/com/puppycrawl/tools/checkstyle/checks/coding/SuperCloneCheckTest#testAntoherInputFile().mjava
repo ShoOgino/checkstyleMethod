@@ -1,0 +1,12 @@
+    @Test
+    public void testAntoherInputFile() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(SuperCloneCheck.class);
+        final String[] expected = {
+            "13:8: " + getCheckMessage(MSG_KEY, "clone", "super.clone"),
+            "19:8: " + getCheckMessage(MSG_KEY, "clone", "super.clone"),
+        };
+        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"
+                + "checkstyle/coding/InputSuperCloneCheck.java").getCanonicalPath(), expected);
+    }
+
