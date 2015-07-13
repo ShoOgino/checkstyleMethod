@@ -1,0 +1,12 @@
+    /**
+     * Tests whether the paragraph tag is immediately followed by the text.
+     * @param tag html tag.
+     * @return true, if the paragraph tag is immediately followed by the text.
+     */
+    private static boolean isImmediatelyFollowedByText(DetailNode tag) {
+        final DetailNode nextSibling = JavadocUtils.getNextSibling(tag);
+        return nextSibling.getType() == JavadocTokenTypes.NEWLINE
+                || nextSibling.getType() == JavadocTokenTypes.EOF
+                || nextSibling.getText().startsWith(" ");
+    }
+
