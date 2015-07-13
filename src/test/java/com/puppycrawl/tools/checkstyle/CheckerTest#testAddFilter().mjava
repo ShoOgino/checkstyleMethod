@@ -5,26 +5,6 @@
 
         c.addFilter(f);
 
-        // Let's try fire some events
-        // we do not call filter in fireAuditStarted() (fix for 1080343)
-//         c.fireAuditStarted();
-//         assertTrue("Checker.fireAuditStarted() doesn't call filter", f.wasCalled());
-
-        // we do not call filter in fireAuditFinished() (fix for 1080343)
-//         f.resetFilter();
-//         c.fireAuditFinished();
-//         assertTrue("Checker.fireAuditFinished() doesn't call filter", f.wasCalled());
-
-        // we do not call filter in fireFileStarted() (fix for 1080343)
-//         f.resetFilter();
-//         c.fireFileStarted("Some File Name");
-//         assertTrue("Checker.fireFileStarted() doesn't call filter", f.wasCalled());
-
-        // we do not call filter in fireFileFinished() (fix for 1080343)
-//         f.resetFilter();
-//         c.fireFileFinished("Some File Name");
-//         assertTrue("Checker.fireFileFinished() doesn't call filter", f.wasCalled());
-
         f.resetFilter();
         final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
