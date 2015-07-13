@@ -1,0 +1,14 @@
+    @Test
+    public void testEmptyFilename() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", "");
+        try {
+            createChecker(checkConfig);
+            fail("Checker creation should not succeed with invalid headerFile");
+        }
+        catch (CheckstyleException ex) {
+            // expected exception
+        }
+    }
+
