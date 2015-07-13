@@ -1,0 +1,15 @@
+    @Test
+    public void testAddIgnored() throws IOException {
+        final XMLLogger logger = new XMLLogger(outStream, true);
+        logger.auditStarted(null);
+        final LocalizedMessage message =
+                new LocalizedMessage(1, 1,
+                        "messages.properties", "key", null, SeverityLevel.IGNORE, null,
+                        this.getClass(), null);
+        final AuditEvent ev = new AuditEvent(this, "Test.java", message);
+        logger.addError(ev);
+        logger.auditFinished(null);
+        final String[] expectedLines = {};
+        verifyLines(expectedLines);
+    }
+
