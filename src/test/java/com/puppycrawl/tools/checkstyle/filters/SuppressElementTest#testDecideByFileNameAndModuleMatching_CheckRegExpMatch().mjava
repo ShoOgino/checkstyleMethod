@@ -1,0 +1,9 @@
+    @Test
+    public void testDecideByFileNameAndModuleMatching_CheckRegExpMatch() {
+        LocalizedMessage message =
+                new LocalizedMessage(10, 10, "", "", null, null, this.getClass(), null);
+        final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
+        filter.setChecks(this.getClass().getCanonicalName());
+        assertFalse(filter.accept(ev));
+    }
+

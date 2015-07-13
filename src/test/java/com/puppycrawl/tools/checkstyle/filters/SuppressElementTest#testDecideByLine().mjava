@@ -8,5 +8,7 @@
         assertFalse("In range 1-10", filter.accept(ev));
         filter.setLines("1-9, 11");
         assertTrue("Not in 1-9, 11", filter.accept(ev));
+        filter.setLines(null);
+        assertFalse("none", filter.accept(ev));
     }
 
