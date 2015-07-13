@@ -1,0 +1,11 @@
+    @Test
+    public void testRemoveChild() {
+        DefaultConfiguration config = new DefaultConfiguration("Myconfig");
+        DefaultConfiguration configChild = new DefaultConfiguration("childConfig");
+        Assert.assertTrue(config.getChildren().length == 0);
+        config.addChild(configChild);
+        Assert.assertTrue(config.getChildren().length == 1);
+        config.removeChild(configChild);
+        Assert.assertTrue(config.getChildren().length == 0);
+    }
+
