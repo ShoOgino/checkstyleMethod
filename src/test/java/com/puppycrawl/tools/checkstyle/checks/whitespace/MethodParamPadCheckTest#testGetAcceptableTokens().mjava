@@ -1,0 +1,15 @@
+    @Test
+    public void testGetAcceptableTokens() {
+        MethodParamPadCheck methodParamPadCheckObj = new MethodParamPadCheck();
+        int[] actual = methodParamPadCheckObj.getAcceptableTokens();
+        int[] expected = new int[] {
+            TokenTypes.CTOR_DEF,
+            TokenTypes.LITERAL_NEW,
+            TokenTypes.METHOD_CALL,
+            TokenTypes.METHOD_DEF,
+            TokenTypes.SUPER_CTOR_CALL,
+        };
+        Assert.assertNotNull(actual);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
