@@ -1,16 +1,11 @@
     /**
-     * Tests whether a method definition AST has exactly one
-     * parameter of type Object.
-     * @param ast the method definition AST to test.
+     * Tests whether a method's first parameter is an Object.
+     * @param methodDefAst the method definition AST to test.
      * Precondition: ast is a TokenTypes.METHOD_DEF node.
-     * @return true if ast has exactly one parameter of type Object.
+     * @return true if ast has first parameter of type Object.
      */
-    private boolean hasObjectParameter(DetailAST ast) {
-        // one parameter?
-        final DetailAST paramsNode = ast.findFirstToken(TokenTypes.PARAMETERS);
-        if (paramsNode.getChildCount() != 1) {
-            return false;
-        }
+    private static boolean isFirstParameterObject(DetailAST methodDefAst) {
+        final DetailAST paramsNode = methodDefAst.findFirstToken(TokenTypes.PARAMETERS);
 
         // parameter type "Object"?
         final DetailAST paramNode =
