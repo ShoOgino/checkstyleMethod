@@ -1,13 +1,15 @@
     @Test
-    public void testCaseSensitive()
+    public void testCustomMessage()
         throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(IllegalTokenTextCheck.class);
         checkConfig.addAttribute("tokens", "STRING_LITERAL");
         checkConfig.addAttribute("format", "a href");
-        checkConfig.addAttribute("ignoreCase", "false");
+
+        String customMessage = "My custom message";
+        checkConfig.addAttribute("message", customMessage);
         final String[] expected = {
-            "24:28: " + getCheckMessage(MSG_KEY, "a href"),
+            "24:28: " + MessageFormat.format(customMessage, "a href"),
         };
         verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
     }
