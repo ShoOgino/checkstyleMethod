@@ -3,7 +3,7 @@
         DefaultConfiguration checkConfig = createCheckConfig(EmptyLineSeparatorCheck.class);
         checkConfig.addAttribute("allowMultipleEmptyLines", "false");
         final String[] expected = {
-
+            "1: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "import"),
         };
         verify(checkConfig, getPath("whitespace/InputEmptyLineSeparatorMultipleImportEmptyClass.java"), expected);
     }

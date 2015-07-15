@@ -1,0 +1,10 @@
+    @Test
+    public void testPrePreviousLineEmpiness() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(EmptyLineSeparatorCheck.class);
+        checkConfig.addAttribute("allowMultipleEmptyLines", "false");
+        final String[] expected = {
+
+        };
+        verify(checkConfig, getPath("whitespace/InputPrePreviousLineEmptiness.java"), expected);
+    }
+
