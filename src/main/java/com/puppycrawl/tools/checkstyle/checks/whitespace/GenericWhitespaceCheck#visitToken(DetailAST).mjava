@@ -1,12 +1,16 @@
     @Override
     public void visitToken(DetailAST ast) {
-        if (ast.getType() == TokenTypes.GENERIC_START) {
-            processStart(ast);
-            depth++;
-        }
-        else if (ast.getType() == TokenTypes.GENERIC_END) {
-            processEnd(ast);
-            depth--;
+        switch (ast.getType()) {
+            case TokenTypes.GENERIC_START:
+                processStart(ast);
+                depth++;
+                break;
+            case TokenTypes.GENERIC_END:
+                processEnd(ast);
+                depth--;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown type " + ast);
         }
     }
 

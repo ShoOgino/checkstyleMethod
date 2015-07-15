@@ -17,10 +17,9 @@
             }
         }
         else if (!Character.isWhitespace(charAfter)
-            && '(' != charAfter && ')' != charAfter
-            && ',' != charAfter && '[' != charAfter
-            && '.' != charAfter && ':' != charAfter
-            && !isAfterMethodReference(ast)) {
+            && charAfter != '(' && charAfter != ')'
+            && charAfter != ',' && charAfter != '['
+            && charAfter != '.' && charAfter != ':') {
             log(ast.getLineNo(), after, WS_ILLEGAL_FOLLOW, ">");
         }
     }

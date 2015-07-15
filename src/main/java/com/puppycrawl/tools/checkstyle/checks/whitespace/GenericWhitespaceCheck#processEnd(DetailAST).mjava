@@ -7,7 +7,7 @@
         final int before = ast.getColumnNo() - 1;
         final int after = ast.getColumnNo() + 1;
 
-        if (0 <= before && Character.isWhitespace(line.charAt(before))
+        if (before >= 0 && Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line)) {
             log(ast.getLineNo(), before, WS_PRECEDED, ">");
         }

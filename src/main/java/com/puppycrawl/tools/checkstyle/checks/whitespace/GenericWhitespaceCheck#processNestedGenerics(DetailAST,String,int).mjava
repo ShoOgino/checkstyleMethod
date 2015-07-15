@@ -14,7 +14,7 @@
         //   should be whitespace if followed by & -+
         //
         final int indexOfAmp = line.indexOf('&', after);
-        if (indexOfAmp != -1
+        if (indexOfAmp >= 0
             && whitespaceBetween(after, indexOfAmp, line)) {
             if (indexOfAmp - after == 0) {
                 log(ast.getLineNo(), after, WS_NOT_PRECEDED, "&");
