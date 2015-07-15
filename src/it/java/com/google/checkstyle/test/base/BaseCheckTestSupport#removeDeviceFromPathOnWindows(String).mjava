@@ -1,0 +1,8 @@
+   private static String removeDeviceFromPathOnWindows(String string) {
+       String os = System.getProperty("os.name", "Unix");
+       if (os.startsWith("Windows")) {
+           return string.substring(string.indexOf(":") + 1);
+       }
+       return string;
+   }
+
