@@ -5,11 +5,8 @@
      * @return true if static imports should be sorted alphabetically.
      */
     private boolean isAlphabeticallySortableStaticImport(boolean isStatic) {
-        boolean result = false;
-        if (isStatic && (getAbstractOption() == ImportOrderOption.TOP
-                || getAbstractOption() == ImportOrderOption.BOTTOM)) {
-            result = true;
-        }
-        return result;
+        return isStatic && sortStaticImportsAlphabetically
+                && (getAbstractOption() == ImportOrderOption.TOP
+                    || getAbstractOption() == ImportOrderOption.BOTTOM);
     }
 
