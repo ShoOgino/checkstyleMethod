@@ -6,13 +6,6 @@
      * method calls are chained returns right paren for last call.
      */
     private static DetailAST getMethodCallLastNode(DetailAST firstNode) {
-        DetailAST lastNode;
-        if (firstNode.getNextSibling() == null) {
-            lastNode = firstNode.getLastChild();
-        }
-        else {
-            lastNode = firstNode.getNextSibling();
-        }
-        return lastNode;
+        return firstNode.getLastChild();
     }
 

@@ -5,30 +5,17 @@
         if (getParent() instanceof MethodCallHandler) {
             final MethodCallHandler container =
                     (MethodCallHandler) getParent();
-            if (container != null) {
-                if (areOnSameLine(container.getMainAst(), getMainAst())) {
-                    return container.getLevel();
-                }
-
-                // we should increase indentation only if this is the first
-                // chained method call which was moved to the next line
-                if (isChainedMethodCallWrapped()) {
-                    return container.getLevel();
-                }
-                else {
-                    return new IndentLevel(container.getLevel(), getBasicOffset());
-                }
+            if (areOnSameLine(container.getMainAst(), getMainAst())) {
+                return container.getLevel();
             }
-
-            // if we get here, we are the child of the left hand side (name
-            //  side) of a method call with no "containing" call, use
-            //  the first non-method call parent
-
-            AbstractExpressionHandler p = getParent();
-            while (p instanceof MethodCallHandler) {
-                p = p.getParent();
+            // we should increase indentation only if this is the first
+            // chained method call which was moved to the next line
+            if (isChainedMethodCallWrapped()) {
+                return container.getLevel();
             }
-            return p.suggestedChildLevel(this);
+            else {
+                return new IndentLevel(container.getLevel(), getBasicOffset());
+            }
         }
 
         // if our expression isn't first on the line, just use the start

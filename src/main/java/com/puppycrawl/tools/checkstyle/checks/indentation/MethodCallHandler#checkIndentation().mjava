@@ -1,8 +1,7 @@
     @Override
     public void checkIndentation() {
         final DetailAST exprNode = getMainAst().getParent();
-        if (exprNode.getParent().getType() != TokenTypes.LCURLY
-            && exprNode.getParent().getType() != TokenTypes.SLIST) {
+        if (exprNode.getParent().getType() != TokenTypes.SLIST) {
             return;
         }
         final DetailAST methodName = getMainAst().getFirstChild();

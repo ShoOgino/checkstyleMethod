@@ -11,14 +11,9 @@
         // call name
 
         DetailAST astNode = ast.getFirstChild();
-        while (astNode != null && astNode.getType() == TokenTypes.DOT) {
+        while (astNode.getType() == TokenTypes.DOT) {
             astNode = astNode.getFirstChild();
         }
-
-        if (astNode == null) {
-            astNode = ast;
-        }
-
         return astNode;
     }
 
