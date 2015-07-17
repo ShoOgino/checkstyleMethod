@@ -4,7 +4,7 @@
      * @param modifiers <code>DetailAST</code>.
      * @return <code>DetailAST</code> or null if there are no annotations.
      */
-    private DetailAST findLastAnnotation(DetailAST modifiers) {
+    private static DetailAST findLastAnnotation(DetailAST modifiers) {
         DetailAST annot = modifiers.findFirstToken(TokenTypes.ANNOTATION);
         while (annot != null && annot.getNextSibling() != null
                && annot.getNextSibling().getType() == TokenTypes.ANNOTATION) {

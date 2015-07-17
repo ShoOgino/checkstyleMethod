@@ -1,14 +1,14 @@
     /** {@inheritDoc} */
     @Override
     public void visitToken(final DetailAST ast) {
-        final DetailAST annotation = this.getSuppressWarnings(ast);
+        final DetailAST annotation = getSuppressWarnings(ast);
 
         if (annotation == null) {
             return;
         }
 
         final DetailAST warningHolder =
-            this.findWarningsHolder(annotation);
+            findWarningsHolder(annotation);
 
         final DetailAST token =
                 warningHolder.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
@@ -37,7 +37,7 @@
                     //typical case
                     case TokenTypes.STRING_LITERAL:
                         final String warningText =
-                            this.removeQuotes(warning.getFirstChild().getText());
+                            removeQuotes(warning.getFirstChild().getText());
                         this.logMatch(warning.getLineNo(),
                                 warning.getColumnNo(), warningText);
                         break;

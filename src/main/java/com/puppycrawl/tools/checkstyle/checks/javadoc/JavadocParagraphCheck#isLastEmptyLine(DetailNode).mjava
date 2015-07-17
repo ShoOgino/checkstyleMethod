@@ -3,7 +3,7 @@
      * @param newLine NEWLINE node.
      * @return true, if NEWLINE node is a last node in javadoc.
      */
-    private boolean isLastEmptyLine(DetailNode newLine) {
+    private static boolean isLastEmptyLine(DetailNode newLine) {
         DetailNode nextNode = JavadocUtils.getNextSibling(newLine);
         while (nextNode != null && nextNode.getType() != JavadocTokenTypes.JAVADOC_TAG) {
             if (nextNode.getType() == JavadocTokenTypes.TEXT

@@ -3,7 +3,7 @@
      * @param ast modifier ast
      * @return tru in modifier is in checked ones
      */
-    private boolean isPrivateOrFinalOrAbstract(DetailAST ast) {
+    private static boolean isPrivateOrFinalOrAbstract(DetailAST ast) {
         // method is ok if it is private or abstract or final
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
         return modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)

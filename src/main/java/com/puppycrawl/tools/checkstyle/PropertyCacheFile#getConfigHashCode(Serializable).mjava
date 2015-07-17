@@ -4,7 +4,7 @@
      * @param configuration the GlobalProperties
      * @return the hashcode for <code>configuration</code>
      */
-    private String getConfigHashCode(Serializable configuration) {
+    private static String getConfigHashCode(Serializable configuration) {
         try {
             // im-memory serialization of Configuration
 
@@ -15,7 +15,7 @@
                 oos.writeObject(configuration);
             }
             finally {
-                this.flushAndCloseOutStream(oos);
+                flushAndCloseOutStream(oos);
             }
 
             // Instead of hexEncoding baos.toByteArray() directly we

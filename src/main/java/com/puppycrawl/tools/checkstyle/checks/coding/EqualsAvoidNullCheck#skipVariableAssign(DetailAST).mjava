@@ -3,7 +3,7 @@
      * @param currentAST current token in the argument expression
      * @return the next relevant token
      */
-    private DetailAST skipVariableAssign(final DetailAST currentAST) {
+    private static DetailAST skipVariableAssign(final DetailAST currentAST) {
         if (currentAST.getType() == TokenTypes.ASSIGN
                 && currentAST.getFirstChild().getType() == TokenTypes.IDENT) {
             return currentAST.getFirstChild().getNextSibling();

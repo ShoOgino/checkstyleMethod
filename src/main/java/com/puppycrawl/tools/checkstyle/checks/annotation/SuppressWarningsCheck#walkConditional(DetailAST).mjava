@@ -9,12 +9,12 @@
     private void walkConditional(final DetailAST cond) {
         if (cond.getType() != TokenTypes.QUESTION) {
             final String warningText =
-                this.removeQuotes(cond.getText());
+                removeQuotes(cond.getText());
             this.logMatch(cond.getLineNo(), cond.getColumnNo(), warningText);
             return;
         }
 
-        this.walkConditional(this.getCondLeft(cond));
-        this.walkConditional(this.getCondRight(cond));
+        this.walkConditional(getCondLeft(cond));
+        this.walkConditional(getCondRight(cond));
     }
 
