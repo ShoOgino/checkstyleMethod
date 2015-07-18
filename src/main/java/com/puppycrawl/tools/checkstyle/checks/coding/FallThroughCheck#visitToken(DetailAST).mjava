@@ -1,9 +1,7 @@
     @Override
     public void visitToken(DetailAST ast) {
         final DetailAST nextGroup = ast.getNextSibling();
-        final boolean isLastGroup =
-                nextGroup == null
-                 || nextGroup.getType() != TokenTypes.CASE_GROUP;
+        final boolean isLastGroup = nextGroup.getType() != TokenTypes.CASE_GROUP;
         if (isLastGroup && !checkLastGroup) {
             // we do not need to check last group
             return;

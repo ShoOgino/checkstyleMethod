@@ -1,19 +1,14 @@
     /**
      * Checks if a given SLIST terminated by return, throw or,
      * if allowed break, continue.
-     * @param ast SLIST to check
+     * @param slistAst SLIST to check
      * @param useBreak should we consider break as terminator.
      * @param useContinue should we consider continue as terminator.
      * @return true if SLIST is terminated.
      */
-    private boolean checkSlist(final DetailAST ast, boolean useBreak,
+    private boolean checkSlist(final DetailAST slistAst, boolean useBreak,
                                boolean useContinue) {
-        DetailAST lastStmt = ast.getLastChild();
-        if (lastStmt == null) {
-            // if last case in switch is empty then slist is empty
-            // since this is a last case it is not a fall-through
-            return true;
-        }
+        DetailAST lastStmt = slistAst.getLastChild();
 
         if (lastStmt.getType() == TokenTypes.RCURLY) {
             lastStmt = lastStmt.getPreviousSibling();
