@@ -1,14 +1,15 @@
     /**
-     * do general validation
-     * @param details details
-     * @param rcurly right curly token
-     * @param lcurly left curly token
+     * Does general validation.
+     * @param details details.
+     * @param rcurly right curly token.
+     * @param lcurly left curly token.
      */
     private void validate(Details details, DetailAST rcurly, DetailAST lcurly) {
         final DetailAST nextToken = details.nextToken;
         final boolean shouldCheckLastRcurly = details.shouldCheckLastRcurly;
 
-        if (getAbstractOption() == RightCurlyOption.SAME && !hasLineBreakBefore(rcurly)) {
+        if (getAbstractOption() == RightCurlyOption.SAME
+                && !hasLineBreakBefore(rcurly)) {
             log(rcurly, MSG_KEY_LINE_BREAK_BEFORE);
         }
 
