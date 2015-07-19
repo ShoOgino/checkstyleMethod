@@ -5,8 +5,7 @@
         // if we have multileveled expected level then we should
         // try to suggest single level to children using curlies'
         // levels.
-        if (getLevel().isMultiLevel() && hasCurlys()
-            && !areOnSameLine(getLCurly(), getRCurly())) {
+        if (getLevel().isMultiLevel() && hasCurlys()) {
             if (startsLine(getLCurly())) {
                 return new IndentLevel(expandedTabsColumnNo(getLCurly()) + getBasicOffset());
             }
