@@ -16,9 +16,7 @@
         else if (literalFor.getParent().getType() == TokenTypes.SLIST
                 && literalFor.getLastChild().getType() != TokenTypes.SLIST) {
             final DetailAST block = literalFor.findFirstToken(TokenTypes.EXPR);
-            if (block != null) {
-                result = literalFor.getLineNo() == block.getLineNo();
-            }
+            result = literalFor.getLineNo() == block.getLineNo();
         }
         return result;
     }
