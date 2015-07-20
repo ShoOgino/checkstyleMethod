@@ -22,10 +22,8 @@
         AbstractExpressionHandler expHandler = null;
         final Constructor<?> handlerCtor =
             typeHandlers.get(ast.getType());
-        if (handlerCtor != null) {
-            expHandler = (AbstractExpressionHandler) Utils.invokeConstructor(
-                    handlerCtor, indentCheck, ast, parent);
-        }
+        expHandler = (AbstractExpressionHandler) Utils.invokeConstructor(
+                handlerCtor, indentCheck, ast, parent);
         return expHandler;
     }
 
