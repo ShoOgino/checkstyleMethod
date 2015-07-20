@@ -1,11 +1,6 @@
     @Override
     public void visitToken(DetailAST ast) {
-        DetailAST astNode = ast;
-        if (ast.getType() == TokenTypes.ARRAY_DECLARATOR
-                 || ast.getType() == TokenTypes.TYPECAST) {
-            astNode = getPreceded(ast);
-        }
-
+        final DetailAST astNode = getPreceded(ast);
         final String line = getLine(ast.getLineNo() - 1);
         final int after = getPositionAfter(astNode);
 
