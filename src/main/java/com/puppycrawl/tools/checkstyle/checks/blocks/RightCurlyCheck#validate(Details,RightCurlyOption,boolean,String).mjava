@@ -16,7 +16,8 @@
         String violation = "";
 
         if (bracePolicy == RightCurlyOption.SAME
-                && !hasLineBreakBefore(rcurly)) {
+                && !hasLineBreakBefore(rcurly)
+                && lcurly.getLineNo() != rcurly.getLineNo()) {
             violation = MSG_KEY_LINE_BREAK_BEFORE;
         }
         else if (shouldCheckLastRcurly) {
