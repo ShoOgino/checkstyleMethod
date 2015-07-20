@@ -22,13 +22,6 @@
                     || currentType == TokenTypes.ARRAY_INIT) {
                 logWarningMessage(node, firstNodeIndent);
             }
-            else if (currentType == TokenTypes.LITERAL_IF) {
-                final DetailAST parent = node.getParent();
-
-                if (parent.getType() == TokenTypes.LITERAL_ELSE) {
-                    logWarningMessage(parent, currentIndent);
-                }
-            }
             else {
                 logWarningMessage(node, currentIndent);
             }

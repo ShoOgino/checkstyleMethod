@@ -20,8 +20,7 @@
                 final DetailAST firstTokenOnLine = result.get(curNode.getLineNo());
 
                 if (firstTokenOnLine == null
-                        || firstTokenOnLine != null
-                        && firstTokenOnLine.getColumnNo() >= curNode.getColumnNo()) {
+                    || firstTokenOnLine.getColumnNo() >= curNode.getColumnNo()) {
                     result.put(curNode.getLineNo(), curNode);
                 }
                 curNode = getNextCurNode(curNode);
