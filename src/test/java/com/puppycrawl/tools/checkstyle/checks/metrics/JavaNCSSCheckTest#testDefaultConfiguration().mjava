@@ -1,0 +1,17 @@
+    @Test
+    public void testDefaultConfiguration() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(JavaNCSSCheck.class);
+        String[] expected = {
+        };
+
+        try {
+            createChecker(checkConfig);
+            verify(checkConfig, getPath("metrics" + File.separator
+                + "JavaNCSSCheckTestInput.java"), expected);
+        }
+        catch (Exception ex) {
+            // Exception is not expected
+            fail();
+        }
+    }
+
