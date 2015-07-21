@@ -10,9 +10,7 @@
 
         while (child != null) {
             final DetailAST toTest = getFirstToken(child);
-            if (toTest.getLineNo() < first.getLineNo()
-                || toTest.getLineNo() == first.getLineNo()
-                    && toTest.getColumnNo() < first.getColumnNo()) {
+            if (toTest.getColumnNo() < first.getColumnNo()) {
                 first = toTest;
             }
             child = child.getNextSibling();
