@@ -1,0 +1,18 @@
+    /**
+     * Checks if interface has proper modifiers
+     * @param ast interface to check
+     */
+    private void checkInterfaceModifiers(DetailAST ast) {
+        final DetailAST modifiers =
+            ast.findFirstToken(TokenTypes.MODIFIERS);
+
+        for (final int tokenType : TOKENS_FOR_INTERFACE_MODIFIERS) {
+            final DetailAST modifier =
+                    modifiers.findFirstToken(tokenType);
+            if (modifier != null) {
+                log(modifier.getLineNo(), modifier.getColumnNo(),
+                        MSG_KEY, modifier.getText());
+            }
+        }
+    }
+
