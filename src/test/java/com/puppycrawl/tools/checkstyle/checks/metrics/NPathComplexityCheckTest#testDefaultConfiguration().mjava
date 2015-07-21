@@ -1,0 +1,17 @@
+    @Test
+    public void testDefaultConfiguration() throws Exception {
+        DefaultConfiguration checkConfig =
+            createCheckConfig(NPathComplexityCheck.class);
+        String[] expected = {
+        };
+
+        try {
+            createChecker(checkConfig);
+            verify(checkConfig, getPath("ComplexityCheckTestInput.java"), expected);
+        }
+        catch (Exception ex) {
+            // Exception is not expected
+            fail();
+        }
+    }
+
