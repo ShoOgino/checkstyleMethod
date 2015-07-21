@@ -10,17 +10,11 @@
         boolean followedByWhitespace = true;
 
         if (after < line.length()) {
-
             final char charAfter = line.charAt(after);
-            if (targetAST.getType() == TokenTypes.SEMI
-                && (charAfter == ';' || charAfter == ')')) {
-                followedByWhitespace = true;
-            }
-            else if (!Character.isWhitespace(charAfter) && !isEmptyForIterator(targetAST)) {
-                followedByWhitespace = false;
-            }
+            followedByWhitespace = Character.isWhitespace(charAfter)
+                || targetAST.getType() == TokenTypes.SEMI
+                    && (charAfter == ';' || charAfter == ')');
         }
-
         return followedByWhitespace;
     }
 
