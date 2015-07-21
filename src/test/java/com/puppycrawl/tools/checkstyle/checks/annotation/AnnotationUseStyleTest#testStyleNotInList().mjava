@@ -1,0 +1,13 @@
+    @Test
+    public void testStyleNotInList() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationUseStyleCheck.class);
+        checkConfig.addAttribute("closingParens", "ignore");
+        checkConfig.addAttribute("elementStyle", "COMPACT_NO_ARRAY");
+        checkConfig.addAttribute("trailingArrayComma", "ignore");
+        final String[] expected = {
+        };
+
+        verify(checkConfig, getPath("annotation" + File.separator + "InputAnnotationUseStyleCheckTest.java"), expected);
+
+    }
+

@@ -1,0 +1,14 @@
+    @Test
+    public void testGetOption() throws Exception {
+        AnnotationUseStyleCheck check = new AnnotationUseStyleCheck();
+        try {
+            check.setElementStyle("SHOULD_PRODUCE_ERROR");
+        }
+        catch (ConversionException ex) {
+            ex.getMessage().startsWith("unable to parse");
+            return;
+        }
+
+        Assert.fail();
+    }
+
