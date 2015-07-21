@@ -1,0 +1,18 @@
+    @Test
+    public void testDefaultConfiguration() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(CustomImportOrderCheck.class);
+        String[] expected = {
+        };
+
+        try {
+            createChecker(checkConfig);
+            verify(checkConfig, getPath("imports" + File.separator
+                + "InputCustomImportOrder.java"), expected);
+        }
+        catch (Exception ex) {
+            // Exception is not expected
+            fail();
+        }
+    }
+
