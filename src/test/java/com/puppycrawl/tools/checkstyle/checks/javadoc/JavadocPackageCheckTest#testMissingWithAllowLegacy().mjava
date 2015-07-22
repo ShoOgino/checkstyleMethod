@@ -1,0 +1,14 @@
+    @Test
+    public void testMissingWithAllowLegacy() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(JavadocPackageCheck.class);
+        checkConfig.addAttribute("allowLegacy", "true");
+        final String[] expected = {
+            "0: " + getCheckMessage(MSG_PACKAGE_INFO),
+        };
+        verify(
+            createChecker(checkConfig),
+            getSrcPath("checks/javadoc/BadCls.java"),
+            getSrcPath("checks/javadoc/BadCls.java"),
+            expected);
+    }
+
