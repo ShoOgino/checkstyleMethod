@@ -1,0 +1,29 @@
+    @Test
+    public void testSerialField() {
+        final DetailAST ast = new DetailAST();
+        final DetailAST astChild = new DetailAST();
+        astChild.setType(TokenTypes.TYPE);
+        ast.setFirstChild(astChild);
+        final DetailAST astChild2 = new DetailAST();
+        astChild2.setType(TokenTypes.ARRAY_DECLARATOR);
+        astChild2.setText("ObjectStreafield");
+        astChild.setFirstChild(astChild2);
+
+        int[] validTypes = new int[] {
+            TokenTypes.VARIABLE_DEF,
+        };
+        for (int type: validTypes) {
+            ast.setType(type);
+            assertTrue(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+        }
+
+        astChild2.setText("1111");
+        assertFalse(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+
+        astChild2.setType(TokenTypes.LITERAL_VOID);
+        assertFalse(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+
+        ast.setType(TokenTypes.LAMBDA);
+        assertFalse(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+    }
+
