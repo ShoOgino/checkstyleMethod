@@ -12,10 +12,7 @@
                 lineBreaks[lineNo++] = matcher.end();
             }
             if (lineNo < lineBreaks.length) {
-                lineBreaks[lineNo++] = fullText.length();
-            }
-            if (lineNo != lineBreaks.length) {
-                throw new ConcurrentModificationException("Text changed.");
+                lineBreaks[lineNo] = fullText.length();
             }
             this.lineBreaks = lineBreaks;
         }
