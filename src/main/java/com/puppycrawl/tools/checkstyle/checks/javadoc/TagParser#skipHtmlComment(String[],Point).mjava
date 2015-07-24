@@ -7,8 +7,7 @@
     private static Point skipHtmlComment(String[] text, Point from) {
         Point to = from;
         to = findChar(text, '>', to);
-        while (to.getLineNo() < text.length
-               && !text[to.getLineNo()]
+        while (!text[to.getLineNo()]
                .substring(0, to.getColumnNo() + 1).endsWith("-->")) {
             to = findChar(text, '>', getNextCharPos(text, to));
         }
