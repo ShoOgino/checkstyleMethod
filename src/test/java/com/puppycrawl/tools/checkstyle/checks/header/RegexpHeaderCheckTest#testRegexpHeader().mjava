@@ -1,0 +1,11 @@
+    @Test
+    public void testRegexpHeader() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header"));
+        final String[] expected = {
+            "3: " + getCheckMessage(MSG_MISMATCH, "// Created: 2002"),
+        };
+        verify(checkConfig, getPath("InputScopeAnonInner.java"), expected);
+    }
+

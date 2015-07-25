@@ -1,0 +1,12 @@
+    @Test
+    public void testEmptyMultiline()
+            throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header2"));
+        checkConfig.addAttribute("multiLines", "");
+        final String[] expected = {
+            "1: " + getCheckMessage(MSG_MISSING),
+        };
+        verify(checkConfig, getPath("InputRegexpSmallHeader.java"), expected);
+    }
+

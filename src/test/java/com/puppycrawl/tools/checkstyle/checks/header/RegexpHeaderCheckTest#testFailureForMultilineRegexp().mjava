@@ -1,0 +1,14 @@
+    @Test
+    public void testFailureForMultilineRegexp() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("header", "^(.*\\n.*)");
+        try {
+            createChecker(checkConfig);
+            fail("Checker creation should not succeed when regexp spans multiple lines");
+        }
+        catch (CheckstyleException ex) {
+            // expected exception
+        }
+    }
+
