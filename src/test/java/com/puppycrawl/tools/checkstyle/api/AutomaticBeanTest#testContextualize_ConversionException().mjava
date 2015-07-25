@@ -1,0 +1,15 @@
+    @Test
+    public void testContextualize_ConversionException() {
+        final TestBean testBean = new TestBean();
+        DefaultContext context = new DefaultContext();
+        context.add("intVal", "some string");
+        try {
+            testBean.contextualize(context);
+            fail();
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof ConversionException);
+            assertTrue(ex.getMessage().startsWith("illegal value "));
+        }
+    }
+

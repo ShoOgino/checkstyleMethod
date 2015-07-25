@@ -1,0 +1,15 @@
+    @Test
+    public void testContextualize_InvocationTargetException() {
+        final TestBean testBean = new TestBean();
+        DefaultContext context = new DefaultContext();
+        context.add("exceptionalMethod", 123f);
+        try {
+            testBean.contextualize(context);
+            fail();
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof InvocationTargetException);
+            assertTrue(ex.getMessage().startsWith("Cannot set property "));
+        }
+    }
+
