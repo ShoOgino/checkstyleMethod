@@ -4,13 +4,8 @@
      * @return true, if right curly has line break before.
      */
     private static boolean hasLineBreakBefore(DetailAST rightCurly) {
-        if (rightCurly != null) {
-            final DetailAST previousToken = rightCurly.getPreviousSibling();
-            if (previousToken != null
-                    && rightCurly.getLineNo() == previousToken.getLineNo()) {
-                return false;
-            }
-        }
-        return true;
+        final DetailAST previousToken = rightCurly.getPreviousSibling();
+        return previousToken == null
+                || rightCurly.getLineNo() != previousToken.getLineNo();
     }
 

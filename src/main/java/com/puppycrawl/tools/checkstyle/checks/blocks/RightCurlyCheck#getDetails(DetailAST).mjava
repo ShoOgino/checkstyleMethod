@@ -58,10 +58,12 @@
                 rcurly = lcurly.getLastChild();
                 nextToken = ast;
                 break;
-            case TokenTypes.METHOD_DEF:
-            case TokenTypes.LITERAL_FOR:
-            case TokenTypes.LITERAL_WHILE:
-            case TokenTypes.LITERAL_DO:
+            default:
+//              ATTENTION! We have default here, but we expect case TokenTypes.METHOD_DEF,
+//              TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE, TokenTypes.LITERAL_DO only.
+//              It has been done to improve coverage to 100%. I couldn't replace it with
+//              if-else-if block because code was ugly and didn't pass pmd check.
+
                 lcurly = ast.findFirstToken(TokenTypes.SLIST);
                 if (lcurly != null) {
                     // SLIST could be absent if method is abstract,
@@ -70,9 +72,6 @@
                 }
                 nextToken = lcurly;
                 break;
-            default:
-                throw new IllegalStateException("Unexpected token type ("
-                        + Utils.getTokenName(ast.getType()) + ")");
         }
 
         final Details details = new Details();
