@@ -2,6 +2,7 @@
     public void testCarriageReturn() throws Exception {
         final String illegal = "\\r";
         checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("maximum", "0");
         final String[] expected = {
             "1: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
             "3: " + getCheckMessage(REGEXP_EXCEEDED, illegal),
