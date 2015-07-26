@@ -5,9 +5,8 @@
                 leaveForIter(ast.getParent());
                 break;
             case TokenTypes.FOR_EACH_CLAUSE:
-                final DetailAST paramDef =
-                    ast.findFirstToken(TokenTypes.VARIABLE_DEF);
-                if (shouldCheckEnhancedForLoopVariable(paramDef)) {
+                if (!skipEnhancedForLoopVariable) {
+                    final DetailAST paramDef = ast.findFirstToken(TokenTypes.VARIABLE_DEF);
                     leaveForEach(paramDef);
                 }
                 break;
