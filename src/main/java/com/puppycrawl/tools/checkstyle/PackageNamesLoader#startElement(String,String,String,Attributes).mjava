@@ -5,11 +5,8 @@
                              Attributes atts)
         throws SAXException {
         if ("package".equals(qName)) {
-            //push package name
+            //push package name, name is mandatory attribute with not empty value by DTD
             final String name = atts.getValue("name");
-            if (name == null) {
-                throw new SAXException("missing package name");
-            }
             packageStack.push(name);
         }
     }

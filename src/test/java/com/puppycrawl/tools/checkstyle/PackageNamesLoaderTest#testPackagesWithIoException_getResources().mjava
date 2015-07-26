@@ -1,0 +1,16 @@
+    @Test
+    public void testPackagesWithIoException_getResources() throws Exception {
+
+        ClassLoader classLoader = mock(ClassLoader.class);
+        when(classLoader.getResources("checkstyle_packages.xml")).thenThrow(IOException.class);
+
+        try {
+            PackageNamesLoader.getPackageNames(classLoader);
+            fail();
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof IOException);
+            assertEquals("unable to get package file resources", ex.getMessage());
+        }
+    }
+

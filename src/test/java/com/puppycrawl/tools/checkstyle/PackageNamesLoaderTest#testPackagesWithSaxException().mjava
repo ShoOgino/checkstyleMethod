@@ -1,0 +1,26 @@
+    @Test
+    public void testPackagesWithSaxException() throws Exception {
+
+        final URLConnection mockConnection = Mockito.mock(URLConnection.class);
+        when(mockConnection.getInputStream()).thenReturn(
+                new ByteArrayInputStream(new byte[]{}));
+
+        URL url = getMockUrl(mockConnection);
+
+        Enumeration<URL> enumer = (Enumeration<URL>) mock(Enumeration.class);
+        when(enumer.hasMoreElements()).thenReturn(true);
+        when(enumer.nextElement()).thenReturn(url);
+
+        ClassLoader classLoader = mock(ClassLoader.class);
+        when(classLoader.getResources("checkstyle_packages.xml")).thenReturn(enumer);
+
+        try {
+            final Set<String> packageNames = PackageNamesLoader
+                    .getPackageNames(classLoader);
+            fail();
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof SAXException);
+        }
+    }
+
