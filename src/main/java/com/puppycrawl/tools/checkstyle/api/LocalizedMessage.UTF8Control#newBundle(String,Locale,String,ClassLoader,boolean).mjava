@@ -20,10 +20,12 @@
                 stream = aLoader.getResourceAsStream(resourceName);
             }
             if (stream != null) {
-                try (Reader streamReader = new InputStreamReader(stream, "UTF-8")) {
+                final Reader streamReader = new InputStreamReader(stream, "UTF-8");
+                try {
                     // Only this line is changed to make it to read properties files as UTF-8.
                     bundle = new PropertyResourceBundle(streamReader);
-                } finally {
+                }
+                finally {
                     stream.close();
                 }
             }
