@@ -6,7 +6,7 @@
      */
     private void visitImport(DetailAST importAst) {
         if (!isStarImport(importAst)) {
-            final String canonicalName = getCanonicalName(importAst);
+            final String canonicalName = getImportedTypeCanonicalName(importAst);
             extendIllegalClassNamesWithShortName(canonicalName);
         }
     }
