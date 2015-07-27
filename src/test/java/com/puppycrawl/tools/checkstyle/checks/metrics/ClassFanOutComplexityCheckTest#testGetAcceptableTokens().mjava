@@ -1,0 +1,18 @@
+    @Test
+    public void testGetAcceptableTokens() {
+        ClassFanOutComplexityCheck classFanOutComplexityCheckObj = new ClassFanOutComplexityCheck();
+        int[] actual = classFanOutComplexityCheckObj.getAcceptableTokens();
+        int[] expected = new int[] {
+            TokenTypes.PACKAGE_DEF,
+            TokenTypes.CLASS_DEF,
+            TokenTypes.INTERFACE_DEF,
+            TokenTypes.ENUM_DEF,
+            TokenTypes.TYPE,
+            TokenTypes.LITERAL_NEW,
+            TokenTypes.LITERAL_THROWS,
+            TokenTypes.ANNOTATION_DEF,
+        };
+        Assert.assertNotNull(actual);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
