@@ -5,12 +5,10 @@
      */
     public static DetailNode getPreviousSibling(DetailNode node) {
         final DetailNode parent = node.getParent();
-        if (parent != null) {
-            final int previousSiblingIndex = node.getIndex() - 1;
-            final DetailNode[] children = parent.getChildren();
-            if (previousSiblingIndex >= 0) {
-                return children[previousSiblingIndex];
-            }
+        final int previousSiblingIndex = node.getIndex() - 1;
+        final DetailNode[] children = parent.getChildren();
+        if (previousSiblingIndex >= 0) {
+            return children[previousSiblingIndex];
         }
         return null;
     }
