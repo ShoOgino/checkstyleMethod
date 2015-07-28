@@ -2,5 +2,12 @@
     public void setCacheFile(String fileName) {
         final Configuration configuration = getConfiguration();
         cache = new PropertyCacheFile(configuration, fileName);
+
+        try {
+            cache.load();
+        }
+        catch (IOException e) {
+            throw new IllegalStateException("cache file load is failed", e);
+        }
     }
 

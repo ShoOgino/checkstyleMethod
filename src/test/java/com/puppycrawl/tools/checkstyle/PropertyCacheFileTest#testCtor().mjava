@@ -1,0 +1,17 @@
+    @Test
+    public void testCtor() throws IOException {
+        try {
+            PropertyCacheFile cache = new PropertyCacheFile(null, "");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("config can not be null", ex.getMessage());
+        }
+        try {
+            Configuration config = new DefaultConfiguration("myname");
+            PropertyCacheFile cache = new PropertyCacheFile(config, null);
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("fileName can not be null", ex.getMessage());
+        }
+    }
+

@@ -1,0 +1,30 @@
+    /**
+     * load cached values from file
+     * @throws IOException when there is a problems with file read
+     */
+    void load() throws IOException {
+        FileInputStream inStream = null;
+        // get the current config so if the file isn't found
+        // the first time the hash will be added to output file
+        final String currentConfigHash = getConfigHashCode(config);
+        if (new File(fileName).exists()) {
+            try {
+                inStream = new FileInputStream(fileName);
+                details.load(inStream);
+                final String cachedConfigHash = details.getProperty(CONFIG_HASH_KEY);
+                if (!currentConfigHash.equals(cachedConfigHash)) {
+                    // Detected configuration change - clear cache
+                    details.clear();
+                    details.put(CONFIG_HASH_KEY, currentConfigHash);
+                }
+            }
+            finally {
+                Closeables.closeQuietly(inStream);
+            }
+        }
+        else {
+            // put the hash in the file if the file is going to be created
+            details.put(CONFIG_HASH_KEY, currentConfigHash);
+        }
+    }
+

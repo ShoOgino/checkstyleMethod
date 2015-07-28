@@ -1,7 +1,15 @@
     @Test
-    public void testNonExistingCacheFileDoesNotThrowException() {
+    public void testNonExistingCacheFileDoesNotThrowException() throws Exception {
         final TreeWalker treeWalker = new TreeWalker();
+        treeWalker.configure(new DefaultConfiguration("default config"));
         treeWalker.setCacheFile("/invalid");
-        treeWalker.destroy();
+        treeWalker.finishLocalSetup();
+        try {
+            treeWalker.destroy();
+            fail();
+        }
+        catch (IllegalStateException ex) {
+            assertTrue(ex.getCause() instanceof IOException);
+        }
     }
 

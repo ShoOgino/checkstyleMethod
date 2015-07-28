@@ -1,0 +1,15 @@
+    /**
+     * Cleans up the object and updates the cache file.
+     * @throws IOException  when there is a problems with file save
+     */
+    void persist() throws IOException {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(fileName);
+            details.store(out, null);
+        }
+        finally {
+            flushAndCloseOutStream(out);
+        }
+    }
+

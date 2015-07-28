@@ -3,8 +3,9 @@
         // check if already checked and passed the file
         final String fileName = file.getPath();
         final long timestamp = file.lastModified();
-        if (cache.alreadyChecked(fileName, timestamp)
-                 || !Utils.fileExtensionMatches(file, getFileExtensions())) {
+        if (cache != null
+                && (cache.inCache(fileName, timestamp)
+                    || !Utils.fileExtensionMatches(file, getFileExtensions()))) {
             return;
         }
 
@@ -41,8 +42,8 @@
             getMessageCollector().add(createLocalizedMessage(ex.getMessage()));
         }
 
-        if (getMessageCollector().size() == 0) {
-            cache.checkedOk(fileName, timestamp);
+        if (cache != null && getMessageCollector().size() == 0) {
+            cache.put(fileName, timestamp);
         }
     }
 

@@ -1,42 +1,17 @@
     /**
      * Creates a new <code>PropertyCacheFile</code> instance.
      *
-     * @param currentConfig the current configuration, not null
+     * @param config the current configuration, not null
      * @param fileName the cache file
      */
-    PropertyCacheFile(Configuration currentConfig, String fileName) {
-        boolean setInActive = true;
-        if (fileName != null) {
-            FileInputStream inStream = null;
-            // get the current config so if the file isn't found
-            // the first time the hash will be added to output file
-            final String currentConfigHash = getConfigHashCode(currentConfig);
-            try {
-                inStream = new FileInputStream(fileName);
-                details.load(inStream);
-                final String cachedConfigHash =
-                    details.getProperty(CONFIG_HASH_KEY);
-                setInActive = false;
-                if (cachedConfigHash == null
-                    || !cachedConfigHash.equals(currentConfigHash)) {
-                    // Detected configuration change - clear cache
-                    details.clear();
-                    details.put(CONFIG_HASH_KEY, currentConfigHash);
-                }
-            }
-            catch (final FileNotFoundException e) {
-                // Ignore, the cache does not exist
-                setInActive = false;
-                // put the hash in the file if the file is going to be created
-                details.put(CONFIG_HASH_KEY, currentConfigHash);
-            }
-            catch (final IOException e) {
-                LOG.debug("Unable to open cache file, ignoring.", e);
-            }
-            finally {
-                Closeables.closeQuietly(inStream);
-            }
+    PropertyCacheFile(Configuration config, String fileName) {
+        if (config == null) {
+            throw new IllegalArgumentException("config can not be null");
         }
-        detailsFile = setInActive ? null : fileName;
+        if (fileName == null) {
+            throw new IllegalArgumentException("fileName can not be null");
+        }
+        this.config = config;
+        this.fileName = fileName;
     }
 

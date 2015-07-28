@@ -1,14 +1,12 @@
     /**
      * Flushes and closes output stream.
      * @param stream the output stream
+     * @throws IOException  when there is a problems with file flush and close
      */
-    private static void flushAndCloseOutStream(OutputStream stream) {
-        try {
+    private static void flushAndCloseOutStream(OutputStream stream) throws IOException {
+        if (stream != null) {
             Flushables.flush(stream, false);
-            Closeables.close(stream, false);
         }
-        catch (final IOException ex) {
-            LOG.debug("Unable to flush and close output stream.", ex);
-        }
+        Closeables.close(stream, false);
     }
 

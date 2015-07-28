@@ -1,0 +1,10 @@
+    @Test
+    public void testNonAccessibleFile() throws IOException {
+        Configuration config = new DefaultConfiguration("myname");
+        final File file = temporaryFolder.newFile("file.output");
+        file.setReadable(true, false);
+        file.setWritable(false, false);
+
+        PropertyCacheFile cache = new PropertyCacheFile(config, file.getAbsolutePath());
+    }
+

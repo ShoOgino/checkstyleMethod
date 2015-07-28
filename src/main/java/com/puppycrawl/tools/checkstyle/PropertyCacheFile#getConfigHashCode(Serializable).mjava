@@ -1,10 +1,10 @@
     /**
      * Calculates the hashcode for a GlobalProperties.
      *
-     * @param configuration the GlobalProperties
-     * @return the hashcode for <code>configuration</code>
+     * @param object the GlobalProperties
+     * @return the hashcode for <code>object</code>
      */
-    private static String getConfigHashCode(Serializable configuration) {
+    private static String getConfigHashCode(Serializable object) {
         try {
             // im-memory serialization of Configuration
 
@@ -12,7 +12,7 @@
             ObjectOutputStream oos = null;
             try {
                 oos = new ObjectOutputStream(baos);
-                oos.writeObject(configuration);
+                oos.writeObject(object);
             }
             finally {
                 flushAndCloseOutStream(oos);
