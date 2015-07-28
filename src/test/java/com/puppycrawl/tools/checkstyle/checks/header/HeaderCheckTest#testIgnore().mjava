@@ -1,12 +1,11 @@
     @Test
-    public void testStaticHeader() throws Exception {
+    public void testIgnore() throws Exception {
         final DefaultConfiguration checkConfig =
                 createCheckConfig(HeaderCheck.class);
         checkConfig.addAttribute("headerFile", getPath("configs/java.header"));
-        checkConfig.addAttribute("ignoreLines", "");
+        checkConfig.addAttribute("ignoreLines", "2");
         final String[] expected = {
-            "1: " + getCheckMessage(MSG_MISSING),
         };
-        verify(checkConfig, getPath("inputHeader.java"), expected);
+        verify(checkConfig, getPath("configs/java2.header"), expected);
     }
 
