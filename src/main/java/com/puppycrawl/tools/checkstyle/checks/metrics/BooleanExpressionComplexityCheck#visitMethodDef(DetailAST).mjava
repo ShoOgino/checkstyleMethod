@@ -4,6 +4,7 @@
      */
     private void visitMethodDef(DetailAST ast) {
         contextStack.push(context);
-        context = new Context(!CheckUtils.isEqualsMethod(ast));
+        final boolean check = !CheckUtils.isEqualsMethod(ast);
+        context = new Context(check);
     }
 
