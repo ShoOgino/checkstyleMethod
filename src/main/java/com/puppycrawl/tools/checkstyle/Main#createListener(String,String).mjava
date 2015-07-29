@@ -25,18 +25,17 @@
 
         // setup a listener
         AuditListener listener = null;
-        switch (format) {
-            case "xml":
-                listener = new XMLLogger(out, closeOut);
-                break;
+        if ("xml".equals(format)) {
+            listener = new XMLLogger(out, closeOut);
 
-            case "plain":
-                listener = new DefaultLogger(out, closeOut);
-                break;
+        }
+        else if ("plain".equals(format)) {
+            listener = new DefaultLogger(out, closeOut);
 
-            default:
-                throw new IllegalStateException("Invalid output format. Found '" + format
-                        + "' but expected 'plain' or 'xml'.");
+        }
+        else {
+            throw new IllegalStateException("Invalid output format. Found '" + format
+                    + "' but expected 'plain' or 'xml'.");
         }
 
         return listener;

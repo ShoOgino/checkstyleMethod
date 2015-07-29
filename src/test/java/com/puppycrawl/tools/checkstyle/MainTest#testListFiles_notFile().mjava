@@ -1,0 +1,16 @@
+    @Test
+    public void testListFiles_notFile() throws Exception {
+        Class[] param = new Class[1];
+        param[0] = File.class;
+        Method method = Main.class.getDeclaredMethod("listFiles", File.class);
+        method.setAccessible(true);
+
+        File fileMock = mock(File.class);
+        when(fileMock.canRead()).thenReturn(true);
+        when(fileMock.isDirectory()).thenReturn(false);
+        when(fileMock.isFile()).thenReturn(false);
+
+        List<File> result = (List<File>) method.invoke(null, fileMock);
+        assertTrue(result.size() == 0);
+    }
+

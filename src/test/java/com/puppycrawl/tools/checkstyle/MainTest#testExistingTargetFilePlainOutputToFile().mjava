@@ -2,12 +2,8 @@
     public void testExistingTargetFilePlainOutputToFile()
             throws Exception {
         final File file = temporaryFolder.newFile("file.output");
-        //Assert.assertTrue(file.getTotalSpace() == 0);
-
-        exit.expectSystemExitWithStatus(0);
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() {
-                //Assert.assertTrue(file.getTotalSpace() > 0);
                 assertEquals("", systemOut.getLog());
                 assertEquals("", systemErr.getLog());
             }

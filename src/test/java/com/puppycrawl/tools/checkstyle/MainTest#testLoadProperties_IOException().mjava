@@ -1,0 +1,20 @@
+    @Test
+    public void testLoadProperties_IOException() throws Exception {
+        Class[] param = new Class[1];
+        param[0] = File.class;
+        Method method = Main.class.getDeclaredMethod("loadProperties", param);
+        method.setAccessible(true);
+        try {
+            method.invoke(null, new File(File.separator + "invalid"));
+            fail();
+        }
+        catch (InvocationTargetException e) {
+            assertTrue(e.getCause() instanceof CheckstyleException);
+            assertEquals("Unable to load properties from file '" + File.separator + "invalid'.",
+                    e.getCause().getMessage());
+        }
+        catch (Exception e) {
+            fail();
+        }
+    }
+

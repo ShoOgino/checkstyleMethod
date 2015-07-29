@@ -63,7 +63,9 @@
             if (errorCounter != 0 && !cliViolations) {
                 System.out.println(String.format("Checkstyle ends with %d errors.", errorCounter));
             }
-            System.exit(exitStatus);
+            if (exitStatus != 0) {
+                System.exit(exitStatus);
+            }
         }
     }
 

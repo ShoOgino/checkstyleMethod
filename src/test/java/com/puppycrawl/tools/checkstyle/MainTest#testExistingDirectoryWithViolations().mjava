@@ -1,0 +1,43 @@
+    @Test
+    public void testExistingDirectoryWithViolations() throws Exception {
+
+        // we just reference there all violations
+        final String[][] outputValues = new String[][]{
+            {"ClassCouplingCheckTestInput", "ClassCouplingCheckTestInput", "6:14"},
+            {"ClassCouplingCheckTestInput", "InnerClass", "7:19"},
+            {"ClassCouplingCheckTestInput", "AnotherInnerClass", "11:19"},
+            {"ClassCouplingCheckTestInput", "InnerEnum", "27:6"},
+            {"InputBooleanExpressionComplexityNPE", "InputBooleanExpressionComplexityNPE", "3:14"},
+            {"BooleanExpressionComplexityCheckTestInput",
+                "BooleanExpressionComplexityCheckTestInput", "3:14", },
+            {"BooleanExpressionComplexityCheckTestInput", "Settings", "53:19"},
+            {"JavaNCSSCheckTestInput", "JavaNCSSCheckTestInput", "9:14"},
+            {"JavaNCSSCheckTestInput", "TestInnerClass", "49:19"},
+            {"JavaNCSSCheckTestInput", "TestTopLevelNestedClass", "56:7"},
+        };
+
+        exit.checkAssertionAfterwards(new Assertion() {
+            public void checkAssertion() throws IOException {
+                String currentPath = new File(".").getCanonicalPath();
+                String expectedPath = currentPath
+                        + "/src/test/resources/com/puppycrawl/tools/checkstyle/metrics/"
+                        .replace("/", File.separator);
+                String format = "%s.java:%s: warning: Name '%s' must match pattern '^[a-z0-9]*$'.";
+                StringBuilder sb = new StringBuilder();
+                sb.append("Starting audit..." + System.getProperty("line.separator"));
+                for (int i = 0; i < outputValues.length; i++) {
+                    String line = String.format(format,
+                            expectedPath + outputValues[i][0], outputValues[i][2],
+                            outputValues[i][1]);
+                    sb.append(line + System.getProperty("line.separator"));
+                }
+                sb.append("Audit done." + System.getProperty("line.separator"));
+                assertEquals(sb.toString(), systemOut.getLog());
+                assertEquals("", systemErr.getLog());
+            }
+        });
+
+        Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname2.xml",
+                "src/test/resources/com/puppycrawl/tools/checkstyle/metrics/");
+    }
+
