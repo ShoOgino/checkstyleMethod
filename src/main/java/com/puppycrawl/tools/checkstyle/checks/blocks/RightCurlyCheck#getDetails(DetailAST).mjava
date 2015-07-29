@@ -56,7 +56,7 @@
             case TokenTypes.INSTANCE_INIT:
                 lcurly = ast.findFirstToken(TokenTypes.SLIST);
                 rcurly = lcurly.getLastChild();
-                nextToken = ast;
+                nextToken = getNextToken(ast);
                 break;
             default:
 //              ATTENTION! We have default here, but we expect case TokenTypes.METHOD_DEF,
@@ -70,7 +70,7 @@
                     // and code like "while(true);"
                     rcurly = lcurly.getLastChild();
                 }
-                nextToken = lcurly;
+                nextToken = getNextToken(ast);
                 break;
         }
 

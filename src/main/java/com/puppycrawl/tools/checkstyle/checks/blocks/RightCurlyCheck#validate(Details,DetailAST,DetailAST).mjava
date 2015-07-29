@@ -12,8 +12,7 @@
                 && !hasLineBreakBefore(rcurly)) {
             log(rcurly, MSG_KEY_LINE_BREAK_BEFORE);
         }
-
-        if (shouldCheckLastRcurly) {
+        else if (shouldCheckLastRcurly) {
             if (rcurly.getLineNo() == nextToken.getLineNo()) {
                 log(rcurly, MSG_KEY_LINE_ALONE, "}");
             }
@@ -23,9 +22,25 @@
             log(rcurly, MSG_KEY_LINE_SAME, "}");
         }
         else if (getAbstractOption() == RightCurlyOption.ALONE
-                && rcurly.getLineNo() == nextToken.getLineNo()
+                && !isAloneOnLine(details)
                 && !isEmptyBody(lcurly)) {
             log(rcurly, MSG_KEY_LINE_ALONE, "}");
+        }
+        else if (getAbstractOption() == RightCurlyOption.ALONE_OR_SINGLELINE
+                && !isAloneOnLine(details)
+                && !isSingleLineBlock(details)
+                && !isAnonInnerClassInit(lcurly)
+                && !isEmptyBody(lcurly)) {
+            log(rcurly, MSG_KEY_LINE_ALONE, "}");
+        }
+        else if (shouldStartLine) {
+            final boolean startsLine =
+                Utils.whitespaceBefore(rcurly.getColumnNo(),
+                    getLines()[rcurly.getLineNo() - 1]);
+
+            if (!startsLine && lcurly.getLineNo() != rcurly.getLineNo()) {
+                log(rcurly, MSG_KEY_LINE_NEW, "}");
+            }
         }
     }
 

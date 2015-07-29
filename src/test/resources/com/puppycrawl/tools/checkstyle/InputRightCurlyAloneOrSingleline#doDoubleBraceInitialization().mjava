@@ -1,0 +1,48 @@
+    void doDoubleBraceInitialization() {
+        java.util.Map<String, String> map = new java.util.LinkedHashMap<String, String>() {{
+            put("Hello", "World");
+            put("first", "second");
+            put("polygene", "lubricants");
+            put("alpha", "betical");
+        }}; // it's ok
+
+        Thread t = new Thread() {@Override public void run() {super.run();}};
+        new Object() { @Override protected void finalize() { "".toString(); }  { int a = 5; }};
+        new Object() { @Override protected void finalize() { "".toString(); }  int b = 10; };
+        new Object() { @Override protected void finalize() { "".toString(); }  { int c = 5; } int d = 8; };
+
+        java.util.Map<String, String> map2 = new java.util.LinkedHashMap<String, String>() {{
+            put("Hello", "World");
+            put("first", "second");
+            put("polygene", "lubricants");
+            put("alpha", "betical");}  //violation
+        };
+
+        java.util.Map<String, String> map3 = new java.util.LinkedHashMap<String, String>() {{
+            put("Hello", "World");
+            put("first", "second");
+            put("polygene", "lubricants");
+            put("alpha", "betical");}}; //violation
+
+        java.util.Map<String, String> map4 = new java.util.LinkedHashMap<String, String>() {{
+            put("Hello", "World");
+            put("first", "second");
+            put("polygene", "lubricants");
+            put("alpha", "betical");
+        }
+        };
+
+        foo23(new java.util.HashSet<String>() {{
+            add("XZ13s");
+            add("AB21/X");
+            add("YYLEX");
+            add("AR5E");
+        }});  //it's ok, can't be formatted better
+
+        foo23(new java.util.HashSet<String>() {{
+            add("XZ13s");
+            add("AB21/X");
+            add("YYLEX");
+            add("AR5E");
+        }});} //violation
+

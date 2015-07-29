@@ -1,0 +1,11 @@
+    @SuppressWarnings("All")
+    void foo22() {
+        long startTime = System.nanoTime();
+        try {
+            int a = 5;
+            toString();
+        } catch (Exception e) { //violation
+            throw new RuntimeException(e);
+        } finally { toString(); } //violation
+    }
+
