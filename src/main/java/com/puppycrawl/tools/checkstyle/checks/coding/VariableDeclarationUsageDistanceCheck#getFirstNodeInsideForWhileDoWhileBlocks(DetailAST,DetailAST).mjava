@@ -24,22 +24,17 @@
             else {
                 // Looking for RPAREN ( ')' ) token to mark the end of operator
                 // expression.
-                currentNode = block.findFirstToken(TokenTypes.RPAREN);
-                if (currentNode != null) {
-                    currentNode = currentNode.getNextSibling();
-                }
+                currentNode = block.findFirstToken(TokenTypes.RPAREN).getNextSibling();
             }
 
-            if (currentNode != null) {
-                final int currentNodeType = currentNode.getType();
+            final int currentNodeType = currentNode.getType();
 
-                if (currentNodeType == TokenTypes.SLIST) {
-                    firstNodeInsideBlock = currentNode.getFirstChild();
-                }
-                else if (currentNodeType != TokenTypes.VARIABLE_DEF
-                        && currentNodeType != TokenTypes.EXPR) {
-                    firstNodeInsideBlock = currentNode;
-                }
+            if (currentNodeType == TokenTypes.SLIST) {
+                firstNodeInsideBlock = currentNode.getFirstChild();
+            }
+            else if (currentNodeType != TokenTypes.VARIABLE_DEF
+                    && currentNodeType != TokenTypes.EXPR) {
+                firstNodeInsideBlock = currentNode;
             }
         }
 
