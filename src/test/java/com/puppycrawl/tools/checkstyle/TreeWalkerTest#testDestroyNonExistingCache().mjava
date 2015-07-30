@@ -1,3 +1,4 @@
+    @Ignore
     @Test
     public void testDestroyNonExistingCache() throws Exception {
         final TreeWalker treeWalker = new TreeWalker();
@@ -6,7 +7,7 @@
         treeWalker.setCacheFile(File.separator + ":invalid");
         try {
             treeWalker.destroy();
-            fail();
+            fail("Exception did not happen");
         }
         catch (IllegalStateException ex) {
             assertTrue(ex.getCause() instanceof IOException);
