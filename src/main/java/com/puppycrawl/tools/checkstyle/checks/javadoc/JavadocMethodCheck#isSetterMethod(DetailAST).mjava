@@ -28,8 +28,7 @@
 
         // Check that is had only one parameter
         final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-        if (params == null
-                || params.getChildCount(TokenTypes.PARAMETER_DEF) != 1) {
+        if (params.getChildCount(TokenTypes.PARAMETER_DEF) != 1) {
             return false;
         }
 
@@ -43,7 +42,6 @@
         }
 
         final AST expr = slist.getFirstChild();
-        return expr.getType() == TokenTypes.EXPR
-                && expr.getFirstChild().getType() == TokenTypes.ASSIGN;
+        return expr.getFirstChild().getType() == TokenTypes.ASSIGN;
     }
 

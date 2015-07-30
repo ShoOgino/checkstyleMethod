@@ -1,6 +1,7 @@
     @Test
     public void testTagsWithResolver() throws Exception {
         checkConfig.addAttribute("allowUndeclaredRTE", "true");
+        checkConfig.addAttribute("validateThrows", "true");
         final String[] expected = {
             "14:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
             "18:9: " + getCheckMessage(MSG_UNUSED_TAG, "@param", "unused"),

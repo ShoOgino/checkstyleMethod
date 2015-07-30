@@ -1,0 +1,11 @@
+    @Test
+    public void testLogLoadErrors() throws Exception {
+        DefaultConfiguration config = createCheckConfig(JavadocMethodCheck.class);
+        config.addAttribute("logLoadErrors", "true");
+        config.addAttribute("allowUndeclaredRTE", "true");
+        final String[] expected = {
+            "7:8: " + getCheckMessage(MSG_CLASS_INFO, "@throws", "InvalidExceptionName"),
+        };
+        verify(config, getPath("javadoc/InputLoadErrors.java"), expected);
+    }
+
