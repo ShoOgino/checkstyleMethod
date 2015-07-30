@@ -2,8 +2,8 @@
     public void testExistingTargetFilePlainOutputToFileWithoutRwPermissions()
             throws Exception {
         final File file = temporaryFolder.newFile("file.output");
-        file.setReadable(true, true);
-        file.setWritable(false, false);
+        assertTrue(file.setReadable(true, true));
+        assertTrue(file.setWritable(false, false));
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() throws IOException {

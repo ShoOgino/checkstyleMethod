@@ -1,4 +1,3 @@
-    @Ignore
     @Test
     public void testLoadProperties_IOException() throws Exception {
         Class[] param = new Class[1];
@@ -11,8 +10,11 @@
         }
         catch (InvocationTargetException e) {
             assertTrue(e.getCause() instanceof CheckstyleException);
-            assertEquals("Unable to load properties from file '" + File.separator + "invalid'.",
-                    e.getCause().getMessage());
+            // We do separate validation for message as in Windows
+            // disk drive letter appear in message,
+            // so we skip that drive letter for compatibility issues
+            assertTrue(e.getCause().getMessage().startsWith("Unable to load properties from file '"));
+            assertTrue(e.getCause().getMessage().endsWith("invalid'."));
         }
         catch (Exception e) {
             fail();

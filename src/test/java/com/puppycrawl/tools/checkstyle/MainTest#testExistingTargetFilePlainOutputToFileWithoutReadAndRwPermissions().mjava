@@ -2,8 +2,12 @@
     public void testExistingTargetFilePlainOutputToFileWithoutReadAndRwPermissions()
             throws Exception {
         final File file = temporaryFolder.newFile("file.output");
-        file.setReadable(false, false);
-        file.setWritable(false, false);
+        // That works fine on Linux/Unix, but ....
+        // It's not possible to make a file unreadable in Windows NTFS for owner.
+        // http://stackoverflow.com/a/4354686
+        // https://github.com/google/google-oauth-java-client/issues/55#issuecomment-69403681
+        //assertTrue(file.setReadable(false, false));
+        assertTrue(file.setWritable(false, false));
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(new Assertion() {
             public void checkAssertion() throws IOException {
