@@ -1,0 +1,12 @@
+    @Test
+    public void testCallVisitToken() throws Exception {
+        TrailingCommentCheck check = new TrailingCommentCheck();
+        try {
+            check.visitToken(new DetailAST());
+            Assert.fail();
+        }
+        catch (IllegalStateException ex) {
+            "visitToken() shouldn't be called.".equals(ex.getMessage());
+        }
+    }
+
