@@ -1,0 +1,10 @@
+    @Test(expected = ConversionException.class)
+    public void testInvalidInfluenceFormat() throws Exception {
+        final DefaultConfiguration filterConfig =
+            createFilterConfig(SuppressWithNearbyCommentFilter.class);
+        filterConfig.addAttribute("influenceFormat", "a");
+        final String[] suppressed = {
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+
