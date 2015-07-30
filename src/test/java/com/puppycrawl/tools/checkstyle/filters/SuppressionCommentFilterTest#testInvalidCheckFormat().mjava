@@ -1,0 +1,10 @@
+    @Test(expected = ConversionException.class)
+    public void testInvalidCheckFormat() throws Exception {
+        final DefaultConfiguration filterConfig =
+            createFilterConfig(SuppressionCommentFilter.class);
+        filterConfig.addAttribute("checkFormat", "e[l");
+        final String[] suppressed = {
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+
