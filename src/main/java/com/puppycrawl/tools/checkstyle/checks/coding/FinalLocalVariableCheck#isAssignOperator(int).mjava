@@ -4,21 +4,6 @@
      * @return true is token type is in arithmetic operator
      */
     private static boolean isAssignOperator(int parentType) {
-        return TokenTypes.POST_DEC == parentType
-                || TokenTypes.DEC == parentType
-                || TokenTypes.POST_INC == parentType
-                || TokenTypes.INC == parentType
-                || TokenTypes.ASSIGN == parentType
-                || TokenTypes.PLUS_ASSIGN == parentType
-                || TokenTypes.MINUS_ASSIGN == parentType
-                || TokenTypes.DIV_ASSIGN == parentType
-                || TokenTypes.STAR_ASSIGN == parentType
-                || TokenTypes.MOD_ASSIGN == parentType
-                || TokenTypes.SR_ASSIGN == parentType
-                || TokenTypes.BSR_ASSIGN == parentType
-                || TokenTypes.SL_ASSIGN == parentType
-                || TokenTypes.BXOR_ASSIGN == parentType
-                || TokenTypes.BOR_ASSIGN == parentType
-                || TokenTypes.BAND_ASSIGN == parentType;
+        return Arrays.binarySearch(ASSIGN_OPERATOR_TYPES, parentType) >= 0;
     }
 

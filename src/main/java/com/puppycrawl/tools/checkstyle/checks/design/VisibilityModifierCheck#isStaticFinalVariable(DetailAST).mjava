@@ -1,0 +1,10 @@
+    /**
+     * Checks whether variable has static final modifiers.
+     * @param variableDef Variable definition node.
+     * @return true of variable has static final modifiers.
+     */
+    private static boolean isStaticFinalVariable(DetailAST variableDef) {
+        final Set<String> modifiers = getModifiers(variableDef);
+        return modifiers.contains("static") && modifiers.contains("final");
+    }
+

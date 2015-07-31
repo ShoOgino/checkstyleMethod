@@ -7,21 +7,17 @@
     private boolean hasProperAccessModifier(DetailAST variableDef, String variableName) {
         boolean result = true;
 
-        final Set<String> mods = getModifiers(variableDef);
-        final String variableScope = getVisibilityScope(mods);
+
+        final String variableScope = getVisibilityScope(variableDef);
 
         if (!"private".equals(variableScope)) {
-            final DetailAST classDef = variableDef.getParent().getParent();
-            final Set<String> classModifiers = getModifiers(classDef);
-
             result =
-                mods.contains("static") && mods.contains("final")
+                isStaticFinalVariable(variableDef)
                 || isPackageAllowed() && "package".equals(variableScope)
                 || isProtectedAllowed() && "protected".equals(variableScope)
-                || "public".equals(variableScope)
-                   && getPublicMemberRegexp().matcher(variableName).find()
+                || isIgnoredPublicMember(variableName, variableScope)
                    || allowPublicImmutableFields
-                      && classModifiers.contains("final") && isImmutableField(variableDef);
+                      && isImmutableFieldDefinedInFinalClass(variableDef);
         }
 
         return result;
