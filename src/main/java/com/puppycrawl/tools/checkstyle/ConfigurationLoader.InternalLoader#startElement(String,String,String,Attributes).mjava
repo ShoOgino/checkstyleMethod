@@ -49,5 +49,10 @@
                 final DefaultConfiguration top = configStack.peek();
                 top.addMessage(key, value);
             }
+            else {
+                if (!qName.equals(METADATA)) {
+                    throw new IllegalStateException("Unknown name:" + qName + ".");
+                }
+            }
         }
 

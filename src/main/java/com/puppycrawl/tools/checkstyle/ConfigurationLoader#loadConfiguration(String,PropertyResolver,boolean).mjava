@@ -17,13 +17,10 @@
             final URL url = new URL(config);
             uri = url.toURI();
         }
-        catch (final MalformedURLException ex) {
+        catch (final URISyntaxException | MalformedURLException ex) {
             uri = null;
         }
-        catch (final URISyntaxException ex) {
-            // URL violating RFC 2396
-            uri = null;
-        }
+
         if (uri == null) {
             final File file = new File(config);
             if (file.exists()) {
@@ -40,7 +37,7 @@
                     uri = configUrl.toURI();
                 }
                 catch (final URISyntaxException e) {
-                    throw new CheckstyleException("unable to find " + config);
+                    throw new CheckstyleException("unable to find " + config, e);
                 }
             }
         }

@@ -1,0 +1,13 @@
+    @Test
+    public void testNonExistingPropertyName() {
+        try {
+            loadConfiguration("config_nonexisting_property.xml");
+            fail("exception in expected");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("unable to parse configuration stream", ex.getMessage());
+            assertEquals("Property ${nonexisting} has not been set",
+                    ex.getCause().getMessage());
+        }
+    }
+

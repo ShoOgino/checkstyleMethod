@@ -1,0 +1,25 @@
+    @Test
+    public void testLoadConfiguration_URISyntaxException() throws CheckstyleException {
+        mockStatic(ConfigurationLoader.class);
+
+        PropertiesExpander expander = new PropertiesExpander(new Properties());
+
+        when(ConfigurationLoader.class.getResource("config_with_ignore.xml"))
+                .thenThrow(URISyntaxException.class);
+        when(ConfigurationLoader.loadConfiguration("config_with_ignore.xml",
+                expander,
+                true))
+                .thenCallRealMethod();
+
+        try {
+            ConfigurationLoader.loadConfiguration(
+                    "config_with_ignore.xml", expander, true);
+
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof  URISyntaxException);
+            assertEquals("unable to find config_with_ignore.xml", ex.getMessage());
+        }
+    }
+

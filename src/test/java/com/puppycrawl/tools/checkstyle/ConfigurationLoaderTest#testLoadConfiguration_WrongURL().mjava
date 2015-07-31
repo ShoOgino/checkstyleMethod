@@ -1,0 +1,17 @@
+    @Test
+    public void testLoadConfiguration_WrongURL() throws CheckstyleException {
+        try {
+            final DefaultConfiguration config =
+                    (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
+                            ";config_with_ignore.xml",
+                            new PropertiesExpander(new Properties()), true);
+
+            final Configuration[] children = config.getChildren();
+            assertTrue(children[0].getChildren().length == 0);
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("unable to find ;config_with_ignore.xml", ex.getMessage());
+        }
+    }
+
