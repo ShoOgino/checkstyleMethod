@@ -1,0 +1,9 @@
+        @Override
+        public RevCommit next() {
+            RevCommit currentCommit = revCommitIterator.next();
+            while (isMergeCommit(currentCommit)) {
+                currentCommit = revCommitIterator.next();
+            }
+            return currentCommit;
+        }
+

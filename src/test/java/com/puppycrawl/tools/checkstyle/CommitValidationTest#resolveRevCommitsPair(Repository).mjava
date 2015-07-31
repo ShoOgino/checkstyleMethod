@@ -1,0 +1,34 @@
+    private static RevCommitsPair resolveRevCommitsPair(Repository repo) {
+        RevCommitsPair revCommitIteratorPair;
+        try {
+            Iterator<RevCommit> first;
+            Iterator<RevCommit> second;
+
+            RevWalk revWalk = new RevWalk(repo);
+
+            ObjectId headId = repo.resolve(Constants.HEAD);
+            RevCommit headCommit = revWalk.parseCommit(headId);
+
+            if (isMergeCommit(headCommit)) {
+                RevCommit firstParent = headCommit.getParent(0);
+                RevCommit secondParent = headCommit.getParent(1);
+
+                first = new Git(repo).log().add(firstParent).call().iterator();
+                second = new Git(repo).log().add(secondParent).call().iterator();
+            }
+            else {
+                first = new Git(repo).log().call().iterator();
+                second = Collections.emptyIterator();
+            }
+
+            revCommitIteratorPair =
+                    new RevCommitsPair(new OmitMergeCommitsIterator(first),
+                            new OmitMergeCommitsIterator(second));
+        }
+        catch (GitAPIException | IOException e) {
+            revCommitIteratorPair = new RevCommitsPair();
+        }
+
+        return revCommitIteratorPair;
+    }
+
