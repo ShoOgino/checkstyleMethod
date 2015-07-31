@@ -1,0 +1,9 @@
+    @Test
+    public void testCtor() throws UnsupportedEncodingException {
+        OutputStream infoStream = new ByteArrayOutputStream();
+        OutputStream errorStream = new ByteArrayOutputStream();
+        DefaultLogger dl = new DefaultLogger(infoStream, true, errorStream, true);
+        dl.addException(new AuditEvent(5000, "myfile"), new IllegalStateException("upsss"));
+        dl.auditFinished(new AuditEvent(6000, "myfile"));
+    }
+
