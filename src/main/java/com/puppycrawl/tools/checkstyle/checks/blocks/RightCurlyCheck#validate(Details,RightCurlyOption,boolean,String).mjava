@@ -1,0 +1,53 @@
+    /**
+     * Does general validation.
+     * @param details for validation.
+     * @param bracePolicy for placing the right curly brace.
+     * @param shouldStartLine do we need to check if right curly starts line.
+     * @param targetSourceLine line that we need to check if shouldStartLine is true.
+     * @return violation message or empty string
+     * if there was not violation durning validation.
+     */
+    private static String validate(Details details, RightCurlyOption bracePolicy,
+                                   boolean shouldStartLine, String targetSourceLine) {
+        final DetailAST rcurly = details.rcurly;
+        final DetailAST lcurly = details.lcurly;
+        final DetailAST nextToken = details.nextToken;
+        final boolean shouldCheckLastRcurly = details.shouldCheckLastRcurly;
+        String violation = "";
+
+        if (bracePolicy == RightCurlyOption.SAME
+                && !hasLineBreakBefore(rcurly)) {
+            violation = MSG_KEY_LINE_BREAK_BEFORE;
+        }
+        else if (shouldCheckLastRcurly) {
+            if (rcurly.getLineNo() == nextToken.getLineNo()) {
+                violation = MSG_KEY_LINE_ALONE;
+            }
+        }
+        else if (bracePolicy == RightCurlyOption.SAME
+                && rcurly.getLineNo() != nextToken.getLineNo()) {
+            violation = MSG_KEY_LINE_SAME;
+        }
+        else if (bracePolicy == RightCurlyOption.ALONE
+                && !isAloneOnLine(details)
+                && !isEmptyBody(lcurly)) {
+            violation = MSG_KEY_LINE_ALONE;
+        }
+        else if (bracePolicy == RightCurlyOption.ALONE_OR_SINGLELINE
+                && !isAloneOnLine(details)
+                && !isSingleLineBlock(details)
+                && !isAnonInnerClassInit(lcurly)
+                && !isEmptyBody(lcurly)) {
+            violation = MSG_KEY_LINE_ALONE;
+        }
+        else if (shouldStartLine) {
+            final boolean startsLine =
+                Utils.whitespaceBefore(rcurly.getColumnNo(), targetSourceLine);
+
+            if (!startsLine && lcurly.getLineNo() != rcurly.getLineNo()) {
+                violation = MSG_KEY_LINE_NEW;
+            }
+        }
+        return violation;
+    }
+
