@@ -1,0 +1,13 @@
+    @Test
+    public void testNoCheckNoId() {
+        final String fn = "src/test/resources/com/puppycrawl/tools/checkstyle/suppressions_no_check_and_id.xml";
+        try {
+            SuppressionsLoader.loadSuppressions(fn);
+        }
+        catch (CheckstyleException ex) {
+            assertEquals(
+                "unable to parse " + fn + " - missing checks and id attribute",
+                ex.getMessage());
+        }
+    }
+

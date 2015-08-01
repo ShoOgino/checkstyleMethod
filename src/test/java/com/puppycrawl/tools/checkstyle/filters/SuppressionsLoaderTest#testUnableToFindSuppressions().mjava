@@ -1,0 +1,20 @@
+    @Test
+    public void testUnableToFindSuppressions() throws Exception {
+        mockStatic(SuppressionsLoader.class);
+
+        String fileName = "suppressions_none.xml";
+        InputSource source = mock(InputSource.class);
+
+        when(source.getByteStream()).thenThrow(FileNotFoundException.class);
+        when(SuppressionsLoader.class, "loadSuppressions", source, fileName).thenCallRealMethod();
+
+        try {
+            Whitebox.invokeMethod(SuppressionsLoader.class, "loadSuppressions", source, fileName);
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof  FileNotFoundException);
+            assertEquals("unable to find " + fileName, ex.getMessage());
+        }
+    }
+

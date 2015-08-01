@@ -17,10 +17,7 @@
         catch (final FileNotFoundException e) {
             throw new CheckstyleException("unable to find " + sourceName, e);
         }
-        catch (final ParserConfigurationException e) {
-            throw new CheckstyleException("unable to parse " + sourceName, e);
-        }
-        catch (final SAXException e) {
+        catch (final ParserConfigurationException | SAXException e) {
             throw new CheckstyleException("unable to parse "
                     + sourceName + " - " + e.getMessage(), e);
         }

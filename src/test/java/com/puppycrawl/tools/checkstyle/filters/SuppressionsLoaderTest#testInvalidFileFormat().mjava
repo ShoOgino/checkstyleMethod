@@ -1,0 +1,13 @@
+    @Test
+    public void testInvalidFileFormat() {
+        final String fn = "src/test/resources/com/puppycrawl/tools/checkstyle/suppressions_invalid_file.xml";
+        try {
+            SuppressionsLoader.loadSuppressions(fn);
+        }
+        catch (CheckstyleException ex) {
+            assertEquals(
+                "unable to parse " + fn + " - invalid files or checks format",
+                ex.getMessage());
+        }
+    }
+

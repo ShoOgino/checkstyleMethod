@@ -1,0 +1,22 @@
+    @Test
+    public void testloadSuppressionsURISyntaxException() throws Exception {
+        mockStatic(SuppressionsLoader.class);
+
+        URL configUrl = mock(URL.class);
+        String fileName = "suppressions_none.xml";
+
+        when(SuppressionsLoader.class.getResource(fileName)).thenReturn(configUrl);
+        when(configUrl.toURI()).thenThrow(URISyntaxException.class);
+        when(SuppressionsLoader.loadSuppressions(fileName))
+                .thenCallRealMethod();
+
+        try {
+            SuppressionsLoader.loadSuppressions(fileName);
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof  URISyntaxException);
+            assertEquals("unable to find " + fileName, ex.getMessage());
+        }
+    }
+
