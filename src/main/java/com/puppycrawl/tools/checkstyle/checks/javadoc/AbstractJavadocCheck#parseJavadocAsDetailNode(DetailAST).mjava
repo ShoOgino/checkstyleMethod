@@ -19,12 +19,6 @@
         try {
             parseTree = parseJavadocAsParseTree(javadocComment);
         }
-        catch (IOException e) {
-            // Antlr can not initiate its ANTLRInputStream
-            parseErrorMessage = new ParseErrorMessage(javadocCommentAst.getLineNo(),
-                    PARSE_ERROR_MESSAGE_KEY,
-                    javadocCommentAst.getColumnNo(), e.getMessage());
-        }
         catch (ParseCancellationException e) {
             // If syntax error occurs then message is printed by error listener
             // and parser throws this runtime exception to stop parsing.

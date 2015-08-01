@@ -6,10 +6,6 @@
     private void walk(DetailNode root) {
         final int[] defaultTokenTypes = getDefaultJavadocTokens();
 
-        if (defaultTokenTypes == null) {
-            return;
-        }
-
         DetailNode curNode = root;
         while (curNode != null) {
             final boolean waitsFor = Ints.contains(defaultTokenTypes, curNode.getType());

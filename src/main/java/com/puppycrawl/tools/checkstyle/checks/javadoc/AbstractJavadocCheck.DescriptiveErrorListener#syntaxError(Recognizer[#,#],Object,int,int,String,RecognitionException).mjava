@@ -29,20 +29,13 @@
                 throw new ParseCancellationException();
             }
             else {
-                final RuleContext ruleContext = ex.getCtx();
-                if (ruleContext != null) {
-                    final int ruleIndex = ex.getCtx().getRuleIndex();
-                    final String ruleName = recognizer.getRuleNames()[ruleIndex];
-                    final String upperCaseRuleName = CaseFormat.UPPER_CAMEL.to(
-                            CaseFormat.UPPER_UNDERSCORE, ruleName);
+                final int ruleIndex = ex.getCtx().getRuleIndex();
+                final String ruleName = recognizer.getRuleNames()[ruleIndex];
+                final String upperCaseRuleName = CaseFormat.UPPER_CAMEL.to(
+                        CaseFormat.UPPER_UNDERSCORE, ruleName);
 
-                    errorMessage = new ParseErrorMessage(lineNumber,
-                            JAVADOC_PARSE_RULE_ERROR, charPositionInLine, msg, upperCaseRuleName);
-                }
-                else {
-                    errorMessage = new ParseErrorMessage(lineNumber, JAVADOC_PARSE_TOKEN_ERROR,
-                            charPositionInLine, msg, charPositionInLine);
-                }
+                errorMessage = new ParseErrorMessage(lineNumber,
+                        JAVADOC_PARSE_RULE_ERROR, charPositionInLine, msg, upperCaseRuleName);
             }
         }
 

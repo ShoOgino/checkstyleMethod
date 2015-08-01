@@ -6,12 +6,8 @@
      * @throws IOException
      *         errors in ANTLRInputStream
      */
-    private ParseTree parseJavadocAsParseTree(String blockComment)
-        throws IOException {
-        final Charset utf8Charset = Charset.forName("UTF-8");
-        final InputStream in = new ByteArrayInputStream(blockComment.getBytes(utf8Charset));
-
-        final ANTLRInputStream input = new ANTLRInputStream(in);
+    private ParseTree parseJavadocAsParseTree(String blockComment) {
+        final ANTLRInputStream input = new ANTLRInputStream(blockComment);
 
         final JavadocLexer lexer = new JavadocLexer(input);
 

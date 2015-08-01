@@ -1,0 +1,9 @@
+    @Test
+    public void testCustomTag() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(TempCheck.class);
+        final String[] expected = {
+            "4: " + getCheckMessage(UNRECOGNIZED_ANTLR_ERROR_MESSAGE_KEY, 4, "null"),
+        };
+        verify(checkConfig, getPath("javadoc/InputCustomTag.java"), expected);
+    }
+

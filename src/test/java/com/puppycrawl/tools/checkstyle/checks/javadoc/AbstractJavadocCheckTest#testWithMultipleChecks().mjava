@@ -1,0 +1,16 @@
+    @Test
+    public void testWithMultipleChecks() throws Exception {
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("configuration");
+        final DefaultConfiguration checksConfig = createCheckConfig(TreeWalker.class);
+        checksConfig.addChild(createCheckConfig(AtclauseOrderCheck.class));
+        checksConfig.addChild(createCheckConfig(JavadocParagraphCheck.class));
+        checkerConfig.addChild(checksConfig);
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(checkerConfig);
+
+        final String[] expected = {
+        };
+        verify(checker, getPath("javadoc/InputCorrectJavaDocParagraphCheck.java"), expected);
+    }
+
