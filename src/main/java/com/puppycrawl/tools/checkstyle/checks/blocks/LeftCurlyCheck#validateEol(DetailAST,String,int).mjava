@@ -7,11 +7,10 @@
     private void validateEol(DetailAST brace, String braceLine, int prevLineLen) {
         if (Utils.whitespaceBefore(brace.getColumnNo(), braceLine)
             && prevLineLen + 2 <= maxLineLength) {
-            log(brace.getLineNo(), brace.getColumnNo(),
-                MSG_KEY_LINE_PREVIOUS, "{");
+            log(brace, MSG_KEY_LINE_PREVIOUS, "{", brace.getColumnNo() + 1);
         }
         if (!hasLineBreakAfter(brace)) {
-            log(brace.getLineNo(), brace.getColumnNo(), MSG_KEY_LINE_BREAK_AFTER);
+            log(brace, MSG_KEY_LINE_BREAK_AFTER, "{", brace.getColumnNo() + 1);
         }
     }
 

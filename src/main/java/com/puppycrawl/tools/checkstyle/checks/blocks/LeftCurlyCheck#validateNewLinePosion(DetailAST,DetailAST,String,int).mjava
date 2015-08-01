@@ -10,17 +10,14 @@
         // not on the same line
         if (startToken.getLineNo() + 1 == brace.getLineNo()) {
             if (!Utils.whitespaceBefore(brace.getColumnNo(), braceLine)) {
-                log(brace.getLineNo(), brace.getColumnNo(),
-                        MSG_KEY_LINE_NEW, "{");
+                log(brace, MSG_KEY_LINE_NEW, "{", brace.getColumnNo() + 1);
             }
             else if (prevLineLen + 2 <= maxLineLength) {
-                log(brace.getLineNo(), brace.getColumnNo(),
-                        MSG_KEY_LINE_PREVIOUS, "{");
+                log(brace, MSG_KEY_LINE_PREVIOUS, "{", brace.getColumnNo() + 1);
             }
         }
         else if (!Utils.whitespaceBefore(brace.getColumnNo(), braceLine)) {
-            log(brace.getLineNo(), brace.getColumnNo(),
-                    MSG_KEY_LINE_NEW, "{");
+            log(brace, MSG_KEY_LINE_NEW, "{", brace.getColumnNo() + 1);
         }
     }
 
