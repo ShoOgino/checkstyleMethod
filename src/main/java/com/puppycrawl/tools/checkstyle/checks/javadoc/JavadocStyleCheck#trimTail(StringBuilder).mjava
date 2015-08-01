@@ -1,0 +1,26 @@
+    /**
+     * Trims any trailing whitespace or the end of Javadoc comment string.
+     * @param builder the StringBuilder to trim.
+     */
+    private static void trimTail(StringBuilder builder) {
+        int i = builder.length() - 1;
+        while (true) {
+            if (Character.isWhitespace(builder.charAt(i))) {
+                builder.deleteCharAt(i);
+            }
+            else if (builder.charAt(i - 1) == '*') {
+                builder.deleteCharAt(i);
+                builder.deleteCharAt(i - 1);
+                i--;
+                while (builder.charAt(i - 1) == '*') {
+                    builder.deleteCharAt(i - 1);
+                    i--;
+                }
+            }
+            else {
+                break;
+            }
+            i--;
+        }
+    }
+

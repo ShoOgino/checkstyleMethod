@@ -4,7 +4,7 @@
      * @return a comment text String.
      */
     private static String getCommentText(String... comments) {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder builder = new StringBuilder();
         for (final String line : comments) {
             final int textStart = findTextStart(line);
 
@@ -13,12 +13,12 @@
                     //we have found the tag section
                     break;
                 }
-                buffer.append(line.substring(textStart));
-                trimTail(buffer);
-                buffer.append('\n');
+                builder.append(line.substring(textStart));
+                trimTail(builder);
+                builder.append('\n');
             }
         }
 
-        return buffer.toString().trim();
+        return builder.toString().trim();
     }
 
