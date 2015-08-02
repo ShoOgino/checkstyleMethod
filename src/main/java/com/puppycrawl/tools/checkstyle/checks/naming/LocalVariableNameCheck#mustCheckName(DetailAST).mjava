@@ -3,7 +3,7 @@
         if (allowOneCharVarInForLoop && isForLoopVariable(ast)) {
             final String variableName =
                     ast.findFirstToken(TokenTypes.IDENT).getText();
-            return !sSingleChar.matcher(variableName).find();
+            return !SINGLE_CHAR.matcher(variableName).find();
         }
         final DetailAST modifiersAST =
             ast.findFirstToken(TokenTypes.MODIFIERS);

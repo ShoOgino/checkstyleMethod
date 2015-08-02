@@ -6,9 +6,9 @@
         if (hasUnicodeChar(literal) && !(allowByTailComment && hasTrailComment(ast)
                 || isAllCharactersEscaped(literal)
                 || allowEscapesForControlCharacters
-                        && isOnlyUnicodeValidChars(literal, sUnicodeControl)
+                        && isOnlyUnicodeValidChars(literal, UNICODE_CONTROL)
                 || allowNonPrintableEscapes
-                        && isOnlyUnicodeValidChars(literal, sNonPrintableChars))) {
+                        && isOnlyUnicodeValidChars(literal, NON_PRINTABLE_CHARS))) {
             log(ast.getLineNo(), "forbid.escaped.unicode.char");
         }
     }
