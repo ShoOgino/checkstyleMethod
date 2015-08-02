@@ -21,7 +21,7 @@
                 break;
             case TokenTypes.VARIABLE_DEF:
                 if (ast.getParent().getType() != TokenTypes.OBJBLOCK
-                        && isVariableInForInit(ast)
+                        && !isVariableInForInit(ast)
                         && shouldCheckEnhancedForLoopVariable(ast)
                         && !ast.branchContains(TokenTypes.FINAL)) {
                     insertVariable(ast);
@@ -37,6 +37,7 @@
                 break;
 
             default:
+                throw new IllegalStateException("Incorrect token type");
         }
     }
 
