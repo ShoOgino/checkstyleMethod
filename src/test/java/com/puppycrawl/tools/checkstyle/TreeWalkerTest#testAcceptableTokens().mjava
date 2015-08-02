@@ -10,11 +10,11 @@
         };
         try {
             verify(checkConfig, getPath("InputHiddenField.java"), expected);
-            Assert.fail();
+            fail();
         }
         catch (CheckstyleException e) {
             String errorMsg = e.getMessage();
-            Assert.assertTrue(errorMsg.contains("cannot initialize module"
+            assertTrue(errorMsg.contains("cannot initialize module"
                     + " com.puppycrawl.tools.checkstyle.TreeWalker - Token \"IMPORT\""
                     + " was not found in Acceptable tokens list in check"
                     + " com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck"));
