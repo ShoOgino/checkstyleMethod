@@ -1,0 +1,41 @@
+    @Test
+    public void testNullClassLoader() throws Exception {
+        DetailAST exprAst = new DetailAST();
+        exprAst.setType(TokenTypes.EXPR);
+
+        DetailAST newAst = new DetailAST();
+        newAst.setType(TokenTypes.LITERAL_NEW);
+        newAst.setLineNo(1);
+        newAst.setColumnNo(1);
+
+        DetailAST identAst = new DetailAST();
+        identAst.setType(TokenTypes.IDENT);
+        identAst.setText("Boolean");
+
+        DetailAST lparenAst = new DetailAST();
+        lparenAst.setType(TokenTypes.LPAREN);
+
+        DetailAST elistAst = new DetailAST();
+        elistAst.setType(TokenTypes.ELIST);
+
+        DetailAST rparenAst = new DetailAST();
+        rparenAst.setType(TokenTypes.RPAREN);
+
+        exprAst.addChild(newAst);
+        newAst.addChild(identAst);
+        identAst.setNextSibling(lparenAst);
+        lparenAst.setNextSibling(elistAst);
+        elistAst.setNextSibling(rparenAst);
+
+        IllegalInstantiationCheck check = new IllegalInstantiationCheck();
+        File inputFile = new File("src/test/resources-noncompilable/com/puppycrawl/tools/checkstyle/"
+                + "coding/InputIllegalInstantiationCheckLang.java");
+        check.setFileContents(new FileContents(new FileText(inputFile, "UTF-8")));
+        check.configure(createCheckConfig(IllegalInstantiationCheck.class));
+        check.setMessages(new LocalizedMessages());
+
+        check.setClasses("java.lang.Boolean");
+        check.visitToken(newAst);
+        check.finishTree(newAst);
+    }
+

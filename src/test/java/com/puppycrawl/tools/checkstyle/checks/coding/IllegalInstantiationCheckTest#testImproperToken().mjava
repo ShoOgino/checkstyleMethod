@@ -1,0 +1,16 @@
+    @Test
+    public void testImproperToken() throws Exception {
+        IllegalInstantiationCheck check = new IllegalInstantiationCheck();
+
+        DetailAST lambdaAst = new DetailAST();
+        lambdaAst.setType(TokenTypes.LAMBDA);
+
+        try {
+            check.visitToken(lambdaAst);
+            Assert.fail();
+        }
+        catch (IllegalArgumentException e) {
+            // it is OK
+        }
+    }
+

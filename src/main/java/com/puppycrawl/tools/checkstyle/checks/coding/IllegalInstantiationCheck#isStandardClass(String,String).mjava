@@ -1,15 +1,12 @@
     /**
      * is Standard Class
      * @param className class name
-     * @param clsNameLen class name length
      * @param illegal illegal value
-     * @param illegalLen illegal value length
      * @return true if type is standard
      */
-    private boolean isStandardClass(String className, int clsNameLen, String illegal,
-                                    int illegalLen) {
+    private boolean isStandardClass(String className, String illegal) {
         // class from java.lang
-        if (illegalLen - JAVA_LANG.length() == clsNameLen
+        if (illegal.length() - JAVA_LANG.length() == className.length()
             && illegal.endsWith(className)
             && illegal.startsWith(JAVA_LANG)) {
             // java.lang needs no import, but a class without import might

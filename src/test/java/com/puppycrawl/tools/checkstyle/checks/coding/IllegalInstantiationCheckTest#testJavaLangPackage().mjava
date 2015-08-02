@@ -1,0 +1,17 @@
+    @Test
+    public void testJavaLangPackage() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(IllegalInstantiationCheck.class);
+        checkConfig.addAttribute(
+                "classes",
+                "java.lang.Boolean,java.lang.String");
+        final String[] expected = {
+            "4:19: " + getCheckMessage(MSG_KEY, "java.lang.Boolean"),
+            "11:20: " + getCheckMessage(MSG_KEY, "java.lang.String"),
+        };
+        verify(checkConfig,
+                new File("src/test/resources-noncompilable/com/puppycrawl/tools/checkstyle/"
+                          + "coding/InputIllegalInstantiationCheckLang.java").getCanonicalPath(),
+                expected);
+    }
+

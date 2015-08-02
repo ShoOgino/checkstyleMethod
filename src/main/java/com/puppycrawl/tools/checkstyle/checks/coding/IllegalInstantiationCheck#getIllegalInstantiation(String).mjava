@@ -9,16 +9,14 @@
             return className;
         }
 
-        final int clsNameLen = className.length();
         final int pkgNameLen = pkgName == null ? 0 : pkgName.length();
 
         for (String illegal : illegalClasses) {
 
-            final int illegalLen = illegal.length();
-            if (isStandardClass(className, clsNameLen, illegal, illegalLen)) {
+            if (isStandardClass(className, illegal)) {
                 return illegal;
             }
-            if (isSamePackage(className, clsNameLen, pkgNameLen, illegal, illegalLen)) {
+            if (isSamePackage(className, pkgNameLen, illegal)) {
                 return illegal;
             }
             final String importArg = checkImportStatements(className);

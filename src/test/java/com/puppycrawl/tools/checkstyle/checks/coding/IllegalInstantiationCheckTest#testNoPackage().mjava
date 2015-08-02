@@ -1,0 +1,16 @@
+    @Test
+    public void testNoPackage() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(IllegalInstantiationCheck.class);
+        checkConfig.addAttribute(
+                "classes",
+                "java.lang.Boolean");
+        final String[] expected = {
+            "3:19: " + getCheckMessage(MSG_KEY, "java.lang.Boolean"),
+        };
+        verify(checkConfig,
+                new File("src/test/resources-noncompilable/com/puppycrawl/tools/checkstyle/"
+                          + "coding/InputIllegalInstantiationCheckNoPackage.java").getCanonicalPath(),
+                expected);
+    }
+
