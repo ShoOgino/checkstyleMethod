@@ -1,16 +1,13 @@
     /** recursive method that finds the matches. */
     private void findMatch() {
-        int startLine;
-        boolean foundMatch;
-        boolean ignore = false;
 
-        foundMatch = matcher.find();
+        final boolean foundMatch = matcher.find();
         if (foundMatch) {
             final FileText text = getFileContents().getText();
             final LineColumn start = text.lineColumn(matcher.start());
-            startLine = start.getLine();
+            final int startLine = start.getLine();
 
-            ignore = isIgnore(startLine, text, start);
+            final boolean ignore = isIgnore(startLine, text, start);
 
             if (!ignore) {
                 matchCount++;
