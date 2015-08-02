@@ -1,0 +1,9 @@
+    @Test
+    public void testWrongDefault() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(OuterTypeFilenameCheck.class);
+        final String[] expected = {
+            "4: " + getCheckMessage("type.file.mismatch"),
+        };
+        verify(checkConfig, getPath("InputOuterTypeFilenameCheck5.java"), expected);
+    }
+
