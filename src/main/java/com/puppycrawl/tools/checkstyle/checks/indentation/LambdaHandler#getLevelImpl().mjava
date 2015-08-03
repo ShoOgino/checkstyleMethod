@@ -1,0 +1,24 @@
+    @Override
+    protected IndentLevel getLevelImpl() {
+        if (getParent() instanceof MethodCallHandler) {
+            return getParent().suggestedChildLevel(this);
+        }
+
+        DetailAST parent = getMainAst().getParent();
+        if (getParent() instanceof NewHandler) {
+            parent = parent.getParent();
+        }
+
+        // Use the start of the parent's line as the reference indentation level.
+        IndentLevel level = new IndentLevel(getLineStart(parent));
+
+        // If the start of the lambda is the first element on the line;
+        // assume line wrapping with respect to its parent.
+        final DetailAST firstChild = getMainAst().getFirstChild();
+        if (getLineStart(firstChild) == firstChild.getColumnNo()) {
+            level = new IndentLevel(level, getIndentCheck().getLineWrappingIndentation());
+        }
+
+        return level;
+    }
+

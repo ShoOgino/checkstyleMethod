@@ -1,0 +1,17 @@
+  void function2(Runnable x) { //indent:2 exp:2
+    Runnable r0 = r2r(() -> { //indent:4 exp:4
+      int i = 1; //indent:6 exp:6
+    }); //indent:4 exp:4
+
+    Runnable r1 = r2r(() -> { //indent:4 exp:4
+          int i = 1; //indent:10 exp:10
+        } //indent:8 exp:8
+    ); //indent:4 exp:4
+
+    Runnable r2 = r2r(r2r(() -> { //indent:4 exp:4
+              int i = 1; //indent:14 exp:14
+            } //indent:12 exp:12
+        ) //indent:8 exp:8
+    ); //indent:4 exp:4
+  } //indent:2 exp:2
+
