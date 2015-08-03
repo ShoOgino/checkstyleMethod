@@ -1,0 +1,24 @@
+    @Test
+    public void testWithSumLessThenMinCustMsg() throws Exception {
+        DefaultConfiguration checkConfig = createCheckConfig(DescendantTokenCheck.class);
+        checkConfig.addAttribute("tokens", "NOT_EQUAL,EQUAL");
+        checkConfig.addAttribute("limitedTokens", "LITERAL_THIS,LITERAL_NULL");
+        checkConfig.addAttribute("minimumNumber", "3");
+        checkConfig.addAttribute("sumTokenCounts", "true");
+        checkConfig.addAttribute("minimumMessage", "custom message");
+
+        String[] expected = {
+            "16:44: custom message",
+            "22:32: custom message",
+            "22:50: custom message",
+            "23:33: custom message",
+            "23:51: custom message",
+            "24:54: custom message",
+            "24:77: custom message",
+        };
+
+        verify(checkConfig,
+                getPath("coding" + File.separator + "InputReturnFromFinallyCheck.java"),
+                expected);
+    }
+
