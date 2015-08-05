@@ -28,12 +28,6 @@
                     fileMessages.addAll(fsc.process(f, theText));
                 }
             }
-            catch (final FileNotFoundException fnfe) {
-                LOG.debug("FileNotFoundException occured.", fnfe);
-                fileMessages.add(new LocalizedMessage(0,
-                        Definitions.CHECKSTYLE_BUNDLE, "general.fileNotFound", null,
-                        null, this.getClass(), null));
-            }
             catch (final IOException ioe) {
                 LOG.debug("IOException occured.", ioe);
                 fileMessages.add(new LocalizedMessage(0,
