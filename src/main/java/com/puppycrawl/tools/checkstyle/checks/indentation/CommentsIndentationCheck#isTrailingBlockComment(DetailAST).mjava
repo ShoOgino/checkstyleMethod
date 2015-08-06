@@ -1,0 +1,18 @@
+    /**
+     * Checks if current comment block is trailing comment, e.g.:
+     * <p>
+     * <code>
+     * double d = 3.14; /* some comment *&#47;
+     * /* some comment *&#47; double d = 18.5;
+     * </code>
+     * </p>
+     * @param blockComment {@link TokenTypes#BLOCK_COMMENT_BEGIN block comment begin}.
+     * @return true if current comment block is trailing comment.
+     */
+    private boolean isTrailingBlockComment(DetailAST blockComment) {
+        final String commentLine = getLine(blockComment.getLineNo() - 1);
+        final int commentColumnNo = blockComment.getColumnNo();
+        return !Utils.whitespaceBefore(commentColumnNo, commentLine)
+            || blockComment.getNextSibling().getLineNo() == blockComment.getLineNo();
+    }
+
