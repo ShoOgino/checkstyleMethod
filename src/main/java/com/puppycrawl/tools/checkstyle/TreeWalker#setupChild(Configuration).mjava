@@ -7,11 +7,11 @@
             throw new CheckstyleException(
                 "TreeWalker is not allowed as a parent of " + name);
         }
-        final Check c = (Check) module;
-        c.contextualize(childContext);
-        c.configure(childConf);
-        c.init();
+        final Check check = (Check) module;
+        check.contextualize(childContext);
+        check.configure(childConf);
+        check.init();
 
-        registerCheck(c);
+        registerCheck(check);
     }
 

@@ -3,7 +3,7 @@
      * @return new instance of <code>Checker</code>
      */
     private Checker createChecker() {
-        Checker c;
+        Checker checker;
         try {
             final Properties props = createOverridingProperties();
             final Configuration config =
@@ -21,15 +21,15 @@
                 Checker.class.getClassLoader();
             context.add("moduleClassLoader", moduleClassLoader);
 
-            c = new Checker();
+            checker = new Checker();
 
-            c.contextualize(context);
-            c.configure(config);
+            checker.contextualize(context);
+            checker.configure(config);
 
             // setup the listeners
             final AuditListener[] listeners = getListeners();
             for (AuditListener element : listeners) {
-                c.addListener(element);
+                checker.addListener(element);
             }
         }
         catch (final Exception e) {
@@ -37,6 +37,6 @@
                     + e.getMessage(), e);
         }
 
-        return c;
+        return checker;
     }
 

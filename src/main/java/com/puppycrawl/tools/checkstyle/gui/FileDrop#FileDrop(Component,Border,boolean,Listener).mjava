@@ -5,19 +5,19 @@
      * <tt>System.out</tt> or <tt>System.err</tt>. A <tt>null</tt> value for
      * the parameter <tt>out</tt> will result in no debugging output.
      *
-     * @param c Component on which files will be dropped.
+     * @param component Component on which files will be dropped.
      * @param dragBorder Border to use on <tt>JComponent</tt> when dragging occurs.
      * @param recursive Recursively set children as drop targets.
      * @param listener Listens for <tt>filesDropped</tt>.
      * @since 1.0
      */
     FileDrop(
-            final Component c,
+            final Component component,
             final Border dragBorder,
             final boolean recursive,
             final Listener listener)
             throws TooManyListenersException {
-        dropListener = new FileDropTargetListener(c, dragBorder, listener);
-        makeDropTarget(c, recursive);
+        dropListener = new FileDropTargetListener(component, dragBorder, listener);
+        makeDropTarget(component, recursive);
     }
 

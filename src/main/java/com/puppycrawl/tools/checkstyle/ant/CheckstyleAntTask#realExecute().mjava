@@ -24,13 +24,13 @@
         }
 
         // Create the checker
-        Checker c = null;
+        Checker checker = null;
         try {
-            c = createChecker();
+            checker = createChecker();
 
             final SeverityLevelCounter warningCounter =
                 new SeverityLevelCounter(SeverityLevel.WARNING);
-            c.addListener(warningCounter);
+            checker.addListener(warningCounter);
 
             // Process the files
             long startTime = System.currentTimeMillis();
@@ -44,7 +44,7 @@
             log("Using configuration " + configLocation, Project.MSG_VERBOSE);
 
             startTime = System.currentTimeMillis();
-            final int numErrs = c.process(files);
+            final int numErrs = checker.process(files);
             endTime = System.currentTimeMillis();
             log("To process the files took " + (endTime - startTime) + " ms.",
                 Project.MSG_VERBOSE);
@@ -67,8 +67,8 @@
             }
         }
         finally {
-            if (c != null) {
-                c.destroy();
+            if (checker != null) {
+                checker.destroy();
             }
         }
     }
