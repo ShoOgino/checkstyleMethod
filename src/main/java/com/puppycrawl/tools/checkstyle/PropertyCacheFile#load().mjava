@@ -15,7 +15,7 @@
                 if (!currentConfigHash.equals(cachedConfigHash)) {
                     // Detected configuration change - clear cache
                     details.clear();
-                    details.put(CONFIG_HASH_KEY, currentConfigHash);
+                    details.setProperty(CONFIG_HASH_KEY, currentConfigHash);
                 }
             }
             finally {
@@ -24,7 +24,7 @@
         }
         else {
             // put the hash in the file if the file is going to be created
-            details.put(CONFIG_HASH_KEY, currentConfigHash);
+            details.setProperty(CONFIG_HASH_KEY, currentConfigHash);
         }
     }
 
