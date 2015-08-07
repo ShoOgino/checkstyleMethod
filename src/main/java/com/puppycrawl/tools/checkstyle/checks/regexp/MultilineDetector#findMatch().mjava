@@ -11,7 +11,7 @@
                         start.getColumn(), end.getLine(), end.getColumn())) {
                     currentMatches++;
                     if (currentMatches > options.getMaximum()) {
-                        if ("".equals(options.getMessage())) {
+                        if (options.getMessage().isEmpty()) {
                             options.getReporter().log(start.getLine(),
                                     REGEXP_EXCEEDED, matcher.pattern().toString());
                         }
