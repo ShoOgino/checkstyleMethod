@@ -2,11 +2,11 @@
     public void visitToken(DetailAST ast) {
         final int tokenType = ast.getType();
 
-        if (TokenTypes.CLASS_DEF == tokenType
-            || TokenTypes.METHOD_DEF == tokenType
-            || TokenTypes.CTOR_DEF == tokenType
-            || TokenTypes.STATIC_INIT == tokenType
-            || TokenTypes.INSTANCE_INIT == tokenType) {
+        if (tokenType == TokenTypes.CLASS_DEF
+            || tokenType == TokenTypes.METHOD_DEF
+            || tokenType == TokenTypes.CTOR_DEF
+            || tokenType == TokenTypes.STATIC_INIT
+            || tokenType == TokenTypes.INSTANCE_INIT) {
             //add a counter for this class/method
             counters.push(new Counter());
         }

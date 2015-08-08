@@ -22,7 +22,7 @@
                 //don't count if or loop conditions
                 final DetailAST prevSibling = ast.getPreviousSibling();
                 countable = prevSibling == null
-                    || TokenTypes.LPAREN != prevSibling.getType();
+                    || prevSibling.getType() != TokenTypes.LPAREN;
                 break;
             default :
                 countable = false;

@@ -11,8 +11,8 @@
         // object block
         final int parentType = ast.getParent().getType();
 
-        if (TokenTypes.SLIST == parentType
-            || TokenTypes.OBJBLOCK == parentType) {
+        if (parentType == TokenTypes.SLIST
+            || parentType == TokenTypes.OBJBLOCK) {
             final DetailAST prevSibling = ast.getPreviousSibling();
 
             //is countable if no previous sibling is found or
@@ -20,7 +20,7 @@
             //This is done because multiple assignment on one line are countes
             // as 1
             countable = prevSibling == null
-                    || TokenTypes.COMMA != prevSibling.getType();
+                    || prevSibling.getType() != TokenTypes.COMMA;
         }
 
         return countable;

@@ -1,10 +1,10 @@
     @Override
     public void visitToken(DetailAST ast) {
-        if (TokenTypes.METHOD_DEF == ast.getType()) {
+        if (ast.getType() == TokenTypes.METHOD_DEF) {
             raiseCounter(ast);
         }
         else {
-            final boolean inInterface = TokenTypes.INTERFACE_DEF == ast.getType();
+            final boolean inInterface = ast.getType() == TokenTypes.INTERFACE_DEF;
             counters.push(new MethodCounter(inInterface));
         }
     }

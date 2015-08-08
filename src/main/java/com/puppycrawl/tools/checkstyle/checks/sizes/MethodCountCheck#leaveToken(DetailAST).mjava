@@ -1,9 +1,9 @@
     @Override
     public void leaveToken(DetailAST ast) {
-        if (TokenTypes.CLASS_DEF == ast.getType()
-            || TokenTypes.INTERFACE_DEF == ast.getType()
-            || TokenTypes.ENUM_CONSTANT_DEF == ast.getType()
-            || TokenTypes.ENUM_DEF == ast.getType()) {
+        if (ast.getType() == TokenTypes.CLASS_DEF
+            || ast.getType() == TokenTypes.INTERFACE_DEF
+            || ast.getType() == TokenTypes.ENUM_CONSTANT_DEF
+            || ast.getType() == TokenTypes.ENUM_DEF) {
             final MethodCounter counter = counters.pop();
             checkCounters(counter, ast);
         }
