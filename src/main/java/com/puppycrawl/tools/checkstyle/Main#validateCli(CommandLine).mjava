@@ -6,10 +6,7 @@
     private static List<String> validateCli(CommandLine cmdLine) {
         final List<String> result = new ArrayList<>();
         // ensure a configuration file is specified
-        if (!cmdLine.hasOption("c")) {
-            result.add("Must specify a config XML file.");
-        }
-        else {
+        if (cmdLine.hasOption("c")) {
             // validate optional parameters
             if (cmdLine.hasOption("f")) {
                 final String format = cmdLine.getOptionValue("f");
@@ -36,6 +33,9 @@
             if (files.isEmpty()) {
                 result.add("Must specify files to process, found 0.");
             }
+        }
+        else {
+            result.add("Must specify a config XML file.");
         }
 
         return result;

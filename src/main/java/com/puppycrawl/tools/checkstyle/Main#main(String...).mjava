@@ -27,19 +27,19 @@
                 // return error is smth is wrong in arguments
                 final List<String> messages = validateCli(commandLine);
                 cliViolations = !messages.isEmpty();
-                if (!cliViolations) {
-                    // create config helper object
-                    final CliOptions config = convertCliToPojo(commandLine);
-                    // run Checker
-                    errorCounter = runCheckstyle(config);
-                    exitStatus = errorCounter;
-                }
-                else {
+                if (cliViolations) {
                     exitStatus = exitWithCliViolation;
                     errorCounter = 1;
                     for (String message : messages) {
                         System.out.println(message);
                     }
+                }
+                else {
+                    // create config helper object
+                    final CliOptions config = convertCliToPojo(commandLine);
+                    // run Checker
+                    errorCounter = runCheckstyle(config);
+                    exitStatus = errorCounter;
                 }
             }
         }
