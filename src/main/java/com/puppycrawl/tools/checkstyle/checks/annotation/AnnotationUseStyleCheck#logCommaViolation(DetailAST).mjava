@@ -12,12 +12,12 @@
 
         if (this.comma == TrailingArrayComma.ALWAYS
             && (comma == null || comma.getType() != TokenTypes.COMMA)) {
-            this.log(rCurly.getLineNo(),
+            log(rCurly.getLineNo(),
                 rCurly.getColumnNo(), MSG_KEY_ANNOTATION_TRAILING_COMMA_MISSING);
         }
         else if (this.comma == TrailingArrayComma.NEVER
             && comma != null && comma.getType() == TokenTypes.COMMA) {
-            this.log(comma.getLineNo(),
+            log(comma.getLineNo(),
                 comma.getColumnNo(), MSG_KEY_ANNOTATION_TRAILING_COMMA_PRESENT);
         }
     }

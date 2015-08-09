@@ -25,7 +25,7 @@
         //rare case with empty array ex: @SuppressWarnings({})
         if (warning == null) {
             //check to see if empty warnings are forbidden -- are by default
-            this.logMatch(warningHolder.getLineNo(),
+            logMatch(warningHolder.getLineNo(),
                 warningHolder.getColumnNo(), "");
             return;
         }
@@ -38,13 +38,13 @@
                     case TokenTypes.STRING_LITERAL:
                         final String warningText =
                             removeQuotes(warning.getFirstChild().getText());
-                        this.logMatch(warning.getLineNo(),
+                        logMatch(warning.getLineNo(),
                                 warning.getColumnNo(), warningText);
                         break;
                     // conditional case
                     // ex: @SuppressWarnings((false) ? (true) ? "unchecked" : "foo" : "unused")
                     case TokenTypes.QUESTION:
-                        this.walkConditional(fChild);
+                        walkConditional(fChild);
                         break;
                     // param in constant case
                     // ex: public static final String UNCHECKED = "unchecked";

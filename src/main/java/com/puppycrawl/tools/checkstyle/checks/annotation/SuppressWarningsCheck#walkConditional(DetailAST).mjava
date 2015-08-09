@@ -10,11 +10,11 @@
         if (cond.getType() != TokenTypes.QUESTION) {
             final String warningText =
                 removeQuotes(cond.getText());
-            this.logMatch(cond.getLineNo(), cond.getColumnNo(), warningText);
+            logMatch(cond.getLineNo(), cond.getColumnNo(), warningText);
             return;
         }
 
-        this.walkConditional(getCondLeft(cond));
-        this.walkConditional(getCondRight(cond));
+        walkConditional(getCondLeft(cond));
+        walkConditional(getCondRight(cond));
     }
 

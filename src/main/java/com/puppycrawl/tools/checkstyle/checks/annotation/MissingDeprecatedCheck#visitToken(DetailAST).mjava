@@ -2,16 +2,16 @@
     @Override
     public void visitToken(final DetailAST ast) {
         final TextBlock javadoc =
-            this.getFileContents().getJavadocBefore(ast.getLineNo());
+            getFileContents().getJavadocBefore(ast.getLineNo());
 
         final boolean containsAnnotation =
             AnnotationUtility.containsAnnotation(ast, DEPRECATED)
             || AnnotationUtility.containsAnnotation(ast, FQ_DEPRECATED);
 
-        final boolean containsJavadocTag = this.containsJavadocTag(javadoc);
+        final boolean containsJavadocTag = containsJavadocTag(javadoc);
 
         if (containsAnnotation ^ containsJavadocTag) {
-            this.log(ast.getLineNo(), MSG_KEY_ANNOTATION_MISSING_DEPRECATED);
+            log(ast.getLineNo(), MSG_KEY_ANNOTATION_MISSING_DEPRECATED);
         }
     }
 
