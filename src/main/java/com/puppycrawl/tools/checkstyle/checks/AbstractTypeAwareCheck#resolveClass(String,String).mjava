@@ -1,14 +1,14 @@
     /**
      * Attempts to resolve the Class for a specified name.
-     * @param className name of the class to resolve
-     * @param currentClass name of surrounding class.
+     * @param resolvableClassName name of the class to resolve
+     * @param currentClassName name of surrounding class.
      * @return the resolved class or {@code null}
      *          if unable to resolve the class.
      */
-    protected final Class<?> resolveClass(String className,
-            String currentClass) {
+    protected final Class<?> resolveClass(String resolvableClassName,
+            String currentClassName) {
         try {
-            return getClassResolver().resolve(className, currentClass);
+            return getClassResolver().resolve(resolvableClassName, currentClassName);
         }
         catch (final ClassNotFoundException ignored) {
             return null;

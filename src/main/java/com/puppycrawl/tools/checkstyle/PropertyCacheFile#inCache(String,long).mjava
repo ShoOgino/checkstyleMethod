@@ -1,10 +1,10 @@
     /**
-     * @param fileName the file to check
+     * @param uncheckedFileName the file to check
      * @param timestamp the timestamp of the file to check
      * @return whether the specified file has already been checked ok
      */
-    boolean inCache(String fileName, long timestamp) {
-        final String lastChecked = details.getProperty(fileName);
+    boolean inCache(String uncheckedFileName, long timestamp) {
+        final String lastChecked = details.getProperty(uncheckedFileName);
         return lastChecked != null
             && lastChecked.equals(Long.toString(timestamp));
     }

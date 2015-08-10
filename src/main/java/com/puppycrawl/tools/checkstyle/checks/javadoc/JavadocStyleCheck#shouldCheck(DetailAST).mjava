@@ -21,15 +21,15 @@
                 ast.findFirstToken(TokenTypes.MODIFIERS));
         }
 
-        final Scope scope =
+        final Scope customScope =
             ScopeUtils.inInterfaceOrAnnotationBlock(ast)
             ? Scope.PUBLIC : declaredScope;
         final Scope surroundingScope = ScopeUtils.getSurroundingScope(ast);
 
-        return scope.isIn(this.scope)
+        return customScope.isIn(this.scope)
             && (surroundingScope == null || surroundingScope.isIn(this.scope))
             && (excludeScope == null
-                || !scope.isIn(excludeScope)
+                || !customScope.isIn(excludeScope)
                 || surroundingScope != null
                 && !surroundingScope.isIn(excludeScope));
     }

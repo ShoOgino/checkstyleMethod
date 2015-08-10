@@ -4,14 +4,14 @@
      * @return the line and column numbers of this character
      */
     public LineColumn lineColumn(int pos) {
-        final int[] lineBreaks = findLineBreaks();
-        int lineNo = Arrays.binarySearch(lineBreaks, pos);
+        final int[] lineBreakPositions = findLineBreaks();
+        int lineNo = Arrays.binarySearch(lineBreakPositions, pos);
         if (lineNo < 0) {
             // we have: lineNo = -(insertion point) - 1
             // we want: lineNo =  (insertion point) - 1
             lineNo = -lineNo - 2;
         }
-        final int startOfLine = lineBreaks[lineNo];
+        final int startOfLine = lineBreakPositions[lineNo];
         final int columnNo = pos - startOfLine;
         // now we have lineNo and columnNo, both starting at zero.
         return new LineColumn(lineNo + 1, columnNo);

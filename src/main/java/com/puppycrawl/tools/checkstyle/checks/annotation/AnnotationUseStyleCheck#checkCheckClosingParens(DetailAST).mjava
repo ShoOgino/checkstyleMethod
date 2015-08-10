@@ -5,18 +5,18 @@
      * @param ast the annotation token
      */
     private void checkCheckClosingParens(final DetailAST ast) {
-        if (parens == ClosingParens.IGNORE) {
+        if (closingParens == ClosingParens.IGNORE) {
             return;
         }
 
         final DetailAST paren = ast.getLastChild();
         final boolean parenExists = paren.getType() == TokenTypes.RPAREN;
 
-        if (parens == ClosingParens.ALWAYS
+        if (closingParens == ClosingParens.ALWAYS
             && !parenExists) {
             log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
         }
-        else if (parens == ClosingParens.NEVER
+        else if (closingParens == ClosingParens.NEVER
             && !ast.branchContains(TokenTypes.EXPR)
             && !ast.branchContains(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
             && !ast.branchContains(TokenTypes.ANNOTATION_ARRAY_INIT)

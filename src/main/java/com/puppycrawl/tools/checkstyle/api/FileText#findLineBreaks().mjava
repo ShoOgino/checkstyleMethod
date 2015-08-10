@@ -4,18 +4,18 @@
      */
     private int[] findLineBreaks() {
         if (lineBreaks == null) {
-            final int[] lineBreaks = new int[size() + 1];
-            lineBreaks[0] = 0;
+            final int[] lineBreakPositions = new int[size() + 1];
+            lineBreakPositions[0] = 0;
             int lineNo = 1;
             final Matcher matcher = LINE_TERMINATOR.matcher(fullText);
             while (matcher.find()) {
-                lineBreaks[lineNo] = matcher.end();
+                lineBreakPositions[lineNo] = matcher.end();
                 lineNo++;
             }
-            if (lineNo < lineBreaks.length) {
-                lineBreaks[lineNo] = fullText.length();
+            if (lineNo < lineBreakPositions.length) {
+                lineBreakPositions[lineNo] = fullText.length();
             }
-            this.lineBreaks = lineBreaks;
+            this.lineBreaks = lineBreakPositions;
         }
         return lineBreaks;
     }

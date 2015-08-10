@@ -9,9 +9,9 @@
             final Counter counter = counters.pop();
 
             final int count = counter.getCount();
-            if (count > methodMax) {
+            if (count > methodMaximum) {
                 log(ast.getLineNo(), ast.getColumnNo(), MSG_METHOD,
-                        count, methodMax);
+                        count, methodMaximum);
             }
         }
         else if (tokenType == TokenTypes.CLASS_DEF) {
@@ -19,9 +19,9 @@
             final Counter counter = counters.pop();
 
             final int count = counter.getCount();
-            if (count > classMax) {
+            if (count > classMaximum) {
                 log(ast.getLineNo(), ast.getColumnNo(), MSG_CLASS,
-                        count, classMax);
+                        count, classMaximum);
             }
         }
     }

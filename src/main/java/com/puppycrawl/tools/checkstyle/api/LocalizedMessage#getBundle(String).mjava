@@ -7,14 +7,14 @@
      */
     private ResourceBundle getBundle(String bundleName) {
         synchronized (BUNDLE_CACHE) {
-            ResourceBundle bundle = BUNDLE_CACHE
+            ResourceBundle resourceBundle = BUNDLE_CACHE
                     .get(bundleName);
-            if (bundle == null) {
-                bundle = ResourceBundle.getBundle(bundleName, sLocale,
+            if (resourceBundle == null) {
+                resourceBundle = ResourceBundle.getBundle(bundleName, sLocale,
                         sourceClass.getClassLoader(), new UTF8Control());
-                BUNDLE_CACHE.put(bundleName, bundle);
+                BUNDLE_CACHE.put(bundleName, resourceBundle);
             }
-            return bundle;
+            return resourceBundle;
         }
     }
 
