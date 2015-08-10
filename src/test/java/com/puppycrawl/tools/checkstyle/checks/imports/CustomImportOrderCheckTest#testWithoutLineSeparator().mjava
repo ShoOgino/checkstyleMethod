@@ -8,11 +8,11 @@
                 "STATIC###SAME_PACKAGE(3)");
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
-            "6: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "7: " + getCheckMessage(MSG_ORDER, "STATIC"),
-            "8: " + getCheckMessage(MSG_ORDER, "STATIC"),
-            "10: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "11: " + getCheckMessage(MSG_ORDER, "STATIC"),
+            "6: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.*"),
+            "7: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC, "java.awt.Button.ABORT"),
+            "8: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC, "javax.swing.WindowConstants.*"),
+            "10: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.AbstractExecutorService"),
+            "11: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC, "java.io.File.createTempFile"),
         };
 
         verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"

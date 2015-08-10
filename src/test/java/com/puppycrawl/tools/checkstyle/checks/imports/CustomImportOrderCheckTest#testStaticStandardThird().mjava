@@ -3,7 +3,7 @@
      * specified in the configuration.
      */
     @Test
-    public void testGoogleStyleguideConfiguraiton() throws Exception {
+    public void testStaticStandardThird() throws Exception {
         final DefaultConfiguration checkConfig =
                 createCheckConfig(CustomImportOrderCheck.class);
         checkConfig.addAttribute("thirdPartyPackageRegExp", "com.|org.");
@@ -11,10 +11,10 @@
                 "STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE");
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
-            "4: " + getCheckMessage(MSG_LEX, "java.awt.Button.ABORT"),
-            "10: " + getCheckMessage(MSG_LEX, "java.awt.Dialog"),
-            "15: " + getCheckMessage(MSG_LEX, "java.io.File"),
-            "22: " + getCheckMessage(MSG_LEX, "com.google.common.collect.*"),
+            "4: " + getCheckMessage(MSG_LEX, "java.awt.Button.ABORT", "java.io.File.createTempFile"),
+            "10: " + getCheckMessage(MSG_LEX, "java.awt.Dialog", "java.awt.Frame"),
+            "15: " + getCheckMessage(MSG_LEX, "java.io.File", "javax.swing.JTable"),
+            "22: " + getCheckMessage(MSG_LEX, "com.google.common.collect.*", "com.puppycrawl.tools.*"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator

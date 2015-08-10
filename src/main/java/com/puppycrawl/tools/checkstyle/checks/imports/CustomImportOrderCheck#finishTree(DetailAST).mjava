@@ -29,12 +29,12 @@
                     }
                     else {
                         logWrongImportGroupOrder(importObject.getLineNumber(),
-                                importGroup);
+                                importGroup, nextGroup, fullImportIdent);
                     }
                 }
                 else {
                     logWrongImportGroupOrder(importObject.getLineNumber(),
-                            importGroup);
+                            importGroup, currentGroup, fullImportIdent);
                 }
             }
             else if (sortImportsInGroupAlphabetically
@@ -42,7 +42,7 @@
                     && matchesImportGroup(importObject.isStaticImport(),
                             fullImportIdent, currentGroup)
                     && compareImports(fullImportIdent, previousImport) < 0) {
-                log(importObject.getLineNumber(), MSG_LEX, fullImportIdent);
+                log(importObject.getLineNumber(), MSG_LEX, fullImportIdent, previousImport);
             }
             previousImport = fullImportIdent;
         }

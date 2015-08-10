@@ -7,9 +7,9 @@
         checkConfig.addAttribute("customImportOrderRules",
                 "SAME_PACKAGE(3)");
         final String[] expected = {
-            "10: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "11: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "12: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
+            "10: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.*"),
+            "11: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.AbstractExecutorService"),
+            "12: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.locks.LockSupport"),
             };
 
         verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"

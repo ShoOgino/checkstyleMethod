@@ -1,0 +1,24 @@
+    /**
+     * Log wrong import group order.
+     * @param currentImportLine
+     *        line number of current import current import.
+     * @param importGroup
+     *        import group.
+     * @param currentGroupNumber
+     *        current group number we are checking.
+     * @param fullImportIdent
+     *        full import name.
+     */
+    private void logWrongImportGroupOrder(int currentImportLine, String importGroup,
+            String currentGroupNumber, String fullImportIdent) {
+        if (NON_GROUP_RULE_GROUP.equals(importGroup)) {
+            log(currentImportLine, MSG_NONGROUP_IMPORT, fullImportIdent);
+        }
+        else if (NON_GROUP_RULE_GROUP.equals(currentGroupNumber)) {
+            log(currentImportLine, MSG_NONGROUP_EXPECTED, importGroup, fullImportIdent);
+        }
+        else {
+            log(currentImportLine, MSG_ORDER, importGroup, currentGroupNumber, fullImportIdent);
+        }
+    }
+

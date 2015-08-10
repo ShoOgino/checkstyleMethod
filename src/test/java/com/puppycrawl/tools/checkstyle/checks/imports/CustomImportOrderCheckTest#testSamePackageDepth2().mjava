@@ -1,3 +1,4 @@
+    @Test
     public void testSamePackageDepth2() throws Exception {
         final DefaultConfiguration checkConfig =
                 createCheckConfig(CustomImportOrderCheck.class);
@@ -6,14 +7,14 @@
         checkConfig.addAttribute("customImportOrderRules",
                 "SAME_PACKAGE(2)");
         final String[] expected = {
-            "7: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "8: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "9: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "10: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "11: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "12: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "13: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "14: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
+            "7: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.*"),
+            "8: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.List"),
+            "9: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.StringTokenizer"),
+            "10: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.*"),
+            "11: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.AbstractExecutorService"),
+            "12: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.locks.LockSupport"),
+            "13: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.regex.Pattern"),
+            "14: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.regex.Matcher"),
             };
 
         verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"

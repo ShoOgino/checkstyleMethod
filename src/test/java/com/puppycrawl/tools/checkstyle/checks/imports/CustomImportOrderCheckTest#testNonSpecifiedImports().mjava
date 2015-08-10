@@ -6,16 +6,15 @@
         final DefaultConfiguration checkConfig =
                 createCheckConfig(CustomImportOrderCheck.class);
         checkConfig.addAttribute("thirdPartyPackageRegExp", "org.");
-        checkConfig
-                .addAttribute("customImportOrderRules",
-                        "STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SAME_PACKAGE(3)");
+        checkConfig.addAttribute("customImportOrderRules",
+                "STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SAME_PACKAGE(3)");
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
-            "4: " + getCheckMessage(MSG_LEX, "java.awt.Button.ABORT"),
-            "10: " + getCheckMessage(MSG_LEX, "java.awt.Dialog"),
-            "15: " + getCheckMessage(MSG_LEX, "java.io.File"),
-            "20: " + getCheckMessage(MSG_ORDER, "SAME_PACKAGE"),
-            "22: " + getCheckMessage(MSG_NONGROUP_IMPORT),
+            "4: " + getCheckMessage(MSG_LEX, "java.awt.Button.ABORT", "java.io.File.createTempFile"),
+            "10: " + getCheckMessage(MSG_LEX, "java.awt.Dialog", "java.awt.Frame"),
+            "15: " + getCheckMessage(MSG_LEX, "java.io.File", "javax.swing.JTable"),
+            "20: " + getCheckMessage(MSG_ORDER, SAME, THIRD, "com.puppycrawl.tools.*"),
+            "22: " + getCheckMessage(MSG_NONGROUP_IMPORT, "com.google.common.collect.*"),
             "23: " + getCheckMessage(MSG_LINE_SEPARATOR, "org.junit.*"),
         };
 
