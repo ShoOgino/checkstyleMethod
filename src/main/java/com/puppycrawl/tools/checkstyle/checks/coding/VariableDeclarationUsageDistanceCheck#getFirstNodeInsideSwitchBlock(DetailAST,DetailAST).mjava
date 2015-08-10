@@ -13,31 +13,28 @@
             DetailAST block, DetailAST variable) {
         DetailAST firstNodeInsideBlock = null;
 
-        if (!isVariableInOperatorExpr(block, variable)) {
-            DetailAST currentNode = block
-                    .findFirstToken(TokenTypes.CASE_GROUP);
-            final List<DetailAST> variableUsageExpressions =
-                    new ArrayList<>();
+        DetailAST currentNode = block
+                .findFirstToken(TokenTypes.CASE_GROUP);
+        final List<DetailAST> variableUsageExpressions =
+                new ArrayList<>();
 
-            // Checking variable usage inside all CASE blocks.
-            while (currentNode != null
-                    && currentNode.getType() == TokenTypes.CASE_GROUP) {
-                final DetailAST lastNodeInCaseGroup =
-                        currentNode.getLastChild();
+        // Checking variable usage inside all CASE blocks.
+        while (currentNode.getType() == TokenTypes.CASE_GROUP) {
+            final DetailAST lastNodeInCaseGroup =
+                    currentNode.getLastChild();
 
-                if (isChild(lastNodeInCaseGroup, variable)) {
-                    variableUsageExpressions.add(lastNodeInCaseGroup);
-                }
-                currentNode = currentNode.getNextSibling();
+            if (isChild(lastNodeInCaseGroup, variable)) {
+                variableUsageExpressions.add(lastNodeInCaseGroup);
             }
+            currentNode = currentNode.getNextSibling();
+        }
 
-            // If variable usage exists in several related blocks, then
-            // firstNodeInsideBlock = null, otherwise if variable usage exists
-            // only inside one block, then get node from
-            // variableUsageExpressions.
-            if (variableUsageExpressions.size() == 1) {
-                firstNodeInsideBlock = variableUsageExpressions.get(0);
-            }
+        // If variable usage exists in several related blocks, then
+        // firstNodeInsideBlock = null, otherwise if variable usage exists
+        // only inside one block, then get node from
+        // variableUsageExpressions.
+        if (variableUsageExpressions.size() == 1) {
+            firstNodeInsideBlock = variableUsageExpressions.get(0);
         }
 
         return firstNodeInsideBlock;

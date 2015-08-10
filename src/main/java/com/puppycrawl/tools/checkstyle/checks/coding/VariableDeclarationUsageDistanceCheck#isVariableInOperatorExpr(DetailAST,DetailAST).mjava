@@ -31,39 +31,21 @@
             exprBetweenBrackets = exprBetweenBrackets.getNextSibling();
         }
 
-        // Variable may be met in ELSE declaration or in CASE declaration.
+        // Variable may be met in ELSE declaration
         // So, check variable usage in these declarations.
-        if (!isVarInOperatorDeclr) {
-            switch (operator.getType()) {
-            case TokenTypes.LITERAL_IF:
-                final DetailAST elseBlock = operator.getLastChild();
+        if (!isVarInOperatorDeclr && operator.getType() == TokenTypes.LITERAL_IF) {
+            final DetailAST elseBlock = operator.getLastChild();
 
-                if (elseBlock.getType() == TokenTypes.LITERAL_ELSE) {
-                    // Get IF followed by ELSE
-                    final DetailAST firstNodeInsideElseBlock = elseBlock.getFirstChild();
+            if (elseBlock.getType() == TokenTypes.LITERAL_ELSE) {
+                // Get IF followed by ELSE
+                final DetailAST firstNodeInsideElseBlock = elseBlock.getFirstChild();
 
-                    if (firstNodeInsideElseBlock.getType() == TokenTypes.LITERAL_IF) {
-                        isVarInOperatorDeclr |= isVariableInOperatorExpr(firstNodeInsideElseBlock, variable);
-                        }
+                if (firstNodeInsideElseBlock.getType() == TokenTypes.LITERAL_IF) {
+                    isVarInOperatorDeclr |=
+                            isVariableInOperatorExpr(
+                                firstNodeInsideElseBlock,
+                                    variable);
                 }
-                break;
-
-            case TokenTypes.LITERAL_SWITCH:
-                DetailAST currentCaseBlock = operator.findFirstToken(TokenTypes.CASE_GROUP);
-
-                while (currentCaseBlock != null && currentCaseBlock.getType() == TokenTypes.CASE_GROUP) {
-                    final DetailAST firstNodeInsideCaseBlock = currentCaseBlock.getFirstChild();
-
-                    if (isChild(firstNodeInsideCaseBlock, variable)) {
-                        isVarInOperatorDeclr = true;
-                        break;
-                        }
-                    currentCaseBlock = currentCaseBlock.getNextSibling();
-                }
-                break;
-
-            default:
-                // no code
             }
         }
 
