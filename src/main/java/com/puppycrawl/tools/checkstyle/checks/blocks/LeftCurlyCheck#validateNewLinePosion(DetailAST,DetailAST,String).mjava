@@ -3,16 +3,15 @@
      * @param brace brace AST
      * @param startToken start Token
      * @param braceLine content of line with Brace
-     * @param prevLineLen previous Line length
      */
     private void validateNewLinePosion(DetailAST brace, DetailAST startToken,
-                                       String braceLine, int prevLineLen) {
+                                       String braceLine) {
         // not on the same line
         if (startToken.getLineNo() + 1 == brace.getLineNo()) {
             if (!Utils.whitespaceBefore(brace.getColumnNo(), braceLine)) {
                 log(brace, MSG_KEY_LINE_NEW, "{", brace.getColumnNo() + 1);
             }
-            else if (prevLineLen + 2 <= maxLineLength) {
+            else {
                 log(brace, MSG_KEY_LINE_PREVIOUS, "{", brace.getColumnNo() + 1);
             }
         }
