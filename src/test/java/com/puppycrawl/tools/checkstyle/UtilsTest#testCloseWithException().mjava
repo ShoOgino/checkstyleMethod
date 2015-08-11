@@ -1,0 +1,11 @@
+    @Test(expected = IllegalStateException.class)
+    public void testCloseWithException() {
+        Utils.close(new Closeable() {
+
+            @Override
+            public void close() throws IOException {
+                throw new IOException();
+            }
+        });
+    }
+
