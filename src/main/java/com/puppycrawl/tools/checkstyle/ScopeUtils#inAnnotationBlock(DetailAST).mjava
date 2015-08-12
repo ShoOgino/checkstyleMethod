@@ -10,21 +10,19 @@
 
         // Loop up looking for a containing interface block
         for (DetailAST token = aAST.getParent();
-             token != null;
+             token != null && !retVal;
              token = token.getParent()) {
             final int type = token.getType();
-            if (type == TokenTypes.CLASS_DEF
+            if (type == TokenTypes.ANNOTATION_DEF) {
+                retVal = true;
+            }
+            else if (type == TokenTypes.CLASS_DEF
                 || type == TokenTypes.ENUM_DEF
-                || type == TokenTypes.INTERFACE_DEF) {
+                || type == TokenTypes.INTERFACE_DEF
+                || type == TokenTypes.LITERAL_NEW) {
                 break; // in a class, enum or interface
             }
-            else if (type == TokenTypes.LITERAL_NEW) {
-                break; // inner implementation
-            }
-            else if (type == TokenTypes.ANNOTATION_DEF) {
-                retVal = true;
-                break;
-            }
+
         }
 
         return retVal;
