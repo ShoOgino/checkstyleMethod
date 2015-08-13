@@ -13,28 +13,28 @@
                 final String[] sourceLines = text.toLinesArray();
 
                 // clear for each new file
-                getLines2position().clear();
+                getLinesToPosition().clear();
                 // starts line counting at 1
-                getLines2position().add(0);
+                getLinesToPosition().add(0);
                 // insert the contents of the file to the text area
                 for (String element : sourceLines) {
-                    getLines2position().add(jTextArea.getText().length());
-                    jTextArea.append(element + "\n");
+                    getLinesToPosition().add(textArea.getText().length());
+                    textArea.append(element + "\n");
                 }
 
                 //clean the text area before inserting the lines of the new file
-                if (!jTextArea.getText().isEmpty()) {
-                    jTextArea.replaceRange("", 0, jTextArea.getText()
+                if (!textArea.getText().isEmpty()) {
+                    textArea.replaceRange("", 0, textArea.getText()
                             .length());
                 }
 
                 // insert the contents of the file to the text area
                 for (final String element : sourceLines) {
-                    jTextArea.append(element + "\n");
+                    textArea.append(element + "\n");
                 }
 
                 // move back to the top of the file
-                jTextArea.moveCaretPosition(0);
+                textArea.moveCaretPosition(0);
             }
             catch (final IOException | ANTLRException ex) {
                 showErrorDialog(

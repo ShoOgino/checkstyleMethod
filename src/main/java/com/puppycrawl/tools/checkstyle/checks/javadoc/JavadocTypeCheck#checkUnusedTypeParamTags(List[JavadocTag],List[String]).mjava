@@ -11,7 +11,7 @@
             final JavadocTag tag = tags.get(i);
             if (tag.isParamTag()) {
 
-                final Matcher matcher = pattern.matcher(tag.getArg1());
+                final Matcher matcher = pattern.matcher(tag.getFirstArg());
                 matcher.find();
                 final String typeParamName = matcher.group(1).trim();
                 if (!typeParamNames.contains(typeParamName)) {

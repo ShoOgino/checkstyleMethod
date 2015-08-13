@@ -22,8 +22,8 @@
             tagIt.remove();
 
             // Loop looking for matching throw
-            final String documentedEx = tag.getArg1();
-            final Token token = new Token(tag.getArg1(), tag.getLineNo(), tag
+            final String documentedEx = tag.getFirstArg();
+            final Token token = new Token(tag.getFirstArg(), tag.getLineNo(), tag
                     .getColumnNo());
             final AbstractClassInfo documentedCI = createClassInfo(token,
                     getCurrentClassName());
@@ -67,7 +67,7 @@
                 if (reqd && validateThrows) {
                     log(tag.getLineNo(), tag.getColumnNo(),
                         MSG_UNUSED_TAG,
-                        JavadocTagInfo.THROWS.getText(), tag.getArg1());
+                        JavadocTagInfo.THROWS.getText(), tag.getFirstArg());
 
                 }
             }
