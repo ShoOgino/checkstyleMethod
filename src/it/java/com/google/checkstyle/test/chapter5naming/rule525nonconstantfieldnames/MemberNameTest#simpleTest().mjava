@@ -1,6 +1,6 @@
     @Test
     public void simpleTest() throws IOException, Exception {
-        
+
         final String[] expected = {
             "12:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "bad$Static", format),
             "17:17: " + getCheckMessage(checkConfig.getMessages(), msgKey, "bad_Member", format),
@@ -37,7 +37,7 @@
         };
 
         String filePath = builder.getFilePath("MemberNameInput_Simple");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

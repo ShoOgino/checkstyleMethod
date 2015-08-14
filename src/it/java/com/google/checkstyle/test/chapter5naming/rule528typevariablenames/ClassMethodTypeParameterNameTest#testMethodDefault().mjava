@@ -1,7 +1,6 @@
     @Test
     public void testMethodDefault() throws IOException, Exception {
 
-        Class<MethodTypeParameterNameCheck> clazz = MethodTypeParameterNameCheck.class;
         Configuration checkConfig = builder.getCheckConfig("MethodTypeParameterName");
 
         final String[] expected = {
@@ -13,9 +12,9 @@
             "42:14: " + getCheckMessage(checkConfig.getMessages(), msgKey, "EE", format),
         };
 
-        
+
         String filePath = builder.getFilePath("MethodTypeParameterNameInput");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
