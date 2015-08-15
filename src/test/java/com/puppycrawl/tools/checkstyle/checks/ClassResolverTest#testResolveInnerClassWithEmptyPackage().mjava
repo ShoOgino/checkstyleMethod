@@ -1,0 +1,15 @@
+    @Test
+    public void testResolveInnerClassWithEmptyPackage() throws Exception {
+        final Set<String> imports = Sets.newHashSet();
+        ClassResolver classResolver = new ClassResolver(
+                Thread.currentThread().getContextClassLoader(),
+                "", imports);
+
+        try {
+            classResolver.resolve("Entry", "Map");
+        }
+        catch (ClassNotFoundException ex) {
+            assertEquals("Entry", ex.getMessage());
+        }
+    }
+

@@ -1,0 +1,18 @@
+    @Test
+    public void testExistedImportCantBeResolved() throws Exception {
+        final Set<String> imports = Sets.newHashSet();
+        imports.add("java.applet.someClass");
+        ClassResolver classResolver = new ClassResolver(
+                Thread.currentThread().getContextClassLoader(),
+                "", imports);
+
+        try {
+            classResolver.resolve("someClass", "");
+            fail("Exception expected");
+        }
+        catch (ClassNotFoundException e) {
+            // expected
+            assertEquals("someClass", e.getMessage());
+        }
+    }
+
