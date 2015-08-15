@@ -1,0 +1,11 @@
+    @Test
+    public void testIsProperUtilsClass() throws ReflectiveOperationException {
+        try {
+            assertUtilsClassHasPrivateConstructor(CheckUtils.class);
+            Assert.fail();
+        }
+        catch (InvocationTargetException ex) {
+            Assert.assertTrue(ex.getCause() instanceof UnsupportedOperationException);
+        }
+    }
+

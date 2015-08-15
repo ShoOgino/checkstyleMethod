@@ -1,0 +1,41 @@
+    @Test
+    public void testEquals() throws Exception {
+        DetailAST litStatic = new DetailAST();
+        litStatic.setType(TokenTypes.LITERAL_STATIC);
+
+        DetailAST modifiers = new DetailAST();
+        modifiers.setType(TokenTypes.MODIFIERS);
+        modifiers.addChild(litStatic);
+
+        DetailAST metDef = new DetailAST();
+        metDef.setType(TokenTypes.METHOD_DEF);
+        metDef.addChild(modifiers);
+
+        Assert.assertFalse(CheckUtils.isEqualsMethod(metDef));
+
+        metDef.removeChildren();
+
+        DetailAST metName = new DetailAST();
+        metName.setType(TokenTypes.IDENT);
+        metName.setText("equals");
+        metDef.addChild(metName);
+
+        DetailAST modifiers2 = new DetailAST();
+        modifiers2.setType(TokenTypes.MODIFIERS);
+        metDef.addChild(modifiers2);
+
+        DetailAST parameter1 = new DetailAST();
+        DetailAST parameter2 = new DetailAST();
+
+        DetailAST parameters = new DetailAST();
+        parameters.setType(TokenTypes.PARAMETERS);
+
+        parameters.addChild(parameter2);
+
+        parameters.addChild(parameter1);
+        metDef.addChild(parameters);
+
+        Assert.assertFalse(CheckUtils.isEqualsMethod(metDef));
+
+    }
+
