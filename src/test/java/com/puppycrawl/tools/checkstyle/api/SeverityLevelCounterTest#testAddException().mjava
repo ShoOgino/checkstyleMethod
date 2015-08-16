@@ -2,8 +2,8 @@
     public void testAddException() {
         final SeverityLevelCounter counter = new SeverityLevelCounter(SeverityLevel.ERROR);
         final AuditEvent event = new AuditEvent(this, "ATest.java", null);
-        Assert.assertTrue(counter.getCount() == 0);
+        assertEquals(0, counter.getCount());
         counter.addException(event, new IllegalStateException());
-        Assert.assertTrue(counter.getCount() == 1);
+        assertEquals(1, counter.getCount());
     }
 
