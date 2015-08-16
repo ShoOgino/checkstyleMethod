@@ -16,11 +16,11 @@
             {"$$", "$"},
         };
         final Properties props = initProperties();
-        for (int i = 0; i < testValues.length; i++) {
+        for (String[] testValue : testValues) {
             final String value = ConfigurationLoader.replaceProperties(
-                testValues[i][0], new PropertiesExpander(props), null);
-            assertEquals("\"" + testValues[i][0] + "\"",
-                testValues[i][1], value);
+                testValue[0], new PropertiesExpander(props), null);
+            assertEquals("\"" + testValue[0] + "\"",
+                testValue[1], value);
         }
     }
 

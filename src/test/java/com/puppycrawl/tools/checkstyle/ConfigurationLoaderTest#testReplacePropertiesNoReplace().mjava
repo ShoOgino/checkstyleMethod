@@ -4,10 +4,10 @@
         final String[] testValues = {null, "", "a", "$a", "{a",
                                      "{a}", "a}", "$a}", "$", "a$b", };
         final Properties props = initProperties();
-        for (int i = 0; i < testValues.length; i++) {
+        for (String testValue : testValues) {
             final String value = ConfigurationLoader.replaceProperties(
-                testValues[i], new PropertiesExpander(props), null);
-            assertEquals("\"" + testValues[i] + "\"", value, testValues[i]);
+                testValue, new PropertiesExpander(props), null);
+            assertEquals("\"" + testValue + "\"", value, testValue);
         }
     }
 
