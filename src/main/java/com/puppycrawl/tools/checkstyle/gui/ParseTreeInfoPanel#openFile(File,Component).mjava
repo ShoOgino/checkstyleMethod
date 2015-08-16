@@ -13,12 +13,12 @@
                 final String[] sourceLines = text.toLinesArray();
 
                 // clear for each new file
-                getLinesToPosition().clear();
+                clearLinesToPosition();
                 // starts line counting at 1
-                getLinesToPosition().add(0);
+                addLineToPosition(0);
                 // insert the contents of the file to the text area
                 for (String element : sourceLines) {
-                    getLinesToPosition().add(textArea.getText().length());
+                    addLineToPosition(textArea.getText().length());
                     textArea.append(element + "\n");
                 }
 
