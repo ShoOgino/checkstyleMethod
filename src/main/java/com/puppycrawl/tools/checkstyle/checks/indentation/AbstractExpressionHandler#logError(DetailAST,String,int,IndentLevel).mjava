@@ -8,8 +8,14 @@
      */
     protected final void logError(DetailAST ast, String subtypeName,
                                   int actualLevel, IndentLevel expectedLevel) {
-        final String typeStr =
-            subtypeName.isEmpty() ? "" : " " + subtypeName;
+        final String typeStr;
+
+        if (subtypeName.isEmpty()) {
+            typeStr = "";
+        }
+        else {
+            typeStr = " " + subtypeName;
+        }
         String messageKey = MSG_ERROR;
         if (expectedLevel.isMultiLevel()) {
             messageKey = MSG_ERROR_MULTI;

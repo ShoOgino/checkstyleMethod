@@ -18,9 +18,15 @@
             // There are no annotations.
             return ast;
         }
-        final DetailAST tokenAfterLast = lastAnnot.getNextSibling() != null
-                                       ? lastAnnot.getNextSibling()
-                                       : modifiers.getNextSibling();
+        final DetailAST tokenAfterLast;
+
+        if (lastAnnot.getNextSibling() == null) {
+            tokenAfterLast = modifiers.getNextSibling();
+        }
+        else {
+            tokenAfterLast = lastAnnot.getNextSibling();
+        }
+
         if (tokenAfterLast.getLineNo() > lastAnnot.getLineNo()) {
             return tokenAfterLast;
         }

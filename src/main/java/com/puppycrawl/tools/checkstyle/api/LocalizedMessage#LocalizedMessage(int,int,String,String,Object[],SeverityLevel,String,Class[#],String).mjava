@@ -23,7 +23,13 @@
         this.lineNo = lineNo;
         this.colNo = colNo;
         this.key = key;
-        this.args = args == null ? null : args.clone();
+
+        if (args == null) {
+            this.args = null;
+        }
+        else {
+            this.args = Arrays.copyOf(args, args.length);
+        }
         this.bundle = bundle;
         this.severityLevel = severityLevel;
         this.moduleId = moduleId;

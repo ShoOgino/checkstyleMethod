@@ -8,7 +8,6 @@
      */
     public MethodDefHandler(IndentationCheck indentCheck,
         DetailAST ast, AbstractExpressionHandler parent) {
-        super(indentCheck, ast.getType() == TokenTypes.CTOR_DEF
-            ? "ctor def" : "method def", ast, parent);
+        super(indentCheck, getHandlerName(ast), ast, parent);
     }
 

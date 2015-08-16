@@ -9,10 +9,6 @@
     public ClassDefHandler(IndentationCheck indentCheck,
                            DetailAST ast,
                            AbstractExpressionHandler parent) {
-        super(indentCheck,
-              ast.getType() == TokenTypes.CLASS_DEF
-              ? "class def" : ast.getType() == TokenTypes.ENUM_DEF
-                  ? "enum def" : "interface def",
-              ast, parent);
+        super(indentCheck, getHandlerName(ast), ast, parent);
     }
 

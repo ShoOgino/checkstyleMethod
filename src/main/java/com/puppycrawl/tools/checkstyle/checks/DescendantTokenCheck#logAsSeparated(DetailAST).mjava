@@ -9,22 +9,26 @@
         for (int element : limitedTokens) {
             final int tokenCount = counts[element - 1];
             if (tokenCount < minimumNumber) {
-                final String descendantName = Utils
-                        .getTokenName(element);
+                final String descendantName = Utils.getTokenName(element);
+
+                if (minimumMessage == null) {
+                    minimumMessage = MSG_KEY_MIN;
+                }
                 log(ast.getLineNo(), ast.getColumnNo(),
-                    minimumMessage == null ? MSG_KEY_MIN
-                                : minimumMessage,
+                        minimumMessage,
                         String.valueOf(tokenCount),
                         String.valueOf(minimumNumber),
                         name,
                         descendantName);
             }
             if (tokenCount > maximumNumber) {
-                final String descendantName = Utils
-                        .getTokenName(element);
+                final String descendantName = Utils.getTokenName(element);
+
+                if (maximumMessage == null) {
+                    maximumMessage = MSG_KEY_MAX;
+                }
                 log(ast.getLineNo(), ast.getColumnNo(),
-                    maximumMessage == null ? MSG_KEY_MAX
-                                : maximumMessage,
+                        maximumMessage,
                         String.valueOf(tokenCount),
                         String.valueOf(maximumNumber),
                         name,

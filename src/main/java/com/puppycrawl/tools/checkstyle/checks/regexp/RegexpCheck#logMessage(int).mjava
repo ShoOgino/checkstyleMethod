@@ -3,10 +3,19 @@
      * @param lineNumber the line number the message relates to.
      */
     private void logMessage(int lineNumber) {
-        String msg = getMessage().isEmpty() ? getFormat() : message;
+        String msg;
+
+        if (getMessage().isEmpty()) {
+            msg = getFormat();
+        }
+        else {
+            msg = message;
+        }
+
         if (errorCount >= errorLimit) {
             msg = ERROR_LIMIT_EXCEEDED_MESSAGE + msg;
         }
+
         if (illegalPattern) {
             log(lineNumber, MSG_ILLEGAL_REGEXP, msg);
         }

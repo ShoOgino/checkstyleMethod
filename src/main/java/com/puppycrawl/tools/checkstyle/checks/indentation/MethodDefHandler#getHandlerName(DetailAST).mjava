@@ -1,0 +1,18 @@
+    /**
+     * Creates a handler name for this class according to ast type.
+     *
+     * @param ast the abstract syntax tree.
+     * @return handler name for this class.
+     */
+    private static String getHandlerName(DetailAST ast) {
+        final String name;
+
+        if (ast.getType() == TokenTypes.CTOR_DEF) {
+            name = "ctor def";
+        }
+        else {
+            name = "method def";
+        }
+        return name;
+    }
+

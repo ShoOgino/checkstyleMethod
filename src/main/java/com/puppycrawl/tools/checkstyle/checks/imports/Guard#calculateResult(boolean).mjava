@@ -5,9 +5,16 @@
      * @return An appropriate {@link AccessResult}.
      */
     private AccessResult calculateResult(final boolean matched) {
+        AccessResult result = AccessResult.UNKNOWN;
+
         if (matched) {
-            return allowed ? AccessResult.ALLOWED : AccessResult.DISALLOWED;
+            if (allowed) {
+                result = AccessResult.ALLOWED;
+            }
+            else {
+                result = AccessResult.DISALLOWED;
+            }
         }
-        return AccessResult.UNKNOWN;
+        return result;
     }
 
