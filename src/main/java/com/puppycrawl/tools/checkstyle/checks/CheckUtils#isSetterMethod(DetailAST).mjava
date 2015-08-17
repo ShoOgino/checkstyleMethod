@@ -3,12 +3,12 @@
      * @param ast the AST to check with
      * @return whether the AST represents a setter method
      */
-    private static boolean isSetterMethod(final DetailAST ast) {
+    public static boolean isSetterMethod(final DetailAST ast) {
         // Check have a method with exactly 7 children which are all that
         // is allowed in a proper setter method which does not throw any
         // exceptions.
         if (ast.getType() != TokenTypes.METHOD_DEF
-                || ast.getChildCount() != MAX_CHILDREN) {
+                || ast.getChildCount() != SETTER_GETTER_MAX_CHILDREN) {
             return false;
         }
 
@@ -37,11 +37,11 @@
         // SEMI
         // RCURLY
         final DetailAST slist = ast.findFirstToken(TokenTypes.SLIST);
-        if (slist == null || slist.getChildCount() != BODY_SIZE) {
+        if (slist == null || slist.getChildCount() != SETTER_BODY_SIZE) {
             return false;
         }
 
-        final AST expr = slist.getFirstChild();
+        final DetailAST expr = slist.getFirstChild();
         return expr.getFirstChild().getType() == TokenTypes.ASSIGN;
     }
 
