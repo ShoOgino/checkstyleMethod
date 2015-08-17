@@ -1,21 +1,17 @@
     @Test
     @SuppressWarnings("unchecked")
     public void testUnableToFindSuppressions() throws Exception {
-        mockStatic(SuppressionsLoader.class);
+        Class<SuppressionsLoader> loaderClass = SuppressionsLoader.class;
+        Method loadSuppressions =
+            loaderClass.getDeclaredMethod("loadSuppressions", InputSource.class, String.class);
+        loadSuppressions.setAccessible(true);
 
-        String fileName = "suppressions_none.xml";
-        InputSource source = mock(InputSource.class);
+        String sourceName = "suppressions_none.xml";
+        InputSource inputSource = new InputSource(sourceName);
 
-        when(source.getByteStream()).thenThrow(FileNotFoundException.class);
-        when(SuppressionsLoader.class, "loadSuppressions", source, fileName).thenCallRealMethod();
+        thrown.expect(CheckstyleException.class);
+        thrown.expectMessage("unable to find " + sourceName);
 
-        try {
-            Whitebox.invokeMethod(SuppressionsLoader.class, "loadSuppressions", source, fileName);
-            fail("Exception is expected");
-        }
-        catch (CheckstyleException ex) {
-            assertTrue(ex.getCause() instanceof  FileNotFoundException);
-            assertEquals("unable to find " + fileName, ex.getMessage());
-        }
+        loadSuppressions.invoke(loaderClass, inputSource, sourceName);
     }
 

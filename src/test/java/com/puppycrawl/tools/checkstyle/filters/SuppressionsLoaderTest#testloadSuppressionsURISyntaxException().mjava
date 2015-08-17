@@ -1,15 +1,12 @@
     @Test
     @SuppressWarnings("unchecked")
     public void testloadSuppressionsURISyntaxException() throws Exception {
-        mockStatic(SuppressionsLoader.class);
-
         URL configUrl = mock(URL.class);
         String fileName = "suppressions_none.xml";
 
-        when(SuppressionsLoader.class.getResource(fileName)).thenReturn(configUrl);
         when(configUrl.toURI()).thenThrow(URISyntaxException.class);
-        when(SuppressionsLoader.loadSuppressions(fileName))
-                .thenCallRealMethod();
+        mockStatic(SuppressionsLoader.class, Mockito.CALLS_REAL_METHODS);
+        when(SuppressionsLoader.class.getResource(fileName)).thenReturn(configUrl);
 
         try {
             SuppressionsLoader.loadSuppressions(fileName);
