@@ -1,30 +1,30 @@
     @Test
     public void testAddListener() throws Exception {
         final DebugChecker c = new DebugChecker();
-        final DebugAuditAdapter aa = new DebugAuditAdapter();
-        c.addListener(aa);
+        final DebugAuditAdapter auditAdapter = new DebugAuditAdapter();
+        c.addListener(auditAdapter);
 
         // Let's try fire some events
         c.fireAuditStarted();
-        assertTrue("Checker.fireAuditStarted() doesn't call listener", aa.wasCalled());
+        assertTrue("Checker.fireAuditStarted() doesn't call listener", auditAdapter.wasCalled());
 
-        aa.resetListener();
+        auditAdapter.resetListener();
         c.fireAuditFinished();
-        assertTrue("Checker.fireAuditFinished() doesn't call listener", aa.wasCalled());
+        assertTrue("Checker.fireAuditFinished() doesn't call listener", auditAdapter.wasCalled());
 
-        aa.resetListener();
+        auditAdapter.resetListener();
         c.fireFileStarted("Some File Name");
-        assertTrue("Checker.fireFileStarted() doesn't call listener", aa.wasCalled());
+        assertTrue("Checker.fireFileStarted() doesn't call listener", auditAdapter.wasCalled());
 
-        aa.resetListener();
+        auditAdapter.resetListener();
         c.fireFileFinished("Some File Name");
-        assertTrue("Checker.fireFileFinished() doesn't call listener", aa.wasCalled());
+        assertTrue("Checker.fireFileFinished() doesn't call listener", auditAdapter.wasCalled());
 
-        aa.resetListener();
+        auditAdapter.resetListener();
         final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
         c.fireErrors("Some File Name", msgs);
-        assertTrue("Checker.fireErrors() doesn't call listener", aa.wasCalled());
+        assertTrue("Checker.fireErrors() doesn't call listener", auditAdapter.wasCalled());
     }
 

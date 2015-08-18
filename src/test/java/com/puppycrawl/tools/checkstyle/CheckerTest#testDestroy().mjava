@@ -1,8 +1,8 @@
     @Test
     public void testDestroy() throws Exception {
         final DebugChecker c = new DebugChecker();
-        final DebugAuditAdapter aa = new DebugAuditAdapter();
-        c.addListener(aa);
+        final DebugAuditAdapter auditAdapter = new DebugAuditAdapter();
+        c.addListener(auditAdapter);
         final DebugFilter f = new DebugFilter();
         c.addFilter(f);
 
@@ -19,7 +19,7 @@
                 new Object[] {"arg"}, null, getClass(), null));
         c.fireErrors("Some File Name", msgs);
 
-        assertFalse("Checker.destroy() doesn't remove listeners.", aa.wasCalled());
+        assertFalse("Checker.destroy() doesn't remove listeners.", auditAdapter.wasCalled());
         assertFalse("Checker.destroy() doesn't remove filters.", f.wasCalled());
     }
 
