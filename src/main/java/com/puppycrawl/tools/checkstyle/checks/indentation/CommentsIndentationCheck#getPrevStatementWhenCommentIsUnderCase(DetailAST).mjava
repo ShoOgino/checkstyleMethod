@@ -1,0 +1,23 @@
+    /**
+     * Gets previous statement for comment which is placed immediatly under case.
+     * @param parentStatement comment's parent statement.
+     * @return comment's previous statement or null if previous statement is absent.
+     */
+    private static DetailAST getPrevStatementWhenCommentIsUnderCase(DetailAST parentStatement) {
+        DetailAST prevStmt = null;
+        final DetailAST prevBlock = parentStatement.getPreviousSibling();
+        if (prevBlock.getLastChild() != null) {
+            DetailAST blockBody = prevBlock.getLastChild().getLastChild();
+            if (blockBody.getPreviousSibling() != null) {
+                blockBody = blockBody.getPreviousSibling();
+            }
+            if (blockBody.getType() == TokenTypes.EXPR) {
+                prevStmt = blockBody.getFirstChild().getFirstChild();
+            }
+            else {
+                prevStmt = blockBody;
+            }
+        }
+        return prevStmt;
+    }
+

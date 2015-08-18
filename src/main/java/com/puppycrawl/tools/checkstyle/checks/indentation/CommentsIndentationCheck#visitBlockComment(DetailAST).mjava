@@ -12,7 +12,7 @@
      */
     private void visitBlockComment(DetailAST blockComment) {
         final DetailAST nextStatement = blockComment.getNextSibling();
-        final DetailAST prevStatement = getPreviousStmt(blockComment);
+        final DetailAST prevStatement = getPrevStatementFromSwitchBlock(blockComment);
 
         if (nextStatement != null
             && nextStatement.getType() != TokenTypes.RCURLY
