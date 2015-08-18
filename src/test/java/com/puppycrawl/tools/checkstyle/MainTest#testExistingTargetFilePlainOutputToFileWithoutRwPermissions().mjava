@@ -6,6 +6,7 @@
         assertTrue(file.setWritable(false, false));
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(new Assertion() {
+            @Override
             public void checkAssertion() throws IOException {
                 assertEquals("Permission denied : '" + file.getCanonicalPath() + "'."
                         + System.lineSeparator(), systemOut.getLog());

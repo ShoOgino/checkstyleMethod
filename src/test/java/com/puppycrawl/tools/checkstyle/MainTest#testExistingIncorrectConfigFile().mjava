@@ -3,6 +3,7 @@
             throws Exception {
         exit.expectSystemExitWithStatus(-2);
         exit.checkAssertionAfterwards(new Assertion() {
+            @Override
             public void checkAssertion() {
                 assertEquals(String.format("unable to parse configuration stream - Content is not allowed in prolog.:7:1%n"
                         + "Checkstyle ends with 1 errors.%n"), systemOut.getLog());
