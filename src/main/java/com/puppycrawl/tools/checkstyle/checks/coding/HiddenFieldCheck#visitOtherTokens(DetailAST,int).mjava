@@ -23,7 +23,7 @@
         else {
             frameName = null;
         }
-        final FieldFrame frame = new FieldFrame(currentFrame, isStaticInnerType, frameName);
+        final FieldFrame newFrame = new FieldFrame(frame, isStaticInnerType, frameName);
 
         //add fields to container
         final DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
@@ -37,16 +37,16 @@
                     final DetailAST mods =
                         child.findFirstToken(TokenTypes.MODIFIERS);
                     if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                        frame.addStaticField(name);
+                        newFrame.addStaticField(name);
                     }
                     else {
-                        frame.addInstanceField(name);
+                        newFrame.addInstanceField(name);
                     }
                 }
                 child = child.getNextSibling();
             }
         }
         // push container
-        currentFrame = frame;
+        frame = newFrame;
     }
 

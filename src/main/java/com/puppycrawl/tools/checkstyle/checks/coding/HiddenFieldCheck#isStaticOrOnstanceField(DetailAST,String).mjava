@@ -5,7 +5,7 @@
      * @return true if static or instance field
      */
     private boolean isStaticOrOnstanceField(DetailAST ast, String name) {
-        return currentFrame.containsStaticField(name)
-            || !inStatic(ast) && currentFrame.containsInstanceField(name);
+        return frame.containsStaticField(name)
+                || !inStatic(ast) && frame.containsInstanceField(name);
     }
 
