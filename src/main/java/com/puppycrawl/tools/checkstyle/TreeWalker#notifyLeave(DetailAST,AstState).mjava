@@ -5,24 +5,12 @@
      * @param astState state of AST.
      */
     private void notifyLeave(DetailAST ast, AstState astState) {
-        Collection<Check> visitors;
-        final String tokenType = Utils.getTokenName(ast.getType());
+        final Collection<Check> visitors = getListOfChecks(ast, astState);
 
-        if (astState == AstState.WITH_COMMENTS) {
-            if (!tokenToCommentChecks.containsKey(tokenType)) {
-                return;
+        if (visitors != null) {
+            for (Check check : visitors) {
+                check.leaveToken(ast);
             }
-            visitors = tokenToCommentChecks.get(tokenType);
-        }
-        else {
-            if (!tokenToOrdinaryChecks.containsKey(tokenType)) {
-                return;
-            }
-            visitors = tokenToOrdinaryChecks.get(tokenType);
-        }
-
-        for (Check check : visitors) {
-            check.leaveToken(ast);
         }
     }
 

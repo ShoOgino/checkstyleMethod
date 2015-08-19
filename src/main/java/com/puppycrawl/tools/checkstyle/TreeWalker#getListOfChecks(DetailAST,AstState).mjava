@@ -1,0 +1,26 @@
+    /**
+     * Method returns list of checks
+     *
+     * @param ast
+     *            the node to notify for
+     * @param astState
+     *            state of AST.
+     * @return list of visitors
+     */
+    private Collection<Check> getListOfChecks(DetailAST ast, AstState astState) {
+        Collection<Check> visitors = null;
+        final String tokenType = Utils.getTokenName(ast.getType());
+
+        if (astState == AstState.WITH_COMMENTS) {
+            if (tokenToCommentChecks.containsKey(tokenType)) {
+                visitors = tokenToCommentChecks.get(tokenType);
+            }
+        }
+        else {
+            if (tokenToOrdinaryChecks.containsKey(tokenType)) {
+                visitors = tokenToOrdinaryChecks.get(tokenType);
+            }
+        }
+        return visitors;
+    }
+
