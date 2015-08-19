@@ -1,9 +1,9 @@
     protected static Integer[] getLinesWithWarnAndCheckComments(String aFileName,
                     final int tabWidth)
                     throws IOException {
-        int lineNumber = 1;
         List<Integer> result = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(aFileName))) {
+            int lineNumber = 1;
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 Matcher match = LINE_WITH_COMMENT_REGEX.matcher(line);
                 if (match.matches()) {
