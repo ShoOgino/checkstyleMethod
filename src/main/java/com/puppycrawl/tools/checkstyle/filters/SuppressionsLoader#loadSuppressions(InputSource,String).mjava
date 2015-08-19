@@ -15,17 +15,17 @@
             return suppressionsLoader.getFilterChain();
         }
         catch (final FileNotFoundException e) {
-            throw new CheckstyleException("unable to find " + sourceName, e);
+            throw new CheckstyleException(UNABLE_TO_FIND_ERROR_MESSAGE + sourceName, e);
         }
         catch (final ParserConfigurationException | SAXException e) {
-            throw new CheckstyleException("unable to parse "
+            throw new CheckstyleException("Unable to parse "
                     + sourceName + " - " + e.getMessage(), e);
         }
         catch (final IOException e) {
-            throw new CheckstyleException("unable to read " + sourceName, e);
+            throw new CheckstyleException("Unable to read " + sourceName, e);
         }
         catch (final NumberFormatException e) {
-            throw new CheckstyleException("number format exception "
+            throw new CheckstyleException("Number format exception "
                 + sourceName + " - " + e.getMessage(), e);
         }
     }
