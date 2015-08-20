@@ -3,17 +3,17 @@
         if (ast.getType() == TokenTypes.CLASS_DEF
             || ast.getType() == TokenTypes.ENUM_DEF) {
             // perhaps it was inner class
-            int dotIdx = currentClass.lastIndexOf('$');
+            int dotIdx = currentClassName.lastIndexOf('$');
             if (dotIdx == -1) {
                 // perhaps just a class
-                dotIdx = currentClass.lastIndexOf('.');
+                dotIdx = currentClassName.lastIndexOf('.');
             }
             if (dotIdx == -1) {
                 // looks like a topmost class
-                currentClass = "";
+                currentClassName = "";
             }
             else {
-                currentClass = currentClass.substring(0, dotIdx);
+                currentClassName = currentClassName.substring(0, dotIdx);
             }
             typeParams.pop();
         }

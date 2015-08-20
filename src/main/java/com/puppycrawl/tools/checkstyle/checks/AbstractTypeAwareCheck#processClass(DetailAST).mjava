@@ -6,10 +6,10 @@
         final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
         String innerClass = ident.getText();
 
-        if (!currentClass.isEmpty()) {
+        if (!currentClassName.isEmpty()) {
             innerClass = "$" + innerClass;
         }
-        currentClass += innerClass;
+        currentClassName += innerClass;
         processTypeParams(ast);
     }
 

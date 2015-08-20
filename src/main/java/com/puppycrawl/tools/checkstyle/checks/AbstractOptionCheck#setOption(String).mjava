@@ -5,10 +5,11 @@
      */
     public void setOption(String optionStr) {
         try {
-            option = Enum.valueOf(optionClass, optionStr.trim().toUpperCase(Locale.ENGLISH));
+            abstractOption =
+                    Enum.valueOf(optionClass, optionStr.trim().toUpperCase(Locale.ENGLISH));
         }
         catch (IllegalArgumentException iae) {
-            throw new ConversionException("unable to parse " + option, iae);
+            throw new ConversionException("unable to parse " + abstractOption, iae);
         }
     }
 
