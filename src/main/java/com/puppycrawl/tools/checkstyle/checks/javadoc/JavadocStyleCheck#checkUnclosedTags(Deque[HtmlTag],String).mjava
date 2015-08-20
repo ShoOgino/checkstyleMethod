@@ -23,7 +23,8 @@
         }
 
         // Output the unterminated tags, if any
-        String lastFound = ""; // Skip multiples, like <b>..<b>
+        // Skip multiples, like <b>..<b>
+        String lastFound = "";
         for (final HtmlTag htag : unclosedTags) {
             lastOpenTag = htag;
             if (lastOpenTag.getId().equals(lastFound)) {

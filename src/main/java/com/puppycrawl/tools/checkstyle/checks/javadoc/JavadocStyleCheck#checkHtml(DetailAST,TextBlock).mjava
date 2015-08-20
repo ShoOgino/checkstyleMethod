@@ -50,7 +50,8 @@
         }
 
         // Identify any tags left on the stack.
-        String lastFound = ""; // Skip multiples, like <b>...<b>
+        // Skip multiples, like <b>...<b>
+        String lastFound = "";
         final List<String> typeParameters = CheckUtils.getTypeParameterNames(ast);
         for (final HtmlTag htag : htmlStack) {
             if (!isSingleTag(htag)
