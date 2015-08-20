@@ -9,7 +9,7 @@
             final DetailAST previousSiblingNode = getPreviousSibling();
 
             if (previousSiblingNode != null) {
-                ast.setPreviousSibling(previousSiblingNode);
+                ast.previousSibling = previousSiblingNode;
                 previousSiblingNode.setNextSibling(ast);
             }
             else if (parent != null) {
@@ -17,7 +17,7 @@
             }
 
             ast.setNextSibling(this);
-            setPreviousSibling(ast);
+            previousSibling = ast;
         }
     }
 
