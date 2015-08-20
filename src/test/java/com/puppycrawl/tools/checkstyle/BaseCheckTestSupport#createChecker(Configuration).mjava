@@ -1,15 +1,15 @@
     protected Checker createChecker(Configuration checkConfig)
             throws Exception {
         final DefaultConfiguration dc = createCheckerConfig(checkConfig);
-        final Checker c = new Checker();
+        final Checker checker = new Checker();
         // make sure the tests always run with default error messages (language-invariant)
         // so the tests don't fail in supported locales like German
         final Locale locale = Locale.ROOT;
-        c.setLocaleCountry(locale.getCountry());
-        c.setLocaleLanguage(locale.getLanguage());
-        c.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        c.configure(dc);
-        c.addListener(new BriefLogger(stream));
-        return c;
+        checker.setLocaleCountry(locale.getCountry());
+        checker.setLocaleLanguage(locale.getLanguage());
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(dc);
+        checker.addListener(new BriefLogger(stream));
+        return checker;
     }
 
