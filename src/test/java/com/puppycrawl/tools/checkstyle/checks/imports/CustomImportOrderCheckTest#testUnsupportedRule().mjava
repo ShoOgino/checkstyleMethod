@@ -4,7 +4,7 @@
                 createCheckConfig(CustomImportOrderCheck.class);
         checkConfig.addAttribute("customImportOrderRules", "SAME_PACKAGE(3)###UNSUPPORTED_RULE"); //#AAA##BBBB###CCCC####DDDD
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
-        final String[] expected = {};
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
         verify(checkConfig, getPath("imports" + File.separator
                 + "InputCustomImportOrder.java"), expected);
