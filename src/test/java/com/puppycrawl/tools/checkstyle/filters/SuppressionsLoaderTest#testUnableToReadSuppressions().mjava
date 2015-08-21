@@ -5,10 +5,10 @@
             loaderClass.getDeclaredMethod("loadSuppressions", InputSource.class, String.class);
         loadSuppressions.setAccessible(true);
 
-        String sourceName = "suppressions_none.xml";
         InputSource inputSource = new InputSource();
 
         thrown.expect(CheckstyleException.class);
+        String sourceName = "suppressions_none.xml";
         thrown.expectMessage("Unable to read " + sourceName);
 
         loadSuppressions.invoke(loaderClass, inputSource, sourceName);

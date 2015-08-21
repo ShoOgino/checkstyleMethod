@@ -2,10 +2,10 @@
     @SuppressWarnings("unchecked")
     public void testloadSuppressionsURISyntaxException() throws Exception {
         URL configUrl = mock(URL.class);
-        String fileName = "suppressions_none.xml";
 
         when(configUrl.toURI()).thenThrow(URISyntaxException.class);
         mockStatic(SuppressionsLoader.class, Mockito.CALLS_REAL_METHODS);
+        String fileName = "suppressions_none.xml";
         when(SuppressionsLoader.class.getResource(fileName)).thenReturn(configUrl);
 
         try {
