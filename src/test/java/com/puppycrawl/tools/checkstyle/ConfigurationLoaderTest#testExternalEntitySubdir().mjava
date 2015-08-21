@@ -1,15 +1,15 @@
     @Test
     public void testExternalEntitySubdir() throws Exception {
         final Properties props = new Properties();
-        props.put("checkstyle.basedir", "basedir");
+        props.setProperty("checkstyle.basedir", "basedir");
 
         final DefaultConfiguration config =
             (DefaultConfiguration) loadConfiguration(
                 "subdir/including.xml", props);
 
         final Properties atts = new Properties();
-        atts.put("tabWidth", "4");
-        atts.put("basedir", "basedir");
+        atts.setProperty("tabWidth", "4");
+        atts.setProperty("basedir", "basedir");
         verifyConfigNode(config, "Checker", 2, atts);
     }
 

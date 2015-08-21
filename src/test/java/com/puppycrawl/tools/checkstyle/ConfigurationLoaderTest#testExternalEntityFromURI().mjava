@@ -1,7 +1,7 @@
     @Test
     public void testExternalEntityFromURI() throws Exception {
         final Properties props = new Properties();
-        props.put("checkstyle.basedir", "basedir");
+        props.setProperty("checkstyle.basedir", "basedir");
 
         final File file = new File(
                 "src/test/resources/com/puppycrawl/tools/checkstyle/configs/subdir/including.xml");
@@ -10,8 +10,8 @@
                     file.toURI().toString(), new PropertiesExpander(props));
 
         final Properties atts = new Properties();
-        atts.put("tabWidth", "4");
-        atts.put("basedir", "basedir");
+        atts.setProperty("tabWidth", "4");
+        atts.setProperty("basedir", "basedir");
         verifyConfigNode(config, "Checker", 2, atts);
     }
 

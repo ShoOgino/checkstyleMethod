@@ -1,7 +1,7 @@
     @Test
     public void testResourceLoadConfiguration() throws Exception {
         final Properties props = new Properties();
-        props.put("checkstyle.basedir", "basedir");
+        props.setProperty("checkstyle.basedir", "basedir");
 
         // load config that's only found in the classpath
         final DefaultConfiguration config = (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
@@ -9,8 +9,8 @@
 
         //verify the root, and property substitution
         final Properties atts = new Properties();
-        atts.put("tabWidth", "4");
-        atts.put("basedir", "basedir");
+        atts.setProperty("tabWidth", "4");
+        atts.setProperty("basedir", "basedir");
         verifyConfigNode(config, "Checker", 3, atts);
     }
 
