@@ -12,8 +12,8 @@
         if (!"private".equals(variableScope)) {
             result =
                 isStaticFinalVariable(variableDef)
-                || isPackageAllowed() && "package".equals(variableScope)
-                || isProtectedAllowed() && "protected".equals(variableScope)
+                || packageAllowed && "package".equals(variableScope)
+                || protectedAllowed && "protected".equals(variableScope)
                 || isIgnoredPublicMember(variableName, variableScope)
                    || allowPublicImmutableFields
                       && isImmutableFieldDefinedInFinalClass(variableDef);
