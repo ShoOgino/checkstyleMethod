@@ -1,19 +1,19 @@
     @Test
     public void testRemoveFilter() throws Exception {
-        final DebugChecker c = new DebugChecker();
-        final DebugFilter f = new DebugFilter();
+        final DebugChecker checker = new DebugChecker();
+        final DebugFilter filter = new DebugFilter();
         final DebugFilter f2 = new DebugFilter();
-        c.addFilter(f);
-        c.addFilter(f2);
-        c.removeFilter(f);
+        checker.addFilter(filter);
+        checker.addFilter(f2);
+        checker.removeFilter(filter);
 
         f2.resetFilter();
         final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
-        c.fireErrors("Some File Name", msgs);
+        checker.fireErrors("Some File Name", msgs);
         assertTrue("Checker.fireErrors() doesn't call filter", f2.wasCalled());
-        assertFalse("Checker.fireErrors() does call removed filter", f.wasCalled());
+        assertFalse("Checker.fireErrors() does call removed filter", filter.wasCalled());
 
     }
 

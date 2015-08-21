@@ -1,25 +1,25 @@
     @Test
     public void testDestroy() throws Exception {
-        final DebugChecker c = new DebugChecker();
+        final DebugChecker checker = new DebugChecker();
         final DebugAuditAdapter auditAdapter = new DebugAuditAdapter();
-        c.addListener(auditAdapter);
-        final DebugFilter f = new DebugFilter();
-        c.addFilter(f);
+        checker.addListener(auditAdapter);
+        final DebugFilter filter = new DebugFilter();
+        checker.addFilter(filter);
 
-        c.destroy(); // should remove al listeners and filters
+        checker.destroy(); // should remove al listeners and filters
 
         // Let's try fire some events
-        c.fireAuditStarted();
-        c.fireAuditFinished();
-        c.fireFileStarted("Some File Name");
-        c.fireFileFinished("Some File Name");
+        checker.fireAuditStarted();
+        checker.fireAuditFinished();
+        checker.fireFileStarted("Some File Name");
+        checker.fireFileFinished("Some File Name");
 
         final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
-        c.fireErrors("Some File Name", msgs);
+        checker.fireErrors("Some File Name", msgs);
 
         assertFalse("Checker.destroy() doesn't remove listeners.", auditAdapter.wasCalled());
-        assertFalse("Checker.destroy() doesn't remove filters.", f.wasCalled());
+        assertFalse("Checker.destroy() doesn't remove filters.", filter.wasCalled());
     }
 

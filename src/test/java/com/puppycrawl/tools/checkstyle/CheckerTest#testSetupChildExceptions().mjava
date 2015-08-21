@@ -1,13 +1,13 @@
     @Test
     public void testSetupChildExceptions() throws Exception {
-        final Checker c = new Checker();
+        final Checker checker = new Checker();
         PackageObjectFactory factory = new PackageObjectFactory(
                 new HashSet<String>(), Thread.currentThread().getContextClassLoader());
-        c.setModuleFactory(factory);
+        checker.setModuleFactory(factory);
 
         Configuration config = new DefaultConfiguration("java.lang.String");
         try {
-            c.setupChild(config);
+            checker.setupChild(config);
             fail("Exception is expected");
         }
         catch (CheckstyleException ex) {

@@ -1,11 +1,11 @@
     @Test
     public void testFinishLocalSetupFullyInitialized() throws Exception {
-        final Checker c = new Checker();
-        c.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
         PackageObjectFactory factory = new PackageObjectFactory(
                 new HashSet<String>(), Thread.currentThread().getContextClassLoader());
-        c.setModuleFactory(factory);
+        checker.setModuleFactory(factory);
 
-        c.finishLocalSetup();
+        checker.finishLocalSetup();
     }
 

@@ -1,15 +1,15 @@
     @Test
     public void testAddFilter() throws Exception {
-        final DebugChecker c = new DebugChecker();
-        final DebugFilter f = new DebugFilter();
+        final DebugChecker checker = new DebugChecker();
+        final DebugFilter filter = new DebugFilter();
 
-        c.addFilter(f);
+        checker.addFilter(filter);
 
-        f.resetFilter();
+        filter.resetFilter();
         final TreeSet<LocalizedMessage> msgs = Sets.newTreeSet();
         msgs.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
-        c.fireErrors("Some File Name", msgs);
-        assertTrue("Checker.fireErrors() doesn't call filter", f.wasCalled());
+        checker.fireErrors("Some File Name", msgs);
+        assertTrue("Checker.fireErrors() doesn't call filter", filter.wasCalled());
     }
 
