@@ -1,0 +1,27 @@
+    /**
+     * Gets the checkstyle's non abstract checks.
+     * @return the set of checkstyle's non abstract check classes.
+     * @throws IOException if the attempt to read class path resources failed.
+     */
+    private static Set<Class<?>> getCheckstyleChecks() throws IOException {
+        Set<Class<?>> checkstyleChecks = new HashSet<>();
+
+        final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        final ClassPath classpath = ClassPath.from(loader);
+        final String packageName = "com.puppycrawl.tools.checkstyle";
+        final ImmutableSet<ClassPath.ClassInfo> checkstyleClasses =
+            classpath.getTopLevelClassesRecursive(packageName);
+
+        for (ClassPath.ClassInfo clazz : checkstyleClasses) {
+            final String className = clazz.getSimpleName();
+            final Class<?> loadedClass = clazz.load();
+            if (!Modifier.isAbstract(loadedClass.getModifiers())
+                && !className.contains("Input")
+                && className.endsWith("Check")) {
+
+                checkstyleChecks.add(loadedClass);
+            }
+        }
+        return checkstyleChecks;
+    }
+

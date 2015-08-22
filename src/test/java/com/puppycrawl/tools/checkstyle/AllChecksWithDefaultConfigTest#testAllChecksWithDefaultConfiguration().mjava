@@ -1,0 +1,36 @@
+    @Test
+    public void testAllChecksWithDefaultConfiguration() throws Exception {
+
+        final Set<Class<?>> checkstyleChecks = getCheckstyleChecks();
+        final String inputFilePath = "src/test/resources-noncompilable/"
+            + "com/puppycrawl/tools/checkstyle/InputDefaultConfig.java";
+        final String[] expected = {};
+
+        for (Class<?> check : checkstyleChecks) {
+            final DefaultConfiguration checkConfig = createCheckConfig(check);
+            final Checker checker;
+            if (Check.class.isAssignableFrom(check)) {
+                // Checks which have Check as a parent.
+                if (check.equals(ImportControlCheck.class)) {
+                    // ImportControlCheck must have the import control configuration file to avoid violation.
+                    checkConfig.addAttribute("file",
+                        "src/test/resources/com/puppycrawl/tools/checkstyle/imports/import-control_complete.xml");
+                }
+                checker = createChecker(checkConfig);
+            }
+            else {
+                // Checks which have TreeWalker as a parent.
+                BaseCheckTestSupport testSupport = new BaseCheckTestSupport() {
+                    @Override
+                    protected DefaultConfiguration createCheckerConfig(Configuration config) {
+                        final DefaultConfiguration dc = new DefaultConfiguration("root");
+                        dc.addChild(checkConfig);
+                        return dc;
+                    }
+                };
+                checker = testSupport.createChecker(checkConfig);
+            }
+            verify(checker, inputFilePath, expected);
+        }
+    }
+
