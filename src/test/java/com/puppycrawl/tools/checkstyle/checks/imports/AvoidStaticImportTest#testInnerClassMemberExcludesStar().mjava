@@ -3,8 +3,10 @@
         throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(AvoidStaticImportCheck.class);
+
+        // should mask com.puppycrawl.tools.checkstyle.imports.InputAvoidStaticImportNestedClass.InnerClass.one
         checkConfig.addAttribute(
-            "excludes", //should mask com.puppycrawl.tools.checkstyle.imports.InputAvoidStaticImportNestedClass.InnerClass.one
+            "excludes",
             "com.puppycrawl.tools.checkstyle.imports.InputAvoidStaticImportNestedClass.InnerClass.*");
         final String[] expected = {
             "23: " + getCheckMessage(MSG_KEY, "java.io.File.listRoots"),
