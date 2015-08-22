@@ -5,9 +5,9 @@
      * @param fileName the audited file
      */
     protected final void fireErrors(String fileName) {
-        final SortedSet<LocalizedMessage> errors = getMessageCollector()
+        final SortedSet<LocalizedMessage> errors = messageCollector
                 .getMessages();
-        getMessageCollector().reset();
+        messageCollector.reset();
         getMessageDispatcher().fireErrors(fileName, errors);
     }
 

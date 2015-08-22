@@ -1,11 +1,11 @@
     @Override
     public final SortedSet<LocalizedMessage> process(File file,
                                                    List<String> lines) {
-        getMessageCollector().reset();
+        messageCollector.reset();
         // Process only what interested in
         if (Utils.fileExtensionMatches(file, fileExtensions)) {
             processFiltered(file, lines);
         }
-        return getMessageCollector().getMessages();
+        return messageCollector.getMessages();
     }
 
