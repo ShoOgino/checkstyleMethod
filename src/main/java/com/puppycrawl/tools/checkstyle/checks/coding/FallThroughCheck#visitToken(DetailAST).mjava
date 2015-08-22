@@ -2,7 +2,7 @@
     public void visitToken(DetailAST ast) {
         final DetailAST nextGroup = ast.getNextSibling();
         final boolean isLastGroup = nextGroup.getType() != TokenTypes.CASE_GROUP;
-        if (isLastGroup && !checkLastGroup) {
+        if (isLastGroup && !checkLastCaseGroup) {
             // we do not need to check last group
             return;
         }
