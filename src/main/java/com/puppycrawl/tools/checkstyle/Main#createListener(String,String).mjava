@@ -25,11 +25,11 @@
 
         // setup a listener
         AuditListener listener;
-        if ("xml".equals(format)) {
+        if (XML_FORMAT_NAME.equals(format)) {
             listener = new XMLLogger(out, closeOutputStream);
 
         }
-        else if ("plain".equals(format)) {
+        else if (PLAIN_FORMAT_NAME.equals(format)) {
             listener = new DefaultLogger(out, closeOutputStream);
 
         }
@@ -37,8 +37,9 @@
             if (closeOutputStream) {
                 Utils.close(out);
             }
-            throw new IllegalStateException("Invalid output format. Found '" + format
-                    + "' but expected 'plain' or 'xml'.");
+            throw new IllegalStateException(String.format(
+                    "Invalid output format. Found '%s' but expected '%s' or '%s'.",
+                    format, PLAIN_FORMAT_NAME, XML_FORMAT_NAME));
         }
 
         return listener;

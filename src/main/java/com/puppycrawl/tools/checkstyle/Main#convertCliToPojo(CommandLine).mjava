@@ -5,13 +5,13 @@
      */
     private static CliOptions convertCliToPojo(CommandLine cmdLine) {
         final CliOptions conf = new CliOptions();
-        conf.format = cmdLine.getOptionValue("f");
+        conf.format = cmdLine.getOptionValue(OPTION_F_NAME);
         if (conf.format == null) {
-            conf.format = "plain";
+            conf.format = PLAIN_FORMAT_NAME;
         }
-        conf.outputLocation = cmdLine.getOptionValue("o");
-        conf.configLocation = cmdLine.getOptionValue("c");
-        conf.propertiesLocation = cmdLine.getOptionValue("p");
+        conf.outputLocation = cmdLine.getOptionValue(OPTION_O_NAME);
+        conf.configLocation = cmdLine.getOptionValue(OPTION_C_NAME);
+        conf.propertiesLocation = cmdLine.getOptionValue(OPTION_P_NAME);
         conf.files = getFilesToProcess(cmdLine.getArgs());
         return conf;
     }

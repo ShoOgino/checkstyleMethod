@@ -9,11 +9,11 @@
 
         final String variableScope = getVisibilityScope(variableDef);
 
-        if (!"private".equals(variableScope)) {
+        if (!PRIVATE_ACCESS_MODIFIER.equals(variableScope)) {
             result =
                 isStaticFinalVariable(variableDef)
-                || packageAllowed && "package".equals(variableScope)
-                || protectedAllowed && "protected".equals(variableScope)
+                || packageAllowed && PACKAGE_ACCESS_MODIFIER.equals(variableScope)
+                || protectedAllowed && PROTECTED_ACCESS_MODIFIER.equals(variableScope)
                 || isIgnoredPublicMember(variableName, variableScope)
                    || allowPublicImmutableFields
                       && isImmutableFieldDefinedInFinalClass(variableDef);

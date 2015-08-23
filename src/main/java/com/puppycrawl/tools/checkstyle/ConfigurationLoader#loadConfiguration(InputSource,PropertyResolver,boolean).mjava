@@ -21,12 +21,12 @@
             return loader.configuration;
         }
         catch (final SAXParseException e) {
-            throw new CheckstyleException("unable to parse configuration stream"
+            throw new CheckstyleException(UNABLE_TO_PARSE_EXCEPTION_PREFIX
                     + " - " + e.getMessage() + ":" + e.getLineNumber()
                     + ":" + e.getColumnNumber(), e);
         }
         catch (final ParserConfigurationException | IOException | SAXException e) {
-            throw new CheckstyleException("unable to parse configuration stream", e);
+            throw new CheckstyleException(UNABLE_TO_PARSE_EXCEPTION_PREFIX, e);
         }
     }
 

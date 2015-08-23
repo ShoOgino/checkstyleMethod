@@ -5,7 +5,7 @@
      */
     private static String getVisibilityScope(DetailAST variableDef) {
         final Set<String> modifiers = getModifiers(variableDef);
-        String accessModifier = "package";
+        String accessModifier = PACKAGE_ACCESS_MODIFIER;
         for (final String modifier : EXPLICIT_MODS) {
             if (modifiers.contains(modifier)) {
                 accessModifier = modifier;

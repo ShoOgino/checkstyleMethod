@@ -5,6 +5,7 @@
      */
     private static boolean isStaticFinalVariable(DetailAST variableDef) {
         final Set<String> modifiers = getModifiers(variableDef);
-        return modifiers.contains("static") && modifiers.contains("final");
+        return modifiers.contains(STATIC_KEYWORD)
+                && modifiers.contains(FINAL_KEYWORD);
     }
 

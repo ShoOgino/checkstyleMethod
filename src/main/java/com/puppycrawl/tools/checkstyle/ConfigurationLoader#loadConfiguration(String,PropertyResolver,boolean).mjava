@@ -32,12 +32,12 @@
                     final URL configUrl = ConfigurationLoader.class
                             .getResource(config);
                     if (configUrl == null) {
-                        throw new CheckstyleException("unable to find " + config);
+                        throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + config);
                     }
                     uri = configUrl.toURI();
                 }
                 catch (final URISyntaxException e) {
-                    throw new CheckstyleException("unable to find " + config, e);
+                    throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + config, e);
                 }
             }
         }

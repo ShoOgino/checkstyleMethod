@@ -5,7 +5,7 @@
      * @return true if variable belongs to public members that should be ignored.
      */
     private boolean isIgnoredPublicMember(String variableName, String variableScope) {
-        return "public".equals(variableScope)
+        return PUBLIC_ACCESS_MODIFIER.equals(variableScope)
             && publicMemberPattern.matcher(variableName).find();
     }
 

@@ -4,11 +4,13 @@
      */
     private static Options buildOptions() {
         final Options options = new Options();
-        options.addOption("c", true, "Sets the check configuration file to use.");
-        options.addOption("o", true, "Sets the output file. Defaults to stdout");
-        options.addOption("p", true, "Loads the properties file");
-        options.addOption("f", true, "Sets the output format. (plain|xml). Defaults to plain");
-        options.addOption("v", false, "Print product version and exit");
+        options.addOption(OPTION_C_NAME, true, "Sets the check configuration file to use.");
+        options.addOption(OPTION_O_NAME, true, "Sets the output file. Defaults to stdout");
+        options.addOption(OPTION_P_NAME, true, "Loads the properties file");
+        options.addOption(OPTION_F_NAME, true, String.format(
+                "Sets the output format. (%s|%s). Defaults to %s",
+                PLAIN_FORMAT_NAME, XML_FORMAT_NAME, PLAIN_FORMAT_NAME));
+        options.addOption(OPTION_V_NAME, false, "Print product version and exit");
         return options;
     }
 
