@@ -1,0 +1,16 @@
+    @Test
+    public void testIoExceptionWhenLoadingHeader() throws Exception {
+        HeaderCheck check = PowerMockito.spy(new HeaderCheck());
+        PowerMockito.doThrow(new IOException("excpected exception")).when(check, "loadHeader",
+                anyObject());
+
+        try {
+            check.setHeader("header");
+            fail("Exception expected");
+        }
+        catch (ConversionException ex) {
+            assertTrue(ex.getCause() instanceof IOException);
+            assertEquals("unable to load header", ex.getMessage());
+        }
+    }
+

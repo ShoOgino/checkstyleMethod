@@ -1,0 +1,21 @@
+    @Test
+    public void testIoExceptionWhenLoadingHeaderFile() throws Exception {
+        HeaderCheck check = PowerMockito.spy(new HeaderCheck());
+        PowerMockito.doThrow(new IOException("excpected exception")).when(check, "loadHeader",
+                anyObject());
+
+        check.setHeaderFile(getPath("InputRegexpHeader1.java"));
+
+        Method loadHeaderFile = AbstractHeaderCheck.class.getDeclaredMethod("loadHeaderFile");
+        loadHeaderFile.setAccessible(true);
+        try {
+            loadHeaderFile.invoke(check);
+            fail("Exception expected");
+        }
+        catch (InvocationTargetException ex) {
+            assertTrue(ex.getCause() instanceof CheckstyleException);
+            assertEquals("unable to load header file "
+                    + getPath("InputRegexpHeader1.java"), ex.getCause().getMessage());
+        }
+    }
+
