@@ -11,7 +11,8 @@
 
         checkHeaderNotInitialized();
 
-        final String headerExpandedNewLines = header.replaceAll("\\\\n", "\n");
+        final String headerExpandedNewLines = ESCAPED_LINE_FEED_PATTERN
+                .matcher(header).replaceAll("\n");
 
         final Reader headerReader = new StringReader(headerExpandedNewLines);
         try {
