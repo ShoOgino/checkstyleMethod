@@ -14,7 +14,7 @@
                     || !containsActualLevel && isWarnComment;
         }
 
-        match = SINGLELEVEL_COMMENT_REGEX.matcher(comment);
+        match = SINGLE_LEVEL_COMMENT_REGEX.matcher(comment);
         if (match.matches()) {
             final int expectedLevel = Integer.parseInt(match.group(1));
 
@@ -22,7 +22,7 @@
                     || expectedLevel != indentInComment && isWarnComment;
         }
 
-        match = NONSTRICT_LEVEL_COMMENT_REGEX.matcher(comment);
+        match = NON_STRICT_LEVEL_COMMENT_REGEX.matcher(comment);
         if (match.matches()) {
             final int expectedMinimalIndent = Integer.parseInt(match.group(1));
 
