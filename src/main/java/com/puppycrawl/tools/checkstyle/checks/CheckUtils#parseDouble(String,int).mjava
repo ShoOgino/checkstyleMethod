@@ -7,7 +7,7 @@
      * @return the double value represented by the string argument.
      */
     public static double parseDouble(String text, int type) {
-        String txt = text.replaceAll("_", "");
+        String txt = UNDERSCORE_PATTERN.matcher(text).replaceAll("");
         double result = 0;
         switch (type) {
             case TokenTypes.NUM_FLOAT:

@@ -18,7 +18,7 @@
         final String name = type.getNextSibling().getText();
 
         // Depends on JDK 1.4
-        if (!name.matches("^(is|get)[A-Z].*")) {
+        if (!GETTER_PATTERN.matcher(name).matches()) {
             return false;
         }
 

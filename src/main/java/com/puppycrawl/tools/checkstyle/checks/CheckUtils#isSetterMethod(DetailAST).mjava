@@ -19,7 +19,7 @@
         final String name = type.getNextSibling().getText();
 
         // Depends on JDK 1.4
-        if (!name.matches("^set[A-Z].*")) {
+        if (!SETTER_PATTERN.matcher(name).matches()) {
             return false;
         }
 
