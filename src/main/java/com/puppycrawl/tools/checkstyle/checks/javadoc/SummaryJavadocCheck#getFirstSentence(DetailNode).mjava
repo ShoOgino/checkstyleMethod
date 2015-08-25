@@ -5,9 +5,10 @@
      */
     private static String getFirstSentence(DetailNode ast) {
         final StringBuilder result = new StringBuilder();
+        final String periodSuffix = PERIOD + ' ';
         for (DetailNode child : ast.getChildren()) {
             if (child.getType() != JavadocTokenTypes.JAVADOC_INLINE_TAG
-                && child.getText().contains(". ")) {
+                && child.getText().contains(periodSuffix)) {
                 result.append(getCharsTillDot(child));
                 break;
             }

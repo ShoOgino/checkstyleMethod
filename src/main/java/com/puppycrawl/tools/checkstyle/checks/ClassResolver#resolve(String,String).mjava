@@ -24,7 +24,7 @@
             // when checking for "DataException", it will match on
             // "SecurityDataException". This has been the cause of a very
             // difficult bug to resolve!
-            if (imp.endsWith("." + name)) {
+            if (imp.endsWith(PERIOD + name)) {
                 clazz = resolveQualifiedName(imp);
                 if (clazz != null) {
                     return clazz;
@@ -35,7 +35,7 @@
 
         // See if in the package
         if (pkg != null && !pkg.isEmpty()) {
-            clazz = resolveQualifiedName(pkg + "." + name);
+            clazz = resolveQualifiedName(pkg + PERIOD + name);
             if (clazz != null) {
                 return clazz;
             }

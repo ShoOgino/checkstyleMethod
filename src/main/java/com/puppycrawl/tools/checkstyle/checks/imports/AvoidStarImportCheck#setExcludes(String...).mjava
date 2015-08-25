@@ -6,14 +6,13 @@
      */
     public void setExcludes(String... excludesParam) {
         excludes.clear();
-        final String suffix = ".*";
 
         for (final String exclude : excludesParam) {
-            if (exclude.endsWith(suffix)) {
+            if (exclude.endsWith(STAR_IMPORT_SUFFIX)) {
                 excludes.add(exclude);
             }
             else {
-                excludes.add(exclude + suffix);
+                excludes.add(exclude + STAR_IMPORT_SUFFIX);
             }
         }
     }

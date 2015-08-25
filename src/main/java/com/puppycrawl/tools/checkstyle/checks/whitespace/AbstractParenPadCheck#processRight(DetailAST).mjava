@@ -9,13 +9,13 @@
             if (getAbstractOption() == PadOption.NOSPACE
                 && Character.isWhitespace(line.charAt(before))
                 && !Utils.whitespaceBefore(before, line)) {
-                log(ast.getLineNo(), before, WS_PRECEDED, ")");
+                log(ast.getLineNo(), before, WS_PRECEDED, CLOSE_PARENTHESIS);
             }
             else if (getAbstractOption() == PadOption.SPACE
                 && !Character.isWhitespace(line.charAt(before))
-                && line.charAt(before) != '(') {
+                && line.charAt(before) != OPEN_PARENTHESIS) {
                 log(ast.getLineNo(), ast.getColumnNo(),
-                    WS_NOT_PRECEDED, ")");
+                    WS_NOT_PRECEDED, CLOSE_PARENTHESIS);
             }
         }
     }

@@ -9,10 +9,10 @@
             throws ClassNotFoundException {
         Class<?> clazz = null;
         if (!currentClass.isEmpty()) {
-            String innerClass = currentClass + "$" + name;
+            String innerClass = currentClass + DOLLAR_SIGN + name;
 
             if (!pkg.isEmpty()) {
-                innerClass = pkg + "." + innerClass;
+                innerClass = pkg + PERIOD + innerClass;
             }
 
             if (isLoadable(innerClass)) {

@@ -8,12 +8,12 @@
         if (after < line.length()) {
             if (getAbstractOption() == PadOption.NOSPACE
                 && Character.isWhitespace(line.charAt(after))) {
-                log(ast.getLineNo(), after, WS_FOLLOWED, "(");
+                log(ast.getLineNo(), after, WS_FOLLOWED, OPEN_PARENTHESIS);
             }
             else if (getAbstractOption() == PadOption.SPACE
                      && !Character.isWhitespace(line.charAt(after))
-                     && line.charAt(after) != ')') {
-                log(ast.getLineNo(), after, WS_NOT_FOLLOWED, "(");
+                     && line.charAt(after) != CLOSE_PARENTHESIS) {
+                log(ast.getLineNo(), after, WS_NOT_FOLLOWED, OPEN_PARENTHESIS);
             }
         }
     }

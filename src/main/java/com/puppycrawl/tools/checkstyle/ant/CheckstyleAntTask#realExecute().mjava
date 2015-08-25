@@ -36,7 +36,7 @@
             long startTime = System.currentTimeMillis();
             final List<File> files = scanFileSets();
             long endTime = System.currentTimeMillis();
-            log("To locate the files took " + (endTime - startTime) + " ms.",
+            log("To locate the files took " + (endTime - startTime) + TIME_SUFFIX,
                 Project.MSG_VERBOSE);
 
             log("Running Checkstyle " + version + " on " + files.size()
@@ -46,7 +46,7 @@
             startTime = System.currentTimeMillis();
             final int numErrs = checker.process(files);
             endTime = System.currentTimeMillis();
-            log("To process the files took " + (endTime - startTime) + " ms.",
+            log("To process the files took " + (endTime - startTime) + TIME_SUFFIX,
                 Project.MSG_VERBOSE);
             final int numWarnings = warningCounter.getCount();
             final boolean ok = numErrs <= maxErrors

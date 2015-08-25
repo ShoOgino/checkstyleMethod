@@ -5,10 +5,10 @@
      */
     private void validateEol(DetailAST brace, String braceLine) {
         if (Utils.whitespaceBefore(brace.getColumnNo(), braceLine)) {
-            log(brace, MSG_KEY_LINE_PREVIOUS, "{", brace.getColumnNo() + 1);
+            log(brace, MSG_KEY_LINE_PREVIOUS, OPEN_CURLY_BRACE, brace.getColumnNo() + 1);
         }
         if (!hasLineBreakAfter(brace)) {
-            log(brace, MSG_KEY_LINE_BREAK_AFTER, "{", brace.getColumnNo() + 1);
+            log(brace, MSG_KEY_LINE_BREAK_AFTER, OPEN_CURLY_BRACE, brace.getColumnNo() + 1);
         }
     }
 
