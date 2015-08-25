@@ -1,0 +1,11 @@
+    /**
+     * Checks if given class ast has protected modifier
+     * @param classDef class ast
+     * @return true if class is protected, false otherwise
+     */
+    private static boolean isClassProtected(DetailAST classDef) {
+        final DetailAST classModifiers =
+                classDef.findFirstToken(TokenTypes.MODIFIERS);
+        return classModifiers.branchContains(TokenTypes.LITERAL_PROTECTED);
+    }
+

@@ -1,0 +1,11 @@
+    /**
+     * Check if class constructor has proper modifiers
+     * @param classCtorAst class constructor ast
+     */
+    private void checkClassContructorModifiers(DetailAST classCtorAst) {
+        final DetailAST classDef = classCtorAst.getParent().getParent();
+        if (!isClassPublic(classDef) && !isClassProtected(classDef)) {
+            checkForRedundantPublicModifier(classCtorAst);
+        }
+    }
+

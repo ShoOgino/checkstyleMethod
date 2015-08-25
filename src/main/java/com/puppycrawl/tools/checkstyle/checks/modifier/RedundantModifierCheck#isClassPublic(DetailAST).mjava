@@ -1,0 +1,11 @@
+    /**
+     * Checks if given class ast has public modifier
+     * @param classDef class ast
+     * @return true if class is public, false otherwise
+     */
+    private static boolean isClassPublic(DetailAST classDef) {
+        final DetailAST classModifiers =
+                classDef.findFirstToken(TokenTypes.MODIFIERS);
+        return classModifiers.branchContains(TokenTypes.LITERAL_PUBLIC);
+    }
+

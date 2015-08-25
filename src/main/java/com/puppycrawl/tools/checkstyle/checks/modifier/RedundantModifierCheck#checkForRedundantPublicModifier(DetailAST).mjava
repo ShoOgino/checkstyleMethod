@@ -1,0 +1,17 @@
+    /**
+     * Checks if given ast has redundant public modifier
+     * @param ast ast
+     */
+    private void checkForRedundantPublicModifier(DetailAST ast) {
+        final DetailAST astModifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
+        DetailAST astModifier = astModifiers.getFirstChild();
+        while (astModifier != null) {
+            if (astModifier.getType() == TokenTypes.LITERAL_PUBLIC) {
+                log(astModifier.getLineNo(), astModifier.getColumnNo(),
+                        MSG_KEY, astModifier.getText());
+            }
+
+            astModifier = astModifier.getNextSibling();
+        }
+    }
+

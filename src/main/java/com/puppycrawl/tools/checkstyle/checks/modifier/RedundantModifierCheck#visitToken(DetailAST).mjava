@@ -3,9 +3,13 @@
         if (ast.getType() == TokenTypes.INTERFACE_DEF) {
             checkInterfaceModifiers(ast);
         }
-        else if (ast.getType() == TokenTypes.CTOR_DEF
-                && isEnumMember(ast)) {
-            checkEnumConstructorModifiers(ast);
+        else if (ast.getType() == TokenTypes.CTOR_DEF) {
+            if (isEnumMember(ast)) {
+                checkEnumConstructorModifiers(ast);
+            }
+            else {
+                checkClassContructorModifiers(ast);
+            }
         }
         else if (isInterfaceOrAnnotationMember(ast)) {
             processInterfaceOrAnnotation(ast);
