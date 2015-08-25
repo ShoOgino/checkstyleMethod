@@ -1,5 +1,5 @@
     @Test
-    public void testOthers() {
+    public void testOthers() throws ReflectiveOperationException {
         JavadocTagInfo[] tags = {
             JavadocTagInfo.CODE,
             JavadocTagInfo.DOC_ROOT,
@@ -15,7 +15,9 @@
             astParent.setType(TokenTypes.LITERAL_CATCH);
 
             final DetailAST ast = new DetailAST();
-            ast.setParent(astParent);
+            Method setParent = ast.getClass().getDeclaredMethod("setParent", DetailAST.class);
+            setParent.setAccessible(true);
+            setParent.invoke(ast, astParent);
 
             int[] validTypes = {
                 TokenTypes.PACKAGE_DEF,

@@ -1,9 +1,11 @@
     @Test
-    public void testSerial() {
+    public void testSerial() throws ReflectiveOperationException {
         final DetailAST ast = new DetailAST();
         DetailAST astParent = new DetailAST();
         astParent.setType(TokenTypes.LITERAL_CATCH);
-        ast.setParent(astParent);
+        Method setParent = ast.getClass().getDeclaredMethod("setParent", DetailAST.class);
+        setParent.setAccessible(true);
+        setParent.invoke(ast, astParent);
 
         int[] validTypes = {
             TokenTypes.VARIABLE_DEF,
