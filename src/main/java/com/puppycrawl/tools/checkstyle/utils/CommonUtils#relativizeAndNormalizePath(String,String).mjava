@@ -1,0 +1,19 @@
+    /**
+     * Constructs a normalized relative path between base directory and a given path.
+     *
+     * @param baseDirectory
+     *            the base path to which given path is relativized
+     * @param path
+     *            the path to relativize against base directory
+     * @return the relative normalized path between base directory and
+     *  path or path if base directory is null
+     */
+    public static String relativizeAndNormalizePath(final String baseDirectory, final String path) {
+        if (baseDirectory == null) {
+            return path;
+        }
+        final Path pathAbsolute = Paths.get(path).normalize();
+        final Path pathBase = Paths.get(baseDirectory).normalize();
+        return pathBase.relativize(pathAbsolute).toString();
+    }
+

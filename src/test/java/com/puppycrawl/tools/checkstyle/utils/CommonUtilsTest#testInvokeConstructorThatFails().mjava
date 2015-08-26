@@ -1,0 +1,14 @@
+    @SuppressWarnings("rawtypes")
+    @Test
+    public void testInvokeConstructorThatFails() throws NoSuchMethodException {
+        Constructor<Dictionary> constructor = Dictionary.class.getConstructor();
+
+        try {
+            CommonUtils.invokeConstructor(constructor);
+            fail();
+        }
+        catch (IllegalStateException expected) {
+            assertSame(InstantiationException.class, expected.getCause().getClass());
+        }
+    }
+

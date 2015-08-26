@@ -1,0 +1,12 @@
+    @Test
+    public void testTokenValueIncorrect() {
+        Integer id = Integer.MAX_VALUE - 1;
+        try {
+            TokenUtils.getTokenName(id);
+            fail();
+        }
+        catch (IllegalArgumentException expected) {
+            assertEquals("given id " + id, expected.getMessage());
+        }
+    }
+

@@ -4,12 +4,12 @@
      */
     private void logAsSeparated(DetailAST ast) {
         // name of this token
-        final String name = Utils.getTokenName(ast.getType());
+        final String name = TokenUtils.getTokenName(ast.getType());
 
         for (int element : limitedTokens) {
             final int tokenCount = counts[element - 1];
             if (tokenCount < minimumNumber) {
-                final String descendantName = Utils.getTokenName(element);
+                final String descendantName = TokenUtils.getTokenName(element);
 
                 if (minimumMessage == null) {
                     minimumMessage = MSG_KEY_MIN;
@@ -22,7 +22,7 @@
                         descendantName);
             }
             if (tokenCount > maximumNumber) {
-                final String descendantName = Utils.getTokenName(element);
+                final String descendantName = TokenUtils.getTokenName(element);
 
                 if (maximumMessage == null) {
                     maximumMessage = MSG_KEY_MAX;

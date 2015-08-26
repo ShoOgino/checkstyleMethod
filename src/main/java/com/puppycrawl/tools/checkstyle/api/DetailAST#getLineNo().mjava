@@ -6,7 +6,7 @@
             DetailAST child = getFirstChild();
             while (child != null) {
                 // comment node can't be start of any java statement/definition
-                if (Utils.isCommentType(child.getType())) {
+                if (TokenUtils.isCommentType(child.getType())) {
                     child = child.getNextSibling();
                 }
                 else {
@@ -17,7 +17,7 @@
             DetailAST sibling = getNextSibling();
             while (sibling != null) {
                 // comment node can't be start of any java statement/definition
-                if (Utils.isCommentType(sibling.getType())) {
+                if (TokenUtils.isCommentType(sibling.getType())) {
                     sibling = sibling.getNextSibling();
                 }
                 else {

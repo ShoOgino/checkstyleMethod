@@ -1,0 +1,24 @@
+    /**
+     * Test CommonUtils.countCharInString.
+     */
+    @Test
+    public void testLengthExpandedTabs()
+        throws Exception {
+        final String s1 = "\t";
+        assertEquals(8, CommonUtils.lengthExpandedTabs(s1, s1.length(), 8));
+
+        final String s2 = "  \t";
+        assertEquals(8, CommonUtils.lengthExpandedTabs(s2, s2.length(), 8));
+
+        final String s3 = "\t\t";
+        assertEquals(16, CommonUtils.lengthExpandedTabs(s3, s3.length(), 8));
+
+        final String s4 = " \t ";
+        assertEquals(9, CommonUtils.lengthExpandedTabs(s4, s4.length(), 8));
+
+        assertEquals(0, CommonUtils.lengthMinusTrailingWhitespace(""));
+        assertEquals(0, CommonUtils.lengthMinusTrailingWhitespace(" \t "));
+        assertEquals(3, CommonUtils.lengthMinusTrailingWhitespace(" 23"));
+        assertEquals(3, CommonUtils.lengthMinusTrailingWhitespace(" 23 \t "));
+    }
+

@@ -1,0 +1,12 @@
+    @Test
+    public void testShortDescriptionIncorrect() {
+        String id = "NON_EXISTING_VALUE";
+        try {
+            TokenUtils.getShortDescription(id);
+            fail();
+        }
+        catch (IllegalArgumentException expected) {
+            assertEquals("given name " + id, expected.getMessage());
+        }
+    }
+

@@ -1,0 +1,28 @@
+    /**
+     * Returns the length of a String prefix with tabs expanded.
+     * Each tab is counted as the number of characters is
+     * takes to jump to the next tab stop.
+     *
+     * @param inputString
+     *            the input String
+     * @param toIdx
+     *            index in string (exclusive) where the calculation stops
+     * @param tabWidth
+     *            the distance between tab stop position.
+     * @return the length of string.substring(0, toIdx) with tabs expanded.
+     */
+    public static int lengthExpandedTabs(String inputString,
+            int toIdx,
+            int tabWidth) {
+        int len = 0;
+        for (int idx = 0; idx < toIdx; idx++) {
+            if (inputString.charAt(idx) == '\t') {
+                len = (len / tabWidth + 1) * tabWidth;
+            }
+            else {
+                len++;
+            }
+        }
+        return len;
+    }
+
