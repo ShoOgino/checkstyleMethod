@@ -4,7 +4,7 @@
      */
     private void visitLiteralFor(DetailAST ast) {
         DetailAST parenAst = ast.findFirstToken(TokenTypes.LPAREN);
-        if (!isPreceedsEmptyForInit(parenAst)) {
+        if (!isPrecedingEmptyForInit(parenAst)) {
             processLeft(parenAst);
         }
         parenAst = ast.findFirstToken(TokenTypes.RPAREN);
