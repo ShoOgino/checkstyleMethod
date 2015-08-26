@@ -15,8 +15,8 @@
         // at the correct indention level; otherwise, it is an only an
         // error if this statement starts the line and it is less than
         // the correct indentation level
-        if (mustMatch && !indentLevel.accept(start)
-                || !mustMatch && colNum == start && indentLevel.greaterThan(start)) {
+        if (mustMatch && !indentLevel.isAcceptable(start)
+                || !mustMatch && colNum == start && indentLevel.isGreaterThan(start)) {
             logChildError(lineNum, start, indentLevel);
         }
     }

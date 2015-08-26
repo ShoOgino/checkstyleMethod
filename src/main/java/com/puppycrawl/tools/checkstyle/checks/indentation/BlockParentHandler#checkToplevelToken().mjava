@@ -5,10 +5,10 @@
         final DetailAST toplevel = getToplevelAST();
 
         if (toplevel == null
-            || getLevel().accept(expandedTabsColumnNo(toplevel)) || hasLabelBefore()) {
+            || getLevel().isAcceptable(expandedTabsColumnNo(toplevel)) || hasLabelBefore()) {
             return;
         }
-        if (!toplevelMustStartLine() && !startsLine(toplevel)) {
+        if (!shouldTopLevelStartLine() && !startsLine(toplevel)) {
             return;
         }
         logError(toplevel, "", expandedTabsColumnNo(toplevel));
