@@ -9,15 +9,18 @@
      * @return an {@link AccessResult}.
      */
     AccessResult checkAccess(final String forImport, final String inPkg) {
+        AccessResult result;
         final AccessResult retVal = localCheckAccess(forImport, inPkg);
         if (retVal != AccessResult.UNKNOWN) {
-            return retVal;
+            result = retVal;
         }
-        if (parent == null) {
+        else if (parent == null) {
             // we are the top, so default to not allowed.
-            return AccessResult.DISALLOWED;
+            result = AccessResult.DISALLOWED;
         }
-
-        return parent.checkAccess(forImport, inPkg);
+        else {
+            result = parent.checkAccess(forImport, inPkg);
+        }
+        return result;
     }
 
