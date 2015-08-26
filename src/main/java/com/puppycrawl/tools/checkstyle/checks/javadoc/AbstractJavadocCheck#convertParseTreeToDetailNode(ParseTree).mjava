@@ -5,43 +5,18 @@
      * @return root of DetailNode tree
      */
     private DetailNode convertParseTreeToDetailNode(ParseTree parseTreeNode) {
-        final JavadocNodeImpl rootJavadocNode = createJavadocNode(parseTreeNode, null, -1);
-
-        int childCount = parseTreeNode.getChildCount();
-        JavadocNodeImpl[] children = new JavadocNodeImpl[childCount];
-
-        for (int i = 0; i < childCount; i++) {
-            final JavadocNodeImpl child = createJavadocNode(parseTreeNode.getChild(i),
-                    rootJavadocNode, i);
-            children[i] = child;
-        }
-        rootJavadocNode.setChildren(children);
+        final JavadocNodeImpl rootJavadocNode = createRootJavadocNode(parseTreeNode);
 
         JavadocNodeImpl currentJavadocParent = rootJavadocNode;
         ParseTree parseTreeParent = parseTreeNode;
 
         while (currentJavadocParent != null) {
-            children = (JavadocNodeImpl[]) currentJavadocParent.getChildren();
-            childCount = children.length;
+            final JavadocNodeImpl[] children =
+                    (JavadocNodeImpl[]) currentJavadocParent.getChildren();
 
-            for (int i = 0; i < childCount; i++) {
-                final JavadocNodeImpl currentJavadocNode = children[i];
-                final ParseTree currentParseTreeNodeChild = parseTreeParent.getChild(i);
+            insertChildrenNodes(children, parseTreeParent);
 
-                final JavadocNodeImpl[] subChildren =
-                        new JavadocNodeImpl[currentJavadocNode.getChildren().length];
-
-                for (int j = 0; j < subChildren.length; j++) {
-                    final JavadocNodeImpl child =
-                            createJavadocNode(currentParseTreeNodeChild.getChild(j),
-                                    currentJavadocNode, j);
-
-                    subChildren[j] = child;
-                }
-                currentJavadocNode.setChildren(subChildren);
-            }
-
-            if (childCount > 0) {
+            if (children.length > 0) {
                 currentJavadocParent = children[0];
                 parseTreeParent = parseTreeParent.getChild(0);
             }
