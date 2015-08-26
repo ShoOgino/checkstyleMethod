@@ -5,7 +5,7 @@
     private String getFileName() {
         String fname = getFileContents().getFileName();
         fname = fname.substring(fname.lastIndexOf(File.separatorChar) + 1);
-        fname = fname.replaceAll("\\.[^\\.]*$", "");
+        fname = FILE_EXTENSION_PATTERN.matcher(fname).replaceAll("");
         return fname;
     }
 
