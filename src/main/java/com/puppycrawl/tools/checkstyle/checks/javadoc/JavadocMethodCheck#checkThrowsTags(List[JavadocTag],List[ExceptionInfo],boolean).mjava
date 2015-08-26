@@ -18,7 +18,6 @@
             if (!tag.isThrowsTag()) {
                 continue;
             }
-
             tagIt.remove();
 
             // Loop looking for matching throw
@@ -27,7 +26,6 @@
                     .getColumnNo());
             final AbstractClassInfo documentedCI = createClassInfo(token,
                     getCurrentClassName());
-
             final boolean found = foundThrows.contains(documentedEx)
                     || isInThrows(throwsList, documentedCI, foundThrows);
 
@@ -46,7 +44,6 @@
                 }
             }
         }
-
         // Now dump out all throws without tags :- unless
         // the user has chosen to suppress these problems
         if (!allowMissingThrowsTags && reportExpectedTags) {

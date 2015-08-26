@@ -1,0 +1,30 @@
+    /**
+     * Gets multiline Javadoc tags with arguments.
+     * @param argMultilineStart javadoc tag Matcher
+     * @param column column number of Javadoc tag
+     * @param lines comment text lines
+     * @param lineIndex line number that contains the javadoc tag
+     * @param tagLine javadoc tag line number in file
+     * @return javadoc tags with arguments
+     */
+    private static List<JavadocTag> getMultilineArgTags(final Matcher argMultilineStart,
+            final int column, final String[] lines, final int lineIndex, final int tagLine) {
+        final List<JavadocTag> tags = new ArrayList<>();
+        final String p1 = argMultilineStart.group(1);
+        final String p2 = argMultilineStart.group(2);
+        int remIndex = lineIndex + 1;
+        while (remIndex < lines.length) {
+            final Matcher multilineCont = MATCH_JAVADOC_MULTILINE_CONT.matcher(lines[remIndex]);
+            if (multilineCont.find()) {
+                remIndex = lines.length;
+                final String lFin = multilineCont.group(1);
+                if (!lFin.equals(NEXT_TAG)
+                    && !lFin.equals(END_JAVADOC)) {
+                    tags.add(new JavadocTag(tagLine, column, p1, p2));
+                }
+            }
+            remIndex++;
+        }
+        return tags;
+    }
+
