@@ -1,0 +1,47 @@
+    /**
+     * Verifies that documented exception is in throws.
+     *
+     * @param throwsList list of throws
+     * @param documentedCI documented exception class info
+     * @param foundThrows previously found throws
+     * @return true if documented exception is in throws.
+     */
+    private boolean isInThrows(List<ExceptionInfo> throwsList,
+            AbstractClassInfo documentedCI, Set<String> foundThrows) {
+        boolean found = false;
+        ExceptionInfo foundException = null;
+
+        // First look for matches on the exception name
+        ListIterator<ExceptionInfo> throwIt = throwsList.listIterator();
+        while (!found && throwIt.hasNext()) {
+            final ExceptionInfo ei = throwIt.next();
+
+            if (ei.getName().getText().equals(
+                    documentedCI.getName().getText())) {
+                found = true;
+                foundException = ei;
+            }
+        }
+
+        // Now match on the exception type
+        throwIt = throwsList.listIterator();
+        while (!found && throwIt.hasNext()) {
+            final ExceptionInfo ei = throwIt.next();
+
+            if (documentedCI.getClazz() == ei.getClazz()) {
+                found = true;
+                foundException = ei;
+            }
+            else if (allowThrowsTagsForSubclasses) {
+                found = isSubclass(documentedCI.getClazz(), ei.getClazz());
+            }
+        }
+
+        if (foundException != null) {
+            foundException.setFound();
+            foundThrows.add(documentedCI.getName().getText());
+        }
+
+        return found;
+    }
+
