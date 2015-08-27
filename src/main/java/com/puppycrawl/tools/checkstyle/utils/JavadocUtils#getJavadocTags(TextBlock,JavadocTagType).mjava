@@ -37,44 +37,7 @@
             }
             // No block tag, so look for inline validTags
             else if (tagType == JavadocTagType.ALL || tagType == JavadocTagType.INLINE) {
-                // Match Javadoc text after comment characters
-                final Pattern commentPattern = Pattern.compile("^\\s*(?:/\\*{2,}|\\*+)\\s*(.*)");
-                final Matcher commentMatcher = commentPattern.matcher(s);
-                final String commentContents;
-
-                // offset including comment characters
-                final int commentOffset;
-
-                if (commentMatcher.find()) {
-                    commentContents = commentMatcher.group(1);
-                    commentOffset = commentMatcher.start(1) - 1;
-                }
-                else {
-                    // No leading asterisks, still valid
-                    commentContents = s;
-                    commentOffset = 0;
-                }
-                final Pattern tagPattern = Pattern.compile(".*?\\{@(\\p{Alpha}+)\\s+(.*?)\\}");
-                final Matcher tagMatcher = tagPattern.matcher(commentContents);
-                while (tagMatcher.find()) {
-                    final String tagName = tagMatcher.group(1);
-                    final String tagValue = tagMatcher.group(2).trim();
-                    final int line = cmt.getStartLineNo() + i;
-                    int col = commentOffset + tagMatcher.start(1) - 1;
-                    if (i == 0) {
-                        col += cmt.getStartColNo();
-                    }
-                    if (JavadocTagInfo.isValidName(tagName)) {
-                        tags.add(new JavadocTag(line, col, tagName,
-                                tagValue));
-                    }
-                    else {
-                        invalidTags.add(new InvalidJavadocTag(line, col,
-                                tagName));
-                    }
-                    // else Error: Unexpected match count for inline Javadoc
-                    // tag!
-                }
+                lookForInlineTags(cmt, i, tags, invalidTags);
             }
             blockTagPattern = Pattern.compile("^\\s*\\**\\s*@(\\p{Alpha}+)\\s");
         }
