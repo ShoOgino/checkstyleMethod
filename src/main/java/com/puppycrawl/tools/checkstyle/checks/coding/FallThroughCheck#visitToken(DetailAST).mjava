@@ -10,7 +10,7 @@
         final DetailAST slist = ast.findFirstToken(TokenTypes.SLIST);
 
         if (slist != null && !isTerminated(slist, true, true)
-            && !hasFallTruComment(ast, nextGroup)) {
+            && !hasFallThroughComment(ast, nextGroup)) {
             if (isLastGroup) {
                 log(ast, MSG_FALL_THROUGH_LAST);
             }

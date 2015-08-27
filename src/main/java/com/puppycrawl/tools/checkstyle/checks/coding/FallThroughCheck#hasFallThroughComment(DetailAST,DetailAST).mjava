@@ -6,9 +6,8 @@
      * @param nextCase AST of the next case.
      * @return True if a relief comment was found
      */
-    private boolean hasFallTruComment(DetailAST currentCase,
-            DetailAST nextCase) {
-
+    private boolean hasFallThroughComment(DetailAST currentCase, DetailAST nextCase) {
+        boolean allThroughComment = false;
         final int endLineNo = nextCase.getLineNo();
         final int endColNo = nextCase.getColumnNo();
 
@@ -31,30 +30,30 @@
          */
         final String linePart = lines[endLineNo - 1].substring(0, endColNo);
         if (commentMatch(regExp, linePart, endLineNo)) {
-            return true;
+            allThroughComment = true;
         }
-
-        /*
-         * Handle:
-         *    case 1:
-         *    .....
-         *    // FALLTHRU
-         *    case 2:
-         *    ....
-         * and
-         *    switch(i) {
-         *    default:
-         *    // FALLTHRU
-         *    }
-         */
-        final int startLineNo = currentCase.getLineNo();
-        for (int i = endLineNo - 2; i > startLineNo - 1; i--) {
-            if (!lines[i].trim().isEmpty()) {
-                return commentMatch(regExp, lines[i], i + 1);
+        else {
+            /*
+             * Handle:
+             *    case 1:
+             *    .....
+             *    // FALLTHRU
+             *    case 2:
+             *    ....
+             * and
+             *    switch(i) {
+             *    default:
+             *    // FALLTHRU
+             *    }
+             */
+            final int startLineNo = currentCase.getLineNo();
+            for (int i = endLineNo - 2; i > startLineNo - 1; i--) {
+                if (!lines[i].trim().isEmpty()) {
+                    allThroughComment = commentMatch(regExp, lines[i], i + 1);
+                    break;
+                }
             }
         }
-
-        // Well -- no relief comment found.
-        return false;
+        return allThroughComment;
     }
 

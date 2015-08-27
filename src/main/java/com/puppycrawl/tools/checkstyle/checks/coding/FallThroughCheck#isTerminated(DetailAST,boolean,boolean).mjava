@@ -8,28 +8,39 @@
      */
     private boolean isTerminated(final DetailAST ast, boolean useBreak,
                                  boolean useContinue) {
+        boolean terminated;
+
         switch (ast.getType()) {
             case TokenTypes.LITERAL_RETURN:
             case TokenTypes.LITERAL_THROW:
-                return true;
+                terminated = true;
+                break;
             case TokenTypes.LITERAL_BREAK:
-                return useBreak;
+                terminated = useBreak;
+                break;
             case TokenTypes.LITERAL_CONTINUE:
-                return useContinue;
+                terminated = useContinue;
+                break;
             case TokenTypes.SLIST:
-                return checkSlist(ast, useBreak, useContinue);
+                terminated = checkSlist(ast, useBreak, useContinue);
+                break;
             case TokenTypes.LITERAL_IF:
-                return checkIf(ast, useBreak, useContinue);
+                terminated = checkIf(ast, useBreak, useContinue);
+                break;
             case TokenTypes.LITERAL_FOR:
             case TokenTypes.LITERAL_WHILE:
             case TokenTypes.LITERAL_DO:
-                return checkLoop(ast);
+                terminated = checkLoop(ast);
+                break;
             case TokenTypes.LITERAL_TRY:
-                return checkTry(ast, useBreak, useContinue);
+                terminated = checkTry(ast, useBreak, useContinue);
+                break;
             case TokenTypes.LITERAL_SWITCH:
-                return checkSwitch(ast, useContinue);
+                terminated = checkSwitch(ast, useContinue);
+                break;
             default:
-                return false;
+                terminated = false;
         }
+        return terminated;
     }
 
