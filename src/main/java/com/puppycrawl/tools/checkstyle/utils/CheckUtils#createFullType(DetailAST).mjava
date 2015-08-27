@@ -4,15 +4,15 @@
      * @return {@code FullIdent} for given type.
      */
     public static FullIdent createFullType(DetailAST typeAST) {
-        final DetailAST arrayDeclAST =
+        final DetailAST arrayDeclaratorAST =
             typeAST.findFirstToken(TokenTypes.ARRAY_DECLARATOR);
         final FullIdent fullType;
 
-        if (arrayDeclAST == null) {
+        if (arrayDeclaratorAST == null) {
             fullType = createFullTypeNoArrays(typeAST);
         }
         else {
-            fullType = createFullTypeNoArrays(arrayDeclAST);
+            fullType = createFullTypeNoArrays(arrayDeclaratorAST);
         }
         return fullType;
     }
