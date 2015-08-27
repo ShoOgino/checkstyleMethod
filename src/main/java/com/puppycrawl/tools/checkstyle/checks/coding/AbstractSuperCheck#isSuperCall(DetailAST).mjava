@@ -1,33 +1,23 @@
     /**
-     *  Determines whether a 'super' literal is a call to the super method
+     * Determines whether a 'super' literal is a call to the super method
      * for this check.
      * @param literalSuperAst the AST node of a 'super' literal.
      * @return true if ast is a call to the super method
      * for this check.
      */
     private boolean isSuperCall(DetailAST literalSuperAst) {
-        if (literalSuperAst.getType() != TokenTypes.LITERAL_SUPER) {
-            return false;
-        }
-        // dot operator?
-        DetailAST dotAst = literalSuperAst.getParent();
-        if (dotAst.getType() != TokenTypes.DOT
-            || isSameNameMethod(literalSuperAst)
-            || hasArguments(dotAst)) {
-            return false;
-        }
+        boolean superCall = false;
 
-        // in an overriding method for this check?
-        while (dotAst != null) {
-            if (dotAst.getType() == TokenTypes.METHOD_DEF) {
-                return isOverridingMethod(dotAst);
+        if (literalSuperAst.getType() == TokenTypes.LITERAL_SUPER) {
+            // dot operator?
+            final DetailAST dotAst = literalSuperAst.getParent();
+
+            if (dotAst.getType() == TokenTypes.DOT
+                && !isSameNameMethod(literalSuperAst)
+                && !hasArguments(dotAst)) {
+                superCall = isSuperCallInOverridingMethod(dotAst);
             }
-            if (dotAst.getType() == TokenTypes.CTOR_DEF
-                || dotAst.getType() == TokenTypes.INSTANCE_INIT) {
-                return false;
-            }
-            dotAst = dotAst.getParent();
         }
-        return false;
+        return superCall;
     }
 

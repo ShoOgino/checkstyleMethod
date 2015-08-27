@@ -5,18 +5,20 @@
      * @return true if the method of ast is a method for this check.
      */
     private boolean isOverridingMethod(DetailAST ast) {
-        if (ast.getType() != TokenTypes.METHOD_DEF
-            || ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
-            return false;
+        boolean overridingMethod = false;
+
+        if (ast.getType() == TokenTypes.METHOD_DEF
+                && !ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
+            final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
+            final String name = nameAST.getText();
+            final DetailAST modifiersAST = ast.findFirstToken(TokenTypes.MODIFIERS);
+
+            if (getMethodName().equals(name)
+                    && !modifiersAST.branchContains(TokenTypes.LITERAL_NATIVE)) {
+                final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
+                overridingMethod = params.getChildCount() == 0;
+            }
         }
-        final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
-        final String name = nameAST.getText();
-        final DetailAST modifiersAST = ast.findFirstToken(TokenTypes.MODIFIERS);
-        if (!getMethodName().equals(name)
-                || modifiersAST.branchContains(TokenTypes.LITERAL_NATIVE)) {
-            return false;
-        }
-        final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-        return params.getChildCount() == 0;
+        return overridingMethod;
     }
 

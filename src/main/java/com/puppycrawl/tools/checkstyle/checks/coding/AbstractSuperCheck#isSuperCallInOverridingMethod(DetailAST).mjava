@@ -1,0 +1,24 @@
+    /**
+     * Determines whether a super call in overriding method.
+     *
+     * @param ast The AST node of a 'dot operator' in 'super' call.
+     * @return true if super call in overriding method.
+     */
+    private boolean isSuperCallInOverridingMethod(DetailAST ast) {
+        boolean inOverridingMethod = false;
+        DetailAST dotAst = ast;
+
+        while (dotAst != null) {
+            if (dotAst.getType() == TokenTypes.METHOD_DEF) {
+                inOverridingMethod = isOverridingMethod(dotAst);
+                break;
+            }
+            if (dotAst.getType() == TokenTypes.CTOR_DEF
+                || dotAst.getType() == TokenTypes.INSTANCE_INIT) {
+                break;
+            }
+            dotAst = dotAst.getParent();
+        }
+        return inOverridingMethod;
+    }
+
