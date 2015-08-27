@@ -1,0 +1,20 @@
+    /**
+     * Remove parameter from params collection by name.
+     * @param params collection of DetailAST parameters
+     * @param paramName name of parameter
+     * @return true if parameter found and removed
+     */
+    private boolean removeMatchingParam(List<DetailAST> params, String paramName) {
+        boolean found = false;
+        final Iterator<DetailAST> paramIt = params.iterator();
+        while (paramIt.hasNext()) {
+            final DetailAST param = paramIt.next();
+            if (param.getText().equals(paramName)) {
+                found = true;
+                paramIt.remove();
+                break;
+            }
+        }
+        return found;
+    }
+

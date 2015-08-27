@@ -21,7 +21,7 @@
 
             checkParamTags(tags, ast, !hasInheritDocTag);
             checkThrowsTags(tags, getThrows(ast), !hasInheritDocTag);
-            if (isFunction(ast)) {
+            if (CheckUtils.isVoidMethod(ast)) {
                 checkReturnTag(tags, ast.getLineNo(), !hasInheritDocTag);
             }
         }

@@ -24,18 +24,8 @@
             tagIt.remove();
 
             boolean found = false;
-
-            // Loop looking for matching param
-            final Iterator<DetailAST> paramIt = params.iterator();
             final String arg1 = tag.getFirstArg();
-            while (paramIt.hasNext()) {
-                final DetailAST param = paramIt.next();
-                if (param.getText().equals(arg1)) {
-                    found = true;
-                    paramIt.remove();
-                    break;
-                }
-            }
+            found = removeMatchingParam(params, arg1);
 
             if (CommonUtils.startsWithChar(arg1, '<') && CommonUtils.endsWithChar(arg1, '>')) {
                 // Loop looking for matching type param
