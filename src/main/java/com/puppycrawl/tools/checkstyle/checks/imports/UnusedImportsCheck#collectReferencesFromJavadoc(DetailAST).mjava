@@ -2,12 +2,12 @@
      * Collects references made in Javadoc comments.
      * @param ast node to inspect for Javadoc
      */
-    private void collectReferecesFromJavadoc(DetailAST ast) {
+    private void collectReferencesFromJavadoc(DetailAST ast) {
         final FileContents contents = getFileContents();
         final int lineNo = ast.getLineNo();
         final TextBlock cmt = contents.getJavadocBefore(lineNo);
         if (cmt != null) {
-            referenced.addAll(collectReferecesFromJavadoc(cmt));
+            referenced.addAll(collectReferencesFromJavadoc(cmt));
         }
     }
 
