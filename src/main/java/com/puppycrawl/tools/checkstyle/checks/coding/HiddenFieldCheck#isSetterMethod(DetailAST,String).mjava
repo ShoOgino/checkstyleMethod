@@ -19,7 +19,7 @@
             final DetailAST typeAST = aMethodAST.findFirstToken(TokenTypes.TYPE);
             final String returnType = typeAST.getFirstChild().getText();
             if (typeAST.branchContains(TokenTypes.LITERAL_VOID)
-                    || setterCanReturnItsClass && frame.embeddedIn(returnType)) {
+                    || setterCanReturnItsClass && frame.isEmbeddedIn(returnType)) {
                 // this method has signature
                 //
                 //     void set${Name}(${anyType} ${name})

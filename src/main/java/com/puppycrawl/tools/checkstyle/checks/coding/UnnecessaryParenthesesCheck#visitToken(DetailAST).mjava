@@ -18,7 +18,7 @@
         }
 
         // A literal (numeric or string) surrounded by parentheses.
-        if (surrounded && inTokenList(type, LITERALS)) {
+        if (surrounded && isInTokenList(type, LITERALS)) {
             parentToSkip = ast.getParent();
             if (type == TokenTypes.STRING_LITERAL) {
                 log(ast, MSG_STRING,
@@ -31,7 +31,7 @@
         }
 
         // The rhs of an assignment surrounded by parentheses.
-        if (inTokenList(type, ASSIGNMENTS)) {
+        if (isInTokenList(type, ASSIGNMENTS)) {
             assignDepth++;
             final DetailAST last = ast.getLastChild();
             if (last.getType() == TokenTypes.RPAREN) {

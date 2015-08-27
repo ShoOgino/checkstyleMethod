@@ -12,10 +12,10 @@
                 break;
 
             case TokenTypes.PARAMETER_DEF:
-                if (!inLambda(ast)
+                if (!isInLambda(ast)
                         && !ast.branchContains(TokenTypes.FINAL)
-                        && !inAbstractOrNativeMethod(ast)
-                        && !ScopeUtils.inInterfaceBlock(ast)) {
+                        && !isInAbstractOrNativeMethod(ast)
+                        && !ScopeUtils.isInInterfaceBlock(ast)) {
                     insertVariable(ast);
                 }
                 break;
