@@ -1,21 +1,12 @@
     /**
-     * We do not want to check colon for cases and defaults
+     * Whether colon belongs to cases or defaults.
      * @param currentType current
      * @param parentType parent
-     * @return true is cur token in colon of case or default tokens
+     * @return true if current token in colon of case or default tokens
      */
     private boolean isColonOfCaseOrDefault(int currentType, int parentType) {
-        if (currentType == TokenTypes.COLON) {
-            //we do not want to check colon for cases and defaults
-            if (parentType == TokenTypes.LITERAL_DEFAULT
-                || parentType == TokenTypes.LITERAL_CASE) {
-                return true;
-            }
-            else if (parentType == TokenTypes.FOR_EACH_CLAUSE
-                && ignoreEnhancedForColon) {
-                return true;
-            }
-        }
-        return false;
+        return currentType == TokenTypes.COLON
+                && (parentType == TokenTypes.LITERAL_DEFAULT
+                    || parentType == TokenTypes.LITERAL_CASE);
     }
 
