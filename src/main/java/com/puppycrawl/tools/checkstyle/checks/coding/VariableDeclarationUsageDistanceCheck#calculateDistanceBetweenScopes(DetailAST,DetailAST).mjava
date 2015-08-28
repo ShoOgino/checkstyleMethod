@@ -14,24 +14,14 @@
         DetailAST currentScopeAst = ast;
         DetailAST variableUsageAst = null;
         while (currentScopeAst != null) {
-            final List<DetailAST> variableUsageExpressions = new ArrayList<>();
-            DetailAST currentStatementAst = currentScopeAst;
+            final Entry<List<DetailAST>, Integer> searchResult =
+                    searchVariableUsageExpressions(variable, currentScopeAst);
+
             currentScopeAst = null;
-            while (currentStatementAst != null
-                    && currentStatementAst.getType() != TokenTypes.RCURLY) {
-                if (currentStatementAst.getFirstChild() != null) {
-                    if (isChild(currentStatementAst, variable)) {
-                        variableUsageExpressions.add(currentStatementAst);
-                    }
-                    // If expression doesn't contain variable and this variable
-                    // hasn't been met yet, than distance + 1.
-                    else if (variableUsageExpressions.isEmpty()
-                            && currentStatementAst.getType() != TokenTypes.VARIABLE_DEF) {
-                        dist++;
-                    }
-                }
-                currentStatementAst = currentStatementAst.getNextSibling();
-            }
+
+            final List<DetailAST> variableUsageExpressions = searchResult.getKey();
+            dist += searchResult.getValue();
+
             // If variable usage exists in a single scope, then look into
             // this scope and count distance until variable usage.
             if (variableUsageExpressions.size() == 1) {
