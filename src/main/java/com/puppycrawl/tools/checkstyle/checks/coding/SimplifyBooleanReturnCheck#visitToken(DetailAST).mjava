@@ -19,8 +19,8 @@
         final AST condition = ast.getFirstChild().getNextSibling();
         final AST thenStatement = condition.getNextSibling().getNextSibling();
 
-        if (returnsOnlyBooleanLiteral(thenStatement)
-            && returnsOnlyBooleanLiteral(elseStatement)) {
+        if (canReturnOnlyBooleanLiteral(thenStatement)
+            && canReturnOnlyBooleanLiteral(elseStatement)) {
             log(ast.getLineNo(), ast.getColumnNo(), MSG_KEY);
         }
     }
