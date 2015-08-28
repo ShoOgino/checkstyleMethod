@@ -1,0 +1,13 @@
+    /**
+     * Determine whether LITERAL_NEW is an anonymous class definition and add it as
+     * a frame in this case.
+     * @param ast LITERAL_NEW ast.
+     */
+    private void processLiteralNew(DetailAST ast) {
+        if (ast.branchContains(TokenTypes.LCURLY)) {
+            final FieldFrame frame = new FieldFrame(currentFrame);
+            currentFrame.addChild(frame);
+            currentFrame = frame;
+        }
+    }
+

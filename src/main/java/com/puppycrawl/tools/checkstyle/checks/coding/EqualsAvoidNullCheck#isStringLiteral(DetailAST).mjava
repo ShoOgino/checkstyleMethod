@@ -1,15 +1,11 @@
     /**
      * Checks for calling equals on String literal and
      * anon object which cannot be null
-     * Also, checks if calling using strange inner class
-     * syntax outer.inner.equals(otherObj) by looking
-     * for the dot operator which cannot be improved
      * @param objCalledOn object AST
      * @return if it is string literal
      */
     private static boolean isStringLiteral(DetailAST objCalledOn) {
         return objCalledOn.getType() == TokenTypes.STRING_LITERAL
-                || objCalledOn.getType() == TokenTypes.LITERAL_NEW
-                || objCalledOn.getType() == TokenTypes.DOT;
+                || objCalledOn.getType() == TokenTypes.LITERAL_NEW;
     }
 

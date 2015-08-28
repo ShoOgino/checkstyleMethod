@@ -1,0 +1,15 @@
+    /**
+     * Add the method call to the current frame if it should be processed.
+     * @param methodCall METHOD_CALL ast.
+     */
+    private void processMethodCall(DetailAST methodCall) {
+        final DetailAST dot = methodCall.getFirstChild();
+        if (dot.getType() == TokenTypes.DOT) {
+            final String methodName = dot.getLastChild().getText();
+            if (EQUALS.equals(methodName)
+                    || !ignoreEqualsIgnoreCase && "equalsIgnoreCase".equals(methodName)) {
+                currentFrame.addMethodCall(methodCall);
+            }
+        }
+    }
+

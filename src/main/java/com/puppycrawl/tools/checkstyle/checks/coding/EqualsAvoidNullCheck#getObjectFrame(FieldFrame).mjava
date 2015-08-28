@@ -1,0 +1,13 @@
+    /**
+     * Get the nearest parent frame which is CLASS_DEF, ENUM_DEF or ENUM_CONST_DEF.
+     * @param frame to start the search from.
+     * @return the nearest parent frame which is CLASS_DEF, ENUM_DEF or ENUM_CONST_DEF.
+     */
+    private static FieldFrame getObjectFrame(FieldFrame frame) {
+        FieldFrame objectFrame = frame;
+        while (objectFrame != null && !objectFrame.isClassOrEnumOrEnumConstDef()) {
+            objectFrame = objectFrame.getParent();
+        }
+        return objectFrame;
+    }
+

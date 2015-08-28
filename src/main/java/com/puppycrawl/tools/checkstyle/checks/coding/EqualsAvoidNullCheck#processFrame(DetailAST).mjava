@@ -1,0 +1,18 @@
+    /**
+     * Process CLASS_DEF, METHOD_DEF, LITERAL_IF, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO,
+     * LITERAL_CATCH, LITERAL_TRY, CTOR_DEF, ENUM_DEF, ENUM_CONSTANT_DEF.
+     * @param ast processed ast.
+     */
+    private void processFrame(DetailAST ast) {
+        final FieldFrame frame = new FieldFrame(currentFrame);
+        final int astType = ast.getType();
+        if (astType == TokenTypes.CLASS_DEF
+                || astType == TokenTypes.ENUM_DEF
+                || astType == TokenTypes.ENUM_CONSTANT_DEF) {
+            frame.setClassOrEnumOrEnumConstDef(true);
+            frame.setFrameName(ast.findFirstToken(TokenTypes.IDENT).getText());
+        }
+        currentFrame.addChild(frame);
+        currentFrame = frame;
+    }
+

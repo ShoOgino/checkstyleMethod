@@ -1,29 +1,21 @@
     @Override
-    public void visitToken(final DetailAST methodCall) {
-        final DetailAST dot = methodCall.getFirstChild();
-        if (dot.getType() != TokenTypes.DOT) {
-            return;
-        }
-
-        final DetailAST objCalledOn = dot.getFirstChild();
-        if (isStringLiteral(objCalledOn)) {
-            return;
-        }
-
-        final DetailAST method = objCalledOn.getNextSibling();
-        final DetailAST expr = dot.getNextSibling().getFirstChild();
-
-        if ("equals".equals(method.getText())
-            && containsOneArgument(methodCall) && containsAllSafeTokens(expr)) {
-            log(methodCall.getLineNo(), methodCall.getColumnNo(),
-                MSG_EQUALS_AVOID_NULL);
-        }
-
-        if (!ignoreEqualsIgnoreCase
-            && "equalsIgnoreCase".equals(method.getText())
-            && containsOneArgument(methodCall) && containsAllSafeTokens(expr)) {
-            log(methodCall.getLineNo(), methodCall.getColumnNo(),
-                MSG_EQUALS_IGNORE_CASE_AVOID_NULL);
+    public void visitToken(final DetailAST ast) {
+        switch (ast.getType()) {
+            case TokenTypes.VARIABLE_DEF:
+            case TokenTypes.PARAMETER_DEF:
+                currentFrame.addField(ast);
+                break;
+            case TokenTypes.METHOD_CALL:
+                processMethodCall(ast);
+                break;
+            case TokenTypes.SLIST:
+                processSlist(ast);
+                break;
+            case TokenTypes.LITERAL_NEW:
+                processLiteralNew(ast);
+                break;
+            default:
+                processFrame(ast);
         }
     }
 

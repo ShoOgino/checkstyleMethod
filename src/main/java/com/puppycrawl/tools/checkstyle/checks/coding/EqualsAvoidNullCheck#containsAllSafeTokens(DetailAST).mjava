@@ -2,19 +2,11 @@
      * <p>
      * Looks for all "safe" Token combinations in the argument
      * expression branch.
-     * </p>
-     *
-     * <p>
-     * See class documentation for details on autoboxing's affect
-     * on this method implementation.
-     * </p>
-     *
      * @param expr the argument expression
      * @return - true if any child matches the set of tokens, false if not
      */
     private static boolean containsAllSafeTokens(final DetailAST expr) {
         DetailAST arg = expr.getFirstChild();
-
         if (arg.branchContains(TokenTypes.METHOD_CALL)) {
             return false;
         }
@@ -27,10 +19,9 @@
         //s.equals(s += "SweetString"); //false
         //s = "SweetString";
         //(s += "SweetString").equals(s); //true
-        //arg = skipVariablePlusAssign(arg);
 
-        //must be just String literals to return true
         return !arg.branchContains(TokenTypes.PLUS_ASSIGN)
-                && !arg.branchContains(TokenTypes.IDENT);
+                && !arg.branchContains(TokenTypes.IDENT)
+                && !arg.branchContains(TokenTypes.LITERAL_NULL);
     }
 

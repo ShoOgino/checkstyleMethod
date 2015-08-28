@@ -1,0 +1,26 @@
+    /**
+     * Check whether the method call should be violated.
+     * @param methodCall method call to check.
+     */
+    private void checkMethodCall(DetailAST methodCall) {
+        DetailAST objCalledOn = methodCall.getFirstChild().getFirstChild();
+        if (objCalledOn.getType() == TokenTypes.DOT) {
+            objCalledOn = objCalledOn.getLastChild();
+        }
+        final DetailAST expr = methodCall.findFirstToken(TokenTypes.ELIST).getFirstChild();
+        if (isObjectValid(objCalledOn)
+                && containsOneArgument(methodCall)
+                && containsAllSafeTokens(expr)
+                && calledOnStringField(objCalledOn)) {
+            final String methodName = methodCall.getFirstChild().getLastChild().getText();
+            if (EQUALS.equals(methodName)) {
+                log(methodCall.getLineNo(), methodCall.getColumnNo(),
+                    MSG_EQUALS_AVOID_NULL);
+            }
+            else {
+                log(methodCall.getLineNo(), methodCall.getColumnNo(),
+                    MSG_EQUALS_IGNORE_CASE_AVOID_NULL);
+            }
+        }
+    }
+

@@ -1,0 +1,17 @@
+    /**
+     * Check whether the field is declared before the method call in case of
+     * methods and initialization blocks.
+     * @param field field to check.
+     * @param objCalledOn object equals method called on.
+     * @return true if the field is declared before the method call.
+     */
+    private static boolean checkLineNo(DetailAST field, DetailAST objCalledOn) {
+        boolean result = false;
+        if (field.getLineNo() < objCalledOn.getLineNo()
+                || field.getLineNo() == objCalledOn.getLineNo()
+                    && field.getColumnNo() < objCalledOn.getColumnNo()) {
+            result = true;
+        }
+        return result;
+    }
+

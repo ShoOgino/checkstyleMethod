@@ -1,0 +1,13 @@
+    /**
+     * Determine whether SLIST begins static or non-static block and
+     * @param ast SLIST ast.
+     */
+    private void leaveSlist(DetailAST ast) {
+        final int parentType = ast.getParent().getType();
+        if (parentType == TokenTypes.SLIST
+                || parentType == TokenTypes.STATIC_INIT
+                || parentType == TokenTypes.INSTANCE_INIT) {
+            currentFrame = currentFrame.getParent();
+        }
+    }
+

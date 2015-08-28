@@ -1,0 +1,53 @@
+    public void method(String param) {
+        final String localVar = "";
+
+        localVar.equals("");
+        param.equals("");
+
+        classVar.equals("");
+        instanceVar.equals("");
+        NewTest.classVar.equals("");
+        this.classVar.equals("");
+        this.instanceVar.equals("");
+
+        NewTest testObj = new NewTest("");
+        this.testObj.instanceVar.equals(""); // not violated, too confusing
+        testObj.classVar.equals(""); // not violated
+
+        for (Nested instanceVar = new Nested(); instanceVar != null; ) {
+            instanceVar.equals(1);
+            if (instanceVar.equals("")) {
+                instanceVar.equals("");
+            }
+        }
+
+        class Inner {
+            String instanceVarInner;
+
+            public void main() {
+                classVar.equals("");
+                instanceVar.equals("");
+                NewTest.classVar.equals("");
+
+                instanceVarInner.equals("");
+                this.instanceVarInner.equals("");
+                localVar.equals("");
+
+                NewTest testObj = new NewTest("");
+                testObj.instanceVar.equals(""); // not violated
+                testObj.classVar.equals(""); // not violated
+
+                Inner testInnerObj = new Inner();
+                testInnerObj.instanceVarInner.equals(""); // not violated
+            }
+        }
+
+        Inner testInnerObj = new Inner();
+        testInnerObj.instanceVarInner.equals(""); // not violated
+
+        Nested.nestedClassVar.equals(""); // not violated, because the equals call is not
+        Nested Nested = new Nested(); // embedded in class Nested, what can lead to really
+        Nested.nestedInstanceVar.equals(""); // confusing constructions. But could be improved.
+        Nested.nestedClassVar.equals("");
+    }
+
