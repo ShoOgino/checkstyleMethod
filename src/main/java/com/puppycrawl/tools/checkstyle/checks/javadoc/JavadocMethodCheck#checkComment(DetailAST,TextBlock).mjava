@@ -11,7 +11,7 @@
             return;
         }
 
-        Iterator<JavadocTag> it = tags.iterator();
+        final Iterator<JavadocTag> it = tags.iterator();
         if (ast.getType() != TokenTypes.ANNOTATION_FIELD_DEF) {
             // Check for inheritDoc
             boolean hasInheritDocTag = false;
@@ -27,9 +27,9 @@
         }
 
         // Dump out all unused tags
-        it = tags.iterator();
-        while (it.hasNext()) {
-            final JavadocTag jt = it.next();
+        final Iterator<JavadocTag> unusedTagIt = tags.iterator();
+        while (unusedTagIt.hasNext()) {
+            final JavadocTag jt = unusedTagIt.next();
             if (!jt.isSeeOrInheritDocTag()) {
                 log(jt.getLineNo(), MSG_UNUSED_TAG_GENERAL);
             }
