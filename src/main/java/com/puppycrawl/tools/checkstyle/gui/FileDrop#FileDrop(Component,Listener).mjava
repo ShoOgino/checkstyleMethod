@@ -6,12 +6,10 @@
      *
      * @param component Component on which files will be dropped.
      * @param listener Listens for <tt>filesDropped</tt>.
-     * @since 1.0
+     * @throws TooManyListenersException When more than one listener registered
+     *     on the particular event.
      */
-    FileDrop(
-            final Component component,
-            final Listener listener)
-            throws TooManyListenersException {
+    FileDrop(final Component component, final Listener listener) throws TooManyListenersException {
         this(component,
              BorderFactory.createMatteBorder(2, 2, 2, 2, DEFAULT_BORDER_COLOR),
              true,
