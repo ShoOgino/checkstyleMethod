@@ -1,0 +1,15 @@
+    /**
+     * Method removes checkstyle prefix (checkstyle:) from check name if exists.
+     *
+     * @param checkName
+     *            - name of the check
+     * @return check name without prefix
+     */
+    private static String removeChecktylePrefixIfExests(String checkName) {
+        String result = checkName;
+        if (checkName.startsWith(CHECKSTYLE_PREFIX)) {
+            result = checkName.substring(CHECKSTYLE_PREFIX.length());
+        }
+        return result;
+    }
+

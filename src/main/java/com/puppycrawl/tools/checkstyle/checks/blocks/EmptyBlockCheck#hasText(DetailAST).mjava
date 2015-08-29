@@ -36,12 +36,7 @@
             }
             else {
                 // check if all lines are also only whitespace
-                for (int i = slistLineNo; i < rcurlyLineNo - 1; i++) {
-                    if (!lines[i].trim().isEmpty()) {
-                        retVal = true;
-                        break;
-                    }
-                }
+                retVal = !checkIsAllLinesAreWhitespace(lines, slistLineNo, rcurlyLineNo);
             }
         }
         return retVal;
