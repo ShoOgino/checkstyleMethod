@@ -1,0 +1,14 @@
+    /**
+     * Whether current event matches any tag from {@link #tags}.
+     * @param event AuditEvent to test match on {@link #tags}.
+     * @return true if event matches any tag from {@link #tags}, false otherwise.
+     */
+    private boolean matchTag(AuditEvent event) {
+        for (final Tag tag : tags) {
+            if (tag.isMatch(event)) {
+                return true;
+            }
+        }
+        return false;
+    }
+

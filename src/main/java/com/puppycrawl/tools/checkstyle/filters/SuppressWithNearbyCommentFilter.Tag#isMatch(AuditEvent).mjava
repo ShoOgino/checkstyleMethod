@@ -6,22 +6,19 @@
          */
         public boolean isMatch(AuditEvent event) {
             final int line = event.getLine();
-            if (line < firstLine) {
-                return false;
+            boolean match = false;
+
+            if (line >= firstLine && line <= lastLine) {
+                final Matcher tagMatcher = tagCheckRegexp.matcher(event.getSourceName());
+
+                if (tagMatcher.find()) {
+                    match = true;
+                }
+                else if (tagMessageRegexp != null) {
+                    final Matcher messageMatcher = tagMessageRegexp.matcher(event.getMessage());
+                    match = messageMatcher.find();
+                }
             }
-            if (line > lastLine) {
-                return false;
-            }
-            final Matcher tagMatcher =
-                tagCheckRegexp.matcher(event.getSourceName());
-            if (tagMatcher.find()) {
-                return true;
-            }
-            if (tagMessageRegexp != null) {
-                final Matcher messageMatcher =
-                    tagMessageRegexp.matcher(event.getMessage());
-                return messageMatcher.find();
-            }
-            return false;
+            return match;
         }
 
