@@ -1,19 +1,24 @@
     @Override
     public Object getValueAt(Object node, int column) {
         final DetailAST ast = (DetailAST) node;
+        Object value;
+
         switch (column) {
-            case 0:
-                return null;
             case 1:
-                return TokenUtils.getTokenName(ast.getType());
+                value = TokenUtils.getTokenName(ast.getType());
+                break;
             case 2:
-                return ast.getLineNo();
+                value = ast.getLineNo();
+                break;
             case 3:
-                return ast.getColumnNo();
+                value = ast.getColumnNo();
+                break;
             case 4:
-                return ast.getText();
+                value = ast.getText();
+                break;
             default:
-                return null;
+                value = null;
         }
+        return value;
     }
 
