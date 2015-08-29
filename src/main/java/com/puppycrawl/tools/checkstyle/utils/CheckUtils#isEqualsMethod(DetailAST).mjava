@@ -5,27 +5,24 @@
      * @return true if ast defines an equals covariant.
      */
     public static boolean isEqualsMethod(DetailAST ast) {
-        if (ast.getType() != TokenTypes.METHOD_DEF) {
-            // A node must be method def
-            return false;
-        }
+        boolean equalsMethod = false;
 
-        // non-static, non-abstract?
-        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
-        if (modifiers.branchContains(TokenTypes.LITERAL_STATIC)
-            || modifiers.branchContains(TokenTypes.ABSTRACT)) {
-            return false;
-        }
+        if (ast.getType() == TokenTypes.METHOD_DEF) {
+            final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
+            final boolean staticOrAbstract = modifiers.branchContains(TokenTypes.LITERAL_STATIC)
+                    || modifiers.branchContains(TokenTypes.ABSTRACT);
 
-        // named "equals"?
-        final DetailAST nameNode = ast.findFirstToken(TokenTypes.IDENT);
-        final String name = nameNode.getText();
-        if (!"equals".equals(name)) {
-            return false;
-        }
+            if (!staticOrAbstract) {
+                final DetailAST nameNode = ast.findFirstToken(TokenTypes.IDENT);
+                final String name = nameNode.getText();
 
-        // one parameter?
-        final DetailAST paramsNode = ast.findFirstToken(TokenTypes.PARAMETERS);
-        return paramsNode.getChildCount() == 1;
+                if ("equals".equals(name)) {
+                    // one parameter?
+                    final DetailAST paramsNode = ast.findFirstToken(TokenTypes.PARAMETERS);
+                    equalsMethod = paramsNode.getChildCount() == 1;
+                }
+            }
+        }
+        return equalsMethod;
     }
 
