@@ -25,20 +25,14 @@
                 violation = MSG_KEY_LINE_ALONE;
             }
         }
-        else if (bracePolicy == RightCurlyOption.SAME
-                && rcurly.getLineNo() != nextToken.getLineNo()) {
+        else if (shouldBeOnSameLine(bracePolicy, details)) {
             violation = MSG_KEY_LINE_SAME;
         }
-        else if (shouldBeAloneOnLine(details, bracePolicy)) {
+        else if (shouldBeAloneOnLine(bracePolicy, details)) {
             violation = MSG_KEY_LINE_ALONE;
         }
-        else if (shouldStartLine) {
-            final boolean startsLine =
-                    CommonUtils.hasWhitespaceBefore(rcurly.getColumnNo(), targetSourceLine);
-
-            if (!startsLine && lcurly.getLineNo() != rcurly.getLineNo()) {
-                violation = MSG_KEY_LINE_NEW;
-            }
+        else if (shouldStartLine && !startsLine(details, targetSourceLine)) {
+            violation = MSG_KEY_LINE_NEW;
         }
         return violation;
     }
