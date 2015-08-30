@@ -29,12 +29,7 @@
             if (i == fileSize) {
                 // if file finished, but we have at least one non-multi-line
                 // header isn't completed
-                for (; headerLineNo < headerSize; headerLineNo++) {
-                    if (!isMultiLine(headerLineNo)) {
-                        log(1, MSG_HEADER_MISSING);
-                        break;
-                    }
-                }
+                logFirstSinglelineLine(headerLineNo, headerSize);
             }
         }
     }
