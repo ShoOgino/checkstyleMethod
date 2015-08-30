@@ -1,5 +1,5 @@
     @Override
-    protected void processFiltered(File file, List<String> lines) {
+    protected void processFiltered(File file, List<String> lines) throws CheckstyleException {
         // check if already checked and passed the file
         final String fileName = file.getPath();
         final long timestamp = file.lastModified();
@@ -27,16 +27,11 @@
         catch (final TokenStreamRecognitionException tre) {
             final String exceptionMsg = String.format(msg, "TokenStreamRecognitionException",
                      fileName);
-            LOG.error(exceptionMsg);
-            final RecognitionException re = tre.recog;
-            final String message = re.getMessage();
-            getMessageCollector().add(createLocalizedMessage(message));
+            throw new CheckstyleException(exceptionMsg, tre);
         }
-        // RecognitionException and any other (need to check if needed)
-        catch (Throwable ex) {
+        catch (RecognitionException | TokenStreamException ex) {
             final String exceptionMsg = String.format(msg, ex.getClass().getSimpleName(), fileName);
-            LOG.error(exceptionMsg, ex);
-            getMessageCollector().add(createLocalizedMessage(ex.getMessage()));
+            throw new CheckstyleException(exceptionMsg, ex);
         }
 
         if (cache != null && getMessageCollector().size() == 0) {

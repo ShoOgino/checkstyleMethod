@@ -11,6 +11,12 @@
         ArrayList<String> lines = new ArrayList<>();
         lines.add(" classD a {} ");
 
-        treeWalker.processFiltered(file, lines);
+        try {
+            treeWalker.processFiltered(file, lines);
+        }
+        catch (CheckstyleException exception) {
+            assertTrue(exception.getMessage().contains(
+                    "occurred during the analysis of file"));
+        }
     }
 
