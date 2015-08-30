@@ -1,0 +1,18 @@
+    /**
+     * Returns first annotation on same line.
+     * @param annotation
+     *            last annotation on the line
+     * @return first annotation on same line.
+     */
+    private static DetailAST getFirstAnnotationOnSameLine(DetailAST annotation) {
+        DetailAST previousAnnotation = annotation;
+        final int lastAnnotationLineNumber = previousAnnotation.getLineNo();
+        while (previousAnnotation.getPreviousSibling() != null
+                && previousAnnotation.getPreviousSibling().getLineNo()
+                    == lastAnnotationLineNumber) {
+
+            previousAnnotation = previousAnnotation.getPreviousSibling();
+        }
+        return previousAnnotation;
+    }
+

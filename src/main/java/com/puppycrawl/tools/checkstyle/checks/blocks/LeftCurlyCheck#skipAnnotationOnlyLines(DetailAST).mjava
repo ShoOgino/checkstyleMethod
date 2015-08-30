@@ -13,7 +13,7 @@
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
 
         if (modifiers != null) {
-            DetailAST lastAnnotation = findLastAnnotation(modifiers);
+            final DetailAST lastAnnotation = findLastAnnotation(modifiers);
 
             if (lastAnnotation != null) {
                 final DetailAST tokenAfterLast;
@@ -29,14 +29,7 @@
                     resultNode = tokenAfterLast;
                 }
                 else {
-                    final int lastAnnotationLineNumber = lastAnnotation.getLineNo();
-                    while (lastAnnotation.getPreviousSibling() != null
-                           && lastAnnotation.getPreviousSibling().getLineNo()
-                               == lastAnnotationLineNumber) {
-
-                        lastAnnotation = lastAnnotation.getPreviousSibling();
-                    }
-                    resultNode = lastAnnotation;
+                    resultNode = getFirstAnnotationOnSameLine(lastAnnotation);
                 }
             }
         }
