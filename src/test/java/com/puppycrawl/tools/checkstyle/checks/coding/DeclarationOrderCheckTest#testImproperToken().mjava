@@ -1,0 +1,12 @@
+    @Test
+    public void testImproperToken() {
+        DeclarationOrderCheck check = new DeclarationOrderCheck();
+        DetailAST parent = new DetailAST();
+        parent.setType(TokenTypes.STATIC_INIT);
+        DetailAST array = new DetailAST();
+        array.setType(TokenTypes.ARRAY_INIT);
+        parent.setFirstChild(array);
+
+        check.visitToken(array);
+    }
+
