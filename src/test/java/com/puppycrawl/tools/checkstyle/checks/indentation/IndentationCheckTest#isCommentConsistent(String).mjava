@@ -16,9 +16,7 @@
         Matcher singleLevelMatch = SINGLELEVEL_COMMENT_REGEX.matcher(comment);
         if (singleLevelMatch.matches()) {
             final int expectedLevel = Integer.parseInt(singleLevelMatch.group(1));
-
-            return expectedLevel == indentInComment && !isWarnComment
-                    || expectedLevel != indentInComment && isWarnComment;
+            return isSingleLevelCommentConsistent(indentInComment, isWarnComment, expectedLevel);
         }
 
         Matcher nonStrictLevelMatch = NONSTRICT_LEVEL_COMMENT_REGEX.matcher(comment);
