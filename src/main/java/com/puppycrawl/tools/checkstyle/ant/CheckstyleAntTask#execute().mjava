@@ -3,7 +3,26 @@
         final long startTime = System.currentTimeMillis();
 
         try {
-            realExecute();
+            // output version info in debug mode
+            final ResourceBundle compilationProperties = ResourceBundle
+                    .getBundle("checkstylecompilation");
+            final String version = compilationProperties
+                    .getString("checkstyle.compile.version");
+            final String compileTimestamp = compilationProperties
+                    .getString("checkstyle.compile.timestamp");
+            log("checkstyle version " + version, Project.MSG_VERBOSE);
+            log("compiled on " + compileTimestamp, Project.MSG_VERBOSE);
+
+            // Check for no arguments
+            if (fileName == null && fileSets.isEmpty()) {
+                throw new BuildException(
+                        "Must specify at least one of 'file' or nested 'fileset'.",
+                        getLocation());
+            }
+            if (configLocation == null) {
+                throw new BuildException("Must specify 'config'.", getLocation());
+            }
+            realExecute(version);
         }
         finally {
             final long endTime = System.currentTimeMillis();

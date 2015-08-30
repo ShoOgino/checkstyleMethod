@@ -1,0 +1,28 @@
+    /**
+     * Helper implementation to perform execution.
+     * @param checkstyleVersion Checkstyle compile version.
+     */
+    private void realExecute(String checkstyleVersion) {
+        // Create the checker
+        Checker checker = null;
+        try {
+            checker = createChecker();
+
+            // setup the listeners
+            final AuditListener[] listeners = getListeners();
+            for (AuditListener element : listeners) {
+                checker.addListener(element);
+            }
+            final SeverityLevelCounter warningCounter =
+                new SeverityLevelCounter(SeverityLevel.WARNING);
+            checker.addListener(warningCounter);
+
+            processFiles(checker, warningCounter, checkstyleVersion);
+        }
+        finally {
+            if (checker != null) {
+                checker.destroy();
+            }
+        }
+    }
+
