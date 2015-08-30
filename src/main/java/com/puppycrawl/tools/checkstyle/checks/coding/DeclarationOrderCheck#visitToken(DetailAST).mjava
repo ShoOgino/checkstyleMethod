@@ -13,7 +13,9 @@
                 break;
             case TokenTypes.METHOD_DEF:
                 if (parentType == TokenTypes.OBJBLOCK) {
-                    processMethod(ast);
+                    final ScopeState state = scopeStates.peek();
+                    // nothing can be bigger than method's state
+                    state.currentScopeState = STATE_METHOD_DEF;
                 }
                 break;
             case TokenTypes.MODIFIERS:
