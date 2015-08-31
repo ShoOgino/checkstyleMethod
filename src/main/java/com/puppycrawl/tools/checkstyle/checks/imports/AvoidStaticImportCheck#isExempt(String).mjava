@@ -9,27 +9,10 @@
         boolean exempt = false;
 
         for (String exclude : excludes) {
-            if (classOrStaticMember.equals(exclude)) {
+            if (classOrStaticMember.equals(exclude)
+                    || isStarImportOfPackage(classOrStaticMember, exclude)) {
                 exempt = true;
                 break;
-            }
-            else if (exclude.endsWith(".*")) {
-                //this section allows explicit imports
-                //to be exempt when configured using
-                //a starred import
-                final String excludeMinusDotStar =
-                    exclude.substring(0, exclude.length() - 2);
-                if (classOrStaticMember.startsWith(excludeMinusDotStar)
-                        && !classOrStaticMember.equals(excludeMinusDotStar)) {
-                    final String member =
-                        classOrStaticMember.substring(
-                            excludeMinusDotStar.length() + 1);
-                    //if it contains a dot then it is not a member but a package
-                    if (member.indexOf('.') == -1) {
-                        exempt = true;
-                        break;
-                    }
-                }
             }
         }
         return exempt;
