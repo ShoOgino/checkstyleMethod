@@ -1,6 +1,5 @@
     @Test
     public void testParents() {
-        DeclarationOrderCheck check = new DeclarationOrderCheck();
         DetailAST parent = new DetailAST();
         parent.setType(TokenTypes.STATIC_INIT);
         DetailAST method = new DetailAST();
@@ -10,6 +9,7 @@
         ctor.setType(TokenTypes.CTOR_DEF);
         method.setNextSibling(ctor);
 
+        DeclarationOrderCheck check = new DeclarationOrderCheck();
         check.visitToken(method);
         check.visitToken(ctor);
     }
