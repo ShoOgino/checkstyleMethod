@@ -1,0 +1,25 @@
+    @Test
+    public void testWrongSeparatorLength() throws Exception {
+        NewlineAtEndOfFileCheck check = new NewlineAtEndOfFileCheck();
+        final DefaultConfiguration checkConfig = createCheckConfig(NewlineAtEndOfFileCheck.class);
+        check.configure(checkConfig);
+
+        Method method = NewlineAtEndOfFileCheck.class
+                .getDeclaredMethod("endsWithNewline", RandomAccessFile.class);
+        method.setAccessible(true);
+        RandomAccessFile file = mock(RandomAccessFile.class);
+        when(file.length()).thenReturn(2000000L);
+        try {
+            method.invoke(new NewlineAtEndOfFileCheck(), file);
+        }
+        catch (InvocationTargetException ex) {
+            assertTrue(ex.getCause() instanceof IOException);
+            if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+                assertEquals(ex.getCause().getMessage(), "Unable to read 2 bytes, got 0");
+            }
+            else {
+                assertEquals(ex.getCause().getMessage(), "Unable to read 1 bytes, got 0");
+            }
+        }
+    }
+
