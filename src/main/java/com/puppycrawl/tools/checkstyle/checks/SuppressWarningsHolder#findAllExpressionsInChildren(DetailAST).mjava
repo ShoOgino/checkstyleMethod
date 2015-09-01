@@ -1,0 +1,17 @@
+    /**
+     * Method looks at children and returns list of expressions in strings.
+     * @param parent ast, that contains children
+     * @return list of expressions in strings
+     */
+    private static List<String> findAllExpressionsInChildren(DetailAST parent) {
+        final List<String> valueList = Lists.newLinkedList();
+        DetailAST childAST = parent.getFirstChild();
+        while (childAST != null) {
+            if (childAST.getType() == TokenTypes.EXPR) {
+                valueList.add(getStringExpr(childAST));
+            }
+            childAST = childAST.getNextSibling();
+        }
+        return valueList;
+    }
+

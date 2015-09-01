@@ -11,15 +11,7 @@
                 return ImmutableList.of(getStringExpr(ast));
 
             case TokenTypes.ANNOTATION_ARRAY_INIT:
-                final List<String> valueList = Lists.newLinkedList();
-                DetailAST childAST = ast.getFirstChild();
-                while (childAST != null) {
-                    if (childAST.getType() == TokenTypes.EXPR) {
-                        valueList.add(getStringExpr(childAST));
-                    }
-                    childAST = childAST.getNextSibling();
-                }
-                return valueList;
+                return findAllExpressionsInChildren(ast);
 
             default:
                 throw new IllegalArgumentException(
