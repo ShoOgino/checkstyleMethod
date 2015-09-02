@@ -1,0 +1,13 @@
+    @Test
+    public void testCorrect() throws Exception {
+        
+        final String[] expected = {
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("SummaryJavadocCheck");
+        String filePath = builder.getFilePath("InputCorrectSummaryJavaDocCheck");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
