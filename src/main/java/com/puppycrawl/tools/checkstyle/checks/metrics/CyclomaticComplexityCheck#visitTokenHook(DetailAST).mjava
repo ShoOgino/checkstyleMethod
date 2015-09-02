@@ -1,5 +1,12 @@
     @Override
     protected final void visitTokenHook(DetailAST ast) {
-        incrementCurrentValue(BigInteger.ONE);
+        if (switchBlockAsSingleDecisionPoint) {
+            if (ast.getType() != TokenTypes.LITERAL_CASE) {
+                incrementCurrentValue(BigInteger.ONE);
+            }
+        }
+        else if (ast.getType() != TokenTypes.LITERAL_SWITCH) {
+            incrementCurrentValue(BigInteger.ONE);
+        }
     }
 
