@@ -11,6 +11,9 @@
                 checkClassConstructorModifiers(ast);
             }
         }
+        else if (ast.getType() == TokenTypes.ENUM_DEF) {
+            checkEnumDef(ast);
+        }
         else if (isInterfaceOrAnnotationMember(ast)) {
             processInterfaceOrAnnotation(ast);
         }
