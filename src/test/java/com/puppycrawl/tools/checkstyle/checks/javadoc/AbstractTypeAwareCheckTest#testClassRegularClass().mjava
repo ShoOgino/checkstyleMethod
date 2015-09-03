@@ -1,0 +1,43 @@
+    @Test
+    public void testClassRegularClass() throws Exception {
+        Class<?> tokenType = Class
+                .forName("com.puppycrawl.tools.checkstyle.checks.AbstractTypeAwareCheck$Token");
+
+        Class<?> regularClassType = Class
+                .forName(
+                        "com.puppycrawl.tools.checkstyle.checks.AbstractTypeAwareCheck$RegularClass");
+        Constructor<?> regularClassConstructor = regularClassType.getDeclaredConstructor(tokenType,
+                String.class, AbstractTypeAwareCheck.class);
+        regularClassConstructor.setAccessible(true);
+
+        try {
+            regularClassConstructor.newInstance(null, "", new JavadocMethodCheck());
+        }
+        catch (InvocationTargetException ex) {
+            assertTrue(ex.getCause() instanceof IllegalArgumentException);
+            assertEquals(ex.getCause().getMessage(), "ClassInfo's name should be non-null");
+        }
+
+        Constructor<?> tokenConstructor = tokenType.getDeclaredConstructor(String.class, int.class,
+                int.class);
+        Object token = tokenConstructor.newInstance("blablabla", 1, 1);
+
+        Object regularClass = regularClassConstructor.newInstance(token, "sur",
+                new JavadocMethodCheck());
+
+        Method toString = regularClass.getClass().getDeclaredMethod("toString");
+        toString.setAccessible(true);
+        String result = (String) toString.invoke(regularClass);
+        assertEquals("RegularClass[name=Token[blablabla(1x1)], in class=sur, loadable=true,"
+                + " class=null]", result);
+
+        Method setClazz = regularClass.getClass().getDeclaredMethod("setClazz", Class.class);
+        setClazz.setAccessible(true);
+        Class<?> arg = null;
+        setClazz.invoke(regularClass, arg);
+
+        Method getClazz = regularClass.getClass().getDeclaredMethod("getClazz");
+        getClazz.setAccessible(true);
+        assertTrue(getClazz.invoke(regularClass) == null);
+    }
+
