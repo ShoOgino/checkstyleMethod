@@ -1,0 +1,13 @@
+    /**
+     * Gets checks names from a set of checks which are Class instances.
+     * @param checks are Class instances.
+     * @return a set of checks names.
+     */
+    private static Set<String> getChecksNames(Set<Class<?>> checks) {
+        final Set<String> checksNames = new HashSet<>();
+        for (Class<?> check : checks) {
+            checksNames.add(check.getSimpleName().replace("Check", ""));
+        }
+        return checksNames;
+    }
+
