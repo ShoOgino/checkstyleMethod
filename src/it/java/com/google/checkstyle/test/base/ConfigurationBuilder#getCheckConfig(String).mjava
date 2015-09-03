@@ -1,15 +1,15 @@
-	public Configuration getCheckConfig(String aCheckName) {
-		for (Configuration currentConfig : configuration.getChildren()) {
-			if ("TreeWalker".equals(currentConfig.getName())) {
-				for (Configuration checkConfig : currentConfig.getChildren()) {
-					if (aCheckName.equals(checkConfig.getName())) {
-						return checkConfig;
-					}
-				}
-			} else if (aCheckName.equals(currentConfig.getName())) {
-				return currentConfig;
-			}
-		}
-		return null;
-	}
+    public Configuration getCheckConfig(String aCheckName) {
+        for (Configuration currentConfig : configuration.getChildren()) {
+            if ("TreeWalker".equals(currentConfig.getName())) {
+                for (Configuration checkConfig : currentConfig.getChildren()) {
+                    if (aCheckName.equals(checkConfig.getName())) {
+                        return checkConfig;
+                    }
+                }
+            } else if (aCheckName.equals(currentConfig.getName())) {
+                return currentConfig;
+            }
+        }
+        return null;
+    }
 
