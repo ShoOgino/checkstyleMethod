@@ -8,7 +8,8 @@
         if (!desc.isDeclaredAsFinal()
             && !desc.isDeclaredAsAbstract()
             && desc.isWithPrivateCtor()
-            && !desc.isWithNonPrivateCtor()) {
+            && !desc.isWithNonPrivateCtor()
+            && !ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
             final String className =
                 ast.findFirstToken(TokenTypes.IDENT).getText();
             log(ast.getLineNo(), MSG_KEY, className);
