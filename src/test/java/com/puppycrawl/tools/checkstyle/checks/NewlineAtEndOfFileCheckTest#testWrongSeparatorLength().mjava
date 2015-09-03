@@ -15,10 +15,10 @@
         catch (InvocationTargetException ex) {
             assertTrue(ex.getCause() instanceof IOException);
             if (System.getProperty("os.name").toLowerCase(ENGLISH).startsWith("windows")) {
-                assertEquals(ex.getCause().getMessage(), "Unable to read 2 bytes, got 0");
+                assertEquals("Unable to read 2 bytes, got 0", ex.getCause().getMessage());
             }
             else {
-                assertEquals(ex.getCause().getMessage(), "Unable to read 1 bytes, got 0");
+                assertEquals("Unable to read 1 bytes, got 0", ex.getCause().getMessage());
             }
         }
     }
