@@ -11,7 +11,8 @@
             method.setAccessible(true);
             actual = method.invoke(t, (DetailAST) null);
         }
-        catch (Exception ignored) {
+        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+                  | IllegalAccessException | InvocationTargetException ignored) {
             actual = null;
         }
 
