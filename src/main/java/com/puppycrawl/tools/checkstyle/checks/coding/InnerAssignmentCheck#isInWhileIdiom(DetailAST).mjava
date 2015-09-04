@@ -10,13 +10,13 @@
      * </p>
      *
      * @param ast assignment AST
-     * @return whether the context of the assignemt AST indicates the idiom
+     * @return whether the context of the assignment AST indicates the idiom
      */
     private static boolean isInWhileIdiom(DetailAST ast) {
         if (!isComparison(ast.getParent())) {
             return false;
         }
         return isInContext(
-                ast.getParent(), ALLOWED_ASSIGMENT_IN_COMPARISON_CONTEXT);
+                ast.getParent(), ALLOWED_ASSIGNMENT_IN_COMPARISON_CONTEXT);
     }
 
