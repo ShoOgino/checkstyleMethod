@@ -1,0 +1,14 @@
+    /**
+     * Skip all annotations in modifier block.
+     * @param modifierIterator iterator for collection of modifiers
+     * @return modifier next to last annotation
+     */
+    private static DetailAST skipAnnotations(Iterator<DetailAST> modifierIterator) {
+        DetailAST modifier;
+        do {
+            modifier = modifierIterator.next();
+        }
+        while (modifierIterator.hasNext() && modifier.getType() == TokenTypes.ANNOTATION);
+        return modifier;
+    }
+

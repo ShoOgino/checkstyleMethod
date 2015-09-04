@@ -10,11 +10,7 @@
         final Iterator<DetailAST> it = modifiers.iterator();
 
         //Speed past all initial annotations
-        DetailAST modifier;
-        do {
-            modifier = it.next();
-        }
-        while (it.hasNext() && modifier.getType() == TokenTypes.ANNOTATION);
+        DetailAST modifier = skipAnnotations(it);
 
         DetailAST offendingModifier = null;
 
@@ -22,7 +18,9 @@
         if (modifier.getType() != TokenTypes.ANNOTATION) {
             int i = 0;
 
-            while (modifier != null) {
+            while (modifier != null
+                    && offendingModifier == null) {
+
                 if (modifier.getType() == TokenTypes.ANNOTATION) {
                     //Annotation not at start of modifiers, bad
                     offendingModifier = modifier;
@@ -37,7 +35,6 @@
                 if (i == JLS_ORDER.length) {
                     //Current modifier is out of JLS order
                     offendingModifier = modifier;
-                    break;
                 }
                 else if (it.hasNext()) {
                     modifier = it.next();
