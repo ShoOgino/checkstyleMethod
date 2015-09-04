@@ -1,12 +1,10 @@
     @Test
     public void testClose() {
+        TestCloseable closeable = new TestCloseable();
+
         CommonUtils.close(null);
+        CommonUtils.close(closeable);
 
-        CommonUtils.close(new Closeable() {
-
-            @Override
-            public void close() {
-            }
-        });
+        assertTrue(closeable.closed);
     }
 
