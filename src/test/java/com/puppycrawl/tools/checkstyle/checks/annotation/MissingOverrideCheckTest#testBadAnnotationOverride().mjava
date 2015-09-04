@@ -3,7 +3,7 @@
      * for only including the inheritDoc tag.
      */
     @Test
-    public void testBadAnnonOverride() throws Exception {
+    public void testBadAnnotationOverride() throws Exception {
         DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
         final String[] expected = {
             "10: " + getCheckMessage(MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
@@ -12,6 +12,6 @@
             "35: " + getCheckMessage(MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
         };
 
-        verify(checkConfig, getPath("annotation" + File.separator + "BadAnnonOverride.java"), expected);
+        verify(checkConfig, getPath("annotation" + File.separator + "BadAnnotationOverride.java"), expected);
     }
 
