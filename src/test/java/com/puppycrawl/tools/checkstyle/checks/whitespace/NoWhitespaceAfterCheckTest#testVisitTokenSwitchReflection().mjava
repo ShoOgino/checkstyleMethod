@@ -1,0 +1,19 @@
+    @Test
+    public void testVisitTokenSwitchReflection() throws Exception {
+        //unexpected parent for ARRAY_DECLARATOR token
+        final DetailAST astImport = mockAST(TokenTypes.IMPORT, "import", "mockfile");
+        final DetailAST astArrayDeclarator = mockAST(TokenTypes.ARRAY_DECLARATOR, "[", "mockfile");
+        final DetailAST astRBrake = mockAST(TokenTypes.RBRACK, "[", "mockfile");
+        astImport.addChild(astArrayDeclarator);
+        astArrayDeclarator.addChild(astRBrake);
+
+        final NoWhitespaceAfterCheck check = new NoWhitespaceAfterCheck();
+        try {
+            check.visitToken(astArrayDeclarator);
+            fail("no intended exception thrown");
+        }
+        catch (IllegalStateException e) {
+            assertEquals("unexpected ast syntaximport[0x-1]", e.getMessage());
+        }
+    }
+

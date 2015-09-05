@@ -1,0 +1,11 @@
+    @Test
+    public void testMethodReference() throws Exception {
+        final String[] expected = {
+            "10:40: " + getCheckMessage(MSG_KEY, "int"),
+            "11:63: " + getCheckMessage(MSG_KEY, "Message"),
+        };
+        verify(checkConfig,
+            getNonCompilablePath("InputNoWhitespaceAfterMethodRef.java"),
+                 expected);
+    }
+

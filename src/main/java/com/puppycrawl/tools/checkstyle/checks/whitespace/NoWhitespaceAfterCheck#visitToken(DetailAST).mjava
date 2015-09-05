@@ -1,13 +1,13 @@
     @Override
     public void visitToken(DetailAST ast) {
-        final DetailAST astNode = getPreceded(ast);
-        final String line = getLine(ast.getLineNo() - 1);
-        final int after = getPositionAfter(astNode);
+        final DetailAST whitespaceFollowedAst = getWhitespaceFollowedNode(ast);
 
-        if ((after >= line.length() || Character.isWhitespace(line.charAt(after)))
-                 && hasRedundantWhitespace(line, after)) {
-            log(astNode.getLineNo(), after,
-                MSG_KEY, astNode.getText());
+        final int whitespaceColumnNo = getPositionAfter(whitespaceFollowedAst);
+        final int whitespaceLineNo = whitespaceFollowedAst.getLineNo();
+
+        if (hasTrailingWhitespace(ast, whitespaceColumnNo, whitespaceLineNo)) {
+            log(whitespaceLineNo, whitespaceColumnNo,
+                MSG_KEY, whitespaceFollowedAst.getText());
         }
     }
 

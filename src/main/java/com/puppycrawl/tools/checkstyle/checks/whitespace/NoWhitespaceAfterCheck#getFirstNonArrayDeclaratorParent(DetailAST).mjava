@@ -1,0 +1,14 @@
+    /**
+     * Get node that owns {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR} sequence.
+     * @param ast
+     *        , {@link TokenTypes#ARRAY_DECLARATOR ARRAY_DECLARATOR} node.
+     * @return owner node.
+     */
+    private static DetailAST getFirstNonArrayDeclaratorParent(DetailAST ast) {
+        DetailAST parent = ast.getParent();
+        while (parent.getType() == TokenTypes.ARRAY_DECLARATOR) {
+            parent = parent.getParent();
+        }
+        return parent;
+    }
+

@@ -1,0 +1,28 @@
+    /**
+     * Gets previous node for {@link TokenTypes#INDEX_OP INDEX_OP} token
+     * for usage in getPositionAfter method, it is a simplified copy of
+     * getArrayDeclaratorPreviousElement method.
+     * @param ast
+     *        , {@link TokenTypes#INDEX_OP INDEX_OP} node.
+     * @return previous node by text order.
+     */
+    private static DetailAST getIndexOpPreviousElement(DetailAST ast) {
+        DetailAST result;
+        final DetailAST firstChild = ast.getFirstChild();
+        if (firstChild.getType() == TokenTypes.INDEX_OP) {
+            // second or higher array index
+            result = firstChild.findFirstToken(TokenTypes.RBRACK);
+        }
+        else {
+            final DetailAST ident = getIdentLastToken(ast);
+            if (ident == null) {
+                // construction like ((byte[]) pixels)[0]
+                result = ast.findFirstToken(TokenTypes.RPAREN);
+            }
+            else {
+                result = ident;
+            }
+        }
+        return result;
+    }
+

@@ -1,0 +1,24 @@
+    /**
+     * Checks if there is unwanted whitespace after the visited node.
+     * @param ast
+     *        , visited node.
+     * @param whitespaceColumnNo
+     *        , column number of a possible whitespace.
+     * @param whitespaceLineNo
+     *        , line number of a possible whitespace.
+     * @return true if whitespace found.
+     */
+    boolean hasTrailingWhitespace(DetailAST ast,
+        int whitespaceColumnNo, int whitespaceLineNo) {
+        final boolean result;
+        final int astLineNo = ast.getLineNo();
+        final String line = getLine(astLineNo - 1);
+        if (astLineNo == whitespaceLineNo && whitespaceColumnNo < line.length()) {
+            result = Character.isWhitespace(line.charAt(whitespaceColumnNo));
+        }
+        else {
+            result = !allowLineBreaks;
+        }
+        return result;
+    }
+

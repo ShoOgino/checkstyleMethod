@@ -1,0 +1,22 @@
+    /**
+     * Searches parameter node for a type node.
+     * Returns it or its last node if it has an extended structure.
+     * @param ast
+     *        , subject node.
+     * @return type node.
+     */
+    private static DetailAST getTypeLastNode(DetailAST ast) {
+        DetailAST result = ast.findFirstToken(TokenTypes.TYPE_ARGUMENTS);
+        if (result == null) {
+            result = getIdentLastToken(ast);
+            if (result == null) {
+                //primitive literal expected
+                result = ast.getFirstChild();
+            }
+        }
+        else {
+            result = result.findFirstToken(TokenTypes.GENERIC_END);
+        }
+        return result;
+    }
+

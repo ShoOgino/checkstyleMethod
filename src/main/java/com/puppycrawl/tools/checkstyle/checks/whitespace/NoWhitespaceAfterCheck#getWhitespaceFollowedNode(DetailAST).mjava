@@ -1,0 +1,25 @@
+    /**
+     * For a visited ast node returns node that should be checked
+     * for not being followed by whitespace.
+     * @param ast
+     *        , visited node.
+     * @return node before ast.
+     */
+    private static DetailAST getWhitespaceFollowedNode(DetailAST ast) {
+        DetailAST whitespaceFollowedAst;
+        switch (ast.getType()) {
+            case TokenTypes.TYPECAST:
+                whitespaceFollowedAst = ast.findFirstToken(TokenTypes.RPAREN);
+                break;
+            case TokenTypes.ARRAY_DECLARATOR:
+                whitespaceFollowedAst = getArrayDeclaratorPreviousElement(ast);
+                break;
+            case TokenTypes.INDEX_OP:
+                whitespaceFollowedAst = getIndexOpPreviousElement(ast);
+                break;
+            default:
+                whitespaceFollowedAst = ast;
+        }
+        return whitespaceFollowedAst;
+    }
+
