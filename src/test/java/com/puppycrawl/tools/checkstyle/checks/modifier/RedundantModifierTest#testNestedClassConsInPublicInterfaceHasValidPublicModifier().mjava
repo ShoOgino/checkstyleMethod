@@ -1,0 +1,17 @@
+    @Test
+    public void testNestedClassConsInPublicInterfaceHasValidPublicModifier() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(RedundantModifierCheck.class);
+
+        final String[] expected = {
+            "18:33: " + getCheckMessage(MSG_KEY, "public"),
+            "22:41: " + getCheckMessage(MSG_KEY, "public"),
+            "33:33: " + getCheckMessage(MSG_KEY, "public"),
+            "41:33: " + getCheckMessage(MSG_KEY, "public"),
+        };
+
+        verify(checkConfig,
+                getPath("InputNestedClassInPublicInterfaceRedundantModifiers.java"),
+                expected);
+    }
+
