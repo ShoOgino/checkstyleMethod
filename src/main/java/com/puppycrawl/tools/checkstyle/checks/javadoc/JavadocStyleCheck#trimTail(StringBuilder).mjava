@@ -8,7 +8,8 @@
             if (Character.isWhitespace(builder.charAt(i))) {
                 builder.deleteCharAt(i);
             }
-            else if (builder.charAt(i - 1) == '*') {
+            else if (builder.charAt(i) == '/'
+                    && builder.charAt(i - 1) == '*') {
                 builder.deleteCharAt(i);
                 builder.deleteCharAt(i - 1);
                 i--;
