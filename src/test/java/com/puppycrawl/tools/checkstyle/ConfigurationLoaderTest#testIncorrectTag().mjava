@@ -4,9 +4,9 @@
             Class<?> aClassParent = ConfigurationLoader.class;
             Constructor<?> ctorParent = null;
             Constructor<?>[] parentConstructors = aClassParent.getDeclaredConstructors();
-            for (Constructor<?> constr: parentConstructors) {
-                constr.setAccessible(true);
-                ctorParent = constr;
+            for (Constructor<?> parentConstructor: parentConstructors) {
+                parentConstructor.setAccessible(true);
+                ctorParent = parentConstructor;
             }
             Class<?> aClass = Class.forName("com.puppycrawl.tools.checkstyle."
                     + "ConfigurationLoader$InternalLoader");
