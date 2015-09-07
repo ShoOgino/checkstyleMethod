@@ -1,0 +1,28 @@
+    /** Tries to find better matching regular expression:
+     * longer matching substring wins; in case of the same length,
+     * lower position of matching substring wins.
+     * @param importPath
+     *      Full import identifier
+     * @param group
+     *      Import group we are trying to assign the import
+     * @param regExp
+     *      Regular expression for import group
+     * @param currentBestMatch
+     *      object with currently best match
+     * @return better match (if found) or the same (currentBestMatch)
+     */
+    private static RuleMatchForImport findBetterPatternMatch(String importPath, String group,
+            Pattern regExp, RuleMatchForImport currentBestMatch) {
+        RuleMatchForImport betterMatchCandidate = currentBestMatch;
+        final Matcher matcher = regExp.matcher(importPath);
+        while (matcher.find()) {
+            final int length = matcher.end() - matcher.start();
+            if (length > betterMatchCandidate.matchLength
+                    || length == betterMatchCandidate.matchLength
+                        && matcher.start() < betterMatchCandidate.matchPosition) {
+                betterMatchCandidate = new RuleMatchForImport(group, length, matcher.start());
+            }
+        }
+        return betterMatchCandidate;
+    }
+

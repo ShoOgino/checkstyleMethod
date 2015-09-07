@@ -7,11 +7,36 @@
      * @return import valid group.
      */
     private String getImportGroup(boolean isStatic, String importPath) {
-        for (String group : customImportOrderRules) {
-            if (matchesImportGroup(isStatic, importPath, group)) {
-                return group;
+        RuleMatchForImport bestMatch = new RuleMatchForImport(NON_GROUP_RULE_GROUP, 0, 0);
+        if (isStatic && customImportOrderRules.contains(STATIC_RULE_GROUP)) {
+            bestMatch.group = STATIC_RULE_GROUP;
+            bestMatch.matchLength = importPath.length();
+        }
+        else if (customImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)) {
+            final String importPathTrimmedToSamePackageDepth =
+                    getFirstNDomainsFromIdent(samePackageMatchingDepth, importPath);
+            if (samePackageDomainsRegExp.equals(importPathTrimmedToSamePackageDepth)) {
+                bestMatch.group = SAME_PACKAGE_RULE_GROUP;
+                bestMatch.matchLength = importPath.length();
             }
         }
-        return NON_GROUP_RULE_GROUP;
+        if (bestMatch.group.equals(NON_GROUP_RULE_GROUP)) {
+            for (String group : customImportOrderRules) {
+                if (STANDARD_JAVA_PACKAGE_RULE_GROUP.equals(group)) {
+                    bestMatch = findBetterPatternMatch(importPath,
+                            STANDARD_JAVA_PACKAGE_RULE_GROUP, standardPackageRegExp, bestMatch);
+                }
+                if (SPECIAL_IMPORTS_RULE_GROUP.equals(group)) {
+                    bestMatch = findBetterPatternMatch(importPath,
+                            SPECIAL_IMPORTS_RULE_GROUP, specialImportsRegExp, bestMatch);
+                }
+            }
+        }
+        if (bestMatch.group.equals(NON_GROUP_RULE_GROUP)
+                && customImportOrderRules.contains(THIRD_PARTY_PACKAGE_RULE_GROUP)
+                && thirdPartyPackageRegExp.matcher(importPath).find()) {
+            bestMatch.group = THIRD_PARTY_PACKAGE_RULE_GROUP;
+        }
+        return bestMatch.group;
     }
 

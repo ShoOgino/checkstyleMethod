@@ -1,0 +1,15 @@
+    @Test
+    public void testMultiplePatternMatchesSecondPatternIsLonger() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(CustomImportOrderCheck.class);
+        checkConfig.addAttribute("customImportOrderRules",
+                "SPECIAL_IMPORTS###STANDARD_JAVA_PACKAGE");
+        checkConfig.addAttribute("specialImportsRegExp", "org");
+        checkConfig.addAttribute("standardPackageRegExp", "junit");
+        String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+
+        createChecker(checkConfig);
+        verify(checkConfig, getPath("imports" + File.separator
+                + "InputCustomImportOrder_MultiplePatternMatches.java"), expected);
+    }
+

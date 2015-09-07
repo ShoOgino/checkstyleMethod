@@ -8,14 +8,13 @@
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
             "4: " + getCheckMessage(MSG_LEX, "java.awt.Button.ABORT", "java.io.File.createTempFile"),
-            "7: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.util.List"),
-            "8: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.util.StringTokenizer"),
-            "9: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.util.*"),
-            "10: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.util.concurrent.AbstractExecutorService"),
-            "11: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.util.concurrent.*"),
-            "13: " + getCheckMessage(MSG_LEX, "com.puppycrawl.tools.*", "javax.swing.WindowConstants.*"),
-            "14: " + getCheckMessage(MSG_LEX, "com.*", "javax.swing.WindowConstants.*"),
-            "16: " + getCheckMessage(MSG_LEX, "com.google.common.base.*", "javax.swing.WindowConstants.*"),
+            "7: " + getCheckMessage(MSG_LEX, "java.util.List", "javax.swing.WindowConstants.*"),
+            "8: " + getCheckMessage(MSG_LEX, "java.util.StringTokenizer", "javax.swing.WindowConstants.*"),
+            "9: " + getCheckMessage(MSG_LEX, "java.util.*", "javax.swing.WindowConstants.*"),
+            "10: " + getCheckMessage(MSG_LEX, "java.util.concurrent.AbstractExecutorService", "javax.swing.WindowConstants.*"),
+            "11: " + getCheckMessage(MSG_LEX, "java.util.concurrent.*", "javax.swing.WindowConstants.*"),
+            "14: " + getCheckMessage(MSG_LEX, "com.*", "com.puppycrawl.tools.*"),
+            "16: " + getCheckMessage(MSG_LEX, "com.google.common.base.*", "com.puppycrawl.tools.*"),
         };
 
         verify(checkConfig, getPath("imports" + File.separator
