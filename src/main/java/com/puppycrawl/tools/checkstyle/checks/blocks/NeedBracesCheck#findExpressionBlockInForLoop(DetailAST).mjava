@@ -1,0 +1,18 @@
+    /**
+     * Detects and returns expression block in classical and enhanced for loops.
+     *
+     * @param literalFor parent for loop literal
+     * @return expression block
+     */
+    private static DetailAST findExpressionBlockInForLoop(DetailAST literalFor) {
+        final DetailAST forEachClause = literalFor.findFirstToken(TokenTypes.FOR_EACH_CLAUSE);
+        final DetailAST firstToken;
+        if (forEachClause != null) {
+            firstToken = forEachClause.findFirstToken(TokenTypes.EXPR);
+        }
+        else {
+            firstToken = literalFor.findFirstToken(TokenTypes.EXPR);
+        }
+        return firstToken;
+    }
+
