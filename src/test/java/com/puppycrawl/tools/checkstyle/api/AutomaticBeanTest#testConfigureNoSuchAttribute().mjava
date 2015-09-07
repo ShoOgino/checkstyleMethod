@@ -1,0 +1,14 @@
+    @Test
+    public void testConfigureNoSuchAttribute() {
+        final TestBean testBean = new TestBean();
+        final DefaultConfiguration conf = new DefaultConfiguration("testConf");
+        conf.addAttribute("NonExisting", "doesn't matter");
+        try {
+            testBean.configure(conf);
+        }
+        catch (CheckstyleException ex) {
+            assertNull(ex.getCause());
+            assertTrue(ex.getMessage().startsWith("Property '" + "NonExisting" + "' in module "));
+        }
+    }
+

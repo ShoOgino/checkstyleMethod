@@ -1,0 +1,22 @@
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testLoadConfigurationURISyntaxException() throws CheckstyleException {
+        mockStatic(ConfigurationLoader.class, Mockito.CALLS_REAL_METHODS);
+
+        PropertiesExpander expander = new PropertiesExpander(new Properties());
+
+        when(ConfigurationLoader.class.getResource("config_with_ignore.xml"))
+                .thenThrow(URISyntaxException.class);
+
+        try {
+            ConfigurationLoader.loadConfiguration(
+                    "config_with_ignore.xml", expander, true);
+
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getCause() instanceof  URISyntaxException);
+            assertEquals("unable to find config_with_ignore.xml", ex.getMessage());
+        }
+    }
+

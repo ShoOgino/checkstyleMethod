@@ -1,0 +1,14 @@
+    @Test
+    public void testCreateListenerIllegalStateException() throws Exception {
+        Method method = Main.class.getDeclaredMethod("createListener", String.class, String.class);
+        method.setAccessible(true);
+        try {
+            method.invoke(null, "myformat", null);
+            fail();
+        }
+        catch (InvocationTargetException e) {
+            assertTrue(e.getCause() instanceof IllegalStateException);
+            assertTrue(e.getCause().getMessage().startsWith("Invalid output format. Found"));
+        }
+    }
+

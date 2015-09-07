@@ -1,0 +1,31 @@
+    @Test
+    public void testLoadPropertiesIOException() throws Exception {
+        Class<?>[] param = new Class<?>[1];
+        param[0] = File.class;
+        Method method = Main.class.getDeclaredMethod("loadProperties", param);
+        method.setAccessible(true);
+        try {
+            if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("windows")) {
+                // https://support.microsoft.com/en-us/kb/177506 but this only for NTFS
+                // WindowsServer 2012 use Resilient File System (ReFS), so any name is ok
+                File file = new File(File.separator + ":invalid");
+                if (file.exists()) {
+                    file.delete();
+                }
+                method.invoke(null, new File(file.getAbsolutePath()));
+            }
+            else {
+                method.invoke(null, new File(File.separator + ":invalid"));
+            }
+            fail("Exception was expected");
+        }
+        catch (InvocationTargetException e) {
+            assertTrue(e.getCause() instanceof CheckstyleException);
+            // We do separate validation for message as in Windows
+            // disk drive letter appear in message,
+            // so we skip that drive letter for compatibility issues
+            assertTrue(e.getCause().getMessage().startsWith("Unable to load properties from file '"));
+            assertTrue(e.getCause().getMessage().endsWith(":invalid'."));
+        }
+    }
+
