@@ -20,10 +20,11 @@
             if (evt.getColumn() > 0) {
                 sb.append(':').append(evt.getColumn());
             }
-            if (severityLevel == SeverityLevel.WARNING) {
-                sb.append(": warning");
+            final String errorMessageSeparator = ": ";
+            if (printSeverity) {
+                sb.append(errorMessageSeparator).append(severityLevel.getName());
             }
-            sb.append(": ").append(message);
+            sb.append(errorMessageSeparator).append(message);
             errorWriter.println(sb);
         }
     }

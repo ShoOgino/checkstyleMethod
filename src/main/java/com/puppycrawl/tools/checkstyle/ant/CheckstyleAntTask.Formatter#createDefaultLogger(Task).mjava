@@ -11,6 +11,7 @@
                     new LogOutputStream(task, Project.MSG_DEBUG),
                     true, new LogOutputStream(task, Project.MSG_ERR), true);
             }
-            return new DefaultLogger(new FileOutputStream(toFile), true);
+            final FileOutputStream infoStream = new FileOutputStream(toFile);
+            return new DefaultLogger(infoStream, true, infoStream, false, true);
         }
 
