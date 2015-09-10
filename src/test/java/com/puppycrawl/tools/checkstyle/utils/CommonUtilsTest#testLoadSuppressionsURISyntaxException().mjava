@@ -1,19 +1,20 @@
     @Test
+    @PrepareForTest({ CommonUtils.class, CommonUtilsTest.class })
     @SuppressWarnings("unchecked")
     public void testLoadSuppressionsURISyntaxException() throws Exception {
         URL configUrl = mock(URL.class);
 
         when(configUrl.toURI()).thenThrow(URISyntaxException.class);
-        mockStatic(SuppressionsLoader.class, Mockito.CALLS_REAL_METHODS);
+        mockStatic(CommonUtils.class, Mockito.CALLS_REAL_METHODS);
         String fileName = "suppressions_none.xml";
-        when(SuppressionsLoader.class.getResource(fileName)).thenReturn(configUrl);
+        when(CommonUtils.class.getResource(fileName)).thenReturn(configUrl);
 
         try {
-            SuppressionsLoader.loadSuppressions(fileName);
+            CommonUtils.getUriByFilename(fileName);
             fail("Exception is expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getCause() instanceof  URISyntaxException);
+            assertTrue(ex.getCause() instanceof URISyntaxException);
             assertEquals("Unable to find: " + fileName, ex.getMessage());
         }
     }

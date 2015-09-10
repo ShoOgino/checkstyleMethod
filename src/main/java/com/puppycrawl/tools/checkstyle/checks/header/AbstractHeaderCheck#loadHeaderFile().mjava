@@ -6,7 +6,7 @@
         checkHeaderNotInitialized();
         Reader headerReader = null;
         try {
-            final URI uri = resolveHeaderFile();
+            final URI uri = CommonUtils.getUriByFilename(filename);
             headerReader = new InputStreamReader(new BufferedInputStream(
                     uri.toURL().openStream()), charset);
             loadHeader(headerReader);

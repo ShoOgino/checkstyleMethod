@@ -1,19 +1,20 @@
     /**
-     * Resolve the specified filename param to a URI.
+     * Resolve the specified filename to a URI.
+     * @param filename name os the file
      * @return resolved header file URI
-     * @throws IOException on failure
+     * @throws CheckstyleException on failure
      */
-    private URI resolveHeaderFile() throws IOException {
+    public static URI getUriByFilename(String filename) throws CheckstyleException {
         // figure out if this is a File or a URL
         URI uri;
         try {
             final URL url = new URL(filename);
             uri = url.toURI();
         }
-        catch (final MalformedURLException | URISyntaxException ignored) {
-            // URL violating RFC 2396
+        catch (final URISyntaxException | MalformedURLException ignored) {
             uri = null;
         }
+
         if (uri == null) {
             final File file = new File(filename);
             if (file.exists()) {
@@ -22,18 +23,19 @@
             else {
                 // check to see if the file is in the classpath
                 try {
-                    final URL configUrl = AbstractHeaderCheck.class
+                    final URL configUrl = CommonUtils.class
                             .getResource(filename);
                     if (configUrl == null) {
-                        throw new FileNotFoundException(filename);
+                        throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + filename);
                     }
                     uri = configUrl.toURI();
                 }
-                catch (final URISyntaxException ignored) {
-                    throw new FileNotFoundException(filename);
+                catch (final URISyntaxException e) {
+                    throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + filename, e);
                 }
             }
         }
+
         return uri;
     }
 
