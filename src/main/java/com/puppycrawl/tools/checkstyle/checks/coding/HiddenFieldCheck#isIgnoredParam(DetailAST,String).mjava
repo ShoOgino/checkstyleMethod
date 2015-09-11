@@ -1,0 +1,12 @@
+    /**
+     * Checks whether method or constructor parameter is ignored.
+     * @param ast the parameter token.
+     * @param name the parameter name.
+     * @return true if parameter is ignored.
+     */
+    private boolean isIgnoredParam(DetailAST ast, String name) {
+        return isIgnoredSetterParam(ast, name)
+            || isIgnoredConstructorParam(ast)
+            || isIgnoredParamOfAbstractMethod(ast);
+    }
+

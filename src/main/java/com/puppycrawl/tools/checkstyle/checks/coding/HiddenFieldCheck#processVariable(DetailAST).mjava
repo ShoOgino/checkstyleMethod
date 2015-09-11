@@ -12,11 +12,10 @@
             final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             final String name = nameAST.getText();
 
-            if (isStaticOrInstanceField(ast, name)
-                && !isMatchingRegexp(name)
-                && !isIgnoredSetterParam(ast, name)
-                && !isIgnoredConstructorParam(ast)
-                && !isIgnoredParamOfAbstractMethod(ast)) {
+            if ((isStaticFieldHiddenFromAnonymousClass(ast, name)
+                        || isStaticOrInstanceField(ast, name))
+                    && !isMatchingRegexp(name)
+                    && !isIgnoredParam(ast, name)) {
                 log(nameAST, MSG_KEY, name);
             }
         }

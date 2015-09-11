@@ -12,7 +12,9 @@
             if (parent.getType() == TokenTypes.STATIC_INIT) {
                 inStatic = true;
             }
-            else if (parent.getType() == TokenTypes.METHOD_DEF) {
+            else if (parent.getType() == TokenTypes.METHOD_DEF
+                        && !ScopeUtils.isInScope(parent, Scope.ANONINNER)
+                        || parent.getType() == TokenTypes.VARIABLE_DEF) {
                 final DetailAST mods =
                     parent.findFirstToken(TokenTypes.MODIFIERS);
                 inStatic = mods.branchContains(TokenTypes.LITERAL_STATIC);
