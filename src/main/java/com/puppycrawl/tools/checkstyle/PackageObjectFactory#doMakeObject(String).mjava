@@ -28,7 +28,10 @@
                 LOG.debug(IGNORING_EXCEPTION_MESSAGE, ex);
             }
         }
-
-        throw new CheckstyleException(UNABLE_TO_INSTANTIATE_EXCEPTION_MESSAGE + name);
+        final LocalizedMessage exceptionMessage = new LocalizedMessage(0,
+            Definitions.CHECKSTYLE_BUNDLE, UNABLE_TO_INSTANTIATE_EXCEPTION_MESSAGE,
+            new String[] {name, joinPackageNamesWithClassName(name)},
+            null, getClass(), null);
+        throw new CheckstyleException(exceptionMessage.getMessage());
     }
 
