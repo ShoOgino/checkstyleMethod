@@ -2,8 +2,9 @@
      * Register a check for a specified token name.
      * @param token the name of the token
      * @param check the check to register
+     * @throws CheckstyleException if Check is misconfigured
      */
-    private void registerCheck(String token, Check check) {
+    private void registerCheck(String token, Check check) throws CheckstyleException {
         if (check.isCommentNodesRequired()) {
             tokenToCommentChecks.put(token, check);
         }
@@ -11,7 +12,7 @@
             final String message = String.format("Check '%s' waits for comment type "
                     + "token ('%s') and should override 'isCommentNodesRequired()' "
                     + "method to return 'true'", check.getClass().getName(), token);
-            LOG.warn(message);
+            throw new CheckstyleException(message);
         }
         else {
             tokenToOrdinaryChecks.put(token, check);
