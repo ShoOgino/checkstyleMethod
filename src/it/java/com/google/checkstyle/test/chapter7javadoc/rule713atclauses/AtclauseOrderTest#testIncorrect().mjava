@@ -1,0 +1,39 @@
+    @Test
+    public void testIncorrect() throws Exception {
+        final String tagOrder = "[@param, @return, @throws, @deprecated]";
+        String msg = getCheckMessage(AtclauseOrderCheck.class, "at.clause.order", tagOrder);
+
+        final String[] expected = {
+            "40: " + msg,
+            "51: " + msg,
+            "62: " + msg,
+            "69: " + msg,
+            "86: " + msg,
+            "87: " + msg,
+            "101: " + msg,
+            "123: " + msg,
+            "134: " + msg,
+            "135: " + msg,
+            "153: " + msg,
+            "172: " + msg,
+            "183: " + msg,
+            "185: " + msg,
+            "199: " + msg,
+            "202: " + msg,
+            "213: " + msg,
+            "223: " + msg,
+            "230: " + msg,
+            "237: " + msg,
+            "247: " + msg,
+            "248: " + msg,
+            "259: " + msg,
+            "261: " + msg,
+        };
+
+        Configuration checkConfig = builder.getCheckConfig("AtclauseOrder");
+        String filePath = builder.getFilePath("InputIncorrectAtClauseOrderCheck");
+        
+        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
