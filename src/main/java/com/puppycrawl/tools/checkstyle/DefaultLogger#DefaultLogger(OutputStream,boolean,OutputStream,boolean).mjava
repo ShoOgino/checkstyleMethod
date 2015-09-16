@@ -5,16 +5,16 @@
      * @param closeInfoAfterUse auditFinished should close infoStream
      * @param errorStream the {@code OutputStream} for error messages
      * @param closeErrorAfterUse auditFinished should close errorStream
-     * @exception UnsupportedEncodingException if there is a problem to use UTF-8 encoding
      */
     public DefaultLogger(OutputStream infoStream,
                          boolean closeInfoAfterUse,
                          OutputStream errorStream,
-                         boolean closeErrorAfterUse) throws UnsupportedEncodingException {
+                         boolean closeErrorAfterUse) {
         closeInfo = closeInfoAfterUse;
         closeError = closeErrorAfterUse;
-        final Writer infoStreamWriter = new OutputStreamWriter(infoStream, UTF8_CHARSET_NAME);
-        final Writer errorStreamWriter = new OutputStreamWriter(errorStream, UTF8_CHARSET_NAME);
+        final Writer infoStreamWriter = new OutputStreamWriter(infoStream, StandardCharsets.UTF_8);
+        final Writer errorStreamWriter = new OutputStreamWriter(errorStream,
+            StandardCharsets.UTF_8);
         infoWriter = new PrintWriter(infoStreamWriter);
 
         if (infoStream == errorStream) {
