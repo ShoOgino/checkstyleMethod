@@ -1,0 +1,25 @@
+    @Test
+    public void testEmptyJavadoc() throws Exception {
+        ListBuffer<String[]> options = new ListBuffer<>();
+        options.add(new String[]{"-doclet", "file.java"});
+        options.add(new String[]{"-destfile", "target/file.java"});
+
+        ListBuffer<String> names = new ListBuffer<>();
+        names.add("com.puppycrawl.tools.checkstyle.doclets.InputTokenTypesDocletEmptyJavadoc");
+
+        Context context = new Context();
+        Messager.preRegister(context, "");
+        JavadocTool javadocTool = JavadocTool.make0(context);
+        RootDoc rootDoc = getRootDoc(javadocTool, options, names);
+
+        try {
+            TokenTypesDoclet.start(rootDoc);
+            fail();
+        }
+        catch (IllegalArgumentException expected) {
+            // Token types must have first sentence of Javadoc summary
+            // so that a brief description could be provided. Otherwise,
+            // an IllegalArgumentException is thrown.
+        }
+    }
+

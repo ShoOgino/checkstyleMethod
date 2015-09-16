@@ -1,0 +1,28 @@
+    private static RootDoc getRootDoc(JavadocTool javadocTool, ListBuffer<String[]> options,
+            ListBuffer<String> names) throws Exception {
+        Method getRootDocImpl = getMethodGetRootDocImplByReflection();
+        RootDoc rootDoc;
+        if (System.getProperty("java.version").startsWith("1.7.")) {
+            rootDoc = (RootDoc) getRootDocImpl.invoke(javadocTool, "", "UTF-8",
+                    new ModifierFilter(ModifierFilter.ALL_ACCESS),
+                    names.toList(),
+                    options.toList(),
+                    false,
+                    new ListBuffer<String>().toList(),
+                    new ListBuffer<String>().toList(),
+                    true, false, false);
+        }
+        else {
+            rootDoc = (RootDoc) getRootDocImpl.invoke(javadocTool, "", "UTF-8",
+                    new ModifierFilter(ModifierFilter.ALL_ACCESS),
+                    names.toList(),
+                    options.toList(),
+                    new ListBuffer<JavaFileObject>().toList(),
+                    false,
+                    new ListBuffer<String>().toList(),
+                    new ListBuffer<String>().toList(),
+                    true, false, false);
+        }
+        return rootDoc;
+    }
+
