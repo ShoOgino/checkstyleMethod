@@ -1,16 +1,11 @@
     @Test
-    public void testNotConstants() throws Exception {
-        // Token types must be public int constants, which means that they must have
-        // modifiers public, static, final and type int, because they are referenced statically in
-        // a lot of different places, must not be changed and an int value is used to encrypt
-        // a token type.
+    public void testCorrect() throws Exception {
         ListBuffer<String[]> options = new ListBuffer<>();
-        options.add(new String[]{"-doclet", "TokenTypesDoclet"});
         options.add(new String[]{"-destfile", "target/tokentypes.properties"});
 
         ListBuffer<String> names = new ListBuffer<>();
         names.add("src/test/resources/com/puppycrawl/tools/"
-                + "checkstyle/doclets/InputTokenTypesDocletNotConstants.java");
+                + "checkstyle/doclets/InputTokenTypesDocletCorrect.java");
 
         Context context = new Context();
         new TestMessager(context);
