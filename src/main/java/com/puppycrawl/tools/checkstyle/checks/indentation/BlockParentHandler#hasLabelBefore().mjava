@@ -3,8 +3,8 @@
      * @return true if the top level token has label before.
      */
     protected boolean hasLabelBefore() {
-        final DetailAST parent = getToplevelAST().getParent();
+        final DetailAST parent = getTopLevelAst().getParent();
         return parent.getType() == TokenTypes.LABELED_STAT
-            && parent.getLineNo() == getToplevelAST().getLineNo();
+            && parent.getLineNo() == getTopLevelAst().getLineNo();
     }
 

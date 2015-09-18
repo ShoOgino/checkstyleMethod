@@ -1,17 +1,17 @@
     @Override
     public void checkIndentation() {
-        checkToplevelToken();
+        checkTopLevelToken();
         // separate to allow for eventual configuration
         checkLParen(getLParen());
         checkRParen(getLParen(), getRParen());
-        if (hasCurlys()) {
+        if (hasCurlies()) {
             checkLCurly();
             checkRCurly();
         }
         final DetailAST listChild = getListChild();
         if (listChild != null) {
-            // NOTE: switch statements usually don't have curlys
-            if (!hasCurlys() || !areOnSameLine(getLCurly(), getRCurly())) {
+            // NOTE: switch statements usually don't have curlies
+            if (!hasCurlies() || !areOnSameLine(getLCurly(), getRCurly())) {
                 checkChildren(listChild,
                               getCheckedChildren(),
                               getChildrenExpectedLevel(),
@@ -20,7 +20,7 @@
             }
         }
         else {
-            checkNonlistChild();
+            checkNonListChild();
         }
     }
 
