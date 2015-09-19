@@ -5,8 +5,13 @@
         exit.checkAssertionAfterwards(new Assertion() {
             @Override
             public void checkAssertion() {
-                assertEquals(String.format("unable to parse configuration stream - Content is not allowed in prolog.:7:1%n"
-                        + "Checkstyle ends with 1 errors.%n"), systemOut.getLog());
+                assertTrue(systemOut.getLog().startsWith(String.format(
+                      "unable to parse configuration stream - Content is not allowed in prolog.:7:1%n"
+                      + "Cause: org.xml.sax.SAXParseException; systemId: file:")));
+                assertTrue(systemOut.getLog().endsWith(String.format(
+                      "com/puppycrawl/tools/checkstyle/config-Incorrect.xml; lineNumber: 7; columnNumber: 1; "
+                      + "Content is not allowed in prolog.%n"
+                      + "Checkstyle ends with 1 errors.%n")));
                 assertEquals("", systemErr.getLog());
             }
         });
