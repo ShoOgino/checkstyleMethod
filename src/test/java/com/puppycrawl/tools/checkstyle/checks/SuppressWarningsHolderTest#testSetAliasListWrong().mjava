@@ -1,0 +1,14 @@
+    @Test
+    public void testSetAliasListWrong() {
+        SuppressWarningsHolder holder = new SuppressWarningsHolder();
+
+        try {
+            holder.setAliasList("SomeAlias");
+            fail("Exception expected");
+        }
+        catch (ConversionException ex) {
+            assertEquals("'=' expected in alias list item: SomeAlias", ex.getMessage());
+        }
+
+    }
+

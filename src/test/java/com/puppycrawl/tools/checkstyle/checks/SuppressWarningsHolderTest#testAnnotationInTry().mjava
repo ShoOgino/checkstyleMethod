@@ -1,0 +1,11 @@
+    @Test
+    public void testAnnotationInTry() throws Exception {
+        Configuration checkConfig = createCheckConfig(SuppressWarningsHolder.class);
+
+        final String[] expected = {
+            "11: " + getCheckMessage("suppress.warnings.invalid.target"),
+        };
+
+        verify(checkConfig, getPath("InputSuppressWarningsHolder2.java"), expected);
+    }
+
