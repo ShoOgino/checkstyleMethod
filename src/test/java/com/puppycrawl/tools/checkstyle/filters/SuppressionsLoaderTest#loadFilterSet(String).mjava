@@ -1,0 +1,28 @@
+    private static FilterSet loadFilterSet(String url) throws Exception {
+        FilterSet filterSet = null;
+
+        if (isUrlReachable(url)) {
+            int attemptCount = 0;
+            final int attemptLimit = 5;
+
+            while (attemptCount <= attemptLimit) {
+                try {
+                    filterSet = SuppressionsLoader.loadSuppressions(url);
+                    break;
+                }
+                catch (CheckstyleException ex) {
+                    // for some reason Travis CI failed some times(unstable) on reading this file
+                    if (attemptCount < attemptLimit && ex.getMessage().contains("Unable to read")) {
+                        attemptCount++;
+                        // wait for bad/disconnection time to pass
+                        Thread.sleep(1000);
+                    }
+                    else {
+                        throw ex;
+                    }
+                }
+            }
+        }
+        return filterSet;
+    }
+
