@@ -1,15 +1,17 @@
     @Test
-    public void testUnknown() throws Exception {
+    public void testUrlUnableToLoad() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
-        checkConfig.addAttribute("file", "unknown-file");
+        checkConfig.addAttribute("url", "https://UnableToLoadThisURL");
         final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+
         try {
             verify(checkConfig, getPath("imports" + File.separator
                     + "InputImportControl.java"), expected);
             fail("Test should fail if exception was not thrown");
         }
-        catch (CheckstyleException ex) {
-            final String message = ((InvocationTargetException) ex.getCause().getCause()).getTargetException().getMessage();
+        catch (final CheckstyleException ex) {
+            final String message = ((InvocationTargetException) ex.getCause().getCause())
+                    .getTargetException().getMessage();
             assertTrue(message.startsWith("Unable to load "));
         }
     }

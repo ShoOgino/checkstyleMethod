@@ -7,10 +7,11 @@
         try {
             verify(checkConfig, getPath("imports" + File.separator
                     + "InputImportControl.java"), expected);
-            fail("should fail");
+            fail("Test should fail if exception was not thrown");
         }
         catch (CheckstyleException ex) {
-            //do nothing
+            final String message = ((InvocationTargetException) ex.getCause().getCause()).getTargetException().getMessage();
+            assertTrue(message.startsWith("Unable to load "));
         }
     }
 
