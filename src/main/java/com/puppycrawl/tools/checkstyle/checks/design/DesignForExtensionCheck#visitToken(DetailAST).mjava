@@ -19,7 +19,7 @@
                     && !classMods.branchContains(TokenTypes.FINAL);
 
             if (nonEmptyImplementation && classCanBeSubclassed
-                    && hasDefaultOrExplNonPrivateCtor(classDef)) {
+                    && hasDefaultOrExplicitNonPrivateCtor(classDef)) {
 
                 final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
                 log(ast.getLineNo(), ast.getColumnNo(), MSG_KEY, name);

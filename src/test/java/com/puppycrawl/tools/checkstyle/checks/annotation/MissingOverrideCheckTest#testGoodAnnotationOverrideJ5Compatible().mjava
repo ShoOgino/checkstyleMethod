@@ -1,14 +1,13 @@
     /**
-     * This tests classes that are extending things explicitly will NOT be flagged while in
+     * This tests anonymous inner classes that are overriding methods are NOT flagged while in
      * Java 5 compatibility mode.
      */
     @Test
-    public void testGoodOverrideFromOtherJ5Compat() throws Exception {
+    public void testGoodAnnotationOverrideJ5Compatible() throws Exception {
         DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
         checkConfig.addAttribute("javaFiveCompatibility", "true");
-
         final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
-        verify(checkConfig, getPath("annotation" + File.separator + "GoodOverrideFromOther.java"), expected);
+        verify(checkConfig, getPath("annotation" + File.separator + "GoodAnnotationOverride.java"), expected);
     }
 

@@ -3,11 +3,11 @@
      * Java 5 compatibility mode.
      */
     @Test
-    public void testGoodAnnotationOverrideJ5Compat() throws Exception {
+    public void testBadAnnotationOverrideJ5Compatible() throws Exception {
         DefaultConfiguration checkConfig = createCheckConfig(MissingOverrideCheck.class);
         checkConfig.addAttribute("javaFiveCompatibility", "true");
         final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
-        verify(checkConfig, getPath("annotation" + File.separator + "GoodAnnotationOverride.java"), expected);
+        verify(checkConfig, getPath("annotation" + File.separator + "BadAnnotationOverride.java"), expected);
     }
 
