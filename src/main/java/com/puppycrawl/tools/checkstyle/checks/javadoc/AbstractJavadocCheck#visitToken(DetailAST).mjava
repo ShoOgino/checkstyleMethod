@@ -8,12 +8,12 @@
 
             ParseStatus ps;
 
-            if (TREE_CACHE.containsKey(treeCacheKey)) {
-                ps = TREE_CACHE.get(treeCacheKey);
+            if (TREE_CACHE.get().containsKey(treeCacheKey)) {
+                ps = TREE_CACHE.get().get(treeCacheKey);
             }
             else {
                 ps = parseJavadocAsDetailNode(blockCommentNode);
-                TREE_CACHE.put(treeCacheKey, ps);
+                TREE_CACHE.get().put(treeCacheKey, ps);
             }
 
             if (ps.getParseErrorMessage() == null) {
