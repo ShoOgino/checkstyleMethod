@@ -1,0 +1,18 @@
+    /**
+     * Checks whether file is missing in resource bundle.
+     * @param fileName file name.
+     * @param filesInResourceBundle a set of files in resource bundle.
+     * @return true if file is missing.
+     */
+    private static boolean isMissing(String fileName, Set<File> filesInResourceBundle) {
+        boolean missing = false;
+        for (File file : filesInResourceBundle) {
+            final String currentFileName = file.getPath();
+            missing =  !currentFileName.equals(fileName);
+            if (!missing) {
+                break;
+            }
+        }
+        return missing;
+    }
+

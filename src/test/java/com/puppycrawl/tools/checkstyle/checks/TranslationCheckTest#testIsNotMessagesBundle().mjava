@@ -1,0 +1,18 @@
+    @Test
+    public void testIsNotMessagesBundle() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(TranslationCheck.class);
+        checkConfig.addAttribute("requiredTranslations", "de");
+
+        final File[] propertyFiles = {
+            new File(getPath("app-dev.properties")),
+            new File(getPath("app-stage.properties")),
+        };
+
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+        verify(
+            createChecker(checkConfig),
+            propertyFiles,
+            getPath("app-dev.properties"),
+            expected);
+    }
+

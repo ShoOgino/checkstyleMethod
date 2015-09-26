@@ -5,15 +5,13 @@
      * @param fileMap a Map from property files to their key sets
      */
     private void compareKeySets(Set<Object> keys,
-            Map<File, Set<Object>> fileMap) {
-        final Set<Entry<File, Set<Object>>> fls = fileMap.entrySet();
+            SetMultimap<File, Object> fileMap) {
 
-        for (Entry<File, Set<Object>> entry : fls) {
-            final File currentFile = entry.getKey();
+        for (File currentFile : fileMap.keySet()) {
             final MessageDispatcher dispatcher = getMessageDispatcher();
             final String path = currentFile.getPath();
             dispatcher.fireFileStarted(path);
-            final Set<Object> currentKeys = entry.getValue();
+            final Set<Object> currentKeys = fileMap.get(currentFile);
 
             // Clone the keys so that they are not lost
             final Set<Object> keysClone = Sets.newHashSet(keys);

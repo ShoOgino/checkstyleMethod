@@ -6,19 +6,15 @@
      * @param basenameSeparator the basename separator
      * @return a Map object which holds the arranged property file sets
      */
-    private static Map<String, Set<File>> arrangePropertyFiles(
+    private static SetMultimap<String, File> arrangePropertyFiles(
         List<File> propFiles, String basenameSeparator) {
-        final Map<String, Set<File>> propFileMap = Maps.newHashMap();
+        final SetMultimap<String, File> propFileMap = HashMultimap.create();
 
         for (final File file : propFiles) {
             final String identifier = extractPropertyIdentifier(file,
                 basenameSeparator);
 
-            Set<File> fileSet = propFileMap.get(identifier);
-            if (fileSet == null) {
-                fileSet = Sets.newHashSet();
-                propFileMap.put(identifier, fileSet);
-            }
+            final Set<File> fileSet = propFileMap.get(identifier);
             fileSet.add(file);
         }
         return propFileMap;

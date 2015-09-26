@@ -1,0 +1,28 @@
+    /**
+     * Gets full name of resource bundle.
+     * Full name of resource bundle consists of bundle path and
+     * full base name.
+     * @param filesInResourceBundle a set of files in resource bundle.
+     * @return full name of resource bundle.
+     */
+    private String getFullBundleName(Set<File> filesInResourceBundle) {
+        final String fullBundleName;
+
+        final File translationFile = filesInResourceBundle.iterator().next();
+        final String translationPath = translationFile.getPath();
+        final String extension = getFileExtensions()[0];
+
+        final Pattern pattern = Pattern.compile("^.+_[a-z]{2}"
+            + extension + "$");
+        final Matcher matcher = pattern.matcher(translationPath);
+        if (matcher.matches()) {
+            fullBundleName = translationPath
+                .substring(0, translationPath.lastIndexOf('_'));
+        }
+        else {
+            fullBundleName = translationPath
+                .substring(0, translationPath.lastIndexOf('.'));
+        }
+        return fullBundleName;
+    }
+
