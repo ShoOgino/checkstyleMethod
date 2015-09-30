@@ -6,10 +6,8 @@
      */
     private static DetailAST getNthChild(DetailAST ast, int index) {
         DetailAST child = ast.getFirstChild();
-        if (child != null) {
-            for (int i = 0; i < index && child != null; ++i) {
-                child = child.getNextSibling();
-            }
+        for (int i = 0; i < index && child != null; ++i) {
+            child = child.getNextSibling();
         }
         return child;
     }

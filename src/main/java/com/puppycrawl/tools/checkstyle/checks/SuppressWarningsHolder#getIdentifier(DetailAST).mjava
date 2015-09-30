@@ -9,11 +9,11 @@
             if (ast.getType() == TokenTypes.IDENT) {
                 return ast.getText();
             }
-            else if (ast.getType() == TokenTypes.DOT) {
+            else {
                 return getIdentifier(ast.getFirstChild()) + "."
-                    + getIdentifier(ast.getLastChild());
+                        + getIdentifier(ast.getLastChild());
             }
         }
-        throw new IllegalArgumentException("Identifier AST expected: " + ast);
+        throw new IllegalArgumentException("Identifier AST expected, but get null.");
     }
 

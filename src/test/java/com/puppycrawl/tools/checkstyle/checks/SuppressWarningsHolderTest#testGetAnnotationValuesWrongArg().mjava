@@ -1,0 +1,24 @@
+    @Test
+    public void testGetAnnotationValuesWrongArg() throws ReflectiveOperationException {
+        SuppressWarningsHolder holder = new SuppressWarningsHolder();
+        Method getAllAnnotationValues = holder.getClass()
+                .getDeclaredMethod("getAnnotationValues", DetailAST.class);
+        getAllAnnotationValues.setAccessible(true);
+
+        DetailAST methodDef = new DetailAST();
+        methodDef.setType(TokenTypes.METHOD_DEF);
+        methodDef.setText("Method Def");
+        methodDef.setLineNo(0);
+        methodDef.setColumnNo(0);
+
+        try {
+            getAllAnnotationValues.invoke(holder, methodDef);
+            fail("Exception expected");
+        }
+        catch (InvocationTargetException ex) {
+            assertTrue(ex.getCause() instanceof IllegalArgumentException);
+            assertEquals("Expression or annotation array"
+                    + " initializer AST expected: Method Def[0x0]", ex.getCause().getMessage());
+        }
+    }
+

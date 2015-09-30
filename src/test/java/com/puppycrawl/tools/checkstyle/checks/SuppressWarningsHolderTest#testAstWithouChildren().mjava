@@ -1,0 +1,16 @@
+    @Test
+    public void testAstWithouChildren() {
+        SuppressWarningsHolder holder = new SuppressWarningsHolder();
+        DetailAST methodDef = new DetailAST();
+        methodDef.setType(TokenTypes.METHOD_DEF);
+
+        try {
+            holder.visitToken(methodDef);
+            fail("Exception expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("Identifier AST expected, but get null.", ex.getMessage());
+        }
+
+    }
+

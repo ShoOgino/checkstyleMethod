@@ -9,27 +9,26 @@
         final DetailAST lparenAST = ast.findFirstToken(TokenTypes.LPAREN);
         if (lparenAST != null) {
             final DetailAST nextAST = lparenAST.getNextSibling();
-            if (nextAST != null) {
-                final int nextType = nextAST.getType();
-                switch (nextType) {
-                    case TokenTypes.EXPR:
-                    case TokenTypes.ANNOTATION_ARRAY_INIT:
-                        values = getAnnotationValues(nextAST);
-                        break;
+            final int nextType = nextAST.getType();
+            switch (nextType) {
+                case TokenTypes.EXPR:
+                case TokenTypes.ANNOTATION_ARRAY_INIT:
+                    values = getAnnotationValues(nextAST);
+                    break;
 
-                    case TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR:
-                        // expected children: IDENT ASSIGN ( EXPR |
-                        // ANNOTATION_ARRAY_INIT )
-                        values = getAnnotationValues(getNthChild(nextAST, 2));
-                        break;
+                case TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR:
+                    // expected children: IDENT ASSIGN ( EXPR |
+                    // ANNOTATION_ARRAY_INIT )
+                    values = getAnnotationValues(getNthChild(nextAST, 2));
+                    break;
 
-                    case TokenTypes.RPAREN:
-                        // no value present (not valid Java)
-                        break;
+                case TokenTypes.RPAREN:
+                    // no value present (not valid Java)
+                    break;
 
-                    default:
-                        // unknown annotation value type (new syntax?)
-                }
+                default:
+                    // unknown annotation value type (new syntax?)
+                    throw new IllegalArgumentException("Unexpected AST: " + nextAST);
             }
         }
         return values;

@@ -31,11 +31,12 @@
                         targetAST = parentAST;
                         break;
                     default:
-                        // unexpected target type
+                        // it's possible case, but shouldn't be processed here
                 }
                 break;
             default:
                 // unexpected container type
+                throw new IllegalArgumentException("Unexpected container AST: " + parentAST);
         }
         return targetAST;
     }
