@@ -1,15 +1,15 @@
     private static List<RevCommit> getCommitsToCheck() throws Exception {
-        Repository repo = new FileRepositoryBuilder().findGitDir().build();
-
-        RevCommitsPair revCommitsPair = resolveRevCommitsPair(repo);
         List<RevCommit> commits;
-        if (COMMITS_RESOLUTION_MODE == CommitsResolutionMode.BY_COUNTER) {
-            commits = getCommitsByCounter(revCommitsPair.getFirst());
-            commits.addAll(getCommitsByCounter(revCommitsPair.getSecond()));
-        }
-        else {
-            commits = getCommitsByLastCommitAuthor(revCommitsPair.getFirst());
-            commits.addAll(getCommitsByLastCommitAuthor(revCommitsPair.getSecond()));
+        try (Repository repo = new FileRepositoryBuilder().findGitDir().build()) {
+            RevCommitsPair revCommitsPair = resolveRevCommitsPair(repo);
+            if (COMMITS_RESOLUTION_MODE == CommitsResolutionMode.BY_COUNTER) {
+                commits = getCommitsByCounter(revCommitsPair.getFirst());
+                commits.addAll(getCommitsByCounter(revCommitsPair.getSecond()));
+            }
+            else {
+                commits = getCommitsByLastCommitAuthor(revCommitsPair.getFirst());
+                commits.addAll(getCommitsByLastCommitAuthor(revCommitsPair.getSecond()));
+            }
         }
         return commits;
     }
