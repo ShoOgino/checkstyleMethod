@@ -9,7 +9,7 @@
             fail("Test should fail if exception was not thrown");
         }
         catch (CheckstyleException ex) {
-            final String message = ((InvocationTargetException) ex.getCause().getCause()).getTargetException().getMessage();
+            final String message = getInvocationTargetExceptionMessage(ex);
             assertTrue(message.startsWith("Unable to load "));
         }
     }
