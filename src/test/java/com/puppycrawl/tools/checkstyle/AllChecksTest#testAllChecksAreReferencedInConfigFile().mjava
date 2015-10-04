@@ -3,7 +3,7 @@
         final String configFilePath = "config/checkstyle_checks.xml";
         final Set<Class<?>> checksFromClassPath = getCheckstyleChecks();
         final Set<String> checksReferencedInConfig = getCheckStyleChecksReferencedInConfig(configFilePath);
-        final Set<String> checksNames = getChecksNames(checksFromClassPath);
+        final Set<String> checksNames = getSimpleNames(checksFromClassPath);
 
         for (String check : checksNames) {
             if (!checksReferencedInConfig.contains(check)) {

@@ -1,0 +1,49 @@
+    /**
+     * Gets names of checkstyle's modules which are documented in xdocs.
+     * @param xdocsDirectoryPath xdocs directory path.
+     * @return a set of checkstyle's modules which have xdoc documentation.
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created which satisfies the configuration requested.
+     * @throws IOException if any IO errors occur.
+     * @throws SAXException if any parse errors occur.
+     */
+    private static Set<String> getModulesNamesWhichHaveXdoc(String xdocsDirectoryPath)
+        throws ParserConfigurationException, IOException, SAXException {
+
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+        // Validations of XML file make parsing too slow, that is why we disable all validations.
+        factory.setNamespaceAware(false);
+        factory.setValidating(false);
+        factory.setFeature("http://xml.org/sax/features/namespaces", false);
+        factory.setFeature("http://xml.org/sax/features/validation", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
+        final Set<Path> xdocsFilePaths = getXdocsFilePaths(xdocsDirectoryPath);
+        final Set<String> modulesNamesWhichHaveXdoc = new HashSet<>();
+
+        for (Path path : xdocsFilePaths) {
+            final DocumentBuilder builder = factory.newDocumentBuilder();
+            final Document document = builder.parse(path.toFile());
+
+            // optional, but recommended
+            // FYI: http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+            document.getDocumentElement().normalize();
+
+            final NodeList nodeList = document.getElementsByTagName("section");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                final Node currentNode = nodeList.item(i);
+                if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+                    final Element module = (Element) currentNode;
+                    final String moduleName = module.getAttribute("name");
+                    if (!"Content".equals(moduleName)
+                            && !"Overview".equals(moduleName)) {
+                        modulesNamesWhichHaveXdoc.add(moduleName);
+                    }
+                }
+            }
+        }
+        return modulesNamesWhichHaveXdoc;
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Checks whether a class may be considered as the checkstyle check.
+     * Checkstyle's checks are nonabstract classes which names end with 'Check',
+     * do not contain the word 'Input' (are not input files for UTs).
+     * @param loadedClass class to check.
+     * @param className class name to check.
+     * @return true if a class may be considered as the checkstyle check.
+     */
+    private static boolean isCheckstyleNonAbstractCheck(Class<?> loadedClass, String className) {
+        return !Modifier.isAbstract(loadedClass.getModifiers())
+            && className.endsWith("Check")
+            && !className.contains("Input");
+    }
+

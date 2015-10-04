@@ -4,7 +4,7 @@
      * @throws IOException if the attempt to read class path resources failed.
      */
     private static Set<Class<?>> getCheckstyleChecks() throws IOException {
-        Set<Class<?>> checkstyleChecks = new HashSet<>();
+        final Set<Class<?>> checkstyleChecks = new HashSet<>();
 
         final ClassLoader loader = Thread.currentThread().getContextClassLoader();
         final ClassPath classpath = ClassPath.from(loader);
@@ -15,10 +15,7 @@
         for (ClassPath.ClassInfo clazz : checkstyleClasses) {
             final String className = clazz.getSimpleName();
             final Class<?> loadedClass = clazz.load();
-            if (!Modifier.isAbstract(loadedClass.getModifiers())
-                && !className.contains("Input")
-                && className.endsWith("Check")) {
-
+            if (isCheckstyleNonAbstractCheck(loadedClass, className)) {
                 checkstyleChecks.add(loadedClass);
             }
         }

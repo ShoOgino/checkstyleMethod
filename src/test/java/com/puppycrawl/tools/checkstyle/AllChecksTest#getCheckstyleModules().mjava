@@ -1,0 +1,26 @@
+    /**
+     * Gets the checkstyle's modules.
+     * Checkstyle's modules are nonabstract classes from com.puppycrawl.tools.checkstyle package
+     * which names end with 'Check', do not contain the word 'Input' (are not input files for UTs),
+     * checkstyle's filters and SuppressWarningsHolder class.
+     * @return a set of checkstyle's modules names.
+     * @throws IOException if the attempt to read class path resources failed.
+     */
+    private static Set<Class<?>> getCheckstyleModules() throws IOException {
+        final Set<Class<?>> checkstyleModules = new HashSet<>();
+
+        final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        final ClassPath classpath = ClassPath.from(loader);
+        final String packageName = "com.puppycrawl.tools.checkstyle";
+        final ImmutableSet<ClassPath.ClassInfo> checkstyleClasses =
+            classpath.getTopLevelClassesRecursive(packageName);
+
+        for (ClassPath.ClassInfo clazz : checkstyleClasses) {
+            final Class<?> loadedClass = clazz.load();
+            if (isCheckstyleModule(loadedClass)) {
+                checkstyleModules.add(loadedClass);
+            }
+        }
+        return checkstyleModules;
+    }
+
