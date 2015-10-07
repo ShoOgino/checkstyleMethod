@@ -4,20 +4,20 @@
      * @return True if the drag was ok
      */
     private static boolean isDragOk(final DropTargetDragEvent evt) {
-        boolean ok = false;
+        boolean okStatus = false;
         final DataFlavor[] flavors = evt.getCurrentDataFlavors();
 
         // See if any of the flavors are a file list
-        int i = 0;
+        int index = 0;
 
         // Is the flavor a file list?
-        while (!ok && i < flavors.length) {
-            if (flavors[i].equals(DataFlavor.javaFileListFlavor)) {
-                ok = true;
+        while (!okStatus && index < flavors.length) {
+            if (flavors[index].equals(DataFlavor.javaFileListFlavor)) {
+                okStatus = true;
             }
-            i++;
+            index++;
         }
 
-        return ok;
+        return okStatus;
     }
 

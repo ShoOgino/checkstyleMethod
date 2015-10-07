@@ -1,12 +1,12 @@
         @Override
-        public void actionPerformed(ActionEvent e) {
-            final JFileChooser fc = new JFileChooser(lastDirectory);
+        public void actionPerformed(ActionEvent event) {
+            final JFileChooser chooser = new JFileChooser(lastDirectory);
             final FileFilter filter = new JavaFileFilter();
-            fc.setFileFilter(filter);
+            chooser.setFileFilter(filter);
             final Component parent =
                 SwingUtilities.getRoot(ParseTreeInfoPanel.this);
-            fc.showDialog(parent, "Open");
-            final File file = fc.getSelectedFile();
+            chooser.showDialog(parent, "Open");
+            final File file = chooser.getSelectedFile();
             openFile(file, parent);
 
         }

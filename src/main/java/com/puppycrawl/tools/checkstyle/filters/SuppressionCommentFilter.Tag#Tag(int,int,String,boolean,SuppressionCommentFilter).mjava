@@ -3,21 +3,22 @@
          * @param line the line number.
          * @param column the column number.
          * @param text the text of the suppression.
-         * @param on {@code true} if the tag turns checkstyle reporting.
+         * @param reportingOn {@code true} if the tag turns checkstyle reporting.
          * @param filter the {@code SuppressionCommentFilter} with the context
          * @throws ConversionException if unable to parse expanded text.
          */
-        public Tag(int line, int column, String text, boolean on, SuppressionCommentFilter filter) {
+        public Tag(int line, int column, String text, boolean reportingOn,
+                   SuppressionCommentFilter filter) {
             this.line = line;
             this.column = column;
             this.text = text;
-            this.on = on;
+            this.reportingOn = reportingOn;
 
             //Expand regexp for check and message
             //Does not intern Patterns with Utils.getPattern()
             String format = "";
             try {
-                if (on) {
+                if (reportingOn) {
                     format =
                         expandFromComment(text, filter.checkFormat, filter.onRegexp);
                     tagCheckRegexp = Pattern.compile(format);

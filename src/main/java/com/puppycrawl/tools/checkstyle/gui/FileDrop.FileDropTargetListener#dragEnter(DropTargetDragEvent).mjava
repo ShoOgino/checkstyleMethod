@@ -2,9 +2,9 @@
         public void dragEnter(DropTargetDragEvent evt) {
             if (isDragOk(evt)) {
                 if (component instanceof JComponent) {
-                    final JComponent jc = (JComponent) component;
-                    normalBorder = jc.getBorder();
-                    jc.setBorder(dragBorder);
+                    final JComponent comp = (JComponent) this.component;
+                    normalBorder = comp.getBorder();
+                    comp.setBorder(dragBorder);
                 }
                 evt.acceptDrag(DnDConstants.ACTION_COPY);
             }

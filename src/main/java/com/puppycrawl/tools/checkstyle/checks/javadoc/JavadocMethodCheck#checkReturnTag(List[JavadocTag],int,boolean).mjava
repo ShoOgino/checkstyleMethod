@@ -14,12 +14,12 @@
         boolean found = false;
         final ListIterator<JavadocTag> it = tags.listIterator();
         while (it.hasNext()) {
-            final JavadocTag jt = it.next();
-            if (jt.isReturnTag()) {
+            final JavadocTag javadocTag = it.next();
+            if (javadocTag.isReturnTag()) {
                 if (found) {
-                    log(jt.getLineNo(), jt.getColumnNo(),
-                        MSG_DUPLICATE_TAG,
-                        JavadocTagInfo.RETURN.getText());
+                    log(javadocTag.getLineNo(), javadocTag.getColumnNo(),
+                            MSG_DUPLICATE_TAG,
+                            JavadocTagInfo.RETURN.getText());
                 }
                 found = true;
                 it.remove();

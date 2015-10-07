@@ -1,15 +1,15 @@
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object other) {
+            if (this == other) {
                 return true;
             }
-            if (o == null || getClass() != o.getClass()) {
+            if (other == null || getClass() != other.getClass()) {
                 return false;
             }
-            final Tag tag = (Tag) o;
+            final Tag tag = (Tag) other;
             return Objects.equals(line, tag.line)
                     && Objects.equals(column, tag.column)
-                    && Objects.equals(on, tag.on)
+                    && Objects.equals(reportingOn, tag.reportingOn)
                     && Objects.equals(text, tag.text);
         }
 

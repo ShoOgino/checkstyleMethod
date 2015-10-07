@@ -13,10 +13,10 @@
             while (child != null) {
                 if (child.getType() == TokenTypes.IDENT
                         || child.getType() == TokenTypes.DOT) {
-                    final FullIdent fi = FullIdent.createFullIdent(child);
-                    final ExceptionInfo ei = new ExceptionInfo(createClassInfo(new Token(fi),
-                            getCurrentClassName()));
-                    retVal.add(ei);
+                    final FullIdent ident = FullIdent.createFullIdent(child);
+                    final ExceptionInfo exceptionInfo = new ExceptionInfo(
+                            createClassInfo(new Token(ident), getCurrentClassName()));
+                    retVal.add(exceptionInfo);
                 }
                 child = child.getNextSibling();
             }

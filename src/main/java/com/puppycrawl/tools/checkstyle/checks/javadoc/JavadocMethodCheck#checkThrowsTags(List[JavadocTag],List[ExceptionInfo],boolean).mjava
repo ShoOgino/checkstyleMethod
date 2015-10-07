@@ -49,10 +49,10 @@
         if (!allowMissingThrowsTags && reportExpectedTags) {
             for (ExceptionInfo ei : throwsList) {
                 if (!ei.isFound()) {
-                    final Token fi = ei.getName();
-                    log(fi.getLineNo(), fi.getColumnNo(),
+                    final Token token = ei.getName();
+                    log(token.getLineNo(), token.getColumnNo(),
                             MSG_EXPECTED_TAG,
-                        JavadocTagInfo.THROWS.getText(), fi.getText());
+                            JavadocTagInfo.THROWS.getText(), token.getText());
                 }
             }
         }

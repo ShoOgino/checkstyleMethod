@@ -8,7 +8,7 @@
      */
     private static List<JavadocTag> getMultilineNoArgTags(final Matcher noargMultilineStart,
             final String[] lines, final int lineIndex, final int tagLine) {
-        final String p1 = noargMultilineStart.group(1);
+        final String param1 = noargMultilineStart.group(1);
         final int col = noargMultilineStart.start(1) - 1;
         final List<JavadocTag> tags = new ArrayList<>();
         int remIndex = lineIndex + 1;
@@ -20,7 +20,7 @@
             final String lFin = multilineCont.group(1);
             if (!lFin.equals(NEXT_TAG)
                 && !lFin.equals(END_JAVADOC)) {
-                tags.add(new JavadocTag(tagLine, col, p1));
+                tags.add(new JavadocTag(tagLine, col, param1));
             }
             remIndex++;
         }
