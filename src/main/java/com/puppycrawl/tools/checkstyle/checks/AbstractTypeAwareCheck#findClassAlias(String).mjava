@@ -4,15 +4,15 @@
      * @return ClassInfo for alias if it exists, null otherwise
      */
     protected final AbstractClassInfo findClassAlias(final String name) {
-        AbstractClassInfo ci = null;
+        AbstractClassInfo classInfo = null;
         final Iterator<Map<String, AbstractClassInfo>> iterator = typeParams.descendingIterator();
         while (iterator.hasNext()) {
             final Map<String, AbstractClassInfo> paramMap = iterator.next();
-            ci = paramMap.get(name);
-            if (ci != null) {
+            classInfo = paramMap.get(name);
+            if (classInfo != null) {
                 break;
             }
         }
-        return ci;
+        return classInfo;
     }
 

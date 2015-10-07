@@ -11,16 +11,16 @@
             list.add(new File(fileName));
         }
         for (int i = 0; i < fileSets.size(); i++) {
-            final FileSet fs = fileSets.get(i);
-            final DirectoryScanner ds = fs.getDirectoryScanner(getProject());
-            ds.scan();
+            final FileSet fileSet = fileSets.get(i);
+            final DirectoryScanner scanner = fileSet.getDirectoryScanner(getProject());
+            scanner.scan();
 
-            final String[] names = ds.getIncludedFiles();
+            final String[] names = scanner.getIncludedFiles();
             log(i + ") Adding " + names.length + " files from directory "
-                    + ds.getBasedir(), Project.MSG_VERBOSE);
+                    + scanner.getBasedir(), Project.MSG_VERBOSE);
 
             for (String element : names) {
-                final String pathname = ds.getBasedir() + File.separator
+                final String pathname = scanner.getBasedir() + File.separator
                         + element;
                 list.add(new File(pathname));
             }

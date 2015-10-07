@@ -2,12 +2,12 @@
         @Override
         public Object convert(Class type, Object value) {
             // Convert to a String and trim it for the tokenizer.
-            final StringTokenizer st = new StringTokenizer(
+            final StringTokenizer tokenizer = new StringTokenizer(
                 value.toString().trim(), ",");
             final List<String> result = Lists.newArrayList();
 
-            while (st.hasMoreTokens()) {
-                final String token = st.nextToken();
+            while (tokenizer.hasMoreTokens()) {
+                final String token = tokenizer.nextToken();
                 result.add(token.trim());
             }
 

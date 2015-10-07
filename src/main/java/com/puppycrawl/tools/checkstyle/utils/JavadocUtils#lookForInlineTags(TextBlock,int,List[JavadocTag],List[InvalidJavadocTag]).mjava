@@ -7,10 +7,10 @@
      */
     private static void lookForInlineTags(TextBlock comment, int lineNumber,
             final List<JavadocTag> validTags, final List<InvalidJavadocTag> invalidTags) {
-        final String s = comment.getText()[lineNumber];
+        final String text = comment.getText()[lineNumber];
         // Match Javadoc text after comment characters
         final Pattern commentPattern = Pattern.compile("^\\s*(?:/\\*{2,}|\\*+)\\s*(.*)");
-        final Matcher commentMatcher = commentPattern.matcher(s);
+        final Matcher commentMatcher = commentPattern.matcher(text);
         final String commentContents;
 
         // offset including comment characters
@@ -22,7 +22,7 @@
         }
         else {
             // No leading asterisks, still valid
-            commentContents = s;
+            commentContents = text;
             commentOffset = 0;
         }
         final Pattern tagPattern = Pattern.compile(".*?\\{@(\\p{Alpha}+)\\s+(.*?)\\}");

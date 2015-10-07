@@ -29,10 +29,10 @@
             throw new BuildException("Unable to process files: " + files, e);
         }
         final int numWarnings = warningCounter.getCount();
-        final boolean ok = numErrs <= maxErrors && numWarnings <= maxWarnings;
+        final boolean okStatus = numErrs <= maxErrors && numWarnings <= maxWarnings;
 
         // Handle the return status
-        if (!ok) {
+        if (!okStatus) {
             final String failureMsg =
                     "Got " + numErrs + " errors and " + numWarnings
                             + " warnings.";

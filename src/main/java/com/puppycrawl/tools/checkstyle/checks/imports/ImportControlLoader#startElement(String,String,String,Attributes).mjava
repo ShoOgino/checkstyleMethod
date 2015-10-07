@@ -20,21 +20,21 @@
             final boolean isLocalOnly = attributes.getValue("local-only") != null;
             final String pkg = attributes.getValue(PKG_ATTRIBUTE_NAME);
             final boolean regex = attributes.getValue("regex") != null;
-            final Guard g;
+            final Guard guard;
             if (pkg != null) {
                 final boolean exactMatch =
                         attributes.getValue("exact-match") != null;
-                g = new Guard(isAllow, isLocalOnly, pkg, exactMatch, regex);
+                guard = new Guard(isAllow, isLocalOnly, pkg, exactMatch, regex);
             }
             else {
                 // handle class names which can be normal class names or regular
                 // expressions
                 final String clazz = safeGet(attributes, "class");
-                g = new Guard(isAllow, isLocalOnly, clazz, regex);
+                guard = new Guard(isAllow, isLocalOnly, clazz, regex);
             }
 
-            final PkgControl pc = stack.peek();
-            pc.addGuard(g);
+            final PkgControl pkgControl = stack.peek();
+            pkgControl.addGuard(guard);
         }
     }
 

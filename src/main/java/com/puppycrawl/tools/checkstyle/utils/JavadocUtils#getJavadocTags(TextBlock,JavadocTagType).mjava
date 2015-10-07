@@ -13,12 +13,12 @@
         final List<InvalidJavadocTag> invalidTags = Lists.newArrayList();
         Pattern blockTagPattern = Pattern.compile("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
         for (int i = 0; i < text.length; i++) {
-            final String s = text[i];
-            final Matcher blockTagMatcher = blockTagPattern.matcher(s);
+            final String textValue = text[i];
+            final Matcher blockTagMatcher = blockTagPattern.matcher(textValue);
             if ((tagType == JavadocTagType.ALL || tagType == JavadocTagType.BLOCK)
                     && blockTagMatcher.find()) {
                 final String tagName = blockTagMatcher.group(1);
-                String content = s.substring(blockTagMatcher.end(1));
+                String content = textValue.substring(blockTagMatcher.end(1));
                 if (content.endsWith("*/")) {
                     content = content.substring(0, content.length() - 2);
                 }

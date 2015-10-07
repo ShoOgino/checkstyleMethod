@@ -1,13 +1,13 @@
     @Override
     public void addException(AuditEvent evt, Throwable throwable) {
-        final StringWriter sw = new StringWriter();
-        final PrintWriter pw = new PrintWriter(sw);
-        pw.println("<exception>");
-        pw.println("<![CDATA[");
-        throwable.printStackTrace(pw);
-        pw.println("]]>");
-        pw.println("</exception>");
-        pw.flush();
-        writer.println(encode(sw.toString()));
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printer = new PrintWriter(stringWriter);
+        printer.println("<exception>");
+        printer.println("<![CDATA[");
+        throwable.printStackTrace(printer);
+        printer.println("]]>");
+        printer.println("</exception>");
+        printer.flush();
+        this.writer.println(encode(stringWriter.toString()));
     }
 

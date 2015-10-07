@@ -6,9 +6,9 @@
      */
     protected final AbstractClassInfo createClassInfo(final Token name,
                                               final String surroundingClass) {
-        final AbstractClassInfo ci = findClassAlias(name.getText());
-        if (ci != null) {
-            return new ClassAlias(name, ci);
+        final AbstractClassInfo classInfo = findClassAlias(name.getText());
+        if (classInfo != null) {
+            return new ClassAlias(name, classInfo);
         }
         return new RegularClass(name, surroundingClass, this);
     }
