@@ -5,11 +5,11 @@
      */
     public void setColumns(String columns) {
         columnsCSV = columns;
-        if (columns != null) {
-            columnFilter = new CSVFilter(columns);
+        if (columns == null) {
+            columnFilter = null;
         }
         else {
-            columnFilter = null;
+            columnFilter = new CSVFilter(columns);
         }
     }
 

@@ -8,12 +8,12 @@
             boolean match = false;
             final Matcher tagMatcher = tagCheckRegexp.matcher(event.getSourceName());
             if (tagMatcher.find()) {
-                if (tagMessageRegexp != null) {
-                    final Matcher messageMatcher = tagMessageRegexp.matcher(event.getMessage());
-                    match = messageMatcher.find();
+                if (tagMessageRegexp == null) {
+                    match = true;
                 }
                 else {
-                    match = true;
+                    final Matcher messageMatcher = tagMessageRegexp.matcher(event.getMessage());
+                    match = messageMatcher.find();
                 }
             }
             return match;

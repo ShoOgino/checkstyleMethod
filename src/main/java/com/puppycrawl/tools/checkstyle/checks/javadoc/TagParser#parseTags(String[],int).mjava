@@ -14,35 +14,11 @@
             if (isCommentTag(text, position)) {
                 position = skipHtmlComment(text, position);
             }
-            else if (!isTag(text, position)) {
-                position = getNextCharPos(text, position);
+            else if (isTag(text, position)) {
+                position = parseTag(text, lineNo, nLines, position);
             }
             else {
-                // find end of tag
-                final Point endTag = findChar(text, '>', position);
-                final boolean incompleteTag = endTag.getLineNo() >= nLines;
-                // get tag id (one word)
-                final String tagId;
-
-                if (incompleteTag) {
-                    tagId = "";
-                }
-                else {
-                    tagId = getTagId(text, position);
-                }
-                // is this closed tag
-                final boolean closedTag =
-                        endTag.getLineNo() < nLines
-                         && text[endTag.getLineNo()]
-                         .charAt(endTag.getColumnNo() - 1) == '/';
-                // add new tag
-                add(new HtmlTag(tagId,
-                                position.getLineNo() + lineNo,
-                                position.getColumnNo(),
-                                closedTag,
-                                incompleteTag,
-                                text[position.getLineNo()]));
-                position = endTag;
+                position = getNextCharPos(text, position);
             }
             position = findChar(text, '<', position);
         }
