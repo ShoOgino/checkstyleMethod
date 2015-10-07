@@ -13,12 +13,12 @@
                 warningHolder.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
         DetailAST warning;
 
-        if (token != null) {
-            // case like '@SuppressWarnings(value = UNUSED)'
-            warning = token.findFirstToken(TokenTypes.EXPR);
+        if (token == null) {
+            warning = warningHolder.findFirstToken(TokenTypes.EXPR);
         }
         else {
-            warning = warningHolder.findFirstToken(TokenTypes.EXPR);
+            // case like '@SuppressWarnings(value = UNUSED)'
+            warning = token.findFirstToken(TokenTypes.EXPR);
         }
 
         //rare case with empty array ex: @SuppressWarnings({})

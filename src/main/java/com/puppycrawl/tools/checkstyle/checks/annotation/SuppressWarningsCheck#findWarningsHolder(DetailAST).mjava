@@ -9,13 +9,13 @@
             annotation.findFirstToken(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR);
         final DetailAST annArrayInit;
 
-        if (annValuePair != null) {
+        if (annValuePair == null) {
             annArrayInit =
-                annValuePair.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
+                    annotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
         }
         else {
             annArrayInit =
-                annotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
+                    annValuePair.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
         }
 
         if (annArrayInit != null) {
