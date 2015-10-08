@@ -20,6 +20,7 @@
             parseTree = parseJavadocAsParseTree(javadocComment);
         }
         catch (ParseCancellationException e) {
+            LOG.error("Syntax error occurs during javadoc parsing.", e);
             // If syntax error occurs then message is printed by error listener
             // and parser throws this runtime exception to stop parsing.
             // Just stop processing current Javadoc comment.
