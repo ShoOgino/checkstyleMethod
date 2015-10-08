@@ -21,7 +21,8 @@
                     || entry.getLastLine() == line && entry
                         .getLastColumn() >= column;
             final boolean nameMatches =
-                entry.getCheckName().equals(checkAlias);
+                ALL_WARNING_MATCHING_ID.equals(entry.getCheckName())
+                    || entry.getCheckName().equals(checkAlias);
             if (afterStart && beforeEnd && nameMatches) {
                 return true;
             }
