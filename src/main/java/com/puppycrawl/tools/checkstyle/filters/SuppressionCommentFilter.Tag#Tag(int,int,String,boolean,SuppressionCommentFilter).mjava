@@ -19,31 +19,28 @@
             String format = "";
             try {
                 if (reportingOn) {
-                    format =
-                        expandFromComment(text, filter.checkFormat, filter.onRegexp);
+                    format = CommonUtils.fillTemplateWithStringsByRegexp(
+                            filter.checkFormat, text, filter.onRegexp);
                     tagCheckRegexp = Pattern.compile(format);
                     if (filter.messageFormat == null) {
                         tagMessageRegexp = null;
                     }
                     else {
-                        format =
-                                expandFromComment(text, filter.messageFormat, filter.onRegexp);
+                        format = CommonUtils.fillTemplateWithStringsByRegexp(
+                                filter.messageFormat, text, filter.onRegexp);
                         tagMessageRegexp = Pattern.compile(format);
                     }
                 }
                 else {
-                    format =
-                        expandFromComment(text, filter.checkFormat, filter.offRegexp);
+                    format = CommonUtils.fillTemplateWithStringsByRegexp(
+                            filter.checkFormat, text, filter.offRegexp);
                     tagCheckRegexp = Pattern.compile(format);
                     if (filter.messageFormat == null) {
                         tagMessageRegexp = null;
                     }
                     else {
-                        format =
-                                expandFromComment(
-                                        text,
-                                        filter.messageFormat,
-                                        filter.offRegexp);
+                        format = CommonUtils.fillTemplateWithStringsByRegexp(
+                                filter.messageFormat, text, filter.offRegexp);
                         tagMessageRegexp = Pattern.compile(format);
                     }
                 }
