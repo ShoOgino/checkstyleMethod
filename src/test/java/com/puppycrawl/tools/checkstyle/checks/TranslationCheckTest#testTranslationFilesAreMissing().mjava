@@ -4,10 +4,8 @@
         checkConfig.addAttribute("requiredTranslations", "ja, de");
 
         final File[] propertyFiles = {
-            new File(getPath("checks" + File.separator
-                + "messages_translation.properties")),
-            new File(getPath("checks" + File.separator
-                + "messages_translation_ja.properties")),
+            new File(getPath("messages_translation.properties")),
+            new File(getPath("messages_translation_ja.properties")),
         };
 
         final String[] expected = {
@@ -16,7 +14,7 @@
         verify(
             createChecker(checkConfig),
             propertyFiles,
-            getPath("checks"),
+            getPath(""),
             expected);
     }
 
