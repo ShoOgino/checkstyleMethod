@@ -5,8 +5,6 @@
             createCheckConfig(FinalLocalVariableCheck.class);
         checkConfig.addAttribute("tokens", "PARAMETER_DEF,VARIABLE_DEF");
         final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
-        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/"
-                + "tools/checkstyle/naming/InputFinalLocalVariableNameLambda.java")
-                .getCanonicalPath(), expected);
+        verify(checkConfig, getNonCompilablePath("InputFinalLocalVariableNameLambda.java"), expected);
     }
 
