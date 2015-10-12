@@ -7,6 +7,11 @@
     private ParseStatus parseJavadocAsDetailNode(DetailAST javadocCommentAst) {
         final String javadocComment = JavadocUtils.getJavadocCommentContent(javadocCommentAst);
 
+        // Use a new error listener each time to be able to use
+        // one check instance for multiple files to be checked
+        // without getting side effects.
+        errorListener = new DescriptiveErrorListener();
+
         // Log messages should have line number in scope of file,
         // not in scope of Javadoc comment.
         // Offset is line number of beginning of Javadoc comment.

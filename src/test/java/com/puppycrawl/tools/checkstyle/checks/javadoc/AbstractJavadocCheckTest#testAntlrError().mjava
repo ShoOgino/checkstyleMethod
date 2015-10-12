@@ -1,0 +1,9 @@
+    @Test
+    public void testAntlrError() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(TempCheck.class);
+        final String[] expected = {
+            "3: " + getCheckMessage(UNRECOGNIZED_ANTLR_ERROR_MESSAGE_KEY, 0, null),
+        };
+        verify(checkConfig, getPath("InputTestInvalidAtSeeReference.java"), expected);
+    }
+

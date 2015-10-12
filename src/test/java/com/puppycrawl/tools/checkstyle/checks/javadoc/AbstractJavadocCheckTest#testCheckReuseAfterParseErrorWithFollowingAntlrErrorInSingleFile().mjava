@@ -1,0 +1,10 @@
+    @Test
+    public void testCheckReuseAfterParseErrorWithFollowingAntlrErrorInSingleFile() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(TempCheck.class);
+        final String[] expected = {
+            "4: " + getCheckMessage(JAVADOC_MISSED_HTML_CLOSE, 4, "unclosedTag"),
+            "7: " + getCheckMessage(UNRECOGNIZED_ANTLR_ERROR_MESSAGE_KEY, 4, null),
+        };
+        verify(checkConfig, getPath("InputTestUnclosedTagAndInvalidAtSeeReference.java"), expected);
+    }
+
