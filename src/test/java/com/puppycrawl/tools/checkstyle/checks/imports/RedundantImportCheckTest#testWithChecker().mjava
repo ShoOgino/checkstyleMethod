@@ -4,13 +4,13 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(RedundantImportCheck.class);
         final String[] expected = {
-            "7:1: " + getCheckMessage(MSG_SAME, "com.puppycrawl.tools.checkstyle.imports.*"),
-            "8:1: " + getCheckMessage(MSG_SAME, "com.puppycrawl.tools.checkstyle.imports.InputImportBug"),
+            "7:1: " + getCheckMessage(MSG_SAME, "com.puppycrawl.tools.checkstyle.checks.imports.*"),
+            "8:1: " + getCheckMessage(MSG_SAME, "com.puppycrawl.tools.checkstyle.checks.imports.InputImportBug"),
             "10:1: " + getCheckMessage(MSG_LANG, "java.lang.*"),
             "11:1: " + getCheckMessage(MSG_LANG, "java.lang.String"),
             "14:1: " + getCheckMessage(MSG_DUPLICATE, 13, "java.util.List"),
             "26:1: " + getCheckMessage(MSG_DUPLICATE, 25, "javax.swing.WindowConstants.*"),
         };
-        verify(checkConfig, getPath("imports" + File.separator + "InputRedundantImportCheck.java"), expected);
+        verify(checkConfig, getPath("InputRedundantImportCheck.java"), expected);
     }
 

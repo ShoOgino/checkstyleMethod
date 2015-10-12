@@ -5,8 +5,6 @@
             "3:8: " + getCheckMessage(MSG_KEY, "java.util.Arrays"),
             "4:8: " + getCheckMessage(MSG_KEY, "java.lang.String"),
         };
-        verify(checkConfig, new File("src/test/resources-noncompilable/com/puppycrawl/tools/"
-                + "checkstyle/imports/"
-                + "InputRedundantImportCheck_UnnamedPackage.java").getCanonicalPath(), expected);
+        verify(checkConfig, getNonCompilablePath("InputRedundantImportCheck_UnnamedPackage.java"), expected);
     }
 

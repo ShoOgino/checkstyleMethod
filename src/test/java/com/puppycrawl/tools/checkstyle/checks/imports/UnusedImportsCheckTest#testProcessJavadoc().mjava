@@ -3,7 +3,7 @@
         final DefaultConfiguration checkConfig = createCheckConfig(UnusedImportsCheck.class);
         checkConfig.addAttribute("processJavadoc", "true");
         final String[] expected = {
-            "8:45: " + getCheckMessage(MSG_KEY, "com.puppycrawl.tools.checkstyle.imports.InputImportBug"),
+            "8:45: " + getCheckMessage(MSG_KEY, "com.puppycrawl.tools.checkstyle.checks.imports.InputImportBug"),
             "11:8: " + getCheckMessage(MSG_KEY, "java.lang.String"),
             "13:8: " + getCheckMessage(MSG_KEY, "java.util.List"),
             "14:8: " + getCheckMessage(MSG_KEY, "java.util.List"),
@@ -15,7 +15,6 @@
             "32:8: " + getCheckMessage(MSG_KEY, "java.awt.Label"),
             "45:8: " + getCheckMessage(MSG_KEY, "com.puppycrawl.tools.checkstyle.DefaultLogger"),
         };
-        verify(checkConfig, getPath("imports" + File.separator
-                + "InputUnusedImportsCheck.java"), expected);
+        verify(checkConfig, getPath("InputUnusedImportsCheck.java"), expected);
     }
 
