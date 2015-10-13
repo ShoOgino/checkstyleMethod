@@ -5,6 +5,8 @@
      */
     protected String getCheckMessage(Class<? extends AbstractViolationReporter> aClass,
             String messageKey, Object... arguments) {
-        return format(getCheckMessage(aClass, messageKey), arguments);
+        final MessageFormat formatter = new MessageFormat(getCheckMessage(aClass, messageKey),
+                Locale.ROOT);
+        return formatter.format(arguments);
     }
 

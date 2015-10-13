@@ -12,6 +12,8 @@
         } catch (IOException e) {
             return null;
         }
-        return format(pr.getProperty(messageKey), arguments);
+        final MessageFormat formatter = new MessageFormat(pr.getProperty(messageKey),
+                Locale.ROOT);
+        return formatter.format(arguments);
     }
 
