@@ -8,7 +8,7 @@
         if (customMessage == null) {
             return null;
         }
-
-        return MessageFormat.format(customMessage, args);
+        final MessageFormat formatter = new MessageFormat(customMessage, Locale.ROOT);
+        return formatter.format(args);
     }
 

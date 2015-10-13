@@ -21,7 +21,8 @@
             return loader.configuration;
         }
         catch (final SAXParseException e) {
-            final String message = String.format("%s - %s:%s:%s", UNABLE_TO_PARSE_EXCEPTION_PREFIX,
+            final String message = String.format(Locale.ROOT, "%s - %s:%s:%s",
+                    UNABLE_TO_PARSE_EXCEPTION_PREFIX,
                     e.getMessage(), e.getLineNumber(), e.getColumnNumber());
             throw new CheckstyleException(message, e);
         }

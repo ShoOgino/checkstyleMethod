@@ -25,12 +25,13 @@
             walk(astWithComments, contents, AstState.WITH_COMMENTS);
         }
         catch (final TokenStreamRecognitionException tre) {
-            final String exceptionMsg = String.format(msg, "TokenStreamRecognitionException",
-                     fileName);
+            final String exceptionMsg = String.format(Locale.ROOT, msg,
+                    "TokenStreamRecognitionException", fileName);
             throw new CheckstyleException(exceptionMsg, tre);
         }
         catch (RecognitionException | TokenStreamException ex) {
-            final String exceptionMsg = String.format(msg, ex.getClass().getSimpleName(), fileName);
+            final String exceptionMsg = String.format(Locale.ROOT, msg,
+                    ex.getClass().getSimpleName(), fileName);
             throw new CheckstyleException(exceptionMsg, ex);
         }
 
