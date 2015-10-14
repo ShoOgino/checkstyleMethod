@@ -1,7 +1,7 @@
     @Test
     public void paramWithGeneric()
         throws IOException {
-        String filename = folderWithInputFiles + "/javadocTags/ParamWithGeneric.txt";
+        String filename = getDocPath("ParamWithGeneric.txt");
         ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
         ParseTree expectedTree = ParseTreeBuilder.treeParamWithGeneric();
         compareTrees(expectedTree, generatedTree);

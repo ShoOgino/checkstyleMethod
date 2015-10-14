@@ -1,9 +1,9 @@
     @Test
-    public void since()
+    public void htmlComments()
         throws IOException {
-        String filename = folderWithInputFiles + "/javadocTags/Since.txt";
+        String filename = getHtmlPath("Comments.txt");
         ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        ParseTree expectedTree = ParseTreeBuilder.treeSince();
+        ParseTree expectedTree = ParseTreeBuilder.treeComments();
         compareTrees(expectedTree, generatedTree);
     }
 

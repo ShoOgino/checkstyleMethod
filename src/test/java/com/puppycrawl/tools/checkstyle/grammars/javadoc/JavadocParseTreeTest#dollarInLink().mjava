@@ -1,7 +1,7 @@
     @Test
     public void dollarInLink()
         throws IOException {
-        String filename = folderWithInputFiles + "/javadocTags/DollarInLink.txt";
+        String filename = getDocPath("DollarInLink.txt");
         ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
         ParseTree expectedTree = ParseTreeBuilder.treeDollarInLink();
         compareTrees(expectedTree, generatedTree);

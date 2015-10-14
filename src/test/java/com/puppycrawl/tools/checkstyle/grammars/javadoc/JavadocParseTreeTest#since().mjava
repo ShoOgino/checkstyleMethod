@@ -1,0 +1,9 @@
+    @Test
+    public void since()
+        throws IOException {
+        String filename = getDocPath("Since.txt");
+        ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
+        ParseTree expectedTree = ParseTreeBuilder.treeSince();
+        compareTrees(expectedTree, generatedTree);
+    }
+

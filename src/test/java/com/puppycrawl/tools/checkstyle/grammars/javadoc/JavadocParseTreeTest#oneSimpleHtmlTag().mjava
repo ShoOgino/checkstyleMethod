@@ -1,7 +1,7 @@
     @Test
     public void oneSimpleHtmlTag()
         throws IOException {
-        String filename = folderWithInputFiles + "/htmlTags/OneSimpleHtmlTag.txt";
+        String filename = getHtmlPath("OneSimpleHtmlTag.txt");
         ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
         ParseTree expectedTree = ParseTreeBuilder.treeOneSimpleHtmlTag();
         compareTrees(expectedTree, generatedTree);

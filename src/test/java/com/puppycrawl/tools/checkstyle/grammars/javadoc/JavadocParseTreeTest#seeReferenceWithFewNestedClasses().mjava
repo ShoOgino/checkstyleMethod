@@ -1,7 +1,7 @@
     @Test
     public void seeReferenceWithFewNestedClasses()
         throws IOException {
-        String filename = folderWithInputFiles + "/javadocTags/SeeReferenceWithFewNestedClasses.txt";
+        String filename = getDocPath("SeeReferenceWithFewNestedClasses.txt");
         ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
         ParseTree expectedTree = ParseTreeBuilder.treeSeeReferenceWithFewNestedClasses();
         compareTrees(expectedTree, generatedTree);

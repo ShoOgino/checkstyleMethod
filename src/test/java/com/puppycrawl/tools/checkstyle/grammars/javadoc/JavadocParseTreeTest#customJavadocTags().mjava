@@ -1,9 +1,9 @@
     @Test
-    public void htmlComments()
+    public void customJavadocTags()
         throws IOException {
-        String filename = folderWithInputFiles + "/htmlTags/Comments.txt";
+        String filename = getDocPath("CustomJavadocTags.txt");
         ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        ParseTree expectedTree = ParseTreeBuilder.treeComments();
+        ParseTree expectedTree = ParseTreeBuilder.treeCustomJavadocTags();
         compareTrees(expectedTree, generatedTree);
     }
 
