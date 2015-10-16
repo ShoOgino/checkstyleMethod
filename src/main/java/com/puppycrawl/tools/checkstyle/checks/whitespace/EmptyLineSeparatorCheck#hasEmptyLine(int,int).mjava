@@ -1,0 +1,24 @@
+    /**
+     * Checks, whether there are empty lines within the specified line range. Line numbering is
+     * started from 1 for parameter values
+     * @param startLine number of the first line in the range
+     * @param endLine number of the second line in the range
+     * @return <code>true</code> if found any blank line within the range, <code>false</code>
+     *         otherwise
+     */
+    private boolean hasEmptyLine(int startLine, int endLine) {
+        // Initial value is false - blank line not found
+        boolean result = false;
+        if (startLine <= endLine) {
+            final FileContents fileContents = getFileContents();
+            for (int line = startLine; line <= endLine; line++) {
+                // Check, if the line is blank. Lines are numbered from 0, so subtract 1
+                if (fileContents.lineIsBlank(line - 1)) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+

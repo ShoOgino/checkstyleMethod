@@ -3,11 +3,15 @@
      * @param token token.
      * @return true if token have empty line after.
      */
-    private static boolean hasEmptyLineAfter(DetailAST token) {
+    private boolean hasEmptyLineAfter(DetailAST token) {
         DetailAST lastToken = token.getLastChild().getLastChild();
         if (lastToken == null) {
             lastToken = token.getLastChild();
         }
-        return token.getNextSibling().getLineNo() - lastToken.getLineNo() > 1;
+        // Start of the next token
+        final int nextBegin = token.getNextSibling().getLineNo();
+        // End of current token.
+        final int currentEnd = lastToken.getLineNo();
+        return hasEmptyLine(currentEnd + 1, nextBegin - 1);
     }
 
