@@ -1,6 +1,7 @@
     @Override
     public final void visitToken(DetailAST blockCommentNode) {
         if (JavadocUtils.isJavadocComment(blockCommentNode)) {
+            // store as field, to share with child Checks
             blockCommentAst = blockCommentNode;
 
             final String treeCacheKey = blockCommentNode.getLineNo() + ":"
