@@ -1,11 +1,11 @@
         @Override
         @SuppressWarnings("unchecked")
-        public void drop(DropTargetDropEvent evt) {
+        public void drop(DropTargetDropEvent event) {
             try {
-                final Transferable transferable = evt.getTransferable();
+                final Transferable transferable = event.getTransferable();
 
                 if (transferable.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
-                    evt.acceptDrop(DnDConstants.ACTION_COPY);
+                    event.acceptDrop(DnDConstants.ACTION_COPY);
 
                     final List<File> fileList = (List<File>) transferable.getTransferData(
                             DataFlavor.javaFileListFlavor);
@@ -16,14 +16,14 @@
                         listener.filesDropped(files);
                     }
 
-                    evt.getDropTargetContext().dropComplete(true);
+                    event.getDropTargetContext().dropComplete(true);
                 }
                 else {
-                    evt.rejectDrop();
+                    event.rejectDrop();
                 }
             }
             catch (final IOException | UnsupportedFlavorException ignored) {
-                evt.rejectDrop();
+                event.rejectDrop();
             }
             finally {
                 if (component instanceof JComponent) {

@@ -5,7 +5,7 @@
      * @return the list of exception nodes for ast.
      */
     private List<ExceptionInfo> getThrows(DetailAST ast) {
-        final List<ExceptionInfo> retVal = Lists.newArrayList();
+        final List<ExceptionInfo> returnValue = Lists.newArrayList();
         final DetailAST throwsAST = ast
                 .findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAST != null) {
@@ -16,11 +16,11 @@
                     final FullIdent ident = FullIdent.createFullIdent(child);
                     final ExceptionInfo exceptionInfo = new ExceptionInfo(
                             createClassInfo(new Token(ident), getCurrentClassName()));
-                    retVal.add(exceptionInfo);
+                    returnValue.add(exceptionInfo);
                 }
                 child = child.getNextSibling();
             }
         }
-        return retVal;
+        return returnValue;
     }
 

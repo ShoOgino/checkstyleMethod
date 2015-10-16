@@ -5,9 +5,9 @@
     private void collectReferencesFromJavadoc(DetailAST ast) {
         final FileContents contents = getFileContents();
         final int lineNo = ast.getLineNo();
-        final TextBlock cmt = contents.getJavadocBefore(lineNo);
-        if (cmt != null) {
-            referenced.addAll(collectReferencesFromJavadoc(cmt));
+        final TextBlock textBlock = contents.getJavadocBefore(lineNo);
+        if (textBlock != null) {
+            referenced.addAll(collectReferencesFromJavadoc(textBlock));
         }
     }
 

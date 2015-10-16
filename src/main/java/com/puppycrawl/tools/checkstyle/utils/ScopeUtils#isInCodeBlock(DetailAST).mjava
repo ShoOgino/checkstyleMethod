@@ -6,7 +6,7 @@
      * @return a {@code boolean} value
      */
     public static boolean isInCodeBlock(DetailAST aAST) {
-        boolean retVal = false;
+        boolean returnValue = false;
 
         // Loop up looking for a containing code block
         for (DetailAST token = aAST.getParent();
@@ -17,11 +17,11 @@
                 || type == TokenTypes.CTOR_DEF
                 || type == TokenTypes.INSTANCE_INIT
                 || type == TokenTypes.STATIC_INIT) {
-                retVal = true;
+                returnValue = true;
                 break;
             }
         }
 
-        return retVal;
+        return returnValue;
     }
 

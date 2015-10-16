@@ -3,12 +3,12 @@
         if (shouldCheck(ast)) {
             final FileContents contents = getFileContents();
             final int lineNo = ast.getLineNo();
-            final TextBlock cmt = contents.getJavadocBefore(lineNo);
-            if (cmt == null) {
+            final TextBlock textBlock = contents.getJavadocBefore(lineNo);
+            if (textBlock == null) {
                 log(lineNo, JAVADOC_MISSING);
             }
             else {
-                final List<JavadocTag> tags = getJavadocTags(cmt);
+                final List<JavadocTag> tags = getJavadocTags(textBlock);
                 if (ScopeUtils.isOuterMostType(ast)) {
                     // don't check author/version for inner classes
                     checkTag(lineNo, tags, JavadocTagInfo.AUTHOR.getName(),

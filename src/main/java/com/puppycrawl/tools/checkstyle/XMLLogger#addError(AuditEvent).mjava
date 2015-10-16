@@ -1,18 +1,18 @@
     @Override
-    public void addError(AuditEvent evt) {
-        if (evt.getSeverityLevel() != SeverityLevel.IGNORE) {
-            writer.print("<error" + " line=\"" + evt.getLine() + "\"");
-            if (evt.getColumn() > 0) {
-                writer.print(" column=\"" + evt.getColumn() + "\"");
+    public void addError(AuditEvent event) {
+        if (event.getSeverityLevel() != SeverityLevel.IGNORE) {
+            writer.print("<error" + " line=\"" + event.getLine() + "\"");
+            if (event.getColumn() > 0) {
+                writer.print(" column=\"" + event.getColumn() + "\"");
             }
             writer.print(" severity=\""
-                + evt.getSeverityLevel().getName()
+                + event.getSeverityLevel().getName()
                 + "\"");
             writer.print(" message=\""
-                + encode(evt.getMessage())
+                + encode(event.getMessage())
                 + "\"");
             writer.println(" source=\""
-                + encode(evt.getSourceName())
+                + encode(event.getSourceName())
                 + "\"/>");
         }
     }

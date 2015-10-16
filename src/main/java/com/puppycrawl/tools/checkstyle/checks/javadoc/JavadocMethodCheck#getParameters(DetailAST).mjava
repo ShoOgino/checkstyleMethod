@@ -6,16 +6,16 @@
      */
     private static List<DetailAST> getParameters(DetailAST ast) {
         final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-        final List<DetailAST> retVal = Lists.newArrayList();
+        final List<DetailAST> returnValue = Lists.newArrayList();
 
         DetailAST child = params.getFirstChild();
         while (child != null) {
             if (child.getType() == TokenTypes.PARAMETER_DEF) {
                 final DetailAST ident = child.findFirstToken(TokenTypes.IDENT);
-                retVal.add(ident);
+                returnValue.add(ident);
             }
             child = child.getNextSibling();
         }
-        return retVal;
+        return returnValue;
     }
 

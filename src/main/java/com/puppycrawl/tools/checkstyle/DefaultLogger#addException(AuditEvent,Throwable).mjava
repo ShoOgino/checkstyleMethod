@@ -1,7 +1,7 @@
     @Override
-    public void addException(AuditEvent evt, Throwable throwable) {
+    public void addException(AuditEvent event, Throwable throwable) {
         synchronized (errorWriter) {
-            errorWriter.println("Error auditing " + evt.getFileName());
+            errorWriter.println("Error auditing " + event.getFileName());
             throwable.printStackTrace(errorWriter);
         }
     }

@@ -7,9 +7,9 @@
     @Override
     public void fireFileStarted(String fileName) {
         final String stripped = CommonUtils.relativizeAndNormalizePath(basedir, fileName);
-        final AuditEvent evt = new AuditEvent(this, stripped);
+        final AuditEvent event = new AuditEvent(this, stripped);
         for (final AuditListener listener : listeners) {
-            listener.fileStarted(evt);
+            listener.fileStarted(event);
         }
     }
 

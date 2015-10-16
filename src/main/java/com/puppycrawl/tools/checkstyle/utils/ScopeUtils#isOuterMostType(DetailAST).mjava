@@ -5,7 +5,7 @@
      * @return a {@code boolean} value
      */
     public static boolean isOuterMostType(DetailAST aAST) {
-        boolean retVal = true;
+        boolean returnValue = true;
         for (DetailAST parent = aAST.getParent();
              parent != null;
              parent = parent.getParent()) {
@@ -13,11 +13,11 @@
                 || parent.getType() == TokenTypes.INTERFACE_DEF
                 || parent.getType() == TokenTypes.ANNOTATION_DEF
                 || parent.getType() == TokenTypes.ENUM_DEF) {
-                retVal = false;
+                returnValue = false;
                 break;
             }
         }
 
-        return retVal;
+        return returnValue;
     }
 

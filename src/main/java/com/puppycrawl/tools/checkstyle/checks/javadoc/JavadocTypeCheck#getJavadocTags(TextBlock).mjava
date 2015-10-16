@@ -1,10 +1,10 @@
     /**
      * Gets all standalone tags from a given javadoc.
-     * @param cmt the Javadoc comment to process.
+     * @param textBlock the Javadoc comment to process.
      * @return all standalone tags from the given javadoc.
      */
-    private List<JavadocTag> getJavadocTags(TextBlock cmt) {
-        final JavadocTags tags = JavadocUtils.getJavadocTags(cmt,
+    private List<JavadocTag> getJavadocTags(TextBlock textBlock) {
+        final JavadocTags tags = JavadocUtils.getJavadocTags(textBlock,
             JavadocUtils.JavadocTagType.BLOCK);
         if (!allowUnknownTags) {
             for (final InvalidJavadocTag tag : tags.getInvalidTags()) {

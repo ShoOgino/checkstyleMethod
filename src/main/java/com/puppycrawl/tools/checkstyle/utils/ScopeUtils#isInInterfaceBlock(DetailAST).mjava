@@ -5,17 +5,17 @@
      * @return a {@code boolean} value
      */
     public static boolean isInInterfaceBlock(DetailAST aAST) {
-        boolean retVal = false;
+        boolean returnValue = false;
 
         // Loop up looking for a containing interface block
         for (DetailAST token = aAST.getParent();
-             token != null && !retVal;
+             token != null && !returnValue;
              token = token.getParent()) {
 
             final int type = token.getType();
 
             if (type == TokenTypes.INTERFACE_DEF) {
-                retVal = true;
+                returnValue = true;
             }
             else if (type == TokenTypes.CLASS_DEF
                 || type == TokenTypes.ENUM_DEF
@@ -25,6 +25,6 @@
             }
         }
 
-        return retVal;
+        return returnValue;
     }
 

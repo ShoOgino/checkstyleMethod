@@ -6,20 +6,20 @@
      */
     public static Scope getScopeFromMods(DetailAST aMods) {
         // default scope
-        Scope retVal = Scope.PACKAGE;
+        Scope returnValue = Scope.PACKAGE;
         for (AST token = aMods.getFirstChild(); token != null
-                && retVal == Scope.PACKAGE;
+                && returnValue == Scope.PACKAGE;
                 token = token.getNextSibling()) {
             if ("public".equals(token.getText())) {
-                retVal = Scope.PUBLIC;
+                returnValue = Scope.PUBLIC;
             }
             else if ("protected".equals(token.getText())) {
-                retVal = Scope.PROTECTED;
+                returnValue = Scope.PROTECTED;
             }
             else if ("private".equals(token.getText())) {
-                retVal = Scope.PRIVATE;
+                returnValue = Scope.PRIVATE;
             }
         }
-        return retVal;
+        return returnValue;
     }
 
