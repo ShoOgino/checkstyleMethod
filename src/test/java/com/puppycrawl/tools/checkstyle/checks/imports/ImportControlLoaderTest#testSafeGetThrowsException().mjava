@@ -9,7 +9,8 @@
             };
         try {
             Class<?> clazz = ImportControlLoader.class;
-            Method privateMethod = clazz.getDeclaredMethod("safeGet", Attributes.class, String.class);
+            Method privateMethod = clazz.getDeclaredMethod("safeGet",
+                Attributes.class, String.class);
             privateMethod.setAccessible(true);
             privateMethod.invoke(null, attr, "you_cannot_find_me");
         }

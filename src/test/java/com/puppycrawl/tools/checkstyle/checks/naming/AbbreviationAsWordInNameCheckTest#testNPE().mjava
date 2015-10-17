@@ -1,7 +1,8 @@
     @Test
     public void testNPE() throws Exception {
 
-        final DefaultConfiguration checkConfig = createCheckConfig(AbbreviationAsWordInNameCheck.class);
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(AbbreviationAsWordInNameCheck.class);
         final int expectedCapitalCount = 1;
         warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));

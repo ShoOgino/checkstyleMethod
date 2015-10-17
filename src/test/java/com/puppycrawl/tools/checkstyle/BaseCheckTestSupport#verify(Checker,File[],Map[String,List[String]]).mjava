@@ -8,17 +8,22 @@
         final int errs = checker.process(theFiles);
 
         final Map<String, List<String>> actualViolations = getActualViolations(errs);
-        final Map<String, List<String>> realExpectedViolations = Maps.filterValues(expectedViolations, new Predicate<List<String>>() {
-            @Override
-            public boolean apply(List<String> input) {
-                return !input.isEmpty();
-            }
-        });
-        final MapDifference<String, List<String>> violationDifferences = Maps.difference(realExpectedViolations, actualViolations);
+        final Map<String, List<String>> realExpectedViolations =
+            Maps.filterValues(expectedViolations, new Predicate<List<String>>() {
+                @Override
+                public boolean apply(List<String> input) {
+                    return !input.isEmpty();
+                }
+            });
+        final MapDifference<String, List<String>> violationDifferences =
+            Maps.difference(realExpectedViolations, actualViolations);
 
-        final Map<String, List<String>> missingViolations = violationDifferences.entriesOnlyOnLeft();
-        final Map<String, List<String>> unexpectedViolations = violationDifferences.entriesOnlyOnRight();
-        final Map<String, ValueDifference<List<String>>> differingViolations = violationDifferences.entriesDiffering();
+        final Map<String, List<String>> missingViolations =
+            violationDifferences.entriesOnlyOnLeft();
+        final Map<String, List<String>> unexpectedViolations =
+            violationDifferences.entriesOnlyOnRight();
+        final Map<String, ValueDifference<List<String>>> differingViolations =
+            violationDifferences.entriesDiffering();
 
         final StringBuilder message = new StringBuilder();
         if (!missingViolations.isEmpty()) {
