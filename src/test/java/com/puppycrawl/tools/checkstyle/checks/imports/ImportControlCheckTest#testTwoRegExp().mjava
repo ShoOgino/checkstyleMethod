@@ -1,15 +1,13 @@
     @Test
     public void testTwoRegExp() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
-        checkConfig.addAttribute("file",
-                "src/test/resources/com/puppycrawl/tools/checkstyle/imports/import-control_two-re.xml");
+        checkConfig.addAttribute("file", getPath("import-control_two-re.xml"));
         final String[] expected = {
             "3:1: " + getCheckMessage(MSG_DISALLOWED, "java.awt.Image"),
             "4:1: " + getCheckMessage(MSG_DISALLOWED, "javax.swing.border.*"),
             "6:1: " + getCheckMessage(MSG_DISALLOWED, "java.awt.Button.ABORT"),
         };
 
-        verify(checkConfig, getPath("imports" + File.separator
-                + "InputImportControl.java"), expected);
+        verify(checkConfig, getPath("InputImportControl.java"), expected);
     }
 

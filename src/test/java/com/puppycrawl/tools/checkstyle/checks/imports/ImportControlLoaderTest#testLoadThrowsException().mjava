@@ -9,13 +9,11 @@
                     "com.puppycrawl.tools.checkstyle.checks.imports.ImportControlLoader");
             Method privateMethod = clazz.getDeclaredMethod("load", InputSource.class, URI.class);
             privateMethod.setAccessible(true);
-            privateMethod.invoke(null, source, new File(
-                    "src/test/resources/com/puppycrawl/tools/checkstyle/imports/import-control_complete.xml").toURI());
+            privateMethod.invoke(null, source, new File(getPath("import-control_complete.xml")).toURI());
         }
         catch (IllegalAccessException | IllegalArgumentException
                 | ClassNotFoundException | NoSuchMethodException | SecurityException e) {
             throw new IllegalStateException(e);
         }
-
     }
 

@@ -1,10 +1,9 @@
     @Test
     public void testOne() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
-        checkConfig.addAttribute("file", "src/test/resources/com/puppycrawl/tools/checkstyle/imports/import-control_one.xml");
+        checkConfig.addAttribute("file", getPath("import-control_one.xml"));
         final String[] expected = {"5:1: " + getCheckMessage(MSG_DISALLOWED, "java.io.File")};
 
-        verify(checkConfig, getPath("imports" + File.separator
-                + "InputImportControl.java"), expected);
+        verify(checkConfig, getPath("InputImportControl.java"), expected);
     }
 

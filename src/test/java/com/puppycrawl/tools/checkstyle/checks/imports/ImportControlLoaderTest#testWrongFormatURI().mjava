@@ -1,8 +1,7 @@
     @Test(expected = CheckstyleException.class)
     public void testWrongFormatURI() throws Exception {
         final PkgControl root =
-                ImportControlLoader.load(
-                        new URI("aaa://src/test/resources/com/puppycrawl/tools/checkstyle/imports/import-control_complete.xml"));
+                ImportControlLoader.load(new URI("aaa://" + getPath("import-control_complete.xml")));
         assertNotNull(root);
     }
 
