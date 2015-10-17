@@ -7,7 +7,11 @@
             fail();
         }
         catch (CheckstyleException ex) {
-            // expected exception
+            assertTrue(ex.getMessage()
+                    .startsWith("cannot initialize module"
+                            + " com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"
+                            + " - Unable to find: "));
+            assertTrue(ex.getMessage().endsWith("nonExisting.file"));
         }
     }
 

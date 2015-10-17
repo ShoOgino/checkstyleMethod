@@ -7,7 +7,11 @@
             fail("Checker creation should not succeed with invalid headerFile");
         }
         catch (CheckstyleException ex) {
-            // expected exception
+            assertEquals("cannot initialize module"
+                    + " com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"
+                    + " - Cannot set property 'headerFile' to '' in"
+                    + " module com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck",
+                    ex.getMessage());
         }
     }
 
