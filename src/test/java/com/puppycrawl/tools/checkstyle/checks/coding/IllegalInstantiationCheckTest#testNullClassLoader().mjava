@@ -28,8 +28,7 @@
         elistAst.setNextSibling(rparenAst);
 
         IllegalInstantiationCheck check = new IllegalInstantiationCheck();
-        File inputFile = new File("src/test/resources-noncompilable/com/puppycrawl/tools/checkstyle/"
-                + "coding/InputIllegalInstantiationCheckLang.java");
+        File inputFile = new File(getNonCompilablePath("InputIllegalInstantiationCheckLang.java"));
         check.setFileContents(new FileContents(new FileText(inputFile, "UTF-8")));
         check.configure(createCheckConfig(IllegalInstantiationCheck.class));
         check.setMessages(new LocalizedMessages());
