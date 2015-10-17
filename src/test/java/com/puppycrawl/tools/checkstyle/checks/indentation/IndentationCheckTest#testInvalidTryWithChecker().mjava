@@ -11,7 +11,7 @@
         checkConfig.addAttribute("lineWrappingIndentation", "4");
         checkConfig.addAttribute("tabWidth", "4");
         checkConfig.addAttribute("throwsIndent", "4");
-        final String fname = getPath("InputInvalidTryIndent.java");
+        final String fileName = getPath("InputInvalidTryIndent.java");
         final String[] expected = {
             "25: " + getCheckMessage(MSG_ERROR, "try", 9, 8),
             "26: " + getCheckMessage(MSG_ERROR, "try rcurly", 7, 8),
@@ -40,6 +40,6 @@
             "80: " + getCheckMessage(MSG_CHILD_ERROR, "catch", 10, 12),
             "80: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 10, 12),
         };
-        verifyWarns(checkConfig, fname, expected, 6);
+        verifyWarns(checkConfig, fileName, expected, 6);
     }
 

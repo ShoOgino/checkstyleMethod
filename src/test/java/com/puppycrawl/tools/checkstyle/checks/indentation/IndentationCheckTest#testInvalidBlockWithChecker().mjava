@@ -11,7 +11,7 @@
         checkConfig.addAttribute("lineWrappingIndentation", "4");
         checkConfig.addAttribute("tabWidth", "4");
         checkConfig.addAttribute("throwsIndent", "4");
-        final String fname = getPath("InputInvalidBlockIndent.java");
+        final String fileName = getPath("InputInvalidBlockIndent.java");
         final String[] expected = {
             "26: " + getCheckMessage(MSG_ERROR, "block lcurly", 7, 8),
             "27: " + getCheckMessage(MSG_ERROR, "block lcurly", 9, 8),
@@ -70,6 +70,6 @@
             "150: " + getCheckMessage(MSG_CHILD_ERROR, "block", 6, 8),
             "150: " + getCheckMessage(MSG_ERROR, "member def type", 6, 8),
         };
-        verifyWarns(checkConfig, fname, expected, 10);
+        verifyWarns(checkConfig, fileName, expected, 10);
     }
 

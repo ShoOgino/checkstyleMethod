@@ -13,13 +13,13 @@
                     || !containsActualLevel && isWarnComment;
         }
 
-        Matcher singleLevelMatch = SINGLELEVEL_COMMENT_REGEX.matcher(comment);
+        Matcher singleLevelMatch = SINGLE_LEVEL_COMMENT_REGEX.matcher(comment);
         if (singleLevelMatch.matches()) {
             final int expectedLevel = Integer.parseInt(singleLevelMatch.group(1));
             return isSingleLevelCommentConsistent(indentInComment, isWarnComment, expectedLevel);
         }
 
-        Matcher nonStrictLevelMatch = NONSTRICT_LEVEL_COMMENT_REGEX.matcher(comment);
+        Matcher nonStrictLevelMatch = NON_STRICT_LEVEL_COMMENT_REGEX.matcher(comment);
         if (nonStrictLevelMatch.matches()) {
             final int expectedMinimalIndent = Integer.parseInt(nonStrictLevelMatch.group(1));
 
