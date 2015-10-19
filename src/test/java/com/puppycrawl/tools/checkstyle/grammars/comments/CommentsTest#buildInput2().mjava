@@ -42,31 +42,37 @@
         annotationsDef.setType(ANNOTATIONS);
         annotationsDef.setText("ANNOTATIONS");
         annotationsDef.setLineNo(1);
-        annotationsDef.setColumnNo(39);
+        annotationsDef.setColumnNo(48);
 
         DetailAST dotDef = new DetailAST();
         dotDef.setType(DOT);
         dotDef.setText(".");
         dotDef.setLineNo(1);
-        dotDef.setColumnNo(39);
+        dotDef.setColumnNo(48);
 
         DetailAST subDotDef = new DetailAST();
         subDotDef.setType(DOT);
         subDotDef.setText(".");
         subDotDef.setLineNo(1);
-        subDotDef.setColumnNo(28);
+        subDotDef.setColumnNo(39);
 
         DetailAST subDotDef1 = new DetailAST();
         subDotDef1.setType(DOT);
         subDotDef1.setText(".");
         subDotDef1.setLineNo(1);
-        subDotDef1.setColumnNo(22);
+        subDotDef1.setColumnNo(28);
 
         DetailAST subDotDef2 = new DetailAST();
         subDotDef2.setType(DOT);
         subDotDef2.setText(".");
         subDotDef2.setLineNo(1);
-        subDotDef2.setColumnNo(11);
+        subDotDef2.setColumnNo(22);
+
+        DetailAST subDotDef3 = new DetailAST();
+        subDotDef3.setType(DOT);
+        subDotDef3.setText(".");
+        subDotDef3.setLineNo(1);
+        subDotDef3.setColumnNo(11);
 
         DetailAST identDef = new DetailAST();
         identDef.setType(IDENT);
@@ -90,7 +96,7 @@
         semiDef.setType(SEMI);
         semiDef.setText(";");
         semiDef.setLineNo(1);
-        semiDef.setColumnNo(48);
+        semiDef.setColumnNo(57);
 
         DetailAST identDef4 = new DetailAST();
         identDef4.setType(IDENT);
@@ -100,9 +106,15 @@
 
         DetailAST identDef5 = new DetailAST();
         identDef5.setType(IDENT);
-        identDef5.setText("comments");
+        identDef5.setText("grammars");
         identDef5.setLineNo(1);
         identDef5.setColumnNo(40);
+
+        DetailAST identDef6 = new DetailAST();
+        identDef6.setType(IDENT);
+        identDef6.setText("comments");
+        identDef6.setLineNo(1);
+        identDef6.setColumnNo(49);
 
         DetailAST classDef = new DetailAST();
         classDef.setType(CLASS_DEF);
@@ -318,11 +330,13 @@
         dotDef.setFirstChild(subDotDef);
         subDotDef.setFirstChild(subDotDef1);
         subDotDef1.setFirstChild(subDotDef2);
-        subDotDef2.setFirstChild(identDef);
+        subDotDef2.setFirstChild(subDotDef3);
+        subDotDef3.setFirstChild(identDef);
         identDef.setNextSibling(identDef2);
-        subDotDef2.setNextSibling(identDef3);
-        subDotDef1.setNextSibling(identDef4);
-        subDotDef.setNextSibling(identDef5);
+        subDotDef2.setNextSibling(identDef4);
+        subDotDef3.setNextSibling(identDef3);
+        subDotDef1.setNextSibling(identDef5);
+        subDotDef.setNextSibling(identDef6);
         dotDef.setNextSibling(semiDef);
         packageDef.setNextSibling(classDef);
         blockCommentStart.setNextSibling(literalProtected);
