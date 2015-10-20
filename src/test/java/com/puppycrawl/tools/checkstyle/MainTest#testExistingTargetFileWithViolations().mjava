@@ -4,10 +4,7 @@
         exit.checkAssertionAfterwards(new Assertion() {
             @Override
             public void checkAssertion() throws IOException {
-                String currentPath = new File(".").getCanonicalPath();
-                String expectedPath = currentPath
-                    + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java"
-                    .replace("/", File.separator);
+                String expectedPath = getFilePath("InputMain.java");
                 assertEquals(String.format(Locale.ROOT, "Starting audit...%n"
                                 + "%1$s:3:14: "
                                 + "warning: Name 'InputMain' must match pattern '^[a-z0-9]*$'.%n"
@@ -18,7 +15,7 @@
                 assertEquals("", systemErr.getLog());
             }
         });
-        Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname2.xml",
-                "src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java");
+        Main.main("-c", getPath("config-classname2.xml"),
+                getPath("InputMain.java"));
     }
 

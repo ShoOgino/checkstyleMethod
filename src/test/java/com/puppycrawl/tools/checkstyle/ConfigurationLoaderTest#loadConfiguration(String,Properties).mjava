@@ -1,7 +1,6 @@
     private static Configuration loadConfiguration(
         String name, Properties props) throws CheckstyleException {
-        final String fName =
-            "src/test/resources/com/puppycrawl/tools/checkstyle/configs/" + name;
+        final String fName = getConfigPath(name);
 
         return ConfigurationLoader.loadConfiguration(
                 fName, new PropertiesExpander(props));

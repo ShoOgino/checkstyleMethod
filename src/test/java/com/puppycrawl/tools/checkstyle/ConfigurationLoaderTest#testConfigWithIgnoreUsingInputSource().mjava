@@ -3,8 +3,7 @@
 
         final DefaultConfiguration config =
                 (DefaultConfiguration) ConfigurationLoader.loadConfiguration(new InputSource(
-                        new File("src/test/resources/com/puppycrawl/tools/checkstyle/configs/"
-                                + "config_with_ignore.xml").toURI().toString()),
+                        new File(getConfigPath("config_with_ignore.xml")).toURI().toString()),
                         new PropertiesExpander(new Properties()), true);
 
         final Configuration[] children = config.getChildren();

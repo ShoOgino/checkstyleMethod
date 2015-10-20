@@ -3,8 +3,7 @@
         final Properties props = new Properties();
         props.setProperty("checkstyle.basedir", "basedir");
 
-        final File file = new File(
-                "src/test/resources/com/puppycrawl/tools/checkstyle/configs/subdir/including.xml");
+        final File file = new File(getConfigPath("subdir/including.xml"));
         final DefaultConfiguration config =
             (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
                     file.toURI().toString(), new PropertiesExpander(props));

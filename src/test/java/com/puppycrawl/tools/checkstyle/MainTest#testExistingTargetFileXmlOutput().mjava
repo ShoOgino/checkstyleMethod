@@ -4,10 +4,7 @@
         exit.checkAssertionAfterwards(new Assertion() {
             @Override
             public void checkAssertion() throws IOException {
-                String currentPath = new File(".").getCanonicalPath();
-                String expectedPath = currentPath
-                        + "/src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java"
-                        .replace("/", File.separator);
+                String expectedPath = getFilePath("InputMain.java");
                 final ResourceBundle compilationProperties =
                         ResourceBundle.getBundle("checkstylecompilation");
                 String version = compilationProperties.getString("checkstyle.compile.version");
@@ -20,8 +17,8 @@
                 assertEquals("", systemErr.getLog());
             }
         });
-        Main.main("-c", "src/test/resources/com/puppycrawl/tools/checkstyle/config-classname.xml",
+        Main.main("-c", getPath("config-classname.xml"),
                 "-f", "xml",
-                "src/test/resources/com/puppycrawl/tools/checkstyle/InputMain.java");
+                getPath("InputMain.java"));
     }
 
