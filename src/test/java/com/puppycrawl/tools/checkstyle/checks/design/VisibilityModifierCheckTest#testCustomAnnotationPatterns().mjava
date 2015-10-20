@@ -3,7 +3,7 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(VisibilityModifierCheck.class);
         checkConfig.addAttribute("ignoreAnnotationCanonicalNames",
-                "com.puppycrawl.tools.checkstyle.AnnotatedVisibility.CustomAnnotation");
+                "com.puppycrawl.tools.checkstyle.checks.design.InputAnnotatedVisibility.CustomAnnotation");
         final String[] expected = {
             "15:28: " + getCheckMessage(MSG_KEY, "publicJUnitRule"),
             "18:28: " + getCheckMessage(MSG_KEY, "fqPublicJUnitRule"),
@@ -17,6 +17,6 @@
             "48:12: " + getCheckMessage(MSG_KEY, "unannotatedPackage"),
             "49:22: " + getCheckMessage(MSG_KEY, "unannotatedProtected"),
         };
-        verify(checkConfig, getPath("AnnotatedVisibility.java"), expected);
+        verify(checkConfig, getPath("InputAnnotatedVisibility.java"), expected);
     }
 
