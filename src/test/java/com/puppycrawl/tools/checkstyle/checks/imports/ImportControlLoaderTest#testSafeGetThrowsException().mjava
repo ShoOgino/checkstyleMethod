@@ -8,14 +8,13 @@
                 }
             };
         try {
-            Class<?> clazz = Class.forName(
-                    "com.puppycrawl.tools.checkstyle.checks.imports.ImportControlLoader");
+            Class<?> clazz = ImportControlLoader.class;
             Method privateMethod = clazz.getDeclaredMethod("safeGet", Attributes.class, String.class);
             privateMethod.setAccessible(true);
             privateMethod.invoke(null, attr, "you_cannot_find_me");
         }
         catch (IllegalAccessException | IllegalArgumentException
-                | ClassNotFoundException | NoSuchMethodException | SecurityException e) {
+                | NoSuchMethodException | SecurityException e) {
             throw new IllegalStateException(e);
         }
     }
