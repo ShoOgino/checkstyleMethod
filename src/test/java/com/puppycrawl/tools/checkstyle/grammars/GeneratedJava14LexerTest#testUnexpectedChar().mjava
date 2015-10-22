@@ -1,10 +1,14 @@
     @Test
     public void testUnexpectedChar() throws Exception {
-        Assume.assumeFalse(SystemUtils.IS_OS_WINDOWS); // Encoding problems can occur in Windows
+        // Encoding problems can occur in Windows
+        Assume.assumeFalse(SystemUtils.IS_OS_WINDOWS);
+
         final DefaultConfiguration checkConfig =
             createCheckConfig(MemberNameCheck.class);
+        // input is 'ÃЯ'
         final String[] expected = {
-            "7:9: Name 'ÃЯ' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "7:9: Name '" + (char) 0xC3 + (char) 0x042F
+                 + "' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
         };
         verify(checkConfig, getPath("InputGrammar.java"), expected);
     }

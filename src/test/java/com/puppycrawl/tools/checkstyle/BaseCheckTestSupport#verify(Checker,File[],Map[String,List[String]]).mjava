@@ -7,62 +7,41 @@
         Collections.addAll(theFiles, processedFiles);
         final int errs = checker.process(theFiles);
 
-        // process each of the lines
-        final ByteArrayInputStream inputStream =
-                new ByteArrayInputStream(stream.toByteArray());
-        try (final LineNumberReader lnr = new LineNumberReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-
-            final Map<String, List<String>> actualViolations = new HashMap<>();
-            for (String line = lnr.readLine(); line != null && lnr.getLineNumber() <= errs; line = lnr.readLine()) {
-                // have at least 2 characters before the splitting colon,
-                // to not split after the drive letter on windows
-                final String[] actualViolation = line.split("(?<=.{2}):", 2);
-                final String actualViolationFileName = actualViolation[0];
-                final String actualViolationMessage = actualViolation[1];
-
-                List<String> actualViolationsPerFile = actualViolations.get(actualViolationFileName);
-                if (actualViolationsPerFile == null) {
-                    actualViolationsPerFile = new ArrayList<>();
-                    actualViolations.put(actualViolationFileName, actualViolationsPerFile);
-                }
-                actualViolationsPerFile.add(actualViolationMessage);
+        final Map<String, List<String>> actualViolations = getActualViolations(errs);
+        final Map<String, List<String>> realExpectedViolations = Maps.filterValues(expectedViolations, new Predicate<List<String>>() {
+            @Override
+            public boolean apply(List<String> input) {
+                return !input.isEmpty();
             }
+        });
+        final MapDifference<String, List<String>> violationDifferences = Maps.difference(realExpectedViolations, actualViolations);
 
-            final Map<String, List<String>> realExpectedViolations = Maps.filterValues(expectedViolations, new Predicate<List<String>>() {
-                @Override
-                public boolean apply(List<String> input) {
-                    return !input.isEmpty();
-                }
-            });
-            final MapDifference<String, List<String>> violationDifferences = Maps.difference(realExpectedViolations, actualViolations);
+        final Map<String, List<String>> missingViolations = violationDifferences.entriesOnlyOnLeft();
+        final Map<String, List<String>> unexpectedViolations = violationDifferences.entriesOnlyOnRight();
+        final Map<String, ValueDifference<List<String>>> differingViolations = violationDifferences.entriesDiffering();
 
-            final Map<String, List<String>> missingViolations = violationDifferences.entriesOnlyOnLeft();
-            final Map<String, List<String>> unexpectedViolations = violationDifferences.entriesOnlyOnRight();
-            final Map<String, ValueDifference<List<String>>> differingViolations = violationDifferences.entriesDiffering();
-
-            final StringBuilder message = new StringBuilder();
-            if (!missingViolations.isEmpty()) {
-                message.append("missing violations: ").append(missingViolations);
-            }
-            if (!unexpectedViolations.isEmpty()) {
-                if (message.length() > 0) {
-                    message.append('\n');
-                }
-                message.append("unexpected violations: ").append(unexpectedViolations);
-            }
-            if (!differingViolations.isEmpty()) {
-                if (message.length() > 0) {
-                    message.append('\n');
-                }
-                message.append("differing violations: ").append(differingViolations);
-            }
-
-            assertTrue(message.toString(),
-                missingViolations.isEmpty()
-                && unexpectedViolations.isEmpty()
-                && differingViolations.isEmpty());
+        final StringBuilder message = new StringBuilder();
+        if (!missingViolations.isEmpty()) {
+            message.append("missing violations: ").append(missingViolations);
         }
+        if (!unexpectedViolations.isEmpty()) {
+            if (message.length() > 0) {
+                message.append('\n');
+            }
+            message.append("unexpected violations: ").append(unexpectedViolations);
+        }
+        if (!differingViolations.isEmpty()) {
+            if (message.length() > 0) {
+                message.append('\n');
+            }
+            message.append("differing violations: ").append(differingViolations);
+        }
+
+        assertTrue(message.toString(),
+            missingViolations.isEmpty()
+            && unexpectedViolations.isEmpty()
+            && differingViolations.isEmpty());
+
         checker.destroy();
     }
 

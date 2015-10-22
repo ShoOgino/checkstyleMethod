@@ -1,32 +1,13 @@
     private static boolean isAstEquals(DetailAST expected, DetailAST actual) {
-        boolean result = false;
+        boolean result;
         if (expected == actual) {
             result = true;
         }
         else if (actual == null || expected == null) {
             result = false;
-        } else {
-            if (expected.getType() == actual.getType()
-                    && expected.getLineNo() == actual.getLineNo()
-                    && expected.getColumnNo() == actual.getColumnNo()) {
-                if (expected.getText() == null) {
-                    result = actual.getText() == null;
-                }
-                else if (expected.getText().equals(actual.getText())) {
-                    result = true;
-                }
-            }
-
-            if (result) {
-                DetailAST childExpected = expected.getFirstChild();
-                DetailAST childActual = actual.getFirstChild();
-                result = isAstEquals(childExpected, childActual);
-                if (result) {
-                    DetailAST nextSiblingExpected = expected.getNextSibling();
-                    DetailAST nextSiblingActual = actual.getNextSibling();
-                    result = isAstEquals(nextSiblingExpected, nextSiblingActual);
-                }
-            }
+        }
+        else {
+            result = isAstEqualsSafe(expected, actual);
         }
         if (!result) {
             System.out.println("Expected: " + expected + " | Actual: " + actual);
