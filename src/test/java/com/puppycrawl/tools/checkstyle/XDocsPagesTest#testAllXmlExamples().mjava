@@ -1,0 +1,39 @@
+    @Test
+    public void testAllXmlExamples() throws Exception {
+        for (File file : Files.fileTreeTraverser().preOrderTraversal(XDOCS_DIRECTORY)) {
+            if (file.isDirectory()) {
+                continue;
+            }
+
+            final String source = Files.toString(file, UTF_8);
+            int position = -1;
+
+            while (true) {
+                position = source.indexOf("<source>", position + 1);
+
+                if (position == -1) {
+                    break;
+                }
+
+                final int nextPosition = source.indexOf("</source>", position);
+                final String unserializedSource = source.substring(position + 8, nextPosition)
+                        .trim().replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", "\"")
+                        .replace("&amp;", "&").replace("...", "");
+
+                position = nextPosition;
+
+                if (unserializedSource.charAt(0) != '<'
+                        || unserializedSource.charAt(unserializedSource.length() - 1) != '>') {
+                    continue;
+                }
+
+                // no dtd testing yet
+                if (unserializedSource.contains("<!")) {
+                    continue;
+                }
+
+                buildAndTestXml(file.getName(), unserializedSource);
+            }
+        }
+    }
+
