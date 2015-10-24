@@ -7,7 +7,7 @@
             final int realLength = CommonUtils.lengthExpandedTabs(
                 line, line.length(), getTabWidth());
 
-            if (realLength > max
+            if (realLength > max && !IMPORT_PATTERN.matcher(line).find()
                 && !ignorePattern.matcher(line).find()) {
                 log(i + 1, MSG_KEY, max, realLength);
             }
