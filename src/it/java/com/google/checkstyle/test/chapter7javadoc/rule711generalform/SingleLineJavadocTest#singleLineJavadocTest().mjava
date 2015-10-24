@@ -1,6 +1,6 @@
     @Test
     public void singleLineJavadocTest() throws Exception {
-        
+
         String msg = getCheckMessage(SingleLineJavadocCheck.class, "singleline.javadoc");
 
         final String[] expected = {
@@ -16,7 +16,7 @@
         final DefaultConfiguration checkConfig = createCheckConfig(SingleLineJavadocCheck.class);
         checkConfig.addAttribute("ignoreInlineTags", "false");
         String filePath = builder.getFilePath("InputSingleLineJavadocCheck");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

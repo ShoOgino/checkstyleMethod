@@ -1,6 +1,6 @@
     @Test
     public void illegalTokensTest() throws Exception {
-        
+
         final String[] expected = {
             "17:27: Avoid using corresponding octal or Unicode escape.",
             "18:27: Avoid using corresponding octal or Unicode escape.",
@@ -72,7 +72,7 @@
 
         Configuration checkConfig = builder.getCheckConfig("IllegalTokenText");
         String filePath = builder.getFilePath("IllegalTokenTextInput");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

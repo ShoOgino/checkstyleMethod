@@ -1,6 +1,6 @@
     @Test
     public void customImportTest3() throws Exception {
-        
+
         final String[] expected = {
                 "4: " + getCheckMessage(clazz, MSG_LEX, "java.awt.Button.ABORT", "java.io.File.createTempFile"),
                 "8: " + getCheckMessage(clazz, MSG_ORDER, STD, SPECIAL, "java.util.StringTokenizer"),
@@ -13,7 +13,7 @@
 
         Configuration checkConfig = builder.getCheckConfig("CustomImportOrder");
         String filePath = builder.getFilePath("CustomImportOrderInput_3");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

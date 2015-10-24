@@ -3,14 +3,14 @@
 
         Class<OneTopLevelClassCheck> clazz = OneTopLevelClassCheck.class;
         String messageKey = "one.top.level.class";
-        
+
         final String[] expected = {
             "4: " + getCheckMessage(clazz, messageKey, "FooEnum"),
         };
-        
+
         Configuration checkConfig = builder.getCheckConfig("OneTopLevelClass");
         String filePath = builder.getFilePath("OneTopLevelClassBad2");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

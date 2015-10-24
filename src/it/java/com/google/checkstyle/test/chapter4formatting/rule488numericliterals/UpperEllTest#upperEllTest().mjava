@@ -1,6 +1,6 @@
     @Test
     public void upperEllTest() throws Exception {
-        
+
         final String[] expected = {
             "6:36: Should use uppercase 'L'.",
             "12:27: Should use uppercase 'L'.",
@@ -27,10 +27,10 @@
             "99:29: Should use uppercase 'L'.",
             "100:22: Should use uppercase 'L'.",
         };
-        
+
         Configuration checkConfig = builder.getCheckConfig("UpperEll");
         String filePath = builder.getFilePath("InputUpperEll");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

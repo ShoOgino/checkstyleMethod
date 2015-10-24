@@ -1,6 +1,6 @@
     @Test
     public void missingSwitchDefaultTest() throws Exception {
-        
+
         String msg = getCheckMessage(MissingSwitchDefaultCheck.class, "missing.switch.default");
 
         final String[] expected = {
@@ -11,10 +11,10 @@
             "38:21: " + msg,
             "42:21: " + msg,
         };
-        
+
         Configuration checkConfig = builder.getCheckConfig("MissingSwitchDefault");
         String filePath = builder.getFilePath("MissingSwitchDefaultInput");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

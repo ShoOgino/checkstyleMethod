@@ -1,6 +1,6 @@
     @Test
     public void overloadMethodsTest() throws Exception {
-        
+
         Class<OverloadMethodsDeclarationOrderCheck> clazz = OverloadMethodsDeclarationOrderCheck.class;
         String messageKey = "overload.methods.declaration";
 
@@ -13,7 +13,7 @@
 
         Configuration checkConfig = builder.getCheckConfig("OverloadMethodsDeclarationOrder");
         String filePath = builder.getFilePath("InputOverloadMethodsDeclarationOrder");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

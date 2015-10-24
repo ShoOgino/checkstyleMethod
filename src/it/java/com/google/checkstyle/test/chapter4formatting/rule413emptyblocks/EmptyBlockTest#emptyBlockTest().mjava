@@ -1,6 +1,6 @@
     @Test
     public void emptyBlockTest() throws Exception {
-        
+
         final String[] expected = {
             "19:21: " + getCheckMessage(EmptyBlockCheck.class, "block.empty", "if"),
             "22:34: " + getCheckMessage(EmptyBlockCheck.class, "block.empty", "if"),
@@ -39,7 +39,7 @@
 
         Configuration checkConfig = builder.getCheckConfig("EmptyBlock");
         String filePath = builder.getFilePath("EmptyBlockInput_Basic");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

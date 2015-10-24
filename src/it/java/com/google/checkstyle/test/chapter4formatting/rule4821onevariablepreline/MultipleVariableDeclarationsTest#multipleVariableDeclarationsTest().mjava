@@ -1,6 +1,6 @@
     @Test
     public void multipleVariableDeclarationsTest() throws Exception {
-        
+
         String msgComma = getCheckMessage(MultipleVariableDeclarationsCheck.class, "multiple.variable.declarations.comma");
         String msg = getCheckMessage(MultipleVariableDeclarationsCheck.class, "multiple.variable.declarations");
 
@@ -29,7 +29,7 @@
 
         Configuration checkConfig = builder.getCheckConfig("MultipleVariableDeclarations");
         String filePath = builder.getFilePath("MultipleVariableDeclarationsInput");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

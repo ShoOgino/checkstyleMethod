@@ -1,6 +1,6 @@
     @Test
     public void methodNameTest() throws Exception {
-        
+
         Configuration checkConfig = builder.getCheckConfig("MethodName");
         String msgKey = "name.invalidPattern";
         String format = "^[a-z][a-z0-9][a-zA-Z0-9_]*$";
@@ -31,9 +31,9 @@
             "49:14: " + getCheckMessage(checkConfig.getMessages(), msgKey, "f", format),
             "50:14: " + getCheckMessage(checkConfig.getMessages(), msgKey, "fO", format),
         };
-        
+
         String filePath = builder.getFilePath("InputMethodName");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }

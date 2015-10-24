@@ -1,7 +1,7 @@
     @Test
     public void testViolationsByComment() throws Exception
     {
-        
+
         final String[] expected = {
             "19: " + getCheckMessage(EmptyCatchBlockCheck.class, "catch.block.empty"),
             "27: " + getCheckMessage(EmptyCatchBlockCheck.class, "catch.block.empty"),
@@ -9,7 +9,7 @@
 
         Configuration checkConfig = builder.getCheckConfig("EmptyCatchBlock");
         String filePath = builder.getFilePath("EmptyCatchBlockViolationsByCommentInput");
-        
+
         Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
