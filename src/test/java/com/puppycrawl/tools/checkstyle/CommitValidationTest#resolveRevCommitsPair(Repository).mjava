@@ -4,12 +4,12 @@
         try (RevWalk revWalk = new RevWalk(repo)) {
             Iterator<RevCommit> first;
             Iterator<RevCommit> second;
-            ObjectId headId = repo.resolve(Constants.HEAD);
-            RevCommit headCommit = revWalk.parseCommit(headId);
+            final ObjectId headId = repo.resolve(Constants.HEAD);
+            final RevCommit headCommit = revWalk.parseCommit(headId);
 
             if (isMergeCommit(headCommit)) {
-                RevCommit firstParent = headCommit.getParent(0);
-                RevCommit secondParent = headCommit.getParent(1);
+                final RevCommit firstParent = headCommit.getParent(0);
+                final RevCommit secondParent = headCommit.getParent(1);
 
                 try (Git git = new Git(repo)) {
                     first = git.log().add(firstParent).call().iterator();

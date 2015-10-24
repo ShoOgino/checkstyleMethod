@@ -1,9 +1,9 @@
     @Test
     public void testFormat() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(MutableExceptionCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(MutableExceptionCheck.class);
         checkConfig.addAttribute("format", "^.*Failure$");
         checkConfig.addAttribute("extendedClassNameFormat", "^.*ThreadDeath$");
-        String[] expected = {
+        final String[] expected = {
             "34:13: " + getCheckMessage(MSG_KEY, "errorCode"),
         };
 

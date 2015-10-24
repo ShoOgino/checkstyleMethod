@@ -1,13 +1,13 @@
     @Test
     public void testDeprecated() throws ReflectiveOperationException {
         final DetailAST ast = new DetailAST();
-        DetailAST astParent = new DetailAST();
+        final DetailAST astParent = new DetailAST();
         astParent.setType(TokenTypes.LITERAL_CATCH);
-        Method setParent = ast.getClass().getDeclaredMethod("setParent", DetailAST.class);
+        final Method setParent = ast.getClass().getDeclaredMethod("setParent", DetailAST.class);
         setParent.setAccessible(true);
         setParent.invoke(ast, astParent);
 
-        int[] validTypes = {
+        final int[] validTypes = {
             TokenTypes.CLASS_DEF,
             TokenTypes.INTERFACE_DEF,
             TokenTypes.ENUM_DEF,

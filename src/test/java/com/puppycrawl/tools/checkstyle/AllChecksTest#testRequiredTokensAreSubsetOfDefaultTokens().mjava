@@ -1,6 +1,6 @@
     @Test
     public void testRequiredTokensAreSubsetOfDefaultTokens() throws Exception {
-        Set<Class<?>> checkstyleChecks = getCheckstyleChecks();
+        final Set<Class<?>> checkstyleChecks = getCheckstyleChecks();
 
         for (Class<?> check : checkstyleChecks) {
             if (Check.class.isAssignableFrom(check)) {
@@ -9,7 +9,7 @@
                 final int[] requiredTokens = testedCheck.getRequiredTokens();
 
                 if (!isSubset(requiredTokens, defaultTokens)) {
-                    String errorMessage = String.format(Locale.ROOT,
+                    final String errorMessage = String.format(Locale.ROOT,
                             "%s's required tokens must be a subset"
                             + " of default tokens.", check.getName());
                     Assert.fail(errorMessage);

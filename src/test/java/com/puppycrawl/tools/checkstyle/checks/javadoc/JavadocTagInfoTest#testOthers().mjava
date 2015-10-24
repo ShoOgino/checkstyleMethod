@@ -1,6 +1,6 @@
     @Test
     public void testOthers() throws ReflectiveOperationException {
-        JavadocTagInfo[] tags = {
+        final JavadocTagInfo[] tags = {
             JavadocTagInfo.CODE,
             JavadocTagInfo.DOC_ROOT,
             JavadocTagInfo.LINK,
@@ -11,15 +11,15 @@
             JavadocTagInfo.VALUE,
         };
         for (JavadocTagInfo tagInfo : tags) {
-            DetailAST astParent = new DetailAST();
+            final DetailAST astParent = new DetailAST();
             astParent.setType(TokenTypes.LITERAL_CATCH);
 
             final DetailAST ast = new DetailAST();
-            Method setParent = ast.getClass().getDeclaredMethod("setParent", DetailAST.class);
+            final Method setParent = ast.getClass().getDeclaredMethod("setParent", DetailAST.class);
             setParent.setAccessible(true);
             setParent.invoke(ast, astParent);
 
-            int[] validTypes = {
+            final int[] validTypes = {
                 TokenTypes.PACKAGE_DEF,
                 TokenTypes.CLASS_DEF,
                 TokenTypes.INTERFACE_DEF,

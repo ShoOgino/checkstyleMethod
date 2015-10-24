@@ -1,16 +1,17 @@
     @Test
     public void testBundleReloadUrlNotNull() throws IOException {
 
-        ClassLoader classloader = mock(ClassLoader.class);
+        final ClassLoader classloader = mock(ClassLoader.class);
         final URLConnection mockConnection = Mockito.mock(URLConnection.class);
         when(mockConnection.getInputStream()).thenReturn(
                 new ByteArrayInputStream(EMPTY_BYTE_ARRAY));
 
-        URL url = getMockUrl(mockConnection);
-        String resource = "com/puppycrawl/tools/checkstyle/checks/coding/messages_en.properties";
+        final URL url = getMockUrl(mockConnection);
+        final String resource =
+            "com/puppycrawl/tools/checkstyle/checks/coding/messages_en.properties";
         when(classloader.getResource(resource)).thenReturn(url);
 
-        LocalizedMessage.UTF8Control control = new LocalizedMessage.UTF8Control();
+        final LocalizedMessage.UTF8Control control = new LocalizedMessage.UTF8Control();
         control.newBundle("com.puppycrawl.tools.checkstyle.checks.coding.messages",
                 Locale.ENGLISH, "java.class",
                 classloader, true);

@@ -1,17 +1,17 @@
     private static List<RevCommit> getCommitsByLastCommitAuthor(
             Iterator<RevCommit> previousCommitsIterator) {
-        List<RevCommit> commits = new LinkedList<>();
+        final List<RevCommit> commits = new LinkedList<>();
 
         if (previousCommitsIterator.hasNext()) {
-            RevCommit lastCommit = previousCommitsIterator.next();
-            String lastCommitAuthor = lastCommit.getAuthorIdent().getName();
+            final RevCommit lastCommit = previousCommitsIterator.next();
+            final String lastCommitAuthor = lastCommit.getAuthorIdent().getName();
             commits.add(lastCommit);
 
             boolean wasLastCheckedCommitAuthorSameAsLastCommit = true;
             while (previousCommitsIterator.hasNext()
                     && wasLastCheckedCommitAuthorSameAsLastCommit) {
-                RevCommit currentCommit = previousCommitsIterator.next();
-                String currentCommitAuthor = currentCommit.getAuthorIdent().getName();
+                final RevCommit currentCommit = previousCommitsIterator.next();
+                final String currentCommitAuthor = currentCommit.getAuthorIdent().getName();
                 if (currentCommitAuthor.equals(lastCommitAuthor)) {
                     commits.add(currentCommit);
                 }

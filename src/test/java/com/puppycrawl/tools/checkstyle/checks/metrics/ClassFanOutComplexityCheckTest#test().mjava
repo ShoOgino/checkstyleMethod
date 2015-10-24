@@ -1,10 +1,11 @@
     @Test
     public void test() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(ClassFanOutComplexityCheck.class);
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ClassFanOutComplexityCheck.class);
 
         checkConfig.addAttribute("max", "0");
 
-        String[] expected = {
+        final String[] expected = {
             "6:1: " + getCheckMessage(MSG_KEY, 3, 0),
             "38:1: " + getCheckMessage(MSG_KEY, 1, 0),
         };

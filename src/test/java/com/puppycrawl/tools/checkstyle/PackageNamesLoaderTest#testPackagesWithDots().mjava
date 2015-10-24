@@ -2,19 +2,19 @@
     @SuppressWarnings("unchecked")
     public void testPackagesWithDots() throws Exception {
 
-        Constructor<PackageNamesLoader> constructor =
+        final Constructor<PackageNamesLoader> constructor =
                 PackageNamesLoader.class.getDeclaredConstructor();
         constructor.setAccessible(true);
-        PackageNamesLoader loader = constructor.newInstance();
+        final PackageNamesLoader loader = constructor.newInstance();
 
-        Attributes attributes = mock(Attributes.class);
+        final Attributes attributes = mock(Attributes.class);
         when(attributes.getValue("name")).thenReturn("coding.");
         loader.startElement("", "", "package", attributes);
         loader.endElement("", "", "package");
 
-        Field field = PackageNamesLoader.class.getDeclaredField("packageNames");
+        final Field field = PackageNamesLoader.class.getDeclaredField("packageNames");
         field.setAccessible(true);
-        Set<String> list = (Set<String>) field.get(loader);
+        final Set<String> list = (Set<String>) field.get(loader);
         assertEquals("coding.", list.iterator().next());
     }
 

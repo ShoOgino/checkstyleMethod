@@ -1,12 +1,12 @@
     @Test
     public void test() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(JavaNCSSCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(JavaNCSSCheck.class);
 
         checkConfig.addAttribute("methodMaximum", "0");
         checkConfig.addAttribute("classMaximum", "1");
         checkConfig.addAttribute("fileMaximum", "2");
 
-        String[] expected = {
+        final String[] expected = {
             "2:1: " + getCheckMessage(MSG_FILE, 39, 2),
             "9:1: " + getCheckMessage(MSG_CLASS, 22, 1),
             "14:5: " + getCheckMessage(MSG_METHOD, 2, 0),

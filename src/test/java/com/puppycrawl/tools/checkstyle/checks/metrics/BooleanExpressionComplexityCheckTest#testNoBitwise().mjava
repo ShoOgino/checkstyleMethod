@@ -1,11 +1,11 @@
     @Test
     public void testNoBitwise() throws Exception {
-        DefaultConfiguration checkConfig =
+        final DefaultConfiguration checkConfig =
             createCheckConfig(BooleanExpressionComplexityCheck.class);
         checkConfig.addAttribute("max", "5");
         checkConfig.addAttribute("tokens", "BXOR,LAND,LOR");
 
-        String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
         verify(checkConfig, getPath("InputBooleanExpressionComplexity.java"), expected);
     }

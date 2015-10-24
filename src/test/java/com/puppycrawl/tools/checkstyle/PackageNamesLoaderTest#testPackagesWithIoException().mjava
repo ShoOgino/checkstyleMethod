@@ -5,13 +5,13 @@
         final URLConnection mockConnection = Mockito.mock(URLConnection.class);
         when(mockConnection.getInputStream()).thenReturn(null);
 
-        URL url = getMockUrl(mockConnection);
+        final URL url = getMockUrl(mockConnection);
 
-        Enumeration<URL> enumer = (Enumeration<URL>) mock(Enumeration.class);
+        final Enumeration<URL> enumer = (Enumeration<URL>) mock(Enumeration.class);
         when(enumer.hasMoreElements()).thenReturn(true);
         when(enumer.nextElement()).thenReturn(url);
 
-        ClassLoader classLoader = mock(ClassLoader.class);
+        final ClassLoader classLoader = mock(ClassLoader.class);
         when(classLoader.getResources("checkstyle_packages.xml")).thenReturn(enumer);
 
         try {

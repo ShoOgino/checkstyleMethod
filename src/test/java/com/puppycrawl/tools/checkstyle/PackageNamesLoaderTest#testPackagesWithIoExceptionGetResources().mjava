@@ -2,7 +2,7 @@
     @SuppressWarnings("unchecked")
     public void testPackagesWithIoExceptionGetResources() throws Exception {
 
-        ClassLoader classLoader = mock(ClassLoader.class);
+        final ClassLoader classLoader = mock(ClassLoader.class);
         when(classLoader.getResources("checkstyle_packages.xml")).thenThrow(IOException.class);
 
         try {

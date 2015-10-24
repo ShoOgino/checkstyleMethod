@@ -1,9 +1,9 @@
     @Test
     public void testDecideByFileNameAndModuleMatchingRegExpMatch() {
-        LocalizedMessage message =
+        final LocalizedMessage message =
                 new LocalizedMessage(10, 10, "", "", null, null, getClass(), null);
         final AuditEvent ev = new AuditEvent(this, "TestSUFFIX", message);
-        SuppressElement filterWithoutChecks = new SuppressElement("Test");
+        final SuppressElement filterWithoutChecks = new SuppressElement("Test");
         assertFalse(filterWithoutChecks.accept(ev));
     }
 

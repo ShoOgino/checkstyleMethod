@@ -1,11 +1,11 @@
     @Test
     public void testGetAnnotationValuesWrongArg() throws ReflectiveOperationException {
-        SuppressWarningsHolder holder = new SuppressWarningsHolder();
-        Method getAllAnnotationValues = holder.getClass()
+        final SuppressWarningsHolder holder = new SuppressWarningsHolder();
+        final Method getAllAnnotationValues = holder.getClass()
                 .getDeclaredMethod("getAnnotationValues", DetailAST.class);
         getAllAnnotationValues.setAccessible(true);
 
-        DetailAST methodDef = new DetailAST();
+        final DetailAST methodDef = new DetailAST();
         methodDef.setType(TokenTypes.METHOD_DEF);
         methodDef.setText("Method Def");
         methodDef.setLineNo(0);

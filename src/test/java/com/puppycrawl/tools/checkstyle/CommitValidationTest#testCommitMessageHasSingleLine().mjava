@@ -1,16 +1,16 @@
     @Test
     public void testCommitMessageHasSingleLine() throws Exception {
         for (RevCommit commit : filterValidCommits(lastCommits)) {
-            String commitId = commit.getId().getName();
-            String commitMessage = commit.getFullMessage();
-            Matcher matcher = NEWLINE_PATTERN.matcher(commitMessage);
+            final String commitId = commit.getId().getName();
+            final String commitMessage = commit.getFullMessage();
+            final Matcher matcher = NEWLINE_PATTERN.matcher(commitMessage);
             if (matcher.find()) {
                 /**
                  * Git by default put newline character at the end of commit message. To check
                  * if commit message has a single line we have to make sure that the only
                  * newline character found is in the end of commit message.
                  */
-                boolean isFoundNewLineCharacterAtTheEndOfMessage =
+                final boolean isFoundNewLineCharacterAtTheEndOfMessage =
                         matcher.end() == commitMessage.length();
                 assertTrue(getInvalidCommitMessageFormattingError(commitId, commitMessage),
                         isFoundNewLineCharacterAtTheEndOfMessage);

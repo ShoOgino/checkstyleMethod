@@ -1,6 +1,7 @@
     @Test
     public void testCreateListenerIllegalStateException() throws Exception {
-        Method method = Main.class.getDeclaredMethod("createListener", String.class, String.class);
+        final Method method = Main.class.getDeclaredMethod("createListener", String.class,
+            String.class);
         method.setAccessible(true);
         try {
             method.invoke(null, "myformat", null);

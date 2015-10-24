@@ -1,8 +1,8 @@
     @Test(expected = IllegalStateException.class)
     public void testVisitTokenWithWrongTokenType() {
-        ExecutableStatementCountCheck checkObj =
+        final ExecutableStatementCountCheck checkObj =
             new ExecutableStatementCountCheck();
-        DetailAST ast = new DetailAST();
+        final DetailAST ast = new DetailAST();
         ast.initialize(
             new CommonHiddenStreamToken(TokenTypes.ENUM, "ENUM"));
         checkObj.visitToken(ast);

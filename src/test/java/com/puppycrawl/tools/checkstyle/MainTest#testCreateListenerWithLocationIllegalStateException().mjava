@@ -1,8 +1,9 @@
     @Test
     public void testCreateListenerWithLocationIllegalStateException() throws Exception {
-        Method method = Main.class.getDeclaredMethod("createListener", String.class, String.class);
+        final Method method = Main.class.getDeclaredMethod("createListener", String.class,
+            String.class);
         method.setAccessible(true);
-        String outDir = "myfolder123";
+        final String outDir = "myfolder123";
         try {
             method.invoke(null, "myformat", outDir);
             fail();

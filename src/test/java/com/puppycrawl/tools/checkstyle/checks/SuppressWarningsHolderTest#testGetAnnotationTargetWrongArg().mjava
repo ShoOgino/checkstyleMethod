@@ -1,15 +1,15 @@
     @Test
     public void testGetAnnotationTargetWrongArg() throws ReflectiveOperationException {
-        SuppressWarningsHolder holder = new SuppressWarningsHolder();
-        Method getAnnotationTarget = holder.getClass()
+        final SuppressWarningsHolder holder = new SuppressWarningsHolder();
+        final Method getAnnotationTarget = holder.getClass()
                 .getDeclaredMethod("getAnnotationTarget", DetailAST.class);
         getAnnotationTarget.setAccessible(true);
 
-        DetailAST methodDef = new DetailAST();
+        final DetailAST methodDef = new DetailAST();
         methodDef.setType(TokenTypes.METHOD_DEF);
         methodDef.setText("Method Def");
 
-        DetailAST parent = new DetailAST();
+        final DetailAST parent = new DetailAST();
         parent.setType(TokenTypes.ASSIGN);
         parent.setText("Parent ast");
         parent.addChild(methodDef);

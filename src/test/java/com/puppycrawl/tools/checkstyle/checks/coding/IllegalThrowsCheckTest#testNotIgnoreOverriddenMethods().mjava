@@ -4,10 +4,10 @@
      */
     @Test
     public void testNotIgnoreOverriddenMethods() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
         checkConfig.addAttribute("ignoreOverriddenMethods", "false");
 
-        String[] expected = {
+        final String[] expected = {
             "7:36: " + getCheckMessage(MSG_KEY, "RuntimeException"),
             "12:51: " + getCheckMessage(MSG_KEY, "RuntimeException"),
         };

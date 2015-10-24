@@ -1,15 +1,15 @@
     @Test
     public void testEmptyJavadoc() throws Exception {
-        ListBuffer<String[]> options = new ListBuffer<>();
+        final ListBuffer<String[]> options = new ListBuffer<>();
         options.add(new String[]{"-destfile", "target/tokentypes.properties"});
 
-        ListBuffer<String> names = new ListBuffer<>();
+        final ListBuffer<String> names = new ListBuffer<>();
         names.add(getPath("InputTokenTypesDocletEmptyJavadoc.java"));
 
-        Context context = new Context();
+        final Context context = new Context();
         new TestMessager(context);
-        JavadocTool javadocTool = JavadocTool.make0(context);
-        RootDoc rootDoc = getRootDoc(javadocTool, options, names);
+        final JavadocTool javadocTool = JavadocTool.make0(context);
+        final RootDoc rootDoc = getRootDoc(javadocTool, options, names);
 
         try {
             TokenTypesDoclet.start(rootDoc);

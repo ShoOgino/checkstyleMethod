@@ -4,10 +4,10 @@
      */
     @Test
     public void testIgnoreOverriddenMethods() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
 
-        String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
         verify(checkConfig, getPath("InputIllegalThrowsIgnoreOverriddenMethods.java"), expected);
     }

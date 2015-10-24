@@ -1,13 +1,13 @@
     @Test
     public void testReturnFromCatch() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(DescendantTokenCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(DescendantTokenCheck.class);
 
         checkConfig.addAttribute("tokens", "LITERAL_CATCH");
         checkConfig.addAttribute("limitedTokens", "LITERAL_RETURN");
         checkConfig.addAttribute("maximumNumber", "0");
         checkConfig.addAttribute("maximumMessage", "Return from catch is not allowed.");
 
-        String[] expected = {
+        final String[] expected = {
             "7:11: Return from catch is not allowed.",
             "15:11: Return from catch is not allowed.",
         };

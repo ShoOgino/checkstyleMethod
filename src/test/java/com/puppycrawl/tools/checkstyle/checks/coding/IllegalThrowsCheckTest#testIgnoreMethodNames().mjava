@@ -3,10 +3,10 @@
      */
     @Test
     public void testIgnoreMethodNames() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
         checkConfig.addAttribute("ignoredMethodNames", "methodTwo");
 
-        String[] expected = {
+        final String[] expected = {
             "9:51: " + getCheckMessage(MSG_KEY, "RuntimeException"),
             "18:35: " + getCheckMessage(MSG_KEY, "Throwable"),
         };

@@ -1,13 +1,13 @@
     @Test
     public void testNoSum() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(DescendantTokenCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(DescendantTokenCheck.class);
 
         checkConfig.addAttribute("tokens", "NOT_EQUAL,EQUAL");
         checkConfig.addAttribute("limitedTokens", "LITERAL_THIS,LITERAL_NULL");
         checkConfig.addAttribute("maximumNumber", "1");
         checkConfig.addAttribute("maximumMessage", "What are you doing?");
 
-        String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
         verify(checkConfig, getPath("InputReturnFromFinally.java"), expected);
     }

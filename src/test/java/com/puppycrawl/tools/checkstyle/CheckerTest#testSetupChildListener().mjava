@@ -1,11 +1,12 @@
     @Test
     public void testSetupChildListener() throws Exception {
         final Checker checker = new Checker();
-        PackageObjectFactory factory = new PackageObjectFactory(
+        final PackageObjectFactory factory = new PackageObjectFactory(
                 new HashSet<String>(), Thread.currentThread().getContextClassLoader());
         checker.setModuleFactory(factory);
 
-        Configuration config = new DefaultConfiguration(DebugAuditAdapter.class.getCanonicalName());
+        final Configuration config = new DefaultConfiguration(
+            DebugAuditAdapter.class.getCanonicalName());
         checker.setupChild(config);
     }
 

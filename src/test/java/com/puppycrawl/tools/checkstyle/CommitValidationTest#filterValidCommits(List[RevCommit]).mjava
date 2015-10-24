@@ -1,7 +1,7 @@
     private static List<RevCommit> filterValidCommits(List<RevCommit> revCommits) {
-        List<RevCommit> filteredCommits = new LinkedList<>();
+        final List<RevCommit> filteredCommits = new LinkedList<>();
         for (RevCommit commit : revCommits) {
-            String commitAuthor = commit.getAuthorIdent().getName();
+            final String commitAuthor = commit.getAuthorIdent().getName();
             if (!USERS_EXCLUDED_FROM_VALIDATION.contains(commitAuthor)) {
                 filteredCommits.add(commit);
             }

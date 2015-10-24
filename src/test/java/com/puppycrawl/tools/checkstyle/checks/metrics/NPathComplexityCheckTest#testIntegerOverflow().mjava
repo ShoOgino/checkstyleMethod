@@ -1,13 +1,13 @@
     @Test
     public void testIntegerOverflow() throws Exception {
-        DefaultConfiguration checkConfig =
+        final DefaultConfiguration checkConfig =
             createCheckConfig(NPathComplexityCheck.class);
 
         checkConfig.addAttribute("max", "0");
 
         final long largerThanMaxInt = 3486784401L;
 
-        String[] expected = {
+        final String[] expected = {
             "9:5: " + getCheckMessage(MSG_KEY, largerThanMaxInt, 0),
         };
 

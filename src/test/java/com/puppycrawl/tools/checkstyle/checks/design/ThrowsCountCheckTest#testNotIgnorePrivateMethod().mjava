@@ -1,8 +1,8 @@
     @Test
     public void testNotIgnorePrivateMethod() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(ThrowsCountCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(ThrowsCountCheck.class);
         checkConfig.addAttribute("ignorePrivateMethods", "false");
-        String[] expected = {
+        final String[] expected = {
             "17:20: " + getCheckMessage(MSG_KEY, 5, 4),
             "22:20: " + getCheckMessage(MSG_KEY, 5, 4),
             "27:20: " + getCheckMessage(MSG_KEY, 6, 4),

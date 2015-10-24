@@ -1,13 +1,13 @@
     @Test
     public void testClassRegularClass() throws Exception {
-        Class<?> tokenType = Class
+        final Class<?> tokenType = Class
                 .forName("com.puppycrawl.tools.checkstyle.checks.AbstractTypeAwareCheck$Token");
 
-        Class<?> regularClassType = Class
+        final Class<?> regularClassType = Class
                 .forName(
                     "com.puppycrawl.tools.checkstyle.checks.AbstractTypeAwareCheck$RegularClass");
-        Constructor<?> regularClassConstructor = regularClassType.getDeclaredConstructor(tokenType,
-                String.class, AbstractTypeAwareCheck.class);
+        final Constructor<?> regularClassConstructor = regularClassType.getDeclaredConstructor(
+                tokenType, String.class, AbstractTypeAwareCheck.class);
         regularClassConstructor.setAccessible(true);
 
         try {
@@ -18,25 +18,25 @@
             assertEquals("ClassInfo's name should be non-null", ex.getCause().getMessage());
         }
 
-        Constructor<?> tokenConstructor = tokenType.getDeclaredConstructor(String.class, int.class,
-                int.class);
-        Object token = tokenConstructor.newInstance("blablabla", 1, 1);
+        final Constructor<?> tokenConstructor = tokenType.getDeclaredConstructor(String.class,
+                int.class, int.class);
+        final Object token = tokenConstructor.newInstance("blablabla", 1, 1);
 
-        Object regularClass = regularClassConstructor.newInstance(token, "sur",
+        final Object regularClass = regularClassConstructor.newInstance(token, "sur",
                 new JavadocMethodCheck());
 
-        Method toString = regularClass.getClass().getDeclaredMethod("toString");
+        final Method toString = regularClass.getClass().getDeclaredMethod("toString");
         toString.setAccessible(true);
-        String result = (String) toString.invoke(regularClass);
+        final String result = (String) toString.invoke(regularClass);
         assertEquals("RegularClass[name=Token[blablabla(1x1)], in class=sur, loadable=true,"
                 + " class=null]", result);
 
-        Method setClazz = regularClass.getClass().getDeclaredMethod("setClazz", Class.class);
+        final Method setClazz = regularClass.getClass().getDeclaredMethod("setClazz", Class.class);
         setClazz.setAccessible(true);
-        Class<?> arg = null;
+        final Class<?> arg = null;
         setClazz.invoke(regularClass, arg);
 
-        Method getClazz = regularClass.getClass().getDeclaredMethod("getClazz");
+        final Method getClazz = regularClass.getClass().getDeclaredMethod("getClazz");
         getClazz.setAccessible(true);
         assertNull(getClazz.invoke(regularClass));
     }

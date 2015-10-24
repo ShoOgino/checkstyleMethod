@@ -3,10 +3,11 @@
     // because this is possible situation (though highly unlikely), which depends on hardware
     // and is difficult to emulate
     public void testLoadThrowsException() throws InvocationTargetException {
-        InputSource source = new InputSource();
+        final InputSource source = new InputSource();
         try {
-            Class<?> clazz = ImportControlLoader.class;
-            Method privateMethod = clazz.getDeclaredMethod("load", InputSource.class, URI.class);
+            final Class<?> clazz = ImportControlLoader.class;
+            final Method privateMethod = clazz.getDeclaredMethod("load", InputSource.class,
+                URI.class);
             privateMethod.setAccessible(true);
             privateMethod.invoke(null, source,
                     new File(getPath("import-control_complete.xml")).toURI());

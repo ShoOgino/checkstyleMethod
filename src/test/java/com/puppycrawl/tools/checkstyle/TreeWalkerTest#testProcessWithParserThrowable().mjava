@@ -2,13 +2,13 @@
     public void testProcessWithParserThrowable() throws Exception {
         final TreeWalker treeWalker = new TreeWalker();
         treeWalker.configure(createCheckConfig(TypeNameCheck.class));
-        PackageObjectFactory factory = new PackageObjectFactory(
+        final PackageObjectFactory factory = new PackageObjectFactory(
                 new HashSet<String>(), Thread.currentThread().getContextClassLoader());
         treeWalker.setModuleFactory(factory);
         treeWalker.setCacheFile(temporaryFolder.newFile().getPath());
         treeWalker.setupChild(createCheckConfig(TypeNameCheck.class));
         final File file = temporaryFolder.newFile("file.java");
-        List<String> lines = new ArrayList<>();
+        final List<String> lines = new ArrayList<>();
         lines.add(" classD a {} ");
 
         try {

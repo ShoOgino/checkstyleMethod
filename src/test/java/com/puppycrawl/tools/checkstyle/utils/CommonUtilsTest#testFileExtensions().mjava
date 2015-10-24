@@ -1,12 +1,12 @@
     @Test
     public void testFileExtensions() {
         final String[] fileExtensions = {"java"};
-        File pdfFile = new File("file.pdf");
+        final File pdfFile = new File("file.pdf");
         assertFalse(CommonUtils.matchesFileExtension(pdfFile, fileExtensions));
         assertTrue(CommonUtils.matchesFileExtension(pdfFile, (String[]) null));
-        File javaFile = new File("file.java");
+        final File javaFile = new File("file.java");
         assertTrue(CommonUtils.matchesFileExtension(javaFile, fileExtensions));
-        File emptyExtensionFile = new File("file.");
+        final File emptyExtensionFile = new File("file.");
         assertTrue(CommonUtils.matchesFileExtension(emptyExtensionFile, ""));
     }
 

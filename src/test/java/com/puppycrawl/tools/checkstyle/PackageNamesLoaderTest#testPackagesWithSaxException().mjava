@@ -6,13 +6,13 @@
         when(mockConnection.getInputStream()).thenReturn(
                 new ByteArrayInputStream(EMPTY_BYTE_ARRAY));
 
-        URL url = getMockUrl(mockConnection);
+        final URL url = getMockUrl(mockConnection);
 
-        Enumeration<URL> enumeration = (Enumeration<URL>) mock(Enumeration.class);
+        final Enumeration<URL> enumeration = (Enumeration<URL>) mock(Enumeration.class);
         when(enumeration.hasMoreElements()).thenReturn(true);
         when(enumeration.nextElement()).thenReturn(url);
 
-        ClassLoader classLoader = mock(ClassLoader.class);
+        final ClassLoader classLoader = mock(ClassLoader.class);
         when(classLoader.getResources("checkstyle_packages.xml")).thenReturn(enumeration);
 
         try {

@@ -1,6 +1,6 @@
     @Test
     public void testIllegalClassNames() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
         checkConfig.addAttribute("illegalClassNames",
                                  "java.lang.Error, java.lang.Exception, NullPointerException");
 
@@ -8,7 +8,7 @@
         checkConfig.addAttribute("illegalClassNames",
                 "java.lang.IOException.");
 
-        String[] expected = {
+        final String[] expected = {
             "5:33: " + getCheckMessage(MSG_KEY, "NullPointerException"),
             "14:73: " + getCheckMessage(MSG_KEY, "java.lang.Error"),
         };

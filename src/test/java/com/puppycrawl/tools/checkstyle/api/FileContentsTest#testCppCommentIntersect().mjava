@@ -1,7 +1,7 @@
     @Test
     public void testCppCommentIntersect() {
         // just to make UT coverage 100%
-        FileContents o = new FileContents(
+        final FileContents o = new FileContents(
                 FileText.fromLines(new File("filename"), Collections.singletonList("  //   ")));
         o.reportCppComment(1, 2);
         assertTrue(o.hasIntersectionWithComment(1, 5, 1, 6));

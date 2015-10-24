@@ -1,9 +1,9 @@
     @Test
     public void testCommitMessageHasProperStructure() throws Exception {
         for (RevCommit commit : filterValidCommits(lastCommits)) {
-            String commitId = commit.getId().getName();
-            String commitMessage = commit.getFullMessage();
-            Matcher matcher = ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher(commitMessage);
+            final String commitId = commit.getId().getName();
+            final String commitMessage = commit.getFullMessage();
+            final Matcher matcher = ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher(commitMessage);
             assertTrue(getInvalidCommitMessageFormattingError(commitId, commitMessage),
                     matcher.matches());
         }

@@ -4,9 +4,9 @@
     public void testGetFullImportIdent() {
         Object actual;
         try {
-            Class<?> clazz = CustomImportOrderCheck.class;
-            Object t = clazz.getConstructor().newInstance();
-            Method method = clazz.getDeclaredMethod("getFullImportIdent", DetailAST.class);
+            final Class<?> clazz = CustomImportOrderCheck.class;
+            final Object t = clazz.getConstructor().newInstance();
+            final Method method = clazz.getDeclaredMethod("getFullImportIdent", DetailAST.class);
             method.setAccessible(true);
             actual = method.invoke(t, (DetailAST) null);
         }
@@ -15,7 +15,7 @@
             actual = null;
         }
 
-        String expected = "";
+        final String expected = "";
         assertEquals(expected, actual);
     }
 

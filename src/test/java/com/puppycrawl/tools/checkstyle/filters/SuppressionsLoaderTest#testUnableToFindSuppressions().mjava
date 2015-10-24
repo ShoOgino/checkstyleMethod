@@ -1,12 +1,12 @@
     @Test
     public void testUnableToFindSuppressions() throws Exception {
-        Class<SuppressionsLoader> loaderClass = SuppressionsLoader.class;
-        Method loadSuppressions =
+        final Class<SuppressionsLoader> loaderClass = SuppressionsLoader.class;
+        final Method loadSuppressions =
             loaderClass.getDeclaredMethod("loadSuppressions", InputSource.class, String.class);
         loadSuppressions.setAccessible(true);
 
-        String sourceName = "suppressions_none.xml";
-        InputSource inputSource = new InputSource(sourceName);
+        final String sourceName = "suppressions_none.xml";
+        final InputSource inputSource = new InputSource(sourceName);
 
         thrown.expect(CheckstyleException.class);
         thrown.expectMessage("Unable to find: " + sourceName);

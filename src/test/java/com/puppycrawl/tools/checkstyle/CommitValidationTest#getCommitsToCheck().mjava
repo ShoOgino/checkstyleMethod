@@ -1,7 +1,7 @@
     private static List<RevCommit> getCommitsToCheck() throws Exception {
         List<RevCommit> commits;
         try (Repository repo = new FileRepositoryBuilder().findGitDir().build()) {
-            RevCommitsPair revCommitsPair = resolveRevCommitsPair(repo);
+            final RevCommitsPair revCommitsPair = resolveRevCommitsPair(repo);
             if (COMMITS_RESOLUTION_MODE == CommitsResolutionMode.BY_COUNTER) {
                 commits = getCommitsByCounter(revCommitsPair.getFirst());
                 commits.addAll(getCommitsByCounter(revCommitsPair.getSecond()));

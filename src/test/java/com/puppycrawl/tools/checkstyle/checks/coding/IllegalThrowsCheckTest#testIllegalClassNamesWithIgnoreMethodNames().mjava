@@ -3,12 +3,12 @@
      */
     @Test
     public void testIllegalClassNamesWithIgnoreMethodNames() throws Exception {
-        DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
+        final DefaultConfiguration checkConfig = createCheckConfig(IllegalThrowsCheck.class);
         checkConfig.addAttribute("illegalClassNames",
             "java.lang.Error, java.lang.Exception, NullPointerException, Throwable");
         checkConfig.addAttribute("ignoredMethodNames", "methodTwo");
 
-        String[] expected = {
+        final String[] expected = {
             "5:33: " + getCheckMessage(MSG_KEY, "NullPointerException"),
             "18:35: " + getCheckMessage(MSG_KEY, "Throwable"),
         };

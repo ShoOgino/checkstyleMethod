@@ -1,7 +1,7 @@
     private static Method getMethodGetRootDocImplByReflection() throws ClassNotFoundException {
         Method result = null;
-        Class<?> javadocToolClass = Class.forName("com.sun.tools.javadoc.JavadocTool");
-        Method[] methods = javadocToolClass.getMethods();
+        final Class<?> javadocToolClass = Class.forName("com.sun.tools.javadoc.JavadocTool");
+        final Method[] methods = javadocToolClass.getMethods();
         for (Method method: methods) {
             if ("getRootDocImpl".equals(method.getName())) {
                 result = method;

@@ -1,10 +1,10 @@
     @Test
     public void testCheckOptions() {
-        Context context = new Context();
-        TestMessager testMessager = new TestMessager(context);
+        final Context context = new Context();
+        final TestMessager testMessager = new TestMessager(context);
 
         //pass invalid options - empty array
-        String[][] options = new String[3][1];
+        final String[][] options = new String[3][1];
         assertFalse(TokenTypesDoclet.checkOptions(options, testMessager));
 
         //pass valid options - array with one "-destfile" option
@@ -15,7 +15,7 @@
         options[1][0] = "-destfile";
         assertFalse(TokenTypesDoclet.checkOptions(options, testMessager));
 
-        String[] expected = {
+        final String[] expected = {
             "Usage: javadoc -destfile file -doclet TokenTypesDoclet ...",
             "Only one -destfile option allowed.",
         };

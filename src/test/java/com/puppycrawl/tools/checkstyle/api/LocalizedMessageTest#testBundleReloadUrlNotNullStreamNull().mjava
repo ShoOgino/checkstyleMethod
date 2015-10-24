@@ -1,13 +1,14 @@
     @Test
     public void testBundleReloadUrlNotNullStreamNull() throws IOException {
 
-        ClassLoader classloader = mock(ClassLoader.class);
-        String resource = "com/puppycrawl/tools/checkstyle/checks/coding/messages_en.properties";
+        final ClassLoader classloader = mock(ClassLoader.class);
+        final String resource =
+            "com/puppycrawl/tools/checkstyle/checks/coding/messages_en.properties";
 
-        URL url = getMockUrl(null);
+        final URL url = getMockUrl(null);
         when(classloader.getResource(resource)).thenReturn(url);
 
-        LocalizedMessage.UTF8Control control = new LocalizedMessage.UTF8Control();
+        final LocalizedMessage.UTF8Control control = new LocalizedMessage.UTF8Control();
         control.newBundle("com.puppycrawl.tools.checkstyle.checks.coding.messages",
                 Locale.ENGLISH, "java.class",
                 classloader, true);

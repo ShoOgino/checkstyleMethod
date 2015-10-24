@@ -1,21 +1,21 @@
     @Test
     public void testIsSuppressed() throws Exception {
-        Class<?> entry = Class
+        final Class<?> entry = Class
                 .forName("com.puppycrawl.tools.checkstyle.checks.SuppressWarningsHolder$Entry");
-        Constructor<?> entryConstructor = entry.getDeclaredConstructor(String.class, int.class,
-                int.class, int.class, int.class);
+        final Constructor<?> entryConstructor = entry.getDeclaredConstructor(String.class,
+                int.class, int.class, int.class, int.class);
         entryConstructor.setAccessible(true);
 
-        Object entryInstance = entryConstructor.newInstance("MockEntry", 100, 100, 350, 350);
+        final Object entryInstance = entryConstructor.newInstance("MockEntry", 100, 100, 350, 350);
 
-        List<Object> entriesList = new ArrayList<>();
+        final List<Object> entriesList = new ArrayList<>();
         entriesList.add(entryInstance);
 
-        ThreadLocal<?> threadLocal = mock(ThreadLocal.class);
+        final ThreadLocal<?> threadLocal = mock(ThreadLocal.class);
         PowerMockito.doReturn(entriesList).when(threadLocal, "get");
 
-        SuppressWarningsHolder holder = new SuppressWarningsHolder();
-        Field entries = holder.getClass().getDeclaredField("ENTRIES");
+        final SuppressWarningsHolder holder = new SuppressWarningsHolder();
+        final Field entries = holder.getClass().getDeclaredField("ENTRIES");
         entries.setAccessible(true);
         entries.set(holder, threadLocal);
 

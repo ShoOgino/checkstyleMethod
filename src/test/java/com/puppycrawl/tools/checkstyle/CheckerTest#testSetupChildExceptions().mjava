@@ -1,11 +1,11 @@
     @Test
     public void testSetupChildExceptions() throws Exception {
         final Checker checker = new Checker();
-        PackageObjectFactory factory = new PackageObjectFactory(
+        final PackageObjectFactory factory = new PackageObjectFactory(
                 new HashSet<String>(), Thread.currentThread().getContextClassLoader());
         checker.setModuleFactory(factory);
 
-        Configuration config = new DefaultConfiguration("java.lang.String");
+        final Configuration config = new DefaultConfiguration("java.lang.String");
         try {
             checker.setupChild(config);
             fail("Exception is expected");

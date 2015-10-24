@@ -1,11 +1,11 @@
     @Test
     public void testResolveInnerClass() throws Exception {
         final Set<String> imports = Sets.newHashSet();
-        ClassResolver classResolver = new ClassResolver(
+        final ClassResolver classResolver = new ClassResolver(
                 Thread.currentThread().getContextClassLoader(),
                 "java.util", imports);
 
-        Class<?> entry = classResolver.resolve("Entry", "Map");
+        final Class<?> entry = classResolver.resolve("Entry", "Map");
         assertEquals("java.util.Map$Entry", entry.getName());
     }
 

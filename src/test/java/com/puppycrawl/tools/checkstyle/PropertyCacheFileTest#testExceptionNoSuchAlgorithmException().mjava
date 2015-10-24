@@ -2,18 +2,18 @@
     @SuppressWarnings("unchecked")
     public void testExceptionNoSuchAlgorithmException() throws Exception {
 
-        Configuration config = new DefaultConfiguration("myName");
+        final Configuration config = new DefaultConfiguration("myName");
         final String filePath = temporaryFolder.newFile().getPath();
-        PropertyCacheFile cache = new PropertyCacheFile(config, filePath);
+        final PropertyCacheFile cache = new PropertyCacheFile(config, filePath);
         cache.put("myFile", 1);
         mockStatic(MessageDigest.class);
 
         when(MessageDigest.getInstance("SHA-1"))
                 .thenThrow(NoSuchAlgorithmException.class);
 
-        Class<?>[] param = new Class<?>[1];
+        final Class<?>[] param = new Class<?>[1];
         param[0] = Serializable.class;
-        Method method = PropertyCacheFile.class.getDeclaredMethod("getConfigHashCode", param);
+        final Method method = PropertyCacheFile.class.getDeclaredMethod("getConfigHashCode", param);
         method.setAccessible(true);
         try {
             method.invoke(cache, config);

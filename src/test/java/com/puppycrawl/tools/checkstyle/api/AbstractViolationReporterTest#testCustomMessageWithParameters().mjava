@@ -1,15 +1,15 @@
     @Test
     public void testCustomMessageWithParameters() throws Exception {
-        DefaultConfiguration config = createCheckConfig(emptyCheck.getClass());
+        final DefaultConfiguration config = createCheckConfig(emptyCheck.getClass());
         config.addMessage("msgKey", "This is a custom message with {0}.");
         emptyCheck.configure(config);
 
-        LocalizedMessages collector = new LocalizedMessages();
+        final LocalizedMessages collector = new LocalizedMessages();
         emptyCheck.setMessages(collector);
 
         emptyCheck.log(0, "msgKey", "TestParam");
 
-        SortedSet<LocalizedMessage> messages = collector.getMessages();
+        final SortedSet<LocalizedMessage> messages = collector.getMessages();
         assertEquals(1, messages.size());
 
         assertEquals("This is a custom message with TestParam.",
