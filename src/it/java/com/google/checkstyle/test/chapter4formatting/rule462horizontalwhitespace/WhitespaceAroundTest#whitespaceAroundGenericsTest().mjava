@@ -1,9 +1,9 @@
     @Test
     public void whitespaceAroundGenericsTest() throws Exception {
 
-        String msgPreceded = "ws.preceded";
-        String msgFollowed = "ws.followed";
-        Configuration checkConfig = builder.getCheckConfig("GenericWhitespace");
+        final String msgPreceded = "ws.preceded";
+        final String msgFollowed = "ws.followed";
+        final Configuration checkConfig = builder.getCheckConfig("GenericWhitespace");
 
         final String[] expected = {
             "12:16: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
@@ -24,9 +24,9 @@
             "20:61: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, ">"),
         };
 
-        String filePath = builder.getFilePath("WhitespaceAroundInput_Generics");
+        final String filePath = builder.getFilePath("WhitespaceAroundInput_Generics");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

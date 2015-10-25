@@ -1,16 +1,16 @@
     @Test
     public void badPackageName3Test() throws Exception {
 
-        String packagePath = "com.google.checkstyle.test.chapter5naming.rule521$packagenames";
-        String msg = getCheckMessage(checkConfig.getMessages(), MSG_KEY, packagePath, format);
+        final String packagePath = "com.google.checkstyle.test.chapter5naming.rule521$packagenames";
+        final String msg = getCheckMessage(checkConfig.getMessages(), MSG_KEY, packagePath, format);
 
         final String[] expected = {
             "1:9: " + msg,
         };
 
-        String filePath = builder.getFilePath("PackageBadNameInput3");
+        final String filePath = builder.getFilePath("PackageBadNameInput3");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

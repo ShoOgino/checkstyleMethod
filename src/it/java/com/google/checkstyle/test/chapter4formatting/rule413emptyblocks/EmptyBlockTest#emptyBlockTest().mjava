@@ -37,10 +37,10 @@
             "320:34: " + getCheckMessage(EmptyBlockCheck.class, "block.empty", "if"),
         };
 
-        Configuration checkConfig = builder.getCheckConfig("EmptyBlock");
-        String filePath = builder.getFilePath("EmptyBlockInput_Basic");
+        final Configuration checkConfig = builder.getCheckConfig("EmptyBlock");
+        final String filePath = builder.getFilePath("EmptyBlockInput_Basic");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

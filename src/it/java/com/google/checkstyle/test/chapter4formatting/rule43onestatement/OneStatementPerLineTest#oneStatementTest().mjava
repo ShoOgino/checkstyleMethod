@@ -1,7 +1,8 @@
     @Test
     public void oneStatementTest() throws Exception {
 
-        String msg = getCheckMessage(OneStatementPerLineCheck.class, "multiple.statements.line");
+        final String msg = getCheckMessage(OneStatementPerLineCheck.class,
+            "multiple.statements.line");
 
         final String[] expected = {
             "6:59: " + msg,
@@ -27,10 +28,10 @@
             "307:39: " + msg,
         };
 
-        Configuration checkConfig = builder.getCheckConfig("OneStatementPerLine");
-        String filePath = builder.getFilePath("OneStatementPerLineInput");
+        final Configuration checkConfig = builder.getCheckConfig("OneStatementPerLine");
+        final String filePath = builder.getFilePath("OneStatementPerLineInput");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

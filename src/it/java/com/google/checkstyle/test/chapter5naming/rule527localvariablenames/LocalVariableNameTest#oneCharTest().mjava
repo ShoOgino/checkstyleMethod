@@ -11,9 +11,9 @@
             "61:17: " + getCheckMessage(checkConfig.getMessages(), MSG_KEY, "index$", format),
         };
 
-        String filePath = builder.getFilePath("LocalVariableNameInput_OneCharVarName");
+        final String filePath = builder.getFilePath("LocalVariableNameInput_OneCharVarName");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

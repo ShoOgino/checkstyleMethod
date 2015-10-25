@@ -6,10 +6,10 @@
             "6: " + getCheckMessage(NoLineWrapCheck.class, "no.line.wrap", "import"),
         };
 
-        Configuration checkConfig = builder.getCheckConfig("NoLineWrap");
-        String filePath = builder.getFilePath("NoLineWrap_Bad");
+        final Configuration checkConfig = builder.getCheckConfig("NoLineWrap");
+        final String filePath = builder.getFilePath("NoLineWrap_Bad");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

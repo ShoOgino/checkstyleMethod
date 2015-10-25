@@ -2,7 +2,8 @@
     public void customImportTest1() throws Exception {
 
         final String[] expected = {
-            "4: " + getCheckMessage(clazz, MSG_LEX, "java.awt.Button.ABORT", "java.io.File.createTempFile"),
+            "4: " + getCheckMessage(clazz, MSG_LEX, "java.awt.Button.ABORT",
+                "java.io.File.createTempFile"),
             "7: " + getCheckMessage(clazz, MSG_ORDER, STD, SPECIAL, "java.awt.Button"),
             "8: " + getCheckMessage(clazz, MSG_ORDER, STD, SPECIAL, "java.awt.Frame"),
             "9: " + getCheckMessage(clazz, MSG_ORDER, STD, SPECIAL, "java.awt.Dialog"),
@@ -15,10 +16,10 @@
             "16: " + getCheckMessage(clazz, MSG_ORDER, STD, SPECIAL, "java.io.Reader"),
         };
 
-        Configuration checkConfig = builder.getCheckConfig("CustomImportOrder");
-        String filePath = builder.getFilePath("CustomImportOrderInput_1");
+        final Configuration checkConfig = builder.getCheckConfig("CustomImportOrder");
+        final String filePath = builder.getFilePath("CustomImportOrderInput_1");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

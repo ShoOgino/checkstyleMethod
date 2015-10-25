@@ -1,6 +1,7 @@
     @Test
     public void testDefaultConfiguration() throws Exception {
-        String msg = getCheckMessage(NonEmptyAtclauseDescriptionCheck.class, "non.empty.atclause");
+        final String msg = getCheckMessage(NonEmptyAtclauseDescriptionCheck.class,
+            "non.empty.atclause");
 
         final String[] expected = {
             "34: " + msg,
@@ -16,10 +17,10 @@
             "52: " + msg,
         };
 
-        Configuration checkConfig = builder.getCheckConfig("NonEmptyAtclauseDescription");
-        String filePath = builder.getFilePath("InputNonEmptyAtclauseDescriptionCheck");
+        final Configuration checkConfig = builder.getCheckConfig("NonEmptyAtclauseDescription");
+        final String filePath = builder.getFilePath("InputNonEmptyAtclauseDescriptionCheck");
 
-        Integer[] warnList = getLineNumbersFromExpected(expected);
+        final Integer[] warnList = getLineNumbersFromExpected(expected);
         verify(checkConfig, filePath, expected, warnList);
     }
 

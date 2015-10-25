@@ -1,12 +1,12 @@
     private static Integer[] getLinesWithWarnAndCheckComments(String aFileName,
             final int tabWidth)
                     throws IOException {
-        List<Integer> result = new ArrayList<>();
+        final List<Integer> result = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 new FileInputStream(aFileName), StandardCharsets.UTF_8))) {
             int lineNumber = 1;
             for (String line = br.readLine(); line != null; line = br.readLine()) {
-                Matcher match = LINE_WITH_COMMENT_REGEX.matcher(line);
+                final Matcher match = LINE_WITH_COMMENT_REGEX.matcher(line);
                 if (match.matches()) {
                     final String comment = match.group(1);
                     final int indentInComment = getIndentFromComment(comment);

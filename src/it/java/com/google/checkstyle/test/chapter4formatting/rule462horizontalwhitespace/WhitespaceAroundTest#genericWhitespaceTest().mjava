@@ -1,10 +1,10 @@
     @Test
     public void genericWhitespaceTest() throws Exception {
-        String msgPreceded = "ws.preceded";
-        String msgFollowed = "ws.followed";
-        String msgNotPreceded = "ws.notPreceded";
-        String msgIllegalFollow = "ws.illegalFollow";
-        Configuration checkConfig = builder.getCheckConfig("GenericWhitespace");
+        final String msgPreceded = "ws.preceded";
+        final String msgFollowed = "ws.followed";
+        final String msgNotPreceded = "ws.notPreceded";
+        final String msgIllegalFollow = "ws.illegalFollow";
+        final Configuration checkConfig = builder.getCheckConfig("GenericWhitespace");
 
         final String[] expected = {
             "16:13: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
@@ -35,9 +35,9 @@
             "63:60: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, ">"),
         };
 
-        String filePath = builder.getFilePath("GenericWhitespaceInput");
+        final String filePath = builder.getFilePath("GenericWhitespaceInput");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

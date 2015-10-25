@@ -7,9 +7,9 @@
             "27:24: " + getCheckMessage(configuration.getMessages(), MSG_KEY, "$foo", format),
         };
 
-        String filePath = builder.getFilePath("ClassTypeParameterNameInput");
+        final String filePath = builder.getFilePath("ClassTypeParameterNameInput");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(configuration, filePath, expected, warnList);
     }
 

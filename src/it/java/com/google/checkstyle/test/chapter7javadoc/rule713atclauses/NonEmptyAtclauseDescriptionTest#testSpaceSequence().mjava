@@ -1,6 +1,7 @@
     @Test
     public void testSpaceSequence() throws Exception {
-        String msg = getCheckMessage(NonEmptyAtclauseDescriptionCheck.class, "non.empty.atclause");
+        final String msg = getCheckMessage(NonEmptyAtclauseDescriptionCheck.class,
+            "non.empty.atclause");
 
         final String[] expected = {
             "27: " + msg,
@@ -11,10 +12,11 @@
             "40: " + msg,
         };
 
-        Configuration checkConfig = builder.getCheckConfig("NonEmptyAtclauseDescription");
-        String filePath = builder.getFilePath("InputNonEmptyAtclauseDescriptionCheckSpaceSeq");
+        final Configuration checkConfig = builder.getCheckConfig("NonEmptyAtclauseDescription");
+        final String filePath = builder
+            .getFilePath("InputNonEmptyAtclauseDescriptionCheckSpaceSeq");
 
-        Integer[] warnList = getLineNumbersFromExpected(expected);
+        final Integer[] warnList = getLineNumbersFromExpected(expected);
         verify(checkConfig, filePath, expected, warnList);
     }
 

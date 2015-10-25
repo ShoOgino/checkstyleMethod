@@ -1,8 +1,8 @@
     @Test
     public void operatorWrapTest() throws Exception {
 
-        Class<OperatorWrapCheck> clazz = OperatorWrapCheck.class;
-        String messageKey = "line.new";
+        final Class<OperatorWrapCheck> clazz = OperatorWrapCheck.class;
+        final String messageKey = "line.new";
 
         final String[] expected = {
             "10:27: " + getCheckMessage(clazz, messageKey, "+"),
@@ -26,10 +26,10 @@
             "185:38: " + getCheckMessage(clazz, messageKey, "?"),
         };
 
-        Configuration checkConfig = builder.getCheckConfig("OperatorWrap");
-        String filePath = builder.getFilePath("OperatorWrapInput");
+        final Configuration checkConfig = builder.getCheckConfig("OperatorWrap");
+        final String filePath = builder.getFilePath("OperatorWrapInput");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

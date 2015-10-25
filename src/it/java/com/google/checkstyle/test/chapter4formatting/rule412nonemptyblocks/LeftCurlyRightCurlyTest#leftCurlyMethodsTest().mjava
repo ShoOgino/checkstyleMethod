@@ -19,10 +19,10 @@
             "76:5: " + getCheckMessage(LeftCurlyCheck.class, MSG_KEY_LINE_PREVIOUS, "{", 5),
         };
 
-        Configuration checkConfig = builder.getCheckConfig("LeftCurly");
-        String filePath = builder.getFilePath("LeftCurlyInput_Method");
+        final Configuration checkConfig = builder.getCheckConfig("LeftCurly");
+        final String filePath = builder.getFilePath("LeftCurlyInput_Method");
 
-        Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 
