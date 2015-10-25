@@ -3,14 +3,13 @@
      * @param messageKey the key of message in 'messages.properties' file.
      * @param arguments the arguments of message in 'messages.properties' file.
      */
-    protected String getCheckMessage(Map<String, String> messages, String messageKey, Object... arguments)
-   {
-       for (Map.Entry<String, String> entry : messages.entrySet()) {
-           if (messageKey.equals(entry.getKey())) {
-               final MessageFormat formatter = new MessageFormat(entry.getValue(), Locale.ROOT);
-               return formatter.format(arguments);
-           }
-       }
-       return null;
-   }
+    protected String getCheckMessage(Map<String, String> messages, String messageKey, Object... arguments) {
+        for (Map.Entry<String, String> entry : messages.entrySet()) {
+            if (messageKey.equals(entry.getKey())) {
+                final MessageFormat formatter = new MessageFormat(entry.getValue(), Locale.ROOT);
+                return formatter.format(arguments);
+            }
+        }
+        return null;
+    }
 
