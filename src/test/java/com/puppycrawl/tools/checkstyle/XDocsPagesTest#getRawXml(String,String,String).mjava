@@ -1,4 +1,4 @@
-    private static void testRawXml(String fileName, String code, String unserializedSource)
+    private static Document getRawXml(String fileName, String code, String unserializedSource)
             throws ParserConfigurationException {
         try {
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -7,11 +7,13 @@
 
             final DocumentBuilder builder = factory.newDocumentBuilder();
 
-            builder.parse(new InputSource(new StringReader(code)));
+            return builder.parse(new InputSource(new StringReader(code)));
         }
         catch (IOException | SAXException e) {
             Assert.fail(fileName + " has invalid xml (" + e.getMessage() + "): "
                     + unserializedSource);
         }
+
+        return null;
     }
 
