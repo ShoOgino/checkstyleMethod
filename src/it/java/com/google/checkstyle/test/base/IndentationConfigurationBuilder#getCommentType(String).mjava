@@ -1,0 +1,21 @@
+    private static CommentType getCommentType(String comment) {
+        CommentType result = CommentType.UNKNOWN;
+        Matcher multilevelMatch = MULTILEVEL_COMMENT_REGEX.matcher(comment);
+        if (multilevelMatch.matches()) {
+            result = CommentType.MULTILEVEL;
+        }
+        else {
+            Matcher singleLevelMatch = SINGLE_LEVEL_COMMENT_REGEX.matcher(comment);
+            if (singleLevelMatch.matches()) {
+                result = CommentType.SINGLE_LEVEL;
+            }
+            else {
+                Matcher nonStrictLevelMatch = NON_STRICT_LEVEL_COMMENT_REGEX.matcher(comment);
+                if (nonStrictLevelMatch.matches()) {
+                    result = CommentType.NON_STRICT_LEVEL;
+                }
+            }
+        }
+        return result;
+    }
+
