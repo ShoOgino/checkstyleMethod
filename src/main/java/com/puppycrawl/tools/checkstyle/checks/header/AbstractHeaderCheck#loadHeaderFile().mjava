@@ -6,14 +6,14 @@
         checkHeaderNotInitialized();
         Reader headerReader = null;
         try {
-            final URI uri = CommonUtils.getUriByFilename(filename);
+            final URI uri = CommonUtils.getUriByFilename(headerFile);
             headerReader = new InputStreamReader(new BufferedInputStream(
                     uri.toURL().openStream()), charset);
             loadHeader(headerReader);
         }
         catch (final IOException ex) {
             throw new CheckstyleException(
-                    "unable to load header file " + filename, ex);
+                    "unable to load header file " + headerFile, ex);
         }
         finally {
             Closeables.closeQuietly(headerReader);
