@@ -1,0 +1,17 @@
+    private static void validateParentSection(String fileName, String sectionName,
+            Node subSection) {
+        final String expected;
+
+        if (hasParentModule(sectionName)) {
+            expected = "TreeWalker";
+        }
+        else {
+            expected = "Checker";
+        }
+
+        Assert.assertEquals(
+                fileName + " section '" + sectionName + "' should have matching parent",
+                expected, subSection
+                        .getTextContent().trim());
+    }
+

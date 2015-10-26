@@ -1,0 +1,14 @@
+    private static boolean hasParentModule(String sectionName) {
+        final String search = "\"" + sectionName + "\"";
+        boolean result = true;
+
+        for (String find : XML_FILESET_LIST) {
+            if (find.contains(search)) {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+

@@ -1,0 +1,34 @@
+    @Test
+    public void testAllCheckSections() throws Exception {
+        final ClassLoader cl = XDocsPagesTest.class.getClassLoader();
+        final Set<String> packageNames = PackageNamesLoader.getPackageNames(cl);
+        final ModuleFactory moduleFactory = new PackageObjectFactory(packageNames, cl);
+
+        for (File file : Files.fileTreeTraverser().preOrderTraversal(XDOCS_DIRECTORY)) {
+            final String fileName = file.getName();
+
+            if (!fileName.startsWith("config_") || "config_reporting.xml".equals(fileName)) {
+                continue;
+            }
+
+            final String input = Files.toString(file, UTF_8);
+            final Document document = getRawXml(fileName, input, input);
+            final NodeList sources = document.getElementsByTagName("section");
+
+            for (int position = 0; position < sources.getLength(); position++) {
+                final Node section = sources.item(position);
+                final String sectionName = section.getAttributes().getNamedItem("name")
+                        .getNodeValue();
+
+                if ("Content".equals(sectionName) || "Overview".equals(sectionName)) {
+                    continue;
+                }
+
+                Assert.assertTrue(fileName + " section '" + sectionName
+                        + "' shouldn't end with 'Check'", !sectionName.endsWith("Check"));
+
+                validateCheckSection(moduleFactory, fileName, sectionName, section);
+            }
+        }
+    }
+

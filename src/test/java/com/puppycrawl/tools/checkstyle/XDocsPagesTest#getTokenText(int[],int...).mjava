@@ -1,0 +1,43 @@
+    private static String getTokenText(int[] tokens, int... subtractions) {
+        if (Arrays.equals(tokens, TokenUtils.getAllTokenIds()) && subtractions.length == 0) {
+            return "TokenTypes.";
+        }
+        else {
+            final StringBuilder result = new StringBuilder();
+            boolean first = true;
+
+            for (int token : tokens) {
+                boolean found = false;
+
+                for (int subtraction : subtractions) {
+                    if (subtraction == token) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    continue;
+                }
+
+                if (first) {
+                    first = false;
+                }
+                else {
+                    result.append(", ");
+                }
+
+                result.append(TokenUtils.getTokenName(token));
+            }
+
+            if (result.length() == 0) {
+                result.append("empty");
+            }
+            else {
+                result.append(".");
+            }
+
+            return result.toString();
+        }
+    }
+

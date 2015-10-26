@@ -1,0 +1,54 @@
+    private static void validatePropertySection(String fileName, String sectionName,
+            Node subSection, Object instance) {
+        final Set<String> properties = getProperties(instance.getClass());
+        final Class<?> clss = instance.getClass();
+
+        // remove global properties that don't need documentation
+        if (hasParentModule(sectionName)) {
+            properties.removeAll(CHECK_PROPERTIES);
+        }
+        else if (AbstractFileSetCheck.class.isAssignableFrom(clss)) {
+            properties.removeAll(FILESET_PROPERTIES);
+
+            // override
+            properties.add("fileExtensions");
+        }
+
+        // missing setter, should be fixed
+        if (CustomImportOrderCheck.class.isAssignableFrom(clss)) {
+            properties.add("samePackageMatchingDepth");
+        }
+
+        // remove undocumented properties
+        for (String p : new HashSet<>(properties)) {
+            if (UNDOCUMENTED_PROPERTIES.contains(clss.getSimpleName() + "." + p)) {
+                properties.remove(p);
+            }
+        }
+
+        final Check check;
+
+        if (Check.class.isAssignableFrom(clss)) {
+            check = (Check) instance;
+
+            if (!Arrays.equals(check.getAcceptableTokens(), check.getDefaultTokens())
+                    || !Arrays.equals(check.getAcceptableTokens(), check.getRequiredTokens())) {
+                properties.add("tokens");
+            }
+        }
+        else {
+            check = null;
+        }
+
+        if (subSection != null) {
+            Assert.assertTrue(fileName + " section '" + sectionName
+                    + "' should have no properties to show", !properties.isEmpty());
+
+            validatePropertySectionProperties(fileName, sectionName, subSection, check,
+                    properties);
+        }
+
+        Assert.assertTrue(fileName + " section '" + sectionName + "' should show properties: "
+                + properties, properties.isEmpty());
+    }
+

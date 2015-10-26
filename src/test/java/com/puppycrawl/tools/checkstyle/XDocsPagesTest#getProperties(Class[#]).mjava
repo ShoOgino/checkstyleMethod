@@ -1,0 +1,13 @@
+    private static Set<String> getProperties(Class<?> clss) {
+        final Set<String> result = new TreeSet<>();
+        final PropertyDescriptor[] map = PropertyUtils.getPropertyDescriptors(clss);
+
+        for (PropertyDescriptor p : map) {
+            if (p.getWriteMethod() != null) {
+                result.add(p.getName());
+            }
+        }
+
+        return result;
+    }
+

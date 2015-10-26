@@ -1,0 +1,56 @@
+    private static void validateCheckSection(ModuleFactory moduleFactory, String fileName,
+            String sectionName, Node section) {
+        Object instance = null;
+
+        try {
+            instance = moduleFactory.createModule(sectionName);
+        }
+        catch (CheckstyleException e) {
+            Assert.fail(fileName + " couldn't find class: " + sectionName);
+        }
+
+        int subSectionPos = 0;
+        for (Node subSection : getChildrenElements(section)) {
+            final String subSectionName = subSection.getAttributes().getNamedItem("name")
+                    .getNodeValue();
+
+            // can be in different orders, and completely optional
+            if ("Notes".equals(subSectionName)
+                    || "Rule Description".equals(subSectionName)) {
+                continue;
+            }
+
+            if (subSectionPos == 1 && !"Properties".equals(subSectionName)) {
+                validatePropertySection(fileName, sectionName, null, instance);
+                subSectionPos++;
+            }
+
+            Assert.assertEquals(fileName + " section '" + sectionName
+                    + "' should be in order", getSubSectionName(subSectionPos),
+                    subSectionName);
+
+            switch (subSectionPos) {
+                case 0:
+                    break;
+                case 1:
+                    validatePropertySection(fileName, sectionName, subSection, instance);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    validateUsageExample(fileName, sectionName, subSection);
+                    break;
+                case 4:
+                    validatePackageSection(fileName, sectionName, subSection, instance);
+                    break;
+                case 5:
+                    validateParentSection(fileName, sectionName, subSection);
+                    break;
+                default:
+                    break;
+            }
+
+            subSectionPos++;
+        }
+    }
+
