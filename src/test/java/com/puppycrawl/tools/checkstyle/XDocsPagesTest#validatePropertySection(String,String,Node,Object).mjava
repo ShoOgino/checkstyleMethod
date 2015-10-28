@@ -14,11 +14,6 @@
             properties.add("fileExtensions");
         }
 
-        // missing setter, should be fixed
-        if (CustomImportOrderCheck.class.isAssignableFrom(clss)) {
-            properties.add("samePackageMatchingDepth");
-        }
-
         // remove undocumented properties
         for (String p : new HashSet<>(properties)) {
             if (UNDOCUMENTED_PROPERTIES.contains(clss.getSimpleName() + "." + p)) {
