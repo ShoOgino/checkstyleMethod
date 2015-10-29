@@ -2,12 +2,12 @@
     public void visitToken(DetailAST ast) {
         final DetailAST nameAST = ast.getLastChild().getPreviousSibling();
         final FullIdent full = FullIdent.createFullIdent(nameAST);
-        if (!getRegexp().matcher(full.getText()).find()) {
+        if (!regexp.matcher(full.getText()).find()) {
             log(full.getLineNo(),
                 full.getColumnNo(),
-                "name.invalidPattern",
+                MSG_KEY,
                 full.getText(),
-                getFormat());
+                format);
         }
     }
 
