@@ -1,8 +1,10 @@
     @Override
     public void visitToken(DetailAST ast) {
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
-        if (!modifiers.branchContains(TokenTypes.ABSTRACT)) {
-            super.visitToken(ast);
+        if (!modifiers.branchContains(TokenTypes.ABSTRACT)
+                && ast.findFirstToken(TokenTypes.OBJBLOCK)
+                    .findFirstToken(TokenTypes.CTOR_DEF) == null) {
+            log(ast.getLineNo(), MSG_KEY);
         }
     }
 
