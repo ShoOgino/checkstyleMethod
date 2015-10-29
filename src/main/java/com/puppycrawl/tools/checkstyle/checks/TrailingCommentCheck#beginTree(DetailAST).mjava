@@ -1,6 +1,5 @@
     @Override
     public void beginTree(DetailAST rootAST) {
-        final Pattern blankLinePattern = getRegexp();
         final Map<Integer, TextBlock> cppComments = getFileContents()
                 .getCppComments();
         final Map<Integer, List<TextBlock>> cComments = getFileContents()
@@ -28,7 +27,7 @@
                     continue;
                 }
             }
-            if (!blankLinePattern.matcher(lineBefore).find()
+            if (!regexp.matcher(lineBefore).find()
                 && !isLegalComment(comment)) {
                 log(lineNo, MSG_KEY);
             }
