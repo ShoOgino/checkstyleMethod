@@ -5,7 +5,7 @@
     private void visitMethodDef(DetailAST ast) {
         contextStack.push(context);
         final DetailAST methodNameAST = ast.findFirstToken(TokenTypes.IDENT);
-        final boolean check = !getRegexp().matcher(methodNameAST.getText()).find();
+        final boolean check = !regexp.matcher(methodNameAST.getText()).find();
         context = new Context(check);
     }
 
