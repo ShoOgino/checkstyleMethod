@@ -1,0 +1,21 @@
+    /**
+     * Checks if the case group or its sibling contain the 'default' switch.
+     * @param caseGroupAst first case group to check.
+     * @return true if 'default' switch found.
+     */
+    private static boolean containsDefaultSwitch(DetailAST caseGroupAst) {
+        DetailAST nextAst = caseGroupAst;
+        boolean found = false;
+
+        while (nextAst != null) {
+            if (nextAst.findFirstToken(TokenTypes.LITERAL_DEFAULT) != null) {
+                found = true;
+                break;
+            }
+
+            nextAst = nextAst.getNextSibling();
+        }
+
+        return found;
+    }
+
