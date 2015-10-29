@@ -8,12 +8,6 @@
      *             if unable to create Pattern object.
      **/
     public static Pattern createPattern(String pattern) {
-        try {
-            return Pattern.compile(pattern);
-        }
-        catch (final PatternSyntaxException e) {
-            throw new ConversionException(
-                    "Failed to initialise regular expression " + pattern, e);
-        }
+        return createPattern(pattern, 0);
     }
 
