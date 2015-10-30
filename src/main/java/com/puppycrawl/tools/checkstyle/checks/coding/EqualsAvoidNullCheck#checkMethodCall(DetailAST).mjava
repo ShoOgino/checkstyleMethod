@@ -11,7 +11,7 @@
         if (isObjectValid(objCalledOn)
                 && containsOneArgument(methodCall)
                 && containsAllSafeTokens(expr)
-                && isCalledOnStringField(objCalledOn)) {
+                && isCalledOnStringFieldOrVariable(objCalledOn)) {
             final String methodName = methodCall.getFirstChild().getLastChild().getText();
             if (EQUALS.equals(methodName)) {
                 log(methodCall.getLineNo(), methodCall.getColumnNo(),

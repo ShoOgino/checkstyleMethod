@@ -1,0 +1,24 @@
+    /**
+     * Whether the field or the variable from the specified class is of String type.
+     * @param objCalledOn the field or the variable from the specified class to check.
+     * @param className the name of the class to check in.
+     * @return true if the field or the variable from the specified class is of String type.
+     */
+    private boolean isStringFieldOrVariableFromClass(DetailAST objCalledOn,
+            final String className) {
+        boolean result = false;
+        final String name = objCalledOn.getText();
+        FieldFrame frame = getObjectFrame(currentFrame);
+        while (frame != null) {
+            if (className.equals(frame.getFrameName())) {
+                final DetailAST field = frame.findField(name);
+                if (field != null) {
+                    result = STRING.equals(getFieldType(field));
+                }
+                break;
+            }
+            frame = getObjectFrame(frame.getParent());
+        }
+        return result;
+    }
+

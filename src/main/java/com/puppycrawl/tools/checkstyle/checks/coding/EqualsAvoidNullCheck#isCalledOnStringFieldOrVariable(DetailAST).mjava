@@ -1,0 +1,23 @@
+    /**
+     * Determine, whether equals method is called on a field of String type.
+     * @param objCalledOn object ast.
+     * @return true if the object is of String type.
+     */
+    private boolean isCalledOnStringFieldOrVariable(DetailAST objCalledOn) {
+        boolean result;
+        final DetailAST previousSiblingAst = objCalledOn.getPreviousSibling();
+        if (previousSiblingAst == null) {
+            result = isStringFieldOrVariable(objCalledOn);
+        }
+        else {
+            if (previousSiblingAst.getType() == TokenTypes.LITERAL_THIS) {
+                result = isStringFieldOrVariableFromThisInstance(objCalledOn);
+            }
+            else {
+                final String className = previousSiblingAst.getText();
+                result = isStringFieldOrVariableFromClass(objCalledOn, className);
+            }
+        }
+        return result;
+    }
+

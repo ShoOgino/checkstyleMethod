@@ -1,0 +1,22 @@
+    /**
+     * Whether the field or the variable is of String type.
+     * @param objCalledOn the field or the variable to check.
+     * @return true if the field or the variable is of String type.
+     */
+    private boolean isStringFieldOrVariable(DetailAST objCalledOn) {
+        boolean result = false;
+        final String name = objCalledOn.getText();
+        FieldFrame frame = currentFrame;
+        while (frame != null) {
+            final DetailAST field = frame.findField(name);
+            if (field != null
+                    && (frame.isClassOrEnumOrEnumConstDef()
+                            || checkLineNo(field, objCalledOn))) {
+                result = STRING.equals(getFieldType(field));
+                break;
+            }
+            frame = frame.getParent();
+        }
+        return result;
+    }
+
