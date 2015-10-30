@@ -5,11 +5,11 @@
         exit.checkAssertionAfterwards(new Assertion() {
             @Override
             public void checkAssertion() {
-                assertEquals(String.format(Locale.ROOT,
-                        "Unable to find: src/main/resources/non_existing_config.xml%n"
-                                + "Checkstyle ends with 1 errors.%n"),
+                assertEquals(String.format(Locale.ROOT, "Checkstyle ends with 1 errors.%n"),
                         systemOut.getLog());
-                assertEquals("", systemErr.getLog());
+                final String cause = "com.puppycrawl.tools.checkstyle.api.CheckstyleException:"
+                        + " Unable to find: src/main/resources/non_existing_config.xml";
+                assertTrue(systemErr.getLog().startsWith(cause));
             }
         });
         Main.main("-c", "src/main/resources/non_existing_config.xml",

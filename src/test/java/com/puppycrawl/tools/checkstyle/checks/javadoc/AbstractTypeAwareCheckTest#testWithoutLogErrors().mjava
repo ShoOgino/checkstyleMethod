@@ -9,10 +9,11 @@
         try {
             verify(config, getPath("InputLoadErrors.java"), expected);
         }
-        catch (IllegalStateException ex) {
+        catch (CheckstyleException ex) {
+            final IllegalStateException cause = (IllegalStateException) ex.getCause();
             assertEquals("Unable to get"
-                    + " class information for @throws tag 'InvalidExceptionName'.",
-                    ex.getMessage());
+                            + " class information for @throws tag 'InvalidExceptionName'.",
+                    cause.getMessage());
         }
     }
 
