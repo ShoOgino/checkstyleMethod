@@ -1,0 +1,16 @@
+    /**
+     * Find the Class, Constructor, Enum or Method in which it is defined.
+     * @param ast Variable for which we want to find the scope in which it is defined
+     * @return ast The Class or Constructor or Method in which it is defined.
+     */
+    private static DetailAST findFirstUpperNamedBlock(DetailAST ast) {
+        DetailAST astTraverse = ast;
+        while (astTraverse.getType() != TokenTypes.METHOD_DEF
+                && astTraverse.getType() != TokenTypes.CLASS_DEF
+                && astTraverse.getType() != TokenTypes.ENUM_DEF
+                && astTraverse.getType() != TokenTypes.CTOR_DEF) {
+            astTraverse = astTraverse.getParent();
+        }
+        return astTraverse;
+    }
+

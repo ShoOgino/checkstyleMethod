@@ -1,0 +1,9 @@
+    /**
+     * Check if VARIABLE_DEF is initialized or not.
+     * @param ast VARIABLE_DEF to be checked
+     * @return true if initialized
+     */
+    private static boolean isInitialized(DetailAST ast) {
+        return ast.getParent().getLastChild().getType() == TokenTypes.ASSIGN;
+    }
+

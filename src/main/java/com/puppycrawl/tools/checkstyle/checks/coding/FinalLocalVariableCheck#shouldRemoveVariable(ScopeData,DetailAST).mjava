@@ -1,0 +1,25 @@
+    /**
+     * Whether the variable should be removed from the list of final local variable
+     * candidates.
+     * @param scopeData the scope data of the variable.
+     * @param ast the variable ast.
+     * @return true, if the variable should be removed.
+     */
+    private boolean shouldRemoveVariable(ScopeData scopeData, DetailAST ast) {
+        boolean shouldRemove = true;
+        for (DetailAST variable : scopeData.uninitializedVariables) {
+            if (variable.getText().equals(ast.getText())) {
+
+                // if the variable is declared outside the loop and initialized inside
+                // the loop, then it cannot be declared final, as it can be initialized
+                // more than once in this case
+                if (isInTheSameLoop(variable, ast)) {
+                    shouldRemove = false;
+                }
+                scopeData.uninitializedVariables.remove(variable);
+                break;
+            }
+        }
+        return shouldRemove;
+    }
+

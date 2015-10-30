@@ -1,23 +1,18 @@
     @Override
     public void leaveToken(DetailAST ast) {
-        super.leaveToken(ast);
-
         switch (ast.getType()) {
             case TokenTypes.OBJBLOCK:
             case TokenTypes.SLIST:
-            case TokenTypes.LITERAL_FOR:
             case TokenTypes.CTOR_DEF:
-            case TokenTypes.STATIC_INIT:
-            case TokenTypes.INSTANCE_INIT:
             case TokenTypes.METHOD_DEF:
-                final Map<String, DetailAST> state = scopeStack.pop();
-                for (DetailAST node : state.values()) {
+                final Map<String, DetailAST> scope = scopeStack.pop().scope;
+                for (DetailAST node : scope.values()) {
                     log(node.getLineNo(), node.getColumnNo(), MSG_KEY, node
                         .getText());
                 }
                 break;
-
             default:
+                // do nothing
         }
     }
 

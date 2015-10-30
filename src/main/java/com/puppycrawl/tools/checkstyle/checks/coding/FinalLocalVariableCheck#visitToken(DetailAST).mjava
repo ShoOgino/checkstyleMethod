@@ -3,12 +3,9 @@
         switch (ast.getType()) {
             case TokenTypes.OBJBLOCK:
             case TokenTypes.SLIST:
-            case TokenTypes.LITERAL_FOR:
             case TokenTypes.METHOD_DEF:
             case TokenTypes.CTOR_DEF:
-            case TokenTypes.STATIC_INIT:
-            case TokenTypes.INSTANCE_INIT:
-                scopeStack.push(new HashMap<String, DetailAST>());
+                scopeStack.push(new ScopeData());
                 break;
 
             case TokenTypes.PARAMETER_DEF:
@@ -16,14 +13,14 @@
                         && !ast.branchContains(TokenTypes.FINAL)
                         && !isInAbstractOrNativeMethod(ast)
                         && !ScopeUtils.isInInterfaceBlock(ast)) {
-                    insertVariable(ast);
+                    insertParameter(ast);
                 }
                 break;
             case TokenTypes.VARIABLE_DEF:
                 if (ast.getParent().getType() != TokenTypes.OBJBLOCK
+                        && !ast.branchContains(TokenTypes.FINAL)
                         && !isVariableInForInit(ast)
-                        && shouldCheckEnhancedForLoopVariable(ast)
-                        && !ast.branchContains(TokenTypes.FINAL)) {
+                        && shouldCheckEnhancedForLoopVariable(ast)) {
                     insertVariable(ast);
                 }
                 break;
@@ -31,7 +28,7 @@
             case TokenTypes.IDENT:
                 final int parentType = ast.getParent().getType();
                 if (isAssignOperator(parentType)
-                        && ast.getParent().getFirstChild() == ast) {
+                        && isFirstChild(ast)) {
                     removeVariable(ast);
                 }
                 break;

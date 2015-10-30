@@ -1,13 +1,10 @@
     /**
-     * Insert a variable at the topmost scope stack.
+     * Insert a parameter at the topmost scope stack.
      * @param ast the variable to insert.
      */
-    private void insertVariable(DetailAST ast) {
+    private void insertParameter(DetailAST ast) {
         final Map<String, DetailAST> scope = scopeStack.peek().scope;
         final DetailAST astNode = ast.findFirstToken(TokenTypes.IDENT);
         scope.put(astNode.getText(), astNode);
-        if (!isInitialized(astNode)) {
-            scopeStack.peek().uninitializedVariables.add(astNode);
-        }
     }
 

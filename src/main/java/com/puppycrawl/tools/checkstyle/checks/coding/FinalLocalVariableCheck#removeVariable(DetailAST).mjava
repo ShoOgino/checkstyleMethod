@@ -1,14 +1,17 @@
     /**
-     * Removes the variable from the Stacks.
+     * Remove the variable from the Stack.
      * @param ast Variable to remove
      */
     private void removeVariable(DetailAST ast) {
-        final Iterator<Map<String, DetailAST>> iterator = scopeStack.descendingIterator();
+        final Iterator<ScopeData> iterator = scopeStack.descendingIterator();
         while (iterator.hasNext()) {
-            final Map<String, DetailAST> state = iterator.next();
-            final DetailAST storedVariable = state.get(ast.getText());
+            final ScopeData scopeData = iterator.next();
+            final Map<String, DetailAST> scope = scopeData.scope;
+            final DetailAST storedVariable = scope.get(ast.getText());
             if (storedVariable != null && isSameVariables(storedVariable, ast)) {
-                state.remove(ast.getText());
+                if (shouldRemoveVariable(scopeData, ast)) {
+                    scope.remove(ast.getText());
+                }
                 break;
             }
         }

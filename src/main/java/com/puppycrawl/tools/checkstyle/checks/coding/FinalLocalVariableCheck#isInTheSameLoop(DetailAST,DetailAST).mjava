@@ -1,0 +1,19 @@
+    /**
+     * Check if both the variables are in the same loop.
+     * @param ast1 variable to compare.
+     * @param ast2 variable to compare.
+     * @return true if both the variables are in the same loop.
+     */
+    private static boolean isInTheSameLoop(DetailAST ast1, DetailAST ast2) {
+        DetailAST loop1 = ast1.getParent();
+        while (loop1 != null && !isLoopAst(loop1.getType())) {
+            loop1 = loop1.getParent();
+        }
+        DetailAST loop2 = ast2.getParent();
+        while (loop2 != null && !isLoopAst(loop2.getType())) {
+            loop2 = loop2.getParent();
+        }
+        return loop1 == null && loop2 == null
+                || loop1 != null && loop1 == loop2;
+    }
+
