@@ -1,0 +1,77 @@
+    private static void fooSwitch() {
+        switch("") {
+            case "0": //some comment
+            case "1":
+                // my comment
+                foo1();
+                break;
+            case "2":
+                // my comment
+                //comment
+                foo1();
+                // comment
+                break;
+            case "3":
+            /* com */
+                foo1();
+                /* com */
+                break;
+            case "5":
+                foo1();
+                   // violation
+            case "6":
+                int k = 7;
+                // fall through
+            case "7":
+                if (true) {}
+                   // violation
+            case "8":
+                break;
+            case "9":
+                foo1();
+                // fall through
+            case "10": {
+                if (true) {}
+                // fall through
+            }
+            case "11": {
+            // fall through
+            }
+            case "28": {
+                // fall through
+            }
+            case "12": {
+      // violation
+                int i;
+            }
+            case "13": {
+                       // some comment in empty case block
+            }
+            case "14": {
+        // TODO: violation
+            }
+            case "15": {
+                foo1();
+                      // violation
+            }
+            case "16": {
+                int a;
+            }
+            // fall through
+            case "17": {
+                int a;
+            }
+              // violation
+                case "18": { System.out.println();
+                }   // trailing comment
+            case "19":
+                // comment
+            case "20":
+            // comment
+            case "21":
+            default:
+                // comment
+                break;
+        }
+    }
+
