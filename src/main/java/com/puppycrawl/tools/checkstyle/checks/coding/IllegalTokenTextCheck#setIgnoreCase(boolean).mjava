@@ -4,7 +4,12 @@
      */
     public void setIgnoreCase(boolean caseInsensitive) {
         if (caseInsensitive) {
-            setCompileFlags(Pattern.CASE_INSENSITIVE);
+            compileFlags = Pattern.CASE_INSENSITIVE;
         }
+        else {
+            compileFlags = 0;
+        }
+
+        updateRegexp();
     }
 

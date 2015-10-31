@@ -1,7 +1,7 @@
     @Override
     public void visitToken(DetailAST ast) {
         final String text = ast.getText();
-        if (getRegexp().matcher(text).find()) {
+        if (regexp.matcher(text).find()) {
             String customMessage = message;
             if (customMessage.isEmpty()) {
                 customMessage = MSG_KEY;
@@ -10,7 +10,7 @@
                 ast.getLineNo(),
                 ast.getColumnNo(),
                 customMessage,
-                getFormat());
+                format);
         }
     }
 
