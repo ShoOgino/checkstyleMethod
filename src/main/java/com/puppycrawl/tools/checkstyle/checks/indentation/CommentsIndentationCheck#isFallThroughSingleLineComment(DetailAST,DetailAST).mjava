@@ -1,0 +1,27 @@
+    /**
+     * Checks whether single line comment is a 'fall through' comment.
+     * For example:
+     * <p>
+     * {@code
+     *    ...
+     *    case OPTION_ONE:
+     *        int someVariable = 1;
+     *        // fall through
+     *    case OPTION_TWO:
+     *        int a = 5;
+     *        break;
+     *    ...
+     * }
+     * </p>
+     * @param prevStmt previous statement.
+     * @param nextStmt next statement.
+     * @return true if a single line comment is a 'fall through' comment.
+     */
+    private static boolean isFallThroughSingleLineComment(DetailAST prevStmt, DetailAST nextStmt) {
+        return prevStmt != null
+            && prevStmt.getType() != TokenTypes.LITERAL_CASE
+            && nextStmt != null
+            && (nextStmt.getType() == TokenTypes.LITERAL_CASE
+                || nextStmt.getType() == TokenTypes.LITERAL_DEFAULT);
+    }
+

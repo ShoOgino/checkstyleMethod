@@ -1,0 +1,16 @@
+    /**
+     * Logs comment which can have the same indentation level as next or previous statement.
+     * @param comment comment.
+     * @param nextStmt previous statement.
+     * @param prevStmt next statement.
+     */
+    private void logMultilineIndentation(DetailAST prevStmt, DetailAST comment,
+                                         DetailAST nextStmt) {
+        final String multilineNoTemplate = "%d, %d";
+        log(comment.getLineNo(), MSG_KEY_SINGLE,
+            String.format(Locale.getDefault(), multilineNoTemplate, prevStmt.getLineNo(),
+                nextStmt.getLineNo()), comment.getColumnNo(),
+            String.format(Locale.getDefault(), multilineNoTemplate, prevStmt.getColumnNo(),
+                nextStmt.getColumnNo()));
+    }
+

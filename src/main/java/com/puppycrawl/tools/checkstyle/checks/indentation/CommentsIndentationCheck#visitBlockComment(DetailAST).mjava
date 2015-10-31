@@ -15,10 +15,9 @@
         final DetailAST prevStatement = getPrevStatementFromSwitchBlock(blockComment);
 
         if (nextStatement != null
-            && nextStatement.getType() != TokenTypes.RCURLY
-            && !isTrailingBlockComment(blockComment)
-            && !areSameLevelIndented(blockComment, prevStatement, nextStatement)) {
-
+                && nextStatement.getType() != TokenTypes.RCURLY
+                && !isTrailingBlockComment(blockComment)
+                && !areSameLevelIndented(blockComment, prevStatement, nextStatement)) {
             log(blockComment.getLineNo(), MSG_KEY_BLOCK, nextStatement.getLineNo(),
                 blockComment.getColumnNo(), nextStatement.getColumnNo());
         }

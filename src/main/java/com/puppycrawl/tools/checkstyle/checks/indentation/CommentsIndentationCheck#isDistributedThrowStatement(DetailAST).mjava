@@ -1,0 +1,20 @@
+    /**
+     * Checks whether the previous statement of a single line comment is a destributed throw
+     * statement.
+     * @param commentPreviousSibling previous sibling of the single line comment.
+     * @return true if the previous statement of a single line comment is a destributed throw
+     *         statement.
+     */
+    private static boolean isDistributedThrowStatement(DetailAST commentPreviousSibling) {
+        boolean destributed = false;
+        if (commentPreviousSibling != null
+                && commentPreviousSibling.getType() == TokenTypes.LITERAL_THROW) {
+            final DetailAST firstChild = commentPreviousSibling.getFirstChild();
+            final DetailAST nextSibling = firstChild.getNextSibling();
+            if (nextSibling.getLineNo() != commentPreviousSibling.getLineNo()) {
+                destributed = true;
+            }
+        }
+        return destributed;
+    }
+

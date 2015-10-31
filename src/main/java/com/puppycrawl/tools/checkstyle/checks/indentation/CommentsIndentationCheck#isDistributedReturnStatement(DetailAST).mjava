@@ -1,0 +1,20 @@
+    /**
+     * Checks whether the previous statement of a single line comment is a destributed return
+     * statement.
+     * @param commentPreviousSibling previous sibling of the single line comment.
+     * @return true if the previous statement of a single line comment is a destributed return
+     *         statement.
+     */
+    private static boolean isDistributedReturnStatement(DetailAST commentPreviousSibling) {
+        boolean destributed = false;
+        if (commentPreviousSibling != null
+                && commentPreviousSibling.getType() == TokenTypes.LITERAL_RETURN) {
+            final DetailAST firstChild = commentPreviousSibling.getFirstChild();
+            final DetailAST nextSibling = firstChild.getNextSibling();
+            if (nextSibling != null) {
+                destributed = true;
+            }
+        }
+        return  destributed;
+    }
+

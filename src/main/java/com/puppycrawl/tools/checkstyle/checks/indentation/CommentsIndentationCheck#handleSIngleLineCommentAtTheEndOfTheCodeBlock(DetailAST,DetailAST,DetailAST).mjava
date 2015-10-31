@@ -1,0 +1,37 @@
+    /**
+     * Hendles a single line comment which is placed at the end of non empty code block.
+     * Note, if single line comment is plcaed at the end of non empty block the comment should have
+     * the same indentation level as the previous statement. For example:
+     * <p>
+     * {@code
+     *    if (a == true) {
+     *        int b = 1;
+     *        // comment
+     *    }
+     * }
+     * </p>
+     * @param prevStmt previous statement.
+     * @param comment single line statement.
+     * @param nextStmt next statement.
+     */
+    private void handleSIngleLineCommentAtTheEndOfTheCodeBlock(DetailAST prevStmt,
+                                                               DetailAST comment,
+                                                               DetailAST nextStmt) {
+        if (prevStmt != null) {
+            if (prevStmt.getType() == TokenTypes.LITERAL_CASE
+                    || prevStmt.getType() == TokenTypes.CASE_GROUP
+                    || prevStmt.getType() == TokenTypes.LITERAL_DEFAULT
+                    || prevStmt.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+                if (comment.getColumnNo() < nextStmt.getColumnNo()) {
+                    log(comment.getLineNo(), MSG_KEY_SINGLE, nextStmt.getLineNo(),
+                        comment.getColumnNo(), nextStmt.getColumnNo());
+                }
+            }
+            else if (!areSameLevelIndented(comment, prevStmt, prevStmt)) {
+                log(comment.getLineNo(), MSG_KEY_SINGLE, prevStmt.getLineNo(),
+                    comment.getColumnNo(), prevStmt.getColumnNo());
+            }
+        }
+
+    }
+

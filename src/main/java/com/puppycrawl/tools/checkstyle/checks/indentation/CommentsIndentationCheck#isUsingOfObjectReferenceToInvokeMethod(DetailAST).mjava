@@ -1,0 +1,10 @@
+    /**
+     * Checks whether there is a use of an object reference to invoke an object's method on line.
+     * @param root root token of the line.
+     * @return true if there is a use of an object reference to invoke an object's method on line.
+     */
+    private static boolean isUsingOfObjectReferenceToInvokeMethod(DetailAST root) {
+        return root.getFirstChild().getFirstChild().getFirstChild() != null
+            && root.getFirstChild().getFirstChild().getFirstChild().getNextSibling() != null;
+    }
+

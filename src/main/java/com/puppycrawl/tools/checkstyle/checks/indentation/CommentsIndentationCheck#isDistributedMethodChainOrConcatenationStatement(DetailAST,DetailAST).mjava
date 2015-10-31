@@ -1,0 +1,26 @@
+    /**
+     * Checks whether the previous statement of a single line comment is a method call chain or
+     * string concatenation statemen distributed over two ore more lines.
+     * @param comment single line comment.
+     * @param commentPreviousSibling previous sibling of the sinle line comment.
+     * @return if the previous statement of a single line comment is a method call chain or
+     *         string concatenation statemen distributed over two ore more lines.
+     */
+    private static boolean isDistributedMethodChainOrConcatenationStatement(
+        DetailAST comment, DetailAST commentPreviousSibling) {
+        boolean destributed = false;
+        if (commentPreviousSibling != null
+                && commentPreviousSibling.getType() == TokenTypes.SEMI
+                && comment.getLineNo() - commentPreviousSibling.getLineNo() == 1) {
+            DetailAST currentToken = commentPreviousSibling.getPreviousSibling();
+            while (currentToken.getFirstChild() != null) {
+                currentToken = currentToken.getFirstChild();
+            }
+            if (currentToken.getType() != TokenTypes.COMMENT_CONTENT
+                    && commentPreviousSibling.getLineNo() != currentToken.getLineNo()) {
+                destributed = true;
+            }
+        }
+        return destributed;
+    }
+

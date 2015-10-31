@@ -12,10 +12,20 @@
                 blockBody = blockBody.getPreviousSibling();
             }
             if (blockBody.getType() == TokenTypes.EXPR) {
-                prevStmt = blockBody.getFirstChild().getFirstChild();
+                if (isUsingOfObjectReferenceToInvokeMethod(blockBody)) {
+                    prevStmt = findStartTokenOfMethodCallChain(blockBody);
+                }
+                else {
+                    prevStmt = blockBody.getFirstChild().getFirstChild();
+                }
             }
             else {
-                prevStmt = blockBody;
+                if (blockBody.getType() == TokenTypes.SLIST) {
+                    prevStmt = blockBody.getParent().getParent();
+                }
+                else {
+                    prevStmt = blockBody;
+                }
             }
         }
         return prevStmt;

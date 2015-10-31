@@ -16,20 +16,20 @@
      * }
      * </pre>
      * </p>
-     * @param singleLineComment {@link TokenTypes#SINGLE_LINE_COMMENT single line comment}.
+     * @param comment {@link TokenTypes#SINGLE_LINE_COMMENT single line comment}.
      * @param prevStmt previous code statement.
      * @param nextStmt next code statement.
      * @return true if comment and next code statement are indented at the same level.
      */
-    private static boolean areSameLevelIndented(DetailAST singleLineComment,
-                                                DetailAST prevStmt, DetailAST nextStmt) {
+    private static boolean areSameLevelIndented(DetailAST comment, DetailAST prevStmt,
+                                                DetailAST nextStmt) {
         boolean result;
         if (prevStmt == null) {
-            result = singleLineComment.getColumnNo() == nextStmt.getColumnNo();
+            result = comment.getColumnNo() == nextStmt.getColumnNo();
         }
         else {
-            result = singleLineComment.getColumnNo() == nextStmt.getColumnNo()
-                || singleLineComment.getColumnNo() == prevStmt.getColumnNo();
+            result = comment.getColumnNo() == nextStmt.getColumnNo()
+                || comment.getColumnNo() == prevStmt.getColumnNo();
         }
         return result;
     }

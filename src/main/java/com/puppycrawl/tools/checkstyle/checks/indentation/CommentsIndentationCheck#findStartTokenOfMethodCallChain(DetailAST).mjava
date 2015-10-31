@@ -1,0 +1,17 @@
+    /**
+     * Finds the start token of method call chain.
+     * @param root root token of the line.
+     * @return the start token of method call chain.
+     */
+    private static DetailAST findStartTokenOfMethodCallChain(DetailAST root) {
+        DetailAST startOfMethodCallChain = root;
+        while (startOfMethodCallChain.getFirstChild() != null
+                && startOfMethodCallChain.getFirstChild().getLineNo() == root.getLineNo()) {
+            startOfMethodCallChain = startOfMethodCallChain.getFirstChild();
+        }
+        if (startOfMethodCallChain.getFirstChild() != null) {
+            startOfMethodCallChain = startOfMethodCallChain.getFirstChild().getNextSibling();
+        }
+        return startOfMethodCallChain;
+    }
+

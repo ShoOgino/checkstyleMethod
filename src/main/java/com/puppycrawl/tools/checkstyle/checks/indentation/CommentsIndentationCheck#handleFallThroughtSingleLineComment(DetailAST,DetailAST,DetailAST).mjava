@@ -1,0 +1,42 @@
+    /**
+     * Handles 'fall through' single line comment.
+     * Note, 'fall through' and similar comments can have indentation level as next or previous
+     * statement.
+     * For example:
+     * <p>
+     * {@code
+     *    ...
+     *    case OPTION_ONE:
+     *        int someVariable = 1;
+     *        // fall through - OK
+     *    case OPTION_TWO:
+     *        int a = 5;
+     *        break;
+     *    ...
+     * }
+     * </p>
+     * <p>
+     * {@code
+     *    ...
+     *    case OPTION_ONE:
+     *        int someVariable = 1;
+     *    // than init variable a - OK
+     *    case OPTION_TWO:
+     *        int a = 5;
+     *        break;
+     *    ...
+     * }
+     * </p>
+     * @param prevStmt previous statement.
+     * @param comment single line comment.
+     * @param nextStmt next statement.
+     */
+    private void handleFallThroughtSingleLineComment(DetailAST prevStmt, DetailAST comment,
+                                                     DetailAST nextStmt) {
+
+        if (!areSameLevelIndented(comment, prevStmt, nextStmt)) {
+            logMultilineIndentation(prevStmt, comment, nextStmt);
+        }
+
+    }
+

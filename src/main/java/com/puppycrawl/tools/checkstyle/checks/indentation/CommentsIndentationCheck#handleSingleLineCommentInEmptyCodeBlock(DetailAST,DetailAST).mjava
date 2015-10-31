@@ -1,0 +1,25 @@
+    /**
+     * Handles a single line comment which is placed within the empty code block.
+     * Note, if comment is placed at the end of the empty code block, we have Checkstyle's
+     * limitations to clearly detect user intention of explanation target - above or below. The
+     * only case we can assume as a violation is when a single line comment within the empty
+     * code block has indentation level that is lower than the indentation level of the closing
+     * right curly brace. For example:
+     * <p>
+     * {@code
+     *    if (a == true) {
+     * // violation
+     *    }
+     * }
+     * </p>
+     *
+     * @param comment single line comment.
+     * @param nextStmt next statement.
+     */
+    private void handleSingleLineCommentInEmptyCodeBlock(DetailAST comment, DetailAST nextStmt) {
+        if (comment.getColumnNo() < nextStmt.getColumnNo()) {
+            log(comment.getLineNo(), MSG_KEY_SINGLE, nextStmt.getLineNo(),
+                comment.getColumnNo(), nextStmt.getColumnNo());
+        }
+    }
+
