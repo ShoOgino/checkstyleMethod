@@ -9,7 +9,7 @@
         for (DetailAST excType : excTypes) {
             final FullIdent ident = FullIdent.createFullIdent(excType);
 
-            if (isIllegalClassName(ident.getText())) {
+            if (illegalClassNames.contains(ident.getText())) {
                 log(detailAST, MSG_KEY, ident.getText());
             }
         }
