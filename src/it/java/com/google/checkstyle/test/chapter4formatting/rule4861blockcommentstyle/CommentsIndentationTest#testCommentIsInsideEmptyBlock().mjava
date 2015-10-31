@@ -1,0 +1,23 @@
+    @Test
+    public void testCommentIsInsideEmptyBlock() throws Exception {
+        final String[] expected = {
+            "9: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                10, 19, 23),
+            "10: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.block",
+                12, 23, 31),
+            "33: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                34, 0, 8),
+            "57: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                58, 0, 8),
+            "71: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                72, 0, 8),
+            };
+
+        final Configuration checkConfig = builder.getCheckConfig("CommentsIndentation");
+        final String filePath =
+            builder.getFilePath("CommentsIndentationInEmptyBlockInput");
+
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

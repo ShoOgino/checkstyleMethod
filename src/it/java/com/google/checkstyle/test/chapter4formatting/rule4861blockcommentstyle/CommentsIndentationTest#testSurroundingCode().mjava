@@ -1,0 +1,31 @@
+    @Test
+    public void testSurroundingCode() throws Exception {
+        final String[] expected = {
+            "13: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                14, 14, 12),
+            "23: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.block",
+                24, 16, 12),
+            "25: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.block",
+                27, 16, 12),
+            "28: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.block",
+                31, 16, 12),
+            "50: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                51, 27, 23),
+            "51: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.block",
+                53, 23, 36),
+            "90: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                91, 14, 8),
+            "98: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                99, 13, 8),
+            "108: " + getCheckMessage(CommentsIndentationCheck.class, "comments.indentation.single",
+                109, 33, 8),
+            };
+
+        final Configuration checkConfig = builder.getCheckConfig("CommentsIndentation");
+        final String filePath =
+            builder.getFilePath("CommentsIndentationSurroundingCodeInput");
+
+        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
