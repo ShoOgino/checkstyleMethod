@@ -1,0 +1,11 @@
+    @Test
+    public void testLimitViolationsBySpecifyingTokens() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("tokens", "INTERFACE_DEF");
+        final String[] expected = {
+            "4: " + getCheckMessage(JAVADOC_MISSING),
+        };
+        verify(checkConfig, getPath("InputNoJavadocOnInterface.java"), expected);
+    }
+
