@@ -7,7 +7,7 @@
             while (token != null) {
                 if (token.getType() != TokenTypes.COMMA) {
                     final FullIdent ident = FullIdent.createFullIdent(token);
-                    if (isIllegalClassName(ident.getText())) {
+                    if (illegalClassNames.contains(ident.getText())) {
                         log(token, MSG_KEY, ident.getText());
                     }
                 }
