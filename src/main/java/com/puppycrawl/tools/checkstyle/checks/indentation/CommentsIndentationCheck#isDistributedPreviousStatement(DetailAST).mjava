@@ -5,7 +5,7 @@
      * @return true if the previous statement of a single line comment is distributed over two or
      *         more lines.
      */
-    private boolean isDistributedPreviousStatement(DetailAST singleLineComment) {
+    private static boolean isDistributedPreviousStatement(DetailAST singleLineComment) {
         final DetailAST previousSibling = singleLineComment.getPreviousSibling();
         return isDistributedMethodChainOrConcatenationStatement(singleLineComment, previousSibling)
             || isDistributedReturnStatement(previousSibling)
