@@ -1,0 +1,15 @@
+    private static Set<Node> findChildElementsByTag(Node node, String tag) {
+        final Set<Node> result = new LinkedHashSet<>();
+
+        for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (tag.equals(child.getNodeName())) {
+                result.add(child);
+            }
+            else if (child.hasChildNodes()) {
+                result.addAll(findChildElementsByTag(child, tag));
+            }
+        }
+
+        return result;
+    }
+
