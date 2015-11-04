@@ -1,5 +1,10 @@
     @Override
     protected boolean mustCheckName(DetailAST ast) {
-        return ast.getParent().getType() != TokenTypes.LITERAL_CATCH;
+        boolean checkName = true;
+        if (ignoreOverridden && isOverriddenMethod(ast)
+                || ast.getParent().getType() == TokenTypes.LITERAL_CATCH) {
+            checkName = false;
+        }
+        return checkName;
     }
 

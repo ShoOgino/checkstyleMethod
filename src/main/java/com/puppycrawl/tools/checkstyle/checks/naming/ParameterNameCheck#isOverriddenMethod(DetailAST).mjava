@@ -1,0 +1,18 @@
+    /**
+     * Checks whether a method is annotated with Override annotation.
+     * @param ast method parameter definition token.
+     * @return true if a method is annotated with Override annotation.
+     */
+    private static boolean isOverriddenMethod(DetailAST ast) {
+        boolean overridden = false;
+        final DetailAST parent = ast.getParent().getParent();
+        final DetailAST annotation = parent.getFirstChild().getFirstChild();
+        if (annotation.getType() == TokenTypes.ANNOTATION) {
+            final DetailAST overrideToken = annotation.findFirstToken(TokenTypes.IDENT);
+            if ("Override".equals(overrideToken.getText())) {
+                overridden = true;
+            }
+        }
+        return overridden;
+    }
+
