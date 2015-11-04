@@ -8,8 +8,9 @@
         }
 
         final boolean skipStatement = isSkipStatement(ast);
+        final boolean skipEmptyLoopBody = allowEmptyLoopBody && isEmptyLoopBody(ast);
 
-        if (slistAST == null && !isElseIf && !skipStatement) {
+        if (slistAST == null && !isElseIf && !skipStatement && !skipEmptyLoopBody) {
             log(ast.getLineNo(), MSG_KEY_NEED_BRACES, ast.getText());
         }
     }

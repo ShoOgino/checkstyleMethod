@@ -1,0 +1,11 @@
+    @Test
+    public void testAllowEmptyLoopBodyTrue() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(NeedBracesCheck.class);
+        checkConfig.addAttribute("allowEmptyLoopBody", "true");
+        final String[] expected = {
+            "97: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
+        };
+        verify(checkConfig, getPath("InputNeedBracesNoBodyLoops.java"), expected);
+    }
+
