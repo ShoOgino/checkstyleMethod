@@ -1,0 +1,13 @@
+    @Test
+    public void testSkipCatchParameterTrue()
+        throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ParameterNameCheck.class);
+        checkConfig.addAttribute("format", "^h$");
+        checkConfig.addAttribute("skipCatchParameter", "true");
+
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig, getPath("InputCatchParameter.java"), expected);
+    }
+

@@ -1,0 +1,23 @@
+    @Test
+    public void testSkipCatchParameterTrueAndIgnoreOverriddenTrue()
+        throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ParameterNameCheck.class);
+        checkConfig.addAttribute("format", "^h$");
+        checkConfig.addAttribute("skipCatchParameter", "true");
+        checkConfig.addAttribute("ignoreOverridden", "true");
+        final String pattern = "^h$";
+
+        final String[] expected = {
+            "13:29: " + getCheckMessage(MSG_INVALID_PATTERN, "object", pattern),
+            "17:30: " + getCheckMessage(MSG_INVALID_PATTERN, "aaaa", pattern),
+            "21:19: " + getCheckMessage(MSG_INVALID_PATTERN, "abc", pattern),
+            "21:28: " + getCheckMessage(MSG_INVALID_PATTERN, "bd", pattern),
+            "23:18: " + getCheckMessage(MSG_INVALID_PATTERN, "abc", pattern),
+            "30:43: " + getCheckMessage(MSG_INVALID_PATTERN, "field", pattern),
+            "30:62: " + getCheckMessage(MSG_INVALID_PATTERN, "packageNames", pattern),
+            };
+
+        verify(checkConfig, getPath("InputParameterNameMultipleOptions.java"), expected);
+    }
+
