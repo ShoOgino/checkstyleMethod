@@ -1,0 +1,9 @@
+    @Test
+    public void testNotMatchFolderAndFileNotMatchesFolder() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        checkConfig.addAttribute("match", "false");
+        checkConfig.addAttribute("folderPattern", ".*[\\\\/]java[\\\\/].*");
+        checkConfig.addAttribute("fileNamePattern", ".*\\.dat");
+        verify(checkConfig, getPath("InputSemantic.java"), ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+

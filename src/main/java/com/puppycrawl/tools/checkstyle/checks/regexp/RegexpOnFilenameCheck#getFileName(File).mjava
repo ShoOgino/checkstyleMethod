@@ -1,0 +1,16 @@
+    /**
+     * Retrieves the file name from the given {@code file}.
+     *
+     * @param file Input file to examine.
+     * @return The file name.
+     */
+    private String getFileName(File file) {
+        String fileName = file.getName();
+
+        if (ignoreFileNameExtensions) {
+            fileName = Files.getNameWithoutExtension(fileName);
+        }
+
+        return fileName;
+    }
+

@@ -1,0 +1,12 @@
+    @Test
+    public void testNotMatchFolderMatches() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        checkConfig.addAttribute("match", "false");
+        checkConfig.addAttribute("folderPattern", ".*[\\\\/]gov[\\\\/].*");
+        final String path = getPath("InputSemantic.java");
+        final String[] expected = {
+            "0: " + getCheckMessage(MSG_MISMATCH, ".*[\\\\/]gov[\\\\/].*", ""),
+        };
+        verify(checkConfig, path, expected);
+    }
+

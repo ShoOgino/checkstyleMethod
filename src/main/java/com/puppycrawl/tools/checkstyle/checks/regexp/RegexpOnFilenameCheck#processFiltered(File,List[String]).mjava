@@ -1,0 +1,10 @@
+    @Override
+    protected void processFiltered(File file, List<String> lines) throws CheckstyleException {
+        final String fileName = getFileName(file);
+        final String folderPath = getFolderPath(file);
+
+        if (isMatchFolder(folderPath) && isMatchFile(fileName)) {
+            log();
+        }
+    }
+

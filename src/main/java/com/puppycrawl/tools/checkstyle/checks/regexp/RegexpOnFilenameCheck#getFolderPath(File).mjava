@@ -1,0 +1,18 @@
+    /**
+     * Retrieves the folder path from the given {@code file}.
+     *
+     * @param file Input file to examine.
+     * @return The folder path.
+     * @throws CheckstyleException if there is an error getting the canonical
+     *         path of the {@code file}.
+     */
+    private static String getFolderPath(File file) throws CheckstyleException {
+        try {
+            return file.getParentFile().getCanonicalPath();
+        }
+        catch (IOException ex) {
+            throw new CheckstyleException("unable to create canonical path names for "
+                    + file.getAbsolutePath(), ex);
+        }
+    }
+

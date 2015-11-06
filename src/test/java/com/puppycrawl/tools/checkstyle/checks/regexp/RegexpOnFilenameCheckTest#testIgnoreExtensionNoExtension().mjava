@@ -1,0 +1,8 @@
+    @Test
+    public void testIgnoreExtensionNoExtension() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        checkConfig.addAttribute("fileNamePattern", "\\.");
+        checkConfig.addAttribute("ignoreFileNameExtensions", "true");
+        verify(checkConfig, getPath("InputNoExtension"), ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+

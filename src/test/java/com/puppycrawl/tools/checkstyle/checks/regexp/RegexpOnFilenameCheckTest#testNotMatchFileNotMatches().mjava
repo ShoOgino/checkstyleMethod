@@ -1,0 +1,8 @@
+    @Test
+    public void testNotMatchFileNotMatches() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        checkConfig.addAttribute("match", "false");
+        checkConfig.addAttribute("fileNamePattern", ".*\\.java");
+        verify(checkConfig, getPath("InputSemantic.java"), ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+

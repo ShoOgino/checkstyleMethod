@@ -1,0 +1,31 @@
+    /**
+     * Checks if the given {@code folderPath} matches the specified
+     * {@link #folderPattern}.
+     *
+     * @param folderPath Input folder path to examine.
+     * @return true if they do match.
+     */
+    private boolean isMatchFolder(String folderPath) {
+        final boolean result;
+
+        // null pattern always matches, regardless of value of 'match'
+        if (folderPattern == null) {
+            result = true;
+        }
+        else {
+            final boolean useMatch;
+
+            // null pattern means 'match' applies to the folderPattern matching
+            if (fileNamePattern == null) {
+                useMatch = match;
+            }
+            else {
+                useMatch = true;
+            }
+
+            result = folderPattern.matcher(folderPath).find() == useMatch;
+        }
+
+        return result;
+    }
+

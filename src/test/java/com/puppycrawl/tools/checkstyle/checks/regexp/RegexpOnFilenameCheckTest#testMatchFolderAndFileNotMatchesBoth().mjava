@@ -1,0 +1,9 @@
+    @Test
+    public void testMatchFolderAndFileNotMatchesBoth() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        checkConfig.addAttribute("match", "true");
+        checkConfig.addAttribute("folderPattern", "BAD.*");
+        checkConfig.addAttribute("fileNamePattern", ".*\\.properties");
+        verify(checkConfig, getPath("InputSemantic.java"), ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+

@@ -1,0 +1,10 @@
+    @Test
+    public void testDefaultProperties() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        final String path = getPath("Input Space.properties");
+        final String[] expected = {
+            "0: " + getCheckMessage(MSG_MATCH, "", "\\s"),
+        };
+        verify(checkConfig, path, expected);
+    }
+

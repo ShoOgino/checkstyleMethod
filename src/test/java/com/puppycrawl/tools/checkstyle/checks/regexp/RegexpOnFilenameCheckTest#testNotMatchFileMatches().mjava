@@ -1,0 +1,12 @@
+    @Test
+    public void testNotMatchFileMatches() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        checkConfig.addAttribute("match", "false");
+        checkConfig.addAttribute("fileNamePattern", ".*\\.properties");
+        final String path = getPath("InputSemantic.java");
+        final String[] expected = {
+            "0: " + getCheckMessage(MSG_MISMATCH, "", ".*\\.properties"),
+        };
+        verify(checkConfig, path, expected);
+    }
+

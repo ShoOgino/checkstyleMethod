@@ -1,0 +1,8 @@
+    @Test
+    public void testIgnoreExtension() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
+        checkConfig.addAttribute("fileNamePattern", ".*\\.java");
+        checkConfig.addAttribute("ignoreFileNameExtensions", "true");
+        verify(checkConfig, getPath("InputSemantic.java"), ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
