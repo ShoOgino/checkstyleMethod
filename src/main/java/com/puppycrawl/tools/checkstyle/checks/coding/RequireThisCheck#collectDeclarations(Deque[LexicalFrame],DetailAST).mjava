@@ -1,0 +1,50 @@
+    /**
+     * Parse the next AST for declarations.
+     *
+     * @param frameStack Stack containing the FrameTree being built
+     * @param ast AST to parse
+     */
+    private static void collectDeclarations(Deque<LexicalFrame> frameStack,
+        DetailAST ast) {
+        final LexicalFrame frame = frameStack.peek();
+        switch (ast.getType()) {
+            case TokenTypes.VARIABLE_DEF :
+                collectVariableDeclarations(ast, frame);
+                break;
+            case TokenTypes.PARAMETER_DEF :
+                final DetailAST parameterAST = ast.findFirstToken(TokenTypes.IDENT);
+                frame.addName(parameterAST.getText());
+                break;
+            case TokenTypes.CLASS_DEF :
+            case TokenTypes.INTERFACE_DEF :
+            case TokenTypes.ENUM_DEF :
+            case TokenTypes.ANNOTATION_DEF :
+                final DetailAST classAST = ast.findFirstToken(TokenTypes.IDENT);
+                frame.addName(classAST.getText());
+                frameStack.addFirst(new ClassFrame(frame));
+                break;
+            case TokenTypes.SLIST :
+                frameStack.addFirst(new BlockFrame(frame));
+                break;
+            case TokenTypes.METHOD_DEF :
+                final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
+                if (frame instanceof ClassFrame) {
+                    final DetailAST mods =
+                            ast.findFirstToken(TokenTypes.MODIFIERS);
+                    if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
+                        ((ClassFrame) frame).addStaticMethod(name);
+                    }
+                    else {
+                        ((ClassFrame) frame).addInstanceMethod(name);
+                    }
+                }
+                frameStack.addFirst(new MethodFrame(frame));
+                break;
+            case TokenTypes.CTOR_DEF :
+                frameStack.addFirst(new MethodFrame(frame));
+                break;
+            default:
+                // do nothing
+        }
+    }
+

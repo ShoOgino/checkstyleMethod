@@ -1,0 +1,11 @@
+    /**
+     * Check if given name is a name for class field in current environment.
+     * @param name a name to check
+     * @return true is the given name is name of member.
+     */
+    protected final boolean isClassField(String name) {
+        final LexicalFrame frame = findFrame(name);
+        return frame instanceof ClassFrame
+                && ((ClassFrame) frame).hasInstanceMember(name);
+    }
+
