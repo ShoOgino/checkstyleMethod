@@ -5,11 +5,12 @@
         final String messageKey = "one.top.level.class";
 
         final String[] expected = {
-            "4: " + getCheckMessage(clazz, messageKey, "FooEnum"),
+            "5: " + getCheckMessage(clazz, messageKey, "FooIn"),
+            "7: " + getCheckMessage(clazz, messageKey, "FooClass"),
         };
 
         final Configuration checkConfig = builder.getCheckConfig("OneTopLevelClass");
-        final String filePath = builder.getFilePath("OneTopLevelClassBad2");
+        final String filePath = builder.getFilePath("InputOneTopLevelClassBad2");
 
         final Integer[] warnList = builder.getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
