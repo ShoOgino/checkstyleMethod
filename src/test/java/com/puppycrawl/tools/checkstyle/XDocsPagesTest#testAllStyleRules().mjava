@@ -1,0 +1,40 @@
+    @Test
+    public void testAllStyleRules() throws Exception {
+        for (File file : Files.fileTreeTraverser().preOrderTraversal(XDOCS_DIRECTORY)) {
+            final String fileName = file.getName();
+
+            if (!fileName.endsWith("_style.xml")) {
+                continue;
+            }
+
+            final String input = Files.toString(file, UTF_8);
+            final Document document = getRawXml(fileName, input, input);
+            final NodeList sources = document.getElementsByTagName("tr");
+            String lastRuleName = null;
+
+            for (int position = 0; position < sources.getLength(); position++) {
+                final Node row = sources.item(position);
+                final List<Node> columns = new ArrayList<>(findChildElementsByTag(row, "td"));
+
+                if (columns.isEmpty()) {
+                    continue;
+                }
+
+                final String ruleName = columns.get(1).getTextContent().trim();
+
+                if (lastRuleName != null) {
+                    Assert.assertTrue(
+                            fileName + " rule '" + ruleName + "' is out of order compared to '"
+                                    + lastRuleName + "'",
+                            ruleName.toLowerCase(Locale.ENGLISH).compareTo(
+                                    lastRuleName.toLowerCase(Locale.ENGLISH)) >= 0);
+                }
+
+                validateStyleChecks(findChildElementsByTag(columns.get(2), "a"),
+                        findChildElementsByTag(columns.get(3), "a"), fileName, ruleName);
+
+                lastRuleName = ruleName;
+            }
+        }
+    }
+

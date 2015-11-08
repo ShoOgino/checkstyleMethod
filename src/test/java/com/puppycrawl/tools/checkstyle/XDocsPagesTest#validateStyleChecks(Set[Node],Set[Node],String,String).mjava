@@ -1,0 +1,64 @@
+    private static void validateStyleChecks(Set<Node> checks, Set<Node> configs, String fileName,
+            String ruleName) {
+        final Iterator<Node> itrChecks = checks.iterator();
+        final Iterator<Node> itrConfigs = configs.iterator();
+
+        while (itrChecks.hasNext()) {
+            final Node check = itrChecks.next();
+            final String checkName = check.getTextContent().trim();
+
+            if (!check.getAttributes().getNamedItem("href").getTextContent()
+                    .startsWith("config_")) {
+                continue;
+            }
+
+            Assert.assertTrue(fileName + " rule '" + ruleName + "' check '" + checkName
+                    + "' shouldn't end with 'Check'", !checkName.endsWith("Check"));
+
+            for (String configName : new String[] {"config", "test"}) {
+                Node config = null;
+
+                try {
+                    config = itrConfigs.next();
+                }
+                catch (NoSuchElementException ignore) {
+                    Assert.fail(fileName + " rule '" + ruleName + "' check '" + checkName
+                            + "' is missing the config link: " + configName);
+                }
+
+                Assert.assertEquals(fileName + " rule '" + ruleName + "' check '" + checkName
+                        + "' has mismatched config/test links", configName, config.getTextContent()
+                        .trim());
+
+                final String configUrl = config.getAttributes().getNamedItem("href")
+                        .getTextContent();
+
+                if ("config".equals(configName)) {
+                    final String expectedUrl = "https://github.com/search?q="
+                            + "path%3Asrc%2Fmain%2Fresources+filename%3Agoogle_checks.xml+"
+                            + "repo%3Acheckstyle%2Fcheckstyle+" + checkName;
+
+                    Assert.assertEquals(fileName + " rule '" + ruleName + "' check '" + checkName
+                            + "' should have matching " + configName + " url", expectedUrl,
+                            configUrl);
+                }
+                else if ("test".equals(configName)) {
+                    Assert.assertTrue(fileName + " rule '" + ruleName + "' check '" + checkName
+                            + "' should have matching " + configName + " url",
+                            configUrl.startsWith("https://github.com/checkstyle/checkstyle/"
+                                    + "blob/master/src/it/java/com/google/checkstyle/test/"));
+                    Assert.assertTrue(fileName + " rule '" + ruleName + "' check '" + checkName
+                            + "' should have matching " + configName + " url",
+                            configUrl.endsWith("/" + checkName + "Test.java"));
+
+                    Assert.assertTrue(fileName + " rule '" + ruleName + "' check '" + checkName
+                            + "' should have a test that exists", new File(configUrl.substring(53)
+                            .replace('/', File.separatorChar)).exists());
+                }
+            }
+        }
+
+        Assert.assertFalse(fileName + " rule '" + ruleName + "' has too many configs",
+                itrConfigs.hasNext());
+    }
+
