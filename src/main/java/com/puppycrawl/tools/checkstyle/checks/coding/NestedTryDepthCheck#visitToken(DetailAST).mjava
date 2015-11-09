@@ -1,5 +1,8 @@
     @Override
     public void visitToken(DetailAST literalTry) {
-        nestIn(literalTry, MSG_KEY);
+        if (depth > max) {
+            log(literalTry, MSG_KEY, depth, max);
+        }
+        ++depth;
     }
 
