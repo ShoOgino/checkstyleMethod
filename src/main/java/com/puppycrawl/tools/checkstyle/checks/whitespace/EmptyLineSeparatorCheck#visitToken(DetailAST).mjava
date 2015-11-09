@@ -1,7 +1,10 @@
     @Override
     public void visitToken(DetailAST ast) {
-        final DetailAST nextToken = ast.getNextSibling();
+        if (hasMultipleLinesBefore(ast)) {
+            log(ast.getLineNo(), MSG_MULTIPLE_LINES, ast.getText());
+        }
 
+        final DetailAST nextToken = ast.getNextSibling();
         if (nextToken != null) {
             final int astType = ast.getType();
             switch (astType) {
@@ -15,11 +18,14 @@
                     processPackage(ast, nextToken);
                     break;
                 default:
-                    if (nextToken.getType() != TokenTypes.RCURLY && !hasEmptyLineAfter(ast)) {
-                        log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED, nextToken.getText());
+                    if (nextToken.getType() == TokenTypes.RCURLY) {
+                        if (hasNotAllowedTwoEmptyLinesBefore(nextToken)) {
+                            log(ast.getLineNo(), MSG_MULTIPLE_LINES_AFTER, ast.getText());
+                        }
                     }
-                    if (hasNotAllowedTwoEmptyLinesBefore(ast)) {
-                        log(ast.getLineNo(), MSG_MULTIPLE_LINES, ast.getText());
+                    else if (!hasEmptyLineAfter(ast)) {
+                        log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED,
+                            nextToken.getText());
                     }
             }
         }

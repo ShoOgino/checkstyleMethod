@@ -1,0 +1,15 @@
+    /**
+     * Whether the token has not allowed multiple empty lines before.
+     * @param ast the ast to check.
+     * @return true if the token has not allowed multiple empty lines before.
+     */
+    private boolean hasMultipleLinesBefore(DetailAST ast) {
+        boolean result = false;
+        if ((ast.getType() != TokenTypes.VARIABLE_DEF
+            || isTypeField(ast))
+                && hasNotAllowedTwoEmptyLinesBefore(ast)) {
+            result = true;
+        }
+        return result;
+    }
+
