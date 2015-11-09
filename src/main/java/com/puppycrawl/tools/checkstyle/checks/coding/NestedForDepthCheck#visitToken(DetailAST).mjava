@@ -1,5 +1,8 @@
     @Override
     public void visitToken(DetailAST ast) {
-        nestIn(ast, MSG_KEY);
+        if (depth > max) {
+            log(ast, MSG_KEY, depth, max);
+        }
+        ++depth;
     }
 
