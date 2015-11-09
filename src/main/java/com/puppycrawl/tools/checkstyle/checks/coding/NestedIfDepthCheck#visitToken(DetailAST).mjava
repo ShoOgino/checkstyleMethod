@@ -1,7 +1,10 @@
     @Override
     public void visitToken(DetailAST literalIf) {
         if (!CheckUtils.isElseIf(literalIf)) {
-            nestIn(literalIf, MSG_KEY);
+            if (depth > max) {
+                log(literalIf, MSG_KEY, depth, max);
+            }
+            ++depth;
         }
     }
 
