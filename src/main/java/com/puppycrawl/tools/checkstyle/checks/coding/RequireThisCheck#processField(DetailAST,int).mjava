@@ -13,13 +13,9 @@
         if (!importOrPackage
                 && !methodNameInMethodCall
                 && !typeName
-                && !isDeclarationToken(parentType)) {
-
-            final String name = ast.getText();
-
-            if (isClassField(name)) {
-                log(ast, MSG_VARIABLE, name);
-            }
+                && !isDeclarationToken(parentType)
+                && isClassField(ast)) {
+            log(ast, MSG_VARIABLE, ast.getText());
         }
     }
 

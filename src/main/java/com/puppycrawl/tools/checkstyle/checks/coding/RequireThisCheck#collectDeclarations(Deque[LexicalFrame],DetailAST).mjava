@@ -12,30 +12,30 @@
                 collectVariableDeclarations(ast, frame);
                 break;
             case TokenTypes.PARAMETER_DEF :
-                final DetailAST parameterAST = ast.findFirstToken(TokenTypes.IDENT);
-                frame.addName(parameterAST.getText());
+                final DetailAST parameterIdent = ast.findFirstToken(TokenTypes.IDENT);
+                frame.addIdent(parameterIdent);
                 break;
             case TokenTypes.CLASS_DEF :
             case TokenTypes.INTERFACE_DEF :
             case TokenTypes.ENUM_DEF :
             case TokenTypes.ANNOTATION_DEF :
-                final DetailAST classAST = ast.findFirstToken(TokenTypes.IDENT);
-                frame.addName(classAST.getText());
+                final DetailAST classIdent = ast.findFirstToken(TokenTypes.IDENT);
+                frame.addIdent(classIdent);
                 frameStack.addFirst(new ClassFrame(frame));
                 break;
             case TokenTypes.SLIST :
                 frameStack.addFirst(new BlockFrame(frame));
                 break;
             case TokenTypes.METHOD_DEF :
-                final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
+                final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
                 if (frame instanceof ClassFrame) {
                     final DetailAST mods =
                             ast.findFirstToken(TokenTypes.MODIFIERS);
                     if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                        ((ClassFrame) frame).addStaticMethod(name);
+                        ((ClassFrame) frame).addStaticMethod(ident);
                     }
                     else {
-                        ((ClassFrame) frame).addInstanceMethod(name);
+                        ((ClassFrame) frame).addInstanceMethod(ident);
                     }
                 }
                 frameStack.addFirst(new MethodFrame(frame));

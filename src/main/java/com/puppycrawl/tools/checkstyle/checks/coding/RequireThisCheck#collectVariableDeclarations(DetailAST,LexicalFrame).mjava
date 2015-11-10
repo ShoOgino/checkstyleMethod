@@ -4,21 +4,21 @@
      * @param frame current frame
      */
     private static void collectVariableDeclarations(DetailAST ast, LexicalFrame frame) {
-        final String name =
-                ast.findFirstToken(TokenTypes.IDENT).getText();
+        final DetailAST ident =
+                ast.findFirstToken(TokenTypes.IDENT);
         if (frame instanceof ClassFrame) {
             final DetailAST mods =
                     ast.findFirstToken(TokenTypes.MODIFIERS);
             if (ScopeUtils.isInInterfaceBlock(ast)
                     || mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                ((ClassFrame) frame).addStaticMember(name);
+                ((ClassFrame) frame).addStaticMember(ident);
             }
             else {
-                ((ClassFrame) frame).addInstanceMember(name);
+                ((ClassFrame) frame).addInstanceMember(ident);
             }
         }
         else {
-            frame.addName(name);
+            frame.addIdent(ident);
         }
     }
 

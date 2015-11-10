@@ -1,0 +1,18 @@
+        /** Check whether the frame contains a given name.
+         * @param nameToFind IDENT ast of the name we're looking for.
+         * @param lookForMethod whether we are looking for a method name.
+         * @return whether it was found.
+         */
+        protected LexicalFrame getIfContains(DetailAST nameToFind, boolean lookForMethod) {
+            LexicalFrame frame = null;
+
+            if (!lookForMethod
+                && contains(nameToFind)) {
+                frame = this;
+            }
+            else if (parent != null) {
+                frame = parent.getIfContains(nameToFind, lookForMethod);
+            }
+            return frame;
+        }
+

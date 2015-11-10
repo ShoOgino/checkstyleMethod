@@ -1,0 +1,13 @@
+        @Override
+        protected LexicalFrame getIfContains(DetailAST nameToFind, boolean lookForMethod) {
+            LexicalFrame frame;
+
+            if (contains(nameToFind)) {
+                frame = this;
+            }
+            else {
+                frame = getParent().getIfContains(nameToFind, lookForMethod);
+            }
+            return frame;
+        }
+

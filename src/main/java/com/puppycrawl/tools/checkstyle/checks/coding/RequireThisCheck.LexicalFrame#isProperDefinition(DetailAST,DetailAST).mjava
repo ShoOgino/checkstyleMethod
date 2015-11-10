@@ -1,0 +1,12 @@
+        /**
+         * Whether the definition is correspondent to the IDENT.
+         * @param ident the IDENT ast to check.
+         * @param ast the IDENT ast of the definition to check.
+         * @return true if ast is correspondent to ident.
+         */
+        protected boolean isProperDefinition(DetailAST ident, DetailAST ast) {
+            final String nameToFind = ident.getText();
+            return nameToFind.equals(ast.getText())
+                && checkPosition(ast, ident);
+        }
+
