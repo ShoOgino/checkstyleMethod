@@ -1,0 +1,8 @@
+    @Test(expected = CheckstyleException.class)
+    public void testInvalidOption() throws Exception {
+        checkConfig.addAttribute("option", "invalid_option");
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig, getPath("InputSeparatorWrap.java"), expected);
+    }
+
