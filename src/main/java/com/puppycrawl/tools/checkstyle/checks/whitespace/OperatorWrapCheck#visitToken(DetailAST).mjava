@@ -8,7 +8,6 @@
                 return;
             }
         }
-        final WrapOption wOp = getAbstractOption();
 
         final String text = ast.getText();
         final int colNo = ast.getColumnNo();
@@ -18,12 +17,12 @@
         // Check if rest of line is whitespace, and not just the operator
         // by itself. This last bit is to handle the operator on a line by
         // itself.
-        if (wOp == WrapOption.NL
+        if (option == WrapOption.NL
                 && !text.equals(currentLine.trim())
                 && StringUtils.isBlank(currentLine.substring(colNo + text.length()))) {
             log(lineNo, colNo, LINE_NEW, text);
         }
-        else if (wOp == WrapOption.EOL
+        else if (option == WrapOption.EOL
                 && CommonUtils.hasWhitespaceBefore(colNo - 1, currentLine)) {
             log(lineNo, colNo, LINE_PREVIOUS, text);
         }
