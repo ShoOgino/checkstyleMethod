@@ -20,11 +20,11 @@
         }
         else {
             final int before = parenAST.getColumnNo() - 1;
-            if (getAbstractOption() == PadOption.NOSPACE
+            if (option == PadOption.NOSPACE
                 && Character.isWhitespace(line.charAt(before))) {
                 log(parenAST, WS_PRECEDED, parenAST.getText());
             }
-            else if (getAbstractOption() == PadOption.SPACE
+            else if (option == PadOption.SPACE
                      && !Character.isWhitespace(line.charAt(before))) {
                 log(parenAST, WS_NOT_PRECEDED, parenAST.getText());
             }
