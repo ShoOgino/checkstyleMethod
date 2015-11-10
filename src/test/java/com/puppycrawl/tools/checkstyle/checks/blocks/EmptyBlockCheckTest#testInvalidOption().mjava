@@ -1,0 +1,9 @@
+    @Test(expected = CheckstyleException.class)
+    public void testInvalidOption() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(EmptyBlockCheck.class);
+        checkConfig.addAttribute("option", "invalid_option");
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig, getPath("InputSemantic.java"), expected);
+    }
+
