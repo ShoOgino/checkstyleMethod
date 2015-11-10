@@ -6,12 +6,12 @@
         final String line = getLines()[ast.getLineNo() - 1];
         final int before = ast.getColumnNo() - 1;
         if (before >= 0) {
-            if (getAbstractOption() == PadOption.NOSPACE
+            if (option == PadOption.NOSPACE
                 && Character.isWhitespace(line.charAt(before))
                 && !CommonUtils.hasWhitespaceBefore(before, line)) {
                 log(ast.getLineNo(), before, WS_PRECEDED, CLOSE_PARENTHESIS);
             }
-            else if (getAbstractOption() == PadOption.SPACE
+            else if (option == PadOption.SPACE
                 && !Character.isWhitespace(line.charAt(before))
                 && line.charAt(before) != OPEN_PARENTHESIS) {
                 log(ast.getLineNo(), ast.getColumnNo(),
