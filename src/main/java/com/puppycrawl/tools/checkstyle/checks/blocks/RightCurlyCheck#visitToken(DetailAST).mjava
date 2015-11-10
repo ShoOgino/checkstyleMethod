@@ -11,10 +11,10 @@
         final String violation;
         if (shouldStartLine) {
             final String targetSourceLine = getLines()[rcurly.getLineNo() - 1];
-            violation = validate(details, getAbstractOption(), true, targetSourceLine);
+            violation = validate(details, option, true, targetSourceLine);
         }
         else {
-            violation = validate(details, getAbstractOption(), false, "");
+            violation = validate(details, option, false, "");
         }
 
         if (!violation.isEmpty()) {
