@@ -16,10 +16,10 @@
             "119: " + getCheckMessage(clazz, messageKey, "VARIABLE_DEF"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("EmptyLineSeparator");
-        final String filePath = builder.getFilePath("InputEmptyLineSeparator");
+        final Configuration checkConfig = getCheckConfig("EmptyLineSeparator");
+        final String filePath = getPath("InputEmptyLineSeparator.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

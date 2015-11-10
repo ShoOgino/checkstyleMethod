@@ -61,10 +61,10 @@
             "219:22: " + getCheckMessage(clazz, msgAnnotation, "@MyAnnotation2"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("ModifierOrder");
-        final String filePath = builder.getFilePath("InputModifierOrder");
+        final Configuration checkConfig = getCheckConfig("ModifierOrder");
+        final String filePath = getPath("InputModifierOrder.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

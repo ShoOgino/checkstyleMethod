@@ -13,10 +13,10 @@
         };
 
         final Configuration checkConfig =
-            builder.getCheckConfig("VariableDeclarationUsageDistance");
-        final String filePath = builder.getFilePath("InputVariableDeclarationUsageDistanceCheck");
+            getCheckConfig("VariableDeclarationUsageDistance");
+        final String filePath = getPath("InputVariableDeclarationUsageDistanceCheck.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

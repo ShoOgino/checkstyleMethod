@@ -13,10 +13,10 @@
             "36: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("AvoidEscapedUnicodeCharacters");
-        final String filePath = builder.getFilePath("InputAvoidEscapedUnicodeCharacters");
+        final Configuration checkConfig = getCheckConfig("AvoidEscapedUnicodeCharacters");
+        final String filePath = getPath("InputAvoidEscapedUnicodeCharacters.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

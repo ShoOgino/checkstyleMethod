@@ -8,12 +8,12 @@
             "24:6: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("OneStatementPerLine");
+        final Configuration checkConfig = getCheckConfig("OneStatementPerLine");
         final String filePath = new File("src/test/resources-noncompilable/"
             + "com/puppycrawl/tools/checkstyle/checks/coding/"
             + "InputOneStatementPerLine.java").getCanonicalPath();
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

@@ -3,10 +3,10 @@
 
         final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
-        final Configuration checkConfig = builder.getCheckConfig("EmptyCatchBlock");
-        final String filePath = builder.getFilePath("InputEmptyCatchBlockNoViolations");
+        final Configuration checkConfig = getCheckConfig("EmptyCatchBlock");
+        final String filePath = getPath("InputEmptyCatchBlockNoViolations.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

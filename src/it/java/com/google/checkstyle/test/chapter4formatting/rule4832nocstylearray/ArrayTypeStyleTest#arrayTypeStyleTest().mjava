@@ -12,10 +12,10 @@
             "42:19: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("ArrayTypeStyle");
-        final String filePath = builder.getFilePath("InputArrayTypeStyle");
+        final Configuration checkConfig = getCheckConfig("ArrayTypeStyle");
+        final String filePath = getPath("InputArrayTypeStyle.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

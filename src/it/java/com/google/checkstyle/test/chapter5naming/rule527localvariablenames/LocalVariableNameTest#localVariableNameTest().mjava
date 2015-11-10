@@ -15,9 +15,9 @@
             "36:13: " + getCheckMessage(checkConfig.getMessages(), MSG_KEY, "aaaaaa$", format),
         };
 
-        final String filePath = builder.getFilePath("InputLocalVariableNameSimple");
+        final String filePath = getPath("InputLocalVariableNameSimple.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

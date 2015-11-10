@@ -15,9 +15,9 @@
 
         final DefaultConfiguration checkConfig = createCheckConfig(SingleLineJavadocCheck.class);
         checkConfig.addAttribute("ignoreInlineTags", "false");
-        final String filePath = builder.getFilePath("InputSingleLineJavadocCheck");
+        final String filePath = getPath("InputSingleLineJavadocCheck.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

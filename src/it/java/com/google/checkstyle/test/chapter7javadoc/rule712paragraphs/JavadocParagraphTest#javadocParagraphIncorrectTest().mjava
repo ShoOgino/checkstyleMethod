@@ -41,10 +41,10 @@
             "73: " + msgBefore,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("JavadocParagraph");
-        final String filePath = builder.getFilePath("InputIncorrectJavadocParagraphCheck");
+        final Configuration checkConfig = getCheckConfig("JavadocParagraph");
+        final String filePath = getPath("InputIncorrectJavadocParagraphCheck.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

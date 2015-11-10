@@ -29,10 +29,10 @@
             "89:5: " + msgComma,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("MultipleVariableDeclarations");
-        final String filePath = builder.getFilePath("InputMultipleVariableDeclarations");
+        final Configuration checkConfig = getCheckConfig("MultipleVariableDeclarations");
+        final String filePath = getPath("InputMultipleVariableDeclarations.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

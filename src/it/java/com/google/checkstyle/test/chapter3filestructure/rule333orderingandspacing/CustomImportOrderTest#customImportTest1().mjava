@@ -16,10 +16,10 @@
             "16: " + getCheckMessage(clazz, MSG_ORDER, STD, SPECIAL, "java.io.Reader"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("CustomImportOrder");
-        final String filePath = builder.getFilePath("InputCustomImportOrder1");
+        final Configuration checkConfig = getCheckConfig("CustomImportOrder");
+        final String filePath = getPath("InputCustomImportOrder1.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

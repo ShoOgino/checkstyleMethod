@@ -45,10 +45,10 @@
             "210: " + getCheckMessage(clazz, messageKey, "for"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("NeedBraces");
-        final String filePath = builder.getFilePath("InputNeedBraces");
+        final Configuration checkConfig = getCheckConfig("NeedBraces");
+        final String filePath = getPath("InputNeedBraces.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

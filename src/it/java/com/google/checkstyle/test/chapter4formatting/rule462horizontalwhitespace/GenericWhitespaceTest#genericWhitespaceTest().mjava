@@ -4,7 +4,7 @@
         final String msgFollowed = "ws.followed";
         final String msgNotPreceded = "ws.notPreceded";
         final String msgIllegalFollow = "ws.illegalFollow";
-        final Configuration checkConfig = builder.getCheckConfig("GenericWhitespace");
+        final Configuration checkConfig = getCheckConfig("GenericWhitespace");
 
         final String[] expected = {
             "16:13: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
@@ -35,9 +35,9 @@
             "63:60: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, ">"),
         };
 
-        final String filePath = builder.getFilePath("InputGenericWhitespace");
+        final String filePath = getPath("InputGenericWhitespace.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

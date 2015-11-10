@@ -17,9 +17,9 @@
             "25:9: " + getCheckMessage(checkConfig.getMessages(), MSG_KEY, "mPackage$", format),
         };
 
-        final String filePath = builder.getFilePath("InputMemberNameBasic");
+        final String filePath = getPath("InputMemberNameBasic.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

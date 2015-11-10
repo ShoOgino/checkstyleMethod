@@ -57,11 +57,11 @@
                 352, 9, 8),
             };
 
-        final Configuration checkConfig = builder.getCheckConfig("CommentsIndentation");
+        final Configuration checkConfig = getCheckConfig("CommentsIndentation");
         final String filePath =
-            builder.getFilePath("InputCommentsIndentationCommentIsAtTheEndOfBlock");
+            getPath("InputCommentsIndentationCommentIsAtTheEndOfBlock.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

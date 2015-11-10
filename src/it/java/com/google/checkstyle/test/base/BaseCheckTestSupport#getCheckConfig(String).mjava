@@ -1,0 +1,19 @@
+    protected static Configuration getCheckConfig(String checkName) throws CheckstyleException {
+        Configuration result = null;
+        for (Configuration currentConfig : getConfiguration().getChildren()) {
+            if ("TreeWalker".equals(currentConfig.getName())) {
+                for (Configuration checkConfig : currentConfig.getChildren()) {
+                    if (checkName.equals(checkConfig.getName())) {
+                        result = checkConfig;
+                        break;
+                    }
+                }
+            }
+            else if (checkName.equals(currentConfig.getName())) {
+                result = currentConfig;
+                break;
+            }
+        }
+        return result;
+    }
+

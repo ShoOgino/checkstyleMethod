@@ -8,10 +8,10 @@
             "4: " + getCheckMessage(clazz, messageKey, "FooEnum"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("OneTopLevelClass");
-        final String filePath = builder.getFilePath("InputOneTopLevelClassBad1");
+        final Configuration checkConfig = getCheckConfig("OneTopLevelClass");
+        final String filePath = getPath("InputOneTopLevelClassBad1.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

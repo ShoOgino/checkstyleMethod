@@ -17,8 +17,8 @@
             "52: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("NonEmptyAtclauseDescription");
-        final String filePath = builder.getFilePath("InputNonEmptyAtclauseDescriptionCheck");
+        final Configuration checkConfig = getCheckConfig("NonEmptyAtclauseDescription");
+        final String filePath = getPath("InputNonEmptyAtclauseDescriptionCheck.java");
 
         final Integer[] warnList = getLineNumbersFromExpected(expected);
         verify(checkConfig, filePath, expected, warnList);

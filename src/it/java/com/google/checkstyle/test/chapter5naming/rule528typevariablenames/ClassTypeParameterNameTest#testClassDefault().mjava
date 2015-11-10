@@ -1,5 +1,7 @@
     @Test
     public void testClassDefault() throws Exception {
+        final Configuration configuration = getCheckConfig("ClassTypeParameterName");
+        final String format = configuration.getAttribute("format");
 
         final String[] expected = {
             "5:31: " + getCheckMessage(configuration.getMessages(), MSG_KEY, "t", format),
@@ -7,9 +9,9 @@
             "27:24: " + getCheckMessage(configuration.getMessages(), MSG_KEY, "$foo", format),
         };
 
-        final String filePath = builder.getFilePath("InputClassTypeParameterName");
+        final String filePath = getPath("InputClassTypeParameterName.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(configuration, filePath, expected, warnList);
     }
 

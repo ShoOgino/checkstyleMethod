@@ -16,10 +16,10 @@
             "103: " + msgFirstSentence,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("SummaryJavadocCheck");
-        final String filePath = builder.getFilePath("InputIncorrectSummaryJavaDocCheck");
+        final Configuration checkConfig = getCheckConfig("SummaryJavadocCheck");
+        final String filePath = getPath("InputIncorrectSummaryJavaDocCheck.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

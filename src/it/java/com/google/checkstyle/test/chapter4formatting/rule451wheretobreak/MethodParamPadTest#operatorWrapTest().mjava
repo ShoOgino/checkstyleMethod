@@ -9,10 +9,10 @@
             "128:13: " + getCheckMessage(clazz, messageKey, "("),
             "130:9: " + getCheckMessage(clazz, messageKey, "("),
         };
-        final Configuration checkConfig = builder.getCheckConfig("MethodParamPad");
-        final String filePath = builder.getFilePath("InputMethodParamPad");
+        final Configuration checkConfig = getCheckConfig("MethodParamPad");
+        final String filePath = getPath("InputMethodParamPad.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

@@ -7,10 +7,10 @@
             "57:5: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("JavadocMethod");
-        final String filePath = builder.getFilePath("InputJavadocMethodCheck");
+        final Configuration checkConfig = getCheckConfig("JavadocMethod");
+        final String filePath = getPath("InputJavadocMethodCheck.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

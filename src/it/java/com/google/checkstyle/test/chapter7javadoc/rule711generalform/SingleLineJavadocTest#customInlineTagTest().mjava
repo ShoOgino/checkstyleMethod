@@ -2,14 +2,14 @@
     public void customInlineTagTest() throws Exception {
         final String msg = getCheckMessage(SingleLineJavadocCheck.class, "singleline.javadoc");
 
-        final Configuration checkConfig = builder.getCheckConfig("SingleLineJavadocCheck");
-        final String filePath = builder.getFilePath("InputSingleLineJavadocCheckError");
+        final Configuration checkConfig = getCheckConfig("SingleLineJavadocCheck");
+        final String filePath = getPath("InputSingleLineJavadocCheckError.java");
 
         final String[] expected = {
             "4: " + msg,
         };
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

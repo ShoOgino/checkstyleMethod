@@ -14,9 +14,8 @@
             "134:3: " + getCheckMessage(FileTabCharacterCheck.class, "containsTab"),
         };
 
-        final String filePath = builder.getFilePath("InputFileTabCharacter");
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
-        verify(createChecker(checkConfig), filePath,
-            expected, warnList);
+        final String filePath = getPath("InputFileTabCharacter.java");
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
     }
 

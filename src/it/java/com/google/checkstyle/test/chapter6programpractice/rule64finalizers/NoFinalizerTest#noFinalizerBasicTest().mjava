@@ -7,10 +7,10 @@
             "5: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("NoFinalizer");
-        final String filePath = builder.getFilePath("InputNoFinalizer");
+        final Configuration checkConfig = getCheckConfig("NoFinalizer");
+        final String filePath = getPath("InputNoFinalizer.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

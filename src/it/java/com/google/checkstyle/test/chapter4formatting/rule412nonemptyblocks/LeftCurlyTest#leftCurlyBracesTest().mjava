@@ -11,10 +11,10 @@
             "97:5: " + getCheckMessage(LeftCurlyCheck.class, MSG_KEY_LINE_PREVIOUS, "{", 5),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("LeftCurly");
-        final String filePath = builder.getFilePath("InputLeftCurlyBraces");
+        final Configuration checkConfig = getCheckConfig("LeftCurly");
+        final String filePath = getPath("InputLeftCurlyBraces.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

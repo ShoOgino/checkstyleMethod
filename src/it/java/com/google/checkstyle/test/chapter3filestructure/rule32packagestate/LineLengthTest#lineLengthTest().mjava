@@ -12,10 +12,10 @@
             "57: " + getCheckMessage(LineLengthCheck.class, "maxLineLen", 100, 116),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("LineLength");
-        final String filePath = builder.getFilePath("InputLineLength");
+        final Configuration checkConfig = getCheckConfig("LineLength");
+        final String filePath = getPath("InputLineLength.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

@@ -1,7 +1,7 @@
     @Test
     public void testMethodDefault() throws Exception {
 
-        final Configuration checkConfig = builder.getCheckConfig("MethodTypeParameterName");
+        final Configuration checkConfig = getCheckConfig("MethodTypeParameterName");
 
         final String[] expected = {
             "9:6: " + getCheckMessage(checkConfig.getMessages(), MSG_KEY, "e_e", format),
@@ -12,9 +12,9 @@
             "42:14: " + getCheckMessage(checkConfig.getMessages(), MSG_KEY, "EE", format),
         };
 
-        final String filePath = builder.getFilePath("InputMethodTypeParameterName");
+        final String filePath = getPath("InputMethodTypeParameterName.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

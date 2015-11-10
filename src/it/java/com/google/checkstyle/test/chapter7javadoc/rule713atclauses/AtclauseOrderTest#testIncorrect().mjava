@@ -33,10 +33,10 @@
             "261: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("AtclauseOrder");
-        final String filePath = builder.getFilePath("InputIncorrectAtClauseOrderCheck");
+        final Configuration checkConfig = getCheckConfig("AtclauseOrder");
+        final String filePath = getPath("InputIncorrectAtClauseOrderCheck.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

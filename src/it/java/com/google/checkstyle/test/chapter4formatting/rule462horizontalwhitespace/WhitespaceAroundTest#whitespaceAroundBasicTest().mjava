@@ -1,7 +1,7 @@
     @Test
     public void whitespaceAroundBasicTest() throws Exception {
 
-        final Configuration checkConfig = builder.getCheckConfig("WhitespaceAround");
+        final Configuration checkConfig = getCheckConfig("WhitespaceAround");
         final String msgPreceded = "ws.notPreceded";
         final String msgFollowed = "ws.notFollowed";
 
@@ -28,9 +28,9 @@
             "150:20: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, ":"),
         };
 
-        final String filePath = builder.getFilePath("InputWhitespaceAroundBasic");
+        final String filePath = getPath("InputWhitespaceAroundBasic.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

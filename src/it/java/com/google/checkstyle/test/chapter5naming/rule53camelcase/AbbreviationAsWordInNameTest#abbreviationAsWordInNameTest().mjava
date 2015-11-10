@@ -16,9 +16,10 @@
             "71: " + msg,
         };
 
-        final String filePath = builder.getFilePath("InputAbbreviationAsWordInTypeNameCheck");
+        final String filePath = getPath("InputAbbreviationAsWordInTypeNameCheck.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Configuration checkConfig = getCheckConfig("AbbreviationAsWordInName");
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

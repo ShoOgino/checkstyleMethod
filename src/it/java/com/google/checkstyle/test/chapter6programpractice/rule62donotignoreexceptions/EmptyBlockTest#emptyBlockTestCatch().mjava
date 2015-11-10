@@ -7,10 +7,10 @@
             "72:21: " + getCheckMessage(EmptyBlockCheck.class, "block.empty", "finally"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("EmptyBlock");
-        final String filePath = builder.getFilePath("InputEmptyBlockCatch");
+        final Configuration checkConfig = getCheckConfig("EmptyBlock");
+        final String filePath = getPath("InputEmptyBlockCatch.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

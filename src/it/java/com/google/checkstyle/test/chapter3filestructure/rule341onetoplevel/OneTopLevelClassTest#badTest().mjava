@@ -13,10 +13,10 @@
             "77: " + getCheckMessage(clazz, messageKey, "AnotherClass"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("OneTopLevelClass");
-        final String filePath = builder.getFilePath("InputOneTopLevelClassBasic");
+        final Configuration checkConfig = getCheckConfig("OneTopLevelClass");
+        final String filePath = getPath("InputOneTopLevelClassBasic.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

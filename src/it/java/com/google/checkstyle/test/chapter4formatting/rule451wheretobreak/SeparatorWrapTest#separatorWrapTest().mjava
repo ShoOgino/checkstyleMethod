@@ -5,10 +5,10 @@
             "28:30: " + getCheckMessage(SeparatorWrapCheck.class, "line.new", "."),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("SeparatorWrap");
-        final String filePath = builder.getFilePath("InputSeparatorWrap");
+        final Configuration checkConfig = getCheckConfig("SeparatorWrap");
+        final String filePath = getPath("InputSeparatorWrap.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

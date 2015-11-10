@@ -7,10 +7,10 @@
             "58: " + getCheckMessage(EmptyCatchBlockCheck.class, "catch.block.empty"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("EmptyCatchBlock");
-        final String filePath = builder.getFilePath("InputEmptyCatchBlockViolationsByVariableName");
+        final Configuration checkConfig = getCheckConfig("EmptyCatchBlock");
+        final String filePath = getPath("InputEmptyCatchBlockViolationsByVariableName.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

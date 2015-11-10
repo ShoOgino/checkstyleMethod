@@ -5,10 +5,10 @@
             "3: " + getCheckMessage(OuterTypeFilenameCheck.class, "type.file.mismatch"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("OuterTypeFilename");
-        final String filePath = builder.getFilePath("InputOuterTypeFilename3");
+        final Configuration checkConfig = getCheckConfig("OuterTypeFilename");
+        final String filePath = getPath("InputOuterTypeFilename3.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

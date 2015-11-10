@@ -26,10 +26,10 @@
             "185:38: " + getCheckMessage(clazz, messageKey, "?"),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("OperatorWrap");
-        final String filePath = builder.getFilePath("InputOperatorWrap");
+        final Configuration checkConfig = getCheckConfig("OperatorWrap");
+        final String filePath = getPath("InputOperatorWrap.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

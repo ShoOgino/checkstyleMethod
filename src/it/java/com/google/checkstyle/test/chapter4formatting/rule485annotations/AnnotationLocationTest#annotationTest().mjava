@@ -3,7 +3,7 @@
 
         final Class<AnnotationLocationCheck> clazz = AnnotationLocationCheck.class;
         getCheckMessage(clazz, "annotation.location.alone");
-        final Configuration checkConfig = builder.getCheckConfig("AnnotationLocation");
+        final Configuration checkConfig = getCheckConfig("AnnotationLocation");
 
         final String msgLocationAlone = "annotation.location.alone";
         final String msgLocation = "annotation.location";
@@ -21,9 +21,9 @@
             "90: " + getCheckMessage(clazz, msgLocation, "MyAnnotation2", "1", "0"),
         };
 
-        final String filePath = builder.getFilePath("InputAnnotationLocation");
+        final String filePath = getPath("InputAnnotationLocation.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

@@ -1,0 +1,19 @@
+    protected Integer[] getLinesWithWarn(String fileName) throws IOException {
+        final List<Integer> result = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                new FileInputStream(fileName), StandardCharsets.UTF_8))) {
+            int lineNumber = 1;
+            while (true) {
+                final String line = br.readLine();
+                if (line == null) {
+                    break;
+                }
+                if (WARN_PATTERN.matcher(line).find()) {
+                    result.add(lineNumber);
+                }
+                lineNumber++;
+            }
+        }
+        return result.toArray(new Integer[result.size()]);
+    }
+

@@ -1,6 +1,5 @@
     @Test
     public void testWithDefaultConfiguration() throws Exception {
-        final ConfigurationBuilder builder = new ConfigurationBuilder(new File("src/it/"));
         final String msg = getCheckMessage(JavadocTagContinuationIndentationCheck.class,
                 "tag.continuation.indent", 4);
 
@@ -19,11 +18,10 @@
             "322: " + msg,
         };
 
-        final Configuration checkConfig = builder
-            .getCheckConfig("JavadocTagContinuationIndentation");
-        final String filePath = builder.getFilePath("InputJavaDocTagContinuationIndentation");
+        final Configuration checkConfig = getCheckConfig("JavadocTagContinuationIndentation");
+        final String filePath = getPath("InputJavaDocTagContinuationIndentation.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

@@ -1,7 +1,7 @@
     @Test
     public void typeNameTest() throws Exception {
 
-        final Configuration checkConfig = builder.getCheckConfig("TypeName");
+        final Configuration checkConfig = getCheckConfig("TypeName");
         final String msgKey = "name.invalidPattern";
         final String format = "^[A-Z][a-zA-Z0-9]*$";
 
@@ -44,9 +44,9 @@
             "71:12: " + getCheckMessage(checkConfig.getMessages(), msgKey, "Annotation$", format),
         };
 
-        final String filePath = builder.getFilePath("InputTypeName");
+        final String filePath = getPath("InputTypeName.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

@@ -1,5 +1,7 @@
-    protected void verify(Configuration aConfig, String aFileName, String[] aExpected,
-            Integer... aWarnsExpected) throws Exception {
-        verify(createChecker(aConfig), aFileName, aFileName, aExpected, aWarnsExpected);
+    protected void verify(Configuration config, String fileName, String[] expected,
+            Integer... warnsExpected) throws Exception {
+        verify(createChecker(config),
+                new File[] {new File(fileName)},
+                fileName, expected, warnsExpected);
     }
 

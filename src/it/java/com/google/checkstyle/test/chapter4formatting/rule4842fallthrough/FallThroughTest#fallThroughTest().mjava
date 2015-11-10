@@ -17,10 +17,10 @@
             "374:41: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("FallThrough");
-        final String filePath = builder.getFilePath("InputFallThrough");
+        final Configuration checkConfig = getCheckConfig("FallThrough");
+        final String filePath = getPath("InputFallThrough.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

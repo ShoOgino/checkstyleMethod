@@ -9,10 +9,10 @@
             "50:5: " + getCheckMessage(LeftCurlyCheck.class, MSG_KEY_LINE_PREVIOUS, "{", 5),
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("LeftCurly");
-        final String filePath = builder.getFilePath("InputLeftCurlyAnnotations");
+        final Configuration checkConfig = getCheckConfig("LeftCurly");
+        final String filePath = getPath("InputLeftCurlyAnnotations.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 

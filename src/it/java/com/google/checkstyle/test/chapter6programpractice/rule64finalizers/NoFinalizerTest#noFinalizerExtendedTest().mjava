@@ -15,10 +15,10 @@
             "136: " + msg,
         };
 
-        final Configuration checkConfig = builder.getCheckConfig("NoFinalizer");
-        final String filePath = builder.getFilePath("InputNoFinalizeExtend");
+        final Configuration checkConfig = getCheckConfig("NoFinalizer");
+        final String filePath = getPath("InputNoFinalizeExtend.java");
 
-        final Integer[] warnList = builder.getLinesWithWarn(filePath);
+        final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
 
