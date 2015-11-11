@@ -1,14 +1,6 @@
     private static Configuration getConfigurationFromXML(String aConfigName,
-            Properties aProps) {
-        try {
-            return ConfigurationLoader.loadConfiguration(aConfigName,
-                    new PropertiesExpander(aProps));
-        }
-        catch (final CheckstyleException e) {
-            System.out.println("Error loading configuration file");
-            e.printStackTrace(System.out);
-            System.exit(1);
-            return null;
-        }
+            Properties aProps) throws CheckstyleException {
+        return ConfigurationLoader.loadConfiguration(aConfigName,
+                new PropertiesExpander(aProps));
     }
 
