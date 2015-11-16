@@ -3,7 +3,7 @@
      * @param ident the IDENT ast of the name to check
      * @return true is the given name is name of method.
      */
-    protected final boolean isClassMethod(DetailAST ident) {
+    private boolean isClassMethod(DetailAST ident) {
         final LexicalFrame frame = findFrame(ident, true);
         return frame instanceof ClassFrame
                 && ((ClassFrame) frame).hasInstanceMethod(ident);

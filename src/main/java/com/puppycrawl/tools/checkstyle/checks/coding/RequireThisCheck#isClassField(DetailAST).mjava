@@ -3,7 +3,7 @@
      * @param ident an IDENT ast to check
      * @return true is the given name is name of member.
      */
-    protected final boolean isClassField(DetailAST ident) {
+    private boolean isClassField(DetailAST ident) {
         final LexicalFrame frame = findFrame(ident, false);
         return frame instanceof ClassFrame
                 && ((ClassFrame) frame).hasInstanceMember(ident);
