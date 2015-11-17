@@ -1,0 +1,11 @@
+    @Test
+    public void testCustomFormatWithNoAnchors() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(CatchParameterNameCheck.class);
+        final String format = "[a-z]";
+        checkConfig.addAttribute("format", format);
+
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig, getPath("InputCatchParameterName.java"), expected);
+    }
+

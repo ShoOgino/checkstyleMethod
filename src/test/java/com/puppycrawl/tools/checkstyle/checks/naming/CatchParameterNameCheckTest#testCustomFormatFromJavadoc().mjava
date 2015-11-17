@@ -1,0 +1,14 @@
+    @Test
+    public void testCustomFormatFromJavadoc() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(CatchParameterNameCheck.class);
+        final String format = "^[a-z][a-zA-Z0-9]+$";
+        checkConfig.addAttribute("format", format);
+
+        final String[] expected = {
+            "6:28: " + getCheckMessage(MSG_INVALID_PATTERN, "e", format),
+            "24:28: " + getCheckMessage(MSG_INVALID_PATTERN, "t", format),
+        };
+
+        verify(checkConfig, getPath("InputCatchParameterName.java"), expected);
+    }
+
