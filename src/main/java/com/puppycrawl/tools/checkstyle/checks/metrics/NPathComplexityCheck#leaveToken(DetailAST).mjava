@@ -15,8 +15,14 @@
             case TokenTypes.LITERAL_CASE:
                 leaveAddingConditional();
                 break;
+            case TokenTypes.CTOR_DEF:
+            case TokenTypes.METHOD_DEF:
+            case TokenTypes.INSTANCE_INIT:
+            case TokenTypes.STATIC_INIT:
+                leaveMethodDef(ast);
+                break;
             default:
-                super.leaveToken(ast);
+                break;
         }
     }
 
