@@ -1,4 +1,9 @@
-    @Override
+    /**
+     * Hook called when visiting a token. Will not be called the method
+     * definition tokens.
+     *
+     * @param ast the token being visited
+     */
     protected final void visitTokenHook(DetailAST ast) {
         if (switchBlockAsSingleDecisionPoint) {
             if (ast.getType() != TokenTypes.LITERAL_CASE) {
