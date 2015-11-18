@@ -7,6 +7,7 @@
      *         statement.
      */
     private static DetailAST getOneLinePreviousStatementOfSingleLineComment(DetailAST comment) {
+        DetailAST previousStatement = null;
         final Stack<DetailAST> stack = new Stack<>();
         DetailAST root = comment.getParent();
 
@@ -15,10 +16,11 @@
                 root = stack.pop();
             }
             while (root != null) {
-                final DetailAST previousStatement =
-                    findPreviousStatementOfSingleLineComment(comment, root);
+                previousStatement = findPreviousStatementOfSingleLineComment(comment, root);
                 if (previousStatement != null) {
-                    return previousStatement;
+                    root = null;
+                    stack.clear();
+                    break;
                 }
                 if (root.getNextSibling() != null) {
                     stack.push(root.getNextSibling());
@@ -26,6 +28,6 @@
                 root = root.getFirstChild();
             }
         }
-        return null;
+        return previousStatement;
     }
 
