@@ -19,14 +19,14 @@
             }
             fail("Exception was expected");
         }
-        catch (InvocationTargetException e) {
-            assertTrue(e.getCause() instanceof CheckstyleException);
+        catch (InvocationTargetException ex) {
+            assertTrue(ex.getCause() instanceof CheckstyleException);
             // We do separate validation for message as in Windows
             // disk drive letter appear in message,
             // so we skip that drive letter for compatibility issues
-            assertTrue(e.getCause().getMessage()
+            assertTrue(ex.getCause().getMessage()
                     .startsWith("Unable to load properties from file '"));
-            assertTrue(e.getCause().getMessage().endsWith(":invalid'."));
+            assertTrue(ex.getCause().getMessage().endsWith(":invalid'."));
         }
     }
 

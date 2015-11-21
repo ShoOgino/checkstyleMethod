@@ -14,9 +14,9 @@
                 inStream = new FileInputStream(properties);
                 returnValue.load(inStream);
             }
-            catch (final IOException e) {
+            catch (final IOException ex) {
                 throw new BuildException("Error loading Properties file '"
-                        + properties + "'", e, getLocation());
+                        + properties + "'", ex, getLocation());
             }
             finally {
                 Closeables.closeQuietly(inStream);

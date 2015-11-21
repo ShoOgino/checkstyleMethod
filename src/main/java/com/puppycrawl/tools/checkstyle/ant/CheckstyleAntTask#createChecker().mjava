@@ -25,9 +25,9 @@
             checker.contextualize(context);
             checker.configure(config);
         }
-        catch (final CheckstyleException e) {
+        catch (final CheckstyleException ex) {
             throw new BuildException(String.format(Locale.ROOT, "Unable to create a Checker: "
-                    + "configLocation {%s}, classpath {%s}.", configLocation, classpath), e);
+                    + "configLocation {%s}, classpath {%s}.", configLocation, classpath), ex);
         }
         return checker;
     }

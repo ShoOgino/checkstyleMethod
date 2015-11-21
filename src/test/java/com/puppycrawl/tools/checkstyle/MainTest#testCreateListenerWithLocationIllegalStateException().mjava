@@ -8,9 +8,9 @@
             method.invoke(null, "myformat", outDir);
             fail();
         }
-        catch (InvocationTargetException e) {
-            assertTrue(e.getCause() instanceof IllegalStateException);
-            assertTrue(e.getCause().getMessage().startsWith("Invalid output format. Found"));
+        catch (InvocationTargetException ex) {
+            assertTrue(ex.getCause() instanceof IllegalStateException);
+            assertTrue(ex.getCause().getMessage().startsWith("Invalid output format. Found"));
         }
         finally {
             // method creates output folder

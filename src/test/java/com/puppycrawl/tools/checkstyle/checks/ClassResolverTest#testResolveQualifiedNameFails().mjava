@@ -14,10 +14,10 @@
             classResolver.resolve("someClass", "");
             fail("Exception expected");
         }
-        catch (IllegalStateException e) {
+        catch (IllegalStateException ex) {
             // expected
-            assertTrue(e.getCause() instanceof ClassNotFoundException);
-            assertTrue(e.getMessage().endsWith("expected exception"));
+            assertTrue(ex.getCause() instanceof ClassNotFoundException);
+            assertTrue(ex.getMessage().endsWith("expected exception"));
         }
     }
 
