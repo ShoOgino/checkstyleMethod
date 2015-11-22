@@ -24,16 +24,16 @@
             final String documentedEx = tag.getFirstArg();
             final Token token = new Token(tag.getFirstArg(), tag.getLineNo(), tag
                     .getColumnNo());
-            final AbstractClassInfo documentedCI = createClassInfo(token,
+            final AbstractClassInfo documentedClassInfo = createClassInfo(token,
                     getCurrentClassName());
             final boolean found = foundThrows.contains(documentedEx)
-                    || isInThrows(throwsList, documentedCI, foundThrows);
+                    || isInThrows(throwsList, documentedClassInfo, foundThrows);
 
             // Handle extra JavadocTag.
             if (!found) {
                 boolean reqd = true;
                 if (allowUndeclaredRTE) {
-                    reqd = !isUnchecked(documentedCI.getClazz());
+                    reqd = !isUnchecked(documentedClassInfo.getClazz());
                 }
 
                 if (reqd && validateThrows) {
