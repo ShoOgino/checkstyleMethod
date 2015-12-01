@@ -4,17 +4,16 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(AbbreviationAsWordInNameCheck.class);
         final int expectedCapitalCount = 3;
-        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
         checkConfig.addAttribute("allowedAbbreviations", "III");
         checkConfig.addAttribute("tokens", "CLASS_DEF");
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
 
         final String[] expected = {
-            "9: " + warningMessage,
-            "12: " + warningMessage,
-            "32: " + warningMessage,
-            "37: " + warningMessage,
+            "9: "  + getWarningMessage("FactoryWithBADNAme", expectedCapitalCount),
+            "12: " + getWarningMessage("AbstractCLASSName", expectedCapitalCount),
+            "32: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
+            "37: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
         };
 
         verify(checkConfig, getPath("InputAbbreviationAsWordInTypeName.java"), expected);

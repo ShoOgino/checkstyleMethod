@@ -2,7 +2,6 @@
     public void testTypeAndVariablesAndMethodNamesWithNoIgnores() throws Exception {
 
         final int expectedCapitalCount = 5;
-        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         final DefaultConfiguration checkConfig =
             createCheckConfig(AbbreviationAsWordInNameCheck.class);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
@@ -16,13 +15,13 @@
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
 
         final String[] expected = {
-            "32: " + warningMessage,
-            "37: " + warningMessage,
-            "38: " + warningMessage,
-            "66: " + warningMessage,
-            "72: " + warningMessage,
-            "78: " + warningMessage,
-            "84: " + warningMessage,
+            "32: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
+            "37: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
+            "38: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
+            "66: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "72: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "78: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "84: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
         };
 
         verify(checkConfig, getPath("InputAbbreviationAsWordInTypeName.java"), expected);

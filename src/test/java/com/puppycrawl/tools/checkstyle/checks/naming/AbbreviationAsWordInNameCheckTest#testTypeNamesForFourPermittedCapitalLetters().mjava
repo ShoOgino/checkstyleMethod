@@ -2,7 +2,6 @@
     public void testTypeNamesForFourPermittedCapitalLetters() throws Exception {
 
         final int expectedCapitalCount = 4;
-        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         final DefaultConfiguration checkConfig =
             createCheckConfig(AbbreviationAsWordInNameCheck.class);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
@@ -11,7 +10,7 @@
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
 
         final String[] expected = {
-            "32: " + warningMessage,
+            "32: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
         };
 
         verify(checkConfig, getPath("InputAbbreviationAsWordInTypeName.java"), expected);

@@ -3,7 +3,6 @@
         final DefaultConfiguration checkConfig =
                 createCheckConfig(AbbreviationAsWordInNameCheck.class);
         final int expectedCapitalCount = 0;
-        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         checkConfig.addAttribute("allowedAbbreviationLength",
                 String.valueOf(expectedCapitalCount));
         checkConfig.addAttribute("allowedAbbreviations", "");
@@ -14,31 +13,31 @@
             + "ANNOTATION_DEF,ANNOTATION_FIELD_DEF,ENUM_CONSTANT_DEF,"
             + "PARAMETER_DEF,VARIABLE_DEF,METHOD_DEF");
         final String[] expected = {
-            "3: " + warningMessage,
-            "6: " + warningMessage,
-            "9: " + warningMessage,
-            "12: " + warningMessage,
-            "32: " + warningMessage,
-            "37: " + warningMessage,
-            "38: " + warningMessage,
-            "39: " + warningMessage,
-            "40: " + warningMessage,
-            "46: " + warningMessage,
-            "47: " + warningMessage,
-            "48: " + warningMessage,
-            "49: " + warningMessage,
-            "57: " + warningMessage,
-            "58: " + warningMessage,
-            "59: " + warningMessage,
-            "60: " + warningMessage,
-            "61: " + warningMessage,
-            "66: " + warningMessage,
-            "72: " + warningMessage,
-            "78: " + warningMessage,
-            "84: " + warningMessage,
-            "88: " + warningMessage,
-            "90: " + warningMessage,
-            "98: " + warningMessage,
+            "3: " + getWarningMessage("IIIInputAbstractClassName", expectedCapitalCount),
+            "6: " + getWarningMessage("NonAAAAbstractClassName", expectedCapitalCount),
+            "9: " + getWarningMessage("FactoryWithBADNAme", expectedCapitalCount),
+            "12: " + getWarningMessage("AbstractCLASSName", expectedCapitalCount),
+            "32: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
+            "37: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
+            "38: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
+            "39: " + getWarningMessage("marazmaticVARIABLEName", expectedCapitalCount),
+            "40: " + getWarningMessage("MARAZMATICVariableName", expectedCapitalCount),
+            "46: " + getWarningMessage("RIGHT", expectedCapitalCount),
+            "47: " + getWarningMessage("LEFT", expectedCapitalCount),
+            "48: " + getWarningMessage("UP", expectedCapitalCount),
+            "49: " + getWarningMessage("DOWN", expectedCapitalCount),
+            "57: " + getWarningMessage("NonAAAAbstractClassName2", expectedCapitalCount),
+            "58: " + getWarningMessage("serialNUMBER", expectedCapitalCount),
+            "59: " + getWarningMessage("s1erialNUMBER", expectedCapitalCount),
+            "60: " + getWarningMessage("s2erialNUMBER", expectedCapitalCount),
+            "61: " + getWarningMessage("s3erialNUMBER", expectedCapitalCount),
+            "66: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "72: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "78: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "84: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "88: " + getWarningMessage("FIleNameFormatException", expectedCapitalCount),
+            "90: " + getWarningMessage("serialVersionUID", expectedCapitalCount),
+            "98: " + getWarningMessage("userID", expectedCapitalCount),
         };
         verify(checkConfig,
                 getPath("InputAbbreviationAsWordInTypeName.java"), expected);

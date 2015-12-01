@@ -2,7 +2,6 @@
     public void testTypeAndVariablesAndMethodNames() throws Exception {
 
         final int expectedCapitalCount = 5;
-        warningMessage = getCheckMessage(MSG_KEY, expectedCapitalCount);
         final DefaultConfiguration checkConfig =
             createCheckConfig(AbbreviationAsWordInNameCheck.class);
         checkConfig.addAttribute("allowedAbbreviationLength", String.valueOf(expectedCapitalCount));
@@ -14,12 +13,12 @@
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
 
         final String[] expected = {
-            "32: " + warningMessage,
-            "37: " + warningMessage,
-            "38: " + warningMessage,
-            "39: " + warningMessage,
-            "40: " + warningMessage,
-            "58: " + warningMessage,
+            "32: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
+            "37: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
+            "38: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
+            "39: " + getWarningMessage("marazmaticVARIABLEName", expectedCapitalCount),
+            "40: " + getWarningMessage("MARAZMATICVariableName", expectedCapitalCount),
+            "58: " + getWarningMessage("serialNUMBER", expectedCapitalCount),
         };
 
         verify(checkConfig, getPath("InputAbbreviationAsWordInTypeName.java"), expected);
