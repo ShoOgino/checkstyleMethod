@@ -1,0 +1,19 @@
+    /**
+     * Returns the last child token that makes a specified type and contains containType in
+     * its branch.
+     * @param ast token to be tested
+     * @param childType the token type to match
+     * @param containType the token type which has to be present in the branch
+     * @return the matching token, or null if no match
+     */
+    public DetailAST findLastToken(DetailAST ast, int childType, int containType) {
+        DetailAST returnValue = null;
+        for (DetailAST astIterator = ast.getFirstChild(); astIterator != null;
+                astIterator = astIterator.getNextSibling()) {
+            if (astIterator.getType() == childType && astIterator.branchContains(containType)) {
+                returnValue = astIterator;
+            }
+        }
+        return returnValue;
+    }
+

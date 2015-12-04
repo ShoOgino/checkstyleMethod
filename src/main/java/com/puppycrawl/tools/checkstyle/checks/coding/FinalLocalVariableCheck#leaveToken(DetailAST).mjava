@@ -1,18 +1,26 @@
     @Override
     public void leaveToken(DetailAST ast) {
+        Map<String, DetailAST> scope = null;
         switch (ast.getType()) {
             case TokenTypes.OBJBLOCK:
-            case TokenTypes.SLIST:
             case TokenTypes.CTOR_DEF:
             case TokenTypes.METHOD_DEF:
-                final Map<String, DetailAST> scope = scopeStack.pop().scope;
-                for (DetailAST node : scope.values()) {
-                    log(node.getLineNo(), node.getColumnNo(), MSG_KEY, node
-                        .getText());
+                scope = scopeStack.pop().scope;
+                break;
+            case TokenTypes.SLIST:
+                if (ast.getParent().getType() != TokenTypes.CASE_GROUP
+                    || findLastToken(ast.getParent().getParent(), TokenTypes.CASE_GROUP,
+                        TokenTypes.SLIST) == ast.getParent()) {
+                    scope = scopeStack.pop().scope;
                 }
                 break;
             default:
                 // do nothing
+        }
+        if (scope != null) {
+            for (DetailAST node : scope.values()) {
+                log(node.getLineNo(), node.getColumnNo(), MSG_KEY, node.getText());
+            }
         }
     }
 

@@ -2,12 +2,17 @@
     public void visitToken(DetailAST ast) {
         switch (ast.getType()) {
             case TokenTypes.OBJBLOCK:
-            case TokenTypes.SLIST:
             case TokenTypes.METHOD_DEF:
             case TokenTypes.CTOR_DEF:
                 scopeStack.push(new ScopeData());
                 break;
-
+            case TokenTypes.SLIST:
+                if (ast.getParent().getType() != TokenTypes.CASE_GROUP
+                    || ast.getParent().getParent().findFirstToken(TokenTypes.CASE_GROUP)
+                    == ast.getParent()) {
+                    scopeStack.push(new ScopeData());
+                }
+                break;
             case TokenTypes.PARAMETER_DEF:
                 if (!isInLambda(ast)
                         && !ast.branchContains(TokenTypes.FINAL)
