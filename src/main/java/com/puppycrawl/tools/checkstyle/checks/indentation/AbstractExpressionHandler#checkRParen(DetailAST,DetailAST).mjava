@@ -11,7 +11,7 @@
             // or has <lparen level> + 1 indentation
             final int lparenLevel = expandedTabsColumnNo(lparen);
 
-            if (!getLevel().isAcceptable(rparenLevel) && startsLine(rparen)
+            if (!getLevel().isAcceptable(rparenLevel) && isOnStartOfLine(rparen)
                     && rparenLevel != lparenLevel + 1) {
                 logError(rparen, "rparen", rparenLevel);
             }
