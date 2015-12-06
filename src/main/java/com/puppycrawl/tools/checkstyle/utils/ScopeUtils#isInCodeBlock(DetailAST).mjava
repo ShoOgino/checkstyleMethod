@@ -2,14 +2,14 @@
      * Returns whether the scope of a node is restricted to a code block.
      * A code block is a method or constructor body, or a initializer block.
      *
-     * @param aAST the node to check
+     * @param node the node to check
      * @return a {@code boolean} value
      */
-    public static boolean isInCodeBlock(DetailAST aAST) {
+    public static boolean isInCodeBlock(DetailAST node) {
         boolean returnValue = false;
 
         // Loop up looking for a containing code block
-        for (DetailAST token = aAST.getParent();
+        for (DetailAST token = node.getParent();
              token != null;
              token = token.getParent()) {
             final int type = token.getType();

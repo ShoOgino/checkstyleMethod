@@ -1,11 +1,11 @@
     /**
      * Returns the scope of the surrounding "block".
-     * @param aAST the node to return the scope for
+     * @param node the node to return the scope for
      * @return the Scope of the surrounding block
      */
-    public static Scope getSurroundingScope(DetailAST aAST) {
+    public static Scope getSurroundingScope(DetailAST node) {
         Scope returnValue = null;
-        for (DetailAST token = aAST.getParent();
+        for (DetailAST token = node.getParent();
              token != null;
              token = token.getParent()) {
             final int type = token.getType();

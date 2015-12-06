@@ -1,14 +1,14 @@
     /**
      * Returns whether a node is directly contained within an enum block.
      *
-     * @param aAST the node to check if directly contained within an enum block.
+     * @param node the node to check if directly contained within an enum block.
      * @return a {@code boolean} value
      */
-    public static boolean isInEnumBlock(DetailAST aAST) {
+    public static boolean isInEnumBlock(DetailAST node) {
         boolean returnValue = false;
 
         // Loop up looking for a containing interface block
-        for (DetailAST token = aAST.getParent();
+        for (DetailAST token = node.getParent();
              token != null && !returnValue;
              token = token.getParent()) {
             final int type = token.getType();

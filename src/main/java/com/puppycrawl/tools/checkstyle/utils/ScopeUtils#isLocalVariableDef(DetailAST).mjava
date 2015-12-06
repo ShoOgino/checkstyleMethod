@@ -2,22 +2,22 @@
      * Determines whether a node is a local variable definition.
      * I.e. if it is declared in a code block, a for initializer,
      * or a catch parameter.
-     * @param aAST the node to check.
+     * @param node the node to check.
      * @return whether aAST is a local variable definition.
      */
-    public static boolean isLocalVariableDef(DetailAST aAST) {
+    public static boolean isLocalVariableDef(DetailAST node) {
         boolean localVariableDef = false;
         // variable declaration?
-        if (aAST.getType() == TokenTypes.VARIABLE_DEF) {
-            final DetailAST parent = aAST.getParent();
+        if (node.getType() == TokenTypes.VARIABLE_DEF) {
+            final DetailAST parent = node.getParent();
             final int type = parent.getType();
             localVariableDef = type == TokenTypes.SLIST
                     || type == TokenTypes.FOR_INIT
                     || type == TokenTypes.FOR_EACH_CLAUSE;
         }
         // catch parameter?
-        if (aAST.getType() == TokenTypes.PARAMETER_DEF) {
-            final DetailAST parent = aAST.getParent();
+        if (node.getType() == TokenTypes.PARAMETER_DEF) {
+            final DetailAST parent = node.getParent();
             localVariableDef = parent.getType() == TokenTypes.LITERAL_CATCH;
         }
         return localVariableDef;
