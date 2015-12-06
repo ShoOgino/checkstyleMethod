@@ -4,11 +4,7 @@
      * @param tags to be ignored by check.
      */
     public void setIgnoredTags(String tags) {
-        final List<String> tagList = new ArrayList<>();
-        final String[] sTags = tags.split(",");
-        for (String sTag : sTags) {
-            tagList.add(sTag.trim());
-        }
-        ignoredTags = tagList;
+        ignoredTags =
+            Lists.newArrayList(Splitter.on(",").omitEmptyStrings().trimResults().split(tags));
     }
 
