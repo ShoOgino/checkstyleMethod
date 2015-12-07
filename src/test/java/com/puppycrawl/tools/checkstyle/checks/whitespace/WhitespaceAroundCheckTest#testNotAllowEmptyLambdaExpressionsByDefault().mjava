@@ -1,0 +1,14 @@
+    @Test
+    public void testNotAllowEmptyLambdaExpressionsByDefault() throws Exception {
+        final String[] expected = {
+            "7:28: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "7:28: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "12:29: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "12:30: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+            "13:29: " + getCheckMessage(WS_NOT_FOLLOWED, "{"),
+            "13:43: " + getCheckMessage(WS_NOT_PRECEDED, "}"),
+        };
+        verify(checkConfig, getNonCompilablePath("InputAllowEmptyLambdaExpressions.java"),
+            expected);
+    }
+
