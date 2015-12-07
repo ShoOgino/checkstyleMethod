@@ -1,4 +1,4 @@
-    private static void buildAndTestXml(String fileName, String unserializedSource)
+    private static void buildAndValidateXml(String fileName, String unserializedSource)
             throws IOException, ParserConfigurationException {
         // not all examples come with the full xml structure
         String code = unserializedSource;
@@ -19,12 +19,12 @@
                     + code;
         }
 
-        // test only
-        getRawXml(fileName, code, unserializedSource);
+        // validate only
+        XmlUtil.getRawXml(fileName, code, unserializedSource);
 
         // can't test ant structure, or old and outdated checks
         if (!fileName.startsWith("anttask") && !fileName.startsWith("releasenotes")) {
-            testCheckstyleXml(fileName, code, unserializedSource);
+            validateCheckstyleXml(fileName, code, unserializedSource);
         }
     }
 

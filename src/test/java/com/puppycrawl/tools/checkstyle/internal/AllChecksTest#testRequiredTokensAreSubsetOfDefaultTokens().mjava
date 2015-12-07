@@ -1,8 +1,6 @@
     @Test
     public void testRequiredTokensAreSubsetOfDefaultTokens() throws Exception {
-        final Set<Class<?>> checkstyleChecks = getCheckstyleChecks();
-
-        for (Class<?> check : checkstyleChecks) {
+        for (Class<?> check : CheckUtil.getCheckstyleChecks()) {
             if (Check.class.isAssignableFrom(check)) {
                 final Check testedCheck = (Check) check.getDeclaredConstructor().newInstance();
                 final int[] defaultTokens = testedCheck.getDefaultTokens();

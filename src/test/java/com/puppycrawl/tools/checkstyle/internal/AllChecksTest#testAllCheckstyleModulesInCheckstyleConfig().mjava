@@ -1,8 +1,8 @@
     @Test
     public void testAllCheckstyleModulesInCheckstyleConfig() throws Exception {
-        final Set<String> configChecks = getCheckStyleChecksReferencedInConfig(CONFIG_PATH);
+        final Set<String> configChecks = CheckUtil.getConfigCheckStyleChecks();
 
-        for (String moduleName : getSimpleNames(getCheckstyleModules())) {
+        for (String moduleName : getSimpleNames(CheckUtil.getCheckstyleModules())) {
             Assert.assertTrue("checkstyle_checks.xml is missing module: " + moduleName,
                     configChecks.contains(moduleName));
         }

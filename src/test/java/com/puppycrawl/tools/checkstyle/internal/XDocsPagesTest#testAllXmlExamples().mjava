@@ -1,14 +1,11 @@
     @Test
     public void testAllXmlExamples() throws Exception {
-        for (File file : Files.fileTreeTraverser().preOrderTraversal(XDOCS_DIRECTORY)) {
-            if (file.isDirectory()) {
-                continue;
-            }
-
+        for (Path path : XDocUtil.getXdocsFilePaths()) {
+            final File file = path.toFile();
             final String input = Files.toString(file, UTF_8);
             final String fileName = file.getName();
 
-            final Document document = getRawXml(fileName, input, input);
+            final Document document = XmlUtil.getRawXml(fileName, input, input);
             final NodeList sources = document.getElementsByTagName("source");
 
             for (int position = 0; position < sources.getLength(); position++) {
@@ -25,7 +22,7 @@
                     continue;
                 }
 
-                buildAndTestXml(fileName, unserializedSource);
+                buildAndValidateXml(fileName, unserializedSource);
             }
         }
     }

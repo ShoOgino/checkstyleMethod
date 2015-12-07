@@ -1,18 +1,17 @@
     @Test
     public void testAllCheckSections() throws Exception {
-        final ClassLoader cl = XDocsPagesTest.class.getClassLoader();
-        final Set<String> packageNames = PackageNamesLoader.getPackageNames(cl);
-        final ModuleFactory moduleFactory = new PackageObjectFactory(packageNames, cl);
+        final ModuleFactory moduleFactory = TestUtils.getPackageObjectFactory();
 
-        for (File file : Files.fileTreeTraverser().preOrderTraversal(XDOCS_DIRECTORY)) {
+        for (Path path : XDocUtil.getXdocsConfigFilePaths(XDocUtil.getXdocsFilePaths())) {
+            final File file = path.toFile();
             final String fileName = file.getName();
 
-            if (!fileName.startsWith("config_") || "config_reporting.xml".equals(fileName)) {
+            if ("config_reporting.xml".equals(fileName)) {
                 continue;
             }
 
             final String input = Files.toString(file, UTF_8);
-            final Document document = getRawXml(fileName, input, input);
+            final Document document = XmlUtil.getRawXml(fileName, input, input);
             final NodeList sources = document.getElementsByTagName("section");
             String lastSectioName = null;
 

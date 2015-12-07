@@ -5,7 +5,7 @@
         Assert.assertTrue(fileName + " section '" + sectionName
                 + "' has unknown text in 'Example of Usage': " + text, text.isEmpty());
 
-        for (Node node : findChildElementsByTag(subSection, "a")) {
+        for (Node node : XmlUtil.findChildElementsByTag(subSection, "a")) {
             final String url = node.getAttributes().getNamedItem("href").getTextContent();
             final String linkText = node.getTextContent().trim();
             String expectedUrl = null;

@@ -1,16 +1,14 @@
     @Test
-    public void testRequiredTokensAreSubsetOfAcceptableTokens() throws Exception {
-        final Set<Class<?>> checkstyleChecks = getCheckstyleChecks();
-
-        for (Class<?> check : checkstyleChecks) {
+    public void testDefaultTokensAreSubsetOfAcceptableTokens() throws Exception {
+        for (Class<?> check : CheckUtil.getCheckstyleChecks()) {
             if (Check.class.isAssignableFrom(check)) {
                 final Check testedCheck = (Check) check.getDeclaredConstructor().newInstance();
-                final int[] requiredTokens = testedCheck.getRequiredTokens();
+                final int[] defaultTokens = testedCheck.getDefaultTokens();
                 final int[] acceptableTokens = testedCheck.getAcceptableTokens();
 
-                if (!isSubset(requiredTokens, acceptableTokens)) {
+                if (!isSubset(defaultTokens, acceptableTokens)) {
                     final String errorMessage = String.format(Locale.ROOT,
-                            "%s's required tokens must be a subset"
+                            "%s's default tokens must be a subset"
                             + " of acceptable tokens.", check.getName());
                     Assert.fail(errorMessage);
                 }

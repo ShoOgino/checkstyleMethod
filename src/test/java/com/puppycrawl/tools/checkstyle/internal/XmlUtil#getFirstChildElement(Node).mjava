@@ -1,12 +1,10 @@
-    private static Set<Node> getChildrenElements(Node node) {
-        final Set<Node> result = new LinkedHashSet<>();
-
+    public static Node getFirstChildElement(Node node) {
         for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child.getNodeType() != Node.TEXT_NODE) {
-                result.add(child);
+                return child;
             }
         }
 
-        return result;
+        return null;
     }
 

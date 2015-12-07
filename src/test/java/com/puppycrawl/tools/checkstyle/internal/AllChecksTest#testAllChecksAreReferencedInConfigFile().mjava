@@ -1,9 +1,7 @@
     @Test
     public void testAllChecksAreReferencedInConfigFile() throws Exception {
-        final Set<Class<?>> checksFromClassPath = getCheckstyleChecks();
-        final Set<String> checksReferencedInConfig =
-                getCheckStyleChecksReferencedInConfig(CONFIG_PATH);
-        final Set<String> checksNames = getSimpleNames(checksFromClassPath);
+        final Set<String> checksReferencedInConfig = CheckUtil.getConfigCheckStyleChecks();
+        final Set<String> checksNames = getSimpleNames(CheckUtil.getCheckstyleChecks());
 
         for (String check : checksNames) {
             if (!checksReferencedInConfig.contains(check)) {

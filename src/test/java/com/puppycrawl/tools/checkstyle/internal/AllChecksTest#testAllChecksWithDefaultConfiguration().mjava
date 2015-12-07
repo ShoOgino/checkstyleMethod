@@ -1,11 +1,9 @@
     @Test
     public void testAllChecksWithDefaultConfiguration() throws Exception {
-
-        final Set<Class<?>> checkstyleChecks = getCheckstyleChecks();
         final String inputFilePath = getNonCompilablePath("InputDefaultConfig.java");
         final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
-        for (Class<?> check : checkstyleChecks) {
+        for (Class<?> check : CheckUtil.getCheckstyleChecks()) {
             final DefaultConfiguration checkConfig = createCheckConfig(check);
             final Checker checker;
             if (Check.class.isAssignableFrom(check)) {

@@ -1,31 +1,36 @@
     /**
      * Gets a set of names of checkstyle's checks which are referenced in checkstyle_checks.xml.
-     * @param configFilePath file path of checkstyle_checks.xml.
+     *
+     * @param configFilePath
+     *            file path of checkstyle_checks.xml.
      * @return names of checkstyle's checks which are referenced in checkstyle_checks.xml.
      * @throws ParserConfigurationException if a DocumentBuilder cannot be created which satisfies
      *              the configuration requested.
      * @throws IOException if any IO errors occur.
      * @throws SAXException if any parse errors occur.
      */
-    private static Set<String> getCheckStyleChecksReferencedInConfig(String configFilePath)
-        throws ParserConfigurationException, IOException, SAXException {
-
+    private static Set<String> getCheckStyleChecksReferencedInConfig(
+            String configFilePath) throws Exception {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-        // Validations of XML file make parsing too slow, that is why we disable all validations.
+        // Validations of XML file make parsing too slow, that is why we disable all
+        // validations.
         factory.setNamespaceAware(false);
         factory.setValidating(false);
         factory.setFeature("http://xml.org/sax/features/namespaces", false);
         factory.setFeature("http://xml.org/sax/features/validation", false);
-        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
-        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar",
+                false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
+                false);
 
         final DocumentBuilder builder = factory.newDocumentBuilder();
         final Document document = builder.parse(new File(configFilePath));
 
         // optional, but recommended
-        // FYI: http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-
-        // how-does-it-work
+        // FYI:
+        // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-
+        // does-it-work
         document.getDocumentElement().normalize();
 
         final NodeList nodeList = document.getElementsByTagName("module");
@@ -36,8 +41,7 @@
             if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
                 final Element module = (Element) currentNode;
                 final String checkName = module.getAttribute("name");
-                if (!"Checker".equals(checkName)
-                    && !"TreeWalker".equals(checkName)) {
+                if (!"Checker".equals(checkName) && !"TreeWalker".equals(checkName)) {
                     checksReferencedInCheckstyleChecksXml.add(checkName);
                 }
             }

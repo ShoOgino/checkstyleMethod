@@ -1,0 +1,16 @@
+    /**
+     * Gets xdocs documentation file paths.
+     * @param files list of all xdoc files
+     * @return a list of xdocs config file paths.
+     */
+    public static Set<Path> getXdocsConfigFilePaths(Set<Path> files) {
+        final Set<Path> xdocs = new HashSet<>();
+        for (Path entry : files) {
+            final String fileName = entry.getFileName().toString();
+            if (fileName.startsWith("config_")) {
+                xdocs.add(entry);
+            }
+        }
+        return xdocs;
+    }
+

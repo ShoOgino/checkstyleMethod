@@ -1,0 +1,16 @@
+    /**
+     * Gets xdocs file paths.
+     * @return a list of xdocs file paths.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static Set<Path> getXdocsFilePaths() throws IOException {
+        final Path directory = Paths.get(DIRECTORY_PATH);
+        final Set<Path> xdocs = new HashSet<>();
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(directory, "*.xml")) {
+            for (Path entry : stream) {
+                xdocs.add(entry);
+            }
+            return xdocs;
+        }
+    }
+

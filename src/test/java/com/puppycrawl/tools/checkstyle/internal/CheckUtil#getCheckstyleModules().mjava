@@ -6,14 +6,15 @@
      * @return a set of checkstyle's modules names.
      * @throws IOException if the attempt to read class path resources failed.
      */
-    private static Set<Class<?>> getCheckstyleModules() throws IOException {
+    public static Set<Class<?>> getCheckstyleModules() throws IOException {
         final Set<Class<?>> checkstyleModules = new HashSet<>();
 
-        final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        final ClassLoader loader = Thread.currentThread()
+                .getContextClassLoader();
         final ClassPath classpath = ClassPath.from(loader);
         final String packageName = "com.puppycrawl.tools.checkstyle";
-        final ImmutableSet<ClassPath.ClassInfo> checkstyleClasses =
-            classpath.getTopLevelClassesRecursive(packageName);
+        final ImmutableSet<ClassPath.ClassInfo> checkstyleClasses = classpath
+                .getTopLevelClassesRecursive(packageName);
 
         for (ClassPath.ClassInfo clazz : checkstyleClasses) {
             final Class<?> loadedClass = clazz.load();

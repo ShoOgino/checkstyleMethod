@@ -1,0 +1,16 @@
+    /**
+     * Gets xdocs style file paths.
+     * @param files list of all xdoc files
+     * @return a list of xdocs style file paths.
+     */
+    public static Set<Path> getXdocsStyleFilePaths(Set<Path> files) {
+        final Set<Path> xdocs = new HashSet<>();
+        for (Path entry : files) {
+            final String fileName = entry.getFileName().toString();
+            if (fileName.endsWith("_style.xml")) {
+                xdocs.add(entry);
+            }
+        }
+        return xdocs;
+    }
+

@@ -1,10 +1,7 @@
     @Test
     public void testAllCheckstyleModulesHaveXdocDocumentation() throws Exception {
-        final Set<Class<?>> checkstyleModules = getCheckstyleModules();
-        final Set<String> checkstyleModulesNames = getSimpleNames(checkstyleModules);
-        final String xdocsDirectoryPath = "src" + File.separator + "xdocs";
-        final Set<String> modulesNamesWhichHaveXdocs =
-            getModulesNamesWhichHaveXdoc(xdocsDirectoryPath);
+        final Set<String> checkstyleModulesNames = getSimpleNames(CheckUtil.getCheckstyleModules());
+        final Set<String> modulesNamesWhichHaveXdocs = XDocUtil.getModulesNamesWhichHaveXdoc();
 
         for (String moduleName : checkstyleModulesNames) {
             if (!modulesNamesWhichHaveXdocs.contains(moduleName)) {
