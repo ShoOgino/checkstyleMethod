@@ -9,13 +9,13 @@
     protected final void checkLinesIndent(int startLine, int endLine,
         IndentLevel indentLevel) {
         // check first line
-        checkSingleLine(startLine, indentLevel);
+        checkLineIndent(startLine, indentLevel);
 
         // check following lines
         final IndentLevel offsetLevel =
             new IndentLevel(indentLevel, getBasicOffset());
         for (int i = startLine + 1; i <= endLine; i++) {
-            checkSingleLine(i, offsetLevel);
+            checkLineIndent(i, offsetLevel);
         }
     }
 
