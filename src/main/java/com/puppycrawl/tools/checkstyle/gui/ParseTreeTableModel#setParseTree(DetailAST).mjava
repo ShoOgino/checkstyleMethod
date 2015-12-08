@@ -3,8 +3,7 @@
      * @param parseTree DetailAST parse tree.
      */
     final void setParseTree(DetailAST parseTree) {
-        final DetailAST root = (DetailAST) getRoot();
-        root.setFirstChild(parseTree);
+        ((AST) root).setFirstChild(parseTree);
         final Object[] path = {root};
         // no need to setup remaining info, as the call results in a
         // table structure changed event anyway - we just pass nulls

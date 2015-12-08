@@ -2,7 +2,7 @@
      * Creates JTreeTable base on TreeTableModel.
      * @param treeTableModel Tree table model
      */
-    public JTreeTable(TreeTableModel treeTableModel) {
+    public JTreeTable(ParseTreeTableModel treeTableModel) {
 
         // Create the tree. It will be used as a renderer and editor.
         tree = new TreeTableCellRenderer(this, treeTableModel);
@@ -17,8 +17,8 @@
         setSelectionModel(selectionWrapper.getListSelectionModel());
 
         // Install the tree editor renderer and editor.
-        setDefaultRenderer(TreeTableModel.class, tree);
-        setDefaultEditor(TreeTableModel.class, new TreeTableCellEditor());
+        setDefaultRenderer(ParseTreeTableModel.class, tree);
+        setDefaultEditor(ParseTreeTableModel.class, new TreeTableCellEditor());
 
         // No grid.
         setShowGrid(false);
