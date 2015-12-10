@@ -15,13 +15,7 @@
         }
         else if (literalFor.getParent().getType() == TokenTypes.SLIST
                 && literalFor.getLastChild().getType() != TokenTypes.SLIST) {
-            final DetailAST block = findExpressionBlockInForLoop(literalFor);
-            if (block == null) {
-                result = literalFor.getLineNo() == literalFor.getLastChild().getLineNo();
-            }
-            else {
-                result = literalFor.getLineNo() == block.getLineNo();
-            }
+            result = literalFor.getLineNo() == literalFor.getLastChild().getLineNo();
         }
         return result;
     }
