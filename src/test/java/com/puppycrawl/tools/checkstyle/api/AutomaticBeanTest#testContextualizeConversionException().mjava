@@ -5,7 +5,7 @@
         context.add("val", "some string");
         try {
             testBean.contextualize(context);
-            fail();
+            fail("InvocationTargetException is expected");
         }
         catch (CheckstyleException ex) {
             assertTrue(ex.getCause() instanceof ConversionException);

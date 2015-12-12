@@ -5,7 +5,7 @@
 
         try {
             CommonUtils.invokeConstructor(constructor);
-            fail();
+            fail("IllegalStateException is expected");
         }
         catch (IllegalStateException expected) {
             assertSame(InstantiationException.class, expected.getCause().getClass());

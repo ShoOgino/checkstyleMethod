@@ -5,7 +5,7 @@
         method.setAccessible(true);
         try {
             method.invoke(null, "myformat", null);
-            fail();
+            fail("InvocationTargetException is expected");
         }
         catch (InvocationTargetException ex) {
             assertTrue(ex.getCause() instanceof IllegalStateException);

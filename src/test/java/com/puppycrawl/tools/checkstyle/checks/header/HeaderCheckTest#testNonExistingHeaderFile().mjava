@@ -4,7 +4,7 @@
         checkConfig.addAttribute("headerFile", getPath("nonExisting.file"));
         try {
             createChecker(checkConfig);
-            fail();
+            fail("CheckstyleException is expected");
         }
         catch (CheckstyleException ex) {
             assertTrue(ex.getMessage()

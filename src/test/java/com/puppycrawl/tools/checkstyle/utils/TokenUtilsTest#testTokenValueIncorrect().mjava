@@ -3,7 +3,7 @@
         final Integer id = Integer.MAX_VALUE - 1;
         try {
             TokenUtils.getTokenName(id);
-            fail();
+            fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException expected) {
             assertEquals("given id " + id, expected.getMessage());

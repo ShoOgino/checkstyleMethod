@@ -2,7 +2,7 @@
     public void testGetNonExistingConstructor() {
         try {
             CommonUtils.getConstructor(Math.class);
-            fail();
+            fail("IllegalStateException is expected");
         }
         catch (IllegalStateException expected) {
             assertSame(NoSuchMethodException.class, expected.getCause().getClass());
