@@ -3,6 +3,15 @@
      * @throws IOException  when there is a problems with file save
      */
     void persist() throws IOException {
+        try {
+            final Path directory = Paths.get(fileName).getParent();
+            if (directory != null) {
+                Files.createDirectories(directory);
+            }
+        }
+        catch (InvalidPathException | AccessDeniedException ex) {
+            throw new IllegalStateException(ex.getMessage(), ex);
+        }
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(fileName);

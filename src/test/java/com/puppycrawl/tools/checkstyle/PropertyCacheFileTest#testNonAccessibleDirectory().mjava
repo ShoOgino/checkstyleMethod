@@ -1,0 +1,42 @@
+    @Test
+    public void testNonAccessibleDirectory() throws Exception {
+
+        final PropertyCacheFile cache;
+        final String failMessage;
+
+        // That works fine on Linux/Unix, but ....
+        // It's not possible to make a directory/file unreadable in Windows NTFS for owner, that
+        // is why we use mock for testing on OS Windows.
+        // http://stackoverflow.com/a/4354686
+        // https://github.com/google/google-oauth-java-client/issues/55#issuecomment-69403681
+        if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("windows")) {
+            // We use mock on Windows just to satisfy coverage rate
+            cache = mock(PropertyCacheFile.class);
+            final String mockExceptionMessage = "...cache";
+            final AccessDeniedException mockException =
+                new AccessDeniedException(mockExceptionMessage);
+            doThrow(new IllegalStateException(mockException)).when(cache).persist();
+            failMessage = "AccessDeniedException is expected since we use the mock object.";
+
+        }
+        else {
+            final Configuration config = new DefaultConfiguration("myName");
+            final File directory = temporaryFolder.newFolder("directory");
+            directory.setReadable(true, false);
+            directory.setWritable(false, false);
+            final String filePath = String.format(Locale.getDefault(), "%s%2$sscache%2$stemp.cache",
+                directory.getAbsolutePath(), File.separator);
+            cache = new PropertyCacheFile(config, filePath);
+            failMessage = "AccessDeniedException is expected since directory is readonly.";
+        }
+
+        try {
+            cache.persist();
+            fail(failMessage);
+        }
+        catch (IllegalStateException ex) {
+            assertTrue(ex.getCause() instanceof AccessDeniedException);
+            assertThat(ex.getMessage(), endsWith("cache"));
+        }
+    }
+

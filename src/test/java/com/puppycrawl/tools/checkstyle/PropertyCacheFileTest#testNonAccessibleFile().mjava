@@ -4,7 +4,13 @@
         final File file = temporaryFolder.newFile("file.output");
         file.setReadable(true, false);
         file.setWritable(false, false);
-
-        new PropertyCacheFile(config, file.getAbsolutePath());
+        try {
+            new PropertyCacheFile(config, file.getAbsolutePath()).persist();
+            fail("FileNotFoundException is expected, since access to the file was denied!");
+        }
+        catch (FileNotFoundException ex) {
+            assertThat(ex.getMessage(), anyOf(endsWith("file.output (Permission denied)"),
+                endsWith("file.output (Access is denied)")));
+        }
     }
 

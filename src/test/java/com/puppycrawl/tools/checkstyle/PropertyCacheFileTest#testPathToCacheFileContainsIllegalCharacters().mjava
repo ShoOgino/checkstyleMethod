@@ -1,0 +1,15 @@
+    @Test
+    public void testPathToCacheFileContainsIllegalCharacters() throws IOException {
+        final Configuration config = new DefaultConfiguration("myName");
+        final String filePath = "\\\0:FOO\\server.properties";
+        final PropertyCacheFile cache = new PropertyCacheFile(config, filePath);
+        try {
+            cache.persist();
+            fail("Exception is expected!");
+        }
+        catch (IllegalStateException ex) {
+            assertThat(ex.getCause(), instanceOf(InvalidPathException.class));
+            assertThat(ex.getMessage(), endsWith("server.properties"));
+        }
+    }
+

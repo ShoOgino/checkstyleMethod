@@ -1,0 +1,24 @@
+    @Test
+    public void testDestroyCacheFileWithInvalidPath() throws Exception {
+        final TreeWalker treeWalker = new TreeWalker();
+        treeWalker.configure(new DefaultConfiguration("default config"));
+        if (System.getProperty("os.name")
+                        .toLowerCase(Locale.ENGLISH).startsWith("windows")) {
+            // https://support.microsoft.com/en-us/kb/177506 but this only for NTFS
+            // WindowsServer 2012 use Resilient File System (ReFS), so any name is ok
+            final File file = new File("C\\:invalid");
+            treeWalker.setCacheFile(file.getAbsolutePath());
+        }
+        else {
+            treeWalker.setCacheFile(File.separator + ":invalid");
+        }
+        try {
+            treeWalker.destroy();
+            fail("Exception did not happen");
+        }
+        catch (IllegalStateException ex) {
+            assertThat(ex.getCause(), anyOf(instanceOf(IOException.class),
+                instanceOf(InvalidPathException.class)));
+        }
+    }
+
