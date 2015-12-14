@@ -1,13 +1,21 @@
     @Override
     public void beginTree(DetailAST rootAST) {
-
+        MatchSuppressor supressor = null;
         if (ignoreComments) {
-            options.setSuppressor(new CommentSuppressor(getFileContents()));
-        }
-        else {
-            options.setSuppressor(NeverSuppress.INSTANCE);
+            supressor = new CommentSuppressor(getFileContents());
         }
 
+        final DetectorOptions options = DetectorOptions.newBuilder()
+            .reporter(this)
+            .compileFlags(0)
+            .suppressor(supressor)
+            .format(format)
+            .message(message)
+            .minimum(minimum)
+            .maximum(maximum)
+            .ignoreCase(ignoreCase)
+            .build();
+        final SinglelineDetector detector = new SinglelineDetector(options);
         detector.processLines(Arrays.asList(getLines()));
     }
 
