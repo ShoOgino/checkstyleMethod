@@ -8,11 +8,11 @@
         final DetailAST rcurly = getRCurly();
         final int rcurlyPos = expandedTabsColumnNo(rcurly);
 
-        if (curlyLevel().isAcceptable(rcurlyPos)
+        if (curlyIndent().isAcceptable(rcurlyPos)
             || !shouldStartWithRCurly() && !isOnStartOfLine(rcurly)
             || areOnSameLine(rcurly, lcurly)) {
             return;
         }
-        logError(rcurly, "rcurly", rcurlyPos, curlyLevel());
+        logError(rcurly, "rcurly", rcurlyPos, curlyIndent());
     }
 

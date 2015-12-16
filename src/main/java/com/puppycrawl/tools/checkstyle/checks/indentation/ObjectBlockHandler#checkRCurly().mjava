@@ -2,11 +2,11 @@
     protected void checkRCurly() {
         final DetailAST rcurly = getRCurly();
         final int rcurlyPos = expandedTabsColumnNo(rcurly);
-        final IndentLevel level = curlyLevel();
+        final IndentLevel level = curlyIndent();
         level.addAcceptedIndent(level.getFirstIndentLevel() + getLineWrappingIndentation());
 
         if (!level.isAcceptable(rcurlyPos) && isOnStartOfLine(rcurly)) {
-            logError(rcurly, "rcurly", rcurlyPos, curlyLevel());
+            logError(rcurly, "rcurly", rcurlyPos, curlyIndent());
         }
     }
 

@@ -3,7 +3,7 @@
         // If the argument list is the first element on the line
         final DetailAST firstChild = getMainAst().getFirstChild();
         if (getLineStart(firstChild) == firstChild.getColumnNo()) {
-            final IndentLevel level = getLevel();
+            final IndentLevel level = getIndent();
             if (!level.isAcceptable(firstChild.getColumnNo())) {
                 logError(firstChild, "arguments", firstChild.getColumnNo(), level);
             }
@@ -12,7 +12,7 @@
         // If the "->" is the first element on the line, assume line wrapping.
         if (getLineStart(getMainAst()) == getMainAst().getColumnNo()) {
             final IndentLevel level =
-                new IndentLevel(getLevel(), getIndentCheck().getLineWrappingIndentation());
+                new IndentLevel(getIndent(), getIndentCheck().getLineWrappingIndentation());
             if (!level.isAcceptable(getMainAst().getColumnNo())) {
                 logError(getMainAst(), "", getMainAst().getColumnNo(), level);
             }

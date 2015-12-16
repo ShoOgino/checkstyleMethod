@@ -2,15 +2,15 @@
      * Check the indent level of the children of the specified parent
      * expression.
      *
-     * @param parentNode             the parent whose children we are checking
+     * @param parentNode         the parent whose children we are checking
      * @param tokenTypes         the token types to check
-     * @param startLevel         the starting indent level
+     * @param startIndent        the starting indent level
      * @param firstLineMatches   whether or not the first line needs to match
      * @param allowNesting       whether or not nested children are allowed
      */
     protected final void checkChildren(DetailAST parentNode,
                                        int[] tokenTypes,
-                                       IndentLevel startLevel,
+                                       IndentLevel startIndent,
                                        boolean firstLineMatches,
                                        boolean allowNesting) {
         Arrays.sort(tokenTypes);
@@ -18,7 +18,7 @@
                 child != null;
                 child = child.getNextSibling()) {
             if (Arrays.binarySearch(tokenTypes, child.getType()) >= 0) {
-                checkExpressionSubtree(child, startLevel,
+                checkExpressionSubtree(child, startIndent,
                     firstLineMatches, allowNesting);
             }
         }

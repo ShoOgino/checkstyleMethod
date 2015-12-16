@@ -1,5 +1,5 @@
     @Override
-    protected IndentLevel getLevelImpl() {
+    protected IndentLevel getIndentImpl() {
         IndentLevel indentLevel;
         // if inside a method call's params, this could be part of
         // an expression, so get the previous line's start
@@ -8,12 +8,12 @@
                     (MethodCallHandler) getParent();
             if (areOnSameLine(container.getMainAst(), getMainAst())
                     || isChainedMethodCallWrapped()) {
-                indentLevel = container.getLevel();
+                indentLevel = container.getIndent();
             }
             // we should increase indentation only if this is the first
             // chained method call which was moved to the next line
             else {
-                indentLevel = new IndentLevel(container.getLevel(), getBasicOffset());
+                indentLevel = new IndentLevel(container.getIndent(), getBasicOffset());
             }
         }
         else {
@@ -24,7 +24,7 @@
             final int firstCol = lines.firstLineCol();
             final int lineStart = getLineStart(getFirstAst(getMainAst()));
             if (lineStart == firstCol) {
-                indentLevel = super.getLevelImpl();
+                indentLevel = super.getIndentImpl();
             }
             else {
                 indentLevel = new IndentLevel(lineStart);

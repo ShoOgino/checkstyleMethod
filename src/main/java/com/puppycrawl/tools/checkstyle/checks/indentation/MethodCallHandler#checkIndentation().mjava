@@ -5,7 +5,7 @@
             return;
         }
         final DetailAST methodName = getMainAst().getFirstChild();
-        checkExpressionSubtree(methodName, getLevel(), false, false);
+        checkExpressionSubtree(methodName, getIndent(), false, false);
 
         final DetailAST lparen = getMainAst();
         final DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
@@ -17,7 +17,7 @@
 
         checkExpressionSubtree(
             getMainAst().findFirstToken(TokenTypes.ELIST),
-            new IndentLevel(getLevel(), getBasicOffset()),
+            new IndentLevel(getIndent(), getBasicOffset()),
             false, true);
 
         checkRParen(lparen, rparen);

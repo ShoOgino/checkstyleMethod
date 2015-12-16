@@ -1,10 +1,10 @@
     @Override
-    protected IndentLevel getLevelImpl() {
+    protected IndentLevel getIndentImpl() {
         // if our expression isn't first on the line, just use the start
         // of the line
         if (getLineStart(getMainAst()) != getMainAst().getColumnNo()) {
             return new IndentLevel(getLineStart(getMainAst()));
         }
-        return super.getLevelImpl();
+        return super.getIndentImpl();
     }
 

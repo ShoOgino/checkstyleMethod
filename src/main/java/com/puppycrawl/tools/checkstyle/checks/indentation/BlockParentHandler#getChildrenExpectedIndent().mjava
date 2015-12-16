@@ -2,17 +2,17 @@
      * Gets indentation level expected for children.
      * @return indentation level expected for children
      */
-    protected IndentLevel getChildrenExpectedLevel() {
-        IndentLevel indentLevel = new IndentLevel(getLevel(), getBasicOffset());
+    protected IndentLevel getChildrenExpectedIndent() {
+        IndentLevel indentLevel = new IndentLevel(getIndent(), getBasicOffset());
         // if we have multileveled expected level then we should
         // try to suggest single level to children using curlies'
         // levels.
-        if (getLevel().isMultiLevel() && hasCurlies()) {
+        if (getIndent().isMultiLevel() && hasCurlies()) {
             if (isOnStartOfLine(getLCurly())) {
                 indentLevel = new IndentLevel(expandedTabsColumnNo(getLCurly()) + getBasicOffset());
             }
             else if (isOnStartOfLine(getRCurly())) {
-                final IndentLevel level = new IndentLevel(curlyLevel(), getBasicOffset());
+                final IndentLevel level = new IndentLevel(curlyIndent(), getBasicOffset());
                 level.addAcceptedIndent(level.getFirstIndentLevel() + getLineWrappingIndent());
                 indentLevel = level;
             }

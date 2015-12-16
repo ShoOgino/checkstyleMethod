@@ -1,5 +1,5 @@
     @Override
-    protected IndentLevel getLevelImpl() {
+    protected IndentLevel getIndentImpl() {
         final DetailAST parentAST = getMainAst().getParent();
         final int type = parentAST.getType();
         if (type == TokenTypes.LITERAL_NEW || type == TokenTypes.ASSIGN) {
@@ -8,7 +8,7 @@
         }
         else {
             // at this point getParent() is instance of BlockParentHandler
-            return ((BlockParentHandler) getParent()).getChildrenExpectedLevel();
+            return ((BlockParentHandler) getParent()).getChildrenExpectedIndent();
         }
     }
 

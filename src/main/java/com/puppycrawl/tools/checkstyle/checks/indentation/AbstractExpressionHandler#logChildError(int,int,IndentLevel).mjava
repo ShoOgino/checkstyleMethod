@@ -2,17 +2,17 @@
      * Log child indentation error.
      *
      * @param line           the expression that caused the error
-     * @param actualLevel   the actual indent level of the expression
-     * @param expectedLevel the expected indent level of the expression
+     * @param actualIndent   the actual indent level of the expression
+     * @param expectedIndent the expected indent level of the expression
      */
     private void logChildError(int line,
-                               int actualLevel,
-                               IndentLevel expectedLevel) {
+                               int actualIndent,
+                               IndentLevel expectedIndent) {
         String messageKey = MSG_CHILD_ERROR;
-        if (expectedLevel.isMultiLevel()) {
+        if (expectedIndent.isMultiLevel()) {
             messageKey = MSG_CHILD_ERROR_MULTI;
         }
         indentCheck.indentationLog(line, messageKey,
-            typeName, actualLevel, expectedLevel);
+            typeName, actualIndent, expectedIndent);
     }
 

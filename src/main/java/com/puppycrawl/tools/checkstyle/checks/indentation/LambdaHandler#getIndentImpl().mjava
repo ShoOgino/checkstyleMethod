@@ -1,7 +1,7 @@
     @Override
-    protected IndentLevel getLevelImpl() {
+    protected IndentLevel getIndentImpl() {
         if (getParent() instanceof MethodCallHandler) {
-            return getParent().getSuggestedChildLevel(this);
+            return getParent().getSuggestedChildIndent(this);
         }
 
         DetailAST parent = getMainAst().getParent();
