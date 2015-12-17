@@ -1,0 +1,9 @@
+    @Test
+    public void testSeparatedStatements() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        final String fileName = getPath("InputSeparatedStatements.java");
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+        verifyWarns(checkConfig, fileName, expected);
+    }
+

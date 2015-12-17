@@ -6,9 +6,11 @@
      */
     private void checkLineIndent(int lineNum, IndentLevel indentLevel) {
         final String line = indentCheck.getLine(lineNum - 1);
-        final int start = getLineStart(line);
-        if (indentLevel.isGreaterThan(start)) {
-            logChildError(lineNum, start, indentLevel);
+        if (!line.isEmpty()) {
+            final int start = getLineStart(line);
+            if (indentLevel.isGreaterThan(start)) {
+                logChildError(lineNum, start, indentLevel);
+            }
         }
     }
 
