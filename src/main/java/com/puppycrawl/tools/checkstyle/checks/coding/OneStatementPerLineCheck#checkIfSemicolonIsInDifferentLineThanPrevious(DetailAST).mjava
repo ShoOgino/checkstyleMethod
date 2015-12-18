@@ -1,0 +1,29 @@
+    /**
+     * Checks if given semicolon is in different line than previous.
+     * @param ast semicolon to check
+     */
+    private void checkIfSemicolonIsInDifferentLineThanPrevious(DetailAST ast) {
+        DetailAST currentStatement = ast;
+        final boolean hasResourcesPrevSibling =
+                currentStatement.getPreviousSibling() != null
+                        && currentStatement.getPreviousSibling().getType() == TokenTypes.RESOURCES;
+        if (!hasResourcesPrevSibling && isMultilineStatement(currentStatement)) {
+            currentStatement = ast.getPreviousSibling();
+        }
+        if (isInLambda) {
+            int countOfSemiInCurrentLambda = countOfSemiInLambda.pop();
+            countOfSemiInCurrentLambda++;
+            countOfSemiInLambda.push(countOfSemiInCurrentLambda);
+            if (!inForHeader && countOfSemiInCurrentLambda > 1
+                    && isOnTheSameLine(currentStatement,
+                    lastStatementEnd, forStatementEnd,
+                    lambdaStatementEnd)) {
+                log(ast, MSG_KEY);
+            }
+        }
+        else if (!inForHeader && isOnTheSameLine(currentStatement, lastStatementEnd,
+                forStatementEnd, lambdaStatementEnd)) {
+            log(ast, MSG_KEY);
+        }
+    }
+

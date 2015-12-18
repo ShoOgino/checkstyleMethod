@@ -2,20 +2,14 @@
     public void visitToken(DetailAST ast) {
         switch (ast.getType()) {
             case TokenTypes.SEMI:
-                DetailAST currentStatement = ast;
-                final boolean hasResourcesPrevSibling =
-                        currentStatement.getPreviousSibling() != null
-                        && currentStatement.getPreviousSibling().getType() == TokenTypes.RESOURCES;
-                if (!hasResourcesPrevSibling && isMultilineStatement(currentStatement)) {
-                    currentStatement = ast.getPreviousSibling();
-                }
-                if (!inForHeader
-                        && isOnTheSameLine(currentStatement, lastStatementEnd, forStatementEnd)) {
-                    log(ast, MSG_KEY);
-                }
+                checkIfSemicolonIsInDifferentLineThanPrevious(ast);
                 break;
             case TokenTypes.FOR_ITERATOR:
                 forStatementEnd = ast.getLineNo();
+                break;
+            case TokenTypes.LAMBDA:
+                isInLambda = true;
+                countOfSemiInLambda.push(0);
                 break;
             default:
                 inForHeader = true;

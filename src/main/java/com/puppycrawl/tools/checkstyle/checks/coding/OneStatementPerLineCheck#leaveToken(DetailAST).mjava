@@ -4,9 +4,17 @@
             case TokenTypes.SEMI:
                 lastStatementEnd = ast.getLineNo();
                 forStatementEnd = -1;
+                lambdaStatementEnd = -1;
                 break;
             case TokenTypes.FOR_ITERATOR:
                 inForHeader = false;
+                break;
+            case TokenTypes.LAMBDA:
+                countOfSemiInLambda.pop();
+                if (countOfSemiInLambda.isEmpty()) {
+                    isInLambda = false;
+                }
+                lambdaStatementEnd = ast.getLineNo();
                 break;
             default:
                 break;

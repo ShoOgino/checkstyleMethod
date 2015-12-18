@@ -4,10 +4,13 @@
      * @param lastStatementEnd the line-number where the last statement ended.
      * @param forStatementEnd the line-number where the last 'for-loop'
      *                        statement ended.
+     * @param lambdaStatementEnd the line-number where the last lambda
+     *                        statement ended.
      * @return true if two statements are on the same line.
      */
     private static boolean isOnTheSameLine(DetailAST ast, int lastStatementEnd,
-                                           int forStatementEnd) {
-        return lastStatementEnd == ast.getLineNo() && forStatementEnd != ast.getLineNo();
+                                           int forStatementEnd, int lambdaStatementEnd) {
+        return lastStatementEnd == ast.getLineNo() && forStatementEnd != ast.getLineNo()
+                && lambdaStatementEnd != ast.getLineNo();
     }
 
