@@ -1,0 +1,11 @@
+    /**
+     * Multiple statements within try-with-resource on a separate line is legal. Added per PR comment:
+     * @see <a href="https://github.com/checkstyle/checkstyle/pull/2750#issuecomment-166032327">Please add UT cases</a>
+     */
+    private void issue2211pass2() {
+        try( AutoCloseable i = new java.io.StringReader("");
+            AutoCloseable k = new java.io.StringReader("");) {
+        } catch (Exception e1) {
+        }
+    }
+
