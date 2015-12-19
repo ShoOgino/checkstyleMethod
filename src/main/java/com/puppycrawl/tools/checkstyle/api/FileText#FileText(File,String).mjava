@@ -24,9 +24,7 @@
         }
         catch (final UnsupportedCharsetException ex) {
             final String message = "Unsupported charset: " + charsetName;
-            final UnsupportedEncodingException ex2 = new UnsupportedEncodingException(message);
-            ex2.initCause(ex);
-            throw ex2;
+            throw new IllegalStateException(message, ex);
         }
 
         fullText = readFile(file, decoder);

@@ -6,7 +6,7 @@
             new FileText(new File("any name"), charsetName);
             fail("UnsupportedEncodingException is expected");
         }
-        catch (UnsupportedEncodingException ex) {
+        catch (IllegalStateException ex) {
             assertEquals("Unsupported charset: " + charsetName, ex.getMessage());
         }
 
