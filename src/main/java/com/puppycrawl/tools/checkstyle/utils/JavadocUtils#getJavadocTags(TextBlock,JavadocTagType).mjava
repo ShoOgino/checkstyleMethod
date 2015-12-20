@@ -11,10 +11,9 @@
         final String[] text = textBlock.getText();
         final List<JavadocTag> tags = Lists.newArrayList();
         final List<InvalidJavadocTag> invalidTags = Lists.newArrayList();
-        Pattern blockTagPattern = Pattern.compile("/\\*{2,}\\s*@(\\p{Alpha}+)\\s");
         for (int i = 0; i < text.length; i++) {
             final String textValue = text[i];
-            final Matcher blockTagMatcher = blockTagPattern.matcher(textValue);
+            final Matcher blockTagMatcher = getBlockTagPattern(i).matcher(textValue);
             if ((tagType == JavadocTagType.ALL || tagType == JavadocTagType.BLOCK)
                     && blockTagMatcher.find()) {
                 final String tagName = blockTagMatcher.group(1);
@@ -39,7 +38,6 @@
             else if (tagType == JavadocTagType.ALL || tagType == JavadocTagType.INLINE) {
                 lookForInlineTags(textBlock, i, tags, invalidTags);
             }
-            blockTagPattern = Pattern.compile("^\\s*\\**\\s*@(\\p{Alpha}+)\\s");
         }
         return new JavadocTags(tags, invalidTags);
     }

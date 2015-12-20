@@ -9,8 +9,7 @@
             final List<JavadocTag> validTags, final List<InvalidJavadocTag> invalidTags) {
         final String text = comment.getText()[lineNumber];
         // Match Javadoc text after comment characters
-        final Pattern commentPattern = Pattern.compile("^\\s*(?:/\\*{2,}|\\*+)\\s*(.*)");
-        final Matcher commentMatcher = commentPattern.matcher(text);
+        final Matcher commentMatcher = COMMENT_PATTERN.matcher(text);
         final String commentContents;
 
         // offset including comment characters
@@ -25,8 +24,7 @@
             commentContents = text;
             commentOffset = 0;
         }
-        final Pattern tagPattern = Pattern.compile(".*?\\{@(\\p{Alpha}+)\\s+(.*?)\\}");
-        final Matcher tagMatcher = tagPattern.matcher(commentContents);
+        final Matcher tagMatcher = INLINE_TAG_PATTERN.matcher(commentContents);
         while (tagMatcher.find()) {
             final String tagName = tagMatcher.group(1);
             final String tagValue = tagMatcher.group(2).trim();
