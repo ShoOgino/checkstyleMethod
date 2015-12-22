@@ -15,11 +15,10 @@
 
         final boolean isStaticAndNotLastImport = isStatic && !lastImportStatic;
         final boolean isLastImportAndNonStatic = lastImportStatic && !isStatic;
-        final ImportOrderOption abstractOption = getAbstractOption();
 
         // using set of IF instead of SWITCH to analyze Enum options to satisfy coverage.
         // https://github.com/checkstyle/checkstyle/issues/1387
-        if (abstractOption == ImportOrderOption.TOP) {
+        if (option == ImportOrderOption.TOP) {
 
             if (isLastImportAndNonStatic) {
                 lastGroup = Integer.MIN_VALUE;
@@ -28,7 +27,7 @@
             doVisitToken(ident, isStatic, isStaticAndNotLastImport);
 
         }
-        else if (abstractOption == ImportOrderOption.BOTTOM) {
+        else if (option == ImportOrderOption.BOTTOM) {
 
             if (isStaticAndNotLastImport) {
                 lastGroup = Integer.MIN_VALUE;
@@ -37,23 +36,23 @@
             doVisitToken(ident, isStatic, isLastImportAndNonStatic);
 
         }
-        else if (abstractOption == ImportOrderOption.ABOVE) {
+        else if (option == ImportOrderOption.ABOVE) {
             // previous non-static but current is static
             doVisitToken(ident, isStatic, isStaticAndNotLastImport);
 
         }
-        else if (abstractOption == ImportOrderOption.UNDER) {
+        else if (option == ImportOrderOption.UNDER) {
             doVisitToken(ident, isStatic, isLastImportAndNonStatic);
 
         }
-        else if (abstractOption == ImportOrderOption.INFLOW) {
+        else if (option == ImportOrderOption.INFLOW) {
             // "previous" argument is useless here
             doVisitToken(ident, isStatic, true);
 
         }
         else {
             throw new IllegalStateException(
-                    "Unexpected option for static imports: " + abstractOption);
+                    "Unexpected option for static imports: " + option);
         }
 
         lastImportLine = ast.findFirstToken(TokenTypes.SEMI).getLineNo();
