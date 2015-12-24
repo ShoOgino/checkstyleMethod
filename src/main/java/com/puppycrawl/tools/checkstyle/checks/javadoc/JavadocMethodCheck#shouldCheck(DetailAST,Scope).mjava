@@ -8,9 +8,10 @@
     private boolean shouldCheck(final DetailAST ast, final Scope nodeScope) {
         final Scope surroundingScope = ScopeUtils.getSurroundingScope(ast);
 
-        return nodeScope.isIn(scope)
-                && surroundingScope.isIn(scope)
-                && (excludeScope == null || nodeScope != excludeScope
-                    && surroundingScope != excludeScope);
+        return (excludeScope == null
+                || nodeScope != excludeScope
+                && surroundingScope != excludeScope)
+            && nodeScope.isIn(scope)
+            && surroundingScope.isIn(scope);
     }
 

@@ -7,8 +7,8 @@
      */
     private boolean isIgnoredParamOfAbstractMethod(DetailAST ast) {
         boolean result = false;
-        if (ast.getType() == TokenTypes.PARAMETER_DEF
-            && ignoreAbstractMethods) {
+        if (ignoreAbstractMethods
+                && ast.getType() == TokenTypes.PARAMETER_DEF) {
             final DetailAST method = ast.getParent().getParent();
             if (method.getType() == TokenTypes.METHOD_DEF) {
                 final DetailAST mods = method.findFirstToken(TokenTypes.MODIFIERS);

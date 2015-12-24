@@ -7,8 +7,8 @@
      */
     private boolean isIgnoredConstructorParam(DetailAST ast) {
         boolean result = false;
-        if (ast.getType() == TokenTypes.PARAMETER_DEF
-            && ignoreConstructorParameter) {
+        if (ignoreConstructorParameter
+                && ast.getType() == TokenTypes.PARAMETER_DEF) {
             final DetailAST parametersAST = ast.getParent();
             final DetailAST constructorAST = parametersAST.getParent();
             result = constructorAST.getType() == TokenTypes.CTOR_DEF;

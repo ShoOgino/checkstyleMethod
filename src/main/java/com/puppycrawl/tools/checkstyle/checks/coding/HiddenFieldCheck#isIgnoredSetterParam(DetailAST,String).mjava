@@ -13,7 +13,7 @@
      *     ignoreSetter is true and ast is the parameter of a setter method.
      */
     private boolean isIgnoredSetterParam(DetailAST ast, String name) {
-        if (ast.getType() == TokenTypes.PARAMETER_DEF && ignoreSetter) {
+        if (ignoreSetter && ast.getType() == TokenTypes.PARAMETER_DEF) {
             final DetailAST parametersAST = ast.getParent();
             final DetailAST methodAST = parametersAST.getParent();
             if (parametersAST.getChildCount() == 1

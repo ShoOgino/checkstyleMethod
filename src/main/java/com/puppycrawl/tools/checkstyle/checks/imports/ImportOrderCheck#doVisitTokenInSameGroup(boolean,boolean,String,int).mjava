@@ -21,17 +21,17 @@
         }
         else {
             final boolean shouldFireError =
-                // current and previous static or current and
-                // previous non-static
-                lastImportStatic == isStatic
-                &&
-                        // and out of lexicographic order
-                        compare(lastImport, name, caseSensitive) > 0
-                ||
                 // previous non-static but current is static (above)
                 // or
                 // previous static but current is non-static (under)
-                previous;
+                previous
+                    ||
+                    // current and previous static or current and
+                    // previous non-static
+                    lastImportStatic == isStatic
+                &&
+                // and out of lexicographic order
+                compare(lastImport, name, caseSensitive) > 0;
 
             if (shouldFireError) {
                 log(line, MSG_ORDERING, name);
