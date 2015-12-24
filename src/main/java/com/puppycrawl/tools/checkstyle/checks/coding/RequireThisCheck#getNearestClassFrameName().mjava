@@ -1,0 +1,12 @@
+    /**
+     * Get the name of the nearest parent ClassFrame.
+     * @return the name of the nearest parent ClassFrame.
+     */
+    private String getNearestClassFrameName() {
+        AbstractFrame frame = current;
+        while (frame.getType() != FrameType.CLASS_FRAME) {
+            frame = frame.getParent();
+        }
+        return frame.getFrameName();
+    }
+

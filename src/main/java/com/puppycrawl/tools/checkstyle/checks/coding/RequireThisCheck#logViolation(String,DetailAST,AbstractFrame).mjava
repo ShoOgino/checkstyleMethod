@@ -1,0 +1,15 @@
+    /**
+     * Helper method to log a LocalizedMessage.
+     * @param ast a node to get line id column numbers associated with the message.
+     * @param msgKey key to locale message format.
+     * @param frame the frame, where the violation is found.
+     */
+    private void logViolation(String msgKey, DetailAST ast, AbstractFrame frame) {
+        if (frame.getFrameName().equals(getNearestClassFrameName())) {
+            log(ast, msgKey, ast.getText(), "");
+        }
+        else {
+            log(ast, msgKey, ast.getText(), frame.getFrameName() + '.');
+        }
+    }
+

@@ -3,10 +3,9 @@
      * @param ast variable token
      * @param frame current frame
      */
-    private static void collectVariableDeclarations(DetailAST ast, LexicalFrame frame) {
-        final DetailAST ident =
-                ast.findFirstToken(TokenTypes.IDENT);
-        if (frame instanceof ClassFrame) {
+    private static void collectVariableDeclarations(DetailAST ast, AbstractFrame frame) {
+        final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
+        if (frame.getType() == FrameType.CLASS_FRAME) {
             final DetailAST mods =
                     ast.findFirstToken(TokenTypes.MODIFIERS);
             if (ScopeUtils.isInInterfaceBlock(ast)

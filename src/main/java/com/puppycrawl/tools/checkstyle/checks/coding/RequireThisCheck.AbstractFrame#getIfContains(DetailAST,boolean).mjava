@@ -3,14 +3,14 @@
          * @param lookForMethod whether we are looking for a method name.
          * @return whether it was found.
          */
-        protected LexicalFrame getIfContains(DetailAST nameToFind, boolean lookForMethod) {
-            LexicalFrame frame = null;
+        protected AbstractFrame getIfContains(DetailAST nameToFind, boolean lookForMethod) {
+            AbstractFrame frame;
 
             if (!lookForMethod
                 && contains(nameToFind)) {
                 frame = this;
             }
-            else if (parent != null) {
+            else {
                 frame = parent.getIfContains(nameToFind, lookForMethod);
             }
             return frame;

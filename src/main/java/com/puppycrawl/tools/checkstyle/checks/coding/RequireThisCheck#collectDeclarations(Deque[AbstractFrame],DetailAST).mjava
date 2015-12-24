@@ -4,9 +4,9 @@
      * @param frameStack Stack containing the FrameTree being built
      * @param ast AST to parse
      */
-    private static void collectDeclarations(Deque<LexicalFrame> frameStack,
+    private static void collectDeclarations(Deque<AbstractFrame> frameStack,
         DetailAST ast) {
-        final LexicalFrame frame = frameStack.peek();
+        final AbstractFrame frame = frameStack.peek();
         switch (ast.getType()) {
             case TokenTypes.VARIABLE_DEF :
                 collectVariableDeclarations(ast, frame);
@@ -20,15 +20,14 @@
             case TokenTypes.ENUM_DEF :
             case TokenTypes.ANNOTATION_DEF :
                 final DetailAST classIdent = ast.findFirstToken(TokenTypes.IDENT);
-                frame.addIdent(classIdent);
-                frameStack.addFirst(new ClassFrame(frame));
+                frameStack.addFirst(new ClassFrame(frame, classIdent.getText()));
                 break;
             case TokenTypes.SLIST :
                 frameStack.addFirst(new BlockFrame(frame));
                 break;
             case TokenTypes.METHOD_DEF :
                 final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
-                if (frame instanceof ClassFrame) {
+                if (frame.getType() == FrameType.CLASS_FRAME) {
                     final DetailAST mods =
                             ast.findFirstToken(TokenTypes.MODIFIERS);
                     if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {

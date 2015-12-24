@@ -1,0 +1,14 @@
+    /**
+     * Check if given name is a name for class method in current environment.
+     * @param ast the IDENT ast of the name to check
+     * @return frame, where the method is declared, if the violation is found and null otherwise
+     */
+    private AbstractFrame checkMethod(DetailAST ast) {
+        final AbstractFrame frame = findFrame(ast, true);
+        if (frame != null
+                && ((ClassFrame) frame).hasInstanceMethod(ast)) {
+            return frame;
+        }
+        return null;
+    }
+

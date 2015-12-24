@@ -1,0 +1,15 @@
+    /**
+     * Check if given name is a name for class field in current environment.
+     * @param ast an IDENT ast to check
+     * @return frame, where the field is declared, if the violation is found and null otherwise
+     */
+    private AbstractFrame checkField(DetailAST ast) {
+        final AbstractFrame frame = findFrame(ast, false);
+        if (frame != null
+                && frame.getType() == FrameType.CLASS_FRAME
+                && ((ClassFrame) frame).hasInstanceMember(ast)) {
+            return frame;
+        }
+        return null;
+    }
+
