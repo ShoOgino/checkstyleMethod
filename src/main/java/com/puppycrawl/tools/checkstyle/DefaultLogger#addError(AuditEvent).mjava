@@ -7,25 +7,8 @@
     public void addError(AuditEvent event) {
         final SeverityLevel severityLevel = event.getSeverityLevel();
         if (severityLevel != SeverityLevel.IGNORE) {
-
-            final String fileName = event.getFileName();
-            final String message = event.getMessage();
-
-            // avoid StringBuffer.expandCapacity
-            final int bufLen = fileName.length() + message.length()
-                + BUFFER_CUSHION;
-            final StringBuilder sb = new StringBuilder(bufLen);
-
-            sb.append(fileName).append(':').append(event.getLine());
-            if (event.getColumn() > 0) {
-                sb.append(':').append(event.getColumn());
-            }
-            final String errorMessageSeparator = ": ";
-            if (printSeverity) {
-                sb.append(errorMessageSeparator).append(severityLevel.getName());
-            }
-            sb.append(errorMessageSeparator).append(message);
-            errorWriter.println(sb);
+            final String errorMessage = formatter.format(event);
+            errorWriter.println(errorMessage);
         }
     }
 

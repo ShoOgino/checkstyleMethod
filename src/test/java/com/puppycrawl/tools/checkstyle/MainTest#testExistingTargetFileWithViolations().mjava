@@ -6,12 +6,12 @@
             public void checkAssertion() throws IOException {
                 final String expectedPath = getFilePath("InputMain.java");
                 assertEquals(String.format(Locale.ROOT, "Starting audit...%n"
-                                + "%1$s:3:14: "
-                                + "warning: Name 'InputMain' must match pattern"
-                                + " '^[a-z0-9]*$'.%n"
-                                + "%1$s:5:7: "
-                                + "warning: Name 'InputMainInner' must match pattern"
-                                + " '^[a-z0-9]*$'.%n"
+                                + "[WARN] %1$s:3:14: "
+                                + "Name 'InputMain' must match pattern"
+                                + " '^[a-z0-9]*$'. [TypeName]%n"
+                                + "[WARN] %1$s:5:7: "
+                                + "Name 'InputMainInner' must match pattern"
+                                + " '^[a-z0-9]*$'. [TypeName]%n"
                                 + "Audit done.%n", expectedPath),
                         systemOut.getLog());
                 assertEquals("", systemErr.getLog());

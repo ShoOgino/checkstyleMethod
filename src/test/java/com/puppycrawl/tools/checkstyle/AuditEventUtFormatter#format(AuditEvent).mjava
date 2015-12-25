@@ -1,0 +1,19 @@
+    @Override
+    public String format(AuditEvent event) {
+        final String fileName = event.getFileName();
+        final String message = event.getMessage();
+
+        // avoid StringBuffer.expandCapacity
+        final int bufLen = event.getFileName().length() + event.getMessage().length()
+            + LENGTH_OF_ALL_SEPARATORS;
+        final StringBuilder sb = new StringBuilder(bufLen);
+
+        sb.append(fileName).append(':').append(event.getLine());
+        if (event.getColumn() > 0) {
+            sb.append(':').append(event.getColumn());
+        }
+        sb.append(": ").append(message);
+
+        return sb.toString();
+    }
+

@@ -12,8 +12,8 @@
                 final String expectedPath = getFilePath("checks/metrics") + File.separator;
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Starting audit...").append(System.getProperty("line.separator"));
-                final String format = "%s.java:%s: warning: File length is %s lines "
-                    + "(max allowed is 170).";
+                final String format = "[WARN] %s.java:%s: File length is %s lines "
+                    + "(max allowed is 170). [FileLength]";
                 for (String[] outputValue : outputValues) {
                     final String line = String.format(Locale.ROOT, format,
                             expectedPath + outputValue[0], outputValue[1],

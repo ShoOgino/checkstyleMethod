@@ -1,0 +1,11 @@
+    /**
+     * Returns check name without 'Check' suffix.
+     * @param event audit ivent.
+     * @return check name without 'Check' suffix.
+     */
+    private static String getCheckShortName(AuditEvent event) {
+        final String checkFullName = event.getSourceName();
+        return checkFullName.substring(checkFullName.lastIndexOf('.') + 1,
+            checkFullName.lastIndexOf("Check"));
+    }
+
