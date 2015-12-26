@@ -2,7 +2,8 @@
         protected AbstractFrame getIfContains(DetailAST nameToFind, boolean lookForMethod) {
             AbstractFrame frame = null;
 
-            if (contains(nameToFind)) {
+            if (lookForMethod && containsMethod(nameToFind)
+                || containsFieldOrVariable(nameToFind)) {
                 frame = this;
             }
             else if (getParent() != null) {

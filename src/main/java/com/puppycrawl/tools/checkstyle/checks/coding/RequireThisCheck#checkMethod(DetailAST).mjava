@@ -6,7 +6,8 @@
     private AbstractFrame checkMethod(DetailAST ast) {
         final AbstractFrame frame = findFrame(ast, true);
         if (frame != null
-                && ((ClassFrame) frame).hasInstanceMethod(ast)) {
+            && ((ClassFrame) frame).hasInstanceMethod(ast)
+            && !((ClassFrame) frame).hasStaticMethod(ast)) {
             return frame;
         }
         return null;

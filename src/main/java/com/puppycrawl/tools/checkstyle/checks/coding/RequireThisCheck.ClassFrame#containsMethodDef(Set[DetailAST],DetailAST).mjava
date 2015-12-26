@@ -1,0 +1,19 @@
+        /**
+         * Whether the set contains a method definition with the
+         *     same name and number of parameters.
+         * @param set the set of definitions.
+         * @param ident the specified method call IDENT ast.
+         * @return true if the set contains a definition with the
+         *     same name and number of parameters.
+         */
+        private boolean containsMethodDef(Set<DetailAST> set, DetailAST ident) {
+            boolean result = false;
+            for (DetailAST ast: set) {
+                if (isSimilarSignature(ident, ast)) {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
