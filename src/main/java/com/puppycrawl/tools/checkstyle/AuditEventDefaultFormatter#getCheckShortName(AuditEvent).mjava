@@ -5,7 +5,25 @@
      */
     private static String getCheckShortName(AuditEvent event) {
         final String checkFullName = event.getSourceName();
-        return checkFullName.substring(checkFullName.lastIndexOf('.') + 1,
-            checkFullName.lastIndexOf("Check"));
+        final String checkShortName;
+        final int lastDotIndex = checkFullName.lastIndexOf('.');
+        if (lastDotIndex == -1) {
+            if (checkFullName.endsWith(SUFFIX)) {
+                checkShortName = checkFullName.substring(0, checkFullName.lastIndexOf(SUFFIX));
+            }
+            else {
+                checkShortName = checkFullName.substring(0, checkFullName.length());
+            }
+        }
+        else {
+            if (checkFullName.endsWith(SUFFIX)) {
+                checkShortName = checkFullName.substring(lastDotIndex + 1,
+                    checkFullName.lastIndexOf(SUFFIX));
+            }
+            else {
+                checkShortName = checkFullName.substring(lastDotIndex + 1, checkFullName.length());
+            }
+        }
+        return checkShortName;
     }
 

@@ -1,0 +1,16 @@
+    @Test
+    public void testFormatFullyQualifiedModuleNameContainsCheckSuffix() {
+        final AuditEvent mock = PowerMockito.mock(AuditEvent.class);
+        when(mock.getSourceName()).thenReturn("com.test.package.TestModuleCheck");
+        when(mock.getSeverityLevel()).thenReturn(SeverityLevel.WARNING);
+        when(mock.getLine()).thenReturn(1);
+        when(mock.getColumn()).thenReturn(1);
+        when(mock.getMessage()).thenReturn("Mocked message.");
+        when(mock.getFileName()).thenReturn("InputMockFile.java");
+        final AuditEvemtFormatter formatter = new AuditEventDefaultFormatter();
+
+        final String expected = "[WARN] InputMockFile.java:1:1: Mocked message. [TestModule]";
+
+        assertEquals(expected, formatter.format(mock));
+    }
+
