@@ -1,0 +1,24 @@
+    /**
+     * Set initial value of width for columns in table.
+     */
+    private void setColumnsInitialWidth() {
+        final FontMetrics fontMetrics = getFontMetrics(getFont());
+        // Six character string to contain "Column" column.
+        final int widthOfSixCharacterString = fontMetrics.stringWidth("XXXXXX");
+        // Padding must be added to width for columns to make them fully
+        // visible in table header.
+        final int padding = 10;
+        final int widthOfColumnContainingSixCharacterString =
+                widthOfSixCharacterString + padding;
+        getColumn("Line").setMaxWidth(widthOfColumnContainingSixCharacterString);
+        getColumn("Column").setMaxWidth(widthOfColumnContainingSixCharacterString);
+        final int preferredTreeColumnWidth =
+                Ints.checkedCast(Math.round(getPreferredSize().getWidth() * 0.6));
+        getColumn("Tree").setPreferredWidth(preferredTreeColumnWidth);
+        // Twenty eight character string to contain "Type" column
+        final int widthOfTwentyEightCharacterString =
+                fontMetrics.stringWidth("XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        final int preferredTypeColumnWidth = widthOfTwentyEightCharacterString + padding;
+        getColumn("Type").setPreferredWidth(preferredTypeColumnWidth);
+    }
+
