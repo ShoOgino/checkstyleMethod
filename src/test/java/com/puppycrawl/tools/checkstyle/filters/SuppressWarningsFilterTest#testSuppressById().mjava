@@ -1,0 +1,19 @@
+    @Test
+    public void testSuppressById() throws Exception {
+        final DefaultConfiguration filterConfig =
+            createFilterConfig(SuppressWarningsFilter.class);
+        final String[] suppressedViolationMessages = {
+            "6:17: Name 'A1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "8: Uncommented main method found.",
+        };
+        final String[] expectedViolationMessages = {
+            "3: Missing a Javadoc comment.",
+            "6:17: Name 'A1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "8: Uncommented main method found.",
+        };
+
+        verify(createChecker(filterConfig),
+            getPath("InputSuppressByIdWithWarningsFilter.java"),
+            removeSuppressed(expectedViolationMessages, suppressedViolationMessages));
+    }
+

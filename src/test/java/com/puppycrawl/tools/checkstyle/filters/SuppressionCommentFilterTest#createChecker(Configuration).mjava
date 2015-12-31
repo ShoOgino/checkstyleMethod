@@ -5,8 +5,13 @@
             new DefaultConfiguration("configuration");
         final DefaultConfiguration checksConfig = createCheckConfig(TreeWalker.class);
         checksConfig.addChild(createCheckConfig(FileContentsHolder.class));
-        checksConfig.addChild(createCheckConfig(MemberNameCheck.class));
-        checksConfig.addChild(createCheckConfig(ConstantNameCheck.class));
+        final DefaultConfiguration memberNameCheckConfig = createCheckConfig(MemberNameCheck.class);
+        memberNameCheckConfig.addAttribute("id", "ignore");
+        checksConfig.addChild(memberNameCheckConfig);
+        final DefaultConfiguration constantNameCheckConfig =
+            createCheckConfig(ConstantNameCheck.class);
+        constantNameCheckConfig.addAttribute("id", null);
+        checksConfig.addChild(constantNameCheckConfig);
         checksConfig.addChild(createCheckConfig(IllegalCatchCheck.class));
         checkerConfig.addChild(checksConfig);
         if (checkConfig != null) {

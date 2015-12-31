@@ -1,0 +1,23 @@
+    @Test
+    public void testSuppressById() throws Exception {
+        final DefaultConfiguration filterConfig =
+            createFilterConfig(SuppressWithNearbyCommentFilter.class);
+        filterConfig.addAttribute("commentFormat", "@cs-: (\\w+) \\(\\w+\\)");
+        filterConfig.addAttribute("checkFormat", "$1");
+        filterConfig.addAttribute("influenceFormat", "0");
+        final String[] suppressedViolationMessages = {
+            "5:17: Name 'A1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "9:9: Name 'line_length' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+        };
+        final String[] expectedViolationMessages = {
+            "5:17: Name 'A1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "7:30: Name 'abc' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+            "9:9: Name 'line_length' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "11:18: Name 'ID' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+        };
+
+        verify(createChecker(filterConfig),
+            getPath("InputSuppressByIdWithNearbyCommentFilter.java"),
+            removeSuppressed(expectedViolationMessages, suppressedViolationMessages));
+    }
+

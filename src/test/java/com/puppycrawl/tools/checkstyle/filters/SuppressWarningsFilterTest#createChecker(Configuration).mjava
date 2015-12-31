@@ -11,11 +11,19 @@
             "com.puppycrawl.tools.checkstyle.checks.sizes."
                 + "ParameterNumberCheck=paramnum");
         checksConfig.addChild(holderConfig);
-        checksConfig.addChild(createCheckConfig(MemberNameCheck.class));
-        checksConfig.addChild(createCheckConfig(ConstantNameCheck.class));
+        final DefaultConfiguration memberNameCheckConfig = createCheckConfig(MemberNameCheck.class);
+        memberNameCheckConfig.addAttribute("id", "ignore");
+        checksConfig.addChild(memberNameCheckConfig);
+        final DefaultConfiguration constantNameCheckConfig =
+            createCheckConfig(ConstantNameCheck.class);
+        constantNameCheckConfig.addAttribute("id", "");
+        checksConfig.addChild(constantNameCheckConfig);
         checksConfig.addChild(createCheckConfig(ParameterNumberCheck.class));
         checksConfig.addChild(createCheckConfig(IllegalCatchCheck.class));
-        checksConfig.addChild(createCheckConfig(UncommentedMainCheck.class));
+        final DefaultConfiguration uncommentedMainCheckConfig =
+            createCheckConfig(UncommentedMainCheck.class);
+        uncommentedMainCheckConfig.addAttribute("id", "ignore");
+        checksConfig.addChild(uncommentedMainCheckConfig);
         checksConfig.addChild(createCheckConfig(JavadocTypeCheck.class));
         checkerConfig.addChild(checksConfig);
         if (checkConfig != null) {

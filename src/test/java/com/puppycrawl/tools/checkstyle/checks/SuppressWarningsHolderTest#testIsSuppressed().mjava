@@ -19,6 +19,11 @@
         entries.setAccessible(true);
         entries.set(holder, threadLocal);
 
-        assertFalse(SuppressWarningsHolder.isSuppressed("SourceName", 100, 10));
+        final Checker source = new Checker();
+        final LocalizedMessage message =
+            new LocalizedMessage(100, 10, null, null, null, "id", MemberNameCheck.class, "message");
+        final AuditEvent event = new AuditEvent(source, "fileName", message);
+
+        assertFalse(SuppressWarningsHolder.isSuppressed(event));
     }
 

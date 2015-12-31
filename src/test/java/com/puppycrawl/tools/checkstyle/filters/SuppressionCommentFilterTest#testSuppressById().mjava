@@ -1,0 +1,23 @@
+    @Test
+    public void testSuppressById() throws Exception {
+        final DefaultConfiguration filterConfig =
+            createFilterConfig(SuppressionCommentFilter.class);
+        filterConfig.addAttribute("offCommentFormat", "CSOFF (\\w+) \\(\\w+\\)");
+        filterConfig.addAttribute("onCommentFormat", "CSON (\\w+)");
+        filterConfig.addAttribute("checkFormat", "$1");
+        final String[] suppressedViolationMessages = {
+            "6:17: Name 'A1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "12:9: Name 'line_length' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            };
+        final String[] expectedViolationMessages = {
+            "6:17: Name 'A1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "9:30: Name 'abc' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+            "12:9: Name 'line_length' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "15:18: Name 'ID' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            };
+
+        verify(createChecker(filterConfig),
+            getPath("InputSuppressByIdWithCommentFilter.java"),
+            removeSuppressed(expectedViolationMessages, suppressedViolationMessages));
+    }
+
