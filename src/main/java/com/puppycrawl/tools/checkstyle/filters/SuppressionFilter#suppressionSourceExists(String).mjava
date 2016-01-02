@@ -1,0 +1,29 @@
+    /**
+     * Checks if suppression source with given fileName exists.
+     * @param fileName name of the suppressions file.
+     * @return true if suppression file exists, otherwise false
+     */
+    private static boolean suppressionSourceExists(String fileName) {
+        boolean suppressionSourceExists = true;
+        InputStream sourceInput = null;
+        try {
+            final URI uriByFilename = CommonUtils.getUriByFilename(fileName);
+            final URL url = uriByFilename.toURL();
+            sourceInput = url.openStream();
+        }
+        catch (CheckstyleException | IOException ignored) {
+            suppressionSourceExists = false;
+        }
+        finally {
+            if (sourceInput != null) {
+                try {
+                    sourceInput.close();
+                }
+                catch (IOException ignored) {
+                    suppressionSourceExists = false;
+                }
+            }
+        }
+        return suppressionSourceExists;
+    }
+

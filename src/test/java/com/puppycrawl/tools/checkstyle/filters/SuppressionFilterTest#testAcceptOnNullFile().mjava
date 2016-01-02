@@ -1,0 +1,11 @@
+    @Test
+    public void testAcceptOnNullFile() throws CheckstyleException {
+        final String fileName = null;
+        final boolean optional = false;
+        final SuppressionFilter filter = createSupressionFilter(fileName, optional);
+
+        final AuditEvent ev = new AuditEvent(this, "AnyJava.java", null);
+
+        assertTrue(filter.accept(ev));
+    }
+

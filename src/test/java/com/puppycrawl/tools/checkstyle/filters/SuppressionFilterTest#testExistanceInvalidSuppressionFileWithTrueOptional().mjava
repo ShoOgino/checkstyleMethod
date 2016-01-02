@@ -1,0 +1,15 @@
+    @Test
+    public void testExistanceInvalidSuppressionFileWithTrueOptional() throws Exception {
+        final String fileName = "src/test/resources/com/puppycrawl/tools/checkstyle/filters/"
+                + "suppressions_invalid_file.xml";
+        try {
+            final boolean optional = true;
+            createSupressionFilter(fileName, optional);
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("Unable to parse " + fileName + " - invalid files or checks format",
+                    ex.getMessage());
+        }
+    }
+

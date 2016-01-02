@@ -1,0 +1,12 @@
+    @Test
+    public void testNonExistanceSuppressionUrlWithTrueOptional() throws Exception {
+        final String fileName =
+                "http://checkstyle.sourceforge.net/non_existing_suppression.xml";
+        final boolean optional = true;
+        final SuppressionFilter filter = createSupressionFilter(fileName, optional);
+
+        final AuditEvent ev = new AuditEvent(this, "AnyFile.java", null);
+
+        assertTrue(filter.accept(ev));
+    }
+

@@ -1,0 +1,12 @@
+    @Test
+    public void testNonExistanceSuppressionFileWithTrueOptional() throws Exception {
+        final String fileName = "src/test/resources/com/puppycrawl/tools/checkstyle/filters/"
+                + "non_existance_suppresion_file.xml";
+        final boolean optional = true;
+        final SuppressionFilter filter = createSupressionFilter(fileName, optional);
+
+        final AuditEvent ev = new AuditEvent(this, "AnyFile.java", null);
+
+        assertTrue(filter.accept(ev));
+    }
+

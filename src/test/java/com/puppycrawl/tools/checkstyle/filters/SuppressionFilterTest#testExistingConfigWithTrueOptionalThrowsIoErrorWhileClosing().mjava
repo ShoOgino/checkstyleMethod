@@ -1,0 +1,24 @@
+    @Test
+    public void testExistingConfigWithTrueOptionalThrowsIoErrorWhileClosing()
+            throws Exception {
+        final InputStream inputStream = PowerMockito.mock(InputStream.class);
+        Mockito.doThrow(IOException.class).when(inputStream).close();
+
+        final URL url = PowerMockito.mock(URL.class);
+        BDDMockito.given(url.openStream()).willReturn(inputStream);
+
+        final URI uri = PowerMockito.mock(URI.class);
+        BDDMockito.given(uri.toURL()).willReturn(url);
+
+        PowerMockito.mockStatic(CommonUtils.class);
+
+        final String fileName = "src/test/resources/com/puppycrawl/tools/checkstyle/filters/"
+                + "suppressions_none.xml";
+        BDDMockito.given(CommonUtils.getUriByFilename(fileName)).willReturn(uri);
+
+        final boolean optional = true;
+        final SuppressionFilter filter = createSupressionFilter(fileName, optional);
+        final AuditEvent ev = new AuditEvent(this, "AnyFile.java", null);
+        assertTrue(filter.accept(ev));
+    }
+

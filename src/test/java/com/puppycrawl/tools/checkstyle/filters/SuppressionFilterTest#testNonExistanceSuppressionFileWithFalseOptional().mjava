@@ -1,0 +1,14 @@
+    @Test
+    public void testNonExistanceSuppressionFileWithFalseOptional() throws Exception {
+        final String fileName = "src/test/resources/com/puppycrawl/tools/checkstyle/filters/"
+                + "non_existance_suppresion_file.xml";
+        try {
+            final boolean optional = false;
+            createSupressionFilter(fileName, optional);
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals("Unable to find: " + fileName, ex.getMessage());
+        }
+    }
+

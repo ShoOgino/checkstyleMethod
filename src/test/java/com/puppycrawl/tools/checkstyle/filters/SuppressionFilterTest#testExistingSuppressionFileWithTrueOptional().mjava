@@ -1,11 +1,11 @@
     @Test
-    public void testAccept() throws CheckstyleException {
+    public void testExistingSuppressionFileWithTrueOptional() throws Exception {
         final String fileName = "src/test/resources/com/puppycrawl/tools/checkstyle/filters/"
-                          + "suppressions_none.xml";
-        final boolean optional = false;
+                + "suppressions_none.xml";
+        final boolean optional = true;
         final SuppressionFilter filter = createSupressionFilter(fileName, optional);
 
-        final AuditEvent ev = new AuditEvent(this, "ATest.java", null);
+        final AuditEvent ev = new AuditEvent(this, "AnyFile.java", null);
 
         assertTrue(filter.accept(ev));
     }

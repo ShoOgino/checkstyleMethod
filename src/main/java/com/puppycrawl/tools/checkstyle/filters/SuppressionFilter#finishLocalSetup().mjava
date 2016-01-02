@@ -1,0 +1,17 @@
+    @Override
+    protected void finishLocalSetup() throws CheckstyleException {
+        if (file != null) {
+            if (optional) {
+                if (suppressionSourceExists(file)) {
+                    filters = SuppressionsLoader.loadSuppressions(file);
+                }
+                else {
+                    filters = new FilterSet();
+                }
+            }
+            else {
+                filters = SuppressionsLoader.loadSuppressions(file);
+            }
+        }
+    }
+
