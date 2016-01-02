@@ -1,0 +1,37 @@
+    /**
+     * Open file and load it.
+     * @param sourceFile the file to open.
+     */
+    public void openFile(File sourceFile) {
+        if (sourceFile != null) {
+            try {
+                setTitle("Checkstyle : " + sourceFile.getName());
+                final DetailAST parseTree = model.parseFile(sourceFile);
+                parseTreeTableModel.setParseTree(parseTree);
+                reloadAction.setEnabled(true);
+
+                final String[] sourceLines = model.getFileText(sourceFile).toLinesArray();
+
+                // clear for each new file
+                model.clearLinesToPosition();
+                // starts line counting at 1
+                model.addLineToPosition(0);
+
+                // clean the text area before inserting the lines of the new file
+                textArea.setText("");
+
+                // insert the contents of the file to the text area
+                for (final String element : sourceLines) {
+                    model.addLineToPosition(textArea.getText().length());
+                    textArea.append(element + System.lineSeparator());
+                }
+
+                treeTable.setLinePositionMap(model.getLinesToPosition());
+            }
+            catch (final IOException | ANTLRException ex) {
+                JOptionPane.showMessageDialog(this,
+                    "Could not parse" + sourceFile + ": " + ex.getMessage());
+            }
+        }
+    }
+

@@ -1,0 +1,13 @@
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            final JFileChooser fileChooser = new JFileChooser(model.getLastDirectory());
+            final FileFilter filter = new JavaFileFilter();
+            fileChooser.setFileFilter(filter);
+
+            final int returnCode = fileChooser.showOpenDialog(MainFrame.this);
+            if (returnCode == JFileChooser.APPROVE_OPTION) {
+                final File file = fileChooser.getSelectedFile();
+                openFile(file);
+            }
+        }
+

@@ -1,0 +1,15 @@
+    /**
+     * Do expansion of a tree node after pressing ENTER.
+     */
+    private void doExpandByEnter() {
+        final TreePath selected = makeCodeSelection();
+
+        if (tree.isExpanded(selected)) {
+            tree.collapsePath(selected);
+        }
+        else {
+            tree.expandPath(selected);
+        }
+        tree.setSelectionPath(selected);
+    }
+

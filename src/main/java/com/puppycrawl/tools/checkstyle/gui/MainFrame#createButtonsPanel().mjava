@@ -1,0 +1,22 @@
+    /**
+     * Create buttons panel.
+     * @return buttons panel.
+     */
+    private JPanel createButtonsPanel() {
+        final JButton openFileButton = new JButton(new FileSelectionAction());
+        openFileButton.setMnemonic(KeyEvent.VK_S);
+        openFileButton.setText("Open File");
+
+        reloadAction.setEnabled(false);
+        final JButton reloadFileButton = new JButton(reloadAction);
+        reloadFileButton.setMnemonic(KeyEvent.VK_R);
+        reloadFileButton.setText("Reload File");
+
+        final JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 2));
+        buttonPanel.add(openFileButton);
+        buttonPanel.add(reloadFileButton);
+
+        return buttonPanel;
+    }
+

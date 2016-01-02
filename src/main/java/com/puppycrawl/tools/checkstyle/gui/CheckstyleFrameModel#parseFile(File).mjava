@@ -1,0 +1,14 @@
+    /**
+     * Parse a file and return the parse tree.
+     * @param file the file to parse.
+     * @return the root node of the parse tree.
+     * @throws IOException if the file could not be read.
+     * @throws ANTLRException if the file is not a Java source.
+     */
+    public DetailAST parseFile(File file) throws IOException, ANTLRException {
+        currentFile = file;
+        final FileText text = getFileText(file);
+        final FileContents contents = new FileContents(text);
+        return TreeWalker.parse(contents);
+    }
+
