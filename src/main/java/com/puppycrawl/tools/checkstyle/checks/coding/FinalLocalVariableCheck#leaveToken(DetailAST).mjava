@@ -8,10 +8,17 @@
                 scope = scopeStack.pop().scope;
                 break;
             case TokenTypes.SLIST:
+                final Deque<DetailAST> prevScopeUnitializedVariableData =
+                    prevScopeUninitializedVariables.peek();
                 if (ast.getParent().getType() != TokenTypes.CASE_GROUP
-                    || findLastToken(ast.getParent().getParent(), TokenTypes.CASE_GROUP,
-                        TokenTypes.SLIST) == ast.getParent()) {
+                    || findLastChildWhichContainsSpecifiedToken(ast.getParent().getParent(),
+                            TokenTypes.CASE_GROUP, TokenTypes.SLIST) == ast.getParent()) {
                     scope = scopeStack.pop().scope;
+                    prevScopeUninitializedVariables.pop();
+                }
+                final DetailAST parent = ast.getParent();
+                if (shouldUpdateUninitializedVariables(parent)) {
+                    updateUninitializedVariables(prevScopeUnitializedVariableData);
                 }
                 break;
             default:
