@@ -1,5 +1,5 @@
     private static List<RevCommit> getCommitsToCheck() throws Exception {
-        List<RevCommit> commits;
+        final List<RevCommit> commits;
         try (Repository repo = new FileRepositoryBuilder().findGitDir().build()) {
             final RevCommitsPair revCommitsPair = resolveRevCommitsPair(repo);
             if (COMMITS_RESOLUTION_MODE == CommitsResolutionMode.BY_COUNTER) {
