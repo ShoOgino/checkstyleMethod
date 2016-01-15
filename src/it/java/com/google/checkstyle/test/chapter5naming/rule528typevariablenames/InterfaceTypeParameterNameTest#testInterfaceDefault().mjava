@@ -1,0 +1,17 @@
+    @Test
+    public void testInterfaceDefault() throws Exception {
+        final Configuration configuration = getCheckConfig("InterfaceTypeParameterName");
+        final String format = configuration.getAttribute("format");
+
+        final String[] expected = {
+            "48:15: " + getCheckMessage(configuration.getMessages(), MSG_KEY, "Input", format),
+            "76:25: " + getCheckMessage(configuration.getMessages(), MSG_KEY, "Request", format),
+            "80:25: " + getCheckMessage(configuration.getMessages(), MSG_KEY, "TRequest", format),
+        };
+
+        final String filePath = getPath("InputInterfaceTypeParameterName.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(configuration, filePath, expected, warnList);
+    }
+
