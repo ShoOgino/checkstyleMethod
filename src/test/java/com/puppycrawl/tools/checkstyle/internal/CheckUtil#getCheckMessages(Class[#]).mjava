@@ -1,0 +1,39 @@
+    /**
+     * Get's the check's messages.
+     * @param module class to examine.
+     * @return a set of checkstyle's module message fields.
+     * @throws ClassNotFoundException if the attempt to read a protected class fails.
+     */
+    public static Set<Field> getCheckMessages(Class<?> module) throws ClassNotFoundException {
+        final Set<Field> checkstyleMessages = new HashSet<>();
+
+        // get all fields from current class
+        final Field[] fields = module.getDeclaredFields();
+
+        for (Field field : fields) {
+            if (field.getName().startsWith("MSG_")) {
+                checkstyleMessages.add(field);
+            }
+        }
+
+        // deep scan class through hierarchy
+        final Class<?> superModule = module.getSuperclass();
+
+        if (superModule != null) {
+            checkstyleMessages.addAll(getCheckMessages(superModule));
+        }
+
+        // special cases that require additional classes
+        if (module == RegexpMultilineCheck.class) {
+            checkstyleMessages.addAll(getCheckMessages(Class
+                    .forName("com.puppycrawl.tools.checkstyle.checks.regexp.MultilineDetector")));
+        }
+        else if (module == RegexpSinglelineCheck.class
+                || module == RegexpSinglelineJavaCheck.class) {
+            checkstyleMessages.addAll(getCheckMessages(Class
+                    .forName("com.puppycrawl.tools.checkstyle.checks.regexp.SinglelineDetector")));
+        }
+
+        return checkstyleMessages;
+    }
+

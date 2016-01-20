@@ -1,0 +1,9 @@
+    @Test
+    public void testAllCheckstyleModulesHaveMessage() throws Exception {
+        for (Class<?> module : CheckUtil.getCheckstyleChecks()) {
+            Assert.assertFalse(module.getSimpleName()
+                    + " should have atleast one 'MSG_*' field for error messages", CheckUtil
+                    .getCheckMessages(module).isEmpty());
+        }
+    }
+
