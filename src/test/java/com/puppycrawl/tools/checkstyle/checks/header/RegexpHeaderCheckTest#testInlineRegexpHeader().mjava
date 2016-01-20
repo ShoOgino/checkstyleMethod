@@ -4,7 +4,7 @@
                 createCheckConfig(RegexpHeaderCheck.class);
         checkConfig.addAttribute("header", "^/*$\\n// .*\\n// Created: 2002\\n^//.*\\n^//.*");
         final String[] expected = {
-            "3: " + getCheckMessage(MSG_MISMATCH, "// Created: 2002"),
+            "3: " + getCheckMessage(MSG_HEADER_MISMATCH, "// Created: 2002"),
         };
         verify(checkConfig, getPath("InputRegexpHeader7.java"), expected);
     }
