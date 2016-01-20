@@ -16,15 +16,15 @@
             final int lineNumber = offset + line;
             final Token token = (Token) offendingSymbol;
 
-            if (JAVADOC_MISSED_HTML_CLOSE.equals(msg)) {
+            if (MSG_JAVADOC_MISSED_HTML_CLOSE.equals(msg)) {
                 errorMessage = new ParseErrorMessage(lineNumber,
-                        JAVADOC_MISSED_HTML_CLOSE, charPositionInLine, token.getText());
+                        MSG_JAVADOC_MISSED_HTML_CLOSE, charPositionInLine, token.getText());
 
                 throw new ParseCancellationException(msg);
             }
-            else if (JAVADOC_WRONG_SINGLETON_TAG.equals(msg)) {
+            else if (MSG_JAVADOC_WRONG_SINGLETON_TAG.equals(msg)) {
                 errorMessage = new ParseErrorMessage(lineNumber,
-                        JAVADOC_WRONG_SINGLETON_TAG, charPositionInLine, token.getText());
+                        MSG_JAVADOC_WRONG_SINGLETON_TAG, charPositionInLine, token.getText());
 
                 throw new ParseCancellationException(msg);
             }
@@ -35,7 +35,7 @@
                         CaseFormat.UPPER_UNDERSCORE, ruleName);
 
                 errorMessage = new ParseErrorMessage(lineNumber,
-                        JAVADOC_PARSE_RULE_ERROR, charPositionInLine, msg, upperCaseRuleName);
+                        MSG_JAVADOC_PARSE_RULE_ERROR, charPositionInLine, msg, upperCaseRuleName);
             }
         }
 

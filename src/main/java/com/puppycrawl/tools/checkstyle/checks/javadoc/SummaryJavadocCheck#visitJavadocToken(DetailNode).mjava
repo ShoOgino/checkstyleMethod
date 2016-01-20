@@ -3,12 +3,12 @@
         String firstSentence = getFirstSentence(ast);
         final int endOfSentence = firstSentence.lastIndexOf(period);
         if (endOfSentence == -1) {
-            log(ast.getLineNumber(), SUMMARY_FIRST_SENTENCE);
+            log(ast.getLineNumber(), MSG_SUMMARY_FIRST_SENTENCE);
         }
         else {
             firstSentence = firstSentence.substring(0, endOfSentence);
             if (containsForbiddenFragment(firstSentence)) {
-                log(ast.getLineNumber(), SUMMARY_JAVADOC);
+                log(ast.getLineNumber(), MSG_SUMMARY_JAVADOC);
             }
         }
     }

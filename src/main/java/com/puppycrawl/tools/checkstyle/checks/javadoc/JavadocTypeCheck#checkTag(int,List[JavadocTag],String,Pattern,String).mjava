@@ -19,12 +19,12 @@
             if (tag.getTagName().equals(tagName)) {
                 tagCount++;
                 if (!formatPattern.matcher(tag.getFirstArg()).find()) {
-                    log(lineNo, TAG_FORMAT, tagPrefix + tagName, format);
+                    log(lineNo, MSG_TAG_FORMAT, tagPrefix + tagName, format);
                 }
             }
         }
         if (tagCount == 0) {
-            log(lineNo, MISSING_TAG, tagPrefix + tagName);
+            log(lineNo, MSG_MISSING_TAG, tagPrefix + tagName);
         }
     }
 

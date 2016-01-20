@@ -18,7 +18,7 @@
             final HtmlTag tag = parser.nextTag();
 
             if (tag.isIncompleteTag()) {
-                log(tag.getLineNo(), INCOMPLETE_TAG,
+                log(tag.getLineNo(), MSG_INCOMPLETE_TAG,
                     text[tag.getLineNo() - lineNo]);
                 return;
             }
@@ -32,7 +32,7 @@
                     // No corresponding open tag was found on the stack.
                     log(tag.getLineNo(),
                         tag.getPosition(),
-                        EXTRA_HTML,
+                        MSG_EXTRA_HTML,
                         tag);
                 }
                 else {
@@ -57,7 +57,7 @@
             if (!isSingleTag(htmlTag)
                 && !htmlTag.getId().equals(lastFound)
                 && !typeParameters.contains(htmlTag.getId())) {
-                log(htmlTag.getLineNo(), htmlTag.getPosition(), UNCLOSED_HTML, htmlTag);
+                log(htmlTag.getLineNo(), htmlTag.getPosition(), MSG_UNCLOSED_HTML, htmlTag);
                 lastFound = htmlTag.getId();
             }
         }

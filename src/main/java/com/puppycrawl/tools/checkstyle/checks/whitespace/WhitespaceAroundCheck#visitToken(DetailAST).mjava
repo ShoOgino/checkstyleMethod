@@ -11,7 +11,7 @@
 
         if (before >= 0 && !Character.isWhitespace(line.charAt(before))) {
             log(ast.getLineNo(), ast.getColumnNo(),
-                    WS_NOT_PRECEDED, ast.getText());
+                    MSG_WS_NOT_PRECEDED, ast.getText());
         }
 
         if (after >= line.length()) {
@@ -26,7 +26,7 @@
             && !isAnonymousInnerClassEnd(currentType, nextChar)) {
 
             log(ast.getLineNo(), ast.getColumnNo() + ast.getText().length(),
-                    WS_NOT_FOLLOWED, ast.getText());
+                    MSG_WS_NOT_FOLLOWED, ast.getText());
         }
     }
 
