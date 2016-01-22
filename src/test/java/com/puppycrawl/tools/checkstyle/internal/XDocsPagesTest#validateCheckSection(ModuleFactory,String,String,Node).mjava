@@ -1,5 +1,5 @@
     private static void validateCheckSection(ModuleFactory moduleFactory, String fileName,
-            String sectionName, Node section) {
+            String sectionName, Node section) throws Exception {
         Object instance = null;
 
         try {
@@ -20,8 +20,13 @@
                 continue;
             }
 
+            // optional sections that can be skipped if they have nothing to report
             if (subSectionPos == 1 && !"Properties".equals(subSectionName)) {
                 validatePropertySection(fileName, sectionName, null, instance);
+                subSectionPos++;
+            }
+            if (subSectionPos == 4 && !"Error Messages".equals(subSectionName)) {
+                validateErrorSection(fileName, sectionName, null, instance);
                 subSectionPos++;
             }
 
@@ -41,9 +46,12 @@
                     validateUsageExample(fileName, sectionName, subSection);
                     break;
                 case 4:
-                    validatePackageSection(fileName, sectionName, subSection, instance);
+                    validateErrorSection(fileName, sectionName, subSection, instance);
                     break;
                 case 5:
+                    validatePackageSection(fileName, sectionName, subSection, instance);
+                    break;
+                case 6:
                     validateParentSection(fileName, sectionName, subSection);
                     break;
                 default:
