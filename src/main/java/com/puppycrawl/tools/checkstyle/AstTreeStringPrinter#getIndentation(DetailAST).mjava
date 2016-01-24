@@ -1,0 +1,33 @@
+    /**
+     * Get indentation for an AST node.
+     * @param ast the AST to get the indentation for.
+     * @return the indentation in String format.
+     */
+    private static String getIndentation(DetailAST ast) {
+        final boolean isLastChild = ast.getNextSibling() == null;
+        DetailAST node = ast;
+        final StringBuilder indentation = new StringBuilder();
+        while (node.getParent() != null) {
+            node = node.getParent();
+            if (node.getParent() == null) {
+                if (isLastChild) {
+                    // only ASCII symbols must be used due to
+                    // problems with running tests on Windows
+                    indentation.append("`--");
+                }
+                else {
+                    indentation.append("|--");
+                }
+            }
+            else {
+                if (node.getNextSibling() == null) {
+                    indentation.insert(0, "    ");
+                }
+                else {
+                    indentation.insert(0, "|   ");
+                }
+            }
+        }
+        return indentation.toString();
+    }
+

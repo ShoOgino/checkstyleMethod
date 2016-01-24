@@ -1,15 +1,17 @@
     @Test
-    public void testNonExistingTargetFile()
-            throws Exception {
+    public void testConflictingOptionsTvsO() throws Exception {
+        final File file = temporaryFolder.newFile("file.output");
+
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(new Assertion() {
             @Override
             public void checkAssertion() {
-                assertEquals("Files to process must be specified, found 0."
+                assertEquals("Option '-t' cannot be used with other options."
                     + System.lineSeparator(), systemOut.getLog());
                 assertEquals("", systemErr.getLog());
             }
         });
-        Main.main("-c", "/google_checks.xml", "NonExistingFile.java");
+
+        Main.main("-o", file.getCanonicalPath(), "-t", getPath("checks/metrics"));
     }
 

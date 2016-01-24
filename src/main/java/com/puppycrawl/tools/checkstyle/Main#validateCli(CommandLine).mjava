@@ -5,8 +5,23 @@
      */
     private static List<String> validateCli(CommandLine cmdLine) {
         final List<String> result = new ArrayList<>();
+        final List<File> filesToProcess = getFilesToProcess(cmdLine.getArgs());
+
+        if (filesToProcess.isEmpty()) {
+            result.add("Files to process must be specified, found 0.");
+        }
+        // ensure there is no conflicting options
+        else if (cmdLine.hasOption(OPTION_T_NAME)) {
+            if (cmdLine.hasOption(OPTION_C_NAME) || cmdLine.hasOption(OPTION_P_NAME)
+                    || cmdLine.hasOption(OPTION_F_NAME) || cmdLine.hasOption(OPTION_O_NAME)) {
+                result.add("Option '-t' cannot be used with other options.");
+            }
+            else if (filesToProcess.size() > 1) {
+                result.add("Printing AST is allowed for only one file.");
+            }
+        }
         // ensure a configuration file is specified
-        if (cmdLine.hasOption(OPTION_C_NAME)) {
+        else if (cmdLine.hasOption(OPTION_C_NAME)) {
             final String configLocation = cmdLine.getOptionValue(OPTION_C_NAME);
             try {
                 // test location only
@@ -38,10 +53,6 @@
                 if (file.exists() && !file.canWrite()) {
                     result.add(String.format("Permission denied : '%s'.", outputLocation));
                 }
-            }
-            final List<File> files = getFilesToProcess(cmdLine.getArgs());
-            if (files.isEmpty()) {
-                result.add("Must specify files to process, found 0.");
             }
         }
         else {

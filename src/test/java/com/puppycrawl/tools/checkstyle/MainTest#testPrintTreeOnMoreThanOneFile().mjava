@@ -1,15 +1,16 @@
     @Test
-    public void testNonExistingTargetFile()
-            throws Exception {
+    public void testPrintTreeOnMoreThanOneFile() throws Exception {
+
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(new Assertion() {
             @Override
             public void checkAssertion() {
-                assertEquals("Files to process must be specified, found 0."
+                assertEquals("Printing AST is allowed for only one file."
                     + System.lineSeparator(), systemOut.getLog());
                 assertEquals("", systemErr.getLog());
             }
         });
-        Main.main("-c", "/google_checks.xml", "NonExistingFile.java");
+
+        Main.main("-t", getPath("checks/metrics"));
     }
 
