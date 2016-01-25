@@ -1,0 +1,12 @@
+    /**
+     * Checks if the Javadoc can be missing if the method or constructor is
+     * below the minimum line count or has a special annotation.
+     *
+     * @param ast the tree node for the method or constructor.
+     * @return True if this method or constructor doesn't need Javadoc.
+     */
+    private boolean isContentsAllowMissingJavadoc(DetailAST ast) {
+        return (ast.getType() == TokenTypes.METHOD_DEF || ast.getType() == TokenTypes.CTOR_DEF)
+                && (getMethodsNumberOfLine(ast) <= minLineCount || hasAllowedAnnotations(ast));
+    }
+
