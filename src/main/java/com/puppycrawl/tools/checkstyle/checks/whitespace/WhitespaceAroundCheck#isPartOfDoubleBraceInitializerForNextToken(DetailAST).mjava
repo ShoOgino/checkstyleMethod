@@ -1,0 +1,18 @@
+    /**
+     * Check if given ast is part of double brace initializer and if it
+     * should omit checking if next token is separated by whitespace.
+     * See <a href="https://github.com/checkstyle/checkstyle/pull/2845">
+     * PR#2845</a> for more information why this function was needed.
+     * @param ast ast to check
+     * @return true if it should omit checking for next token, false otherwise
+     */
+    private static boolean isPartOfDoubleBraceInitializerForNextToken(DetailAST ast) {
+        final boolean classBeginBeforeInitializerBegin = ast.getType() == TokenTypes.LCURLY
+            && ast.getNextSibling().getType() == TokenTypes.INSTANCE_INIT;
+        final boolean initalizerEndsBeforeClassEnds = ast.getType() == TokenTypes.RCURLY
+            && ast.getParent().getType() == TokenTypes.SLIST
+            && ast.getParent().getParent().getType() == TokenTypes.INSTANCE_INIT
+            && ast.getParent().getParent().getNextSibling().getType() == TokenTypes.RCURLY;
+        return classBeginBeforeInitializerBegin || initalizerEndsBeforeClassEnds;
+    }
+

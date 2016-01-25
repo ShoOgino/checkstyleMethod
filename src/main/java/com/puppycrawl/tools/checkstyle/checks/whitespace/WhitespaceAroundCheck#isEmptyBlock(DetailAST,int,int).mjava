@@ -19,12 +19,12 @@
             final DetailAST parent = ast.getParent();
             final DetailAST grandParent = ast.getParent().getParent();
             return parentType == TokenTypes.SLIST
-                && parent.getFirstChild().getType() == TokenTypes.RCURLY
-                && grandParent.getType() == match;
+                    && parent.getFirstChild().getType() == TokenTypes.RCURLY
+                    && grandParent.getType() == match;
         }
 
         return type == TokenTypes.SLIST
-            && parentType == match
-            && ast.getFirstChild().getType() == TokenTypes.RCURLY;
+                && parentType == match
+                && ast.getFirstChild().getType() == TokenTypes.RCURLY;
     }
 

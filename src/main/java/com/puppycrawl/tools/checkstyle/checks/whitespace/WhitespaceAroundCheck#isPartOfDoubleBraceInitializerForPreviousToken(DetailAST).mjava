@@ -1,0 +1,15 @@
+    /**
+     * Check if given ast is part of double brace initializer and if it
+     * should omit checking if previous token is separated by whitespace.
+     * @param ast ast to check
+     * @return true if it should omit checking for previous token, false otherwise
+     */
+    private static boolean isPartOfDoubleBraceInitializerForPreviousToken(DetailAST ast) {
+        final boolean initializerBeginsAfterClassBegins = ast.getType() == TokenTypes.SLIST
+                && ast.getParent().getType() == TokenTypes.INSTANCE_INIT;
+        final boolean classEndsAfterInitializerEnds = ast.getType() == TokenTypes.RCURLY
+                && ast.getPreviousSibling() != null
+                && ast.getPreviousSibling().getType() == TokenTypes.INSTANCE_INIT;
+        return initializerBeginsAfterClassBegins || classEndsAfterInitializerEnds;
+    }
+

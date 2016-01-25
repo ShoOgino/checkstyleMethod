@@ -9,24 +9,22 @@
         final int before = ast.getColumnNo() - 1;
         final int after = ast.getColumnNo() + ast.getText().length();
 
-        if (before >= 0 && !Character.isWhitespace(line.charAt(before))) {
-            log(ast.getLineNo(), ast.getColumnNo(),
-                    MSG_WS_NOT_PRECEDED, ast.getText());
+        if (before >= 0) {
+            final char prevChar = line.charAt(before);
+            if (shouldCheckSeparationFromPreviousToken(ast)
+                    && !Character.isWhitespace(prevChar)) {
+                log(ast.getLineNo(), ast.getColumnNo(),
+                        MSG_WS_NOT_PRECEDED, ast.getText());
+            }
         }
 
-        if (after >= line.length()) {
-            return;
-        }
-
-        final char nextChar = line.charAt(after);
-        if (!Character.isWhitespace(nextChar)
-            // Check for "return;"
-            && !(currentType == TokenTypes.LITERAL_RETURN
-                && ast.getFirstChild().getType() == TokenTypes.SEMI)
-            && !isAnonymousInnerClassEnd(currentType, nextChar)) {
-
-            log(ast.getLineNo(), ast.getColumnNo() + ast.getText().length(),
-                    MSG_WS_NOT_FOLLOWED, ast.getText());
+        if (after < line.length()) {
+            final char nextChar = line.charAt(after);
+            if (shouldCheckSeparationFromNextToken(ast, nextChar)
+                    && !Character.isWhitespace(nextChar)) {
+                log(ast.getLineNo(), ast.getColumnNo() + ast.getText().length(),
+                        MSG_WS_NOT_FOLLOWED, ast.getText());
+            }
         }
     }
 

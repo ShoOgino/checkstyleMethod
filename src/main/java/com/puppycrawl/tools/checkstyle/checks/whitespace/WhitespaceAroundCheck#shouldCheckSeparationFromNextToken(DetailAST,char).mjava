@@ -1,0 +1,16 @@
+    /**
+     * Check if it should be checked if next token is separated from current by
+     * whitespace. Explanation why this method is needed is identical to one
+     * included in shouldCheckSeparationFromPreviousToken method.
+     * @param ast current AST.
+     * @param nextChar next character.
+     * @return true if it should be checked if next token is separated by whitespace,
+     *      false otherwise.
+     */
+    private static boolean shouldCheckSeparationFromNextToken(DetailAST ast, char nextChar) {
+        return !(ast.getType() == TokenTypes.LITERAL_RETURN
+                    && ast.getFirstChild().getType() == TokenTypes.SEMI)
+                && !isAnonymousInnerClassEnd(ast.getType(), nextChar)
+                && !isPartOfDoubleBraceInitializerForNextToken(ast);
+    }
+
