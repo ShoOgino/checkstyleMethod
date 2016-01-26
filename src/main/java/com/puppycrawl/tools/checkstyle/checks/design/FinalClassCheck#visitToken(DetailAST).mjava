@@ -2,20 +2,36 @@
     public void visitToken(DetailAST ast) {
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
 
-        if (ast.getType() == TokenTypes.CLASS_DEF) {
-            final boolean isFinal = modifiers.branchContains(TokenTypes.FINAL);
-            final boolean isAbstract = modifiers.branchContains(TokenTypes.ABSTRACT);
-            classes.push(new ClassDesc(isFinal, isAbstract));
-        }
-        // ctors in enums don't matter
-        else if (!ScopeUtils.isInEnumBlock(ast)) {
-            final ClassDesc desc = classes.peek();
-            if (modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)) {
-                desc.reportPrivateCtor();
-            }
-            else {
-                desc.reportNonPrivateCtor();
-            }
+        switch (ast.getType()) {
+
+            case TokenTypes.PACKAGE_DEF:
+                packageName = extractQualifiedName(ast);
+                break;
+
+            case TokenTypes.CLASS_DEF:
+                registerNestedSubclassToOuterSuperClasses(ast);
+
+                final boolean isFinal = modifiers.branchContains(TokenTypes.FINAL);
+                final boolean isAbstract = modifiers.branchContains(TokenTypes.ABSTRACT);
+
+                final String qualifiedClassName = getQualifiedClassName(ast);
+                classes.push(new ClassDesc(qualifiedClassName, isFinal, isAbstract));
+                break;
+
+            case TokenTypes.CTOR_DEF:
+                if (!ScopeUtils.isInEnumBlock(ast)) {
+                    final ClassDesc desc = classes.peek();
+                    if (modifiers.branchContains(TokenTypes.LITERAL_PRIVATE)) {
+                        desc.registerPrivateCtor();
+                    }
+                    else {
+                        desc.registerNonPrivateCtor();
+                    }
+                }
+                break;
+
+            default:
+                throw new IllegalStateException(ast.toString());
         }
     }
 

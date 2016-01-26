@@ -1,0 +1,27 @@
+    /**
+     * Calculate qualified class name(package + class name) laying inside given
+     * outer class.
+     * @param packageName package name, empty string on default package
+     * @param outerClassQualifiedName qualified name(package + class) of outer class,
+     *                           null if doesnt exist
+     * @param className class name
+     * @return qualified class name(package + class name)
+     */
+    private static String getQualifiedClassName(String packageName, String outerClassQualifiedName,
+                                                String className) {
+        final String qualifiedClassName;
+
+        if (outerClassQualifiedName == null) {
+            if (packageName.isEmpty()) {
+                qualifiedClassName = className;
+            }
+            else {
+                qualifiedClassName = packageName + PACKAGE_SEPARATOR + className;
+            }
+        }
+        else {
+            qualifiedClassName = outerClassQualifiedName + PACKAGE_SEPARATOR + className;
+        }
+        return qualifiedClassName;
+    }
+

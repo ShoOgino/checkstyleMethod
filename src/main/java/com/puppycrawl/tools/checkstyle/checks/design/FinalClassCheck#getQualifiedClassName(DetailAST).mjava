@@ -1,0 +1,14 @@
+    /**
+     * Get qualified class name from given class Ast.
+     * @param classAst class to get qualified class name
+     * @return qualified class name of a class
+     */
+    private String getQualifiedClassName(DetailAST classAst) {
+        final String className = classAst.findFirstToken(TokenTypes.IDENT).getText();
+        String outerClassQualifiedName = null;
+        if (!classes.isEmpty()) {
+            outerClassQualifiedName = classes.peek().getQualifiedName();
+        }
+        return getQualifiedClassName(packageName, outerClassQualifiedName, className);
+    }
+

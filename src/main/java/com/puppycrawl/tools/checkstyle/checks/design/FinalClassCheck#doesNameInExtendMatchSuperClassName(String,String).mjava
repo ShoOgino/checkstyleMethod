@@ -1,0 +1,16 @@
+    /**
+     * Checks if given super class name in extend clause match super class qualified name.
+     * @param superClassQualifiedName super class quaflieid name(with package)
+     * @param superClassInExtendClause name in extend clause
+     * @return true if given super class name in extend clause match super class qualified name,
+     *         false otherwise
+     */
+    private static boolean doesNameInExtendMatchSuperClassName(String superClassQualifiedName,
+                                                               String superClassInExtendClause) {
+        String superClassNormalizedName = superClassQualifiedName;
+        if (!superClassInExtendClause.contains(PACKAGE_SEPARATOR)) {
+            superClassNormalizedName = getClassNameFromQualifiedName(superClassQualifiedName);
+        }
+        return superClassNormalizedName.equals(superClassInExtendClause);
+    }
+

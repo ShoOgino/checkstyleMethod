@@ -1,0 +1,19 @@
+    /**
+     * Register to outer super classes of given classAst that
+     * given classAst is extending them.
+     * @param classAst class which outer super classes will be
+     *                 informed about nesting subclass
+     */
+    private void registerNestedSubclassToOuterSuperClasses(DetailAST classAst) {
+        final String currentAstSuperClassName = getSuperClassName(classAst);
+        if (currentAstSuperClassName != null) {
+            for (ClassDesc classDesc : classes) {
+                final String classDescQualifiedName = classDesc.getQualifiedName();
+                if (doesNameInExtendMatchSuperClassName(classDescQualifiedName,
+                        currentAstSuperClassName)) {
+                    classDesc.registerNestedSubclass();
+                }
+            }
+        }
+    }
+
