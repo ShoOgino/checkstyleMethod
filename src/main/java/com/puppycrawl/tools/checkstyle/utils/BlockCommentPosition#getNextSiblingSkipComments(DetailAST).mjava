@@ -1,0 +1,14 @@
+    /**
+     * Get next sibling node skipping any comment nodes.
+     * @param node current node
+     * @return next sibling
+     */
+    private static DetailAST getNextSiblingSkipComments(DetailAST node) {
+        DetailAST result = node.getNextSibling();
+        while (result.getType() == TokenTypes.SINGLE_LINE_COMMENT
+                || result.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
+            result = result.getNextSibling();
+        }
+        return result;
+    }
+

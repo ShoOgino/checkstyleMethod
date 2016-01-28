@@ -1,0 +1,17 @@
+    /**
+     * Node is on enum constant.
+     * @param blockComment DetailAST
+     * @return true if node is before enum constant
+     */
+    public static boolean isOnEnumConstant(DetailAST blockComment) {
+        final boolean isOnPlainConst = blockComment.getParent() != null
+                && blockComment.getParent().getType() == TokenTypes.ENUM_CONSTANT_DEF
+                && getPrevSiblingSkipComments(blockComment).getType() == TokenTypes.ANNOTATIONS
+                && getPrevSiblingSkipComments(blockComment).getChildCount() == 0;
+        final boolean isOnConstWithAnnotation = !isOnPlainConst && blockComment.getParent() != null
+                && blockComment.getParent().getType() == TokenTypes.ANNOTATION
+                && blockComment.getParent().getParent().getParent().getType()
+                    == TokenTypes.ENUM_CONSTANT_DEF;
+        return isOnPlainConst || isOnConstWithAnnotation;
+    }
+

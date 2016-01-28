@@ -1,0 +1,10 @@
+    @Test
+    public void testPosition()
+        throws Exception {
+        JavadocCatchCheck.clearCounter();
+        final DefaultConfiguration checkConfig = createCheckConfig(JavadocCatchCheck.class);
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputJavadocPosition.java"), expected);
+        Assert.assertEquals(58, JavadocCatchCheck.javadocsNumber);
+    }
+

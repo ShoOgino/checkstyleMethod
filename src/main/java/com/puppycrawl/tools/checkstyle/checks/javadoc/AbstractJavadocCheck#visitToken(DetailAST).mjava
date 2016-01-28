@@ -1,6 +1,7 @@
     @Override
     public final void visitToken(DetailAST blockCommentNode) {
-        if (JavadocUtils.isJavadocComment(blockCommentNode)) {
+        if (JavadocUtils.isJavadocComment(blockCommentNode)
+              && isCorrectJavadocPosition(blockCommentNode)) {
             // store as field, to share with child Checks
             blockCommentAst = blockCommentNode;
 

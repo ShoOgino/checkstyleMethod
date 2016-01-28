@@ -1,0 +1,11 @@
+    /**
+     * Node is on interface definition.
+     * @param blockComment DetailAST
+     * @return true if node is before interface
+     */
+    public static boolean isOnInterface(DetailAST blockComment) {
+        return isOnPlainToken(blockComment, TokenTypes.INTERFACE_DEF, TokenTypes.LITERAL_INTERFACE)
+                || isOnTokenWithModifiers(blockComment, TokenTypes.INTERFACE_DEF)
+                || isOnTokenWithAnnotation(blockComment, TokenTypes.INTERFACE_DEF);
+    }
+

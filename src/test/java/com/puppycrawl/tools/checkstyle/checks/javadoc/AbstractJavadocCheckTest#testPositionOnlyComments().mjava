@@ -1,0 +1,10 @@
+    @Test
+    public void testPositionOnlyComments()
+        throws Exception {
+        JavadocCatchCheck.clearCounter();
+        final DefaultConfiguration checkConfig = createCheckConfig(JavadocCatchCheck.class);
+        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputJavadocPositionOnlyComments.java"), expected);
+        Assert.assertEquals(0, JavadocCatchCheck.javadocsNumber);
+    }
+

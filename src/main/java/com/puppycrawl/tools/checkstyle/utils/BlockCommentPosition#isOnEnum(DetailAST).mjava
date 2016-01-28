@@ -1,0 +1,11 @@
+    /**
+     * Node is on enum definition.
+     * @param blockComment DetailAST
+     * @return true if node is before enum
+     */
+    public static boolean isOnEnum(DetailAST blockComment) {
+        return isOnPlainToken(blockComment, TokenTypes.ENUM_DEF, TokenTypes.ENUM)
+                || isOnTokenWithModifiers(blockComment, TokenTypes.ENUM_DEF)
+                || isOnTokenWithAnnotation(blockComment, TokenTypes.ENUM_DEF);
+    }
+

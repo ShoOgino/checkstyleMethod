@@ -1,0 +1,11 @@
+    /**
+     * Node is on method declaration.
+     * @param blockComment DetailAST
+     * @return true if node is before method
+     */
+    public static boolean isOnMethod(DetailAST blockComment) {
+        return isOnPlainClassMember(blockComment, TokenTypes.METHOD_DEF)
+                || isOnTokenWithModifiers(blockComment, TokenTypes.METHOD_DEF)
+                || isOnTokenWithAnnotation(blockComment, TokenTypes.METHOD_DEF);
+    }
+

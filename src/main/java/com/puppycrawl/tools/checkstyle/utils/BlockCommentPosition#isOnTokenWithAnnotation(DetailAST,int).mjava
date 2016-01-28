@@ -1,0 +1,15 @@
+    /**
+     * Checks that block comment is on specified token with annotation.
+     * @param blockComment block comment start DetailAST
+     * @param tokenType parent token type
+     * @return true if block comment is on specified token with annotation
+     */
+    private static boolean isOnTokenWithAnnotation(DetailAST blockComment, int tokenType) {
+        return blockComment.getParent() != null
+                && blockComment.getParent().getType() == TokenTypes.ANNOTATION
+                && getPrevSiblingSkipComments(blockComment.getParent()) == null
+                && blockComment.getParent().getParent().getType() == TokenTypes.MODIFIERS
+                && blockComment.getParent().getParent().getParent().getType() == tokenType
+                && getPrevSiblingSkipComments(blockComment) == null;
+    }
+

@@ -1,0 +1,11 @@
+    /**
+     * Node is on class definition.
+     * @param blockComment DetailAST
+     * @return true if node is before class
+     */
+    public static boolean isOnClass(DetailAST blockComment) {
+        return isOnPlainToken(blockComment, TokenTypes.CLASS_DEF, TokenTypes.LITERAL_CLASS)
+                || isOnTokenWithModifiers(blockComment, TokenTypes.CLASS_DEF)
+                || isOnTokenWithAnnotation(blockComment, TokenTypes.CLASS_DEF);
+    }
+

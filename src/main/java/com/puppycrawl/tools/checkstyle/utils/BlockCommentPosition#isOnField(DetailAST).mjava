@@ -1,0 +1,11 @@
+    /**
+     * Node is on field declaration.
+     * @param blockComment DetailAST
+     * @return true if node is before field
+     */
+    public static boolean isOnField(DetailAST blockComment) {
+        return isOnPlainClassMember(blockComment, TokenTypes.VARIABLE_DEF)
+                || isOnTokenWithModifiers(blockComment, TokenTypes.VARIABLE_DEF)
+                || isOnTokenWithAnnotation(blockComment, TokenTypes.VARIABLE_DEF);
+    }
+

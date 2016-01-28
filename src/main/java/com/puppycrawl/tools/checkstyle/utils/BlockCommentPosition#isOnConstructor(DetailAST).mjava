@@ -1,0 +1,11 @@
+    /**
+     * Node is on constructor.
+     * @param blockComment DetailAST
+     * @return true if node is before constructor
+     */
+    public static boolean isOnConstructor(DetailAST blockComment) {
+        return isOnPlainToken(blockComment, TokenTypes.CTOR_DEF, TokenTypes.IDENT)
+                || isOnTokenWithModifiers(blockComment, TokenTypes.CTOR_DEF)
+                || isOnTokenWithAnnotation(blockComment, TokenTypes.CTOR_DEF);
+    }
+
