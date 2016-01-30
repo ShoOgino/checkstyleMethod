@@ -2,7 +2,7 @@
     public void testNotMatchFolderAndFileNotMatchesFile() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(RegexpOnFilenameCheck.class);
         checkConfig.addAttribute("match", "false");
-        checkConfig.addAttribute("folderPattern", ".*[\\\\/]gov[\\\\/].*");
+        checkConfig.addAttribute("folderPattern", ".*[\\\\/]govstrangefolder[\\\\/].*");
         checkConfig.addAttribute("fileNamePattern", ".*\\.java");
         verify(checkConfig, getPath("InputSemantic.java"), ArrayUtils.EMPTY_STRING_ARRAY);
     }
