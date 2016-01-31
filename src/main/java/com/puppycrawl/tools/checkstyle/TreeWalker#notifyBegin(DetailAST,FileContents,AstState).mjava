@@ -6,7 +6,7 @@
      */
     private void notifyBegin(DetailAST rootAST, FileContents contents,
             AstState astState) {
-        final Set<Check> checks;
+        final Set<AbstractCheck> checks;
 
         if (astState == AstState.WITH_COMMENTS) {
             checks = commentChecks;
@@ -15,7 +15,7 @@
             checks = ordinaryChecks;
         }
 
-        for (Check check : checks) {
+        for (AbstractCheck check : checks) {
             check.setFileContents(contents);
             check.beginTree(rootAST);
         }

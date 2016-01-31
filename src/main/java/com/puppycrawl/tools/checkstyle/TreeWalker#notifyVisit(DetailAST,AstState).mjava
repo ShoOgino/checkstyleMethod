@@ -4,10 +4,10 @@
      * @param astState state of AST.
      */
     private void notifyVisit(DetailAST ast, AstState astState) {
-        final Collection<Check> visitors = getListOfChecks(ast, astState);
+        final Collection<AbstractCheck> visitors = getListOfChecks(ast, astState);
 
         if (visitors != null) {
-            for (Check check : visitors) {
+            for (AbstractCheck check : visitors) {
                 check.visitToken(ast);
             }
         }

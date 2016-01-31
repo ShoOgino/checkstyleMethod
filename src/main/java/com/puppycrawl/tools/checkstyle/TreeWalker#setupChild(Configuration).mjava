@@ -3,11 +3,11 @@
         throws CheckstyleException {
         final String name = childConf.getName();
         final Object module = moduleFactory.createModule(name);
-        if (!(module instanceof Check)) {
+        if (!(module instanceof AbstractCheck)) {
             throw new CheckstyleException(
                 "TreeWalker is not allowed as a parent of " + name);
         }
-        final Check check = (Check) module;
+        final AbstractCheck check = (AbstractCheck) module;
         check.contextualize(childContext);
         check.configure(childConf);
         check.init();

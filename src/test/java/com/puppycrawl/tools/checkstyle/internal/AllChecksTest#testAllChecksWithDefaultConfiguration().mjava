@@ -6,7 +6,7 @@
         for (Class<?> check : CheckUtil.getCheckstyleChecks()) {
             final DefaultConfiguration checkConfig = createCheckConfig(check);
             final Checker checker;
-            if (Check.class.isAssignableFrom(check)) {
+            if (AbstractCheck.class.isAssignableFrom(check)) {
                 // Checks which have Check as a parent.
                 if (check.equals(ImportControlCheck.class)) {
                     // ImportControlCheck must have the import control configuration file to avoid

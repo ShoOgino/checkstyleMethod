@@ -21,10 +21,10 @@
             }
         }
 
-        final Check check;
+        final AbstractCheck check;
 
-        if (Check.class.isAssignableFrom(clss)) {
-            check = (Check) instance;
+        if (AbstractCheck.class.isAssignableFrom(clss)) {
+            check = (AbstractCheck) instance;
 
             if (!Arrays.equals(check.getAcceptableTokens(), check.getDefaultTokens())
                     || !Arrays.equals(check.getAcceptableTokens(), check.getRequiredTokens())) {

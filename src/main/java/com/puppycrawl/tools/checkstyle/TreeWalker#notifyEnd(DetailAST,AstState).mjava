@@ -4,7 +4,7 @@
      * @param astState state of AST.
      */
     private void notifyEnd(DetailAST rootAST, AstState astState) {
-        final Set<Check> checks;
+        final Set<AbstractCheck> checks;
 
         if (astState == AstState.WITH_COMMENTS) {
             checks = commentChecks;
@@ -13,7 +13,7 @@
             checks = ordinaryChecks;
         }
 
-        for (Check check : checks) {
+        for (AbstractCheck check : checks) {
             check.finishTree(rootAST);
         }
     }
