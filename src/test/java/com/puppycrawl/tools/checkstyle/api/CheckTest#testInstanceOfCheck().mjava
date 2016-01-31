@@ -1,0 +1,18 @@
+    @SuppressWarnings("deprecation")
+    @Test
+    public void testInstanceOfCheck() {
+        final Object module = new Check() {
+            @Override
+            public int[] getDefaultTokens() {
+                return null;
+            }
+        };
+
+        Assert.assertTrue("Check must be an instance of AbstractCheck - 1",
+                module instanceof AbstractCheck);
+        Assert.assertTrue("Check must be an instance of AbstractCheck - 2",
+                AbstractCheck.class.isInstance(module));
+        Assert.assertTrue("Check must be able to be assignable to AbstractCheck",
+                AbstractCheck.class.isAssignableFrom(Check.class));
+    }
+
