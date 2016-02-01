@@ -3,6 +3,11 @@
      */
     ListToTreeSelectionModelWrapper(JTreeTable jTreeTable) {
         treeTable = jTreeTable;
-        getListSelectionModel().addListSelectionListener(createListSelectionListener());
+        getListSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                updateSelectedPathsFromSelectedRows();
+            }
+        });
     }
 
