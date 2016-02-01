@@ -21,7 +21,7 @@
                 final DetailAST firstTokenOnLine = result.get(curNode.getLineNo());
 
                 if (firstTokenOnLine == null
-                    || firstTokenOnLine.getColumnNo() >= curNode.getColumnNo()) {
+                    || expandedTabsColumnNo(firstTokenOnLine) >= expandedTabsColumnNo(curNode)) {
                     result.put(curNode.getLineNo(), curNode);
                 }
                 curNode = getNextCurNode(curNode);

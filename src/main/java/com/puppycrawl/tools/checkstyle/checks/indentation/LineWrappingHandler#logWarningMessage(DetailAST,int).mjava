@@ -8,17 +8,17 @@
      */
     private void logWarningMessage(DetailAST currentNode, int currentIndent) {
         if (forceStrictCondition) {
-            if (currentNode.getColumnNo() != currentIndent) {
+            if (expandedTabsColumnNo(currentNode) != currentIndent) {
                 indentCheck.indentationLog(currentNode.getLineNo(),
                         IndentationCheck.MSG_ERROR, currentNode.getText(),
-                        currentNode.getColumnNo(), currentIndent);
+                        expandedTabsColumnNo(currentNode), currentIndent);
             }
         }
         else {
-            if (currentNode.getColumnNo() < currentIndent) {
+            if (expandedTabsColumnNo(currentNode) < currentIndent) {
                 indentCheck.indentationLog(currentNode.getLineNo(),
                         IndentationCheck.MSG_ERROR, currentNode.getText(),
-                        currentNode.getColumnNo(), currentIndent);
+                        expandedTabsColumnNo(currentNode), currentIndent);
             }
         }
     }

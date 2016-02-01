@@ -5,8 +5,8 @@
      *            first node.
      * @return indentation of first node.
      */
-    private static int getFirstNodeIndent(DetailAST node) {
-        int indentLevel = node.getColumnNo();
+    private int getFirstNodeIndent(DetailAST node) {
+        final int result;
 
         if (node.getType() == TokenTypes.LITERAL_IF
                 && node.getParent().getType() == TokenTypes.LITERAL_ELSE) {
@@ -15,12 +15,15 @@
 
             if (lcurly.getType() == TokenTypes.SLIST
                     && rcurly.getLineNo() == node.getLineNo()) {
-                indentLevel = rcurly.getColumnNo();
+                result = expandedTabsColumnNo(rcurly);
             }
             else {
-                indentLevel = node.getParent().getColumnNo();
+                result = expandedTabsColumnNo(node.getParent());
             }
         }
-        return indentLevel;
+        else {
+            result = expandedTabsColumnNo(node);
+        }
+        return result;
     }
 
