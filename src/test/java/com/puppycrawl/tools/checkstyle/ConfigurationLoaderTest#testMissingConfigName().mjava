@@ -5,10 +5,9 @@
             fail("missing module name");
         }
         catch (CheckstyleException ex) {
-            assertTrue(
-                ex.getMessage().endsWith(
-                    "Attribute \"name\" is required and must be specified "
-                        + "for element type \"module\".:7:23"));
+            assertTrue(ex.getMessage().contains("\"name\""));
+            assertTrue(ex.getMessage().contains("\"module\""));
+            assertTrue(ex.getMessage().endsWith(":7:23"));
         }
     }
 

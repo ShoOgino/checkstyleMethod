@@ -3,8 +3,12 @@
 
         // we just reference there all violations
         final String[][] outputValues = {
-            {"InputComplexityOverflow", "1", "172"},
+                {"InputComplexityOverflow", "1", "172"},
         };
+
+        final int allowedLength = 170;
+        final String msgKey = "maxLen.file";
+        final String bundle = "com.puppycrawl.tools.checkstyle.checks.sizes.messages";
 
         exit.checkAssertionAfterwards(new Assertion() {
             @Override
@@ -12,12 +16,13 @@
                 final String expectedPath = getFilePath("checks/metrics") + File.separator;
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Starting audit...").append(System.getProperty("line.separator"));
-                final String format = "[WARN] %s.java:%s: File length is %s lines "
-                    + "(max allowed is 170). [FileLength]";
+                final String format = "[WARN] %s.java:%s: %s [FileLength]";
                 for (String[] outputValue : outputValues) {
+                    final String localizedMessage = new LocalizedMessage(0, bundle,
+                            msgKey, new Integer[] {Integer.valueOf(outputValue[2]), allowedLength},
+                            null, getClass(), null).getMessage();
                     final String line = String.format(Locale.ROOT, format,
-                            expectedPath + outputValue[0], outputValue[1],
-                            outputValue[2]);
+                            expectedPath + outputValue[0], outputValue[1], localizedMessage);
                     sb.append(line).append(System.getProperty("line.separator"));
                 }
                 sb.append("Audit done.").append(System.getProperty("line.separator"));

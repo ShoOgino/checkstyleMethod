@@ -5,10 +5,9 @@
             fail("missing property name");
         }
         catch (CheckstyleException ex) {
-            assertTrue(
-                ex.getMessage().endsWith(
-                    "Attribute \"name\" is required and must be specified "
-                        + "for element type \"property\".:8:41"));
+            assertTrue(ex.getMessage().contains("\"name\""));
+            assertTrue(ex.getMessage().contains("\"property\""));
+            assertTrue(ex.getMessage().endsWith(":8:41"));
         }
     }
 

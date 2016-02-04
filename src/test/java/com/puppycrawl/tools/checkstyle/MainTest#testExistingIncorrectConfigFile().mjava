@@ -8,10 +8,8 @@
                 final String output = String.format(Locale.ROOT,
                         "Checkstyle ends with 1 errors.%n");
                 assertEquals(output, systemOut.getLog());
-                final String errorOuput = String.format(Locale.ROOT,
-                        "com.puppycrawl.tools.checkstyle.api."
-                        + "CheckstyleException: unable to parse configuration stream"
-                        + " - Content is not allowed in prolog.:7:1%n");
+                final String errorOuput = "com.puppycrawl.tools.checkstyle.api."
+                    + "CheckstyleException: unable to parse configuration stream - ";
                 assertTrue(systemErr.getLog().startsWith(errorOuput));
             }
         });
