@@ -1,6 +1,6 @@
     /**
-     * Process modifiers.
-     * @param ast ast of Modifiers
+     * Processes modifiers.
+     * @param ast ast of Modifiers.
      */
     private void processModifiers(DetailAST ast) {
 
@@ -28,7 +28,8 @@
 
         final Scope access = ScopeUtils.getScopeFromMods(ast);
         if (state.declarationAccess.compareTo(access) > 0) {
-            if (!ignoreModifiers) {
+            if (!ignoreModifiers
+                    && !isForwardReference(ast.getParent())) {
                 log(ast, MSG_ACCESS);
             }
         }
