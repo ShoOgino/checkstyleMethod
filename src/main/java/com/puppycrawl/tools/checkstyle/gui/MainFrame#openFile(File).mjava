@@ -6,31 +6,13 @@
         if (sourceFile != null) {
             try {
                 setTitle("Checkstyle GUI : " + sourceFile.getName());
-                final DetailAST parseTree = model.parseFile(sourceFile);
-                parseTreeTableModel.setParseTree(parseTree);
+                model.openFile(sourceFile);
                 reloadAction.setEnabled(true);
-
-                final String[] sourceLines = model.getFileText(sourceFile).toLinesArray();
-
-                // clear for each new file
-                model.clearLinesToPosition();
-                // starts line counting at 1
-                model.addLineToPosition(0);
-
-                // clean the text area before inserting the lines of the new file
-                textArea.setText("");
-
-                // insert the contents of the file to the text area
-                for (final String element : sourceLines) {
-                    model.addLineToPosition(textArea.getText().length());
-                    textArea.append(element + System.lineSeparator());
-                }
-
+                textArea.setText(model.getText());
                 treeTable.setLinePositionMap(model.getLinesToPosition());
             }
-            catch (final IOException | ANTLRException ex) {
-                JOptionPane.showMessageDialog(this,
-                    "Could not parse" + sourceFile + ": " + ex.getMessage());
+            catch (final CheckstyleException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         }
     }

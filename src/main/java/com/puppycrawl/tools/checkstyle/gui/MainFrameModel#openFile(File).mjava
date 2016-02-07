@@ -1,0 +1,33 @@
+    /**
+     * Open file and load the file.
+     * @param file the file to open.
+     * @throws CheckstyleException if the file can not be parsed.
+     */
+    public void openFile(File file) throws CheckstyleException {
+        try {
+            currentFile = file;
+            final DetailAST parseTree = parseFile(file);
+            parseTreeTableModel.setParseTree(parseTree);
+            final String[] sourceLines = getFileText(file).toLinesArray();
+
+            // clear for each new file
+            linesToPosition.clear();
+            // starts line counting at 1
+            linesToPosition.add(0);
+
+            final StringBuilder sb = new StringBuilder();
+            // insert the contents of the file to the text area
+            for (final String element : sourceLines) {
+                linesToPosition.add(sb.length());
+                sb.append(element).append(System.lineSeparator());
+            }
+            text = sb.toString();
+        }
+        catch (IOException | ANTLRException ex) {
+            final String exceptionMsg = String.format(Locale.ROOT,
+                "%s occurred while opening file %s.",
+                ex.getClass().getSimpleName(), file.getPath());
+            throw new CheckstyleException(exceptionMsg, ex);
+        }
+    }
+
