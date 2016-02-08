@@ -1,12 +1,5 @@
     @Override
     public Object getChild(Object parent, int index) {
-        final DetailAST ast = (DetailAST) parent;
-        int currentIndex = 0;
-        AST child = ast.getFirstChild();
-        while (currentIndex < index) {
-            child = child.getNextSibling();
-            currentIndex++;
-        }
-        return child;
+        return pModel.getChild(parent, index);
     }
 

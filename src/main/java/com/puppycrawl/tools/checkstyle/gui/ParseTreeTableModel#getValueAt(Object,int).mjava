@@ -5,25 +5,6 @@
      *     at column number {@code column}.
      */
     public Object getValueAt(Object node, int column) {
-        final DetailAST ast = (DetailAST) node;
-        final Object value;
-
-        switch (column) {
-            case 1:
-                value = TokenUtils.getTokenName(ast.getType());
-                break;
-            case 2:
-                value = ast.getLineNo();
-                break;
-            case 3:
-                value = ast.getColumnNo();
-                break;
-            case 4:
-                value = ast.getText();
-                break;
-            default:
-                value = null;
-        }
-        return value;
+        return pModel.getValueAt(node, column);
     }
 

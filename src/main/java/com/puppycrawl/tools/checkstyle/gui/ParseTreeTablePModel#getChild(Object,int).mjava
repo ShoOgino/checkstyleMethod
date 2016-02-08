@@ -1,0 +1,17 @@
+    /**
+     * Returns the child of parent at index.
+     * @param parent the node to get a child from.
+     * @param index the index of a child.
+     * @return the child of parent at index.
+     */
+    public Object getChild(Object parent, int index) {
+        final DetailAST ast = (DetailAST) parent;
+        int currentIndex = 0;
+        AST child = ast.getFirstChild();
+        while (currentIndex < index) {
+            child = child.getNextSibling();
+            currentIndex++;
+        }
+        return child;
+    }
+
