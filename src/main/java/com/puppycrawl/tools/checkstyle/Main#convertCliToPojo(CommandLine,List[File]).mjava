@@ -1,9 +1,10 @@
     /**
      * Util method to convert CommandLine type to POJO object.
      * @param cmdLine command line object
+     * @param filesToProcess List of files to process found from the command line.
      * @return command line option as POJO object
      */
-    private static CliOptions convertCliToPojo(CommandLine cmdLine) {
+    private static CliOptions convertCliToPojo(CommandLine cmdLine, List<File> filesToProcess) {
         final CliOptions conf = new CliOptions();
         conf.format = cmdLine.getOptionValue(OPTION_F_NAME);
         if (conf.format == null) {
@@ -12,7 +13,7 @@
         conf.outputLocation = cmdLine.getOptionValue(OPTION_O_NAME);
         conf.configLocation = cmdLine.getOptionValue(OPTION_C_NAME);
         conf.propertiesLocation = cmdLine.getOptionValue(OPTION_P_NAME);
-        conf.files = getFilesToProcess(cmdLine.getArgs());
+        conf.files = filesToProcess;
         return conf;
     }
 
