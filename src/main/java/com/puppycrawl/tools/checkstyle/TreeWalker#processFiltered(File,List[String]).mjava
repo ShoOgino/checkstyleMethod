@@ -1,16 +1,12 @@
     @Override
     protected void processFiltered(File file, List<String> lines) throws CheckstyleException {
         // check if already checked and passed the file
-        final String fileName = file.getPath();
-        final long timestamp = file.lastModified();
-        if (cache != null
-                && (cache.isInCache(fileName, timestamp)
-                    || !CommonUtils.matchesFileExtension(file, getFileExtensions()))) {
+        if (!CommonUtils.matchesFileExtension(file, getFileExtensions())) {
             return;
         }
 
         final String msg = "%s occurred during the analysis of file %s.";
-
+        final String fileName = file.getPath();
         try {
             final FileText text = FileText.fromLines(file, lines);
             final FileContents contents = new FileContents(text);
@@ -33,10 +29,6 @@
             final String exceptionMsg = String.format(Locale.ROOT, msg,
                     ex.getClass().getSimpleName(), fileName);
             throw new CheckstyleException(exceptionMsg, ex);
-        }
-
-        if (cache != null && getMessageCollector().size() == 0) {
-            cache.put(fileName, timestamp);
         }
     }
 

@@ -2,5 +2,13 @@
     public void destroy() {
         listeners.clear();
         filters.clear();
+        if (cache != null) {
+            try {
+                cache.persist();
+            }
+            catch (IOException ex) {
+                throw new IllegalStateException("Unable to persist cache file.", ex);
+            }
+        }
     }
 

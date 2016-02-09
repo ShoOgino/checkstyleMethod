@@ -1,6 +1,13 @@
     @Test
     public void testFileExtensions() throws Exception {
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("configuration");
+        checkerConfig.addAttribute("charset", "UTF-8");
+        checkerConfig.addAttribute("cacheFile", temporaryFolder.newFile().getPath());
+
         final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(checkerConfig);
+
         final List<File> files = new ArrayList<>();
         final File file = new File("file.pdf");
         files.add(file);
@@ -8,6 +15,7 @@
         files.add(otherFile);
         final String[] fileExtensions = {"java", "xml", "properties"};
         checker.setFileExtensions(fileExtensions);
+        checker.setCacheFile(temporaryFolder.newFile().getPath());
         final int counter = checker.process(files);
 
         // comparing to 1 as there is only one legal file in input

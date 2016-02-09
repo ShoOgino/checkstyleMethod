@@ -1,18 +1,20 @@
     @Test
     public void testDestroyNonExistingCache() throws Exception {
-
         // We use assumption to satisfy coverage rate on OS Windows, since persist() method of
         // class PropertyCacheFile does not throw IOException on OS Linux when path to a cache
         // directory is invalid on OS Windows.
         Assume.assumeTrue(System.getProperty("os.name")
             .toLowerCase(Locale.ENGLISH).startsWith("windows"));
 
-        final TreeWalker treeWalker = new TreeWalker();
-        treeWalker.configure(new DefaultConfiguration("default config"));
+        final Checker checker = new Checker();
+        final PackageObjectFactory factory = new PackageObjectFactory(
+            new HashSet<String>(), Thread.currentThread().getContextClassLoader());
+        checker.setModuleFactory(factory);
+        checker.configure(new DefaultConfiguration("default config"));
         final String tempFilePath = temporaryFolder.newFile().getPath() + ".\\\'";
-        treeWalker.setCacheFile(tempFilePath);
+        checker.setCacheFile(tempFilePath);
         try {
-            treeWalker.destroy();
+            checker.destroy();
             fail("Exception did not happen");
         }
         catch (IllegalStateException ex) {

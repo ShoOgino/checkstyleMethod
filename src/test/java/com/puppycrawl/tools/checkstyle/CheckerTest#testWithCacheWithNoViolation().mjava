@@ -1,0 +1,15 @@
+    @Test
+    public void testWithCacheWithNoViolation() throws Exception {
+        final Checker checker = new Checker();
+        final PackageObjectFactory factory = new PackageObjectFactory(
+            new HashSet<String>(), Thread.currentThread().getContextClassLoader());
+        checker.setModuleFactory(factory);
+        checker.configure(createCheckConfig(TranslationCheck.class));
+        checker.setCacheFile(temporaryFolder.newFile().getPath());
+        checker.setupChild(createCheckConfig(TranslationCheck.class));
+        final File file = temporaryFolder.newFile("file.java");
+        final List<File> files = new ArrayList<>();
+        files.add(file);
+        checker.process(files);
+    }
+
