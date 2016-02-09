@@ -1,0 +1,15 @@
+    /**
+     * Find start and end selection positions from AST line and Column.
+     */
+    public void findSelectionPositions() {
+        selectionStart = lines2position.get(ast.getLineNo()) + ast.getColumnNo();
+
+        if (ast.getChildCount() == 0
+                && TokenUtils.getTokenName(ast.getType()).equals(ast.getText())) {
+            selectionEnd = selectionStart;
+        }
+        else {
+            selectionEnd = findLastPosition(ast);
+        }
+    }
+

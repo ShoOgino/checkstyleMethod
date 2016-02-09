@@ -1,21 +1,11 @@
     /**
-     * Set a selection position from AST line and Column.
+     * Set selection.
      */
     public void select() {
-        final int start = lines2position.get(ast.getLineNo()) + ast.getColumnNo();
-        final int end;
-
-        if (ast.getChildCount() == 0
-            && TokenUtils.getTokenName(ast.getType()).equals(ast.getText())) {
-            end = start;
-        }
-        else {
-            end = findLastPosition(ast);
-        }
-
+        pModel.findSelectionPositions();
         editor.setSelectedTextColor(Color.blue);
         editor.requestFocusInWindow();
-        editor.setCaretPosition(start);
-        editor.moveCaretPosition(end);
+        editor.setCaretPosition(pModel.getSelectionStart());
+        editor.moveCaretPosition(pModel.getSelectionEnd());
     }
 
