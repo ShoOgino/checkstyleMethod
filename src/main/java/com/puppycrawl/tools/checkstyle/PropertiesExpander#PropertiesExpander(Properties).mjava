@@ -3,12 +3,15 @@
      * @param properties the underlying properties to use for
      *     property resolution.
      * @throws IllegalArgumentException indicates null was passed
-     * @noinspection CollectionDeclaredAsConcreteClass
      */
     public PropertiesExpander(Properties properties) {
         if (properties == null) {
             throw new IllegalArgumentException("cannot pass null");
         }
-        this.properties.putAll(properties);
+        values = new HashMap<>(properties.size());
+        for (Enumeration<?> e = properties.propertyNames(); e.hasMoreElements();) {
+            final String name = (String) e.nextElement();
+            values.put(name, properties.getProperty(name));
+        }
     }
 
