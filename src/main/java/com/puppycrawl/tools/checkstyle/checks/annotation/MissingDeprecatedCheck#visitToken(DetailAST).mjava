@@ -9,7 +9,7 @@
 
         final boolean containsJavadocTag = containsJavadocTag(javadoc);
 
-        if (containsAnnotation ^ containsJavadocTag) {
+        if (containsAnnotation ^ containsJavadocTag && !(skipNoJavadoc && javadoc == null)) {
             log(ast.getLineNo(), MSG_KEY_ANNOTATION_MISSING_DEPRECATED);
         }
     }
