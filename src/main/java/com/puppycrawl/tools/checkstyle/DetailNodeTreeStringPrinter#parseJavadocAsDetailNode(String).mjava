@@ -1,0 +1,11 @@
+    /**
+     * Parse javadoc comment to DetailNode tree.
+     * @param javadocComment javadoc comment content
+     * @return tree
+     */
+    private static DetailNode parseJavadocAsDetailNode(String javadocComment) {
+        final JavadocDetailNodeParser parser = new JavadocDetailNodeParser();
+        return parser.parseJavadocAsDetailNode(createFakeBlockComment(javadocComment))
+                .getTree();
+    }
+

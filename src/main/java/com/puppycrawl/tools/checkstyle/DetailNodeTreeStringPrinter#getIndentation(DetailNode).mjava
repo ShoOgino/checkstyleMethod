@@ -1,0 +1,33 @@
+    /**
+     * Get indentation for a node.
+     * @param node the DetailNode to get the indentation for.
+     * @return the indentation in String format.
+     */
+    private static String getIndentation(DetailNode node) {
+        final boolean isLastChild = JavadocUtils.getNextSibling(node) == null;
+        DetailNode currentNode = node;
+        final StringBuilder indentation = new StringBuilder();
+        while (currentNode.getParent() != null) {
+            currentNode = currentNode.getParent();
+            if (currentNode.getParent() == null) {
+                if (isLastChild) {
+                    // only ASCII symbols must be used due to
+                    // problems with running tests on Windows
+                    indentation.append("`--");
+                }
+                else {
+                    indentation.append("|--");
+                }
+            }
+            else {
+                if (JavadocUtils.getNextSibling(currentNode) == null) {
+                    indentation.insert(0, "    ");
+                }
+                else {
+                    indentation.insert(0, "|   ");
+                }
+            }
+        }
+        return indentation.toString();
+    }
+

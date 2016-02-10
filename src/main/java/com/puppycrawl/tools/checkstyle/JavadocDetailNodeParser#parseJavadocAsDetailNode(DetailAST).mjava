@@ -4,7 +4,8 @@
      *        DetailAST of Javadoc comment
      * @return DetailNode tree of Javadoc comment
      */
-    private ParseStatus parseJavadocAsDetailNode(DetailAST javadocCommentAst) {
+    public ParseStatus parseJavadocAsDetailNode(DetailAST javadocCommentAst) {
+        blockCommentLineNumber = javadocCommentAst.getLineNo();
         final String javadocComment = JavadocUtils.getJavadocCommentContent(javadocCommentAst);
 
         // Use a new error listener each time to be able to use

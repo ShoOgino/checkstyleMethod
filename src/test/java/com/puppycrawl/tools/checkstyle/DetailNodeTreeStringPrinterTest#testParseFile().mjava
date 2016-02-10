@@ -1,0 +1,11 @@
+    @Test
+    public void testParseFile() throws Exception {
+        final String actual = DetailNodeTreeStringPrinter.printFileAst(
+            new File(getPath("InputJavadocComment.javadoc")))
+                .replaceAll("\\\\r\\\\n", "\\\\n");
+        final String expected = Files.toString(new File(
+                getPath("expectedInputJavadocComment.txt")), Charsets.UTF_8)
+                .replaceAll("\\\\r\\\\n", "\\\\n");
+        Assert.assertEquals(expected, actual);
+    }
+
