@@ -1,0 +1,11 @@
+    @Test
+    public void testNewLineOptionWithLambda() throws Exception {
+        checkConfig.addAttribute("option", LeftCurlyOption.NL.toString());
+        final String[] expected = {
+            "6:32: " + getCheckMessage(MSG_KEY_LINE_NEW, "{", 32),
+            "12:32: " + getCheckMessage(MSG_KEY_LINE_NEW, "{", 32),
+        };
+        verify(checkConfig, getNonCompilablePath("InputLeftCurlyNewLineOptionWithLambda.java"),
+                expected);
+    }
+
