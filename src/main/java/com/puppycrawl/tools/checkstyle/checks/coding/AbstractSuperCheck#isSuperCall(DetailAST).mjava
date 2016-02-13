@@ -11,8 +11,7 @@
             // dot operator?
             final DetailAST dotAst = literalSuperAst.getParent();
 
-            if (dotAst.getType() == TokenTypes.DOT
-                && !isSameNameMethod(literalSuperAst)
+            if (!isSameNameMethod(literalSuperAst)
                 && !hasArguments(dotAst)) {
                 superCall = isSuperCallInOverridingMethod(dotAst);
             }
