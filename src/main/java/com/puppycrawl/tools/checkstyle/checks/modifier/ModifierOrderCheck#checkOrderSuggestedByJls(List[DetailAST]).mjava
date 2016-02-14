@@ -22,8 +22,10 @@
                     && offendingModifier == null) {
 
                 if (modifier.getType() == TokenTypes.ANNOTATION) {
-                    //Annotation not at start of modifiers, bad
-                    offendingModifier = modifier;
+                    if (!isAnnotationOnType(modifier)) {
+                        //Annotation not at start of modifiers, bad
+                        offendingModifier = modifier;
+                    }
                     break;
                 }
 

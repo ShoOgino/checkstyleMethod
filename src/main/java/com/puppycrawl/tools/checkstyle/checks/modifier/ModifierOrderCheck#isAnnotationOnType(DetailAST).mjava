@@ -1,0 +1,16 @@
+    /**
+     * Checks whether annotation on type takes place.
+     * @param modifier modifier token.
+     * @return true if annotation on type takes place.
+     */
+    private static boolean isAnnotationOnType(DetailAST modifier) {
+        boolean annotationOnType = false;
+        final DetailAST modifiers = modifier.getParent();
+        final int definitionTokenType = modifiers.getParent().getType();
+        if (definitionTokenType == TokenTypes.VARIABLE_DEF
+                || definitionTokenType == TokenTypes.PARAMETER_DEF) {
+            annotationOnType = true;
+        }
+        return annotationOnType;
+    }
+
