@@ -3,38 +3,8 @@
      * @param ast ast of Modifiers.
      */
     private void processModifiers(DetailAST ast) {
-
         final ScopeState state = scopeStates.peek();
-        if (ast.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
-            if (state.currentScopeState > STATE_INSTANCE_VARIABLE_DEF) {
-                log(ast, MSG_INSTANCE);
-            }
-            else if (state.currentScopeState == STATE_STATIC_VARIABLE_DEF) {
-                state.declarationAccess = Scope.PUBLIC;
-                state.currentScopeState = STATE_INSTANCE_VARIABLE_DEF;
-            }
-        }
-        else {
-            if (state.currentScopeState > STATE_STATIC_VARIABLE_DEF) {
-                if (!ignoreModifiers
-                        || state.currentScopeState > STATE_INSTANCE_VARIABLE_DEF) {
-                    log(ast, MSG_STATIC);
-                }
-            }
-            else {
-                state.currentScopeState = STATE_STATIC_VARIABLE_DEF;
-            }
-        }
-
-        final Scope access = ScopeUtils.getScopeFromMods(ast);
-        if (state.declarationAccess.compareTo(access) > 0) {
-            if (!ignoreModifiers
-                    && !isForwardReference(ast.getParent())) {
-                log(ast, MSG_ACCESS);
-            }
-        }
-        else {
-            state.declarationAccess = access;
-        }
+        final boolean isStateValid = processModifiersState(ast, state);
+        processModifiersSubState(ast, state, isStateValid);
     }
 

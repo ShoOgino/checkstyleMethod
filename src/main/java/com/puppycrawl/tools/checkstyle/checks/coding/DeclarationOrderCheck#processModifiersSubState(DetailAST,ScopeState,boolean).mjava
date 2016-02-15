@@ -1,0 +1,23 @@
+    /**
+     * Checks if given modifiers are valid in substate of given
+     * state({@code Scope}), if it is it updates substate or else it
+     * logs violation.
+     * @param modifiersAst modifiers to process
+     * @param state curent state
+     * @param isStateValid is main state for given modifiers is valid
+     */
+    private void processModifiersSubState(DetailAST modifiersAst, ScopeState state,
+                                          boolean isStateValid) {
+        final Scope access = ScopeUtils.getScopeFromMods(modifiersAst);
+        if (state.declarationAccess.compareTo(access) > 0) {
+            if (isStateValid
+                    && !ignoreModifiers
+                    && !isForwardReference(modifiersAst.getParent())) {
+                log(modifiersAst, MSG_ACCESS);
+            }
+        }
+        else {
+            state.declarationAccess = access;
+        }
+    }
+
