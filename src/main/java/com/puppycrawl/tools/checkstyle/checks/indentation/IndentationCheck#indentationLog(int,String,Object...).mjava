@@ -8,6 +8,9 @@
      * @see java.text.MessageFormat
      */
     public void indentationLog(int line, String key, Object... args) {
-        log(line, key, args);
+        if (!incorrectIndentationLines.contains(line)) {
+            incorrectIndentationLines.add(line);
+            log(line, key, args);
+        }
     }
 
