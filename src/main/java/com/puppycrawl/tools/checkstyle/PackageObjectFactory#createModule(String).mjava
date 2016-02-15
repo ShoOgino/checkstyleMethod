@@ -9,23 +9,22 @@
      * @throws CheckstyleException if an error occurs.
      */
     @Override
-    public Object createModule(String name)
-        throws CheckstyleException {
-        try {
-            return doMakeObject(name);
-        }
-        catch (final CheckstyleException ignored) {
-            //try again with suffix "Check"
-            try {
-                return doMakeObject(name + "Check");
-            }
-            catch (final CheckstyleException ex) {
+    public Object createModule(String name) throws CheckstyleException {
+        Object instance = createObjectWithIgnoringProblems(name, getAllPossibleNames(name));
+        if (instance == null) {
+            final String nameCheck = name + "Check";
+            instance = createObjectWithIgnoringProblems(nameCheck, getAllPossibleNames(nameCheck));
+            if (instance == null) {
+
+                final String attemptedNames = joinPackageNamesWithClassName(name)
+                        + STRING_SEPARATOR + nameCheck + STRING_SEPARATOR
+                        + joinPackageNamesWithClassName(nameCheck);
                 final LocalizedMessage exceptionMessage = new LocalizedMessage(0,
                     Definitions.CHECKSTYLE_BUNDLE, UNABLE_TO_INSTANTIATE_EXCEPTION_MESSAGE,
-                    new String[] {name, joinPackageNamesWithClassName(name)},
-                    null, getClass(), null);
-                throw new CheckstyleException(exceptionMessage.getMessage(), ex);
+                    new String[] {name, attemptedNames}, null, getClass(), null);
+                throw new CheckstyleException(exceptionMessage.getMessage());
             }
         }
+        return instance;
     }
 
