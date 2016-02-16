@@ -1,8 +1,6 @@
     private void addTotalValueOfOrder(final AugmentedOrder order) {
-    final BigDecimal totalValueOfOrder = order.getTransactions().stream()
+    final BigDecimal totalValueOfOrder = order
             .reduce(BigDecimal.ZERO,
-                    (t, u) -> t.add(u.getAmount()),
-                    BigDecimal::add);
-    order.setTotalValueOfOrder(totalValueOfOrder.toPlainString());
+                    (t, u) -> t.add(u.getAmount()));
  }
 
