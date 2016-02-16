@@ -9,11 +9,9 @@
      */
     private void checkExistenceOfRequiredTranslations(Set<File> filesInResourceBundle) {
         final String fullBundleName = getFullBundleName(filesInResourceBundle);
-        final String extension = getFileExtensions()[0];
 
         for (String languageCode : requiredTranslations) {
-            final String translationFileName =
-                fullBundleName + '_' + languageCode + extension;
+            final String translationFileName = fullBundleName + '_' + languageCode;
 
             final boolean missing = isMissing(translationFileName, filesInResourceBundle);
             if (missing) {
