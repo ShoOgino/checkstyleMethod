@@ -1,0 +1,23 @@
+    /**
+     * Processes a file with all FileSetChecks.
+     * @param file a file to process.
+     * @return a sorted set of messages to be logged.
+     * @throws CheckstyleException if error condition within Checkstyle occurs.
+     */
+    private SortedSet<LocalizedMessage> processFile(File file) throws CheckstyleException {
+        final SortedSet<LocalizedMessage> fileMessages = Sets.newTreeSet();
+        try {
+            final FileText theText = new FileText(file.getAbsoluteFile(), charset);
+            for (final FileSetCheck fsc : fileSetChecks) {
+                fileMessages.addAll(fsc.process(file, theText));
+            }
+        }
+        catch (final IOException ioe) {
+            LOG.debug("IOException occurred.", ioe);
+            fileMessages.add(new LocalizedMessage(0,
+                Definitions.CHECKSTYLE_BUNDLE, "general.exception",
+                new String[] {ioe.getMessage()}, null, getClass(), null));
+        }
+        return fileMessages;
+    }
+
