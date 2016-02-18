@@ -10,7 +10,8 @@
             messageBuilder.append(getIndentation(node))
                     .append(TokenUtils.getTokenName(node.getType())).append(" -> ")
                     .append(excapeAllControlChars(node.getText())).append(" [")
-                    .append(node.getLineNo()).append(':').append(node.getColumnNo()).append("]\n")
+                    .append(node.getLineNo()).append(':').append(node.getColumnNo()).append(']')
+                    .append(LINE_SEPARATOR)
                     .append(printTree(node.getFirstChild()));
             node = node.getNextSibling();
         }

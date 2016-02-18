@@ -1,11 +1,13 @@
     /**
      * Parse a file and print the parse tree.
      * @param file the file to print.
+     * @param withComments true to include comments to AST
      * @return the AST of the file in String form.
      * @throws IOException if the file could not be read.
      * @throws CheckstyleException if the file is not a Java source.
      */
-    public static String printFileAst(File file) throws IOException, CheckstyleException {
-        return printTree(parseFile(file));
+    public static String printFileAst(File file, boolean withComments)
+            throws IOException, CheckstyleException {
+        return printTree(parseFile(file, withComments));
     }
 

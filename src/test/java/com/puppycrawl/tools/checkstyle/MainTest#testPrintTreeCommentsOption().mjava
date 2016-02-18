@@ -1,5 +1,5 @@
     @Test
-    public void testPrintTreeOption() throws Exception {
+    public void testPrintTreeCommentsOption() throws Exception {
         final String expected = String.format(Locale.ROOT, "PACKAGE_DEF -> package [1:0]%n"
             + "|--ANNOTATIONS -> ANNOTATIONS [1:28]%n"
             + "|--DOT -> . [1:28]%n"
@@ -12,6 +12,9 @@
             + "`--SEMI -> ; [1:39]%n"
             + "CLASS_DEF -> CLASS_DEF [3:0]%n"
             + "|--MODIFIERS -> MODIFIERS [3:0]%n"
+            + "|   |--BLOCK_COMMENT_BEGIN -> /* [2:0]%n"
+            + "|   |   |--COMMENT_CONTENT -> comment [2:2]%n"
+            + "|   |   `--BLOCK_COMMENT_END -> */ [2:8]%n"
             + "|   `--LITERAL_PUBLIC -> public [3:0]%n"
             + "|--LITERAL_CLASS -> class [3:7]%n"
             + "|--IDENT -> InputMain [3:13]%n"
@@ -33,6 +36,6 @@
                 assertEquals("", systemErr.getLog());
             }
         });
-        Main.main("-t", getPath("InputMain.java"));
+        Main.main("-T", getPath("InputMain.java"));
     }
 

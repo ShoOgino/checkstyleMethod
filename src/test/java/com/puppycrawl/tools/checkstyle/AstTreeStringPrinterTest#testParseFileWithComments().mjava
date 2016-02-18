@@ -1,0 +1,11 @@
+    @Test
+    public void testParseFileWithComments() throws Exception {
+        final String actual = AstTreeStringPrinter.printFileAst(
+            new File(getPath("InputAstTreeStringPrinterComments.java")), true)
+                .replaceAll("\\\\r\\\\n", "\\\\n");
+        final String expected = Files.toString(new File(
+                getPath("expectedInputAstTreeStringPrinterComments.txt")), Charsets.UTF_8)
+                .replaceAll("\\\\r\\\\n", "\\\\n");
+        Assert.assertEquals(expected, actual);
+    }
+
