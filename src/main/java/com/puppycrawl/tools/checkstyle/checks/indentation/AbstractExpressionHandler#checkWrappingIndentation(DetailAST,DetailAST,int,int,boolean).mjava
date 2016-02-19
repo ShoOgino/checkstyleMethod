@@ -1,0 +1,16 @@
+    /**
+     * Checks indentation on wrapped lines between and including
+     * {@code firstNode} and {@code lastNode}.
+     *
+     * @param firstNode First node to start examining.
+     * @param lastNode Last node to examine inclusively.
+     * @param wrappedIndentLevel Indentation all wrapped lines should use.
+     * @param startIndent Indentation first line before wrapped lines used.
+     * @param ignoreFirstLine Test if first line's indentation should be checked or not.
+     */
+    protected void checkWrappingIndentation(DetailAST firstNode, DetailAST lastNode,
+            int wrappedIndentLevel, int startIndent, boolean ignoreFirstLine) {
+        indentCheck.getLineWrappingHandler().checkIndentation(firstNode, lastNode,
+                wrappedIndentLevel, startIndent, ignoreFirstLine);
+    }
+

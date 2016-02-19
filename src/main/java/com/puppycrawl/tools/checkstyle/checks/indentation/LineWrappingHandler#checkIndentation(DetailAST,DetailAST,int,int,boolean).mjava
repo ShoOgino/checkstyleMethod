@@ -1,0 +1,45 @@
+    /**
+     * Checks line wrapping into expressions and definitions.
+     *
+     * @param firstNode First node to start examining.
+     * @param lastNode Last node to examine inclusively.
+     * @param indentLevel Indentation all wrapped lines should use.
+     * @param startIndent Indentation first line before wrapped lines used.
+     * @param ignoreFirstLine Test if first line's indentation should be checked or not.
+     */
+    public void checkIndentation(DetailAST firstNode, DetailAST lastNode, int indentLevel,
+            int startIndent, boolean ignoreFirstLine) {
+        final NavigableMap<Integer, DetailAST> firstNodesOnLines = collectFirstNodes(firstNode,
+                lastNode);
+
+        final DetailAST firstLineNode = firstNodesOnLines.get(firstNodesOnLines.firstKey());
+        if (firstLineNode.getType() == TokenTypes.AT) {
+            checkAnnotationIndentation(firstLineNode, firstNodesOnLines, indentLevel);
+        }
+
+        if (ignoreFirstLine) {
+            // First node should be removed because it was already checked before.
+            firstNodesOnLines.remove(firstNodesOnLines.firstKey());
+        }
+
+        final int firstNodeIndent;
+        if (startIndent == -1) {
+            firstNodeIndent = getLineStart(firstLineNode);
+        }
+        else {
+            firstNodeIndent = startIndent;
+        }
+        final int currentIndent = firstNodeIndent + indentLevel;
+
+        for (DetailAST node : firstNodesOnLines.values()) {
+            final int currentType = node.getType();
+
+            if (currentType == TokenTypes.RPAREN) {
+                logWarningMessage(node, firstNodeIndent);
+            }
+            else if (currentType != TokenTypes.RCURLY && currentType != TokenTypes.ARRAY_INIT) {
+                logWarningMessage(node, currentIndent);
+            }
+        }
+    }
+
