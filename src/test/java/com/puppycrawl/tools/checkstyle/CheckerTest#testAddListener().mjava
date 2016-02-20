@@ -1,15 +1,15 @@
     @Test
-    public void testAddListener() {
+    public void testAddListener() throws Exception {
         final Checker checker = new Checker();
         final DebugAuditAdapter auditAdapter = new DebugAuditAdapter();
         checker.addListener(auditAdapter);
 
         // Let's try fire some events
-        checker.fireAuditStarted();
+        getFireAuditStartedMethod().invoke(checker);
         assertTrue("Checker.fireAuditStarted() doesn't call listener", auditAdapter.wasCalled());
 
         auditAdapter.resetListener();
-        checker.fireAuditFinished();
+        getFireAuditFinished().invoke(checker);
         assertTrue("Checker.fireAuditFinished() doesn't call listener", auditAdapter.wasCalled());
 
         auditAdapter.resetListener();

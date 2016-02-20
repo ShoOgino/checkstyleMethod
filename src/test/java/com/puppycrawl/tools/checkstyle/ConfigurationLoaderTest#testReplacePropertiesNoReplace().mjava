@@ -1,12 +1,11 @@
     @Test
-    public void testReplacePropertiesNoReplace()
-        throws CheckstyleException {
+    public void testReplacePropertiesNoReplace() throws Exception {
         final String[] testValues = {null, "", "a", "$a", "{a",
                                      "{a}", "a}", "$a}", "$", "a$b", };
         final Properties props = initProperties();
         for (String testValue : testValues) {
-            final String value = ConfigurationLoader.replaceProperties(
-                testValue, new PropertiesExpander(props), null);
+            final String value = (String) getReplacePropertiesMethod().invoke(
+                null, testValue, new PropertiesExpander(props), null);
             assertEquals("\"" + testValue + "\"", value, testValue);
         }
     }

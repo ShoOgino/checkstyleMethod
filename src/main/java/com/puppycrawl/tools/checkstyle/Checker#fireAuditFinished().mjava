@@ -1,6 +1,5 @@
     /** Notify all listeners about the audit end. */
-    @VisibleForTesting
-    void fireAuditFinished() {
+    private void fireAuditFinished() {
         final AuditEvent event = new AuditEvent(this);
         for (final AuditListener listener : listeners) {
             listener.auditFinished(event);

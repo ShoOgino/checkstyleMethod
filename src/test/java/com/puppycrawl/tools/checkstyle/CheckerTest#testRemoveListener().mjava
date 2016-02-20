@@ -1,5 +1,5 @@
     @Test
-    public void testRemoveListener() {
+    public void testRemoveListener() throws Exception {
         final Checker checker = new Checker();
         final DebugAuditAdapter auditAdapter = new DebugAuditAdapter();
         final DebugAuditAdapter aa2 = new DebugAuditAdapter();
@@ -8,13 +8,13 @@
         checker.removeListener(auditAdapter);
 
         // Let's try fire some events
-        checker.fireAuditStarted();
+        getFireAuditStartedMethod().invoke(checker);
         assertTrue("Checker.fireAuditStarted() doesn't call listener", aa2.wasCalled());
         assertFalse("Checker.fireAuditStarted() does call removed listener",
                 auditAdapter.wasCalled());
 
         aa2.resetListener();
-        checker.fireAuditFinished();
+        getFireAuditFinished().invoke(checker);
         assertTrue("Checker.fireAuditFinished() doesn't call listener", aa2.wasCalled());
         assertFalse("Checker.fireAuditFinished() does call removed listener",
                 auditAdapter.wasCalled());

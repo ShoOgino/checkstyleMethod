@@ -1,13 +1,13 @@
     @Test
-    public void testReplacePropertiesSyntaxError() {
+    public void testReplacePropertiesSyntaxError() throws Exception {
         final Properties props = initProperties();
         try {
-            final String value = ConfigurationLoader.replaceProperties(
-                "${a", new PropertiesExpander(props), null);
+            final String value = (String) getReplacePropertiesMethod().invoke(
+                null, "${a", new PropertiesExpander(props), null);
             fail("expected to fail, instead got: " + value);
         }
-        catch (CheckstyleException ex) {
-            assertEquals("Syntax error in property: ${a", ex.getMessage());
+        catch (InvocationTargetException ex) {
+            assertEquals("Syntax error in property: ${a", ex.getCause().getMessage());
         }
     }
 

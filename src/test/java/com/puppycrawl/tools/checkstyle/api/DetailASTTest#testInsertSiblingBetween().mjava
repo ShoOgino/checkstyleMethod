@@ -1,5 +1,5 @@
     @Test
-    public void testInsertSiblingBetween() {
+    public void testInsertSiblingBetween() throws Exception {
         final DetailAST root = new DetailAST();
         final DetailAST firstLevelA = new DetailAST();
         final DetailAST firstLevelB = new DetailAST();
@@ -8,17 +8,18 @@
         assertEquals(0, root.getChildCount());
 
         root.setFirstChild(firstLevelA);
-        firstLevelA.setParent(root);
+        final Method setParentMethod = getSetParentMethod();
+        setParentMethod.invoke(firstLevelA, root);
 
         assertEquals(1, root.getChildCount());
 
         firstLevelA.addNextSibling(firstLevelB);
-        firstLevelB.setParent(root);
+        setParentMethod.invoke(firstLevelB, root);
 
         assertEquals(firstLevelB, firstLevelA.getNextSibling());
 
         firstLevelA.addNextSibling(firstLevelC);
-        firstLevelC.setParent(root);
+        setParentMethod.invoke(firstLevelC, root);
 
         assertEquals(firstLevelC, firstLevelA.getNextSibling());
     }

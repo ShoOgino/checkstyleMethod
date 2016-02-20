@@ -1,5 +1,5 @@
     @Test
-    public void testDestroy() {
+    public void testDestroy() throws Exception {
         final Checker checker = new Checker();
         final DebugAuditAdapter auditAdapter = new DebugAuditAdapter();
         checker.addListener(auditAdapter);
@@ -10,8 +10,8 @@
         checker.destroy();
 
         // Let's try fire some events
-        checker.fireAuditStarted();
-        checker.fireAuditFinished();
+        getFireAuditStartedMethod().invoke(checker);
+        getFireAuditFinished().invoke(checker);
         checker.fireFileStarted("Some File Name");
         checker.fireFileFinished("Some File Name");
 

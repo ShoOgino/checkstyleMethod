@@ -1,0 +1,12 @@
+    private static Method getReplacePropertiesMethod() throws Exception {
+        final Class<?>[] params = new Class<?>[3];
+        params[0] = String.class;
+        params[1] = PropertyResolver.class;
+        params[2] = String.class;
+        final Class<ConfigurationLoader> configurationLoaderClass = ConfigurationLoader.class;
+        final Method replacePropertiesMethod =
+            configurationLoaderClass.getDeclaredMethod("replaceProperties", params);
+        replacePropertiesMethod.setAccessible(true);
+        return replacePropertiesMethod;
+    }
+

@@ -1,13 +1,13 @@
     @Test
-    public void testReplacePropertiesMissingProperty() {
+    public void testReplacePropertiesMissingProperty() throws Exception {
         final Properties props = initProperties();
         try {
-            final String value = ConfigurationLoader.replaceProperties(
-                "${c}", new PropertiesExpander(props), null);
+            final String value = (String) getReplacePropertiesMethod().invoke(
+                null, "${c}", new PropertiesExpander(props), null);
             fail("expected to fail, instead got: " + value);
         }
-        catch (CheckstyleException ex) {
-            assertEquals("Property ${c} has not been set", ex.getMessage());
+        catch (InvocationTargetException ex) {
+            assertEquals("Property ${c} has not been set", ex.getCause().getMessage());
         }
     }
 

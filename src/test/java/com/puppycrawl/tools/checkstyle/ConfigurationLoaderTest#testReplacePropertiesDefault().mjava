@@ -3,8 +3,8 @@
         final Properties props = new Properties();
         final String defaultValue = "defaultValue";
 
-        final String value = ConfigurationLoader.replaceProperties("${checkstyle.basedir}",
-                new PropertiesExpander(props), defaultValue);
+        final String value = (String) getReplacePropertiesMethod().invoke(
+            null, "${checkstyle.basedir}", new PropertiesExpander(props), defaultValue);
 
         assertEquals(defaultValue, value);
     }

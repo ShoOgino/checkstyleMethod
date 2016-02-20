@@ -1,0 +1,9 @@
+    private static Method getGetMessageBundleMethod() throws Exception {
+        final Class<AbstractViolationReporter> abstractViolationReporterClass =
+            AbstractViolationReporter.class;
+        final Method getMessageBundleMethod =
+            abstractViolationReporterClass.getDeclaredMethod("getMessageBundle", String.class);
+        getMessageBundleMethod.setAccessible(true);
+        return getMessageBundleMethod;
+    }
+
