@@ -4,9 +4,10 @@
      * @param atNode at-clause node.
      * @param firstNodesOnLines map which contains
      *     first nodes as values and line numbers as keys.
+     * @param indentLevel line wrapping indentation.
      */
     private void checkAnnotationIndentation(DetailAST atNode,
-            NavigableMap<Integer, DetailAST> firstNodesOnLines) {
+            NavigableMap<Integer, DetailAST> firstNodesOnLines, int indentLevel) {
         final int firstNodeIndent = expandedTabsColumnNo(atNode);
         final int currentIndent = firstNodeIndent + indentLevel;
         final Collection<DetailAST> values = firstNodesOnLines.values();

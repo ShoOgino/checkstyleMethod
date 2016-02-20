@@ -1,12 +1,17 @@
     /**
      * Checks line wrapping into expressions and definitions.
+     *
+     * @param firstNode First node to start examining.
+     * @param lastNode Last node to examine inclusively.
+     * @param indentLevel Indentation all wrapped lines should use.
      */
-    public void checkIndentation() {
-        final NavigableMap<Integer, DetailAST> firstNodesOnLines = collectFirstNodes();
+    public void checkIndentation(DetailAST firstNode, DetailAST lastNode, int indentLevel) {
+        final NavigableMap<Integer, DetailAST> firstNodesOnLines = collectFirstNodes(firstNode,
+                lastNode);
 
         final DetailAST firstLineNode = firstNodesOnLines.get(firstNodesOnLines.firstKey());
         if (firstLineNode.getType() == TokenTypes.AT) {
-            checkAnnotationIndentation(firstLineNode, firstNodesOnLines);
+            checkAnnotationIndentation(firstLineNode, firstNodesOnLines, indentLevel);
         }
 
         // First node should be removed because it was already checked before.

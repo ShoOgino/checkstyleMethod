@@ -1,10 +1,13 @@
     /**
      * Finds first nodes on line and puts them into Map.
      *
+     * @param firstNode First node to start examining.
+     * @param lastNode Last node to examine inclusively.
      * @return NavigableMap which contains lines numbers as a key and first
      *         nodes on lines as a values.
      */
-    private NavigableMap<Integer, DetailAST> collectFirstNodes() {
+    private NavigableMap<Integer, DetailAST> collectFirstNodes(DetailAST firstNode,
+            DetailAST lastNode) {
         final NavigableMap<Integer, DetailAST> result = new TreeMap<>();
 
         result.put(firstNode.getLineNo(), firstNode);
