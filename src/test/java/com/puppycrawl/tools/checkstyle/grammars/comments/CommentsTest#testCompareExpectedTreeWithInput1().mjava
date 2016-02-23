@@ -1,8 +1,5 @@
     @Test
     public void testCompareExpectedTreeWithInput1() throws Exception {
-        final DefaultConfiguration checkConfig = createCheckConfig(CompareTreesWithComments.class);
-        CompareTreesWithComments.setExpectedTree(buildInput1());
-        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
-        verify(checkConfig, getPath("InputComments1.java"), expected);
+        verifyAst(getPath("InputComments1Ast.txt"), getPath("InputComments1.java"), true);
     }
 

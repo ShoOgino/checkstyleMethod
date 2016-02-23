@@ -1,0 +1,11 @@
+    protected void verifyAst(String expectedTextPrintFileName, String actualJavaFileName,
+            boolean withComments) throws Exception {
+        final String expectedContents = Files.toString(new File(expectedTextPrintFileName),
+                Charsets.UTF_8).replaceAll("\\\\r\\\\n", "\\\\n");
+        final String actualContents = AstTreeStringPrinter.printFileAst(
+                new File(actualJavaFileName), withComments).replaceAll("\\\\r\\\\n", "\\\\n");
+
+        assertEquals("Generated AST from Java file should match pre-defined AST", expectedContents,
+                actualContents);
+    }
+
