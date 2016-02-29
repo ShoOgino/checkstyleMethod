@@ -1,0 +1,27 @@
+    @Test
+    public final void testSimultaneousConfiguration() throws IOException {
+        CheckstyleAntTask antTask;
+        final File file = new File(getPath(CONFIG_FILE));
+        final URL url = file.toURI().toURL();
+        final String expected =
+                "Attributes 'config' and 'configURL' must not be set at the same time";
+        try {
+            antTask = new CheckstyleAntTask();
+            antTask.setConfigUrl(url);
+            antTask.setConfig(file);
+            fail("Exception is expected");
+        }
+        catch (BuildException ex) {
+            assertEquals(expected, ex.getMessage());
+        }
+        try {
+            antTask = new CheckstyleAntTask();
+            antTask.setConfig(file);
+            antTask.setConfigUrl(url);
+            fail("Exception is expected");
+        }
+        catch (BuildException ex) {
+            assertEquals(expected, ex.getMessage());
+        }
+    }
+

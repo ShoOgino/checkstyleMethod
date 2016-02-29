@@ -1,0 +1,10 @@
+    @Test
+    public final void testConfigurationByUrl() throws IOException {
+        final CheckstyleAntTask antTask = new CheckstyleAntTask();
+        antTask.setProject(new Project());
+        final URL url = new File(getPath(CONFIG_FILE)).toURI().toURL();
+        antTask.setConfigURL(url);
+        antTask.setFile(new File(getPath(FLAWLESS_INPUT)));
+        antTask.execute();
+    }
+

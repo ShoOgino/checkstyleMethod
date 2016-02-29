@@ -1,0 +1,25 @@
+    @Test
+    public final void testXmlOutput() throws IOException {
+        final CheckstyleAntTask antTask = getCheckstyleAntTask();
+        antTask.setFile(new File(getPath(VIOLATED_INPUT)));
+        antTask.setFailOnViolation(false);
+        final CheckstyleAntTask.Formatter formatter = new CheckstyleAntTask.Formatter();
+        final File outputFile = new File("target/log.xml");
+        formatter.setTofile(outputFile);
+        final CheckstyleAntTask.FormatterType formatterType = new CheckstyleAntTask.FormatterType();
+        formatterType.setValue("xml");
+        formatter.setType(formatterType);
+        antTask.addFormatter(formatter);
+        antTask.execute();
+
+        final List<String> expected = FileUtils.readLines(
+                new File(getPath("ant/ant_task_xml_output.xml")));
+        final List<String> actual = FileUtils.readLines(outputFile);
+        for (int i = 0; i < expected.size(); i++) {
+            final String line = expected.get(i);
+            if (!line.startsWith("<checkstyle version") && !line.startsWith("<file")) {
+                assertEquals(line, actual.get(i));
+            }
+        }
+    }
+

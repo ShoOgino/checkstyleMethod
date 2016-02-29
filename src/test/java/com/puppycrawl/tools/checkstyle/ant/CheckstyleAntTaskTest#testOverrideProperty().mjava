@@ -1,0 +1,11 @@
+    @Test
+    public final void testOverrideProperty() throws IOException {
+        final CheckstyleAntTask antTask = getCheckstyleAntTask();
+        antTask.setFile(new File(getPath(VIOLATED_INPUT)));
+        final CheckstyleAntTask.Property property = new CheckstyleAntTask.Property();
+        property.setKey("lineLength.severity");
+        property.setValue("ignore");
+        antTask.addProperty(property);
+        antTask.execute();
+    }
+

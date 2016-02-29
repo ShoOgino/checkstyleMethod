@@ -1,0 +1,9 @@
+    @Test
+    public final void testFileSet() throws IOException {
+        final CheckstyleAntTask antTask = getCheckstyleAntTask();
+        final FileSet examinationFileSet = new FileSet();
+        examinationFileSet.setFile(new File(getPath(FLAWLESS_INPUT)));
+        antTask.addFileset(examinationFileSet);
+        antTask.execute();
+    }
+

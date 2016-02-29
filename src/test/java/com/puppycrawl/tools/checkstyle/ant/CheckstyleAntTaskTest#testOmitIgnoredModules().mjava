@@ -1,0 +1,32 @@
+    @Test
+    public final void testOmitIgnoredModules() throws IOException {
+        final CheckstyleAntTask antTask = getCheckstyleAntTask();
+        antTask.setFile(new File(getPath(VIOLATED_INPUT)));
+        antTask.setFailOnViolation(false);
+        antTask.setOmitIgnoredModules(false);
+
+        final CheckstyleAntTask.Formatter formatter = new CheckstyleAntTask.Formatter();
+        final File outputFile = new File("target/ant_task_plain_output.txt");
+        formatter.setTofile(outputFile);
+        final CheckstyleAntTask.FormatterType formatterType = new CheckstyleAntTask.FormatterType();
+        formatterType.setValue("plain");
+        formatter.setType(formatterType);
+        formatter.createListener(null);
+
+        antTask.addFormatter(formatter);
+        antTask.execute();
+
+        final List<String> output = FileUtils.readLines(outputFile);
+        assertEquals("Starting audit...", output.get(0));
+        assertTrue(output.get(1).startsWith("[WARN]"));
+        assertTrue(output.get(1).endsWith("InputCheckstyleAntTaskError.java:4: "
+                + "@incomplete=Some javadoc [WriteTag]"));
+        assertTrue(output.get(2).startsWith("[ERROR]"));
+        assertTrue(output.get(2).endsWith("InputCheckstyleAntTaskError.java:7: "
+                + "Line is longer than 70 characters (found 80). [LineLength]"));
+        assertTrue(output.get(3).startsWith("[ERROR]"));
+        assertTrue(output.get(3).endsWith("InputCheckstyleAntTaskError.java:9: "
+                + "Line is longer than 70 characters (found 81). [LineLength]"));
+        assertEquals("Audit done.", output.get(4));
+    }
+
