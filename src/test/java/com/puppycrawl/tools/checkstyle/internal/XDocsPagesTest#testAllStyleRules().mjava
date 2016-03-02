@@ -27,6 +27,11 @@
                                     lastRuleName.toLowerCase(Locale.ENGLISH)) >= 0);
                 }
 
+                if (!"--".equals(ruleName)) {
+                    validateStyleAnchors(XmlUtil.findChildElementsByTag(columns.get(0), "a"),
+                            fileName, ruleName);
+                }
+
                 validateStyleChecks(XmlUtil.findChildElementsByTag(columns.get(2), "a"),
                         XmlUtil.findChildElementsByTag(columns.get(3), "a"), fileName, ruleName);
 
