@@ -2,6 +2,7 @@
     public void testGenerics() throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(RequireThisCheck.class);
+        checkConfig.addAttribute("validateOnlyOverlapping", "false");
         final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("Input15Extensions.java"), expected);
     }

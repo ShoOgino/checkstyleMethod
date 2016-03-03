@@ -1,0 +1,17 @@
+        /**
+         * Checks whether given instance member has final modifier.
+         * @param instanceMember an instance member of a class.
+         * @return true if given instance member has final modifier.
+         */
+        public boolean hasFinalField(final DetailAST instanceMember) {
+            boolean result = false;
+            for (DetailAST member : instanceMembers) {
+                final DetailAST mods = member.getParent().findFirstToken(TokenTypes.MODIFIERS);
+                final boolean finalMod = mods.branchContains(TokenTypes.FINAL);
+                if (finalMod && member.equals(instanceMember)) {
+                    result = true;
+                }
+            }
+            return result;
+        }
+

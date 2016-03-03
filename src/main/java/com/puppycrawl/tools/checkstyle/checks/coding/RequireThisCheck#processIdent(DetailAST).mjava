@@ -1,7 +1,6 @@
     /**
      * Checks if a given IDENT is method call or field name which
-     * require explicit {@code this} qualifier.
-     *
+     * requires explicit {@code this} qualifier.
      * @param ast IDENT to check.
      */
     private void processIdent(DetailAST ast) {
@@ -13,9 +12,8 @@
                 // no need to check annotations content
                 break;
             case TokenTypes.METHOD_CALL:
-                // let's check method calls
                 if (checkMethods) {
-                    final AbstractFrame frame = checkMethod(ast);
+                    final AbstractFrame frame = getMethodWithoutThis(ast);
                     if (frame != null) {
                         logViolation(MSG_METHOD, ast, frame);
                     }
@@ -23,7 +21,7 @@
                 break;
             default:
                 if (checkFields) {
-                    final AbstractFrame frame = processField(ast, parentType);
+                    final AbstractFrame frame = getFieldWithoutThis(ast, parentType);
                     if (frame != null) {
                         logViolation(MSG_VARIABLE, ast, frame);
                     }

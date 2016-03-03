@@ -1,0 +1,14 @@
+    public String foo45() {
+        String servletRelativeAction = getServletRelativeAction(); // violation (Method call to 'getServletRelativeAction' needs "this.".)
+        if (true) {
+            return processAction("action"); // violation (Method call to 'processAction' needs "this.".)
+        }
+        else if (servletRelativeAction.endsWith("/")) {
+            if (servletRelativeAction.startsWith("/")) {
+                servletRelativeAction = "" + servletRelativeAction;
+            }
+        }
+        servletRelativeAction = "servletRelativeAction"; // violation
+        return processAction(servletRelativeAction); // violation (Method call to 'processAction' needs "this.".)
+    }
+

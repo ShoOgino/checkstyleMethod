@@ -1,0 +1,32 @@
+    /**
+     * Collects all tokens which are equal to current token starting with the current ast node and
+     * which line number is lower or equal to the end line number.
+     * @param ast ast node.
+     * @param token token.
+     * @param endLineNumber end line number.
+     * @return a set of tokens which are equal to current token starting with the current ast node
+     *         and which line number is lower or equal to the end line number.
+     */
+    private static Set<DetailAST> getAllTokensWhichAreEqualToCurrent(DetailAST ast, DetailAST token,
+                                                                     int endLineNumber) {
+        DetailAST vertex = ast;
+        final Set<DetailAST> result = Sets.newHashSet();
+        final Deque<DetailAST> stack = Queues.newArrayDeque();
+        while (vertex != null || !stack.isEmpty()) {
+            if (!stack.isEmpty()) {
+                vertex = stack.pop();
+            }
+            while (vertex != null) {
+                if (token.equals(vertex)
+                        && vertex.getLineNo() <= endLineNumber) {
+                    result.add(vertex);
+                }
+                if (vertex.getNextSibling() != null) {
+                    stack.push(vertex.getNextSibling());
+                }
+                vertex = vertex.getFirstChild();
+            }
+        }
+        return result;
+    }
+

@@ -1,11 +1,9 @@
     /**
-     * Parse the next AST for declarations.
-     *
-     * @param frameStack Stack containing the FrameTree being built
-     * @param ast AST to parse
+     * Parses the next AST for declarations.
+     * @param frameStack stack containing the FrameTree being built.
+     * @param ast AST to parse.
      */
-    private static void collectDeclarations(Deque<AbstractFrame> frameStack,
-        DetailAST ast) {
+    private static void collectDeclarations(Deque<AbstractFrame> frameStack, DetailAST ast) {
         final AbstractFrame frame = frameStack.peek();
         switch (ast.getType()) {
             case TokenTypes.VARIABLE_DEF :
@@ -19,28 +17,28 @@
             case TokenTypes.INTERFACE_DEF :
             case TokenTypes.ENUM_DEF :
             case TokenTypes.ANNOTATION_DEF :
-                final DetailAST classIdent = ast.findFirstToken(TokenTypes.IDENT);
-                frameStack.addFirst(new ClassFrame(frame, classIdent.getText()));
+                final DetailAST classFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
+                frameStack.addFirst(new ClassFrame(frame, classFrameNameIdent));
                 break;
             case TokenTypes.SLIST :
-                frameStack.addFirst(new BlockFrame(frame));
+                frameStack.addFirst(new BlockFrame(frame, ast));
                 break;
             case TokenTypes.METHOD_DEF :
-                final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
+                final DetailAST methodFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
                 if (frame.getType() == FrameType.CLASS_FRAME) {
-                    final DetailAST mods =
-                            ast.findFirstToken(TokenTypes.MODIFIERS);
+                    final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
                     if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                        ((ClassFrame) frame).addStaticMethod(ident);
+                        ((ClassFrame) frame).addStaticMethod(methodFrameNameIdent);
                     }
                     else {
-                        ((ClassFrame) frame).addInstanceMethod(ident);
+                        ((ClassFrame) frame).addInstanceMethod(methodFrameNameIdent);
                     }
                 }
-                frameStack.addFirst(new MethodFrame(frame));
+                frameStack.addFirst(new MethodFrame(frame, methodFrameNameIdent));
                 break;
             case TokenTypes.CTOR_DEF :
-                frameStack.addFirst(new MethodFrame(frame));
+                final DetailAST ctorFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
+                frameStack.addFirst(new ConstructorFrame(frame, ctorFrameNameIdent));
                 break;
             default:
                 // do nothing

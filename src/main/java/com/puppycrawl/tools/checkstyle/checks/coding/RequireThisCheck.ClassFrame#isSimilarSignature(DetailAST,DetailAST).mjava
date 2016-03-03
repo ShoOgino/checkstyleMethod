@@ -7,11 +7,11 @@
          */
         private boolean isSimilarSignature(DetailAST ident, DetailAST ast) {
             boolean result = false;
-            if (ident.getText().equals(ast.getText())) {
-                final int paramsNumber = ast.getParent().findFirstToken(TokenTypes.PARAMETERS)
-                    .getChildCount();
-                final int argsNumber = ident.getParent().findFirstToken(TokenTypes.ELIST)
-                    .getChildCount();
+            final DetailAST elistToken = ident.getParent().findFirstToken(TokenTypes.ELIST);
+            if (elistToken != null && ident.getText().equals(ast.getText())) {
+                final int paramsNumber =
+                    ast.getParent().findFirstToken(TokenTypes.PARAMETERS).getChildCount();
+                final int argsNumber = elistToken.getChildCount();
                 result = paramsNumber == argsNumber;
             }
             return result;

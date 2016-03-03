@@ -1,0 +1,32 @@
+    /**
+     * Collects all tokens of specific type starting with the current ast node and which line
+     * number is lower or equal to the end line number.
+     * @param ast ast node.
+     * @param tokenType token type.
+     * @param endLineNumber end line number.
+     * @return a set of all tokens of specific type starting with the current ast node and which
+     *         line number is lower or equal to the end line number.
+     */
+    private static Set<DetailAST> getAllTokensOfType(DetailAST ast, int tokenType,
+                                                     int endLineNumber) {
+        DetailAST vertex = ast;
+        final Set<DetailAST> result = Sets.newHashSet();
+        final Deque<DetailAST> stack = Queues.newArrayDeque();
+        while (vertex != null || !stack.isEmpty()) {
+            if (!stack.isEmpty()) {
+                vertex = stack.pop();
+            }
+            while (vertex != null) {
+                if (tokenType == vertex.getType()
+                    && vertex.getLineNo() <= endLineNumber) {
+                    result.add(vertex);
+                }
+                if (vertex.getNextSibling() != null) {
+                    stack.push(vertex.getNextSibling());
+                }
+                vertex = vertex.getFirstChild();
+            }
+        }
+        return result;
+    }
+

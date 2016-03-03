@@ -2,6 +2,7 @@
     public void testGithubIssue41() throws Exception {
         final DefaultConfiguration checkConfig =
                 createCheckConfig(RequireThisCheck.class);
+        checkConfig.addAttribute("validateOnlyOverlapping", "false");
         final String[] expected = {
             "7:19: " + getCheckMessage(MSG_VARIABLE, "number", ""),
             "8:16: " + getCheckMessage(MSG_METHOD, "other", ""),

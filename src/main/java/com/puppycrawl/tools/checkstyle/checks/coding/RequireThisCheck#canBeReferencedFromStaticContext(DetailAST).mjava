@@ -1,0 +1,40 @@
+    /**
+     * Checks whether a field can be referenced from a static context.
+     * @param ident ident token.
+     * @return true if field can be referenced from a static context.
+     */
+    private boolean canBeReferencedFromStaticContext(DetailAST ident) {
+        AbstractFrame variableDeclarationFrame = findFrame(ident, false);
+        boolean staticInitializationBlock = false;
+        while (variableDeclarationFrame.getType() == FrameType.BLOCK_FRAME) {
+            final DetailAST blockFrameNameIdent = variableDeclarationFrame.getFrameNameIdent();
+            final DetailAST definitionToken = blockFrameNameIdent.getParent();
+            if (definitionToken.getType() == TokenTypes.STATIC_INIT) {
+                staticInitializationBlock = true;
+                break;
+            }
+            variableDeclarationFrame = variableDeclarationFrame.getParent();
+        }
+
+        boolean staticContext = false;
+        if (staticInitializationBlock) {
+            staticContext = true;
+        }
+        else {
+            if (variableDeclarationFrame.getType() == FrameType.CLASS_FRAME) {
+                final DetailAST codeBlockDefinition = getCodeBlockDefinitionToken(ident);
+                if (codeBlockDefinition != null) {
+                    final DetailAST modifiers = codeBlockDefinition.getFirstChild();
+                    staticContext = codeBlockDefinition.getType() == TokenTypes.STATIC_INIT
+                        || modifiers.branchContains(TokenTypes.LITERAL_STATIC);
+                }
+            }
+            else {
+                final DetailAST frameNameIdent = variableDeclarationFrame.getFrameNameIdent();
+                final DetailAST definitionToken = frameNameIdent.getParent();
+                staticContext = definitionToken.branchContains(TokenTypes.LITERAL_STATIC);
+            }
+        }
+        return !staticContext;
+    }
+

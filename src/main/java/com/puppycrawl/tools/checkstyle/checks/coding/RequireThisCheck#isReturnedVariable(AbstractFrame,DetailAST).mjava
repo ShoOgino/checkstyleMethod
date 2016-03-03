@@ -1,0 +1,25 @@
+    /**
+     * Checks whether the current variable is returned from the method.
+     * @param currentFrame current frame.
+     * @param ident variable ident token.
+     * @return true if the current variable is returned from the method.
+     */
+    private static boolean isReturnedVariable(AbstractFrame currentFrame, DetailAST ident) {
+        final DetailAST blockFrameNameIdent = currentFrame.getFrameNameIdent();
+        final DetailAST definitionToken = blockFrameNameIdent.getParent();
+        final DetailAST blockStartToken = definitionToken.findFirstToken(TokenTypes.SLIST);
+        final DetailAST blockEndToken = getBlockEndToken(blockFrameNameIdent, blockStartToken);
+
+        final Set<DetailAST> returnsInsideBlock = getAllTokensOfType(definitionToken,
+            TokenTypes.LITERAL_RETURN, blockEndToken.getLineNo());
+
+        boolean returnedVariable = false;
+        for (DetailAST returnToken : returnsInsideBlock) {
+            returnedVariable = returnToken.findAll(ident).hasMoreNodes();
+            if (returnedVariable) {
+                break;
+            }
+        }
+        return returnedVariable;
+    }
+

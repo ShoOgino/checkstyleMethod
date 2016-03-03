@@ -2,12 +2,14 @@
     public void testIt() throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(RequireThisCheck.class);
+        checkConfig.addAttribute("validateOnlyOverlapping", "false");
         final String[] expected = {
             "11:9: " + getCheckMessage(MSG_VARIABLE, "i", ""),
             "17:9: " + getCheckMessage(MSG_METHOD, "method1", ""),
             "31:9: " + getCheckMessage(MSG_VARIABLE, "i", ""),
             "49:13: " + getCheckMessage(MSG_VARIABLE, "z", ""),
             "56:9: " + getCheckMessage(MSG_VARIABLE, "z", ""),
+            "86:16: " + getCheckMessage(MSG_VARIABLE, "CONST", ""),
             "113:9: " + getCheckMessage(MSG_VARIABLE, "i", ""),
             "114:9: " + getCheckMessage(MSG_VARIABLE, "i", ""),
             "115:9: " + getCheckMessage(MSG_METHOD, "instanceMethod", ""),

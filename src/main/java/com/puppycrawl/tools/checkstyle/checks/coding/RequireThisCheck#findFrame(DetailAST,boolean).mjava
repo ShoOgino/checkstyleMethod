@@ -5,11 +5,13 @@
      * @return AbstractFrame containing declaration or null.
      */
     private AbstractFrame findFrame(DetailAST name, boolean lookForMethod) {
+        final AbstractFrame result;
         if (current == null) {
-            return null;
+            result = null;
         }
         else {
-            return current.getIfContains(name, lookForMethod);
+            result = current.getIfContains(name, lookForMethod);
         }
+        return result;
     }
 

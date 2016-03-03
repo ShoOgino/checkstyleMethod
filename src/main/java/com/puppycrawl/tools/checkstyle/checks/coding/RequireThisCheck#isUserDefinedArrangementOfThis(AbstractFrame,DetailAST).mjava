@@ -1,0 +1,28 @@
+    /**
+     * Checks whether user arranges 'this' for variable in method, constructor, or block on his own.
+     * @param currentFrame current frame.
+     * @param ident ident token.
+     * @return true if user arranges 'this' for variable in method, constructor,
+     *         or block on his own.
+     */
+    private static boolean isUserDefinedArrangementOfThis(AbstractFrame currentFrame,
+                                                          DetailAST ident) {
+        final DetailAST blockFrameNameIdent = currentFrame.getFrameNameIdent();
+        final DetailAST definitionToken = blockFrameNameIdent.getParent();
+        final DetailAST blockStartToken = definitionToken.findFirstToken(TokenTypes.SLIST);
+        final DetailAST blockEndToken = getBlockEndToken(blockFrameNameIdent, blockStartToken);
+
+        final Set<DetailAST> variableUsagesInsideBlock =
+            getAllTokensWhichAreEqualToCurrent(definitionToken, ident, blockEndToken.getLineNo());
+
+        boolean userDefinedArrangementOfThis = false;
+        for (DetailAST variableUsage : variableUsagesInsideBlock) {
+            final DetailAST prevSibling = variableUsage.getPreviousSibling();
+            if (prevSibling != null
+                    && prevSibling.getType() == TokenTypes.LITERAL_THIS) {
+                userDefinedArrangementOfThis = true;
+            }
+        }
+        return userDefinedArrangementOfThis;
+    }
+
