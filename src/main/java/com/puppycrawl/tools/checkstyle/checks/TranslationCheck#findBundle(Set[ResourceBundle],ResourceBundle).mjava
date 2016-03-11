@@ -1,0 +1,20 @@
+    /**
+     * Searches for specific resource bundle in a set of resource bundles.
+     * @param bundles set of resource bundles.
+     * @param targetBundle target bundle to search for.
+     * @return Guava's Optional of resource bundle (present if target bundle is found).
+     */
+    private static Optional<ResourceBundle> findBundle(Set<ResourceBundle> bundles,
+                                                       final ResourceBundle targetBundle) {
+        Optional<ResourceBundle> result = Optional.absent();
+        for (ResourceBundle currentBundle : bundles) {
+            if (targetBundle.getBaseName().equals(currentBundle.getBaseName())
+                    && targetBundle.getExtension().equals(currentBundle.getExtension())
+                    && targetBundle.getPath().equals(currentBundle.getPath())) {
+                result = Optional.of(currentBundle);
+                break;
+            }
+        }
+        return result;
+    }
+

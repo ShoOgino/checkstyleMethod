@@ -1,0 +1,21 @@
+    /**
+     * Checks resource files in bundle for consistency regarding their keys.
+     * All files in bundle must have the same key set. If this is not the case
+     * an error message is posted giving information which key misses in which file.
+     * @param bundle resource bundle.
+     */
+    private void checkTranslationKeys(ResourceBundle bundle) {
+        final Set<File> filesInBundle = bundle.getFiles();
+        if (filesInBundle.size() > 1) {
+            // build a map from files to the keys they contain
+            final Set<String> allTranslationKeys = Sets.newHashSet();
+            final SetMultimap<File, String> filesAssociatedWithKeys = HashMultimap.create();
+            for (File currentFile : filesInBundle) {
+                final Set<String> keysInCurrentFile = getTranslationKeys(currentFile);
+                allTranslationKeys.addAll(keysInCurrentFile);
+                filesAssociatedWithKeys.putAll(currentFile, keysInCurrentFile);
+            }
+            checkFilesForConsistencyRegardingTheirKeys(filesAssociatedWithKeys, allTranslationKeys);
+        }
+    }
+

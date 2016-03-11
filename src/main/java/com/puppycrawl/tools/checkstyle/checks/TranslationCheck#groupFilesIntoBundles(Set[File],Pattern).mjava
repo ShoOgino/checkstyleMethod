@@ -1,0 +1,30 @@
+    /**
+     * Groups a set of files into bundles.
+     * Only files, which names match base name regexp pattern will be grouped.
+     * @param files set of files.
+     * @param baseNameRegexp base name regexp pattern.
+     * @return set of ResourceBundles.
+     */
+    private Set<ResourceBundle> groupFilesIntoBundles(Set<File> files, Pattern baseNameRegexp) {
+        final Set<ResourceBundle> resourceBundles = Sets.newHashSet();
+        for (File currentFile : files) {
+            final String fileName = currentFile.getName();
+            final String baseName = extractBaseName(fileName);
+            final Matcher baseNameMatcher = baseNameRegexp.matcher(baseName);
+            if (baseNameMatcher.matches()) {
+                final String extension = Files.getFileExtension(fileName);
+                final String path = getPath(currentFile.getAbsolutePath());
+                final ResourceBundle newBundle = new ResourceBundle(baseName, path, extension);
+                final Optional<ResourceBundle> bundle = findBundle(resourceBundles, newBundle);
+                if (bundle.isPresent()) {
+                    bundle.get().addFile(currentFile);
+                }
+                else {
+                    newBundle.addFile(currentFile);
+                    resourceBundles.add(newBundle);
+                }
+            }
+        }
+        return resourceBundles;
+    }
+

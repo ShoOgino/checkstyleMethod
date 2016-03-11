@@ -1,0 +1,11 @@
+    /**
+     * Checks an existence of default translation file in the resource bundle.
+     * @param bundle resource bundle.
+     */
+    private void checkExistenceOfDefaultTranslation(ResourceBundle bundle) {
+        final Optional<String> fileName = getMissingFileName(bundle, null);
+        if (fileName.isPresent()) {
+            logMissingTranslation(bundle.getPath(), fileName.get());
+        }
+    }
+

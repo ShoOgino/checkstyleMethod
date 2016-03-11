@@ -9,7 +9,8 @@
         final Checker checker = createChecker(checkConfig);
         check.setMessageDispatcher(checker);
 
-        final Method loadKeys = check.getClass().getDeclaredMethod("loadKeys", File.class);
+        final Method loadKeys =
+            check.getClass().getDeclaredMethod("getTranslationKeys", File.class);
         loadKeys.setAccessible(true);
         loadKeys.invoke(check, new File(""));
 

@@ -1,16 +1,14 @@
     @Test
-    public void testBaseNameSeparatorTranslationsAreMissing() throws Exception {
+    public void testBaseNameWithSeparatorDefaultTranslationIsMissing() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(TranslationCheck.class);
-        checkConfig.addAttribute("requiredTranslations", "fr, tr");
-        checkConfig.addAttribute("basenameSeparator", "-");
+        checkConfig.addAttribute("requiredTranslations", "fr");
 
         final File[] propertyFiles = {
-            new File(getPath("messages-translation.properties")),
             new File(getPath("messages-translation_fr.properties")),
         };
 
         final String[] expected = {
-            "0: Properties file 'messages-translation_tr.properties' is missing.",
+            "0: Properties file 'messages-translation.properties' is missing.",
         };
         verify(
             createChecker(checkConfig),

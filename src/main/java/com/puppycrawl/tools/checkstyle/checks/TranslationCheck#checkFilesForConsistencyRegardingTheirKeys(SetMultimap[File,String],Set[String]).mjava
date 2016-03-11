@@ -1,0 +1,24 @@
+    /**
+     * Compares th the specified key set with the key sets of the given translation files (arranged
+     * in a map). All missing keys are reported.
+     * @param fileKeys a Map from translation files to their key sets.
+     * @param keysThatMustExist the set of keys to compare with.
+     */
+    private void checkFilesForConsistencyRegardingTheirKeys(SetMultimap<File, String> fileKeys,
+                                                            Set<String> keysThatMustExist) {
+        for (File currentFile : fileKeys.keySet()) {
+            final MessageDispatcher dispatcher = getMessageDispatcher();
+            final String path = currentFile.getPath();
+            dispatcher.fireFileStarted(path);
+            final Set<String> currentFileKeys = fileKeys.get(currentFile);
+            final Set<String> missingKeys = Sets.difference(keysThatMustExist, currentFileKeys);
+            if (!missingKeys.isEmpty()) {
+                for (Object key : missingKeys) {
+                    log(0, MSG_KEY, key);
+                }
+            }
+            fireErrors(path);
+            dispatcher.fireFileFinished(path);
+        }
+    }
+

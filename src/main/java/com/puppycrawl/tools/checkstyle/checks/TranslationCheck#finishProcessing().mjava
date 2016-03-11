@@ -1,9 +1,12 @@
     @Override
     public void finishProcessing() {
         super.finishProcessing();
-        final SetMultimap<String, File> propFilesMap =
-            arrangePropertyFiles(propertyFiles, basenameSeparator);
-        checkExistenceOfTranslations(propFilesMap);
-        checkPropertyFileSets(propFilesMap);
+
+        final Set<ResourceBundle> bundles = groupFilesIntoBundles(filesToProcess, baseNamePattern);
+        for (ResourceBundle currentBundle : bundles) {
+            checkExistenceOfDefaultTranslation(currentBundle);
+            checkExistenceOfRequiredTranslations(currentBundle);
+            checkTranslationKeys(currentBundle);
+        }
     }
 

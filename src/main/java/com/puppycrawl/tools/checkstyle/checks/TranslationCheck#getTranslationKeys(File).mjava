@@ -1,0 +1,23 @@
+    /**
+     * Loads the keys from the specified translation file into a set.
+     * @param file translation file.
+     * @return a Set object which holds the loaded keys.
+     */
+    private Set<String> getTranslationKeys(File file) {
+        Set<String> keys = Sets.newHashSet();
+        InputStream inStream = null;
+        try {
+            inStream = new FileInputStream(file);
+            final Properties translations = new Properties();
+            translations.load(inStream);
+            keys = translations.stringPropertyNames();
+        }
+        catch (final IOException ex) {
+            logIoException(ex, file);
+        }
+        finally {
+            Closeables.closeQuietly(inStream);
+        }
+        return keys;
+    }
+

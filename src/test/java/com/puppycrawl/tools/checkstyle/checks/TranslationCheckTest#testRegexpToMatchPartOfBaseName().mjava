@@ -1,0 +1,25 @@
+    @Test
+    public void testRegexpToMatchPartOfBaseName() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(TranslationCheck.class);
+        checkConfig.addAttribute("requiredTranslations", "de, es, fr, ja");
+        checkConfig.addAttribute("fileExtensions", "properties,translations");
+        checkConfig.addAttribute("baseName", "^.*Labels.*");
+
+        final File[] propertyFiles = {
+            new File(getPath("MyLabelsI18.properties")),
+            new File(getPath("MyLabelsI18_de.properties")),
+            new File(getPath("MyLabelsI18_es.properties")),
+        };
+
+        final String[] expected = {
+            "0: Properties file 'MyLabelsI18_fr.properties' is missing.",
+            "0: Properties file 'MyLabelsI18_ja.properties' is missing.",
+            };
+
+        verify(
+            createChecker(checkConfig),
+            propertyFiles,
+            getPath(""),
+            expected);
+    }
+
