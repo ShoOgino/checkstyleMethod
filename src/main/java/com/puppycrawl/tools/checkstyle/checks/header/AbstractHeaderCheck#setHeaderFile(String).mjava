@@ -4,7 +4,7 @@
      * @throws CheckstyleException if fileName is empty.
      */
     public void setHeaderFile(String fileName) throws CheckstyleException {
-        if (StringUtils.isBlank(fileName)) {
+        if (fileName == null || CharMatcher.WHITESPACE.matchesAllOf(fileName)) {
             throw new CheckstyleException(
                 "property 'headerFile' is missing or invalid in module "
                     + getConfiguration().getName());

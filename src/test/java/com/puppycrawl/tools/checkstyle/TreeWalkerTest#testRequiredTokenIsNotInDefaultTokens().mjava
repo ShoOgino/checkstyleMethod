@@ -3,9 +3,9 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(RequiredTokenIsNotInDefaultsCheck.class);
         final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
-        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
 
         try {
+            final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
             verify(checkConfig, pathToEmptyFile, expected);
             fail("CheckstyleException is expected");
         }

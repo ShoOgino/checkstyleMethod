@@ -17,7 +17,7 @@
                 qualifiedNameParts.add(0, traverse.findFirstToken(TokenTypes.IDENT).getText());
                 traverse = traverse.findFirstToken(TokenTypes.DOT);
             }
-            className = StringUtils.join(qualifiedNameParts, PACKAGE_SEPARATOR);
+            className = Joiner.on(PACKAGE_SEPARATOR).join(qualifiedNameParts);
         }
         else {
             className = classExtend.findFirstToken(TokenTypes.IDENT).getText();

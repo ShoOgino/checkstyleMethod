@@ -5,8 +5,8 @@
             createCheckConfig(HiddenFieldCheck.class);
         checkConfig.addAttribute("tokens", "VARIABLE_DEF, ENUM_DEF, CLASS_DEF, METHOD_DEF,"
                 + "IMPORT");
-        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
         try {
+            final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
             verify(checkConfig, getPath("InputMain.java"), expected);
             fail("CheckstyleException is expected");
         }

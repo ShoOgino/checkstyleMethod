@@ -2,8 +2,8 @@
     public void testUnknown() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
         checkConfig.addAttribute("file", "unknown-file");
-        final String[] expected = ArrayUtils.EMPTY_STRING_ARRAY;
         try {
+            final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
             verify(checkConfig, getPath("InputImportControl.java"), expected);
             fail("Test should fail if exception was not thrown");
         }

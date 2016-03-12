@@ -5,7 +5,7 @@
      * @throws ConversionException if the header cannot be interpreted
      */
     public void setHeader(String header) {
-        if (StringUtils.isBlank(header)) {
+        if (header == null || CharMatcher.WHITESPACE.matchesAllOf(header)) {
             return;
         }
 

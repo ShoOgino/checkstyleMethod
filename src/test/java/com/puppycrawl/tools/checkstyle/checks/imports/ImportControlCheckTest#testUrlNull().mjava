@@ -1,0 +1,9 @@
+    @Test
+    public void testUrlNull() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        checkConfig.addAttribute("url", null);
+        final String[] expected = {"1:47: " + getCheckMessage(MSG_MISSING_FILE)};
+
+        verify(checkConfig, getPath("InputImportControl.java"), expected);
+    }
+

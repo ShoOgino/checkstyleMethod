@@ -30,7 +30,7 @@
             throw new IllegalArgumentException("the annotation is null");
         }
 
-        if (StringUtils.isBlank(annotation)) {
+        if (CharMatcher.WHITESPACE.matchesAllOf(annotation)) {
             throw new IllegalArgumentException(
                     "the annotation is empty or spaces");
         }
