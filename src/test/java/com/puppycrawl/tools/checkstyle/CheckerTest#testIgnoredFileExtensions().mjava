@@ -1,5 +1,5 @@
     @Test
-    public void testFileExtensions() throws Exception {
+    public void testIgnoredFileExtensions() throws Exception {
         final DefaultConfiguration checkerConfig = new DefaultConfiguration("configuration");
         checkerConfig.addAttribute("charset", "UTF-8");
         checkerConfig.addAttribute("cacheFile", temporaryFolder.newFile().getPath());
@@ -11,18 +11,16 @@
         final DebugAuditAdapter auditAdapter = new DebugAuditAdapter();
         checker.addListener(auditAdapter);
 
-        final List<File> files = new ArrayList<>();
-        final File file = new File("file.pdf");
-        files.add(file);
-        final File otherFile = new File("file.java");
-        files.add(otherFile);
+        final List<File> allIgnoredFiles = new ArrayList<>();
+        final File ignoredFile = new File("file.pdf");
+        allIgnoredFiles.add(ignoredFile);
         final String[] fileExtensions = {"java", "xml", "properties"};
         checker.setFileExtensions(fileExtensions);
         checker.setCacheFile(temporaryFolder.newFile().getPath());
-        final int counter = checker.process(files);
+        final int counter = checker.process(allIgnoredFiles);
 
-        // comparing to 1 as there is only one legal file in input
-        final int numLegalFiles = 1;
+        // comparing to 0 as there is no legal file in input
+        final int numLegalFiles = 0;
         assertEquals(numLegalFiles, counter);
         assertEquals(numLegalFiles, auditAdapter.getNumFilesStarted());
         assertEquals(numLegalFiles, auditAdapter.getNumFilesFinished());
