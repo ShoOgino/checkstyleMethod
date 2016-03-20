@@ -6,7 +6,7 @@
      */
     @Override
     public void setHeader(String header) {
-        if (header == null || CharMatcher.WHITESPACE.matchesAllOf(header)) {
+        if (CommonUtils.isBlank(header)) {
             return;
         }
         if (!CommonUtils.isPatternValid(header)) {

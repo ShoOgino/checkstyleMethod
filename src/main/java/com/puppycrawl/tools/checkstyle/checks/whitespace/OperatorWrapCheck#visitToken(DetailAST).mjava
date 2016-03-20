@@ -19,8 +19,7 @@
         // itself.
         if (option == WrapOption.NL
                 && !text.equals(currentLine.trim())
-                && CharMatcher.WHITESPACE.matchesAllOf(
-                    currentLine.substring(colNo + text.length()))) {
+                && CommonUtils.isBlank(currentLine.substring(colNo + text.length()))) {
             log(lineNo, colNo, MSG_LINE_NEW, text);
         }
         else if (option == WrapOption.EOL
