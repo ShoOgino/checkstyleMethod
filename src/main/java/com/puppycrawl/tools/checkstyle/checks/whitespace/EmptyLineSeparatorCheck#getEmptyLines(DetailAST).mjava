@@ -1,0 +1,22 @@
+    /**
+     * Get list of empty lines.
+     * @param ast the ast to check.
+     * @return list of line numbers for empty lines.
+     */
+    private List<Integer> getEmptyLines(DetailAST ast) {
+        final DetailAST lastToken = ast.getLastChild().getLastChild();
+        int lastTokenLineNo = 0;
+        if (lastToken != null) {
+            lastTokenLineNo = lastToken.getLineNo();
+        }
+        final List<Integer> emptyLines = new ArrayList<>();
+        final FileContents fileContents = getFileContents();
+
+        for (int lineNo = ast.getLineNo(); lineNo < lastTokenLineNo; lineNo++) {
+            if (fileContents.lineIsBlank(lineNo)) {
+                emptyLines.add(lineNo);
+            }
+        }
+        return emptyLines;
+    }
+

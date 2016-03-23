@@ -3,6 +3,9 @@
         if (hasMultipleLinesBefore(ast)) {
             log(ast.getLineNo(), MSG_MULTIPLE_LINES, ast.getText());
         }
+        if (!allowMultipleEmptyLinesInsideClassMembers) {
+            processMultipleLinesInside(ast);
+        }
 
         final DetailAST nextToken = ast.getNextSibling();
         if (nextToken != null) {

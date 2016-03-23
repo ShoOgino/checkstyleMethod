@@ -1,0 +1,19 @@
+    /**
+     * Get list of empty lines to log.
+     * @param emptyLines list of empty lines.
+     * @return list of empty lines to log.
+     */
+    private static List<Integer> getEmptyLinesToLog(List<Integer> emptyLines) {
+        final List<Integer> emptyLinesToLog = new ArrayList<>();
+        if (emptyLines.size() > 1) {
+            int previousEmptyLineNo = emptyLines.get(0);
+            for (int emptyLineNo : emptyLines) {
+                if (previousEmptyLineNo + 1 == emptyLineNo) {
+                    emptyLinesToLog.add(emptyLineNo);
+                }
+                previousEmptyLineNo = emptyLineNo;
+            }
+        }
+        return emptyLinesToLog;
+    }
+
