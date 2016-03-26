@@ -1,8 +1,8 @@
-    private boolean isInIfBlock(DetailAST node) {
+    private boolean isInSpecificCodeBlock(DetailAST node, int blockType) {
         boolean returnValue = false;
         for (DetailAST token = node.getParent(); token != null; token = token.getParent()) {
             final int type = token.getType();
-            if (type == TokenTypes.LITERAL_IF) {
+            if (type == blockType) {
                 returnValue = true;
                 break;
             }

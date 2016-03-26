@@ -1,0 +1,11 @@
+    private static boolean isAssignInIfBlockWhichIsInsideCaseBlock(ScopeData scopeData,
+                                                                   DetailAST ast) {
+        boolean assignInIfElseBlock = false;
+        FinalVariableCandidate candidate = scopeData.scope.get(ast.getText());
+        if (candidate != null)
+        {
+            assignInIfElseBlock = candidate.assignInIfBlockWhichIsInsideCaseBlock;
+        }
+        return assignInIfElseBlock;
+    }
+

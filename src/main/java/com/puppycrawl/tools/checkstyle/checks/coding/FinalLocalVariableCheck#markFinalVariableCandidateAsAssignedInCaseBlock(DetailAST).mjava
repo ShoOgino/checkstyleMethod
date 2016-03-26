@@ -1,4 +1,4 @@
-    private void markFinalVariableCandidateAsAssignOutsideIfOrElseBlock(DetailAST ast) {
+    private void markFinalVariableCandidateAsAssignedInCaseBlock(DetailAST ast) {
         final Iterator<ScopeData> iterator = scopeStack.descendingIterator();
         while (iterator.hasNext()) {
             final ScopeData scopeData = iterator.next();
@@ -9,7 +9,7 @@
                 storedVariable = candidate.variableIdent;
             }
             if (storedVariable != null && isSameVariables(storedVariable, ast)) {
-                candidate.assignOutsideIfOrElseBlock = true;
+                candidate.assignInIfBlockWhichIsInsideCaseBlock = true;
                 break;
             }
         }

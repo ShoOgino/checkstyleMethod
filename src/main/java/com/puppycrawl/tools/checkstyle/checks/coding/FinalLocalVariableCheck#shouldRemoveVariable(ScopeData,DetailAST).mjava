@@ -19,7 +19,8 @@
                         shouldRemove = true;
                     }
                     else if (isAssignInIfBlock(scopeData, ast)
-                        && isAssignOutsideIfOrElseBlock(scopeData, ast)) {
+                        && isAssignOutsideIfOrElseBlock(scopeData, ast)
+                        && !isAssignInIfBlockWhichIsInsideCaseBlock(scopeData, ast)) {
                         shouldRemove = true;
                     }
                     else {
