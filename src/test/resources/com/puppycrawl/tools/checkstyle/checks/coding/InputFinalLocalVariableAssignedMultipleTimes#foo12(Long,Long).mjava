@@ -1,0 +1,30 @@
+    // Taken from findbugs
+    private void foo12(Long start, Long end) {
+        HashMap<Object, Object> headMap;
+        if (end < Long.MAX_VALUE) {
+            headMap = Maps.newHashMap();
+            Long tailEnd = 1L;
+            if (tailEnd != null) {
+                end = tailEnd;
+            }
+            if (!headMap.isEmpty()) {
+                tailEnd = (Long) headMap.get(headMap.size());
+                if (tailEnd > end) {
+                    end = tailEnd;
+                }
+            }
+        }
+        headMap = Maps.newHashMap();
+        if (!headMap.isEmpty()) {
+            final int headStart = headMap.size();
+            final Long headEnd = (Long) headMap.get(headStart);
+            if (headEnd >= start - 1) {
+                headMap.remove(headStart);
+                start = Long.valueOf(headStart);
+            }
+        }
+        headMap.clear();
+        headMap.remove(end);
+        headMap.put(start, end);
+    }
+
