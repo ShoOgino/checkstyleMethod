@@ -1,0 +1,10 @@
+    private static boolean isAssignInElseBlock(ScopeData scopeData, DetailAST ast) {
+        boolean assignInIfElseBlock = false;
+        FinalVariableCandidate candidate = scopeData.scope.get(ast.getText());
+        if (candidate != null)
+        {
+            assignInIfElseBlock = candidate.assignInElseBlock;
+        }
+        return assignInIfElseBlock;
+    }
+

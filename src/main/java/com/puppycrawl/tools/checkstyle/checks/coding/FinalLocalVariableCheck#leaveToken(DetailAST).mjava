@@ -1,6 +1,6 @@
     @Override
     public void leaveToken(DetailAST ast) {
-        Map<String, DetailAST> scope = null;
+        Map<String, FinalVariableCandidate> scope = null;
         switch (ast.getType()) {
             case TokenTypes.OBJBLOCK:
             case TokenTypes.CTOR_DEF:
@@ -25,8 +25,9 @@
                 // do nothing
         }
         if (scope != null) {
-            for (DetailAST node : scope.values()) {
-                log(node.getLineNo(), node.getColumnNo(), MSG_KEY, node.getText());
+            for (FinalVariableCandidate candidate : scope.values()) {
+                DetailAST ident = candidate.variableIdent;
+                log(ident.getLineNo(), ident.getColumnNo(), MSG_KEY, ident.getText());
             }
         }
     }

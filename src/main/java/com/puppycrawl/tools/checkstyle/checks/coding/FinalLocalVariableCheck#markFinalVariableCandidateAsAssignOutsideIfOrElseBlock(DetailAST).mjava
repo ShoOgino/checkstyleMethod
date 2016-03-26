@@ -1,21 +1,15 @@
-    /**
-     * Remove the variable from the Stack.
-     * @param ast Variable to remove
-     */
-    private void removeVariable(DetailAST ast) {
+    private void markFinalVariableCandidateAsAssignOutsideIfOrElseBlock(DetailAST ast) {
         final Iterator<ScopeData> iterator = scopeStack.descendingIterator();
         while (iterator.hasNext()) {
             final ScopeData scopeData = iterator.next();
             final Map<String, FinalVariableCandidate> scope = scopeData.scope;
-            final FinalVariableCandidate candidate = scope.get(ast.getText());
             DetailAST storedVariable = null;
+            final FinalVariableCandidate candidate = scope.get(ast.getText());
             if (candidate != null) {
                 storedVariable = candidate.variableIdent;
             }
             if (storedVariable != null && isSameVariables(storedVariable, ast)) {
-                if (shouldRemoveVariable(scopeData, ast)) {
-                    scope.remove(ast.getText());
-                }
+                candidate.assignOutsideIfOrElseBlock = true;
                 break;
             }
         }

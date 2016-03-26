@@ -35,6 +35,18 @@
                 final int parentType = ast.getParent().getType();
                 if (isAssignOperator(parentType)
                         && isFirstChild(ast)) {
+                    if (isInIfBlock(ast))
+                    {
+                        markFinalVariableCandidateAsAssignInIfBlock(ast);
+                    }
+                    else if (isInElseBlock(ast))
+                    {
+                        markFinalVariableCandidateAsAssignInElseBlock(ast);
+                    }
+                    else
+                    {
+                        markFinalVariableCandidateAsAssignOutsideIfOrElseBlock(ast);
+                    }
                     removeVariable(ast);
                 }
                 break;

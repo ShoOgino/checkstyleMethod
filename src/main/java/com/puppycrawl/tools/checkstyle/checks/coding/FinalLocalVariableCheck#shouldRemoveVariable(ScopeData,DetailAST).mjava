@@ -15,8 +15,18 @@
                 // more than once in this case
                 if (isInTheSameLoop(variable, ast)
                         || !isUseOfExternalVariableInsideLoop(ast)) {
-                    shouldRemove = false;
+                    if (isAssignInIfBlock(scopeData, ast) && isAssignInElseBlock(scopeData, ast)) {
+                        shouldRemove = true;
+                    }
+                    else if (isAssignInIfBlock(scopeData, ast)
+                        && isAssignOutsideIfOrElseBlock(scopeData, ast)) {
+                        shouldRemove = true;
+                    }
+                    else {
+                        shouldRemove = false;
+                    }
                 }
+
                 scopeData.uninitializedVariables.remove(variable);
                 break;
             }

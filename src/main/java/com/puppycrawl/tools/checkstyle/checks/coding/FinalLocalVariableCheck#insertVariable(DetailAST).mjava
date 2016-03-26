@@ -3,9 +3,9 @@
      * @param ast the variable to insert.
      */
     private void insertVariable(DetailAST ast) {
-        final Map<String, DetailAST> scope = scopeStack.peek().scope;
+        final Map<String, FinalVariableCandidate> scope = scopeStack.peek().scope;
         final DetailAST astNode = ast.findFirstToken(TokenTypes.IDENT);
-        scope.put(astNode.getText(), astNode);
+        scope.put(astNode.getText(), new FinalVariableCandidate(astNode));
         if (!isInitialized(astNode)) {
             scopeStack.peek().uninitializedVariables.add(astNode);
         }

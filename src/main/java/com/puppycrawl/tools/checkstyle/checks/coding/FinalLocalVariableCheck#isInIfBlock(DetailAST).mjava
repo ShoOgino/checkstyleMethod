@@ -1,0 +1,12 @@
+    private boolean isInIfBlock(DetailAST node) {
+        boolean returnValue = false;
+        for (DetailAST token = node.getParent(); token != null; token = token.getParent()) {
+            final int type = token.getType();
+            if (type == TokenTypes.LITERAL_IF) {
+                returnValue = true;
+                break;
+            }
+        }
+        return returnValue;
+    }
+
