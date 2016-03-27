@@ -1,0 +1,19 @@
+        /**
+         * Searches for final local variable candidate for ast in the scope.
+         * @param ast ast.
+         * @return Optional of {@link FinalVariableCandidate}.
+         */
+        public Optional<FinalVariableCandidate> findFinalVariableCandidateForAst(DetailAST ast) {
+            Optional<FinalVariableCandidate> result = Optional.absent();
+            DetailAST storedVariable = null;
+            final Optional<FinalVariableCandidate> candidate =
+                Optional.fromNullable(scope.get(ast.getText()));
+            if (candidate.isPresent()) {
+                storedVariable = candidate.get().variableIdent;
+            }
+            if (storedVariable != null && isSameVariables(storedVariable, ast)) {
+                result = candidate;
+            }
+            return result;
+        }
+

@@ -1,0 +1,15 @@
+    /**
+     * Gets final variable candidate for ast.
+     * @param ast ast.
+     * @return Optional of {@link FinalVariableCandidate} for ast from scopeStack.
+     */
+    private Optional<FinalVariableCandidate> getFinalCandidate(DetailAST ast) {
+        Optional<FinalVariableCandidate> result = Optional.absent();
+        final Iterator<ScopeData> iterator = scopeStack.descendingIterator();
+        while (iterator.hasNext() && !result.isPresent()) {
+            final ScopeData scopeData = iterator.next();
+            result = scopeData.findFinalVariableCandidateForAst(ast);
+        }
+        return result;
+    }
+

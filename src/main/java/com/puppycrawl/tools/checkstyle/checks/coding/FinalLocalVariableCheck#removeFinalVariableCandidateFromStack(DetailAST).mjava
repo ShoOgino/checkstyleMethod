@@ -1,15 +1,21 @@
-    private void markFinalVariableCandidateAsAssignedInElseBlock(DetailAST ast) {
+    /**
+     * Removes the final variable candidate from the Stack.
+     * @param ast variable to remove.
+     */
+    private void removeFinalVariableCandidateFromStack(DetailAST ast) {
         final Iterator<ScopeData> iterator = scopeStack.descendingIterator();
         while (iterator.hasNext()) {
             final ScopeData scopeData = iterator.next();
             final Map<String, FinalVariableCandidate> scope = scopeData.scope;
-            DetailAST storedVariable = null;
             final FinalVariableCandidate candidate = scope.get(ast.getText());
+            DetailAST storedVariable = null;
             if (candidate != null) {
                 storedVariable = candidate.variableIdent;
             }
             if (storedVariable != null && isSameVariables(storedVariable, ast)) {
-                candidate.assignInElseBlock = true;
+                if (shouldRemoveFinalVariableCandidate(scopeData, ast)) {
+                    scope.remove(ast.getText());
+                }
                 break;
             }
         }

@@ -13,7 +13,6 @@
      * @return true if a variable which is declared ouside loop is used inside loop.
      */
     private static boolean isUseOfExternalVariableInsideLoop(DetailAST variable) {
-        boolean result = true;
         DetailAST loop2 = variable.getParent();
         while (loop2 != null
             && !isLoopAst(loop2.getType())) {

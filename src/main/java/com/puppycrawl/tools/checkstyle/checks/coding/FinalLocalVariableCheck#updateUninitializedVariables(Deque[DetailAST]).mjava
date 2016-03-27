@@ -3,8 +3,7 @@
      * @param prevScopeUnitializedVariableData variable for previous stack of uninitialized
      *     variables
      */
-    private void updateUninitializedVariables(Deque<DetailAST>
-            prevScopeUnitializedVariableData) {
+    private void updateUninitializedVariables(Deque<DetailAST> prevScopeUnitializedVariableData) {
         // Check for only previous scope
         for (DetailAST variable : prevScopeUnitializedVariableData) {
             for (ScopeData scopeData : scopeStack) {
@@ -23,7 +22,8 @@
         for (Deque<DetailAST> unitializedVariableData : prevScopeUninitializedVariables) {
             for (DetailAST variable : unitializedVariableData) {
                 for (ScopeData scopeData : scopeStack) {
-                    final FinalVariableCandidate candidate = scopeData.scope.get(variable.getText());
+                    final FinalVariableCandidate candidate =
+                        scopeData.scope.get(variable.getText());
                     DetailAST storedVariable = null;
                     if (candidate != null) {
                         storedVariable = candidate.variableIdent;

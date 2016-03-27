@@ -33,24 +33,20 @@
 
             case TokenTypes.IDENT:
                 final int parentType = ast.getParent().getType();
-                if (isAssignOperator(parentType)
-                        && isFirstChild(ast)) {
-                    if (isInSpecificCodeBlock(ast, TokenTypes.LITERAL_IF))
-                    {
-                        markFinalVariableCandidateAsAssignedInIfBlock(ast);
-                        if (isInSpecificCodeBlock(ast, TokenTypes.CASE_GROUP)) {
-                            markFinalVariableCandidateAsAssignedInCaseBlock(ast);
+                if (isAssignOperator(parentType) && isFirstChild(ast)) {
+                    final Optional<FinalVariableCandidate> candidate = getFinalCandidate(ast);
+                    if (candidate.isPresent()) {
+                        if (isInSpecificCodeBlock(ast, TokenTypes.LITERAL_IF)) {
+                            candidate.get().assignInIfBlock = true;
+                            if (isInSpecificCodeBlock(ast, TokenTypes.CASE_GROUP)) {
+                                candidate.get().assignInIfBlockWhichIsInsideCaseBlock = true;
+                            }
+                        }
+                        else {
+                            candidate.get().assignOutsideConditionalBlock = true;
                         }
                     }
-                    else if (isInSpecificCodeBlock(ast, TokenTypes.LITERAL_ELSE))
-                    {
-                        markFinalVariableCandidateAsAssignedInElseBlock(ast);
-                    }
-                    else
-                    {
-                        markFinalVariableCandidateAsAssignedOutsideIfOrElseBlock(ast);
-                    }
-                    removeVariable(ast);
+                    removeFinalVariableCandidateFromStack(ast);
                 }
                 break;
 

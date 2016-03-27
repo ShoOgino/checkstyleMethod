@@ -1,4 +1,10 @@
-    private boolean isInSpecificCodeBlock(DetailAST node, int blockType) {
+    /**
+     * Checks whether the scope of a node is restricted to a specific code block.
+     * @param node node.
+     * @param blockType block type.
+     * @return true if the scope of a node is restricted to a specific code block.
+     */
+    private static boolean isInSpecificCodeBlock(DetailAST node, int blockType) {
         boolean returnValue = false;
         for (DetailAST token = node.getParent(); token != null; token = token.getParent()) {
             final int type = token.getType();
