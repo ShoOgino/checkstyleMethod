@@ -4,30 +4,19 @@
      * @return true if trail comment is present after ast token.
      */
     private boolean hasTrailComment(DetailAST ast) {
-        final DetailAST variableDef = getVariableDef(ast);
-        DetailAST semi;
-
-        if (variableDef == null) {
-            semi = getSemi(ast);
+        boolean result = false;
+        final int lineNo = ast.getLineNo();
+        if (singlelineComments.containsKey(lineNo)) {
+            result = true;
         }
         else {
-            semi = variableDef.getNextSibling();
-
-            if (semi.getType() != TokenTypes.SEMI) {
-                semi = variableDef.getLastChild();
+            final String line = getLines()[lineNo - 1];
+            final List<TextBlock> commentList = blockComments.get(lineNo);
+            if (commentList != null) {
+                final TextBlock comment = commentList.get(commentList.size() - 1);
+                result = isTrailingCComent(comment, line);
             }
         }
-
-        boolean result = false;
-        if (semi != null) {
-            final int lineNo = semi.getLineNo();
-            final String currentLine = getLine(lineNo - 1);
-
-            if (COMMENT_REGEXP.matcher(currentLine).find()) {
-                result = true;
-            }
-        }
-
         return result;
     }
 
