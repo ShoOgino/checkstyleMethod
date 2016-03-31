@@ -1,0 +1,14 @@
+    @Test
+    public void testWrongUserSpecifiedLanguageCodes() throws Exception {
+        final TranslationCheck check = new TranslationCheck();
+        try {
+            check.setRequiredTranslations("11");
+            fail("IllegalArgumentException is expected. Specified language code is incorrect.");
+        }
+        catch (IllegalArgumentException ex) {
+            final String exceptionMessage = ex.getMessage();
+            assertThat(exceptionMessage, containsString("11"));
+            assertThat(exceptionMessage, endsWith("[TranslationCheck]"));
+        }
+    }
+
