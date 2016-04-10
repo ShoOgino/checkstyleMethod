@@ -54,6 +54,11 @@
                         final String stringAst = DetailNodeTreeStringPrinter.printFileAst(file);
                         System.out.print(stringAst);
                     }
+                    else if (commandLine.hasOption(OPTION_CAPITAL_J_NAME)) {
+                        final File file = config.files.get(0);
+                        final String stringAst = AstTreeStringPrinter.printJavaAndJavadocTree(file);
+                        System.out.print(stringAst);
+                    }
                     else {
                         // run Checker
                         errorCounter = runCheckstyle(config);

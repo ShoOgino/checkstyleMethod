@@ -8,9 +8,7 @@
         DetailAST node = ast;
         while (node != null) {
             messageBuilder.append(getIndentation(node))
-                    .append(TokenUtils.getTokenName(node.getType())).append(" -> ")
-                    .append(excapeAllControlChars(node.getText())).append(" [")
-                    .append(node.getLineNo()).append(':').append(node.getColumnNo()).append(']')
+                    .append(getNodeInfo(node))
                     .append(LINE_SEPARATOR)
                     .append(printTree(node.getFirstChild()));
             node = node.getNextSibling();

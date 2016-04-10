@@ -1,0 +1,12 @@
+    /**
+     * Get string representation of the node as token name,
+     * node text, line number and column number.
+     * @param node DetailAST
+     * @return node info
+     */
+    private static String getNodeInfo(DetailAST node) {
+        return TokenUtils.getTokenName(node.getType())
+                + " -> " + excapeAllControlChars(node.getText())
+                + " [" + node.getLineNo() + ':' + node.getColumnNo() + ']';
+    }
+

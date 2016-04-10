@@ -1,0 +1,16 @@
+    @Test
+    public void testPrintFullTreeOption() throws Exception {
+        final String expected = Files.toString(new File(
+                getPath("astprinter/expectedInputAstTreeStringPrinterJavadoc.txt")),
+                Charsets.UTF_8).replaceAll("\\\\r\\\\n", "\\\\n");
+
+        exit.checkAssertionAfterwards(new Assertion() {
+            @Override
+            public void checkAssertion() {
+                assertEquals(expected, systemOut.getLog().replaceAll("\\\\r\\\\n", "\\\\n"));
+                assertEquals("", systemErr.getLog());
+            }
+        });
+        Main.main("-J", getPath("astprinter/InputAstTreeStringPrinterJavadoc.java"));
+    }
+
