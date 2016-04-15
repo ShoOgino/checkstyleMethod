@@ -1,0 +1,14 @@
+        @Override
+        public void addError(AuditEvent event) {
+            final int line = event.getLine();
+            final String message = event.getMessage();
+            final IndentComment comment = comments[position];
+            position++;
+
+            assertTrue(
+                    "input expected warning #" + position + " at line " + comment.getLineNumber()
+                            + " to report '" + comment.getExpectedMessage() + "' but got instead: "
+                            + line + ": " + message,
+                    message.endsWith(comment.getExpectedMessage()));
+        }
+

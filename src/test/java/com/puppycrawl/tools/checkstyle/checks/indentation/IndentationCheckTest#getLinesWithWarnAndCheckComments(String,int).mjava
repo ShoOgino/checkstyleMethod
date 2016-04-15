@@ -1,36 +1,35 @@
-    private static Integer[] getLinesWithWarnAndCheckComments(String aFileName,
+    private static IndentComment[] getLinesWithWarnAndCheckComments(String aFileName,
             final int tabWidth)
                     throws IOException {
-        final List<Integer> result = new ArrayList<>();
+        final List<IndentComment> result = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 new FileInputStream(aFileName), StandardCharsets.UTF_8))) {
             int lineNumber = 1;
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 final Matcher match = LINE_WITH_COMMENT_REGEX.matcher(line);
                 if (match.matches()) {
-                    final String comment = match.group(1);
-                    final int indentInComment = getIndentFromComment(comment);
+                    final IndentComment warn = new IndentComment(match, lineNumber);
                     final int actualIndent = getLineStart(line, tabWidth);
 
-                    if (actualIndent != indentInComment) {
+                    if (actualIndent != warn.getIndent()) {
                         throw new IllegalStateException(String.format(Locale.ROOT,
-                                        "File \"%1$s\" has incorrect indentation in comment."
+                                        "File \"%1$s\" has incorrect indentation in comment. "
                                                         + "Line %2$d: comment:%3$d, actual:%4$d.",
                                         aFileName,
                                         lineNumber,
-                                        indentInComment,
+                                        warn.getIndent(),
                                         actualIndent));
                     }
 
-                    if (isWarnComment(comment)) {
-                        result.add(lineNumber);
-                    }
-
-                    if (!isCommentConsistent(comment)) {
+                    if (!isCommentConsistent(warn)) {
                         throw new IllegalStateException(String.format(Locale.ROOT,
                                         "File \"%1$s\" has inconsistent comment on line %2$d",
                                         aFileName,
                                         lineNumber));
+                    }
+
+                    if (warn.isWarning()) {
+                        result.add(warn);
                     }
                 }
                 else if (!line.isEmpty()) {
@@ -43,6 +42,6 @@
                 lineNumber++;
             }
         }
-        return result.toArray(new Integer[result.size()]);
+        return result.toArray(new IndentComment[result.size()]);
     }
 

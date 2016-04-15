@@ -1,0 +1,14 @@
+        private IndentComment(Matcher match, int lineNumber) {
+            this.lineNumber = lineNumber;
+            indent = Integer.parseInt(match.group(1));
+            if (match.group(2) == null) {
+                indentOffset = 0;
+            }
+            else {
+                indentOffset = Integer.parseInt(match.group(2));
+            }
+            expectedNonStrict = match.group(3) != null;
+            expectedWarning = match.group(4).replace(",", ", ");
+            warning = match.group(5) != null;
+        }
+
