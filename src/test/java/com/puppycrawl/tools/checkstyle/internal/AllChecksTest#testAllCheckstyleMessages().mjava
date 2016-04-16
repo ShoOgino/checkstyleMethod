@@ -1,6 +1,9 @@
     @Test
     public void testAllCheckstyleMessages() throws Exception {
-        for (Class<?> module : CheckUtil.getCheckstyleChecks()) {
+        final Map<String, List<String>> usedMessages = new TreeMap<>();
+
+        // test validity of messages from checks
+        for (Class<?> module : CheckUtil.getCheckstyleModules()) {
             for (Field message : CheckUtil.getCheckMessages(module)) {
                 Assert.assertEquals(module.getSimpleName() + "." + message.getName()
                         + " should be 'public static final'", Modifier.PUBLIC | Modifier.STATIC
@@ -11,33 +14,24 @@
                     message.setAccessible(true);
                 }
 
-                for (Locale locale : ALL_LOCALES) {
-                    final String messageString = message.get(null).toString();
-                    String result = null;
+                verifyCheckstyleMessage(usedMessages, module, message);
+            }
+        }
 
-                    try {
-                        result = CheckUtil.getCheckMessage(module, locale, messageString);
-                    }
-                    catch (IllegalArgumentException ex) {
-                        Assert.fail(module.getSimpleName() + " with the message '" + messageString
-                                + "' in locale '" + locale.getLanguage() + "' failed with: "
-                                + ex.getClass().getSimpleName() + " - " + ex.getMessage());
-                    }
+        // test properties for messages not used by checks
+        for (Entry<String, List<String>> entry : usedMessages.entrySet()) {
+            final Properties pr = new Properties();
+            pr.load(AllChecksTest.class.getResourceAsStream(
+                    "/" + entry.getKey().replace('.', '/') + "/messages.properties"));
 
-                    Assert.assertNotNull(
-                            module.getSimpleName() + " should have text for the message '"
-                                    + messageString + "' in locale " + locale.getLanguage() + "'",
-                            result);
-                    Assert.assertFalse(
-                            module.getSimpleName() + " should have non-empty text for the message '"
-                                    + messageString + "' in locale '" + locale.getLanguage() + "'",
-                            result.trim().isEmpty());
-                    Assert.assertFalse(
-                            module.getSimpleName() + " should have non-TODO text for the message '"
-                                    + messageString + "' in locale " + locale.getLanguage() + "'",
-                            !"todo.match".equals(messageString)
-                                    && result.trim().startsWith("TODO"));
+            for (Object key : pr.keySet()) {
+                // hidden exception messages
+                if ("translation.wrongLanguageCode".equals(key)) {
+                    continue;
                 }
+
+                Assert.assertTrue("property '" + key + "' isn't used by any check in package '"
+                        + entry.getKey() + "'", entry.getValue().contains(key.toString()));
             }
         }
     }
