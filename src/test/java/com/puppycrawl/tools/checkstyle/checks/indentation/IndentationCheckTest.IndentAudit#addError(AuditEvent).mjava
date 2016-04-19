@@ -2,6 +2,12 @@
         public void addError(AuditEvent event) {
             final int line = event.getLine();
             final String message = event.getMessage();
+
+            if (position >= comments.length) {
+                fail("found a warning when none was expected for #" + position + " at line " + line
+                        + " with message " + message);
+            }
+
             final IndentComment comment = comments[position];
             position++;
 
