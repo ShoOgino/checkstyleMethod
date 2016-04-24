@@ -8,7 +8,7 @@
      */
     private void checkAnnotationIndentation(DetailAST atNode,
             NavigableMap<Integer, DetailAST> firstNodesOnLines, int indentLevel) {
-        final int firstNodeIndent = expandedTabsColumnNo(atNode);
+        final int firstNodeIndent = getLineStart(atNode);
         final int currentIndent = firstNodeIndent + indentLevel;
         final Collection<DetailAST> values = firstNodesOnLines.values();
         final DetailAST lastAnnotationNode = getLastAnnotationNode(atNode);
