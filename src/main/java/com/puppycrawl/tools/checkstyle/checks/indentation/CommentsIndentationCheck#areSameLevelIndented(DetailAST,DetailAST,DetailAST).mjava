@@ -21,15 +21,15 @@
      * @param nextStmt next code statement.
      * @return true if comment and next code statement are indented at the same level.
      */
-    private static boolean areSameLevelIndented(DetailAST comment, DetailAST prevStmt,
+    private boolean areSameLevelIndented(DetailAST comment, DetailAST prevStmt,
                                                 DetailAST nextStmt) {
         final boolean result;
         if (prevStmt == null) {
-            result = comment.getColumnNo() == nextStmt.getColumnNo();
+            result = comment.getColumnNo() == getLineStart(nextStmt.getLineNo());
         }
         else {
-            result = comment.getColumnNo() == nextStmt.getColumnNo()
-                || comment.getColumnNo() == prevStmt.getColumnNo();
+            result = comment.getColumnNo() == getLineStart(nextStmt.getLineNo())
+                    || comment.getColumnNo() == getLineStart(prevStmt.getLineNo());
         }
         return result;
     }

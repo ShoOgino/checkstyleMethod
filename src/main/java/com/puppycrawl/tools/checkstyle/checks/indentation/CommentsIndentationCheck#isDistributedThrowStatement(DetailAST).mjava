@@ -6,15 +6,15 @@
      *         statement.
      */
     private static boolean isDistributedThrowStatement(DetailAST commentPreviousSibling) {
-        boolean destributed = false;
+        boolean isDistributed = false;
         if (commentPreviousSibling != null
                 && commentPreviousSibling.getType() == TokenTypes.LITERAL_THROW) {
             final DetailAST firstChild = commentPreviousSibling.getFirstChild();
             final DetailAST nextSibling = firstChild.getNextSibling();
             if (nextSibling.getLineNo() != commentPreviousSibling.getLineNo()) {
-                destributed = true;
+                isDistributed = true;
             }
         }
-        return destributed;
+        return isDistributed;
     }
 

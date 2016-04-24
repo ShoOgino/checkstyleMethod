@@ -8,7 +8,7 @@
      */
     private static boolean isDistributedMethodChainOrConcatenationStatement(
         DetailAST comment, DetailAST commentPreviousSibling) {
-        boolean destributed = false;
+        boolean isDistributed = false;
         if (commentPreviousSibling != null
                 && commentPreviousSibling.getType() == TokenTypes.SEMI
                 && comment.getLineNo() - commentPreviousSibling.getLineNo() == 1) {
@@ -16,11 +16,17 @@
             while (currentToken.getFirstChild() != null) {
                 currentToken = currentToken.getFirstChild();
             }
-            if (currentToken.getType() != TokenTypes.COMMENT_CONTENT
-                    && commentPreviousSibling.getLineNo() != currentToken.getLineNo()) {
-                destributed = true;
+            if (currentToken.getType() == TokenTypes.COMMENT_CONTENT) {
+                currentToken = currentToken.getParent();
+                while (currentToken.getType() == TokenTypes.SINGLE_LINE_COMMENT
+                        || currentToken.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
+                    currentToken = currentToken.getNextSibling();
+                }
+            }
+            if (commentPreviousSibling.getLineNo() != currentToken.getLineNo()) {
+                isDistributed = true;
             }
         }
-        return destributed;
+        return isDistributed;
     }
 

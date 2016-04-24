@@ -14,7 +14,7 @@
      * @param comment single line statement.
      * @param nextStmt next statement.
      */
-    private void handleSIngleLineCommentAtTheEndOfTheCodeBlock(DetailAST prevStmt,
+    private void handleSingleLineCommentAtTheEndOfTheCodeBlock(DetailAST prevStmt,
                                                                DetailAST comment,
                                                                DetailAST nextStmt) {
         if (prevStmt != null) {
@@ -28,8 +28,9 @@
                 }
             }
             else if (!areSameLevelIndented(comment, prevStmt, prevStmt)) {
-                log(comment.getLineNo(), MSG_KEY_SINGLE, prevStmt.getLineNo(),
-                    comment.getColumnNo(), prevStmt.getColumnNo());
+                final int prevStmtLineNo = prevStmt.getLineNo();
+                log(comment.getLineNo(), MSG_KEY_SINGLE, prevStmtLineNo,
+                    comment.getColumnNo(), getLineStart(prevStmtLineNo));
             }
         }
 

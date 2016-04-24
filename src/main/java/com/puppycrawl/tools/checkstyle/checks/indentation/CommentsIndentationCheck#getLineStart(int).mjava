@@ -1,0 +1,14 @@
+    /**
+     * Get a column number where a code starts.
+     * @param lineNo the line number to get column number in.
+     * @return the column number where a code starts.
+     */
+    private int getLineStart(int lineNo) {
+        final char[] line = getLines()[lineNo - 1].toCharArray();
+        int lineStart = 0;
+        while (Character.isWhitespace(line[lineStart])) {
+            lineStart++;
+        }
+        return lineStart;
+    }
+
