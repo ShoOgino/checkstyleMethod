@@ -1,13 +1,11 @@
     /**
-     * Finds a previous statement of the single line comment.
+     * Finds a previous statement of the comment.
      * Uses root token of the line while searching.
-     * @param comment single line comment.
+     * @param comment comment.
      * @param root root token of the line.
-     * @return previous statement of the single line comment or null if previous statement was not
-     *         found.
+     * @return previous statement of the comment or null if previous statement was not found.
      */
-    private static DetailAST findPreviousStatementOfSingleLineComment(DetailAST comment,
-                                                                      DetailAST root) {
+    private DetailAST findPreviousStatement(DetailAST comment, DetailAST root) {
         DetailAST previousStatement = null;
         if (root.getLineNo() >= comment.getLineNo()) {
             // ATTENTION: parent of the comment is below the comment in case block
@@ -31,8 +29,8 @@
             tokenWhichBeginsTheLine = root;
         }
         if (tokenWhichBeginsTheLine != null
-                && isOnPreviousLine(comment, tokenWhichBeginsTheLine)
-            ) {
+                && !isComment(tokenWhichBeginsTheLine)
+                && isOnPreviousLineIgnoringComments(comment, tokenWhichBeginsTheLine)) {
             previousStatement = tokenWhichBeginsTheLine;
         }
         return previousStatement;

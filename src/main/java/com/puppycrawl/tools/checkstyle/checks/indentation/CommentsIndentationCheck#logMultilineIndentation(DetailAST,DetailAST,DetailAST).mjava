@@ -7,10 +7,10 @@
     private void logMultilineIndentation(DetailAST prevStmt, DetailAST comment,
                                          DetailAST nextStmt) {
         final String multilineNoTemplate = "%d, %d";
-        log(comment.getLineNo(), MSG_KEY_SINGLE,
+        log(comment.getLineNo(), getMessageKey(comment),
             String.format(Locale.getDefault(), multilineNoTemplate, prevStmt.getLineNo(),
                 nextStmt.getLineNo()), comment.getColumnNo(),
-            String.format(Locale.getDefault(), multilineNoTemplate, prevStmt.getColumnNo(),
-                nextStmt.getColumnNo()));
+            String.format(Locale.getDefault(), multilineNoTemplate,
+                    getLineStart(prevStmt.getLineNo()), getLineStart(nextStmt.getLineNo())));
     }
 

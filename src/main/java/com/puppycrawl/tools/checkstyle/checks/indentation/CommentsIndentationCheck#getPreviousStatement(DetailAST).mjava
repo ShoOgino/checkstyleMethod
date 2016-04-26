@@ -1,0 +1,16 @@
+    /**
+     * Returns the previous statement of a comment.
+     * @param comment comment.
+     * @return the previous statement of a comment.
+     */
+    private DetailAST getPreviousStatement(DetailAST comment) {
+        final DetailAST prevStatement;
+        if (isDistributedPreviousStatement(comment)) {
+            prevStatement = getDistributedPreviousStatement(comment);
+        }
+        else {
+            prevStatement = getOneLinePreviousStatement(comment);
+        }
+        return prevStatement;
+    }
+

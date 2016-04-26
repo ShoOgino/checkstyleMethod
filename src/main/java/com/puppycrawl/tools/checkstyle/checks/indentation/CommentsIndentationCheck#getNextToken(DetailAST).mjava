@@ -1,0 +1,20 @@
+    /**
+     * Get the token to start counting the number of lines to add to the distance aim from.
+     * @param checkedStatement the checked statement.
+     * @return the token to start counting the number of lines to add to the distance aim from.
+     */
+    private DetailAST getNextToken(DetailAST checkedStatement) {
+        DetailAST nextToken;
+        if (checkedStatement.getType() == TokenTypes.SLIST
+                || checkedStatement.getType() == TokenTypes.CASE_GROUP) {
+            nextToken = checkedStatement.getFirstChild();
+        }
+        else {
+            nextToken = checkedStatement.getNextSibling();
+        }
+        if (nextToken != null && isComment(nextToken) && isTrailingComment(nextToken)) {
+            nextToken = nextToken.getNextSibling();
+        }
+        return nextToken;
+    }
+

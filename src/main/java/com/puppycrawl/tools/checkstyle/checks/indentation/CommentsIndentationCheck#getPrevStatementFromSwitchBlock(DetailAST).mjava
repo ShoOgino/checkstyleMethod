@@ -4,15 +4,13 @@
      * @return comment's previous statement or null if previous statement is absent.
      */
     private static DetailAST getPrevStatementFromSwitchBlock(DetailAST comment) {
-        DetailAST prevStmt = null;
+        final DetailAST prevStmt;
         final DetailAST parentStatement = comment.getParent();
-        if (parentStatement != null) {
-            if (parentStatement.getType() == TokenTypes.CASE_GROUP) {
-                prevStmt = getPrevStatementWhenCommentIsUnderCase(parentStatement);
-            }
-            else {
-                prevStmt = getPrevCaseToken(parentStatement);
-            }
+        if (parentStatement.getType() == TokenTypes.CASE_GROUP) {
+            prevStmt = getPrevStatementWhenCommentIsUnderCase(parentStatement);
+        }
+        else {
+            prevStmt = getPrevCaseToken(parentStatement);
         }
         return prevStmt;
     }

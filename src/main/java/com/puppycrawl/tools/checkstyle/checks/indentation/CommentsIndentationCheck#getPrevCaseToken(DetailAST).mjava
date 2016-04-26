@@ -6,7 +6,7 @@
     private static DetailAST getPrevCaseToken(DetailAST parentStatement) {
         final DetailAST prevCaseToken;
         final DetailAST parentBlock = parentStatement.getParent();
-        if (parentBlock != null && parentBlock.getParent() != null
+        if (parentBlock.getParent() != null
                 && parentBlock.getParent().getPreviousSibling() != null
                 && parentBlock.getParent().getPreviousSibling().getType()
                     == TokenTypes.LITERAL_CASE) {

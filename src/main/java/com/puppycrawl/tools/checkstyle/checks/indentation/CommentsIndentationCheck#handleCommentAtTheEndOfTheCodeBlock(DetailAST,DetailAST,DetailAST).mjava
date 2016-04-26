@@ -1,5 +1,5 @@
     /**
-     * Hendles a single line comment which is placed at the end of non empty code block.
+     * Handles a comment which is placed at the end of non empty code block.
      * Note, if single line comment is plcaed at the end of non empty block the comment should have
      * the same indentation level as the previous statement. For example:
      * <p>
@@ -11,25 +11,23 @@
      * }
      * </p>
      * @param prevStmt previous statement.
-     * @param comment single line statement.
+     * @param comment comment to check.
      * @param nextStmt next statement.
      */
-    private void handleSingleLineCommentAtTheEndOfTheCodeBlock(DetailAST prevStmt,
-                                                               DetailAST comment,
-                                                               DetailAST nextStmt) {
+    private void handleCommentAtTheEndOfTheCodeBlock(DetailAST prevStmt, DetailAST comment,
+                                                     DetailAST nextStmt) {
         if (prevStmt != null) {
             if (prevStmt.getType() == TokenTypes.LITERAL_CASE
                     || prevStmt.getType() == TokenTypes.CASE_GROUP
-                    || prevStmt.getType() == TokenTypes.LITERAL_DEFAULT
-                    || prevStmt.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+                    || prevStmt.getType() == TokenTypes.LITERAL_DEFAULT) {
                 if (comment.getColumnNo() < nextStmt.getColumnNo()) {
-                    log(comment.getLineNo(), MSG_KEY_SINGLE, nextStmt.getLineNo(),
+                    log(comment.getLineNo(), getMessageKey(comment), nextStmt.getLineNo(),
                         comment.getColumnNo(), nextStmt.getColumnNo());
                 }
             }
             else if (!areSameLevelIndented(comment, prevStmt, prevStmt)) {
                 final int prevStmtLineNo = prevStmt.getLineNo();
-                log(comment.getLineNo(), MSG_KEY_SINGLE, prevStmtLineNo,
+                log(comment.getLineNo(), getMessageKey(comment), prevStmtLineNo,
                     comment.getColumnNo(), getLineStart(prevStmtLineNo));
             }
         }

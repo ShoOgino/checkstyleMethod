@@ -23,14 +23,8 @@
      */
     private boolean areSameLevelIndented(DetailAST comment, DetailAST prevStmt,
                                                 DetailAST nextStmt) {
-        final boolean result;
-        if (prevStmt == null) {
-            result = comment.getColumnNo() == getLineStart(nextStmt.getLineNo());
-        }
-        else {
-            result = comment.getColumnNo() == getLineStart(nextStmt.getLineNo())
-                    || comment.getColumnNo() == getLineStart(prevStmt.getLineNo());
-        }
-        return result;
+
+        return comment.getColumnNo() == getLineStart(nextStmt.getLineNo())
+            || comment.getColumnNo() == getLineStart(prevStmt.getLineNo());
     }
 

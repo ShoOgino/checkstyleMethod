@@ -1,0 +1,13 @@
+    /**
+     * Whether the ast is a comment.
+     * @param ast the ast to check.
+     * @return true if the ast is a comment.
+     */
+    private static boolean isComment(DetailAST ast) {
+        final int astType = ast.getType();
+        return astType == TokenTypes.SINGLE_LINE_COMMENT
+            || astType == TokenTypes.BLOCK_COMMENT_BEGIN
+            || astType == TokenTypes.COMMENT_CONTENT
+            || astType == TokenTypes.BLOCK_COMMENT_END;
+    }
+

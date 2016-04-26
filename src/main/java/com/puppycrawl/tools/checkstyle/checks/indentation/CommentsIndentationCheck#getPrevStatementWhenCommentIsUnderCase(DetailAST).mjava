@@ -8,7 +8,7 @@
         final DetailAST prevBlock = parentStatement.getPreviousSibling();
         if (prevBlock.getLastChild() != null) {
             DetailAST blockBody = prevBlock.getLastChild().getLastChild();
-            if (blockBody.getPreviousSibling() != null) {
+            if (blockBody.getType() == TokenTypes.SEMI) {
                 blockBody = blockBody.getPreviousSibling();
             }
             if (blockBody.getType() == TokenTypes.EXPR) {
@@ -26,6 +26,9 @@
                 else {
                     prevStmt = blockBody;
                 }
+            }
+            if (isComment(prevStmt)) {
+                prevStmt = prevStmt.getNextSibling();
             }
         }
         return prevStmt;

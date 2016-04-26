@@ -1,0 +1,13 @@
+    /**
+     * Whether the statement is a kind of definition (method, class etc.).
+     * @param previousSibling the statement to check.
+     * @return true if the statement is a kind of definition.
+     */
+    private boolean isDefinition(DetailAST previousSibling) {
+        return previousSibling.getType() == TokenTypes.METHOD_DEF
+            || previousSibling.getType() == TokenTypes.CLASS_DEF
+            || previousSibling.getType() == TokenTypes.INTERFACE_DEF
+            || previousSibling.getType() == TokenTypes.ENUM_DEF
+            || previousSibling.getType() == TokenTypes.ANNOTATION_DEF;
+    }
+

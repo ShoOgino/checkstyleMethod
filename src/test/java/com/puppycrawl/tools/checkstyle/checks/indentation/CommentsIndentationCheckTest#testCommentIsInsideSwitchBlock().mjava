@@ -3,6 +3,7 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(CommentsIndentationCheck.class);
         final String[] expected = {
+            "19: " + getCheckMessage(MSG_KEY_BLOCK, 20, 12, 16),
             "25: " + getCheckMessage(MSG_KEY_SINGLE, "24, 26", 19, "16, 12"),
             "31: " + getCheckMessage(MSG_KEY_SINGLE, "30, 32", 19, "16, 12"),
             "48: " + getCheckMessage(MSG_KEY_SINGLE, 49, 6, 16),
@@ -19,6 +20,8 @@
             "204: " + getCheckMessage(MSG_KEY_SINGLE, 205, 20, 17),
             "205: " + getCheckMessage(MSG_KEY_SINGLE, "202, 206", 17, "16, 12"),
             "229: " + getCheckMessage(MSG_KEY_SINGLE, "228, 230", 6, "12, 12"),
+            "276: " + getCheckMessage(MSG_KEY_BLOCK, "275, 279", 11, "16, 12"),
+            "281: " + getCheckMessage(MSG_KEY_SINGLE, "280, 282", 11, "16, 12"),
         };
         final String testInputFile = "InputCommentsIndentationInSwitchBlock.java";
         verify(checkConfig, getPath(testInputFile), expected);

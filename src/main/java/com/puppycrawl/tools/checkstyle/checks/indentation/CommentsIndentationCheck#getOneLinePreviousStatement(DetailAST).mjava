@@ -1,22 +1,25 @@
     /**
      * Does pre-order traverse of abstract syntax tree to find the previous statement of the
-     * single line comment. If previous statement of the comment is found, then the traverse will
+     * comment. If previous statement of the comment is found, then the traverse will
      * be finished.
      * @param comment current statement.
      * @return previous statement of the comment or null if the comment does not have previous
      *         statement.
      */
-    private static DetailAST getOneLinePreviousStatementOfSingleLineComment(DetailAST comment) {
-        DetailAST previousStatement = null;
-        final Deque<DetailAST> stack = new ArrayDeque<>();
+    private DetailAST getOneLinePreviousStatement(DetailAST comment) {
         DetailAST root = comment.getParent();
+        while (root != null && !isBlockStart(root)) {
+            root = root.getParent();
+        }
 
+        final Deque<DetailAST> stack = new ArrayDeque<>();
+        DetailAST previousStatement = null;
         while (root != null || !stack.isEmpty()) {
             if (!stack.isEmpty()) {
                 root = stack.pop();
             }
             while (root != null) {
-                previousStatement = findPreviousStatementOfSingleLineComment(comment, root);
+                previousStatement = findPreviousStatement(comment, root);
                 if (previousStatement != null) {
                     root = null;
                     stack.clear();

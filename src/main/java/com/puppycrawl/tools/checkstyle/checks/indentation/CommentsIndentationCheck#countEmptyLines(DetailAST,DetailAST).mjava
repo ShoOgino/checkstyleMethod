@@ -1,0 +1,18 @@
+    /**
+     * Count the number of empty lines between statements.
+     * @param startStatement start statement.
+     * @param endStatement end statement.
+     * @return the number of empty lines between statements.
+     */
+    private int countEmptyLines(DetailAST startStatement, DetailAST endStatement) {
+        int emptyLinesNumber = 0;
+        final String[] lines = getLines();
+        final int endLineNo = endStatement.getLineNo();
+        for (int lineNo = startStatement.getLineNo(); lineNo < endLineNo; lineNo++) {
+            if (CommonUtils.isBlank(lines[lineNo])) {
+                emptyLinesNumber++;
+            }
+        }
+        return emptyLinesNumber;
+    }
+

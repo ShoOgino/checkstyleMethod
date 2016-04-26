@@ -1,13 +1,11 @@
     /**
-     * Checks whether the previous statement of a single line comment is distributed over two or
-     * more lines.
-     * @param singleLineComment single line comment.
-     * @return true if the previous statement of a single line comment is distributed over two or
-     *         more lines.
+     * Checks whether the previous statement of a comment is distributed over two or more lines.
+     * @param comment comment to check.
+     * @return true if the previous statement of a comment is distributed over two or more lines.
      */
-    private static boolean isDistributedPreviousStatement(DetailAST singleLineComment) {
-        final DetailAST previousSibling = singleLineComment.getPreviousSibling();
-        return isDistributedMethodChainOrConcatenationStatement(singleLineComment, previousSibling)
+    private boolean isDistributedPreviousStatement(DetailAST comment) {
+        final DetailAST previousSibling = comment.getPreviousSibling();
+        return isDistributedExpression(comment)
             || isDistributedReturnStatement(previousSibling)
             || isDistributedThrowStatement(previousSibling);
     }

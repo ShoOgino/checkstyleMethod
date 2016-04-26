@@ -1,5 +1,5 @@
     /**
-     * Handles a single line comment which is placed within the empty code block.
+     * Handles a comment which is placed within the empty code block.
      * Note, if comment is placed at the end of the empty code block, we have Checkstyle's
      * limitations to clearly detect user intention of explanation target - above or below. The
      * only case we can assume as a violation is when a single line comment within the empty
@@ -13,12 +13,12 @@
      * }
      * </p>
      *
-     * @param comment single line comment.
+     * @param comment comment to check.
      * @param nextStmt next statement.
      */
-    private void handleSingleLineCommentInEmptyCodeBlock(DetailAST comment, DetailAST nextStmt) {
+    private void handleCommentInEmptyCodeBlock(DetailAST comment, DetailAST nextStmt) {
         if (comment.getColumnNo() < nextStmt.getColumnNo()) {
-            log(comment.getLineNo(), MSG_KEY_SINGLE, nextStmt.getLineNo(),
+            log(comment.getLineNo(), getMessageKey(comment), nextStmt.getLineNo(),
                 comment.getColumnNo(), nextStmt.getColumnNo());
         }
     }

@@ -1,5 +1,5 @@
     /**
-     * Checks whether single line comment is a 'fall through' comment.
+     * Checks whether comment is a 'fall through' comment.
      * For example:
      * <p>
      * {@code
@@ -15,9 +15,9 @@
      * </p>
      * @param prevStmt previous statement.
      * @param nextStmt next statement.
-     * @return true if a single line comment is a 'fall through' comment.
+     * @return true if a comment is a 'fall through' comment.
      */
-    private static boolean isFallThroughSingleLineComment(DetailAST prevStmt, DetailAST nextStmt) {
+    private static boolean isFallThroughComment(DetailAST prevStmt, DetailAST nextStmt) {
         return prevStmt != null
             && nextStmt != null
             && prevStmt.getType() != TokenTypes.LITERAL_CASE

@@ -1,0 +1,11 @@
+    /**
+     * Whether the AST node starts a block.
+     * @param root the AST node to check.
+     * @return true if the AST node starts a block.
+     */
+    private static boolean isBlockStart(DetailAST root) {
+        return root.getType() == TokenTypes.SLIST
+                || root.getType() == TokenTypes.OBJBLOCK
+                || root.getType() == TokenTypes.CASE_GROUP;
+    }
+

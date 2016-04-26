@@ -1,0 +1,16 @@
+    /**
+     * Get a message key depending on a comment type.
+     * @param comment the comment to process.
+     * @return a message key.
+     */
+    private String getMessageKey(DetailAST comment) {
+        final String msgKey;
+        if (comment.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+            msgKey = MSG_KEY_SINGLE;
+        }
+        else {
+            msgKey = MSG_KEY_BLOCK;
+        }
+        return msgKey;
+    }
+

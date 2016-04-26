@@ -1,0 +1,36 @@
+    /**
+     * Checks comment indentations over surrounding code, e.g.:
+     * <p>
+     * {@code
+     * // some comment - this is ok
+     * double d = 3.14;
+     *     // some comment - this is <b>not</b> ok.
+     * double d1 = 5.0;
+     * }
+     * </p>
+     * @param comment comment to check.
+     */
+    private void visitComment(DetailAST comment) {
+        final DetailAST prevStmt = getPreviousStatement(comment);
+        final DetailAST nextStmt = comment.getNextSibling();
+
+        if (!isTrailingComment(comment)) {
+            if (isInEmptyCaseBlock(prevStmt, nextStmt)) {
+                handleCommentInEmptyCaseBlock(prevStmt, comment, nextStmt);
+            }
+            else if (isFallThroughComment(prevStmt, nextStmt)) {
+                handleFallThroughtComment(prevStmt, comment, nextStmt);
+            }
+            else if (isInEmptyCodeBlock(prevStmt, nextStmt)) {
+                handleCommentInEmptyCodeBlock(comment, nextStmt);
+            }
+            else if (isCommentAtTheEndOfTheCodeBlock(nextStmt)) {
+                handleCommentAtTheEndOfTheCodeBlock(prevStmt, comment, nextStmt);
+            }
+            else if (nextStmt != null && !areSameLevelIndented(comment, nextStmt, nextStmt)) {
+                log(comment.getLineNo(), getMessageKey(comment), nextStmt.getLineNo(),
+                    comment.getColumnNo(), nextStmt.getColumnNo());
+            }
+        }
+    }
+

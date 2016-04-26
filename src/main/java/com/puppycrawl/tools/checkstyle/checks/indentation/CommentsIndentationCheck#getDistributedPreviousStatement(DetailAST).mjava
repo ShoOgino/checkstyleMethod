@@ -1,0 +1,24 @@
+    /**
+     * Returns the first token of the destributed previous statement of comment.
+     * @param comment comment to check.
+     * @return the first token of the destributed previous statement of comment.
+     */
+    private static DetailAST getDistributedPreviousStatement(DetailAST comment) {
+        DetailAST currentToken = comment.getPreviousSibling();
+        while (isComment(currentToken)) {
+            currentToken = currentToken.getPreviousSibling();
+        }
+        final DetailAST previousStatement;
+        if (currentToken.getType() == TokenTypes.SEMI) {
+            currentToken = currentToken.getPreviousSibling();
+            while (currentToken.getFirstChild() != null) {
+                currentToken = currentToken.getFirstChild();
+            }
+            previousStatement = currentToken;
+        }
+        else {
+            previousStatement = currentToken;
+        }
+        return previousStatement;
+    }
+

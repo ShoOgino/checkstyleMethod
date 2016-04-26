@@ -1,5 +1,5 @@
     /**
-     * Handles a single line comment which is plased within empty case block.
+     * Handles a comment which is plased within empty case block.
      * Note, if comment is placed at the end of the empty case block, we have Checkstyle's
      * limitations to clearly detect user intention of explanation target - above or below. The
      * only case we can assume as a violation is when a single line comment within the empty case
@@ -18,8 +18,8 @@
      * @param comment single line comment.
      * @param nextStmt next statement.
      */
-    private void handleSingleLineCommentInEmptyCaseBlock(DetailAST prevStmt, DetailAST comment,
-                                                         DetailAST nextStmt) {
+    private void handleCommentInEmptyCaseBlock(DetailAST prevStmt, DetailAST comment,
+                                               DetailAST nextStmt) {
 
         if (comment.getColumnNo() < prevStmt.getColumnNo()
                 || comment.getColumnNo() < nextStmt.getColumnNo()) {

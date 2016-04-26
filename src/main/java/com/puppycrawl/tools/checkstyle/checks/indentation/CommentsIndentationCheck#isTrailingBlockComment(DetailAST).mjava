@@ -12,7 +12,8 @@
     private boolean isTrailingBlockComment(DetailAST blockComment) {
         final String commentLine = getLine(blockComment.getLineNo() - 1);
         final int commentColumnNo = blockComment.getColumnNo();
+        final DetailAST nextSibling = blockComment.getNextSibling();
         return !CommonUtils.hasWhitespaceBefore(commentColumnNo, commentLine)
-            || blockComment.getNextSibling().getLineNo() == blockComment.getLineNo();
+            || nextSibling != null && nextSibling.getLineNo() == blockComment.getLineNo();
     }
 

@@ -1,0 +1,16 @@
+    /**
+     * Checks if current comment is a trailing comment.
+     * @param comment comment to check.
+     * @return true if current comment is a trailing comment.
+     */
+    private boolean isTrailingComment(DetailAST comment) {
+        final boolean isTrailingComment;
+        if (comment.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+            isTrailingComment = isTrailingSingleLineComment(comment);
+        }
+        else {
+            isTrailingComment = isTrailingBlockComment(comment);
+        }
+        return isTrailingComment;
+    }
+

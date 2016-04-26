@@ -2,10 +2,8 @@
     public void visitToken(DetailAST commentAst) {
         switch (commentAst.getType()) {
             case TokenTypes.SINGLE_LINE_COMMENT:
-                visitSingleLineComment(commentAst);
-                break;
             case TokenTypes.BLOCK_COMMENT_BEGIN:
-                visitBlockComment(commentAst);
+                visitComment(commentAst);
                 break;
             default:
                 final String exceptionMsg = "Unexpected token type: " + commentAst.getText();
