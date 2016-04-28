@@ -15,6 +15,7 @@
                     "input expected warning #" + position + " at line " + comment.getLineNumber()
                             + " to report '" + comment.getExpectedMessage() + "' but got instead: "
                             + line + ": " + message,
-                    message.endsWith(comment.getExpectedMessage()));
+                    line == comment.getLineNumber()
+                            && message.endsWith(comment.getExpectedMessage()));
         }
 
