@@ -1,6 +1,12 @@
     private void verifyWarns(Configuration config, String filePath,
                     String... expected)
                     throws Exception {
-        verifyWarns(config, filePath, expected, 0);
+        final int tabWidth = Integer.parseInt(config.getAttribute("tabWidth"));
+        final IndentComment[] linesWithWarn =
+                        getLinesWithWarnAndCheckComments(filePath, tabWidth);
+        verify(config, filePath, expected, linesWithWarn);
+        assertEquals("Expected warning count in UT does not match warn"
+                        + " comment count in input file", linesWithWarn.length,
+                        expected.length);
     }
 
