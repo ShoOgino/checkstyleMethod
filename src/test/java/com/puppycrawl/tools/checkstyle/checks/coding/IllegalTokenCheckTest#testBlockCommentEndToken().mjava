@@ -1,0 +1,13 @@
+    @Test
+    public void testBlockCommentEndToken()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(IllegalTokenCheck.class);
+        checkConfig.addAttribute("tokens", "BLOCK_COMMENT_END");
+
+        final String[] expected = {
+            "5:2: " + getCheckMessage(MSG_KEY, "*/"),
+        };
+        verify(checkConfig, getPath("InputIllegalTokens.java"), expected);
+    }
+
