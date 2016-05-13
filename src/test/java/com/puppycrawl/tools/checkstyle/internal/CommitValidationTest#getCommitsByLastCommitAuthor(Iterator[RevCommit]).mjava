@@ -8,8 +8,8 @@
             commits.add(lastCommit);
 
             boolean wasLastCheckedCommitAuthorSameAsLastCommit = true;
-            while (previousCommitsIterator.hasNext()
-                    && wasLastCheckedCommitAuthorSameAsLastCommit) {
+            while (wasLastCheckedCommitAuthorSameAsLastCommit
+                    && previousCommitsIterator.hasNext()) {
                 final RevCommit currentCommit = previousCommitsIterator.next();
                 final String currentCommitAuthor = currentCommit.getAuthorIdent().getName();
                 if (currentCommitAuthor.equals(lastCommitAuthor)) {
