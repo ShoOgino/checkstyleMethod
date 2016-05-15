@@ -1,12 +1,11 @@
         /**
-         * Checks if number of return statements in method more
+         * Checks if number of return statements in the method are more
          * than allowed.
          * @param ast method def associated with this context.
          */
         public void checkCount(DetailAST ast) {
-            if (checking && count > getMax()) {
-                log(ast.getLineNo(), ast.getColumnNo(), MSG_KEY,
-                    count, getMax());
+            if (checking && maxAllowed != null && count > maxAllowed) {
+                log(ast.getLineNo(), ast.getColumnNo(), MSG_KEY, count, maxAllowed);
             }
         }
 

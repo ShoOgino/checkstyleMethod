@@ -1,0 +1,15 @@
+    /**
+     * Examines the return statement and tells context about it.
+     * @param ast return statement to check.
+     */
+    private void visitReturn(DetailAST ast) {
+        // we can't identify which max to use for lambdas, so we can only assign
+        // after the first return statement is seen
+        if (ast.getFirstChild().getType() == TokenTypes.SEMI) {
+            context.visitLiteralReturn(maxForVoid);
+        }
+        else {
+            context.visitLiteralReturn(max);
+        }
+    }
+
