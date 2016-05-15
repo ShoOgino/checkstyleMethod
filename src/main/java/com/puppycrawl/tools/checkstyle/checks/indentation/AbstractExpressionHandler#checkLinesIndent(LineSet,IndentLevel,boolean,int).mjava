@@ -10,44 +10,42 @@
                                   IndentLevel indentLevel,
                                   boolean firstLineMatches,
                                   int firstLine) {
-        if (lines.isEmpty()) {
-            return;
-        }
+        if (!lines.isEmpty()) {
+            // check first line
+            final int startLine = lines.firstLine();
+            final int endLine = lines.lastLine();
+            final int startCol = lines.firstLineCol();
 
-        // check first line
-        final int startLine = lines.firstLine();
-        final int endLine = lines.lastLine();
-        final int startCol = lines.firstLineCol();
+            final int realStartCol =
+                getLineStart(indentCheck.getLine(startLine - 1));
 
-        final int realStartCol =
-            getLineStart(indentCheck.getLine(startLine - 1));
+            if (realStartCol == startCol) {
+                checkLineIndent(startLine, startCol, indentLevel,
+                    firstLineMatches);
+            }
 
-        if (realStartCol == startCol) {
-            checkLineIndent(startLine, startCol, indentLevel,
-                firstLineMatches);
-        }
+            // if first line starts the line, following lines are indented
+            // one level; but if the first line of this expression is
+            // nested with the previous expression (which is assumed if it
+            // doesn't start the line) then don't indent more, the first
+            // indentation is absorbed by the nesting
 
-        // if first line starts the line, following lines are indented
-        // one level; but if the first line of this expression is
-        // nested with the previous expression (which is assumed if it
-        // doesn't start the line) then don't indent more, the first
-        // indentation is absorbed by the nesting
+            IndentLevel theLevel = indentLevel;
+            if (firstLineMatches
+                || firstLine > mainAst.getLineNo() && shouldIncreaseIndent()) {
+                theLevel = new IndentLevel(indentLevel, getBasicOffset());
+            }
 
-        IndentLevel theLevel = indentLevel;
-        if (firstLineMatches
-            || firstLine > mainAst.getLineNo() && shouldIncreaseIndent()) {
-            theLevel = new IndentLevel(indentLevel, getBasicOffset());
-        }
+            // check following lines
+            for (int i = startLine + 1; i <= endLine; i++) {
+                final Integer col = lines.getStartColumn(i);
+                // startCol could be null if this line didn't have an
+                // expression that was required to be checked (it could be
+                // checked by a child expression)
 
-        // check following lines
-        for (int i = startLine + 1; i <= endLine; i++) {
-            final Integer col = lines.getStartColumn(i);
-            // startCol could be null if this line didn't have an
-            // expression that was required to be checked (it could be
-            // checked by a child expression)
-
-            if (col != null) {
-                checkLineIndent(i, col, theLevel, false);
+                if (col != null) {
+                    checkLineIndent(i, col, theLevel, false);
+                }
             }
         }
     }

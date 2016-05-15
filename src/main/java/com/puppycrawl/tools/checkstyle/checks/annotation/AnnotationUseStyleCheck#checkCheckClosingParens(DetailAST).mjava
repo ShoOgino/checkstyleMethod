@@ -5,23 +5,21 @@
      * @param ast the annotation token
      */
     private void checkCheckClosingParens(final DetailAST ast) {
-        if (closingParens == ClosingParens.IGNORE) {
-            return;
-        }
+        if (closingParens != ClosingParens.IGNORE) {
+            final DetailAST paren = ast.getLastChild();
+            final boolean parenExists = paren.getType() == TokenTypes.RPAREN;
 
-        final DetailAST paren = ast.getLastChild();
-        final boolean parenExists = paren.getType() == TokenTypes.RPAREN;
-
-        if (closingParens == ClosingParens.ALWAYS
-            && !parenExists) {
-            log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
-        }
-        else if (closingParens == ClosingParens.NEVER
-                 && parenExists
-                 && !ast.branchContains(TokenTypes.EXPR)
-                 && !ast.branchContains(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
-                 && !ast.branchContains(TokenTypes.ANNOTATION_ARRAY_INIT)) {
-            log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_PRESENT);
+            if (closingParens == ClosingParens.ALWAYS
+                && !parenExists) {
+                log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
+            }
+            else if (closingParens == ClosingParens.NEVER
+                     && parenExists
+                     && !ast.branchContains(TokenTypes.EXPR)
+                     && !ast.branchContains(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
+                     && !ast.branchContains(TokenTypes.ANNOTATION_ARRAY_INIT)) {
+                log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_PRESENT);
+            }
         }
     }
 

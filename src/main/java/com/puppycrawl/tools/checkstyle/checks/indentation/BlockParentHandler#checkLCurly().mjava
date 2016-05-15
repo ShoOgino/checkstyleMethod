@@ -7,10 +7,8 @@
         final DetailAST lcurly = getLCurly();
         final int lcurlyPos = expandedTabsColumnNo(lcurly);
 
-        if (curlyIndent().isAcceptable(lcurlyPos) || !isOnStartOfLine(lcurly)) {
-            return;
+        if (!curlyIndent().isAcceptable(lcurlyPos) && isOnStartOfLine(lcurly)) {
+            logError(lcurly, "lcurly", lcurlyPos, curlyIndent());
         }
-
-        logError(lcurly, "lcurly", lcurlyPos, curlyIndent());
     }
 

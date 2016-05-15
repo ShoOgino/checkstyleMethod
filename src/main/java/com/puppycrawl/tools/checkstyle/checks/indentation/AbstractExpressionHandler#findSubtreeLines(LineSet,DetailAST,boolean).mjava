@@ -7,23 +7,21 @@
      */
     protected final void findSubtreeLines(LineSet lines, DetailAST tree,
         boolean allowNesting) {
-        if (indentCheck.getHandlerFactory().isHandledType(tree.getType())) {
-            return;
-        }
+        if (!indentCheck.getHandlerFactory().isHandledType(tree.getType())) {
+            final int lineNum = tree.getLineNo();
+            final Integer colNum = lines.getStartColumn(lineNum);
 
-        final int lineNum = tree.getLineNo();
-        final Integer colNum = lines.getStartColumn(lineNum);
+            final int thisLineColumn = expandedTabsColumnNo(tree);
+            if (colNum == null || thisLineColumn < colNum) {
+                lines.addLineAndCol(lineNum, thisLineColumn);
+            }
 
-        final int thisLineColumn = expandedTabsColumnNo(tree);
-        if (colNum == null || thisLineColumn < colNum) {
-            lines.addLineAndCol(lineNum, thisLineColumn);
-        }
-
-        // check children
-        for (DetailAST node = tree.getFirstChild();
-            node != null;
-            node = node.getNextSibling()) {
-            findSubtreeLines(lines, node, allowNesting);
+            // check children
+            for (DetailAST node = tree.getFirstChild();
+                node != null;
+                node = node.getNextSibling()) {
+                findSubtreeLines(lines, node, allowNesting);
+            }
         }
     }
 

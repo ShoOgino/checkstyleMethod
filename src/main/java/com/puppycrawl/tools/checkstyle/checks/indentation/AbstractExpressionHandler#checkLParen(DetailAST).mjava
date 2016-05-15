@@ -5,11 +5,10 @@
     protected final void checkLParen(final DetailAST lparen) {
         // the rcurly can either be at the correct indentation, or on the
         // same line as the lcurly
-        if (lparen == null
-            || getIndent().isAcceptable(expandedTabsColumnNo(lparen))
-            || !isOnStartOfLine(lparen)) {
-            return;
+        if (lparen != null
+                && !getIndent().isAcceptable(expandedTabsColumnNo(lparen))
+                && isOnStartOfLine(lparen)) {
+            logError(lparen, "lparen", expandedTabsColumnNo(lparen));
         }
-        logError(lparen, "lparen", expandedTabsColumnNo(lparen));
     }
 

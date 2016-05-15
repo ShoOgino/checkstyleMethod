@@ -7,14 +7,14 @@
      * {@link TokenTypes#QUESTION QUESTION}
      */
     private void walkConditional(final DetailAST cond) {
-        if (cond.getType() != TokenTypes.QUESTION) {
-            final String warningText =
-                removeQuotes(cond.getText());
-            logMatch(cond.getLineNo(), cond.getColumnNo(), warningText);
-            return;
+        if (cond.getType() == TokenTypes.QUESTION) {
+            walkConditional(getCondLeft(cond));
+            walkConditional(getCondRight(cond));
         }
-
-        walkConditional(getCondLeft(cond));
-        walkConditional(getCondRight(cond));
+        else {
+            final String warningText =
+                    removeQuotes(cond.getText());
+            logMatch(cond.getLineNo(), cond.getColumnNo(), warningText);
+        }
     }
 

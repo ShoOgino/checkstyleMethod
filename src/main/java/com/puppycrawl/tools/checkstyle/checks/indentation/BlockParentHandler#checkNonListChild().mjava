@@ -3,11 +3,9 @@
      */
     private void checkNonListChild() {
         final DetailAST nonList = getNonListChild();
-        if (nonList == null) {
-            return;
+        if (nonList != null) {
+            final IndentLevel expected = new IndentLevel(getIndent(), getBasicOffset());
+            checkExpressionSubtree(nonList, expected, false, false);
         }
-
-        final IndentLevel expected = new IndentLevel(getIndent(), getBasicOffset());
-        checkExpressionSubtree(nonList, expected, false, false);
     }
 

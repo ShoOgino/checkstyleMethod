@@ -1,54 +1,8 @@
     @Override
     public void finishTree(DetailAST rootAST) {
 
-        if (importToGroupList.isEmpty()) {
-            return;
-        }
-
-        final ImportDetails firstImport = importToGroupList.get(0);
-        String currentGroup = getImportGroup(firstImport.isStaticImport(),
-                firstImport.getImportFullPath());
-        int currentGroupNumber = customImportOrderRules.indexOf(currentGroup);
-        String previousImportFromCurrentGroup = null;
-
-        for (ImportDetails importObject : importToGroupList) {
-            final String importGroup = importObject.getImportGroup();
-            final String fullImportIdent = importObject.getImportFullPath();
-
-            if (importGroup.equals(currentGroup)) {
-                if (sortImportsInGroupAlphabetically
-                        && previousImportFromCurrentGroup != null
-                        && compareImports(fullImportIdent, previousImportFromCurrentGroup) < 0) {
-                    log(importObject.getLineNumber(), MSG_LEX,
-                            fullImportIdent, previousImportFromCurrentGroup);
-                }
-                else {
-                    previousImportFromCurrentGroup = fullImportIdent;
-                }
-            }
-            else {
-                //not the last group, last one is always NON_GROUP
-                if (customImportOrderRules.size() > currentGroupNumber + 1) {
-                    final String nextGroup = getNextImportGroup(currentGroupNumber + 1);
-                    if (importGroup.equals(nextGroup)) {
-                        if (separateLineBetweenGroups
-                                && !hasEmptyLineBefore(importObject.getLineNumber())) {
-                            log(importObject.getLineNumber(), MSG_LINE_SEPARATOR, fullImportIdent);
-                        }
-                        currentGroup = nextGroup;
-                        currentGroupNumber = customImportOrderRules.indexOf(nextGroup);
-                        previousImportFromCurrentGroup = fullImportIdent;
-                    }
-                    else {
-                        logWrongImportGroupOrder(importObject.getLineNumber(),
-                                importGroup, nextGroup, fullImportIdent);
-                    }
-                }
-                else {
-                    logWrongImportGroupOrder(importObject.getLineNumber(),
-                            importGroup, currentGroup, fullImportIdent);
-                }
-            }
+        if (!importToGroupList.isEmpty()) {
+            finishImportList();
         }
     }
 

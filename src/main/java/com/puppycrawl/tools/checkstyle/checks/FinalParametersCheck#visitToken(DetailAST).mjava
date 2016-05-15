@@ -2,18 +2,16 @@
     public void visitToken(DetailAST ast) {
         // don't flag interfaces
         final DetailAST container = ast.getParent().getParent();
-        if (container.getType() == TokenTypes.INTERFACE_DEF) {
-            return;
-        }
-
-        if (ast.getType() == TokenTypes.LITERAL_CATCH) {
-            visitCatch(ast);
-        }
-        else if (ast.getType() == TokenTypes.FOR_EACH_CLAUSE) {
-            visitForEachClause(ast);
-        }
-        else {
-            visitMethod(ast);
+        if (container.getType() != TokenTypes.INTERFACE_DEF) {
+            if (ast.getType() == TokenTypes.LITERAL_CATCH) {
+                visitCatch(ast);
+            }
+            else if (ast.getType() == TokenTypes.FOR_EACH_CLAUSE) {
+                visitForEachClause(ast);
+            }
+            else {
+                visitMethod(ast);
+            }
         }
     }
 

@@ -6,16 +6,14 @@
      */
     public void setFile(final String name) {
         // Handle empty param
-        if (CommonUtils.isBlank(name)) {
-            return;
-        }
-
-        try {
-            root = ImportControlLoader.load(new File(name).toURI());
-            fileLocation = name;
-        }
-        catch (final CheckstyleException ex) {
-            throw new ConversionException(UNABLE_TO_LOAD + name, ex);
+        if (!CommonUtils.isBlank(name)) {
+            try {
+                root = ImportControlLoader.load(new File(name).toURI());
+                fileLocation = name;
+            }
+            catch (final CheckstyleException ex) {
+                throw new ConversionException(UNABLE_TO_LOAD + name, ex);
+            }
         }
     }
 
