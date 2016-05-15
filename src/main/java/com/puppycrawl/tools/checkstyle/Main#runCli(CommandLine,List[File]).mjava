@@ -1,0 +1,65 @@
+    /**
+     * Do execution of CheckStyle based on Command line options.
+     * @param commandLine command line object
+     * @param filesToProcess List of files to process found from the command line.
+     * @return number of violations
+     * @throws IOException if a file could not be read.
+     * @throws CheckstyleException if something happens processing the files.
+     */
+    private static int runCli(CommandLine commandLine, List<File> filesToProcess)
+            throws IOException, CheckstyleException {
+        int result = 0;
+
+        // create config helper object
+        final CliOptions config = convertCliToPojo(commandLine, filesToProcess);
+        if (commandLine.hasOption(OPTION_T_NAME)) {
+            // print AST
+            final File file = config.files.get(0);
+            final String stringAst = AstTreeStringPrinter.printFileAst(file, false);
+            System.out.print(stringAst);
+        }
+        else if (commandLine.hasOption(OPTION_CAPITAL_T_NAME)) {
+            final File file = config.files.get(0);
+            final String stringAst = AstTreeStringPrinter.printFileAst(file, true);
+            System.out.print(stringAst);
+        }
+        else if (commandLine.hasOption(OPTION_J_NAME)) {
+            final File file = config.files.get(0);
+            final String stringAst = DetailNodeTreeStringPrinter.printFileAst(file);
+            System.out.print(stringAst);
+        }
+        else if (commandLine.hasOption(OPTION_CAPITAL_J_NAME)) {
+            final File file = config.files.get(0);
+            final String stringAst = AstTreeStringPrinter.printJavaAndJavadocTree(file);
+            System.out.print(stringAst);
+        }
+        else {
+            if (commandLine.hasOption(OPTION_D_NAME)) {
+                final Logger parentLogger = Logger.getLogger(Main.class.getName()).getParent();
+                final ConsoleHandler handler = new ConsoleHandler();
+
+                parentLogger.setLevel(Level.FINEST);
+                handler.setLevel(Level.FINEST);
+                parentLogger.addHandler(handler);
+                handler.setFilter(new Filter() {
+                    private final String packageName = Main.class.getPackage().getName();
+
+                    @Override
+                    public boolean isLoggable(LogRecord record) {
+                        return record.getLoggerName().startsWith(packageName);
+                    }
+                });
+            }
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Checkstyle debug logging enabled");
+                LOG.debug("Running Checkstyle with version: "
+                        + Main.class.getPackage().getImplementationVersion());
+            }
+
+            // run Checker
+            result = runCheckstyle(config);
+        }
+
+        return result;
+    }
+
