@@ -8,6 +8,10 @@
      * @see #destroy()
      */
     public int process(List<File> files) throws CheckstyleException {
+        if (cache != null) {
+            cache.putExternalResources(getExternalResourceLocations());
+        }
+
         // Prepare to start
         fireAuditStarted();
         for (final FileSetCheck fsc : fileSetChecks) {

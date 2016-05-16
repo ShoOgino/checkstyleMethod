@@ -1,0 +1,12 @@
+    private static boolean isUrlReachable(String url) {
+        try {
+            final URL verifiableUrl = new URL(url);
+            final HttpURLConnection urlConnect = (HttpURLConnection) verifiableUrl.openConnection();
+            urlConnect.getContent();
+        }
+        catch (IOException ex) {
+            return false;
+        }
+        return true;
+    }
+

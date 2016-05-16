@@ -1,0 +1,17 @@
+    /**
+     * Returns a set of external configuration resource locations which are used by the checks set.
+     * @param checks a set of checks.
+     * @return a set of external configuration resource locations which are used by the checks set.
+     */
+    private Set<String> getExternalResourceLocations(Set<AbstractCheck> checks) {
+        final Set<String> externalConfigurationResources = Sets.newHashSet();
+        for (AbstractCheck check : checks) {
+            if (check instanceof ExternalResourceHolder) {
+                final Set<String> checkExternalResources =
+                    ((ExternalResourceHolder) check).getExternalResourceLocations();
+                externalConfigurationResources.addAll(checkExternalResources);
+            }
+        }
+        return externalConfigurationResources;
+    }
+

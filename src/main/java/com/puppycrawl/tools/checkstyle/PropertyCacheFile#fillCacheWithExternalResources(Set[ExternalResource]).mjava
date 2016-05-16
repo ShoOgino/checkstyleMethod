@@ -1,0 +1,13 @@
+    /**
+     * Fills cache with a set of {@link ExternalResource}.
+     * If external resource from the set is already in cache, it will be skipped.
+     * @param externalResources a set of {@link ExternalResource}.
+     */
+    private void fillCacheWithExternalResources(Set<ExternalResource> externalResources) {
+        for (ExternalResource resource : externalResources) {
+            if (!isResourceLocationInCache(resource.location)) {
+                details.setProperty(resource.location, resource.contentHashSum);
+            }
+        }
+    }
+

@@ -1,0 +1,25 @@
+    /**
+     * Returns a set of external configuration resource locations which are used by all file set
+     * checks and filters.
+     * @return a set of external configuration resource locations which are used by all file set
+     *         checks and filters.
+     */
+    private Set<String> getExternalResourceLocations() {
+        final Set<String> externalResources = Sets.newHashSet();
+        for (FileSetCheck check : fileSetChecks) {
+            if (check instanceof ExternalResourceHolder) {
+                final Set<String> locations =
+                    ((ExternalResourceHolder) check).getExternalResourceLocations();
+                externalResources.addAll(locations);
+            }
+        }
+        for (Filter filter : filters.getFilters()) {
+            if (filter instanceof ExternalResourceHolder) {
+                final Set<String> locations =
+                    ((ExternalResourceHolder) filter).getExternalResourceLocations();
+                externalResources.addAll(locations);
+            }
+        }
+        return externalResources;
+    }
+

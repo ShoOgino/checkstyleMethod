@@ -1,0 +1,11 @@
+        @Override
+        public Set<String> getExternalResourceLocations() {
+            final Set<String> locations = new HashSet<>();
+            locations.add(firstExternalResourceLocation);
+            // Attempt to change the behaviour of the check dynamically
+            if (secondExternalResourceLocation != null) {
+                locations.add(secondExternalResourceLocation);
+            }
+            return locations;
+        }
+

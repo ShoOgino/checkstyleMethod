@@ -1,0 +1,36 @@
+    @Test
+    public void testMultipleConfigs() throws Exception {
+        final DefaultConfiguration headerCheckConfig = createCheckConfig(HeaderCheck.class);
+        headerCheckConfig.addAttribute("headerFile",
+            getPath("configs" + File.separator + "java.header"));
+
+        final DefaultConfiguration dummyFileSetCheckConfig =
+            createCheckConfig(DummyFileSetCheck.class);
+
+        final DefaultConfiguration regexpHeaderCheckConfig =
+            createCheckConfig(RegexpHeaderCheck.class);
+        regexpHeaderCheckConfig.addAttribute("headerFile",
+            getPath("checks" + File.separator + "header" + File.separator + "regexp.header"));
+
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
+        checkerConfig.addAttribute("cacheFile", temporaryFolder.newFile().getPath());
+        checkerConfig.addChild(headerCheckConfig);
+        checkerConfig.addChild(dummyFileSetCheckConfig);
+        checkerConfig.addChild(regexpHeaderCheckConfig);
+
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(checkerConfig);
+        checker.addListener(new BriefUtLogger(stream));
+
+        final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+        final String[] expected = {
+            "1: " + "Missing a header - not enough lines in file.",
+        };
+
+        verify(checker, pathToEmptyFile, expected);
+        // Once again to invalidate cache because in the second run IOException will happen
+        // on different line for DummyFileSetCheck and it will change the content
+        verify(checker, pathToEmptyFile, expected);
+    }
+

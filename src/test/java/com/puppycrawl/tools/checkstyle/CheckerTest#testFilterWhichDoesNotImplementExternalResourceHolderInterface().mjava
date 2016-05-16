@@ -1,0 +1,20 @@
+    @Test
+    public void testFilterWhichDoesNotImplementExternalResourceHolderInterface() throws Exception {
+        final DefaultConfiguration filterConfig = createCheckConfig(DummyFilter.class);
+
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
+        checkerConfig.addChild(filterConfig);
+        checkerConfig.addAttribute("cacheFile", temporaryFolder.newFile().getPath());
+
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(checkerConfig);
+        checker.addListener(new BriefUtLogger(stream));
+
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+        verify(checker, pathToEmptyFile, expected);
+        // One more time to use cache.
+        verify(checker, pathToEmptyFile, expected);
+    }
+

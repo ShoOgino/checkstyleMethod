@@ -1,0 +1,27 @@
+    /**
+     * Loads a set of {@link ExternalResource} based on their locations.
+     * @param resourceLocations locations of external configuration resources.
+     * @return a set of {@link ExternalResource}.
+     */
+    private Set<ExternalResource> loadExternalResources(Set<String> resourceLocations) {
+        final Set<ExternalResource> resources = Sets.newHashSet();
+        for (String location : resourceLocations) {
+            String contentHashSum = null;
+            try {
+                final byte[] content = loadExternalResource(location);
+                contentHashSum = getHashCodeBasedOnObjectContent(content);
+            }
+            catch (CheckstyleException ex) {
+                // if exception happened (configuration resource was not found, connection is not
+                // available, resouce is broken, etc), we need to calculate hash sum based on
+                // exception object content in order to check whether problem is resolved later
+                // and/or the configuration is changed.
+                contentHashSum = getHashCodeBasedOnObjectContent(ex);
+            }
+            finally {
+                resources.add(new ExternalResource(location, contentHashSum));
+            }
+        }
+        return resources;
+    }
+

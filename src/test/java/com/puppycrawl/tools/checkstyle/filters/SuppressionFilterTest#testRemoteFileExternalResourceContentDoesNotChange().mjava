@@ -1,0 +1,52 @@
+    @Test
+    public void testRemoteFileExternalResourceContentDoesNotChange() throws Exception {
+        final String[] urlCandidates = {
+            "http://checkstyle.sourceforge.net/files/suppressions_none.xml",
+            "https://raw.githubusercontent.com/checkstyle/checkstyle/master/src/site/resources/"
+                + "files/suppressions_none.xml",
+        };
+
+        String urlForTest = null;
+        for (String url : urlCandidates) {
+            if (isConnectionAvailableAndStable(url)) {
+                urlForTest = url;
+                break;
+            }
+        }
+
+        // Run the test only if connection is available and url is reachable.
+        Assume.assumeFalse(urlForTest == null);
+
+        final DefaultConfiguration firstFilterConfig = createCheckConfig(SuppressionFilter.class);
+        firstFilterConfig.addAttribute("file", urlForTest);
+
+        final DefaultConfiguration firstCheckerConfig =
+            new DefaultConfiguration("checkstyle_checks");
+        firstCheckerConfig.addChild(firstFilterConfig);
+        final String cacheFile = temporaryFolder.newFile().getPath();
+        firstCheckerConfig.addAttribute("cacheFile", cacheFile);
+
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(firstCheckerConfig);
+        checker.addListener(new BriefUtLogger(stream));
+
+        final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+
+        verify(checker, pathToEmptyFile, expected);
+
+        // One more time to use cache.
+        final DefaultConfiguration secondFilterConfig = createCheckConfig(SuppressionFilter.class);
+        secondFilterConfig.addAttribute("file", urlForTest);
+
+        final DefaultConfiguration secondCheckerConfig =
+            new DefaultConfiguration("checkstyle_checks");
+        secondCheckerConfig.addAttribute("cacheFile", cacheFile);
+        secondCheckerConfig.addChild(secondFilterConfig);
+
+        checker.configure(secondCheckerConfig);
+
+        verify(checker, pathToEmptyFile, expected);
+    }
+

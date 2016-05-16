@@ -1,0 +1,23 @@
+    @Test
+    public void testLocalFileExternalResourceContentDoesNotChange() throws Exception {
+        final DefaultConfiguration filterConfig = createCheckConfig(SuppressionFilter.class);
+        filterConfig.addAttribute("file", getPath("suppressions_none.xml"));
+
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
+        checkerConfig.addChild(filterConfig);
+        final String cacheFile = temporaryFolder.newFile().getPath();
+        checkerConfig.addAttribute("cacheFile", cacheFile);
+
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.addListener(new BriefUtLogger(stream));
+        checker.configure(checkerConfig);
+
+        final String filePath = temporaryFolder.newFile("file.java").getPath();
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+
+        verify(checker, filePath, expected);
+        // One more time to use cache.
+        verify(checker, filePath, expected);
+    }
+

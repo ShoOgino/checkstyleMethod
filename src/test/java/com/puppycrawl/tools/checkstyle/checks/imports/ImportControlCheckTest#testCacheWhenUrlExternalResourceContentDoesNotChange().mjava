@@ -1,0 +1,15 @@
+    @Test
+    public void testCacheWhenUrlExternalResourceContentDoesNotChange() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        checkConfig.addAttribute("url", getUriString("import-control_one.xml"));
+
+        final Checker checker = createMockCheckerWithCache(checkConfig);
+
+        final String pathToEmptyFile = temporaryFolder.newFile("TestFile.java").getPath();
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+
+        verify(checker, pathToEmptyFile, pathToEmptyFile, expected);
+        // One more time to use cache.
+        verify(checker, pathToEmptyFile, pathToEmptyFile, expected);
+    }
+
