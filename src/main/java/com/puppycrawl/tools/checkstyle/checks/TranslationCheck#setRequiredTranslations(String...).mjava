@@ -2,9 +2,8 @@
      * Sets language codes of required translations for the check.
      * @param translationCodes a comma separated list of language codes.
      */
-    public void setRequiredTranslations(String translationCodes) {
-        requiredTranslations = Sets.newTreeSet(Splitter.on(',')
-            .trimResults().omitEmptyStrings().split(translationCodes));
+    public void setRequiredTranslations(String... translationCodes) {
+        requiredTranslations = Sets.newHashSet(translationCodes);
         validateUserSpecifiedLanguageCodes(requiredTranslations);
     }
 

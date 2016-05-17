@@ -5,10 +5,9 @@
      *        an string of abbreviations that must be skipped from checking,
      *        each abbreviation separated by comma.
      */
-    public void setAllowedAbbreviations(String allowedAbbreviations) {
+    public void setAllowedAbbreviations(String... allowedAbbreviations) {
         if (allowedAbbreviations != null) {
-            this.allowedAbbreviations = new HashSet<>(
-                    Arrays.asList(allowedAbbreviations.split(",")));
+            this.allowedAbbreviations = Sets.newHashSet(allowedAbbreviations);
         }
     }
 
