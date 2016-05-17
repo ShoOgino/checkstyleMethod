@@ -1,0 +1,16 @@
+    @Test
+    public void testCommitMessage() {
+        assertFalse("should not accept commit message with periods on end",
+                ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher("minor: Test. Test.").matches());
+        assertFalse("should not accept commit message with spaces on end",
+                ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher("minor: Test. ").matches());
+        assertFalse("should not accept commit message with tabs on end",
+                ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher("minor: Test.\t").matches());
+        assertFalse("should not accept commit message with newline on end",
+                ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher("minor: Test.\n").matches());
+        assertFalse("should not accept commit message with missing prefix",
+                ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher("Test. Test").matches());
+        assertTrue("should accept commit message that ends properly",
+                ACCEPTED_COMMIT_MESSAGE_PATTERN.matcher("minor: Test. Test").matches());
+    }
+
