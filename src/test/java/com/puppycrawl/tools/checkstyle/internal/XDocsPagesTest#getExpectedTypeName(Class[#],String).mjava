@@ -1,0 +1,31 @@
+    private static String getExpectedTypeName(Class<?> clss, String propertyName) {
+        String result = null;
+
+        if (clss == boolean.class) {
+            result = "Boolean";
+        }
+        else if (clss == int.class) {
+            result = "Integer";
+        }
+        else if (clss == int[].class) {
+            result = "Integer Set";
+        }
+        else if (clss == double[].class) {
+            result = "Number Set";
+        }
+        else if (clss == String[].class) {
+            if (propertyName.endsWith("Tokens") || propertyName.endsWith("Token")
+                    || "ignoreOccurrenceContext".equals(propertyName)) {
+                result = "subset of tokens TokenTypes";
+            }
+            else {
+                result = "String Set";
+            }
+        }
+        else if (clss != String.class) {
+            Assert.fail("Unknown property type: " + clss.getSimpleName());
+        }
+
+        return result;
+    }
+

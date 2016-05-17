@@ -1,5 +1,5 @@
     private static void validatePropertySection(String fileName, String sectionName,
-            Node subSection, Object instance) {
+            Node subSection, Object instance) throws Exception {
         final Set<String> properties = getProperties(instance.getClass());
         final Class<?> clss = instance.getClass();
 
@@ -21,25 +21,20 @@
             }
         }
 
-        final AbstractCheck check;
-
         if (AbstractCheck.class.isAssignableFrom(clss)) {
-            check = (AbstractCheck) instance;
+            final AbstractCheck check = (AbstractCheck) instance;
 
             if (!Arrays.equals(check.getAcceptableTokens(), check.getDefaultTokens())
                     || !Arrays.equals(check.getAcceptableTokens(), check.getRequiredTokens())) {
                 properties.add("tokens");
             }
         }
-        else {
-            check = null;
-        }
 
         if (subSection != null) {
             Assert.assertTrue(fileName + " section '" + sectionName
                     + "' should have no properties to show", !properties.isEmpty());
 
-            validatePropertySectionProperties(fileName, sectionName, subSection, check,
+            validatePropertySectionProperties(fileName, sectionName, subSection, instance,
                     properties);
         }
 
