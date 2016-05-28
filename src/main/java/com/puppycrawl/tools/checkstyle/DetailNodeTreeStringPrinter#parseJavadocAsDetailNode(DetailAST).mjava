@@ -1,0 +1,14 @@
+    /**
+     * Parse block comment DetailAST as Javadoc DetailNode tree.
+     * @param blockComment DetailAST
+     * @return DetailNode tree
+     */
+    public static DetailNode parseJavadocAsDetailNode(DetailAST blockComment) {
+        final JavadocDetailNodeParser parser = new JavadocDetailNodeParser();
+        final ParseStatus status = parser.parseJavadocAsDetailNode(blockComment);
+        if (status.getParseErrorMessage() != null) {
+            throw new IllegalArgumentException(getParseErrorMessage(status.getParseErrorMessage()));
+        }
+        return status.getTree();
+    }
+

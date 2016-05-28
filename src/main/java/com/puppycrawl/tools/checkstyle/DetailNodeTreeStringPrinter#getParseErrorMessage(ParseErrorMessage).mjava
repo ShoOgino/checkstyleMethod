@@ -1,0 +1,17 @@
+    /**
+     * Builds error message base on ParseErrorMessage's message key, its arguments, etc.
+     * @param parseErrorMessage ParseErrorMessage
+     * @return error message
+     */
+    private static String getParseErrorMessage(ParseErrorMessage parseErrorMessage) {
+        final LocalizedMessage lmessage = new LocalizedMessage(
+                parseErrorMessage.getLineNumber(),
+                "com.puppycrawl.tools.checkstyle.checks.javadoc.messages",
+                parseErrorMessage.getMessageKey(),
+                parseErrorMessage.getMessageArguments(),
+                "",
+                DetailNodeTreeStringPrinter.class,
+                null);
+        return "[ERROR:" + parseErrorMessage.getLineNumber() + "] " + lmessage.getMessage();
+    }
+

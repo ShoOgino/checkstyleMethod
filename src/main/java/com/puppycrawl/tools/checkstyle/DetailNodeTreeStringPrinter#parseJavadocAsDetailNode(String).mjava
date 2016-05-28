@@ -4,8 +4,7 @@
      * @return tree
      */
     private static DetailNode parseJavadocAsDetailNode(String javadocComment) {
-        final JavadocDetailNodeParser parser = new JavadocDetailNodeParser();
-        return parser.parseJavadocAsDetailNode(createFakeBlockComment(javadocComment))
-                .getTree();
+        final DetailAST blockComment = createFakeBlockComment(javadocComment);
+        return parseJavadocAsDetailNode(blockComment);
     }
 
