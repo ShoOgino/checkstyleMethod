@@ -1,0 +1,24 @@
+    /**
+     * Checks if characters in {@code line} at and around {@code columnNo} has
+     * the correct number of spaces. to return {@code true} the following
+     * conditions must be met:<br />
+     * - the character at {@code columnNo} is the first in the line.<br />
+     * - the character at {@code columnNo} is not separated by whitespaces from
+     * the previous non-whitespace character. <br />
+     * - the character at {@code columnNo} is separated by only one whitespace
+     * from the previous non-whitespace character.<br />
+     * - {@link #validateComments} is disabled and the previous text is the
+     * end of a block comment.
+     *
+     * @param line The line in the file to examine.
+     * @param columnNo The column position in the {@code line} to examine.
+     * @return {@code true} if the text at {@code columnNo} is separated
+     *         correctly from the previous token.
+     */
+    private boolean isTextSeparatedCorrectlyFromPrevious(String line, int columnNo) {
+        return isSingleSpace(line, columnNo)
+                || !isWhitespace(line, columnNo)
+                || isFirstInLine(line, columnNo)
+                || !validateComments && isBlockCommentEnd(line, columnNo);
+    }
+

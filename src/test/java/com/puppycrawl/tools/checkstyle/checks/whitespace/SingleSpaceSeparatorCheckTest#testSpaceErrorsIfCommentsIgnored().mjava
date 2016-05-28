@@ -1,0 +1,10 @@
+    @Test
+    public void testSpaceErrorsIfCommentsIgnored() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(SingleSpaceSeparatorCheck.class);
+        final String[] expected = {
+            "13:13: " + getCheckMessage(MSG_KEY),
+        };
+
+        verify(checkConfig, getPath("InputSingleSpaceComments.java"), expected);
+    }
+
