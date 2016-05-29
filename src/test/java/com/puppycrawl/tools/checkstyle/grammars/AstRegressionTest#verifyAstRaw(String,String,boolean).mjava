@@ -5,7 +5,7 @@
                 "file.encoding", "UTF-8")).getFullText().toString().replace("\r", "");
 
         final FileText actualFileContents = FileText.fromLines(new File(""),
-                Arrays.asList(actualJava.split("\\n")));
+                Arrays.asList(actualJava.split("\\n|\\r\\n?")));
         final String actualContents = AstTreeStringPrinter.printAst(actualFileContents,
                 withComments);
 
