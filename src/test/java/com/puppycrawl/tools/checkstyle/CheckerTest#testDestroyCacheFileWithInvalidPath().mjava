@@ -13,7 +13,8 @@
             checker.setCacheFile(file.getAbsolutePath());
         }
         else {
-            checker.setCacheFile(File.separator + ":invalid");
+            final int wrongFileNameLength = 300;
+            checker.setCacheFile(Strings.padEnd(File.separator, wrongFileNameLength, '*'));
         }
         try {
             checker.destroy();
