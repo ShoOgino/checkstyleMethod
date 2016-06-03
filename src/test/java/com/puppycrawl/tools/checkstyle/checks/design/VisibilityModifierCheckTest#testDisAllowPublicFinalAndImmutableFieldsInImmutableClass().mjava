@@ -1,20 +1,23 @@
     @Test
-    public void testUserSpecifiedImmutableClassesList() throws Exception {
+    public void testDisAllowPublicFinalAndImmutableFieldsInImmutableClass() throws Exception {
         final DefaultConfiguration checkConfig =
-                createCheckConfig(VisibilityModifierCheck.class);
-        checkConfig.addAttribute("allowPublicImmutableFields", "true");
-        checkConfig.addAttribute("immutableClassCanonicalNames", "java.util.List,"
-                + "com.google.common.collect.ImmutableSet");
+            createCheckConfig(VisibilityModifierCheck.class);
         final String[] expected = {
+            "11:22: " + getCheckMessage(MSG_KEY, "someIntValue"),
+            "12:39: " + getCheckMessage(MSG_KEY, "includes"),
+            "13:39: " + getCheckMessage(MSG_KEY, "excludes"),
             "14:35: " + getCheckMessage(MSG_KEY, "notes"),
             "15:29: " + getCheckMessage(MSG_KEY, "money"),
+            "16:23: " + getCheckMessage(MSG_KEY, "list"),
+            "30:28: " + getCheckMessage(MSG_KEY, "f"),
+            "31:30: " + getCheckMessage(MSG_KEY, "bool"),
             "32:35: " + getCheckMessage(MSG_KEY, "uri"),
             "33:35: " + getCheckMessage(MSG_KEY, "file"),
             "34:20: " + getCheckMessage(MSG_KEY, "value"),
             "35:35: " + getCheckMessage(MSG_KEY, "url"),
             "36:24: " + getCheckMessage(MSG_KEY, "bValue"),
             "37:31: " + getCheckMessage(MSG_KEY, "longValue"),
-        };
+            };
         verify(checkConfig, getPath("InputImmutable.java"), expected);
     }
 

@@ -1,11 +1,11 @@
     @Test
-    public void testNullModifiers() throws Exception {
+    public void testPublicFinalFieldInEnum() throws Exception {
         final DefaultConfiguration checkConfig =
             createCheckConfig(VisibilityModifierCheck.class);
         checkConfig.addAttribute("allowPublicImmutableFields", "true");
         final String[] expected = {
-            "11:50: " + getCheckMessage(MSG_KEY, "i"),
+            "15:23: " + getCheckMessage(MSG_KEY, "hole"),
         };
-        verify(checkConfig, getPath("InputNullModifiers.java"), expected);
+        verify(checkConfig, getPath("InputEnumIsSealed.java"), expected);
     }
 

@@ -2,6 +2,7 @@
     public void testImmutableStarImportNoWarn() throws Exception {
         final DefaultConfiguration checkConfig =
                 createCheckConfig(VisibilityModifierCheck.class);
+        checkConfig.addAttribute("allowPublicImmutableFields", "true");
         checkConfig.addAttribute("immutableClassCanonicalNames",
                  "com.google.common.collect.ImmutableSet");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;

@@ -1,7 +1,8 @@
     @Test
-    public void testImmutableDefaultValueSameTypeName() throws Exception {
+    public void testImmutableValueSameTypeName() throws Exception {
         final DefaultConfiguration checkConfig =
                 createCheckConfig(VisibilityModifierCheck.class);
+        checkConfig.addAttribute("allowPublicImmutableFields", "true");
         final String[] expected = {
             "7:46: " + getCheckMessage(MSG_KEY, "calendar"),
             "8:41: " + getCheckMessage(MSG_KEY, "calendar2"),

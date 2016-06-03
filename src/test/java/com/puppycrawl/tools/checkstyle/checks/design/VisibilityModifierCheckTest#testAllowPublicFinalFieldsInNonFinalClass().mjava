@@ -1,12 +1,9 @@
     @Test
-    public void testAllowPublicFinalFieldsInImmutableClass() throws Exception {
+    public void testAllowPublicFinalFieldsInNonFinalClass() throws Exception {
         final DefaultConfiguration checkConfig =
                 createCheckConfig(VisibilityModifierCheck.class);
-        checkConfig.addAttribute("allowPublicImmutableFields", "true");
+        checkConfig.addAttribute("allowPublicFinalFields", "true");
         final String[] expected = {
-            "12:39: " + getCheckMessage(MSG_KEY, "includes"),
-            "13:39: " + getCheckMessage(MSG_KEY, "excludes"),
-            "16:23: " + getCheckMessage(MSG_KEY, "list"),
             "34:20: " + getCheckMessage(MSG_KEY, "value"),
             "36:24: " + getCheckMessage(MSG_KEY, "bValue"),
             "37:31: " + getCheckMessage(MSG_KEY, "longValue"),

@@ -15,8 +15,7 @@
                 || packageAllowed && PACKAGE_ACCESS_MODIFIER.equals(variableScope)
                 || protectedAllowed && PROTECTED_ACCESS_MODIFIER.equals(variableScope)
                 || isIgnoredPublicMember(variableName, variableScope)
-                   || allowPublicImmutableFields
-                      && isImmutableFieldDefinedInFinalClass(variableDef);
+                || isAllowedPublicField(variableDef);
         }
 
         return result;

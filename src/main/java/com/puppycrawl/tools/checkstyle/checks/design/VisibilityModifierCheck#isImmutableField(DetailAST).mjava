@@ -9,10 +9,7 @@
      */
     private boolean isImmutableField(DetailAST variableDef) {
         boolean result = false;
-
-        final DetailAST modifiers = variableDef.findFirstToken(TokenTypes.MODIFIERS);
-        final boolean isFinal = modifiers.branchContains(TokenTypes.FINAL);
-        if (isFinal) {
+        if (isFinalField(variableDef)) {
             final DetailAST type = variableDef.findFirstToken(TokenTypes.TYPE);
             final boolean isCanonicalName = type.getFirstChild().getType() == TokenTypes.DOT;
             final String typeName = getTypeName(type, isCanonicalName);

@@ -1,0 +1,10 @@
+    /**
+     * Checks whether current field is final.
+     * @param variableDef field in consideration.
+     * @return true if current field is final.
+     */
+    private boolean isFinalField(DetailAST variableDef) {
+        final DetailAST modifiers = variableDef.findFirstToken(TokenTypes.MODIFIERS);
+        return modifiers.branchContains(TokenTypes.FINAL);
+    }
+

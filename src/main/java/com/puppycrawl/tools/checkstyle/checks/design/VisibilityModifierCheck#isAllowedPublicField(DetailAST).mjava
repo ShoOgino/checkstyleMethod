@@ -1,0 +1,10 @@
+    /**
+     * Checks whether the variable satisfies the public field check.
+     * @param variableDef Variable definition node.
+     * @return true if allowed.
+     */
+    private boolean isAllowedPublicField(DetailAST variableDef) {
+        return allowPublicFinalFields && isFinalField(variableDef)
+            || allowPublicImmutableFields && isImmutableFieldDefinedInFinalClass(variableDef);
+    }
+
