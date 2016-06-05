@@ -1,0 +1,41 @@
+    private static String getCheckPropertyExpectedValue(Class<?> clss, Object instance,
+            String propertyName) throws Exception {
+        final Field field = getField(instance.getClass(), propertyName);
+        String result = null;
+
+        if (field != null) {
+            final Object value = field.get(instance);
+
+            if (clss == boolean.class) {
+                result = value.toString();
+            }
+            else if (clss == int.class) {
+                if (value.equals(Integer.MAX_VALUE)) {
+                    result = "java.lang.Integer.MAX_VALUE";
+                }
+                else {
+                    result = value.toString();
+                }
+            }
+            else if (clss == int[].class) {
+                result = Arrays.toString((int[]) value).replace("[", "").replace("]", "");
+                if (result.isEmpty()) {
+                    result = "{}";
+                }
+            }
+            else if (clss == double[].class) {
+                result = Arrays.toString((double[]) value).replace("[", "").replace("]", "")
+                        .replace(".0", "");
+                if (result.isEmpty()) {
+                    result = "{}";
+                }
+            }
+
+            if (clss != String.class && clss != String[].class && result == null) {
+                result = "null";
+            }
+        }
+
+        return result;
+    }
+

@@ -1,0 +1,16 @@
+    private static Field getField(Class<?> clss, String propertyName) {
+        Field result = null;
+
+        if (clss != null) {
+            try {
+                result = clss.getDeclaredField(propertyName);
+                result.setAccessible(true);
+            }
+            catch (NoSuchFieldException ex) {
+                result = getField(clss.getSuperclass(), propertyName);
+            }
+        }
+
+        return result;
+    }
+
