@@ -6,6 +6,7 @@
     private DetailAST getNextToken(DetailAST checkedStatement) {
         DetailAST nextToken;
         if (checkedStatement.getType() == TokenTypes.SLIST
+                || checkedStatement.getType() == TokenTypes.ARRAY_INIT
                 || checkedStatement.getType() == TokenTypes.CASE_GROUP) {
             nextToken = checkedStatement.getFirstChild();
         }
