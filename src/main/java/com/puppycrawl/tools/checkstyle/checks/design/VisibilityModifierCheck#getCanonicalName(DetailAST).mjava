@@ -10,9 +10,11 @@
             toVisit = getNextSubTreeNode(toVisit, type);
             if (toVisit != null && toVisit.getType() == TokenTypes.IDENT) {
                 canonicalNameBuilder.append(toVisit.getText());
-                final DetailAST nextSubTreeNode = getNextSubTreeNode(toVisit,
-                         type);
+                final DetailAST nextSubTreeNode = getNextSubTreeNode(toVisit, type);
                 if (nextSubTreeNode != null) {
+                    if (nextSubTreeNode.getType() == TokenTypes.TYPE_ARGUMENTS) {
+                        break;
+                    }
                     canonicalNameBuilder.append('.');
                 }
             }

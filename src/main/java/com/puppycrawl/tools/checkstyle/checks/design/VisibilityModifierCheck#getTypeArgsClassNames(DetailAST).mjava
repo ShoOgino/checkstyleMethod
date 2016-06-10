@@ -1,0 +1,22 @@
+    /**
+     * Returns a list of type parameters class names.
+     * @param typeArgs type arguments token.
+     * @return a list of type parameters class names.
+     */
+    private static List<String> getTypeArgsClassNames(DetailAST typeArgs) {
+        final List<String> typeClassNames = new ArrayList<>();
+        DetailAST type = typeArgs.findFirstToken(TokenTypes.TYPE_ARGUMENT);
+        boolean isCanonicalName = isCanonicalName(type);
+        String typeName = getTypeName(type, isCanonicalName);
+        typeClassNames.add(typeName);
+        DetailAST sibling = type.getNextSibling();
+        while (sibling.getType() == TokenTypes.COMMA) {
+            type = sibling.getNextSibling();
+            isCanonicalName = isCanonicalName(type);
+            typeName = getTypeName(type, isCanonicalName);
+            typeClassNames.add(typeName);
+            sibling = type.getNextSibling();
+        }
+        return typeClassNames;
+    }
+

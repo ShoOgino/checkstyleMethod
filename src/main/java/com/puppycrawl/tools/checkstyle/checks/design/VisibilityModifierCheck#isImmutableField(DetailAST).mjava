@@ -11,12 +11,20 @@
         boolean result = false;
         if (isFinalField(variableDef)) {
             final DetailAST type = variableDef.findFirstToken(TokenTypes.TYPE);
-            final boolean isCanonicalName = type.getFirstChild().getType() == TokenTypes.DOT;
+            final boolean isCanonicalName = isCanonicalName(type);
             final String typeName = getTypeName(type, isCanonicalName);
-
-            result = !isCanonicalName && isPrimitive(type)
-                     || immutableClassShortNames.contains(typeName)
-                     || isCanonicalName && immutableClassCanonicalNames.contains(typeName);
+            final DetailAST typeArgs = getGenericTypeArgs(type, isCanonicalName);
+            if (typeArgs == null) {
+                result = !isCanonicalName && isPrimitive(type)
+                    || immutableClassShortNames.contains(typeName)
+                    || isCanonicalName && immutableClassCanonicalNames.contains(typeName);
+            }
+            else {
+                final List<String> argsClassNames = getTypeArgsClassNames(typeArgs);
+                result = (immutableClassShortNames.contains(typeName)
+                    || isCanonicalName && immutableClassCanonicalNames.contains(typeName))
+                    && areImmutableTypeArguments(argsClassNames);
+            }
         }
         return result;
     }
