@@ -1,0 +1,28 @@
+    public void foo4() {
+        int prog, user;
+        prog = (int)(Math.random() * 10) + 1;
+        Scanner input = new Scanner(System.in);
+        if( input.hasNextInt() ) {
+            do {
+                user = input.nextInt();
+                if(user == prog) {
+                    System.out.println("Good!");
+                } else {
+                    if (user > 0 && user <= 10) {
+                        System.out.print("Bad! ");
+                        if( prog < user ) {
+                            System.out.println("My number is less than yours.");
+                        } else {
+                            System.out.println("My number is greater than yours.");
+                        }
+                    } else {
+                        System.out.println("Error!");
+                    }
+                }
+            } while( user != prog );
+        } else {
+            System.out.println("Error!");
+        }
+        System.out.println("Goodbye!");
+    }
+
