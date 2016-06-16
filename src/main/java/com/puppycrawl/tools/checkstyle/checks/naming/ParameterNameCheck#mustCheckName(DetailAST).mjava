@@ -2,7 +2,8 @@
     protected boolean mustCheckName(DetailAST ast) {
         boolean checkName = true;
         if (ignoreOverridden && isOverriddenMethod(ast)
-                || ast.getParent().getType() == TokenTypes.LITERAL_CATCH) {
+                || ast.getParent().getType() == TokenTypes.LITERAL_CATCH
+                || CheckUtils.isReceiverParameter(ast)) {
             checkName = false;
         }
         return checkName;

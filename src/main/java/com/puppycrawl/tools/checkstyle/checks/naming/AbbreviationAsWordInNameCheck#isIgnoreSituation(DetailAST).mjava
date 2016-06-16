@@ -7,7 +7,7 @@
     private boolean isIgnoreSituation(DetailAST ast) {
         final DetailAST modifiers = ast.getFirstChild();
 
-        boolean result = false;
+        final boolean result;
         if (ast.getType() == TokenTypes.VARIABLE_DEF) {
             if ((ignoreFinal || ignoreStatic)
                     && isInterfaceDeclaration(ast)) {
@@ -24,6 +24,9 @@
         else if (ast.getType() == TokenTypes.METHOD_DEF) {
             result = ignoreOverriddenMethods
                     && hasOverrideAnnotation(modifiers);
+        }
+        else {
+            result = CheckUtils.isReceiverParameter(ast);
         }
         return result;
     }

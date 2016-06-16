@@ -6,6 +6,7 @@
      */
     private void processVariable(DetailAST ast) {
         if (!ScopeUtils.isInInterfaceOrAnnotationBlock(ast)
+            && !CheckUtils.isReceiverParameter(ast)
             && (ScopeUtils.isLocalVariableDef(ast)
                 || ast.getType() == TokenTypes.PARAMETER_DEF)) {
             // local variable or parameter. Does it shadow a field?
