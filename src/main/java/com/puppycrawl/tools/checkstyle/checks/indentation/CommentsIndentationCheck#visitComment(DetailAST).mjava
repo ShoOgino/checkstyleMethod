@@ -12,7 +12,7 @@
      */
     private void visitComment(DetailAST comment) {
         final DetailAST prevStmt = getPreviousStatement(comment);
-        final DetailAST nextStmt = comment.getNextSibling();
+        final DetailAST nextStmt = getNextStmt(comment);
 
         if (!isTrailingComment(comment)) {
             if (isInEmptyCaseBlock(prevStmt, nextStmt)) {

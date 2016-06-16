@@ -1,0 +1,15 @@
+    /**
+     * Returns the next statement of a comment.
+     * @param comment comment.
+     * @return the next statement of a comment.
+     */
+    private static DetailAST getNextStmt(DetailAST comment) {
+        DetailAST nextStmt = comment.getNextSibling();
+        while (nextStmt != null
+                && isComment(nextStmt)
+                && comment.getColumnNo() != nextStmt.getColumnNo()) {
+            nextStmt = nextStmt.getNextSibling();
+        }
+        return nextStmt;
+    }
+
