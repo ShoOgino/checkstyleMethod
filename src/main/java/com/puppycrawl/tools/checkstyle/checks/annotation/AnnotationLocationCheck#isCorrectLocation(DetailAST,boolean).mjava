@@ -15,6 +15,7 @@
         }
         return allowSamelineMultipleAnnotations
             || allowingCondition && !hasNodeBefore(annotation)
-            || !allowingCondition && !hasNodeBeside(annotation);
+            || !allowingCondition && (!hasNodeBeside(annotation)
+            || isAllowedPosition(annotation, SINGLELINE_ANNOTATION_PARENTS));
     }
 

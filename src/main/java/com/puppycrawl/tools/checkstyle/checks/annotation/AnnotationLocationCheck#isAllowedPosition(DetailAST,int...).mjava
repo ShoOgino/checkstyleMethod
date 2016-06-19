@@ -1,0 +1,17 @@
+    /**
+     * Checks whether position of annotation is allowed.
+     * @param annotation annotation token.
+     * @param allowedPositions an array of allowed annotation positions.
+     * @return true if position of annotation is allowed.
+     */
+    public static boolean isAllowedPosition(DetailAST annotation, int... allowedPositions) {
+        boolean allowed = false;
+        for (int position : allowedPositions) {
+            if (isInSpecificCodeBlock(annotation, position)) {
+                allowed = true;
+                break;
+            }
+        }
+        return allowed;
+    }
+
