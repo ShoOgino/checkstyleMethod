@@ -4,10 +4,10 @@
          * @return Optional of {@link FinalVariableCandidate}.
          */
         public Optional<FinalVariableCandidate> findFinalVariableCandidateForAst(DetailAST ast) {
-            Optional<FinalVariableCandidate> result = Optional.absent();
+            Optional<FinalVariableCandidate> result = Optional.empty();
             DetailAST storedVariable = null;
             final Optional<FinalVariableCandidate> candidate =
-                Optional.fromNullable(scope.get(ast.getText()));
+                Optional.ofNullable(scope.get(ast.getText()));
             if (candidate.isPresent()) {
                 storedVariable = candidate.get().variableIdent;
             }

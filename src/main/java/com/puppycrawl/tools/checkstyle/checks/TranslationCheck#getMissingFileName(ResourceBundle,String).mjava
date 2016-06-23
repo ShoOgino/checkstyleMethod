@@ -21,7 +21,7 @@
             fileNameRegexp = String.format(Locale.ROOT,
                 REGEXP_FORMAT_TO_CHECK_REQUIRED_TRANSLATIONS, baseName, languageCode, extension);
         }
-        Optional<String> missingFileName = Optional.absent();
+        Optional<String> missingFileName = Optional.empty();
         if (!bundle.containsFile(fileNameRegexp)) {
             if (searchForDefaultTranslation) {
                 missingFileName = Optional.of(String.format(Locale.ROOT,

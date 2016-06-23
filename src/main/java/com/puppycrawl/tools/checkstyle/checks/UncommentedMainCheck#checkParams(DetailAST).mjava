@@ -9,9 +9,9 @@
 
         if (params.getChildCount() == 1) {
             final DetailAST parameterType = params.getFirstChild().findFirstToken(TokenTypes.TYPE);
-            final Optional<DetailAST> arrayDecl = Optional.fromNullable(
+            final Optional<DetailAST> arrayDecl = Optional.ofNullable(
                 parameterType.findFirstToken(TokenTypes.ARRAY_DECLARATOR));
-            final Optional<DetailAST> varargs = Optional.fromNullable(
+            final Optional<DetailAST> varargs = Optional.ofNullable(
                 params.getFirstChild().findFirstToken(TokenTypes.ELLIPSIS));
 
             if (arrayDecl.isPresent()) {
