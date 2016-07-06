@@ -1,0 +1,18 @@
+    /**
+     * Extracts import container name from fully qualified import name.
+     * An import container name is the type which encloses the static element being imported.
+     * For example, HttpConstants, HttpHeaders, HttpHeaders.Names are import container names:
+     * <p>
+     * import static HttpConstants.COLON     => HttpConstants
+     * import static HttpHeaders.addHeader   => HttpHeaders
+     * import static HttpHeaders.setHeader   => HttpHeaders
+     * import static HttpHeaders.Names.DATE  => HttpHeaders.Names
+     * </p>
+     * @param qualifiedImportName fully qualified import name.
+     * @return import container name.
+     */
+    private static String getImportContainer(String qualifiedImportName) {
+        final int lastDotIndex = qualifiedImportName.lastIndexOf('.');
+        return qualifiedImportName.substring(0, lastDotIndex);
+    }
+
