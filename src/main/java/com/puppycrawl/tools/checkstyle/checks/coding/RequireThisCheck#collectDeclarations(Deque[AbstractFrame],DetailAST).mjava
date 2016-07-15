@@ -42,6 +42,12 @@
                 final DetailAST ctorFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
                 frameStack.addFirst(new ConstructorFrame(frame, ctorFrameNameIdent));
                 break;
+            case TokenTypes.LITERAL_NEW:
+                if (isAnonymousClassDef(ast)) {
+                    frameStack.addFirst(new AnonymousClassFrame(frame,
+                            ast.getFirstChild().toString()));
+                }
+                break;
             default:
                 // do nothing
         }

@@ -8,7 +8,7 @@
         if (frame.getFrameName().equals(getNearestClassFrameName())) {
             log(ast, msgKey, ast.getText(), "");
         }
-        else {
+        else if (!(frame instanceof AnonymousClassFrame)) {
             log(ast, msgKey, ast.getText(), frame.getFrameName() + '.');
         }
     }
