@@ -4,7 +4,7 @@
                 createCheckConfig(FinalLocalVariableCheck.class);
         checkConfig.addAttribute("tokens", "VARIABLE_DEF, PARAMETER_DEF");
         final String[] expected = {
-            "15:13: " + "Variable 'x' should be declared final.",
+            "15:13: " + getCheckMessage(MSG_KEY, "x"),
         };
         verify(checkConfig, getPath("InputFinalLocalVariableEnhancedForLoopVariable.java"),
             expected);
