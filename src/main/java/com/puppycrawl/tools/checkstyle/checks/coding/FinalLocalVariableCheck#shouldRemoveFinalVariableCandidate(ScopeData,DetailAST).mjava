@@ -14,9 +14,7 @@
                 // more than once in this case
                 if (isInTheSameLoop(variable, ast) || !isUseOfExternalVariableInsideLoop(ast)) {
                     final FinalVariableCandidate candidate = scopeData.scope.get(ast.getText());
-                    shouldRemove = candidate.assignInIfBlock
-                        && candidate.assignOutsideConditionalBlock
-                        && !candidate.assignInIfBlockWhichIsInsideCaseBlock;
+                    shouldRemove = candidate.alreadyAssigned;
                 }
                 scopeData.uninitializedVariables.remove(variable);
                 break;

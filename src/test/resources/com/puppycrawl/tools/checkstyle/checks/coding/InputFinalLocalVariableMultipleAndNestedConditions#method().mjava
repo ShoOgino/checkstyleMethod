@@ -1,0 +1,34 @@
+    // False positive
+    // https://github.com/checkstyle/checkstyle/issues/3186
+    void method() {
+        for (int i = 0; i < 2; i++) {
+            final Object converter = new Object();
+            final String type = getType();
+            Object value;
+
+            if ("s1".equals(type)) {
+                if (getCondition(1)) {
+                    value = getValue(1);
+                }
+                else {
+                    continue;
+                }
+            }
+            else if ("s2".equals(type)) {
+                if (getCondition(2)) {
+                    value = getValue(2);
+                }
+                else {
+                    continue;
+                }
+            }
+            else {
+                continue;
+            }
+
+            if (converter != null) {
+                value = /* converter. */getValue(1, type, value);
+            }
+        }
+    }
+

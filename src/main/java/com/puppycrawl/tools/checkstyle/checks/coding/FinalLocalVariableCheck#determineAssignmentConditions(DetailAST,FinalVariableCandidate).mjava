@@ -1,0 +1,18 @@
+    /**
+     * Determines identifier assignment conditions (assigned or already assigned).
+     * @param ident identifier.
+     * @param candidate final local variable candidate.
+     */
+    private static void determineAssignmentConditions(DetailAST ident,
+                                                      FinalVariableCandidate candidate) {
+        if (candidate.assigned) {
+            if (!isInSpecificCodeBlock(ident, TokenTypes.LITERAL_ELSE)
+                    && !isInSpecificCodeBlock(ident, TokenTypes.CASE_GROUP)) {
+                candidate.alreadyAssigned = true;
+            }
+        }
+        else {
+            candidate.assigned = true;
+        }
+    }
+

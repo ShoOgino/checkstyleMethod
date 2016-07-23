@@ -36,15 +36,7 @@
                 if (isAssignOperator(parentType) && isFirstChild(ast)) {
                     final Optional<FinalVariableCandidate> candidate = getFinalCandidate(ast);
                     if (candidate.isPresent()) {
-                        if (isInSpecificCodeBlock(ast, TokenTypes.LITERAL_IF)) {
-                            candidate.get().assignInIfBlock = true;
-                            if (isInSpecificCodeBlock(ast, TokenTypes.CASE_GROUP)) {
-                                candidate.get().assignInIfBlockWhichIsInsideCaseBlock = true;
-                            }
-                        }
-                        else {
-                            candidate.get().assignOutsideConditionalBlock = true;
-                        }
+                        determineAssignmentConditions(ast, candidate.get());
                     }
                     removeFinalVariableCandidateFromStack(ast);
                 }
