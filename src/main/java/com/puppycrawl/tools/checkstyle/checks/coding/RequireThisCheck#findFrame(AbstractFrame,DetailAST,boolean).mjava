@@ -1,0 +1,19 @@
+    /**
+     * Find frame containing declaration.
+     * @param frame The parent frame to searching in.
+     * @param name IDENT ast of the declaration to find.
+     * @param lookForMethod whether we are looking for a method name.
+     * @return AbstractFrame containing declaration or null.
+     */
+    private static AbstractFrame findFrame(AbstractFrame frame, DetailAST name,
+            boolean lookForMethod) {
+        final AbstractFrame result;
+        if (frame == null) {
+            result = null;
+        }
+        else {
+            result = frame.getIfContains(name, lookForMethod);
+        }
+        return result;
+    }
+

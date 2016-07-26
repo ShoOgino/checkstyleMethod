@@ -9,14 +9,12 @@
         final DetailAST sibling = ast.getNextSibling();
         if (sibling != null && isAssignToken(parent.getType())) {
             final ClassFrame classFrame = (ClassFrame) findFrame(ast, true);
-            if (classFrame != null) {
-                final Set<DetailAST> exprIdents = getAllTokensOfType(sibling, TokenTypes.IDENT);
-                if (isCompoundAssignToken(parent.getType())) {
-                    overlapping = true;
-                }
-                else {
-                    overlapping = classFrame.containsFieldOrVariableDef(exprIdents, ast);
-                }
+            final Set<DetailAST> exprIdents = getAllTokensOfType(sibling, TokenTypes.IDENT);
+            if (isCompoundAssignToken(parent.getType())) {
+                overlapping = true;
+            }
+            else {
+                overlapping = classFrame.containsFieldOrVariableDef(exprIdents, ast);
             }
         }
         return overlapping;

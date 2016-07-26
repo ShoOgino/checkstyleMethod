@@ -14,17 +14,15 @@
 
         boolean userDefinedArrangementOfThis = false;
 
-        if (blockEndToken != null) {
-            final Set<DetailAST> variableUsagesInsideBlock =
-                getAllTokensWhichAreEqualToCurrent(definitionToken, ident,
-                    blockEndToken.getLineNo());
+        final Set<DetailAST> variableUsagesInsideBlock =
+            getAllTokensWhichAreEqualToCurrent(definitionToken, ident,
+                blockEndToken.getLineNo());
 
-            for (DetailAST variableUsage : variableUsagesInsideBlock) {
-                final DetailAST prevSibling = variableUsage.getPreviousSibling();
-                if (prevSibling != null
-                        && prevSibling.getType() == TokenTypes.LITERAL_THIS) {
-                    userDefinedArrangementOfThis = true;
-                }
+        for (DetailAST variableUsage : variableUsagesInsideBlock) {
+            final DetailAST prevSibling = variableUsage.getPreviousSibling();
+            if (prevSibling != null
+                    && prevSibling.getType() == TokenTypes.LITERAL_THIS) {
+                userDefinedArrangementOfThis = true;
             }
         }
         return userDefinedArrangementOfThis;

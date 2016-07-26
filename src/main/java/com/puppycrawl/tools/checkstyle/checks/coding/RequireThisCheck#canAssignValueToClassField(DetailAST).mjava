@@ -10,10 +10,7 @@
         final boolean fieldUsageInConstructor = isInsideConstructorFrame(fieldUsageFrame);
 
         final AbstractFrame declarationFrame = findFrame(ast, true);
-        boolean finalField = false;
-        if (declarationFrame != null) {
-            finalField = ((ClassFrame) declarationFrame).hasFinalField(ast);
-        }
+        final boolean finalField = ((ClassFrame) declarationFrame).hasFinalField(ast);
 
         return fieldUsageInConstructor || !finalField;
     }

@@ -1,0 +1,22 @@
+    /**
+     * Find the class frame containing declaration.
+     * @param name IDENT ast of the declaration to find.
+     * @param lookForMethod whether we are looking for a method name.
+     * @return AbstractFrame containing declaration or null.
+     */
+    private AbstractFrame findClassFrame(DetailAST name, boolean lookForMethod) {
+        AbstractFrame frame = current;
+
+        while (true) {
+            frame = findFrame(frame, name, lookForMethod);
+
+            if (frame == null || frame instanceof ClassFrame) {
+                break;
+            }
+
+            frame = frame.getParent();
+        }
+
+        return frame;
+    }
+

@@ -18,7 +18,11 @@
                 && !methodNameInMethodCall
                 && !typeName
                 && !isDeclarationToken(parentType)) {
-            frame = getClassFrameWhereViolationIsFound(ast);
+            final AbstractFrame fieldFrame = findClassFrame(ast, false);
+
+            if (fieldFrame != null && ((ClassFrame) fieldFrame).hasInstanceMember(ast)) {
+                frame = getClassFrameWhereViolationIsFound(ast);
+            }
         }
         return frame;
     }

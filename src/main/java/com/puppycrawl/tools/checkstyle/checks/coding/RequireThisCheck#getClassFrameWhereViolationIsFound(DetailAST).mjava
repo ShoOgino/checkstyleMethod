@@ -7,56 +7,53 @@
     private AbstractFrame getClassFrameWhereViolationIsFound(DetailAST ast) {
         AbstractFrame frameWhereViolationIsFound = null;
         final AbstractFrame variableDeclarationFrame = findFrame(ast, false);
-        if (variableDeclarationFrame != null) {
-            final FrameType variableDeclarationFrameType = variableDeclarationFrame.getType();
-            final DetailAST prevSibling = ast.getPreviousSibling();
-            if (variableDeclarationFrameType == FrameType.CLASS_FRAME
-                    && !validateOnlyOverlapping
-                    && prevSibling == null
-                    && !ScopeUtils.isInInterfaceBlock(ast)
-                    && canBeReferencedFromStaticContext(ast)) {
-                frameWhereViolationIsFound = variableDeclarationFrame;
-            }
-            else if (variableDeclarationFrameType == FrameType.METHOD_FRAME) {
-                if (isOverlappingByArgument(ast)) {
-                    if (!isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
-                            && !isReturnedVariable(variableDeclarationFrame, ast)
-                            && canBeReferencedFromStaticContext(ast)
-                            && canAssignValueToClassField(ast)) {
-                        frameWhereViolationIsFound = findFrame(ast, true);
-                    }
-                }
-                else if (!validateOnlyOverlapping
-                         && prevSibling == null
-                         && isAssignToken(ast.getParent().getType())
-                         && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
-                         && canBeReferencedFromStaticContext(ast)
-                         && canAssignValueToClassField(ast)) {
+        final FrameType variableDeclarationFrameType = variableDeclarationFrame.getType();
+        final DetailAST prevSibling = ast.getPreviousSibling();
+        if (variableDeclarationFrameType == FrameType.CLASS_FRAME
+                && !validateOnlyOverlapping
+                && prevSibling == null
+                && canBeReferencedFromStaticContext(ast)) {
+            frameWhereViolationIsFound = variableDeclarationFrame;
+        }
+        else if (variableDeclarationFrameType == FrameType.METHOD_FRAME) {
+            if (isOverlappingByArgument(ast)) {
+                if (!isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
+                        && !isReturnedVariable(variableDeclarationFrame, ast)
+                        && canBeReferencedFromStaticContext(ast)
+                        && canAssignValueToClassField(ast)) {
                     frameWhereViolationIsFound = findFrame(ast, true);
-
                 }
             }
-            else if (variableDeclarationFrameType == FrameType.CTOR_FRAME
-                     && isOverlappingByArgument(ast)
-                     && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)) {
+            else if (!validateOnlyOverlapping
+                     && prevSibling == null
+                     && isAssignToken(ast.getParent().getType())
+                     && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
+                     && canBeReferencedFromStaticContext(ast)
+                     && canAssignValueToClassField(ast)) {
                 frameWhereViolationIsFound = findFrame(ast, true);
+
             }
-            else if (variableDeclarationFrameType == FrameType.BLOCK_FRAME) {
-                if (isOverlappingByLocalVariable(ast)) {
-                    if (canAssignValueToClassField(ast)
-                            && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
-                            && !isReturnedVariable(variableDeclarationFrame, ast)
-                            && canBeReferencedFromStaticContext(ast)) {
-                        frameWhereViolationIsFound = findFrame(ast, true);
-                    }
-                }
-                else if (!validateOnlyOverlapping
-                         && prevSibling == null
-                         && isAssignToken(ast.getParent().getType())
-                         && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
-                         && canBeReferencedFromStaticContext(ast)) {
+        }
+        else if (variableDeclarationFrameType == FrameType.CTOR_FRAME
+                 && isOverlappingByArgument(ast)
+                 && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)) {
+            frameWhereViolationIsFound = findFrame(ast, true);
+        }
+        else if (variableDeclarationFrameType == FrameType.BLOCK_FRAME) {
+            if (isOverlappingByLocalVariable(ast)) {
+                if (canAssignValueToClassField(ast)
+                        && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
+                        && !isReturnedVariable(variableDeclarationFrame, ast)
+                        && canBeReferencedFromStaticContext(ast)) {
                     frameWhereViolationIsFound = findFrame(ast, true);
                 }
+            }
+            else if (!validateOnlyOverlapping
+                     && prevSibling == null
+                     && isAssignToken(ast.getParent().getType())
+                     && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
+                     && canBeReferencedFromStaticContext(ast)) {
+                frameWhereViolationIsFound = findFrame(ast, true);
             }
         }
         return frameWhereViolationIsFound;
