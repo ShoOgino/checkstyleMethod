@@ -3,20 +3,23 @@
      * list. Subdirectories are also traversed.
      * @param node
      *        the node to process
+     * @param patternsToExclude The list of directory patterns to exclude from searching.
      * @return found files
      */
-    private static List<File> listFiles(File node) {
+    private static List<File> listFiles(File node, List<Pattern> patternsToExclude) {
         // could be replaced with org.apache.commons.io.FileUtils.list() method
         // if only we add commons-io library
         final List<File> result = Lists.newLinkedList();
 
         if (node.canRead()) {
             if (node.isDirectory()) {
-                final File[] files = node.listFiles();
-                // listFiles() can return null, so we need to check it
-                if (files != null) {
-                    for (File element : files) {
-                        result.addAll(listFiles(element));
+                if (!isDirectoryExcluded(node.getAbsolutePath(), patternsToExclude)) {
+                    final File[] files = node.listFiles();
+                    // listFiles() can return null, so we need to check it
+                    if (files != null) {
+                        for (File element : files) {
+                            result.addAll(listFiles(element, patternsToExclude));
+                        }
                     }
                 }
             }

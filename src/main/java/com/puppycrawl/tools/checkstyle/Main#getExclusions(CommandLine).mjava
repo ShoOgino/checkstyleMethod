@@ -1,0 +1,23 @@
+    /**
+     * Gets the list of exclusions provided through the command line argument.
+     * @param commandLine command line object
+     * @return List of exclusion patterns.
+     */
+    private static List<Pattern> getExclusions(CommandLine commandLine) {
+        final List<Pattern> result = new ArrayList<>();
+
+        if (commandLine.hasOption(OPTION_E_NAME)) {
+            for (String value : commandLine.getOptionValues(OPTION_E_NAME)) {
+                result.add(Pattern.compile("^" + Pattern.quote(new File(value).getAbsolutePath())
+                        + "$"));
+            }
+        }
+        if (commandLine.hasOption(OPTION_X_NAME)) {
+            for (String value : commandLine.getOptionValues(OPTION_X_NAME)) {
+                result.add(Pattern.compile(value));
+            }
+        }
+
+        return result;
+    }
+

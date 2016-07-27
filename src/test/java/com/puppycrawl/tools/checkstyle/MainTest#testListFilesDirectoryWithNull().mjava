@@ -1,7 +1,7 @@
     @Test
     @SuppressWarnings("unchecked")
     public void testListFilesDirectoryWithNull() throws Exception {
-        final Method method = Main.class.getDeclaredMethod("listFiles", File.class);
+        final Method method = Main.class.getDeclaredMethod("listFiles", File.class, List.class);
         method.setAccessible(true);
 
         final File fileMock = mock(File.class);
@@ -9,7 +9,8 @@
         when(fileMock.isDirectory()).thenReturn(true);
         when(fileMock.listFiles()).thenReturn(null);
 
-        final List<File> result = (List<File>) method.invoke(null, fileMock);
+        final List<File> result = (List<File>) method.invoke(null, fileMock,
+                new ArrayList<Pattern>());
         assertEquals(0, result.size());
     }
 

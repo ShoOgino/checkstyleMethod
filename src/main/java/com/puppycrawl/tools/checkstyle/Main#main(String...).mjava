@@ -23,7 +23,8 @@
                 exitStatus = 0;
             }
             else {
-                final List<File> filesToProcess = getFilesToProcess(commandLine.getArgs());
+                final List<File> filesToProcess = getFilesToProcess(getExclusions(commandLine),
+                        commandLine.getArgs());
 
                 // return error if something is wrong in arguments
                 final List<String> messages = validateCli(commandLine, filesToProcess);
