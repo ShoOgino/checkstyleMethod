@@ -5,7 +5,7 @@
          * @return true if a method definition has the same name and number of parameters
          *     as the method call.
          */
-        private boolean isSimilarSignature(DetailAST ident, DetailAST ast) {
+        private static boolean isSimilarSignature(DetailAST ident, DetailAST ast) {
             boolean result = false;
             final DetailAST elistToken = ident.getParent().findFirstToken(TokenTypes.ELIST);
             if (elistToken != null && ident.getText().equals(ast.getText())) {
