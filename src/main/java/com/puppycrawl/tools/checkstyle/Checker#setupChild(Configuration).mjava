@@ -22,6 +22,10 @@
             fsc.init();
             addFileSetCheck(fsc);
         }
+        else if (child instanceof BeforeExecutionFileFilter) {
+            final BeforeExecutionFileFilter filter = (BeforeExecutionFileFilter) child;
+            addBeforeExecutionFileFilter(filter);
+        }
         else if (child instanceof Filter) {
             final Filter filter = (Filter) child;
             addFilter(filter);

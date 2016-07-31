@@ -1,0 +1,12 @@
+    @Test
+    public void testAddBeforeExecutionFileFilter() throws Exception {
+        final Checker checker = new Checker();
+        final TestBeforeExecutionFileFilter filter = new TestBeforeExecutionFileFilter();
+
+        checker.addBeforeExecutionFileFilter(filter);
+
+        filter.resetFilter();
+        getAcceptFileStarted().invoke(checker, "Test.java");
+        assertTrue("Checker.acceptFileStarted() doesn't call filter", filter.wasCalled());
+    }
+

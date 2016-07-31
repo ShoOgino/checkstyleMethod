@@ -1,0 +1,12 @@
+    /**
+     * Check if all before execution file filters accept starting the file.
+     *
+     * @param fileName
+     *            the file to be audited
+     * @return {@code true} if the file is accepted.
+     */
+    private boolean acceptFileStarted(String fileName) {
+        final String stripped = CommonUtils.relativizeAndNormalizePath(basedir, fileName);
+        return beforeExecutionFileFilters.accept(stripped);
+    }
+
