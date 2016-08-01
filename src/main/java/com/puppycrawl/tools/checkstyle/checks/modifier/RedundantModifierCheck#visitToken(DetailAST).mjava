@@ -3,25 +3,28 @@
         if (ast.getType() == TokenTypes.INTERFACE_DEF) {
             checkInterfaceModifiers(ast);
         }
-        else if (ast.getType() == TokenTypes.CTOR_DEF) {
-            if (isEnumMember(ast)) {
-                checkEnumConstructorModifiers(ast);
-            }
-            else {
-                checkClassConstructorModifiers(ast);
-            }
-        }
         else if (ast.getType() == TokenTypes.ENUM_DEF) {
             checkEnumDef(ast);
         }
-        else if (isInterfaceOrAnnotationMember(ast)) {
-            processInterfaceOrAnnotation(ast);
-        }
-        else if (ast.getType() == TokenTypes.METHOD_DEF) {
-            processMethods(ast);
-        }
-        else if (ast.getType() == TokenTypes.RESOURCE) {
-            processResources(ast);
+        else {
+            if (ast.getType() == TokenTypes.CTOR_DEF) {
+                if (isEnumMember(ast)) {
+                    checkEnumConstructorModifiers(ast);
+                }
+                else {
+                    checkClassConstructorModifiers(ast);
+                }
+            }
+            else if (ast.getType() == TokenTypes.METHOD_DEF) {
+                processMethods(ast);
+            }
+            else if (ast.getType() == TokenTypes.RESOURCE) {
+                processResources(ast);
+            }
+
+            if (isInterfaceOrAnnotationMember(ast)) {
+                processInterfaceOrAnnotation(ast);
+            }
         }
     }
 

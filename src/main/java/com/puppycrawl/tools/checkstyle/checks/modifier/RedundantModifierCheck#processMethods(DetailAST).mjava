@@ -1,5 +1,5 @@
     /**
-     * Process validation ofMethods.
+     * Process validation of Methods.
      * @param ast method AST
      */
     private void processMethods(DetailAST ast) {
@@ -26,16 +26,11 @@
             }
         }
         if (checkFinal && !isAnnotatedWithSafeVarargs(ast)) {
-            DetailAST modifier = modifiers.getFirstChild();
-            while (modifier != null) {
-                final int type = modifier.getType();
-                if (type == TokenTypes.FINAL) {
-                    log(modifier.getLineNo(), modifier.getColumnNo(),
-                            MSG_KEY, modifier.getText());
-                    break;
-                }
-                modifier = modifier.getNextSibling();
-            }
+            checkForRedundantModifier(ast, TokenTypes.FINAL);
+        }
+
+        if (!ast.branchContains(TokenTypes.SLIST)) {
+            processAbstractMethodParameters(ast);
         }
     }
 

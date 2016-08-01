@@ -5,7 +5,7 @@
     private void checkClassConstructorModifiers(DetailAST classCtorAst) {
         final DetailAST classDef = classCtorAst.getParent().getParent();
         if (!isClassPublic(classDef) && !isClassProtected(classDef)) {
-            checkForRedundantPublicModifier(classCtorAst);
+            checkForRedundantModifier(classCtorAst, TokenTypes.LITERAL_PUBLIC);
         }
     }
 
