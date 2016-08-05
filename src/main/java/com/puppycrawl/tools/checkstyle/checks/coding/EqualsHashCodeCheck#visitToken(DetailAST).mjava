@@ -11,13 +11,13 @@
                 && parameters.getChildCount() == 1
                 && isObjectParam(parameters.getFirstChild())
             ) {
-            objBlockEquals.put(ast.getParent(), ast);
+            objBlockWithEquals.put(ast.getParent(), ast);
         }
         else if (type.getFirstChild().getType() == TokenTypes.LITERAL_INT
                 && "hashCode".equals(methodName.getText())
                 && modifiers.branchContains(TokenTypes.LITERAL_PUBLIC)
                 && parameters.getFirstChild() == null) {
-            objBlockWithHashCode.add(ast.getParent());
+            objBlockWithHashCode.put(ast.getParent(), ast);
         }
     }
 

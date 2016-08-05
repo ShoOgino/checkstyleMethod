@@ -1,13 +1,19 @@
     @Override
     public void finishTree(DetailAST rootAST) {
-        for (Map.Entry<DetailAST, DetailAST> detailASTDetailASTEntry : objBlockEquals.entrySet()) {
-            if (!objBlockWithHashCode.contains(detailASTDetailASTEntry.getKey())) {
+        for (Map.Entry<DetailAST, DetailAST> detailASTDetailASTEntry : objBlockWithEquals
+                .entrySet()) {
+            if (objBlockWithHashCode.remove(detailASTDetailASTEntry.getKey()) == null) {
                 final DetailAST equalsAST = detailASTDetailASTEntry.getValue();
-                log(equalsAST.getLineNo(), equalsAST.getColumnNo(), MSG_KEY);
+                log(equalsAST.getLineNo(), equalsAST.getColumnNo(), MSG_KEY_HASHCODE);
             }
         }
+        for (Map.Entry<DetailAST, DetailAST> detailASTDetailASTEntry : objBlockWithHashCode
+                .entrySet()) {
+            final DetailAST equalsAST = detailASTDetailASTEntry.getValue();
+            log(equalsAST.getLineNo(), equalsAST.getColumnNo(), MSG_KEY_EQUALS);
+        }
 
-        objBlockEquals.clear();
+        objBlockWithEquals.clear();
         objBlockWithHashCode.clear();
     }
 
