@@ -4,17 +4,17 @@
         Function<Double, Double> log = d -> ex.log(d);
         Function<Double, Double> exp = d -> ex.exp(d);
         InputLambda15 compose = new InputLambda15();
-        System.out.println(compose.calculate(sin.compose(log), 0.8));
+        LOG.info(compose.calculate(sin.compose(log), 0.8).toString());
         // prints log:sin:-0.22
-        System.out.println(compose.calculate(sin.andThen(log), 0.8));
+        LOG.info(compose.calculate(sin.andThen(log), 0.8).toString());
         // prints sin:log:-0.33
-        System.out.println(compose.calculate(sin.compose(log).andThen(exp), 0.8));
+        LOG.info(compose.calculate(sin.compose(log).andThen(exp), 0.8).toString());
         //log:sin:exp:0.80
-        System.out.println(compose.calculate(sin.compose(log).compose(exp), 0.8));
+        LOG.info(compose.calculate(sin.compose(log).compose(exp), 0.8).toString());
         //exp:log:sin:0.71
-        System.out.println(compose.calculate(sin.andThen(log).compose(exp), 0.8));
+        LOG.info(compose.calculate(sin.andThen(log).compose(exp), 0.8).toString());
         //exp:sin:log:-0.23
-        System.out.println(compose.calculate(sin.andThen(log).andThen(exp), 0.8));
+        LOG.info(compose.calculate(sin.andThen(log).andThen(exp), 0.8).toString());
         //sin:log:exp:0.71
  
     }

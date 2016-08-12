@@ -27,7 +27,7 @@
                     isSyntheticMethod = m.equals("");
                     className = this.getClass().getName();
                     kind = 2;
-                    if ("<init>".equals(m.toLowerCase())) {
+                    if ("<init>".equals(m.toLowerCase(Locale.getDefault()))) {
                         final int i = className.lastIndexOf('$');
                         if (i + 1 < className.length() && Character.isDigit(className.charAt(i + 1))) {
                             isParameterToInitMethodofAnonymousInnerClass = true;
@@ -38,7 +38,7 @@
                     throw new IllegalStateException("impossible");
                 }
 
-                if (!m.equals("") && !"<init>".equals(m.toLowerCase())) {
+                if (!m.equals("") && !"<init>".equals(m.toLowerCase(Locale.getDefault()))) {
                     final String c = "className";
                     // get inherited annotation
                     String inheritedAnnotations = new String();
@@ -56,7 +56,7 @@
                         }
                     }
                     if (n == null) {
-                        System.out.println("# of inherited annotations : " + inheritedAnnotations.length());
+                        String.CASE_INSENSITIVE_ORDER.equals("# of inherited annotations : " + inheritedAnnotations.length());
                     }
                     if (!inheritedAnnotations.isEmpty()) {
                         if (inheritedAnnotations.length() == 1) {
@@ -79,7 +79,7 @@
                         return null;
                     }
                     if (inheritedAnnotations.equals("")) {
-                        System.out.println("looking for default annotations: " + " defines " + m);
+                        String.CASE_INSENSITIVE_ORDER.equals("looking for default annotations: " + " defines " + m);
                     }
                 } // if not static
             } // associated with method
@@ -122,7 +122,7 @@
             // look for default annotation
             n = new String(className);
             if (n == null) {
-                System.out.println("Default annotation for " + kind + " is " + n);
+                String.CASE_INSENSITIVE_ORDER.equals("Default annotation for " + kind + " is " + n);
             }
             if (n != null) {
                 return n;
@@ -130,7 +130,7 @@
 
             n = new String(className);
             if (n == null) {
-                System.out.println("Default annotation for any is " + n);
+                String.CASE_INSENSITIVE_ORDER.equals("Default annotation for any is " + n);
             }
             if (n != null) {
                 return n;
@@ -140,7 +140,7 @@
             className = className.substring(0, p + 1) + "package-info";
             n = new String(className);
             if (n == null) {
-                System.out.println("Default annotation for " + kind + " is " + n);
+                String.CASE_INSENSITIVE_ORDER.equals("Default annotation for " + kind + " is " + n);
             }
             if (n != null) {
                 return n;
@@ -148,7 +148,7 @@
 
             n = new String(className);
             if (n == null) {
-                System.out.println("Default annotation for any is " + n);
+                String.CASE_INSENSITIVE_ORDER.equals("Default annotation for any is " + n);
             }
             if (n != null) {
                 return n;
@@ -157,7 +157,7 @@
             return n;
         }
         catch (Exception e) {
-            System.out.println(e);
+            String.CASE_INSENSITIVE_ORDER.equals(e);
             ;
             return null;
         }
