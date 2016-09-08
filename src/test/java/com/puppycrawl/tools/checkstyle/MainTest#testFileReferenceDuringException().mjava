@@ -1,21 +1,18 @@
     @Test
     public void testFileReferenceDuringException() throws Exception {
         exit.expectSystemExitWithStatus(-2);
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                final String expectedExceptionMessage =
-                        String.format(Locale.ROOT, "Starting audit...%n"
-                                + "Checkstyle ends with 1 errors.%n");
-                assertEquals(expectedExceptionMessage, systemOut.getLog());
+        exit.checkAssertionAfterwards(() -> {
+            final String expectedExceptionMessage =
+                    String.format(Locale.ROOT, "Starting audit...%n"
+                            + "Checkstyle ends with 1 errors.%n");
+            assertEquals(expectedExceptionMessage, systemOut.getLog());
 
-                final String exceptionFirstLine = String.format(Locale.ROOT,
-                        "com.puppycrawl.tools.checkstyle.api."
-                        + "CheckstyleException: Exception was thrown while processing "
-                        + new File(getNonCompilablePath("InputIncorrectClass.java")).getPath()
-                        + "%n");
-                assertTrue(systemErr.getLog().startsWith(exceptionFirstLine));
-            }
+            final String exceptionFirstLine = String.format(Locale.ROOT,
+                    "com.puppycrawl.tools.checkstyle.api."
+                    + "CheckstyleException: Exception was thrown while processing "
+                    + new File(getNonCompilablePath("InputIncorrectClass.java")).getPath()
+                    + "%n");
+            assertTrue(systemErr.getLog().startsWith(exceptionFirstLine));
         });
 
         // We put xml as source to cause parse excepion

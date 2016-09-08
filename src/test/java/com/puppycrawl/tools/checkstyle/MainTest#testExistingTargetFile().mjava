@@ -1,13 +1,10 @@
     @Test
     public void testExistingTargetFile() throws Exception {
 
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals(String.format(Locale.ROOT, "Starting audit...%n"
-                        + "Audit done.%n"), systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals(String.format(Locale.ROOT, "Starting audit...%n"
+                    + "Audit done.%n"), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
         Main.main("-c", getPath("config-classname.xml"),
                 getPath("InputMain.java"));

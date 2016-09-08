@@ -28,11 +28,8 @@
             }
 
             // Dump out all unused tags
-            for (JavadocTag javadocTag : tags) {
-                if (!javadocTag.isSeeOrInheritDocTag()) {
-                    log(javadocTag.getLineNo(), MSG_UNUSED_TAG_GENERAL);
-                }
-            }
+            tags.stream().filter(javadocTag -> !javadocTag.isSeeOrInheritDocTag())
+                .forEach(javadocTag -> log(javadocTag.getLineNo(), MSG_UNUSED_TAG_GENERAL));
         }
     }
 

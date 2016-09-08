@@ -4,22 +4,19 @@
      * @return true if the contents of external configuration resources were changed.
      */
     private boolean areExternalResourcesChanged(Set<ExternalResource> resources) {
-        return Iterables.tryFind(resources, new Predicate<ExternalResource>() {
-            @Override
-            public boolean apply(ExternalResource resource) {
-                boolean changed = false;
-                if (isResourceLocationInCache(resource.location)) {
-                    final String contentHashSum = resource.contentHashSum;
-                    final String cachedHashSum = details.getProperty(resource.location);
-                    if (!cachedHashSum.equals(contentHashSum)) {
-                        changed = true;
-                    }
-                }
-                else {
+        return Iterables.tryFind(resources, resource -> {
+            boolean changed = false;
+            if (isResourceLocationInCache(resource.location)) {
+                final String contentHashSum = resource.contentHashSum;
+                final String cachedHashSum = details.getProperty(resource.location);
+                if (!cachedHashSum.equals(contentHashSum)) {
                     changed = true;
                 }
-                return changed;
             }
+            else {
+                changed = true;
+            }
+            return changed;
         }).isPresent();
     }
 

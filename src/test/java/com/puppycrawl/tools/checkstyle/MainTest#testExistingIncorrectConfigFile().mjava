@@ -2,16 +2,13 @@
     public void testExistingIncorrectConfigFile()
             throws Exception {
         exit.expectSystemExitWithStatus(-2);
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                final String output = String.format(Locale.ROOT,
-                        "Checkstyle ends with 1 errors.%n");
-                assertEquals(output, systemOut.getLog());
-                final String errorOuput = "com.puppycrawl.tools.checkstyle.api."
-                    + "CheckstyleException: unable to parse configuration stream - ";
-                assertTrue(systemErr.getLog().startsWith(errorOuput));
-            }
+        exit.checkAssertionAfterwards(() -> {
+            final String output = String.format(Locale.ROOT,
+                    "Checkstyle ends with 1 errors.%n");
+            assertEquals(output, systemOut.getLog());
+            final String errorOuput = "com.puppycrawl.tools.checkstyle.api."
+                + "CheckstyleException: unable to parse configuration stream - ";
+            assertTrue(systemErr.getLog().startsWith(errorOuput));
         });
         Main.main("-c", getPath("config-Incorrect.xml"),
             getPath("InputMain.java"));

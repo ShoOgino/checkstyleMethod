@@ -8,20 +8,13 @@
         final Set<String> references = new HashSet<>();
         // process all the @link type tags
         // INLINE tags inside BLOCKs get hidden when using ALL
-        for (final JavadocTag tag
-                : getValidTags(textBlock, JavadocUtils.JavadocTagType.INLINE)) {
-            if (tag.canReferenceImports()) {
-                references.addAll(processJavadocTag(tag));
-            }
-        }
+        getValidTags(textBlock, JavadocUtils.JavadocTagType.INLINE).stream()
+            .filter(JavadocTag::canReferenceImports)
+            .forEach(tag -> references.addAll(processJavadocTag(tag)));
         // process all the @throws type tags
-        for (final JavadocTag tag
-                : getValidTags(textBlock, JavadocUtils.JavadocTagType.BLOCK)) {
-            if (tag.canReferenceImports()) {
-                references.addAll(
-                        matchPattern(tag.getFirstArg(), FIRST_CLASS_NAME));
-            }
-        }
+        getValidTags(textBlock, JavadocUtils.JavadocTagType.BLOCK).stream()
+            .filter(JavadocTag::canReferenceImports)
+            .forEach(tag -> references.addAll(matchPattern(tag.getFirstArg(), FIRST_CLASS_NAME)));
         return references;
     }
 

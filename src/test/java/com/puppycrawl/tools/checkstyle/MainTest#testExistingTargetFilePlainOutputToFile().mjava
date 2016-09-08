@@ -2,12 +2,9 @@
     public void testExistingTargetFilePlainOutputToFile()
             throws Exception {
         final File file = temporaryFolder.newFile("file.output");
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals("", systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("", systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
         Main.main("-c", getPath("config-classname.xml"),
                 "-f", "plain",

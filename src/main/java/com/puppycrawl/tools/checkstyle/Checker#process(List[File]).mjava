@@ -21,15 +21,11 @@
         processFiles(files);
 
         // Finish up
-        for (final FileSetCheck fsc : fileSetChecks) {
-            // It may also log!!!
-            fsc.finishProcessing();
-        }
+        // It may also log!!!
+        fileSetChecks.forEach(FileSetCheck::finishProcessing);
 
-        for (final FileSetCheck fsc : fileSetChecks) {
-            // It may also log!!!
-            fsc.destroy();
-        }
+        // It may also log!!!
+        fileSetChecks.forEach(FileSetCheck::destroy);
 
         final int errorCount = counter.getCount();
         fireAuditFinished();

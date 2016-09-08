@@ -3,13 +3,11 @@
         final Set<String> checksReferencedInConfig = CheckUtil.getConfigCheckStyleChecks();
         final Set<String> checksNames = getSimpleNames(CheckUtil.getCheckstyleChecks());
 
-        for (String check : checksNames) {
-            if (!checksReferencedInConfig.contains(check)) {
+        checksNames.stream().filter(check -> !checksReferencedInConfig.contains(check))
+            .forEach(check -> {
                 final String errorMessage = String.format(Locale.ROOT,
-                        "%s is not referenced in checkstyle_checks.xml", check);
+                    "%s is not referenced in checkstyle_checks.xml", check);
                 Assert.fail(errorMessage);
-            }
-        }
-
+            });
     }
 

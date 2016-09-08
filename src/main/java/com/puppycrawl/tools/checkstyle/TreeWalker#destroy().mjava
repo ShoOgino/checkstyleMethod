@@ -1,11 +1,7 @@
     @Override
     public void destroy() {
-        for (AbstractCheck check : ordinaryChecks) {
-            check.destroy();
-        }
-        for (AbstractCheck check : commentChecks) {
-            check.destroy();
-        }
+        ordinaryChecks.forEach(AbstractCheck::destroy);
+        commentChecks.forEach(AbstractCheck::destroy);
         super.destroy();
     }
 

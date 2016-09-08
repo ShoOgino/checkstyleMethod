@@ -2,13 +2,10 @@
     public void testExistingTargetFilePlainOutputNonexistingProperties()
             throws Exception {
         exit.expectSystemExitWithStatus(-1);
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals("Could not find file 'nonexisting.properties'."
-                        + System.lineSeparator(), systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Could not find file 'nonexisting.properties'."
+                    + System.lineSeparator(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
         Main.main("-c", getPath("config-classname-prop.xml"),
                 "-p", "nonexisting.properties",

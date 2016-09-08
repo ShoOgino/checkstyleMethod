@@ -47,14 +47,13 @@
         // Now dump out all throws without tags :- unless
         // the user has chosen to suppress these problems
         if (!allowMissingThrowsTags && reportExpectedTags) {
-            for (ExceptionInfo exceptionInfo : throwsList) {
-                if (!exceptionInfo.isFound()) {
+            throwsList.stream().filter(exceptionInfo -> !exceptionInfo.isFound())
+                .forEach(exceptionInfo -> {
                     final Token token = exceptionInfo.getName();
                     log(token.getLineNo(), token.getColumnNo(),
-                            MSG_EXPECTED_TAG,
-                            JavadocTagInfo.THROWS.getText(), token.getText());
-                }
-            }
+                        MSG_EXPECTED_TAG,
+                        JavadocTagInfo.THROWS.getText(), token.getText());
+                });
         }
     }
 

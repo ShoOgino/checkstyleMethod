@@ -1,11 +1,6 @@
     @Test
     public void testDebugOption() throws Exception {
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertNotEquals("", systemErr.getLog());
-            }
-        });
+        exit.checkAssertionAfterwards(() -> assertNotEquals("", systemErr.getLog()));
         Main.main("-c", "/google_checks.xml", getPath("InputMain.java"), "-d");
     }
 

@@ -2,7 +2,7 @@
     public void testWithCacheWithNoViolation() throws Exception {
         final Checker checker = new Checker();
         final PackageObjectFactory factory = new PackageObjectFactory(
-            new HashSet<String>(), Thread.currentThread().getContextClassLoader());
+            new HashSet<>(), Thread.currentThread().getContextClassLoader());
         checker.setModuleFactory(factory);
         checker.configure(createCheckConfig(TranslationCheck.class));
         checker.setCacheFile(temporaryFolder.newFile().getPath());

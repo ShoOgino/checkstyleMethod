@@ -3,13 +3,10 @@
         final File file = temporaryFolder.newFile("file.output");
 
         exit.expectSystemExitWithStatus(-1);
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals("Option '-t' cannot be used with other options."
-                    + System.lineSeparator(), systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Option '-t' cannot be used with other options."
+                + System.lineSeparator(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
 
         Main.main("-o", file.getCanonicalPath(), "-t", getPath("checks/metrics"));

@@ -4,10 +4,7 @@
      * @return a set of simple names.
      */
     private static Set<String> getSimpleNames(Set<Class<?>> checks) {
-        final Set<String> checksNames = new HashSet<>();
-        for (Class<?> check : checks) {
-            checksNames.add(check.getSimpleName().replace("Check", ""));
-        }
-        return checksNames;
+        return checks.stream().map(check -> check.getSimpleName().replace("Check", ""))
+            .collect(Collectors.toSet());
     }
 

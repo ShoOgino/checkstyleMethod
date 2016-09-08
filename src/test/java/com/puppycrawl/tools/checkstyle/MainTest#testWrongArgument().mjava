@@ -2,14 +2,11 @@
     public void testWrongArgument()
             throws Exception {
         exit.expectSystemExitWithStatus(-1);
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                final String usage = String.format(Locale.ROOT, "Unrecognized option: -w%n")
-                        + USAGE;
-                assertEquals(usage, systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            final String usage = String.format(Locale.ROOT, "Unrecognized option: -w%n")
+                    + USAGE;
+            assertEquals(usage, systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
         Main.main("-w");
     }

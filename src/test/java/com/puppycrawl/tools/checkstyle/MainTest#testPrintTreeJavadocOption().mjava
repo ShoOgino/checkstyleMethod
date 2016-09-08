@@ -4,12 +4,9 @@
                 getPath("astprinter/expectedInputJavadocComment.txt")), Charsets.UTF_8)
                     .replaceAll("\\\\r\\\\n", "\\\\n");
 
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals(expected, systemOut.getLog().replaceAll("\\\\r\\\\n", "\\\\n"));
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals(expected, systemOut.getLog().replaceAll("\\\\r\\\\n", "\\\\n"));
+            assertEquals("", systemErr.getLog());
         });
         Main.main("-j", getPath("astprinter/InputJavadocComment.javadoc"));
     }

@@ -2,13 +2,10 @@
     public void testVersionPrint()
             throws Exception {
 
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals("Checkstyle version: null" + System.lineSeparator(),
-                        systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Checkstyle version: null" + System.lineSeparator(),
+                    systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
         Main.main("-v");
     }

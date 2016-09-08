@@ -5,9 +5,8 @@
      */
     private Set<String> getAllPossibleNames(String name) {
         final Set<String> names = Sets.newHashSet();
-        for (String packageName : packages) {
-            names.add(packageName + name);
-        }
+        names.addAll(packages.stream().map(packageName -> packageName + name)
+            .collect(Collectors.toList()));
         return names;
     }
 

@@ -2,13 +2,10 @@
     public void testConflictingOptionsTvsC() throws Exception {
 
         exit.expectSystemExitWithStatus(-1);
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals("Option '-t' cannot be used with other options."
-                    + System.lineSeparator(), systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Option '-t' cannot be used with other options."
+                + System.lineSeparator(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
 
         Main.main("-c", "/google_checks.xml", "-t", getPath("checks/metrics"));

@@ -2,13 +2,10 @@
     public void testNoConfigSpecified()
             throws Exception {
         exit.expectSystemExitWithStatus(-1);
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() {
-                assertEquals("Must specify a config XML file." + System.lineSeparator(),
-                        systemOut.getLog());
-                assertEquals("", systemErr.getLog());
-            }
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Must specify a config XML file." + System.lineSeparator(),
+                    systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
         Main.main(getPath("InputMain.java"));
     }
