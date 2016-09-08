@@ -13,14 +13,8 @@
         final int column = event.getColumn();
         boolean suppressed = false;
         for (Entry entry : entries) {
-            final boolean afterStart =
-                entry.getFirstLine() < line
-                    || entry.getFirstLine() == line
-                            && (column == 0 || entry.getFirstColumn() <= column);
-            final boolean beforeEnd =
-                entry.getLastLine() > line
-                    || entry.getLastLine() == line && entry
-                        .getLastColumn() >= column;
+            final boolean afterStart = isSuppressedAfterEventStart(line, column, entry);
+            final boolean beforeEnd = isSuppressedBeforeEventEnd(line, column, entry);
             final boolean nameMatches =
                 ALL_WARNING_MATCHING_ID.equals(entry.getCheckName())
                     || entry.getCheckName().equalsIgnoreCase(checkAlias);
