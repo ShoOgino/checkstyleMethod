@@ -1,0 +1,16 @@
+    /**
+     * Matches other package name exactly or partially at front.
+     * @param pkg the package to compare with.
+     * @return if it matches.
+     */
+    private boolean matchesAtFront(final String pkg) {
+        final boolean result;
+        if (regex) {
+            result = patternForPartialMatch.matcher(pkg).matches();
+        }
+        else {
+            result = matchesAtFrontNoRegex(pkg);
+        }
+        return result;
+    }
+

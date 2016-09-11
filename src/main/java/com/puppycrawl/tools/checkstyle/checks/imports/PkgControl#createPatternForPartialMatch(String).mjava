@@ -1,0 +1,11 @@
+    /**
+     * Creates a Pattern from {@code expression} that matches exactly and child packages.
+     * @param expression a self-contained regular expression matching the full package exactly.
+     * @return a Pattern.
+     */
+    private static Pattern createPatternForPartialMatch(String expression) {
+        // javadoc of encloseInGroup() explains how to concatenate regular expressions
+        // no grouping needs to be added to fullPackage since this already have been done.
+        return Pattern.compile(expression + "(?:\\..*)?");
+    }
+

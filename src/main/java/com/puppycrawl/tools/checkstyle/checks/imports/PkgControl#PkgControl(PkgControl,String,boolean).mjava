@@ -1,0 +1,27 @@
+    /**
+     * Construct a child node. The concatenation of regular expressions needs special care:
+     * see {@link #ensureSelfContainedRegex(String, boolean)} for more details.
+     * @param parent the parent node.
+     * @param subPkg the sub package name.
+     * @param regex flags interpretation of subPkg as regex pattern.
+     */
+    PkgControl(final PkgControl parent, final String subPkg, final boolean regex) {
+        this.parent = parent;
+        if (regex || parent.regex) {
+            // regex gets inherited
+            final String parentRegex = ensureSelfContainedRegex(parent.fullPackage, parent.regex);
+            final String thisRegex = ensureSelfContainedRegex(subPkg, regex);
+            fullPackage = parentRegex + DOT_REGEX + thisRegex;
+            patternForPartialMatch = createPatternForPartialMatch(fullPackage);
+            patternForExactMatch = createPatternForExactMatch(fullPackage);
+            this.regex = true;
+        }
+        else {
+            fullPackage = parent.fullPackage + DOT + subPkg;
+            patternForPartialMatch = null;
+            patternForExactMatch = null;
+            this.regex = false;
+        }
+        parent.children.add(this);
+    }
+

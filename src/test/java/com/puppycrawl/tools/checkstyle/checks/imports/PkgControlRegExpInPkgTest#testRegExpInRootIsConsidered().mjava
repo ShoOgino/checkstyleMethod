@@ -1,0 +1,11 @@
+    @Test
+    public void testRegExpInRootIsConsidered() {
+        assertNull(pcRoot.locateFinest("com"));
+        assertNull(pcRoot.locateFinest("com/hurz/courtlink"));
+        assertNull(pcRoot.locateFinest("com.hurz.hurz.courtlink"));
+        assertEquals(pcRoot, pcRoot
+                .locateFinest("com.hurz.courtlink.domain"));
+        assertEquals(pcRoot, pcRoot
+                .locateFinest("com.kazgroup.courtlink.domain"));
+    }
+

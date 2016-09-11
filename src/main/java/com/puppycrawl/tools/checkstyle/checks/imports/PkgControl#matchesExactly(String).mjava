@@ -1,0 +1,16 @@
+    /**
+     * Check for equality of this with pkg
+     * @param pkg the package to compare with.
+     * @return if it matches.
+     */
+    private boolean matchesExactly(final String pkg) {
+        final boolean result;
+        if (regex) {
+            result = patternForExactMatch.matcher(pkg).matches();
+        }
+        else {
+            result = fullPackage.equals(pkg);
+        }
+        return result;
+    }
+

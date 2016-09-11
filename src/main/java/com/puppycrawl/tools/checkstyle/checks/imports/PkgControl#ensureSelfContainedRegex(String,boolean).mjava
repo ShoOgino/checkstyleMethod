@@ -1,0 +1,35 @@
+    /**
+     * Returns a regex that is suitable for concatenation by 1) either converting a plain string
+     * into a regular expression (handling special characters) or 2) by enclosing {@code input} in
+     * a (non-capturing) group if {@code input} already is a regular expression.
+     *
+     * <p>1) When concatenating a non-regex package component (like "org.google") with a regex
+     * component (like "[^.]+") the other component has to be converted into a regex too, see
+     * {@link #toRegex(String)}.
+     *
+     * <p>2) The grouping is strictly necessary if a) {@code input} is a regular expression that b)
+     * contains the alteration character ('|') and if c) the pattern is not already enclosed in a
+     * group - as you see in this example: {@code parent="com|org", child="common|uncommon"} will
+     * result in the pattern {@code "(?:org|com)\.(?common|uncommon)"} what will match
+     * {@code "com.common"}, {@code "com.uncommon"}, {@code "org.common"}, and {@code
+     * "org.uncommon"}. Without the grouping it would be {@code "com|org.common|uncommon"} which
+     * would match {@code "com"}, {@code "org.common"}, and {@code "uncommon"}, which clearly is
+     * undesirable. Adding the group fixes this.
+     *
+     * <p>For simplicity the grouping is added to regular expressions unconditionally.
+     *
+     * @param input the input string.
+     * @param alreadyRegex signals if input already is a regular expression.
+     * @return a regex string.
+     */
+    private static String ensureSelfContainedRegex(final String input, final boolean alreadyRegex) {
+        final String result;
+        if (alreadyRegex) {
+            result = encloseInGroup(input);
+        }
+        else {
+            result = toRegex(input);
+        }
+        return result;
+    }
+

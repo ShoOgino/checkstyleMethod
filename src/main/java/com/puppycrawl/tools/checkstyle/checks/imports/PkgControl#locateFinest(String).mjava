@@ -6,9 +6,7 @@
     public PkgControl locateFinest(final String forPkg) {
         PkgControl finestMatch = null;
         // Check if we are a match.
-        // This algorithm should be improved to check for a trailing "."
-        // or nothing following.
-        if (forPkg.startsWith(fullPackage)) {
+        if (matchesAtFront(forPkg)) {
             // If there won't be match so I am the best there is.
             finestMatch = this;
             // Check if any of the children match.

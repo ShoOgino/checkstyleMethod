@@ -1,0 +1,11 @@
+    @Test
+    public void testAlternationInParentIfUserCaresForIt() {
+        // the regular expression has to be adjusted to (com\.foo|com\.bar)
+        final PkgControl root = new PkgControl("(com\\.foo|com\\.bar)", true);
+        final PkgControl common = new PkgControl(root, "common", false);
+        assertEquals(root, root.locateFinest("com.foo"));
+        assertEquals(common, root.locateFinest("com.foo.common"));
+        assertEquals(root, root.locateFinest("com.bar"));
+        assertEquals(common, root.locateFinest("com.bar.common"));
+    }
+

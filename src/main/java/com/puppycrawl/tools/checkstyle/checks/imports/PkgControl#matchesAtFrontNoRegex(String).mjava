@@ -1,0 +1,12 @@
+    /**
+     * Non-regex case. Ensure a trailing dot for subpackages, i.e. "com.puppy"
+     * will match "com.puppy.crawl" but not "com.puppycrawl.tools".
+     * @param pkg the package to compare with.
+     * @return if it matches.
+     */
+    private boolean matchesAtFrontNoRegex(final String pkg) {
+        return pkg.startsWith(fullPackage)
+                && (pkg.length() == fullPackage.length()
+                    || pkg.charAt(fullPackage.length()) == '.');
+    }
+

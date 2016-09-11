@@ -9,7 +9,7 @@
         final String inPkg) {
         for (Guard g : guards) {
             // Check if a Guard is only meant to be applied locally.
-            if (g.isLocalOnly() && !fullPackage.equals(inPkg)) {
+            if (g.isLocalOnly() && !matchesExactly(inPkg)) {
                 continue;
             }
             final AccessResult result = g.verifyImport(forImport);
