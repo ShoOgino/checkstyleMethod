@@ -9,8 +9,22 @@
                 currentFile = file;
                 title = "Checkstyle GUI : " + file.getName();
                 reloadActionEnabled = true;
-                final DetailAST parseTree = parseFile(file);
+                final DetailAST parseTree;
+
+                switch (parseMode) {
+                    case PLAIN_JAVA:
+                        parseTree = parseFile(file);
+                        break;
+                    case JAVA_WITH_COMMENTS:
+                    case JAVA_WITH_JAVADOC_AND_COMMENTS:
+                        parseTree = parseFileWithComments(file);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown mode: " + parseMode);
+                }
+
                 parseTreeTableModel.setParseTree(parseTree);
+                parseTreeTableModel.setParseMode(parseMode);
                 final String[] sourceLines = getFileText(file).toLinesArray();
 
                 // clear for each new file

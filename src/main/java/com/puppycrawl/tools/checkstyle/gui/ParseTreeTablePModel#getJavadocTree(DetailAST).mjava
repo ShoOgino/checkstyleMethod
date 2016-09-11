@@ -1,0 +1,15 @@
+    /**
+     * Gets Javadoc (DetailNode) tree of specified block comments.
+     * @param blockComment Javadoc comment as a block comment
+     * @return DetailNode tree
+     */
+    private DetailNode getJavadocTree(DetailAST blockComment) {
+        DetailNode javadocTree = blockCommentToJavadocTree.get(blockComment);
+        if (javadocTree == null) {
+            javadocTree = new JavadocDetailNodeParser().parseJavadocAsDetailNode(blockComment)
+                    .getTree();
+            blockCommentToJavadocTree.put(blockComment, javadocTree);
+        }
+        return javadocTree;
+    }
+

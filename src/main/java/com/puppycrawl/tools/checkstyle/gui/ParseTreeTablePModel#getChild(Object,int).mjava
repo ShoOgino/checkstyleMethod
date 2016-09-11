@@ -5,13 +5,15 @@
      * @return the child of parent at index.
      */
     public Object getChild(Object parent, int index) {
-        final DetailAST ast = (DetailAST) parent;
-        int currentIndex = 0;
-        AST child = ast.getFirstChild();
-        while (currentIndex < index) {
-            child = child.getNextSibling();
-            currentIndex++;
+        final Object result;
+
+        if (parent instanceof DetailNode) {
+            result = ((DetailNode) parent).getChildren()[index];
         }
-        return child;
+        else {
+            result = getChildAtDetailAst((DetailAST) parent, index);
+        }
+
+        return result;
     }
 

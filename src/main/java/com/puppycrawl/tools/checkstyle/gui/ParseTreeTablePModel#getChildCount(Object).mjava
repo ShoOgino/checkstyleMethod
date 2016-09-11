@@ -4,7 +4,15 @@
      * @return the number of children of the node parent.
      */
     public int getChildCount(Object parent) {
-        final DetailAST ast = (DetailAST) parent;
-        return ast.getChildCount();
+        final int result;
+
+        if (parent instanceof DetailNode) {
+            result = ((DetailNode) parent).getChildren().length;
+        }
+        else {
+            result = ((DetailAST) parent).getChildCount();
+        }
+
+        return result;
     }
 
