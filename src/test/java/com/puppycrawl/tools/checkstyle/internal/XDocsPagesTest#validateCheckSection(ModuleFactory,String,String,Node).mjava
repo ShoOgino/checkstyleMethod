@@ -6,7 +6,7 @@
             instance = moduleFactory.createModule(sectionName);
         }
         catch (CheckstyleException ex) {
-            Assert.fail(fileName + " couldn't find class: " + sectionName);
+            throw new CheckstyleException(fileName + " couldn't find class: " + sectionName, ex);
         }
 
         int subSectionPos = 0;

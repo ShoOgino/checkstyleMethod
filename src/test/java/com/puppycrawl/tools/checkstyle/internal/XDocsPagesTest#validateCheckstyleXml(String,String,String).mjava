@@ -1,5 +1,5 @@
     private static void validateCheckstyleXml(String fileName, String code,
-            String unserializedSource) throws IOException {
+            String unserializedSource) throws IOException, CheckstyleException {
         // can't process non-existent examples, or out of context snippets
         if (!code.contains("com.mycompany") && !code.contains("checkstyle-packages")
                 && !code.contains("MethodLimit") && !code.contains("<suppress ")
@@ -28,8 +28,8 @@
                 }
             }
             catch (CheckstyleException ex) {
-                Assert.fail(fileName + " has invalid Checkstyle xml (" + ex.getMessage() + "): "
-                        + unserializedSource);
+                throw new CheckstyleException(fileName + " has invalid Checkstyle xml ("
+                        + ex.getMessage() + "): " + unserializedSource, ex);
             }
         }
     }
