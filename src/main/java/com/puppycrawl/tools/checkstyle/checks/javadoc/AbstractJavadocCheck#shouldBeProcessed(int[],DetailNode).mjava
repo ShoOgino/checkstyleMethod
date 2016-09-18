@@ -1,0 +1,10 @@
+    /**
+     * Checks whether the current node should be processed by the check.
+     * @param defaultTokenTypes default token types.
+     * @param curNode current node.
+     * @return true if the current node should be processed by the check.
+     */
+    private boolean shouldBeProcessed(int[] defaultTokenTypes, DetailNode curNode) {
+        return IntStream.of(defaultTokenTypes).anyMatch(i -> i == curNode.getType());
+    }
+

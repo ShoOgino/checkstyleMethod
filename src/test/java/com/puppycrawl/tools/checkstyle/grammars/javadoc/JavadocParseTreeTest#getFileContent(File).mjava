@@ -1,5 +1,5 @@
     private static String getFileContent(File filename)
             throws IOException {
-        return Files.toString(filename, Charsets.UTF_8);
+        return new String(Files.readAllBytes(filename.toPath()), StandardCharsets.UTF_8);
     }
 

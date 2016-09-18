@@ -6,7 +6,8 @@
         text = new FileText(fileText);
         resetState();
 
-        if (Strings.isNullOrEmpty(options.getFormat())) {
+        final String format = options.getFormat();
+        if (format == null || format.isEmpty()) {
             options.getReporter().log(0, MSG_EMPTY);
         }
         else {

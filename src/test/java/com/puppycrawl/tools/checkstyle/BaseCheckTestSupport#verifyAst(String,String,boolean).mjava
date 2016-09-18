@@ -1,7 +1,8 @@
     protected static void verifyAst(String expectedTextPrintFileName, String actualJavaFileName,
             boolean withComments) throws Exception {
-        final String expectedContents = Files.toString(new File(expectedTextPrintFileName),
-                Charsets.UTF_8).replaceAll("\\\\r\\\\n", "\\\\n");
+        final String expectedContents = new String(Files.readAllBytes(
+            Paths.get(expectedTextPrintFileName)), StandardCharsets.UTF_8)
+            .replaceAll("\\\\r\\\\n", "\\\\n");
         final String actualContents = AstTreeStringPrinter.printFileAst(
                 new File(actualJavaFileName), withComments).replaceAll("\\\\r\\\\n", "\\\\n");
 

@@ -8,15 +8,15 @@
 
         DetailNode curNode = root;
         while (curNode != null) {
-            final boolean waitsFor = Ints.contains(defaultTokenTypes, curNode.getType());
+            final boolean waitsForProcessing = shouldBeProcessed(defaultTokenTypes, curNode);
 
-            if (waitsFor) {
+            if (waitsForProcessing) {
                 visitJavadocToken(curNode);
             }
             DetailNode toVisit = JavadocUtils.getFirstChild(curNode);
             while (curNode != null && toVisit == null) {
 
-                if (waitsFor) {
+                if (waitsForProcessing) {
                     leaveJavadocToken(curNode);
                 }
 

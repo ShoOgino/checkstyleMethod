@@ -6,8 +6,8 @@
      * @return true if all of generic type arguments are immutable.
      */
     private boolean areImmutableTypeArguments(List<String> typeArgsClassNames) {
-        return !Iterables.tryFind(typeArgsClassNames,
+        return !typeArgsClassNames.stream().filter(
             typeName -> !immutableClassShortNames.contains(typeName)
-            && !immutableClassCanonicalNames.contains(typeName)).isPresent();
+                && !immutableClassCanonicalNames.contains(typeName)).findFirst().isPresent();
     }
 

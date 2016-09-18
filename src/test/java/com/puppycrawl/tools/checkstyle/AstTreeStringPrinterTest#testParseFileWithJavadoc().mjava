@@ -3,8 +3,8 @@
         final String actual = AstTreeStringPrinter.printJavaAndJavadocTree(
                 new File(getPath("InputAstTreeStringPrinterJavadoc.java")))
                 .replaceAll("\\\\r\\\\n", "\\\\n");
-        final String expected = Files.toString(new File(
-                getPath("expectedInputAstTreeStringPrinterJavadoc.txt")), Charsets.UTF_8)
+        final String expected = new String(Files.readAllBytes(Paths.get(
+                getPath("expectedInputAstTreeStringPrinterJavadoc.txt"))), StandardCharsets.UTF_8)
                 .replaceAll("\\\\r\\\\n", "\\\\n");
         Assert.assertEquals(expected, actual);
     }
