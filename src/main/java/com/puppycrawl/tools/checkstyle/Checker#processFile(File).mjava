@@ -5,7 +5,7 @@
      * @throws CheckstyleException if error condition within Checkstyle occurs.
      */
     private SortedSet<LocalizedMessage> processFile(File file) throws CheckstyleException {
-        final SortedSet<LocalizedMessage> fileMessages = Sets.newTreeSet();
+        final SortedSet<LocalizedMessage> fileMessages = new TreeSet<>();
         try {
             final FileText theText = new FileText(file.getAbsoluteFile(), charset);
             for (final FileSetCheck fsc : fileSetChecks) {

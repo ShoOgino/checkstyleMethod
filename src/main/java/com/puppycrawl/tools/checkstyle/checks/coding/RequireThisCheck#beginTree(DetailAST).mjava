@@ -1,9 +1,9 @@
     @Override
     public void beginTree(DetailAST rootAST) {
-        frames = Maps.newHashMap();
+        frames = new HashMap<>();
         current = null;
 
-        final Deque<AbstractFrame> frameStack = Lists.newLinkedList();
+        final Deque<AbstractFrame> frameStack = new LinkedList<>();
         DetailAST curNode = rootAST;
         while (curNode != null) {
             collectDeclarations(frameStack, curNode);

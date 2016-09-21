@@ -4,7 +4,7 @@
      * @return a set of external configuration resource locations which are used by the checks set.
      */
     private static Set<String> getExternalResourceLocations(Set<AbstractCheck> checks) {
-        final Set<String> externalConfigurationResources = Sets.newHashSet();
+        final Set<String> externalConfigurationResources = new HashSet<>();
         checks.stream().filter(check -> check instanceof ExternalResourceHolder).forEach(check -> {
             final Set<String> checkExternalResources =
                 ((ExternalResourceHolder) check).getExternalResourceLocations();

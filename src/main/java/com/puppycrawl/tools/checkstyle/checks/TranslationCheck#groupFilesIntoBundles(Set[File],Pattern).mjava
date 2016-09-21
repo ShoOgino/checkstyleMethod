@@ -7,7 +7,7 @@
      */
     private static Set<ResourceBundle> groupFilesIntoBundles(Set<File> files,
                                                              Pattern baseNameRegexp) {
-        final Set<ResourceBundle> resourceBundles = Sets.newHashSet();
+        final Set<ResourceBundle> resourceBundles = new HashSet<>();
         for (File currentFile : files) {
             final String fileName = currentFile.getName();
             final String baseName = extractBaseName(fileName);

@@ -4,7 +4,7 @@
      */
     private void visitMethodDef(DetailAST ast) {
         parameterNamesStack.push(parameterNames);
-        parameterNames = Sets.newHashSet();
+        parameterNames = new HashSet<>();
 
         visitMethodParameters(ast.findFirstToken(TokenTypes.PARAMETERS));
     }

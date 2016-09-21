@@ -12,7 +12,7 @@
         final Error expectedError = new IOError(new InternalError(errorMessage));
         when(mock.lastModified()).thenThrow(expectedError);
         final Checker checker = new Checker();
-        final List<File> filesToProcess = Lists.newArrayList();
+        final List<File> filesToProcess = new ArrayList<>();
         filesToProcess.add(mock);
         try {
             checker.process(filesToProcess);

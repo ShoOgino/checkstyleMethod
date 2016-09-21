@@ -7,7 +7,7 @@
      */
     private static List<File> getFilesToProcess(List<Pattern> patternsToExclude,
             String... filesToProcess) {
-        final List<File> files = Lists.newLinkedList();
+        final List<File> files = new LinkedList<>();
         for (String element : filesToProcess) {
             files.addAll(listFiles(new File(element), patternsToExclude));
         }

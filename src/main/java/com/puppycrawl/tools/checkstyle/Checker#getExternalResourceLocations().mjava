@@ -5,7 +5,7 @@
      *         checks and filters.
      */
     private Set<String> getExternalResourceLocations() {
-        final Set<String> externalResources = Sets.newHashSet();
+        final Set<String> externalResources = new HashSet<>();
         fileSetChecks.stream().filter(check -> check instanceof ExternalResourceHolder)
             .forEach(check -> {
                 final Set<String> locations =

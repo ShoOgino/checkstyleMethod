@@ -7,7 +7,7 @@
     private static Set<String> getVariablesManagedByForLoop(DetailAST ast) {
         final Set<String> initializedVariables = getForInitVariables(ast);
         final Set<String> iteratingVariables = getForIteratorVariables(ast);
-
-        return Sets.intersection(initializedVariables, iteratingVariables);
+        return initializedVariables.stream().filter(iteratingVariables::contains)
+            .collect(Collectors.toSet());
     }
 

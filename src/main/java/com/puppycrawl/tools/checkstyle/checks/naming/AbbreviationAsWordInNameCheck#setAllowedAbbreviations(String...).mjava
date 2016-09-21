@@ -7,7 +7,8 @@
      */
     public void setAllowedAbbreviations(String... allowedAbbreviations) {
         if (allowedAbbreviations != null) {
-            this.allowedAbbreviations = Sets.newHashSet(allowedAbbreviations);
+            this.allowedAbbreviations =
+                Arrays.stream(allowedAbbreviations).collect(Collectors.toSet());
         }
     }
 

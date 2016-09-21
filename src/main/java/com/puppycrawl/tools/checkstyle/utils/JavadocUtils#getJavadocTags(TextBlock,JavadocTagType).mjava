@@ -9,8 +9,8 @@
     public static JavadocTags getJavadocTags(TextBlock textBlock,
             JavadocTagType tagType) {
         final String[] text = textBlock.getText();
-        final List<JavadocTag> tags = Lists.newArrayList();
-        final List<InvalidJavadocTag> invalidTags = Lists.newArrayList();
+        final List<JavadocTag> tags = new ArrayList<>();
+        final List<InvalidJavadocTag> invalidTags = new ArrayList<>();
         for (int i = 0; i < text.length; i++) {
             final String textValue = text[i];
             final Matcher blockTagMatcher = getBlockTagPattern(i).matcher(textValue);

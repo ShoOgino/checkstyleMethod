@@ -3,7 +3,7 @@
      * @param translationCodes a comma separated list of language codes.
      */
     public void setRequiredTranslations(String... translationCodes) {
-        requiredTranslations = Sets.newHashSet(translationCodes);
+        requiredTranslations = Arrays.stream(translationCodes).collect(Collectors.toSet());
         validateUserSpecifiedLanguageCodes(requiredTranslations);
     }
 

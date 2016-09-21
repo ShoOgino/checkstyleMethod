@@ -6,7 +6,7 @@
      */
     private static List<DetailAST> getParameters(DetailAST ast) {
         final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-        final List<DetailAST> returnValue = Lists.newArrayList();
+        final List<DetailAST> returnValue = new ArrayList<>();
 
         DetailAST child = params.getFirstChild();
         while (child != null) {

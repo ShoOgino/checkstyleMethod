@@ -5,7 +5,7 @@
      * @return the list of exception nodes for ast.
      */
     private List<ExceptionInfo> getThrows(DetailAST ast) {
-        final List<ExceptionInfo> returnValue = Lists.newArrayList();
+        final List<ExceptionInfo> returnValue = new ArrayList<>();
         final DetailAST throwsAST = ast
                 .findFirstToken(TokenTypes.LITERAL_THROWS);
         if (throwsAST != null) {

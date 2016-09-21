@@ -32,7 +32,7 @@
                 auditAdapter.wasCalled());
 
         aa2.resetListener();
-        final SortedSet<LocalizedMessage> messages = Sets.newTreeSet();
+        final SortedSet<LocalizedMessage> messages = new TreeSet<>();
         messages.add(new LocalizedMessage(0, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
         checker.fireErrors("Some File Name", messages);

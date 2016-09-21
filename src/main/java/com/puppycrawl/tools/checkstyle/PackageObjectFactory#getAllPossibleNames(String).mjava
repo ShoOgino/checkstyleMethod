@@ -4,7 +4,7 @@
      * @return all possible name for a class.
      */
     private Set<String> getAllPossibleNames(String name) {
-        final Set<String> names = Sets.newHashSet();
+        final Set<String> names = new HashSet<>();
         names.addAll(packages.stream().map(packageName -> packageName + name)
             .collect(Collectors.toList()));
         return names;
