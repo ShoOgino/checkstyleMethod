@@ -1,16 +1,16 @@
     @Test
     public void testAllChecksPresentOnAvailableChecksPage() throws IOException {
-        final String availableChecks = Files.toString(AVAILABLE_CHECKS_FILE, UTF_8);
-        for (File file : Files.fileTreeTraverser().preOrderTraversal(JAVA_SOURCES_DIRECTORY)) {
-            final String fileName = file.getName();
+        final String availableChecks = new String(Files.readAllBytes(AVAILABLE_CHECKS_PATH), UTF_8);
+        Files.walk(JAVA_SOURCES_DIRECTORY).forEach(filePath -> {
+            final String fileName = filePath.getFileName().toString();
             if (fileName.matches(CHECK_FILE_NAME)
                     && !CHECKS_ON_PAGE_IGNORE_LIST.contains(fileName)) {
                 final String checkName = fileName.replace(CHECK_SUFFIX, "");
                 if (!isPresent(availableChecks, checkName)) {
                     Assert.fail(checkName + " is not correctly listed on Available Checks page"
-                            + " - add it to " + AVAILABLE_CHECKS_PATH);
+                        + " - add it to " + AVAILABLE_CHECKS_PATH);
                 }
             }
-        }
+        });
     }
 

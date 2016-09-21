@@ -8,7 +8,7 @@
         };
 
         final File file = temporaryFolder.newFile();
-        Files.write("", file, StandardCharsets.UTF_8);
+        Files.write(file.toPath(), "".getBytes(StandardCharsets.UTF_8));
 
         verify(checkConfig, file.getPath(), expected);
     }

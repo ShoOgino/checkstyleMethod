@@ -1,9 +1,8 @@
     @Test
     public void testAllStyleRules() throws Exception {
         for (Path path : XDocUtil.getXdocsStyleFilePaths(XDocUtil.getXdocsFilePaths())) {
-            final File file = path.toFile();
-            final String fileName = file.getName();
-            final String input = Files.toString(file, UTF_8);
+            final String fileName = path.getFileName().toString();
+            final String input = new String(Files.readAllBytes(path), UTF_8);
             final Document document = XmlUtil.getRawXml(fileName, input, input);
             final NodeList sources = document.getElementsByTagName("tr");
             String lastRuleName = null;

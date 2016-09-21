@@ -9,7 +9,8 @@
         };
 
         final File file = temporaryFolder.newFile();
-        Files.write("first line \r\n second line \n\r third line", file, StandardCharsets.UTF_8);
+        Files.write(file.toPath(),
+            "first line \r\n second line \n\r third line".getBytes(StandardCharsets.UTF_8));
 
         verify(checkConfig, file.getPath(), expected);
     }

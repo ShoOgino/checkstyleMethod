@@ -1,0 +1,20 @@
+    /**
+     * Returns file name without extension.
+     * We do not use the method from Guava library to reduce Checkstyle's dependencies
+     * on external libraries.
+     * @param fullFilename file name with extension.
+     * @return file name without extension.
+     */
+    public static String getFileNameWithoutExtension(String fullFilename) {
+        final String fileName = new File(fullFilename).getName();
+        final int dotIndex = fileName.lastIndexOf('.');
+        final String fileNameWithoutExtension;
+        if (dotIndex == -1) {
+            fileNameWithoutExtension = fileName;
+        }
+        else {
+            fileNameWithoutExtension = fileName.substring(0, dotIndex);
+        }
+        return fileNameWithoutExtension;
+    }
+

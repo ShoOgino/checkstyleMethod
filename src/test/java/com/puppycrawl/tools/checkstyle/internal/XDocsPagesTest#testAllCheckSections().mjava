@@ -3,14 +3,13 @@
         final ModuleFactory moduleFactory = TestUtils.getPackageObjectFactory();
 
         for (Path path : XDocUtil.getXdocsConfigFilePaths(XDocUtil.getXdocsFilePaths())) {
-            final File file = path.toFile();
-            final String fileName = file.getName();
+            final String fileName = path.getFileName().toString();
 
             if ("config_reporting.xml".equals(fileName)) {
                 continue;
             }
 
-            final String input = Files.toString(file, UTF_8);
+            final String input = new String(Files.readAllBytes(path), UTF_8);
             final Document document = XmlUtil.getRawXml(fileName, input, input);
             final NodeList sources = document.getElementsByTagName("section");
             String lastSectioName = null;
