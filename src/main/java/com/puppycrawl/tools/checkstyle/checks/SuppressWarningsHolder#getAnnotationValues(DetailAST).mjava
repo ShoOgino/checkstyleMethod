@@ -8,7 +8,7 @@
     private static List<String> getAnnotationValues(DetailAST ast) {
         switch (ast.getType()) {
             case TokenTypes.EXPR:
-                return ImmutableList.of(getStringExpr(ast));
+                return Collections.singletonList(getStringExpr(ast));
 
             case TokenTypes.ANNOTATION_ARRAY_INIT:
                 return findAllExpressionsInChildren(ast);

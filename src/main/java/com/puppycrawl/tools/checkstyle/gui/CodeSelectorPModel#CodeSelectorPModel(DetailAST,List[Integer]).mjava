@@ -5,6 +5,7 @@
      */
     public CodeSelectorPModel(DetailAST ast, List<Integer> lines2position) {
         this.ast = ast;
-        this.lines2position = ImmutableList.copyOf(lines2position);
+        final List<Integer> copy = new ArrayList<>(lines2position);
+        this.lines2position = Collections.unmodifiableList(copy);
     }
 

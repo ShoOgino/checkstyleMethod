@@ -3,6 +3,7 @@
      * @param excludedClasses the list of classes to ignore.
      */
     public final void setExcludedClasses(String... excludedClasses) {
-        this.excludedClasses = ImmutableSet.copyOf(excludedClasses);
+        this.excludedClasses =
+            Collections.unmodifiableSet(Arrays.stream(excludedClasses).collect(Collectors.toSet()));
     }
 

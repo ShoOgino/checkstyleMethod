@@ -2,7 +2,8 @@
      * Return the header lines to check against.
      * @return the header lines to check against.
      */
-    protected ImmutableList<String> getHeaderLines() {
-        return ImmutableList.copyOf(readerLines);
+    protected List<String> getHeaderLines() {
+        final List<String> copy = new ArrayList<>(readerLines);
+        return Collections.unmodifiableList(copy);
     }
 

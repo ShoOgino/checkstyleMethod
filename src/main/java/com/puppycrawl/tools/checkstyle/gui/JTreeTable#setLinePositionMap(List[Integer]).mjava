@@ -3,6 +3,7 @@
      * @param linePositionMap Line position map.
      */
     public void setLinePositionMap(List<Integer> linePositionMap) {
-        this.linePositionMap = ImmutableList.copyOf(linePositionMap);
+        final List<Integer> copy = new ArrayList<>(linePositionMap);
+        this.linePositionMap = Collections.unmodifiableList(copy);
     }
 
