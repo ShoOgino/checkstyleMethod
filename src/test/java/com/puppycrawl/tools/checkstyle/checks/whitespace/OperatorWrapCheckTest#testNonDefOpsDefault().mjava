@@ -1,0 +1,10 @@
+    @Test
+    public void testNonDefOpsDefault()
+            throws Exception {
+        checkConfig.addAttribute("tokens", "METHOD_REF");
+        final String[] expected = {
+            "33:33: " + getCheckMessage(MSG_LINE_NEW, "::"),
+        };
+        verify(checkConfig, getPath("InputOpWrap.java"), expected);
+    }
+
