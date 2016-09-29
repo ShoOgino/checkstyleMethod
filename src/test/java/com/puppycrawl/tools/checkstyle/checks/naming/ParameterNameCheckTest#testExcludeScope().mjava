@@ -1,0 +1,21 @@
+    @Test
+    public void testExcludeScope()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ParameterNameCheck.class);
+        checkConfig.addAttribute("format", "^h$");
+        checkConfig.addAttribute("excludeScope", Scope.PROTECTED.getName());
+
+        final String pattern = "^h$";
+
+        final String[] expected = {
+            "23:17: " + getCheckMessage(MSG_INVALID_PATTERN, "pubpack", pattern),
+            "25:25: " + getCheckMessage(MSG_INVALID_PATTERN, "pubpriv", pattern),
+            "48:17: " + getCheckMessage(MSG_INVALID_PATTERN, "packpack", pattern),
+            "50:25: " + getCheckMessage(MSG_INVALID_PATTERN, "packpriv", pattern),
+            "68:27: " + getCheckMessage(MSG_INVALID_PATTERN, "lexp", pattern),
+            "70:23: " + getCheckMessage(MSG_INVALID_PATTERN, "limp", pattern),
+            };
+        verify(checkConfig, getPath("InputScope.java"), expected);
+    }
+

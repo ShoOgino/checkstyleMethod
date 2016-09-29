@@ -1,9 +1,12 @@
     @Override
     protected boolean mustCheckName(DetailAST ast) {
         boolean checkName = true;
+        final boolean isDefault = scope == Scope.ANONINNER && excludeScope == null;
+
         if (ignoreOverridden && isOverriddenMethod(ast)
                 || ast.getParent().getType() == TokenTypes.LITERAL_CATCH
-                || CheckUtils.isReceiverParameter(ast)) {
+                || CheckUtils.isReceiverParameter(ast)
+                || !isDefault && !matchScope(calculateScope(ast))) {
             checkName = false;
         }
         return checkName;
