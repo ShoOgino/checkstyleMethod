@@ -1,0 +1,17 @@
+    /**
+     * Determines if an AST is a valid Equals method implementation.
+     *
+     * @param ast the AST to check
+     * @return true if the {code ast} is a Equals method.
+     */
+    private static boolean isEqualsMethod(DetailAST ast) {
+        final DetailAST modifiers = ast.getFirstChild();
+        final DetailAST parameters = ast.findFirstToken(TokenTypes.PARAMETERS);
+
+        return CheckUtils.isEqualsMethod(ast)
+                && modifiers.branchContains(TokenTypes.LITERAL_PUBLIC)
+                && isObjectParam(parameters.getFirstChild())
+                && (ast.branchContains(TokenTypes.SLIST)
+                        || modifiers.branchContains(TokenTypes.LITERAL_NATIVE));
+    }
+

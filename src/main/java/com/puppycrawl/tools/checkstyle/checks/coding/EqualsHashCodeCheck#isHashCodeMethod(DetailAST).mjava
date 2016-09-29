@@ -1,0 +1,21 @@
+    /**
+     * Determines if an AST is a valid HashCode method implementation.
+     *
+     * @param ast the AST to check
+     * @return true if the {code ast} is a HashCode method.
+     */
+    private static boolean isHashCodeMethod(DetailAST ast) {
+        final DetailAST modifiers = ast.getFirstChild();
+        final AST type = ast.findFirstToken(TokenTypes.TYPE);
+        final AST methodName = ast.findFirstToken(TokenTypes.IDENT);
+        final DetailAST parameters = ast.findFirstToken(TokenTypes.PARAMETERS);
+
+        return type.getFirstChild().getType() == TokenTypes.LITERAL_INT
+                && "hashCode".equals(methodName.getText())
+                && modifiers.branchContains(TokenTypes.LITERAL_PUBLIC)
+                && !modifiers.branchContains(TokenTypes.LITERAL_STATIC)
+                && parameters.getFirstChild() == null
+                && (ast.branchContains(TokenTypes.SLIST)
+                        || modifiers.branchContains(TokenTypes.LITERAL_NATIVE));
+    }
+
