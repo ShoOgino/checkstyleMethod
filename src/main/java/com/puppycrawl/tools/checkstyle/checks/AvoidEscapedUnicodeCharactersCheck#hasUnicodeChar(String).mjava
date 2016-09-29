@@ -4,6 +4,8 @@
      * @return true if literal has Unicode chars.
      */
     private static boolean hasUnicodeChar(String literal) {
-        return UNICODE_REGEXP.matcher(literal).find();
+        final String literalWithoutEscapedBackslashes =
+                ESCAPED_BACKSLASH.matcher(literal).replaceAll("");
+        return UNICODE_REGEXP.matcher(literalWithoutEscapedBackslashes).find();
     }
 
