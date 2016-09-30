@@ -4,7 +4,8 @@
      *        DetailAST object.
      */
     public void addPreviousSibling(DetailAST ast) {
-        clearBranchTokenTypesCache();
+        clearBranchTokenTypes();
+        clearChildCountCache(parent);
         if (ast != null) {
             ast.setParent(parent);
             final DetailAST previousSiblingNode = previousSibling;

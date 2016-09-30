@@ -1,6 +1,7 @@
     @Override
     public void setNextSibling(AST ast) {
-        clearBranchTokenTypesCache();
+        clearBranchTokenTypes();
+        clearChildCountCache(parent);
         super.setNextSibling(ast);
         if (ast != null && parent != null) {
             ((DetailAST) ast).setParent(parent);

@@ -1,7 +1,7 @@
     @Override
     public void setFirstChild(AST ast) {
-        clearBranchTokenTypesCache();
-        childCount = NOT_INITIALIZED;
+        clearBranchTokenTypes();
+        clearChildCountCache(this);
         super.setFirstChild(ast);
         if (ast != null) {
             ((DetailAST) ast).setParent(this);

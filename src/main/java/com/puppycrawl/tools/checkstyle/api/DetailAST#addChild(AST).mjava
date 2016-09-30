@@ -1,6 +1,7 @@
     @Override
     public void addChild(AST ast) {
-        clearBranchTokenTypesCache();
+        clearBranchTokenTypes();
+        clearChildCountCache(this);
         super.addChild(ast);
         if (ast != null) {
             ((DetailAST) ast).setParent(this);
