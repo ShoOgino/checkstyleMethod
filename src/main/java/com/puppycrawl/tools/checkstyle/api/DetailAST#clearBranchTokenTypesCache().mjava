@@ -1,0 +1,11 @@
+    /**
+     * Clears branchTokenTypes cache for all parents of the current DetailAST instance.
+     */
+    private void clearBranchTokenTypesCache() {
+        DetailAST prevParent = getParent();
+        while (prevParent != null) {
+            prevParent.branchTokenTypes = null;
+            prevParent = prevParent.getParent();
+        }
+    }
+

@@ -1,0 +1,14 @@
+        @Override
+        public void visitToken(DetailAST ast) {
+            if (!ast.branchContains(TokenTypes.BLOCK_COMMENT_BEGIN)) {
+                log(ast, "Incorrect AST structure.");
+            }
+            final int childCount = ast.getChildCount();
+            if (childCount != METHOD_DEF_CHILD_COUNT) {
+                final String msg = String.format(Locale.getDefault(),
+                    "AST node has wrong number of children. Expected is %d but was %d",
+                    METHOD_DEF_CHILD_COUNT, childCount);
+                log(ast, msg);
+            }
+        }
+
