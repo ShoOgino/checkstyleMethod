@@ -1,0 +1,12 @@
+    @Test
+    public void testParseFileWithJavadoc3() throws Exception {
+        final String actual = AstTreeStringPrinter.printJavaAndJavadocTree(
+                new File(getPath("InputAstTreeStringPrinterAttributesAndMethodsJavadoc.java")))
+                .replaceAll("\\\\r\\\\n", "\\\\n");
+        final String expected = new String(Files.readAllBytes(Paths.get(
+                getPath("expectedInputAstTreeStringPrinterAttributesAndMethodsJavadoc.txt"))),
+                        StandardCharsets.UTF_8)
+                .replaceAll("\\\\r\\\\n", "\\\\n");
+        Assert.assertEquals(expected, actual);
+    }
+

@@ -7,16 +7,16 @@
         final StringBuilder messageBuilder = new StringBuilder();
         DetailAST node = ast;
         while (node != null) {
-            if (node.getType() == TokenTypes.BLOCK_COMMENT_BEGIN
-                    && JavadocUtils.isJavadocComment(node)) {
+            messageBuilder.append(getIndentation(node))
+                .append(getNodeInfo(node))
+                .append(LINE_SEPARATOR);
+            if (node.getType() == TokenTypes.COMMENT_CONTENT
+                    && JavadocUtils.isJavadocComment(node.getParent())) {
                 final String javadocTree = parseAndPrintJavadocTree(node);
                 messageBuilder.append(javadocTree);
             }
             else {
-                messageBuilder.append(getIndentation(node))
-                    .append(getNodeInfo(node))
-                    .append(LINE_SEPARATOR)
-                    .append(printJavaAndJavadocTree(node.getFirstChild()));
+                messageBuilder.append(printJavaAndJavadocTree(node.getFirstChild()));
             }
             node = node.getNextSibling();
         }

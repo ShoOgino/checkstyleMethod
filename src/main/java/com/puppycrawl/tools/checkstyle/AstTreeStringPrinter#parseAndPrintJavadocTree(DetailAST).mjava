@@ -4,10 +4,13 @@
      * @return string javadoc tree
      */
     private static String parseAndPrintJavadocTree(DetailAST node) {
-        final DetailNode tree = DetailNodeTreeStringPrinter.parseJavadocAsDetailNode(node);
+        final DetailAST javadocBlock = node.getParent();
+        final DetailNode tree = DetailNodeTreeStringPrinter.parseJavadocAsDetailNode(javadocBlock);
 
-        final String rootPrefix = getIndentation(node);
-        final String prefix = rootPrefix.substring(0, rootPrefix.length() - 2) + "   ";
+        String baseIdentation = getIndentation(node);
+        baseIdentation = baseIdentation.substring(0, baseIdentation.length() - 2);
+        final String rootPrefix = baseIdentation + "   `--";
+        final String prefix = baseIdentation + "       ";
         return DetailNodeTreeStringPrinter.printTree(tree, rootPrefix, prefix);
     }
 
