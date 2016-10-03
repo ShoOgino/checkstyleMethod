@@ -4,11 +4,10 @@
         final String filePath = String.format(Locale.getDefault(), "%s%2$stemp%2$scache.temp",
             temporaryFolder.getRoot(), File.separator);
         final PropertyCacheFile cache = new PropertyCacheFile(config, filePath);
-        try {
-            cache.persist();
-        }
-        catch (FileNotFoundException ex) {
-            fail("Exception is not expected. Cache directory should be created successfully!");
-        }
+
+        // no exception expected, cache directory should be created
+        cache.persist();
+
+        assertTrue("cache exists in directory", new File(filePath).exists());
     }
 
