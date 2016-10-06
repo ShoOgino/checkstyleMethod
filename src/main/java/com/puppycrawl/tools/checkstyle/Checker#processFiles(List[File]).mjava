@@ -14,13 +14,13 @@
                         || !acceptFileStarted(fileName)) {
                     continue;
                 }
+                if (cache != null) {
+                    cache.put(fileName, timestamp);
+                }
                 fireFileStarted(fileName);
                 final SortedSet<LocalizedMessage> fileMessages = processFile(file);
                 fireErrors(fileName, fileMessages);
                 fireFileFinished(fileName);
-                if (cache != null && fileMessages.isEmpty()) {
-                    cache.put(fileName, timestamp);
-                }
             }
             // -@cs[IllegalCatch] There is no other way to deliver filename that was under
             // processing. See https://github.com/checkstyle/checkstyle/issues/2285
