@@ -3,9 +3,8 @@
         final DefaultConfiguration checkConfig =
             createCheckConfig(DesignForExtensionCheck.class);
         final String[] expected = {
-            "46:5: " + getCheckMessage(MSG_KEY, "doh"),
-            "54:5: " + getCheckMessage(MSG_KEY, "aNativeMethod"),
-            "105:9: " + getCheckMessage(MSG_KEY, "someMethod"),
+            "46:5: " + getCheckMessage(MSG_KEY, "InputDesignForExtension", "doh"),
+            "100:9: " + getCheckMessage(MSG_KEY, "anotherNonFinalClass", "someMethod"),
         };
         verify(checkConfig, getPath("InputDesignForExtension.java"), expected);
 

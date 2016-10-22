@@ -1,0 +1,21 @@
+    /**
+     * Check if a method has specific annotation.
+     * @param methodDef method definition token.
+     * @param annotationName annotation name.
+     * @return true, if a method has a specific annotation.
+     */
+    private static boolean hasAnnotation(DetailAST methodDef, String annotationName) {
+        final DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
+        boolean containsAnnotation = false;
+        if (modifiers.branchContains(TokenTypes.ANNOTATION)) {
+            final Optional<DetailAST> annotation = TokenUtils.findFirstTokenByPredicate(modifiers,
+                currentToken -> currentToken != null
+                    && currentToken.getType() == TokenTypes.ANNOTATION
+                    && annotationName.equals(getAnnotationName(currentToken)));
+            if (annotation.isPresent()) {
+                containsAnnotation = true;
+            }
+        }
+        return containsAnnotation;
+    }
+

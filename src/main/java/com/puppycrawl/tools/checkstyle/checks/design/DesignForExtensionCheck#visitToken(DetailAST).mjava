@@ -1,28 +1,16 @@
     @Override
     public void visitToken(DetailAST ast) {
-        // nothing to do for Interfaces
-        if (!ScopeUtils.isInInterfaceOrAnnotationBlock(ast)
-                && !isPrivateOrFinalOrAbstract(ast)
-                && ScopeUtils.getSurroundingScope(ast).isIn(Scope.PROTECTED)) {
+        if (!hasJavadocComment(ast)
+                && (isNativeMethod(ast)
+                    || !hasEmptyImplementation(ast))
+                && canBeOverridden(ast)
+                && !hasIgnoredAnnotation(ast, ignoredAnnotations)) {
 
-            // method is ok if it is implementation can verified to be empty
-            // Note: native methods don't have impl in java code, so
-            // implementation can be null even if method not abstract
-            final DetailAST implementation = ast.findFirstToken(TokenTypes.SLIST);
-            final boolean nonEmptyImplementation = implementation == null
-                    || implementation.getFirstChild().getType() != TokenTypes.RCURLY;
-
-            final DetailAST classDef = findContainingClass(ast);
-            final DetailAST classMods = classDef.findFirstToken(TokenTypes.MODIFIERS);
-            // check if the containing class can be subclassed
-            final boolean classCanBeSubclassed = classDef.getType() != TokenTypes.ENUM_DEF
-                    && !classMods.branchContains(TokenTypes.FINAL);
-
-            if (nonEmptyImplementation && classCanBeSubclassed
-                    && hasDefaultOrExplicitNonPrivateCtor(classDef)) {
-
-                final String name = ast.findFirstToken(TokenTypes.IDENT).getText();
-                log(ast.getLineNo(), ast.getColumnNo(), MSG_KEY, name);
+            final DetailAST classDef = getNearestClassOrEnumDefinition(ast);
+            if (canBeSubclassed(classDef)) {
+                final String className = classDef.findFirstToken(TokenTypes.IDENT).getText();
+                final String methodName = ast.findFirstToken(TokenTypes.IDENT).getText();
+                log(ast.getLineNo(), ast.getColumnNo(), MSG_KEY, className, methodName);
             }
         }
     }

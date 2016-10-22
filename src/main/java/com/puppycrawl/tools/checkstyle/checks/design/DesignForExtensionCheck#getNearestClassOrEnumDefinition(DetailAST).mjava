@@ -1,0 +1,15 @@
+    /**
+     * Returns CLASS_DEF or ENUM_DEF token which is the nearest to the given ast node.
+     * Searches the tree towards the root until it finds a CLASS_DEF or ENUM_DEF node.
+     * @param ast the start node for searching.
+     * @return the CLASS_DEF or ENUM_DEF token.
+     */
+    private static DetailAST getNearestClassOrEnumDefinition(DetailAST ast) {
+        DetailAST searchAST = ast;
+        while (searchAST.getType() != TokenTypes.CLASS_DEF
+               && searchAST.getType() != TokenTypes.ENUM_DEF) {
+            searchAST = searchAST.getParent();
+        }
+        return searchAST;
+    }
+

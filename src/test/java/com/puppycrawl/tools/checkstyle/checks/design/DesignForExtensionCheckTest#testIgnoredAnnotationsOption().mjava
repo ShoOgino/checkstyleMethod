@@ -1,0 +1,13 @@
+    @Test
+    public void testIgnoredAnnotationsOption() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(DesignForExtensionCheck.class);
+        checkConfig.addAttribute("ignoredAnnotations", "Override, Deprecated");
+        final String[] expected = {
+            "31:5: "
+                + getCheckMessage(MSG_KEY, "InputDesignForExtensionIgnoredAnnotations", "foo1"),
+            "141:5: "
+                + getCheckMessage(MSG_KEY, "InputDesignForExtensionIgnoredAnnotations", "foo21"),
+        };
+        verify(checkConfig, getPath("InputDesignForExtensionIgnoredAnnotations.java"), expected);
+    }
+

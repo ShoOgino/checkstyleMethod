@@ -1,0 +1,10 @@
+    /**
+     * Checks whether a methods is native.
+     * @param ast method definition token.
+     * @return true if a methods is native.
+     */
+    private boolean isNativeMethod(DetailAST ast) {
+        final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
+        return mods.branchContains(TokenTypes.LITERAL_NATIVE);
+    }
+

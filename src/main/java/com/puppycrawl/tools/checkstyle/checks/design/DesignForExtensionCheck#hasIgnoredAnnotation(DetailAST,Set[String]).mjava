@@ -1,0 +1,11 @@
+    /**
+     * Checks whether a method has any of ignored annotations.
+     * @param methodDef method definition token.
+     * @param annotations a set of ignored annotations.
+     * @return true if a method has any of ignored annotations.
+     */
+    private static boolean hasIgnoredAnnotation(DetailAST methodDef, Set<String> annotations) {
+        return annotations.stream().filter(annotation -> hasAnnotation(methodDef, annotation))
+            .findAny().isPresent();
+    }
+
