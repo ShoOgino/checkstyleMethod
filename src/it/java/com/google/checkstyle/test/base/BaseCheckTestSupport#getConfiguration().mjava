@@ -1,3 +1,10 @@
+    /**
+     * Returns {@link Configuration} based on Google's checks xml-configuration (google_checks.xml).
+     * This implementation uses {@link ConfigurationLoader} in order to load configuration
+     * from xml-file.
+     * @return {@link Configuration} based on Google's checks xml-configuration (google_checks.xml).
+     * @throws CheckstyleException if exception occurs during configuration loading.
+     */
     protected static Configuration getConfiguration() throws CheckstyleException {
         if (configuration == null) {
             configuration = ConfigurationLoader.loadConfiguration(XML_NAME, new PropertiesExpander(
