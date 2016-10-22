@@ -1,39 +1,33 @@
     /**
-     * Verifies whether a package name be used.
-     * @param forImport the package to check.
+     * Verifies whether a package name is used.
+     * @param forImport the import to check.
      * @return a result {@link AccessResult} indicating whether it can be used.
      */
+    @Override
     public AccessResult verifyImport(final String forImport) {
-        if (className != null) {
-            final boolean classMatch;
-
-            if (regExp) {
-                classMatch = forImport.matches(className);
-            }
-            else {
-                classMatch = forImport.equals(className);
-            }
-            return calculateResult(classMatch);
-        }
-
-        // Must be checking a package. First check that we actually match
-        // the package. Then check if matched and we must be an exact match.
+        // First check that we actually match the package.
+        // Then check if matched and f we must be an exact match.
         // In this case, the text after the first "." must not contain
         // another "." as this indicates that it is not an exact match.
+
         boolean pkgMatch;
-        if (regExp) {
+
+        if (isRegExp()) {
             pkgMatch = forImport.matches(pkgName + "\\..*");
+
             if (pkgMatch && exactMatch) {
                 pkgMatch = !forImport.matches(pkgName + "\\..*\\..*");
             }
         }
         else {
             pkgMatch = forImport.startsWith(pkgName + ".");
+
             if (pkgMatch && exactMatch) {
                 pkgMatch = forImport.indexOf('.',
                         pkgName.length() + 1) == -1;
             }
         }
+
         return calculateResult(pkgMatch);
     }
 

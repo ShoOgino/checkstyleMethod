@@ -1,0 +1,19 @@
+    /**
+     * Verifies whether a class name is used.
+     * @param forImport the import to check.
+     * @return a result {@link AccessResult} indicating whether it can be used.
+     */
+    @Override
+    public AccessResult verifyImport(final String forImport) {
+        final boolean classMatch;
+
+        if (isRegExp()) {
+            classMatch = forImport.matches(className);
+        }
+        else {
+            classMatch = forImport.equals(className);
+        }
+
+        return calculateResult(classMatch);
+    }
+

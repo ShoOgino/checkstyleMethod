@@ -1,0 +1,12 @@
+    @Test
+    public void testClassImportRule() {
+        final ClassImportRule r = new ClassImportRule(true, false, "pkg.a", false);
+        assertNotNull(r);
+        assertEquals(AccessResult.UNKNOWN, r.verifyImport("asda"));
+        assertEquals(AccessResult.UNKNOWN, r.verifyImport("p"));
+        assertEquals(AccessResult.UNKNOWN, r.verifyImport("pkga"));
+        assertEquals(AccessResult.ALLOWED, r.verifyImport("pkg.a"));
+        assertEquals(AccessResult.UNKNOWN, r.verifyImport("pkg.a.b"));
+        assertEquals(AccessResult.UNKNOWN, r.verifyImport("pkg"));
+    }
+
