@@ -1,0 +1,56 @@
+    private static void fixCapturedProperties(String sectionName, Object instance, Class<?> clss,
+            Set<String> properties) {
+        // remove global properties that don't need documentation
+        if (hasParentModule(sectionName)) {
+            if (AbstractJavadocCheck.class.isAssignableFrom(clss)) {
+                properties.removeAll(JAVADOC_CHECK_PROPERTIES);
+            }
+            else if (AbstractCheck.class.isAssignableFrom(clss)) {
+                properties.removeAll(CHECK_PROPERTIES);
+            }
+        }
+        else if (AbstractFileSetCheck.class.isAssignableFrom(clss)) {
+            properties.removeAll(FILESET_PROPERTIES);
+
+            // override
+            properties.add("fileExtensions");
+        }
+
+        // remove undocumented properties
+        new HashSet<>(properties).stream()
+            .filter(p -> UNDOCUMENTED_PROPERTIES.contains(clss.getSimpleName() + "." + p))
+            .forEach(properties::remove);
+
+        if (AbstractCheck.class.isAssignableFrom(clss)) {
+            final AbstractCheck check = (AbstractCheck) instance;
+
+            final int[] acceptableTokens = check.getAcceptableTokens();
+            Arrays.sort(acceptableTokens);
+            final int[] defaultTokens = check.getDefaultTokens();
+            Arrays.sort(defaultTokens);
+            final int[] requiredTokens = check.getRequiredTokens();
+            Arrays.sort(requiredTokens);
+
+            if (!Arrays.equals(acceptableTokens, defaultTokens)
+                    || !Arrays.equals(acceptableTokens, requiredTokens)) {
+                properties.add("tokens");
+            }
+        }
+
+        if (AbstractJavadocCheck.class.isAssignableFrom(clss)) {
+            final AbstractJavadocCheck check = (AbstractJavadocCheck) instance;
+
+            final int[] acceptableJavadocTokens = check.getAcceptableJavadocTokens();
+            Arrays.sort(acceptableJavadocTokens);
+            final int[] defaultJavadocTokens = check.getDefaultJavadocTokens();
+            Arrays.sort(defaultJavadocTokens);
+            final int[] requiredJavadocTokens = check.getRequiredJavadocTokens();
+            Arrays.sort(requiredJavadocTokens);
+
+            if (!Arrays.equals(acceptableJavadocTokens, defaultJavadocTokens)
+                    || !Arrays.equals(acceptableJavadocTokens, requiredJavadocTokens)) {
+                properties.add("javadocTokens");
+            }
+        }
+    }
+

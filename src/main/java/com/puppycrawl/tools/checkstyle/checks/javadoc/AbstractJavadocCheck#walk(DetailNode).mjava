@@ -4,11 +4,9 @@
      *        the root of tree for process
      */
     private void walk(DetailNode root) {
-        final int[] defaultTokenTypes = getDefaultJavadocTokens();
-
         DetailNode curNode = root;
         while (curNode != null) {
-            final boolean waitsForProcessing = shouldBeProcessed(defaultTokenTypes, curNode);
+            boolean waitsForProcessing = shouldBeProcessed(curNode);
 
             if (waitsForProcessing) {
                 visitJavadocToken(curNode);
@@ -23,6 +21,9 @@
                 toVisit = JavadocUtils.getNextSibling(curNode);
                 if (toVisit == null) {
                     curNode = curNode.getParent();
+                    if (curNode != null) {
+                        waitsForProcessing = shouldBeProcessed(curNode);
+                    }
                 }
             }
             curNode = toVisit;

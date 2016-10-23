@@ -1,0 +1,18 @@
+    @Test
+    public void testAcceptableTokensFail()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(TokenIsNotInAcceptablesJavadocCheck.class);
+        checkConfig.addAttribute("javadocTokens", "RETURN_LITERAL");
+        try {
+            final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+            verify(checkConfig, getPath("InputMain.java"), expected);
+            Assert.fail("CheckstyleException is expected");
+        }
+        catch (IllegalStateException ex) {
+            Assert.assertTrue(ex.getMessage().startsWith("Javadoc Token "
+                    + "\"RETURN_LITERAL\" was not found in "
+                    + "Acceptable javadoc tokens list in check"));
+        }
+    }
+

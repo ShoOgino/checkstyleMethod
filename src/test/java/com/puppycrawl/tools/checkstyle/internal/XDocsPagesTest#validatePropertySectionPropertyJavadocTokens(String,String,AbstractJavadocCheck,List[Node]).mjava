@@ -1,0 +1,20 @@
+    private static void validatePropertySectionPropertyJavadocTokens(String fileName,
+            String sectionName, AbstractJavadocCheck check, List<Node> columns) {
+        Assert.assertEquals(fileName + " section '" + sectionName
+                + "' should have the basic token javadoc description", "javadoc tokens to check",
+                columns.get(1).getTextContent());
+        Assert.assertEquals(
+                fileName + " section '" + sectionName
+                        + "' should have all the acceptable javadoc tokens",
+                "subset of javadoc tokens "
+                        + CheckUtil.getJavadocTokenText(check.getAcceptableJavadocTokens(),
+                                check.getRequiredJavadocTokens()), columns.get(2).getTextContent()
+                        .replaceAll("\\s+", " ").trim());
+        Assert.assertEquals(
+                fileName + " section '" + sectionName
+                        + "' should have all the default javadoc tokens",
+                CheckUtil.getJavadocTokenText(check.getDefaultJavadocTokens(),
+                        check.getRequiredJavadocTokens()), columns.get(3).getTextContent()
+                        .replaceAll("\\s+", " ").trim());
+    }
+

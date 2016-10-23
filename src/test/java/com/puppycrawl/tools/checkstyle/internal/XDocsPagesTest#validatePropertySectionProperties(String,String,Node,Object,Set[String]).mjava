@@ -1,6 +1,7 @@
     private static void validatePropertySectionProperties(String fileName, String sectionName,
             Node subSection, Object instance, Set<String> properties) throws Exception {
         boolean skip = true;
+        boolean didJavadocTokens = false;
         boolean didTokens = false;
 
         for (Node row : XmlUtil.getChildrenElements(XmlUtil.getFirstChildElement(subSection))) {
@@ -20,25 +21,18 @@
 
             if ("tokens".equals(propertyName)) {
                 final AbstractCheck check = (AbstractCheck) instance;
-
-                Assert.assertEquals(fileName + " section '" + sectionName
-                        + "' should have the basic token description", "tokens to check", columns
-                        .get(1).getTextContent());
-                Assert.assertEquals(
-                        fileName + " section '" + sectionName
-                                + "' should have all the acceptable tokens",
-                        "subset of tokens "
-                                + CheckUtil.getTokenText(check.getAcceptableTokens(),
-                                        check.getRequiredTokens()), columns.get(2).getTextContent()
-                                .replaceAll("\\s+", " ").trim());
-                Assert.assertEquals(
-                        fileName + " section '" + sectionName
-                                + "' should have all the default tokens",
-                        CheckUtil.getTokenText(check.getDefaultTokens(), check.getRequiredTokens()),
-                        columns.get(3).getTextContent().replaceAll("\\s+", " ").trim());
+                validatePropertySectionPropertyTokens(fileName, sectionName, check, columns);
                 didTokens = true;
             }
+            else if ("javadocTokens".equals(propertyName)) {
+                final AbstractJavadocCheck check = (AbstractJavadocCheck) instance;
+                validatePropertySectionPropertyJavadocTokens(fileName, sectionName, check, columns);
+                didJavadocTokens = true;
+            }
             else {
+                Assert.assertFalse(fileName + " section '" + sectionName
+                        + "' should have javadoc token properties next to last, before tokens",
+                        didJavadocTokens);
                 Assert.assertFalse(fileName + " section '" + sectionName
                         + "' should have a description for " + propertyName, columns.get(1)
                         .getTextContent().trim().isEmpty());

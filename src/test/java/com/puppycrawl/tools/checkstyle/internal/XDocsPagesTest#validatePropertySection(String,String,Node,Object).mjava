@@ -3,37 +3,7 @@
         final Set<String> properties = getProperties(instance.getClass());
         final Class<?> clss = instance.getClass();
 
-        // remove global properties that don't need documentation
-        if (hasParentModule(sectionName)) {
-            properties.removeAll(CHECK_PROPERTIES);
-        }
-        else if (AbstractFileSetCheck.class.isAssignableFrom(clss)) {
-            properties.removeAll(FILESET_PROPERTIES);
-
-            // override
-            properties.add("fileExtensions");
-        }
-
-        // remove undocumented properties
-        new HashSet<>(properties).stream()
-            .filter(p -> UNDOCUMENTED_PROPERTIES.contains(clss.getSimpleName() + "." + p))
-            .forEach(properties::remove);
-
-        if (AbstractCheck.class.isAssignableFrom(clss)) {
-            final AbstractCheck check = (AbstractCheck) instance;
-
-            final int[] acceptableTokens = check.getAcceptableTokens();
-            Arrays.sort(acceptableTokens);
-            final int[] defaultTokens = check.getDefaultTokens();
-            Arrays.sort(defaultTokens);
-            final int[] requiredTokens = check.getRequiredTokens();
-            Arrays.sort(requiredTokens);
-
-            if (!Arrays.equals(acceptableTokens, defaultTokens)
-                    || !Arrays.equals(acceptableTokens, requiredTokens)) {
-                properties.add("tokens");
-            }
-        }
+        fixCapturedProperties(sectionName, instance, clss, properties);
 
         if (subSection != null) {
             Assert.assertTrue(fileName + " section '" + sectionName
