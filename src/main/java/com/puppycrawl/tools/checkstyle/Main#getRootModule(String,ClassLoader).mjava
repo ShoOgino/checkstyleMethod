@@ -1,0 +1,17 @@
+    /**
+     * Creates a new instance of the root module that will control and run
+     * Checkstyle.
+     * @param name The name of the module. This will either be a short name that
+     *        will have to be found or the complete package name.
+     * @param moduleClassLoader Class loader used to load the root module.
+     * @return The new instance of the root module.
+     * @throws CheckstyleException if no module can be instantiated from name
+     */
+    private static RootModule getRootModule(String name, ClassLoader moduleClassLoader)
+            throws CheckstyleException {
+        final ModuleFactory factory = new PackageObjectFactory(
+                Checker.class.getPackage().getName() + ".", moduleClassLoader);
+
+        return (RootModule) factory.createModule(name);
+    }
+

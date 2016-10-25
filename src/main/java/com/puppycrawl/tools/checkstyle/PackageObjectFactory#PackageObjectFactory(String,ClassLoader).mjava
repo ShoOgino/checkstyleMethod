@@ -1,16 +1,16 @@
     /**
      * Creates a new {@code PackageObjectFactory} instance.
-     * @param packageNames the list of package names to use
+     * @param packageName The package name to use
      * @param moduleClassLoader class loader used to load Checkstyle
      *          core and custom modules
      */
-    public PackageObjectFactory(Set<String> packageNames, ClassLoader moduleClassLoader) {
+    public PackageObjectFactory(String packageName, ClassLoader moduleClassLoader) {
         if (moduleClassLoader == null) {
             throw new IllegalArgumentException(NULL_LOADER_MESSAGE);
         }
 
-        //create a copy of the given set, but retain ordering
-        packages = new LinkedHashSet<>(packageNames);
+        packages = new LinkedHashSet<>(1);
+        packages.add(packageName);
         this.moduleClassLoader = moduleClassLoader;
     }
 

@@ -27,23 +27,23 @@
         // create a listener for output
         final AuditListener listener = createListener(cliOptions.format, cliOptions.outputLocation);
 
-        // create Checker object and run it
+        // create RootModule object and run it
         int errorCounter = 0;
-        final Checker checker = new Checker();
+        final ClassLoader moduleClassLoader = Checker.class.getClassLoader();
+        final RootModule rootModule = getRootModule(config.getName(), moduleClassLoader);
 
         try {
 
-            final ClassLoader moduleClassLoader = Checker.class.getClassLoader();
-            checker.setModuleClassLoader(moduleClassLoader);
-            checker.configure(config);
-            checker.addListener(listener);
+            rootModule.setModuleClassLoader(moduleClassLoader);
+            rootModule.configure(config);
+            rootModule.addListener(listener);
 
-            // run Checker
-            errorCounter = checker.process(cliOptions.files);
+            // run RootModule
+            errorCounter = rootModule.process(cliOptions.files);
 
         }
         finally {
-            checker.destroy();
+            rootModule.destroy();
         }
 
         return errorCounter;
