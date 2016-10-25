@@ -3,15 +3,15 @@
      * @param forPkg the package to search for.
      * @return the finest match, or null if no match at all.
      */
-    public PkgControl locateFinest(final String forPkg) {
-        PkgControl finestMatch = null;
+    public ImportControl locateFinest(final String forPkg) {
+        ImportControl finestMatch = null;
         // Check if we are a match.
         if (matchesAtFront(forPkg)) {
             // If there won't be match so I am the best there is.
             finestMatch = this;
             // Check if any of the children match.
-            for (PkgControl child : children) {
-                final PkgControl match = child.locateFinest(forPkg);
+            for (ImportControl child : children) {
+                final ImportControl match = child.locateFinest(forPkg);
                 if (match != null) {
                     finestMatch = match;
                     break;

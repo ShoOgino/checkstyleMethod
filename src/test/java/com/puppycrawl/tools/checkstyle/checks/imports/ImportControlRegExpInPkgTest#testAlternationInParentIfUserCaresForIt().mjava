@@ -1,8 +1,8 @@
     @Test
-    public void testAlternationInParentIsHandledCorrectly() {
+    public void testAlternationInParentIfUserCaresForIt() {
         // the regular expression has to be adjusted to (com\.foo|com\.bar)
-        final PkgControl root = new PkgControl("com\\.foo|com\\.bar", true);
-        final PkgControl common = new PkgControl(root, "common", false);
+        final ImportControl root = new ImportControl("(com\\.foo|com\\.bar)", true);
+        final ImportControl common = new ImportControl(root, "common", false);
         assertEquals(root, root.locateFinest("com.foo"));
         assertEquals(common, root.locateFinest("com.foo.common"));
         assertEquals(root, root.locateFinest("com.bar"));

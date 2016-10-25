@@ -7,12 +7,12 @@
         if ("import-control".equals(qName)) {
             final String pkg = safeGet(attributes, PKG_ATTRIBUTE_NAME);
             final boolean regex = containsRegexAttribute(attributes);
-            stack.push(new PkgControl(pkg, regex));
+            stack.push(new ImportControl(pkg, regex));
         }
         else if (SUBPACKAGE_ELEMENT_NAME.equals(qName)) {
             final String name = safeGet(attributes, "name");
             final boolean regex = containsRegexAttribute(attributes);
-            stack.push(new PkgControl(stack.peek(), name, regex));
+            stack.push(new ImportControl(stack.peek(), name, regex));
         }
         else if (ALLOW_ELEMENT_NAME.equals(qName) || "disallow".equals(qName)) {
             // Need to handle either "pkg" or "class" attribute.
