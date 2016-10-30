@@ -1,0 +1,12 @@
+    @Test
+    public void testJavadocChildCount() {
+        final DetailAST commentContentNode = tree.getFirstChild().getNextSibling().getFirstChild();
+        final ParseTreeTablePModel parseTree = new ParseTreeTablePModel(null);
+        parseTree.setParseMode(ParseMode.JAVA_WITH_JAVADOC_AND_COMMENTS);
+        final Object javadoc = parseTree.getChild(commentContentNode, 0);
+        Assert.assertTrue(javadoc instanceof DetailNode);
+        Assert.assertEquals(JavadocTokenTypes.JAVADOC, ((DetailNode) javadoc).getType());
+        final int javadocChildCount = parseTree.getChildCount(javadoc);
+        Assert.assertEquals(5, javadocChildCount);
+    }
+

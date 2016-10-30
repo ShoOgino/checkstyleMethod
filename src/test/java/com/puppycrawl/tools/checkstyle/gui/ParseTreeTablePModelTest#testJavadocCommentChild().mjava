@@ -1,0 +1,10 @@
+    @Test
+    public void testJavadocCommentChild() {
+        final DetailAST commentContentNode = tree.getFirstChild().getNextSibling().getFirstChild();
+        final ParseTreeTablePModel parseTree = new ParseTreeTablePModel(null);
+        parseTree.setParseMode(ParseMode.JAVA_WITH_JAVADOC_AND_COMMENTS);
+        final Object child = parseTree.getChild(commentContentNode, 0);
+        Assert.assertTrue(child instanceof DetailNode);
+        Assert.assertEquals(JavadocTokenTypes.JAVADOC, ((DetailNode) child).getType());
+    }
+
