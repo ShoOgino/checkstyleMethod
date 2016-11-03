@@ -1,10 +1,13 @@
     @Test
     public void testSemi() throws Exception {
+        final DefaultConfiguration configurationTestSemi =
+                createCheckConfig(WhitespaceAfterCheck.class);
+        configurationTestSemi.addAttribute("tokens", "SEMI");
         final String[] expected = {
             "54:23: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, ";"),
             "54:29: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, ";"),
             "103:19: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, ";"),
         };
-        verify(checkConfig, getPath("InputBraces.java"), expected);
+        verify(configurationTestSemi, getPath("InputBraces.java"), expected);
     }
 

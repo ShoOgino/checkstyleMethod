@@ -1,0 +1,11 @@
+    @Test
+    public void testLiteralWhile() throws Exception {
+        final DefaultConfiguration configurationTestLiteralWhile =
+                createCheckConfig(WhitespaceAfterCheck.class);
+        configurationTestLiteralWhile.addAttribute("tokens", "LITERAL_WHILE");
+        final String[] expected = {
+            "39:14: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "while"),
+        };
+        verify(configurationTestLiteralWhile, getPath("InputWhitespaceAfter.java"), expected);
+    }
+

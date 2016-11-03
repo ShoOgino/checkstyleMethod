@@ -1,0 +1,11 @@
+    @Test
+    public void testLiteralIf() throws Exception {
+        final DefaultConfiguration configurationTestLiteralIf =
+                createCheckConfig(WhitespaceAfterCheck.class);
+        configurationTestLiteralIf.addAttribute("tokens", "LITERAL_IF");
+        final String[] expected = {
+            "18:11: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "if"),
+        };
+        verify(configurationTestLiteralIf, getPath("InputWhitespaceAfter.java"), expected);
+    }
+
