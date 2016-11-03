@@ -2,7 +2,7 @@
     public void testAccept() {
         final String fileName = "BAD";
         final BeforeExecutionExclusionFileFilter filter = new BeforeExecutionExclusionFileFilter();
-        filter.setFileNamePattern(fileName);
+        filter.setFileNamePattern(Pattern.compile(fileName));
         final BeforeExecutionFileFilterSet set = new BeforeExecutionFileFilterSet();
         set.addBeforeExecutionFileFilter(filter);
 

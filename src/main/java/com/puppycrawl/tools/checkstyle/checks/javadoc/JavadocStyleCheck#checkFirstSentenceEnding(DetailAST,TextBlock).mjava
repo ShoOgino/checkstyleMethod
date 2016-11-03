@@ -12,7 +12,7 @@
         final String commentText = getCommentText(comment.getText());
 
         if (!commentText.isEmpty()
-            && !getEndOfSentencePattern().matcher(commentText).find()
+            && !endOfSentenceFormat.matcher(commentText).find()
             && !(commentText.startsWith("{@inheritDoc}")
             && JavadocTagInfo.INHERIT_DOC.isValidOn(ast))) {
             log(comment.getStartLineNo(), MSG_NO_PERIOD);

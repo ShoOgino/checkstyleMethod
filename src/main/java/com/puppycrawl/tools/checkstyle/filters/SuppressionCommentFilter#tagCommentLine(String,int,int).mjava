@@ -6,12 +6,12 @@
      * @param column the column number of text.
      */
     private void tagCommentLine(String text, int line, int column) {
-        final Matcher offMatcher = offRegexp.matcher(text);
+        final Matcher offMatcher = offCommentFormat.matcher(text);
         if (offMatcher.find()) {
             addTag(offMatcher.group(0), line, column, false);
         }
         else {
-            final Matcher onMatcher = onRegexp.matcher(text);
+            final Matcher onMatcher = onCommentFormat.matcher(text);
             if (onMatcher.find()) {
                 addTag(onMatcher.group(0), line, column, true);
             }

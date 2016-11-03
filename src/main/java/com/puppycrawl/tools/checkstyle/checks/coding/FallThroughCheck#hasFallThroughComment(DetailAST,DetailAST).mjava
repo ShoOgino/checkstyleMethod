@@ -26,7 +26,7 @@
         //    /+ FALLTHRU +/}
         //
         final String linePart = lines[endLineNo - 1].substring(0, endColNo);
-        if (matchesComment(regExp, linePart, endLineNo)) {
+        if (matchesComment(reliefPattern, linePart, endLineNo)) {
             allThroughComment = true;
         }
         else {
@@ -44,7 +44,7 @@
             final int startLineNo = currentCase.getLineNo();
             for (int i = endLineNo - 2; i > startLineNo - 1; i--) {
                 if (!lines[i].trim().isEmpty()) {
-                    allThroughComment = matchesComment(regExp, lines[i], i + 1);
+                    allThroughComment = matchesComment(reliefPattern, lines[i], i + 1);
                     break;
                 }
             }

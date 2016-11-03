@@ -30,6 +30,16 @@
                     result = "{}";
                 }
             }
+            else if (clss == Pattern.class) {
+                if (value != null) {
+                    result = '"' + value.toString().replace("\n", "\\n").replace("\t", "\\t")
+                            .replace("\r", "\\r").replace("\f", "\\f") + '"';
+                }
+
+                if ("\"$^\"".equals(result)) {
+                    result += " (empty)";
+                }
+            }
 
             if (clss != String.class && clss != String[].class && result == null) {
                 result = "null";

@@ -20,27 +20,27 @@
             try {
                 if (reportingOn) {
                     format = CommonUtils.fillTemplateWithStringsByRegexp(
-                            filter.checkFormat, text, filter.onRegexp);
+                            filter.checkFormat, text, filter.onCommentFormat);
                     tagCheckRegexp = Pattern.compile(format);
                     if (filter.messageFormat == null) {
                         tagMessageRegexp = null;
                     }
                     else {
                         format = CommonUtils.fillTemplateWithStringsByRegexp(
-                                filter.messageFormat, text, filter.onRegexp);
+                                filter.messageFormat, text, filter.onCommentFormat);
                         tagMessageRegexp = Pattern.compile(format);
                     }
                 }
                 else {
                     format = CommonUtils.fillTemplateWithStringsByRegexp(
-                            filter.checkFormat, text, filter.offRegexp);
+                            filter.checkFormat, text, filter.offCommentFormat);
                     tagCheckRegexp = Pattern.compile(format);
                     if (filter.messageFormat == null) {
                         tagMessageRegexp = null;
                     }
                     else {
                         format = CommonUtils.fillTemplateWithStringsByRegexp(
-                                filter.messageFormat, text, filter.offRegexp);
+                                filter.messageFormat, text, filter.offCommentFormat);
                         tagMessageRegexp = Pattern.compile(format);
                     }
                 }

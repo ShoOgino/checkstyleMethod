@@ -2,7 +2,7 @@
     public void visitToken(DetailAST ast) {
         if (!isInIgnoreOccurrenceContext(ast)) {
             final String currentString = ast.getText();
-            if (pattern == null || !pattern.matcher(currentString).find()) {
+            if (ignoreStringsRegexp == null || !ignoreStringsRegexp.matcher(currentString).find()) {
                 List<StringInfo> hitList = stringMap.get(currentString);
                 if (hitList == null) {
                     hitList = new ArrayList<>();
