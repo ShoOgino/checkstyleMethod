@@ -4,10 +4,9 @@
      * @param tags tags from the Javadoc comment for the type definition.
      * @param tagName the required tag name.
      * @param formatPattern regexp for the tag value.
-     * @param format pattern for the tag value.
      */
     private void checkTag(int lineNo, List<JavadocTag> tags, String tagName,
-                          Pattern formatPattern, String format) {
+                          Pattern formatPattern) {
         if (formatPattern != null) {
             int tagCount = 0;
             final String tagPrefix = "@";
@@ -16,7 +15,7 @@
                 if (tag.getTagName().equals(tagName)) {
                     tagCount++;
                     if (!formatPattern.matcher(tag.getFirstArg()).find()) {
-                        log(lineNo, MSG_TAG_FORMAT, tagPrefix + tagName, format);
+                        log(lineNo, MSG_TAG_FORMAT, tagPrefix + tagName, formatPattern.pattern());
                     }
                 }
             }

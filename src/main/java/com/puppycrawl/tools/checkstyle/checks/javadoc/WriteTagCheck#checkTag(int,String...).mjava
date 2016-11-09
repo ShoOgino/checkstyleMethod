@@ -13,11 +13,11 @@
                     tagCount += 1;
                     final int contentStart = matcher.start(1);
                     final String content = commentValue.substring(contentStart);
-                    if (tagFormatRegExp == null || tagFormatRegExp.matcher(content).find()) {
+                    if (tagFormat == null || tagFormat.matcher(content).find()) {
                         logTag(lineNo + i - comment.length, tag, content);
                     }
                     else {
-                        log(lineNo + i - comment.length, MSG_TAG_FORMAT, tag, tagFormat);
+                        log(lineNo + i - comment.length, MSG_TAG_FORMAT, tag, tagFormat.pattern());
                     }
                 }
             }
