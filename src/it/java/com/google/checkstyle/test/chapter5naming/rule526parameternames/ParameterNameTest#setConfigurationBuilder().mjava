@@ -1,6 +1,15 @@
     @BeforeClass
     public static void setConfigurationBuilder() throws CheckstyleException {
-        checkConfig = getCheckConfig("ParameterName");
-        format = checkConfig.getAttribute("format");
+        final List<Configuration> configs = getCheckConfigs("ParameterName");
+
+        Assert.assertEquals(configs.size(), 2);
+
+        privConfig = configs.get(0);
+        Assert.assertEquals(privConfig.getAttribute("excludeScope"), "public");
+        privFormat = privConfig.getAttribute("format");
+
+        pubConfig = configs.get(1);
+        Assert.assertEquals(pubConfig.getAttribute("scope"), "public");
+        pubFormat = pubConfig.getAttribute("format");
     }
 

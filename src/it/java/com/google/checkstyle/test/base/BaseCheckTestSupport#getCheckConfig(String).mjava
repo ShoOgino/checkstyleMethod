@@ -6,21 +6,12 @@
      * @throws CheckstyleException if exception occurs during configuration loading.
      */
     protected static Configuration getCheckConfig(String checkName) throws CheckstyleException {
-        Configuration result = null;
-        for (Configuration currentConfig : getConfiguration().getChildren()) {
-            if ("TreeWalker".equals(currentConfig.getName())) {
-                for (Configuration checkConfig : currentConfig.getChildren()) {
-                    if (checkName.equals(checkConfig.getName())) {
-                        result = checkConfig;
-                        break;
-                    }
-                }
-            }
-            else if (checkName.equals(currentConfig.getName())) {
-                result = currentConfig;
-                break;
-            }
+        final List<Configuration> configs = getCheckConfigs(checkName);
+        if (configs.isEmpty()) {
+            return null;
         }
-        return result;
+        else {
+            return configs.get(0);
+        }
     }
 

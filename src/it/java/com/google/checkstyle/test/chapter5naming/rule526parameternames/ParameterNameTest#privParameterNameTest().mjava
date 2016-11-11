@@ -1,0 +1,21 @@
+    @Test
+    public void privParameterNameTest() throws Exception {
+
+        final String[] expected = {
+            "8:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "$arg1", privFormat),
+            "9:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "ar$g2", privFormat),
+            "10:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "arg3$", privFormat),
+            "11:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "a_rg4", privFormat),
+            "12:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "_arg5", privFormat),
+            "13:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "arg6_", privFormat),
+            "14:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "aArg7", privFormat),
+            "15:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "aArg8", privFormat),
+            "16:21: " + getCheckMessage(privConfig.getMessages(), MSG_KEY, "aar_g", privFormat),
+        };
+
+        final String filePath = getPath("InputParameterNameSimplePriv.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(privConfig, filePath, expected, warnList);
+    }
+
