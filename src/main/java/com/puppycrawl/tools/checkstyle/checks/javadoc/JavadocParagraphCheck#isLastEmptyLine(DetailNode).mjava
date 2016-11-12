@@ -7,7 +7,7 @@
         DetailNode nextNode = JavadocUtils.getNextSibling(newLine);
         while (nextNode != null && nextNode.getType() != JavadocTokenTypes.JAVADOC_TAG) {
             if (nextNode.getType() == JavadocTokenTypes.TEXT
-                    && nextNode.getChildren().length > 1
+                    && !nextNode.getText().trim().isEmpty()
                     || nextNode.getType() == JavadocTokenTypes.HTML_ELEMENT) {
                 return false;
             }

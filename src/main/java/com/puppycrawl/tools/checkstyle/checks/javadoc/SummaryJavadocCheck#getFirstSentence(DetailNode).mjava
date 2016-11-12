@@ -7,13 +7,15 @@
         final StringBuilder result = new StringBuilder();
         final String periodSuffix = PERIOD + ' ';
         for (DetailNode child : ast.getChildren()) {
+            final String text = child.getText();
+
             if (child.getType() != JavadocTokenTypes.JAVADOC_INLINE_TAG
-                && child.getText().contains(periodSuffix)) {
-                result.append(getCharsTillDot(child));
+                && text.contains(periodSuffix)) {
+                result.append(text.substring(0, text.indexOf(periodSuffix) + 1));
                 break;
             }
             else {
-                result.append(child.getText());
+                result.append(text);
             }
         }
         return result.toString();

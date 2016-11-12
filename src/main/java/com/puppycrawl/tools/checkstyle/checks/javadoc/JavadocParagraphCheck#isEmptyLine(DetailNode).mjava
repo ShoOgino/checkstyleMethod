@@ -10,7 +10,7 @@
             return false;
         }
         if (previousSibling.getType() == JavadocTokenTypes.TEXT
-                && previousSibling.getChildren().length == 1) {
+                && previousSibling.getText().trim().isEmpty()) {
             previousSibling = JavadocUtils.getPreviousSibling(previousSibling);
         }
         return previousSibling != null

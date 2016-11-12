@@ -7,7 +7,7 @@
         DetailNode previousNode = JavadocUtils.getPreviousSibling(paragraphTag);
         while (previousNode != null) {
             if (previousNode.getType() == JavadocTokenTypes.TEXT
-                    && previousNode.getChildren().length > 1
+                    && !previousNode.getText().trim().isEmpty()
                 || previousNode.getType() != JavadocTokenTypes.LEADING_ASTERISK
                     && previousNode.getType() != JavadocTokenTypes.NEWLINE
                     && previousNode.getType() != JavadocTokenTypes.TEXT) {
