@@ -1,0 +1,15 @@
+    /**
+     * Check if token is preceded by javadoc comment.
+     * @param token token for check.
+     * @return true, if token is preceded by javadoc comment.
+     */
+    private static boolean isPrecededByJavadoc(DetailAST token) {
+        boolean result = false;
+        final DetailAST previous = token.getPreviousSibling();
+        if (previous.getType() == TokenTypes.BLOCK_COMMENT_BEGIN
+                && JavadocUtils.isJavadocComment(previous)) {
+            result = true;
+        }
+        return result;
+    }
+

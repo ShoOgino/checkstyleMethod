@@ -8,8 +8,12 @@
         if (lastToken == null) {
             lastToken = token.getLastChild();
         }
+        DetailAST nextToken = token.getNextSibling();
+        if (isComment(nextToken)) {
+            nextToken = nextToken.getNextSibling();
+        }
         // Start of the next token
-        final int nextBegin = token.getNextSibling().getLineNo();
+        final int nextBegin = nextToken.getLineNo();
         // End of current token.
         final int currentEnd = lastToken.getLineNo();
         return hasEmptyLine(currentEnd + 1, nextBegin - 1);

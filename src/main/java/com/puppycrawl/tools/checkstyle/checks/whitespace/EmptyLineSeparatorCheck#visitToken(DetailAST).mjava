@@ -7,7 +7,10 @@
             processMultipleLinesInside(ast);
         }
 
-        final DetailAST nextToken = ast.getNextSibling();
+        DetailAST nextToken = ast.getNextSibling();
+        while (nextToken != null && isComment(nextToken)) {
+            nextToken = nextToken.getNextSibling();
+        }
         if (nextToken != null) {
             final int astType = ast.getType();
             switch (astType) {

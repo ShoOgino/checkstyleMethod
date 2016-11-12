@@ -1,0 +1,11 @@
+    @Test
+    public void testAllowSingleLineCommentPackage() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(EmptyLineSeparatorCheck.class);
+        final String[] expected = {
+            "3: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "package"),
+        };
+        verify(checkConfig,
+                getPath("package-info/test4/package-info.java"),
+                expected);
+    }
+
