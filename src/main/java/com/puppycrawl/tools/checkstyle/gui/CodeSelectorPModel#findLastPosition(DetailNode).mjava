@@ -1,0 +1,19 @@
+    /**
+     * Finds the last position of node without children.
+     * @param detailNode DetailNode node.
+     * @return Last position of node without children.
+     */
+    private int findLastPosition(final DetailNode detailNode) {
+        final int lastPosition;
+        if (detailNode.getChildren().length == 0) {
+            lastPosition = lines2position.get(detailNode.getLineNumber())
+                    + detailNode.getColumnNumber() + detailNode.getText().length();
+        }
+        else {
+            final DetailNode lastChild =
+                    detailNode.getChildren()[detailNode.getChildren().length - 1];
+            lastPosition = findLastPosition(lastChild);
+        }
+        return lastPosition;
+    }
+

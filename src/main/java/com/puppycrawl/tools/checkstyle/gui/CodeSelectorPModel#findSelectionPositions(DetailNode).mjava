@@ -1,0 +1,11 @@
+    /**
+     * Find start and end selection positions from DetailNode line and Column.
+     * @param detailNode DetailNode node for which selection finds
+     */
+    private void findSelectionPositions(DetailNode detailNode) {
+        selectionStart = lines2position.get(detailNode.getLineNumber())
+                            + detailNode.getColumnNumber();
+
+        selectionEnd = findLastPosition(detailNode);
+    }
+

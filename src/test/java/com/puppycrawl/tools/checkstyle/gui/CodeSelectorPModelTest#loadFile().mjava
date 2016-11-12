@@ -1,0 +1,9 @@
+    @Before
+    public void loadFile() throws CheckstyleException {
+        model = new MainFrameModel();
+        model.setParseMode(ParseMode.JAVA_WITH_JAVADOC_AND_COMMENTS);
+        model.openFile(new File(getPath("InputJavadocAttributesAndMethods.java")));
+        tree = ((DetailAST) model.getParseTreeTableModel().getRoot()).getFirstChild();
+        linesToPosition = convertLinesToPosition(model.getLinesToPosition());
+    }
+

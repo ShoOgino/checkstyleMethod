@@ -1,0 +1,17 @@
+    /**
+     * Constructor.
+     * @param node ast node.
+     * @param editor text area editor.
+     * @param lines2position list to map lines.
+     */
+    public CodeSelector(final Object node, final JTextArea editor,
+                        final List<Integer> lines2position) {
+        this.editor = editor;
+        if (node instanceof DetailAST) {
+            pModel = new CodeSelectorPModel((DetailAST) node, lines2position);
+        }
+        else {
+            pModel = new CodeSelectorPModel((DetailNode) node, lines2position);
+        }
+    }
+

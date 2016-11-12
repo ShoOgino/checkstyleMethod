@@ -2,14 +2,11 @@
      * Find start and end selection positions from AST line and Column.
      */
     public void findSelectionPositions() {
-        selectionStart = lines2position.get(ast.getLineNo()) + ast.getColumnNo();
-
-        if (ast.getChildCount() == 0
-                && TokenUtils.getTokenName(ast.getType()).equals(ast.getText())) {
-            selectionEnd = selectionStart;
+        if (node instanceof DetailAST) {
+            findSelectionPositions((DetailAST) node);
         }
         else {
-            selectionEnd = findLastPosition(ast);
+            findSelectionPositions((DetailNode) node);
         }
     }
 
