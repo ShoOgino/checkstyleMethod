@@ -1,0 +1,10 @@
+    /**
+     * Returns package text.
+     * @param ast PACKAGE_DEF ast node
+     * @return String that represents full package name
+     */
+    private static String getPackageText(DetailAST ast) {
+        final DetailAST nameAST = ast.getLastChild().getPreviousSibling();
+        return FullIdent.createFullIdent(nameAST).getText();
+    }
+

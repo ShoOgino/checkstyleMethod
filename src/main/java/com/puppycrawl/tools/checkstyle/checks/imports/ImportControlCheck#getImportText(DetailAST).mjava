@@ -1,0 +1,18 @@
+    /**
+     * Returns import text.
+     * @param ast ast node that represents import
+     * @return String that represents importing class
+     */
+    private static String getImportText(DetailAST ast) {
+        final FullIdent imp;
+        if (ast.getType() == TokenTypes.IMPORT) {
+            imp = FullIdent.createFullIdentBelow(ast);
+        }
+        else {
+            // know it is a static import
+            imp = FullIdent.createFullIdent(ast
+                    .getFirstChild().getNextSibling());
+        }
+        return imp.getText();
+    }
+
