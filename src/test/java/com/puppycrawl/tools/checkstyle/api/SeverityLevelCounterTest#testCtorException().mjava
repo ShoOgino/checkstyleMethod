@@ -1,5 +1,11 @@
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testCtorException() {
-        new SeverityLevelCounter(null);
+        try {
+            new SeverityLevelCounter(null);
+            fail("exception expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("'level' cannot be null", ex.getMessage());
+        }
     }
 

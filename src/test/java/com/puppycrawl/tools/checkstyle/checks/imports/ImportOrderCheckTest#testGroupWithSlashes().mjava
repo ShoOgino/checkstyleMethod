@@ -1,9 +1,18 @@
-    @Test(expected = CheckstyleException.class)
+    @Test
     public void testGroupWithSlashes() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(ImportOrderCheck.class);
         checkConfig.addAttribute("groups", "/^javax");
-        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
 
-        verify(checkConfig, getPath("InputImportOrder.java"), expected);
+        try {
+            final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+
+            verify(checkConfig, getPath("InputImportOrder.java"), expected);
+            fail("exception expected");
+        }
+        catch (CheckstyleException ex) {
+            assertTrue(ex.getMessage().startsWith(
+                    "cannot initialize module com.puppycrawl.tools.checkstyle.TreeWalker - "
+                            + "Cannot set property 'groups' to '/^javax' in module"));
+        }
     }
 

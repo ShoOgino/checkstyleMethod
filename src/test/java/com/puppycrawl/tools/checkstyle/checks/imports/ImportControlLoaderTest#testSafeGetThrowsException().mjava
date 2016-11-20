@@ -1,6 +1,6 @@
-    @Test(expected = InvocationTargetException.class)
+    @Test
     // UT uses Reflection to avoid removing null-validation from static method
-    public void testSafeGetThrowsException() throws InvocationTargetException {
+    public void testSafeGetThrowsException() throws Exception {
         final AttributesImpl attr = new AttributesImpl() {
             @Override
             public String getValue(int index) {
@@ -13,10 +13,11 @@
                 Attributes.class, String.class);
             privateMethod.setAccessible(true);
             privateMethod.invoke(null, attr, "you_cannot_find_me");
+            fail("exception expected");
         }
-        catch (IllegalAccessException | IllegalArgumentException
-                | NoSuchMethodException | SecurityException ex) {
-            throw new IllegalStateException(ex);
+        catch (InvocationTargetException ex) {
+            assertSame(SAXException.class, ex.getCause().getClass());
+            assertEquals("missing attribute you_cannot_find_me", ex.getCause().getMessage());
         }
     }
 

@@ -1,10 +1,16 @@
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testVisitTokenWithWrongTokenType() {
         final ExecutableStatementCountCheck checkObj =
             new ExecutableStatementCountCheck();
         final DetailAST ast = new DetailAST();
         ast.initialize(
             new CommonHiddenStreamToken(TokenTypes.ENUM, "ENUM"));
-        checkObj.visitToken(ast);
+        try {
+            checkObj.visitToken(ast);
+            fail("exception expected");
+        }
+        catch (IllegalStateException ex) {
+            assertEquals("ENUM[0x-1]", ex.getMessage());
+        }
     }
 

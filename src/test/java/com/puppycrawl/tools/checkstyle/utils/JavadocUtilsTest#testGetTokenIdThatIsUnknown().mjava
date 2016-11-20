@@ -1,5 +1,11 @@
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetTokenIdThatIsUnknown() {
-        JavadocUtils.getTokenId("");
+        try {
+            JavadocUtils.getTokenId("");
+            fail("exception expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("Unknown javadoc token name. Given name ", ex.getMessage());
+        }
     }
 

@@ -1,9 +1,15 @@
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testWrongToken() {
         final ClassDataAbstractionCouplingCheck classDataAbstractionCouplingCheckObj =
             new ClassDataAbstractionCouplingCheck();
         final DetailAST ast = new DetailAST();
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.CTOR_DEF, "ctor"));
-        classDataAbstractionCouplingCheckObj.visitToken(ast);
+        try {
+            classDataAbstractionCouplingCheckObj.visitToken(ast);
+            fail("exception expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("Unknown type: ctor[0x-1]", ex.getMessage());
+        }
     }
 

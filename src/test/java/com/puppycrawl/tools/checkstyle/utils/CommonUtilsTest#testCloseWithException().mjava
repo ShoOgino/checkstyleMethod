@@ -1,7 +1,13 @@
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testCloseWithException() {
-        CommonUtils.close(() -> {
-            throw new IOException("Test IOException");
-        });
+        try {
+            CommonUtils.close(() -> {
+                throw new IOException("Test IOException");
+            });
+            fail("exception expected");
+        }
+        catch (IllegalStateException ex) {
+            assertEquals("Cannot close the stream", ex.getMessage());
+        }
     }
 

@@ -1,11 +1,17 @@
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testMisc() {
         final Scope o = Scope.getInstance("public");
         assertNotNull(o);
         assertEquals("public", o.toString());
         assertEquals("public", o.getName());
 
-        // will fail
-        Scope.getInstance("unknown");
+        try {
+            Scope.getInstance("unknown");
+            fail("exception expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("No enum constant com.puppycrawl.tools.checkstyle.api.Scope.UNKNOWN",
+                    ex.getMessage());
+        }
     }
 

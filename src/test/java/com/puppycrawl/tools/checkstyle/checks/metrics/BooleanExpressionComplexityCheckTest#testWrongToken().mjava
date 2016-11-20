@@ -1,9 +1,15 @@
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testWrongToken() {
         final BooleanExpressionComplexityCheck booleanExpressionComplexityCheckObj =
             new BooleanExpressionComplexityCheck();
         final DetailAST ast = new DetailAST();
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.INTERFACE_DEF, "interface"));
-        booleanExpressionComplexityCheckObj.visitToken(ast);
+        try {
+            booleanExpressionComplexityCheckObj.visitToken(ast);
+            fail("exception expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("Unknown type: interface[0x-1]", ex.getMessage());
+        }
     }
 

@@ -1,8 +1,14 @@
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testWrongTokenType() {
         final GenericWhitespaceCheck genericWhitespaceCheckObj = new GenericWhitespaceCheck();
         final DetailAST ast = new DetailAST();
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.INTERFACE_DEF, "interface"));
-        genericWhitespaceCheckObj.visitToken(ast);
+        try {
+            genericWhitespaceCheckObj.visitToken(ast);
+            fail("exception expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("Unknown type interface[0x-1]", ex.getMessage());
+        }
     }
 

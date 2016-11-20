@@ -1,8 +1,12 @@
-    @Test(expected = CheckstyleException.class)
+    @Test
     public void testWrongFormatUri() throws Exception {
-        final ImportControl root =
-                ImportControlLoader.load(new URI("aaa://"
-                    + getPath("import-control_complete.xml")));
-        assertNotNull(root);
+        try {
+            ImportControlLoader.load(new URI("aaa://" + getPath("import-control_complete.xml")));
+            fail("exception expected");
+        }
+        catch (CheckstyleException ex) {
+            assertSame(MalformedURLException.class, ex.getCause().getClass());
+            assertEquals("unknown protocol: aaa", ex.getCause().getMessage());
+        }
     }
 

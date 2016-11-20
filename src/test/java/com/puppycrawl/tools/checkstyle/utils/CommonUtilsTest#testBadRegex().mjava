@@ -1,5 +1,11 @@
-    @Test(expected = ConversionException.class)
+    @Test
     public void testBadRegex() {
-        CommonUtils.createPattern("[");
+        try {
+            CommonUtils.createPattern("[");
+            fail("exception expected");
+        }
+        catch (ConversionException ex) {
+            assertEquals("Failed to initialise regular expression [", ex.getMessage());
+        }
     }
 
