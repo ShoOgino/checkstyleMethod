@@ -1,0 +1,16 @@
+    @Test
+    public void testResourceUnableToLoad() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        checkConfig.addAttribute("file", getResourcePath("import-control_unknown.xml"));
+
+        try {
+            final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+            verify(checkConfig, getPath("InputImportControl.java"), expected);
+            fail("Test should fail if exception was not thrown");
+        }
+        catch (final CheckstyleException ex) {
+            final String message = getInvocationTargetExceptionMessage(ex);
+            assertTrue(message.startsWith("Unable to load "));
+        }
+    }
+
