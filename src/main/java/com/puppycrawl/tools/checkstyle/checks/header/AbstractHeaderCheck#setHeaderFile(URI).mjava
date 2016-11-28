@@ -1,15 +1,15 @@
     /**
      * Set the header file to check against.
-     * @param fileName the file that contains the header to check against.
+     * @param uri the uri of the header to load.
      * @throws CheckstyleException if fileName is empty.
      */
-    public void setHeaderFile(String fileName) throws CheckstyleException {
-        if (CommonUtils.isBlank(fileName)) {
+    public void setHeaderFile(URI uri) throws CheckstyleException {
+        if (uri == null) {
             throw new CheckstyleException(
                 "property 'headerFile' is missing or invalid in module "
                     + getConfiguration().getName());
         }
 
-        headerFile = fileName;
+        headerFile = uri;
     }
 

@@ -10,8 +10,9 @@
             assertTrue(ex.getMessage()
                     .startsWith("cannot initialize module"
                             + " com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"
-                            + " - Unable to find: "));
-            assertTrue(ex.getMessage().endsWith("nonExisting.file"));
+                            + " - illegal value "));
+            assertTrue(ex.getCause().getCause().getCause().getMessage()
+                    .startsWith("Unable to find: "));
         }
     }
 

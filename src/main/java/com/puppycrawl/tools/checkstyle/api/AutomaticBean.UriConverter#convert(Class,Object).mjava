@@ -1,0 +1,18 @@
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        @Override
+        public Object convert(Class type, Object value) {
+            final String url = value.toString();
+            URI result = null;
+
+            if (!CommonUtils.isBlank(url)) {
+                try {
+                    result = CommonUtils.getUriByFilename(url);
+                }
+                catch (CheckstyleException ex) {
+                    throw new ConversionException(ex);
+                }
+            }
+
+            return result;
+        }
+

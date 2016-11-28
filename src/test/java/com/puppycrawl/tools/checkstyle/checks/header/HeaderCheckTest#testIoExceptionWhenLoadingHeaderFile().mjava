@@ -4,7 +4,7 @@
         PowerMockito.doThrow(new IOException("expected exception")).when(check, "loadHeader",
                 anyObject());
 
-        check.setHeaderFile(getPath("InputRegexpHeader1.java"));
+        check.setHeaderFile(CommonUtils.getUriByFilename(getPath("InputRegexpHeader1.java")));
 
         final Method loadHeaderFile = AbstractHeaderCheck.class.getDeclaredMethod("loadHeaderFile");
         loadHeaderFile.setAccessible(true);
@@ -14,8 +14,7 @@
         }
         catch (InvocationTargetException ex) {
             assertTrue(ex.getCause() instanceof CheckstyleException);
-            assertEquals("unable to load header file "
-                    + getPath("InputRegexpHeader1.java"), ex.getCause().getMessage());
+            assertTrue(ex.getCause().getMessage().startsWith("unable to load header file "));
         }
     }
 

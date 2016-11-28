@@ -1,0 +1,13 @@
+    /**
+     * Register custom types of JDK like URI and Checkstyle specific classes to use with BeanUtils.
+     * None of these types should be found in the {@code java.lang} package.
+     * @param cub
+     *            Instance of {@link ConvertUtilsBean} to register types with.
+     */
+    private static void registerCustomTypes(ConvertUtilsBean cub) {
+        cub.register(new PatternConverter(), Pattern.class);
+        cub.register(new ServerityLevelConverter(), SeverityLevel.class);
+        cub.register(new ScopeConverter(), Scope.class);
+        cub.register(new UriConverter(), URI.class);
+    }
+

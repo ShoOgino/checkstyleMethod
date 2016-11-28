@@ -7,8 +7,7 @@
      * @param exception Exception
      * @return String message of original exception
      */
-    private static String getInvocationTargetExceptionMessage(CheckstyleException exception) {
-        return ((InvocationTargetException) exception.getCause().getCause())
-            .getTargetException().getMessage();
+    private static String getCheckstyleExceptionMessage(CheckstyleException exception) {
+        return exception.getCause().getCause().getCause().getMessage();
     }
 
