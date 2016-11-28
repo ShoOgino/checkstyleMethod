@@ -1,3 +1,4 @@
+    /** @noinspection IfStatementWithTooManyBranches */
     private static String getCheckPropertyExpectedTypeName(Class<?> clss, Object instance,
             String propertyName) {
         final String instanceName = instance.getClass().getSimpleName();
@@ -31,6 +32,9 @@
         }
         else if (clss == SeverityLevel.class) {
             result = "Severity";
+        }
+        else if (clss == Scope.class) {
+            result = "Scope";
         }
         else if (clss != String.class) {
             Assert.fail("Unknown property type: " + clss.getSimpleName());
