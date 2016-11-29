@@ -5,27 +5,16 @@
      * @throws CheckstyleException if error while loading occurs.
      */
     private static byte[] loadExternalResource(String location) throws CheckstyleException {
-        byte[] content = null;
+        final byte[] content;
         final URI uri = CommonUtils.getUriByFilename(location);
-        InputStream resourceReader = null;
+
         try {
-            resourceReader = new BufferedInputStream(uri.toURL().openStream());
-            final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            final byte[] data = new byte[BUFFER_SIZE];
-            int bytesRead = resourceReader.read(data, 0, data.length);
-            while (bytesRead != -1) {
-                outputStream.write(data, 0, bytesRead);
-                bytesRead = resourceReader.read(data, 0, data.length);
-            }
-            outputStream.flush();
-            content = outputStream.toByteArray();
+            content = ByteStreams.toByteArray(new BufferedInputStream(uri.toURL().openStream()));
         }
         catch (IOException ex) {
             throw new CheckstyleException("Unable to load external resource file " + location, ex);
         }
-        finally {
-            Closeables.closeQuietly(resourceReader);
-        }
+
         return content;
     }
 
