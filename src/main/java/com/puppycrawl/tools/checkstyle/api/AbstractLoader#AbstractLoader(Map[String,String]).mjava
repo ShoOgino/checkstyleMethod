@@ -8,6 +8,8 @@
             throws SAXException, ParserConfigurationException {
         this.publicIdToResourceNameMap = new HashMap<>(publicIdToResourceNameMap);
         final SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setFeature(LOAD_EXTERNAL_DTD, true);
+        factory.setFeature(EXTERNAL_GENERAL_ENTITIES, true);
         factory.setValidating(true);
         factory.setNamespaceAware(true);
         parser = factory.newSAXParser().getXMLReader();
