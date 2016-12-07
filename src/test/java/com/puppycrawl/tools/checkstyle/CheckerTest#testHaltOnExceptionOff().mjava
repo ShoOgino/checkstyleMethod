@@ -1,0 +1,26 @@
+    @Test
+    public void testHaltOnExceptionOff() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(CheckWhichThrowsError.class);
+
+        final DefaultConfiguration treeWalkerConfig = createCheckConfig(TreeWalker.class);
+        treeWalkerConfig.addChild(checkConfig);
+
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyleConfig");
+        checkerConfig.addChild(treeWalkerConfig);
+
+        checkerConfig.addAttribute("haltOnException", "false");
+
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(checkerConfig);
+        checker.addListener(new BriefUtLogger(stream));
+
+        final String filePath = getPath("InputMain.java");
+        final String[] expected = {
+            "0: Got an exception - java.lang.IndexOutOfBoundsException: test",
+        };
+
+        verify(checker, filePath, filePath, expected);
+    }
+
