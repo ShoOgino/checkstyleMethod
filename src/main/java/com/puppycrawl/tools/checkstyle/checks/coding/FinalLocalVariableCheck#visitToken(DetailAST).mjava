@@ -20,7 +20,8 @@
                 if (!isInLambda(ast)
                         && !ast.branchContains(TokenTypes.FINAL)
                         && !isInAbstractOrNativeMethod(ast)
-                        && !ScopeUtils.isInInterfaceBlock(ast)) {
+                        && !ScopeUtils.isInInterfaceBlock(ast)
+                        && !isMultipleTypeCatch(ast)) {
                     insertParameter(ast);
                 }
                 break;
