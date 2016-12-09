@@ -1,11 +1,11 @@
     @Test
     public void testColumnMethods() {
         final ParseTreeTablePModel parseTree = new ParseTreeTablePModel(null);
-        Assert.assertEquals(ParseTreeTableModel.class, parseTree.getColumnClass(0));
-        Assert.assertEquals(String.class, parseTree.getColumnClass(1));
-        Assert.assertEquals(Integer.class, parseTree.getColumnClass(2));
-        Assert.assertEquals(Integer.class, parseTree.getColumnClass(3));
-        Assert.assertEquals(String.class, parseTree.getColumnClass(4));
+        Assert.assertSame(ParseTreeTableModel.class, parseTree.getColumnClass(0));
+        Assert.assertSame(String.class, parseTree.getColumnClass(1));
+        Assert.assertSame(Integer.class, parseTree.getColumnClass(2));
+        Assert.assertSame(Integer.class, parseTree.getColumnClass(3));
+        Assert.assertSame(String.class, parseTree.getColumnClass(4));
 
         try {
             parseTree.getColumnClass(parseTree.getColumnCount());
