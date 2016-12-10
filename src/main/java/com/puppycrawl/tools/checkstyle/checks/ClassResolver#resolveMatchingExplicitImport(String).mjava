@@ -1,0 +1,23 @@
+    /**
+     * Try to find class by matching explicit Import.
+     * @param name class name
+     * @return class object
+     */
+    private Class<?> resolveMatchingExplicitImport(String name) {
+        Class<?> clazz = null;
+        for (String imp : imports) {
+            // Very important to add the "." in the check below. Otherwise you
+            // when checking for "DataException", it will match on
+            // "SecurityDataException". This has been the cause of a very
+            // difficult bug to resolve!
+            if (imp.endsWith(PERIOD + name)) {
+                clazz = resolveQualifiedName(imp);
+                if (clazz != null) {
+                    break;
+                }
+
+            }
+        }
+        return clazz;
+    }
+

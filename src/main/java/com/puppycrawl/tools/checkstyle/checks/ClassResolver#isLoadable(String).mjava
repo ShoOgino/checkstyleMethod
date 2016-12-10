@@ -3,12 +3,14 @@
      * @return whether a specified class is loadable with safeLoad().
      */
     public boolean isLoadable(String name) {
+        boolean result = false;
         try {
             safeLoad(name);
-            return true;
+            result = true;
         }
         catch (final ClassNotFoundException | NoClassDefFoundError ignored) {
-            return false;
+            result = false;
         }
+        return result;
     }
 

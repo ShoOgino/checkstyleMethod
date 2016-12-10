@@ -10,51 +10,35 @@
      * @return the resolved class
      * @throws ClassNotFoundException if unable to resolve the class
      */
-    // -@cs[ForbidWildcardAsReturnType] The class is deprecated and will be removed soon.
+    // -@cs[ForbidWildcardAsReturnType] This method can return any type, so no way to avoid wildcard
     public Class<?> resolve(String name, String currentClass)
             throws ClassNotFoundException {
         // See if the class is full qualified
         Class<?> clazz = resolveQualifiedName(name);
-        if (clazz != null) {
-            return clazz;
-        }
+        if (clazz == null) {
+            // try matching explicit imports
+            clazz = resolveMatchingExplicitImport(name);
 
-        // try matching explicit imports
-        for (String imp : imports) {
-            // Very important to add the "." in the check below. Otherwise you
-            // when checking for "DataException", it will match on
-            // "SecurityDataException". This has been the cause of a very
-            // difficult bug to resolve!
-            if (imp.endsWith(PERIOD + name)) {
-                clazz = resolveQualifiedName(imp);
-                if (clazz != null) {
-                    return clazz;
+            if (clazz == null) {
+                // See if in the package
+                clazz = resolveInPackage(name);
+
+                if (clazz == null) {
+                    // see if inner class of this class
+                    clazz = resolveInnerClass(name, currentClass);
+
+                    if (clazz == null) {
+                        clazz = resolveByStarImports(name);
+                        // -@cs[NestedIfDepth] it is better to have single return point from method
+                        if (clazz == null) {
+                            // Giving up, the type is unknown, so load the class to generate an
+                            // exception
+                            clazz = safeLoad(name);
+                        }
+                    }
                 }
-
             }
         }
-
-        // See if in the package
-        if (pkg != null && !pkg.isEmpty()) {
-            final Class<?> classFromQualifiedName = resolveQualifiedName(pkg + PERIOD + name);
-            if (classFromQualifiedName != null) {
-                return classFromQualifiedName;
-            }
-        }
-
-        // see if inner class of this class
-        final Class<?> innerClass = resolveInnerClass(name, currentClass);
-        if (innerClass != null) {
-            return innerClass;
-        }
-
-        final Class<?> classFromStarImport = resolveByStarImports(name);
-        if (classFromStarImport != null) {
-            return classFromStarImport;
-        }
-
-        // Giving up, the type is unknown, so load the class to generate an
-        // exception
-        return safeLoad(name);
+        return clazz;
     }
 

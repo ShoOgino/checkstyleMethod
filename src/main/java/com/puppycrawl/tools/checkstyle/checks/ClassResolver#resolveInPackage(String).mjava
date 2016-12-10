@@ -1,0 +1,16 @@
+    /**
+     * Try to find class by search in package.
+     * @param name class name
+     * @return class object
+     */
+    private Class<?> resolveInPackage(String name) {
+        Class<?> clazz = null;
+        if (pkg != null && !pkg.isEmpty()) {
+            final Class<?> classFromQualifiedName = resolveQualifiedName(pkg + PERIOD + name);
+            if (classFromQualifiedName != null) {
+                clazz = classFromQualifiedName;
+            }
+        }
+        return clazz;
+    }
+
