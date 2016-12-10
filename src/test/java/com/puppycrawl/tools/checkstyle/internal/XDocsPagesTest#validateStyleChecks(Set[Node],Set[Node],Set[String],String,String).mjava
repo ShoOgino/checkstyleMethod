@@ -1,5 +1,5 @@
-    private static void validateStyleChecks(Set<Node> checks, Set<Node> configs, String fileName,
-            String ruleName) {
+    private static void validateStyleChecks(Set<Node> checks, Set<Node> configs,
+            Set<String> styleChecks, String fileName, String ruleName) {
         final Iterator<Node> itrChecks = checks.iterator();
         final Iterator<Node> itrConfigs = configs.iterator();
 
@@ -14,6 +14,8 @@
 
             Assert.assertTrue(fileName + " rule '" + ruleName + "' check '" + checkName
                     + "' shouldn't end with 'Check'", !checkName.endsWith("Check"));
+
+            styleChecks.remove(checkName);
 
             for (String configName : new String[] {"config", "test"}) {
                 Node config = null;
