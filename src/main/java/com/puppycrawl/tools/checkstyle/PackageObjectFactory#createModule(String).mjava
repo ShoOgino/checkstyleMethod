@@ -10,9 +10,12 @@
      */
     @Override
     public Object createModule(String name) throws CheckstyleException {
-        Object instance = createObjectWithIgnoringProblems(name, getAllPossibleNames(name));
+        Object instance = createObjectFromMap(name);
         if (instance == null) {
-            final String nameCheck = name + "Check";
+            instance = createObjectWithIgnoringProblems(name, getAllPossibleNames(name));
+        }
+        if (instance == null) {
+            final String nameCheck = name + CHECK_SUFFIX;
             instance = createObjectWithIgnoringProblems(nameCheck, getAllPossibleNames(nameCheck));
             if (instance == null) {
 

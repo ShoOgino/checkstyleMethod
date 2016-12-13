@@ -1,0 +1,20 @@
+    /**
+     * Create object with the help of Checkstyle NAME_TO_FULL_MODULE_NAME map.
+     * @param name name of module.
+     * @return instance of module if it is found in modules map.
+     */
+    private Object createObjectFromMap(String name) {
+        final String fullModuleName = NAME_TO_FULL_MODULE_NAME.get(name);
+        Object instance = null;
+        if (fullModuleName == null) {
+            final String fullCheckModuleName = NAME_TO_FULL_MODULE_NAME.get(name + CHECK_SUFFIX);
+            if (fullCheckModuleName != null) {
+                instance = createObject(fullCheckModuleName);
+            }
+        }
+        else {
+            instance = createObject(fullModuleName);
+        }
+        return instance;
+    }
+

@@ -11,8 +11,8 @@
             declaredConstructor.setAccessible(true);
             instance = declaredConstructor.newInstance();
         }
-        catch (final ReflectiveOperationException | NoClassDefFoundError exception) {
-            LOG.debug(IGNORING_EXCEPTION_MESSAGE, exception);
+        catch (final ReflectiveOperationException | NoClassDefFoundError ignored) {
+            // keep looking, ignoring exception
         }
         return instance;
     }
