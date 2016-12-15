@@ -1,0 +1,15 @@
+    @Test
+    public void testExceptioForNonExistingAttribute() {
+        final String name = "MyConfig";
+        final DefaultConfiguration config = new DefaultConfiguration(name);
+        final String attributeName = "NonExisting#$%";
+        try {
+            config.getAttribute(attributeName);
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException expected) {
+            assertEquals("missing key '" + attributeName + "' in " + name,
+                    expected.getMessage());
+        }
+    }
+

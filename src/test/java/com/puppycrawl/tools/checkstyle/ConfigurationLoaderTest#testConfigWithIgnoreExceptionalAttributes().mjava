@@ -1,0 +1,34 @@
+    /**
+     * This SuppressWarning("unchecked") required to suppress
+     * "Unchecked generics array creation for varargs parameter" during mock
+     * @throws Exception could happen from PowerMokito calls and getAttribute
+     */
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testConfigWithIgnoreExceptionalAttributes() throws Exception {
+
+        // emulate exception from unrelated code, but that is same try-catch
+        final DefaultConfiguration tested = PowerMockito.mock(DefaultConfiguration.class);
+        when(tested.getAttributeNames()).thenReturn(new String[] {"severity"});
+        when(tested.getName()).thenReturn("MemberName");
+        when(tested.getAttribute("severity")).thenThrow(CheckstyleException.class);
+        // to void creation of 2 other mocks for now reason, only one moc is used for all cases
+        PowerMockito.whenNew(DefaultConfiguration.class)
+                .withArguments("MemberName").thenReturn(tested);
+        PowerMockito.whenNew(DefaultConfiguration.class)
+                .withArguments("Checker").thenReturn(tested);
+        PowerMockito.whenNew(DefaultConfiguration.class)
+                .withArguments("TreeWalker").thenReturn(tested);
+
+        try {
+            ConfigurationLoader.loadConfiguration(
+                    getConfigPath("config_with_ignore.xml"),
+                    new PropertiesExpander(new Properties()), true);
+            fail("Exception is expected");
+        }
+        catch (CheckstyleException expected) {
+            assertEquals("Problem during accessing 'severity' attribute for MemberName",
+                    expected.getCause().getMessage());
+        }
+    }
+

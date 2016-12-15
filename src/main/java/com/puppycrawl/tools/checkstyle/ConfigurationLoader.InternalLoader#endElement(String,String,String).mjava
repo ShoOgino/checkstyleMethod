@@ -1,21 +1,24 @@
         @Override
         public void endElement(String uri,
                                String localName,
-                               String qName) {
+                               String qName) throws SAXException {
             if (qName.equals(MODULE)) {
 
                 final Configuration recentModule =
                     configStack.pop();
 
-                // remove modules with severity ignore if these modules should
-                // be omitted
+                // get severity attribute if it exists
                 SeverityLevel level = null;
-                try {
-                    final String severity = recentModule.getAttribute(SEVERITY);
-                    level = SeverityLevel.getInstance(severity);
-                }
-                catch (final CheckstyleException ex) {
-                    LOG.debug("Severity not set, ignoring exception", ex);
+                if (containsAttribute(recentModule, SEVERITY)) {
+                    try {
+                        final String severity = recentModule.getAttribute(SEVERITY);
+                        level = SeverityLevel.getInstance(severity);
+                    }
+                    catch (final CheckstyleException ex) {
+                        throw new SAXException(
+                                "Problem during accessing '" + SEVERITY + "' attribute for "
+                                        + recentModule.getName(), ex);
+                    }
                 }
 
                 // omit this module if these should be omitted and the module
