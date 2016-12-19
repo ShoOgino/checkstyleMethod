@@ -6,7 +6,9 @@
         checkConfig.addAttribute("separateLineBetweenGroups", "true");
         checkConfig.addAttribute("customImportOrderRules",
                 "SAME_PACKAGE(3)###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE###STATIC");
-        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        final String[] expected = {
+            "4: " + getCheckMessage(MSG_LINE_SEPARATOR, "org.junit.*"),
+        };
 
         verify(checkConfig, getPath("InputCustomImportOrderThirdPartyPackage.java"), expected);
     }

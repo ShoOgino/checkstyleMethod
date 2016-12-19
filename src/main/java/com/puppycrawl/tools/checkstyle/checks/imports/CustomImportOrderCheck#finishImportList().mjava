@@ -10,6 +10,9 @@
             final String importGroup = importObject.getImportGroup();
             final String fullImportIdent = importObject.getImportFullPath();
 
+            if (getCountOfEmptyLinesBefore(importObject.getLineNumber()) > 1) {
+                log(importObject.getLineNumber(), MSG_LINE_SEPARATOR, fullImportIdent);
+            }
             if (importGroup.equals(currentGroup)) {
                 if (sortImportsInGroupAlphabetically
                         && previousImportFromCurrentGroup != null
@@ -27,7 +30,7 @@
                     final String nextGroup = getNextImportGroup(currentGroupNumber + 1);
                     if (importGroup.equals(nextGroup)) {
                         if (separateLineBetweenGroups
-                                && !hasEmptyLineBefore(importObject.getLineNumber())) {
+                                && getCountOfEmptyLinesBefore(importObject.getLineNumber()) == 0) {
                             log(importObject.getLineNumber(), MSG_LINE_SEPARATOR, fullImportIdent);
                         }
                         currentGroup = nextGroup;
