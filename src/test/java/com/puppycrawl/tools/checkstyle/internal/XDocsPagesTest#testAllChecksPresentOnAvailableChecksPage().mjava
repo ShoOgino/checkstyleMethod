@@ -4,7 +4,7 @@
         Files.walk(JAVA_SOURCES_DIRECTORY).forEach(filePath -> {
             final String fileName = filePath.getFileName().toString();
             if (fileName.matches(CHECK_FILE_NAME)
-                    && !CHECKS_ON_PAGE_IGNORE_LIST.contains(fileName)) {
+                    && !MODULES_ON_PAGE_IGNORE_LIST.contains(fileName)) {
                 final String checkName = fileName.replace(CHECK_SUFFIX, "");
                 if (!isPresent(availableChecks, checkName)) {
                     Assert.fail(checkName + " is not correctly listed on Available Checks page"

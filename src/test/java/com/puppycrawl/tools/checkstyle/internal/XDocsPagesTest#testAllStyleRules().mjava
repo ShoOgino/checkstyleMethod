@@ -8,7 +8,7 @@
             Set<String> styleChecks = null;
 
             if (path.toFile().getName().contains("google")) {
-                styleChecks = new HashSet<>(GOOGLE_CHECKS);
+                styleChecks = new HashSet<>(GOOGLE_MODULES);
             }
             else if (path.toFile().getName().contains("sun")) {
                 styleChecks = new HashSet<>();
@@ -40,12 +40,16 @@
                             fileName, ruleName);
                 }
 
-                validateStyleChecks(XmlUtil.findChildElementsByTag(columns.get(2), "a"),
+                validateStyleModules(XmlUtil.findChildElementsByTag(columns.get(2), "a"),
                         XmlUtil.findChildElementsByTag(columns.get(3), "a"), styleChecks, fileName,
                         ruleName);
 
                 lastRuleName = ruleName;
             }
+
+            // these modules aren't documented, but are added to the config
+            styleChecks.remove("TreeWalker");
+            styleChecks.remove("Checker");
 
             Assert.assertTrue(fileName + " requires the following check(s) to appear: "
                     + styleChecks, styleChecks.isEmpty());

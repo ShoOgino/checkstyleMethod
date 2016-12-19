@@ -1,0 +1,13 @@
+    /**
+     * Checks whether a class extends 'AutomaticBean', is non-abstract, and doesn't start with the
+     * word 'Input' (are not input files for UTs).
+     * @param loadedClass class to check.
+     * @param className class name to check.
+     * @return true if a class may be considered a valid production class.
+     */
+    public static boolean isValidCheckstyleClass(Class<?> loadedClass, String className) {
+        return AutomaticBean.class.isAssignableFrom(loadedClass)
+                && !Modifier.isAbstract(loadedClass.getModifiers())
+                && !className.contains("Input");
+    }
+

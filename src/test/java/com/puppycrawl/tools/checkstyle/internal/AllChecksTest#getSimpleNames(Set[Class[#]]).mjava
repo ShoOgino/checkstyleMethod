@@ -1,10 +1,18 @@
     /**
-     * Removes 'Check' suffix from each class name in the set.
+     * Retrieves a list of class names, removing 'Check' from the end if the class is
+     * a checkstyle check.
      * @param checks class instances.
      * @return a set of simple names.
      */
     private static Set<String> getSimpleNames(Set<Class<?>> checks) {
-        return checks.stream().map(check -> check.getSimpleName().replace("Check", ""))
-            .collect(Collectors.toSet());
+        return checks.stream().map(check -> {
+            String name = check.getSimpleName();
+
+            if (name.endsWith("Check")) {
+                name = name.substring(0, name.length() - 5);
+            }
+
+            return name;
+        }).collect(Collectors.toSet());
     }
 

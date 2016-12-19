@@ -29,7 +29,7 @@
 
                 Assert.assertTrue(fileName + " section '" + sectionName
                         + "' should be in google_checks.xml or not reference 'Google Style'",
-                        GOOGLE_CHECKS.contains(sectionName));
+                        GOOGLE_MODULES.contains(sectionName));
             }
             else if ("Sun Style".equals(linkText)) {
                 hasSun = true;
@@ -40,7 +40,7 @@
 
                 Assert.assertTrue(fileName + " section '" + sectionName
                         + "' should be in sun_checks.xml or not reference 'Sun Style'",
-                        SUN_CHECKS.contains(sectionName));
+                        SUN_MODULES.contains(sectionName));
             }
 
             Assert.assertEquals(fileName + " section '" + sectionName
@@ -51,9 +51,9 @@
                 + "' should have a checkstyle section", hasCheckstyle);
         Assert.assertTrue(fileName + " section '" + sectionName
                 + "' should have a google section since it is in it's config", hasGoogle
-                || !GOOGLE_CHECKS.contains(sectionName));
+                || !GOOGLE_MODULES.contains(sectionName));
         Assert.assertTrue(fileName + " section '" + sectionName
                 + "' should have a sun section since it is in it's config",
-                hasSun || !SUN_CHECKS.contains(sectionName));
+                hasSun || !SUN_MODULES.contains(sectionName));
     }
 

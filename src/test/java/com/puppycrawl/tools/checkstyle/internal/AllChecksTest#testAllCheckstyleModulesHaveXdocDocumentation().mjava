@@ -3,6 +3,10 @@
         final Set<String> checkstyleModulesNames = getSimpleNames(CheckUtil.getCheckstyleModules());
         final Set<String> modulesNamesWhichHaveXdocs = XDocUtil.getModulesNamesWhichHaveXdoc();
 
+        // these are documented on non-'config_' pages
+        checkstyleModulesNames.remove("TreeWalker");
+        checkstyleModulesNames.remove("Checker");
+
         checkstyleModulesNames.stream()
             .filter(moduleName -> !modulesNamesWhichHaveXdocs.contains(moduleName))
             .forEach(moduleName -> {

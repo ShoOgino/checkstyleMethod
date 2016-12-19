@@ -5,7 +5,7 @@
      *            file path of checkstyle_checks.xml.
      * @return names of checkstyle's checks which are referenced in checkstyle_checks.xml.
      */
-    private static Set<String> getCheckStyleChecksReferencedInConfig(String configFilePath) {
+    private static Set<String> getCheckStyleModulesReferencedInConfig(String configFilePath) {
         try {
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
@@ -37,9 +37,7 @@
                 if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
                     final Element module = (Element) currentNode;
                     final String checkName = module.getAttribute("name");
-                    if (!"Checker".equals(checkName) && !"TreeWalker".equals(checkName)) {
-                        checksReferencedInCheckstyleChecksXml.add(checkName);
-                    }
+                    checksReferencedInCheckstyleChecksXml.add(checkName);
                 }
             }
             return checksReferencedInCheckstyleChecksXml;

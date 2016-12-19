@@ -1,10 +1,8 @@
     /**
-     * Gets the checkstyle's modules.
-     * Checkstyle's modules are nonabstract classes from com.puppycrawl.tools.checkstyle package
-     * which names end with 'Check', do not contain the word 'Input' (are not input files for UTs),
-     * checkstyle's filters and SuppressWarningsHolder class.
-     * @return a set of checkstyle's modules names.
+     * Gets all checkstyle's modules.
+     * @return the set of checkstyle's module classes.
      * @throws IOException if the attempt to read class path resources failed.
+     * @see #isCheckstyleModule(Class)
      */
     public static Set<Class<?>> getCheckstyleModules() throws IOException {
         final Set<Class<?>> checkstyleModules = new HashSet<>();
