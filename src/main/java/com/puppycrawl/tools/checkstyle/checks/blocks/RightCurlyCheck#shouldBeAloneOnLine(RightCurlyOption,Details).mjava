@@ -5,13 +5,18 @@
      * @return true if a right curly should be alone on a line.
      */
     private static boolean shouldBeAloneOnLine(RightCurlyOption bracePolicy, Details details) {
+        final int tokenLambda = details.lcurly.getParent().getType();
         return bracePolicy == RightCurlyOption.ALONE
+                && tokenLambda != TokenTypes.LAMBDA
                 && !isAloneOnLine(details)
                 && !isEmptyBody(details.lcurly)
                 || bracePolicy == RightCurlyOption.ALONE_OR_SINGLELINE
                 && !isAloneOnLine(details)
                 && !isSingleLineBlock(details)
                 && !isAnonInnerClassInit(details.lcurly)
-                && !isEmptyBody(details.lcurly);
+                && !isEmptyBody(details.lcurly)
+                || bracePolicy == RightCurlyOption.ALONE
+                && tokenLambda == TokenTypes.LAMBDA
+                && !isAloneLambda(details);
     }
 

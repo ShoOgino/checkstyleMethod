@@ -10,14 +10,11 @@
     private static String validate(Details details, RightCurlyOption bracePolicy,
                                    boolean shouldStartLine, String targetSourceLine) {
         final DetailAST rcurly = details.rcurly;
-        final DetailAST lcurly = details.lcurly;
         final DetailAST nextToken = details.nextToken;
         final boolean shouldCheckLastRcurly = details.shouldCheckLastRcurly;
         String violation = "";
 
-        if (bracePolicy == RightCurlyOption.SAME
-                && !hasLineBreakBefore(rcurly)
-                && lcurly.getLineNo() != rcurly.getLineNo()) {
+        if (shouldHaveBeLineBreakBefore(bracePolicy, details)) {
             violation = MSG_KEY_LINE_BREAK_BEFORE;
         }
         else if (shouldCheckLastRcurly) {
