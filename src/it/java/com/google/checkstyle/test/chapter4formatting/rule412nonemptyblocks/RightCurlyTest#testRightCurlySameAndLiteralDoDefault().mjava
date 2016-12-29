@@ -1,14 +1,14 @@
     @Test
-    public void testRightCurlySameAndLiteralDo() throws Exception {
-        final DefaultConfiguration checkConfig = createCheckConfig(RightCurlyCheck.class);
-        checkConfig.addAttribute("option", RightCurlyOption.SAME.toString());
-        checkConfig.addAttribute("tokens", "LITERAL_DO");
+    public void testRightCurlySameAndLiteralDoDefault() throws Exception {
         final String[] expected = {
             "62:9: " + getCheckMessage(RightCurlyCheck.class, MSG_KEY_LINE_SAME, "}", 9),
             "67:13: " + getCheckMessage(RightCurlyCheck.class, MSG_KEY_LINE_SAME, "}", 13),
             "83:9: " + getCheckMessage(RightCurlyCheck.class, MSG_KEY_LINE_SAME, "}", 9),
         };
+
+        final Configuration checkConfig = getCheckConfig("RightCurly", "RightCurlyDefault");
         final String filePath = getPath("InputRightCurlyDoWhile.java");
+
         final Integer[] warnList = getLinesWithWarn(filePath);
         verify(checkConfig, filePath, expected, warnList);
     }
