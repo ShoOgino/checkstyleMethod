@@ -13,8 +13,7 @@
             "41: " + msg,
         };
 
-        final DefaultConfiguration checkConfig = createCheckConfig(SingleLineJavadocCheck.class);
-        checkConfig.addAttribute("ignoreInlineTags", "false");
+        final Configuration checkConfig = getCheckConfig("SingleLineJavadoc");
         final String filePath = getPath("InputSingleLineJavadocCheck.java");
 
         final Integer[] warnList = getLinesWithWarn(filePath);
