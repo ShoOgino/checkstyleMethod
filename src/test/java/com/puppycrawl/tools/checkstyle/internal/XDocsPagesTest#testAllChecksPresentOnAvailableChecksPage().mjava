@@ -1,16 +1,13 @@
     @Test
-    public void testAllChecksPresentOnAvailableChecksPage() throws IOException {
+    public void testAllChecksPresentOnAvailableChecksPage() throws Exception {
         final String availableChecks = new String(Files.readAllBytes(AVAILABLE_CHECKS_PATH), UTF_8);
-        Files.walk(JAVA_SOURCES_DIRECTORY).forEach(filePath -> {
-            final String fileName = filePath.getFileName().toString();
-            if (fileName.matches(CHECK_FILE_NAME)
-                    && !MODULES_ON_PAGE_IGNORE_LIST.contains(fileName)) {
-                final String checkName = fileName.replace(CHECK_SUFFIX, "");
+
+        CheckUtil.getSimpleNames(CheckUtil.getCheckstyleChecks())
+            .forEach(checkName -> {
                 if (!isPresent(availableChecks, checkName)) {
                     Assert.fail(checkName + " is not correctly listed on Available Checks page"
                         + " - add it to " + AVAILABLE_CHECKS_PATH);
                 }
-            }
-        });
+            });
     }
 

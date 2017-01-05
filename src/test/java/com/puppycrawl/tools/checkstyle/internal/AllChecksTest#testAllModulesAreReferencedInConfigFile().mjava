@@ -1,7 +1,7 @@
     @Test
     public void testAllModulesAreReferencedInConfigFile() throws Exception {
         final Set<String> modulesReferencedInConfig = CheckUtil.getConfigCheckStyleModules();
-        final Set<String> moduleNames = getSimpleNames(CheckUtil.getCheckstyleModules());
+        final Set<String> moduleNames = CheckUtil.getSimpleNames(CheckUtil.getCheckstyleModules());
 
         moduleNames.stream().filter(check -> !modulesReferencedInConfig.contains(check))
             .forEach(check -> {
