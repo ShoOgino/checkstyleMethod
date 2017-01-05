@@ -1,0 +1,15 @@
+    /**
+     * Adjust first line nodes to javadoc indent.
+     * @param tree DetailNode tree root
+     * @param javadocColumnNumber javadoc indent
+     */
+    private void adjustFirstLineToJavadocIndent(DetailNode tree, int javadocColumnNumber) {
+        if (tree.getLineNumber() == blockCommentLineNumber) {
+            ((JavadocNodeImpl) tree).setColumnNumber(tree.getColumnNumber() + javadocColumnNumber);
+            final DetailNode[] children = tree.getChildren();
+            for (DetailNode child : children) {
+                adjustFirstLineToJavadocIndent(child, javadocColumnNumber);
+            }
+        }
+    }
+

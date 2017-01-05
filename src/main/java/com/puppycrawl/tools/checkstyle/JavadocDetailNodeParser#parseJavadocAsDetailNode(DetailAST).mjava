@@ -6,6 +6,7 @@
      */
     public ParseStatus parseJavadocAsDetailNode(DetailAST javadocCommentAst) {
         blockCommentLineNumber = javadocCommentAst.getLineNo();
+
         final String javadocComment = JavadocUtils.getJavadocCommentContent(javadocCommentAst);
 
         // Use a new error listener each time to be able to use
@@ -24,6 +25,10 @@
             final ParseTree parseTree = parseJavadocAsParseTree(javadocComment);
 
             final DetailNode tree = convertParseTreeToDetailNode(parseTree);
+            // adjust first line to indent of /**
+            adjustFirstLineToJavadocIndent(tree,
+                        javadocCommentAst.getColumnNo()
+                                + JAVADOC_START.length());
             result.setTree(tree);
         }
         catch (ParseCancellationException ex) {
