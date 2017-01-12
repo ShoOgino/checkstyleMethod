@@ -1,0 +1,12 @@
+    public static Set<Configuration> getChecks(Configuration config) {
+        final Set<Configuration> result = new HashSet<>();
+
+        for (Configuration child : config.getChildren()) {
+            if ("TreeWalker".equals(child.getName())) {
+                result.addAll(getModules(child));
+            }
+        }
+
+        return result;
+    }
+
