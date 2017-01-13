@@ -1,0 +1,10 @@
+    @Test
+    public void testPathRegexMatches() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        checkConfig.addAttribute("file", getResourcePath("import-control_one.xml"));
+        checkConfig.addAttribute("path", "^.*[\\\\/]src[\\\\/]test[\\\\/].*$");
+        final String[] expected = {"5:1: " + getCheckMessage(MSG_DISALLOWED, "java.io.File")};
+
+        verify(checkConfig, getPath("InputImportControl.java"), expected);
+    }
+

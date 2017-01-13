@@ -1,22 +1,25 @@
     @Override
     public void visitToken(final DetailAST ast) {
-        if (ast.getType() == TokenTypes.PACKAGE_DEF) {
-            if (root == null) {
-                log(ast, MSG_MISSING_FILE);
-            }
-            else {
-                packageName = getPackageText(ast);
-                currentImportControl = root.locateFinest(packageName);
-                if (currentImportControl == null) {
-                    log(ast, MSG_UNKNOWN_PKG);
+        if (processCurrentFile) {
+            if (ast.getType() == TokenTypes.PACKAGE_DEF) {
+                if (root == null) {
+                    log(ast, MSG_MISSING_FILE);
+                }
+                else {
+                    packageName = getPackageText(ast);
+                    currentImportControl = root.locateFinest(packageName);
+                    if (currentImportControl == null) {
+                        log(ast, MSG_UNKNOWN_PKG);
+                    }
                 }
             }
-        }
-        else if (currentImportControl != null) {
-            final String importText = getImportText(ast);
-            final AccessResult access = currentImportControl.checkAccess(packageName, importText);
-            if (access != AccessResult.ALLOWED) {
-                log(ast, MSG_DISALLOWED, importText);
+            else if (currentImportControl != null) {
+                final String importText = getImportText(ast);
+                final AccessResult access =
+                        currentImportControl.checkAccess(packageName, importText);
+                if (access != AccessResult.ALLOWED) {
+                    log(ast, MSG_DISALLOWED, importText);
+                }
             }
         }
     }
