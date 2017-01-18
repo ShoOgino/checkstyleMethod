@@ -1,0 +1,30 @@
+    /**
+     * Checks line for end of scope.  Handles occurrences of close braces and close parenthesis on
+     * the same line.
+     *
+     * @param lastAnnotationNode the last node of the annotation
+     * @param node the node indicating where to begin checking
+     * @return true if all the nodes up to the last annotation node are end of scope nodes
+     *         false otherwise
+     */
+    private boolean isEndOfScope(final DetailAST lastAnnotationNode, final DetailAST node) {
+        DetailAST checkNode = node;
+        boolean endOfScope = true;
+        while (endOfScope && !checkNode.equals(lastAnnotationNode)) {
+            switch (checkNode.getType()) {
+                case TokenTypes.RCURLY:
+                case TokenTypes.RBRACK:
+                    while (checkNode.getNextSibling() == null) {
+                        checkNode = checkNode.getParent();
+                    }
+                    checkNode = checkNode.getNextSibling();
+                    break;
+                default:
+                    endOfScope = false;
+
+            }
+
+        }
+        return endOfScope;
+    }
+

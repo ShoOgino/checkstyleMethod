@@ -14,7 +14,21 @@
 
         final DetailAST firstLineNode = firstNodesOnLines.get(firstNodesOnLines.firstKey());
         if (firstLineNode.getType() == TokenTypes.AT) {
-            checkAnnotationIndentation(firstLineNode, firstNodesOnLines, indentLevel);
+            DetailAST node = firstLineNode.getParent();
+            while (node != null) {
+                if (node.getType() == TokenTypes.ANNOTATION) {
+                    final DetailAST atNode = node.getFirstChild();
+                    final NavigableMap<Integer, DetailAST> annotationLines =
+                        firstNodesOnLines.subMap(
+                            node.getLineNo(),
+                            true,
+                            getNextNodeLine(firstNodesOnLines, node),
+                            true
+                        );
+                    checkAnnotationIndentation(atNode, annotationLines, indentLevel);
+                }
+                node = node.getNextSibling();
+            }
         }
 
         if (ignoreFirstLine) {

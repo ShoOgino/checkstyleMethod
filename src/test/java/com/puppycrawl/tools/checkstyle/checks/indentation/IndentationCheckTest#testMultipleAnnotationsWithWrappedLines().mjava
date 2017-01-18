@@ -1,0 +1,11 @@
+    @Test
+    public void testMultipleAnnotationsWithWrappedLines() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("forceStrictCondition", "true");
+        final String fileName = getPath("InputCorrectMultipleAnnotationsWithWrappedLines.java");
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verifyWarns(checkConfig, fileName, expected);
+    }
+

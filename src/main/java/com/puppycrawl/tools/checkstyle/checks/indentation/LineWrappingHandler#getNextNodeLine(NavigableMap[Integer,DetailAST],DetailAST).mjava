@@ -1,0 +1,17 @@
+    /**
+     * Gets the next node line from the firstNodesOnLines map unless there is no next line, in
+     * which case, it returns the last line.
+     *
+     * @param firstNodesOnLines NavigableMap of lines and their first nodes.
+     * @param node the node for which to find the next node line
+     * @return the line number of the next line in the map
+     */
+    private static Integer getNextNodeLine(
+            NavigableMap<Integer, DetailAST> firstNodesOnLines, DetailAST node) {
+        Integer nextNodeLine = firstNodesOnLines.higherKey(node.getLastChild().getLineNo());
+        if (nextNodeLine == null) {
+            nextNodeLine = firstNodesOnLines.lastKey();
+        }
+        return nextNodeLine;
+    }
+

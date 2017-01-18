@@ -11,32 +11,27 @@
         final int firstNodeIndent = getLineStart(atNode);
         final int currentIndent = firstNodeIndent + indentLevel;
         final Collection<DetailAST> values = firstNodesOnLines.values();
-        final DetailAST lastAnnotationNode = getLastAnnotationNode(atNode);
+        final DetailAST lastAnnotationNode = atNode.getParent().getLastChild();
         final int lastAnnotationLine = lastAnnotationNode.getLineNo();
 
         final Iterator<DetailAST> itr = values.iterator();
         while (firstNodesOnLines.size() > 1) {
             final DetailAST node = itr.next();
 
-            if (node.getLineNo() <= lastAnnotationLine) {
-                final DetailAST parentNode = node.getParent();
-                final boolean isCurrentNodeCloseAnnotationAloneInLine =
-                        node.getLineNo() == lastAnnotationLine
-                        && node.equals(lastAnnotationNode);
-                if (isCurrentNodeCloseAnnotationAloneInLine
-                        || node.getType() == TokenTypes.AT
-                        && (parentNode.getParent().getType() == TokenTypes.MODIFIERS
-                            || parentNode.getParent().getType() == TokenTypes.ANNOTATIONS)) {
-                    logWarningMessage(node, firstNodeIndent);
-                }
-                else {
-                    logWarningMessage(node, currentIndent);
-                }
-                itr.remove();
+            final DetailAST parentNode = node.getParent();
+            final boolean isCurrentNodeCloseAnnotationAloneInLine =
+                node.getLineNo() == lastAnnotationLine
+                    && isEndOfScope(lastAnnotationNode, node);
+            if (isCurrentNodeCloseAnnotationAloneInLine
+                    || node.getType() == TokenTypes.AT
+                    && (parentNode.getParent().getType() == TokenTypes.MODIFIERS
+                        || parentNode.getParent().getType() == TokenTypes.ANNOTATIONS)) {
+                logWarningMessage(node, firstNodeIndent);
             }
             else {
-                break;
+                logWarningMessage(node, currentIndent);
             }
+            itr.remove();
         }
     }
 
