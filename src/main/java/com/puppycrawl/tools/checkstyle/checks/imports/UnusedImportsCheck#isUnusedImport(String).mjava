@@ -1,0 +1,11 @@
+    /**
+     * Checks whether an import is unused.
+     * @param imprt an import.
+     * @return true if an import is unused.
+     */
+    private boolean isUnusedImport(String imprt) {
+        final Matcher javaLangPackageMatcher = JAVA_LANG_PACKAGE_PATTERN.matcher(imprt);
+        return !referenced.contains(CommonUtils.baseClassName(imprt))
+            || javaLangPackageMatcher.matches();
+    }
+

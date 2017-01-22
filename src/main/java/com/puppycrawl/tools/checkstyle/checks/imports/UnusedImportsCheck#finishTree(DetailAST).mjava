@@ -2,9 +2,9 @@
     public void finishTree(DetailAST rootAST) {
         // loop over all the imports to see if referenced.
         imports.stream()
-            .filter(imp -> !referenced.contains(CommonUtils.baseClassName(imp.getText())))
-            .forEach(imp -> log(imp.getLineNo(),
-                imp.getColumnNo(),
-                MSG_KEY, imp.getText()));
+            .filter(imprt -> isUnusedImport(imprt.getText()))
+            .forEach(imprt -> log(imprt.getLineNo(),
+                imprt.getColumnNo(),
+                MSG_KEY, imprt.getText()));
     }
 
