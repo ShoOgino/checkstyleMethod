@@ -4,12 +4,13 @@
 
         Assert.assertEquals(configs.size(), 2);
 
-        privConfig = configs.get(0);
-        Assert.assertEquals(privConfig.getAttribute("excludeScope"), "public");
-        privFormat = privConfig.getAttribute("format");
+        generalConfig = configs.get(0);
+        Assert.assertEquals(generalConfig.getAttribute("accessModifiers"),
+            "protected, package, private");
+        genealFormat = generalConfig.getAttribute("format");
 
         pubConfig = configs.get(1);
-        Assert.assertEquals(pubConfig.getAttribute("scope"), "public");
+        Assert.assertEquals(pubConfig.getAttribute("accessModifiers"), "public");
         pubFormat = pubConfig.getAttribute("format");
     }
 

@@ -1,0 +1,16 @@
+    @Test
+    public void testGetAccessModifierFromModifiersTokenWrongTokenType() {
+        final DetailAST modifiers = new DetailAST();
+        modifiers.setType(TokenTypes.METHOD_DEF);
+
+        try {
+            CheckUtils.getAccessModifierFromModifiersToken(modifiers);
+            fail(IllegalArgumentException.class.getSimpleName() + " was expcted.");
+        }
+        catch (IllegalArgumentException exc) {
+            final String expectedExceptionMsg = "expected non-null AST-token with type 'MODIFIERS'";
+            final String actualExceptionMsg = exc.getMessage();
+            assertEquals(expectedExceptionMsg, actualExceptionMsg);
+        }
+    }
+

@@ -1,0 +1,27 @@
+    /**
+     * Returns the access modifier of the method/constructor at the specified AST. If
+     * the method is in an interface or annotation block, the access modifier is assumed
+     * to be public.
+     *
+     * @param ast the token of the method/constructor.
+     * @return the access modifier of the method/constructor.
+     */
+    private static AccessModifier getAccessModifier(final DetailAST ast) {
+        final DetailAST params = ast.getParent();
+        final DetailAST meth = params.getParent();
+        AccessModifier accessModifier = AccessModifier.PRIVATE;
+
+        if (meth.getType() == TokenTypes.METHOD_DEF
+                || meth.getType() == TokenTypes.CTOR_DEF) {
+            if (ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
+                accessModifier = AccessModifier.PUBLIC;
+            }
+            else {
+                final DetailAST modsToken = meth.findFirstToken(TokenTypes.MODIFIERS);
+                accessModifier = CheckUtils.getAccessModifierFromModifiersToken(modsToken);
+            }
+        }
+
+        return accessModifier;
+    }
+

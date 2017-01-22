@@ -48,6 +48,9 @@
             else if (value != null && (clss == SeverityLevel.class || clss == Scope.class)) {
                 result = value.toString().toLowerCase(Locale.ENGLISH);
             }
+            else if (value != null && clss == AccessModifier[].class) {
+                result = Arrays.toString((Object[]) value).replace("[", "").replace("]", "");
+            }
 
             if (clss != String.class && clss != String[].class && result == null) {
                 result = "null";

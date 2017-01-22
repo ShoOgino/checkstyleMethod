@@ -1,0 +1,13 @@
+    @Test
+    public void testGetAccessModifierFromModifiersTokenWithNullParameter() {
+        try {
+            CheckUtils.getAccessModifierFromModifiersToken(null);
+            fail(IllegalArgumentException.class.getSimpleName() + " was expcted.");
+        }
+        catch (IllegalArgumentException exc) {
+            final String expectedExceptionMsg = "expected non-null AST-token with type 'MODIFIERS'";
+            final String actualExceptionMsg = exc.getMessage();
+            assertEquals(expectedExceptionMsg, actualExceptionMsg);
+        }
+    }
+
