@@ -1,0 +1,39 @@
+    /**
+     * Creates new instance of the root module.
+     * @return new instance of the root module
+     */
+    private RootModule createRootModule() {
+        final RootModule rootModule;
+        try {
+            final Properties props = createOverridingProperties();
+            final Configuration config =
+                ConfigurationLoader.loadConfiguration(
+                    configLocation,
+                    new PropertiesExpander(props),
+                    omitIgnoredModules);
+
+            final ClassLoader moduleClassLoader =
+                Checker.class.getClassLoader();
+
+            final ModuleFactory factory = new PackageObjectFactory(
+                    Checker.class.getPackage().getName() + ".", moduleClassLoader);
+
+            rootModule = (RootModule) factory.createModule(config.getName());
+            rootModule.setModuleClassLoader(moduleClassLoader);
+
+            if (rootModule instanceof Checker) {
+                final ClassLoader loader = new AntClassLoader(getProject(),
+                        classpath);
+
+                ((Checker) rootModule).setClassLoader(loader);
+            }
+
+            rootModule.configure(config);
+        }
+        catch (final CheckstyleException ex) {
+            throw new BuildException(String.format(Locale.ROOT, "Unable to create Root Module: "
+                    + "configLocation {%s}, classpath {%s}.", configLocation, classpath), ex);
+        }
+        return rootModule;
+    }
+

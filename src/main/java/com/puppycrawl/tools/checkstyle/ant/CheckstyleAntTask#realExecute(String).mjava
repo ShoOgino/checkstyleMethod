@@ -3,24 +3,24 @@
      * @param checkstyleVersion Checkstyle compile version.
      */
     private void realExecute(String checkstyleVersion) {
-        // Create the checker
-        Checker checker = null;
+        // Create the root module
+        RootModule rootModule = null;
         try {
-            checker = createChecker();
+            rootModule = createRootModule();
 
             // setup the listeners
             final AuditListener[] listeners = getListeners();
             for (AuditListener element : listeners) {
-                checker.addListener(element);
+                rootModule.addListener(element);
             }
             final SeverityLevelCounter warningCounter =
                 new SeverityLevelCounter(SeverityLevel.WARNING);
-            checker.addListener(warningCounter);
+            rootModule.addListener(warningCounter);
 
-            processFiles(checker, warningCounter, checkstyleVersion);
+            processFiles(rootModule, warningCounter, checkstyleVersion);
         }
         finally {
-            destroyChecker(checker);
+            destroyRootModule(rootModule);
         }
     }
 
