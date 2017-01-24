@@ -1,8 +1,6 @@
-    @Test
-    public void testAllCheckTokensAreReferencedInConfigFile() throws Exception {
+    private static void validateAllCheckTokensAreReferencedInConfigFile(String configName,
+            Configuration configuration, Map<String, Set<String>> tokensToIgnore) throws Exception {
         final ModuleFactory moduleFactory = TestUtils.getPackageObjectFactory();
-        final Configuration configuration = ConfigurationUtil
-                .loadConfiguration("config/checkstyle_checks.xml");
         final Set<Configuration> configChecks = ConfigurationUtil.getChecks(configuration);
 
         final Map<String, Set<String>> configCheckTokens = new HashMap<>();
@@ -30,7 +28,7 @@
                     configCheckTokens.put(checkName, configTokens);
 
                     // add all overriden tokens
-                    final Set<String> overrideTokens = TOKENS_IN_CONFIG_TO_IGNORE.get(checkName);
+                    final Set<String> overrideTokens = tokensToIgnore.get(checkName);
 
                     if (overrideTokens != null) {
                         configTokens.addAll(overrideTokens);
@@ -42,8 +40,8 @@
                 }
 
                 try {
-                    configTokens.addAll(Arrays.asList(checkConfig.getAttribute("tokens").split(
-                            ",\\s*")));
+                    configTokens.addAll(Arrays.asList(checkConfig.getAttribute("tokens").trim()
+                            .split(",\\s*")));
                 }
                 catch (CheckstyleException ex) {
                     // no tokens defined, so it is using default
@@ -53,8 +51,8 @@
 
         for (Entry<String, Set<String>> entry : checkTokens.entrySet()) {
             Assert.assertEquals("'" + entry.getKey()
-                    + "' should have all acceptable tokens from check in config or specify an "
-                    + "override to ignore the specific tokens",
+                    + "' should have all acceptable tokens from check in " + configName
+                    + " config or specify an override to ignore the specific tokens",
                     entry.getValue(), configCheckTokens.get(entry.getKey()));
         }
     }
