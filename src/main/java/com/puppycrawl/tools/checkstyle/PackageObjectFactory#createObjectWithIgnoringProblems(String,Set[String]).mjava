@@ -4,9 +4,10 @@
      * @param secondAttempt the set of names to attempt instantiation
      *                      if usage of the className was not successful.
      * @return the {@code Object} created by loader or null.
+     * @throws CheckstyleException if the class fails to instantiate.
      */
-    private Object createObjectWithIgnoringProblems(String className,
-                                                    Set<String> secondAttempt) {
+    private Object createObjectWithIgnoringProblems(String className, Set<String> secondAttempt)
+            throws CheckstyleException {
         Object instance = createObject(className);
         if (instance == null) {
             final Iterator<String> ite = secondAttempt.iterator();
