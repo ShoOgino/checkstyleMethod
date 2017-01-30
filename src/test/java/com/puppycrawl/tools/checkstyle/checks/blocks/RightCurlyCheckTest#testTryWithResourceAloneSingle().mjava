@@ -1,0 +1,9 @@
+    @Test
+    public void testTryWithResourceAloneSingle() throws Exception {
+        checkConfig.addAttribute("option", RightCurlyOption.ALONE_OR_SINGLELINE.toString());
+        final String[] expected = {
+            "19:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+        };
+        verify(checkConfig, getPath("InputRightCurlyTryResource.java"), expected);
+    }
+

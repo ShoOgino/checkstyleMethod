@@ -1,0 +1,10 @@
+    @Test
+    public void testTryWithResourceSame() throws Exception {
+        checkConfig.addAttribute("option", RightCurlyOption.SAME.toString());
+        final String[] expected = {
+            "11:9: " + getCheckMessage(MSG_KEY_LINE_SAME, "}", 9),
+            "24:67: " + getCheckMessage(MSG_KEY_LINE_SAME, "}", 67),
+        };
+        verify(checkConfig, getPath("InputRightCurlyTryResource.java"), expected);
+    }
+
