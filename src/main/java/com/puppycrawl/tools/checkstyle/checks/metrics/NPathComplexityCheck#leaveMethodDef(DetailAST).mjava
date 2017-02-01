@@ -1,13 +1,13 @@
     /**
      * Process the end of a method definition.
-     *
-     * @param ast the token representing the method definition
+     * @param ast the token type representing the method definition
      */
     private void leaveMethodDef(DetailAST ast) {
         final BigInteger bigIntegerMax = BigInteger.valueOf(max);
-        if (currentValue.compareTo(bigIntegerMax) > 0) {
-            log(ast, MSG_KEY, currentValue, bigIntegerMax);
+        if (currentRangeValue.compareTo(bigIntegerMax) > 0) {
+            log(ast, MSG_KEY, currentRangeValue, bigIntegerMax);
         }
         popValue();
+        currentRangeValue = INITIAL_VALUE;
     }
 

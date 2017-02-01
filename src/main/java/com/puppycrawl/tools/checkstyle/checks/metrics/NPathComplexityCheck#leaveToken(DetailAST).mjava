@@ -5,15 +5,26 @@
             case TokenTypes.LITERAL_DO:
             case TokenTypes.LITERAL_FOR:
             case TokenTypes.LITERAL_IF:
-            case TokenTypes.QUESTION:
-            case TokenTypes.LITERAL_TRY:
             case TokenTypes.LITERAL_SWITCH:
+                leaveConditional();
+                break;
+            case TokenTypes.LITERAL_TRY:
                 leaveMultiplyingConditional();
                 break;
-            case TokenTypes.LITERAL_ELSE:
+            case TokenTypes.LITERAL_RETURN:
+            case TokenTypes.QUESTION:
+                leaveUnitaryOperator();
+                break;
             case TokenTypes.LITERAL_CATCH:
-            case TokenTypes.LITERAL_CASE:
                 leaveAddingConditional();
+                break;
+            case TokenTypes.LITERAL_DEFAULT:
+                leaveBranch();
+                break;
+            case TokenTypes.LITERAL_ELSE:
+            case TokenTypes.CASE_GROUP:
+                leaveBranch();
+                branchVisited = false;
                 break;
             case TokenTypes.CTOR_DEF:
             case TokenTypes.METHOD_DEF:

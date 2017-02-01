@@ -1,0 +1,17 @@
+    /**
+     * Finds a leaf, which is the most distant from the root.
+     * @param ast the root of tree.
+     * @return the leaf.
+     */
+    private static DetailAST getLastToken(DetailAST ast) {
+        final DetailAST lastChild = ast.getLastChild();
+        final DetailAST result;
+        if (lastChild.getFirstChild() == null) {
+            result = lastChild;
+        }
+        else {
+            result = getLastToken(lastChild);
+        }
+        return result;
+    }
+

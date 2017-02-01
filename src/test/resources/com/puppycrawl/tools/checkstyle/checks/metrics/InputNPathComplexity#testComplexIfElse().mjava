@@ -1,0 +1,10 @@
+    // NP = 11   
+    void testComplexIfElse() {
+        // NP = (if-range=1) + (else-range=9) + (expr=1) = 11
+        if (true && true) { }
+        // NP(else-range) = (if-range=1) + (else-range=6) + (expr=2) = 9
+        else if (true || true || true) { }
+        // NP(else-range) = (if-range=1) + 1 + (expr=4) = 6
+        else if (true && true && true || true || true) { }
+    }
+

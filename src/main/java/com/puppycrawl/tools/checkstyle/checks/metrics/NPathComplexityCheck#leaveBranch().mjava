@@ -1,0 +1,13 @@
+    /** Leaves else, default or case group tokens. */
+    private void leaveBranch() {
+        final Values valuePair = popValue();
+        final BigInteger basicRangeValue = valuePair.getRangeValue();
+        final BigInteger expressionValue = valuePair.getExpressionValue();
+        if (branchVisited && currentRangeValue.equals(BigInteger.ZERO)) {
+            currentRangeValue = BigInteger.ONE;
+        }
+        currentRangeValue = currentRangeValue.subtract(BigInteger.ONE)
+                .add(basicRangeValue)
+                .add(expressionValue);
+    }
+

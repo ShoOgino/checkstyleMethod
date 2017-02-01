@@ -1,0 +1,16 @@
+    /**
+     * Visits ternary operator (?:) and return tokens. They differ from those processed by
+     * visitConditional method in that their expression isn't bracketed.
+     * @param ast visited token.
+     * @param basicBranchingFactor number of branches inherently added by this token.
+     */
+    private void visitUnitaryOperator(DetailAST ast, int basicBranchingFactor) {
+        final boolean isAfter = processingTokenEnd.isAfter(ast);
+        isAfterValues.push(isAfter);
+        if (!isAfter) {
+            processingTokenEnd.setToken(getLastToken(ast));
+            final int expressionValue = basicBranchingFactor + countConditionalOperators(ast);
+            pushValue(expressionValue);
+        }
+    }
+

@@ -1,0 +1,18 @@
+    /**
+     * Leaves ternary operator (?:) and return tokens.
+     */
+    private void leaveUnitaryOperator() {
+        if (!isAfterValues.pop()) {
+            final Values valuePair = popValue();
+            BigInteger basicRangeValue = valuePair.getRangeValue();
+            BigInteger expressionValue = valuePair.getExpressionValue();
+            if (expressionValue.equals(BigInteger.ZERO)) {
+                expressionValue = BigInteger.ONE;
+            }
+            if (basicRangeValue.equals(BigInteger.ZERO)) {
+                basicRangeValue = BigInteger.ONE;
+            }
+            currentRangeValue = currentRangeValue.add(expressionValue).multiply(basicRangeValue);
+        }
+    }
+

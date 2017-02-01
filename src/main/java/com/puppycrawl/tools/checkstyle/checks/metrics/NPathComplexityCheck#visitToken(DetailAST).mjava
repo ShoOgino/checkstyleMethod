@@ -1,25 +1,41 @@
     @Override
     public void visitToken(DetailAST ast) {
         switch (ast.getType()) {
+            case TokenTypes.LITERAL_IF:
+            case TokenTypes.LITERAL_SWITCH:
             case TokenTypes.LITERAL_WHILE:
             case TokenTypes.LITERAL_DO:
             case TokenTypes.LITERAL_FOR:
-            case TokenTypes.LITERAL_IF:
+                visitConditional(ast, 1);
+                break;
             case TokenTypes.QUESTION:
-            case TokenTypes.LITERAL_TRY:
-            case TokenTypes.LITERAL_SWITCH:
-                visitMultiplyingConditional();
+                visitUnitaryOperator(ast, 2);
+                break;
+            case TokenTypes.LITERAL_RETURN:
+                visitUnitaryOperator(ast, 0);
+                break;
+            case TokenTypes.CASE_GROUP:
+                final int caseNumber = countCaseTokens(ast);
+                branchVisited = true;
+                pushValue(caseNumber);
                 break;
             case TokenTypes.LITERAL_ELSE:
+                branchVisited = true;
+                if (currentRangeValue.equals(BigInteger.ZERO)) {
+                    currentRangeValue = BigInteger.ONE;
+                }
+                pushValue(0);
+                break;
+            case TokenTypes.LITERAL_TRY:
             case TokenTypes.LITERAL_CATCH:
-            case TokenTypes.LITERAL_CASE:
-                visitAddingConditional();
+            case TokenTypes.LITERAL_DEFAULT:
+                pushValue(1);
                 break;
             case TokenTypes.CTOR_DEF:
             case TokenTypes.METHOD_DEF:
             case TokenTypes.INSTANCE_INIT:
             case TokenTypes.STATIC_INIT:
-                visitMethodDef();
+                pushValue(0);
                 break;
             default:
                 break;

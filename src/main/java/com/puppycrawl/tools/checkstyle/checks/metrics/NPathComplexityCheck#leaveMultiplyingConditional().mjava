@@ -1,5 +1,6 @@
-    /** Leaves while, do, for, if, try, ? (in ?::) or switch. */
+    /** Leaves try. */
     private void leaveMultiplyingConditional() {
-        currentValue = currentValue.add(BigInteger.ONE).multiply(popValue());
+        currentRangeValue = currentRangeValue.add(BigInteger.ONE)
+                .multiply(popValue().getRangeValue().add(BigInteger.ONE));
     }
 

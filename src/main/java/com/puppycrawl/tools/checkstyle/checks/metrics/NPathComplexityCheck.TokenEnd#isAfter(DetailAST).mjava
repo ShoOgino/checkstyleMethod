@@ -1,0 +1,17 @@
+        /**
+         * Checks if saved coordinates located after given token.
+         * @param ast given token.
+         * @return true, if saved coordinates located after given token.
+         */
+        public boolean isAfter(DetailAST ast) {
+            final int lineNo = ast.getLineNo();
+            final int columnNo = ast.getColumnNo();
+            boolean isAfter = true;
+            if (lineNo > endLineNo
+                    || lineNo == endLineNo
+                    && columnNo > endColumnNo) {
+                isAfter = false;
+            }
+            return isAfter;
+        }
+

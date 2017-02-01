@@ -1,0 +1,16 @@
+    /**
+     * Counts number of case tokens subject to a case group token.
+     * @param ast case group token.
+     * @return number of case tokens.
+     */
+    private static int countCaseTokens(DetailAST ast) {
+        int counter = 0;
+        for (DetailAST iterator = ast.getFirstChild(); iterator != null;
+                iterator = iterator.getNextSibling()) {
+            if (iterator.getType() == TokenTypes.LITERAL_CASE) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+

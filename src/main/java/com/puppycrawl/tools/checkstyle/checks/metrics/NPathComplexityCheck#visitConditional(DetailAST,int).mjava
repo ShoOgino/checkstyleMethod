@@ -1,0 +1,18 @@
+    /**
+     * Visits if, while, do-while, for and switch tokens - all of them have expression in
+     * parentheses which is used for calculation.
+     * @param ast visited token.
+     * @param basicBranchingFactor default number of branches added.
+     */
+    private void visitConditional(DetailAST ast, int basicBranchingFactor) {
+        int expressionValue = basicBranchingFactor;
+        DetailAST bracketed;
+        for (bracketed = ast.findFirstToken(TokenTypes.LPAREN).getNextSibling();
+                bracketed.getType() != TokenTypes.RPAREN;
+                bracketed = bracketed.getNextSibling()) {
+            expressionValue += countConditionalOperators(bracketed);
+        }
+        processingTokenEnd.setToken(bracketed);
+        pushValue(expressionValue);
+    }
+

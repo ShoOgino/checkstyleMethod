@@ -1,9 +1,9 @@
     /**
-     * Pops a value off the stack and makes it the current value.
-     * @return pop a value off the stack and make it the current value
+     * Pops values from both stack of expression values and stack of range values.
+     * @return pair of head values from both of the stacks.
      */
-    private BigInteger popValue() {
-        currentValue = valueStack.pop();
-        return currentValue;
+    private Values popValue() {
+        final int expressionValue = expressionValues.pop();
+        return new Values(rangeValues.pop(), BigInteger.valueOf(expressionValue));
     }
 

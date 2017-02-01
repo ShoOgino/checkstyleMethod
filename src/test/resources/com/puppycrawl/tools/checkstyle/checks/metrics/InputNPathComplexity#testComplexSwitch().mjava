@@ -1,0 +1,25 @@
+    //NP = 15
+    void testComplexSwitch() {
+        int a = 0;
+        // NP = (case-range[1]=2) + (case-range[2]=5*2) + (case-range[3]=2)
+        //         + (default-range=1) + (expr=0) = 15
+        switch(a) {
+        case 1:
+            // NP(case-range) = (if-range=1) + 1 + (expr=0) = 2
+            if (true) { }
+            break;
+        case 2:
+            // NP(case-range) = (if-range=1) + (else-range=1) + (expr=3) = 5
+            if (true && true || (true || true)) { }
+            else { }
+            // NP(case-range) = (if-range=1) + 1 + (expr=0) = 2
+            if (true) { }
+        case 3:
+            // NP(case-range) = (if-range=1) + 1 + (expr=0) = 2
+            if (true) { }
+            break;
+        default:
+            break;
+        }
+    }
+

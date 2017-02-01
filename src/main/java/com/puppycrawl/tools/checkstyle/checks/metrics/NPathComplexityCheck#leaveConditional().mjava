@@ -1,0 +1,14 @@
+    /** Leaves while, do, for, if, ternary (?::), return or switch. */
+    private void leaveConditional() {
+        final Values valuePair = popValue();
+        final BigInteger expressionValue = valuePair.getExpressionValue();
+        BigInteger basicRangeValue = valuePair.getRangeValue();
+        if (currentRangeValue.equals(BigInteger.ZERO)) {
+            currentRangeValue = BigInteger.ONE;
+        }
+        if (basicRangeValue.equals(BigInteger.ZERO)) {
+            basicRangeValue = BigInteger.ONE;
+        }
+        currentRangeValue = currentRangeValue.add(expressionValue).multiply(basicRangeValue);
+    }
+
