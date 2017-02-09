@@ -2,29 +2,23 @@
     public void generalParameterNameTest() throws Exception {
 
         final String[] expected = {
-            "8:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "$arg1", genealFormat),
-            "9:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "ar$g2", genealFormat),
-            "10:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "arg3$", genealFormat),
-            "11:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "a_rg4", genealFormat),
-            "12:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "_arg5", genealFormat),
-            "13:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "arg6_", genealFormat),
-            "14:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "aArg7", genealFormat),
-            "15:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "aArg8", genealFormat),
-            "16:21: "
-                + getCheckMessage(generalConfig.getMessages(), MSG_KEY, "aar_g", genealFormat),
+            "10:21: " + getCheckMessage(config.getMessages(), MSG_KEY, "bB", format),
+            "33:22: " + getCheckMessage(config.getMessages(), MSG_KEY, "llll_llll", format),
+            "34:21: " + getCheckMessage(config.getMessages(), MSG_KEY, "bB", format),
+            "64:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "$arg1", format),
+            "65:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "ar$g2", format),
+            "66:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "arg3$", format),
+            "67:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "a_rg4", format),
+            "68:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "_arg5", format),
+            "69:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "arg6_", format),
+            "70:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "aArg7", format),
+            "71:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "aArg8", format),
+            "72:13: " + getCheckMessage(config.getMessages(), MSG_KEY, "aar_g", format),
         };
 
-        final String filePath = getPath("InputParameterNameSimpleGeneral.java");
+        final String filePath = getPath("InputParameterName.java");
 
         final Integer[] warnList = getLinesWithWarn(filePath);
-        verify(generalConfig, filePath, expected, warnList);
+        verify(config, filePath, expected, warnList);
     }
 

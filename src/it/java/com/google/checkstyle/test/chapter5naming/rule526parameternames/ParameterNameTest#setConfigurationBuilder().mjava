@@ -2,15 +2,9 @@
     public static void setConfigurationBuilder() throws CheckstyleException {
         final List<Configuration> configs = getCheckConfigs("ParameterName");
 
-        Assert.assertEquals(configs.size(), 2);
+        Assert.assertEquals(configs.size(), 1);
 
-        generalConfig = configs.get(0);
-        Assert.assertEquals(generalConfig.getAttribute("accessModifiers"),
-            "protected, package, private");
-        genealFormat = generalConfig.getAttribute("format");
-
-        pubConfig = configs.get(1);
-        Assert.assertEquals(pubConfig.getAttribute("accessModifiers"), "public");
-        pubFormat = pubConfig.getAttribute("format");
+        config = configs.get(0);
+        format = config.getAttribute("format");
     }
 
