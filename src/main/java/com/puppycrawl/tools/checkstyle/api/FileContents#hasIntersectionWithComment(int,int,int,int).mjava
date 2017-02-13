@@ -8,7 +8,8 @@
      **/
     public boolean hasIntersectionWithComment(int startLineNo,
             int startColNo, int endLineNo, int endColNo) {
-        return hasIntersectionWithCComment(startLineNo, startColNo, endLineNo, endColNo)
-                || hasIntersectionWithCppComment(startLineNo, startColNo, endLineNo, endColNo);
+        return hasIntersectionWithBlockComment(startLineNo, startColNo, endLineNo, endColNo)
+                || hasIntersectionWithSingleLineComment(startLineNo, startColNo, endLineNo,
+                        endColNo);
     }
 

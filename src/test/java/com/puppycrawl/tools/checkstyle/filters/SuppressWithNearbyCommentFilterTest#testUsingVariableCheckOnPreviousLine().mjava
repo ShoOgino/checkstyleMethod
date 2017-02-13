@@ -1,0 +1,13 @@
+    @Test
+    public void testUsingVariableCheckOnPreviousLine() throws Exception {
+        final DefaultConfiguration filterConfig =
+            createFilterConfig(SuppressWithNearbyCommentFilter.class);
+        filterConfig.addAttribute("commentFormat", "ALLOW (\\w+) ON PREVIOUS LINE");
+        filterConfig.addAttribute("checkFormat", "$1");
+        filterConfig.addAttribute("influenceFormat", "-1");
+        final String[] suppressed = {
+            "28:17: Name 'D2' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+

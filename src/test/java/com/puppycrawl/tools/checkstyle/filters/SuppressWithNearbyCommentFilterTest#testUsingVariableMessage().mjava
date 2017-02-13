@@ -1,0 +1,15 @@
+    @Test
+    public void testUsingVariableMessage() throws Exception {
+        final DefaultConfiguration filterConfig =
+            createFilterConfig(SuppressWithNearbyCommentFilter.class);
+        filterConfig.addAttribute("commentFormat", "ALLOW CATCH (\\w+) BECAUSE");
+        filterConfig.addAttribute("checkFormat", "IllegalCatchCheck");
+        filterConfig.addAttribute("messageFormat", "$1");
+        filterConfig.addAttribute("influenceFormat", "-1");
+        final String[] suppressed = {
+            "66:23: Catching 'Throwable' is not allowed.",
+            "73:11: Catching 'Exception' is not allowed.",
+        };
+        verifySuppressed(filterConfig, suppressed);
+    }
+

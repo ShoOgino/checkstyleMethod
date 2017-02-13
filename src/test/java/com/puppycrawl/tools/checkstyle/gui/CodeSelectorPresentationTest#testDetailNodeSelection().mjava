@@ -1,0 +1,11 @@
+    @Test
+    public void testDetailNodeSelection() {
+        final DetailNode javadoc = (DetailNode) model.getParseTreeTableModel()
+                .getChild(tree.getFirstChild().getNextSibling().getFirstChild(), 0);
+        final CodeSelectorPresentation selector = new CodeSelectorPresentation(javadoc,
+                linesToPosition);
+        selector.findSelectionPositions();
+        Assert.assertEquals(3, selector.getSelectionStart());
+        Assert.assertEquals(25, selector.getSelectionEnd());
+    }
+

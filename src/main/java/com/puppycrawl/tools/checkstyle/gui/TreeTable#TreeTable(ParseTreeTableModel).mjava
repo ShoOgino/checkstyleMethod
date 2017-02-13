@@ -1,0 +1,60 @@
+    /**
+     * Creates TreeTable base on TreeTableModel.
+     * @param treeTableModel Tree table model
+     */
+    public TreeTable(ParseTreeTableModel treeTableModel) {
+
+        // Create the tree. It will be used as a renderer and editor.
+        tree = new TreeTableCellRenderer(this, treeTableModel);
+
+        // Install a tableModel representing the visible rows in the tree.
+        setModel(new TreeTableModelAdapter(treeTableModel, tree));
+
+        // Force the JTable and JTree to share their row selection models.
+        final ListToTreeSelectionModelWrapper selectionWrapper = new
+                ListToTreeSelectionModelWrapper(this);
+        tree.setSelectionModel(selectionWrapper);
+        setSelectionModel(selectionWrapper.getListSelectionModel());
+
+        // Install the tree editor renderer and editor.
+        setDefaultRenderer(ParseTreeTableModel.class, tree);
+        setDefaultEditor(ParseTreeTableModel.class, new TreeTableCellEditor());
+
+        // No grid.
+        setShowGrid(false);
+
+        // No intercell spacing
+        setIntercellSpacing(new Dimension(0, 0));
+
+        // And update the height of the trees row to match that of
+        // the table.
+        if (tree.getRowHeight() < 1) {
+            // Metal looks better like this.
+            setRowHeight(getRowHeight());
+        }
+
+        setColumnsInitialWidth();
+
+        final Action expand = new AbstractAction() {
+            private static final long serialVersionUID = -5859674518660156121L;
+
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                expandSelectedNode();
+            }
+        };
+        final KeyStroke stroke = KeyStroke.getKeyStroke("ENTER");
+        final String command = "expand/collapse";
+        getInputMap().put(stroke, command);
+        getActionMap().put(command, expand);
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                if (event.getClickCount() == 2) {
+                    expandSelectedNode();
+                }
+            }
+        });
+    }
+

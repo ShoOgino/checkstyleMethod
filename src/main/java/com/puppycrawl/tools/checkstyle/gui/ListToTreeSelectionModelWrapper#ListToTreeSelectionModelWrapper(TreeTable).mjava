@@ -1,0 +1,10 @@
+    /**
+     * @param jTreeTable TreeTable to perform updates on.
+     */
+    ListToTreeSelectionModelWrapper(TreeTable jTreeTable) {
+        treeTable = jTreeTable;
+        getListSelectionModel().addListSelectionListener(event -> {
+            updateSelectedPathsFromSelectedRows();
+        });
+    }
+

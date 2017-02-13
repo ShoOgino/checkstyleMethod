@@ -2,11 +2,11 @@
     public void checkIndentation() {
         checkTopLevelToken();
         // separate to allow for eventual configuration
-        checkLParen(getLParen());
-        checkRParen(getLParen(), getRParen());
+        checkLeftParen(getLeftParen());
+        checkRightParen(getLeftParen(), getRightParen());
         if (hasCurlies()) {
-            checkLCurly();
-            checkRCurly();
+            checkLeftCurly();
+            checkRightCurly();
         }
         final DetailAST listChild = getListChild();
         if (listChild == null) {
@@ -14,7 +14,7 @@
         }
         else {
             // NOTE: switch statements usually don't have curlies
-            if (!hasCurlies() || !areOnSameLine(getLCurly(), getRCurly())) {
+            if (!hasCurlies() || !areOnSameLine(getLeftCurly(), getRightCurly())) {
                 checkChildren(listChild,
                         getCheckedChildren(),
                         getChildrenExpectedIndent(),

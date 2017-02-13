@@ -1,0 +1,14 @@
+    /**
+     * Check the indentation of the left parenthesis.
+     * @param lparen parenthesis to check
+     */
+    protected final void checkLeftParen(final DetailAST lparen) {
+        // the rcurly can either be at the correct indentation, or on the
+        // same line as the lcurly
+        if (lparen != null
+                && !getIndent().isAcceptable(expandedTabsColumnNo(lparen))
+                && isOnStartOfLine(lparen)) {
+            logError(lparen, "lparen", expandedTabsColumnNo(lparen));
+        }
+    }
+

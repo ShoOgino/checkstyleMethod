@@ -1,0 +1,14 @@
+    /**
+     * Check the indentation of the left curly brace.
+     */
+    protected void checkLeftCurly() {
+        // the lcurly can either be at the correct indentation, or nested
+        // with a previous expression
+        final DetailAST lcurly = getLeftCurly();
+        final int lcurlyPos = expandedTabsColumnNo(lcurly);
+
+        if (!curlyIndent().isAcceptable(lcurlyPos) && isOnStartOfLine(lcurly)) {
+            logError(lcurly, "lcurly", lcurlyPos, curlyIndent());
+        }
+    }
+

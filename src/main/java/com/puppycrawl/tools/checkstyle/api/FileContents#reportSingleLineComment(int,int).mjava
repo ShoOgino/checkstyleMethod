@@ -1,0 +1,13 @@
+    /**
+     * Report the location of a single line comment.
+     * @param startLineNo the starting line number
+     * @param startColNo the starting column number
+     **/
+    public void reportSingleLineComment(int startLineNo, int startColNo) {
+        final String line = line(startLineNo - 1);
+        final String[] txt = {line.substring(startColNo)};
+        final Comment comment = new Comment(txt, startColNo, startLineNo,
+                line.length() - 1);
+        cppComments.put(startLineNo, comment);
+    }
+

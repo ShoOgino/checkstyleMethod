@@ -8,10 +8,11 @@
         // try to suggest single level to children using curlies'
         // levels.
         if (getIndent().isMultiLevel() && hasCurlies()) {
-            if (isOnStartOfLine(getLCurly())) {
-                indentLevel = new IndentLevel(expandedTabsColumnNo(getLCurly()) + getBasicOffset());
+            if (isOnStartOfLine(getLeftCurly())) {
+                indentLevel = new IndentLevel(expandedTabsColumnNo(getLeftCurly())
+                        + getBasicOffset());
             }
-            else if (isOnStartOfLine(getRCurly())) {
+            else if (isOnStartOfLine(getRightCurly())) {
                 final IndentLevel level = new IndentLevel(curlyIndent(), getBasicOffset());
                 level.addAcceptedIndent(level.getFirstIndentLevel() + getLineWrappingIndent());
                 indentLevel = level;

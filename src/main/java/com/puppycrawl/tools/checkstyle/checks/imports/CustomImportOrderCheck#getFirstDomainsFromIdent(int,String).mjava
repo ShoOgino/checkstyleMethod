@@ -1,0 +1,22 @@
+    /**
+     * Extracts defined amount of domains from the left side of package/import identifier
+     * @param firstPackageDomainsCount
+     *        number of first package domains.
+     * @param packageFullPath
+     *        full identifier containing path to package or imported object.
+     * @return String with defined amount of domains or full identifier
+     *        (if full identifier had less domain then specified)
+     */
+    private static String getFirstDomainsFromIdent(
+            final int firstPackageDomainsCount, final String packageFullPath) {
+        final StringBuilder builder = new StringBuilder();
+        final StringTokenizer tokens = new StringTokenizer(packageFullPath, ".");
+        int count = firstPackageDomainsCount;
+
+        while (count > 0 && tokens.hasMoreTokens()) {
+            builder.append(tokens.nextToken()).append('.');
+            count--;
+        }
+        return builder.toString();
+    }
+

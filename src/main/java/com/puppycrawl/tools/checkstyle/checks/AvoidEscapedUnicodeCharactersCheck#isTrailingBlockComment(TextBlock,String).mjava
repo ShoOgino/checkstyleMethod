@@ -1,0 +1,11 @@
+    /**
+     * Whether the C style comment is trailing.
+     * @param comment the comment to check.
+     * @param line the line where the comment starts.
+     * @return true if the comment is trailing.
+     */
+    private static boolean isTrailingBlockComment(TextBlock comment, String line) {
+        return comment.getText().length != 1
+            || line.substring(comment.getEndColNo() + 1).trim().isEmpty();
+    }
+
