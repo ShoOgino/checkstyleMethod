@@ -1,9 +1,9 @@
     @Override
     public void visitToken(DetailAST ast) {
         if (!hasJavadocComment(ast)
+                && canBeOverridden(ast)
                 && (isNativeMethod(ast)
                     || !hasEmptyImplementation(ast))
-                && canBeOverridden(ast)
                 && !hasIgnoredAnnotation(ast, ignoredAnnotations)) {
 
             final DetailAST classDef = getNearestClassOrEnumDefinition(ast);

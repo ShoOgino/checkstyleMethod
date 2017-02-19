@@ -7,19 +7,17 @@
     private static boolean hasEmptyImplementation(DetailAST ast) {
         boolean hasEmptyBody = true;
         final DetailAST methodImplOpenBrace = ast.findFirstToken(TokenTypes.SLIST);
-        if (methodImplOpenBrace != null) {
-            final DetailAST methodImplCloseBrace = methodImplOpenBrace.getLastChild();
-            final Predicate<DetailAST> predicate = currentNode -> {
-                return currentNode != null
-                    && currentNode != methodImplCloseBrace
-                    && currentNode.getLineNo() <= methodImplCloseBrace.getLineNo()
-                    && !TokenUtils.isCommentType(currentNode.getType());
-            };
-            final Optional<DetailAST> methodBody =
-                TokenUtils.findFirstTokenByPredicate(methodImplOpenBrace, predicate);
-            if (methodBody.isPresent()) {
-                hasEmptyBody = false;
-            }
+        final DetailAST methodImplCloseBrace = methodImplOpenBrace.getLastChild();
+        final Predicate<DetailAST> predicate = currentNode -> {
+            return currentNode != null
+                && currentNode != methodImplCloseBrace
+                && currentNode.getLineNo() <= methodImplCloseBrace.getLineNo()
+                && !TokenUtils.isCommentType(currentNode.getType());
+        };
+        final Optional<DetailAST> methodBody =
+            TokenUtils.findFirstTokenByPredicate(methodImplOpenBrace, predicate);
+        if (methodBody.isPresent()) {
+            hasEmptyBody = false;
         }
         return hasEmptyBody;
     }
