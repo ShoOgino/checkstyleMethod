@@ -1,0 +1,9 @@
+    @Test
+    public void testIgnoreAnnotationsOptionWithMultipleAnnotations() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(DesignForExtensionCheck.class);
+        checkConfig.addAttribute("ignoredAnnotations",
+            "Override, Deprecated, Before, After, BeforeClass, AfterClass");
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputDesignForExtensionMultipleAnnotations.java"), expected);
+    }
+

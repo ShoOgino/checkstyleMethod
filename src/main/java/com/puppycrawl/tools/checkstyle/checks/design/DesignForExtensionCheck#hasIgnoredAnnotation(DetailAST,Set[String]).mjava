@@ -5,7 +5,18 @@
      * @return true if a method has any of ignored annotations.
      */
     private static boolean hasIgnoredAnnotation(DetailAST methodDef, Set<String> annotations) {
-        return annotations.stream().filter(annotation -> hasAnnotation(methodDef, annotation))
-            .findAny().isPresent();
+        final DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
+        boolean hasIgnoredAnnotation = false;
+        if (modifiers.branchContains(TokenTypes.ANNOTATION)) {
+            final Optional<DetailAST> annotation = TokenUtils.findFirstTokenByPredicate(modifiers,
+                currentToken -> {
+                    return currentToken.getType() == TokenTypes.ANNOTATION
+                        && annotations.contains(getAnnotationName(currentToken));
+                });
+            if (annotation.isPresent()) {
+                hasIgnoredAnnotation = true;
+            }
+        }
+        return hasIgnoredAnnotation;
     }
 

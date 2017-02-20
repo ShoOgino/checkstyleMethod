@@ -9,9 +9,7 @@
         final DetailAST methodImplOpenBrace = ast.findFirstToken(TokenTypes.SLIST);
         final DetailAST methodImplCloseBrace = methodImplOpenBrace.getLastChild();
         final Predicate<DetailAST> predicate = currentNode -> {
-            return currentNode != null
-                && currentNode != methodImplCloseBrace
-                && currentNode.getLineNo() <= methodImplCloseBrace.getLineNo()
+            return currentNode != methodImplCloseBrace
                 && !TokenUtils.isCommentType(currentNode.getType());
         };
         final Optional<DetailAST> methodBody =
