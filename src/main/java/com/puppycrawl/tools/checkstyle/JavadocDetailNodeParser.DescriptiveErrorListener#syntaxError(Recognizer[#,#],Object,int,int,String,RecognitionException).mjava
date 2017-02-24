@@ -20,13 +20,13 @@
                 errorMessage = new ParseErrorMessage(lineNumber,
                         MSG_JAVADOC_MISSED_HTML_CLOSE, charPositionInLine, token.getText());
 
-                throw new ParseCancellationException(msg);
+                throw new IllegalArgumentException(msg);
             }
             else if (MSG_JAVADOC_WRONG_SINGLETON_TAG.equals(msg)) {
                 errorMessage = new ParseErrorMessage(lineNumber,
                         MSG_JAVADOC_WRONG_SINGLETON_TAG, charPositionInLine, token.getText());
 
-                throw new ParseCancellationException(msg);
+                throw new IllegalArgumentException(msg);
             }
             else {
                 final int ruleIndex = ex.getCtx().getRuleIndex();

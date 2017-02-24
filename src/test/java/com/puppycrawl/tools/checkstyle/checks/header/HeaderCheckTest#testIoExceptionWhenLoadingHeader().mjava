@@ -8,7 +8,7 @@
             check.setHeader("header");
             fail("Exception expected");
         }
-        catch (ConversionException ex) {
+        catch (IllegalArgumentException ex) {
             assertTrue(ex.getCause() instanceof IOException);
             assertEquals("unable to load header", ex.getMessage());
         }

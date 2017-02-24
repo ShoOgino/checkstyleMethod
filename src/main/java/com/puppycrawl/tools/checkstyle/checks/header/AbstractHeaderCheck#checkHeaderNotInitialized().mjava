@@ -1,10 +1,10 @@
     /**
      * Called before initializing the header.
-     * @throws ConversionException if header has already been set
+     * @throws IllegalArgumentException if header has already been set
      */
     private void checkHeaderNotInitialized() {
         if (!readerLines.isEmpty()) {
-            throw new ConversionException(
+            throw new IllegalArgumentException(
                     "header has already been set - "
                     + "set either header or headerFile, not both");
         }

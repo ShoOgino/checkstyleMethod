@@ -5,7 +5,7 @@
          * @param text the text of the suppression.
          * @param reportingOn {@code true} if the tag turns checkstyle reporting.
          * @param filter the {@code SuppressionCommentFilter} with the context
-         * @throws ConversionException if unable to parse expanded text.
+         * @throws IllegalArgumentException if unable to parse expanded text.
          */
         public Tag(int line, int column, String text, boolean reportingOn,
                    SuppressionCommentFilter filter) {
@@ -46,9 +46,8 @@
                 }
             }
             catch (final PatternSyntaxException ex) {
-                throw new ConversionException(
-                    "unable to parse expanded comment " + format,
-                    ex);
+                throw new IllegalArgumentException(
+                    "unable to parse expanded comment " + format, ex);
             }
         }
 
