@@ -4,15 +4,7 @@
         final DetailAST rcurly = details.rcurly;
 
         if (rcurly != null) {
-            final String violation;
-            if (shouldStartLine) {
-                final String targetSourceLine = getLines()[rcurly.getLineNo() - 1];
-                violation = validate(details, option, true, targetSourceLine);
-            }
-            else {
-                violation = validate(details, option, false, "");
-            }
-
+            final String violation = validate(details);
             if (!violation.isEmpty()) {
                 log(rcurly, violation, "}", rcurly.getColumnNo() + 1);
             }
