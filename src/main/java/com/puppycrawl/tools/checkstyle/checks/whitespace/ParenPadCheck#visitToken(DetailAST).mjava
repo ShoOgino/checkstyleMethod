@@ -17,7 +17,8 @@
             case TokenTypes.ENUM_CONSTANT_DEF:
             case TokenTypes.LITERAL_NEW:
             case TokenTypes.LITERAL_SYNCHRONIZED:
-                visitNewEnumConstDefAnnotationSync(ast);
+            case TokenTypes.LAMBDA:
+                visitTokenWithOptionalParentheses(ast);
                 break;
             default:
                 processLeft(ast.findFirstToken(TokenTypes.LPAREN));
