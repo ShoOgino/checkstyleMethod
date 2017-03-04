@@ -20,5 +20,10 @@
                 validateCommitMessage("minor: Test\n\n"));
         assertEquals("should accept commit message that ends properly", 0,
                 validateCommitMessage("minor: Test. Test"));
+        assertEquals("should accept commit message with less than or equal to 200 characters",
+                4, validateCommitMessage("minor: Test Test Test Test Test"
+                + "Test Test Test Test Test Test Test Test Test Test Test Test Test Test "
+                + "Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test "
+                + "Test Test Test Test Test Test Test  Test Test Test Test Test Test"));
     }
 
