@@ -1,0 +1,15 @@
+    public void goodCase() throws FooExceptionForTestComma, BarExceptionForTestComma
+    {
+        int i = 0;
+        String s = "ffffooooString";
+        s
+                .isEmpty(); //good wrapping
+        s.isEmpty();
+        try {
+            foo(i, s);
+        } catch (FooExceptionForTestComma |
+                BarExceptionForTestComma e) {}
+        foo(i,
+                s); //good wrapping
+    }
+

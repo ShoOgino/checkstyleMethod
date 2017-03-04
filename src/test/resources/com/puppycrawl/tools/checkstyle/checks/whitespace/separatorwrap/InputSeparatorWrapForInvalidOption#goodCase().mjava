@@ -1,0 +1,15 @@
+    public void goodCase() throws FooExceptionForInvalidOption, BarExceptionForInvalidOption
+    {
+        int i = 0;
+        String s = "ffffooooString";
+        s
+                .isEmpty(); //good wrapping
+        s.isEmpty();
+        try {
+            foo(i, s);
+        } catch (FooExceptionForInvalidOption |
+                BarExceptionForInvalidOption e) {}
+        foo(i,
+                s); //good wrapping
+    }
+
