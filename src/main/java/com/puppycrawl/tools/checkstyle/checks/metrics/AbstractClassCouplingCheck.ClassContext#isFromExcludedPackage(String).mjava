@@ -1,0 +1,21 @@
+        /**
+         * Checks if given class should be ignored as it belongs to excluded package.
+         * @param candidateClassName class to check
+         * @return true if we should not count this class.
+         */
+        private boolean isFromExcludedPackage(String candidateClassName) {
+            String classNameWithPackage = candidateClassName;
+            if (!candidateClassName.contains(DOT)) {
+                classNameWithPackage = parentContext.getClassNameWithPackage(candidateClassName)
+                    .orElse("");
+            }
+            boolean isFromExcludedPackage = false;
+            if (classNameWithPackage.contains(DOT)) {
+                final int lastDotIndex = classNameWithPackage.lastIndexOf(DOT);
+                final String packageName = classNameWithPackage.substring(0, lastDotIndex);
+                isFromExcludedPackage = packageName.startsWith("java.lang")
+                    || excludedPackages.contains(packageName);
+            }
+            return isFromExcludedPackage;
+        }
+

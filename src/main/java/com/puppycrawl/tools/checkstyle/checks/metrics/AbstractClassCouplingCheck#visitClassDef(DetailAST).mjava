@@ -3,11 +3,7 @@
      * @param classDef class definition node.
      */
     private void visitClassDef(DetailAST classDef) {
-        contextStack.push(context);
-        final String className =
-            classDef.findFirstToken(TokenTypes.IDENT).getText();
-        context = new Context(className,
-                               classDef.getLineNo(),
-                               classDef.getColumnNo());
+        final String className = classDef.findFirstToken(TokenTypes.IDENT).getText();
+        fileContext.createNewClassContext(className, classDef.getLineNo(), classDef.getColumnNo());
     }
 

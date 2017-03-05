@@ -5,7 +5,7 @@
          */
         private boolean isSignificant(String candidateClassName) {
             boolean result = !excludedClasses.contains(candidateClassName)
-                    && !candidateClassName.startsWith("java.lang.");
+                && !isFromExcludedPackage(candidateClassName);
             if (result) {
                 for (Pattern pattern : excludeClassesRegexps) {
                     if (pattern.matcher(candidateClassName).matches()) {

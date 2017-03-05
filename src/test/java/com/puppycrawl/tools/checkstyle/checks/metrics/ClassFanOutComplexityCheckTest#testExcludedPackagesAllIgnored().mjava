@@ -1,0 +1,17 @@
+    @Test
+    public void testExcludedPackagesAllIgnored() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ClassFanOutComplexityCheck.class);
+
+        checkConfig.addAttribute("max", "0");
+        checkConfig.addAttribute("excludedPackages",
+            "com.puppycrawl.tools.checkstyle.checks.metrics.inputs.a.aa,"
+                + "com.puppycrawl.tools.checkstyle.checks.metrics.inputs.a.ab,"
+                + "com.puppycrawl.tools.checkstyle.checks.metrics.inputs.b,"
+                + "com.puppycrawl.tools.checkstyle.checks.metrics.inputs.c");
+
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig,
+            getPath("InputClassFanOutComplexityExcludedPackagesAllIgnored.java"), expected);
+    }
+

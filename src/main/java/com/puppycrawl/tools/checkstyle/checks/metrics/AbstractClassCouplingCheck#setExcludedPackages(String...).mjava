@@ -1,0 +1,19 @@
+    /**
+     * Sets user-excluded pakcages to ignore. All exlcuded packages should end with a period,
+     * so it also appends a dot to a package name.
+     * @param excludedPackages the list of packages to ignore.
+     */
+    public final void setExcludedPackages(String... excludedPackages) {
+        final List<String> invalidIdentifiers = Arrays.stream(excludedPackages)
+            .filter(x -> !CommonUtils.isName(x))
+            .collect(Collectors.toList());
+        if (!invalidIdentifiers.isEmpty()) {
+            throw new IllegalArgumentException(
+                "the following values are not valid identifiers: "
+                    + invalidIdentifiers.stream().collect(Collectors.joining(", ", "[", "]")));
+        }
+
+        this.excludedPackages = Collections.unmodifiableSet(
+            Arrays.stream(excludedPackages).collect(Collectors.toSet()));
+    }
+

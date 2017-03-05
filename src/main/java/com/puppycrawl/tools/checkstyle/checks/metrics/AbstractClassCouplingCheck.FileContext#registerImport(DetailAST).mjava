@@ -1,0 +1,14 @@
+        /**
+         * Registers given import. This allows us to track imported classes.
+         * @param imp import definition.
+         */
+        public void registerImport(DetailAST imp) {
+            final FullIdent ident = FullIdent.createFullIdent(
+                imp.getLastChild().getPreviousSibling());
+            final String fullName = ident.getText();
+            if (fullName.charAt(fullName.length() - 1) != '*') {
+                final int lastDot = fullName.lastIndexOf(DOT);
+                importedClassPackage.put(fullName.substring(lastDot + 1), fullName);
+            }
+        }
+

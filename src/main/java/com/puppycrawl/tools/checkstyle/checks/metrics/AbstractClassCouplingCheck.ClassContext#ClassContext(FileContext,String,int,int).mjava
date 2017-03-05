@@ -1,10 +1,12 @@
         /**
          * Create new context associated with given class.
+         * @param parentContext Parent file context.
          * @param className name of the given class.
          * @param lineNo line of class definition.
          * @param columnNo column of class definition.
          */
-        Context(String className, int lineNo, int columnNo) {
+        ClassContext(FileContext parentContext, String className, int lineNo, int columnNo) {
+            this.parentContext = parentContext;
             this.className = className;
             this.lineNo = lineNo;
             this.columnNo = columnNo;

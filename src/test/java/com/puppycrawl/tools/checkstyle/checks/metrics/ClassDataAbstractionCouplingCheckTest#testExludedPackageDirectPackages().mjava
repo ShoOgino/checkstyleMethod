@@ -1,0 +1,18 @@
+    @Test
+    public void testExludedPackageDirectPackages() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createCheckConfig(ClassDataAbstractionCouplingCheck.class);
+
+        checkConfig.addAttribute("max", "0");
+        checkConfig.addAttribute("excludedPackages",
+            "com.puppycrawl.tools.checkstyle.checks.metrics.inputs.c,"
+                + "com.puppycrawl.tools.checkstyle.checks.metrics.inputs.b");
+
+        final String[] expected = {
+            "8:1: " + getCheckMessage(MSG_KEY, 2, 0, "[AAClass, ABClass]"),
+        };
+
+        verify(checkConfig,
+            getPath("InputClassCouplingExcludedPackagesDirectPackages.java"), expected);
+    }
+
