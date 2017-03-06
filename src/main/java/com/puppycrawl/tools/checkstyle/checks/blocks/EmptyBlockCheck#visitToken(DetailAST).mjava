@@ -1,15 +1,6 @@
     @Override
     public void visitToken(DetailAST ast) {
-        final DetailAST slistToken = ast.findFirstToken(TokenTypes.SLIST);
-        final DetailAST leftCurly;
-
-        if (slistToken == null) {
-            leftCurly = ast.findFirstToken(TokenTypes.LCURLY);
-        }
-        else {
-            leftCurly = slistToken;
-        }
-
+        final DetailAST leftCurly = findLeftCurly(ast);
         if (leftCurly != null) {
             if (option == BlockOption.STMT) {
                 final boolean emptyBlock;

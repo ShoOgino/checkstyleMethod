@@ -1,0 +1,23 @@
+    /**
+     * Calculates the left curly corresponding to the block to be checked.
+     *
+     * @param ast a {@code DetailAST} value
+     * @return the left curly corresponding to the block to be checked
+     */
+    private static DetailAST findLeftCurly(DetailAST ast) {
+        final DetailAST leftCurly;
+        final DetailAST slistAST = ast.findFirstToken(TokenTypes.SLIST);
+        if (ast.getType() == TokenTypes.LITERAL_CASE
+                && ast.getNextSibling() != null
+                && ast.getNextSibling().getFirstChild().getType() == TokenTypes.SLIST) {
+            leftCurly = ast.getNextSibling().getFirstChild();
+        }
+        else if (slistAST == null) {
+            leftCurly = ast.findFirstToken(TokenTypes.LCURLY);
+        }
+        else {
+            leftCurly = slistAST;
+        }
+        return leftCurly;
+    }
+
