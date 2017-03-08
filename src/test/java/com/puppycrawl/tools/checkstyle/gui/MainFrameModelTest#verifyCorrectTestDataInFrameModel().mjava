@@ -1,0 +1,20 @@
+    private void verifyCorrectTestDataInFrameModel() {
+        assertEquals(testData, model.getCurrentFile());
+
+        final String expectedTitle = "Checkstyle GUI : " + FILE_NAME_TEST_DATA;
+        assertEquals(expectedTitle, model.getTitle());
+
+        assertTrue(model.isReloadActionEnabled());
+
+        final int expectedLines = 17;
+        assertEquals(expectedLines, model.getLinesToPosition().size());
+
+        final String testDataFileNameWithoutPostfix = FILE_NAME_TEST_DATA.replace(".java", "");
+        assertTrue(model.getText().contains(testDataFileNameWithoutPostfix));
+
+        final File expectedLastDirectory = new File(getPath(""));
+        assertEquals(expectedLastDirectory, model.getLastDirectory());
+
+        assertNotNull(model.getParseTreeTableModel());
+    }
+

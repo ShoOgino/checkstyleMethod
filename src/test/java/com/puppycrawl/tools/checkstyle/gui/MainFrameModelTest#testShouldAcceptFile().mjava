@@ -1,0 +1,18 @@
+    @Test
+    public void testShouldAcceptFile() {
+        final File directory = PowerMockito.mock(File.class);
+        PowerMockito.when(directory.isDirectory()).thenReturn(true);
+        assertTrue(MainFrameModel.shouldAcceptFile(directory));
+
+        final File javaFile = new File(getPath(FILE_NAME_TEST_DATA));
+        assertTrue(MainFrameModel.shouldAcceptFile(javaFile));
+
+        final File nonJavaFile = PowerMockito.mock(File.class);
+        PowerMockito.when(nonJavaFile.isDirectory()).thenReturn(false);
+        PowerMockito.when(nonJavaFile.getName()).thenReturn(FILE_NAME_NON_JAVA);
+        assertFalse(MainFrameModel.shouldAcceptFile(nonJavaFile));
+
+        final File nonExistentFile = new File(getPath(FILE_NAME_NON_EXISTENT));
+        assertFalse(MainFrameModel.shouldAcceptFile(nonExistentFile));
+    }
+
