@@ -1,0 +1,28 @@
+    private static void checkTree(final String filename, final DetailAST root) {
+        DetailAST curNode = root;
+        DetailAST parent = null;
+        DetailAST prev = null;
+        while (curNode != null) {
+            checkNode(curNode, parent, prev, filename, root);
+            DetailAST toVisit = curNode.getFirstChild();
+            if (toVisit != null) {
+                parent = curNode;
+                curNode = toVisit;
+                prev = null;
+            } else {
+                while (curNode != null && toVisit == null) {
+                    toVisit = curNode.getNextSibling();
+                    if (toVisit != null) {
+                        prev = curNode;
+                        curNode = toVisit;
+                    } else {
+                        curNode = curNode.getParent();
+                        if (curNode != null) {
+                            parent = curNode.getParent();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
