@@ -2,9 +2,9 @@
     public void testNumberFormatException() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(TempCheck.class);
         final String[] expected = {
-            "3: " + getCheckMessage(MSG_KEY_PARSE_ERROR, 52, "no viable "
-                + "alternative at input '<ul><li>a' {@link EntityEntry} (by way of {@link #;' "
-                + "while parsing HTML_TAG"),
+            "3: " + getCheckMessage(MSG_JAVADOC_PARSE_RULE_ERROR, 52, "no viable "
+                + "alternative at input '<ul><li>a' {@link EntityEntry} (by way of {@link #;'",
+                "HTML_TAG"),
         };
         verify(checkConfig, getPath("InputTestNumberFormatException.java"), expected);
     }

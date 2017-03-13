@@ -9,6 +9,6 @@
         final Set<LocalizedMessage> messages = check.process(impossibleFile, lines);
         assertEquals(1, messages.size());
         final Iterator<LocalizedMessage> iterator = messages.iterator();
-        assertEquals("Unable to open ''.", iterator.next().getMessage());
+        assertEquals(getCheckMessage(MSG_KEY_UNABLE_OPEN, ""), iterator.next().getMessage());
     }
 

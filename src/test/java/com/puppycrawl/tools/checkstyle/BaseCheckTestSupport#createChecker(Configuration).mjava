@@ -8,11 +8,6 @@
             throws Exception {
         final DefaultConfiguration dc = createCheckerConfig(checkConfig);
         final Checker checker = new Checker();
-        // make sure the tests always run with default error messages (language-invariant)
-        // so the tests don't fail in supported locales like German
-        final Locale locale = Locale.ROOT;
-        checker.setLocaleCountry(locale.getCountry());
-        checker.setLocaleLanguage(locale.getLanguage());
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
         checker.configure(dc);
         checker.addListener(new BriefUtLogger(stream));

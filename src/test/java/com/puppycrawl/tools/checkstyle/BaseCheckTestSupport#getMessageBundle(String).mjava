@@ -1,0 +1,10 @@
+    private static String getMessageBundle(String className) {
+        final int endIndex = className.lastIndexOf('.');
+        final String messages = "messages";
+        if (endIndex < 0) {
+            return messages;
+        }
+        final String packageName = className.substring(0, endIndex);
+        return packageName + "." + messages;
+    }
+

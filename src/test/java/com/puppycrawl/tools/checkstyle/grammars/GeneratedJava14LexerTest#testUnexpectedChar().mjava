@@ -7,8 +7,8 @@
             createCheckConfig(MemberNameCheck.class);
         // input is 'ÃЯ'
         final String[] expected = {
-            "7:9: Name '" + (char) 0xC3 + (char) 0x042F
-                 + "' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "7:9: " + getCheckMessage(MemberNameCheck.class, MSG_INVALID_PATTERN,
+                    "" + (char) 0xC3 + (char) 0x042F, "^[a-z][a-zA-Z0-9]*$"),
         };
         verify(checkConfig, getPath("InputGrammar.java"), expected);
     }

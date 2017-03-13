@@ -2,6 +2,9 @@
             final IndentComment... linesWithWarn) throws Exception {
         final Checker checker = createChecker(config);
         checker.addListener(new IndentAudit(linesWithWarn));
+        checker.setLocaleCountry(Locale.ROOT.getCountry());
+        checker.setLocaleLanguage(Locale.ROOT.getLanguage());
+        checker.finishLocalSetup();
         verify(checker, new File[] {new File(filePath)}, filePath, expected);
     }
 
