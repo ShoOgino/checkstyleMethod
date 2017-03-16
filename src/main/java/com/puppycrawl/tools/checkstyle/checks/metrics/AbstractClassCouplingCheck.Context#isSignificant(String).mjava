@@ -4,7 +4,16 @@
          * @return true if we should count this class.
          */
         private boolean isSignificant(String candidateClassName) {
-            return !excludedClasses.contains(candidateClassName)
+            boolean result = !excludedClasses.contains(candidateClassName)
                     && !candidateClassName.startsWith("java.lang.");
+            if (result) {
+                for (Pattern pattern : excludeClassesRegexps) {
+                    if (pattern.matcher(candidateClassName).matches()) {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+            return result;
         }
 
