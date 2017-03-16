@@ -1,0 +1,8 @@
+        private String getExpectedMessagePostfix(final String messageKey) {
+            final String msg = getCheckMessage(IndentationCheck.class, messageKey,
+                    FAKE_ARGUMENT_ZERO, indent + indentOffset, expectedWarning);
+            final int indexOfMsgPostfix = msg.indexOf(FAKE_ARGUMENT_ZERO)
+                    + FAKE_ARGUMENT_ZERO.length();
+            return msg.substring(indexOfMsgPostfix);
+        }
+

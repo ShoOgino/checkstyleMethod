@@ -11,11 +11,14 @@
             final IndentComment comment = comments[position];
             position++;
 
-            assertTrue(
-                    "input expected warning #" + position + " at line " + comment.getLineNumber()
-                            + " to report '" + comment.getExpectedMessage() + "' but got instead: "
-                            + line + ": " + message,
-                    line == comment.getLineNumber()
-                            && message.endsWith(comment.getExpectedMessage()));
+            final String possibleExceptedMessages = Arrays.stream(comment.getExpectedMessages())
+                    .reduce("", (cur, next) -> cur + "\"" + next + "\", ");
+            final String assertMessage = String.format(
+                    Locale.ROOT,
+                    "input expected warning #%d at line %d to report one of the following: %s"
+                            + "but got instead: %d: %s",
+                    position, comment.getLineNumber(), possibleExceptedMessages, line, message);
+            assertTrue(assertMessage, line == comment.getLineNumber()
+                    && Arrays.stream(comment.getExpectedMessages()).anyMatch(message::endsWith));
         }
 

@@ -46,11 +46,7 @@
             "112: " + getCheckMessage(MSG_ERROR_MULTI, "array initialization rcurly", 6, "8, 12"),
         };
 
-        final Checker checker = createChecker(checkConfig);
-        checker.setLocaleCountry(Locale.ROOT.getCountry());
-        checker.setLocaleLanguage(Locale.ROOT.getLanguage());
-        checker.finishLocalSetup();
         //Test input for this test case is not checked due to issue #693.
-        verify(checker, fileName, expected);
+        verify(checkConfig, fileName, expected);
     }
 

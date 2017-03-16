@@ -1,0 +1,16 @@
+        public String[] getExpectedMessages() {
+            final String[] expectedMessages;
+            if (expectedWarning.contains(",")) {
+                expectedMessages = new String[] {
+                    getExpectedMessagePostfix(MSG_ERROR_MULTI),
+                    getExpectedMessagePostfix(MSG_CHILD_ERROR_MULTI),
+                };
+            } else {
+                expectedMessages = new String[] {
+                    getExpectedMessagePostfix(MSG_ERROR),
+                    getExpectedMessagePostfix(MSG_CHILD_ERROR),
+                };
+            }
+            return expectedMessages;
+        }
+
