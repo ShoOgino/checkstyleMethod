@@ -3,7 +3,7 @@
         String firstSentence = getFirstSentence(ast);
         final int endOfSentence = firstSentence.lastIndexOf(period);
         if (endOfSentence == -1) {
-            if (!firstSentence.trim().startsWith("{@inheritDoc}")) {
+            if (!isOnlyInheritDoc(ast)) {
                 log(ast.getLineNumber(), MSG_SUMMARY_FIRST_SENTENCE);
             }
         }

@@ -1,0 +1,32 @@
+    /**
+     * Finds if inheritDoc is placed properly in java doc.
+     * @param ast Javadoc root node.
+     * @return true if inheritDoc is valid or false.
+     */
+    private static boolean isOnlyInheritDoc(DetailNode ast) {
+        boolean extraTextFound = false;
+        boolean containsInheritDoc = false;
+        for (DetailNode child : ast.getChildren()) {
+            if (child.getType() == JavadocTokenTypes.TEXT) {
+                if (!child.getText().trim().isEmpty()) {
+                    extraTextFound = true;
+                }
+            }
+            else if (child.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG) {
+                if (child.getChildren()[1].getType() == JavadocTokenTypes.INHERIT_DOC_LITERAL) {
+                    containsInheritDoc = true;
+                }
+                else {
+                    extraTextFound = true;
+                }
+            }
+            else if (!SKIP_TOKENS.contains(child.getType())) {
+                extraTextFound = true;
+            }
+            if (extraTextFound) {
+                break;
+            }
+        }
+        return containsInheritDoc && !extraTextFound;
+    }
+
