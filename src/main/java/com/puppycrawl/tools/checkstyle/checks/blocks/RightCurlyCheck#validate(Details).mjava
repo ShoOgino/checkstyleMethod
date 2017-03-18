@@ -6,16 +6,14 @@
      */
     private String validate(Details details) {
         final DetailAST rcurly = details.rcurly;
-        final DetailAST lcurly = details.lcurly;
         final DetailAST nextToken = details.nextToken;
         final boolean shouldCheckLastRcurly = details.shouldCheckLastRcurly;
         String violation = "";
-        if (option == RightCurlyOption.SAME
-                && !hasLineBreakBefore(rcurly)
-                && lcurly.getLineNo() != rcurly.getLineNo()) {
+        if (shouldHaveLineBreakBefore(option, details)) {
             violation = MSG_KEY_LINE_BREAK_BEFORE;
         }
-        else if (shouldCheckLastRcurly) {
+        else if (shouldCheckLastRcurly
+                 && option != RightCurlyOption.ALONE) {
             if (rcurly.getLineNo() == nextToken.getLineNo()) {
                 violation = MSG_KEY_LINE_ALONE;
             }
