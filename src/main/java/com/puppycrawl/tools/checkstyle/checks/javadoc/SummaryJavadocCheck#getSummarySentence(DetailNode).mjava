@@ -1,0 +1,31 @@
+    /**
+     * Checks if period is at the end of sentence.
+     * @param ast Javadoc root node.
+     * @return error string
+     */
+    private String getSummarySentence(DetailNode ast) {
+        boolean flag = true;
+        final StringBuilder result = new StringBuilder();
+        for (DetailNode child : ast.getChildren()) {
+            if (ALLOWED_TYPES.contains(child.getType())) {
+                result.append(child.getText());
+            }
+            else if (child.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG
+                    && getContentOfChild(child).equals(INHERIT_DOC)) {
+                result.append(INHERIT_DOC);
+            }
+            else if (child.getType() == JavadocTokenTypes.HTML_ELEMENT
+                    && CommonUtils.isBlank(result.toString().trim())) {
+                result.append(getStringInsideTag(result.toString(),
+                        child.getChildren()[0].getChildren()[0]));
+            }
+            else if (child.getType() == JavadocTokenTypes.JAVADOC_TAG) {
+                flag = false;
+            }
+            if (!flag) {
+                break;
+            }
+        }
+        return result.toString().trim();
+    }
+

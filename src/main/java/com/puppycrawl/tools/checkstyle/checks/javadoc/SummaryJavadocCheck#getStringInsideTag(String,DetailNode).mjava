@@ -1,0 +1,18 @@
+    /**
+     * Concatenates string within text of html tags.
+     * @param result javadoc string
+     * @param detailNode javadoc tag node
+     * @return java doc tag content appended in result
+     */
+    private String getStringInsideTag(String result, DetailNode detailNode) {
+        final StringBuilder contents = new StringBuilder(result);
+        DetailNode tempNode = detailNode;
+        while (tempNode != null) {
+            if (tempNode.getType() == JavadocTokenTypes.TEXT) {
+                contents.append(tempNode.getText());
+            }
+            tempNode = JavadocUtils.getNextSibling(tempNode);
+        }
+        return contents.toString();
+    }
+

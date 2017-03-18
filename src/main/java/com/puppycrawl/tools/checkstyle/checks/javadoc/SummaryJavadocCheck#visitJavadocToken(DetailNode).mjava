@@ -2,12 +2,16 @@
     public void visitJavadocToken(DetailNode ast) {
         String firstSentence = getFirstSentence(ast);
         final int endOfSentence = firstSentence.lastIndexOf(period);
-        if (endOfSentence == -1) {
-            if (!isOnlyInheritDoc(ast)) {
-                log(ast.getLineNumber(), MSG_SUMMARY_FIRST_SENTENCE);
-            }
+        final String summaryDoc = getSummarySentence(ast);
+        if (summaryDoc.isEmpty()) {
+            log(ast.getLineNumber(), MSG_SUMMARY_JAVADOC_MISSING);
         }
-        else {
+        else if (!period.isEmpty()
+                && !summaryDoc.contains(period)
+                && !summaryDoc.equals(INHERIT_DOC)) {
+            log(ast.getLineNumber(), MSG_SUMMARY_FIRST_SENTENCE);
+        }
+        if (endOfSentence != -1) {
             firstSentence = firstSentence.substring(0, endOfSentence);
             if (containsForbiddenFragment(firstSentence)) {
                 log(ast.getLineNumber(), MSG_SUMMARY_JAVADOC);

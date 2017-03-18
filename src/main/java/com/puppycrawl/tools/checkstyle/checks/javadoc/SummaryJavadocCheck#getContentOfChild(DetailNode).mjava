@@ -1,0 +1,13 @@
+    /**
+     * Returns content when token type is javadoc inline tag.
+     * @param child javadoc inline tag ast.
+     * @return content of child nodes as string.
+     */
+    private static String getContentOfChild(DetailNode child) {
+        final StringBuilder contents = new StringBuilder();
+        for (DetailNode node : child.getChildren()) {
+            contents.append(node.getText().trim());
+        }
+        return contents.toString();
+    }
+

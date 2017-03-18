@@ -3,17 +3,20 @@
         checkConfig.addAttribute("forbiddenSummaryFragments",
                 "^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )");
         final String[] expected = {
-            "14: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
+            "14: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "32: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
             "37: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
             "47: " + getCheckMessage(MSG_SUMMARY_JAVADOC),
+            "53: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "58: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
             "58: " + getCheckMessage(MSG_SUMMARY_JAVADOC),
-            "69: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
+            "69: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
             "83: " + getCheckMessage(MSG_SUMMARY_JAVADOC),
-            "103: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
+            "103: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
             "116: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
             "121: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
-            "126: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
-            "131: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
+            "126: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "131: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
         };
         verify(checkConfig, getPath("InputSummaryJavadocIncorrect.java"), expected);
     }
