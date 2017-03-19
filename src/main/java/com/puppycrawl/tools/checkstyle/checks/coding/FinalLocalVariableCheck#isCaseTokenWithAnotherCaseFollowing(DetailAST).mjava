@@ -1,0 +1,11 @@
+    /**
+     * If token is CASE_GROUP and there is another {@code case} following.
+     * @param ast token to be checked
+     * @return true if token is CASE_GROUP and there is another {@code case} following, else false
+     */
+    private static boolean isCaseTokenWithAnotherCaseFollowing(DetailAST ast) {
+        return ast.getType() == TokenTypes.CASE_GROUP
+                && findLastChildWhichContainsSpecifiedToken(
+                        ast.getParent(), TokenTypes.CASE_GROUP, TokenTypes.SLIST) != ast;
+    }
+
