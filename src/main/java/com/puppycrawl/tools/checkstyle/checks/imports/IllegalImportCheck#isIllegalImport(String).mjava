@@ -1,16 +1,16 @@
     /**
-     * Checks if an import is from a package that must not be used.
+     * Checks if an import is from a package or class name that must not be used.
      * @param importText the argument of the import keyword
-     * @return if {@code importText} contains an illegal package prefix
+     * @return if {@code importText} is illegal import
      */
     private boolean isIllegalImport(String importText) {
-        boolean isIllegal = false;
-        for (String element : illegalPkgs) {
-            if (importText.startsWith(element + ".")) {
-                isIllegal = true;
-                break;
-            }
+        final boolean result;
+        if (regexp) {
+            result = isIllegalImportByRegularExpressions(importText);
         }
-        return isIllegal;
+        else {
+            result = isIllegalImportByPackagesAndClassNames(importText);
+        }
+        return result;
     }
 

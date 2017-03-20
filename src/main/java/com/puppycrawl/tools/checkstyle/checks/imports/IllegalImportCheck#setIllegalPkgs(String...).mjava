@@ -4,5 +4,9 @@
      */
     public final void setIllegalPkgs(String... from) {
         illegalPkgs = from.clone();
+        illegalPkgsRegexps.clear();
+        for (String illegalPkg : illegalPkgs) {
+            illegalPkgsRegexps.add(CommonUtils.createPattern("^" + illegalPkg + "\\..*"));
+        }
     }
 

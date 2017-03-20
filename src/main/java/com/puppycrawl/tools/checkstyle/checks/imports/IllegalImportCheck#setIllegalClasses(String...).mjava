@@ -1,0 +1,12 @@
+    /**
+     * Set the list of illegal classes.
+     * @param from array of illegal classes
+     */
+    public void setIllegalClasses(String... from) {
+        illegalClasses = from.clone();
+        illegalClassesRegexps.clear();
+        for (String illegalClass : illegalClasses) {
+            illegalClassesRegexps.add(CommonUtils.createPattern(illegalClass));
+        }
+    }
+
