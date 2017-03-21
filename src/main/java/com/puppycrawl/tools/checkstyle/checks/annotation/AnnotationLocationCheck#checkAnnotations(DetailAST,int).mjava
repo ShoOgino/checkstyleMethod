@@ -1,9 +1,11 @@
     /**
-     * Some javadoc.
-     * @param modifierNode Some javadoc.
-     * @param correctLevel Some javadoc.
+     * Checks annotations positions in code:
+     * 1) Checks whether the annotations locations are correct.
+     * 2) Checks whether the annotations have the valid indentation level.
+     * @param modifierNode modifiers node.
+     * @param correctIndentation correct indentation of the annotation.
      */
-    private void checkAnnotations(DetailAST modifierNode, int correctLevel) {
+    private void checkAnnotations(DetailAST modifierNode, int correctIndentation) {
         DetailAST annotation = modifierNode.getFirstChild();
 
         while (annotation != null && annotation.getType() == TokenTypes.ANNOTATION) {
@@ -13,9 +15,9 @@
                 log(annotation.getLineNo(),
                         MSG_KEY_ANNOTATION_LOCATION_ALONE, getAnnotationName(annotation));
             }
-            else if (annotation.getColumnNo() != correctLevel && !hasNodeBefore(annotation)) {
+            else if (annotation.getColumnNo() != correctIndentation && !hasNodeBefore(annotation)) {
                 log(annotation.getLineNo(), MSG_KEY_ANNOTATION_LOCATION,
-                    getAnnotationName(annotation), annotation.getColumnNo(), correctLevel);
+                    getAnnotationName(annotation), annotation.getColumnNo(), correctIndentation);
             }
             annotation = annotation.getNextSibling();
         }

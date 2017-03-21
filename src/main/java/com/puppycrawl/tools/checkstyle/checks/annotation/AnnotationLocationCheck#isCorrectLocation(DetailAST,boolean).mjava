@@ -1,8 +1,17 @@
     /**
-     * Some javadoc.
-     * @param annotation Some javadoc.
-     * @param hasParams Some javadoc.
-     * @return Some javadoc.
+     * Checks whether an annotation has a correct location.
+     * Annotation location is considered correct
+     * if {@link AnnotationLocationCheck#allowSamelineMultipleAnnotations} is set to true.
+     * The method also:
+     * 1) checks parameterized annotation location considering
+     * the value of {@link AnnotationLocationCheck#allowSamelineParameterizedAnnotation};
+     * 2) checks parameterless annotation location considering
+     * the value of {@link AnnotationLocationCheck#allowSamelineSingleParameterlessAnnotation};
+     * 3) checks annotation location considering the elements
+     * of {@link AnnotationLocationCheck#SINGLELINE_ANNOTATION_PARENTS};
+     * @param annotation annotation node.
+     * @param hasParams whether an annotation has parameters.
+     * @return true if the annotation has a correct location.
      */
     private boolean isCorrectLocation(DetailAST annotation, boolean hasParams) {
         final boolean allowingCondition;
