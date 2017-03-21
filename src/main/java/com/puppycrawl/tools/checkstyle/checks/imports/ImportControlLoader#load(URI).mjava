@@ -5,9 +5,12 @@
      * @throws CheckstyleException if an error occurs.
      */
     public static ImportControl load(final URI uri) throws CheckstyleException {
-        final InputStream inputStream;
+
+        InputStream inputStream = null;
         try {
             inputStream = uri.toURL().openStream();
+            final InputSource source = new InputSource(inputStream);
+            return load(source, uri);
         }
         catch (final MalformedURLException ex) {
             throw new CheckstyleException("syntax error in url " + uri, ex);
@@ -15,7 +18,8 @@
         catch (final IOException ex) {
             throw new CheckstyleException("unable to find " + uri, ex);
         }
-        final InputSource source = new InputSource(inputStream);
-        return load(source, uri);
+        finally {
+            closeStream(inputStream);
+        }
     }
 
