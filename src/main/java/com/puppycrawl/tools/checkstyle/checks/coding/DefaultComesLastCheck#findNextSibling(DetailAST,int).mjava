@@ -1,0 +1,20 @@
+    /**
+     * Return token type only if passed tokenType in argument is found or returns -1.
+     *
+     * @param ast root node.
+     * @param tokenType tokentype to be processed.
+     * @return token if desired token is found or else null.
+     */
+    private static DetailAST findNextSibling(DetailAST ast, int tokenType) {
+        DetailAST token = null;
+        DetailAST node = ast.getNextSibling();
+        while (node != null) {
+            if (node.getType() == tokenType) {
+                token = node;
+                break;
+            }
+            node = node.getNextSibling();
+        }
+        return token;
+    }
+
