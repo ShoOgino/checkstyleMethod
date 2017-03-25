@@ -6,12 +6,10 @@
      */
     private static boolean shouldBeAloneOnLine(RightCurlyOption bracePolicy, Details details) {
         return bracePolicy == RightCurlyOption.ALONE
-                && !isAloneOnLine(details)
-                && !isEmptyBody(details.lcurly)
+                    && shouldBeAloneOnLineWithAloneOption(details)
                 || bracePolicy == RightCurlyOption.ALONE_OR_SINGLELINE
-                && !isAloneOnLine(details)
-                && !isSingleLineBlock(details)
-                && !isAnonInnerClassInit(details.lcurly)
-                && !isEmptyBody(details.lcurly);
+                    && shouldBeAloneOnLineWithAloneOrSinglelineOption(details)
+                || details.shouldCheckLastRcurly
+                    && details.rcurly.getLineNo() == details.nextToken.getLineNo();
     }
 

@@ -5,18 +5,9 @@
      *     if there was not violation during validation.
      */
     private String validate(Details details) {
-        final DetailAST rcurly = details.rcurly;
-        final DetailAST nextToken = details.nextToken;
-        final boolean shouldCheckLastRcurly = details.shouldCheckLastRcurly;
         String violation = "";
         if (shouldHaveLineBreakBefore(option, details)) {
             violation = MSG_KEY_LINE_BREAK_BEFORE;
-        }
-        else if (shouldCheckLastRcurly
-                 && option != RightCurlyOption.ALONE) {
-            if (rcurly.getLineNo() == nextToken.getLineNo()) {
-                violation = MSG_KEY_LINE_ALONE;
-            }
         }
         else if (shouldBeOnSameLine(option, details)) {
             violation = MSG_KEY_LINE_SAME;
@@ -25,7 +16,7 @@
             violation = MSG_KEY_LINE_ALONE;
         }
         else if (shouldStartLine) {
-            final String targetSourceLine = getLines()[rcurly.getLineNo() - 1];
+            final String targetSourceLine = getLines()[details.rcurly.getLineNo() - 1];
             if (!isOnStartOfLine(details, targetSourceLine)) {
                 violation = MSG_KEY_LINE_NEW;
             }

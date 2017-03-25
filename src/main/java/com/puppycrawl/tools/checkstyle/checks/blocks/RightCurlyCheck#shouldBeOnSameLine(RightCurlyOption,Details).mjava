@@ -6,6 +6,7 @@
      */
     private static boolean shouldBeOnSameLine(RightCurlyOption bracePolicy, Details details) {
         return bracePolicy == RightCurlyOption.SAME
+                && !details.shouldCheckLastRcurly
                 && details.rcurly.getLineNo() != details.nextToken.getLineNo();
     }
 
