@@ -1,0 +1,13 @@
+    /**
+     * Update assigned variables in a temporary stack.
+     */
+    private void updateCurrentScopeAssignedVariables() {
+        final Deque<DetailAST> poppedScopeAssignedVariableData =
+                currentScopeAssignedVariables.pop();
+        final Deque<DetailAST> currentScopeAssignedVariableData =
+                currentScopeAssignedVariables.peek();
+        if (currentScopeAssignedVariableData != null) {
+            currentScopeAssignedVariableData.addAll(poppedScopeAssignedVariableData);
+        }
+    }
+

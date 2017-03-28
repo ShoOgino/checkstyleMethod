@@ -1,27 +1,12 @@
     /**
-     * Update current scope data uninitialized variable according to the previous scope data.
-     * @param prevScopeUnitializedVariableData variable for previous stack of uninitialized
-     *     variables
+     * Update current scope data uninitialized variable according to the specific scope data.
+     * @param scopeUnitializedVariableData variable for specific stack of uninitialized variables
      */
-    // -@cs[CyclomaticComplexity] Breaking apart will damage encapsulation.
-    private void updateUninitializedVariables(Deque<DetailAST> prevScopeUnitializedVariableData) {
-        // Check for only previous scope
-        for (DetailAST variable : prevScopeUnitializedVariableData) {
-            for (ScopeData scopeData : scopeStack) {
-                final FinalVariableCandidate candidate = scopeData.scope.get(variable.getText());
-                DetailAST storedVariable = null;
-                if (candidate != null) {
-                    storedVariable = candidate.variableIdent;
-                }
-                if (storedVariable != null && isSameVariables(storedVariable, variable)
-                        && !scopeData.uninitializedVariables.contains(storedVariable)) {
-                    scopeData.uninitializedVariables.push(variable);
-                }
-            }
-        }
-        // Check for rest of the scope
-        for (Deque<DetailAST> unitializedVariableData : prevScopeUninitializedVariables) {
-            for (DetailAST variable : unitializedVariableData) {
+    private void updateUninitializedVariables(Deque<DetailAST> scopeUnitializedVariableData) {
+        final Iterator<DetailAST> iterator = currentScopeAssignedVariables.peek().iterator();
+        while (iterator.hasNext()) {
+            final DetailAST assignedVariable = iterator.next();
+            for (DetailAST variable : scopeUnitializedVariableData) {
                 for (ScopeData scopeData : scopeStack) {
                     final FinalVariableCandidate candidate =
                         scopeData.scope.get(variable.getText());
@@ -31,8 +16,9 @@
                     }
                     if (storedVariable != null
                             && isSameVariables(storedVariable, variable)
-                            && !scopeData.uninitializedVariables.contains(storedVariable)) {
+                            && isSameVariables(assignedVariable, variable)) {
                         scopeData.uninitializedVariables.push(variable);
+                        iterator.remove();
                     }
                 }
             }

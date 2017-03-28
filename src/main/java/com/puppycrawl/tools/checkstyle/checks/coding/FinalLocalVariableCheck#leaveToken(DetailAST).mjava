@@ -10,16 +10,19 @@
             case TokenTypes.SLIST:
                 final Deque<DetailAST> prevScopeUnitializedVariableData =
                     prevScopeUninitializedVariables.peek();
+                boolean containsBreak = false;
                 if (ast.getParent().getType() != TokenTypes.CASE_GROUP
                     || findLastChildWhichContainsSpecifiedToken(ast.getParent().getParent(),
                             TokenTypes.CASE_GROUP, TokenTypes.SLIST) == ast.getParent()) {
+                    containsBreak = scopeStack.peek().containsBreak;
                     scope = scopeStack.pop().scope;
                     prevScopeUninitializedVariables.pop();
                 }
                 final DetailAST parent = ast.getParent();
-                if (shouldUpdateUninitializedVariables(parent)) {
-                    updateUninitializedVariables(prevScopeUnitializedVariableData);
+                if (containsBreak || shouldUpdateUninitializedVariables(parent)) {
+                    updateAllUninitializedVariables(prevScopeUnitializedVariableData);
                 }
+                updateCurrentScopeAssignedVariables();
                 break;
             default:
                 // do nothing

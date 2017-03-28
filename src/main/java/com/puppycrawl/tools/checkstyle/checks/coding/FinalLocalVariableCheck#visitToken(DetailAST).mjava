@@ -9,6 +9,7 @@
                 scopeStack.push(new ScopeData());
                 break;
             case TokenTypes.SLIST:
+                currentScopeAssignedVariables.push(new ArrayDeque<>());
                 if (ast.getParent().getType() != TokenTypes.CASE_GROUP
                     || ast.getParent().getParent().findFirstToken(TokenTypes.CASE_GROUP)
                     == ast.getParent()) {
@@ -33,18 +34,20 @@
                     insertVariable(ast);
                 }
                 break;
-
             case TokenTypes.IDENT:
                 final int parentType = ast.getParent().getType();
                 if (isAssignOperator(parentType) && isFirstChild(ast)) {
                     final Optional<FinalVariableCandidate> candidate = getFinalCandidate(ast);
                     if (candidate.isPresent()) {
                         determineAssignmentConditions(ast, candidate.get());
+                        currentScopeAssignedVariables.peek().add(ast);
                     }
                     removeFinalVariableCandidateFromStack(ast);
                 }
                 break;
-
+            case TokenTypes.LITERAL_BREAK:
+                scopeStack.peek().containsBreak = true;
+                break;
             default:
                 throw new IllegalStateException("Incorrect token type");
         }
