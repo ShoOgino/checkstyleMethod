@@ -14,9 +14,11 @@
             log("compiled on " + compileTimestamp, Project.MSG_VERBOSE);
 
             // Check for no arguments
-            if (fileName == null && fileSets.isEmpty()) {
+            if (fileName == null
+                    && fileSets.isEmpty()
+                    && paths.isEmpty()) {
                 throw new BuildException(
-                        "Must specify at least one of 'file' or nested 'fileset'.",
+                        "Must specify at least one of 'file' or nested 'fileset' or 'path'.",
                         getLocation());
             }
             if (configLocation == null) {

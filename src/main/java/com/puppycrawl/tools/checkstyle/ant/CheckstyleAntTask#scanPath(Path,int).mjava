@@ -1,0 +1,36 @@
+    /**
+     * Scans the given path and retrieves all files for the given path.
+     *
+     * @param path      A path to scan.
+     * @param pathIndex The index of the given path. Used in log messages only.
+     * @return A list of files, extracted from the given path.
+     */
+    private List<File> scanPath(Path path, int pathIndex) {
+        final String[] resources = path.list();
+        log(pathIndex + ") Scanning path " + path, Project.MSG_VERBOSE);
+        final List<File> allFiles = new ArrayList<>();
+        int concreteFilesCount = 0;
+
+        for (String resource : resources) {
+            final File file = new File(resource);
+            if (file.isFile()) {
+                concreteFilesCount++;
+                allFiles.add(file);
+            }
+            else {
+                final DirectoryScanner scanner = new DirectoryScanner();
+                scanner.setBasedir(file);
+                scanner.scan();
+                final List<File> scannedFiles = retrieveAllScannedFiles(scanner, pathIndex);
+                allFiles.addAll(scannedFiles);
+            }
+        }
+
+        if (concreteFilesCount > 0) {
+            log(String.format(Locale.ROOT, "%d) Adding %d files from path %s",
+                pathIndex, concreteFilesCount, path), Project.MSG_VERBOSE);
+        }
+
+        return allFiles;
+    }
+

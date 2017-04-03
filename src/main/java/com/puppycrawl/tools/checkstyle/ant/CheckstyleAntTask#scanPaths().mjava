@@ -1,0 +1,16 @@
+    /**
+     * Retrieves all files from the defined paths.
+     * @return a list of files defined via paths.
+     */
+    private List<File> scanPaths() {
+        final List<File> allFiles = new ArrayList<>();
+
+        for (int i = 0; i < paths.size(); i++) {
+            final Path currentPath = paths.get(i);
+            final List<File> pathFiles = scanPath(currentPath, i + 1);
+            allFiles.addAll(pathFiles);
+        }
+
+        return allFiles;
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * Retrieves all matched files from the given scanner.
+     *
+     * @param scanner  A directory scanner. Note, that {@link DirectoryScanner#scan()}
+     *                 must be called before calling this method.
+     * @param logIndex A log entry index. Used only for log messages.
+     * @return A list of files, retrieved from the given scanner.
+     */
+    private List<File> retrieveAllScannedFiles(DirectoryScanner scanner, int logIndex) {
+        final String[] fileNames = scanner.getIncludedFiles();
+        log(String.format(Locale.ROOT, "%d) Adding %d files from directory %s",
+            logIndex, fileNames.length, scanner.getBasedir()), Project.MSG_VERBOSE);
+
+        return Arrays.stream(fileNames)
+            .map(name -> scanner.getBasedir() + File.separator + name)
+            .map(File::new)
+            .collect(Collectors.toList());
+    }
+

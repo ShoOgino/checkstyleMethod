@@ -1,0 +1,22 @@
+    /**
+     * Returns the list of files (full path name) to process.
+     * @return the list of files included via the fileName, filesets and paths.
+     */
+    protected List<File> getFilesToCheck() {
+        final List<File> allFiles = new ArrayList<>();
+        if (fileName != null) {
+            // oops we've got an additional one to process, don't
+            // forget it. No sweat, it's fully resolved via the setter.
+            log("Adding standalone file for audit", Project.MSG_VERBOSE);
+            allFiles.add(new File(fileName));
+        }
+
+        final List<File> filesFromFileSets = scanFileSets();
+        allFiles.addAll(filesFromFileSets);
+
+        final List<File> filesFromPaths = scanPaths();
+        allFiles.addAll(filesFromPaths);
+
+        return allFiles;
+    }
+

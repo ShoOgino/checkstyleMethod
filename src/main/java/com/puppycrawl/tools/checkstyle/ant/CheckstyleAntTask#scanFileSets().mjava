@@ -3,29 +3,17 @@
      * @return the list of files included via the filesets.
      */
     protected List<File> scanFileSets() {
-        final List<File> list = new ArrayList<>();
-        if (fileName != null) {
-            // oops we've got an additional one to process, don't
-            // forget it. No sweat, it's fully resolved via the setter.
-            log("Adding standalone file for audit", Project.MSG_VERBOSE);
-            list.add(new File(fileName));
-        }
+        final List<File> allFiles = new ArrayList<>();
+
         for (int i = 0; i < fileSets.size(); i++) {
             final FileSet fileSet = fileSets.get(i);
             final DirectoryScanner scanner = fileSet.getDirectoryScanner(getProject());
             scanner.scan();
 
-            final String[] names = scanner.getIncludedFiles();
-            log(i + ") Adding " + names.length + " files from directory "
-                    + scanner.getBasedir(), Project.MSG_VERBOSE);
-
-            for (String element : names) {
-                final String pathname = scanner.getBasedir() + File.separator
-                        + element;
-                list.add(new File(pathname));
-            }
+            final List<File> scannedFiles = retrieveAllScannedFiles(scanner, i);
+            allFiles.addAll(scannedFiles);
         }
 
-        return list;
+        return allFiles;
     }
 

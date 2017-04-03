@@ -1,0 +1,22 @@
+    @Test
+    public final void testPathsOneFile() throws IOException {
+        // given
+        TestRootModuleChecker.reset();
+
+        final CheckstyleAntTask antTask = getCheckstyleAntTask(CUSTOM_ROOT_CONFIG_FILE);
+        final FileSet examinationFileSet = new FileSet();
+        examinationFileSet.setFile(new File(getPath(FLAWLESS_INPUT)));
+        final Path sourcePath = new Path(antTask.getProject());
+        sourcePath.addFileset(examinationFileSet);
+        antTask.addPath(sourcePath);
+
+        // when
+        antTask.execute();
+
+        // then
+        assertTrue(TestRootModuleChecker.isProcessed());
+        final List<File> filesToCheck = TestRootModuleChecker.getFilesToCheck();
+        assertThat(filesToCheck.size(), is(1));
+        assertThat(filesToCheck.get(0).getAbsolutePath(), is(getPath(FLAWLESS_INPUT)));
+    }
+
