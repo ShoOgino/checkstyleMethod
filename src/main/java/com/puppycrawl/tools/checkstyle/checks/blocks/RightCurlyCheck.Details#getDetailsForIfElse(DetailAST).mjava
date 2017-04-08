@@ -1,0 +1,37 @@
+        /**
+         * Collects validation details for LITERAL_IF and LITERAL_ELSE.
+         * @param ast a {@code DetailAST} value
+         * @return object containing all details to make a validation
+         */
+        private static Details getDetailsForIfElse(DetailAST ast) {
+            boolean shouldCheckLastRcurly = false;
+            DetailAST rcurly = null;
+            final DetailAST lcurly;
+            DetailAST nextToken;
+            final int tokenType = ast.getType();
+            if (tokenType == TokenTypes.LITERAL_IF) {
+                nextToken = ast.findFirstToken(TokenTypes.LITERAL_ELSE);
+                if (nextToken == null) {
+                    shouldCheckLastRcurly = true;
+                    nextToken = getNextToken(ast);
+                    lcurly = ast.getLastChild();
+                }
+                else {
+                    lcurly = nextToken.getPreviousSibling();
+                }
+                if (lcurly.getType() == TokenTypes.SLIST) {
+                    rcurly = lcurly.getLastChild();
+                }
+
+            }
+            else {
+                shouldCheckLastRcurly = true;
+                nextToken = getNextToken(ast);
+                lcurly = ast.getFirstChild();
+                if (lcurly.getType() == TokenTypes.SLIST) {
+                    rcurly = lcurly.getLastChild();
+                }
+            }
+            return new Details(lcurly, rcurly, nextToken, shouldCheckLastRcurly);
+        }
+

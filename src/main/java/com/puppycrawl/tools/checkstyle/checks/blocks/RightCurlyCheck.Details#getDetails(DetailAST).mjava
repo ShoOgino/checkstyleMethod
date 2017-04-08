@@ -1,0 +1,32 @@
+        /**
+         * Collects validation Details.
+         * @param ast a {@code DetailAST} value
+         * @return object containing all details to make a validation
+         */
+        private static Details getDetails(DetailAST ast) {
+            final Details details;
+            switch (ast.getType()) {
+                case TokenTypes.LITERAL_TRY:
+                case TokenTypes.LITERAL_CATCH:
+                case TokenTypes.LITERAL_FINALLY:
+                    details = getDetailsForTryCatchFinally(ast);
+                    break;
+                case TokenTypes.LITERAL_IF:
+                case TokenTypes.LITERAL_ELSE:
+                    details = getDetailsForIfElse(ast);
+                    break;
+                case TokenTypes.LITERAL_DO:
+                case TokenTypes.LITERAL_WHILE:
+                case TokenTypes.LITERAL_FOR:
+                    details = getDetailsForLoops(ast);
+                    break;
+                case TokenTypes.LAMBDA:
+                    details = getDetailsForLambda(ast);
+                    break;
+                default:
+                    details = getDetailsForOthers(ast);
+                    break;
+            }
+            return details;
+        }
+

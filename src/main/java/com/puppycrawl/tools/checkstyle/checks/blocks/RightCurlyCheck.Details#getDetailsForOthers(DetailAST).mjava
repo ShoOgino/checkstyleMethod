@@ -1,0 +1,33 @@
+        /**
+         * Collects validation details for CLASS_DEF, METHOD DEF, CTOR_DEF, STATIC_INIT, and
+         * INSTANCE_INIT.
+         * @param ast a {@code DetailAST} value
+         * @return an object containing all details to make a validation
+         */
+        private static Details getDetailsForOthers(DetailAST ast) {
+            DetailAST rcurly = null;
+            final DetailAST lcurly;
+            final DetailAST nextToken;
+            final int tokenType = ast.getType();
+            if (tokenType == TokenTypes.CLASS_DEF) {
+                final DetailAST child = ast.getLastChild();
+                lcurly = child.getFirstChild();
+                rcurly = child.getLastChild();
+                nextToken = ast;
+            }
+            else if (tokenType == TokenTypes.METHOD_DEF) {
+                lcurly = ast.findFirstToken(TokenTypes.SLIST);
+                if (lcurly != null) {
+                    // SLIST could be absent if method is abstract
+                    rcurly = lcurly.getLastChild();
+                }
+                nextToken = getNextToken(ast);
+            }
+            else {
+                lcurly = ast.findFirstToken(TokenTypes.SLIST);
+                rcurly = lcurly.getLastChild();
+                nextToken = getNextToken(ast);
+            }
+            return new Details(lcurly, rcurly, nextToken, false);
+        }
+
