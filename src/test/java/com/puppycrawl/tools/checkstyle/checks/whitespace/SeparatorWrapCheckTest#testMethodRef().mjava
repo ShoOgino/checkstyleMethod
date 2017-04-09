@@ -1,0 +1,10 @@
+    @Test
+    public void testMethodRef() throws Exception {
+        checkConfig.addAttribute("option", "NL");
+        checkConfig.addAttribute("tokens", "METHOD_REF");
+        final String[] expected = {
+            "17:56: " + getCheckMessage(MSG_LINE_NEW, "::"),
+        };
+        verify(checkConfig, getPath("InputSeparatorWrapForTestMethodRef.java"), expected);
+    }
+
