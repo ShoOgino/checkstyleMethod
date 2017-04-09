@@ -1,0 +1,40 @@
+    void foo1() {
+        Stream.of("Hello").filter(s -> {
+                return s != null;
+            }       // violation
+        ).collect(Collectors.toList());
+
+        Stream.of("Hello").filter(s -> {
+                return s != null;
+        }).collect(Collectors.toList());
+
+        Stream.of("Hello").filter(s -> {return s != null;})
+                .collect(Collectors.toList());
+
+        Stream.of("Hello").filter(s -> {return s != null;}).collect(Collectors.toList());
+
+        Stream.of("Hello").filter(s -> {
+            return s != null;}).collect(Collectors.toList()); // violation
+
+        bar(() -> {return;}, () -> {return;});
+
+        bar(() -> {
+            return;
+        }, () -> {return;});
+
+        bar(() -> {
+            return;
+        }, () -> {
+            return;
+        });
+
+        bar(() -> {
+            return;}, () -> {return;}); // violation
+
+        bar(() -> {
+            return;
+        }, () -> {
+            return;}); // violation
+
+    }
+

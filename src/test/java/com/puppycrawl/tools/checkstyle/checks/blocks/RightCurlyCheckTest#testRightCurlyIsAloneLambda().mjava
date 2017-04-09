@@ -1,0 +1,13 @@
+    @Test
+    public void testRightCurlyIsAloneLambda() throws Exception {
+        checkConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
+        checkConfig.addAttribute("tokens", "LAMBDA");
+        final String[] expected = {
+            "14:74: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 74),
+            "17:49: " + getCheckMessage(MSG_KEY_LINE_NEW, "}", 49),
+            "35:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "45:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+        };
+        verify(checkConfig, getPath("InputRightCurlyAloneLambda.java"), expected);
+    }
+

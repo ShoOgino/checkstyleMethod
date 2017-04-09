@@ -2,10 +2,10 @@
      * Collects validation details.
      * @param ast detail ast.
      * @return object that contain all details to make a validation.
+     * @noinspection SwitchStatementDensity
      */
-    // -@cs[JavaNCSS] getDetails() method is a huge SWITCH, it has to be monolithic
-    // -@cs[ExecutableStatementCount] getDetails() method is a huge SWITCH, it has to be monolithic
-    // -@cs[NPathComplexity] getDetails() method is a huge SWITCH, it has to be monolithic
+    // -@cs[JavaNCSS|ExecutableStatementCount|CyclomaticComplexity|NPathComplexity] getDetails()
+    // method is a huge SWITCH, it has to be monolithic
     private static Details getDetails(DetailAST ast) {
         // Attempt to locate the tokens to do the check
         boolean shouldCheckLastRcurly = false;
@@ -77,6 +77,18 @@
             case TokenTypes.LITERAL_DO:
                 nextToken = ast.findFirstToken(TokenTypes.DO_WHILE);
                 lcurly = ast.findFirstToken(TokenTypes.SLIST);
+                if (lcurly != null) {
+                    rcurly = lcurly.getLastChild();
+                }
+                break;
+            case TokenTypes.LAMBDA:
+                lcurly = ast.findFirstToken(TokenTypes.SLIST);
+                nextToken = getNextToken(ast);
+                if (nextToken.getType() != TokenTypes.RPAREN
+                        && nextToken.getType() != TokenTypes.COMMA) {
+                    shouldCheckLastRcurly = true;
+                    nextToken = getNextToken(nextToken);
+                }
                 if (lcurly != null) {
                     rcurly = lcurly.getLastChild();
                 }
