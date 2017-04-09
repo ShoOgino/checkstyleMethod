@@ -34,7 +34,7 @@
                         configTokens.addAll(overrideTokens);
                     }
 
-                    configTokens.addAll(CheckUtil.getTokenNameSet(check.getDefaultTokens()));
+                    configTokens.addAll(CheckUtil.getTokenNameSet(check.getRequiredTokens()));
                     checkTokens.put(checkName,
                             CheckUtil.getTokenNameSet(check.getAcceptableTokens()));
                 }
@@ -45,6 +45,7 @@
                 }
                 catch (CheckstyleException ex) {
                     // no tokens defined, so it is using default
+                    configTokens.addAll(CheckUtil.getTokenNameSet(check.getDefaultTokens()));
                 }
             }
         }
