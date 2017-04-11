@@ -1,0 +1,18 @@
+    void method1(int a) {
+        switch (a) {}
+        switch (a) {default: ; } // no violation
+        switch (a) {default: {}} // violation
+        switch (a) {
+            default:
+        }
+        switch (a) {
+            default:             // violation
+            {}
+        }
+        switch (a) {
+            default:             // violation if checking statements
+            { // text
+            }
+        }
+    }
+

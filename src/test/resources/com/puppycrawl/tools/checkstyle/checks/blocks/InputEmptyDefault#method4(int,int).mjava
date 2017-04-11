@@ -1,0 +1,25 @@
+    void method4(int a, int b) {
+        switch (a) {
+            case 1:
+            default: {}    // violation
+        }
+
+        switch (b) {
+            case 1:
+            default:       // no violation
+        }
+
+        switch (a+b) {
+            default:       // no violation
+            case 1: { }
+        }
+
+        switch (a-b) {
+            case 1:
+            default: {     // violation if checking statements
+
+            } ;
+            case 2: { }
+        }
+    }
+
