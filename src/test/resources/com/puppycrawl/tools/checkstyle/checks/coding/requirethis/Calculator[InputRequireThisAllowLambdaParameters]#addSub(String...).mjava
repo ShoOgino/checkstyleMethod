@@ -1,0 +1,9 @@
+    public void addSub(String... args) {
+
+        Calculator myApp = new Calculator();
+        IntegerMath addition = (a, b) -> a = a + b;  // NO violations
+        IntegerMath subtraction = (a, b) -> a = a - b; // NO violations
+        myApp.operateBinary(20, 10, subtraction);
+        myApp.operateBinary(a++, b, addition);  // 2 violations
+    }
+

@@ -17,7 +17,8 @@
         if (!importOrPackage
                 && !methodNameInMethodCall
                 && !typeName
-                && !isDeclarationToken(parentType)) {
+                && !isDeclarationToken(parentType)
+                && !isLambdaParameter(ast)) {
             final AbstractFrame fieldFrame = findClassFrame(ast, false);
 
             if (fieldFrame != null && ((ClassFrame) fieldFrame).hasInstanceMember(ast)) {
