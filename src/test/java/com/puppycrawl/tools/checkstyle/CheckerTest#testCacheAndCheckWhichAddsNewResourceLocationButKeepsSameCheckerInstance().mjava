@@ -1,0 +1,65 @@
+    /**
+     * It is OK to have long test method name here as it describes the test purpose.
+     * @noinspection InstanceMethodNamingConvention
+     */
+    @Test
+    public void testCacheAndCheckWhichAddsNewResourceLocationButKeepsSameCheckerInstance()
+            throws Exception {
+
+        // Use case (https://github.com/checkstyle/checkstyle/pull/3092#issuecomment-218162436):
+        // Imagine that cache exists in a file. New version of Checkstyle appear.
+        // New release contains update to a some check to have additional external resource.
+        // User update his configuration and run validation as usually.
+        // Cache should not be reused.
+
+        final DynamicalResourceHolderCheck check = new DynamicalResourceHolderCheck();
+        final String firstExternalResourceLocation = getPath("checks" + File.separator
+            + "imports" + File.separator + "import-control_one.xml");
+        check.setFirstExternalResourceLocation(firstExternalResourceLocation);
+
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
+        final File cacheFile = temporaryFolder.newFile();
+        checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
+
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.addFileSetCheck(check);
+        checker.configure(checkerConfig);
+        checker.addListener(new BriefUtLogger(stream));
+
+        final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+
+        verify(checker, pathToEmptyFile, expected);
+        final Properties cacheAfterFirstRun = new Properties();
+        cacheAfterFirstRun.load(Files.newBufferedReader(cacheFile.toPath()));
+
+        final int expectedNumberOfObjectsInCacheAfterFirstRun = 3;
+        assertEquals(expectedNumberOfObjectsInCacheAfterFirstRun, cacheAfterFirstRun.size());
+
+        // Change a list of external resources which are used by the check
+        final String secondExternalResourceLocation = "checks" + File.separator
+            + "imports" + File.separator + "import-control_one-re.xml";
+        check.setSecondExternalResourceLocation(secondExternalResourceLocation);
+
+        verify(checker, pathToEmptyFile, expected);
+        final Properties cacheAfterSecondRun = new Properties();
+        cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
+
+        assertEquals(
+            cacheAfterFirstRun.getProperty(pathToEmptyFile),
+            cacheAfterSecondRun.getProperty(pathToEmptyFile)
+        );
+        assertEquals(
+            cacheAfterFirstRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
+            cacheAfterSecondRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY)
+        );
+        assertEquals(
+            cacheAfterFirstRun.getProperty(firstExternalResourceLocation),
+            cacheAfterSecondRun.getProperty(firstExternalResourceLocation)
+        );
+        final int expectedNumberOfObjectsInCacheAfterSecondRun = 4;
+        assertEquals(expectedNumberOfObjectsInCacheAfterSecondRun, cacheAfterSecondRun.size());
+        assertNotNull(cacheAfterSecondRun.getProperty(secondExternalResourceLocation));
+    }
+

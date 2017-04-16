@@ -5,11 +5,29 @@
             new HashSet<>(), Thread.currentThread().getContextClassLoader());
         checker.setModuleFactory(factory);
         checker.configure(createCheckConfig(TranslationCheck.class));
-        checker.setCacheFile(temporaryFolder.newFile().getPath());
+
+        final File cacheFile = temporaryFolder.newFile();
+        checker.setCacheFile(cacheFile.getPath());
+
         checker.setupChild(createCheckConfig(TranslationCheck.class));
-        final File file = temporaryFolder.newFile("file.java");
-        final List<File> files = new ArrayList<>();
-        files.add(file);
+        final File tmpFile = temporaryFolder.newFile("file.java");
+        final List<File> files = new ArrayList<>(1);
+        files.add(tmpFile);
         checker.process(files);
+
+        // invoke destroy to persist cache
+        checker.destroy();
+
+        final Properties cache = new Properties();
+        cache.load(Files.newBufferedReader(cacheFile.toPath()));
+
+        // There should 2 objects in cache: processed file (file.java) and checker configuration.
+        final int expectedNumberOfObjectsInCache = 2;
+        assertEquals(expectedNumberOfObjectsInCache, cache.size());
+
+        final String expectedConfigHash = "68EE3C3B4593FD8D86159C670C504542E20C6FA0";
+        assertEquals(expectedConfigHash, cache.getProperty(PropertyCacheFile.CONFIG_HASH_KEY));
+
+        assertNotNull(cache.getProperty(tmpFile.getPath()));
     }
 

@@ -1,0 +1,43 @@
+    /**
+     * It is OK to have long test method name here as it describes the test purpose.
+     * @noinspection InstanceMethodNamingConvention
+     */
+    @Test
+    public void testCacheAndCheckWhichDoesNotImplementExternalResourceHolderInterface()
+            throws Exception {
+        assertFalse(ExternalResourceHolder.class.isAssignableFrom(HiddenFieldCheck.class));
+        final DefaultConfiguration checkConfig = createCheckConfig(HiddenFieldCheck.class);
+
+        final DefaultConfiguration treeWalkerConfig = createCheckConfig(TreeWalker.class);
+        treeWalkerConfig.addChild(checkConfig);
+
+        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyleConfig");
+        checkerConfig.addAttribute("charset", "UTF-8");
+        checkerConfig.addChild(treeWalkerConfig);
+
+        final File cacheFile = temporaryFolder.newFile();
+        checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
+
+        final Checker checker = new Checker();
+        final Locale locale = Locale.ROOT;
+        checker.setLocaleCountry(locale.getCountry());
+        checker.setLocaleLanguage(locale.getLanguage());
+        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        checker.configure(checkerConfig);
+        checker.addListener(new BriefUtLogger(stream));
+
+        final File tmpFile = temporaryFolder.newFile("file.java");
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+
+        verify(checker, tmpFile.getPath(), tmpFile.getPath(), expected);
+        final Properties cacheAfterFirstRun = new Properties();
+        cacheAfterFirstRun.load(Files.newBufferedReader(cacheFile.toPath()));
+
+        // one more time to reuse cache
+        verify(checker, tmpFile.getPath(), tmpFile.getPath(), expected);
+        final Properties cacheAfterSecondRun = new Properties();
+        cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
+
+        assertEquals(cacheAfterFirstRun, cacheAfterSecondRun);
+    }
+
