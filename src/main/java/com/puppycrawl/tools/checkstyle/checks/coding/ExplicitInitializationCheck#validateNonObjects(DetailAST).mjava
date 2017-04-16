@@ -1,0 +1,24 @@
+    /**
+     * Checks for explicit initializations made to 'false', '0' and '\0'.
+     * @param ast token being checked for explicit initializations
+     */
+    private void validateNonObjects(DetailAST ast) {
+        final DetailAST ident = ast.findFirstToken(TokenTypes.IDENT);
+        final DetailAST assign = ast.findFirstToken(TokenTypes.ASSIGN);
+        final DetailAST exprStart =
+                assign.getFirstChild().getFirstChild();
+        final DetailAST type = ast.findFirstToken(TokenTypes.TYPE);
+        final int primitiveType = type.getFirstChild().getType();
+        if (primitiveType == TokenTypes.LITERAL_BOOLEAN
+                && exprStart.getType() == TokenTypes.LITERAL_FALSE) {
+            log(ident, MSG_KEY, ident.getText(), "false");
+        }
+        if (isNumericType(primitiveType) && isZero(exprStart)) {
+            log(ident, MSG_KEY, ident.getText(), "0");
+        }
+        if (primitiveType == TokenTypes.LITERAL_CHAR
+                && isZeroChar(exprStart)) {
+            log(ident, MSG_KEY, ident.getText(), "\\0");
+        }
+    }
+

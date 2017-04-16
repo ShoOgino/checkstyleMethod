@@ -10,18 +10,8 @@
                 && exprStart.getType() == TokenTypes.LITERAL_NULL) {
                 log(ident, MSG_KEY, ident.getText(), "null");
             }
-
-            final int primitiveType = type.getFirstChild().getType();
-            if (primitiveType == TokenTypes.LITERAL_BOOLEAN
-                && exprStart.getType() == TokenTypes.LITERAL_FALSE) {
-                log(ident, MSG_KEY, ident.getText(), "false");
-            }
-            if (isNumericType(primitiveType) && isZero(exprStart)) {
-                log(ident, MSG_KEY, ident.getText(), "0");
-            }
-            if (primitiveType == TokenTypes.LITERAL_CHAR
-                && isZeroChar(exprStart)) {
-                log(ident, MSG_KEY, ident.getText(), "\\0");
+            if (!onlyObjectReferences) {
+                validateNonObjects(ast);
             }
         }
     }
