@@ -1,10 +1,12 @@
     public static Node getFirstChildElement(Node node) {
+        Node firstChildElement = null;
         for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child.getNodeType() != Node.TEXT_NODE) {
-                return child;
+                firstChildElement = child;
+                break;
             }
         }
 
-        return null;
+        return firstChildElement;
     }
 

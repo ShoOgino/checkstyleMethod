@@ -9,8 +9,9 @@
      */
     public static String getCheckMessage(Class<?> module, Locale locale, String messageKey,
             Object... arguments) {
-        final Properties pr = new Properties();
+        String checkMessage;
         try {
+            final Properties pr = new Properties();
             if (locale == Locale.ENGLISH) {
                 pr.load(module.getResourceAsStream("messages.properties"));
             }
@@ -18,11 +19,12 @@
                 pr.load(module
                         .getResourceAsStream("messages_" + locale.getLanguage() + ".properties"));
             }
+            final MessageFormat formatter = new MessageFormat(pr.getProperty(messageKey), locale);
+            checkMessage = formatter.format(arguments);
         }
         catch (IOException ex) {
-            return null;
+            checkMessage = null;
         }
-        final MessageFormat formatter = new MessageFormat(pr.getProperty(messageKey), locale);
-        return formatter.format(arguments);
+        return checkMessage;
     }
 

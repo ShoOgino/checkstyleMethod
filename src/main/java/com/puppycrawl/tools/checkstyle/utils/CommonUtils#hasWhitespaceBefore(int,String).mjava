@@ -8,11 +8,13 @@
      * @return whether there is only whitespace
      */
     public static boolean hasWhitespaceBefore(int index, String line) {
+        boolean result = true;
         for (int i = 0; i < index; i++) {
             if (!Character.isWhitespace(line.charAt(i))) {
-                return false;
+                result = false;
+                break;
             }
         }
-        return true;
+        return result;
     }
 

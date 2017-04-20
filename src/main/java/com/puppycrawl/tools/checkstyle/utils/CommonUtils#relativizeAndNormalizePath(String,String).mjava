@@ -9,11 +9,15 @@
      *     path or path if base directory is null.
      */
     public static String relativizeAndNormalizePath(final String baseDirectory, final String path) {
+        final String resultPath;
         if (baseDirectory == null) {
-            return path;
+            resultPath = path;
         }
-        final Path pathAbsolute = Paths.get(path).normalize();
-        final Path pathBase = Paths.get(baseDirectory).normalize();
-        return pathBase.relativize(pathAbsolute).toString();
+        else {
+            final Path pathAbsolute = Paths.get(path).normalize();
+            final Path pathBase = Paths.get(baseDirectory).normalize();
+            resultPath = pathBase.relativize(pathAbsolute).toString();
+        }
+        return resultPath;
     }
 

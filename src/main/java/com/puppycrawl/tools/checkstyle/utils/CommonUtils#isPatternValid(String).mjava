@@ -6,12 +6,13 @@
      * @return true if the pattern is valid false otherwise
      */
     public static boolean isPatternValid(String pattern) {
+        boolean isValid = true;
         try {
             Pattern.compile(pattern);
         }
         catch (final PatternSyntaxException ignored) {
-            return false;
+            isValid = false;
         }
-        return true;
+        return isValid;
     }
 

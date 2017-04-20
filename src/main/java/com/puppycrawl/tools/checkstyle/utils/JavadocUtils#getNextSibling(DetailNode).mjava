@@ -5,14 +5,15 @@
      * @return next sibling.
      */
     public static DetailNode getNextSibling(DetailNode node) {
+        DetailNode nextSibling = null;
         final DetailNode parent = node.getParent();
         if (parent != null) {
             final int nextSiblingIndex = node.getIndex() + 1;
             final DetailNode[] children = parent.getChildren();
             if (nextSiblingIndex <= children.length - 1) {
-                return children[nextSiblingIndex];
+                nextSibling = children[nextSiblingIndex];
             }
         }
-        return null;
+        return nextSibling;
     }
 

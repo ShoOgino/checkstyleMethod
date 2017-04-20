@@ -5,15 +5,18 @@
      * @return a token name
      */
     public static String getTokenName(int id) {
+        final String name;
         if (id == JavadocTokenTypes.EOF) {
-            return "EOF";
+            name = "EOF";
         }
-        if (id > TOKEN_VALUE_TO_NAME.length - 1) {
+        else if (id > TOKEN_VALUE_TO_NAME.length - 1) {
             throw new IllegalArgumentException(UNKNOWN_JAVADOC_TOKEN_ID_EXCEPTION_MESSAGE + id);
         }
-        final String name = TOKEN_VALUE_TO_NAME[id];
-        if (name == null) {
-            throw new IllegalArgumentException(UNKNOWN_JAVADOC_TOKEN_ID_EXCEPTION_MESSAGE + id);
+        else {
+            name = TOKEN_VALUE_TO_NAME[id];
+            if (name == null) {
+                throw new IllegalArgumentException(UNKNOWN_JAVADOC_TOKEN_ID_EXCEPTION_MESSAGE + id);
+            }
         }
         return name;
     }

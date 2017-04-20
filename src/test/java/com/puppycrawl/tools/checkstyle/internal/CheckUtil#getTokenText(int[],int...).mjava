@@ -1,6 +1,7 @@
     public static String getTokenText(int[] tokens, int... subtractions) {
+        final String tokenText;
         if (subtractions.length == 0 && Arrays.equals(tokens, TokenUtils.getAllTokenIds())) {
-            return "TokenTypes.";
+            tokenText = "TokenTypes.";
         }
         else {
             final StringBuilder result = new StringBuilder();
@@ -37,7 +38,8 @@
                 result.append(".");
             }
 
-            return result.toString();
+            tokenText = result.toString();
         }
+        return tokenText;
     }
 
