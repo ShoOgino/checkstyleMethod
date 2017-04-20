@@ -2,13 +2,16 @@
      * Checks that a right curly should be alone on a line.
      * @param bracePolicy option for placing the right curly brace
      * @param details Details for validation
+     * @param targetSrcLine A string with contents of rcurly's line
      * @return true if a right curly should be alone on a line.
      */
-    private static boolean shouldBeAloneOnLine(RightCurlyOption bracePolicy, Details details) {
+    private static boolean shouldBeAloneOnLine(RightCurlyOption bracePolicy,
+                                               Details details,
+                                               String targetSrcLine) {
         return bracePolicy == RightCurlyOption.ALONE
-                    && shouldBeAloneOnLineWithAloneOption(details)
+                    && shouldBeAloneOnLineWithAloneOption(details, targetSrcLine)
                 || bracePolicy == RightCurlyOption.ALONE_OR_SINGLELINE
-                    && shouldBeAloneOnLineWithAloneOrSinglelineOption(details)
+                    && shouldBeAloneOnLineWithAloneOrSinglelineOption(details, targetSrcLine)
                 || details.shouldCheckLastRcurly
                     && details.rcurly.getLineNo() == details.nextToken.getLineNo();
     }

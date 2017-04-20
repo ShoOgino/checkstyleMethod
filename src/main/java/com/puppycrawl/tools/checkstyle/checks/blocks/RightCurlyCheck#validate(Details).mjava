@@ -12,14 +12,8 @@
         else if (shouldBeOnSameLine(option, details)) {
             violation = MSG_KEY_LINE_SAME;
         }
-        else if (shouldBeAloneOnLine(option, details)) {
+        else if (shouldBeAloneOnLine(option, details, getLine(details.rcurly.getLineNo() - 1))) {
             violation = MSG_KEY_LINE_ALONE;
-        }
-        else if (shouldStartLine) {
-            final String targetSourceLine = getLines()[details.rcurly.getLineNo() - 1];
-            if (!isOnStartOfLine(details, targetSourceLine)) {
-                violation = MSG_KEY_LINE_NEW;
-            }
         }
         return violation;
     }

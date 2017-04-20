@@ -1,13 +1,14 @@
     /**
      * Whether right curly should be alone on line when ALONE_OR_SINGLELINE option is used.
      * @param details details for validation.
+     * @param targetSrcLine A string with contents of rcurly's line
      * @return true, if right curly should be alone on line
      *         when ALONE_OR_SINGLELINE option is used.
      */
-    private static boolean shouldBeAloneOnLineWithAloneOrSinglelineOption(Details details) {
-        return !isAloneOnLine(details)
+    private static boolean shouldBeAloneOnLineWithAloneOrSinglelineOption(Details details,
+                                                                          String targetSrcLine) {
+        return !isAloneOnLine(details, targetSrcLine)
                 && !isSingleLineBlock(details)
-                && !isAnonInnerClassInit(details.lcurly)
                 && !isEmptyBody(details.lcurly);
     }
 

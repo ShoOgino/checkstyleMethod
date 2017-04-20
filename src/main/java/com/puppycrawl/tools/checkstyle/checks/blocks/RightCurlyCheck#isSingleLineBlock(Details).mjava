@@ -6,8 +6,15 @@
     private static boolean isSingleLineBlock(Details details) {
         final DetailAST rcurly = details.rcurly;
         final DetailAST lcurly = details.lcurly;
-        final DetailAST nextToken = details.nextToken;
+        DetailAST nextToken = details.nextToken;
+        while (nextToken.getType() == TokenTypes.LITERAL_ELSE) {
+            nextToken = Details.getNextToken(nextToken);
+        }
+        if (nextToken.getType() == TokenTypes.DO_WHILE) {
+            final DetailAST doWhileSemi = nextToken.getParent().getLastChild();
+            nextToken = Details.getNextToken(doWhileSemi);
+        }
         return rcurly.getLineNo() == lcurly.getLineNo()
-            && rcurly.getLineNo() != nextToken.getLineNo();
+                && rcurly.getLineNo() != nextToken.getLineNo();
     }
 

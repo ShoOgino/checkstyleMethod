@@ -1,0 +1,28 @@
+    /**
+     * This method determines if the double brace initialization should be skipped over by the
+     * check. Double brace initializations are treated differently. The corresponding inner
+     * rcurly is treated as if it was alone on line even when it may be followed by another
+     * rcurly and a semi, raising no violations.
+     * <i>Please do note though that the line should not contain anything other than the following
+     * right curly and the semi following it or else violations will be raised.</i>
+     * Only the kind of double brace initializations shown in the following example code will be
+     * skipped over:<br>
+     * <pre>
+     *     {@code Map<String, String> map = new LinkedHashMap<>() {{
+     *           put("alpha", "man");
+     *       }}; // no violation}
+     * </pre>
+     *
+     * @param details {@link Details} object containing the details relevant to the rcurly
+     * @return if the double brace initialization rcurly should be skipped over by the check
+     */
+    private static boolean skipDoubleBraceInstInit(Details details) {
+        final DetailAST rcurly = details.rcurly;
+        final DetailAST tokenAfterNextToken = Details.getNextToken(details.nextToken);
+        return rcurly.getParent().getParent().getType() == TokenTypes.INSTANCE_INIT
+                && details.nextToken.getType() == TokenTypes.RCURLY
+                && tokenAfterNextToken.getType() == TokenTypes.SEMI
+                && rcurly.getLineNo() != Details.getNextToken(tokenAfterNextToken).getLineNo();
+
+    }
+
