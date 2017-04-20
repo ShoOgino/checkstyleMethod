@@ -6,11 +6,13 @@
      * @return DetailAST of comment node.
      */
     private static DetailAST createCommentAstFromToken(Token token) {
+        final DetailAST commentAst;
         if (token.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
-            return createSlCommentNode(token);
+            commentAst = createSlCommentNode(token);
         }
         else {
-            return createBlockCommentNode(token);
+            commentAst = createBlockCommentNode(token);
         }
+        return commentAst;
     }
 

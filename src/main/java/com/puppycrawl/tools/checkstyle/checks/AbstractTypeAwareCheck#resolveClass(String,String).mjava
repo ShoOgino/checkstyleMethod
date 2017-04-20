@@ -8,11 +8,13 @@
     // -@cs[ForbidWildcardAsReturnType] The class is deprecated and will be removed soon.
     protected final Class<?> resolveClass(String resolvableClassName,
             String className) {
+        Class<?> clazz;
         try {
-            return getClassResolver().resolve(resolvableClassName, className);
+            clazz = getClassResolver().resolve(resolvableClassName, className);
         }
         catch (final ClassNotFoundException ignored) {
-            return null;
+            clazz = null;
         }
+        return clazz;
     }
 

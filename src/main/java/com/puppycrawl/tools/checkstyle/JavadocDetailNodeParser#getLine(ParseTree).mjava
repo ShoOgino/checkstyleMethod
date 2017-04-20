@@ -5,12 +5,14 @@
      * @return line number
      */
     private static int getLine(ParseTree tree) {
+        final int line;
         if (tree instanceof TerminalNode) {
-            return ((TerminalNode) tree).getSymbol().getLine() - 1;
+            line = ((TerminalNode) tree).getSymbol().getLine() - 1;
         }
         else {
             final ParserRuleContext rule = (ParserRuleContext) tree;
-            return rule.start.getLine() - 1;
+            line = rule.start.getLine() - 1;
         }
+        return line;
     }
 

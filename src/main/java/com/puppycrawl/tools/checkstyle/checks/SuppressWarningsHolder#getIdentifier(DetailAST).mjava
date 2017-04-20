@@ -5,15 +5,17 @@
      * @throws IllegalArgumentException if the AST is invalid
      */
     private static String getIdentifier(DetailAST ast) {
-        if (ast != null) {
-            if (ast.getType() == TokenTypes.IDENT) {
-                return ast.getText();
-            }
-            else {
-                return getIdentifier(ast.getFirstChild()) + "."
-                        + getIdentifier(ast.getLastChild());
-            }
+        if (ast == null) {
+            throw new IllegalArgumentException("Identifier AST expected, but get null.");
         }
-        throw new IllegalArgumentException("Identifier AST expected, but get null.");
+        final String identifier;
+        if (ast.getType() == TokenTypes.IDENT) {
+            identifier = ast.getText();
+        }
+        else {
+            identifier = getIdentifier(ast.getFirstChild()) + "."
+                + getIdentifier(ast.getLastChild());
+        }
+        return identifier;
     }
 

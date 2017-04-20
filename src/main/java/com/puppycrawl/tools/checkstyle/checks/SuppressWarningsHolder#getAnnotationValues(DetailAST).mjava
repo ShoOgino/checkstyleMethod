@@ -6,16 +6,18 @@
      * @throws IllegalArgumentException if the AST is invalid
      */
     private static List<String> getAnnotationValues(DetailAST ast) {
+        final List<String> annotationValues;
         switch (ast.getType()) {
             case TokenTypes.EXPR:
-                return Collections.singletonList(getStringExpr(ast));
-
+                annotationValues = Collections.singletonList(getStringExpr(ast));
+                break;
             case TokenTypes.ANNOTATION_ARRAY_INIT:
-                return findAllExpressionsInChildren(ast);
-
+                annotationValues = findAllExpressionsInChildren(ast);
+                break;
             default:
                 throw new IllegalArgumentException(
                         "Expression or annotation array initializer AST expected: " + ast);
         }
+        return annotationValues;
     }
 

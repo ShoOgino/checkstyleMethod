@@ -6,10 +6,14 @@
      */
     protected final AbstractClassInfo createClassInfo(final Token name,
                                               final String surroundingClass) {
+        final AbstractClassInfo result;
         final AbstractClassInfo classInfo = findClassAlias(name.getText());
-        if (classInfo != null) {
-            return new ClassAlias(name, classInfo);
+        if (classInfo == null) {
+            result = new RegularClass(name, surroundingClass, this);
         }
-        return new RegularClass(name, surroundingClass, this);
+        else {
+            result = new ClassAlias(name, classInfo);
+        }
+        return result;
     }
 
