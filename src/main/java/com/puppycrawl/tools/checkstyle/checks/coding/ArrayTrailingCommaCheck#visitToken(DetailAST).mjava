@@ -1,15 +1,14 @@
     @Override
     public void visitToken(DetailAST arrayInit) {
         final DetailAST rcurly = arrayInit.findFirstToken(TokenTypes.RCURLY);
+        final DetailAST previousSibling = rcurly.getPreviousSibling();
 
-        // if curlies are on the same line
-        // or array is empty then check nothing
         if (arrayInit.getLineNo() != rcurly.getLineNo()
-            && arrayInit.getChildCount() != 1) {
-            final DetailAST prev = rcurly.getPreviousSibling();
-            if (prev.getType() != TokenTypes.COMMA) {
-                log(rcurly.getLineNo(), MSG_KEY);
-            }
+                && arrayInit.getChildCount() != 1
+                && rcurly.getLineNo() != previousSibling.getLineNo()
+                && arrayInit.getLineNo() != previousSibling.getLineNo()
+                && previousSibling.getType() != TokenTypes.COMMA) {
+            log(rcurly.getLineNo(), MSG_KEY);
         }
     }
 
