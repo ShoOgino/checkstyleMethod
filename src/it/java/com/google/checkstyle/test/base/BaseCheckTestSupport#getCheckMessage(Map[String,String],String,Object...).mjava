@@ -5,12 +5,14 @@
      */
     protected String getCheckMessage(Map<String, String> messages, String messageKey,
             Object... arguments) {
+        String checkMessage = null;
         for (Map.Entry<String, String> entry : messages.entrySet()) {
             if (messageKey.equals(entry.getKey())) {
                 final MessageFormat formatter = new MessageFormat(entry.getValue(), Locale.ROOT);
-                return formatter.format(arguments);
+                checkMessage = formatter.format(arguments);
+                break;
             }
         }
-        return null;
+        return checkMessage;
     }
 
