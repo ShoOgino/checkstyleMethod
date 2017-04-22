@@ -4,6 +4,7 @@
      * @return true, if line with paragraph tag is first line in javadoc.
      */
     private static boolean isFirstParagraph(DetailNode paragraphTag) {
+        boolean result = true;
         DetailNode previousNode = JavadocUtils.getPreviousSibling(paragraphTag);
         while (previousNode != null) {
             if (previousNode.getType() == JavadocTokenTypes.TEXT
@@ -11,10 +12,11 @@
                 || previousNode.getType() != JavadocTokenTypes.LEADING_ASTERISK
                     && previousNode.getType() != JavadocTokenTypes.NEWLINE
                     && previousNode.getType() != JavadocTokenTypes.TEXT) {
-                return false;
+                result = false;
+                break;
             }
             previousNode = JavadocUtils.getPreviousSibling(previousNode);
         }
-        return true;
+        return result;
     }
 

@@ -8,13 +8,14 @@
      */
     private static Scope calculateScope(final DetailAST ast) {
         final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
-        final Scope declaredScope = ScopeUtils.getScopeFromMods(mods);
+        final Scope scope;
 
         if (ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
-            return Scope.PUBLIC;
+            scope = Scope.PUBLIC;
         }
         else {
-            return declaredScope;
+            scope = ScopeUtils.getScopeFromMods(mods);
         }
+        return scope;
     }
 

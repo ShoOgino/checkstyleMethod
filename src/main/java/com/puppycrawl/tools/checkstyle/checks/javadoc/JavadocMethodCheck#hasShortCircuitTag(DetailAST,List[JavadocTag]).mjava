@@ -6,19 +6,19 @@
      * @param tags the list of Javadoc tags associated with the construct
      * @return true if the construct has a short circuit tag.
      */
-    private boolean hasShortCircuitTag(final DetailAST ast,
-            final List<JavadocTag> tags) {
+    private boolean hasShortCircuitTag(final DetailAST ast, final List<JavadocTag> tags) {
+        boolean result = true;
         // Check if it contains {@inheritDoc} tag
-        if (tags.size() != 1
-                || !tags.get(0).isInheritDocTag()) {
-            return false;
+        if (tags.size() == 1
+                && tags.get(0).isInheritDocTag()) {
+            // Invalid if private, a constructor, or a static method
+            if (!JavadocTagInfo.INHERIT_DOC.isValidOn(ast)) {
+                log(ast, MSG_INVALID_INHERIT_DOC);
+            }
         }
-
-        // Invalid if private, a constructor, or a static method
-        if (!JavadocTagInfo.INHERIT_DOC.isValidOn(ast)) {
-            log(ast, MSG_INVALID_INHERIT_DOC);
+        else {
+            result = false;
         }
-
-        return true;
+        return result;
     }
 

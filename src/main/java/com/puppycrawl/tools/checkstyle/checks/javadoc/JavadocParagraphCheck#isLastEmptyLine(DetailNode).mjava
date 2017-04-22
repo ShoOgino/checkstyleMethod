@@ -4,15 +4,17 @@
      * @return true, if NEWLINE node is a last node in javadoc.
      */
     private static boolean isLastEmptyLine(DetailNode newLine) {
+        boolean result = true;
         DetailNode nextNode = JavadocUtils.getNextSibling(newLine);
         while (nextNode != null && nextNode.getType() != JavadocTokenTypes.JAVADOC_TAG) {
             if (nextNode.getType() == JavadocTokenTypes.TEXT
                     && !nextNode.getText().trim().isEmpty()
                     || nextNode.getType() == JavadocTokenTypes.HTML_ELEMENT) {
-                return false;
+                result = false;
+                break;
             }
             nextNode = JavadocUtils.getNextSibling(nextNode);
         }
-        return true;
+        return result;
     }
 

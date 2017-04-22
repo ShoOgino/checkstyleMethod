@@ -4,16 +4,17 @@
      * @return true, if line is empty line.
      */
     private static boolean isEmptyLine(DetailNode newLine) {
+        boolean result = false;
         DetailNode previousSibling = JavadocUtils.getPreviousSibling(newLine);
-        if (previousSibling == null
-                || previousSibling.getParent().getType() != JavadocTokenTypes.JAVADOC) {
-            return false;
+        if (previousSibling != null
+                && previousSibling.getParent().getType() == JavadocTokenTypes.JAVADOC) {
+            if (previousSibling.getType() == JavadocTokenTypes.TEXT
+                    && previousSibling.getText().trim().isEmpty()) {
+                previousSibling = JavadocUtils.getPreviousSibling(previousSibling);
+            }
+            result = previousSibling != null
+                    && previousSibling.getType() == JavadocTokenTypes.LEADING_ASTERISK;
         }
-        if (previousSibling.getType() == JavadocTokenTypes.TEXT
-                && previousSibling.getText().trim().isEmpty()) {
-            previousSibling = JavadocUtils.getPreviousSibling(previousSibling);
-        }
-        return previousSibling != null
-                && previousSibling.getType() == JavadocTokenTypes.LEADING_ASTERISK;
+        return result;
     }
 

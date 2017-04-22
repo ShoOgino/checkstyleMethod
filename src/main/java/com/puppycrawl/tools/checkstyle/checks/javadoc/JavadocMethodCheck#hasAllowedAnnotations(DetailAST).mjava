@@ -4,6 +4,7 @@
      * @return Some javadoc.
      */
     private boolean hasAllowedAnnotations(DetailAST methodDef) {
+        boolean result = false;
         final DetailAST modifiersNode = methodDef.findFirstToken(TokenTypes.MODIFIERS);
         DetailAST annotationNode = modifiersNode.findFirstToken(TokenTypes.ANNOTATION);
         while (annotationNode != null && annotationNode.getType() == TokenTypes.ANNOTATION) {
@@ -13,10 +14,11 @@
                     .findFirstToken(TokenTypes.IDENT);
             }
             if (allowedAnnotations.contains(identNode.getText())) {
-                return true;
+                result = true;
+                break;
             }
             annotationNode = annotationNode.getNextSibling();
         }
-        return false;
+        return result;
     }
 
