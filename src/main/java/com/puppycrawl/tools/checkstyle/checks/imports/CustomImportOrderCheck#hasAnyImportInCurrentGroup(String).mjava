@@ -6,11 +6,13 @@
      *        true, if current group contains at least one import.
      */
     private boolean hasAnyImportInCurrentGroup(String currentGroup) {
+        boolean result = false;
         for (ImportDetails currentImport : importToGroupList) {
             if (currentGroup.equals(currentImport.getImportGroup())) {
-                return true;
+                result = true;
+                break;
             }
         }
-        return false;
+        return result;
     }
 

@@ -5,11 +5,10 @@
      * @return full path or null.
      */
     private static String getFullImportIdent(DetailAST token) {
-        if (token == null) {
-            return "";
+        String ident = "";
+        if (token != null) {
+            ident = FullIdent.createFullIdent(token.findFirstToken(TokenTypes.DOT)).getText();
         }
-        else {
-            return FullIdent.createFullIdent(token.findFirstToken(TokenTypes.DOT)).getText();
-        }
+        return ident;
     }
 
