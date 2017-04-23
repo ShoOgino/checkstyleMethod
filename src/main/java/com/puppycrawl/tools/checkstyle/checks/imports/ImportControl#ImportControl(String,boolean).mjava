@@ -4,18 +4,6 @@
      * @param regex flags interpretation of pkgName as regex pattern.
      */
     ImportControl(final String pkgName, final boolean regex) {
-        parent = null;
-        this.regex = regex;
-        if (regex) {
-            // ensure that fullPackage is a self-contained regular expression
-            fullPackage = encloseInGroup(pkgName);
-            patternForPartialMatch = createPatternForPartialMatch(fullPackage);
-            patternForExactMatch = createPatternForExactMatch(fullPackage);
-        }
-        else {
-            fullPackage = pkgName;
-            patternForPartialMatch = null;
-            patternForExactMatch = null;
-        }
+        this(pkgName, regex, MismatchStrategy.DISALLOWED);
     }
 

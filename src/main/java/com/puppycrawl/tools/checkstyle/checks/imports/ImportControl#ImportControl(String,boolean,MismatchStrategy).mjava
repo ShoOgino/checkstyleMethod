@@ -1,0 +1,24 @@
+    /**
+     * Construct a root node.
+     * @param pkgName the name of the package.
+     * @param regex flags interpretation of pkgName as regex pattern.
+     * @param strategyOnMismatch strategy in a case if matching allow/disallow rule was not found.
+     */
+    ImportControl(final String pkgName, final boolean regex,
+                  final MismatchStrategy strategyOnMismatch) {
+        parent = null;
+        this.regex = regex;
+        this.strategyOnMismatch = strategyOnMismatch;
+        if (regex) {
+            // ensure that fullPackage is a self-contained regular expression
+            fullPackage = encloseInGroup(pkgName);
+            patternForPartialMatch = createPatternForPartialMatch(fullPackage);
+            patternForExactMatch = createPatternForExactMatch(fullPackage);
+        }
+        else {
+            fullPackage = pkgName;
+            patternForPartialMatch = null;
+            patternForExactMatch = null;
+        }
+    }
+

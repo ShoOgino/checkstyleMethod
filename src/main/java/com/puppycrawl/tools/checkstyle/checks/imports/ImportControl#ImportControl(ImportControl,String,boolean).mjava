@@ -6,22 +6,6 @@
      * @param regex flags interpretation of subPkg as regex pattern.
      */
     ImportControl(final ImportControl parent, final String subPkg, final boolean regex) {
-        this.parent = parent;
-        if (regex || parent.regex) {
-            // regex gets inherited
-            final String parentRegex = ensureSelfContainedRegex(parent.fullPackage, parent.regex);
-            final String thisRegex = ensureSelfContainedRegex(subPkg, regex);
-            fullPackage = parentRegex + DOT_REGEX + thisRegex;
-            patternForPartialMatch = createPatternForPartialMatch(fullPackage);
-            patternForExactMatch = createPatternForExactMatch(fullPackage);
-            this.regex = true;
-        }
-        else {
-            fullPackage = parent.fullPackage + DOT + subPkg;
-            patternForPartialMatch = null;
-            patternForExactMatch = null;
-            this.regex = false;
-        }
-        parent.children.add(this);
+        this(parent, subPkg, regex, MismatchStrategy.DELEGATE_TO_PARENT);
     }
 

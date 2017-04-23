@@ -1,0 +1,14 @@
+    /**
+     * Utility to get a strategyOnMismatch property for "import-control" tag.
+     * @param attributes collect to get attribute from.
+     * @return the value of the attribute.
+     */
+    private static MismatchStrategy getStrategyForImportControl(final Attributes attributes) {
+        final String returnValue = attributes.getValue(STRATEGY_ON_MISMATCH_ATTRIBUTE_NAME);
+        MismatchStrategy strategyOnMismatch = MismatchStrategy.DISALLOWED;
+        if (STRATEGY_ON_MISMATCH_ALLOWED_VALUE.equals(returnValue)) {
+            strategyOnMismatch = MismatchStrategy.ALLOWED;
+        }
+        return strategyOnMismatch;
+    }
+

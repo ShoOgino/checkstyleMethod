@@ -15,11 +15,23 @@
             result = returnValue;
         }
         else if (parent == null) {
-            // we are the top, so default to not allowed.
-            result = AccessResult.DISALLOWED;
+            if (strategyOnMismatch == MismatchStrategy.ALLOWED) {
+                result = AccessResult.ALLOWED;
+            }
+            else {
+                result = AccessResult.DISALLOWED;
+            }
         }
         else {
-            result = parent.checkAccess(inPkg, forImport);
+            if (strategyOnMismatch == MismatchStrategy.ALLOWED) {
+                result = AccessResult.ALLOWED;
+            }
+            else if (strategyOnMismatch == MismatchStrategy.DISALLOWED) {
+                result = AccessResult.DISALLOWED;
+            }
+            else {
+                result = parent.checkAccess(inPkg, forImport);
+            }
         }
         return result;
     }
