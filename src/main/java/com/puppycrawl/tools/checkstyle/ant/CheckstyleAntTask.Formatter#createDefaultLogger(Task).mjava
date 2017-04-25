@@ -6,12 +6,16 @@
          */
         private AuditListener createDefaultLogger(Task task)
                 throws IOException {
+            final AuditListener defaultLogger;
             if (toFile == null || !useFile) {
-                return new DefaultLogger(
+                defaultLogger = new DefaultLogger(
                     new LogOutputStream(task, Project.MSG_DEBUG),
                     true, new LogOutputStream(task, Project.MSG_ERR), true);
             }
-            final FileOutputStream infoStream = new FileOutputStream(toFile);
-            return new DefaultLogger(infoStream, true, infoStream, false);
+            else {
+                final FileOutputStream infoStream = new FileOutputStream(toFile);
+                defaultLogger = new DefaultLogger(infoStream, true, infoStream, false);
+            }
+            return defaultLogger;
         }
 

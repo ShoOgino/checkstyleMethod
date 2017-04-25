@@ -5,10 +5,13 @@
          * @throws IOException if an error occurs
          */
         private AuditListener createXmlLogger(Task task) throws IOException {
+            final AuditListener xmlLogger;
             if (toFile == null || !useFile) {
-                return new XMLLogger(new LogOutputStream(task,
-                        Project.MSG_INFO), true);
+                xmlLogger = new XMLLogger(new LogOutputStream(task, Project.MSG_INFO), true);
             }
-            return new XMLLogger(new FileOutputStream(toFile), true);
+            else {
+                xmlLogger = new XMLLogger(new FileOutputStream(toFile), true);
+            }
+            return xmlLogger;
         }
 

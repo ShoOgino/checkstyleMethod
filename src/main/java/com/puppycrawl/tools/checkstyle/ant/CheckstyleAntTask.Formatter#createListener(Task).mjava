@@ -5,10 +5,14 @@
          * @throws IOException if an error occurs
          */
         public AuditListener createListener(Task task) throws IOException {
+            final AuditListener listener;
             if (type != null
                     && E_XML.equals(type.getValue())) {
-                return createXmlLogger(task);
+                listener = createXmlLogger(task);
             }
-            return createDefaultLogger(task);
+            else {
+                listener = createDefaultLogger(task);
+            }
+            return listener;
         }
 
