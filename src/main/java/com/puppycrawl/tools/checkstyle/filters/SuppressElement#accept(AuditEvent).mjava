@@ -1,13 +1,6 @@
     @Override
     public boolean accept(AuditEvent event) {
-        // reject if file or check module mismatch?
-        if (isFileNameAndModuleNotMatching(event)) {
-            return true;
-        }
-
-        // reject if no line/column matching
-        return (lineFilter != null || columnFilter != null)
-                && (lineFilter == null || !lineFilter.accept(event.getLine()))
-                && (columnFilter == null || !columnFilter.accept(event.getColumn()));
+        return isFileNameAndModuleNotMatching(event)
+                || isLineAndColumnMatch(event);
     }
 

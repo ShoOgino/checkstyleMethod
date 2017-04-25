@@ -1,0 +1,11 @@
+    /**
+     * Whether line and column match.
+     * @param event event to process.
+     * @return true if line and column match.
+     */
+    private boolean isLineAndColumnMatch(AuditEvent event) {
+        return (lineFilter != null || columnFilter != null)
+                && (lineFilter == null || !lineFilter.accept(event.getLine()))
+                && (columnFilter == null || !columnFilter.accept(event.getColumn()));
+    }
+

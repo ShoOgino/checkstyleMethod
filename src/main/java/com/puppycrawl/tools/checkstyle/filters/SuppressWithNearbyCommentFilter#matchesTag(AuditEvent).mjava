@@ -4,11 +4,13 @@
      * @return true if event matches any tag from {@link #tags}, false otherwise.
      */
     private boolean matchesTag(AuditEvent event) {
+        boolean result = false;
         for (final Tag tag : tags) {
             if (tag.isMatch(event)) {
-                return true;
+                result = true;
+                break;
             }
         }
-        return false;
+        return result;
     }
 
