@@ -8,15 +8,17 @@
      */
     private boolean hasIntersectionWithSingleLineComment(int startLineNo, int startColNo,
             int endLineNo, int endColNo) {
+        boolean hasIntersection = false;
         // Check CPP comments (line searching is possible)
         for (int lineNumber = startLineNo; lineNumber <= endLineNo;
              lineNumber++) {
             final TextBlock comment = cppComments.get(lineNumber);
             if (comment != null && comment.intersects(startLineNo, startColNo,
                     endLineNo, endColNo)) {
-                return true;
+                hasIntersection = true;
+                break;
             }
         }
-        return false;
+        return hasIntersection;
     }
 
