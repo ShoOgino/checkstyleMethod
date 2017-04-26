@@ -1,0 +1,12 @@
+    @Test
+    public void testCtorNullPackageException1() {
+        final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        try {
+            new PackageObjectFactory(Collections.singleton(null), classLoader);
+            fail("Exception is expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals(NULL_PACKAGE_MESSAGE, ex.getMessage());
+        }
+    }
+

@@ -1,0 +1,10 @@
+    /**
+     * Checks whether a class extends 'AutomaticBean' and is non-abstract.
+     * @param clazz class to check.
+     * @return true if a class may be considered a valid production class.
+     */
+    public static boolean isValidCheckstyleClass(Class<?> clazz) {
+        return AutomaticBean.class.isAssignableFrom(clazz)
+                && !Modifier.isAbstract(clazz.getModifiers());
+    }
+

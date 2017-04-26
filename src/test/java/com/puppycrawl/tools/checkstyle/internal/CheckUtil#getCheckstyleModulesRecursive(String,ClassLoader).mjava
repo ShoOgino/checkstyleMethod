@@ -1,0 +1,17 @@
+    /**
+     * Gets checkstyle's modules in the given package recursively.
+     * @param packageName the package name to use
+     * @param loader the class loader used to load Checkstyle package name
+     * @return the set of checkstyle's module classes
+     * @throws IOException if the attempt to read class path resources failed
+     * @see ModuleReflectionUtils#isCheckstyleModule(Class)
+     */
+    private static Set<Class<?>> getCheckstyleModulesRecursive(
+            String packageName, ClassLoader loader) throws IOException {
+        final ClassPath classPath = ClassPath.from(loader);
+        return classPath.getTopLevelClassesRecursive(packageName).stream()
+                .map(ClassPath.ClassInfo::load)
+                .filter(ModuleReflectionUtils::isCheckstyleModule)
+                .collect(Collectors.toSet());
+    }
+

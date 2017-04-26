@@ -1,0 +1,16 @@
+    /**
+     * Checks whether a class may be considered as a checkstyle module. Checkstyle's modules are
+     * non-abstract classes, which are either checkstyle's checks, file sets, filters, file filters,
+     * or root module.
+     * @param clazz class to check.
+     * @return true if the class may be considered as the checkstyle module.
+     */
+    public static boolean isCheckstyleModule(Class<?> clazz) {
+        return isValidCheckstyleClass(clazz)
+            && (isCheckstyleCheck(clazz)
+                    || isFileSetModule(clazz)
+                    || isFilterModule(clazz)
+                    || isFileFilterModule(clazz)
+                    || isRootModule(clazz));
+    }
+

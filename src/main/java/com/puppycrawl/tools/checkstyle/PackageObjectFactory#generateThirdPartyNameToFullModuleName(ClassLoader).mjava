@@ -1,0 +1,17 @@
+    /**
+     * Generate the map of third party Checkstyle module names to their fully qualified names.
+     * @param loader the class loader used to load Checkstyle package names
+     * @return the map of third party Checkstyle module names to their fully qualified names
+     */
+    private Map<String, String> generateThirdPartyNameToFullModuleName(ClassLoader loader) {
+        Map<String, String> returnValue;
+        try {
+            returnValue = ModuleReflectionUtils.getCheckstyleModules(packages, loader).stream()
+                    .collect(Collectors.toMap(Class::getSimpleName, Class::getCanonicalName));
+        }
+        catch (IOException ignore) {
+            returnValue = new HashMap<>();
+        }
+        return returnValue;
+    }
+

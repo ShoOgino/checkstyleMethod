@@ -8,6 +8,9 @@
         if (moduleClassLoader == null) {
             throw new IllegalArgumentException(NULL_LOADER_MESSAGE);
         }
+        if (packageNames.contains(null)) {
+            throw new IllegalArgumentException(NULL_PACKAGE_MESSAGE);
+        }
 
         //create a copy of the given set, but retain ordering
         packages = new LinkedHashSet<>(packageNames);

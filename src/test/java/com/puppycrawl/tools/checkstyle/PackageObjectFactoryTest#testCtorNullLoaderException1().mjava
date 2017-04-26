@@ -1,11 +1,11 @@
     @Test
-    public void testCtorException() {
+    public void testCtorNullLoaderException1() {
         try {
             new PackageObjectFactory(new HashSet<>(), null);
             fail("Exception is expected");
         }
         catch (IllegalArgumentException ex) {
-            Assert.assertEquals("moduleClassLoader must not be null", ex.getMessage());
+            assertEquals(NULL_LOADER_MESSAGE, ex.getMessage());
         }
     }
 

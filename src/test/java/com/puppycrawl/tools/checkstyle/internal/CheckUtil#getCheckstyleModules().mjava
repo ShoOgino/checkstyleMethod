@@ -2,24 +2,11 @@
      * Gets all checkstyle's modules.
      * @return the set of checkstyle's module classes.
      * @throws IOException if the attempt to read class path resources failed.
-     * @see #isCheckstyleModule(Class)
      */
     public static Set<Class<?>> getCheckstyleModules() throws IOException {
-        final Set<Class<?>> checkstyleModules = new HashSet<>();
-
         final ClassLoader loader = Thread.currentThread()
                 .getContextClassLoader();
-        final ClassPath classpath = ClassPath.from(loader);
         final String packageName = "com.puppycrawl.tools.checkstyle";
-        final ImmutableSet<ClassPath.ClassInfo> checkstyleClasses = classpath
-                .getTopLevelClassesRecursive(packageName);
-
-        for (ClassPath.ClassInfo clazz : checkstyleClasses) {
-            final Class<?> loadedClass = clazz.load();
-            if (isCheckstyleModule(loadedClass)) {
-                checkstyleModules.add(loadedClass);
-            }
-        }
-        return checkstyleModules;
+        return getCheckstyleModulesRecursive(packageName, loader);
     }
 

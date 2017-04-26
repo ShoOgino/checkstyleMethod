@@ -10,23 +10,34 @@
      */
     @Override
     public Object createModule(String name) throws CheckstyleException {
-        Object instance = createObjectFromMap(name);
+        Object instance = null;
+        // if the name is a simple class name, try to find it in maps at first
+        if (!name.contains(PACKAGE_SEPARATOR)) {
+            instance = createObjectFromMap(name, NAME_TO_FULL_MODULE_NAME);
+            if (instance == null) {
+                if (thirdPartyNameToFullModuleName == null) {
+                    thirdPartyNameToFullModuleName =
+                            generateThirdPartyNameToFullModuleName(moduleClassLoader);
+                }
+                instance = createObjectFromMap(name, thirdPartyNameToFullModuleName);
+            }
+        }
+
         if (instance == null) {
-            instance = createObjectWithIgnoringProblems(name, getAllPossibleNames(name));
+            instance = createObject(name);
+        }
+        final String nameCheck = name + CHECK_SUFFIX;
+        if (instance == null) {
+            instance = createObject(nameCheck);
         }
         if (instance == null) {
-            final String nameCheck = name + CHECK_SUFFIX;
-            instance = createObjectWithIgnoringProblems(nameCheck, getAllPossibleNames(nameCheck));
-            if (instance == null) {
-
-                final String attemptedNames = joinPackageNamesWithClassName(name, packages)
-                        + STRING_SEPARATOR + nameCheck + STRING_SEPARATOR
-                        + joinPackageNamesWithClassName(nameCheck, packages);
-                final LocalizedMessage exceptionMessage = new LocalizedMessage(0,
-                    Definitions.CHECKSTYLE_BUNDLE, UNABLE_TO_INSTANTIATE_EXCEPTION_MESSAGE,
-                    new String[] {name, attemptedNames}, null, getClass(), null);
-                throw new CheckstyleException(exceptionMessage.getMessage());
-            }
+            final String attemptedNames = joinPackageNamesWithClassName(name, packages)
+                    + STRING_SEPARATOR + nameCheck + STRING_SEPARATOR
+                    + joinPackageNamesWithClassName(nameCheck, packages);
+            final LocalizedMessage exceptionMessage = new LocalizedMessage(0,
+                Definitions.CHECKSTYLE_BUNDLE, UNABLE_TO_INSTANTIATE_EXCEPTION_MESSAGE,
+                new String[] {name, attemptedNames}, null, getClass(), null);
+            throw new CheckstyleException(exceptionMessage.getMessage());
         }
         return instance;
     }
