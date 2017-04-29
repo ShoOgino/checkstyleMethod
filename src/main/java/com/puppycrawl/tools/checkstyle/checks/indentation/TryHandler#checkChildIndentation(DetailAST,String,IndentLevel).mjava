@@ -1,0 +1,22 @@
+    /**
+     * Method to check indentation of try resources children.
+     * It takes into account forceStrictCondition value when logging errors.
+     * Example of usage would include checking for try parenthesis and try resources.
+     *
+     * @param ast           AST to check.
+     * @param subType       String representing child type.
+     * @param expectedIdent Expected indent level.
+     */
+    private void checkChildIndentation(DetailAST ast, String subType, IndentLevel expectedIdent) {
+        if (getIndentCheck().isForceStrictCondition()) {
+            if (!expectedIdent.isAcceptable(expandedTabsColumnNo(ast))) {
+                logError(ast, subType, expandedTabsColumnNo(ast), expectedIdent);
+            }
+        }
+        else {
+            if (expandedTabsColumnNo(ast) < expectedIdent.getFirstIndentLevel()) {
+                logError(ast, subType, expandedTabsColumnNo(ast), expectedIdent);
+            }
+        }
+    }
+

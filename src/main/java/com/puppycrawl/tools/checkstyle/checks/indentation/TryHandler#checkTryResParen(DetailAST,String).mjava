@@ -1,0 +1,18 @@
+    /**
+     * Method to check the indentation of left paren or right paren.
+     * This method itself checks whether either of these are on start of line. This method
+     * takes care of line wrapping strict condition as well.
+     *
+     * @param parenAst      lparen or rparen ast to check
+     * @param subType       name to be used in log message
+     */
+    protected void checkTryResParen(final DetailAST parenAst,
+                                    final String subType) {
+        if (isOnStartOfLine(parenAst)) {
+            final IndentLevel expectedIdent = new IndentLevel(getIndent(), 0,
+                getIndentCheck().getLineWrappingIndentation());
+
+            checkChildIndentation(parenAst, subType, expectedIdent);
+        }
+    }
+

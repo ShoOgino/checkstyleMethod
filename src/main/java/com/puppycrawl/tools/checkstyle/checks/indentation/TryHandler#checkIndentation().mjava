@@ -1,0 +1,10 @@
+    @Override
+    public void checkIndentation() {
+        super.checkIndentation();
+        if (getMainAst().getFirstChild().getType() == TokenTypes.RESOURCE_SPECIFICATION) {
+            checkTryResParen(getTryResLparen(), "lparen");
+            checkTryResParen(getTryResRparen(), "rparen");
+            checkTryResources(getMainAst().getFirstChild());
+        }
+    }
+

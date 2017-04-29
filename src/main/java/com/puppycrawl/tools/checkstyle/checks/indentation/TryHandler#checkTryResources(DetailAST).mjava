@@ -1,0 +1,40 @@
+    /**
+     * Checks indentation of resources parameters in try resources.
+     *
+     * @param resourcesSpecAst   Resource specification ast
+     */
+    protected void checkTryResources(final DetailAST resourcesSpecAst) {
+        final DetailAST resourcesAst = resourcesSpecAst.findFirstToken(TokenTypes.RESOURCES);
+        final int indetation = getIndent().getFirstIndentLevel()
+            + getIndentCheck().getLineWrappingIndentation();
+        final IndentLevel expectedResourceIndent = new IndentLevel(indetation);
+
+        final String subType = "resource";
+
+        DetailAST resourceAst = resourcesAst.getFirstChild();
+        while (resourceAst != null) {
+            if (resourceAst.getType() == TokenTypes.RESOURCE) {
+                final DetailAST nextSibling;
+                if (resourceAst.getNextSibling() == null) {
+                    nextSibling = getTryResRparen();
+                }
+                else {
+                    nextSibling = resourceAst.getNextSibling();
+                }
+                if (isOnStartOfLine(resourceAst)) {
+                    checkChildIndentation(resourceAst, subType, expectedResourceIndent);
+                    checkWrappingIndentation(
+                        resourceAst,
+                        nextSibling,
+                        getIndentCheck().getLineWrappingIndentation(),
+                        expectedResourceIndent.getFirstIndentLevel(),
+                        true);
+                }
+                else {
+                    checkWrappingIndentation(resourceAst, nextSibling);
+                }
+            }
+            resourceAst = resourceAst.getNextSibling();
+        }
+    }
+
