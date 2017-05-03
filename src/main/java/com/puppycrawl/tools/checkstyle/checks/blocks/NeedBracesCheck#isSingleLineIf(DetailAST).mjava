@@ -10,7 +10,6 @@
      */
     private static boolean isSingleLineIf(DetailAST literalIf) {
         boolean result = false;
-        final DetailAST ifCondition = literalIf.findFirstToken(TokenTypes.EXPR);
         if (literalIf.getParent().getType() == TokenTypes.SLIST) {
             final DetailAST literalIfLastChild = literalIf.getLastChild();
             final DetailAST block;
@@ -20,6 +19,7 @@
             else {
                 block = literalIfLastChild;
             }
+            final DetailAST ifCondition = literalIf.findFirstToken(TokenTypes.EXPR);
             result = ifCondition.getLineNo() == block.getLineNo();
         }
         return result;
