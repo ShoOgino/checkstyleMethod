@@ -1,0 +1,42 @@
+    private static void verifyInputFile(Map<String, List<String>> allTests, File file) {
+        if (file.isFile()) {
+            final String path;
+
+            try {
+                path = getSimplePath(file.getCanonicalPath());
+            }
+            catch (IOException ex) {
+                throw new IllegalStateException(ex);
+            }
+
+            // until https://github.com/checkstyle/checkstyle/issues/5105
+            if (!path.contains(File.separatorChar + "grammars" + File.separatorChar)
+                    // until https://github.com/checkstyle/checkstyle/issues/5104
+                    && !path.contains(File.separatorChar + "foo" + File.separatorChar)
+                    && !path.contains(File.separatorChar + "bar" + File.separatorChar)) {
+                String fileName = file.getName();
+                final boolean skipFileNaming = shouldSkipInputFileNameCheck(path, fileName);
+
+                if (!skipFileNaming) {
+                    Assert.assertTrue("Resource must start with 'Input' or 'Expected': " + path,
+                            fileName.startsWith("Input") || fileName.startsWith("Expected"));
+
+                    if (fileName.startsWith("Input")) {
+                        fileName = fileName.substring(5);
+                    }
+                    else {
+                        fileName = fileName.substring(8);
+                    }
+
+                    final int period = fileName.lastIndexOf('.');
+
+                    if (period > 0) {
+                        fileName = fileName.substring(0, period);
+                    }
+                }
+
+                verifyInputFile(allTests, skipFileNaming, path, fileName);
+            }
+        }
+    }
+
