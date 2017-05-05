@@ -1,0 +1,12 @@
+    /**
+     * @param source Source string.
+     * @param index An index into the string.
+     * @return A position in the source representing what line and column that index appears on.
+     */
+    private static LineColumn getLineColumnOfIndex(String source, int index) {
+        final String precedingText = source.subSequence(0, index).toString();
+        final String[] precedingLines = NEWLINE_PATTERN.split(precedingText);
+        final String lastLine = precedingLines[precedingLines.length - 1];
+        return new LineColumn(precedingLines.length, lastLine.length());
+    }
+

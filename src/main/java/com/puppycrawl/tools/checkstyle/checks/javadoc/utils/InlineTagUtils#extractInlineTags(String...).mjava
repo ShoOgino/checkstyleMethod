@@ -1,0 +1,39 @@
+    /**
+     * Extract inline Javadoc tags from the given comment.
+     * @param lines The Javadoc comment (as lines).
+     * @return The extracted inline Javadoc tags.
+     */
+    public static List<TagInfo> extractInlineTags(String... lines) {
+        for (String line : lines) {
+            if (line.contains(LINE_FEED) || line.contains(CARRIAGE_RETURN)) {
+                throw new IllegalArgumentException("comment lines cannot contain newlines");
+            }
+        }
+
+        final String commentText = convertLinesToString(lines);
+        final Matcher inlineTagMatcher = INLINE_TAG_PATTERN.matcher(commentText);
+
+        final List<TagInfo> tags = new ArrayList<>();
+
+        while (inlineTagMatcher.find()) {
+            final String tagName = inlineTagMatcher.group(1);
+
+            // Remove the leading asterisks (in case the tag spans a line) and collapse
+            // the whitespace.
+            String matchedTagValue = inlineTagMatcher.group(2);
+            matchedTagValue = removeLeadingJavaDoc(matchedTagValue);
+            matchedTagValue = collapseWhitespace(matchedTagValue);
+
+            final String tagValue = matchedTagValue;
+
+            final int startIndex = inlineTagMatcher.start(1);
+            final LineColumn position = getLineColumnOfIndex(commentText,
+                // correct start index offset
+                startIndex - 1);
+
+            tags.add(new TagInfo(tagName, tagValue, position));
+        }
+
+        return tags;
+    }
+

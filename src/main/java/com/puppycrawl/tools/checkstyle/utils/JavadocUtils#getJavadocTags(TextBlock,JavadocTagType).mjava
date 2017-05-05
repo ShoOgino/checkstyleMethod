@@ -8,37 +8,42 @@
      */
     public static JavadocTags getJavadocTags(TextBlock textBlock,
             JavadocTagType tagType) {
-        final String[] text = textBlock.getText();
-        final List<JavadocTag> tags = new ArrayList<>();
+
+        final boolean getBlockTags = tagType == JavadocTagType.ALL
+                                         || tagType == JavadocTagType.BLOCK;
+        final boolean getInlineTags = tagType == JavadocTagType.ALL
+                                          || tagType == JavadocTagType.INLINE;
+
+        final List<TagInfo> tags = new ArrayList<>();
+
+        if (getBlockTags) {
+            tags.addAll(BlockTagUtils.extractBlockTags(textBlock.getText()));
+        }
+
+        if (getInlineTags) {
+            tags.addAll(InlineTagUtils.extractInlineTags(textBlock.getText()));
+        }
+
+        final List<JavadocTag> validTags = new ArrayList<>();
         final List<InvalidJavadocTag> invalidTags = new ArrayList<>();
-        for (int i = 0; i < text.length; i++) {
-            final String textValue = text[i];
-            final Matcher blockTagMatcher = getBlockTagPattern(i).matcher(textValue);
-            if ((tagType == JavadocTagType.ALL || tagType == JavadocTagType.BLOCK)
-                    && blockTagMatcher.find()) {
-                final String tagName = blockTagMatcher.group(1);
-                String content = textValue.substring(blockTagMatcher.end(1));
-                if (content.endsWith("*/")) {
-                    content = content.substring(0, content.length() - 2);
-                }
-                final int line = textBlock.getStartLineNo() + i;
-                int col = blockTagMatcher.start(1) - 1;
-                if (i == 0) {
-                    col += textBlock.getStartColNo();
-                }
-                if (JavadocTagInfo.isValidName(tagName)) {
-                    tags.add(
-                            new JavadocTag(line, col, tagName, content.trim()));
-                }
-                else {
-                    invalidTags.add(new InvalidJavadocTag(line, col, tagName));
-                }
+
+        for (TagInfo tag : tags) {
+            final int col = tag.getPosition().getColumn();
+
+            // Add the starting line of the comment to the line number to get the actual line number
+            // in the source.
+            // Lines are one-indexed, so need a off-by-one correction.
+            final int line = textBlock.getStartLineNo() + tag.getPosition().getLine() - 1;
+
+            if (JavadocTagInfo.isValidName(tag.getName())) {
+                validTags.add(
+                    new JavadocTag(line, col, tag.getName(), tag.getValue()));
             }
-            // No block tag, so look for inline validTags
-            else if (tagType == JavadocTagType.ALL || tagType == JavadocTagType.INLINE) {
-                lookForInlineTags(textBlock, i, tags, invalidTags);
+            else {
+                invalidTags.add(new InvalidJavadocTag(line, col, tag.getName()));
             }
         }
-        return new JavadocTags(tags, invalidTags);
+
+        return new JavadocTags(validTags, invalidTags);
     }
 

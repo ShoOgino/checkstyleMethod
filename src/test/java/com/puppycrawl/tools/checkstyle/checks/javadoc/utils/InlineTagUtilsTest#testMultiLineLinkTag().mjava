@@ -1,0 +1,14 @@
+    @Test
+    public void testMultiLineLinkTag() {
+        final String[] text = {
+            "/**",
+            " * {@link foo",
+            " *        bar baz}",
+            " */"};
+
+        final List<TagInfo> tags = InlineTagUtils.extractInlineTags(text);
+
+        assertEquals(1, tags.size());
+        assertTag(tags.get(0), "link", "foo bar baz", 2, 4);
+    }
+
