@@ -1,0 +1,17 @@
+    void method6() throws Exception {
+        String srcDir = System.getProperty("test.src", ".");
+        try (FileInputStream fis8859_1 = new FileInputStream(new File(srcDir, "Bug6204853.properties"));
+             FileInputStream fisUTF8 = new FileInputStream(new File(srcDir, "Bug6204853_Utf8.properties"));
+             InputStreamReader isrutf8 = new InputStreamReader(fisUTF8, "UTF-8")) {
+            PropertyResourceBundle bundleUtf8 = new PropertyResourceBundle(isrutf8);
+            PropertyResourceBundle bundle = new PropertyResourceBundle(fis8859_1);
+            String[] arrayUtf8 = {"1", "2", "3"};
+            String[] array = {"key1", "key2"};
+            if (!Arrays.equals(arrayUtf8, array)) {
+                throw new RuntimeException("Error message");
+            }
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
+
