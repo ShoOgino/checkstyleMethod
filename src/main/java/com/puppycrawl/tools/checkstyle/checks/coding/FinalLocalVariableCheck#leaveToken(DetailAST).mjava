@@ -8,6 +8,8 @@
                 scope = scopeStack.pop().scope;
                 break;
             case TokenTypes.SLIST:
+                // -@cs[MoveVariableInsideIf] assignment value is modified later so it can't be
+                // moved
                 final Deque<DetailAST> prevScopeUnitializedVariableData =
                     prevScopeUninitializedVariables.peek();
                 boolean containsBreak = false;
