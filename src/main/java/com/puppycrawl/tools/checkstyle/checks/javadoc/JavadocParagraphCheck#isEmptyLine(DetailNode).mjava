@@ -9,7 +9,7 @@
         if (previousSibling != null
                 && previousSibling.getParent().getType() == JavadocTokenTypes.JAVADOC) {
             if (previousSibling.getType() == JavadocTokenTypes.TEXT
-                    && previousSibling.getText().trim().isEmpty()) {
+                    && CommonUtils.isBlank(previousSibling.getText())) {
                 previousSibling = JavadocUtils.getPreviousSibling(previousSibling);
             }
             result = previousSibling != null

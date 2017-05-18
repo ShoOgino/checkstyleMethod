@@ -10,7 +10,8 @@
         //  [lineNo - 2] is the number of the previous line
         //  because the numbering starts from zero.
         int lineBeforeIndex = lineNo - 2;
-        while (lineBeforeIndex >= 0 && lines[lineBeforeIndex].trim().isEmpty()) {
+        while (lineBeforeIndex >= 0
+                && CommonUtils.isBlank(lines[lineBeforeIndex])) {
             lineBeforeIndex--;
             result++;
         }
