@@ -22,7 +22,8 @@
 
         // create a configuration
         final Configuration config = ConfigurationLoader.loadConfiguration(
-                cliOptions.configLocation, new PropertiesExpander(props));
+                cliOptions.configLocation, new PropertiesExpander(props),
+                !cliOptions.executeIgnoredModules);
 
         // create a listener for output
         final AuditListener listener = createListener(cliOptions.format, cliOptions.outputLocation);

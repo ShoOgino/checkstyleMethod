@@ -1,0 +1,18 @@
+    @Test
+    public void testExecuteIgnoredModule() throws Exception {
+        exit.expectSystemExitWithStatus(-2);
+        exit.checkAssertionAfterwards(() -> {
+            final String expectedExceptionMessage =
+                    String.format(Locale.ROOT, "Checkstyle ends with 1 errors.%n");
+            assertEquals(expectedExceptionMessage, systemOut.getLog());
+
+            final String cause = "com.puppycrawl.tools.checkstyle.api.CheckstyleException:"
+                    + " cannot initialize module TreeWalker - ";
+            assertTrue(systemErr.getLog().startsWith(cause));
+        });
+
+        Main.main("-c", getPath("config-non-existing-classname-ignore.xml"),
+                "-executeIgnoredModules",
+                getPath("InputMain.java"));
+    }
+
