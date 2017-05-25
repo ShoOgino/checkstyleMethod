@@ -19,7 +19,8 @@
                 contentHashSum = getHashCodeBasedOnObjectContent(ex);
             }
             finally {
-                resources.add(new ExternalResource(location, contentHashSum));
+                resources.add(new ExternalResource(EXTERNAL_RESOURCE_KEY_PREFIX + location,
+                        contentHashSum));
             }
         }
         return resources;
