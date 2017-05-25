@@ -26,9 +26,15 @@
             }
 
             LOG.debug("Exception occurred.", ex);
+
+            final StringWriter sw = new StringWriter();
+            final PrintWriter pw = new PrintWriter(sw, true);
+
+            ex.printStackTrace(pw);
+
             fileMessages.add(new LocalizedMessage(0,
                     Definitions.CHECKSTYLE_BUNDLE, EXCEPTION_MSG,
-                    new String[] {ex.getClass().getName() + ": " + ex.getMessage()},
+                    new String[] {sw.getBuffer().toString()},
                     null, getClass(), null));
         }
         return fileMessages;
