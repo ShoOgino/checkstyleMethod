@@ -1,17 +1,14 @@
     /**
      * Returns the module configurations in a specified file.
-     *
      * @param config location of config file, can be either a URL or a filename
      * @param overridePropsResolver overriding properties
-     * @param omitIgnoredModules {@code true} if modules with severity
-     *            'ignore' should be omitted, {@code false} otherwise
+     * @param threadModeSettings the thread mode configuration
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
     public static Configuration loadConfiguration(String config,
-        PropertyResolver overridePropsResolver, boolean omitIgnoredModules)
+            PropertyResolver overridePropsResolver, ThreadModeSettings threadModeSettings)
             throws CheckstyleException {
-        return loadConfiguration(config, overridePropsResolver, omitIgnoredModules,
-                ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE);
+        return loadConfiguration(config, overridePropsResolver, false, threadModeSettings);
     }
 

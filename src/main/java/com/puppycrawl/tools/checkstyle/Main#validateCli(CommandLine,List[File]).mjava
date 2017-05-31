@@ -49,6 +49,12 @@
                     result.add(String.format("Could not find file '%s'.", propertiesLocation));
                 }
             }
+            verifyThreadsNumberParameter(cmdLine, result, OPTION_CAPITAL_C_NAME,
+                "Checker threads number must be greater than zero",
+                "Invalid Checker threads number");
+            verifyThreadsNumberParameter(cmdLine, result, OPTION_CAPITAL_W_NAME,
+                "TreeWalker threads number must be greater than zero",
+                "Invalid TreeWalker threads number");
         }
         else {
             result.add("Must specify a config XML file.");

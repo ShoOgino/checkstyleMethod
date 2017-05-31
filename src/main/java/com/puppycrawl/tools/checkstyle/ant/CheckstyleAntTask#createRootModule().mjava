@@ -6,11 +6,11 @@
         final RootModule rootModule;
         try {
             final Properties props = createOverridingProperties();
-            final Configuration configuration =
-                ConfigurationLoader.loadConfiguration(
-                    config,
-                    new PropertiesExpander(props),
-                    !executeIgnoredModules);
+            final ThreadModeSettings threadModeSettings =
+                    ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE;
+            final Configuration configuration = ConfigurationLoader.loadConfiguration(
+                    config, new PropertiesExpander(props),
+                    !executeIgnoredModules, threadModeSettings);
 
             final ClassLoader moduleClassLoader =
                 Checker.class.getClassLoader();

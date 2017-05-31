@@ -1,0 +1,9 @@
+    @Test
+    public void testMultiThreadConfiguration() throws Exception {
+        final String name = "MyConfig";
+        final ThreadModeSettings multiThreadMode =
+                new ThreadModeSettings(4, 2);
+        final DefaultConfiguration config = new DefaultConfiguration(name, multiThreadMode);
+        assertEquals(multiThreadMode, config.getThreadModeSettings());
+    }
+

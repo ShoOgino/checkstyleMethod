@@ -1,0 +1,11 @@
+    @Test
+    public void testInvalidTreeWalkerThreadsNumber() throws Exception {
+        exit.expectSystemExitWithStatus(-1);
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Invalid TreeWalker threads number"
+                + System.lineSeparator(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
+        });
+        Main.main("-W", "invalid", "-c", "/google_checks.xml", getPath("InputMain.java"));
+    }
+

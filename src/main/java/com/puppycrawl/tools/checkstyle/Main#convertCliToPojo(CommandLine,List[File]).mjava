@@ -15,6 +15,12 @@
         conf.propertiesLocation = cmdLine.getOptionValue(OPTION_P_NAME);
         conf.files = filesToProcess;
         conf.executeIgnoredModules = cmdLine.hasOption(OPTION_EXECUTE_IGNORED_MODULES_NAME);
+        final String checkerThreadsNumber = cmdLine.getOptionValue(
+                OPTION_CAPITAL_C_NAME, ONE_STRING_VALUE);
+        conf.checkerThreadsNumber = Integer.parseInt(checkerThreadsNumber);
+        final String treeWalkerThreadsNumber = cmdLine.getOptionValue(
+                OPTION_CAPITAL_W_NAME, ONE_STRING_VALUE);
+        conf.treeWalkerThreadsNumber = Integer.parseInt(treeWalkerThreadsNumber);
         return conf;
     }
 

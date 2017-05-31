@@ -14,11 +14,14 @@
         when(tested.getAttribute("severity")).thenThrow(CheckstyleException.class);
         // to void creation of 2 other mocks for now reason, only one moc is used for all cases
         PowerMockito.whenNew(DefaultConfiguration.class)
-                .withArguments("MemberName").thenReturn(tested);
+                .withArguments("MemberName", ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE)
+                .thenReturn(tested);
         PowerMockito.whenNew(DefaultConfiguration.class)
-                .withArguments("Checker").thenReturn(tested);
+                .withArguments("Checker", ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE)
+                .thenReturn(tested);
         PowerMockito.whenNew(DefaultConfiguration.class)
-                .withArguments("TreeWalker").thenReturn(tested);
+                .withArguments("TreeWalker", ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE)
+                .thenReturn(tested);
 
         try {
             ConfigurationLoader.loadConfiguration(

@@ -1,0 +1,11 @@
+    @Test
+    public void testZeroCheckerThreadsNumber() throws Exception {
+        exit.expectSystemExitWithStatus(-1);
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Checker threads number must be greater than zero"
+                + System.lineSeparator(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
+        });
+        Main.main("-C", "0", "-c", "/google_checks.xml", getPath("InputMain.java"));
+    }
+

@@ -3,12 +3,17 @@
      * @param overrideProps resolver for overriding properties
      * @param omitIgnoredModules {@code true} if ignored modules should be
      *         omitted
+     * @param threadModeSettings the thread mode configuration
      * @throws ParserConfigurationException if an error occurs
      * @throws SAXException if an error occurs
      */
     private ConfigurationLoader(final PropertyResolver overrideProps,
-                                final boolean omitIgnoredModules)
+                                final boolean omitIgnoredModules,
+                                final ThreadModeSettings threadModeSettings)
             throws ParserConfigurationException, SAXException {
-        this(overrideProps, omitIgnoredModules, ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE);
+        saxHandler = new InternalLoader();
+        overridePropsResolver = overrideProps;
+        this.omitIgnoredModules = omitIgnoredModules;
+        this.threadModeSettings = threadModeSettings;
     }
 

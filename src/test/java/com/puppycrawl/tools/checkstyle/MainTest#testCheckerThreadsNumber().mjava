@@ -1,0 +1,18 @@
+    @Test
+    public void testCheckerThreadsNumber() throws Exception {
+        TestRootModuleChecker.reset();
+
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("", systemOut.getLog());
+            assertEquals("", systemErr.getLog());
+            assertTrue(TestRootModuleChecker.isProcessed());
+            final DefaultConfiguration config =
+                    (DefaultConfiguration) TestRootModuleChecker.getConfig();
+            final ThreadModeSettings multiThreadModeSettings = config.getThreadModeSettings();
+            assertEquals(4, multiThreadModeSettings.getCheckerThreadsNumber());
+            assertEquals(1, multiThreadModeSettings.getTreeWalkerThreadsNumber());
+        });
+        Main.main("-C", "4", "-c", getPath("config-custom-root-module.xml"),
+            getPath("InputMain.java"));
+    }
+

@@ -1,0 +1,11 @@
+    @Test
+    public void testZeroTreeWalkerThreadsNumber() throws Exception {
+        exit.expectSystemExitWithStatus(-1);
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("TreeWalker threads number must be greater than zero"
+                + System.lineSeparator(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
+        });
+        Main.main("-W", "0", "-c", "/google_checks.xml", getPath("InputMain.java"));
+    }
+

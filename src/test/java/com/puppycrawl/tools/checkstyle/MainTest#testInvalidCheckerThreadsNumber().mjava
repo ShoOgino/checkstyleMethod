@@ -1,0 +1,11 @@
+    @Test
+    public void testInvalidCheckerThreadsNumber() throws Exception {
+        exit.expectSystemExitWithStatus(-1);
+        exit.checkAssertionAfterwards(() -> {
+            assertEquals("Invalid Checker threads number"
+                + System.lineSeparator(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
+        });
+        Main.main("-C", "invalid", "-c", "/google_checks.xml", getPath("InputMain.java"));
+    }
+

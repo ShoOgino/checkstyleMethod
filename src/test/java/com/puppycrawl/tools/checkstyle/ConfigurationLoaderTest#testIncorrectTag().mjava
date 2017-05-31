@@ -2,12 +2,9 @@
     public void testIncorrectTag() throws Exception {
         try {
             final Class<?> aClassParent = ConfigurationLoader.class;
-            Constructor<?> ctorParent = null;
-            final Constructor<?>[] parentConstructors = aClassParent.getDeclaredConstructors();
-            for (Constructor<?> parentConstructor: parentConstructors) {
-                parentConstructor.setAccessible(true);
-                ctorParent = parentConstructor;
-            }
+            final Constructor<?> ctorParent = aClassParent.getDeclaredConstructor(
+                    PropertyResolver.class, boolean.class, ThreadModeSettings.class);
+            ctorParent.setAccessible(true);
             final Class<?> aClass = Class.forName("com.puppycrawl.tools.checkstyle."
                     + "ConfigurationLoader$InternalLoader");
             Constructor<?> constructor = null;
@@ -17,7 +14,7 @@
                 constructor = constr;
             }
 
-            final Object objParent = ctorParent.newInstance(null, true);
+            final Object objParent = ctorParent.newInstance(null, true, null);
             final Object obj = constructor.newInstance(objParent);
 
             final Class<?>[] param = new Class<?>[] {String.class, String.class,
