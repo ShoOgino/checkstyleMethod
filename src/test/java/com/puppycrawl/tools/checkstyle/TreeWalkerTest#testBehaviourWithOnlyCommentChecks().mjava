@@ -1,0 +1,22 @@
+    @Test
+    public void testBehaviourWithOnlyCommentChecks() throws Exception {
+        final TreeWalker treeWalkerSpy = spy(new TreeWalker());
+        final Class<?> classAstState =
+                Class.forName("com.puppycrawl.tools.checkstyle.TreeWalker$AstState");
+        final PackageObjectFactory factory = new PackageObjectFactory(
+                new HashSet<>(), Thread.currentThread().getContextClassLoader());
+        treeWalkerSpy.configure(createCheckConfig(CommentsIndentationCheck.class));
+        treeWalkerSpy.setModuleFactory(factory);
+        treeWalkerSpy.setupChild(createCheckConfig(CommentsIndentationCheck.class));
+        spy(TreeWalker.class);
+        doNothing().when(treeWalkerSpy, "walk",
+                any(DetailAST.class), any(FileContents.class), any(classAstState));
+        when(TreeWalker.class, "appendHiddenCommentNodes", any(DetailAST.class))
+                .thenReturn(null);
+        treeWalkerSpy.processFiltered(temporaryFolder.newFile("file.java"), new ArrayList<>());
+        verifyPrivate(TreeWalker.class, times(1))
+                .invoke("appendHiddenCommentNodes", any(DetailAST.class));
+        verifyPrivate(treeWalkerSpy, times(1)).invoke("walk",
+                any(DetailAST.class), any(FileContents.class), any(classAstState));
+    }
+

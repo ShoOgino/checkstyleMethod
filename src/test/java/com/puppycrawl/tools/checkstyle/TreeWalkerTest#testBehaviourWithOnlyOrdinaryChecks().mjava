@@ -1,0 +1,22 @@
+    @Test
+    public void testBehaviourWithOnlyOrdinaryChecks() throws Exception {
+        final String errMsg = "No comment processing checks -> "
+                + "No calls to TreeWalker.appendHiddenCommentNodes";
+        final TreeWalker treeWalkerSpy = spy(new TreeWalker());
+        final Class<?> classAstState =
+                Class.forName("com.puppycrawl.tools.checkstyle.TreeWalker$AstState");
+        final PackageObjectFactory factory = new PackageObjectFactory(
+                new HashSet<>(), Thread.currentThread().getContextClassLoader());
+        treeWalkerSpy.configure(createCheckConfig(TypeNameCheck.class));
+        treeWalkerSpy.setModuleFactory(factory);
+        treeWalkerSpy.setupChild(createCheckConfig(TypeNameCheck.class));
+        spy(TreeWalker.class);
+        doNothing().when(treeWalkerSpy, "walk",
+                any(DetailAST.class), any(FileContents.class), any(classAstState));
+        when(TreeWalker.class, "appendHiddenCommentNodes", any(DetailAST.class))
+                .thenThrow(new IllegalStateException(errMsg));
+        treeWalkerSpy.processFiltered(temporaryFolder.newFile("file.java"), new ArrayList<>());
+        verifyPrivate(treeWalkerSpy, times(1)).invoke("walk",
+                any(DetailAST.class), any(FileContents.class), any(classAstState));
+    }
+

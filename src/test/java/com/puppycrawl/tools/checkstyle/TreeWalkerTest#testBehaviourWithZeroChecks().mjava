@@ -1,0 +1,16 @@
+    @Test
+    public void testBehaviourWithZeroChecks() throws Exception {
+        final String errMsg = "No checks -> No parsing";
+        final TreeWalker treeWalkerSpy = spy(new TreeWalker());
+        final Class<?> classAstState =
+                Class.forName("com.puppycrawl.tools.checkstyle.TreeWalker$AstState");
+        mockStatic(TreeWalker.class);
+        when(TreeWalker.parse(any(FileContents.class)))
+                .thenThrow(new IllegalStateException(errMsg));
+        doNothing().when(treeWalkerSpy, "walk",
+                any(DetailAST.class), any(FileContents.class), any(classAstState));
+        treeWalkerSpy.processFiltered(temporaryFolder.newFile("file.java"), new ArrayList<>());
+        verifyPrivate(treeWalkerSpy, never()).invoke("walk",
+                any(DetailAST.class), any(FileContents.class), any(classAstState));
+    }
+
