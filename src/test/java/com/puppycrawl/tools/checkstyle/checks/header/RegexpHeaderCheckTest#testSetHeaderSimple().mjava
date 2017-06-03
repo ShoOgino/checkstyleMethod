@@ -3,9 +3,17 @@
      */
     @Test
     public void testSetHeaderSimple() {
+        //check if reader finally closed
+        mockStatic(Closeables.class);
+        doNothing().when(Closeables.class);
+        Closeables.closeQuietly(any(Reader.class));
+
         final RegexpHeaderCheck instance = new RegexpHeaderCheck();
         // check valid header passes
         final String header = "abc.*";
         instance.setHeader(header);
+
+        verifyStatic(times(1));
+        Closeables.closeQuietly(any(Reader.class));
     }
 

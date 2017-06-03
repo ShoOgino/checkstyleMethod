@@ -1,0 +1,11 @@
+    @Test
+    public void testNoHeaderMissingErrorInCaseHeaderSizeEqualToFileSize() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header3"));
+        checkConfig.addAttribute("multiLines", "1");
+        final String[] expected = {
+            "5: " + getCheckMessage(MSG_HEADER_MISMATCH, "^$"),
+        };
+        verify(checkConfig, getPath("InputRegexpHeader5.java"), expected);
+    }
+

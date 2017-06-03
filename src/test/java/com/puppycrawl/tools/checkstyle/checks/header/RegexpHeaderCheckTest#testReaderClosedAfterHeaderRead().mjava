@@ -1,0 +1,15 @@
+    @Test
+    public void testReaderClosedAfterHeaderRead() throws Exception {
+        mockStatic(Closeables.class);
+        doNothing().when(Closeables.class);
+        Closeables.closeQuietly(any(InputStreamReader.class));
+
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header"));
+        createChecker(checkConfig);
+
+        //check if reader finally closed
+        verifyStatic(times(1));
+        Closeables.closeQuietly(any(InputStreamReader.class));
+    }
+

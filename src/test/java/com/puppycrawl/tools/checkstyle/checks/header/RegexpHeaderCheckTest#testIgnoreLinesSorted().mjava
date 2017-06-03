@@ -1,0 +1,10 @@
+    @Test
+    public void testIgnoreLinesSorted() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header5"));
+        checkConfig.addAttribute("multiLines", "7,5,3");
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputRegexpHeader8.java"), expected);
+    }
+

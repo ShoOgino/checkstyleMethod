@@ -1,0 +1,15 @@
+    @Test
+    public void testHeaderWithInvalidRegexp() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.invalid.header"));
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        try {
+            verify(checkConfig, getPath("InputRegexpHeader5.java"), expected);
+            fail("IllegalArgumentException is expected");
+        }
+        catch (IllegalArgumentException ex) {
+            assertEquals("line 1 in header specification is not a regular expression",
+                    ex.getMessage());
+        }
+    }
+

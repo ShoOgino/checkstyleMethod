@@ -1,0 +1,8 @@
+    @Test
+    public void testNoWarningIfSingleLinedLeft() throws Exception {
+        final DefaultConfiguration checkConfig = createCheckConfig(RegexpHeaderCheck.class);
+        checkConfig.addAttribute("headerFile", getPath("regexp.header4"));
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputRegexpHeader4.java"), expected);
+    }
+
