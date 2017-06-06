@@ -6,7 +6,7 @@
         checker.addBeforeExecutionFileFilter(filter);
 
         filter.resetFilter();
-        getAcceptFileStarted().invoke(checker, "Test.java");
+        checker.process(Collections.singletonList(new File("dummy.java")));
         assertTrue("Checker.acceptFileStarted() doesn't call filter", filter.wasCalled());
     }
 
