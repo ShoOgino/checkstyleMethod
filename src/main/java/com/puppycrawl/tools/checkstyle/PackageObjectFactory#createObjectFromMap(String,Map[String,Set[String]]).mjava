@@ -1,0 +1,23 @@
+    /**
+     * Create object with the help of the supplied map.
+     * @param name name of module.
+     * @param map the supplied map.
+     * @return instance of module if it is found in modules map and no ambiguous classes exist.
+     * @throws CheckstyleException if the class fails to instantiate or there are ambiguous classes.
+     */
+    private Object createObjectFromMap(String name, Map<String, Set<String>> map)
+            throws CheckstyleException {
+        final Set<String> fullModuleNames = map.get(name);
+        Object instance = null;
+        if (fullModuleNames == null) {
+            final Set<String> fullCheckModuleNames = map.get(name + CHECK_SUFFIX);
+            if (fullCheckModuleNames != null) {
+                instance = createObjectFromFullModuleNames(name, fullCheckModuleNames);
+            }
+        }
+        else {
+            instance = createObjectFromFullModuleNames(name, fullModuleNames);
+        }
+        return instance;
+    }
+

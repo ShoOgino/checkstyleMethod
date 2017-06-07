@@ -1,14 +1,22 @@
     /**
-     * Generate the map of third party Checkstyle module names to their fully qualified names.
+     * Generate the map of third party Checkstyle module names to the set of their fully qualified
+     * names.
      * @param loader the class loader used to load Checkstyle package names
-     * @return the map of third party Checkstyle module names to their fully qualified names
+     * @return the map of third party Checkstyle module names to the set of their fully qualified
+     *      names
      */
-    private Map<String, String> generateThirdPartyNameToFullModuleName(ClassLoader loader) {
-        Map<String, String> returnValue;
+    private Map<String, Set<String>> generateThirdPartyNameToFullModuleName(ClassLoader loader) {
+        Map<String, Set<String>> returnValue;
         try {
             returnValue = ModuleReflectionUtils.getCheckstyleModules(packages, loader).stream()
-                .filter(clazz -> !NAME_TO_FULL_MODULE_NAME.keySet().contains(clazz.getSimpleName()))
-                .collect(Collectors.toMap(Class::getSimpleName, Class::getCanonicalName));
+                    .collect(Collectors.toMap(
+                        Class::getSimpleName,
+                        cls -> Collections.singleton(cls.getCanonicalName()),
+                        (fullNames1, fullNames2) -> {
+                            final Set<String> mergedNames = new LinkedHashSet<>(fullNames1);
+                            mergedNames.addAll(fullNames2);
+                            return mergedNames;
+                        }));
         }
         catch (IOException ignore) {
             returnValue = new HashMap<>();

@@ -13,13 +13,26 @@
         Object instance = null;
         // if the name is a simple class name, try to find it in maps at first
         if (!name.contains(PACKAGE_SEPARATOR)) {
-            instance = createObjectFromMap(name, NAME_TO_FULL_MODULE_NAME);
+            // find the name in hardcode map
+            final String fullModuleName = NAME_TO_FULL_MODULE_NAME.get(name);
+            if (fullModuleName == null) {
+                final String fullCheckModuleName =
+                        NAME_TO_FULL_MODULE_NAME.get(name + CHECK_SUFFIX);
+                if (fullCheckModuleName != null) {
+                    instance = createObject(fullCheckModuleName);
+                }
+            }
+            else {
+                instance = createObject(fullModuleName);
+            }
+
+            // find the name in third party map
             if (instance == null) {
-                if (thirdPartyNameToFullModuleName == null) {
-                    thirdPartyNameToFullModuleName =
+                if (thirdPartyNameToFullModuleNames == null) {
+                    thirdPartyNameToFullModuleNames =
                             generateThirdPartyNameToFullModuleName(moduleClassLoader);
                 }
-                instance = createObjectFromMap(name, thirdPartyNameToFullModuleName);
+                instance = createObjectFromMap(name, thirdPartyNameToFullModuleNames);
             }
         }
 
