@@ -1,0 +1,14 @@
+    @Test
+    public void testisInInterfaceOrAnnotationBlock() {
+        assertTrue(ScopeUtils.isInInterfaceOrAnnotationBlock(
+                getNode(TokenTypes.ANNOTATION_DEF, TokenTypes.OBJBLOCK)));
+        assertTrue(ScopeUtils.isInInterfaceOrAnnotationBlock(
+                getNode(TokenTypes.INTERFACE_DEF, TokenTypes.OBJBLOCK)));
+        assertFalse(ScopeUtils.isInInterfaceOrAnnotationBlock(
+                getNode(TokenTypes.CLASS_DEF, TokenTypes.OBJBLOCK)));
+        assertFalse(ScopeUtils.isInInterfaceOrAnnotationBlock(
+                getNode(TokenTypes.LITERAL_NEW, TokenTypes.IDENT)));
+        assertFalse(ScopeUtils.isInInterfaceOrAnnotationBlock(
+                getNode(TokenTypes.ENUM_DEF, TokenTypes.OBJBLOCK)));
+    }
+

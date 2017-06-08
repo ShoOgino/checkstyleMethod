@@ -1,0 +1,12 @@
+    private static DetailAST getNode(int... nodeTypes) {
+        DetailAST ast = new DetailAST();
+        ast.setType(nodeTypes[0]);
+        for (int i = 1; i < nodeTypes.length; i++) {
+            final DetailAST astChild = new DetailAST();
+            astChild.setType(nodeTypes[i]);
+            ast.addChild(astChild);
+            ast = astChild;
+        }
+        return ast;
+    }
+

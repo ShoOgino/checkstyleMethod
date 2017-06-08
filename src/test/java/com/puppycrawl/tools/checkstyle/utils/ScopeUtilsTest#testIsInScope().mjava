@@ -1,0 +1,8 @@
+    @Test
+    public void testIsInScope() {
+        assertTrue(ScopeUtils.isInScope(getNodeWithParentScope(TokenTypes.LITERAL_PUBLIC,
+                "public", TokenTypes.ANNOTATION_DEF), Scope.PUBLIC));
+        assertFalse(ScopeUtils.isInScope(getNodeWithParentScope(TokenTypes.LITERAL_PROTECTED,
+                "protected", TokenTypes.INTERFACE_DEF), Scope.PRIVATE));
+    }
+

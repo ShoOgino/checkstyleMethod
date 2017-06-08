@@ -1,11 +1,6 @@
     @Test
     public void testIsLocalVariableDefCatch() {
-        final DetailAST ast = new DetailAST();
-        ast.setType(TokenTypes.LITERAL_CATCH);
-        final DetailAST ast2 = new DetailAST();
-        ast2.setType(TokenTypes.PARAMETER_DEF);
-        ast.addChild(ast2);
-
-        Assert.assertTrue(ScopeUtils.isLocalVariableDef(ast2));
+        assertTrue(ScopeUtils.isLocalVariableDef(
+                getNode(TokenTypes.LITERAL_CATCH, TokenTypes.PARAMETER_DEF)));
     }
 

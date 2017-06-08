@@ -1,11 +1,6 @@
     @Test
     public void testInEnumBlockInClass() {
-        final DetailAST ast = new DetailAST();
-        ast.setType(TokenTypes.CLASS_DEF);
-        final DetailAST ast2 = new DetailAST();
-        ast2.setType(TokenTypes.MODIFIERS);
-        ast.addChild(ast2);
-
-        Assert.assertFalse(ScopeUtils.isInEnumBlock(ast2));
+        assertFalse(ScopeUtils.isInEnumBlock(
+                getNode(TokenTypes.CLASS_DEF, TokenTypes.MODIFIERS)));
     }
 

@@ -1,11 +1,6 @@
     @Test
     public void testIsOuterMostTypeAnnotation() {
-        final DetailAST ast = new DetailAST();
-        ast.setType(TokenTypes.ANNOTATION_DEF);
-        final DetailAST ast2 = new DetailAST();
-        ast2.setType(TokenTypes.MODIFIERS);
-        ast.addChild(ast2);
-
-        Assert.assertFalse(ScopeUtils.isOuterMostType(ast2));
+        assertFalse(ScopeUtils.isOuterMostType(
+                getNode(TokenTypes.ANNOTATION_DEF, TokenTypes.MODIFIERS)));
     }
 
