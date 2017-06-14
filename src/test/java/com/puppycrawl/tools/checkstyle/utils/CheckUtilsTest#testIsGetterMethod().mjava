@@ -1,0 +1,9 @@
+    @Test
+    public void testIsGetterMethod() throws Exception {
+        final DetailAST notGetterMethod = getNodeFromFile(TokenTypes.METHOD_DEF);
+        final DetailAST getterMethod = notGetterMethod.getNextSibling().getNextSibling();
+
+        assertTrue(CheckUtils.isGetterMethod(getterMethod));
+        assertFalse(CheckUtils.isGetterMethod(notGetterMethod));
+    }
+

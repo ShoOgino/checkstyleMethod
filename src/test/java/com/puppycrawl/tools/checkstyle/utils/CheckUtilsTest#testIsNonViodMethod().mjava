@@ -1,0 +1,9 @@
+    @Test
+    public void testIsNonViodMethod() throws Exception {
+        final DetailAST nonVoidMethod = getNodeFromFile(TokenTypes.METHOD_DEF);
+        final DetailAST voidMethod = nonVoidMethod.getNextSibling();
+
+        assertTrue(CheckUtils.isNonVoidMethod(nonVoidMethod));
+        assertFalse(CheckUtils.isNonVoidMethod(voidMethod));
+    }
+

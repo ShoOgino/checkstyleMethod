@@ -1,0 +1,29 @@
+    /**
+     * Finds node of specified type among root children, siblings, siblings children
+     * on any deep level.
+     * @param root      DetailAST
+     * @param predicate predicate
+     * @return {@link Optional} of {@link DetailAST} node which matches the predicate.
+     */
+    public static Optional<DetailAST> findTokenInAstByPredicate(DetailAST root,
+                                                                Predicate<DetailAST> predicate) {
+        DetailAST curNode = root;
+        while (!predicate.test(curNode)) {
+            DetailAST toVisit = curNode.getFirstChild();
+            while (curNode != null && toVisit == null) {
+                toVisit = curNode.getNextSibling();
+                if (toVisit == null) {
+                    curNode = curNode.getParent();
+                }
+            }
+
+            if (curNode == toVisit || curNode == root.getParent()) {
+                curNode = null;
+                break;
+            }
+
+            curNode = toVisit;
+        }
+        return Optional.ofNullable(curNode);
+    }
+

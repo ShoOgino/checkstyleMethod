@@ -1,0 +1,9 @@
+    @Test
+    public void testIsEqualsMethod() throws Exception {
+        final DetailAST equalsMethodNode = getNodeFromFile(TokenTypes.METHOD_DEF);
+        final DetailAST someOtherMethod = equalsMethodNode.getNextSibling();
+
+        assertTrue(CheckUtils.isEqualsMethod(equalsMethodNode));
+        assertFalse(CheckUtils.isEqualsMethod(someOtherMethod));
+    }
+

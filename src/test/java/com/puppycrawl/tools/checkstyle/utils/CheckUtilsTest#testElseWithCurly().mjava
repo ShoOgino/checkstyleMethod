@@ -3,7 +3,7 @@
         final DetailAST ast = new DetailAST();
         ast.setType(TokenTypes.ASSIGN);
         ast.setText("ASSIGN");
-        Assert.assertFalse(CheckUtils.isElseIf(ast));
+        assertFalse(CheckUtils.isElseIf(ast));
 
         final DetailAST parentAst = new DetailAST();
         parentAst.setType(TokenTypes.LCURLY);
@@ -14,7 +14,7 @@
         ifAst.setText("IF");
         parentAst.addChild(ifAst);
 
-        Assert.assertFalse(CheckUtils.isElseIf(ifAst));
+        assertFalse(CheckUtils.isElseIf(ifAst));
 
         final DetailAST parentAst2 = new DetailAST();
         parentAst2.setType(TokenTypes.SLIST);
@@ -22,12 +22,12 @@
 
         parentAst2.addChild(ifAst);
 
-        Assert.assertFalse(CheckUtils.isElseIf(ifAst));
+        assertFalse(CheckUtils.isElseIf(ifAst));
 
         final DetailAST elseAst = new DetailAST();
         elseAst.setType(TokenTypes.LITERAL_ELSE);
 
         elseAst.setFirstChild(ifAst);
-        Assert.assertTrue(CheckUtils.isElseIf(ifAst));
+        assertTrue(CheckUtils.isElseIf(ifAst));
     }
 

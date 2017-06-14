@@ -1,0 +1,11 @@
+    @Test
+    public void testIsSetterMethod() throws Exception {
+        final DetailAST firstClassMethod = getNodeFromFile(TokenTypes.METHOD_DEF);
+        final DetailAST setterMethod =
+                firstClassMethod.getNextSibling().getNextSibling().getNextSibling();
+        final DetailAST notSetterMethod = setterMethod.getNextSibling();
+
+        assertTrue(CheckUtils.isSetterMethod(setterMethod));
+        assertFalse(CheckUtils.isSetterMethod(notSetterMethod));
+    }
+

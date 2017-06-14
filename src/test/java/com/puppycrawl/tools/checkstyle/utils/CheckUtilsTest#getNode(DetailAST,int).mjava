@@ -1,0 +1,11 @@
+    private static DetailAST getNode(DetailAST root, int type) {
+        final Optional<DetailAST> node = findTokenInAstByPredicate(root,
+            ast -> ast.getType() == type);
+
+        if (!node.isPresent()) {
+            fail("Cannot find node of specified type: " + type);
+        }
+
+        return node.get();
+    }
+

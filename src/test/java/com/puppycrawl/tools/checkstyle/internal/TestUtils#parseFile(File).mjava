@@ -1,0 +1,14 @@
+    /**
+     * Parses Java source file. Results in AST which contains comment nodes.
+     * @param file file to parse
+     * @return DetailAST tree
+     * @throws NullPointerException if the text is null
+     * @throws IOException          if the file could not be read
+     * @throws ANTLRException       if parser or lexer failed
+     */
+    public static DetailAST parseFile(File file) throws IOException, ANTLRException {
+        final FileText text = new FileText(file.getAbsoluteFile(), "UTF-8");
+        final FileContents contents = new FileContents(text);
+        return parseWithComments(contents);
+    }
+

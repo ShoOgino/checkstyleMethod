@@ -1,0 +1,8 @@
+    @Test
+    public void testGetTypeParameterNames() throws Exception {
+        final DetailAST parameterisedClassNode = getNodeFromFile(TokenTypes.CLASS_DEF);
+        final List<String> expected = Arrays.asList("V", "C");
+
+        assertEquals(expected, CheckUtils.getTypeParameterNames(parameterisedClassNode));
+    }
+

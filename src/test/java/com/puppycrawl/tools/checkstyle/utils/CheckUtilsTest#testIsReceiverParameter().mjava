@@ -1,0 +1,13 @@
+    @Test
+    public void testIsReceiverParameter() throws Exception {
+        final DetailAST objBlock = getNodeFromFile(TokenTypes.OBJBLOCK);
+        final DetailAST methodWithReceiverParameter = objBlock.getLastChild().getPreviousSibling();
+        final DetailAST receiverParameter =
+                getNode(methodWithReceiverParameter, TokenTypes.PARAMETER_DEF);
+        final DetailAST simpleParameter =
+                receiverParameter.getNextSibling().getNextSibling();
+
+        assertTrue(CheckUtils.isReceiverParameter(receiverParameter));
+        assertFalse(CheckUtils.isReceiverParameter(simpleParameter));
+    }
+

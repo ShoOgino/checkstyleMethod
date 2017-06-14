@@ -1,0 +1,17 @@
+    @Test
+    public void testGetAccessModifierFromModifiersToken() throws Exception {
+        final DetailAST privateVariable = getNodeFromFile(TokenTypes.VARIABLE_DEF);
+        final DetailAST protectedVariable = privateVariable.getNextSibling();
+        final DetailAST publicVariable = protectedVariable.getNextSibling();
+        final DetailAST packageVariable = publicVariable.getNextSibling();
+
+        assertEquals(AccessModifier.PRIVATE,
+                CheckUtils.getAccessModifierFromModifiersToken(privateVariable.getFirstChild()));
+        assertEquals(AccessModifier.PROTECTED,
+                CheckUtils.getAccessModifierFromModifiersToken(protectedVariable.getFirstChild()));
+        assertEquals(AccessModifier.PUBLIC,
+                CheckUtils.getAccessModifierFromModifiersToken(publicVariable.getFirstChild()));
+        assertEquals(AccessModifier.PACKAGE,
+                CheckUtils.getAccessModifierFromModifiersToken(packageVariable.getFirstChild()));
+    }
+
