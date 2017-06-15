@@ -1,0 +1,11 @@
+    private static DetailAST getSiblingByType(DetailAST node, int type) {
+        DetailAST returnValue = null;
+        for (DetailAST ast = node; ast != null; ast = ast.getNextSibling()) {
+            if (ast.getType() == type) {
+                returnValue = ast;
+                break;
+            }
+        }
+        return returnValue;
+    }
+

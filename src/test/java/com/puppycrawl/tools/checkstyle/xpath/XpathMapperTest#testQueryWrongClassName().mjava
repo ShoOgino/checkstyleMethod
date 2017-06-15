@@ -1,0 +1,8 @@
+    @Test
+    public void testQueryWrongClassName() throws Exception {
+        final String xpath = "/CLASS_DEF[@text='WrongName']";
+        final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
+        final List<Item> nodes = getXpathItems(xpath, rootNode);
+        assertTrue("Should return true, because no item matches xpath", nodes.isEmpty());
+    }
+

@@ -1,0 +1,57 @@
+    /**
+     * Determines axis iteration algorithm. Throws {@code UnsupportedOperationException} in case,
+     * when there is no axis iterator for given axisNumber.
+     *
+     * @param axisNumber element from {@code AxisInfo}
+     * @return {@code AxisIterator} object
+     */
+    @Override
+    public AxisIterator iterateAxis(byte axisNumber) {
+        final AxisIterator result;
+        switch (axisNumber) {
+            case AxisInfo.ANCESTOR:
+                result = new Navigator.AncestorEnumeration(this, false);
+                break;
+            case AxisInfo.ANCESTOR_OR_SELF:
+                result = new Navigator.AncestorEnumeration(this, true);
+                break;
+            case AxisInfo.ATTRIBUTE:
+                if (attributes == null) {
+                    result = EmptyIterator.OfNodes.THE_INSTANCE;
+                }
+                else {
+                    result = new ArrayIterator.OfNodes(attributes);
+                }
+                break;
+            case AxisInfo.CHILD:
+                if (hasChildNodes()) {
+                    result = new ArrayIterator.OfNodes(
+                            getChildren().toArray(new AbstractNode[getChildren().size()]));
+                }
+                else {
+                    result = EmptyIterator.OfNodes.THE_INSTANCE;
+                }
+                break;
+            case AxisInfo.DESCENDANT:
+                if (hasChildNodes()) {
+                    result = new Navigator.DescendantEnumeration(this, false, true);
+                }
+                else {
+                    result = EmptyIterator.OfNodes.THE_INSTANCE;
+                }
+                break;
+            case AxisInfo.DESCENDANT_OR_SELF:
+                result = new Navigator.DescendantEnumeration(this, true, true);
+                break;
+            case AxisInfo.PARENT:
+                result = SingleNodeIterator.makeIterator(parent);
+                break;
+            case AxisInfo.SELF:
+                result = SingleNodeIterator.makeIterator(this);
+                break;
+            default:
+                throw throwUnsupportedOperationException();
+        }
+        return result;
+    }
+

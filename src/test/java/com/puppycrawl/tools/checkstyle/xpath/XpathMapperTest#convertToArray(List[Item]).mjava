@@ -1,0 +1,9 @@
+    private static DetailAST[] convertToArray(List<Item> nodes) {
+        final DetailAST[] result = new DetailAST[nodes.size()];
+        for (int i = 0; i < nodes.size(); i++) {
+            final AbstractNode abstractNode = (AbstractNode) nodes.get(i);
+            result[i] = abstractNode.getUnderlyingNode();
+        }
+        return result;
+    }
+

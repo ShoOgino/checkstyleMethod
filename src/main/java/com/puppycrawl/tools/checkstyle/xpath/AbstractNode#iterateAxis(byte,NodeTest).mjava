@@ -1,0 +1,15 @@
+    /**
+     * Determines axis iteration algorithm.
+     * @param axisNumber element from {@code AxisInfo}
+     * @param nodeTest filter for iterator
+     * @return {@code AxisIterator} object
+     */
+    @Override
+    public AxisIterator iterateAxis(byte axisNumber, NodeTest nodeTest) {
+        AxisIterator axisIterator = iterateAxis(axisNumber);
+        if (nodeTest != null) {
+            axisIterator = new Navigator.AxisFilter(axisIterator, nodeTest);
+        }
+        return axisIterator;
+    }
+
