@@ -1,9 +1,8 @@
     @Test
-    public final void testConfigurationByUrl() throws IOException {
+    public final void testConfigurationByResource() throws IOException {
         final CheckstyleAntTask antTask = new CheckstyleAntTask();
         antTask.setProject(new Project());
-        final URL url = new File(getPath(CONFIG_FILE)).toURI().toURL();
-        antTask.setConfig(url.toString());
+        antTask.setConfig(CONFIG_RESOURCE);
         antTask.setFile(new File(getPath(FLAWLESS_INPUT)));
         antTask.execute();
     }

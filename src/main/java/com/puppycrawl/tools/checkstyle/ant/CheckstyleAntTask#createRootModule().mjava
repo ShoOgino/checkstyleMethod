@@ -6,9 +6,9 @@
         final RootModule rootModule;
         try {
             final Properties props = createOverridingProperties();
-            final Configuration config =
+            final Configuration configuration =
                 ConfigurationLoader.loadConfiguration(
-                    configLocation,
+                    config,
                     new PropertiesExpander(props),
                     !executeIgnoredModules);
 
@@ -18,7 +18,7 @@
             final ModuleFactory factory = new PackageObjectFactory(
                     Checker.class.getPackage().getName() + ".", moduleClassLoader);
 
-            rootModule = (RootModule) factory.createModule(config.getName());
+            rootModule = (RootModule) factory.createModule(configuration.getName());
             rootModule.setModuleClassLoader(moduleClassLoader);
 
             if (rootModule instanceof Checker) {
@@ -28,11 +28,11 @@
                 ((Checker) rootModule).setClassLoader(loader);
             }
 
-            rootModule.configure(config);
+            rootModule.configure(configuration);
         }
         catch (final CheckstyleException ex) {
             throw new BuildException(String.format(Locale.ROOT, "Unable to create Root Module: "
-                    + "configLocation {%s}, classpath {%s}.", configLocation, classpath), ex);
+                    + "config {%s}, classpath {%s}.", config, classpath), ex);
         }
         return rootModule;
     }

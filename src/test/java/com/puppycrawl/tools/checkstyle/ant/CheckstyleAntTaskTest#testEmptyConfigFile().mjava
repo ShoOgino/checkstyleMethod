@@ -1,7 +1,7 @@
     @Test
     public final void testEmptyConfigFile() throws IOException {
         final CheckstyleAntTask antTask = new CheckstyleAntTask();
-        antTask.setConfig(new File(getPath("ant/empty_config.xml")));
+        antTask.setConfig(getPath("ant/empty_config.xml"));
         antTask.setProject(new Project());
         antTask.setFile(new File(getPath(FLAWLESS_INPUT)));
         try {
@@ -10,7 +10,7 @@
         }
         catch (BuildException ex) {
             assertTrue("Error message is unexpected",
-                    ex.getMessage().startsWith("Unable to create Root Module: configLocation"));
+                    ex.getMessage().startsWith("Unable to create Root Module: config"));
         }
     }
 
