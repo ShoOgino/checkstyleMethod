@@ -8,7 +8,13 @@
      */
     private JavadocNodeImpl createJavadocNode(ParseTree parseTree, DetailNode parent, int index) {
         final JavadocNodeImpl node = new JavadocNodeImpl();
-        node.setText(parseTree.getText());
+        if (parseTree.getChildCount() == 0
+                || "Text".equals(getNodeClassNameWithoutContext(parseTree))) {
+            node.setText(parseTree.getText());
+        }
+        else {
+            node.setText(getFormattedNodeClassNameWithoutContext(parseTree));
+        }
         node.setColumnNumber(getColumn(parseTree));
         node.setLineNumber(getLine(parseTree) + blockCommentLineNumber);
         node.setIndex(index);
