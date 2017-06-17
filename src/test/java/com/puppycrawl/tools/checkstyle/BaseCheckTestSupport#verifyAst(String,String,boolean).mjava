@@ -6,12 +6,11 @@
      * @throws Exception if exception occurs during verification.
      */
     protected static void verifyAst(String expectedTextPrintFileName, String actualJavaFileName,
-            boolean withComments) throws Exception {
-        final String expectedContents = new String(Files.readAllBytes(
-            Paths.get(expectedTextPrintFileName)), StandardCharsets.UTF_8)
-            .replaceAll("\\\\r\\\\n", "\\\\n");
+                                    boolean withComments) throws Exception {
+        final String expectedContents = readFile(expectedTextPrintFileName);
+
         final String actualContents = AstTreeStringPrinter.printFileAst(
-                new File(actualJavaFileName), withComments).replaceAll("\\\\r\\\\n", "\\\\n");
+                new File(actualJavaFileName), withComments).replaceAll(CLRF_REGEX, LF_REGEX);
 
         assertEquals("Generated AST from Java file should match pre-defined AST", expectedContents,
                 actualContents);

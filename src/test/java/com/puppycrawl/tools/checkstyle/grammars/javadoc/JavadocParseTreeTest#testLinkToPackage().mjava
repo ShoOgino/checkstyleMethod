@@ -1,8 +1,6 @@
     @Test
-    public void testLinkToPackage() throws IOException {
-        final String filename = getDocPath("InputLinkToPackage.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeLinkToPackage();
-        compareTrees(expectedTree, generatedTree);
+    public void testLinkToPackage() throws Exception {
+        verifyJavadocTree(getDocPath("expectedLinkToPackageAst.txt"),
+                getDocPath("InputLinkToPackage.txt"));
     }
 

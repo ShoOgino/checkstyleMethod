@@ -1,10 +1,6 @@
     @Test
-    public void listWithUnclosedItemInUnclosedParagraph()
-            throws IOException {
-        final String filename = getHtmlPath("InputListWithUnclosedItemInUnclosedParagraph.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder
-                .treeListWithUnclosedItemInUnclosedParagraph();
-        compareTrees(expectedTree, generatedTree);
+    public void listWithUnclosedItemInUnclosedParagraph() throws Exception {
+        verifyJavadocTree(getHtmlPath("expectedListWithUnclosedItemInUnclosedParagraphAst.txt"),
+                getHtmlPath("InputListWithUnclosedItemInUnclosedParagraph.txt"));
     }
 

@@ -1,9 +1,6 @@
     @Test
-    public void docRootInheritDoc()
-            throws IOException {
-        final String filename = getDocPath("InputDocRootInheritDoc.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeDocRootInheritDoc();
-        compareTrees(expectedTree, generatedTree);
+    public void docRootInheritDoc() throws Exception {
+        verifyJavadocTree(getDocPath("expectedDocRootInheritDocAst.txt"),
+                getDocPath("InputDocRootInheritDoc.txt"));
     }
 

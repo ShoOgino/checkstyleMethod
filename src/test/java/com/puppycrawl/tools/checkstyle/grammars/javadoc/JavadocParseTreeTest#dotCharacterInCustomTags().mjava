@@ -1,9 +1,6 @@
     @Test
-    public void dotCharacterInCustomTags()
-            throws IOException {
-        final String filename = getDocPath("InputCustomTagWithDot.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeCustomTagWithDot();
-        compareTrees(expectedTree, generatedTree);
+    public void dotCharacterInCustomTags() throws Exception {
+        verifyJavadocTree(getDocPath("expectedCustomTagWithDotAst.txt"),
+                getDocPath("InputCustomTagWithDot.txt"));
     }
 

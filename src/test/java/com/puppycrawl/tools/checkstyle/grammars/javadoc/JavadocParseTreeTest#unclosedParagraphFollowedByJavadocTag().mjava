@@ -1,9 +1,6 @@
     @Test
-    public void unclosedParagraphFollowedByJavadocTag()
-            throws IOException {
-        final String filename = getHtmlPath("InputUnclosedParagraphFollowedByJavadocTag.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeUnclosedParagraphFollowedByJavadocTag();
-        compareTrees(expectedTree, generatedTree);
+    public void unclosedParagraphFollowedByJavadocTag() throws Exception {
+        verifyJavadocTree(getHtmlPath("expectedUnclosedParagraphFollowedByJavadocTagAst.txt"),
+                getHtmlPath("InputUnclosedParagraphFollowedByJavadocTag.txt"));
     }
 

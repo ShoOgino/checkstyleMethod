@@ -1,8 +1,6 @@
     @Test
-    public void testInlineCustomJavadocTag() throws IOException {
-        final String filename = getDocPath("InputInlineCustomJavadocTag.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeInlineCustomJavadocTag();
-        compareTrees(expectedTree, generatedTree);
+    public void testInlineCustomJavadocTag() throws Exception {
+        verifyJavadocTree(getDocPath("expectedInlineCustomJavadocTagAst.txt"),
+                getDocPath("InputInlineCustomJavadocTag.txt"));
     }
 

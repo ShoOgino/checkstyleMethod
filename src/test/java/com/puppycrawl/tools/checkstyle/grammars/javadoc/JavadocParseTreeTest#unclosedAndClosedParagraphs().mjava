@@ -1,9 +1,6 @@
     @Test
-    public void unclosedAndClosedParagraphs()
-            throws IOException {
-        final String filename = getHtmlPath("InputUnclosedAndClosedParagraphs.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeUnclosedAndClosedParagraphs();
-        compareTrees(expectedTree, generatedTree);
+    public void unclosedAndClosedParagraphs() throws Exception {
+        verifyJavadocTree(getHtmlPath("expectedUnclosedAndClosedParagraphsAst.txt"),
+                getHtmlPath("InputUnclosedAndClosedParagraphs.txt"));
     }
 

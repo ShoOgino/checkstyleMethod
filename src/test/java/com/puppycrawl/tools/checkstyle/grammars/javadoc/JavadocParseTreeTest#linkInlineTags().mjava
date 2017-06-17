@@ -1,9 +1,6 @@
     @Test
-    public void linkInlineTags()
-            throws IOException {
-        final String filename = getDocPath("InputLinkInlineTags.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeLinkInlineTags();
-        compareTrees(expectedTree, generatedTree);
+    public void linkInlineTags() throws Exception {
+        verifyJavadocTree(getDocPath("expectedLinkInlineTagsAst.txt"),
+                getDocPath("InputLinkInlineTags.txt"));
     }
 

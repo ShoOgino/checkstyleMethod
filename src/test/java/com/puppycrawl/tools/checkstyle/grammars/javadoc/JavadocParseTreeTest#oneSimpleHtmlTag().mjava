@@ -1,9 +1,6 @@
     @Test
-    public void oneSimpleHtmlTag()
-            throws IOException {
-        final String filename = getHtmlPath("InputOneSimpleHtmlTag.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeOneSimpleHtmlTag();
-        compareTrees(expectedTree, generatedTree);
+    public void oneSimpleHtmlTag() throws Exception {
+        verifyJavadocTree(getHtmlPath("expectedOneSimpleHtmlTagAst.txt"),
+                getHtmlPath("InputOneSimpleHtmlTag.txt"));
     }
 

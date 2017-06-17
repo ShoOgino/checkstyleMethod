@@ -1,9 +1,6 @@
     @Test
-    public void fewWhiteSpacesAsSeparator()
-            throws IOException {
-        final String filename = getDocPath("InputFewWhiteSpacesAsSeparator.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeFewWhiteSpacesAsSeparator();
-        compareTrees(expectedTree, generatedTree);
+    public void fewWhiteSpacesAsSeparator() throws Exception {
+        verifyJavadocTree(getDocPath("expectedFewWhiteSpacesAsSeparatorAst.txt"),
+                getDocPath("InputFewWhiteSpacesAsSeparator.txt"));
     }
 

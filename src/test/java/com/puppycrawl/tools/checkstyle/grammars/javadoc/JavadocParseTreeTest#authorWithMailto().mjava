@@ -1,9 +1,6 @@
     @Test
-    public void authorWithMailto()
-            throws IOException {
-        final String filename = getDocPath("InputAuthorWithMailto.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeAuthorWithMailto();
-        compareTrees(expectedTree, generatedTree);
+    public void authorWithMailto() throws Exception {
+        verifyJavadocTree(getDocPath("expectedAuthorWithMailtoAst.txt"),
+                getDocPath("InputAuthorWithMailto.txt"));
     }
 

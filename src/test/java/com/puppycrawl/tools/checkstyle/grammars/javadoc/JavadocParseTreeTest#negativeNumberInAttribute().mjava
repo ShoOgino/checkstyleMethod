@@ -1,9 +1,6 @@
     @Test
-    public void negativeNumberInAttribute()
-            throws IOException {
-        final String filename = getHtmlPath("InputNegativeNumberInAttribute.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeNegativeNumberInAttribute();
-        compareTrees(expectedTree, generatedTree);
+    public void negativeNumberInAttribute() throws Exception {
+        verifyJavadocTree(getHtmlPath("expectedNegativeNumberInAttributeAst.txt"),
+                getHtmlPath("InputNegativeNumberInAttribute.txt"));
     }
 

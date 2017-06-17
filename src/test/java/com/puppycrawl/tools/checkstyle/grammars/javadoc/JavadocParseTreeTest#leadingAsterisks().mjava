@@ -1,9 +1,6 @@
     @Test
-    public void leadingAsterisks()
-            throws IOException {
-        final String filename = getPath("InputLeadingAsterisks.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeLeadingAsterisks();
-        compareTrees(expectedTree, generatedTree);
+    public void leadingAsterisks() throws Exception {
+        verifyJavadocTree(getPath("expectedLeadingAsterisksAst.txt"),
+                getPath("InputLeadingAsterisks.txt"));
     }
 

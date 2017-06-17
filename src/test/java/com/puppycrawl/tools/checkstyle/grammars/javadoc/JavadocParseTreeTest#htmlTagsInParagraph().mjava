@@ -1,9 +1,6 @@
     @Test
-    public void htmlTagsInParagraph()
-            throws IOException {
-        final String filename = getHtmlPath("InputHtmlTagsInParagraph.txt");
-        final ParseTree generatedTree = parseJavadoc(getFileContent(new File(filename)));
-        final ParseTree expectedTree = ParseTreeBuilder.treeHtmlTagsInParagraph();
-        compareTrees(expectedTree, generatedTree);
+    public void htmlTagsInParagraph() throws Exception {
+        verifyJavadocTree(getHtmlPath("expectedHtmlTagsInParagraphAst.txt"),
+                getHtmlPath("InputHtmlTagsInParagraph.txt"));
     }
 
