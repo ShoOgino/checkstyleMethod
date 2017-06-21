@@ -1,0 +1,15 @@
+    @Test
+    public void testFinishLocalSetupFullyInitialized() throws Exception {
+        final TreeWalker treeWalker = new TreeWalker();
+        final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        treeWalker.setClassLoader(contextClassLoader);
+        treeWalker.setSeverity("error");
+        treeWalker.setTabWidth(100);
+        treeWalker.finishLocalSetup();
+
+        final Context context = (Context) Whitebox.getInternalState(treeWalker, "childContext");
+        assertEquals(contextClassLoader, context.get("classLoader"));
+        assertEquals("error", context.get("severity"));
+        assertEquals(String.valueOf(100), context.get("tabWidth"));
+    }
+

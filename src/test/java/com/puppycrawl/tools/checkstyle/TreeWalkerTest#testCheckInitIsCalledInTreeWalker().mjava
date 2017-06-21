@@ -1,0 +1,10 @@
+    @Test
+    public void testCheckInitIsCalledInTreeWalker() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createCheckConfig(VerifyInitCheck.class);
+        final File file = temporaryFolder.newFile("file.pdf");
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig, file.getPath(), expected);
+        assertTrue(VerifyInitCheck.isInitWasCalled());
+    }
+

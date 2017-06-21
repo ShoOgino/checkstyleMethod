@@ -1,0 +1,23 @@
+    @Test
+    public void testCreationOfFakeCommentBlock() throws Exception {
+        final Method createFakeBlockComment =
+                Whitebox.getMethod(DetailNodeTreeStringPrinter.class,
+                        "createFakeBlockComment", String.class);
+
+        final DetailAST testCommentBlock =
+                (DetailAST) createFakeBlockComment.invoke(null, "test_comment");
+        assertEquals(TokenTypes.BLOCK_COMMENT_BEGIN, testCommentBlock.getType());
+        assertEquals("/*", testCommentBlock.getText());
+        assertEquals(0, testCommentBlock.getLineNo());
+
+        final DetailAST contentCommentBlock = testCommentBlock.getFirstChild();
+        assertEquals(TokenTypes.COMMENT_CONTENT, contentCommentBlock.getType());
+        assertEquals("*test_comment", contentCommentBlock.getText());
+        assertEquals(0, contentCommentBlock.getLineNo());
+        assertEquals(-1, contentCommentBlock.getColumnNo());
+
+        final DetailAST endCommentBlock = contentCommentBlock.getNextSibling();
+        assertEquals(TokenTypes.BLOCK_COMMENT_END, endCommentBlock.getType());
+        assertEquals("*/", endCommentBlock.getText());
+    }
+
