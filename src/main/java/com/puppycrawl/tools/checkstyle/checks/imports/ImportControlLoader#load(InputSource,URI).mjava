@@ -5,18 +5,18 @@
      * @return the root {@link ImportControl} object.
      * @throws CheckstyleException if an error occurs.
      */
-    private static ImportControl load(final InputSource source,
-        final URI uri) throws CheckstyleException {
+    private static ImportControl load(InputSource source,
+        URI uri) throws CheckstyleException {
         try {
             final ImportControlLoader loader = new ImportControlLoader();
             loader.parseInputSource(source);
             return loader.getRoot();
         }
-        catch (final ParserConfigurationException | SAXException ex) {
+        catch (ParserConfigurationException | SAXException ex) {
             throw new CheckstyleException("unable to parse " + uri
                     + " - " + ex.getMessage(), ex);
         }
-        catch (final IOException ex) {
+        catch (IOException ex) {
             throw new CheckstyleException("unable to read " + uri, ex);
         }
     }

@@ -4,7 +4,7 @@
      * @return the root {@link ImportControl} object.
      * @throws CheckstyleException if an error occurs.
      */
-    public static ImportControl load(final URI uri) throws CheckstyleException {
+    public static ImportControl load(URI uri) throws CheckstyleException {
 
         InputStream inputStream = null;
         try {
@@ -12,10 +12,10 @@
             final InputSource source = new InputSource(inputStream);
             return load(source, uri);
         }
-        catch (final MalformedURLException ex) {
+        catch (MalformedURLException ex) {
             throw new CheckstyleException("syntax error in url " + uri, ex);
         }
-        catch (final IOException ex) {
+        catch (IOException ex) {
             throw new CheckstyleException("unable to find " + uri, ex);
         }
         finally {
