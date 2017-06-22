@@ -1,0 +1,17 @@
+    @Test
+    public void testGetCommentMeasures() {
+        final String[] commentText = {"/**",
+            "     * Creates new instance.",
+            "     * @param text the lines that make up the comment.",
+            "     * @param firstCol number of the first column of the comment.",
+            "     * @param lastLine number of the last line of the comment.",
+            "     * @param lastCol number of the last column of the comment.",
+            "     */"};
+        final Comment comment = new Comment(commentText, 5, 49, 66);
+
+        Assert.assertEquals(43, comment.getStartLineNo());
+        Assert.assertEquals(5, comment.getStartColNo());
+        Assert.assertEquals(49, comment.getEndLineNo());
+        Assert.assertEquals(66, comment.getEndColNo());
+    }
+

@@ -1,0 +1,14 @@
+    @Test
+    public void testGetClassLoader() throws Exception {
+        final AbstractCheck check = new AbstractCheck() {
+            @Override
+            public int[] getDefaultTokens() {
+                return CommonUtils.EMPTY_INT_ARRAY;
+            }
+        };
+        final ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        check.setClassLoader(classLoader);
+
+        Assert.assertEquals(classLoader, check.getClassLoader());
+    }
+

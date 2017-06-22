@@ -1,12 +1,14 @@
     @Test
-    public void testGetRequiredTokens() {
+    public void testGetTabWidth() throws Exception {
         final AbstractCheck check = new AbstractCheck() {
             @Override
             public int[] getDefaultTokens() {
                 return CommonUtils.EMPTY_INT_ARRAY;
             }
         };
-        // Eventually it will become clear abstract method
-        Assert.assertArrayEquals(CommonUtils.EMPTY_INT_ARRAY, check.getRequiredTokens());
+        final int tabWidth = 4;
+        check.setTabWidth(tabWidth);
+
+        Assert.assertEquals(tabWidth, check.getTabWidth());
     }
 

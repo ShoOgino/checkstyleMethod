@@ -1,0 +1,15 @@
+    @Test
+    public void testGetLine() throws Exception {
+        final AbstractCheck check = new AbstractCheck() {
+            @Override
+            public int[] getDefaultTokens() {
+                return CommonUtils.EMPTY_INT_ARRAY;
+            }
+        };
+        check.setFileContents(new FileContents(new FileText(
+            new File(INPUT_FOLDER + "InputAbstractCheckTestFileContence.java"),
+            Charset.defaultCharset().name())));
+
+        Assert.assertEquals(" * I'm a javadoc", check.getLine(3));
+    }
+

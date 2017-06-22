@@ -1,0 +1,13 @@
+    @Test
+    @SuppressWarnings("NullArgumentToVariableArgMethod")
+    public void testSetExtentionThrowsExceptionWhenTheyAreNull() throws Exception {
+        final DummyFileSetCheck check = new DummyFileSetCheck();
+        try {
+            check.setFileExtensions(null);
+            fail("Expected exception.");
+        }
+        catch (IllegalArgumentException exception) {
+            assertEquals("Extensions array can not be null", exception.getMessage());
+        }
+    }
+

@@ -1,0 +1,14 @@
+    @Test
+    public void testGetAcceptableTokens() throws Exception {
+        final int[] defaultTokens = {TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF};
+        final AbstractCheck check = new AbstractCheck() {
+            @Override
+            public int[] getDefaultTokens() {
+                return defaultTokens;
+            }
+        };
+
+        Assert.assertNotEquals(defaultTokens, check.getAcceptableTokens());
+        Assert.assertArrayEquals(defaultTokens, check.getAcceptableTokens());
+    }
+
