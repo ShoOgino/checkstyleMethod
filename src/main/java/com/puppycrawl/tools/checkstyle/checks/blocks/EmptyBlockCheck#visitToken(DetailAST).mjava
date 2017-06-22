@@ -2,7 +2,7 @@
     public void visitToken(DetailAST ast) {
         final DetailAST leftCurly = findLeftCurly(ast);
         if (leftCurly != null) {
-            if (option == BlockOption.STMT) {
+            if (option == BlockOption.STATEMENT) {
                 final boolean emptyBlock;
                 if (leftCurly.getType() == TokenTypes.LCURLY) {
                     emptyBlock = leftCurly.getNextSibling().getType() != TokenTypes.CASE_GROUP;
@@ -13,7 +13,7 @@
                 if (emptyBlock) {
                     log(leftCurly.getLineNo(),
                         leftCurly.getColumnNo(),
-                        MSG_KEY_BLOCK_NO_STMT,
+                        MSG_KEY_BLOCK_NO_STATEMENT,
                         ast.getText());
                 }
             }
