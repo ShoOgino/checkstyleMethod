@@ -1,13 +1,13 @@
     @Before
     public void setUp() {
-        // restore original logging level and handlers to prevent bleeding into other tests
+        // restore original logging level and HANDLERS to prevent bleeding into other tests
 
-        logger.setLevel(originalLogLevel);
+        LOG.setLevel(ORIGINAL_LOG_LEVEL);
 
-        for (Handler handler : logger.getHandlers()) {
+        for (Handler handler : LOG.getHandlers()) {
             boolean found = false;
 
-            for (Handler savedHandler : handlers) {
+            for (Handler savedHandler : HANDLERS) {
                 if (handler == savedHandler) {
                     found = true;
                     break;
@@ -15,7 +15,7 @@
             }
 
             if (!found) {
-                logger.removeHandler(handler);
+                LOG.removeHandler(handler);
             }
         }
     }
