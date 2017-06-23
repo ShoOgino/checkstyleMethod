@@ -1,11 +1,11 @@
     @Test
     public void testPkgImportRuleExactMatch() {
-        final PkgImportRule r = new PkgImportRule(true, false, "pkg", true, false);
-        assertNotNull(r);
-        assertEquals(AccessResult.UNKNOWN, r.verifyImport("asda"));
-        assertEquals(AccessResult.UNKNOWN, r.verifyImport("p"));
-        assertEquals(AccessResult.ALLOWED, r.verifyImport("pkg.a"));
-        assertEquals(AccessResult.UNKNOWN, r.verifyImport("pkg.a.b"));
-        assertEquals(AccessResult.UNKNOWN, r.verifyImport("pkg"));
+        final PkgImportRule rule = new PkgImportRule(true, false, "pkg", true, false);
+        assertNotNull(rule);
+        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("asda"));
+        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("p"));
+        assertEquals(AccessResult.ALLOWED, rule.verifyImport("pkg.a"));
+        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("pkg.a.b"));
+        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("pkg"));
     }
 

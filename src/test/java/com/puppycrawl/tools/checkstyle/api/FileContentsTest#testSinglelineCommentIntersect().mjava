@@ -1,10 +1,10 @@
     @Test
     public void testSinglelineCommentIntersect() {
         // just to make UT coverage 100%
-        final FileContents o = new FileContents(
+        final FileContents fileContents = new FileContents(
                 FileText.fromLines(new File("filename"), Collections.singletonList("  //   ")));
-        o.reportSingleLineComment(1, 2);
-        assertTrue(o.hasIntersectionWithComment(1, 5, 1, 6));
+        fileContents.reportSingleLineComment(1, 2);
+        assertTrue(fileContents.hasIntersectionWithComment(1, 5, 1, 6));
 
     }
 
