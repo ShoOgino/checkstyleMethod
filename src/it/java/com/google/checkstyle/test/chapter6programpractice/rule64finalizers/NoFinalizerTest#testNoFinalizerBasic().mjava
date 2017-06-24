@@ -1,0 +1,16 @@
+    @Test
+    public void testNoFinalizerBasic() throws Exception {
+
+        final String msg = getCheckMessage(NoFinalizerCheck.class, "avoid.finalizer.method");
+
+        final String[] expected = {
+            "5: " + msg,
+        };
+
+        final Configuration checkConfig = getCheckConfig("NoFinalizer");
+        final String filePath = getPath("InputNoFinalizer.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

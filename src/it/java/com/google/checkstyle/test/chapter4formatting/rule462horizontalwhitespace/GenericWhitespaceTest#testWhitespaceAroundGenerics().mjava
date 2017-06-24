@@ -1,0 +1,32 @@
+    @Test
+    public void testWhitespaceAroundGenerics() throws Exception {
+
+        final String msgPreceded = "ws.preceded";
+        final String msgFollowed = "ws.followed";
+        final Configuration checkConfig = getCheckConfig("GenericWhitespace");
+
+        final String[] expected = {
+            "12:16: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
+            "12:18: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, "<"),
+            "12:36: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
+            "12:38: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, "<"),
+            "12:47: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, ">"),
+            "12:49: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, ">"),
+            "12:49: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, ">"),
+            "14:32: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
+            "14:34: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, "<"),
+            "14:45: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, ">"),
+            "15:32: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
+            "15:34: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, "<"),
+            "15:45: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, ">"),
+            "20:38: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, "<"),
+            "20:40: " + getCheckMessage(checkConfig.getMessages(), msgFollowed, "<"),
+            "20:61: " + getCheckMessage(checkConfig.getMessages(), msgPreceded, ">"),
+        };
+
+        final String filePath = getPath("InputWhitespaceAroundGenerics.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

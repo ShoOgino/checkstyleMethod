@@ -1,0 +1,14 @@
+    @Test
+    public void testSeparatorWrapComma() throws Exception {
+
+        final String[] expected = {
+            "31:17: " + getCheckMessage(SeparatorWrapCheck.class, "line.previous", ","),
+        };
+
+        final Configuration checkConfig = getCheckConfig("SeparatorWrap", "SeparatorWrapComma");
+        final String filePath = getPath("InputSeparatorWrapComma.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

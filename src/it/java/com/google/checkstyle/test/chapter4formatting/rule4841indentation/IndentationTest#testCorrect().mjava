@@ -1,0 +1,12 @@
+    @Test
+    public void testCorrect() throws Exception {
+
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+
+        final Configuration checkConfig = getCheckConfig("Indentation");
+        final String filePath = getPath("InputIndentationCorrect.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
