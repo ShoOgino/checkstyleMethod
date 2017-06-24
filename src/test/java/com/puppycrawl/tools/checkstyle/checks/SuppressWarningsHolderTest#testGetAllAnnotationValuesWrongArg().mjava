@@ -23,8 +23,10 @@
             fail("Exception expected");
         }
         catch (InvocationTargetException ex) {
-            assertTrue(ex.getCause() instanceof IllegalArgumentException);
-            assertEquals("Unexpected AST: Method Def[0x0]", ex.getCause().getMessage());
+            assertTrue("Error type is unexpected",
+                    ex.getCause() instanceof IllegalArgumentException);
+            assertEquals("Error message is unexpected",
+                    "Unexpected AST: Method Def[0x0]", ex.getCause().getMessage());
         }
     }
 

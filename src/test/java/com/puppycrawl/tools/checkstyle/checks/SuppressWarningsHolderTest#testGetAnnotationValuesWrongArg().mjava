@@ -16,8 +16,10 @@
             fail("Exception expected");
         }
         catch (InvocationTargetException ex) {
-            assertTrue(ex.getCause() instanceof IllegalArgumentException);
-            assertEquals("Expression or annotation array"
+            assertTrue("Error type is unexpected",
+                    ex.getCause() instanceof IllegalArgumentException);
+            assertEquals("Error message is unexpected",
+                    "Expression or annotation array"
                     + " initializer AST expected: Method Def[0x0]", ex.getCause().getMessage());
         }
     }

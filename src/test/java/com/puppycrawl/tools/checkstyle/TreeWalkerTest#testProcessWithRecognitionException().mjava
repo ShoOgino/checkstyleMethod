@@ -14,7 +14,8 @@
             treeWalker.processFiltered(file, lines);
         }
         catch (CheckstyleException exception) {
-            assertTrue(exception.getMessage().contains(
+            assertTrue("Error message is unexpected",
+                    exception.getMessage().contains(
                     "TokenStreamRecognitionException occurred during the analysis of file"));
         }
     }

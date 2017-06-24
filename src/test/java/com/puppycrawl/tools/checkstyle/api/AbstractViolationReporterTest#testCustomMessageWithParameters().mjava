@@ -10,9 +10,11 @@
         emptyCheck.log(0, "msgKey", "TestParam");
 
         final SortedSet<LocalizedMessage> messages = collector.getMessages();
-        assertEquals(1, messages.size());
+        assertEquals("Amount of messages differs from expected",
+                1, messages.size());
 
-        assertEquals("This is a custom message with TestParam.",
+        assertEquals("Message differs from expected",
+                "This is a custom message with TestParam.",
                 messages.first().getMessage());
     }
 

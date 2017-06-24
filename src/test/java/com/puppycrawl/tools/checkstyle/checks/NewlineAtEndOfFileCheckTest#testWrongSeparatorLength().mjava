@@ -13,12 +13,15 @@
             method.invoke(new NewlineAtEndOfFileCheck(), file);
         }
         catch (InvocationTargetException ex) {
-            assertTrue(ex.getCause() instanceof IOException);
+            assertTrue("Error type is unexpected",
+                    ex.getCause() instanceof IOException);
             if (System.getProperty("os.name").toLowerCase(ENGLISH).startsWith("windows")) {
-                assertEquals("Unable to read 2 bytes, got 0", ex.getCause().getMessage());
+                assertEquals("Error message is unexpected",
+                        "Unable to read 2 bytes, got 0", ex.getCause().getMessage());
             }
             else {
-                assertEquals("Unable to read 1 bytes, got 0", ex.getCause().getMessage());
+                assertEquals("Error message is unexpected",
+                        "Unable to read 1 bytes, got 0", ex.getCause().getMessage());
             }
         }
     }

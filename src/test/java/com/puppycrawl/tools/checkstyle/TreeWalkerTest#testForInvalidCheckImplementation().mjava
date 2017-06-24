@@ -8,7 +8,8 @@
             verify(checkConfig, pathToEmptyFile, expected);
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getMessage().contains("isCommentNodesRequired"));
+            assertTrue("Error message is unexpected",
+                    ex.getMessage().contains("isCommentNodesRequired"));
         }
     }
 

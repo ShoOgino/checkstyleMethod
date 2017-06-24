@@ -9,7 +9,8 @@
             fail("exception expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getMessage().startsWith(
+            assertTrue("Error message is unexpected",
+                    ex.getMessage().startsWith(
                     "cannot initialize module com.puppycrawl.tools.checkstyle."
                             + "checks.NewlineAtEndOfFileCheck - "
                             + "Cannot set property 'lineSeparator' to 'ct' in module"));

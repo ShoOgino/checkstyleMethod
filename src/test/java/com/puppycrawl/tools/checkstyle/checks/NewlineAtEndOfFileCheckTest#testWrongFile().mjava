@@ -7,8 +7,10 @@
         lines.add("txt");
         final File impossibleFile = new File("");
         final Set<LocalizedMessage> messages = check.process(impossibleFile, lines);
-        assertEquals(1, messages.size());
+        assertEquals("Ammount of messages is unexpected",
+                1, messages.size());
         final Iterator<LocalizedMessage> iterator = messages.iterator();
-        assertEquals(getCheckMessage(MSG_KEY_UNABLE_OPEN, ""), iterator.next().getMessage());
+        assertEquals("Violation message differs from expected",
+                getCheckMessage(MSG_KEY_UNABLE_OPEN, ""), iterator.next().getMessage());
     }
 
