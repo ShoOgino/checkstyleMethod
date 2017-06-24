@@ -5,9 +5,13 @@
             SuppressionsLoader.loadSuppressions(fn);
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getMessage().startsWith("Unable to parse " + fn));
-            assertTrue(ex.getMessage().contains("\"files\""));
-            assertTrue(ex.getMessage().contains("\"suppress\""));
+            final String messageStart = "Unable to parse " + fn;
+            assertTrue("Exception message should start with: " + messageStart,
+                ex.getMessage().startsWith("Unable to parse " + fn));
+            assertTrue("Exception message should contain \"files\"",
+                ex.getMessage().contains("\"files\""));
+            assertTrue("Exception message should contain \"suppress\"",
+                ex.getMessage().contains("\"suppress\""));
         }
     }
 

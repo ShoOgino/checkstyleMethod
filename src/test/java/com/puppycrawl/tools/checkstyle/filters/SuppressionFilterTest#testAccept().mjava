@@ -7,6 +7,7 @@
 
         final AuditEvent ev = new AuditEvent(this, "ATest.java", null);
 
-        assertTrue(filter.accept(ev));
+        assertTrue("Audit event should be excepted when there are no suppressions",
+            filter.accept(ev));
     }
 

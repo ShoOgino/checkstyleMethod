@@ -19,6 +19,8 @@
         final boolean optional = true;
         final SuppressionFilter filter = createSuppressionFilter(fileName, optional);
         final AuditEvent ev = new AuditEvent(this, "AnyFile.java", null);
-        assertTrue(filter.accept(ev));
+        assertTrue(
+            "Event was not excepted when IOException is thrown while reading suppression file",
+            filter.accept(ev));
     }
 

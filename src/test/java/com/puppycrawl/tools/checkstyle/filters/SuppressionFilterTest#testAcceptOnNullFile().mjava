@@ -5,7 +5,6 @@
         final SuppressionFilter filter = createSuppressionFilter(fileName, optional);
 
         final AuditEvent ev = new AuditEvent(this, "AnyJava.java", null);
-
-        assertTrue(filter.accept(ev));
+        assertTrue("Audit event on null file should be excepted, but was not", filter.accept(ev));
     }
 
