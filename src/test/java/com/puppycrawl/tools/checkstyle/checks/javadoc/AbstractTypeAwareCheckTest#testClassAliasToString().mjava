@@ -30,6 +30,7 @@
         final Method toString = classAlias.getClass().getDeclaredMethod("toString");
         toString.setAccessible(true);
         final String result = (String) toString.invoke(classAlias);
-        assertEquals("ClassAlias[alias Token[blablabla(1x1)] for Token[blablabla(1x1)]]", result);
+        assertEquals("Invalid toString result",
+            "ClassAlias[alias Token[blablabla(1x1)] for Token[blablabla(1x1)]]", result);
     }
 

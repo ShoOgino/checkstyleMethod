@@ -6,7 +6,10 @@
             Assert.fail("ConversionException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertTrue(ex.getMessage().startsWith("unable to parse"));
+            final String messageStart = "unable to parse";
+
+            assertTrue("Invalid exception message, should start with: " + messageStart,
+                ex.getMessage().startsWith(messageStart));
         }
     }
 

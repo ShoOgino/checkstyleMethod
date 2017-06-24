@@ -11,8 +11,9 @@
         }
         catch (CheckstyleException ex) {
             final IllegalStateException cause = (IllegalStateException) ex.getCause();
-            assertEquals(getCheckMessage(MSG_CLASS_INFO, "@throws", "InvalidExceptionName"),
-                    cause.getMessage());
+            assertEquals("Invalid exception message",
+                getCheckMessage(MSG_CLASS_INFO, "@throws", "InvalidExceptionName"),
+                cause.getMessage());
         }
     }
 

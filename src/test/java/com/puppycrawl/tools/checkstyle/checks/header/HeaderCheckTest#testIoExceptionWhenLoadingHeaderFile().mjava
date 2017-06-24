@@ -13,8 +13,9 @@
             fail("Exception expected");
         }
         catch (InvocationTargetException ex) {
-            assertTrue(ex.getCause() instanceof CheckstyleException);
-            assertTrue(ex.getCause().getMessage().startsWith("unable to load header file "));
+            assertTrue("Invalid exception cause", ex.getCause() instanceof CheckstyleException);
+            assertTrue("Invalid exception cause message",
+                ex.getCause().getMessage().startsWith("unable to load header file "));
         }
     }
 

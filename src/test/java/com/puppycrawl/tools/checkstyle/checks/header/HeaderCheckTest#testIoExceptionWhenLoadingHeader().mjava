@@ -9,8 +9,8 @@
             fail("Exception expected");
         }
         catch (IllegalArgumentException ex) {
-            assertTrue(ex.getCause() instanceof IOException);
-            assertEquals("unable to load header", ex.getMessage());
+            assertTrue("Invalid exception cause", ex.getCause() instanceof IOException);
+            assertEquals("Invalid exception message", "unable to load header", ex.getMessage());
         }
     }
 

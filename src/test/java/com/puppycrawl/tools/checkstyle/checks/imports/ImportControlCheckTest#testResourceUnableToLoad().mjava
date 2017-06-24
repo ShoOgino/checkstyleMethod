@@ -10,7 +10,10 @@
         }
         catch (CheckstyleException ex) {
             final String message = getCheckstyleExceptionMessage(ex);
-            assertTrue(message.startsWith("Unable to find: "));
+            final String messageStart = "Unable to find: ";
+
+            assertTrue("Invalid message, should start with: " + messageStart,
+                message.startsWith(message));
         }
     }
 
