@@ -21,8 +21,11 @@
 
         // comparing to 0 as there is no legal file in input
         final int numLegalFiles = 0;
-        assertEquals(numLegalFiles, counter);
-        assertEquals(numLegalFiles, auditAdapter.getNumFilesStarted());
-        assertEquals(numLegalFiles, auditAdapter.getNumFilesFinished());
+        assertEquals("There were more legal files than expected",
+                numLegalFiles, counter);
+        assertEquals("Audit was started on larger amount of files than expected",
+                numLegalFiles, auditAdapter.getNumFilesStarted());
+        assertEquals("Audit was finished on larger amount of files than expected",
+                numLegalFiles, auditAdapter.getNumFilesFinished());
     }
 

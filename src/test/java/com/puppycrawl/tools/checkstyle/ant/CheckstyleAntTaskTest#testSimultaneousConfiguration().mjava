@@ -12,7 +12,8 @@
             fail("Exception is expected");
         }
         catch (BuildException ex) {
-            assertEquals(expected, ex.getMessage());
+            assertEquals("Error message is unexpected",
+                    expected, ex.getMessage());
         }
         try {
             antTask = new CheckstyleAntTask();
@@ -21,7 +22,8 @@
             fail("Exception is expected");
         }
         catch (BuildException ex) {
-            assertEquals(expected, ex.getMessage());
+            assertEquals("Error message is unexpected",
+                    expected, ex.getMessage());
         }
     }
 

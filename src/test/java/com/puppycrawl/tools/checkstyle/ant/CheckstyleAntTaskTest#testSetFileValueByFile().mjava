@@ -3,6 +3,7 @@
         final String filename = getPath("ant/checkstyleAntTest.properties");
         final CheckstyleAntTask.Property property = new CheckstyleAntTask.Property();
         property.setFile(new File(filename));
-        assertEquals(property.getValue(), new File(filename).getAbsolutePath());
+        assertEquals("File path is unexpected",
+                property.getValue(), new File(filename).getAbsolutePath());
     }
 

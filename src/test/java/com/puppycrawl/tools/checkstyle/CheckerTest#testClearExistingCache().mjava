@@ -23,8 +23,10 @@
         final Properties cacheAfterClear = new Properties();
         cacheAfterClear.load(Files.newBufferedReader(cacheFile.toPath()));
 
-        assertEquals(1, cacheAfterClear.size());
-        assertNotNull(cacheAfterClear.getProperty(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals("Cache has unexpected size",
+                1, cacheAfterClear.size());
+        assertNotNull("Cache has null hash",
+                cacheAfterClear.getProperty(PropertyCacheFile.CONFIG_HASH_KEY));
 
         final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
@@ -34,12 +36,14 @@
         final Properties cacheAfterSecondRun = new Properties();
         cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
 
-        assertNotNull(cacheAfterSecondRun.getProperty(pathToEmptyFile));
-        assertEquals(
+        assertNotNull("Cache has null path",
+                cacheAfterSecondRun.getProperty(pathToEmptyFile));
+        assertEquals("Cash have changed it hash",
             cacheAfterClear.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
             cacheAfterSecondRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY)
         );
         final int expectedNumberOfObjectsInCacheAfterSecondRun = 2;
-        assertEquals(expectedNumberOfObjectsInCacheAfterSecondRun, cacheAfterSecondRun.size());
+        assertEquals("Cache has changed number of items",
+                expectedNumberOfObjectsInCacheAfterSecondRun, cacheAfterSecondRun.size());
     }
 

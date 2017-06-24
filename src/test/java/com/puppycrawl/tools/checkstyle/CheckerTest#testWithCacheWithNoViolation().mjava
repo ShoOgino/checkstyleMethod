@@ -23,11 +23,14 @@
 
         // There should 2 objects in cache: processed file (file.java) and checker configuration.
         final int expectedNumberOfObjectsInCache = 2;
-        assertEquals(expectedNumberOfObjectsInCache, cache.size());
+        assertEquals("Cache has unexpected size",
+                expectedNumberOfObjectsInCache, cache.size());
 
         final String expectedConfigHash = "68EE3C3B4593FD8D86159C670C504542E20C6FA0";
-        assertEquals(expectedConfigHash, cache.getProperty(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals("Cache has unexpected hash",
+                expectedConfigHash, cache.getProperty(PropertyCacheFile.CONFIG_HASH_KEY));
 
-        assertNotNull(cache.getProperty(tmpFile.getPath()));
+        assertNotNull("Cache file has null path",
+                cache.getProperty(tmpFile.getPath()));
     }
 

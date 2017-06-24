@@ -20,9 +20,12 @@
         }
         // -@cs[IllegalCatchExtended] Testing for catch Error is part of 100% coverage.
         catch (Error error) {
-            assertThat(error.getCause(), instanceOf(IOError.class));
-            assertThat(error.getCause().getCause(), instanceOf(InternalError.class));
-            assertEquals(errorMessage, error.getCause().getCause().getMessage());
+            assertThat("Error cause differs from IOError",
+                    error.getCause(), instanceOf(IOError.class));
+            assertThat("Error cause is not InternalError",
+                    error.getCause().getCause(), instanceOf(InternalError.class));
+            assertEquals("Error message is not expected",
+                    errorMessage, error.getCause().getCause().getMessage());
         }
     }
 

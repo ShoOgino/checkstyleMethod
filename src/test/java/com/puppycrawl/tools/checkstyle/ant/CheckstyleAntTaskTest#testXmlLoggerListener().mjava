@@ -5,6 +5,7 @@
         final CheckstyleAntTask.Formatter formatter = new CheckstyleAntTask.Formatter();
         formatter.setType(formatterType);
         formatter.setUseFile(false);
-        assertTrue(formatter.createListener(null) instanceof XMLLogger);
+        assertTrue("Listener instance has unexpected type",
+                formatter.createListener(null) instanceof XMLLogger);
     }
 

@@ -12,14 +12,18 @@
         checker.finishLocalSetup();
 
         final Context context = (Context) Whitebox.getInternalState(checker, "childContext");
-        assertEquals(System.getProperty("file.encoding", "UTF-8"), context.get("charset"));
-        assertEquals(contextClassLoader, context.get("classLoader"));
-        assertEquals("error", context.get("severity"));
-        assertEquals("testBaseDir", context.get("basedir"));
+        assertEquals("Charset was different than expected",
+                System.getProperty("file.encoding", "UTF-8"), context.get("charset"));
+        assertEquals("Was used unsufficient classloader",
+                contextClassLoader, context.get("classLoader"));
+        assertEquals("Severity is set to unexpected value",
+                "error", context.get("severity"));
+        assertEquals("Basedir is set to unexpected value",
+                "testBaseDir", context.get("basedir"));
 
         final Field sLocale = LocalizedMessage.class.getDeclaredField("sLocale");
         sLocale.setAccessible(true);
         final Locale locale = (Locale) sLocale.get(null);
-        assertEquals(Locale.ITALY, locale);
+        assertEquals("Locale is set to unexpected value", Locale.ITALY, locale);
     }
 

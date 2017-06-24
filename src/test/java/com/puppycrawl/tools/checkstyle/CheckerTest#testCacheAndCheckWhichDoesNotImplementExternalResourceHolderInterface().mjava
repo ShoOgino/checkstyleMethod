@@ -5,7 +5,8 @@
     @Test
     public void testCacheAndCheckWhichDoesNotImplementExternalResourceHolderInterface()
             throws Exception {
-        assertFalse(ExternalResourceHolder.class.isAssignableFrom(HiddenFieldCheck.class));
+        assertFalse("ExternalResourceHolder has changed his parent",
+                ExternalResourceHolder.class.isAssignableFrom(HiddenFieldCheck.class));
         final DefaultConfiguration checkConfig = createCheckConfig(HiddenFieldCheck.class);
 
         final DefaultConfiguration treeWalkerConfig = createCheckConfig(TreeWalker.class);
@@ -38,6 +39,7 @@
         final Properties cacheAfterSecondRun = new Properties();
         cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
 
-        assertEquals(cacheAfterFirstRun, cacheAfterSecondRun);
+        assertEquals("Cache from first run differs from second run cache",
+                cacheAfterFirstRun, cacheAfterSecondRun);
     }
 

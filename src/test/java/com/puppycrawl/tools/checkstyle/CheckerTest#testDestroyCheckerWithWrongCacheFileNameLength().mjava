@@ -14,7 +14,8 @@
             fail("Exception did not happen");
         }
         catch (IllegalStateException ex) {
-            assertTrue(ex.getCause() instanceof IOException);
+            assertTrue("Cause of exception differs from IOException",
+                    ex.getCause() instanceof IOException);
         }
     }
 

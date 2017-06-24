@@ -9,7 +9,8 @@
             fail("Exception is expected");
         }
         catch (BuildException ex) {
-            assertTrue(ex.getMessage().startsWith("Unable to create Root Module: configLocation"));
+            assertTrue("Error message is unexpected",
+                    ex.getMessage().startsWith("Unable to create Root Module: configLocation"));
         }
     }
 

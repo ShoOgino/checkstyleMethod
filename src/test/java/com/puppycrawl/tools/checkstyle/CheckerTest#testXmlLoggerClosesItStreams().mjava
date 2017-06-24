@@ -11,7 +11,9 @@
 
         verify(checker, tmpFile.getPath(), tmpFile.getPath(), expected);
 
-        assertEquals(1, testInfoOutputStream.getCloseCount());
-        assertEquals(0, testInfoOutputStream.getFlushCount());
+        assertEquals("Close count was not expected",
+                1, testInfoOutputStream.getCloseCount());
+        assertEquals("Flush count was not expected",
+                0, testInfoOutputStream.getFlushCount());
     }
 

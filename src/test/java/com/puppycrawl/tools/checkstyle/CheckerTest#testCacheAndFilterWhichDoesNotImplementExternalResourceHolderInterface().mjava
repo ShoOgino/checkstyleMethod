@@ -5,7 +5,8 @@
     @Test
     public void testCacheAndFilterWhichDoesNotImplementExternalResourceHolderInterface()
             throws Exception {
-        assertFalse(ExternalResourceHolder.class.isAssignableFrom(DummyFilter.class));
+        assertFalse("ExternalResourceHolder has changed its parent",
+                ExternalResourceHolder.class.isAssignableFrom(DummyFilter.class));
         final DefaultConfiguration filterConfig = createCheckConfig(DummyFilter.class);
 
         final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
@@ -31,15 +32,19 @@
         cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
 
         assertEquals(
+                "Cache file has changed its path",
             cacheAfterFirstRun.getProperty(pathToEmptyFile),
             cacheAfterSecondRun.getProperty(pathToEmptyFile)
         );
         assertEquals(
+                "Cache has changed its hash",
             cacheAfterFirstRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
             cacheAfterSecondRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY)
         );
         final int expectedNumberOfObjectsInCache = 2;
-        assertEquals(expectedNumberOfObjectsInCache, cacheAfterFirstRun.size());
-        assertEquals(expectedNumberOfObjectsInCache, cacheAfterSecondRun.size());
+        assertEquals("Number of items in cache differs from expected",
+                expectedNumberOfObjectsInCache, cacheAfterFirstRun.size());
+        assertEquals("Number of items in cache differs from expected",
+                expectedNumberOfObjectsInCache, cacheAfterSecondRun.size());
     }
 

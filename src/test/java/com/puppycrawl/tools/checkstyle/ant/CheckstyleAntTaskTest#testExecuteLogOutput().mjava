@@ -26,12 +26,15 @@
 
         final List<MessageLevelPair> loggedMessages = antTask.getLoggedMessages();
 
-        assertEquals(expectedList.size(), loggedMessages.size());
+        assertEquals("Amount of log messages is unexpected",
+                expectedList.size(), loggedMessages.size());
         for (int i = 0; i < expectedList.size(); i++) {
             final MessageLevelPair expected = expectedList.get(i);
             final MessageLevelPair actual = loggedMessages.get(i);
-            assertTrue(actual.getMsg().startsWith(expected.getMsg()));
-            assertEquals(expected.getLevel(), actual.getLevel());
+            assertTrue("Log messages were expected",
+                    actual.getMsg().startsWith(expected.getMsg()));
+            assertEquals("Log messages were expected",
+                    expected.getLevel(), actual.getLevel());
         }
 
     }

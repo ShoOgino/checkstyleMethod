@@ -17,16 +17,17 @@
         antTask.execute();
 
         final List<String> output = FileUtils.readLines(outputFile);
-        assertEquals("Starting audit...", output.get(0));
-        assertTrue(output.get(1).startsWith("[WARN]"));
-        assertTrue(output.get(1).endsWith("InputCheckstyleAntTaskError.java:4: "
+        final String errorMessage = "Content of file with violations differs from expected";
+        assertEquals(errorMessage, "Starting audit...", output.get(0));
+        assertTrue(errorMessage, output.get(1).startsWith("[WARN]"));
+        assertTrue(errorMessage, output.get(1).endsWith("InputCheckstyleAntTaskError.java:4: "
                 + "@incomplete=Some javadoc [WriteTag]"));
-        assertTrue(output.get(2).startsWith("[ERROR]"));
-        assertTrue(output.get(2).endsWith("InputCheckstyleAntTaskError.java:7: "
+        assertTrue(errorMessage, output.get(2).startsWith("[ERROR]"));
+        assertTrue(errorMessage, output.get(2).endsWith("InputCheckstyleAntTaskError.java:7: "
                 + "Line is longer than 70 characters (found 80). [LineLength]"));
-        assertTrue(output.get(3).startsWith("[ERROR]"));
-        assertTrue(output.get(3).endsWith("InputCheckstyleAntTaskError.java:9: "
+        assertTrue(errorMessage, output.get(3).startsWith("[ERROR]"));
+        assertTrue(errorMessage, output.get(3).endsWith("InputCheckstyleAntTaskError.java:9: "
                 + "Line is longer than 70 characters (found 81). [LineLength]"));
-        assertEquals("Audit done.", output.get(4));
+        assertEquals(errorMessage, "Audit done.", output.get(4));
     }
 
