@@ -7,13 +7,13 @@
         treeWalker.configure(new DefaultConfiguration("default config"));
         final DefaultConfiguration childConfig = createCheckConfig(JavadocParagraphCheck.class);
         treeWalker.setupChild(childConfig);
-
+        final File file = new File("input.java");
         final List<String> lines =
             new ArrayList<>(Arrays.asList("package com.puppycrawl.tools.checkstyle;", "",
                 "error public class InputTreeWalkerFileWithViolation {}"));
-
+        final FileText fileText = new FileText(file, lines);
         try {
-            treeWalker.processFiltered(new File("input.java"), lines);
+            treeWalker.processFiltered(file, fileText);
             fail("Exception expected");
         }
         catch (CheckstyleException ex) {
@@ -21,8 +21,5 @@
                 "MismatchedTokenException occurred during the analysis of file input.java.",
                 ex.getMessage());
         }
-
-        // Should not throw exception as file with txt extension should not be processed at all
-        treeWalker.processFiltered(new File("input.txt"), lines);
     }
 

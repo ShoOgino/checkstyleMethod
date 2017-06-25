@@ -3,11 +3,13 @@
         final DummyFileSetCheck check = new DummyFileSetCheck();
         check.configure(new DefaultConfiguration("filesetcheck"));
         check.setFileExtensions("tmp");
-        final List<String> lines = Arrays.asList("key=value", "ext=tmp");
+        final File firstFile = new File("inputAbstractFileSetCheck.tmp");
         final SortedSet<LocalizedMessage> firstFileMessages =
-            check.process(new File("inputAbstractFileSetCheck.tmp"), Collections.emptyList());
+            check.process(firstFile, new FileText(firstFile, Collections.emptyList()));
+        final File secondFile = new File("inputAbstractFileSetCheck.txt");
+        final List<String> lines = Arrays.asList("key=value", "ext=tmp");
         final SortedSet<LocalizedMessage> secondFileMessages =
-            check.process(new File("inputAbstractFileSetCheck.txt"), lines);
+            check.process(secondFile, new FileText(secondFile, lines));
 
         assertEquals("File should not be empty.",
             firstFileMessages.first().getMessage());

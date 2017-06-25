@@ -1,5 +1,5 @@
     @Override
-    protected void processFiltered(File file, List<String> lines) throws CheckstyleException {
+    protected void processFiltered(File file, FileText fileText) throws CheckstyleException {
         // check if already checked and passed the file
         if (CommonUtils.matchesFileExtension(file, getFileExtensions())) {
             final String msg = "%s occurred during the analysis of file %s.";
@@ -7,8 +7,7 @@
             try {
                 if (!ordinaryChecks.isEmpty()
                         || !commentChecks.isEmpty()) {
-                    final FileText text = FileText.fromLines(file, lines);
-                    final FileContents contents = new FileContents(text);
+                    final FileContents contents = new FileContents(fileText);
                     final DetailAST rootAST = parse(contents);
 
                     if (!ordinaryChecks.isEmpty()) {
