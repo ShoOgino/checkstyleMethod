@@ -1,9 +1,6 @@
     @Test
     public void testParseFile() throws Exception {
-        final String actual = AstTreeStringPrinter.printFileAst(
-            new File(getPath("InputAstTreeStringPrinterComments.java")), false);
-        final String expected = new String(Files.readAllBytes(Paths.get(
-            getPath("expectedInputAstTreeStringPrinter.txt"))), StandardCharsets.UTF_8);
-        Assert.assertEquals(expected, actual);
+        verifyAst(getPath("expectedInputAstTreeStringPrinter.txt"),
+                getPath("InputAstTreeStringPrinterComments.java"), false);
     }
 
