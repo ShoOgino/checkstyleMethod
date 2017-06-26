@@ -1,6 +1,9 @@
     @Override
     public void auditFinished(AuditEvent event) {
-        infoWriter.println("Audit done.");
+        final LocalizedMessage auditFinishMessage = new LocalizedMessage(0,
+            Definitions.CHECKSTYLE_BUNDLE, AUDIT_FINISHED_MESSAGE, null, null,
+            LocalizedMessage.class, null);
+        infoWriter.println(auditFinishMessage.getMessage());
         closeStreams();
     }
 

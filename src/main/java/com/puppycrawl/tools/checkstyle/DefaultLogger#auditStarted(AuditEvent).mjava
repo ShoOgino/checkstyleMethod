@@ -1,6 +1,9 @@
     @Override
     public void auditStarted(AuditEvent event) {
-        infoWriter.println("Starting audit...");
+        final LocalizedMessage auditStartMessage = new LocalizedMessage(0,
+            Definitions.CHECKSTYLE_BUNDLE, AUDIT_STARTED_MESSAGE, null, null,
+            LocalizedMessage.class, null);
+        infoWriter.println(auditStartMessage.getMessage());
         infoWriter.flush();
     }
 
