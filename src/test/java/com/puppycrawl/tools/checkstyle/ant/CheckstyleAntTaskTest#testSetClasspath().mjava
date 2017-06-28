@@ -6,5 +6,8 @@
         antTask.setClasspath(new Path(project, "/"));
         antTask.setClasspath(new Path(project, "/checkstyle"));
         antTask.setClasspathRef(new Reference());
+
+        assertNotNull("Classpath should not be null",
+            Whitebox.getInternalState(antTask, "classpath"));
     }
 

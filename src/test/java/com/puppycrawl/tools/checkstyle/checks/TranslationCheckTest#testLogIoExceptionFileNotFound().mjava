@@ -1,4 +1,5 @@
     @Test
+    @SuppressWarnings("unchecked")
     public void testLogIoExceptionFileNotFound() throws Exception {
         //I can't put wrong file here. Checkstyle fails before check started.
         //I saw some usage of file or handling of wrong file in Checker, or somewhere
@@ -12,7 +13,7 @@
         final Method loadKeys =
             check.getClass().getDeclaredMethod("getTranslationKeys", File.class);
         loadKeys.setAccessible(true);
-        loadKeys.invoke(check, new File(""));
-
+        final Set<String> keys = (Set<String>) loadKeys.invoke(check, new File(""));
+        assertTrue("Translation keys should be empty when File is not found", keys.isEmpty());
     }
 

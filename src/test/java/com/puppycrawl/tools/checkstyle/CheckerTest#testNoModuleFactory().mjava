@@ -1,8 +1,14 @@
     @Test
     public void testNoModuleFactory() throws Exception {
         final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
+        final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
+        checker.setModuleClassLoader(classLoader);
         checker.finishLocalSetup();
+        final Context actualCtx = (Context) Whitebox.getInternalState(checker, "childContext");
+
+        assertNotNull("Default module factory should be created when it is not specified",
+            actualCtx.get("moduleFactory"));
+        assertEquals("Invalid classLoader", classLoader, actualCtx.get("classLoader"));
     }
 

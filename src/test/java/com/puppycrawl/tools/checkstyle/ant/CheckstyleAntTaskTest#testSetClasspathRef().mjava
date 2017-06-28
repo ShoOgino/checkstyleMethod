@@ -3,5 +3,8 @@
         // temporary fake test
         final CheckstyleAntTask antTask = new CheckstyleAntTask();
         antTask.setClasspathRef(new Reference());
+
+        assertNotNull("Classpath should not be null",
+            Whitebox.getInternalState(antTask, "classpath"));
     }
 
