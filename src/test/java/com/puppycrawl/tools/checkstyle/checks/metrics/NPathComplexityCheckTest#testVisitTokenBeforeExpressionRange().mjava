@@ -15,10 +15,15 @@
                 mockAST(TokenTypes.LITERAL_TRUE, "true", "mockfile", 1, 2);
         astTernary.addChild(astTernaryTrue);
 
-        final NPathComplexityCheck mock = new NPathComplexityCheck();
+        final NPathComplexityCheck npathComplexityCheckObj = new NPathComplexityCheck();
+        final LocalizedMessages messages = new LocalizedMessages();
+        npathComplexityCheckObj.setMessages(messages);
+
         // visiting first ast, set expressionSpatialRange to [2,2 - 4,4]
-        mock.visitToken(astIf);
+        npathComplexityCheckObj.visitToken(astIf);
+        Assert.assertEquals("No exception messages expected", 0, messages.size());
         //visiting ternary, it lies before expressionSpatialRange
-        mock.visitToken(astTernary);
+        npathComplexityCheckObj.visitToken(astTernary);
+        Assert.assertEquals("No exception messages expected", 0, messages.size());
     }
 

@@ -7,6 +7,10 @@
         parent.setFirstChild(array);
 
         final DeclarationOrderCheck check = new DeclarationOrderCheck();
+        final LocalizedMessages messages = new LocalizedMessages();
+        check.setMessages(messages);
+
         check.visitToken(array);
+        assertEquals("No exception messages expected", 0, messages.size());
     }
 

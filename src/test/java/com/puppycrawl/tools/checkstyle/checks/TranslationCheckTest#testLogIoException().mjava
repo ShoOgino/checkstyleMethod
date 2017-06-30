@@ -5,13 +5,19 @@
         //in checks running part. So I had to do it with reflection to improve coverage.
         final TranslationCheck check = new TranslationCheck();
         final DefaultConfiguration checkConfig = createCheckConfig(TranslationCheck.class);
+        final MessageDispatcher dispatcher = mock(MessageDispatcher.class);
         check.configure(checkConfig);
-        check.setMessageDispatcher(createChecker(checkConfig));
+        check.setMessageDispatcher(dispatcher);
 
         final Method logIoException = check.getClass().getDeclaredMethod("logIoException",
                 IOException.class,
                 File.class);
         logIoException.setAccessible(true);
-        logIoException.invoke(check, new IOException("test exception"), new File(""));
+        final File file = new File("");
+        logIoException.invoke(check, new IOException("test exception"), file);
+
+        Mockito.verify(dispatcher, times(1)).fireErrors(any(String.class), captor.capture());
+        assertEquals("Invalid exception message", "Got an exception - test exception",
+            captor.getValue().first().getMessage());
     }
 

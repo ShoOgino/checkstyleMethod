@@ -1,8 +1,13 @@
     @Test
     public void testDefaultSwitch() {
         final RequireThisCheck check = new RequireThisCheck();
+        final LocalizedMessages messages = new LocalizedMessages();
+        check.setMessages(messages);
+
         final DetailAST ast = new DetailAST();
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.ENUM, "ENUM"));
+
         check.visitToken(ast);
+        Assert.assertEquals("No exception messages expected", 0, messages.size());
     }
 

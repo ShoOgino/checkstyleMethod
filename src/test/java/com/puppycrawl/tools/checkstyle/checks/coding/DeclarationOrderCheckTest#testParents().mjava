@@ -10,7 +10,13 @@
         method.setNextSibling(ctor);
 
         final DeclarationOrderCheck check = new DeclarationOrderCheck();
+        final LocalizedMessages messages = new LocalizedMessages();
+        check.setMessages(messages);
+
         check.visitToken(method);
+        assertEquals("No exception messages expected", 0, messages.size());
+
         check.visitToken(ctor);
+        assertEquals("No exception messages expected", 0, messages.size());
     }
 

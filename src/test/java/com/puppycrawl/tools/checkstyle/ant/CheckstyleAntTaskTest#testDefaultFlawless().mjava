@@ -1,7 +1,11 @@
     @Test
     public final void testDefaultFlawless() throws IOException {
-        final CheckstyleAntTask antTask = getCheckstyleAntTask();
+        TestRootModuleChecker.reset();
+        final CheckstyleAntTask antTask = getCheckstyleAntTask(CUSTOM_ROOT_CONFIG_FILE);
         antTask.setFile(new File(getPath(FLAWLESS_INPUT)));
         antTask.execute();
+
+        assertTrue("Checker is not processed",
+            TestRootModuleChecker.isProcessed());
     }
 
