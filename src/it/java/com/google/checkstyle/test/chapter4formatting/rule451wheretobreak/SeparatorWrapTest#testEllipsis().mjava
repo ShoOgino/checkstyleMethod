@@ -1,0 +1,13 @@
+    @Test
+    public void testEllipsis() throws Exception {
+        final String[] expected = {
+            "11:13: " + getCheckMessage(SeparatorWrapCheck.class, "line.previous", "..."),
+        };
+
+        final Configuration checkConfig = getCheckConfig("SeparatorWrap", "SeparatorWrapEllipsis");
+        final String filePath = getPath("InputSeparatorWrapEllipsis.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
