@@ -16,9 +16,18 @@
         antTask.addFormatter(formatter);
         antTask.execute();
 
+        final LocalizedMessage auditStartedMessage = new LocalizedMessage(0,
+                Definitions.CHECKSTYLE_BUNDLE, "DefaultLogger.auditStarted",
+                null, null,
+                getClass(), null);
+        final LocalizedMessage auditFinishedMessage = new LocalizedMessage(0,
+                Definitions.CHECKSTYLE_BUNDLE, "DefaultLogger.auditFinished",
+                null, null,
+                getClass(), null);
+
         final List<String> output = FileUtils.readLines(outputFile);
         final String errorMessage = "Content of file with violations differs from expected";
-        assertEquals(errorMessage, "Starting audit...", output.get(0));
+        assertEquals(errorMessage, auditStartedMessage.getMessage(), output.get(0));
         assertTrue(errorMessage, output.get(1).startsWith("[WARN]"));
         assertTrue(errorMessage, output.get(1).endsWith("InputCheckstyleAntTaskError.java:4: "
                 + "@incomplete=Some javadoc [WriteTag]"));
@@ -28,6 +37,6 @@
         assertTrue(errorMessage, output.get(3).startsWith("[ERROR]"));
         assertTrue(errorMessage, output.get(3).endsWith("InputCheckstyleAntTaskError.java:9: "
                 + "Line is longer than 70 characters (found 81). [LineLength]"));
-        assertEquals(errorMessage, "Audit done.", output.get(4));
+        assertEquals(errorMessage, auditFinishedMessage.getMessage(), output.get(4));
     }
 
