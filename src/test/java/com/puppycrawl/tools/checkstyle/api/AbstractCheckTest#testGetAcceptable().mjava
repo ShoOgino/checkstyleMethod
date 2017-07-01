@@ -5,6 +5,16 @@
             public int[] getDefaultTokens() {
                 return CommonUtils.EMPTY_INT_ARRAY;
             }
+
+            @Override
+            public int[] getAcceptableTokens() {
+                return getDefaultTokens();
+            }
+
+            @Override
+            public int[] getRequiredTokens() {
+                return getDefaultTokens();
+            }
         };
         // Eventually it will become clear abstract method
         Assert.assertArrayEquals(CommonUtils.EMPTY_INT_ARRAY, check.getAcceptableTokens());

@@ -1,0 +1,24 @@
+    @Test
+    public void testTokens() throws Exception {
+        final int[] defaultJavadocTokens = {JavadocTokenTypes.JAVADOC};
+        final AbstractJavadocCheck check = new AbstractJavadocCheck() {
+
+            @Override
+            public void visitJavadocToken(DetailNode ast) {
+                // no code necessary
+            }
+
+            @Override
+            public int[] getDefaultJavadocTokens() {
+                return defaultJavadocTokens;
+            }
+        };
+
+        Assert.assertNotNull(check.getDefaultTokens());
+        Assert.assertArrayEquals(check.getDefaultTokens(), check.getAcceptableTokens());
+        Assert.assertArrayEquals(check.getDefaultTokens(), check.getRequiredTokens());
+        Assert.assertArrayEquals(defaultJavadocTokens, check.getDefaultJavadocTokens());
+        Assert.assertArrayEquals(defaultJavadocTokens, check.getAcceptableJavadocTokens());
+        Assert.assertNotEquals(defaultJavadocTokens, check.getRequiredJavadocTokens());
+    }
+
