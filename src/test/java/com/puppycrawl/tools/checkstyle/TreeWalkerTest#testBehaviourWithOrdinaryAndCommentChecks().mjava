@@ -1,23 +1,26 @@
     @Test
     public void testBehaviourWithOrdinaryAndCommentChecks() throws Exception {
-        final TreeWalker treeWalkerSpy = spy(new TreeWalker());
-        final Class<?> classAstState =
-                Class.forName("com.puppycrawl.tools.checkstyle.TreeWalker$AstState");
+        final TreeWalker treeWalker = new TreeWalker();
+        treeWalker.configure(createCheckConfig(TypeNameCheck.class));
+        treeWalker.configure(createCheckConfig(CommentsIndentationCheck.class));
         final PackageObjectFactory factory = new PackageObjectFactory(
                 new HashSet<>(), Thread.currentThread().getContextClassLoader());
-        treeWalkerSpy.configure(new DefaultConfiguration("TreeWalkerTest"));
-        treeWalkerSpy.setModuleFactory(factory);
-        treeWalkerSpy.setupChild(createCheckConfig(CommentsIndentationCheck.class));
-        treeWalkerSpy.setupChild(createCheckConfig(TypeNameCheck.class));
-        spy(TreeWalker.class);
-        doNothing().when(treeWalkerSpy, "walk",
-                any(DetailAST.class), any(FileContents.class), any(classAstState));
-        treeWalkerSpy.processFiltered(temporaryFolder.newFile("file.java"), new ArrayList<>());
-        verifyPrivate(TreeWalker.class, times(1))
-                .invoke("appendHiddenCommentNodes", any(DetailAST.class));
-        verifyPrivate(treeWalkerSpy, times(2)).invoke("walk",
-                any(DetailAST.class), any(FileContents.class), any(classAstState));
-        verifyStatic(times(1));
-        TreeWalker.parse(any(FileContents.class));
+        treeWalker.setModuleFactory(factory);
+        treeWalker.setupChild(createCheckConfig(TypeNameCheck.class));
+        treeWalker.setupChild(createCheckConfig(CommentsIndentationCheck.class));
+        final File file = temporaryFolder.newFile("file.java");
+        final List<String> lines = new ArrayList<>();
+        lines.add(" class a%$# {} ");
+
+        try {
+            treeWalker.processFiltered(file, lines);
+            fail("file is not compilable, exception is expected");
+        }
+        catch (CheckstyleException exception) {
+            final String message =
+                    "TokenStreamRecognitionException occurred during the analysis of file";
+            assertTrue("Error message is unexpected",
+                    exception.getMessage().contains(message));
+        }
     }
 
