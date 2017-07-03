@@ -16,14 +16,17 @@
         astTernary.addChild(astTernaryTrue);
 
         final NPathComplexityCheck npathComplexityCheckObj = new NPathComplexityCheck();
-        final LocalizedMessages messages = new LocalizedMessages();
-        npathComplexityCheckObj.setMessages(messages);
 
         // visiting first ast, set expressionSpatialRange to [2,2 - 4,4]
         npathComplexityCheckObj.visitToken(astIf);
-        Assert.assertEquals("No exception messages expected", 0, messages.size());
+        final SortedSet<LocalizedMessage> messages1 = npathComplexityCheckObj.getMessages();
+
+        Assert.assertEquals("No exception messages expected", 0, messages1.size());
+
         //visiting ternary, it lies before expressionSpatialRange
         npathComplexityCheckObj.visitToken(astTernary);
-        Assert.assertEquals("No exception messages expected", 0, messages.size());
+        final SortedSet<LocalizedMessage> messages2 = npathComplexityCheckObj.getMessages();
+
+        Assert.assertEquals("No exception messages expected", 0, messages2.size());
     }
 

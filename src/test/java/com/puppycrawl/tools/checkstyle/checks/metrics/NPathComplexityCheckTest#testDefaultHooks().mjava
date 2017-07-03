@@ -1,16 +1,17 @@
     @Test
     public void testDefaultHooks() {
         final NPathComplexityCheck npathComplexityCheckObj = new NPathComplexityCheck();
-        final LocalizedMessages messages = new LocalizedMessages();
-        npathComplexityCheckObj.setMessages(messages);
-
         final DetailAST ast = new DetailAST();
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.INTERFACE_DEF, "interface"));
 
         npathComplexityCheckObj.visitToken(ast);
-        Assert.assertEquals("No exception messages expected", 0, messages.size());
+        final SortedSet<LocalizedMessage> messages1 = npathComplexityCheckObj.getMessages();
+
+        Assert.assertEquals("No exception messages expected", 0, messages1.size());
 
         npathComplexityCheckObj.leaveToken(ast);
-        Assert.assertEquals("No exception messages expected", 0, messages.size());
+        final SortedSet<LocalizedMessage> messages2 = npathComplexityCheckObj.getMessages();
+
+        Assert.assertEquals("No exception messages expected", 0, messages2.size());
     }
 

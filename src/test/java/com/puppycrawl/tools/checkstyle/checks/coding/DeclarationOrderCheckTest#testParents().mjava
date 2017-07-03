@@ -10,13 +10,15 @@
         method.setNextSibling(ctor);
 
         final DeclarationOrderCheck check = new DeclarationOrderCheck();
-        final LocalizedMessages messages = new LocalizedMessages();
-        check.setMessages(messages);
 
         check.visitToken(method);
-        assertEquals("No exception messages expected", 0, messages.size());
+        final SortedSet<LocalizedMessage> messages1 = check.getMessages();
+
+        assertEquals("No exception messages expected", 0, messages1.size());
 
         check.visitToken(ctor);
-        assertEquals("No exception messages expected", 0, messages.size());
+        final SortedSet<LocalizedMessage> messages2 = check.getMessages();
+
+        assertEquals("No exception messages expected", 0, messages2.size());
     }
 
