@@ -1,0 +1,20 @@
+    /**
+     * Checks if there is a scope definition to check and that the method is found inside that scope
+     * (class, enum, etc.).
+     * @param methodDef
+     *        The method to analzye.
+     * @return {@code true} if the method is part of the latest scope definition and should be
+     *         counted.
+     */
+    private boolean isInLastestScopeDefinition(DetailAST methodDef) {
+        boolean result = false;
+
+        if (!counters.isEmpty()) {
+            final DetailAST latestDefinition = counters.peek().getScopeDefinition();
+
+            result = latestDefinition == methodDef.getParent().getParent();
+        }
+
+        return result;
+    }
+

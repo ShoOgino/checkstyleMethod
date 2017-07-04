@@ -1,13 +1,12 @@
     @Override
     public void visitToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.METHOD_DEF) {
-            if (!counters.isEmpty()) {
+            if (isInLastestScopeDefinition(ast)) {
                 raiseCounter(ast);
             }
         }
         else {
-            final boolean inInterface = ast.getType() == TokenTypes.INTERFACE_DEF;
-            counters.push(new MethodCounter(inInterface));
+            counters.push(new MethodCounter(ast));
         }
     }
 
