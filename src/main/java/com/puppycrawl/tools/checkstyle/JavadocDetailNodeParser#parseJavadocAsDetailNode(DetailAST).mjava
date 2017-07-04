@@ -31,11 +31,29 @@
                                 + JAVADOC_START.length());
             result.setTree(tree);
         }
-        catch (ParseCancellationException | IllegalArgumentException ignored) {
-            // If syntax error occurs then message is printed by error listener
-            // and parser throws this runtime exception to stop parsing.
-            // Just stop processing current Javadoc comment.
-            final ParseErrorMessage parseErrorMessage = errorListener.getErrorMessage();
+        catch (ParseCancellationException | IllegalArgumentException ex) {
+            ParseErrorMessage parseErrorMessage = null;
+
+            if (ex.getCause() instanceof FailedPredicateException
+                    || ex.getCause() instanceof NoViableAltException) {
+                final RecognitionException recognitionEx = (RecognitionException) ex.getCause();
+                if (recognitionEx.getCtx() instanceof JavadocParser.HtmlTagContext) {
+                    final Token htmlTagNameStart = getMissedHtmlTag(recognitionEx);
+                    parseErrorMessage = new ParseErrorMessage(
+                            errorListener.offset + htmlTagNameStart.getLine(),
+                            MSG_JAVADOC_MISSED_HTML_CLOSE,
+                            htmlTagNameStart.getCharPositionInLine(),
+                            htmlTagNameStart.getText());
+                }
+            }
+
+            if (parseErrorMessage == null) {
+                // If syntax error occurs then message is printed by error listener
+                // and parser throws this runtime exception to stop parsing.
+                // Just stop processing current Javadoc comment.
+                parseErrorMessage = errorListener.getErrorMessage();
+            }
+
             result.setParseErrorMessage(parseErrorMessage);
         }
 

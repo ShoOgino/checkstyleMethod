@@ -1,16 +1,15 @@
     @Test
     public void testParseFileWithError() throws Exception {
-        LocalizedMessage.setLocale(Locale.ROOT);
         try {
             DetailNodeTreeStringPrinter.printFileAst(
                     new File(getPath("InputJavadocWithError.javadoc")));
-            Assert.fail("Javadoc parser didn't failed on missing end tag");
+            Assert.fail("Javadoc parser didn't fail on missing end tag");
         }
         catch (IllegalArgumentException ex) {
-            final String expected = "[ERROR:0] Javadoc comment at column 1 has parse error. "
-                    + "Missed HTML close tag 'qwe'. Sometimes it means that close tag missed "
-                    + "for one of previous tags.";
-            assertEquals("Invalidexception message", expected, ex.getMessage());
+            final String expected = (String) GET_PARSE_ERROR_MESSAGE.invoke(null,
+                    new ParseErrorMessage(0, MSG_JAVADOC_MISSED_HTML_CLOSE, 1, "qwe"));
+            assertEquals("Generated and expected parse error messages don't match",
+                    expected, ex.getMessage());
         }
     }
 

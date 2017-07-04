@@ -14,17 +14,11 @@
                 int line, int charPositionInLine,
                 String msg, RecognitionException ex) {
             final int lineNumber = offset + line;
-            final Token token = (Token) offendingSymbol;
 
-            if (MSG_JAVADOC_MISSED_HTML_CLOSE.equals(msg)) {
+            if (MSG_JAVADOC_WRONG_SINGLETON_TAG.equals(msg)) {
                 errorMessage = new ParseErrorMessage(lineNumber,
-                        MSG_JAVADOC_MISSED_HTML_CLOSE, charPositionInLine, token.getText());
-
-                throw new IllegalArgumentException(msg);
-            }
-            else if (MSG_JAVADOC_WRONG_SINGLETON_TAG.equals(msg)) {
-                errorMessage = new ParseErrorMessage(lineNumber,
-                        MSG_JAVADOC_WRONG_SINGLETON_TAG, charPositionInLine, token.getText());
+                        MSG_JAVADOC_WRONG_SINGLETON_TAG, charPositionInLine,
+                        ((Token) offendingSymbol).getText());
 
                 throw new IllegalArgumentException(msg);
             }
