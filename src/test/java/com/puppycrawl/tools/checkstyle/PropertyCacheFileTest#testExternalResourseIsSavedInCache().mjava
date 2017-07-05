@@ -1,5 +1,5 @@
     @Test
-    public void testExternalResourseIsSavedInCache() throws IOException {
+    public void testExternalResourseIsSavedInCache() throws Exception {
         final Configuration config = new DefaultConfiguration("myName");
         final String filePath = temporaryFolder.newFile().getPath();
         final PropertyCacheFile cache = new PropertyCacheFile(config, filePath);
@@ -12,6 +12,18 @@
         resources.add(pathToResource);
         cache.putExternalResources(resources);
 
-        assertFalse(cache.get("module-resource*?:" + pathToResource).isEmpty());
+        final MessageDigest digest = MessageDigest.getInstance("SHA-1");
+        final URI uri = CommonUtils.getUriByFilename(pathToResource);
+        final byte[] input =
+                ByteStreams.toByteArray(new BufferedInputStream(uri.toURL().openStream()));
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try (ObjectOutputStream oos = new ObjectOutputStream(out)) {
+            oos.writeObject(input);
+        }
+        digest.update(out.toByteArray());
+        final String expected = DatatypeConverter.printHexBinary(digest.digest());
+
+        assertEquals("Hashes are not equal", expected,
+                cache.get("module-resource*?:" + pathToResource));
     }
 
