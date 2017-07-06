@@ -4,6 +4,6 @@
         model.setParseMode(ParseMode.JAVA_WITH_JAVADOC_AND_COMMENTS);
         model.openFile(new File(getPath("InputJavadocAttributesAndMethods.java")));
         tree = ((DetailAST) model.getParseTreeTableModel().getRoot()).getFirstChild();
-        linesToPosition = convertLinesToPosition(model.getLinesToPosition());
+        linesToPosition = ImmutableList.copyOf(convertLinesToPosition(model.getLinesToPosition()));
     }
 

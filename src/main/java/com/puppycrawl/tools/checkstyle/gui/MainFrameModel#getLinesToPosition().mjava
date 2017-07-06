@@ -1,9 +1,12 @@
     /**
      * Get lines to position map.
+     * It returns unmodifiable collection to
+     * prevent additional overhead of copying
+     * and possible state modifications.
      * @return lines to position map.
+     * @noinspection ReturnOfCollectionOrArrayField
      */
-    public List<Integer> getLinesToPosition() {
-        final List<Integer> copy = new ArrayList<>(linesToPosition);
-        return Collections.unmodifiableList(copy);
+    public ImmutableList<Integer> getLinesToPosition() {
+        return linesToPosition;
     }
 

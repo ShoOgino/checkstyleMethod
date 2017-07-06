@@ -27,17 +27,17 @@
                 parseTreeTableModel.setParseMode(parseMode);
                 final String[] sourceLines = getFileText(file).toLinesArray();
 
-                // clear for each new file
-                linesToPosition.clear();
+                final List<Integer> linesToPositionTemp = new ArrayList<>();
                 // starts line counting at 1
-                linesToPosition.add(0);
+                linesToPositionTemp.add(0);
 
                 final StringBuilder sb = new StringBuilder();
                 // insert the contents of the file to the text area
                 for (final String element : sourceLines) {
-                    linesToPosition.add(sb.length());
+                    linesToPositionTemp.add(sb.length());
                     sb.append(element).append(System.lineSeparator());
                 }
+                linesToPosition = ImmutableList.copyOf(linesToPositionTemp);
                 text = sb.toString();
             }
             catch (IOException | ANTLRException ex) {
