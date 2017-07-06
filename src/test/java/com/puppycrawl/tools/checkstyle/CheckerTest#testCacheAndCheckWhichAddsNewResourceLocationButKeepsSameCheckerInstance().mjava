@@ -26,6 +26,7 @@
         final Checker checker = new Checker();
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
         checker.addFileSetCheck(check);
+        checker.addFilter(new DummyFilterSet());
         checker.configure(checkerConfig);
         checker.addListener(new BriefUtLogger(stream));
 
@@ -36,7 +37,7 @@
         final Properties cacheAfterFirstRun = new Properties();
         cacheAfterFirstRun.load(Files.newBufferedReader(cacheFile.toPath()));
 
-        final int expectedNumberOfObjectsInCacheAfterFirstRun = 3;
+        final int expectedNumberOfObjectsInCacheAfterFirstRun = 4;
         assertEquals("Number of items in cache differs from expected",
                 expectedNumberOfObjectsInCacheAfterFirstRun, cacheAfterFirstRun.size());
 

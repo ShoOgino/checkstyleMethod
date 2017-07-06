@@ -3,7 +3,10 @@
         // given
         TestRootModuleChecker.reset();
 
-        final CheckstyleAntTask antTask = getCheckstyleAntTask(CUSTOM_ROOT_CONFIG_FILE);
+        final CheckstyleAntTaskLogStub antTask = new CheckstyleAntTaskLogStub();
+        antTask.setConfig(getPath(CUSTOM_ROOT_CONFIG_FILE));
+        antTask.setProject(new Project());
+
         final FileResource fileResource = new FileResource(
             antTask.getProject(), getPath(FLAWLESS_INPUT_DIR));
         final Path sourcePath = new Path(antTask.getProject());
@@ -21,5 +24,7 @@
                 filesToCheck.size(), is(1));
         assertThat("The path of file differs from expected",
                 filesToCheck.get(0).getAbsolutePath(), is(getPath(FLAWLESS_INPUT)));
+        assertEquals("Amount of logged messages in unxexpected",
+                9, antTask.getLoggedMessages().size());
     }
 
