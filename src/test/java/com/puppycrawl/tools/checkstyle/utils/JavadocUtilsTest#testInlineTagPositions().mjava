@@ -1,0 +1,14 @@
+    @Test
+    public void testInlineTagPositions() {
+        final String[] text = {"/** Also {@link Name value} */"};
+        final Comment comment = new Comment(text, 1, 0, text[0].length());
+
+        final List<JavadocTag> tags = JavadocUtils.getJavadocTags(
+            comment, JavadocUtils.JavadocTagType.INLINE).getValidTags();
+
+        assertEquals(1, tags.size());
+
+        assertEquals("Unexpected line number", 0, tags.get(0).getLineNo());
+        assertEquals("Unexpected column number", 10, tags.get(0).getColumnNo());
+    }
+

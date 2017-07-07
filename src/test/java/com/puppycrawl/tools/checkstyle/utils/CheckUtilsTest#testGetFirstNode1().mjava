@@ -1,0 +1,15 @@
+    @Test
+    public void testGetFirstNode1() throws Exception {
+        final DetailAST child = new DetailAST();
+        child.setLineNo(5);
+        child.setColumnNo(6);
+
+        final DetailAST root = new DetailAST();
+        root.setLineNo(5);
+        root.setColumnNo(6);
+
+        root.addChild(child);
+
+        assertEquals("Unexpected node", root, CheckUtils.getFirstNode(root));
+    }
+
