@@ -9,8 +9,11 @@
             fail("InvocationTargetException  is expected");
         }
         catch (InvocationTargetException ex) {
+            final LocalizedMessage createListenerMessage = new LocalizedMessage(0,
+                    Definitions.CHECKSTYLE_BUNDLE, "Main.createListener",
+                    new String[] {"myformat", "plain", "xml"}, null, getClass(), null);
+            assertEquals(createListenerMessage.getMessage(), ex.getCause().getLocalizedMessage());
             assertTrue(ex.getCause() instanceof IllegalStateException);
-            assertTrue(ex.getCause().getMessage().startsWith("Invalid output format. Found"));
         }
         finally {
             // method creates output folder

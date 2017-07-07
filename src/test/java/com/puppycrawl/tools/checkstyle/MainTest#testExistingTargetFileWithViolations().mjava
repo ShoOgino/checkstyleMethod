@@ -1,16 +1,23 @@
     @Test
     public void testExistingTargetFileWithViolations() throws Exception {
         exit.checkAssertionAfterwards(() -> {
+            final LocalizedMessage invalidPatternMessageMain = new LocalizedMessage(0,
+                    "com.puppycrawl.tools.checkstyle.checks.naming.messages",
+                    "name.invalidPattern", new String[] {"InputMain", "^[a-z0-9]*$"},
+                    null, getClass(), null);
+            final LocalizedMessage invalidPatternMessageMainInner = new LocalizedMessage(0,
+                    "com.puppycrawl.tools.checkstyle.checks.naming.messages",
+                    "name.invalidPattern", new String[] {"InputMainInner", "^[a-z0-9]*$"},
+                    null, getClass(), null);
             final String expectedPath = getFilePath("InputMain.java");
-            assertEquals(String.format(Locale.ROOT, "Starting audit...%n"
-                            + "[WARN] %1$s:3:14: "
-                            + "Name 'InputMain' must match pattern"
-                            + " '^[a-z0-9]*$'. [TypeName]%n"
-                            + "[WARN] %1$s:5:7: "
-                            + "Name 'InputMainInner' must match pattern"
-                            + " '^[a-z0-9]*$'. [TypeName]%n"
-                            + "Audit done.%n", expectedPath),
-                    systemOut.getLog());
+            assertEquals(auditStartMessage.getMessage() + EOL
+                            + "[WARN] " + expectedPath + ":3:14: "
+                            + invalidPatternMessageMain.getMessage()
+                            + " [TypeName]" + EOL
+                            + "[WARN] " + expectedPath + ":5:7: "
+                            + invalidPatternMessageMainInner.getMessage()
+                            + " [TypeName]" + EOL
+                            + auditFinishMessage.getMessage() + EOL, systemOut.getLog());
             assertEquals("", systemErr.getLog());
         });
         Main.main("-c", getPath("config-classname2.xml"),

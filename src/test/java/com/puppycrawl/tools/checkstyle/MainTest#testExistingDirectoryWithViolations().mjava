@@ -10,25 +10,24 @@
         final String msgKey = "maxLen.file";
         final String bundle = "com.puppycrawl.tools.checkstyle.checks.sizes.messages";
 
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() throws IOException {
-                final String expectedPath = getFilePath("main/") + File.separator;
-                final StringBuilder sb = new StringBuilder(28);
-                sb.append("Starting audit...").append(System.getProperty("line.separator"));
-                final String format = "[WARN] %s.java:%s: %s [FileLength]";
-                for (String[] outputValue : outputValues) {
-                    final String localizedMessage = new LocalizedMessage(0, bundle,
-                            msgKey, new Integer[] {Integer.valueOf(outputValue[2]), allowedLength},
-                            null, getClass(), null).getMessage();
-                    final String line = String.format(Locale.ROOT, format,
-                            expectedPath + outputValue[0], outputValue[1], localizedMessage);
-                    sb.append(line).append(System.getProperty("line.separator"));
-                }
-                sb.append("Audit done.").append(System.getProperty("line.separator"));
-                assertEquals(sb.toString(), systemOut.getLog());
-                assertEquals("", systemErr.getLog());
+        exit.checkAssertionAfterwards(() -> {
+            final String expectedPath = getFilePath("main/") + File.separator;
+            final StringBuilder sb = new StringBuilder(28);
+            sb.append(auditStartMessage.getMessage())
+                    .append(EOL);
+            final String format = "[WARN] " + expectedPath + outputValues[0][0] + ".java:"
+                    + outputValues[0][1] + ": ";
+            for (String[] outputValue : outputValues) {
+                final String localizedMessage = new LocalizedMessage(0, bundle,
+                        msgKey, new Integer[] {Integer.valueOf(outputValue[2]), allowedLength},
+                        null, getClass(), null).getMessage();
+                final String line = format + localizedMessage + " [FileLength]";
+                sb.append(line).append(EOL);
             }
+            sb.append(auditFinishMessage.getMessage())
+                    .append(EOL);
+            assertEquals(sb.toString(), systemOut.getLog());
+            assertEquals("", systemErr.getLog());
         });
 
         Main.main("-c", getPath("config-filelength.xml"),

@@ -2,16 +2,14 @@
     public void testFileReferenceDuringException() throws Exception {
         exit.expectSystemExitWithStatus(-2);
         exit.checkAssertionAfterwards(() -> {
-            final String expectedExceptionMessage =
-                    String.format(Locale.ROOT, "Starting audit...%n"
-                            + "Checkstyle ends with 1 errors.%n");
+            final String expectedExceptionMessage = auditStartMessage.getMessage() + EOL
+                            + errorCounterOneMessage.getMessage() + EOL;
             assertEquals(expectedExceptionMessage, systemOut.getLog());
 
-            final String exceptionFirstLine = String.format(Locale.ROOT,
-                    "com.puppycrawl.tools.checkstyle.api."
+            final String exceptionFirstLine = "com.puppycrawl.tools.checkstyle.api."
                     + "CheckstyleException: Exception was thrown while processing "
                     + new File(getNonCompilablePath("InputIncorrectClass.java")).getPath()
-                    + "%n");
+                    + EOL;
             assertTrue(systemErr.getLog().startsWith(exceptionFirstLine));
         });
 

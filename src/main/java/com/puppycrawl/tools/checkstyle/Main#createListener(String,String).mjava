@@ -36,9 +36,11 @@
             if (closeOutputStream) {
                 CommonUtils.close(out);
             }
-            throw new IllegalStateException(String.format(
-                    "Invalid output format. Found '%s' but expected '%s' or '%s'.",
-                    format, PLAIN_FORMAT_NAME, XML_FORMAT_NAME));
+            final LocalizedMessage outputFormatExceptionMessage = new LocalizedMessage(0,
+                    Definitions.CHECKSTYLE_BUNDLE, CREATE_LISTENER_EXCEPTION,
+                    new String[] {format, PLAIN_FORMAT_NAME, XML_FORMAT_NAME}, null,
+                    Main.class, null);
+            throw new IllegalStateException(outputFormatExceptionMessage.getMessage());
         }
 
         return listener;

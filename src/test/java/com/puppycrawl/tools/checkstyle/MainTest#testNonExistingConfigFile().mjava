@@ -3,9 +3,8 @@
             throws Exception {
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(() -> {
-            assertEquals(String.format(Locale.ROOT,
-                    "Could not find config XML file "
-                        + "'src/main/resources/non_existing_config.xml'.%n"),
+            assertEquals("Could not find config XML file "
+                        + "'src/main/resources/non_existing_config.xml'." + EOL,
                     systemOut.getLog());
             assertEquals("", systemErr.getLog());
         });

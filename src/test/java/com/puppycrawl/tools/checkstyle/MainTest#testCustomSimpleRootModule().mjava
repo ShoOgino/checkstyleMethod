@@ -4,15 +4,18 @@
         exit.expectSystemExitWithStatus(-2);
         exit.checkAssertionAfterwards(() -> {
             final String checkstylePackage = "com.puppycrawl.tools.checkstyle.";
-
-            assertEquals(String.format(Locale.ROOT, "Checkstyle ends with 1 errors.%n"),
+            final LocalizedMessage unableToInstantiateExceptionMessage = new LocalizedMessage(0,
+                    Definitions.CHECKSTYLE_BUNDLE,
+                    "PackageObjectFactory.unableToInstantiateExceptionMessage",
+                    new String[] {"TestRootModuleChecker", checkstylePackage
+                            + "TestRootModuleChecker, "
+                            + "TestRootModuleCheckerCheck, " + checkstylePackage
+                            + "TestRootModuleCheckerCheck"},
+                    null, getClass(), null);
+            assertEquals(errorCounterOneMessage.getMessage() + EOL,
                     systemOut.getLog());
-            assertTrue(systemErr.getLog().startsWith(
-                    checkstylePackage + "api.CheckstyleException: Unable to instantiate "
-                            + "'TestRootModuleChecker' class, it is also not possible to "
-                            + "instantiate it as " + checkstylePackage
-                            + "TestRootModuleChecker, TestRootModuleCheckerCheck, "
-                            + checkstylePackage + "TestRootModuleCheckerCheck."));
+            assertTrue(systemErr.getLog().startsWith(checkstylePackage + "api.CheckstyleException: "
+                    + unableToInstantiateExceptionMessage.getMessage()));
             assertFalse(TestRootModuleChecker.isProcessed());
         });
         Main.main("-c", getPath("config-custom-simple-root-module.xml"),

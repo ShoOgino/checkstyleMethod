@@ -3,8 +3,7 @@
             throws Exception {
         exit.expectSystemExitWithStatus(-2);
         exit.checkAssertionAfterwards(() -> {
-            final String output = String.format(Locale.ROOT,
-                    "Checkstyle ends with 1 errors.%n");
+            final String output = errorCounterOneMessage.getMessage() + EOL;
             assertEquals(output, systemOut.getLog());
             final String errorOutput = "com.puppycrawl.tools.checkstyle.api."
                 + "CheckstyleException: unable to parse configuration stream - ";

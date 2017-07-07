@@ -3,8 +3,8 @@
             throws Exception {
         //exit.expectSystemExitWithStatus(0);
         exit.checkAssertionAfterwards(() -> {
-            assertEquals(String.format(Locale.ROOT, "Starting audit...%n"
-                    + "Audit done.%n"), systemOut.getLog());
+            assertEquals(auditStartMessage.getMessage() + EOL
+                    + auditFinishMessage.getMessage() + EOL, systemOut.getLog());
             assertEquals("", systemErr.getLog());
         });
         Main.main("-c", getPath("config-classname-prop.xml"),

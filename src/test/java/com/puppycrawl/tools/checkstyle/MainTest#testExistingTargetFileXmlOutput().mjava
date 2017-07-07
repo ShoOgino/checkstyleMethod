@@ -7,12 +7,11 @@
                     ResourceBundle.getBundle("checkstylecompilation", Locale.ROOT);
             final String version = compilationProperties
                 .getString("checkstyle.compile.version");
-            assertEquals(String.format(Locale.ROOT,
-                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>%n"
-                    + "<checkstyle version=\"%s\">%n"
-                    + "<file name=\"%s\">%n"
-                    + "</file>%n"
-                    + "</checkstyle>%n", version, expectedPath), systemOut.getLog());
+            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + EOL
+                    + "<checkstyle version=\"" + version + "\">" + EOL
+                    + "<file name=\"" + expectedPath + "\">" + EOL
+                    + "</file>" + EOL
+                    + "</checkstyle>" + EOL, systemOut.getLog());
             assertEquals("", systemErr.getLog());
         });
         Main.main("-c", getPath("config-classname.xml"),

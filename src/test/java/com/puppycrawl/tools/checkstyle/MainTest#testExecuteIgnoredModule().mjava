@@ -2,8 +2,7 @@
     public void testExecuteIgnoredModule() throws Exception {
         exit.expectSystemExitWithStatus(-2);
         exit.checkAssertionAfterwards(() -> {
-            final String expectedExceptionMessage =
-                    String.format(Locale.ROOT, "Checkstyle ends with 1 errors.%n");
+            final String expectedExceptionMessage = errorCounterOneMessage.getMessage() + EOL;
             assertEquals(expectedExceptionMessage, systemOut.getLog());
 
             final String cause = "com.puppycrawl.tools.checkstyle.api.CheckstyleException:"

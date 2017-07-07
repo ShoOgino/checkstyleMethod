@@ -16,8 +16,10 @@
             properties.load(fis);
         }
         catch (final IOException ex) {
-            throw new CheckstyleException(String.format(
-                    "Unable to load properties from file '%s'.", file.getAbsolutePath()), ex);
+            final LocalizedMessage loadPropertiesExceptionMessage = new LocalizedMessage(0,
+                    Definitions.CHECKSTYLE_BUNDLE, LOAD_PROPERTIES_EXCEPTION,
+                    new String[] {file.getAbsolutePath()}, null, Main.class, null);
+            throw new CheckstyleException(loadPropertiesExceptionMessage.getMessage(), ex);
         }
         finally {
             Closeables.closeQuietly(fis);

@@ -1,33 +1,33 @@
     @Test
     public void testPrintTreeCommentsOption() throws Exception {
-        final String expected = String.format(Locale.ROOT, "PACKAGE_DEF -> package [1:0]%n"
-            + "|--ANNOTATIONS -> ANNOTATIONS [1:28]%n"
-            + "|--DOT -> . [1:28]%n"
-            + "|   |--DOT -> . [1:22]%n"
-            + "|   |   |--DOT -> . [1:11]%n"
-            + "|   |   |   |--IDENT -> com [1:8]%n"
-            + "|   |   |   `--IDENT -> puppycrawl [1:12]%n"
-            + "|   |   `--IDENT -> tools [1:23]%n"
-            + "|   `--IDENT -> checkstyle [1:29]%n"
-            + "`--SEMI -> ; [1:39]%n"
-            + "CLASS_DEF -> CLASS_DEF [3:0]%n"
-            + "|--MODIFIERS -> MODIFIERS [3:0]%n"
-            + "|   |--BLOCK_COMMENT_BEGIN -> /* [2:0]%n"
-            + "|   |   |--COMMENT_CONTENT -> comment [2:2]%n"
-            + "|   |   `--BLOCK_COMMENT_END -> */ [2:8]%n"
-            + "|   `--LITERAL_PUBLIC -> public [3:0]%n"
-            + "|--LITERAL_CLASS -> class [3:7]%n"
-            + "|--IDENT -> InputMain [3:13]%n"
-            + "`--OBJBLOCK -> OBJBLOCK [3:23]%n"
-            + "    |--LCURLY -> { [3:23]%n"
-            + "    `--RCURLY -> } [4:0]%n"
-            + "CLASS_DEF -> CLASS_DEF [5:0]%n"
-            + "|--MODIFIERS -> MODIFIERS [5:0]%n"
-            + "|--LITERAL_CLASS -> class [5:0]%n"
-            + "|--IDENT -> InputMainInner [5:6]%n"
-            + "`--OBJBLOCK -> OBJBLOCK [5:21]%n"
-            + "    |--LCURLY -> { [5:21]%n"
-            + "    `--RCURLY -> } [6:0]%n");
+        final String expected = "PACKAGE_DEF -> package [1:0]" + EOL
+            + "|--ANNOTATIONS -> ANNOTATIONS [1:28]" + EOL
+            + "|--DOT -> . [1:28]" + EOL
+            + "|   |--DOT -> . [1:22]" + EOL
+            + "|   |   |--DOT -> . [1:11]" + EOL
+            + "|   |   |   |--IDENT -> com [1:8]" + EOL
+            + "|   |   |   `--IDENT -> puppycrawl [1:12]" + EOL
+            + "|   |   `--IDENT -> tools [1:23]" + EOL
+            + "|   `--IDENT -> checkstyle [1:29]" + EOL
+            + "`--SEMI -> ; [1:39]" + EOL
+            + "CLASS_DEF -> CLASS_DEF [3:0]" + EOL
+            + "|--MODIFIERS -> MODIFIERS [3:0]" + EOL
+            + "|   |--BLOCK_COMMENT_BEGIN -> /* [2:0]" + EOL
+            + "|   |   |--COMMENT_CONTENT -> comment [2:2]" + EOL
+            + "|   |   `--BLOCK_COMMENT_END -> */ [2:8]" + EOL
+            + "|   `--LITERAL_PUBLIC -> public [3:0]" + EOL
+            + "|--LITERAL_CLASS -> class [3:7]" + EOL
+            + "|--IDENT -> InputMain [3:13]" + EOL
+            + "`--OBJBLOCK -> OBJBLOCK [3:23]" + EOL
+            + "    |--LCURLY -> { [3:23]" + EOL
+            + "    `--RCURLY -> } [4:0]" + EOL
+            + "CLASS_DEF -> CLASS_DEF [5:0]" + EOL
+            + "|--MODIFIERS -> MODIFIERS [5:0]" + EOL
+            + "|--LITERAL_CLASS -> class [5:0]" + EOL
+            + "|--IDENT -> InputMainInner [5:6]" + EOL
+            + "`--OBJBLOCK -> OBJBLOCK [5:21]" + EOL
+            + "    |--LCURLY -> { [5:21]" + EOL
+            + "    `--RCURLY -> } [6:0]" + EOL;
 
         exit.checkAssertionAfterwards(() -> {
             assertEquals(expected, systemOut.getLog());

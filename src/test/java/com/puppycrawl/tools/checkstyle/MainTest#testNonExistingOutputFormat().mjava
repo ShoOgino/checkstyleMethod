@@ -2,8 +2,8 @@
     public void testNonExistingOutputFormat() throws Exception {
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(() -> {
-            assertEquals(String.format(Locale.ROOT, "Invalid output format. "
-                    + "Found 'xmlp' but expected 'plain' or 'xml'.%n"), systemOut.getLog());
+            assertEquals("Invalid output format. "
+                    + "Found 'xmlp' but expected 'plain' or 'xml'." + EOL, systemOut.getLog());
             assertEquals("", systemErr.getLog());
         });
         Main.main("-c", "/google_checks.xml", "-f", "xmlp",
