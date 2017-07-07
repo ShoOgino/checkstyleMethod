@@ -1,0 +1,18 @@
+    @Test
+    public void testAppendHiddenSingleLineCommentNodes() throws Exception {
+        final DetailAST root =
+            TestUtils.parseFile(new File(getPath("InputTreeWalkerHiddenComments.java")));
+
+        final Optional<DetailAST> singleLineComment = TestUtils.findTokenInAstByPredicate(root,
+            ast -> ast.getType() == TokenTypes.SINGLE_LINE_COMMENT);
+        assertTrue(singleLineComment.isPresent());
+
+        final DetailAST commentContent = singleLineComment.get().getFirstChild();
+
+        assertEquals("Unexpected token type", TokenTypes.COMMENT_CONTENT, commentContent.getType());
+        assertEquals("Unexpected line number", 13, commentContent.getLineNo());
+        assertEquals("Unexpected column number", 2, commentContent.getColumnNo());
+        assertTrue("Unexpected comment content",
+            commentContent.getText().startsWith(" inline comment"));
+    }
+
