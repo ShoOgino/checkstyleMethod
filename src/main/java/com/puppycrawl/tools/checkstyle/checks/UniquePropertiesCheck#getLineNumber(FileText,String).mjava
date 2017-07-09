@@ -2,27 +2,26 @@
      * Method returns line number the key is detected in the checked properties
      * files first.
      *
-     * @param lines
-     *            properties file lines list
+     * @param fileText
+     *            {@link FileText} object contains the lines to process
      * @param keyName
      *            key name to look for
      * @return line number of first occurrence. If no key found in properties
      *         file, 0 is returned
      */
-    protected static int getLineNumber(List<String> lines, String keyName) {
-        final String keyPatternString = "^" + SPACE_PATTERN.matcher(keyName)
-                        .replaceAll(Matcher.quoteReplacement("\\\\ ")) + "[\\s:=].*$";
-        final Pattern keyPattern = Pattern.compile(keyPatternString);
+    protected static int getLineNumber(FileText fileText, String keyName) {
+        final Pattern keyPattern = getKeyPattern(keyName);
         int lineNumber = 1;
         final Matcher matcher = keyPattern.matcher("");
-        for (String line : lines) {
+        for (int index = 0; index < fileText.size(); index++) {
+            final String line = fileText.get(index);
             matcher.reset(line);
             if (matcher.matches()) {
                 break;
             }
             ++lineNumber;
         }
-        if (lineNumber > lines.size()) {
+        if (lineNumber > fileText.size()) {
             lineNumber = 0;
         }
         return lineNumber;
