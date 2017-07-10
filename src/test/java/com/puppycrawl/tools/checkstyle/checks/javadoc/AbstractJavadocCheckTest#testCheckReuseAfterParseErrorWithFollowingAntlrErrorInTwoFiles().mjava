@@ -2,15 +2,16 @@
     public void testCheckReuseAfterParseErrorWithFollowingAntlrErrorInTwoFiles() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(TempCheck.class);
         final Map<String, List<String>> expectedMessages = new LinkedHashMap<>(2);
-        expectedMessages.put(getPath("InputParsingErrors.java"), asList(
+        expectedMessages.put(getPath("InputAbstractJavadocParsingErrors.java"), asList(
             "4: " + getCheckMessage(MSG_JAVADOC_MISSED_HTML_CLOSE, 4, "unclosedTag"),
             "8: " + getCheckMessage(MSG_JAVADOC_WRONG_SINGLETON_TAG, 35, "img")
         ));
-        expectedMessages.put(getPath("InputTestInvalidAtSeeReference.java"), singletonList(
-            "3: " + getCheckMessage(MSG_KEY_UNRECOGNIZED_ANTLR_ERROR, 0, null)
+        expectedMessages.put(getPath("InputAbstractJavadocInvalidAtSeeReference.java"),
+            singletonList("3: " + getCheckMessage(MSG_KEY_UNRECOGNIZED_ANTLR_ERROR, 0, null)
         ));
         verify(createChecker(checkConfig), new File[] {
-            new File(getPath("InputParsingErrors.java")),
-            new File(getPath("InputTestInvalidAtSeeReference.java")), }, expectedMessages);
+            new File(getPath("InputAbstractJavadocParsingErrors.java")),
+            new File(getPath("InputAbstractJavadocInvalidAtSeeReference.java")), },
+                expectedMessages);
     }
 
