@@ -1,12 +1,12 @@
     @Test
     public void testNotMatch() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(HeaderCheck.class);
-        checkConfig.addAttribute("headerFile", getConfigPath("java.header"));
+        checkConfig.addAttribute("headerFile", getPath("InputHeaderjava.header"));
         checkConfig.addAttribute("ignoreLines", "");
         final String[] expected = {
             "2: " + getCheckMessage(MSG_MISMATCH,
                     "// checkstyle: Checks Java source code for adherence to a set of rules."),
         };
-        verify(checkConfig, getConfigPath("java2.header"), expected);
+        verify(checkConfig, getPath("InputHeaderjava2.header"), expected);
     }
 

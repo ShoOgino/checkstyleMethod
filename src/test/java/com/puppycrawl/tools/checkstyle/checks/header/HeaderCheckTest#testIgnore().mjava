@@ -1,9 +1,9 @@
     @Test
     public void testIgnore() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(HeaderCheck.class);
-        checkConfig.addAttribute("headerFile", getConfigPath("java.header"));
+        checkConfig.addAttribute("headerFile", getPath("InputHeaderjava.header"));
         checkConfig.addAttribute("ignoreLines", "2");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
-        verify(checkConfig, getConfigPath("java2.header"), expected);
+        verify(checkConfig, getPath("InputHeaderjava2.header"), expected);
     }
 
