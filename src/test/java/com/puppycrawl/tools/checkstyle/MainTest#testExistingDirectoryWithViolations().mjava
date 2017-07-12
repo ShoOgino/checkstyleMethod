@@ -3,7 +3,7 @@
 
         // we just reference there all violations
         final String[][] outputValues = {
-                {"InputComplexityOverflow", "1", "172"},
+                {"InputMainComplexityOverflow", "1", "172"},
         };
 
         final int allowedLength = 170;
@@ -11,7 +11,7 @@
         final String bundle = "com.puppycrawl.tools.checkstyle.checks.sizes.messages";
 
         exit.checkAssertionAfterwards(() -> {
-            final String expectedPath = getFilePath("main/") + File.separator;
+            final String expectedPath = getFilePath("") + File.separator;
             final StringBuilder sb = new StringBuilder(28);
             sb.append(auditStartMessage.getMessage())
                     .append(EOL);
@@ -30,7 +30,7 @@
             assertEquals("", systemErr.getLog());
         });
 
-        Main.main("-c", getPath("config-filelength.xml"),
-                getPath("main/"));
+        Main.main("-c", getPath("InputMainConfig-filelength.xml"),
+                getPath(""));
     }
 

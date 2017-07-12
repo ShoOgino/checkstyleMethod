@@ -8,13 +8,13 @@
 
             final String exceptionFirstLine = "com.puppycrawl.tools.checkstyle.api."
                     + "CheckstyleException: Exception was thrown while processing "
-                    + new File(getNonCompilablePath("InputIncorrectClass.java")).getPath()
+                    + new File(getNonCompilablePath("InputMainIncorrectClass.java")).getPath()
                     + EOL;
             assertTrue(systemErr.getLog().startsWith(exceptionFirstLine));
         });
 
         // We put xml as source to cause parse excepion
-        Main.main("-c", getPath("config-classname.xml"),
-                getNonCompilablePath("InputIncorrectClass.java"));
+        Main.main("-c", getPath("InputMainConfig-classname.xml"),
+                getNonCompilablePath("InputMainIncorrectClass.java"));
     }
 
