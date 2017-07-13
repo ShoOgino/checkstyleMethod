@@ -13,12 +13,21 @@
                 result = TREE_CACHE.get().get(treeCacheKey);
             }
             else {
-                result = context.get().parser.parseJavadocAsDetailNode(blockCommentNode);
+                result = context.get().parser
+                        .parseJavadocAsDetailNode(blockCommentNode);
                 TREE_CACHE.get().put(treeCacheKey, result);
             }
 
             if (result.getParseErrorMessage() == null) {
-                processTree(result.getTree());
+                if (acceptJavadocWithNonTightHtml() || !result.isNonTight()) {
+                    processTree(result.getTree());
+                }
+
+                if (violateExecutionOnNonTightHtml && result.isNonTight()) {
+                    log(result.getFirstNonTightHtmlTag().getLine(),
+                            JavadocDetailNodeParser.MSG_UNCLOSED_HTML_TAG,
+                            result.getFirstNonTightHtmlTag().getText());
+                }
             }
             else {
                 final ParseErrorMessage parseErrorMessage = result.getParseErrorMessage();

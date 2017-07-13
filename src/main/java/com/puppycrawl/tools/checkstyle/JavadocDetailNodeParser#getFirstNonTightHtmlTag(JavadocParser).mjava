@@ -1,0 +1,25 @@
+    /**
+     * This method is used to get the first non-tight HTML tag encountered while parsing javadoc.
+     * This shall eventually be reflected by the {@link ParseStatus} object returned by
+     * {@link #parseJavadocAsDetailNode(DetailAST)} method via the instance member
+     * {@link ParseStatus#firstNonTightHtmlTag}, and checks not supposed to process non-tight HTML
+     * or the ones which are supposed to log violation for non-tight javadocs can utilize that.
+     *
+     * @param javadocParser The ANTLR recognizer instance which has been used to parse the javadoc
+     * @return First non-tight HTML tag if one exists; null otherwise
+     */
+    private Token getFirstNonTightHtmlTag(JavadocParser javadocParser) {
+        final CommonToken offendingToken;
+        final ParserRuleContext nonTightTagStartContext = javadocParser.nonTightTagStartContext;
+        if (nonTightTagStartContext == null) {
+            offendingToken = null;
+        }
+        else {
+            final Token token = ((TerminalNode) nonTightTagStartContext.getChild(1))
+                    .getSymbol();
+            offendingToken = new CommonToken(token);
+            offendingToken.setLine(offendingToken.getLine() + errorListener.offset);
+        }
+        return offendingToken;
+    }
+

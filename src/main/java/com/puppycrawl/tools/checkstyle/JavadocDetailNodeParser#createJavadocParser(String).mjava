@@ -5,7 +5,7 @@
      * @return parse tree
      * @noinspection deprecation
      */
-    private ParseTree parseJavadocAsParseTree(String blockComment) {
+    private JavadocParser createJavadocParser(String blockComment) {
         final ANTLRInputStream input = new ANTLRInputStream(blockComment);
 
         final JavadocLexer lexer = new JavadocLexer(input);
@@ -20,10 +20,10 @@
         // add custom error listener that logs syntax errors
         parser.addErrorListener(errorListener);
 
-        // This strategy stops parsing when parser error occurs.
-        // By default it uses Error Recover Strategy which is slow and useless.
+        // JavadocParserErrorStrategy stops parsing on first parse error encountered unlike the
+        // DefaultErrorStrategy used by ANTLR which rather attempts error recovery.
         parser.setErrorHandler(new JavadocParserErrorStrategy());
 
-        return parser.javadoc();
+        return parser;
     }
 

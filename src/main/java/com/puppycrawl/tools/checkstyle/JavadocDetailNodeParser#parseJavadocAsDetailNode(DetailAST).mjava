@@ -22,14 +22,17 @@
         final ParseStatus result = new ParseStatus();
 
         try {
-            final ParseTree parseTree = parseJavadocAsParseTree(javadocComment);
+            final JavadocParser javadocParser = createJavadocParser(javadocComment);
 
-            final DetailNode tree = convertParseTreeToDetailNode(parseTree);
+            final ParseTree javadocParseTree = javadocParser.javadoc();
+
+            final DetailNode tree = convertParseTreeToDetailNode(javadocParseTree);
             // adjust first line to indent of /**
             adjustFirstLineToJavadocIndent(tree,
                         javadocCommentAst.getColumnNo()
                                 + JAVADOC_START.length());
             result.setTree(tree);
+            result.firstNonTightHtmlTag = getFirstNonTightHtmlTag(javadocParser);
         }
         catch (ParseCancellationException | IllegalArgumentException ex) {
             ParseErrorMessage parseErrorMessage = null;
