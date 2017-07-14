@@ -4,6 +4,13 @@
         final FileText fileText = new FileText(new File("src/test/resources/com/puppycrawl/tools/"
                  + "checkstyle/api/import-control_complete.xml"), charsetName);
         final FileText copy = new FileText(fileText);
-        assertEquals(3, copy.lineColumn(100).getLine());
+        final LineColumn lineColumn = copy.lineColumn(100);
+        assertEquals(3, lineColumn.getLine());
+        if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("windows")) {
+            assertEquals(44, lineColumn.getColumn());
+        }
+        else {
+            assertEquals(46, lineColumn.getColumn());
+        }
     }
 

@@ -1,0 +1,29 @@
+    @Test
+    public void testClearChildCountCache() throws Exception {
+        final DetailAST parent = new DetailAST();
+        final DetailAST child = new DetailAST();
+        parent.setFirstChild(child);
+
+        final List<Consumer<DetailAST>> clearChildCountCacheMethods = Arrays.asList(
+            ast -> child.setNextSibling(ast),
+            ast -> child.addPreviousSibling(ast),
+            ast -> child.addNextSibling(ast)
+        );
+
+        for (Consumer<DetailAST> method : clearChildCountCacheMethods) {
+            final int startCount = parent.getChildCount();
+            method.accept(null);
+            final int intermediateCount = Whitebox.getInternalState(parent, "childCount");
+            final int finishCount = parent.getChildCount();
+            assertEquals(startCount, finishCount);
+            assertEquals(Integer.MIN_VALUE, intermediateCount);
+        }
+
+        final int startCount = child.getChildCount();
+        child.addChild(null);
+        final int intermediateCount = Whitebox.getInternalState(child, "childCount");
+        final int finishCount = child.getChildCount();
+        assertEquals(startCount, finishCount);
+        assertEquals(Integer.MIN_VALUE, intermediateCount);
+    }
+

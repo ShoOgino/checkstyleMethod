@@ -1,8 +1,16 @@
     @Test
     public void testSupportedCharset() throws IOException {
+        //check if reader finally closed
+        mockStatic(Closeables.class);
+        doNothing().when(Closeables.class);
+        Closeables.closeQuietly(any(Reader.class));
+
         final String charsetName = "ISO-8859-1";
         final FileText fileText = new FileText(new File("src/test/resources/com/puppycrawl/tools/"
                  + "checkstyle/api/import-control_complete.xml"), charsetName);
         assertEquals(charsetName, fileText.getCharset().name());
+
+        verifyStatic(times(1));
+        Closeables.closeQuietly(any(Reader.class));
     }
 

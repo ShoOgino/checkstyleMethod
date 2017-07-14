@@ -1,0 +1,11 @@
+    @Test
+    public void testLineColumnAtTheStartOfFile() throws IOException {
+        final String charsetName = "ISO-8859-1";
+        final FileText fileText = new FileText(new File("src/test/resources/com/puppycrawl/tools/"
+                + "checkstyle/api/import-control_complete.xml"), charsetName);
+        final FileText copy = new FileText(fileText);
+        final LineColumn lineColumn = copy.lineColumn(0);
+        assertEquals(1, lineColumn.getLine());
+        assertEquals(0, lineColumn.getColumn());
+    }
+

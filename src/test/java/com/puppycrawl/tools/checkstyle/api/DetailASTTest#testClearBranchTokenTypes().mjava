@@ -1,0 +1,32 @@
+    @Test
+    public void testClearBranchTokenTypes() throws Exception {
+        final DetailAST parent = new DetailAST();
+        final DetailAST child = new DetailAST();
+        parent.setFirstChild(child);
+
+        final List<Consumer<DetailAST>> clearBranchTokenTypesMethods = Arrays.asList(
+            ast -> child.setFirstChild(ast),
+            ast -> child.setNextSibling(ast),
+            ast -> child.addPreviousSibling(ast),
+            ast -> child.addNextSibling(ast),
+            ast -> child.addChild(ast),
+            ast -> {
+                try {
+                    Whitebox.invokeMethod(child, "setParent", ast);
+                }
+                // -@cs[IllegalCatch] Cannot avoid catching it.
+                catch (Exception exception) {
+                    throw new IllegalStateException(exception);
+                }
+            }
+        );
+
+        for (Consumer<DetailAST> method : clearBranchTokenTypesMethods) {
+            final BitSet branchTokenTypes = Whitebox.invokeMethod(parent, "getBranchTokenTypes");
+            method.accept(null);
+            final BitSet branchTokenTypes2 = Whitebox.invokeMethod(parent, "getBranchTokenTypes");
+            assertEquals(branchTokenTypes, branchTokenTypes2);
+            assertNotSame(branchTokenTypes, branchTokenTypes2);
+        }
+    }
+

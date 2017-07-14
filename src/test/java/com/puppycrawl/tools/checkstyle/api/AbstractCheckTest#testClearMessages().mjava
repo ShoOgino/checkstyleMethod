@@ -1,0 +1,13 @@
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testClearMessages() {
+        final AbstractCheck check = new DummyAbstractCheck();
+
+        check.log(0, "key", "args");
+        final Collection<LocalizedMessage> messages =
+                (Collection<LocalizedMessage>) Whitebox.getInternalState(check, "messages");
+        Assert.assertEquals(1, messages.size());
+        check.clearMessages();
+        Assert.assertEquals(0, messages.size());
+    }
+
