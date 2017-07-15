@@ -25,7 +25,7 @@
                 null, null,
                 getClass(), null);
 
-        final List<String> output = FileUtils.readLines(outputFile);
+        final List<String> output = FileUtils.readLines(outputFile, StandardCharsets.UTF_8);
         final String errorMessage = "Content of file with violations differs from expected";
         assertEquals(errorMessage, auditStartedMessage.getMessage(), output.get(0));
         assertTrue(errorMessage, output.get(1).startsWith("[WARN]"));

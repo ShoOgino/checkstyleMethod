@@ -13,7 +13,8 @@
 
         assertTrue(TokenTypesDoclet.start(rootDoc));
         final String fileContent =
-                FileUtils.readFileToString(new File("target/tokentypes.properties"));
+                FileUtils.readFileToString(new File("target/tokentypes.properties"),
+                        StandardCharsets.UTF_8);
         assertTrue("File content is not expected",
                 fileContent.startsWith("EOF=The end of file token."));
 
