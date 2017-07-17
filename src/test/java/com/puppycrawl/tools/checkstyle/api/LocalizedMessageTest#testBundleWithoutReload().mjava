@@ -1,0 +1,20 @@
+    @Test
+    public void testBundleWithoutReload() throws IOException {
+        final ClassLoader classloader = mock(ClassLoader.class);
+        final URLConnection mockConnection = Mockito.mock(URLConnection.class);
+        when(mockConnection.getInputStream()).thenReturn(
+                new ByteArrayInputStream(EMPTY_BYTE_ARRAY));
+
+        final URL url = getMockUrl(mockConnection);
+        final String resource =
+                "com/puppycrawl/tools/checkstyle/checks/coding/messages_en.properties";
+        when(classloader.getResource(resource)).thenReturn(url);
+
+        final LocalizedMessage.Utf8Control control = new LocalizedMessage.Utf8Control();
+        final ResourceBundle resourceBundle = control.newBundle(
+                "com.puppycrawl.tools.checkstyle.checks.coding.messages",
+                Locale.ENGLISH, "java.class", classloader, false);
+
+        assertNull(resourceBundle);
+    }
+

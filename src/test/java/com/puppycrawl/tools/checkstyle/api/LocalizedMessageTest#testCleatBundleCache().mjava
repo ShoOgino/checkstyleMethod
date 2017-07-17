@@ -1,0 +1,18 @@
+    @Test
+    public void testCleatBundleCache() {
+        Locale.setDefault(Locale.FRENCH);
+        LocalizedMessage.setLocale(Locale.ROOT);
+        final LocalizedMessage localizedMessage = createSampleLocalizedMessage();
+
+        assertEquals("Empty statement.", localizedMessage.getMessage());
+
+        final Map<String, ResourceBundle> bundleCache =
+                Whitebox.getInternalState(LocalizedMessage.class, "BUNDLE_CACHE");
+
+        assertEquals(1, bundleCache.size());
+
+        LocalizedMessage.setLocale(Locale.CHINA);
+
+        assertEquals(0, bundleCache.size());
+    }
+

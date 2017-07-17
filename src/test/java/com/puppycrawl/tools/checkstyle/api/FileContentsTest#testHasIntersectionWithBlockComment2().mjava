@@ -1,0 +1,9 @@
+    @Test
+    public void testHasIntersectionWithBlockComment2() {
+        final FileContents fileContents = new FileContents(
+                new FileText(new File("filename"), Arrays.asList("  /* */    ", "    ", " ")));
+        fileContents.reportCComment(1, 2, 1, 5);
+
+        assertFalse(fileContents.hasIntersectionWithComment(2, 2, 3, 6));
+    }
+
