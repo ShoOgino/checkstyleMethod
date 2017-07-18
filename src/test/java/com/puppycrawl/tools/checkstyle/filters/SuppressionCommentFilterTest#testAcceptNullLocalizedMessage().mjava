@@ -1,7 +1,8 @@
     @Test
     public void testAcceptNullLocalizedMessage() {
         final SuppressionCommentFilter filter = new SuppressionCommentFilter();
-        final AuditEvent auditEvent = new AuditEvent(this);
+        final TreeWalkerAuditEvent auditEvent = new TreeWalkerAuditEvent(null, null, null);
         Assert.assertTrue(filter.accept(auditEvent));
+        Assert.assertNull(auditEvent.getFileName());
     }
 

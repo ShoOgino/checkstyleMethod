@@ -1,10 +1,10 @@
     /**
      * Finds the nearest comment text tag that matches an audit event.
      * The nearest tag is before the line and column of the event.
-     * @param event the {@code AuditEvent} to match.
+     * @param event the {@code TreeWalkerAuditEvent} to match.
      * @return The {@code Tag} nearest event.
      */
-    private Tag findNearestMatch(AuditEvent event) {
+    private Tag findNearestMatch(TreeWalkerAuditEvent event) {
         Tag result = null;
         for (Tag tag : tags) {
             if (tag.getLine() > event.getLine()

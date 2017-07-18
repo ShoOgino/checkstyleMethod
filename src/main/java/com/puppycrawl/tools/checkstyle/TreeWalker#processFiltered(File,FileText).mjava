@@ -4,6 +4,7 @@
         if (CommonUtils.matchesFileExtension(file, getFileExtensions())) {
             final String msg = "%s occurred during the analysis of file %s.";
             final String fileName = file.getPath();
+
             try {
                 if (!ordinaryChecks.isEmpty()
                         || !commentChecks.isEmpty()) {
@@ -18,6 +19,10 @@
 
                         walk(astWithComments, contents, AstState.WITH_COMMENTS);
                     }
+                    final SortedSet<LocalizedMessage> filteredMessages =
+                            getFilteredMessages(fileName, contents);
+                    addMessages(filteredMessages);
+                    messages.clear();
                 }
             }
             catch (final TokenStreamRecognitionException tre) {

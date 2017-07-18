@@ -1,0 +1,22 @@
+    /**
+     * Returns filtered set of {@link LocalizedMessage}.
+     * @param fileName path to the file
+     * @param fileContents the contents of the file
+     * @return filtered set of messages
+     */
+    private SortedSet<LocalizedMessage> getFilteredMessages(String fileName,
+                                                            FileContents fileContents) {
+        final SortedSet<LocalizedMessage> result = new TreeSet<>(messages);
+        for (LocalizedMessage element : messages) {
+            final TreeWalkerAuditEvent event =
+                    new TreeWalkerAuditEvent(fileContents, fileName, element);
+            for (TreeWalkerFilter filter : filters) {
+                if (!filter.accept(event)) {
+                    result.remove(element);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+

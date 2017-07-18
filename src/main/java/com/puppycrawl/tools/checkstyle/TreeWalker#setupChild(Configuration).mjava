@@ -1,19 +1,31 @@
+    /**
+     * {@inheritDoc} Creates child module.
+     * @noinspection ChainOfInstanceofChecks
+     */
     @Override
     public void setupChild(Configuration childConf)
             throws CheckstyleException {
         final String name = childConf.getName();
         final Object module = moduleFactory.createModule(name);
-        if (!(module instanceof AbstractCheck)) {
+        if (module instanceof AutomaticBean) {
+            final AutomaticBean bean = (AutomaticBean) module;
+            bean.contextualize(childContext);
+            bean.configure(childConf);
+        }
+        if (module instanceof AbstractCheck) {
+            final AbstractCheck check = (AbstractCheck) module;
+            check.init();
+            registerCheck(check);
+        }
+        else if (module instanceof TreeWalkerFilter) {
+            final TreeWalkerFilter filter = (TreeWalkerFilter) module;
+            filters.add(filter);
+        }
+        else {
             throw new CheckstyleException(
                 "TreeWalker is not allowed as a parent of " + name
                         + " Please review 'Parent Module' section for this Check in web"
                         + " documentation if Check is standard.");
         }
-        final AbstractCheck check = (AbstractCheck) module;
-        check.contextualize(childContext);
-        check.configure(childConf);
-        check.init();
-
-        registerCheck(check);
     }
 
