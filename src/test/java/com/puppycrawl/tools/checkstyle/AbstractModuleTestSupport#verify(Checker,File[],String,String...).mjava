@@ -1,0 +1,36 @@
+    /**
+     *  We keep two verify methods with separate logic only for convenience of debugging
+     *  We have minimum amount of multi-file test cases
+     */
+    protected void verify(Checker checker,
+                          File[] processedFiles,
+                          String messageFileName,
+                          String... expected)
+            throws Exception {
+        stream.flush();
+        final List<File> theFiles = new ArrayList<>();
+        Collections.addAll(theFiles, processedFiles);
+        final int errs = checker.process(theFiles);
+
+        // process each of the lines
+        final ByteArrayInputStream inputStream =
+                new ByteArrayInputStream(stream.toByteArray());
+        try (LineNumberReader lnr = new LineNumberReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+
+            final List<String> actuals = lnr.lines().limit(expected.length)
+                    .sorted().collect(Collectors.toList());
+            Arrays.sort(expected);
+
+            for (int i = 0; i < expected.length; i++) {
+                final String expectedResult = messageFileName + ":" + expected[i];
+                assertEquals("error message " + i, expectedResult, actuals.get(i));
+            }
+
+            assertEquals("unexpected output: " + lnr.readLine(),
+                    expected.length, errs);
+        }
+
+        checker.destroy();
+    }
+
