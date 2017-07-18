@@ -1,0 +1,24 @@
+    @Test
+    public void testTagsAreClearedEachRun() {
+        final SuppressionCommentFilter suppressionCommentFilter = new SuppressionCommentFilter();
+        final AuditEvent dummyEvent = new AuditEvent(new Object(), "filename",
+                new LocalizedMessage(1, null, null, null, null, Object.class, null));
+
+        final FileContentsHolder fileContentsHolder = new FileContentsHolder();
+        final FileContents contents =
+                new FileContents("filename", "//CHECKSTYLE:OFF", "line2");
+        contents.reportSingleLineComment(1, 0);
+        fileContentsHolder.setFileContents(contents);
+        fileContentsHolder.beginTree(null);
+        suppressionCommentFilter.accept(dummyEvent);
+        final FileContents contents2 =
+                new FileContents("filename2", "some line", "//CHECKSTYLE:OFF");
+        contents2.reportSingleLineComment(2, 0);
+        fileContentsHolder.setFileContents(contents2);
+        fileContentsHolder.beginTree(null);
+        suppressionCommentFilter.accept(dummyEvent);
+        final List<SuppressionCommentFilter.Tag> tags =
+                Whitebox.getInternalState(suppressionCommentFilter, "tags");
+        assertEquals(1, tags.size());
+    }
+
