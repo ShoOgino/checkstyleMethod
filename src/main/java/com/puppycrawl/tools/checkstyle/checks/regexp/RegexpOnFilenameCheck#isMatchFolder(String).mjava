@@ -13,16 +13,8 @@
             result = true;
         }
         else {
-            final boolean useMatch;
-
             // null pattern means 'match' applies to the folderPattern matching
-            if (fileNamePattern == null) {
-                useMatch = match;
-            }
-            else {
-                useMatch = true;
-            }
-
+            final boolean useMatch = fileNamePattern != null || match;
             result = folderPattern.matcher(folderPath).find() == useMatch;
         }
 
