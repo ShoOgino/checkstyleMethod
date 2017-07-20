@@ -13,7 +13,7 @@
 
         final Checker checker = new Checker();
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.addListener(new BriefUtLogger(stream));
+        checker.addListener(getBriefUtLogger());
         checker.configure(defaultConfig);
 
         final String fileViolationPath = temporaryFolder.newFile("ViolationFile.java").getPath();

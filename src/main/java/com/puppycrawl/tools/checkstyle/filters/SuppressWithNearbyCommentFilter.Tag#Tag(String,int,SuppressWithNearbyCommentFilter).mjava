@@ -25,17 +25,12 @@
                 }
                 format = CommonUtils.fillTemplateWithStringsByRegexp(
                         filter.influenceFormat, text, filter.commentFormat);
-                final int influence;
-                try {
-                    if (CommonUtils.startsWithChar(format, '+')) {
-                        format = format.substring(1);
-                    }
-                    influence = Integer.parseInt(format);
+
+                if (CommonUtils.startsWithChar(format, '+')) {
+                    format = format.substring(1);
                 }
-                catch (final NumberFormatException ex) {
-                    throw new IllegalArgumentException("unable to parse influence from '" + text
-                            + "' using " + filter.influenceFormat, ex);
-                }
+                final int influence = parseInfluence(format, filter.influenceFormat, text);
+
                 if (influence >= 1) {
                     firstLine = line;
                     lastLine = line + influence;

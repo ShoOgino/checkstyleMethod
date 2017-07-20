@@ -10,7 +10,7 @@
 
         final Checker checker = new Checker();
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.addListener(new BriefUtLogger(stream));
+        checker.addListener(getBriefUtLogger());
         checker.configure(checkerConfig);
 
         final String filePath = temporaryFolder.newFile("file.java").getPath();

@@ -1,18 +1,7 @@
     @Override
     protected void processFiltered(File file, FileText fileText) {
-        // Cannot use lines as the line separators have been removed!
         try {
-            final RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
-            boolean threw = true;
-            try {
-                if (!endsWithNewline(randomAccessFile)) {
-                    log(0, MSG_KEY_NO_NEWLINE_EOF, file.getPath());
-                }
-                threw = false;
-            }
-            finally {
-                Closeables.close(randomAccessFile, threw);
-            }
+            readAndCheckFile(file);
         }
         catch (final IOException ignored) {
             log(0, MSG_KEY_UNABLE_OPEN, file.getPath());

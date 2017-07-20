@@ -32,7 +32,7 @@
             final Checker checker = new Checker();
             checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
             checker.configure(firstCheckerConfig);
-            checker.addListener(new BriefUtLogger(stream));
+            checker.addListener(getBriefUtLogger());
 
             final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
             final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;

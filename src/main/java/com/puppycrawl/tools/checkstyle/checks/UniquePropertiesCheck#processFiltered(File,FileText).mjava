@@ -1,20 +1,17 @@
     @Override
     protected void processFiltered(File file, FileText fileText) {
         final UniqueProperties properties = new UniqueProperties();
-
+        FileInputStream fileInputStream = null;
         try {
-            final FileInputStream fileInputStream = new FileInputStream(file);
-            try {
-                // As file is already read, there should not be any exceptions.
-                properties.load(fileInputStream);
-            }
-            finally {
-                fileInputStream.close();
-            }
+            fileInputStream = new FileInputStream(file);
+            properties.load(fileInputStream);
         }
         catch (IOException ex) {
             log(0, MSG_IO_EXCEPTION_KEY, file.getPath(),
                     ex.getLocalizedMessage());
+        }
+        finally {
+            Closeables.closeQuietly(fileInputStream);
         }
 
         for (Entry<String> duplication : properties
