@@ -8,7 +8,7 @@
         final String[] expectedTrue = {
             "69: " + getCheckMessage(MSG_ILLEGAL_REGEXP, illegalTrue),
         };
-        verify(checkConfigTrue, getPath("InputSemantic.java"), expectedTrue);
+        verify(checkConfigTrue, getPath("InputRegexpSemantic.java"), expectedTrue);
 
         final String illegalFalse = "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
         final DefaultConfiguration checkConfigFalse =
@@ -16,6 +16,6 @@
         checkConfigFalse.addAttribute("format", illegalFalse);
         checkConfigFalse.addAttribute("illegalPattern", "true");
         final String[] expectedFalse = CommonUtils.EMPTY_STRING_ARRAY;
-        verify(checkConfigFalse, getPath("InputSemantic.java"), expectedFalse);
+        verify(checkConfigFalse, getPath("InputRegexpSemantic.java"), expectedFalse);
     }
 
