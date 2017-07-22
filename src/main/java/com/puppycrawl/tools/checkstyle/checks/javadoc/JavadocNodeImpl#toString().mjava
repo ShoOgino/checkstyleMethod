@@ -1,6 +1,12 @@
     @Override
     public String toString() {
-        return JavadocUtils.getTokenName(type)
-                + "[" + lineNumber + "x" + columnNumber + "]";
+        return "JavadocNodeImpl["
+                + "index=" + index
+                + ", type=" + JavadocUtils.getTokenName(type)
+                + ", text='" + text + '\''
+                + ", lineNumber=" + lineNumber
+                + ", columnNumber=" + columnNumber
+                + ", children=" + Objects.hashCode(children)
+                + ", parent=" + parent + ']';
     }
 
