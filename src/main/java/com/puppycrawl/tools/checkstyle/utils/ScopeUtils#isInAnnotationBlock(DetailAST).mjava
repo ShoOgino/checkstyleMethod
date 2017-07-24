@@ -5,25 +5,6 @@
      * @return a {@code boolean} value
      */
     public static boolean isInAnnotationBlock(DetailAST node) {
-        boolean returnValue = false;
-
-        // Loop up looking for a containing interface block
-        for (DetailAST token = node.getParent();
-             token != null && !returnValue;
-             token = token.getParent()) {
-            final int type = token.getType();
-            if (type == TokenTypes.ANNOTATION_DEF) {
-                returnValue = true;
-            }
-            else if (type == TokenTypes.CLASS_DEF
-                || type == TokenTypes.ENUM_DEF
-                || type == TokenTypes.INTERFACE_DEF
-                || type == TokenTypes.LITERAL_NEW) {
-                break;
-            }
-
-        }
-
-        return returnValue;
+        return isInBlockOf(node, TokenTypes.ANNOTATION_DEF);
     }
 
