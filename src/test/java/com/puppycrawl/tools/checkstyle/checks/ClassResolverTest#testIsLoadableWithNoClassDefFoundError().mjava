@@ -22,7 +22,9 @@
         }
         catch (NoClassDefFoundError ex) {
             fail("NoClassDefFoundError is not expected");
-            assertTrue(ex.getMessage().endsWith("expected exception"));
+            final String expected = "expected exception";
+            assertTrue("Invalid exception message, should end with: " + expected,
+                    ex.getMessage().endsWith(expected));
         }
     }
 

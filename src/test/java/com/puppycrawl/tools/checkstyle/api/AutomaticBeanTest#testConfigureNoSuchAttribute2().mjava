@@ -7,8 +7,10 @@
             testBean.configure(conf);
         }
         catch (CheckstyleException ex) {
-            assertNull(ex.getCause());
-            assertTrue(ex.getMessage().startsWith("Property '" + "privateField" + "' in module "));
+            final String expected = "Property 'privateField' in module ";
+            assertNull("Exceptions cause should be null", ex.getCause());
+            assertTrue("Invalid exception message, should start with: " + expected,
+                    ex.getMessage().startsWith(expected));
         }
     }
 

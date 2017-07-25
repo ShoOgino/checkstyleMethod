@@ -8,8 +8,11 @@
         final DetailAST ifWithoutElse =
                 firstElseNode.getParent().getNextSibling().getNextSibling();
 
-        assertTrue(CheckUtils.isElseIf(ifElseWithCurlyBraces));
-        assertTrue(CheckUtils.isElseIf(ifElse));
-        assertFalse(CheckUtils.isElseIf(ifWithoutElse));
+        assertTrue("Invalid result: AST provided is not else if with curly",
+                CheckUtils.isElseIf(ifElseWithCurlyBraces));
+        assertTrue("Invalid result: AST provided is not else if with curly",
+                CheckUtils.isElseIf(ifElse));
+        assertFalse("Invalid result: AST provided is else if with curly",
+                CheckUtils.isElseIf(ifWithoutElse));
     }
 

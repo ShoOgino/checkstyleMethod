@@ -11,8 +11,8 @@
         final SortedSet<LocalizedMessage> secondFileMessages =
             check.process(secondFile, new FileText(secondFile, lines));
 
-        assertEquals("File should not be empty.",
+        assertEquals("Invalid message", "File should not be empty.",
             firstFileMessages.first().getMessage());
-        assertTrue(secondFileMessages.isEmpty());
+        assertTrue("Message should be empty, but was not", secondFileMessages.isEmpty());
     }
 

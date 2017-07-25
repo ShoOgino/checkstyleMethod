@@ -8,8 +8,11 @@
             fail("InvocationTargetException is expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getCause() instanceof ConversionException);
-            assertTrue(ex.getMessage().startsWith("illegal value "));
+            final String expected = "illegal value ";
+            assertTrue("Invalid exception cause, should be: ConversionException",
+                    ex.getCause() instanceof ConversionException);
+            assertTrue("Invalid exception message, should start with: " + expected,
+                    ex.getMessage().startsWith(expected));
         }
     }
 

@@ -3,7 +3,9 @@
         final DetailAST notGetterMethod = getNodeFromFile(TokenTypes.METHOD_DEF);
         final DetailAST getterMethod = notGetterMethod.getNextSibling().getNextSibling();
 
-        assertTrue(CheckUtils.isGetterMethod(getterMethod));
-        assertFalse(CheckUtils.isGetterMethod(notGetterMethod));
+        assertTrue("Invalid result: AST provided is getter method",
+                CheckUtils.isGetterMethod(getterMethod));
+        assertFalse("Invalid result: AST provided is not getter method",
+                CheckUtils.isGetterMethod(notGetterMethod));
     }
 

@@ -3,7 +3,9 @@
         final DetailAST equalsMethodNode = getNodeFromFile(TokenTypes.METHOD_DEF);
         final DetailAST someOtherMethod = equalsMethodNode.getNextSibling();
 
-        assertTrue(CheckUtils.isEqualsMethod(equalsMethodNode));
-        assertFalse(CheckUtils.isEqualsMethod(someOtherMethod));
+        assertTrue("Invalid result: AST provided is not equals method",
+                CheckUtils.isEqualsMethod(equalsMethodNode));
+        assertFalse("Invalid result: AST provided is equals method",
+                CheckUtils.isEqualsMethod(someOtherMethod));
     }
 

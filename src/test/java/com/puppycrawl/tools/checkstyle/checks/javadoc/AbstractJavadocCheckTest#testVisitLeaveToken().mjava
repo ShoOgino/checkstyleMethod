@@ -5,7 +5,9 @@
         final DefaultConfiguration checkConfig = createCheckConfig(JavadocVisitLeaveCheck.class);
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputAbstractJavadocPosition.java"), expected);
-        Assert.assertTrue(JavadocVisitLeaveCheck.visitCount > 0);
-        Assert.assertEquals(JavadocVisitLeaveCheck.visitCount, JavadocVisitLeaveCheck.leaveCount);
+        Assert.assertTrue("Javadoc visit count should be greater than zero",
+                JavadocVisitLeaveCheck.visitCount > 0);
+        Assert.assertEquals("Javadoc visit and leave count should be equal",
+                JavadocVisitLeaveCheck.visitCount, JavadocVisitLeaveCheck.leaveCount);
     }
 

@@ -11,7 +11,8 @@
         metDef.setType(TokenTypes.METHOD_DEF);
         metDef.addChild(modifiers);
 
-        assertFalse(CheckUtils.isEqualsMethod(metDef));
+        assertFalse("Invalid result: ast is not equals method",
+                CheckUtils.isEqualsMethod(metDef));
 
         metDef.removeChildren();
 
@@ -35,6 +36,7 @@
         parameters.addChild(parameter1);
         metDef.addChild(parameters);
 
-        assertFalse(CheckUtils.isEqualsMethod(metDef));
+        assertFalse("Invalid result: ast is not equals method",
+                CheckUtils.isEqualsMethod(metDef));
     }
 

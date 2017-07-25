@@ -8,8 +8,11 @@
             fail("InvocationTargetException is expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getCause() instanceof InvocationTargetException);
-            assertTrue(ex.getMessage().startsWith("Cannot set property "));
+            final String expected = "Cannot set property ";
+            assertTrue("Invalid exception cause, should be: InvocationTargetException",
+                    ex.getCause() instanceof InvocationTargetException);
+            assertTrue("Invalid exception message, should start with: " + expected,
+                    ex.getMessage().startsWith(expected));
         }
     }
 

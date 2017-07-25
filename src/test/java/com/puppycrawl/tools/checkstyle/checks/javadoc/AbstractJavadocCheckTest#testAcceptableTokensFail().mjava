@@ -10,9 +10,11 @@
             Assert.fail("CheckstyleException is expected");
         }
         catch (IllegalStateException ex) {
-            Assert.assertTrue(ex.getMessage().startsWith("Javadoc Token "
+            final String expected = "Javadoc Token "
                     + "\"RETURN_LITERAL\" was not found in "
-                    + "Acceptable javadoc tokens list in check"));
+                    + "Acceptable javadoc tokens list in check";
+            Assert.assertTrue("Invalid exception, should start with: " + expected,
+                    ex.getMessage().startsWith(expected));
         }
     }
 

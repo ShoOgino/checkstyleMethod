@@ -1,12 +1,18 @@
     @Test
     public void testParseDouble() throws Exception {
-        assertEquals(1.0, CheckUtils.parseDouble("1", TokenTypes.NUM_INT), 0);
-        assertEquals(-0.05, CheckUtils.parseDouble("-0.05f", TokenTypes.NUM_FLOAT), 0);
-        assertEquals(8.0, CheckUtils.parseDouble("8L", TokenTypes.NUM_LONG), 0);
-        assertEquals(0.0, CheckUtils.parseDouble("0.0", TokenTypes.NUM_DOUBLE), 0);
-        assertEquals(2915.0, CheckUtils.parseDouble("0x0B63", TokenTypes.NUM_INT), 0);
-        assertEquals(2.147_483_647E10,
+        assertEquals("Invalid parse result", 1.0,
+                CheckUtils.parseDouble("1", TokenTypes.NUM_INT), 0);
+        assertEquals("Invalid parse result", -0.05,
+                CheckUtils.parseDouble("-0.05f", TokenTypes.NUM_FLOAT), 0);
+        assertEquals("Invalid parse result", 8.0,
+                CheckUtils.parseDouble("8L", TokenTypes.NUM_LONG), 0);
+        assertEquals("Invalid parse result", 0.0,
+                CheckUtils.parseDouble("0.0", TokenTypes.NUM_DOUBLE), 0);
+        assertEquals("Invalid parse result", 2915.0,
+                CheckUtils.parseDouble("0x0B63", TokenTypes.NUM_INT), 0);
+        assertEquals("Invalid parse result", 2.147_483_647E10,
                 CheckUtils.parseDouble("21474836470", TokenTypes.NUM_LONG), 0);
-        assertEquals(59.0, CheckUtils.parseDouble("073L", TokenTypes.NUM_LONG), 0);
+        assertEquals("Invalid parse result", 59.0,
+                CheckUtils.parseDouble("073L", TokenTypes.NUM_LONG), 0);
     }
 
