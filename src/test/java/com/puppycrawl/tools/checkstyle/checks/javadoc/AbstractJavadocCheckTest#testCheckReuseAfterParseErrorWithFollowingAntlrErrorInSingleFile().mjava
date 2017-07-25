@@ -4,7 +4,8 @@
         final DefaultConfiguration checkConfig = createCheckConfig(TempCheck.class);
         final String[] expected = {
             "4: " + getCheckMessage(MSG_JAVADOC_MISSED_HTML_CLOSE, 4, "unclosedTag"),
-            "7: " + getCheckMessage(MSG_KEY_UNRECOGNIZED_ANTLR_ERROR, 4, null),
+            "8: " + getCheckMessage(MSG_JAVADOC_PARSE_RULE_ERROR, 53,
+                    "mismatched input 'get' expecting <EOF>", "JAVADOC"),
         };
         verify(checkConfig,
             getPath("InputAbstractJavadocUnclosedTagAndInvalidAtSeeReference.java"), expected);

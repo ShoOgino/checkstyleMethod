@@ -2,7 +2,8 @@
     public void testAntlrError() throws Exception {
         final DefaultConfiguration checkConfig = createCheckConfig(TempCheck.class);
         final String[] expected = {
-            "3: " + getCheckMessage(MSG_KEY_UNRECOGNIZED_ANTLR_ERROR, 0, null),
+            "4: " + getCheckMessage(MSG_JAVADOC_PARSE_RULE_ERROR, 49,
+                    "mismatched input 'get' expecting <EOF>", "JAVADOC"),
         };
         verify(checkConfig, getPath("InputAbstractJavadocInvalidAtSeeReference.java"), expected);
     }

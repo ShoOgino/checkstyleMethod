@@ -31,19 +31,11 @@
                                 + JAVADOC_START.length());
             result.setTree(tree);
         }
-        catch (ParseCancellationException | IllegalArgumentException ex) {
+        catch (ParseCancellationException | IllegalArgumentException ignored) {
             // If syntax error occurs then message is printed by error listener
             // and parser throws this runtime exception to stop parsing.
             // Just stop processing current Javadoc comment.
-            ParseErrorMessage parseErrorMessage = errorListener.getErrorMessage();
-
-            // There are cases when antlr error listener does not handle syntax error
-            if (parseErrorMessage == null) {
-                parseErrorMessage = new ParseErrorMessage(javadocCommentAst.getLineNo(),
-                        MSG_KEY_UNRECOGNIZED_ANTLR_ERROR,
-                        javadocCommentAst.getColumnNo(), ex.getMessage());
-            }
-
+            final ParseErrorMessage parseErrorMessage = errorListener.getErrorMessage();
             result.setParseErrorMessage(parseErrorMessage);
         }
 
