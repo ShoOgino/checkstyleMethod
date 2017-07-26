@@ -3,6 +3,7 @@
      *
      * @param lineNo line number associated with the message
      * @param columnNo column number associated with the message
+     * @param tokenType token type of the event associated with the message. See {@link TokenTypes}
      * @param bundle resource bundle name
      * @param key the key to locate the translation
      * @param args arguments for the translation
@@ -14,6 +15,7 @@
     // -@cs[ParameterNumber] Class is immutable, we need that amount of arguments.
     public LocalizedMessage(int lineNo,
                             int columnNo,
+                            int tokenType,
                             String bundle,
                             String key,
                             Object[] args,
@@ -21,7 +23,21 @@
                             String moduleId,
                             Class<?> sourceClass,
                             String customMessage) {
-        this(lineNo, columnNo, 0, bundle, key, args, severityLevel, moduleId, sourceClass,
-                customMessage);
+        this.lineNo = lineNo;
+        this.columnNo = columnNo;
+        this.tokenType = tokenType;
+        this.key = key;
+
+        if (args == null) {
+            this.args = null;
+        }
+        else {
+            this.args = Arrays.copyOf(args, args.length);
+        }
+        this.bundle = bundle;
+        this.severityLevel = severityLevel;
+        this.moduleId = moduleId;
+        this.sourceClass = sourceClass;
+        this.customMessage = customMessage;
     }
 
