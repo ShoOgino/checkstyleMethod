@@ -18,7 +18,14 @@
                     continue;
                 }
 
-                buildAndValidateXml(fileName, unserializedSource);
+                final String code = buildXml(unserializedSource);
+                // validate only
+                XmlUtil.getRawXml(fileName, code, unserializedSource);
+
+                // can't test ant structure, or old and outdated checks
+                Assert.assertTrue(fileName.startsWith("anttask")
+                        || fileName.startsWith("releasenotes")
+                        || isValidCheckstyleXml(fileName, code, unserializedSource));
             }
         }
     }

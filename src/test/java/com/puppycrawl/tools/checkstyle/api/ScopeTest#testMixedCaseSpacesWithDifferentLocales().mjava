@@ -5,7 +5,12 @@
         try {
             for (Locale differentLocale : differentLocales) {
                 Locale.setDefault(differentLocale);
-                testMixedCaseSpaces();
+                assertEquals(Scope.NOTHING, Scope.getInstance("NothinG "));
+                assertEquals(Scope.PUBLIC, Scope.getInstance(" PuBlic"));
+                assertEquals(Scope.PROTECTED, Scope.getInstance(" ProteCted"));
+                assertEquals(Scope.PACKAGE, Scope.getInstance("    PackAge "));
+                assertEquals(Scope.PRIVATE, Scope.getInstance("privaTe   "));
+                assertEquals(Scope.ANONINNER, Scope.getInstance("AnonInner"));
             }
         }
         finally {

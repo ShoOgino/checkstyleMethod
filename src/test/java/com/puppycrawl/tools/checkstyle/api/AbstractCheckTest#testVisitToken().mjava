@@ -16,7 +16,10 @@
                 return CommonUtils.EMPTY_INT_ARRAY;
             }
         };
+        final AbstractCheck checkSpy = spy(check);
         // Eventually it will become clear abstract method
-        check.visitToken(null);
+        checkSpy.visitToken(null);
+
+        verify(checkSpy, times(1)).visitToken(null);
     }
 

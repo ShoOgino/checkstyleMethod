@@ -1,5 +1,6 @@
-    private static void validateCheckstyleXml(String fileName, String code,
-            String unserializedSource) throws IOException, CheckstyleException {
+    private static boolean isValidCheckstyleXml(String fileName, String code,
+                                                String unserializedSource)
+            throws IOException, CheckstyleException {
         // can't process non-existent examples, or out of context snippets
         if (!code.contains("com.mycompany") && !code.contains("checkstyle-packages")
                 && !code.contains("MethodLimit") && !code.contains("<suppress ")
@@ -32,5 +33,6 @@
                         + ex.getMessage() + "): " + unserializedSource, ex);
             }
         }
+        return true;
     }
 
