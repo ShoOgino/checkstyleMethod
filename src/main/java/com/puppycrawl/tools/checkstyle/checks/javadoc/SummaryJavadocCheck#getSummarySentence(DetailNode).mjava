@@ -5,7 +5,7 @@
      */
     private static String getSummarySentence(DetailNode ast) {
         boolean flag = true;
-        final StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder(256);
         for (DetailNode child : ast.getChildren()) {
             if (ALLOWED_TYPES.contains(child.getType())) {
                 result.append(child.getText());

@@ -6,7 +6,7 @@
     private static String getIndentation(DetailNode node) {
         final boolean isLastChild = JavadocUtils.getNextSibling(node) == null;
         DetailNode currentNode = node;
-        final StringBuilder indentation = new StringBuilder();
+        final StringBuilder indentation = new StringBuilder(1024);
         while (currentNode.getParent() != null) {
             currentNode = currentNode.getParent();
             if (currentNode.getParent() == null) {
