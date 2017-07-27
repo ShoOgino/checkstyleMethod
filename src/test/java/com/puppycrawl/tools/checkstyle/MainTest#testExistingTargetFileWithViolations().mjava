@@ -10,7 +10,7 @@
                     "name.invalidPattern", new String[] {"InputMainInner", "^[a-z0-9]*$"},
                     null, getClass(), null);
             final String expectedPath = getFilePath("InputMain.java");
-            assertEquals(auditStartMessage.getMessage() + EOL
+            assertEquals("Unexpected ouput log", auditStartMessage.getMessage() + EOL
                             + "[WARN] " + expectedPath + ":3:14: "
                             + invalidPatternMessageMain.getMessage()
                             + " [TypeName]" + EOL
@@ -18,7 +18,7 @@
                             + invalidPatternMessageMainInner.getMessage()
                             + " [TypeName]" + EOL
                             + auditFinishMessage.getMessage() + EOL, systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main("-c", getPath("InputMainConfig-classname2.xml"),
                 getPath("InputMain.java"));

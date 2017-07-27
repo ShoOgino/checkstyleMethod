@@ -5,8 +5,8 @@
         exit.checkAssertionAfterwards(() -> {
             final String usage = "Unrecognized option: -w" + EOL
                     + USAGE;
-            assertEquals(usage, systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected ouput log", usage, systemOut.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main("-w");
     }

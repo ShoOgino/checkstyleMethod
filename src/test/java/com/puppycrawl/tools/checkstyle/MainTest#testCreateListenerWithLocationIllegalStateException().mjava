@@ -16,8 +16,10 @@
             final LocalizedMessage createListenerMessage = new LocalizedMessage(0,
                     Definitions.CHECKSTYLE_BUNDLE, "Main.createListener",
                     new String[] {"myformat", "plain", "xml"}, null, getClass(), null);
-            assertEquals(createListenerMessage.getMessage(), ex.getCause().getLocalizedMessage());
-            assertTrue(ex.getCause() instanceof IllegalStateException);
+            assertEquals("Invalid error message",
+                    createListenerMessage.getMessage(), ex.getCause().getLocalizedMessage());
+            assertTrue("Invalid error cause",
+                    ex.getCause() instanceof IllegalStateException);
         }
         finally {
             // method creates output folder

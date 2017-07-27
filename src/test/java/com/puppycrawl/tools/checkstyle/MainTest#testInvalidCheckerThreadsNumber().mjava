@@ -2,9 +2,9 @@
     public void testInvalidCheckerThreadsNumber() throws Exception {
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(() -> {
-            assertEquals("Invalid Checker threads number"
+            assertEquals("Unexpected ouput log", "Invalid Checker threads number"
                 + System.lineSeparator(), systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main("-C", "invalid", "-c", "/google_checks.xml", getPath("InputMain.java"));
     }

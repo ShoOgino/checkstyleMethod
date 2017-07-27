@@ -26,8 +26,8 @@
             }
             sb.append(auditFinishMessage.getMessage())
                     .append(EOL);
-            assertEquals(sb.toString(), systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected ouput log", sb.toString(), systemOut.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
 
         Main.main("-c", getPath("InputMainConfig-filelength.xml"),

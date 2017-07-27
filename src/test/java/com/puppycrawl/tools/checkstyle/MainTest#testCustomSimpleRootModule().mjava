@@ -12,11 +12,12 @@
                             + "TestRootModuleCheckerCheck, " + checkstylePackage
                             + "TestRootModuleCheckerCheck"},
                     null, getClass(), null);
-            assertEquals(errorCounterOneMessage.getMessage() + EOL,
+            assertEquals("Unexpected ouput log", errorCounterOneMessage.getMessage() + EOL,
                     systemOut.getLog());
-            assertTrue(systemErr.getLog().startsWith(checkstylePackage + "api.CheckstyleException: "
+            assertTrue("Unexpected system error log",
+                    systemErr.getLog().startsWith(checkstylePackage + "api.CheckstyleException: "
                     + unableToInstantiateExceptionMessage.getMessage()));
-            assertFalse(TestRootModuleChecker.isProcessed());
+            assertFalse("Invalid checker state", TestRootModuleChecker.isProcessed());
         });
         Main.main("-c", getPath("InputMainConfig-custom-simple-root-module.xml"),
                 getPath("InputMain.java"));

@@ -3,9 +3,9 @@
         TestRootModuleChecker.reset();
 
         exit.checkAssertionAfterwards(() -> {
-            assertEquals("", systemOut.getLog());
-            assertEquals("", systemErr.getLog());
-            assertTrue(TestRootModuleChecker.isProcessed());
+            assertEquals("Unexpected ouput log", "", systemOut.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
+            assertTrue("Invalid Checker state", TestRootModuleChecker.isProcessed());
         });
         Main.main("-c", getPath("InputMainConfig-custom-root-module.xml"),
                 getPath("InputMain.java"));

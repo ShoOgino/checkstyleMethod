@@ -32,8 +32,8 @@
             + "    `--RCURLY -> } [6:0]" + EOL;
 
         exit.checkAssertionAfterwards(() -> {
-            assertEquals(expected, systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected ouput log", expected, systemOut.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main("-T", getPath("InputMain.java"));
     }

@@ -1,18 +1,18 @@
     @Test
     public void testCheckAccess() {
-        assertEquals(AccessResult.DISALLOWED, icCommon.checkAccess(
+        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common",
                 "org.springframework.something"));
-        assertEquals(AccessResult.ALLOWED, icCommon
+        assertEquals("Unxpected access result", AccessResult.ALLOWED, icCommon
                 .checkAccess("com.kazgroup.courtlink.common",
                         "org.apache.commons.something"));
-        assertEquals(AccessResult.DISALLOWED, icCommon.checkAccess(
+        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common", "org.apache.commons"));
-        assertEquals(AccessResult.ALLOWED, icCommon.checkAccess(
+        assertEquals("Unxpected access result", AccessResult.ALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common", "org.hibernate.something"));
-        assertEquals(AccessResult.DISALLOWED, icCommon.checkAccess(
+        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common", "com.badpackage.something"));
-        assertEquals(AccessResult.DISALLOWED, icRoot.checkAccess(
+        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icRoot.checkAccess(
                 "com.kazgroup.courtlink", "org.hibernate.something"));
     }
 

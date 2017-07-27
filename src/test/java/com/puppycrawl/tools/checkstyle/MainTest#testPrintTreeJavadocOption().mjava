@@ -5,8 +5,10 @@
             .replaceAll("\\\\r\\\\n", "\\\\n");
 
         exit.checkAssertionAfterwards(() -> {
-            assertEquals(expected, systemOut.getLog().replaceAll("\\\\r\\\\n", "\\\\n"));
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected ouput log",
+                    expected, systemOut.getLog().replaceAll("\\\\r\\\\n", "\\\\n"));
+            assertEquals("Unexpected system error log",
+                    "", systemErr.getLog());
         });
         Main.main("-j", getPath("InputMainJavadocComment.javadoc"));
     }

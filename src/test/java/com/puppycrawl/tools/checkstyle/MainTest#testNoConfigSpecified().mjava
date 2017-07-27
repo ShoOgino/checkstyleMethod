@@ -3,9 +3,10 @@
             throws Exception {
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(() -> {
-            assertEquals("Must specify a config XML file." + System.lineSeparator(),
+            assertEquals("Unexpected ouput log",
+                    "Must specify a config XML file." + System.lineSeparator(),
                     systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main(getPath("InputMain.java"));
     }

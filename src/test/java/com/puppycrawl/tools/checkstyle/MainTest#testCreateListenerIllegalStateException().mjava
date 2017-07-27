@@ -11,8 +11,10 @@
             final LocalizedMessage loadPropertiesMessage = new LocalizedMessage(0,
                     Definitions.CHECKSTYLE_BUNDLE, "Main.createListener",
                     new String[] {"myformat", "plain", "xml"}, null, getClass(), null);
-            assertEquals(loadPropertiesMessage.getMessage(), ex.getCause().getLocalizedMessage());
-            assertTrue(ex.getCause() instanceof IllegalStateException);
+            assertEquals("Invalid error message",
+                    loadPropertiesMessage.getMessage(), ex.getCause().getLocalizedMessage());
+            assertTrue("Invalid error cause",
+                    ex.getCause() instanceof IllegalStateException);
         }
     }
 

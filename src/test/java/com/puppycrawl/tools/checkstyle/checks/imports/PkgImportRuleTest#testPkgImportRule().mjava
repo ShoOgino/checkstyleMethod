@@ -1,12 +1,12 @@
     @Test
     public void testPkgImportRule() {
         final PkgImportRule rule = new PkgImportRule(true, false, "pkg", false, false);
-        assertNotNull(rule);
-        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("asda"));
-        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("p"));
-        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("pkga"));
-        assertEquals(AccessResult.ALLOWED, rule.verifyImport("pkg.a"));
-        assertEquals(AccessResult.ALLOWED, rule.verifyImport("pkg.a.b"));
-        assertEquals(AccessResult.UNKNOWN, rule.verifyImport("pkg"));
+        assertNotNull("Rule must not be null", rule);
+        assertEquals("Invalid access result", AccessResult.UNKNOWN, rule.verifyImport("asda"));
+        assertEquals("Invalid access result", AccessResult.UNKNOWN, rule.verifyImport("p"));
+        assertEquals("Invalid access result", AccessResult.UNKNOWN, rule.verifyImport("pkga"));
+        assertEquals("Invalid access result", AccessResult.ALLOWED, rule.verifyImport("pkg.a"));
+        assertEquals("Invalid access result", AccessResult.ALLOWED, rule.verifyImport("pkg.a.b"));
+        assertEquals("Invalid access result", AccessResult.UNKNOWN, rule.verifyImport("pkg"));
     }
 

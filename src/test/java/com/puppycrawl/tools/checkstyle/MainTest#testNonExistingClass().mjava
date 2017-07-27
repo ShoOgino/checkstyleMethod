@@ -4,11 +4,11 @@
         exit.checkAssertionAfterwards(() -> {
             final String expectedExceptionMessage = errorCounterOneMessage.getMessage()
                     + EOL;
-            assertEquals(expectedExceptionMessage, systemOut.getLog());
+            assertEquals("Unexpected ouput log", expectedExceptionMessage, systemOut.getLog());
 
             final String cause = "com.puppycrawl.tools.checkstyle.api.CheckstyleException:"
                     + " cannot initialize module TreeWalker - ";
-            assertTrue(systemErr.getLog().startsWith(cause));
+            assertTrue("Unexpected system error log", systemErr.getLog().startsWith(cause));
         });
 
         Main.main("-c", getPath("InputMainConfig-non-existing-classname.xml"),

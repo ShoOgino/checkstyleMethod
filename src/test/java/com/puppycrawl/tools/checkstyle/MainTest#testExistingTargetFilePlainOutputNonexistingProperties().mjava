@@ -3,9 +3,9 @@
             throws Exception {
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(() -> {
-            assertEquals("Could not find file 'nonexisting.properties'."
+            assertEquals("Unexpected ouput log", "Could not find file 'nonexisting.properties'."
                     + System.lineSeparator(), systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main("-c", getPath("InputMainConfig-classname-prop.xml"),
                 "-p", "nonexisting.properties",

@@ -2,9 +2,9 @@
     public void testExistingTargetFilePlainOutput() throws Exception {
 
         exit.checkAssertionAfterwards(() -> {
-            assertEquals(auditStartMessage.getMessage() + EOL
+            assertEquals("Unexpected ouput log", auditStartMessage.getMessage() + EOL
                     + auditFinishMessage.getMessage() + EOL, systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main("-c", getPath("InputMainConfig-classname.xml"),
                 "-f", "plain",

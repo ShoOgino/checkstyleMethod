@@ -3,9 +3,9 @@
 
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(() -> {
-            assertEquals("Printing AST is allowed for only one file."
+            assertEquals("Unexpected ouput log", "Printing AST is allowed for only one file."
                 + System.lineSeparator(), systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
 
         Main.main("-t", getPath(""));

@@ -3,8 +3,8 @@
             throws Exception {
         final File file = temporaryFolder.newFile("file.output");
         exit.checkAssertionAfterwards(() -> {
-            assertEquals("", systemOut.getLog());
-            assertEquals("", systemErr.getLog());
+            assertEquals("Unexpected ouput log", "", systemOut.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
         Main.main("-c", getPath("InputMainConfig-classname.xml"),
                 "-f", "plain",

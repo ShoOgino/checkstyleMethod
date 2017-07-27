@@ -4,13 +4,14 @@
         exit.checkAssertionAfterwards(() -> {
             final String expectedExceptionMessage = auditStartMessage.getMessage() + EOL
                             + errorCounterOneMessage.getMessage() + EOL;
-            assertEquals(expectedExceptionMessage, systemOut.getLog());
+            assertEquals("Unexpected ouput log", expectedExceptionMessage, systemOut.getLog());
 
             final String exceptionFirstLine = "com.puppycrawl.tools.checkstyle.api."
                     + "CheckstyleException: Exception was thrown while processing "
                     + new File(getNonCompilablePath("InputMainIncorrectClass.java")).getPath()
                     + EOL;
-            assertTrue(systemErr.getLog().startsWith(exceptionFirstLine));
+            assertTrue("Unexpected system error log",
+                    systemErr.getLog().startsWith(exceptionFirstLine));
         });
 
         // We put xml as source to cause parse excepion

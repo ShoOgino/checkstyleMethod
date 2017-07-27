@@ -3,14 +3,16 @@
         TestRootModuleChecker.reset();
 
         exit.checkAssertionAfterwards(() -> {
-            assertEquals("", systemOut.getLog());
-            assertEquals("", systemErr.getLog());
-            assertTrue(TestRootModuleChecker.isProcessed());
+            assertEquals("Unexpected ouput log", "", systemOut.getLog());
+            assertEquals("Unexpected system error log", "", systemErr.getLog());
+            assertTrue("Invalid checker state", TestRootModuleChecker.isProcessed());
             final DefaultConfiguration config =
                     (DefaultConfiguration) TestRootModuleChecker.getConfig();
             final ThreadModeSettings multiThreadModeSettings = config.getThreadModeSettings();
-            assertEquals(1, multiThreadModeSettings.getCheckerThreadsNumber());
-            assertEquals(4, multiThreadModeSettings.getTreeWalkerThreadsNumber());
+            assertEquals("Invalid checker thread number",
+                    1, multiThreadModeSettings.getCheckerThreadsNumber());
+            assertEquals("Invalid checker thread number",
+                    4, multiThreadModeSettings.getTreeWalkerThreadsNumber());
         });
         Main.main("-W", "4", "-c", getPath("InputMainConfig-custom-root-module.xml"),
             getPath("InputMain.java"));
