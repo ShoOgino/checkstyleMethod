@@ -1,5 +1,9 @@
     @Test
     public void testCreateListenerWithLocationIllegalStateException() throws Exception {
+        mockStatic(CommonUtils.class);
+        doNothing().when(CommonUtils.class);
+        CommonUtils.close(any(OutputStream.class));
+
         final Method method = Main.class.getDeclaredMethod("createListener", String.class,
             String.class);
         method.setAccessible(true);
@@ -19,5 +23,8 @@
             // method creates output folder
             FileUtils.deleteQuietly(new File(outDir));
         }
+
+        verifyStatic(times(1));
+        CommonUtils.close(any(OutputStream.class));
     }
 

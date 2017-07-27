@@ -1,6 +1,9 @@
     @Test
-    public void testExistingTargetFilePlainOutputProperties()
-            throws Exception {
+    public void testExistingTargetFilePlainOutputProperties() throws Exception {
+        mockStatic(Closeables.class);
+        doNothing().when(Closeables.class);
+        Closeables.closeQuietly(any(InputStream.class));
+
         //exit.expectSystemExitWithStatus(0);
         exit.checkAssertionAfterwards(() -> {
             assertEquals(auditStartMessage.getMessage() + EOL
@@ -10,5 +13,8 @@
         Main.main("-c", getPath("InputMainConfig-classname-prop.xml"),
                 "-p", getPath("InputMainMycheckstyle.properties"),
                 getPath("InputMain.java"));
+
+        verifyStatic(times(2));
+        Closeables.closeQuietly(any(InputStream.class));
     }
 
