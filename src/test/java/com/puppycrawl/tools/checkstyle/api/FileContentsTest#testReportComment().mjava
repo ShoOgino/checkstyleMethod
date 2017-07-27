@@ -5,7 +5,8 @@
         fileContents.reportCComment(1, 2, 1, 2);
         final ImmutableMap<Integer, List<TextBlock>> comments = fileContents.getCComments();
 
-        assertEquals(new Comment(new String[] {"/"}, 2, 1, 2).toString(),
+        assertEquals("Invalid comment",
+                new Comment(new String[] {"/"}, 2, 1, 2).toString(),
                 comments.get(1).get(0).toString());
     }
 

@@ -5,9 +5,12 @@
             fail("missing module parent");
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getMessage().contains("\"property\""));
-            assertTrue(ex.getMessage().contains("\"module\""));
-            assertTrue(ex.getMessage().endsWith(":8:38"));
+            assertTrue("Invalid exception message: " + ex.getMessage(),
+                    ex.getMessage().contains("\"property\""));
+            assertTrue("Invalid exception message: " + ex.getMessage(),
+                    ex.getMessage().contains("\"module\""));
+            assertTrue("Invalid exception message: " + ex.getMessage(),
+                    ex.getMessage().endsWith(":8:38"));
         }
     }
 

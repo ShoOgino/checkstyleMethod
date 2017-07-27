@@ -5,12 +5,12 @@
                  + "checkstyle/api/import-control_complete.xml"), charsetName);
         final FileText copy = new FileText(fileText);
         final LineColumn lineColumn = copy.lineColumn(100);
-        assertEquals(3, lineColumn.getLine());
+        assertEquals("Invalid line", 3, lineColumn.getLine());
         if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("windows")) {
-            assertEquals(44, lineColumn.getColumn());
+            assertEquals("Invalid column", 44, lineColumn.getColumn());
         }
         else {
-            assertEquals(46, lineColumn.getColumn());
+            assertEquals("Invalid column", 46, lineColumn.getColumn());
         }
     }
 

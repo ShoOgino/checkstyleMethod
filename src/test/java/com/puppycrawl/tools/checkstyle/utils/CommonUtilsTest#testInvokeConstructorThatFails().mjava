@@ -8,7 +8,8 @@
             fail("IllegalStateException is expected");
         }
         catch (IllegalStateException expected) {
-            assertSame(InstantiationException.class, expected.getCause().getClass());
+            assertSame("Invalid exception cause", InstantiationException.class,
+                expected.getCause().getClass());
         }
     }
 

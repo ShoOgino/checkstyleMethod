@@ -5,7 +5,8 @@
             fail("IllegalStateException is expected");
         }
         catch (IllegalStateException expected) {
-            assertSame(NoSuchMethodException.class, expected.getCause().getClass());
+            assertSame("Invalid exception cause",
+                NoSuchMethodException.class, expected.getCause().getClass());
         }
     }
 

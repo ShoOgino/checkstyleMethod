@@ -15,7 +15,8 @@
             fail("exception expected " + available);
         }
         catch (CheckstyleException ex) {
-            assertSame(SAXParseException.class, ex.getCause().getClass());
+            assertSame("Invalid exception class",
+                    SAXParseException.class, ex.getCause().getClass());
         }
     }
 

@@ -5,8 +5,10 @@
             fail("exception in expected");
         }
         catch (CheckstyleException ex) {
-            assertEquals("unable to parse configuration stream", ex.getMessage());
-            assertEquals("Property ${nonexisting} has not been set",
+            assertEquals("Invalid exception message",
+                "unable to parse configuration stream", ex.getMessage());
+            assertEquals("Invalid exception cause message",
+                "Property ${nonexisting} has not been set",
                     ex.getCause().getMessage());
         }
     }

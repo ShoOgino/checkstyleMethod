@@ -16,15 +16,15 @@
 
         setParentMethod.invoke(secondLevelA, root);
 
-        assertEquals(0, secondLevelA.getChildCount());
-        assertEquals(0, firstLevelB.getChildCount());
-        assertEquals(1, firstLevelA.getChildCount());
-        assertEquals(2, root.getChildCount());
-        assertEquals(2, root.getChildCount());
+        assertEquals("Invalid child count", 0, secondLevelA.getChildCount());
+        assertEquals("Invalid child count", 0, firstLevelB.getChildCount());
+        assertEquals("Invalid child count", 1, firstLevelA.getChildCount());
+        assertEquals("Invalid child count", 2, root.getChildCount());
+        assertEquals("Invalid child count", 2, root.getChildCount());
 
-        assertNull(root.getPreviousSibling());
-        assertNull(firstLevelA.getPreviousSibling());
-        assertNull(secondLevelA.getPreviousSibling());
-        assertEquals(firstLevelA, firstLevelB.getPreviousSibling());
+        assertNull("Previous sibling should be null", root.getPreviousSibling());
+        assertNull("Previous sibling should be null", firstLevelA.getPreviousSibling());
+        assertNull("Previous sibling should be null", secondLevelA.getPreviousSibling());
+        assertEquals("Invalid previous sibling", firstLevelA, firstLevelB.getPreviousSibling());
     }
 

@@ -1,11 +1,10 @@
     @Test
     public void testRegExpInRootIsConsidered() {
-        assertNull(icRoot.locateFinest("com"));
-        assertNull(icRoot.locateFinest("com/hurz/courtlink"));
-        assertNull(icRoot.locateFinest("com.hurz.hurz.courtlink"));
-        assertEquals(icRoot, icRoot
-                .locateFinest("com.hurz.courtlink.domain"));
-        assertEquals(icRoot, icRoot
+        assertNull("Package should not be null", icRoot.locateFinest("com"));
+        assertNull("Package should not be null", icRoot.locateFinest("com/hurz/courtlink"));
+        assertNull("Package should not be null", icRoot.locateFinest("com.hurz.hurz.courtlink"));
+        assertEquals("Invalid package", icRoot, icRoot.locateFinest("com.hurz.courtlink.domain"));
+        assertEquals("Invalid package", icRoot, icRoot
                 .locateFinest("com.kazgroup.courtlink.domain"));
     }
 

@@ -14,8 +14,9 @@
             fail("Exception is expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getCause() instanceof URISyntaxException);
-            assertEquals("Unable to find: " + fileName, ex.getMessage());
+            assertTrue("Invalid exception cause", ex.getCause() instanceof URISyntaxException);
+            assertEquals("Invalid exception message",
+                "Unable to find: " + fileName, ex.getMessage());
         }
     }
 

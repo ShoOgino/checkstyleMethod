@@ -24,8 +24,10 @@
 
         }
         catch (InvocationTargetException ex) {
-            assertTrue(ex.getCause() instanceof IllegalStateException);
-            assertEquals("Unknown name:" + "hello" + ".", ex.getCause().getMessage());
+            assertTrue("Invalid exception cause",
+                ex.getCause() instanceof IllegalStateException);
+            assertEquals("Invalid exception cause message",
+                "Unknown name:" + "hello" + ".", ex.getCause().getMessage());
         }
     }
 

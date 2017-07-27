@@ -6,8 +6,10 @@
             fail("exception expected");
         }
         catch (CheckstyleException ex) {
-            assertSame(MalformedURLException.class, ex.getCause().getClass());
-            assertEquals("unknown protocol: aaa", ex.getCause().getMessage());
+            assertSame("Invalid exception class",
+                    MalformedURLException.class, ex.getCause().getClass());
+            assertEquals("Invalid exception message",
+                    "unknown protocol: aaa", ex.getCause().getMessage());
         }
     }
 

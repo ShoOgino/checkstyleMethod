@@ -6,10 +6,10 @@
         final DetailAST newSibling = new DetailAST();
         parent.setFirstChild(child);
         child.setNextSibling(sibling);
-
         child.addNextSibling(newSibling);
-        assertTrue(newSibling.getParent().equals(parent));
-        assertTrue(newSibling.getNextSibling().equals(sibling));
-        assertTrue(child.getNextSibling().equals(newSibling));
+
+        assertEquals("Invalid parent", parent, newSibling.getParent());
+        assertEquals("Invalid next sibling", sibling, newSibling.getNextSibling());
+        assertEquals("Invalid child", newSibling, child.getNextSibling());
     }
 

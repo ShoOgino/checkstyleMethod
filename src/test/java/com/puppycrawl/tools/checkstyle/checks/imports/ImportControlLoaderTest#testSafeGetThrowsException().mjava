@@ -16,8 +16,9 @@
             fail("exception expected");
         }
         catch (InvocationTargetException ex) {
-            assertSame(SAXException.class, ex.getCause().getClass());
-            assertEquals("missing attribute you_cannot_find_me", ex.getCause().getMessage());
+            assertSame("Invalid exception class", SAXException.class, ex.getCause().getClass());
+            assertEquals("Invalid exception message",
+                    "missing attribute you_cannot_find_me", ex.getCause().getMessage());
         }
     }
 

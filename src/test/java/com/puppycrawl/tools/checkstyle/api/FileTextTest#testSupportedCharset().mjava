@@ -8,7 +8,7 @@
         final String charsetName = "ISO-8859-1";
         final FileText fileText = new FileText(new File("src/test/resources/com/puppycrawl/tools/"
                  + "checkstyle/api/import-control_complete.xml"), charsetName);
-        assertEquals(charsetName, fileText.getCharset().name());
+        assertEquals("Invalid charset name", charsetName, fileText.getCharset().name());
 
         verifyStatic(times(2));
         Closeables.closeQuietly(any(Reader.class));

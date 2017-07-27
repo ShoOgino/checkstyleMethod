@@ -15,11 +15,13 @@
         final Field overridePropsResolverField =
                 configurationLoaderClass.getDeclaredField("overridePropsResolver");
         overridePropsResolverField.setAccessible(true);
-        assertEquals(propertyResolver, overridePropsResolverField.get(configurationLoader));
+        assertEquals("Invalid property resolver",
+            propertyResolver, overridePropsResolverField.get(configurationLoader));
 
         final Field omitIgnoredModulesField =
                 configurationLoaderClass.getDeclaredField("omitIgnoredModules");
         omitIgnoredModulesField.setAccessible(true);
-        assertEquals(true, omitIgnoredModulesField.get(configurationLoader));
+        assertEquals("omitIgnoredModules should be set to true",
+            true, omitIgnoredModulesField.get(configurationLoader));
     }
 

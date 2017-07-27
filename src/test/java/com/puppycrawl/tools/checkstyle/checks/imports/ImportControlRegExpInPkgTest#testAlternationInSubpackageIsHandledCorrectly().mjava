@@ -3,8 +3,8 @@
         final ImportControl root = new ImportControl("org.somewhere", false);
         // the regular expression has to be adjusted to (foo|bar)
         final ImportControl subpackages = new ImportControl(root, "foo|bar", true);
-        assertEquals(root, root.locateFinest("org.somewhere"));
-        assertEquals(subpackages, root.locateFinest("org.somewhere.foo"));
-        assertEquals(subpackages, root.locateFinest("org.somewhere.bar"));
+        assertEquals("Invalid package", root, root.locateFinest("org.somewhere"));
+        assertEquals("Invalid package", subpackages, root.locateFinest("org.somewhere.foo"));
+        assertEquals("Invalid package", subpackages, root.locateFinest("org.somewhere.bar"));
     }
 

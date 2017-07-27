@@ -10,7 +10,9 @@
         final Configuration[] children = config.getChildren();
         final Configuration[] grandchildren = children[0].getChildren();
 
-        assertTrue(grandchildren[0].getMessages()
-            .containsKey("name.invalidPattern"));
+        final String expectedKey = "name.invalidPattern";
+        assertTrue("Messages should contain key: " + expectedKey,
+            grandchildren[0].getMessages()
+            .containsKey(expectedKey));
     }
 

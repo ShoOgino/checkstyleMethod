@@ -15,15 +15,15 @@
             method.accept(null);
             final int intermediateCount = Whitebox.getInternalState(parent, "childCount");
             final int finishCount = parent.getChildCount();
-            assertEquals(startCount, finishCount);
-            assertEquals(Integer.MIN_VALUE, intermediateCount);
+            assertEquals("Child count has changed", startCount, finishCount);
+            assertEquals("Invalid child count", Integer.MIN_VALUE, intermediateCount);
         }
 
         final int startCount = child.getChildCount();
         child.addChild(null);
         final int intermediateCount = Whitebox.getInternalState(child, "childCount");
         final int finishCount = child.getChildCount();
-        assertEquals(startCount, finishCount);
-        assertEquals(Integer.MIN_VALUE, intermediateCount);
+        assertEquals("Child count has changed", startCount, finishCount);
+        assertEquals("Invalid child count", Integer.MIN_VALUE, intermediateCount);
     }
 
