@@ -1,0 +1,13 @@
+    @Test
+    public void testMatchingModuleId() throws Exception {
+        final String xpath = "/CLASS_DEF[@text='InputSuppressByXpath']";
+        final XpathFilter filter =
+                new XpathFilter("InputSuppressByXpath", "Test", "id19", xpath);
+        final LocalizedMessage message =
+                new LocalizedMessage(3, 0, TokenTypes.CLASS_DEF, "", "", null, null, "id19",
+                        getClass(), null);
+        final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(fileContents,
+                file.getName(), message, TestUtils.parseFile(file));
+        assertFalse("Event should be rejected", filter.accept(ev));
+    }
+

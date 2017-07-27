@@ -1,0 +1,34 @@
+    /**
+     * Creates a {@code XpathElement} instance.
+     * @param files regular expression for names of filtered files
+     * @param checks regular expression for filtered check classes
+     * @param moduleId the module id
+     * @param query the xpath query
+     */
+    public XpathFilter(String files, String checks,
+                       String moduleId, String query) {
+        filePattern = files;
+        fileRegexp = Pattern.compile(files);
+        checkPattern = checks;
+        if (checks == null) {
+            checkRegexp = null;
+        }
+        else {
+            checkRegexp = CommonUtils.createPattern(checks);
+        }
+        this.moduleId = moduleId;
+        xpathQuery = query;
+        if (xpathQuery == null) {
+            xpathExpression = null;
+        }
+        else {
+            final XPathEvaluator xpathEvaluator = new XPathEvaluator();
+            try {
+                xpathExpression = xpathEvaluator.createExpression(xpathQuery);
+            }
+            catch (XPathException ex) {
+                throw new IllegalStateException("Unexpected xpath query: " + xpathQuery, ex);
+            }
+        }
+    }
+

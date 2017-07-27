@@ -1,0 +1,22 @@
+    /**
+     * Is matching by xpath query.
+     * @param event event
+     * @return true is matching
+     */
+    private boolean isXpathQueryMatching(TreeWalkerAuditEvent event) {
+        boolean isMatching = false;
+        if (xpathExpression != null) {
+            final List<Item> items = getItems(event);
+            for (Item item : items) {
+                final AbstractNode abstractNode = (AbstractNode) item;
+                isMatching = abstractNode.getTokenType() == event.getTokenType()
+                        && abstractNode.getLineNumber() == event.getLine()
+                        && abstractNode.getColumnNumber() == event.getColumn();
+                if (isMatching) {
+                    break;
+                }
+            }
+        }
+        return isMatching;
+    }
+

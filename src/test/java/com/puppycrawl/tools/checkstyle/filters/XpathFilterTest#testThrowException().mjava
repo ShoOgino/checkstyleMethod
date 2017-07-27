@@ -1,0 +1,19 @@
+    @Test
+    public void testThrowException() throws Exception {
+        final String xpath = "/CLASS_DEF[@text='InputSuppressByXpath']";
+        final XpathFilter filter =
+                new XpathFilter("InputSuppressByXpath", "Test", null, xpath);
+        final LocalizedMessage message =
+                new LocalizedMessage(3, 0, TokenTypes.CLASS_DEF, "", "", null, null, "id19",
+                        getClass(), null);
+        final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(fileContents,
+                file.getName(), message, null);
+        try {
+            filter.accept(ev);
+        }
+        catch (IllegalStateException ex) {
+            assertTrue("Exception message does not match expected one",
+                    ex.getMessage().contains("Cannot initialize context and evaluate query"));
+        }
+    }
+

@@ -1,0 +1,10 @@
+    @Test
+    public void testMatching() throws Exception {
+        final String xpath = "/CLASS_DEF[@text='InputSuppressByXpath']";
+        final XpathFilter filter =
+                new XpathFilter("InputSuppressByXpath", "Test", null, xpath);
+        final TreeWalkerAuditEvent ev = getEvent(3, 0,
+                TokenTypes.CLASS_DEF);
+        assertFalse("Event should be rejected", filter.accept(ev));
+    }
+

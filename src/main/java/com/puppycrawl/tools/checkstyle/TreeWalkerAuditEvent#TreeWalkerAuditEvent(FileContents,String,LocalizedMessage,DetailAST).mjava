@@ -4,11 +4,13 @@
      * @param fileContents contents of the file associated with the event
      * @param fileName file associated with the event
      * @param localizedMessage the actual message
+     * @param rootAst root AST element {@link DetailAST} of the file
      */
     public TreeWalkerAuditEvent(FileContents fileContents, String fileName,
-                                LocalizedMessage localizedMessage) {
+                                LocalizedMessage localizedMessage, DetailAST rootAst) {
         this.fileContents = fileContents;
         this.fileName = fileName;
         this.localizedMessage = localizedMessage;
+        this.rootAst = rootAst;
     }
 

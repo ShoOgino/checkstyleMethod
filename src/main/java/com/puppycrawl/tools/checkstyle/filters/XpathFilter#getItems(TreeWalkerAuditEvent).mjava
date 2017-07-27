@@ -1,0 +1,26 @@
+    /**
+     * Returns list of nodes matching xpath expression given event.
+     * @param event {@code TreeWalkerAuditEvent} object
+     * @return list of nodes matching xpath expression given event
+     */
+    private List<Item> getItems(TreeWalkerAuditEvent event) {
+        final RootNode rootNode;
+        if (event.getRootAst() == null) {
+            rootNode = null;
+        }
+        else {
+            rootNode = new RootNode(event.getRootAst());
+        }
+        final List<Item> items;
+        try {
+            final XPathDynamicContext xpathDynamicContext =
+                    xpathExpression.createDynamicContext(rootNode);
+            items = xpathExpression.evaluate(xpathDynamicContext);
+        }
+        catch (XPathException ex) {
+            throw new IllegalStateException("Cannot initialize context and evaluate query: "
+                    + xpathQuery, ex);
+        }
+        return items;
+    }
+

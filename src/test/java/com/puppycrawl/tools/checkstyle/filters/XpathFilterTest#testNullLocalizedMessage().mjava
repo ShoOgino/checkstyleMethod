@@ -1,0 +1,10 @@
+    @Test
+    public void testNullLocalizedMessage() throws Exception {
+        final String xpath = "NON_MATCHING_QUERY";
+        final XpathFilter filter =
+                new XpathFilter("InputSuppressByXpath", "Test", null, xpath);
+        final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(null,
+                file.getName(), null, null);
+        assertTrue("Event should be accepted", filter.accept(ev));
+    }
+

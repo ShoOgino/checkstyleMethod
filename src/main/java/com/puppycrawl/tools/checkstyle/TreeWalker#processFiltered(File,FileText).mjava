@@ -19,9 +19,14 @@
 
                         walk(astWithComments, contents, AstState.WITH_COMMENTS);
                     }
-                    final SortedSet<LocalizedMessage> filteredMessages =
-                            getFilteredMessages(fileName, contents);
-                    addMessages(filteredMessages);
+                    if (filters.isEmpty()) {
+                        addMessages(messages);
+                    }
+                    else {
+                        final SortedSet<LocalizedMessage> filteredMessages =
+                            getFilteredMessages(fileName, contents, rootAST);
+                        addMessages(filteredMessages);
+                    }
                     messages.clear();
                 }
             }

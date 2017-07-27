@@ -1,0 +1,13 @@
+    @Test
+    public void testIncorrectQuery() throws Exception {
+        final String xpath = "1@#";
+        try {
+            new XpathFilter("InputSuppressByXpath", "Test", null, xpath);
+            fail("Exception was expected");
+        }
+        catch (IllegalStateException ex) {
+            assertTrue("Message should be: Unexpected xpath query",
+                    ex.getMessage().contains("Unexpected xpath query"));
+        }
+    }
+
