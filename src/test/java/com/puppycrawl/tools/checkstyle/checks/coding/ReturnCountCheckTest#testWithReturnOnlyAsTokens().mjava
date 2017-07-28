@@ -1,6 +1,6 @@
     @Test
     public void testWithReturnOnlyAsTokens() throws Exception {
-        final DefaultConfiguration checkConfig = createCheckConfig(ReturnCountCheck.class);
+        final DefaultConfiguration checkConfig = createModuleConfig(ReturnCountCheck.class);
         checkConfig.addAttribute("tokens", "LITERAL_RETURN");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputReturnCountLambda.java"), expected);

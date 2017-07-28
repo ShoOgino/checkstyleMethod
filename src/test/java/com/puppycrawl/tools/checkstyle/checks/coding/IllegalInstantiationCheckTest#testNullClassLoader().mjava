@@ -30,7 +30,7 @@
         final IllegalInstantiationCheck check = new IllegalInstantiationCheck();
         final File inputFile = new File(getNonCompilablePath("InputIllegalInstantiationLang.java"));
         check.setFileContents(new FileContents(new FileText(inputFile, "UTF-8")));
-        check.configure(createCheckConfig(IllegalInstantiationCheck.class));
+        check.configure(createModuleConfig(IllegalInstantiationCheck.class));
         check.setClasses("java.lang.Boolean");
 
         check.visitToken(newAst);

@@ -2,7 +2,7 @@
     public void testIgnoreCaseFalse() throws Exception {
         final String illegalTrue = "(?i)SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
         final DefaultConfiguration checkConfigTrue =
-            createCheckConfig(RegexpCheck.class);
+            createModuleConfig(RegexpCheck.class);
         checkConfigTrue.addAttribute("format", illegalTrue);
         checkConfigTrue.addAttribute("illegalPattern", "true");
         final String[] expectedTrue = {
@@ -12,7 +12,7 @@
 
         final String illegalFalse = "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
         final DefaultConfiguration checkConfigFalse =
-            createCheckConfig(RegexpCheck.class);
+            createModuleConfig(RegexpCheck.class);
         checkConfigFalse.addAttribute("format", illegalFalse);
         checkConfigFalse.addAttribute("illegalPattern", "true");
         final String[] expectedFalse = CommonUtils.EMPTY_STRING_ARRAY;

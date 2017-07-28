@@ -1,16 +1,23 @@
     /**
      * Creates {@link Checker} instance based on the given {@link Configuration} instance.
-     * @param checkConfig {@link Configuration} instance.
+     * @param moduleConfig {@link Configuration} instance.
      * @return {@link Checker} instance based on the given {@link Configuration} instance.
      * @throws Exception if an exception occurs during checker configuration.
      */
-    public Checker createChecker(Configuration checkConfig)
+    public Checker createChecker(Configuration moduleConfig)
             throws Exception {
-        final DefaultConfiguration dc = createCheckerConfig(checkConfig);
-        final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.configure(dc);
-        checker.addListener(new BriefUtLogger(stream));
-        return checker;
+        boolean addTreeWalker = false;
+
+        try {
+            final Class<?> moduleClass = Class.forName(moduleConfig.getName());
+            if (ModuleReflectionUtils.isCheckstyleCheck(moduleClass)) {
+                addTreeWalker = true;
+            }
+        }
+        catch (ClassNotFoundException ignore) {
+            // ignore exception, assume it is not part of TreeWalker
+        }
+
+        return createChecker(moduleConfig, addTreeWalker);
     }
 

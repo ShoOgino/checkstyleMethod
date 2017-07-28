@@ -2,7 +2,7 @@
     public void testVisitLeaveToken()
             throws Exception {
         JavadocVisitLeaveCheck.clearCounter();
-        final DefaultConfiguration checkConfig = createCheckConfig(JavadocVisitLeaveCheck.class);
+        final DefaultConfiguration checkConfig = createModuleConfig(JavadocVisitLeaveCheck.class);
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputAbstractJavadocPosition.java"), expected);
         Assert.assertTrue("Javadoc visit count should be greater than zero",

@@ -1,9 +1,9 @@
     @Test
     public void testWithMultipleChecks() throws Exception {
         final DefaultConfiguration checkerConfig = new DefaultConfiguration("configuration");
-        final DefaultConfiguration checksConfig = createCheckConfig(TreeWalker.class);
-        checksConfig.addChild(createCheckConfig(AtclauseOrderCheck.class));
-        checksConfig.addChild(createCheckConfig(JavadocParagraphCheck.class));
+        final DefaultConfiguration checksConfig = createModuleConfig(TreeWalker.class);
+        checksConfig.addChild(createModuleConfig(AtclauseOrderCheck.class));
+        checksConfig.addChild(createModuleConfig(JavadocParagraphCheck.class));
         checkerConfig.addChild(checksConfig);
         final Checker checker = new Checker();
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());

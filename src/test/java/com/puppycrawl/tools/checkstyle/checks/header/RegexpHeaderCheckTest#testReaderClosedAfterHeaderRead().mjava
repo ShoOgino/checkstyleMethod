@@ -4,7 +4,7 @@
         doNothing().when(Closeables.class);
         Closeables.closeQuietly(any(InputStreamReader.class));
 
-        final DefaultConfiguration checkConfig = createCheckConfig(RegexpHeaderCheck.class);
+        final DefaultConfiguration checkConfig = createModuleConfig(RegexpHeaderCheck.class);
         checkConfig.addAttribute("headerFile", getPath("InputRegexpHeader.header"));
         createChecker(checkConfig);
 

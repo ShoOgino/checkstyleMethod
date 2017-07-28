@@ -2,10 +2,10 @@
     public void testBehaviourWithChecksAndFilters() throws Exception {
         final DefaultConfiguration checkerConfig =
                 new DefaultConfiguration("configuration");
-        final DefaultConfiguration treeWalkerConfig = createCheckConfig(TreeWalker.class);
-        treeWalkerConfig.addChild(createCheckConfig(MemberNameCheck.class));
+        final DefaultConfiguration treeWalkerConfig = createModuleConfig(TreeWalker.class);
+        treeWalkerConfig.addChild(createModuleConfig(MemberNameCheck.class));
         final DefaultConfiguration filterConfig =
-                createCheckConfig(SuppressionCommentFilter.class);
+                createModuleConfig(SuppressionCommentFilter.class);
         filterConfig.addAttribute("checkCPP", "false");
         treeWalkerConfig.addChild(filterConfig);
         checkerConfig.addChild(treeWalkerConfig);

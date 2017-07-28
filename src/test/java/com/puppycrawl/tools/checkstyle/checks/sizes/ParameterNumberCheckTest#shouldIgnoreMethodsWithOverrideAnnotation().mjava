@@ -2,7 +2,7 @@
     public void shouldIgnoreMethodsWithOverrideAnnotation()
             throws Exception {
         final DefaultConfiguration checkConfig =
-                createCheckConfig(ParameterNumberCheck.class);
+                createModuleConfig(ParameterNumberCheck.class);
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
         final String[] expected = {
             "6:10: " + getCheckMessage(MSG_KEY, 7, 8),

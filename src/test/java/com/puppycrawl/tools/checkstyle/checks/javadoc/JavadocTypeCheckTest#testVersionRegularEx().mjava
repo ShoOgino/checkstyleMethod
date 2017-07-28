@@ -2,7 +2,7 @@
     public void testVersionRegularEx()
             throws Exception {
         final DefaultConfiguration checkConfig =
-            createCheckConfig(JavadocTypeCheck.class);
+            createModuleConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("versionFormat", "^\\p{Digit}+\\.\\p{Digit}+$");
         final String[] expected = {
             "22: " + getCheckMessage(MSG_MISSING_TAG, "@version"),

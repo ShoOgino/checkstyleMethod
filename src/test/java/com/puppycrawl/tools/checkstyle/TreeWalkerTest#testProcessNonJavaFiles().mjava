@@ -5,7 +5,7 @@
             new HashSet<>(), Thread.currentThread().getContextClassLoader());
         treeWalker.setModuleFactory(factory);
         treeWalker.configure(new DefaultConfiguration("default config"));
-        final DefaultConfiguration childConfig = createCheckConfig(JavadocParagraphCheck.class);
+        final DefaultConfiguration childConfig = createModuleConfig(JavadocParagraphCheck.class);
         treeWalker.setupChild(childConfig);
         final File file = new File("input.java");
         final List<String> lines =

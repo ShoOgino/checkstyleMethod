@@ -1,10 +1,10 @@
     @Test
     public void testWithCheckNotHavingTreeWalkerAsParent() throws Exception {
-        final DefaultConfiguration checkConfig = createCheckConfig(JavadocPackageCheck.class);
+        final DefaultConfiguration checkConfig = createModuleConfig(JavadocPackageCheck.class);
 
         try {
             final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
-            verify(checkConfig, temporaryFolder.newFile().getPath(), expected);
+            verify(createChecker(checkConfig, true), temporaryFolder.newFile().getPath(), expected);
             fail("CheckstyleException is expected");
         }
         catch (CheckstyleException exception) {

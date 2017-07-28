@@ -1,6 +1,6 @@
     // all import-control_pkg-re* files should be equivalent so use one test for all
     private void testRegExpInPackage(String file) throws Exception {
-        final DefaultConfiguration checkConfig = createCheckConfig(ImportControlCheck.class);
+        final DefaultConfiguration checkConfig = createModuleConfig(ImportControlCheck.class);
         checkConfig.addAttribute("file", getPath(file));
         final String[] expected = {"5:1: " + getCheckMessage(MSG_DISALLOWED, "java.io.File")};
 
