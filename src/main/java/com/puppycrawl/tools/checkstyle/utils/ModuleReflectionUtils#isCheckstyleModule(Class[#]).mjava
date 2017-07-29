@@ -1,7 +1,7 @@
     /**
      * Checks whether a class may be considered as a checkstyle module. Checkstyle's modules are
      * non-abstract classes, which are either checkstyle's checks, file sets, filters, file filters,
-     * or root module.
+     * {@code TreeWalker} filters or root module.
      * @param clazz class to check.
      * @return true if the class may be considered as the checkstyle module.
      */
@@ -11,6 +11,7 @@
                     || isFileSetModule(clazz)
                     || isFilterModule(clazz)
                     || isFileFilterModule(clazz)
+                    || isTreeWalkerFilterModule(clazz)
                     || isRootModule(clazz));
     }
 
