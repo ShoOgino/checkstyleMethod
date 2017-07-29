@@ -4,8 +4,11 @@
         final String filePath = temporaryFolder.newFile().getPath();
         final PropertyCacheFile cache = new PropertyCacheFile(config, filePath);
         cache.put("myFile", 1);
-        assertTrue(cache.isInCache("myFile", 1));
-        assertFalse(cache.isInCache("myFile", 2));
-        assertFalse(cache.isInCache("myFile1", 1));
+        assertTrue("Should return true wnen file is in cache",
+                cache.isInCache("myFile", 1));
+        assertFalse("Should return false wnen file is not in cache",
+                cache.isInCache("myFile", 2));
+        assertFalse("Should return false wnen file is not in cache",
+                cache.isInCache("myFile1", 1));
     }
 

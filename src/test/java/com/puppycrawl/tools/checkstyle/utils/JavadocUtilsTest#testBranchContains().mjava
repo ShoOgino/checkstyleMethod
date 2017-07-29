@@ -9,13 +9,16 @@
         secondChild.setType(JavadocTokenTypes.CODE_LITERAL);
 
         node.setChildren(firstChild, secondChild);
-        assertFalse(JavadocUtils.containsInBranch(node, JavadocTokenTypes.AUTHOR_LITERAL));
+        assertFalse("Should return true when branch contains node passed",
+                JavadocUtils.containsInBranch(node, JavadocTokenTypes.AUTHOR_LITERAL));
 
         firstChild.setParent(node);
         secondChild.setParent(node);
-        assertFalse(JavadocUtils.containsInBranch(node, JavadocTokenTypes.AUTHOR_LITERAL));
+        assertFalse("Should return false when branch does not contain node passed",
+                JavadocUtils.containsInBranch(node, JavadocTokenTypes.AUTHOR_LITERAL));
 
         secondChild.setType(JavadocTokenTypes.AUTHOR_LITERAL);
-        assertTrue(JavadocUtils.containsInBranch(node, JavadocTokenTypes.AUTHOR_LITERAL));
+        assertTrue("Should return true when branch contains node passed",
+                JavadocUtils.containsInBranch(node, JavadocTokenTypes.AUTHOR_LITERAL));
     }
 

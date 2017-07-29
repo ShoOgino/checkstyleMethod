@@ -1,8 +1,11 @@
     @Test
     public void testIsValidCheckstyleClass() {
-        assertTrue(ModuleReflectionUtils.isValidCheckstyleClass(ValidCheckstyleClass.class));
-        assertFalse(ModuleReflectionUtils
+        assertTrue("Should return true when valid checkstyle class is passed",
+                ModuleReflectionUtils.isValidCheckstyleClass(ValidCheckstyleClass.class));
+        assertFalse("Should return false when invalid class is passed",
+                ModuleReflectionUtils
                 .isValidCheckstyleClass(InvalidNonAutomaticBeanClass.class));
-        assertFalse(ModuleReflectionUtils.isValidCheckstyleClass(AbstractInvalidClass.class));
+        assertFalse("Should return false when invalid class is passed",
+                ModuleReflectionUtils.isValidCheckstyleClass(AbstractInvalidClass.class));
     }
 

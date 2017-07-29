@@ -16,7 +16,7 @@
         cache.put(myFile, 1);
 
         final String hash = cache.get(PropertyCacheFile.CONFIG_HASH_KEY);
-        assertNotNull(hash);
+        assertNotNull("Config hash key should not be null", hash);
 
         mockStatic(ByteStreams.class);
 
@@ -29,7 +29,9 @@
         resources.add(resource);
         cache.putExternalResources(resources);
 
-        assertFalse(cache.isInCache(myFile, 1));
-        assertFalse(cache.isInCache(resource, 1));
+        assertFalse("Should return false in file is not in cache",
+                cache.isInCache(myFile, 1));
+        assertFalse("Should return false in file is not in cache",
+                cache.isInCache(resource, 1));
     }
 

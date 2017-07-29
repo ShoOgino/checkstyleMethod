@@ -6,7 +6,7 @@
         final Optional<DetailAST> blockComment = TestUtils.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN);
 
-        assertTrue(blockComment.isPresent());
+        assertTrue("Block comment should be present", blockComment.isPresent());
 
         final DetailAST commentContent = blockComment.get().getFirstChild();
         final DetailAST commentEnd = blockComment.get().getLastChild();

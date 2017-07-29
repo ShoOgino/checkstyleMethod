@@ -31,15 +31,18 @@
             };
             for (int type: validTypes) {
                 ast.setType(type);
-                assertTrue(tagInfo.isValidOn(ast));
+                assertTrue("Invalid ast type for current tag: " + ast.getType(),
+                        tagInfo.isValidOn(ast));
             }
 
             astParent.setType(TokenTypes.SLIST);
             ast.setType(TokenTypes.VARIABLE_DEF);
-            assertFalse(tagInfo.isValidOn(ast));
+            assertFalse("Should return false when ast type is invalid for currrent tag",
+                    tagInfo.isValidOn(ast));
 
             ast.setType(TokenTypes.PARAMETER_DEF);
-            assertFalse(tagInfo.isValidOn(ast));
+            assertFalse("Should return false when ast type is invalid for currrent tag",
+                    tagInfo.isValidOn(ast));
         }
     }
 

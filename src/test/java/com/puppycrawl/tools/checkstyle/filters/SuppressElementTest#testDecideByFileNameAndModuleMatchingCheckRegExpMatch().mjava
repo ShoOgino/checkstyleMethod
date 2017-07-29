@@ -4,6 +4,6 @@
                 new LocalizedMessage(10, 10, "", "", null, null, getClass(), null);
         final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
         filter.setChecks(getClass().getCanonicalName());
-        assertFalse(filter.accept(ev));
+        assertFalse("Filter should not accept invalid event", filter.accept(ev));
     }
 

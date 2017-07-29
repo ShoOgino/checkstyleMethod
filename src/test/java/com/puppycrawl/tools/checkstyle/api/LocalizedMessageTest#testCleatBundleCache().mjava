@@ -4,15 +4,15 @@
         LocalizedMessage.setLocale(Locale.ROOT);
         final LocalizedMessage localizedMessage = createSampleLocalizedMessage();
 
-        assertEquals("Empty statement.", localizedMessage.getMessage());
+        assertEquals("Invalid message", "Empty statement.", localizedMessage.getMessage());
 
         final Map<String, ResourceBundle> bundleCache =
                 Whitebox.getInternalState(LocalizedMessage.class, "BUNDLE_CACHE");
 
-        assertEquals(1, bundleCache.size());
+        assertEquals("Invalid bundle cache size", 1, bundleCache.size());
 
         LocalizedMessage.setLocale(Locale.CHINA);
 
-        assertEquals(0, bundleCache.size());
+        assertEquals("Invalid bundle cache size", 0, bundleCache.size());
     }
 

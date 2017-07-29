@@ -1,6 +1,8 @@
     @Test
     public void testIsFileSetModule() {
-        assertTrue(ModuleReflectionUtils.isFileSetModule(FileSetModuleClass.class));
-        assertFalse(ModuleReflectionUtils.isFileSetModule(NotCheckstyleCheck.class));
+        assertTrue("Should return true when valid checkstyle file set module is passed",
+                ModuleReflectionUtils.isFileSetModule(FileSetModuleClass.class));
+        assertFalse("Should return false when invalid class is passed",
+                ModuleReflectionUtils.isFileSetModule(NotCheckstyleCheck.class));
     }
 

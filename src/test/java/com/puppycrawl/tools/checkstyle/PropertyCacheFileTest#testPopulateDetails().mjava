@@ -10,14 +10,15 @@
         cache.load();
 
         final String hash = cache.get(PropertyCacheFile.CONFIG_HASH_KEY);
-        assertNotNull(hash);
-        assertNull(cache.get("key"));
+        assertNotNull("Config hash key should not be null", hash);
+        assertNull("Should return null if key is not in cache", cache.get("key"));
 
         cache.load();
 
-        assertEquals(hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
-        assertEquals("value", cache.get("key"));
-        assertNotNull(cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals("Invalid config hash key", hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals("Invalid cache value", "value", cache.get("key"));
+        assertNotNull("Config hash key should not be null",
+                cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
 
         verifyStatic(times(2));
         Closeables.closeQuietly(any(FileInputStream.class));

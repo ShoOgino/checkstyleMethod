@@ -13,8 +13,10 @@
             }
 
             final String moduleName = module.getSimpleName();
-            assertThat(singleThreadModeSettings.resolveName(moduleName), is(moduleName));
-            assertThat(multiThreadModeSettings.resolveName(moduleName), is(moduleName));
+            assertThat("Invalid name resolved",
+                    singleThreadModeSettings.resolveName(moduleName), is(moduleName));
+            assertThat("Invalid name resolved",
+                    multiThreadModeSettings.resolveName(moduleName), is(moduleName));
         }
     }
 

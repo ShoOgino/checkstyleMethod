@@ -2,6 +2,7 @@
     public void testGetIntFromAccessibleField() throws NoSuchFieldException {
         final Field field = Integer.class.getField("MAX_VALUE");
 
-        assertEquals(Integer.MAX_VALUE, TokenUtils.getIntFromField(field, 0));
+        assertEquals("Invalid getIntFromField result",
+                Integer.MAX_VALUE, TokenUtils.getIntFromField(field, 0));
     }
 

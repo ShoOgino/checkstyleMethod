@@ -1,6 +1,8 @@
     @Test
     public void testIsCheckstyleCheck() {
-        assertTrue(ModuleReflectionUtils.isCheckstyleCheck(CheckClass.class));
-        assertFalse(ModuleReflectionUtils.isCheckstyleCheck(NotCheckstyleCheck.class));
+        assertTrue("Should return true when valid checkstyle check is passed",
+                ModuleReflectionUtils.isCheckstyleCheck(CheckClass.class));
+        assertFalse("Should return false when invalid class is passed",
+                ModuleReflectionUtils.isCheckstyleCheck(NotCheckstyleCheck.class));
     }
 

@@ -21,8 +21,10 @@
             fail("InvocationTargetException is expected");
         }
         catch (InvocationTargetException ex) {
-            assertTrue(ex.getCause().getCause() instanceof NoSuchAlgorithmException);
-            assertEquals("Unable to calculate hashcode.", ex.getCause().getMessage());
+            assertTrue("Invalid exception cause",
+                    ex.getCause().getCause() instanceof NoSuchAlgorithmException);
+            assertEquals("Invalid exception message",
+                    "Unable to calculate hashcode.", ex.getCause().getMessage());
         }
     }
 

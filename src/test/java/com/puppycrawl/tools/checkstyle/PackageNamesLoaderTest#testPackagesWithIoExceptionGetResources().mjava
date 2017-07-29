@@ -10,8 +10,9 @@
             fail("CheckstyleException is expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue(ex.getCause() instanceof IOException);
-            assertEquals("unable to get package file resources", ex.getMessage());
+            assertTrue("Invalid exception cause class", ex.getCause() instanceof IOException);
+            assertEquals("Invalid exception message",
+                    "unable to get package file resources", ex.getMessage());
         }
     }
 

@@ -5,7 +5,7 @@
 
         final Optional<DetailAST> singleLineComment = TestUtils.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.SINGLE_LINE_COMMENT);
-        assertTrue(singleLineComment.isPresent());
+        assertTrue("Single line comment should be present", singleLineComment.isPresent());
 
         final DetailAST commentContent = singleLineComment.get().getFirstChild();
 

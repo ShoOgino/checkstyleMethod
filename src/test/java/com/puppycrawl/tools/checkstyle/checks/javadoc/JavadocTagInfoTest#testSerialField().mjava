@@ -14,16 +14,20 @@
         };
         for (int type: validTypes) {
             ast.setType(type);
-            assertTrue(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+            assertTrue("Invalid ast type for current tag: " + ast.getType(),
+                    JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
         }
 
         astChild2.setText("1111");
-        assertFalse(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+        assertFalse("Should return false when ast type is invalid for currrent tag",
+                JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
 
         astChild2.setType(TokenTypes.LITERAL_VOID);
-        assertFalse(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+        assertFalse("Should return false when ast type is invalid for currrent tag",
+                JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
 
         ast.setType(TokenTypes.LAMBDA);
-        assertFalse(JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
+        assertFalse("Should return false when ast type is invalid for currrent tag",
+                JavadocTagInfo.SERIAL_FIELD.isValidOn(ast));
     }
 

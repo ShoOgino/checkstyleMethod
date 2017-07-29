@@ -13,13 +13,16 @@
         };
         for (int type: validTypes) {
             ast.setType(type);
-            assertTrue(JavadocTagInfo.RETURN.isValidOn(ast));
+            assertTrue("Invalid ast type for current tag: " + ast.getType(),
+                    JavadocTagInfo.RETURN.isValidOn(ast));
         }
 
         astChild2.setType(TokenTypes.LITERAL_VOID);
-        assertFalse(JavadocTagInfo.RETURN.isValidOn(ast));
+        assertFalse("Should return false when ast type is invalid for currrent tag",
+                JavadocTagInfo.RETURN.isValidOn(ast));
 
         ast.setType(TokenTypes.LAMBDA);
-        assertFalse(JavadocTagInfo.RETURN.isValidOn(ast));
+        assertFalse("Should return false when ast type is invalid for currrent tag",
+                JavadocTagInfo.RETURN.isValidOn(ast));
     }
 

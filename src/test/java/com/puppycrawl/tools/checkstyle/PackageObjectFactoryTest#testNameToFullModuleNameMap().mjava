@@ -6,7 +6,7 @@
         final Field field = packageObjectFactoryClass.getDeclaredField("NAME_TO_FULL_MODULE_NAME");
         field.setAccessible(true);
         final Collection<String> canonicalNames = ((Map<String, String>) field.get(null)).values();
-        assertFalse(classes.stream()
+        assertFalse("Invalid canonical name", classes.stream()
                 .anyMatch(clazz -> !canonicalNames.contains(clazz.getCanonicalName())));
     }
 

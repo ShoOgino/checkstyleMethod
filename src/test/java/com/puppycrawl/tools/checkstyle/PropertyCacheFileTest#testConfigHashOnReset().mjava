@@ -7,10 +7,11 @@
         cache.load();
 
         final String hash = cache.get(PropertyCacheFile.CONFIG_HASH_KEY);
-        assertNotNull(hash);
+        assertNotNull("Config hash key should not be null", hash);
 
         cache.reset();
 
-        assertEquals(hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals("Invalid config hash key",
+                hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
     }
 

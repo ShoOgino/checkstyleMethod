@@ -17,13 +17,16 @@
         };
         for (String name: validNames) {
             astChild.setText(name);
-            assertTrue(JavadocTagInfo.SERIAL_DATA.isValidOn(ast));
+            assertTrue("Invalid ast type for current tag: " + ast.getType(),
+                    JavadocTagInfo.SERIAL_DATA.isValidOn(ast));
         }
 
         astChild.setText("1111");
-        assertFalse(JavadocTagInfo.SERIAL_DATA.isValidOn(ast));
+        assertFalse("Should return false when ast type is invalid for currrent tag",
+                JavadocTagInfo.SERIAL_DATA.isValidOn(ast));
 
         ast.setType(TokenTypes.LAMBDA);
-        assertFalse(JavadocTagInfo.SERIAL_DATA.isValidOn(ast));
+        assertFalse("Should return false when ast type is invalid for currrent tag",
+                JavadocTagInfo.SERIAL_DATA.isValidOn(ast));
     }
 

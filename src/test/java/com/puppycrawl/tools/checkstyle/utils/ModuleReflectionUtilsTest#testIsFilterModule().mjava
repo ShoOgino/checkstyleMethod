@@ -1,6 +1,8 @@
     @Test
     public void testIsFilterModule() {
-        assertTrue(ModuleReflectionUtils.isFilterModule(FilterClass.class));
-        assertFalse(ModuleReflectionUtils.isFilterModule(NotCheckstyleCheck.class));
+        assertTrue("Should return true when valid checkstyle filter module is passed",
+                ModuleReflectionUtils.isFilterModule(FilterClass.class));
+        assertFalse("Should return false when invalid class is passed",
+                ModuleReflectionUtils.isFilterModule(NotCheckstyleCheck.class));
     }
 

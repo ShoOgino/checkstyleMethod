@@ -1,8 +1,8 @@
     @Test
     public void testCoverage() {
-        assertEquals(JavadocTagInfo.Type.BLOCK, JavadocTagInfo.VERSION.getType());
+        assertEquals("Invalid type", JavadocTagInfo.Type.BLOCK, JavadocTagInfo.VERSION.getType());
 
-        assertEquals("text [@version] name [version] type [BLOCK]",
+        assertEquals("Invalid toString result", "text [@version] name [version] type [BLOCK]",
             JavadocTagInfo.VERSION.toString());
 
         try {
@@ -10,7 +10,8 @@
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("the name is null", ex.getMessage());
+            assertEquals("Invalid exception message",
+                    "the name is null", ex.getMessage());
         }
 
         try {
@@ -18,7 +19,8 @@
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("the name [myname] is not a valid Javadoc tag name", ex.getMessage());
+            assertEquals("Invalid exception message",
+                    "the name [myname] is not a valid Javadoc tag name", ex.getMessage());
         }
 
         try {
@@ -26,7 +28,7 @@
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("the text is null", ex.getMessage());
+            assertEquals("Invalid exception message", "the text is null", ex.getMessage());
         }
 
         try {
@@ -34,9 +36,11 @@
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("the text [myname] is not a valid Javadoc tag text", ex.getMessage());
+            assertEquals("Invalid exception message",
+                    "the text [myname] is not a valid Javadoc tag text", ex.getMessage());
         }
 
-        assertEquals(JavadocTagInfo.VERSION, JavadocTagInfo.fromText("@version"));
+        assertEquals("Invalid fromText result",
+                JavadocTagInfo.VERSION, JavadocTagInfo.fromText("@version"));
     }
 

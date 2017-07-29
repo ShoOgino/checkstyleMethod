@@ -9,14 +9,16 @@
         cache.put("myFile", 1);
 
         final String hash = cache.get(PropertyCacheFile.CONFIG_HASH_KEY);
-        assertNotNull(hash);
+        assertNotNull("Config hash key should not be null", hash);
 
         // apply new external resource to clear cache
         final Set<String> resources = new HashSet<>();
         resources.add("dummy");
         cache.putExternalResources(resources);
 
-        assertEquals(hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
-        assertFalse(cache.isInCache("myFile", 1));
+        assertEquals("Invalid config hash key",
+                hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertFalse("Should return false in file is not in cache",
+                cache.isInCache("myFile", 1));
     }
 

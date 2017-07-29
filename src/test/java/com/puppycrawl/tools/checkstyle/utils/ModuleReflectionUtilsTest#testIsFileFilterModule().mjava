@@ -1,6 +1,8 @@
     @Test
     public void testIsFileFilterModule() {
-        assertTrue(ModuleReflectionUtils.isFileFilterModule(FileFilterModuleClass.class));
-        assertFalse(ModuleReflectionUtils.isFileFilterModule(NotCheckstyleCheck.class));
+        assertTrue("Should return true when valid checkstyle file filter module is passed",
+                ModuleReflectionUtils.isFileFilterModule(FileFilterModuleClass.class));
+        assertFalse("Should return false when invalid class is passed",
+                ModuleReflectionUtils.isFileFilterModule(NotCheckstyleCheck.class));
     }
 

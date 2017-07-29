@@ -4,14 +4,16 @@
             new PropertyCacheFile(null, "");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("config can not be null", ex.getMessage());
+            assertEquals("Invalid exception message",
+                    "config can not be null", ex.getMessage());
         }
         try {
             final Configuration config = new DefaultConfiguration("myName");
             new PropertyCacheFile(config, null);
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("fileName can not be null", ex.getMessage());
+            assertEquals("Invalid exception message",
+                    "fileName can not be null", ex.getMessage());
         }
     }
 
