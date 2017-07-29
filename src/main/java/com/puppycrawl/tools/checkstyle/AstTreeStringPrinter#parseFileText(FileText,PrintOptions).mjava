@@ -5,12 +5,12 @@
      * @return the root node of the parse tree.
      * @throws CheckstyleException if the file is not a Java source.
      */
-    private static DetailAST parseFileText(FileText text, boolean withComments)
+    private static DetailAST parseFileText(FileText text, PrintOptions withComments)
             throws CheckstyleException {
         final FileContents contents = new FileContents(text);
         final DetailAST result;
         try {
-            if (withComments) {
+            if (withComments == PrintOptions.WITH_COMMENTS) {
                 result = TreeWalker.parseWithComments(contents);
             }
             else {

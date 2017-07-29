@@ -6,7 +6,8 @@
      * @throws Exception if exception occurs during verification.
      */
     protected static void verifyAst(String expectedTextPrintFileName, String actualJavaFileName,
-                                    boolean withComments) throws Exception {
+                                    AstTreeStringPrinter.PrintOptions withComments)
+            throws Exception {
         final String expectedContents = readFile(expectedTextPrintFileName);
 
         final String actualContents = AstTreeStringPrinter.printFileAst(

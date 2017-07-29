@@ -8,7 +8,7 @@
      * @param ignoreFirstLine Test if first line's indentation should be checked or not.
      */
     public void checkIndentation(DetailAST firstNode, DetailAST lastNode, int indentLevel,
-            int startIndent, boolean ignoreFirstLine) {
+            int startIndent, LineWrappingOptions ignoreFirstLine) {
         final NavigableMap<Integer, DetailAST> firstNodesOnLines = collectFirstNodes(firstNode,
                 lastNode);
 
@@ -31,7 +31,7 @@
             }
         }
 
-        if (ignoreFirstLine) {
+        if (ignoreFirstLine == LineWrappingOptions.IGNORE_FIRST_LINE) {
             // First node should be removed because it was already checked before.
             firstNodesOnLines.remove(firstNodesOnLines.firstKey());
         }

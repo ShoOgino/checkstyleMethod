@@ -2,7 +2,8 @@
     public void testParseFileThrowable() throws Exception {
         try {
             AstTreeStringPrinter.printFileAst(
-                new File(getNonCompilablePath("InputAstTreeStringPrinter.java")), false);
+                new File(getNonCompilablePath("InputAstTreeStringPrinter.java")),
+                    AstTreeStringPrinter.PrintOptions.WITHOUT_COMMENTS);
             Assert.fail("exception expected");
         }
         catch (CheckstyleException ex) {

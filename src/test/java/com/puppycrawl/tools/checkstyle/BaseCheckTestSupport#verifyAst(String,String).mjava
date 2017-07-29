@@ -1,6 +1,7 @@
     /**
      * Performs verification of the given text ast tree representation.
-     * This implementation uses {@link BaseCheckTestSupport#verifyAst(String, String, boolean)}
+     * This implementation uses
+     * {@link BaseCheckTestSupport#verifyAst(String, String, AstTreeStringPrinter.PrintOptions)}
      * method inside.
      * @param expectedTextPrintFileName expected text ast tree representation.
      * @param actualJavaFileName actual text ast tree representation.
@@ -8,6 +9,7 @@
      */
     protected static void verifyAst(String expectedTextPrintFileName, String actualJavaFileName)
             throws Exception {
-        verifyAst(expectedTextPrintFileName, actualJavaFileName, false);
+        verifyAst(expectedTextPrintFileName, actualJavaFileName,
+                AstTreeStringPrinter.PrintOptions.WITHOUT_COMMENTS);
     }
 

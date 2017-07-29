@@ -6,12 +6,17 @@
         verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "\r\r");
         verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "\r");
         verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "\u000c\f");
-        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "// \n", true);
-        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "// \r", true);
-        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "// \r\n", true);
-        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "/* \n */", true);
-        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "/* \r\n */", true);
+        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "// \n",
+                AstTreeStringPrinter.PrintOptions.WITH_COMMENTS);
+        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "// \r",
+                AstTreeStringPrinter.PrintOptions.WITH_COMMENTS);
+        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "// \r\n",
+                AstTreeStringPrinter.PrintOptions.WITH_COMMENTS);
+        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "/* \n */",
+                AstTreeStringPrinter.PrintOptions.WITH_COMMENTS);
+        verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "/* \r\n */",
+                AstTreeStringPrinter.PrintOptions.WITH_COMMENTS);
         verifyAstRaw(getPath("InputRegressionEmptyAst.txt"), "/* \r" + "\u0000\u0000" + " */",
-            true);
+                AstTreeStringPrinter.PrintOptions.WITH_COMMENTS);
     }
 
