@@ -2,20 +2,15 @@
     public void testTagsAreClearedEachRun() {
         final SuppressWithNearbyCommentFilter suppressionCommentFilter =
                 new SuppressWithNearbyCommentFilter();
-        final FileContentsHolder fileContentsHolder = new FileContentsHolder();
         final FileContents contents =
                 new FileContents("filename", "//SUPPRESS CHECKSTYLE ignore", "line2");
         contents.reportSingleLineComment(1, 0);
-        fileContentsHolder.setFileContents(contents);
-        fileContentsHolder.beginTree(null);
         final TreeWalkerAuditEvent dummyEvent = new TreeWalkerAuditEvent(contents, "filename",
                 new LocalizedMessage(1, null, null, null, null, Object.class, null));
         suppressionCommentFilter.accept(dummyEvent);
         final FileContents contents2 =
                 new FileContents("filename2", "some line", "//SUPPRESS CHECKSTYLE ignore");
         contents2.reportSingleLineComment(2, 0);
-        fileContentsHolder.setFileContents(contents2);
-        fileContentsHolder.beginTree(null);
         final TreeWalkerAuditEvent dummyEvent2 = new TreeWalkerAuditEvent(contents2, "filename",
                 new LocalizedMessage(1, null, null, null, null, Object.class, null));
         suppressionCommentFilter.accept(dummyEvent2);
