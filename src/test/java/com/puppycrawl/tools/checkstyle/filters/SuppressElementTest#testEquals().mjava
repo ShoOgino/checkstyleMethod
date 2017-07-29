@@ -2,29 +2,30 @@
     public void testEquals() {
         // filterBased is used instead of filter field only to satisfy IntelliJ Idea Inspection
         // Inspection "Arguments to assertEquals() in wrong order "
-        final SuppressElement filterBased = new SuppressElement("Test");
-        filterBased.setChecks("Test");
+        final SuppressElement filterBased =
+                new SuppressElement("Test", "Test", null, null, null);
 
-        final SuppressElement filter2 = new SuppressElement("Test");
-        filter2.setChecks("Test");
+        final SuppressElement filter2 =
+                new SuppressElement("Test", "Test", null, null, null);
         assertEquals("filter, filter2", filterBased, filter2);
-        final SuppressElement filter3 = new SuppressElement("Test");
-        filter3.setChecks("Test3");
+        final SuppressElement filter3 =
+                new SuppressElement("Test", "Test3", null, null, null);
         assertNotEquals("filter, filter3", filterBased, filter3);
-        filterBased.setColumns("1-10");
-        assertNotEquals("filter, filter2", filterBased, filter2);
-        filter2.setColumns("1-10");
-        assertEquals("filter, filter2", filterBased, filter2);
-        filterBased.setColumns(null);
-        assertNotEquals("filter, filter2", filterBased, filter2);
-        filter2.setColumns(null);
-        filterBased.setLines("3,4");
-        assertNotEquals("filter, filter2", filterBased, filter2);
-        filter2.setLines("3,4");
-        assertEquals("filter, filter2", filterBased, filter2);
-        filterBased.setColumns("1-10");
-        assertNotEquals("filter, filter2", filterBased, filter2);
-        filter2.setColumns("1-10");
-        assertEquals("filter, filter2", filterBased, filter2);
+        final SuppressElement filterBased1 =
+                new SuppressElement("Test", "Test", null, null, "1-10");
+
+        assertNotEquals("filter, filter2", filterBased1, filter2);
+        final SuppressElement filter22 =
+                new SuppressElement("Test", "Test", null, null, "1-10");
+        assertEquals("filter, filter2", filterBased1, filter22);
+        assertNotEquals("filter, filter2", filterBased1, filter2);
+        final SuppressElement filterBased2 =
+                new SuppressElement("Test", "Test", null, "3,4", null);
+        assertNotEquals("filter, filter2", filterBased2, filter2);
+        final SuppressElement filter23 =
+                new SuppressElement("Test", "Test", null, "3,4", null);
+        assertEquals("filter, filter2", filterBased2, filter23);
+        assertNotEquals("filter, filter2", filterBased2, filter2);
+        assertEquals("filter, filter2", filterBased2, filter23);
     }
 

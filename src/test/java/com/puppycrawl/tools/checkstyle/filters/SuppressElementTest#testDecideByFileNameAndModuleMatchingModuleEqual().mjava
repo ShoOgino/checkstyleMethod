@@ -3,7 +3,9 @@
         final LocalizedMessage message =
                 new LocalizedMessage(10, 10, "", "", null, "MyModule", getClass(), null);
         final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
-        filter.setModuleId("MyModule");
-        assertFalse("Filter should not accept invalid event", filter.accept(ev));
+        final SuppressElement myFilter =
+                new SuppressElement("Test", "Test", "MyModule", null, null);
+
+        assertFalse("Filter should not accept invalid event", myFilter.accept(ev));
     }
 

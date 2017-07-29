@@ -3,12 +3,15 @@
         final LocalizedMessage message =
             new LocalizedMessage(10, 10, "", "", null, null, getClass(), null);
         final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
+        final SuppressElement filter1 =
+                new SuppressElement("Test", "Test", null, "1-10", null);
+        final SuppressElement filter2 =
+                new SuppressElement("Test", "Test", null, "1-9, 11", null);
+        final SuppressElement filter3 =
+                new SuppressElement("Test", "Test", null, null, null);
         //deny because there are matches on file name, check name, and line
-        filter.setLines("1-10");
-        assertFalse("In range 1-10", filter.accept(ev));
-        filter.setLines("1-9, 11");
-        assertTrue("Not in 1-9, 11", filter.accept(ev));
-        filter.setLines(null);
-        assertFalse("none", filter.accept(ev));
+        assertFalse("In range 1-10", filter1.accept(ev));
+        assertTrue("Not in 1-9, 11", filter2.accept(ev));
+        assertFalse("none", filter3.accept(ev));
     }
 
