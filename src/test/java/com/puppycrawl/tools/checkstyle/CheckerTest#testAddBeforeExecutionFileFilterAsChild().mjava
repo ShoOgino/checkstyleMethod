@@ -14,7 +14,7 @@
             }
         };
         checker.setModuleFactory(factory);
-        checker.setupChild(createCheckConfig(TestBeforeExecutionFileFilter.class));
+        checker.setupChild(createModuleConfig(TestBeforeExecutionFileFilter.class));
         checker.process(Collections.singletonList(new File("dummy.java")));
         assertTrue("Checker.acceptFileStarted() doesn't call listener", fileFilter.wasCalled());
     }

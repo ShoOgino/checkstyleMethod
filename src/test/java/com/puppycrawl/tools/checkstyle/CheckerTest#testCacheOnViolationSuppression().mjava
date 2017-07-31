@@ -2,12 +2,12 @@
     public void testCacheOnViolationSuppression() throws Exception {
         final File cacheFile = temporaryFolder.newFile();
         final DefaultConfiguration violationCheck =
-                createCheckConfig(DummyFileSetViolationCheck.class);
+                createModuleConfig(DummyFileSetViolationCheck.class);
         final DefaultConfiguration defaultConfig = new DefaultConfiguration("defaultConfiguration");
         defaultConfig.addAttribute("cacheFile", cacheFile.getPath());
         defaultConfig.addChild(violationCheck);
 
-        final DefaultConfiguration filterConfig = createCheckConfig(SuppressionFilter.class);
+        final DefaultConfiguration filterConfig = createModuleConfig(SuppressionFilter.class);
         filterConfig.addAttribute("file", getPath("suppress_all.xml"));
         defaultConfig.addChild(filterConfig);
 
