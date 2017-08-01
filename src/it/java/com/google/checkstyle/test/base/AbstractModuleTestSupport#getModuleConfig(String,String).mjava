@@ -1,21 +1,24 @@
     /**
-     * Returns {@link Configuration} instance for the given check name.
+     * Returns {@link Configuration} instance for the given module name.
      * This implementation uses {@link AbstractModuleTestSupport#getConfiguration()} method inside.
-     * @param checkName check name.
-     * @return {@link Configuration} instance for the given check name.
+     * @param moduleName module name.
+     * @return {@link Configuration} instance for the given module name.
      * @throws CheckstyleException if exception occurs during configuration loading.
      */
-    protected static Configuration getCheckConfig(String checkName, String checkId)
+    protected static Configuration getModuleConfig(String moduleName, String moduleId)
             throws CheckstyleException {
         final Configuration result;
-        final List<Configuration> configs = getCheckConfigs(checkName);
+        final List<Configuration> configs = getModuleConfigs(moduleName);
         if (configs.size() == 1) {
             result = configs.get(0);
+        }
+        else if (moduleId == null) {
+            throw new IllegalStateException("multiple instances of the same Module are detected");
         }
         else {
             result = configs.stream().filter(conf -> {
                 try {
-                    return conf.getAttribute("id").equals(checkId);
+                    return conf.getAttribute("id").equals(moduleId);
                 }
                 catch (CheckstyleException ex) {
                     throw new IllegalStateException("problem to get ID attribute from " + conf, ex);
@@ -23,6 +26,7 @@
             })
             .findFirst().orElseGet(null);
         }
+
         return result;
     }
 

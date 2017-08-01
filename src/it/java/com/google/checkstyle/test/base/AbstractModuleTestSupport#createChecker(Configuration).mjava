@@ -1,21 +1,29 @@
     /**
-     * Creates {@link Checker} instance based on specified {@link Configuration}.
-     * @param checkConfig {@link Configuration} instance.
-     * @return {@link Checker} instance.
-     * @throws CheckstyleException if an exception occurs during checker configuration.
+     * Creates {@link Checker} instance based on the given {@link Configuration} instance.
+     * @param moduleConfig {@link Configuration} instance.
+     * @return {@link Checker} instance based on the given {@link Configuration} instance.
+     * @throws Exception if an exception occurs during checker configuration.
      */
-    protected Checker createChecker(Configuration checkConfig)
+    public Checker createChecker(Configuration moduleConfig)
             throws Exception {
-        final DefaultConfiguration dc = createCheckerConfig(checkConfig);
-        final Checker checker = new Checker();
-        // make sure the tests always run with English error messages
-        // so the tests don't fail in supported locales like German
-        final Locale locale = Locale.ENGLISH;
-        checker.setLocaleCountry(locale.getCountry());
-        checker.setLocaleLanguage(locale.getLanguage());
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.configure(dc);
-        checker.addListener(getBriefUtLogger());
-        return checker;
+        if (checkstyleModules == null) {
+            checkstyleModules = CheckUtil.getCheckstyleModules();
+        }
+
+        final String name = moduleConfig.getName();
+        boolean addTreeWalker = false;
+
+        for (Class<?> moduleClass : checkstyleModules) {
+            if (moduleClass.getSimpleName().equals(name)
+                    || moduleClass.getSimpleName().equals(name + "Check")) {
+                if (ModuleReflectionUtils.isCheckstyleCheck(moduleClass)
+                        || ModuleReflectionUtils.isTreeWalkerFilterModule(moduleClass)) {
+                    addTreeWalker = true;
+                }
+                break;
+            }
+        }
+
+        return createChecker(moduleConfig, addTreeWalker);
     }
 
