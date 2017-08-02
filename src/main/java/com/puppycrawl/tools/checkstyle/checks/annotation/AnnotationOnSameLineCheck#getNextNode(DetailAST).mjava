@@ -1,0 +1,13 @@
+    /**
+     * Finds next node of ast tree.
+     * @param node current node
+     * @return node that is next to given
+     */
+    private static DetailAST getNextNode(DetailAST node) {
+        DetailAST nextNode = node.getNextSibling();
+        if (nextNode == null) {
+            nextNode = node.getParent().getNextSibling();
+        }
+        return nextNode;
+    }
+

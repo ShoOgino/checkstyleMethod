@@ -1,0 +1,23 @@
+    @Override
+    public void visitToken(DetailAST ast) {
+        DetailAST nodeWithAnnotations = ast;
+        if (ast.getType() == TokenTypes.TYPECAST) {
+            nodeWithAnnotations = ast.findFirstToken(TokenTypes.TYPE);
+        }
+        DetailAST modifiersNode = nodeWithAnnotations.findFirstToken(TokenTypes.MODIFIERS);
+        if (modifiersNode == null) {
+            modifiersNode = nodeWithAnnotations.findFirstToken(TokenTypes.ANNOTATIONS);
+        }
+        if (modifiersNode != null) {
+            for (DetailAST annotationNode = modifiersNode.getFirstChild();
+                    annotationNode != null;
+                    annotationNode = annotationNode.getNextSibling()) {
+                if (annotationNode.getType() == TokenTypes.ANNOTATION
+                        && annotationNode.getLineNo() != getNextNode(annotationNode).getLineNo()) {
+                    log(annotationNode.getLineNo(), MSG_KEY_ANNOTATION_ON_SAME_LINE,
+                          getAnnotationName(annotationNode));
+                }
+            }
+        }
+    }
+
