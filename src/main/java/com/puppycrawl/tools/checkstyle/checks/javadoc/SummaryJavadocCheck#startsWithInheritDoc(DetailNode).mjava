@@ -1,0 +1,24 @@
+    /**
+     * Checks if the node starts with an {&#64;inheritDoc}.
+     * @param root The root node to examine.
+     * @return {@code true} if the javadoc starts with an {&#64;inheritDoc}.
+     */
+    private static boolean startsWithInheritDoc(DetailNode root) {
+        boolean found = false;
+        final DetailNode[] children = root.getChildren();
+
+        for (int i = 0; !found && i < children.length - 1; i++) {
+            final DetailNode child = children[i];
+            if (child.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG
+                    && child.getChildren()[1].getType() == JavadocTokenTypes.INHERIT_DOC_LITERAL) {
+                found = true;
+            }
+            else if (child.getType() != JavadocTokenTypes.LEADING_ASTERISK
+                    && !CommonUtils.isBlank(child.getText())) {
+                break;
+            }
+        }
+
+        return found;
+    }
+

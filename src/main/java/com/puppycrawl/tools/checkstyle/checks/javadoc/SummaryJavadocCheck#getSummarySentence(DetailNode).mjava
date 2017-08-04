@@ -10,10 +10,6 @@
             if (ALLOWED_TYPES.contains(child.getType())) {
                 result.append(child.getText());
             }
-            else if (child.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG
-                    && getContentOfChild(child).equals(INHERIT_DOC)) {
-                result.append(INHERIT_DOC);
-            }
             else if (child.getType() == JavadocTokenTypes.HTML_ELEMENT
                     && CommonUtils.isBlank(result.toString().trim())) {
                 result.append(getStringInsideTag(result.toString(),
