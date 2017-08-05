@@ -1,0 +1,8 @@
+    @Test
+    public void testIsAuditListener() {
+        assertTrue("Should return true when valid checkstyle AuditListener module is passed",
+                ModuleReflectionUtils.isAuditListener(DefaultLogger.class));
+        assertFalse("Should return false when invalid class is passed",
+                ModuleReflectionUtils.isAuditListener(NotCheckstyleCheck.class));
+    }
+

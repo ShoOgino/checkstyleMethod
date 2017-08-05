@@ -1,0 +1,16 @@
+    /**
+     * Checks if the class has a default constructor.
+     * @param clazz class to check
+     * @return true if the class has a default constructor.
+     */
+    private static boolean hasDefaultConstructor(Class<?> clazz) {
+        boolean result = false;
+        for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+            if (constructor.getParameterCount() == 0) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
