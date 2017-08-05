@@ -4,7 +4,8 @@
      */
     private void checkEnumConstructorModifiers(DetailAST ast) {
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
-        final DetailAST modifier = modifiers.getFirstChild();
+        final DetailAST modifier = getFirstModifierAst(modifiers);
+
         if (modifier != null) {
             log(modifier.getLineNo(), modifier.getColumnNo(),
                     MSG_KEY, modifier.getText());
