@@ -1,9 +1,13 @@
+    // -@cs[CyclomaticComplexity] All logs should be in visit token.
     @Override
     public void visitToken(DetailAST ast) {
         final int type = ast.getType();
         final DetailAST parent = ast.getParent();
 
-        if (type != TokenTypes.ASSIGN
+        if (type == TokenTypes.LAMBDA && isLambdaSingleParameterSurrounded(ast)) {
+            log(ast, MSG_LAMBDA, ast.getText());
+        }
+        else if (type != TokenTypes.ASSIGN
             || parent.getType() != TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR) {
 
             final boolean surrounded = isSurrounded(ast);

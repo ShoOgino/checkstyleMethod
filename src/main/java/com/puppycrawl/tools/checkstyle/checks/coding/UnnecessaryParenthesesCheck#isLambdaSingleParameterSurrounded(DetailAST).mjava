@@ -1,0 +1,16 @@
+    /**
+     * Tests if the given lambda node has a single parameter, no defined type, and is surrounded
+     * by parentheses.
+     * @param ast a {@code DetailAST} whose type is
+     *        {@code TokenTypes.LAMBDA}.
+     * @return {@code true} if the lambda has a single parameter, no defined type, and is
+     *         surrounded by parentheses.
+     */
+    private static boolean isLambdaSingleParameterSurrounded(DetailAST ast) {
+        final DetailAST firstChild = ast.getFirstChild();
+        return firstChild.getType() == TokenTypes.LPAREN
+                && firstChild.getNextSibling().getChildCount(TokenTypes.PARAMETER_DEF) == 1
+                && firstChild.getNextSibling().getFirstChild().findFirstToken(TokenTypes.TYPE)
+                        .getChildCount() == 0;
+    }
+
