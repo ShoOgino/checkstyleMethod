@@ -1,0 +1,16 @@
+    /**
+     * Returns full xpath query for given ast element.
+     * @param ast {@code DetailAST} ast element
+     * @return full xpath query for given ast element
+     */
+    private static String generateXpathQuery(DetailAST ast) {
+        String xpathQuery = getXpathQuery(null, ast);
+        if (!isUniqueAst(ast)) {
+            final DetailAST child = findChildWithIdent(ast);
+            if (child != null) {
+                xpathQuery += "[." + getXpathQuery(ast, child) + ']';
+            }
+        }
+        return xpathQuery;
+    }
+

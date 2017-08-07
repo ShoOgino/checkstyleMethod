@@ -1,0 +1,12 @@
+    /**
+     * Returns list of xpath queries of nodes, matching line and column number.
+     * This approach uses DetailAST traversal. DetailAST means detail abstract syntax tree.
+     * @return list of xpath queries of nodes, matching line and column number
+     */
+    public List<String> generate() {
+        return getMatchingAstElements(rootAst, lineNumber, columnNumber)
+            .stream()
+            .map(XpathQueryGenerator::generateXpathQuery)
+            .collect(Collectors.toList());
+    }
+

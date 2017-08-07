@@ -1,0 +1,13 @@
+    /**
+     * To be sure that generated xpath query will return exactly required ast element, the element
+     * should be checked for uniqueness. If ast element has {@link TokenTypes#IDENT} as the child
+     * or there is no sibling with the same {@code TokenTypes} then element is supposed to be
+     * unique. This method finds if {@code DetailAst} element is unique.
+     * @param ast {@code DetailAST} ast element
+     * @return if {@code DetailAst} element is unique
+     */
+    private static boolean isUniqueAst(DetailAST ast) {
+        return ast.findFirstToken(TokenTypes.IDENT) != null
+            || !hasAtLeastOneSiblingWithSameTokenType(ast);
+    }
+

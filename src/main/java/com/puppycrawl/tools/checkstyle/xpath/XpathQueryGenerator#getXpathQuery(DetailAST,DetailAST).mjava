@@ -1,0 +1,25 @@
+    /**
+     * Returns relative xpath query for given ast element from root.
+     * @param root {@code DetailAST} root element
+     * @param ast {@code DetailAST} ast element
+     * @return relative xpath query for given ast element from root
+     */
+    private static String getXpathQuery(DetailAST root, DetailAST ast) {
+        final StringBuilder resultBuilder = new StringBuilder(1024);
+        DetailAST cur = ast;
+        while (cur != root) {
+            final StringBuilder curNodeQueryBuilder = new StringBuilder(256);
+            curNodeQueryBuilder.append('/')
+                    .append(TokenUtils.getTokenName(cur.getType()));
+            final DetailAST identAst = cur.findFirstToken(TokenTypes.IDENT);
+            if (identAst != null) {
+                curNodeQueryBuilder.append("[@text='")
+                        .append(identAst.getText())
+                        .append("']");
+            }
+            resultBuilder.insert(0, curNodeQueryBuilder);
+            cur = cur.getParent();
+        }
+        return resultBuilder.toString();
+    }
+

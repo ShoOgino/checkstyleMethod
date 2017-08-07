@@ -1,0 +1,14 @@
+    @Test
+    public void testClassDef() {
+        final int lineNumber = 12;
+        final int columnNumber = 0;
+        final XpathQueryGenerator queryGenerator = new XpathQueryGenerator(rootAst, lineNumber,
+                columnNumber);
+        final List<String> actual = queryGenerator.generate();
+        final List<String> expected = Arrays.asList(
+            "/CLASS_DEF[@text='InputXpathQueryGenerator']",
+            "/CLASS_DEF[@text='InputXpathQueryGenerator']/MODIFIERS",
+            "/CLASS_DEF[@text='InputXpathQueryGenerator']/MODIFIERS/LITERAL_PUBLIC");
+        assertEquals("Generated queries do not match expected ones", expected, actual);
+    }
+

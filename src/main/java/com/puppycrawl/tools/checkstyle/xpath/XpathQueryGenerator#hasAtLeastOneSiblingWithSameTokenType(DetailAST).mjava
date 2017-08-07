@@ -1,0 +1,33 @@
+    /**
+     * Checks if the given ast element has unique {@code TokenTypes} among siblings.
+     * @param ast {@code DetailAST} ast element
+     * @return if the given ast element has unique {@code TokenTypes} among siblings
+     */
+    private static boolean hasAtLeastOneSiblingWithSameTokenType(DetailAST ast) {
+        boolean result = false;
+        if (ast.getParent() == null) {
+            DetailAST prev = ast.getPreviousSibling();
+            while (prev != null) {
+                if (prev.getType() == ast.getType()) {
+                    result = true;
+                    break;
+                }
+                prev = prev.getPreviousSibling();
+            }
+            if (!result) {
+                DetailAST next = ast.getNextSibling();
+                while (next != null) {
+                    if (next.getType() == ast.getType()) {
+                        result = true;
+                        break;
+                    }
+                    next = next.getNextSibling();
+                }
+            }
+        }
+        else {
+            result = ast.getParent().getChildCount(ast.getType()) > 1;
+        }
+        return result;
+    }
+
