@@ -6,19 +6,19 @@
      */
     public Checker createChecker(Configuration moduleConfig)
             throws Exception {
-        boolean addTreeWalker = false;
+        ModuleCreationOption moduleCreationOption = ModuleCreationOption.IN_CHECKER;
 
         try {
             final Class<?> moduleClass = Class.forName(moduleConfig.getName());
             if (ModuleReflectionUtils.isCheckstyleCheck(moduleClass)
                     || ModuleReflectionUtils.isTreeWalkerFilterModule(moduleClass)) {
-                addTreeWalker = true;
+                moduleCreationOption = ModuleCreationOption.IN_TREEWALKER;
             }
         }
         catch (ClassNotFoundException ignore) {
             // ignore exception, assume it is not part of TreeWalker
         }
 
-        return createChecker(moduleConfig, addTreeWalker);
+        return createChecker(moduleConfig, moduleCreationOption);
     }
 
