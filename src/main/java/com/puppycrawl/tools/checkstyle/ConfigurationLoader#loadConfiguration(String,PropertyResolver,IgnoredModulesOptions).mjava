@@ -3,18 +3,16 @@
      *
      * @param config location of config file, can be either a URL or a filename
      * @param overridePropsResolver overriding properties
-     * @param omitIgnoredModules {@code true} if modules with severity
-     *            'ignore' should be omitted, {@code false} otherwise
+     * @param ignoredModulesOptions {@code OMIT} if modules with severity
+     *            'ignore' should be omitted, {@code EXECUTE} otherwise
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
-     * @deprecated in order to fullfil demands of BooleanParameter IDEA check.
-     * @noinspection BooleanParameter
      */
-    @Deprecated
     public static Configuration loadConfiguration(String config,
-        PropertyResolver overridePropsResolver, boolean omitIgnoredModules)
+                                                  PropertyResolver overridePropsResolver,
+                                                  IgnoredModulesOptions ignoredModulesOptions)
             throws CheckstyleException {
-        return loadConfiguration(config, overridePropsResolver, omitIgnoredModules,
+        return loadConfiguration(config, overridePropsResolver, ignoredModulesOptions,
                 ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE);
     }
 

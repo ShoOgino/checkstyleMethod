@@ -3,23 +3,21 @@
      *
      * @param config location of config file, can be either a URL or a filename
      * @param overridePropsResolver overriding properties
-     * @param omitIgnoredModules {@code true} if modules with severity
-     *            'ignore' should be omitted, {@code false} otherwise
+     * @param ignoredModulesOptions {@code OMIT} if modules with severity
+     *            'ignore' should be omitted, {@code EXECUTE} otherwise
      * @param threadModeSettings the thread mode configuration
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
-     * @deprecated in order to fullfil demands of BooleanParameter IDEA check.
-     * @noinspection BooleanParameter
      */
-    @Deprecated
     public static Configuration loadConfiguration(String config,
-            PropertyResolver overridePropsResolver,
-            boolean omitIgnoredModules, ThreadModeSettings threadModeSettings)
+                                                  PropertyResolver overridePropsResolver,
+                                                  IgnoredModulesOptions ignoredModulesOptions,
+                                                  ThreadModeSettings threadModeSettings)
             throws CheckstyleException {
         // figure out if this is a File or a URL
         final URI uri = CommonUtils.getUriByFilename(config);
         final InputSource source = new InputSource(uri.toString());
         return loadConfiguration(source, overridePropsResolver,
-                omitIgnoredModules, threadModeSettings);
+                ignoredModulesOptions, threadModeSettings);
     }
 

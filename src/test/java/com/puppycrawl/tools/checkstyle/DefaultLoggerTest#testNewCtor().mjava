@@ -1,0 +1,23 @@
+    @Test
+    public void testNewCtor() throws Exception {
+        final OutputStream infoStream = spy(new ByteArrayOutputStream());
+        final ByteArrayOutputStream errorStream = spy(new ByteArrayOutputStream());
+        final DefaultLogger dl = new DefaultLogger(infoStream,
+                AutomaticBean.OutputStreamOptions.CLOSE, errorStream,
+                AutomaticBean.OutputStreamOptions.CLOSE);
+        dl.addException(new AuditEvent(5000, "myfile"), new IllegalStateException("upsss"));
+        dl.auditFinished(new AuditEvent(6000, "myfile"));
+        final String output = errorStream.toString("UTF-8");
+        final LocalizedMessage addExceptionMessage = new LocalizedMessage(0,
+                Definitions.CHECKSTYLE_BUNDLE, "DefaultLogger.addException",
+                new String[] {"myfile"}, null,
+                getClass(), null);
+
+        verify(infoStream, times(1)).close();
+        verify(errorStream, times(1)).close();
+        assertTrue("Message should contain exception info, but was " + output,
+                output.contains(addExceptionMessage.getMessage()));
+        assertTrue("Message should contain exception info, but was " + output,
+                output.contains("java.lang.IllegalStateException: upsss"));
+    }
+

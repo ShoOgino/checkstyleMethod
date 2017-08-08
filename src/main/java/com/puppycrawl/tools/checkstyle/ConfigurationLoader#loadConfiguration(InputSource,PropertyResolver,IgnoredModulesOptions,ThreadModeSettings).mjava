@@ -5,23 +5,22 @@
      *
      * @param configSource the input stream to the Checkstyle configuration
      * @param overridePropsResolver overriding properties
-     * @param omitIgnoredModules {@code true} if modules with severity
-     *            'ignore' should be omitted, {@code false} otherwise
+     * @param ignoredModulesOptions {@code OMIT} if modules with severity
+     *            'ignore' should be omitted, {@code EXECUTE} otherwise
      * @param threadModeSettings the thread mode configuration
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
-     * @deprecated in order to fullfil demands of BooleanParameter IDEA check.
-     * @noinspection BooleanParameter
      */
-    @Deprecated
     public static Configuration loadConfiguration(InputSource configSource,
-        PropertyResolver overridePropsResolver,
-        boolean omitIgnoredModules, ThreadModeSettings threadModeSettings)
+                                                  PropertyResolver overridePropsResolver,
+                                                  IgnoredModulesOptions ignoredModulesOptions,
+                                                  ThreadModeSettings threadModeSettings)
             throws CheckstyleException {
         try {
+            final boolean omitIgnoreModules = ignoredModulesOptions == IgnoredModulesOptions.OMIT;
             final ConfigurationLoader loader =
-                new ConfigurationLoader(overridePropsResolver,
-                                        omitIgnoredModules, threadModeSettings);
+                    new ConfigurationLoader(overridePropsResolver,
+                            omitIgnoreModules, threadModeSettings);
             loader.parseInputSource(configSource);
             return loader.configuration;
         }

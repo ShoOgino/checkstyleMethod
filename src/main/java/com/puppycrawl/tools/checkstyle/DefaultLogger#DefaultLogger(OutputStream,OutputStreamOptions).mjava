@@ -1,0 +1,10 @@
+    /**
+     * Creates a new {@code DefaultLogger} instance.
+     * @param outputStream where to log infos and errors
+     * @param outputStreamOptions if {@code CLOSE} that should be closed in auditFinished()
+     */
+    public DefaultLogger(OutputStream outputStream, OutputStreamOptions outputStreamOptions) {
+        // no need to close oS twice
+        this(outputStream, outputStreamOptions, outputStream, OutputStreamOptions.NONE);
+    }
+

@@ -10,11 +10,16 @@
             if (toFile == null || !useFile) {
                 defaultLogger = new DefaultLogger(
                     new LogOutputStream(task, Project.MSG_DEBUG),
-                    true, new LogOutputStream(task, Project.MSG_ERR), true);
+                        AutomaticBean.OutputStreamOptions.CLOSE,
+                        new LogOutputStream(task, Project.MSG_ERR),
+                        AutomaticBean.OutputStreamOptions.CLOSE
+                );
             }
             else {
                 final FileOutputStream infoStream = new FileOutputStream(toFile);
-                defaultLogger = new DefaultLogger(infoStream, true, infoStream, false);
+                defaultLogger =
+                        new DefaultLogger(infoStream, AutomaticBean.OutputStreamOptions.CLOSE,
+                                infoStream, AutomaticBean.OutputStreamOptions.NONE);
             }
             return defaultLogger;
         }

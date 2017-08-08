@@ -24,9 +24,18 @@
         final ThreadModeSettings multiThreadModeSettings =
                 new ThreadModeSettings(
                         cliOptions.checkerThreadsNumber, cliOptions.treeWalkerThreadsNumber);
+
+        final ConfigurationLoader.IgnoredModulesOptions ignoredModulesOptions;
+        if (cliOptions.executeIgnoredModules) {
+            ignoredModulesOptions = ConfigurationLoader.IgnoredModulesOptions.EXECUTE;
+        }
+        else {
+            ignoredModulesOptions = ConfigurationLoader.IgnoredModulesOptions.OMIT;
+        }
+
         final Configuration config = ConfigurationLoader.loadConfiguration(
                 cliOptions.configLocation, new PropertiesExpander(props),
-                !cliOptions.executeIgnoredModules, multiThreadModeSettings);
+                ignoredModulesOptions, multiThreadModeSettings);
 
         // create a listener for output
         final AuditListener listener = createListener(cliOptions.format, cliOptions.outputLocation);

@@ -1,0 +1,19 @@
+    @Test
+    public void testMissingPropertyNameInMethodWithBooleanParameter() {
+        try {
+            final String fName = getConfigPath("missing_property_name.xml");
+            ConfigurationLoader.loadConfiguration(fName, new PropertiesExpander(new Properties()),
+                    false);
+
+            fail("missing property name");
+        }
+        catch (CheckstyleException ex) {
+            assertTrue("Invalid exception message: " + ex.getMessage(),
+                    ex.getMessage().contains("\"name\""));
+            assertTrue("Invalid exception message: " + ex.getMessage(),
+                    ex.getMessage().contains("\"property\""));
+            assertTrue("Invalid exception message: " + ex.getMessage(),
+                    ex.getMessage().endsWith(":8:41"));
+        }
+    }
+

@@ -1,6 +1,10 @@
     @Test
     @SuppressWarnings("unchecked")
     public void testPackagesFile() throws Exception {
+        mockStatic(Closeables.class);
+        doNothing().when(Closeables.class);
+        Closeables.closeQuietly(any(InputStream.class));
+
         final Method processFileMethod = PackageNamesLoader.class.getDeclaredMethod("processFile",
                 URL.class, PackageNamesLoader.class);
         processFileMethod.setAccessible(true);
@@ -42,5 +46,8 @@
         final Set<String> checkstylePackagesSet =
                 new HashSet<>(Arrays.asList(expectedPackageNames));
         assertEquals("Invalid names set.", checkstylePackagesSet, actualPackageNames);
+
+        verifyStatic(times(1));
+        Closeables.closeQuietly(any(InputStream.class));
     }
 

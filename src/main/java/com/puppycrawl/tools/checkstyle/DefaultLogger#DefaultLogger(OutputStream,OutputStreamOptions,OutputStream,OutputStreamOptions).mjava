@@ -1,0 +1,15 @@
+    /**
+     * Creates a new {@code DefaultLogger} instance.
+     * @param infoStream the {@code OutputStream} for info messages.
+     * @param infoStreamOptions if {@code CLOSE} info should be closed in auditFinished()
+     * @param errorStream the {@code OutputStream} for error messages.
+     * @param errorStreamOptions if {@code CLOSE} error should be closed in auditFinished()
+     */
+    public DefaultLogger(OutputStream infoStream,
+                         OutputStreamOptions infoStreamOptions,
+                         OutputStream errorStream,
+                         OutputStreamOptions errorStreamOptions) {
+        this(infoStream, infoStreamOptions, errorStream, errorStreamOptions,
+                new AuditEventDefaultFormatter());
+    }
+

@@ -13,14 +13,14 @@
 
         // setup the output stream
         final OutputStream out;
-        final boolean closeOutputStream;
+        final AutomaticBean.OutputStreamOptions closeOutputStream;
         if (outputLocation == null) {
             out = System.out;
-            closeOutputStream = false;
+            closeOutputStream = AutomaticBean.OutputStreamOptions.NONE;
         }
         else {
             out = new FileOutputStream(outputLocation);
-            closeOutputStream = true;
+            closeOutputStream = AutomaticBean.OutputStreamOptions.CLOSE;
         }
 
         // setup a listener
@@ -30,11 +30,12 @@
 
         }
         else if (PLAIN_FORMAT_NAME.equals(format)) {
-            listener = new DefaultLogger(out, closeOutputStream, out, false);
+            listener = new DefaultLogger(out, closeOutputStream, out,
+                    AutomaticBean.OutputStreamOptions.NONE);
 
         }
         else {
-            if (closeOutputStream) {
+            if (closeOutputStream == AutomaticBean.OutputStreamOptions.CLOSE) {
                 CommonUtils.close(out);
             }
             final LocalizedMessage outputFormatExceptionMessage = new LocalizedMessage(0,

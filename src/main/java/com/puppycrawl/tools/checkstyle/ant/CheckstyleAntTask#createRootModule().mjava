@@ -8,9 +8,16 @@
             final Properties props = createOverridingProperties();
             final ThreadModeSettings threadModeSettings =
                     ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE;
-            final Configuration configuration = ConfigurationLoader.loadConfiguration(
-                    config, new PropertiesExpander(props),
-                    !executeIgnoredModules, threadModeSettings);
+            final ConfigurationLoader.IgnoredModulesOptions ignoredModulesOptions;
+            if (executeIgnoredModules) {
+                ignoredModulesOptions = ConfigurationLoader.IgnoredModulesOptions.EXECUTE;
+            }
+            else {
+                ignoredModulesOptions = ConfigurationLoader.IgnoredModulesOptions.OMIT;
+            }
+
+            final Configuration configuration = ConfigurationLoader.loadConfiguration(config,
+                    new PropertiesExpander(props), ignoredModulesOptions, threadModeSettings);
 
             final ClassLoader moduleClassLoader =
                 Checker.class.getClassLoader();
