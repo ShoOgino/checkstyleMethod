@@ -4,7 +4,7 @@
      *
      * @param ast the token being visited
      */
-    protected final void visitTokenHook(DetailAST ast) {
+    private void visitTokenHook(DetailAST ast) {
         if (switchBlockAsSingleDecisionPoint) {
             if (ast.getType() != TokenTypes.LITERAL_CASE) {
                 incrementCurrentValue(BigInteger.ONE);

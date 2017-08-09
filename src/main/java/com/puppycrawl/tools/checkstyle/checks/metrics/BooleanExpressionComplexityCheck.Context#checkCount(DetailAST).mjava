@@ -3,11 +3,11 @@
          * @param ast a node we check now.
          */
         public void checkCount(DetailAST ast) {
-            if (checking && count > getMax()) {
+            if (checking && count > max) {
                 final DetailAST parentAST = ast.getParent();
 
                 log(parentAST.getLineNo(), parentAST.getColumnNo(),
-                    MSG_KEY, count, getMax());
+                    MSG_KEY, count, max);
             }
         }
 
