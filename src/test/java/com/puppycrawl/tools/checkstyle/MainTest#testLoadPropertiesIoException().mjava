@@ -25,8 +25,16 @@
             // We do separate validation for message as in Windows
             // disk drive letter appear in message,
             // so we skip that drive letter for compatibility issues
+            final LocalizedMessage loadPropertiesMessage = new LocalizedMessage(0,
+                    Definitions.CHECKSTYLE_BUNDLE, Main.LOAD_PROPERTIES_EXCEPTION,
+                    new String[] {""}, null, getClass(), null);
+            final String causeMessage = ex.getCause().getLocalizedMessage();
             assertTrue("Invalid error message",
-                    ex.getCause().getLocalizedMessage().contains(":invalid"));
+                    causeMessage.substring(0, causeMessage.lastIndexOf(' '))
+                            .startsWith(loadPropertiesMessage.getMessage()
+                                    .substring(0, causeMessage.lastIndexOf(' '))));
+            assertTrue("Invalid error message",
+                    causeMessage.contains(":invalid"));
         }
     }
 

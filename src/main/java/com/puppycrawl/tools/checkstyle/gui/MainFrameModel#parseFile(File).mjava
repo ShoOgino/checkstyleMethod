@@ -5,7 +5,7 @@
      * @throws IOException if the file could not be read.
      * @throws ANTLRException if the file is not a Java source.
      */
-    public DetailAST parseFile(File file) throws IOException, ANTLRException {
+    private static DetailAST parseFile(File file) throws IOException, ANTLRException {
         final FileText fileText = getFileText(file);
         final FileContents contents = new FileContents(fileText);
         return TreeWalker.parse(contents);
