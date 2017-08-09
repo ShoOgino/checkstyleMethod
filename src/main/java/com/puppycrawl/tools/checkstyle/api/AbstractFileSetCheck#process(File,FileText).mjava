@@ -1,11 +1,11 @@
     @Override
     public final SortedSet<LocalizedMessage> process(File file, FileText fileText)
             throws CheckstyleException {
-        messageCollector.clear();
+        MESSAGE_COLLECTOR.get().clear();
         // Process only what interested in
         if (CommonUtils.matchesFileExtension(file, fileExtensions)) {
             processFiltered(file, fileText);
         }
-        return new TreeSet<>(messageCollector);
+        return new TreeSet<>(MESSAGE_COLLECTOR.get());
     }
 
