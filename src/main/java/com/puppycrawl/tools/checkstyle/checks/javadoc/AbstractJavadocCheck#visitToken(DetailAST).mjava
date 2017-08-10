@@ -2,7 +2,7 @@
     public final void visitToken(DetailAST blockCommentNode) {
         if (JavadocUtils.isJavadocComment(blockCommentNode)) {
             // store as field, to share with child Checks
-            blockCommentAst = blockCommentNode;
+            context.get().blockCommentAst = blockCommentNode;
 
             final String treeCacheKey = blockCommentNode.getLineNo() + ":"
                     + blockCommentNode.getColumnNo();
@@ -13,7 +13,7 @@
                 result = TREE_CACHE.get().get(treeCacheKey);
             }
             else {
-                result = parser.parseJavadocAsDetailNode(blockCommentNode);
+                result = context.get().parser.parseJavadocAsDetailNode(blockCommentNode);
                 TREE_CACHE.get().put(treeCacheKey, result);
             }
 
