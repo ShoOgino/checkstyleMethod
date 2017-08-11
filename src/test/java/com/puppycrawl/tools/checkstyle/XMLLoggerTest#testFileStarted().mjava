@@ -6,7 +6,10 @@
         final AuditEvent ev = new AuditEvent(this, "Test.java");
         logger.fileStarted(ev);
         logger.auditFinished(null);
-        final String[] expectedLines = {"<file name=\"Test.java\">"};
+        final String[] expectedLines = {
+            "<file name=\"Test.java\">",
+            "</file>",
+        };
         verifyLines(expectedLines);
     }
 

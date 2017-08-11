@@ -1,12 +1,15 @@
     @Override
     public void addException(AuditEvent event, Throwable throwable) {
-        final StringWriter stringWriter = new StringWriter();
-        final PrintWriter printer = new PrintWriter(stringWriter);
-        printer.println("<exception>");
-        printer.println("<![CDATA[");
-        throwable.printStackTrace(printer);
-        printer.println("]]>");
-        printer.println("</exception>");
-        writer.println(encode(stringWriter.toString()));
+        final String fileName = event.getFileName();
+        if (fileName == null) {
+            synchronized (writerLock) {
+                writeException(throwable);
+            }
+        }
+        else {
+            final FileMessages messages = fileMessages.computeIfAbsent(
+                    fileName, name -> new FileMessages());
+            messages.addException(throwable);
+        }
     }
 

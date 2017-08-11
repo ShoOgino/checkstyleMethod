@@ -1,0 +1,15 @@
+    /**
+     * Writes the exception event to the print writer.
+     * @param throwable The
+     */
+    private void writeException(Throwable throwable) {
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printer = new PrintWriter(stringWriter);
+        printer.println("<exception>");
+        printer.println("<![CDATA[");
+        throwable.printStackTrace(printer);
+        printer.println("]]>");
+        printer.println("</exception>");
+        writer.println(encode(stringWriter.toString()));
+    }
+

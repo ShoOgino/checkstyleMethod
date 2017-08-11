@@ -1,5 +1,12 @@
     @Override
     public void fileFinished(AuditEvent event) {
-        writer.println("</file>");
+        final String fileName = event.getFileName();
+        final FileMessages messages = fileMessages.get(fileName);
+
+        synchronized (writerLock) {
+            writeFileMessages(fileName, messages);
+        }
+
+        fileMessages.remove(fileName);
     }
 

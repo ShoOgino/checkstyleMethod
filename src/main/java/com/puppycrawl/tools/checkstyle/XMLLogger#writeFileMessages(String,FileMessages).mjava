@@ -1,0 +1,18 @@
+    /**
+     * Prints the file section with all file errors and exceptions.
+     * @param fileName The file name, as should be printed in the opening file tag.
+     * @param messages The file messages.
+     */
+    private void writeFileMessages(String fileName, FileMessages messages) {
+        writeFileOpeningTag(fileName);
+        if (messages != null) {
+            for (AuditEvent errorEvent : messages.getErrors()) {
+                writeFileError(errorEvent);
+            }
+            for (Throwable exception : messages.getExceptions()) {
+                writeException(exception);
+            }
+        }
+        writeFileClosingTag();
+    }
+

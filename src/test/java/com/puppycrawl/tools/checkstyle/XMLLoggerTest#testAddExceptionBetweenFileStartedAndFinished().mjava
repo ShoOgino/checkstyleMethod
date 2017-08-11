@@ -1,18 +1,22 @@
     @Test
-    public void testAddException()
+    public void testAddExceptionBetweenFileStartedAndFinished()
             throws IOException {
         final XMLLogger logger = new XMLLogger(outStream, true);
         logger.auditStarted(null);
         final LocalizedMessage message =
-            new LocalizedMessage(1, 1,
-                "messages.properties", null, null, null, getClass(), null);
+                new LocalizedMessage(1, 1,
+                        "messages.properties", null, null, null, getClass(), null);
+        final AuditEvent fileStartedEvent = new AuditEvent(this, "Test.java");
+        logger.fileStarted(fileStartedEvent);
         final AuditEvent ev = new AuditEvent(this, "Test.java", message);
         logger.addException(ev, new TestException("msg", new RuntimeException("msg")));
+        final AuditEvent fileFinishedEvent = new AuditEvent(this, "Test.java");
+        logger.fileFinished(fileFinishedEvent);
         logger.auditFinished(null);
         final String[] expectedLines = {
             "<file name=\"Test.java\">",
             "&lt;exception&gt;&#10;&lt;![CDATA[&#10;stackTrace&#10;example]]&gt;"
-                + "&#10;&lt;/exception&gt;&#10;",
+                    + "&#10;&lt;/exception&gt;&#10;",
             "</file>",
         };
 
