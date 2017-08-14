@@ -2,9 +2,8 @@
     protected void processFiltered(File file, FileText fileText) {
         // Check if already processed directory
         final File dir = file.getParentFile();
-        if (!directoriesChecked.contains(dir)) {
-            directoriesChecked.add(dir);
-
+        final boolean isDirChecked = !directoriesChecked.add(dir);
+        if (!isDirChecked) {
             // Check for the preferred file.
             final File packageInfo = new File(dir, "package-info.java");
             final File packageHtml = new File(dir, "package.html");
