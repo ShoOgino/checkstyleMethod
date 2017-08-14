@@ -7,7 +7,7 @@
     private boolean isMatchingClassName(String className) {
         final String shortName = className.substring(className.lastIndexOf('.') + 1);
         return illegalClassNames.contains(className)
-                || illegalClassNames.contains(shortName)
+                || illegalShortClassNames.contains(shortName)
                 || validateAbstractClassNames
                     && !legalAbstractClassNames.contains(className)
                     && format.matcher(className).find();
