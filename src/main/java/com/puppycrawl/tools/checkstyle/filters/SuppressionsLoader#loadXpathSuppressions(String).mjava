@@ -1,0 +1,14 @@
+    /**
+     * Returns the suppression {@code TreeWalker} filters in a specified file.
+     * @param filename name of the suppressions file.
+     * @return the set of xpath suppression elements specified in the file.
+     * @throws CheckstyleException if an error occurs.
+     */
+    public static Set<TreeWalkerFilter> loadXpathSuppressions(String filename)
+            throws CheckstyleException {
+        // figure out if this is a File or a URL
+        final URI uri = CommonUtils.getUriByFilename(filename);
+        final InputSource source = new InputSource(uri.toString());
+        return loadXpathSuppressions(source, filename);
+    }
+

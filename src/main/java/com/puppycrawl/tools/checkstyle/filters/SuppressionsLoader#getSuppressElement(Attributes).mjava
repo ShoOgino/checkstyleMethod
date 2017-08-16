@@ -1,0 +1,28 @@
+    /**
+     * Returns the suppress element, initialized from given attributes.
+     * @param attributes the attributes of xml-tag "<suppress></suppress>", specified inside
+     *                   suppression file.
+     * @return the suppress element
+     * @throws SAXException if an error occurs.
+     */
+    private static SuppressElement getSuppressElement(Attributes attributes) throws SAXException {
+        final String checks = attributes.getValue(ATTRIBUTE_NAME_CHECKS);
+        final String modId = attributes.getValue(ATTRIBUTE_NAME_ID);
+        if (checks == null && modId == null) {
+            // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
+            throw new SAXException("missing checks and id attribute");
+        }
+        final SuppressElement suppress;
+        try {
+            final String files = attributes.getValue(ATTRIBUTE_NAME_FILES);
+            final String lines = attributes.getValue(ATTRIBUTE_NAME_LINES);
+            final String columns = attributes.getValue(ATTRIBUTE_NAME_COLUMNS);
+            suppress = new SuppressElement(files, checks, modId, lines, columns);
+        }
+        catch (final PatternSyntaxException ex) {
+            // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
+            throw new SAXException("invalid files or checks format", ex);
+        }
+        return suppress;
+    }
+

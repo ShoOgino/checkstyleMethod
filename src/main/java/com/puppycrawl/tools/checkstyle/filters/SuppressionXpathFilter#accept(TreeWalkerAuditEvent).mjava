@@ -1,0 +1,12 @@
+    @Override
+    public boolean accept(TreeWalkerAuditEvent treeWalkerAuditEvent) {
+        boolean result = true;
+        for (TreeWalkerFilter filter : filters) {
+            if (!filter.accept(treeWalkerAuditEvent)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+

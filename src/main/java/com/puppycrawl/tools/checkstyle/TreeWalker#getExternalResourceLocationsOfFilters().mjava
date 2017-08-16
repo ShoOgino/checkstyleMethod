@@ -1,0 +1,15 @@
+    /**
+     * Returns a set of external configuration resource locations which are used by the filters set.
+     * @return a set of external configuration resource locations which are used by the filters set.
+     */
+    private Set<String> getExternalResourceLocationsOfFilters() {
+        final Set<String> externalConfigurationResources = new HashSet<>();
+        filters.stream().filter(filter -> filter instanceof ExternalResourceHolder)
+                .forEach(filter -> {
+                    final Set<String> checkExternalResources =
+                        ((ExternalResourceHolder) filter).getExternalResourceLocations();
+                    externalConfigurationResources.addAll(checkExternalResources);
+                });
+        return externalConfigurationResources;
+    }
+

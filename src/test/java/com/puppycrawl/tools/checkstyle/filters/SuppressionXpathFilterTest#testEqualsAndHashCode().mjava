@@ -1,0 +1,10 @@
+    @Test
+    public void testEqualsAndHashCode() {
+        EqualsVerifier
+                .forClass(SuppressionXpathFilter.class)
+                .usingGetClass()
+                .withIgnoredFields("file", "optional", "configuration")
+                .suppress(Warning.NONFINAL_FIELDS)
+                .verify();
+    }
+

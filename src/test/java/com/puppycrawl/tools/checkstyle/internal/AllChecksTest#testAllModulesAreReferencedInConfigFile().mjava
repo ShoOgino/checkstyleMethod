@@ -2,6 +2,8 @@
     public void testAllModulesAreReferencedInConfigFile() throws Exception {
         final Set<String> modulesReferencedInConfig = CheckUtil.getConfigCheckStyleModules();
         final Set<String> moduleNames = CheckUtil.getSimpleNames(CheckUtil.getCheckstyleModules());
+        //Issue: https://github.com/checkstyle/checkstyle/issues/4421
+        moduleNames.remove("SuppressionXpathFilter");
 
         moduleNames.stream().filter(check -> !modulesReferencedInConfig.contains(check))
             .forEach(check -> {

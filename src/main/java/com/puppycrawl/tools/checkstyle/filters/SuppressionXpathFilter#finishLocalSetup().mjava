@@ -3,14 +3,14 @@
         if (file != null) {
             if (optional) {
                 if (FilterUtils.isFileExists(file)) {
-                    filters = SuppressionsLoader.loadSuppressions(file);
+                    filters = SuppressionsLoader.loadXpathSuppressions(file);
                 }
                 else {
-                    filters = new FilterSet();
+                    filters = new HashSet<>();
                 }
             }
             else {
-                filters = SuppressionsLoader.loadSuppressions(file);
+                filters = SuppressionsLoader.loadXpathSuppressions(file);
             }
         }
     }

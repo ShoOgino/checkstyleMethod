@@ -1,6 +1,7 @@
     @Test
-    public void testExistingConfigWithTrueOptionalThrowsIoErrorWhileClosing()
-            throws Exception {
+    @PrepareForTest({FilterUtils.class, CommonUtils.class})
+    public void testExceptionOnClosing() throws Exception {
+        final File file = temporaryFolder.newFile("existing.xml");
         final InputStream inputStream = PowerMockito.mock(InputStream.class);
         Mockito.doThrow(IOException.class).when(inputStream).close();
 
@@ -12,14 +13,9 @@
 
         PowerMockito.mockStatic(CommonUtils.class);
 
-        final String fileName = getPath("InputSuppressionFilterNone.xml");
+        final String fileName = file.getPath();
         BDDMockito.given(CommonUtils.getUriByFilename(fileName)).willReturn(uri);
-
-        final boolean optional = true;
-        final SuppressionFilter filter = createSuppressionFilter(fileName, optional);
-        final AuditEvent ev = new AuditEvent(this, "AnyFile.java", null);
-        assertTrue(
-            "Event was not excepted when IOException is thrown while reading suppression file",
-            filter.accept(ev));
+        assertFalse("Should be false, because error on close",
+                FilterUtils.isFileExists(fileName));
     }
 

@@ -1,0 +1,33 @@
+    /**
+     * Parses specified source and returns the suppression loader.
+     * @param source the source for the suppressions.
+     * @param sourceName the name of the source.
+     * @return the suppression loader
+     * @throws CheckstyleException if an error occurs.
+     */
+    private static SuppressionsLoader getSuppressionLoader(InputSource source, String sourceName)
+            throws CheckstyleException {
+        try {
+            final SuppressionsLoader suppressionsLoader =
+                new SuppressionsLoader();
+            suppressionsLoader.parseInputSource(source);
+            return suppressionsLoader;
+        }
+        catch (final FileNotFoundException ex) {
+            throw new CheckstyleException(UNABLE_TO_FIND_ERROR_MESSAGE + sourceName, ex);
+        }
+        catch (final ParserConfigurationException | SAXException ex) {
+            final String message = String.format(Locale.ROOT, "Unable to parse %s - %s",
+                    sourceName, ex.getMessage());
+            throw new CheckstyleException(message, ex);
+        }
+        catch (final IOException ex) {
+            throw new CheckstyleException("Unable to read " + sourceName, ex);
+        }
+        catch (final NumberFormatException ex) {
+            final String message = String.format(Locale.ROOT, "Number format exception %s - %s",
+                    sourceName, ex.getMessage());
+            throw new CheckstyleException(message, ex);
+        }
+    }
+

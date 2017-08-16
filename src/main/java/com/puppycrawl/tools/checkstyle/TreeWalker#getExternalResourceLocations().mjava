@@ -1,11 +1,18 @@
     @Override
     public Set<String> getExternalResourceLocations() {
-        final Set<String> ordinaryChecksResources = getExternalResourceLocations(ordinaryChecks);
-        final Set<String> commentChecksResources = getExternalResourceLocations(commentChecks);
-        final int resultListSize = commentChecksResources.size() + ordinaryChecksResources.size();
+        final Set<String> ordinaryChecksResources =
+                getExternalResourceLocationsOfChecks(ordinaryChecks);
+        final Set<String> commentChecksResources =
+                getExternalResourceLocationsOfChecks(commentChecks);
+        final Set<String> filtersResources =
+                getExternalResourceLocationsOfFilters();
+        final int resultListSize = commentChecksResources.size()
+                + ordinaryChecksResources.size()
+                + filtersResources.size();
         final Set<String> resourceLocations = new HashSet<>(resultListSize);
         resourceLocations.addAll(ordinaryChecksResources);
         resourceLocations.addAll(commentChecksResources);
+        resourceLocations.addAll(filtersResources);
         return resourceLocations;
     }
 

@@ -7,6 +7,8 @@
         // these are documented on non-'config_' pages
         checkstyleModulesNames.remove("TreeWalker");
         checkstyleModulesNames.remove("Checker");
+        //Issue: https://github.com/checkstyle/checkstyle/issues/4421
+        checkstyleModulesNames.remove("SuppressionXpathFilter");
 
         checkstyleModulesNames.stream()
             .filter(moduleName -> !modulesNamesWhichHaveXdocs.contains(moduleName))

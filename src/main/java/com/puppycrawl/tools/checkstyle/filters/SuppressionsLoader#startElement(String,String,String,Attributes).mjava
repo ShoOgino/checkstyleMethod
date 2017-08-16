@@ -6,24 +6,12 @@
             throws SAXException {
         if ("suppress".equals(qName)) {
             //add SuppressElement filter to the filter chain
-            final String checks = attributes.getValue("checks");
-            final String modId = attributes.getValue("id");
-            if (checks == null && modId == null) {
-                // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
-                throw new SAXException("missing checks and id attribute");
-            }
-            final SuppressElement suppress;
-            try {
-                final String files = attributes.getValue("files");
-                final String lines = attributes.getValue("lines");
-                final String columns = attributes.getValue("columns");
-                suppress = new SuppressElement(files, checks, modId, lines, columns);
-            }
-            catch (final PatternSyntaxException ex) {
-                // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
-                throw new SAXException("invalid files or checks format", ex);
-            }
+            final SuppressElement suppress = getSuppressElement(attributes);
             filterChain.addFilter(suppress);
+        }
+        else if ("suppress-xpath".equals(qName)) {
+            final XpathFilter filter = getXpathFilter(attributes);
+            treeWalkerFilters.add(filter);
         }
     }
 
