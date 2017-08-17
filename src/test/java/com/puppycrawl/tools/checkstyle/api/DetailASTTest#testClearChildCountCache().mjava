@@ -5,9 +5,9 @@
         parent.setFirstChild(child);
 
         final List<Consumer<DetailAST>> clearChildCountCacheMethods = Arrays.asList(
-            ast -> child.setNextSibling(ast),
-            ast -> child.addPreviousSibling(ast),
-            ast -> child.addNextSibling(ast)
+                child::setNextSibling,
+                child::addPreviousSibling,
+                child::addNextSibling
         );
 
         for (Consumer<DetailAST> method : clearChildCountCacheMethods) {
