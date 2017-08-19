@@ -10,12 +10,14 @@
          */
         private boolean isEmbeddedIn(String classOrEnumName) {
             FieldFrame currentFrame = this;
+            boolean isEmbeddedIn = false;
             while (currentFrame != null) {
                 if (Objects.equals(currentFrame.frameName, classOrEnumName)) {
-                    return true;
+                    isEmbeddedIn = true;
+                    break;
                 }
                 currentFrame = currentFrame.parent;
             }
-            return false;
+            return isEmbeddedIn;
         }
 
