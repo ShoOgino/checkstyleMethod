@@ -3,6 +3,7 @@
         // the regular expression has to be adjusted to (com\.foo|com\.bar)
         final ImportControl root = new ImportControl("com\\.foo|com\\.bar", true);
         final ImportControl common = new ImportControl(root, "common", false);
+        root.addChild(common);
         assertEquals("Invalid package", root, root.locateFinest("com.foo"));
         assertEquals("Invalid package", common, root.locateFinest("com.foo.common"));
         assertEquals("Invalid package", root, root.locateFinest("com.bar"));
