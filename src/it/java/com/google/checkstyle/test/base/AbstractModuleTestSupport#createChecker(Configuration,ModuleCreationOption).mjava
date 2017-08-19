@@ -1,14 +1,17 @@
     /**
      * Creates {@link Checker} instance based on specified {@link Configuration}.
      * @param moduleConfig {@link Configuration} instance.
+     * @param moduleCreationOption {@code IN_TREEWALKER} if the {@code moduleConfig} should be added
+     *                                                  under {@link TreeWalker}.
      * @return {@link Checker} instance.
      * @throws CheckstyleException if an exception occurs during checker configuration.
      */
-    protected Checker createChecker(Configuration moduleConfig, boolean addTreeWalker)
+    protected Checker createChecker(Configuration moduleConfig,
+                                    ModuleCreationOption moduleCreationOption)
             throws Exception {
         final DefaultConfiguration dc;
 
-        if (addTreeWalker) {
+        if (moduleCreationOption == ModuleCreationOption.IN_TREEWALKER) {
             dc = createTreeWalkerConfig(moduleConfig);
         }
         else {

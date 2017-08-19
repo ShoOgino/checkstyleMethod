@@ -11,19 +11,19 @@
         }
 
         final String name = moduleConfig.getName();
-        boolean addTreeWalker = false;
+        ModuleCreationOption moduleCreationOption = ModuleCreationOption.IN_CHECKER;
 
         for (Class<?> moduleClass : checkstyleModules) {
             if (moduleClass.getSimpleName().equals(name)
                     || moduleClass.getSimpleName().equals(name + "Check")) {
                 if (ModuleReflectionUtils.isCheckstyleCheck(moduleClass)
                         || ModuleReflectionUtils.isTreeWalkerFilterModule(moduleClass)) {
-                    addTreeWalker = true;
+                    moduleCreationOption = ModuleCreationOption.IN_TREEWALKER;
                 }
                 break;
             }
         }
 
-        return createChecker(moduleConfig, addTreeWalker);
+        return createChecker(moduleConfig, moduleCreationOption);
     }
 
