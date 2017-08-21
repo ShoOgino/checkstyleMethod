@@ -10,12 +10,6 @@
 
         final JavadocLexer lexer = new JavadocLexer(input);
 
-        // remove default error listeners
-        lexer.removeErrorListeners();
-
-        // add custom error listener that logs parsing errors
-        lexer.addErrorListener(errorListener);
-
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
 
         final JavadocParser parser = new JavadocParser(tokens);

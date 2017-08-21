@@ -14,10 +14,7 @@
         final String fullText = contents.getText().getFullText().toString();
         final Reader reader = new StringReader(fullText);
         final GeneratedJavaLexer lexer = new GeneratedJavaLexer(reader);
-        lexer.setFilename(contents.getFileName());
         lexer.setCommentListener(contents);
-        lexer.setTreatAssertAsKeyword(true);
-        lexer.setTreatEnumAsKeyword(true);
         lexer.setTokenObjectClass("antlr.CommonHiddenStreamToken");
 
         final TokenStreamHiddenTokenFilter filter =

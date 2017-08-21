@@ -7,14 +7,14 @@
         final JavadocNodeImpl rootJavadocNode = createJavadocNode(parseTreeNode, null, -1);
 
         final int childCount = parseTreeNode.getChildCount();
-        final JavadocNodeImpl[] children = new JavadocNodeImpl[childCount];
+        final DetailNode[] children = rootJavadocNode.getChildren();
 
         for (int i = 0; i < childCount; i++) {
             final JavadocNodeImpl child = createJavadocNode(parseTreeNode.getChild(i),
                     rootJavadocNode, i);
             children[i] = child;
         }
-        rootJavadocNode.setChildren((DetailNode[]) children);
+        rootJavadocNode.setChildren(children);
         return rootJavadocNode;
     }
 

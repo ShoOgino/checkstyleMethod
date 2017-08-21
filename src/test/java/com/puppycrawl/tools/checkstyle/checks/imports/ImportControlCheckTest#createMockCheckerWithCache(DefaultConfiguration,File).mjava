@@ -1,11 +1,11 @@
-    private Checker createMockCheckerWithCache(DefaultConfiguration checkConfig)
-            throws IOException, CheckstyleException {
+    private Checker createMockCheckerWithCache(DefaultConfiguration checkConfig,
+                                               File cacheFile) throws CheckstyleException {
         final DefaultConfiguration treeWalkerConfig = createModuleConfig(TreeWalker.class);
         treeWalkerConfig.addChild(checkConfig);
 
         final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
         checkerConfig.addChild(treeWalkerConfig);
-        checkerConfig.addAttribute("cacheFile", temporaryFolder.newFile().getPath());
+        checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
         final Checker checker = new Checker();
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());

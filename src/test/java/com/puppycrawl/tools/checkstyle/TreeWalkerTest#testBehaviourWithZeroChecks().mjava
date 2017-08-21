@@ -1,4 +1,3 @@
-    @SuppressWarnings("unchecked")
     @Test
     public void testBehaviourWithZeroChecks() throws Exception {
         final TreeWalker treeWalker = new TreeWalker();
@@ -10,8 +9,7 @@
         final FileText fileText = new FileText(file, new ArrayList<>());
 
         treeWalker.processFiltered(file, fileText);
-        final Collection<Checks> checks =
-                (Collection<Checks>) Whitebox.getInternalState(treeWalker, "ordinaryChecks");
+        final Collection<Checks> checks = Whitebox.getInternalState(treeWalker, "ordinaryChecks");
         assertTrue("No checks -> No parsing", checks.isEmpty());
     }
 

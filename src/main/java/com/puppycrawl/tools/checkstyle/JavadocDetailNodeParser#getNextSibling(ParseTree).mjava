@@ -8,15 +8,11 @@
 
         if (node.getParent() != null) {
             final ParseTree parent = node.getParent();
-            final int childCount = parent.getChildCount();
-
             int index = 0;
             while (true) {
                 final ParseTree currentNode = parent.getChild(index);
                 if (currentNode.equals(node)) {
-                    if (index != childCount - 1) {
-                        nextSibling = parent.getChild(index + 1);
-                    }
+                    nextSibling = parent.getChild(index + 1);
                     break;
                 }
                 index++;

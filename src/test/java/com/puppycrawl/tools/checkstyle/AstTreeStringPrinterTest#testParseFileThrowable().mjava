@@ -1,8 +1,8 @@
     @Test
     public void testParseFileThrowable() throws Exception {
+        final File input = new File(getNonCompilablePath("InputAstTreeStringPrinter.java"));
         try {
-            AstTreeStringPrinter.printFileAst(
-                new File(getNonCompilablePath("InputAstTreeStringPrinter.java")),
+            AstTreeStringPrinter.printFileAst(input,
                     AstTreeStringPrinter.PrintOptions.WITHOUT_COMMENTS);
             Assert.fail("exception expected");
         }
@@ -10,7 +10,8 @@
             Assert.assertSame("Invalid class",
                     NoViableAltException.class, ex.getCause().getClass());
             Assert.assertEquals("Invalid exception message",
-                    "unexpected token: classD", ex.getCause().getMessage());
+                    input.getAbsolutePath() + ":1:1: unexpected token: classD",
+                    ex.getCause().toString());
         }
     }
 

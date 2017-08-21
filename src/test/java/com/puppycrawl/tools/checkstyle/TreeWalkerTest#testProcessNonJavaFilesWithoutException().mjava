@@ -1,4 +1,3 @@
-    @SuppressWarnings("unchecked")
     @Test
     public void testProcessNonJavaFilesWithoutException() throws Exception {
         final TreeWalker treeWalker = new TreeWalker();
@@ -7,8 +6,7 @@
         final File file = new File(getPath("InputTreeWalkerNotJava.xml"));
         final FileText fileText = new FileText(file, StandardCharsets.ISO_8859_1.name());
         treeWalker.processFiltered(file, fileText);
-        final Collection<Checks> checks =
-                (Collection<Checks>) Whitebox.getInternalState(treeWalker, "ordinaryChecks");
+        final Collection<Checks> checks = Whitebox.getInternalState(treeWalker, "ordinaryChecks");
         assertTrue("No checks -> No parsing", checks.isEmpty());
     }
 
