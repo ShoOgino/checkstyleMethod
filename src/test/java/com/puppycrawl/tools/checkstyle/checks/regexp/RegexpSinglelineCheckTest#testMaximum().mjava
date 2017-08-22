@@ -1,0 +1,8 @@
+    @Test
+    public void testMaximum() throws Exception {
+        final String illegal = "System\\.(out)|(err)\\.print(ln)?\\(";
+        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("maximum", "1");
+        verify(checkConfig, getPath("InputRegexpSinglelineSemantic.java"), EMPTY);
+    }
+
