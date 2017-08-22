@@ -1,8 +1,12 @@
     @Override
     protected IndentLevel getIndentImpl() {
+        final IndentLevel result;
         if (isIfAfterElse()) {
-            return getParent().getIndent();
+            result = getParent().getIndent();
         }
-        return super.getIndentImpl();
+        else {
+            result = super.getIndentImpl();
+        }
+        return result;
     }
 

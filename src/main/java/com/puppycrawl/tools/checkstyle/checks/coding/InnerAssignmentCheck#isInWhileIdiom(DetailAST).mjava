@@ -12,13 +12,13 @@
      *
      * @param ast assignment AST
      * @return whether the context of the assignment AST indicates the idiom
-     * @noinspection SimplifiableIfStatement
      */
     private static boolean isInWhileIdiom(DetailAST ast) {
-        if (!isComparison(ast.getParent())) {
-            return false;
+        boolean result = false;
+        if (isComparison(ast.getParent())) {
+            result = isInContext(
+                    ast.getParent(), ALLOWED_ASSIGNMENT_IN_COMPARISON_CONTEXT);
         }
-        return isInContext(
-                ast.getParent(), ALLOWED_ASSIGNMENT_IN_COMPARISON_CONTEXT);
+        return result;
     }
 

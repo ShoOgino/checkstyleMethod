@@ -1,8 +1,12 @@
     @Override
     public IndentLevel getSuggestedChildIndent(AbstractExpressionHandler child) {
+        final IndentLevel result;
         if (child instanceof ElseHandler) {
-            return getIndent();
+            result = getIndent();
         }
-        return super.getSuggestedChildIndent(child);
+        else {
+            result = super.getSuggestedChildIndent(child);
+        }
+        return result;
     }
 

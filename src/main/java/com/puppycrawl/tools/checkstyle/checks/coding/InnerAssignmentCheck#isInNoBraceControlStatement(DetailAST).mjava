@@ -28,11 +28,12 @@
      * @return whether ast is in the body of a flow control statement
      */
     private static boolean isInNoBraceControlStatement(DetailAST ast) {
-        if (!isInContext(ast, CONTROL_CONTEXT)) {
-            return false;
+        boolean result = false;
+        if (isInContext(ast, CONTROL_CONTEXT)) {
+            final DetailAST expr = ast.getParent();
+            final AST exprNext = expr.getNextSibling();
+            result = exprNext.getType() == TokenTypes.SEMI;
         }
-        final DetailAST expr = ast.getParent();
-        final AST exprNext = expr.getNextSibling();
-        return exprNext.getType() == TokenTypes.SEMI;
+        return result;
     }
 
