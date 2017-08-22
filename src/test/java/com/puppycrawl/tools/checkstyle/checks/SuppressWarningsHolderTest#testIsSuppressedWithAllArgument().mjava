@@ -1,23 +1,6 @@
     @Test
     public void testIsSuppressedWithAllArgument() throws Exception {
-        final Class<?> entry = Class
-                .forName("com.puppycrawl.tools.checkstyle.checks.SuppressWarningsHolder$Entry");
-        final Constructor<?> entryConstr = entry.getDeclaredConstructor(String.class, int.class,
-                int.class, int.class, int.class);
-        entryConstr.setAccessible(true);
-
-        final Object entryInstance = entryConstr.newInstance("all", 100, 100, 350, 350);
-
-        final List<Object> entriesList = new ArrayList<>();
-        entriesList.add(entryInstance);
-
-        final ThreadLocal<?> threadLocal = mock(ThreadLocal.class);
-        PowerMockito.doReturn(entriesList).when(threadLocal, "get");
-
-        final SuppressWarningsHolder holder = new SuppressWarningsHolder();
-        final Field entries = holder.getClass().getDeclaredField("ENTRIES");
-        entries.setAccessible(true);
-        entries.set(holder, threadLocal);
+        createHolder("all", 100, 100, 350, 350);
 
         final Checker source = new Checker();
         final LocalizedMessage firstMessageForTest =

@@ -1,0 +1,7 @@
+    private static AuditEvent createAuditEvent(String moduleId, int line, int column) {
+        final Checker source = new Checker();
+        final LocalizedMessage message = new LocalizedMessage(line, column, null, null, null,
+                moduleId, MemberNameCheck.class, "message");
+        return new AuditEvent(source, "filename", message);
+    }
+
