@@ -7,12 +7,14 @@
         final DetailAST lastToken = ast.getLastChild().getLastChild();
         int lastTokenLineNo = 0;
         if (lastToken != null) {
-            lastTokenLineNo = lastToken.getLineNo();
+            // -1 as count starts from 0
+            // -2 as last token line cannot be empty, because it is a RCURLY
+            lastTokenLineNo = lastToken.getLineNo() - 2;
         }
         final List<Integer> emptyLines = new ArrayList<>();
         final FileContents fileContents = getFileContents();
 
-        for (int lineNo = ast.getLineNo(); lineNo < lastTokenLineNo; lineNo++) {
+        for (int lineNo = ast.getLineNo(); lineNo <= lastTokenLineNo; lineNo++) {
             if (fileContents.lineIsBlank(lineNo)) {
                 emptyLines.add(lineNo);
             }
