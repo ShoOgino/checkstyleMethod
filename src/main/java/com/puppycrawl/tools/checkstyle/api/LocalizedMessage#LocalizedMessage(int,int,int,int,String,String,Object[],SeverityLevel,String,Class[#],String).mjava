@@ -2,17 +2,23 @@
      * Creates a new {@code LocalizedMessage} instance.
      *
      * @param lineNo line number associated with the message
+     * @param columnNo column number associated with the message
+     * @param columnCharIndex column char index associated with the message
+     * @param tokenType token type of the event associated with the message. See {@link TokenTypes}
      * @param bundle resource bundle name
      * @param key the key to locate the translation
      * @param args arguments for the translation
      * @param severityLevel severity level for the message
      * @param moduleId the id of the module the message is associated with
-     * @param sourceClass the source class for the message
+     * @param sourceClass the Class that is the source of the message
      * @param customMessage optional custom message overriding the default
      * @noinspection ConstructorWithTooManyParameters
      */
     // -@cs[ParameterNumber] Class is immutable, we need that amount of arguments.
     public LocalizedMessage(int lineNo,
+                            int columnNo,
+                            int columnCharIndex,
+                            int tokenType,
                             String bundle,
                             String key,
                             Object[] args,
@@ -20,7 +26,22 @@
                             String moduleId,
                             Class<?> sourceClass,
                             String customMessage) {
-        this(lineNo, 0, bundle, key, args, severityLevel, moduleId,
-                sourceClass, customMessage);
+        this.lineNo = lineNo;
+        this.columnNo = columnNo;
+        this.columnCharIndex = columnCharIndex;
+        this.tokenType = tokenType;
+        this.key = key;
+
+        if (args == null) {
+            this.args = null;
+        }
+        else {
+            this.args = Arrays.copyOf(args, args.length);
+        }
+        this.bundle = bundle;
+        this.severityLevel = severityLevel;
+        this.moduleId = moduleId;
+        this.sourceClass = sourceClass;
+        this.customMessage = customMessage;
     }
 

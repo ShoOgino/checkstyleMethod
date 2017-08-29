@@ -11,6 +11,7 @@
      * @param moduleId the id of the module the message is associated with
      * @param sourceClass the Class that is the source of the message
      * @param customMessage optional custom message overriding the default
+     * @noinspection ConstructorWithTooManyParameters
      */
     // -@cs[ParameterNumber] Class is immutable, we need that amount of arguments.
     public LocalizedMessage(int lineNo,
@@ -23,21 +24,7 @@
                             String moduleId,
                             Class<?> sourceClass,
                             String customMessage) {
-        this.lineNo = lineNo;
-        this.columnNo = columnNo;
-        this.tokenType = tokenType;
-        this.key = key;
-
-        if (args == null) {
-            this.args = null;
-        }
-        else {
-            this.args = Arrays.copyOf(args, args.length);
-        }
-        this.bundle = bundle;
-        this.severityLevel = severityLevel;
-        this.moduleId = moduleId;
-        this.sourceClass = sourceClass;
-        this.customMessage = customMessage;
+        this(lineNo, columnNo, columnNo, tokenType, bundle, key, args, severityLevel, moduleId,
+                sourceClass, customMessage);
     }
 
