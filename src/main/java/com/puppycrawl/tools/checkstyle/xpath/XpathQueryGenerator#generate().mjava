@@ -4,7 +4,7 @@
      * @return list of xpath queries of nodes, matching line and column number
      */
     public List<String> generate() {
-        return getMatchingAstElements(rootAst, lineNumber, columnNumber)
+        return getMatchingAstElements()
             .stream()
             .map(XpathQueryGenerator::generateXpathQuery)
             .collect(Collectors.toList());

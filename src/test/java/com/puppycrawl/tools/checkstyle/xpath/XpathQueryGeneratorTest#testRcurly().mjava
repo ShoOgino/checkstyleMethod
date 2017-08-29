@@ -1,9 +1,9 @@
     @Test
     public void testRcurly() {
         final int lineNumber = 25;
-        final int columnNumber = 4;
+        final int columnNumber = 5;
         final XpathQueryGenerator queryGenerator = new XpathQueryGenerator(rootAst, lineNumber,
-                columnNumber);
+                columnNumber, fileText, DEFAULT_TAB_WIDTH);
         final List<String> actual = queryGenerator.generate();
         final List<String> expected = Collections.singletonList(
             "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK/INSTANCE_INIT"

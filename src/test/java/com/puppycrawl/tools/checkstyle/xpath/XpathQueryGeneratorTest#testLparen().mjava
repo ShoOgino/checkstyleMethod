@@ -1,9 +1,9 @@
     @Test
     public void testLparen() {
         final int lineNumber = 45;
-        final int columnNumber = 30;
+        final int columnNumber = 31;
         final XpathQueryGenerator queryGenerator = new XpathQueryGenerator(rootAst, lineNumber,
-                columnNumber);
+                columnNumber, fileText, DEFAULT_TAB_WIDTH);
         final List<String> actual = queryGenerator.generate();
         final List<String> expected = Collections.singletonList(
             "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK"

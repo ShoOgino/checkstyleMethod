@@ -1,18 +1,12 @@
     /**
      * Returns list of nodes matching defined line and column number.
-     * @param root {@code DetailAST} root ast
-     * @param lineNumber line number
-     * @param columnNumber column number
      * @return list of nodes matching defined line and column number
      */
-    private static List<DetailAST> getMatchingAstElements(DetailAST root, int lineNumber,
-                                                          int columnNumber) {
+    private List<DetailAST> getMatchingAstElements() {
         final List<DetailAST> result = new ArrayList<>();
-        DetailAST curNode = root;
+        DetailAST curNode = rootAst;
         while (curNode != null && curNode.getLineNo() <= lineNumber) {
-            if (curNode.getLineNo() == lineNumber
-                    && curNode.getColumnNo() == columnNumber
-                    && curNode.getType() != TokenTypes.IDENT) {
+            if (isMatchingByLineAndColumnAndNotIdent(curNode)) {
                 result.add(curNode);
             }
             DetailAST toVisit = curNode.getFirstChild();

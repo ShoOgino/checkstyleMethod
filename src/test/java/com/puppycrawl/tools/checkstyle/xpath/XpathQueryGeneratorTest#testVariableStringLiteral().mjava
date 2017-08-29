@@ -1,9 +1,9 @@
     @Test
     public void testVariableStringLiteral() {
         final int lineNumber = 47;
-        final int columnNumber = 25;
+        final int columnNumber = 26;
         final XpathQueryGenerator queryGenerator = new XpathQueryGenerator(rootAst, lineNumber,
-                columnNumber);
+                columnNumber, fileText, DEFAULT_TAB_WIDTH);
         final List<String> actual = queryGenerator.generate();
         final List<String> expected = Arrays.asList(
             "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK"
