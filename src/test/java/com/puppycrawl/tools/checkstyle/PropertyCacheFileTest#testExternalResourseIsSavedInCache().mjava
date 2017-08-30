@@ -21,7 +21,7 @@
             oos.writeObject(input);
         }
         digest.update(out.toByteArray());
-        final String expected = DatatypeConverter.printHexBinary(digest.digest());
+        final String expected = BaseEncoding.base16().upperCase().encode(digest.digest());
 
         assertEquals("Hashes are not equal", expected,
                 cache.get("module-resource*?:" + pathToResource));

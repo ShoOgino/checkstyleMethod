@@ -15,7 +15,7 @@
             final MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.update(outputStream.toByteArray());
 
-            return DatatypeConverter.printHexBinary(digest.digest());
+            return BaseEncoding.base16().upperCase().encode(digest.digest());
         }
         catch (final IOException | NoSuchAlgorithmException ex) {
             // rethrow as unchecked exception
