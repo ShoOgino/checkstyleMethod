@@ -5,7 +5,7 @@
      * @param outputStreamOptions if {@code CLOSE} stream should be closed in auditFinished()
      */
     public XMLLogger(OutputStream outputStream, OutputStreamOptions outputStreamOptions) {
-        setOutputStream(outputStream);
+        writer = new PrintWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
         closeStream = outputStreamOptions == OutputStreamOptions.CLOSE;
     }
 

@@ -8,7 +8,7 @@
      */
     @Deprecated
     public XMLLogger(OutputStream outputStream, boolean closeStream) {
-        setOutputStream(outputStream);
+        writer = new PrintWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
         this.closeStream = closeStream;
     }
 
