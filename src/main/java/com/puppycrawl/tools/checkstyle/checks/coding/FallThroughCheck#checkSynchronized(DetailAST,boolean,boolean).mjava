@@ -1,0 +1,14 @@
+    /**
+     * Checks if a given synchronized block terminated by return, throw or,
+     * if allowed break, continue.
+     * @param synchronizedAst synchronized block to check.
+     * @param useBreak should we consider break as terminator.
+     * @param useContinue should we consider continue as terminator.
+     * @return true if synchronized block is terminated.
+     */
+    private boolean checkSynchronized(final DetailAST synchronizedAst, boolean useBreak,
+                                      boolean useContinue) {
+        return isTerminated(
+            synchronizedAst.findFirstToken(TokenTypes.SLIST), useBreak, useContinue);
+    }
+
