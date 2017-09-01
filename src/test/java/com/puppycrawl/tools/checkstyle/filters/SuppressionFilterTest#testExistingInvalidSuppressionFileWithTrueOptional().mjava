@@ -1,7 +1,6 @@
     @Test
-    public void testExistingInvalidSuppressionFileWithTrueOptional() {
-        final String fileName = "src/test/resources/com/puppycrawl/tools/checkstyle/filters/"
-                + "suppressions_invalid_file.xml";
+    public void testExistingInvalidSuppressionFileWithTrueOptional() throws IOException {
+        final String fileName = getPath("InputSuppressionFilterInvalidFile.xml");
         try {
             final boolean optional = true;
             createSuppressionFilter(fileName, optional);
