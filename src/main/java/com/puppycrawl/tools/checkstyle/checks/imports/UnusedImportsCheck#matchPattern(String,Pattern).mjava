@@ -9,7 +9,7 @@
         final Set<String> references = new HashSet<>();
         final Matcher matcher = pattern.matcher(identifier);
         while (matcher.find()) {
-            references.add(matcher.group(1));
+            references.add(topLevelType(matcher.group(1)));
         }
         return references;
     }
