@@ -1,8 +1,8 @@
     @Test
     public void testLineColumnAfterCopyConstructor() throws IOException {
         final String charsetName = "ISO-8859-1";
-        final FileText fileText = new FileText(new File("src/test/resources/com/puppycrawl/tools/"
-                 + "checkstyle/api/import-control_complete.xml"), charsetName);
+        final FileText fileText = new FileText(new File(getPath("InputFileTextImportControl.xml")),
+                charsetName);
         final FileText copy = new FileText(fileText);
         final LineColumn lineColumn = copy.lineColumn(100);
         assertEquals("Invalid line", 3, lineColumn.getLine());
