@@ -1,9 +1,10 @@
     @Test
-    public void testConfigWithIgnoreUsingInputSource() throws CheckstyleException {
+    public void testConfigWithIgnoreUsingInputSource() throws Exception {
 
         final DefaultConfiguration config =
                 (DefaultConfiguration) ConfigurationLoader.loadConfiguration(new InputSource(
-                        new File(getConfigPath("config_with_ignore.xml")).toURI().toString()),
+                        new File(getPath("InputConfigurationLoaderModuleIgnoreSeverity.xml"))
+                            .toURI().toString()),
                         new PropertiesExpander(new Properties()), true);
 
         final Configuration[] children = config.getChildren();

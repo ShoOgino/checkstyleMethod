@@ -2,7 +2,7 @@
     public void testConstructors() throws Exception {
         final Properties props = new Properties();
         props.setProperty("checkstyle.basedir", "basedir");
-        final String fName = getConfigPath("checkstyle_checks.xml");
+        final String fName = getPath("InputConfigurationLoaderChecks.xml");
 
         final Configuration configuration = ConfigurationLoader.loadConfiguration(fName,
                 new PropertiesExpander(props), ConfigurationLoader.IgnoredModulesOptions.OMIT);
@@ -10,8 +10,8 @@
 
         final DefaultConfiguration configuration1 =
                 (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
-                        new InputSource(
-                                new FileInputStream(getConfigPath("config_with_ignore.xml"))),
+                        new InputSource(new FileInputStream(
+                            getPath("InputConfigurationLoaderModuleIgnoreSeverity.xml"))),
                         new PropertiesExpander(new Properties()),
                         ConfigurationLoader.IgnoredModulesOptions.EXECUTE);
 

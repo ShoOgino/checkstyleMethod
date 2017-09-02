@@ -3,7 +3,7 @@
         try {
             final DefaultConfiguration config =
                     (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
-                            ";config_with_ignore.xml",
+                            ";InputConfigurationLoaderModuleIgnoreSeverity.xml",
                             new PropertiesExpander(new Properties()), true);
 
             final Configuration[] children = config.getChildren();
@@ -12,7 +12,8 @@
         }
         catch (CheckstyleException ex) {
             assertEquals("Invalid exception message",
-                "Unable to find: ;config_with_ignore.xml", ex.getMessage());
+                    "Unable to find: ;InputConfigurationLoaderModuleIgnoreSeverity.xml",
+                    ex.getMessage());
         }
     }
 
