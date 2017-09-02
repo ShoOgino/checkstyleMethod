@@ -1,6 +1,5 @@
-    private static RootNode getRootNode(String fileName) throws Exception {
-        final File file = new File("src/test/resources/com/puppycrawl/tools/"
-                + "checkstyle/xpath/" + fileName);
+    private RootNode getRootNode(String fileName) throws Exception {
+        final File file = new File(getPath(fileName));
         final DetailAST rootAst = TestUtils.parseFile(file);
         return new RootNode(rootAst);
     }
