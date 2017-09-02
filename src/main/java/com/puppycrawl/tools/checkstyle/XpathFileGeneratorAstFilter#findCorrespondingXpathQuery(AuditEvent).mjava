@@ -1,0 +1,22 @@
+    /**
+     * Returns xpath query corresponding to {@code TreeWalkerAuditEvent} object which points to
+     * the same AST element as specified {@code AuditEvent} object.
+     * @param event the {@code AuditEvent} object.
+     * @return returns corresponding xpath query
+     */
+    public static String findCorrespondingXpathQuery(AuditEvent event) {
+        String result = null;
+        for (int i = 0; i < EVENTS.size(); i++) {
+            final TreeWalkerAuditEvent treeWalkerAuditEvent =
+                    EVENTS.get(i);
+            if (event.getSourceName().equals(treeWalkerAuditEvent.getSourceName())
+                    && event.getLine() == treeWalkerAuditEvent.getLine()
+                    && event.getColumn() == treeWalkerAuditEvent.getColumn()
+                    && event.getFileName().endsWith(treeWalkerAuditEvent.getFileName())) {
+                result = QUERIES.get(i);
+                break;
+            }
+        }
+        return result;
+    }
+

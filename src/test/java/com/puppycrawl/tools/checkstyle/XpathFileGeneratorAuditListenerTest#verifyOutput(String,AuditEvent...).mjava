@@ -1,0 +1,15 @@
+    private static void verifyOutput(String expected, AuditEvent... events) {
+        final OutputStream out = new ByteArrayOutputStream();
+        final XpathFileGeneratorAuditListener listener =
+                new XpathFileGeneratorAuditListener(out, AutomaticBean.OutputStreamOptions.CLOSE);
+
+        for (AuditEvent event : events) {
+            listener.addError(event);
+        }
+
+        listener.auditFinished(null);
+
+        final String actual = out.toString();
+        assertEquals("Invalid suppressions file content", expected, actual);
+    }
+

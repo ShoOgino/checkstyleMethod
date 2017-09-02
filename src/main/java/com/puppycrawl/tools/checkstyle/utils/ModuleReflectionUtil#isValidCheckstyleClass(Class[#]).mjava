@@ -7,6 +7,7 @@
     public static boolean isValidCheckstyleClass(Class<?> clazz) {
         return AutomaticBean.class.isAssignableFrom(clazz)
                 && !Modifier.isAbstract(clazz.getModifiers())
-                && hasDefaultConstructor(clazz);
+                && hasDefaultConstructor(clazz)
+                && isNotXpathFileGenerator(clazz);
     }
 

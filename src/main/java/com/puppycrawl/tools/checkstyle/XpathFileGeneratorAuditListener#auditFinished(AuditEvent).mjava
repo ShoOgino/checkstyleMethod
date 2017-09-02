@@ -1,0 +1,13 @@
+    @Override
+    public void auditFinished(AuditEvent event) {
+        if (isXmlHeaderPrinted) {
+            writer.println("</suppressions>");
+        }
+        if (closeStream) {
+            writer.close();
+        }
+        else {
+            writer.flush();
+        }
+    }
+

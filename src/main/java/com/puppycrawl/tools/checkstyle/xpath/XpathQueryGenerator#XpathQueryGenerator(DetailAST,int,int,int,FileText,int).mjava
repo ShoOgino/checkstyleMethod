@@ -4,11 +4,17 @@
      * @param rootAst root ast
      * @param lineNumber line number of the element for which the query should be generated
      * @param columnNumber column number of the element for which the query should be generated
+     * @param tokenType token type of the element for which the query should be generated
      * @param fileText the {@code FileText} object
      * @param tabWidth distance between tab stop position
      */
-    public XpathQueryGenerator(DetailAST rootAst, int lineNumber, int columnNumber,
+    public XpathQueryGenerator(DetailAST rootAst, int lineNumber, int columnNumber, int tokenType,
                                FileText fileText, int tabWidth) {
-        this(rootAst, lineNumber, columnNumber, 0, fileText, tabWidth);
+        this.rootAst = rootAst;
+        this.lineNumber = lineNumber;
+        this.columnNumber = columnNumber;
+        this.tokenType = tokenType;
+        this.fileText = fileText;
+        this.tabWidth = tabWidth;
     }
 

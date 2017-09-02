@@ -1,0 +1,12 @@
+    /**
+     * Creates a new {@code SuppressionFileGenerator} instance.
+     * Sets the output to a defined stream.
+     * @param out the output stream
+     * @param outputStreamOptions if {@code CLOSE} stream should be closed in auditFinished()
+     */
+    public XpathFileGeneratorAuditListener(OutputStream out,
+                                           OutputStreamOptions outputStreamOptions) {
+        writer = new PrintWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
+        closeStream = outputStreamOptions == OutputStreamOptions.CLOSE;
+    }
+

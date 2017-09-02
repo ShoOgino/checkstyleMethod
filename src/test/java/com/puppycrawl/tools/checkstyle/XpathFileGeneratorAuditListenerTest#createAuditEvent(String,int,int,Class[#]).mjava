@@ -1,0 +1,10 @@
+    private AuditEvent createAuditEvent(String fileName, int lineNumber, int columnNumber,
+                                        Class<?> sourceClass) {
+        final LocalizedMessage message =
+                new LocalizedMessage(lineNumber, columnNumber, "messages.properties", null,
+                        null, null, sourceClass, null);
+
+        return new AuditEvent(this,
+                getPath(fileName), message);
+    }
+

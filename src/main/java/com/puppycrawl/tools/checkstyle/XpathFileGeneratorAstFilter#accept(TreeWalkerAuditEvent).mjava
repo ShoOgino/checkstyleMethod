@@ -1,0 +1,15 @@
+    @Override
+    public boolean accept(TreeWalkerAuditEvent event) {
+        if (event.getTokenType() != 0) {
+            final XpathQueryGenerator xpathQueryGenerator =
+                    new XpathQueryGenerator(event, tabWidth);
+            final List<String> xpathQueries = xpathQueryGenerator.generate();
+            if (!xpathQueries.isEmpty()) {
+                final String query = xpathQueries.stream().collect(Collectors.joining(DELIMITER));
+                EVENTS.add(event);
+                QUERIES.add(query);
+            }
+        }
+        return true;
+    }
+

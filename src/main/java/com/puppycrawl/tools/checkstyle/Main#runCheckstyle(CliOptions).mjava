@@ -37,15 +37,33 @@
                 cliOptions.configLocation, new PropertiesExpander(props),
                 ignoredModulesOptions, multiThreadModeSettings);
 
-        // create a listener for output
-        final AuditListener listener = createListener(cliOptions.format, cliOptions.outputLocation);
-
         // create RootModule object and run it
         final int errorCounter;
         final ClassLoader moduleClassLoader = Checker.class.getClassLoader();
         final RootModule rootModule = getRootModule(config.getName(), moduleClassLoader);
 
         try {
+            final AuditListener listener;
+            if (cliOptions.generateXpathSuppressionsFile) {
+                // create filter to print generated xpath suppressions file
+                final Configuration treeWalkerConfig = getTreeWalkerConfig(config);
+                if (treeWalkerConfig != null) {
+                    final DefaultConfiguration moduleConfig =
+                            new DefaultConfiguration(
+                                    XpathFileGeneratorAstFilter.class.getName());
+                    moduleConfig.addAttribute(OPTION_TAB_WIDTH_NAME,
+                            Integer.toString(cliOptions.tabWidth));
+                    ((DefaultConfiguration) treeWalkerConfig).addChild(moduleConfig);
+                }
+
+                listener = new XpathFileGeneratorAuditListener(System.out,
+                        AutomaticBean.OutputStreamOptions.NONE);
+            }
+            else {
+                listener = createListener(cliOptions.format,
+                        cliOptions.outputLocation);
+            }
+
             rootModule.setModuleClassLoader(moduleClassLoader);
             rootModule.configure(config);
             rootModule.addListener(listener);
