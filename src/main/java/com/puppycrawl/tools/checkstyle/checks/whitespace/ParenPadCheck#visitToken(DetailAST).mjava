@@ -21,6 +21,9 @@
             case TokenTypes.LAMBDA:
                 visitTokenWithOptionalParentheses(ast);
                 break;
+            case TokenTypes.RESOURCE_SPECIFICATION:
+                visitResourceSpecification(ast);
+                break;
             default:
                 processLeft(ast.findFirstToken(TokenTypes.LPAREN));
                 processRight(ast.findFirstToken(TokenTypes.RPAREN));
