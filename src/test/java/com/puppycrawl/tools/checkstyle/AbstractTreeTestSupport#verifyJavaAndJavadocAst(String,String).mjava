@@ -11,7 +11,7 @@
         final String expectedContents = readFile(expectedTextPrintFilename);
 
         final String actualContents = AstTreeStringPrinter.printJavaAndJavadocTree(
-                new File(actualJavaFilename)).replaceAll(CLRF_REGEX, LF_REGEX);
+                new File(actualJavaFilename)).replaceAll(CRLF_REGEX, LF_REGEX);
 
         assertEquals("Generated AST from the java file should match the pre-defined AST",
                 expectedContents, actualContents);

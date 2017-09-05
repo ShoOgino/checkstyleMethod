@@ -11,7 +11,7 @@
         final String expectedContents = readFile(expectedTextPrintFilename);
 
         final String actualContents = DetailNodeTreeStringPrinter.printFileAst(
-                new File(actualJavadocFilename)).replaceAll(CLRF_REGEX, LF_REGEX);
+                new File(actualJavadocFilename)).replaceAll(CRLF_REGEX, LF_REGEX);
 
         assertEquals("Generated tree from the javadoc file should match the pre-defined tree",
                 expectedContents, actualContents);
