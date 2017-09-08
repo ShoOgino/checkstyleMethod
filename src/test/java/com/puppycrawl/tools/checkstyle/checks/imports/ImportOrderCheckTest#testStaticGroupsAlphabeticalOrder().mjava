@@ -5,7 +5,11 @@
         checkConfig.addAttribute("option", "top");
         checkConfig.addAttribute("groups", "org, java");
         checkConfig.addAttribute("sortStaticImportsAlphabetically", "true");
-        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        final String[] expected = {
+            "6: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "org.*"),
+            "8: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.util.Set"),
+        };
+
         verify(checkConfig, getPath("InputImportOrderStaticGroupOrder.java"), expected);
     }
 

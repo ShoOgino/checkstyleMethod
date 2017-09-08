@@ -5,8 +5,8 @@
      * @param line the line of the current import.
      * @return true if imports group are separated internally.
      */
-    private boolean checkSeparatorInGroup(int groupIdx, boolean isStatic, int line) {
-        return !beforeFirstImport && separated && groupIdx == lastGroup
-                && isStatic == lastImportStatic && line - lastImportLine > 1;
+    private boolean isSeparatorInGroup(int groupIdx, boolean isStatic, int line) {
+        final boolean inSameGroup = isInSameGroup(groupIdx, isStatic);
+        return (!separated || inSameGroup) && isSeparatorBeforeImport(line);
     }
 
