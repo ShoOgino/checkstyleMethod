@@ -1,0 +1,49 @@
+    @Test
+    public void testLogOutput() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(TranslationCheck.class);
+        checkConfig.addAttribute("requiredTranslations", "ja,de");
+        checkConfig.addAttribute("baseName", "^InputTranslation.*$");
+        final Checker checker = createChecker(checkConfig);
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final XMLLogger logger = new XMLLogger(out, AutomaticBean.OutputStreamOptions.NONE);
+        checker.addListener(logger);
+
+        final String defaultProps = getPath("InputTranslationCheckFireErrors.properties");
+        final String translationProps = getPath("InputTranslationCheckFireErrors_de.properties");
+
+        final File[] propertyFiles = {
+            new File(defaultProps),
+            new File(translationProps),
+        };
+
+        final String line = "0: ";
+        final String firstErrorMessage = getCheckMessage(MSG_KEY_MISSING_TRANSLATION_FILE,
+                "InputTranslationCheckFireErrors_ja.properties");
+        final String secondErrorMessage = getCheckMessage(MSG_KEY, "anotherKey");
+
+        verify(checker, propertyFiles, ImmutableMap.of(
+            getPath(""), Collections.singletonList(line + firstErrorMessage),
+            translationProps, Collections.singletonList(line + secondErrorMessage)));
+
+        final String osName = System.getProperty("os.name").toLowerCase(ENGLISH);
+        String expectedLogOutput;
+
+        // till https://github.com/checkstyle/checkstyle/issues/5103
+        if (osName.startsWith("windows")) {
+            expectedLogOutput = readFile("OutputTranslationCheckWindows.xml");
+        }
+        else if (osName.startsWith("linux")) {
+            expectedLogOutput = readFile("OutputTranslationCheckLinux.xml");
+        }
+        else {
+            expectedLogOutput = readFile("OutputTranslationCheckMacOS.xml");
+        }
+
+        expectedLogOutput = expectedLogOutput.replace("path_to_file", getPackageAbsolutePath());
+        expectedLogOutput = String.format(Locale.getDefault(), expectedLogOutput,
+                firstErrorMessage, secondErrorMessage).replace("'", "&apos;");
+
+        assertEquals("Unexpected log output", expectedLogOutput,
+            out.toString(StandardCharsets.UTF_8.name()));
+    }
+

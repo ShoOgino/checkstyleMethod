@@ -1,0 +1,30 @@
+    /**
+     * Pitest requires all closes of streams and readers to be verified. Using PowerMock
+     * is almost only posibility to check it without rewriting production code.
+     *
+     * @throws Exception when code tested throws some exception
+     */
+    @Test
+    public void testResourcesAreClosed() throws Exception {
+        mockStatic(Closeables.class);
+        doNothing().when(Closeables.class);
+        Closeables.closeQuietly(any(InputStream.class));
+
+        final DefaultConfiguration checkConfig = createModuleConfig(TranslationCheck.class);
+        checkConfig.addAttribute("requiredTranslations", "es");
+
+        final File[] propertyFiles = {
+            new File(getPath("messages_home.properties")),
+            new File(getPath("messages_home_es_US.properties")),
+            };
+
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verify(
+            createChecker(checkConfig),
+            propertyFiles,
+            getPath(""),
+            expected);
+        verifyStatic(times(2));
+        Closeables.closeQuietly(any(FileInputStream.class));
+    }
+
