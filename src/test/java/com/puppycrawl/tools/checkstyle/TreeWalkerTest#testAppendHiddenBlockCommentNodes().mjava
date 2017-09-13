@@ -1,9 +1,9 @@
     @Test
     public void testAppendHiddenBlockCommentNodes() throws Exception {
         final DetailAST root =
-            TestUtils.parseFile(new File(getPath("InputTreeWalkerHiddenComments.java")));
+            TestUtil.parseFile(new File(getPath("InputTreeWalkerHiddenComments.java")));
 
-        final Optional<DetailAST> blockComment = TestUtils.findTokenInAstByPredicate(root,
+        final Optional<DetailAST> blockComment = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN);
 
         assertTrue("Block comment should be present", blockComment.isPresent());

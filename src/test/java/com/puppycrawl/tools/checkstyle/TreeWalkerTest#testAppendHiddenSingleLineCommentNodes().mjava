@@ -1,9 +1,9 @@
     @Test
     public void testAppendHiddenSingleLineCommentNodes() throws Exception {
         final DetailAST root =
-            TestUtils.parseFile(new File(getPath("InputTreeWalkerHiddenComments.java")));
+            TestUtil.parseFile(new File(getPath("InputTreeWalkerHiddenComments.java")));
 
-        final Optional<DetailAST> singleLineComment = TestUtils.findTokenInAstByPredicate(root,
+        final Optional<DetailAST> singleLineComment = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.SINGLE_LINE_COMMENT);
         assertTrue("Single line comment should be present", singleLineComment.isPresent());
 
