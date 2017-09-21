@@ -1,0 +1,16 @@
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testStatefulFieldsClearedOnBeginTree2() throws Exception {
+        final DetailAST ast = new DetailAST();
+        ast.setType(TokenTypes.LITERAL_RETURN);
+        ast.setLineNo(5);
+        final DetailAST child = new DetailAST();
+        child.setType(TokenTypes.SEMI);
+        ast.addChild(child);
+
+        final NPathComplexityCheck check = new NPathComplexityCheck();
+        Assert.assertTrue("Stateful field is not cleared after beginTree",
+            TestUtils.isStatefulFieldClearedDuringBeginTree(check, ast, "isAfterValues",
+                isAfterValues -> ((Collection<Context>) isAfterValues).isEmpty()));
+    }
+
