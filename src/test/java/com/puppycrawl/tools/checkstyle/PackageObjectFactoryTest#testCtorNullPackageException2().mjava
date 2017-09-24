@@ -2,8 +2,8 @@
     public void testCtorNullPackageException2() {
         final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try {
-            new PackageObjectFactory((String) null, classLoader);
-            fail("Exception is expected");
+            final Object test = new PackageObjectFactory((String) null, classLoader);
+            fail("Exception is expected but got " + test);
         }
         catch (IllegalArgumentException ex) {
             assertEquals("Invalid exception message", NULL_PACKAGE_MESSAGE, ex.getMessage());

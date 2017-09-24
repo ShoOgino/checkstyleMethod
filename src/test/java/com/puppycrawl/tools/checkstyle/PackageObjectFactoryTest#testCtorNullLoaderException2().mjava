@@ -1,8 +1,8 @@
     @Test
     public void testCtorNullLoaderException2() {
         try {
-            new PackageObjectFactory("test", null);
-            fail("Exception is expected");
+            final Object test = new PackageObjectFactory("test", null);
+            fail("Exception is expected but got " + test);
         }
         catch (IllegalArgumentException ex) {
             assertEquals("Invalid exception message", NULL_LOADER_MESSAGE, ex.getMessage());
