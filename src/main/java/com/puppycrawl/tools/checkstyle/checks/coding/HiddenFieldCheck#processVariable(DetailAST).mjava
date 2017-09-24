@@ -13,8 +13,7 @@
             final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             final String name = nameAST.getText();
 
-            if ((isStaticFieldHiddenFromAnonymousClass(ast, name)
-                        || isStaticOrInstanceField(ast, name))
+            if ((frame.containsStaticField(name) || isInstanceField(ast, name))
                     && !isMatchingRegexp(name)
                     && !isIgnoredParam(ast, name)) {
                 log(nameAST, MSG_KEY, name);

@@ -1,0 +1,23 @@
+    /**
+     * We cannot reproduce situation when visitToken is called and leaveToken is not.
+     * So, we have to use reflection to be sure that even in such situation
+     * state of the field will be cleared.
+     *
+     * @throws Exception when code tested throws exception
+     */
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testClearState() throws Exception {
+        final ModifiedControlVariableCheck check = new ModifiedControlVariableCheck();
+        final Optional<DetailAST> methodDef = TestUtils.findTokenInAstByPredicate(
+            TestUtils.parseFile(new File(
+                getPath("InputModifiedControlVariableEnhancedForLoopVariable.java"))),
+            ast -> ast.getType() == TokenTypes.OBJBLOCK);
+
+        assertTrue("Ast should contain METHOD_DEF", methodDef.isPresent());
+        assertTrue("State is not cleared on beginTree",
+            TestUtils.isStatefulFieldClearedDuringBeginTree(check, methodDef.get(),
+                "variableStack",
+                variableStack -> ((Collection<Set<String>>) variableStack).isEmpty()));
+    }
+

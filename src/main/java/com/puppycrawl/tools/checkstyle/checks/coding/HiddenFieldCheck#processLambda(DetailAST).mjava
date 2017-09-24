@@ -9,7 +9,8 @@
         final DetailAST firstChild = ast.getFirstChild();
         if (firstChild.getType() == TokenTypes.IDENT) {
             final String untypedLambdaParameterName = firstChild.getText();
-            if (isStaticOrInstanceField(firstChild, untypedLambdaParameterName)) {
+            if (frame.containsStaticField(untypedLambdaParameterName)
+                || isInstanceField(firstChild, untypedLambdaParameterName)) {
                 log(firstChild, MSG_KEY, untypedLambdaParameterName);
             }
         }
