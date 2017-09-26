@@ -8,7 +8,20 @@
         icRoot.addImportRule(
             new PkgImportRule(true, false, "org.apache.commons", false, false));
 
+        icRootRegexpChild.addChild(icCommonRegexpChild);
+        icRootRegexpChild.addImportRule(
+            new PkgImportRule(false, false, ".*\\.(spring|lui)framework", false, true));
+        icRootRegexpChild.addImportRule(
+            new PkgImportRule(false, false, "org\\.hibernate", false, true));
+        icRootRegexpChild.addImportRule(
+            new PkgImportRule(true, false, "org\\.(apache|lui)\\.commons", false, true));
+
         icCommon.addImportRule(
             new PkgImportRule(true, false, "org.hibernate", false, false));
+
+        icCommonRegexpChild.addImportRule(
+            new PkgImportRule(true, false, "org\\.h.*", false, true));
+
+        icRootRegexpParent.addChild(icCommonRegexpParen);
     }
 
