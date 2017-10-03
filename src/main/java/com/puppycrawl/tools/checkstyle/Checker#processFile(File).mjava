@@ -14,7 +14,7 @@
             }
         }
         catch (final IOException ioe) {
-            LOG.debug("IOException occurred.", ioe);
+            log.debug("IOException occurred.", ioe);
             fileMessages.add(new LocalizedMessage(0,
                     Definitions.CHECKSTYLE_BUNDLE, EXCEPTION_MSG,
                     new String[] {ioe.getMessage()}, null, getClass(), null));
@@ -25,7 +25,7 @@
                 throw ex;
             }
 
-            LOG.debug("Exception occurred.", ex);
+            log.debug("Exception occurred.", ex);
 
             final StringWriter sw = new StringWriter();
             final PrintWriter pw = new PrintWriter(sw, true);
