@@ -1,0 +1,16 @@
+    protected static void verifyXml(String expectedOutputFile,
+            ByteArrayOutputStream actualOutputStream,
+            BiPredicate<Node, Node> ordered, String... messages) throws Exception {
+        String expectedContents = readFile(expectedOutputFile);
+
+        for (int i = 0; i < messages.length; i++) {
+            expectedContents = expectedContents.replace("$" + i, messages[i]);
+        }
+
+        final Document expectedDocument = XmlUtil.getRawXml("audit output", expectedContents,
+                expectedContents);
+        final Document actualDocument = getOutputStreamXml(actualOutputStream);
+
+        verifyXmlNode(expectedDocument, actualDocument, "/", ordered);
+    }
+

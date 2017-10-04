@@ -1,5 +1,5 @@
     @Test
-    public void testAddErrorModuleId() throws IOException {
+    public void testAddErrorModuleId() throws Exception {
         final XMLLogger logger = new XMLLogger(outStream, true);
         logger.auditStarted(null);
         final LocalizedMessage message =
@@ -9,12 +9,6 @@
         final AuditEvent ev = new AuditEvent(this, "Test.java", message);
         logger.addError(ev);
         logger.auditFinished(null);
-        final String[] expectedLines = {
-            "<file name=\"Test.java\">",
-            "<error line=\"1\" column=\"1\" severity=\"error\" message=\"key\""
-                + " source=\"module\"/>",
-            "</file>",
-        };
-        verifyLines(expectedLines);
+        verifyXml(getPath("ExpectedXMLLoggerErrorModuleId.xml"), outStream, message.getMessage());
     }
 

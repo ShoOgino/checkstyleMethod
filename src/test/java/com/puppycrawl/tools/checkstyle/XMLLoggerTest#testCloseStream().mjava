@@ -1,6 +1,6 @@
     @Test
     public void testCloseStream()
-            throws IOException {
+            throws Exception {
         final XMLLogger logger = new XMLLogger(outStream,
                 AutomaticBean.OutputStreamOptions.CLOSE);
         logger.auditStarted(null);
@@ -8,7 +8,6 @@
 
         assertEquals("Invalid close count", 1, outStream.getCloseCount());
 
-        final String[] expectedLines = CommonUtils.EMPTY_STRING_ARRAY;
-        verifyLines(expectedLines);
+        verifyXml(getPath("ExpectedXMLLoggerEmpty.xml"), outStream);
     }
 

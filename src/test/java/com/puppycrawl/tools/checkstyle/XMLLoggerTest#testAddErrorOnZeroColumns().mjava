@@ -1,5 +1,5 @@
     @Test
-    public void testAddErrorOnZeroColumns() throws IOException {
+    public void testAddErrorOnZeroColumns() throws Exception {
         final XMLLogger logger = new XMLLogger(outStream, true);
         logger.auditStarted(null);
         final LocalizedMessage message =
@@ -9,12 +9,7 @@
         final AuditEvent ev = new AuditEvent(this, "Test.java", message);
         logger.addError(ev);
         logger.auditFinished(null);
-        final String[] expectedLines = {
-            "<file name=\"Test.java\">",
-            "<error line=\"1\" severity=\"error\" message=\"key\""
-                + " source=\"com.puppycrawl.tools.checkstyle.XMLLoggerTest\"/>",
-            "</file>",
-        };
-        verifyLines(expectedLines);
+        verifyXml(getPath("ExpectedXMLLoggerErrorZeroColumn.xml"), outStream,
+                message.getMessage());
     }
 

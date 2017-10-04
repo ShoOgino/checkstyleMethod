@@ -1,5 +1,5 @@
     @Test
-    public void testAddIgnored() throws IOException {
+    public void testAddIgnored() throws Exception {
         final XMLLogger logger = new XMLLogger(outStream, true);
         logger.auditStarted(null);
         final LocalizedMessage message =
@@ -9,7 +9,6 @@
         final AuditEvent ev = new AuditEvent(this, "Test.java", message);
         logger.addError(ev);
         logger.auditFinished(null);
-        final String[] expectedLines = CommonUtils.EMPTY_STRING_ARRAY;
-        verifyLines(expectedLines);
+        verifyXml(getPath("ExpectedXMLLoggerEmpty.xml"), outStream);
     }
 

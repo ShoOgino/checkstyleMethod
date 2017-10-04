@@ -1,5 +1,5 @@
     @Test
-    public void testAddErrorWithNullFileName() throws IOException {
+    public void testAddErrorWithNullFileName() throws Exception {
         final XMLLogger logger = new XMLLogger(outStream, true);
         logger.auditStarted(null);
         final LocalizedMessage message =
@@ -9,10 +9,7 @@
         final AuditEvent ev = new AuditEvent(this, null, message);
         logger.addError(ev);
         logger.auditFinished(null);
-        final String[] expectedLines = {
-            "<error line=\"1\" column=\"1\" severity=\"error\" message=\"key\""
-                + " source=\"com.puppycrawl.tools.checkstyle.XMLLoggerTest\"/>",
-        };
-        verifyLines(expectedLines);
+        verifyXml(getPath("ExpectedXMLLoggerErrorNullFileName.xml"), outStream,
+                message.getMessage());
     }
 

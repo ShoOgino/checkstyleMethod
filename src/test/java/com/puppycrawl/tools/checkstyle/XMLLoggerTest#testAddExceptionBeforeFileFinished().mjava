@@ -1,6 +1,6 @@
     @Test
     public void testAddExceptionBeforeFileFinished()
-            throws IOException {
+            throws Exception {
         final XMLLogger logger = new XMLLogger(outStream, true);
         logger.auditStarted(null);
         final LocalizedMessage message =
@@ -11,14 +11,7 @@
         final AuditEvent fileFinishedEvent = new AuditEvent(this, "Test.java");
         logger.fileFinished(fileFinishedEvent);
         logger.auditFinished(null);
-        final String[] expectedLines = {
-            "<file name=\"Test.java\">",
-            "&lt;exception&gt;&#10;&lt;![CDATA[&#10;stackTrace&#10;example]]&gt;"
-                    + "&#10;&lt;/exception&gt;&#10;",
-            "</file>",
-        };
-
-        verifyLines(expectedLines);
+        verifyXml(getPath("ExpectedXMLLoggerException.xml"), outStream);
         assertEquals("Invalid close count", 1, outStream.getCloseCount());
     }
 

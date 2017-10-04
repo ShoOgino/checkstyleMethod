@@ -1,5 +1,5 @@
     @Test
-    public void testAuditFinishedWithoutFileFinished() throws IOException {
+    public void testAuditFinishedWithoutFileFinished() throws Exception {
         final XMLLogger logger = new XMLLogger(outStream, true);
         logger.auditStarted(null);
         final AuditEvent fileStartedEvent = new AuditEvent(this, "Test.java");
@@ -13,12 +13,6 @@
         logger.addError(errorEvent);
 
         logger.auditFinished(null);
-        final String[] expectedLines = {
-            "<file name=\"Test.java\">",
-            "<error line=\"1\" column=\"1\" severity=\"error\" message=\"key\""
-                    + " source=\"com.puppycrawl.tools.checkstyle.XMLLoggerTest\"/>",
-            "</file>",
-        };
-        verifyLines(expectedLines);
+        verifyXml(getPath("ExpectedXMLLoggerError.xml"), outStream, message.getMessage());
     }
 

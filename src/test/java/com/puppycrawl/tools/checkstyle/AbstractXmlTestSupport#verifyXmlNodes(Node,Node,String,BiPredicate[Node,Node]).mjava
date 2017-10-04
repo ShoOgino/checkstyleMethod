@@ -1,0 +1,51 @@
+    private static void verifyXmlNodes(Node expected, Node actual, String path,
+            BiPredicate<Node, Node> ordered) {
+        final Node expectedFirstChild = expected.getFirstChild();
+        final Node actualFirstChild = actual.getFirstChild();
+
+        if (expectedFirstChild == null) {
+            Assert.assertNull("no children nodes should exist: " + path, actualFirstChild);
+            Assert.assertEquals("text should be the same: " + path, expected.getNodeValue(),
+                    actual.getNodeValue());
+        }
+        else {
+            Assert.assertNotNull("children nodes should exist: " + path, actualFirstChild);
+
+            if (ordered == null) {
+                Node actualChild = actualFirstChild;
+
+                for (Node expectedChild = expectedFirstChild; expectedChild != null;
+                        expectedChild = expectedChild.getNextSibling()) {
+                    verifyXmlNode(expectedChild, actualChild, path, ordered);
+
+                    actualChild = actualChild.getNextSibling();
+                }
+
+                Assert.assertNull("node have same number of children: " + path, actualChild);
+            }
+            else {
+                final Set<Node> expectedChildren = XmlUtil.getChildrenElements(expected);
+                final Set<Node> actualChildren = XmlUtil.getChildrenElements(actual);
+
+                Assert.assertEquals("node have same number of children: " + path,
+                        expectedChildren.size(), actualChildren.size());
+
+                for (Node expectedChild : expectedChildren) {
+                    Node foundChild = null;
+
+                    for (Node actualChild : actualChildren) {
+                        if (ordered.test(expectedChild, actualChild)) {
+                            foundChild = actualChild;
+                            break;
+                        }
+                    }
+
+                    Assert.assertNotNull("node should exist: " + path + expectedChild.getNodeName()
+                            + "/", foundChild);
+
+                    verifyXmlNode(expectedChild, foundChild, path, ordered);
+                }
+            }
+        }
+    }
+

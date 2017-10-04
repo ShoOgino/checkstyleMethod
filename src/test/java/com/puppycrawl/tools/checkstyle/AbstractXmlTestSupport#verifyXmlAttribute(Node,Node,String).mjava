@@ -1,0 +1,16 @@
+    private static void verifyXmlAttribute(Node expected, Node actual, String path) {
+        final String expectedName = expected.getNodeName();
+
+        Assert.assertNotNull("attribute value for '" + expectedName + "' should not be null: "
+                + path, actual);
+
+        Assert.assertEquals("attribute name should match: " + path, expectedName,
+                actual.getNodeName());
+
+        // ignore checkstyle version in xml as it changes each release
+        if (!"/#document/checkstyle".equals(path) && !"version".equals(expectedName)) {
+            Assert.assertEquals("attribute value for '" + expectedName + "' should match: " + path,
+                    expected.getNodeValue(), actual.getNodeValue());
+        }
+    }
+
