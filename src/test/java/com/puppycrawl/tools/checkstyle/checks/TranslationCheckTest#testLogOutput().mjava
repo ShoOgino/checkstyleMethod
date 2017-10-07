@@ -24,26 +24,5 @@
         verify(checker, propertyFiles, ImmutableMap.of(
             getPath(""), Collections.singletonList(line + firstErrorMessage),
             translationProps, Collections.singletonList(line + secondErrorMessage)));
-
-        final String osName = System.getProperty("os.name").toLowerCase(ENGLISH);
-        String expectedLogOutput;
-
-        // till https://github.com/checkstyle/checkstyle/issues/5103
-        if (osName.startsWith("windows")) {
-            expectedLogOutput = readFile("OutputTranslationCheckWindows.xml");
-        }
-        else if (osName.startsWith("linux")) {
-            expectedLogOutput = readFile("OutputTranslationCheckLinux.xml");
-        }
-        else {
-            expectedLogOutput = readFile("OutputTranslationCheckMacOS.xml");
-        }
-
-        expectedLogOutput = expectedLogOutput.replace("path_to_file", getPackageAbsolutePath());
-        expectedLogOutput = String.format(Locale.getDefault(), expectedLogOutput,
-                firstErrorMessage, secondErrorMessage).replace("'", "&apos;");
-
-        assertEquals("Unexpected log output", expectedLogOutput,
-            out.toString(StandardCharsets.UTF_8.name()));
     }
 
