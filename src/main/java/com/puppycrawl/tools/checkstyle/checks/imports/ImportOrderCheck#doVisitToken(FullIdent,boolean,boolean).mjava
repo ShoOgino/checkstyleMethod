@@ -12,8 +12,7 @@
         final int groupIdx = getGroupNumber(name);
         final int line = ident.getLineNo();
 
-        if (groupIdx == lastGroup
-            || !beforeFirstImport && isAlphabeticallySortableStaticImport(isStatic)) {
+        if (isInSameGroup(groupIdx, isStatic)) {
             doVisitTokenInSameGroup(isStatic, previous, name, line);
         }
         else if (groupIdx > lastGroup) {
