@@ -1,12 +1,12 @@
     /**
-     * Creates DetailAST block comment to pass it to the Javadoc parser.
+     * Create block comment from string content.
      * @param content comment content.
      * @return DetailAST block comment
      */
-    private static DetailAST createFakeBlockComment(String content) {
+    public static DetailAST createBlockCommentNode(String content) {
         final DetailAST blockCommentBegin = new DetailAST();
         blockCommentBegin.setType(TokenTypes.BLOCK_COMMENT_BEGIN);
-        blockCommentBegin.setText("/*");
+        blockCommentBegin.setText(BLOCK_MULTIPLE_COMMENT_BEGIN);
         blockCommentBegin.setLineNo(0);
         blockCommentBegin.setColumnNo(-JAVADOC_START.length());
 
@@ -20,7 +20,7 @@
 
         final DetailAST blockCommentEnd = new DetailAST();
         blockCommentEnd.setType(TokenTypes.BLOCK_COMMENT_END);
-        blockCommentEnd.setText("*/");
+        blockCommentEnd.setText(BLOCK_MULTIPLE_COMMENT_END);
 
         blockCommentBegin.setFirstChild(commentContent);
         commentContent.setNextSibling(blockCommentEnd);
