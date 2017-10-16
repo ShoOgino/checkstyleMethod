@@ -5,7 +5,7 @@
         doNothing().when(Closeables.class);
         Closeables.closeQuietly(any(Reader.class));
 
-        final String charsetName = "ISO-8859-1";
+        final String charsetName = StandardCharsets.ISO_8859_1.name();
         final FileText fileText = new FileText(new File(getPath("InputFileTextImportControl.xml")),
                 charsetName);
         assertEquals("Invalid charset name", charsetName, fileText.getCharset().name());

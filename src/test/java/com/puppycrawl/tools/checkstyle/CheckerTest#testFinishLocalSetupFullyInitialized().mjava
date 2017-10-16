@@ -13,7 +13,8 @@
 
         final Context context = (Context) Whitebox.getInternalState(checker, "childContext");
         assertEquals("Charset was different than expected",
-                System.getProperty("file.encoding", "UTF-8"), context.get("charset"));
+                System.getProperty("file.encoding", StandardCharsets.UTF_8.name()),
+                context.get("charset"));
         assertEquals("Was used unsufficient classloader",
                 contextClassLoader, context.get("classLoader"));
         assertEquals("Severity is set to unexpected value",

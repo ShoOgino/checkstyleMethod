@@ -1,6 +1,8 @@
     private static DetailAST parseFile(File file) throws Exception {
         final FileContents contents = new FileContents(
-                new FileText(file.getAbsoluteFile(), System.getProperty("file.encoding", "UTF-8")));
+                new FileText(file.getAbsoluteFile(),
+                        System.getProperty("file.encoding",
+                        StandardCharsets.UTF_8.name())));
         return TreeWalker.parseWithComments(contents);
     }
 

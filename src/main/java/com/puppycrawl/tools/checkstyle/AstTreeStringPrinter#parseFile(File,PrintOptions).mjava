@@ -9,7 +9,7 @@
     private static DetailAST parseFile(File file, PrintOptions withComments)
             throws IOException, CheckstyleException {
         final FileText text = new FileText(file.getAbsoluteFile(),
-            System.getProperty("file.encoding", "UTF-8"));
+            System.getProperty("file.encoding", StandardCharsets.UTF_8.name()));
         return parseFileText(text, withComments);
     }
 
