@@ -9,12 +9,17 @@
         while (sibling != null) {
             final int columnNo = sibling.getColumnNo() - 1;
 
-            if (columnNo >= 0
+            // in such expression: "j  =123", placed at the start of the string index of the second
+            // space character will be: 2 = 0(j) + 1(whitespace) + 1(whitespace). It is a minimal
+            // possible index for the second whitespace between non-whitespace characters.
+            final int minSecondWhitespaceColumnNo = 2;
+
+            if (columnNo >= minSecondWhitespaceColumnNo
                     && !isTextSeparatedCorrectlyFromPrevious(getLine(sibling.getLineNo() - 1),
                             columnNo)) {
                 log(sibling.getLineNo(), columnNo, MSG_KEY);
             }
-            if (sibling.getChildCount() > 0) {
+            if (sibling.getChildCount() >= 1) {
                 visitEachToken(sibling.getFirstChild());
             }
 
