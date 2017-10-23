@@ -1,6 +1,9 @@
         @Override
         public void visitJavadocToken(DetailNode ast) {
             assertEquals(ast.toString(), "JAVADOC", ast.getText());
+            final DetailNode text = JavadocUtils.findFirstToken(ast, JavadocTokenTypes.TEXT);
+            Assert.assertNotNull("Empty javadoc text at " + ast, text);
+            assertEquals(ast.toString(), "Javadoc", text.getText());
             javadocsNumber++;
         }
 

@@ -5,10 +5,15 @@
      * @return true if block comment is on specified token without modifiers
      */
     private static boolean isOnPlainClassMember(DetailAST blockComment, int memberType) {
-        return blockComment.getParent() != null
-                && blockComment.getParent().getType() == TokenTypes.TYPE
-                && blockComment.getParent().getParent().getType() == memberType
+        DetailAST parent = blockComment.getParent();
+        // type could be in fully qualified form, so we go up to Type token
+        while (parent != null && parent.getType() == TokenTypes.DOT) {
+            parent = parent.getParent();
+        }
+        return parent != null
+                && parent.getType() == TokenTypes.TYPE
+                && parent.getParent().getType() == memberType
                 // previous parent sibling is always TokenTypes.MODIFIERS
-                && blockComment.getParent().getPreviousSibling().getChildCount() == 0;
+                && parent.getPreviousSibling().getChildCount() == 0;
     }
 
