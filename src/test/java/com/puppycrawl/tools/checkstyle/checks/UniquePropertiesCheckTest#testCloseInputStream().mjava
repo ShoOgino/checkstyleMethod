@@ -10,6 +10,7 @@
         doNothing().when(Closeables.class);
         Closeables.closeQuietly(any(FileInputStream.class));
 
+        final DefaultConfiguration checkConfig = createModuleConfig(UniquePropertiesCheck.class);
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputUniquePropertiesWithoutErrors.properties"), expected);
 

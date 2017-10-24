@@ -1,5 +1,6 @@
     @Test
     public void testEmptyLoops() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(WhitespaceAroundCheck.class);
         checkConfig.addAttribute("allowEmptyLoops", "true");
         final String[] expected = {
             "40:65: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "{"),

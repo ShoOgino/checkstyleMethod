@@ -1,5 +1,6 @@
     @Test
     public void testLineBreakAfter() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(LeftCurlyCheck.class);
         checkConfig.addAttribute("option", LeftCurlyOption.EOL.toString());
         final String[] expected = {
             "9:1: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{", 1),

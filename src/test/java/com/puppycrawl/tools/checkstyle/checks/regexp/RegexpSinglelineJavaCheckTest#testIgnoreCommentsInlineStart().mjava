@@ -1,5 +1,7 @@
     @Test
     public void testIgnoreCommentsInlineStart() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RegexpSinglelineJavaCheck.class);
         final String illegal = "long ms /";
         checkConfig.addAttribute("format", illegal);
         checkConfig.addAttribute("ignoreComments", "true");

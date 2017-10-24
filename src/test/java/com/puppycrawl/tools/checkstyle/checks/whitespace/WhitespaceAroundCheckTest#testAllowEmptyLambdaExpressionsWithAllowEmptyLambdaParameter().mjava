@@ -1,5 +1,6 @@
     @Test
     public void testAllowEmptyLambdaExpressionsWithAllowEmptyLambdaParameter() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(WhitespaceAroundCheck.class);
         checkConfig.addAttribute("allowEmptyLambdas", "true");
         final String[] expected = {
             "12:29: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "{"),

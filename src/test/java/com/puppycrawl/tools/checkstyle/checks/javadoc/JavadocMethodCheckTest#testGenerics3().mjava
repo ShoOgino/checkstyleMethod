@@ -1,5 +1,6 @@
     @Test
     public void testGenerics3() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
         checkConfig.addAttribute("validateThrows", "true");
         final String[] expected = {
             "8:8: " + getCheckMessage(MSG_UNUSED_TAG, "@throws", "RE"),

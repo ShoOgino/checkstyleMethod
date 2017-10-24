@@ -1,5 +1,7 @@
     @Test
     public void testIgnoreCommentsNoSpaces() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RegexpSinglelineJavaCheck.class);
         // make sure the comment is not turned into spaces
         final String illegal = "long ms  ";
         checkConfig.addAttribute("format", illegal);

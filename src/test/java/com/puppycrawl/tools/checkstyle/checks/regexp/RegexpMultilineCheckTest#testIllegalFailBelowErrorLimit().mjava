@@ -1,5 +1,6 @@
     @Test
     public void testIllegalFailBelowErrorLimit() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(RegexpMultilineCheck.class);
         final String illegal = "^import";
         checkConfig.addAttribute("format", illegal);
         final String[] expected = {

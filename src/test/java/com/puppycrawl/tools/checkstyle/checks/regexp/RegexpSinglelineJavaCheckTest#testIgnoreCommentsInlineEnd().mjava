@@ -1,5 +1,7 @@
     @Test
     public void testIgnoreCommentsInlineEnd() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RegexpSinglelineJavaCheck.class);
         final String illegal = "int z";
         checkConfig.addAttribute("format", illegal);
         checkConfig.addAttribute("ignoreComments", "true");

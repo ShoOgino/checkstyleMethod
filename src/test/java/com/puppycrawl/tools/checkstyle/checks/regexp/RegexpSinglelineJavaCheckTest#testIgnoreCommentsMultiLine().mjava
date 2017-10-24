@@ -1,5 +1,7 @@
     @Test
     public void testIgnoreCommentsMultiLine() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RegexpSinglelineJavaCheck.class);
         final String illegal = "Let's check multi-line comments";
         checkConfig.addAttribute("format", illegal);
         checkConfig.addAttribute("ignoreComments", "true");

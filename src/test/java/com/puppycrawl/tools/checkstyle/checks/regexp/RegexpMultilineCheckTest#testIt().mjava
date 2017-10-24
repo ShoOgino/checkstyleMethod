@@ -1,5 +1,6 @@
     @Test
     public void testIt() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(RegexpMultilineCheck.class);
         final String illegal = "System\\.(out)|(err)\\.print(ln)?\\(";
         checkConfig.addAttribute("format", illegal);
         final String[] expected = {

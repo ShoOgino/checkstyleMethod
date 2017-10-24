@@ -1,5 +1,6 @@
     @Test
     public void testClearDataBetweenFiles() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IllegalTypeCheck.class);
         final String violationFile = getPath("InputIllegalType.java");
         checkConfig.addAttribute("illegalClassNames", "java.util.TreeSet");
         final String[] expected = {

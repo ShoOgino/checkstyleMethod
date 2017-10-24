@@ -1,5 +1,6 @@
     @Test
     public void testNlWithAnnotations() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(LeftCurlyCheck.class);
         checkConfig.addAttribute("option", LeftCurlyOption.NL.toString());
         final String[] expected = {
             "35:34: " + getCheckMessage(MSG_KEY_LINE_NEW, "{", 34),

@@ -1,5 +1,6 @@
     @Test
     public void testWhitespaceAroundEmptyCatchBlock() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(WhitespaceAroundCheck.class);
         checkConfig.addAttribute("allowEmptyCatches", "true");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputWhitespaceAroundCatch.java"),

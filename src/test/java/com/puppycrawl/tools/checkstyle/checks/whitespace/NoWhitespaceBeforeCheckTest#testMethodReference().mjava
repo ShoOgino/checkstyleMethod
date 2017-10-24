@@ -1,5 +1,6 @@
     @Test
     public void testMethodReference() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(NoWhitespaceBeforeCheck.class);
         checkConfig.addAttribute("tokens", "METHOD_REF");
         final String[] expected = {
             "17:31: " + getCheckMessage(MSG_KEY, "::"),

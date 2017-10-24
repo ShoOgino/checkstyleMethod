@@ -1,5 +1,6 @@
     @Test
     public void testAllowEmptyTypesIsSetToFalseAndNonEmptyClasses() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(WhitespaceAroundCheck.class);
         checkConfig.addAttribute("allowEmptyTypes", "false");
         final String[] expected = {
             "6:68: " + getCheckMessage(MSG_WS_NOT_PRECEDED, "{"),

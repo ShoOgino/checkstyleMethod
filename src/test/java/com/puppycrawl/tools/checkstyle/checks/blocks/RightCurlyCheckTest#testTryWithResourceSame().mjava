@@ -1,5 +1,6 @@
     @Test
     public void testTryWithResourceSame() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.SAME.toString());
         final String[] expected = {
             "11:9: " + getCheckMessage(MSG_KEY_LINE_SAME, "}", 9),

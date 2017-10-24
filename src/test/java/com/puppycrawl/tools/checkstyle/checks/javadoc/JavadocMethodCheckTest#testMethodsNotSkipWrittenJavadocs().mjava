@@ -1,5 +1,6 @@
     @Test
     public void testMethodsNotSkipWrittenJavadocs() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
         checkConfig.addAttribute("allowedAnnotations", "MyAnnotation");
         final String[] expected = {
             "7:8: " + getCheckMessage(MSG_UNUSED_TAG, "@param", "BAD"),

@@ -1,5 +1,6 @@
     @Test
     public void testValidateAbstractClassNamesSetToTrue() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IllegalTypeCheck.class);
         checkConfig.addAttribute("validateAbstractClassNames", "true");
         final String[] expected = {
             "27:5: " + getCheckMessage(MSG_KEY, "AbstractClass"),

@@ -1,5 +1,6 @@
     @Test
     public void testDoAllowMissingJavadocTagsByDefault() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
         final String[] expected = {
             "10: " + getCheckMessage(MSG_RETURN_EXPECTED),
             "20:26: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "number"),

@@ -1,5 +1,7 @@
     @Test
     public void testIgnoreCommentsFalseCppStyle() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RegexpSinglelineJavaCheck.class);
         // See if the comment is removed properly
         final String illegal = "don't use trailing comments";
         checkConfig.addAttribute("format", illegal);
