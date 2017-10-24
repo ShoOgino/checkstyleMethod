@@ -1,6 +1,7 @@
     @Test
     public void testWithCacheWithNoViolation() throws Exception {
-        final Checker checker = createChecker(createModuleConfig(HiddenFieldCheck.class));
+        final DefaultConfiguration checkConfig = createModuleConfig(HiddenFieldCheck.class);
+        final Checker checker = createChecker(checkConfig);
         final PackageObjectFactory factory = new PackageObjectFactory(
             new HashSet<>(), Thread.currentThread().getContextClassLoader());
         checker.setModuleFactory(factory);

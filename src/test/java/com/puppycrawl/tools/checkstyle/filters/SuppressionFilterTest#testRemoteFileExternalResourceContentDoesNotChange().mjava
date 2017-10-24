@@ -21,37 +21,28 @@
         if (urlForTest != null) {
             final DefaultConfiguration firstFilterConfig =
                 createModuleConfig(SuppressionFilter.class);
+            // -@cs[CheckstyleTestMakeup] need to test dynamic property
             firstFilterConfig.addAttribute("file", urlForTest);
 
-            final DefaultConfiguration firstCheckerConfig =
-                new DefaultConfiguration("checkstyle_checks");
-            firstCheckerConfig.addChild(firstFilterConfig);
-            final String cacheFile = temporaryFolder.newFile().getPath();
-            firstCheckerConfig.addAttribute("cacheFile", cacheFile);
-
-            final Checker checker = new Checker();
-            checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-            checker.configure(firstCheckerConfig);
-            checker.addListener(getBriefUtLogger());
+            final DefaultConfiguration firstCheckerConfig = createRootConfig(firstFilterConfig);
+            final File cacheFile = temporaryFolder.newFile();
+            firstCheckerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
             final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
             final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
 
-            verify(checker, pathToEmptyFile, expected);
+            verify(firstCheckerConfig, pathToEmptyFile, expected);
 
             // One more time to use cache.
             final DefaultConfiguration secondFilterConfig =
                 createModuleConfig(SuppressionFilter.class);
+            // -@cs[CheckstyleTestMakeup] need to test dynamic property
             secondFilterConfig.addAttribute("file", urlForTest);
 
-            final DefaultConfiguration secondCheckerConfig =
-                new DefaultConfiguration("checkstyle_checks");
-            secondCheckerConfig.addAttribute("cacheFile", cacheFile);
-            secondCheckerConfig.addChild(secondFilterConfig);
+            final DefaultConfiguration secondCheckerConfig = createRootConfig(secondFilterConfig);
+            secondCheckerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
-            checker.configure(secondCheckerConfig);
-
-            verify(checker, pathToEmptyFile, expected);
+            verify(secondCheckerConfig, pathToEmptyFile, expected);
         }
     }
 

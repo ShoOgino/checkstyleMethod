@@ -9,25 +9,19 @@
                 ExternalResourceHolder.class.isAssignableFrom(DummyFilter.class));
         final DefaultConfiguration filterConfig = createModuleConfig(DummyFilter.class);
 
-        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
-        checkerConfig.addChild(filterConfig);
+        final DefaultConfiguration checkerConfig = createRootConfig(filterConfig);
         final File cacheFile = temporaryFolder.newFile();
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
-
-        final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.configure(checkerConfig);
-        checker.addListener(getBriefUtLogger());
 
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
 
-        verify(checker, pathToEmptyFile, expected);
+        verify(checkerConfig, pathToEmptyFile, expected);
         final Properties cacheAfterFirstRun = new Properties();
         cacheAfterFirstRun.load(Files.newBufferedReader(cacheFile.toPath()));
 
         // One more time to use cache.
-        verify(checker, pathToEmptyFile, expected);
+        verify(checkerConfig, pathToEmptyFile, expected);
         final Properties cacheAfterSecondRun = new Properties();
         cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
 

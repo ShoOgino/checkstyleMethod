@@ -9,17 +9,11 @@
         treeWalkerConfig.addChild(checkConfig1);
         treeWalkerConfig.addChild(checkConfig2);
 
-        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyleConfig");
-        checkerConfig.addChild(treeWalkerConfig);
-
-        final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.configure(checkerConfig);
-        checker.addListener(getBriefUtLogger());
+        final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
 
         final String filePath = getPath("InputCheckerClearDetailAstLazyLoadCache.java");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
 
-        verify(checker, filePath, filePath, expected);
+        verify(checkerConfig, filePath, expected);
     }
 

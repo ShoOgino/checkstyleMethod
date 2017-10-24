@@ -9,18 +9,20 @@
     public Checker createChecker(Configuration moduleConfig,
                                  ModuleCreationOption moduleCreationOption)
             throws Exception {
-        final Configuration dc;
-
-        if (moduleCreationOption == ModuleCreationOption.IN_TREEWALKER) {
-            dc = createTreeWalkerConfig(moduleConfig);
-        }
-        else {
-            dc = createRootConfig(moduleConfig);
-        }
-
         final Checker checker = new Checker();
         checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.configure(dc);
+
+        if (moduleCreationOption == ModuleCreationOption.IN_TREEWALKER) {
+            final Configuration dc = createTreeWalkerConfig(moduleConfig);
+            checker.configure(dc);
+        }
+        else if (ROOT_MODULE_NAME.equals(moduleConfig.getName())) {
+            checker.configure(moduleConfig);
+        }
+        else {
+            final Configuration dc = createRootConfig(moduleConfig);
+            checker.configure(dc);
+        }
         checker.addListener(new BriefUtLogger(stream));
         return checker;
     }

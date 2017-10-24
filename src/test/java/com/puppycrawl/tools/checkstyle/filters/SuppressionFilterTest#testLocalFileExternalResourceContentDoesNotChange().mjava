@@ -3,21 +3,15 @@
         final DefaultConfiguration filterConfig = createModuleConfig(SuppressionFilter.class);
         filterConfig.addAttribute("file", getPath("InputSuppressionFilterNone.xml"));
 
-        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyle_checks");
-        checkerConfig.addChild(filterConfig);
-        final String cacheFile = temporaryFolder.newFile().getPath();
-        checkerConfig.addAttribute("cacheFile", cacheFile);
-
-        final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.addListener(getBriefUtLogger());
-        checker.configure(checkerConfig);
+        final DefaultConfiguration checkerConfig = createRootConfig(filterConfig);
+        final File cacheFile = temporaryFolder.newFile();
+        checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
         final String filePath = temporaryFolder.newFile("file.java").getPath();
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
 
-        verify(checker, filePath, expected);
+        verify(checkerConfig, filePath, expected);
         // One more time to use cache.
-        verify(checker, filePath, expected);
+        verify(checkerConfig, filePath, expected);
     }
 

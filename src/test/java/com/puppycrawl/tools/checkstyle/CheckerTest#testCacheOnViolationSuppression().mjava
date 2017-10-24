@@ -3,23 +3,18 @@
         final File cacheFile = temporaryFolder.newFile();
         final DefaultConfiguration violationCheck =
                 createModuleConfig(DummyFileSetViolationCheck.class);
-        final DefaultConfiguration defaultConfig = new DefaultConfiguration("defaultConfiguration");
-        defaultConfig.addAttribute("cacheFile", cacheFile.getPath());
-        defaultConfig.addChild(violationCheck);
 
         final DefaultConfiguration filterConfig = createModuleConfig(SuppressionFilter.class);
         filterConfig.addAttribute("file", getPath("InputCheckerSuppressAll.xml"));
-        defaultConfig.addChild(filterConfig);
 
-        final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.addListener(getBriefUtLogger());
-        checker.configure(defaultConfig);
+        final DefaultConfiguration checkerConfig = createRootConfig(violationCheck);
+        checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
+        checkerConfig.addChild(filterConfig);
 
         final String fileViolationPath = temporaryFolder.newFile("ViolationFile.java").getPath();
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
 
-        verify(checker, fileViolationPath, expected);
+        verify(checkerConfig, fileViolationPath, expected);
 
         try (FileInputStream input = new FileInputStream(cacheFile)) {
             final Properties details = new Properties();

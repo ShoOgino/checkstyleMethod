@@ -1,18 +1,14 @@
     @Test
     public void testBehaviourWithChecksAndFilters() throws Exception {
-        final DefaultConfiguration checkerConfig =
-                new DefaultConfiguration("configuration");
-        final DefaultConfiguration treeWalkerConfig = createModuleConfig(TreeWalker.class);
-        treeWalkerConfig.addChild(createModuleConfig(MemberNameCheck.class));
         final DefaultConfiguration filterConfig =
                 createModuleConfig(SuppressionCommentFilter.class);
         filterConfig.addAttribute("checkCPP", "false");
+
+        final DefaultConfiguration treeWalkerConfig = createModuleConfig(TreeWalker.class);
+        treeWalkerConfig.addChild(createModuleConfig(MemberNameCheck.class));
         treeWalkerConfig.addChild(filterConfig);
-        checkerConfig.addChild(treeWalkerConfig);
-        final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.configure(checkerConfig);
-        checker.addListener(getBriefUtLogger());
+
+        final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
 
         final File file = new File(getPath("InputTreeWalkerSuppressionCommentFilter.java"));
 
@@ -23,7 +19,7 @@
                     "^[a-z][a-zA-Z0-9]*$"),
         };
 
-        verify(checker,
+        verify(checkerConfig,
                 file.getPath(),
                 expected);
     }

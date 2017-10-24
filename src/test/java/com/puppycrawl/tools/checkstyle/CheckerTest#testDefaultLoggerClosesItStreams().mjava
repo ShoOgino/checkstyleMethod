@@ -1,3 +1,4 @@
+    // -@cs[CheckstyleTestMakeup] must use raw class to directly initialize DefaultLogger
     @Test
     public void testDefaultLoggerClosesItStreams() throws Exception {
         final Checker checker = new Checker();
@@ -12,7 +13,7 @@
         final File tmpFile = temporaryFolder.newFile("file.java");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
 
-        verify(checker, tmpFile.getPath(), tmpFile.getPath(), expected);
+        verify(checker, tmpFile.getPath(), expected);
 
         assertEquals("Close count was not expected",
                 1, testInfoOutputStream.getCloseCount());

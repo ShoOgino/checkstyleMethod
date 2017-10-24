@@ -8,15 +8,18 @@
             throws Exception {
         ModuleCreationOption moduleCreationOption = ModuleCreationOption.IN_CHECKER;
 
-        try {
-            final Class<?> moduleClass = Class.forName(moduleConfig.getName());
-            if (ModuleReflectionUtils.isCheckstyleCheck(moduleClass)
-                    || ModuleReflectionUtils.isTreeWalkerFilterModule(moduleClass)) {
-                moduleCreationOption = ModuleCreationOption.IN_TREEWALKER;
+        final String moduleName = moduleConfig.getName();
+        if (!ROOT_MODULE_NAME.equals(moduleName)) {
+            try {
+                final Class<?> moduleClass = Class.forName(moduleName);
+                if (ModuleReflectionUtils.isCheckstyleCheck(moduleClass)
+                        || ModuleReflectionUtils.isTreeWalkerFilterModule(moduleClass)) {
+                    moduleCreationOption = ModuleCreationOption.IN_TREEWALKER;
+                }
             }
-        }
-        catch (ClassNotFoundException ignore) {
-            // ignore exception, assume it is not part of TreeWalker
+            catch (ClassNotFoundException ignore) {
+                // ignore exception, assume it is not part of TreeWalker
+            }
         }
 
         return createChecker(moduleConfig, moduleCreationOption);

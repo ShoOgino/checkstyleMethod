@@ -6,21 +6,16 @@
         final DefaultConfiguration treeWalkerConfig = createModuleConfig(TreeWalker.class);
         treeWalkerConfig.addChild(checkConfig);
 
-        final DefaultConfiguration checkerConfig = new DefaultConfiguration("checkstyleConfig");
+        final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
         checkerConfig.addChild(treeWalkerConfig);
 
         checkerConfig.addAttribute("haltOnException", "false");
-
-        final Checker checker = new Checker();
-        checker.setModuleClassLoader(Thread.currentThread().getContextClassLoader());
-        checker.configure(checkerConfig);
-        checker.addListener(getBriefUtLogger());
 
         final String filePath = getPath("InputChecker.java");
         final String[] expected = {
             "0: " + getCheckMessage(EXCEPTION_MSG, "java.lang.IndexOutOfBoundsException: test"),
         };
 
-        verify(checker, filePath, filePath, expected);
+        verify(checkerConfig, filePath, expected);
     }
 
