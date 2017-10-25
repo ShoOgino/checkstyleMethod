@@ -29,11 +29,11 @@
             case TokenTypes.METHOD_DEF :
                 final DetailAST methodFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
                 final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
-                if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                    ((ClassFrame) frame).addStaticMethod(methodFrameNameIdent);
+                if (mods.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
+                    ((ClassFrame) frame).addInstanceMethod(methodFrameNameIdent);
                 }
                 else {
-                    ((ClassFrame) frame).addInstanceMethod(methodFrameNameIdent);
+                    ((ClassFrame) frame).addStaticMethod(methodFrameNameIdent);
                 }
                 frameStack.addFirst(new MethodFrame(frame, methodFrameNameIdent));
                 break;

@@ -18,7 +18,7 @@
             // therefore this method is potentially a setter
             final DetailAST typeAST = aMethodAST.findFirstToken(TokenTypes.TYPE);
             final String returnType = typeAST.getFirstChild().getText();
-            if (typeAST.branchContains(TokenTypes.LITERAL_VOID)
+            if (typeAST.findFirstToken(TokenTypes.LITERAL_VOID) != null
                     || setterCanReturnItsClass && frame.isEmbeddedIn(returnType)) {
                 // this method has signature
                 //

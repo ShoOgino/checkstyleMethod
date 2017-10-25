@@ -14,7 +14,7 @@
         final DetailAST typeMods = ast.findFirstToken(TokenTypes.MODIFIERS);
         final boolean isStaticInnerType =
                 typeMods != null
-                        && typeMods.branchContains(TokenTypes.LITERAL_STATIC);
+                        && typeMods.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
         final String frameName;
 
         if (type == TokenTypes.CLASS_DEF || type == TokenTypes.ENUM_DEF) {
@@ -36,11 +36,11 @@
                         child.findFirstToken(TokenTypes.IDENT).getText();
                     final DetailAST mods =
                         child.findFirstToken(TokenTypes.MODIFIERS);
-                    if (mods.branchContains(TokenTypes.LITERAL_STATIC)) {
-                        newFrame.addStaticField(name);
+                    if (mods.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
+                        newFrame.addInstanceField(name);
                     }
                     else {
-                        newFrame.addInstanceField(name);
+                        newFrame.addStaticField(name);
                     }
                 }
                 child = child.getNextSibling();

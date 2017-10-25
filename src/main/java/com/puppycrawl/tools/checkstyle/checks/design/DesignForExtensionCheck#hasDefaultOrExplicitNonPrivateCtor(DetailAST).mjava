@@ -18,7 +18,7 @@
 
                 final DetailAST ctorMods =
                         candidate.findFirstToken(TokenTypes.MODIFIERS);
-                if (!ctorMods.branchContains(TokenTypes.LITERAL_PRIVATE)) {
+                if (ctorMods.findFirstToken(TokenTypes.LITERAL_PRIVATE) == null) {
                     hasExplicitNonPrivateCtor = true;
                     break;
                 }

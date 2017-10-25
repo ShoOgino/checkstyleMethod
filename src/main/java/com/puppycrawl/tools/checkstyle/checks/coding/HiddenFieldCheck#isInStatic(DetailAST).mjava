@@ -17,7 +17,7 @@
                         || parent.getType() == TokenTypes.VARIABLE_DEF) {
                 final DetailAST mods =
                     parent.findFirstToken(TokenTypes.MODIFIERS);
-                inStatic = mods.branchContains(TokenTypes.LITERAL_STATIC);
+                inStatic = mods.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
                 break;
             }
             else {

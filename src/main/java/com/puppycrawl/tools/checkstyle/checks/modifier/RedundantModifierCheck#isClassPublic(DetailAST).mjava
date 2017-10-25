@@ -7,7 +7,8 @@
         boolean isAccessibleFromPublic = false;
         final boolean isMostOuterScope = ast.getParent() == null;
         final DetailAST modifiersAst = ast.findFirstToken(TokenTypes.MODIFIERS);
-        final boolean hasPublicModifier = modifiersAst.branchContains(TokenTypes.LITERAL_PUBLIC);
+        final boolean hasPublicModifier =
+                modifiersAst.findFirstToken(TokenTypes.LITERAL_PUBLIC) != null;
 
         if (isMostOuterScope) {
             isAccessibleFromPublic = hasPublicModifier;

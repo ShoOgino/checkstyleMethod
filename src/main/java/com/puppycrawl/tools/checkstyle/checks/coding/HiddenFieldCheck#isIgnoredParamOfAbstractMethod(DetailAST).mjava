@@ -12,7 +12,7 @@
             final DetailAST method = ast.getParent().getParent();
             if (method.getType() == TokenTypes.METHOD_DEF) {
                 final DetailAST mods = method.findFirstToken(TokenTypes.MODIFIERS);
-                result = mods.branchContains(TokenTypes.ABSTRACT);
+                result = mods.findFirstToken(TokenTypes.ABSTRACT) != null;
             }
         }
         return result;

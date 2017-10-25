@@ -5,6 +5,6 @@
      */
     private static boolean isNativeMethod(DetailAST ast) {
         final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
-        return mods.branchContains(TokenTypes.LITERAL_NATIVE);
+        return mods.findFirstToken(TokenTypes.LITERAL_NATIVE) != null;
     }
 

@@ -26,7 +26,7 @@
                 if (codeBlockDefinition != null) {
                     final DetailAST modifiers = codeBlockDefinition.getFirstChild();
                     staticContext = codeBlockDefinition.getType() == TokenTypes.STATIC_INIT
-                        || modifiers.branchContains(TokenTypes.LITERAL_STATIC);
+                        || modifiers.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
                 }
             }
             else {

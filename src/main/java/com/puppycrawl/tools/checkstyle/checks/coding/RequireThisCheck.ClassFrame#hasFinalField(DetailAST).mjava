@@ -7,7 +7,7 @@
             boolean result = false;
             for (DetailAST member : instanceMembers) {
                 final DetailAST mods = member.getParent().findFirstToken(TokenTypes.MODIFIERS);
-                final boolean finalMod = mods.branchContains(TokenTypes.FINAL);
+                final boolean finalMod = mods.findFirstToken(TokenTypes.FINAL) != null;
                 if (finalMod && member.equals(instanceMember)) {
                     result = true;
                     break;

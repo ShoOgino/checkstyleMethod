@@ -6,6 +6,6 @@
     private static boolean isClassProtected(DetailAST classDef) {
         final DetailAST classModifiers =
                 classDef.findFirstToken(TokenTypes.MODIFIERS);
-        return classModifiers.branchContains(TokenTypes.LITERAL_PROTECTED);
+        return classModifiers.findFirstToken(TokenTypes.LITERAL_PROTECTED) != null;
     }
 

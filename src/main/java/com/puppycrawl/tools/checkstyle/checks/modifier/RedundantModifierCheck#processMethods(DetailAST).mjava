@@ -7,14 +7,14 @@
                         ast.findFirstToken(TokenTypes.MODIFIERS);
         // private method?
         boolean checkFinal =
-            modifiers.branchContains(TokenTypes.LITERAL_PRIVATE);
+            modifiers.findFirstToken(TokenTypes.LITERAL_PRIVATE) != null;
         // declared in a final class?
         DetailAST parent = ast.getParent();
         while (parent != null) {
             if (parent.getType() == TokenTypes.CLASS_DEF) {
                 final DetailAST classModifiers =
                     parent.findFirstToken(TokenTypes.MODIFIERS);
-                checkFinal = checkFinal || classModifiers.branchContains(TokenTypes.FINAL);
+                checkFinal = checkFinal || classModifiers.findFirstToken(TokenTypes.FINAL) != null;
                 parent = null;
             }
             else if (parent.getType() == TokenTypes.LITERAL_NEW
