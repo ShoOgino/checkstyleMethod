@@ -1,0 +1,30 @@
+    private static void verifyHasProductionFile(Map<String, List<String>> allTests, File file) {
+        if (file.isFile()) {
+            final String fileName = file.getName().replace("Test.java", ".java");
+
+            if (!fileName.endsWith("TestSupport.java")
+                    // tests external utility XPathEvaluator
+                    && !"XpathMapper.java".equals(fileName)) {
+                final String path;
+
+                try {
+                    path = getSimplePath(file.getCanonicalPath());
+                }
+                catch (IOException ex) {
+                    throw new IllegalStateException(ex);
+                }
+
+                if (!path.contains(File.separatorChar + "grammars" + File.separatorChar)
+                        && !path.contains(File.separatorChar + "internal" + File.separatorChar)) {
+                    final int slash = path.lastIndexOf(File.separatorChar);
+                    final String packge = path.substring(0, slash);
+                    final List<String> classes = allTests.get(packge);
+
+                    Assert.assertTrue("Test must be named after a production class "
+                            + "and must be in the same package of the production class: " + path,
+                            classes != null && classes.contains(fileName));
+                }
+            }
+        }
+    }
+
