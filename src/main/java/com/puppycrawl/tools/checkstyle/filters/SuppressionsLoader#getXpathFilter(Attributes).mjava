@@ -8,19 +8,21 @@
     private static XpathFilter getXpathFilter(Attributes attributes) throws SAXException {
         final String checks = attributes.getValue(ATTRIBUTE_NAME_CHECKS);
         final String modId = attributes.getValue(ATTRIBUTE_NAME_ID);
-        if (checks == null && modId == null) {
+        final String message = attributes.getValue(ATTRIBUTE_NAME_MESSAGE);
+        if (checks == null && modId == null && message == null) {
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
-            throw new SAXException("missing checks and id attribute for suppress-xpath");
+            throw new SAXException("missing checks or id or message attribute for suppress-xpath");
         }
         final XpathFilter filter;
         try {
             final String files = attributes.getValue(ATTRIBUTE_NAME_FILES);
             final String xpathQuery = attributes.getValue(ATTRIBUTE_NAME_QUERY);
-            filter = new XpathFilter(files, checks, modId, xpathQuery);
+            filter = new XpathFilter(files, checks, message, modId, xpathQuery);
         }
         catch (final PatternSyntaxException ex) {
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
-            throw new SAXException("invalid files or checks format for suppress-xpath", ex);
+            throw new SAXException("invalid files or checks or message format for suppress-xpath",
+                    ex);
         }
         return filter;
     }

@@ -4,20 +4,33 @@
      *
      * @param files   regular expression for names of filtered files.
      * @param checks  regular expression for filtered check classes.
+     * @param message regular expression for messages.
      * @param modId   the id
      * @param lines   lines CSV values and ranges for line number filtering.
      * @param columns columns CSV values and ranges for column number filtering.
      */
     public SuppressElement(String files, String checks,
-                           String modId, String lines, String columns) {
+                           String message, String modId, String lines, String columns) {
         filePattern = files;
-        fileRegexp = Pattern.compile(files);
+        if (files == null) {
+            fileRegexp = null;
+        }
+        else {
+            fileRegexp = Pattern.compile(files);
+        }
         checkPattern = checks;
         if (checks == null) {
             checkRegexp = null;
         }
         else {
-            checkRegexp = CommonUtils.createPattern(checks);
+            checkRegexp = Pattern.compile(checks);
+        }
+        messagePattern = message;
+        if (message == null) {
+            messageRegexp = null;
+        }
+        else {
+            messageRegexp = Pattern.compile(message);
         }
         moduleId = modId;
         linesCsv = lines;

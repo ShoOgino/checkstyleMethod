@@ -4,9 +4,9 @@
             new LocalizedMessage(10, 10, "", "", null, null, getClass(), null);
         final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
         final SuppressElement filter1 =
-                new SuppressElement("Test", "Test", null, null, "1-10");
+                new SuppressElement("Test", "Test", null, null, null, "1-10");
         final SuppressElement filter2 =
-                new SuppressElement("Test", "Test", null, null, "1-9, 11");
+                new SuppressElement("Test", "Test", null, null, null, "1-9, 11");
 
         //deny because there are matches on file name, check name, and column
         assertFalse("In range 1-10", filter1.accept(ev));

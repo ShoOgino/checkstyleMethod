@@ -2,7 +2,7 @@
     public void testNullModuleIdAndNonMatchingChecks() throws Exception {
         final String xpath = "NON_MATCHING_QUERY";
         final XpathFilter filter = new XpathFilter("InputXpathFilterSuppressByXpath",
-                "NonMatchingRegexp", null, xpath);
+                "NonMatchingRegexp", null, null, xpath);
         final TreeWalkerAuditEvent ev = getEvent(3, 0,
                 TokenTypes.CLASS_DEF);
         assertTrue("Event should be accepted", filter.accept(ev));

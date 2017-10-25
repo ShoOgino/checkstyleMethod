@@ -1,6 +1,7 @@
     @Override
     public boolean accept(TreeWalkerAuditEvent event) {
         return !isFileNameAndModuleAndCheckNameMatching(event)
+                || !isMessageNameMatching(event)
                 || !isXpathQueryMatching(event);
     }
 
