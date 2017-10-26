@@ -1,9 +1,8 @@
     @Test
     public void testRequiredPass() throws Exception {
-        final String required = "Test case file";
         final DefaultConfiguration checkConfig =
             createModuleConfig(RegexpCheck.class);
-        checkConfig.addAttribute("format", required);
+        checkConfig.addAttribute("format", "Test case file");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputRegexpSemantic.java"), expected);
     }

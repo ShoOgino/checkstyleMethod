@@ -1,8 +1,7 @@
     @Test
     public void testMaximum() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(RegexpSinglelineCheck.class);
-        final String illegal = "System\\.(out)|(err)\\.print(ln)?\\(";
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "System\\.(out)|(err)\\.print(ln)?\\(");
         checkConfig.addAttribute("maximum", "1");
         verify(checkConfig, getPath("InputRegexpSinglelineSemantic.java"), EMPTY);
     }

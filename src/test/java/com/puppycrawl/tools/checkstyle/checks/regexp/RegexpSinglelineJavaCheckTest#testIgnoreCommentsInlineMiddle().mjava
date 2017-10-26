@@ -2,11 +2,10 @@
     public void testIgnoreCommentsInlineMiddle() throws Exception {
         final DefaultConfiguration checkConfig =
                 createModuleConfig(RegexpSinglelineJavaCheck.class);
-        final String illegal = "int y";
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "int y");
         checkConfig.addAttribute("ignoreComments", "true");
         final String[] expected = {
-            "23: " + getCheckMessage(MSG_REGEXP_EXCEEDED, illegal),
+            "23: " + getCheckMessage(MSG_REGEXP_EXCEEDED, "int y"),
         };
         verify(checkConfig, getPath("InputRegexpSinglelineJavaTrailingComment.java"), expected);
     }

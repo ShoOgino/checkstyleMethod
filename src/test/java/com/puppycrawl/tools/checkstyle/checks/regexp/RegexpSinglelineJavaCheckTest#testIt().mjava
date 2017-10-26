@@ -2,10 +2,9 @@
     public void testIt() throws Exception {
         final DefaultConfiguration checkConfig =
                 createModuleConfig(RegexpSinglelineJavaCheck.class);
-        final String illegal = "System\\.(out)|(err)\\.print(ln)?\\(";
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "System\\.(out)|(err)\\.print(ln)?\\(");
         final String[] expected = {
-            "69: " + getCheckMessage(MSG_REGEXP_EXCEEDED, illegal),
+            "69: " + getCheckMessage(MSG_REGEXP_EXCEEDED, "System\\.(out)|(err)\\.print(ln)?\\("),
         };
         verify(checkConfig, getPath("InputRegexpSinglelineJavaSemantic.java"), expected);
     }

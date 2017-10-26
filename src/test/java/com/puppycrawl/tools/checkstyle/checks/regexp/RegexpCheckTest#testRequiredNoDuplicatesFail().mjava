@@ -1,12 +1,11 @@
     @Test
     public void testRequiredNoDuplicatesFail() throws Exception {
-        final String required = "Boolean x = new Boolean";
         final DefaultConfiguration checkConfig =
             createModuleConfig(RegexpCheck.class);
-        checkConfig.addAttribute("format", required);
+        checkConfig.addAttribute("format", "Boolean x = new Boolean");
         checkConfig.addAttribute("duplicateLimit", "0");
         final String[] expected = {
-            "24: " + getCheckMessage(MSG_DUPLICATE_REGEXP, required),
+            "24: " + getCheckMessage(MSG_DUPLICATE_REGEXP, "Boolean x = new Boolean"),
         };
         verify(checkConfig, getPath("InputRegexpSemantic.java"), expected);
     }

@@ -2,12 +2,11 @@
     public void testMissing() throws Exception {
         final DefaultConfiguration checkConfig =
                 createModuleConfig(RegexpSinglelineJavaCheck.class);
-        final String required = "This text is not in the file";
-        checkConfig.addAttribute("format", required);
+        checkConfig.addAttribute("format", "This text is not in the file");
         checkConfig.addAttribute("minimum", "1");
         checkConfig.addAttribute("maximum", "1000");
         final String[] expected = {
-            "0: " + getCheckMessage(MSG_REGEXP_MINIMUM, 1, required),
+            "0: " + getCheckMessage(MSG_REGEXP_MINIMUM, 1, "This text is not in the file"),
         };
         verify(checkConfig, getPath("InputRegexpSinglelineJavaSemantic.java"), expected);
     }

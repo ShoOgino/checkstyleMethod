@@ -3,8 +3,7 @@
         final DefaultConfiguration checkConfig =
                 createModuleConfig(RegexpSinglelineJavaCheck.class);
         // See if the comment is removed properly
-        final String illegal = "don't use trailing comments";
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "don't use trailing comments");
         checkConfig.addAttribute("ignoreComments", "true");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputRegexpSinglelineJavaTrailingComment.java"), expected);

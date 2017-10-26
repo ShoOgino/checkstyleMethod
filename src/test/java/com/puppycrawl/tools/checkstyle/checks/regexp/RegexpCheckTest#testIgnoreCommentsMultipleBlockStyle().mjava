@@ -1,10 +1,9 @@
     @Test
     public void testIgnoreCommentsMultipleBlockStyle() throws Exception {
         // See if a second comment on the same line is removed properly
-        final String illegal = "c-style 2";
         final DefaultConfiguration checkConfig =
             createModuleConfig(RegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "c-style 2");
         checkConfig.addAttribute("illegalPattern", "true");
         checkConfig.addAttribute("ignoreComments", "true");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;

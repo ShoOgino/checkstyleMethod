@@ -1,11 +1,10 @@
     @Test
     public void testMinimum() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(RegexpSinglelineCheck.class);
-        final String illegal = "\\r";
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "\\r");
         checkConfig.addAttribute("minimum", "500");
         final String[] expected = {
-            "0: " + getCheckMessage(MSG_REGEXP_MINIMUM, "500", illegal),
+            "0: " + getCheckMessage(MSG_REGEXP_MINIMUM, "500", "\\r"),
         };
 
         verify(checkConfig, getPath("InputRegexpSinglelineSemantic.java"), expected);

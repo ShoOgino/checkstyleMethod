@@ -1,15 +1,13 @@
     @Test
     public void testMessagePropertyGood()
             throws Exception {
-        final String illegal = "System\\.(out)|(err)\\.print(ln)?\\(";
         final DefaultConfiguration checkConfig =
             createModuleConfig(RegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "System\\.(out)|(err)\\.print(ln)?\\(");
         checkConfig.addAttribute("illegalPattern", "true");
-        final String message = "Bad line :(";
-        checkConfig.addAttribute("message", message);
+        checkConfig.addAttribute("message", "Bad line :(");
         final String[] expected = {
-            "69: " + getCheckMessage(MSG_ILLEGAL_REGEXP, message),
+            "69: " + getCheckMessage(MSG_ILLEGAL_REGEXP, "Bad line :("),
         };
         verify(checkConfig, getPath("InputRegexpSemantic.java"), expected);
     }

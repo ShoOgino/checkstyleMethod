@@ -1,9 +1,8 @@
     @Test
     public void testIgnoreCommentsInlineStart() throws Exception {
-        final String illegal = "long ms /";
         final DefaultConfiguration checkConfig =
             createModuleConfig(RegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "long ms /");
         checkConfig.addAttribute("illegalPattern", "true");
         checkConfig.addAttribute("ignoreComments", "true");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;

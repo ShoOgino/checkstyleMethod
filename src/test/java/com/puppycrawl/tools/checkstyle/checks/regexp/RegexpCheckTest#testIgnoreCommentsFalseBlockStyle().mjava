@@ -1,13 +1,12 @@
     @Test
     public void testIgnoreCommentsFalseBlockStyle() throws Exception {
-        final String illegal = "c-style 1";
         final DefaultConfiguration checkConfig =
             createModuleConfig(RegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "c-style 1");
         checkConfig.addAttribute("illegalPattern", "true");
         checkConfig.addAttribute("ignoreComments", "false");
         final String[] expected = {
-            "19: " + getCheckMessage(MSG_ILLEGAL_REGEXP, illegal),
+            "19: " + getCheckMessage(MSG_ILLEGAL_REGEXP, "c-style 1"),
         };
         verify(checkConfig, getPath("InputRegexpTrailingComment.java"), expected);
     }

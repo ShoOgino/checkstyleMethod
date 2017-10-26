@@ -1,8 +1,7 @@
     @Test
     public void testGoodLimit() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(RegexpMultilineCheck.class);
-        final String illegal = "^import";
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "^import");
         checkConfig.addAttribute("maximum", "5000");
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputRegexpMultilineSemantic.java"), expected);

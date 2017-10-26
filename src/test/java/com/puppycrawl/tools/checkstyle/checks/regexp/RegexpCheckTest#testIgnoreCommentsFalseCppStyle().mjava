@@ -1,14 +1,13 @@
     @Test
     public void testIgnoreCommentsFalseCppStyle() throws Exception {
         // See if the comment is removed properly
-        final String illegal = "don't use trailing comments";
         final DefaultConfiguration checkConfig =
             createModuleConfig(RegexpCheck.class);
-        checkConfig.addAttribute("format", illegal);
+        checkConfig.addAttribute("format", "don't use trailing comments");
         checkConfig.addAttribute("illegalPattern", "true");
         checkConfig.addAttribute("ignoreComments", "false");
         final String[] expected = {
-            "4: " + getCheckMessage(MSG_ILLEGAL_REGEXP, illegal),
+            "4: " + getCheckMessage(MSG_ILLEGAL_REGEXP, "don't use trailing comments"),
         };
         verify(checkConfig, getPath("InputRegexpTrailingComment.java"), expected);
     }

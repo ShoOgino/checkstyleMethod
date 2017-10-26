@@ -1,19 +1,18 @@
     @Test
     public void testIgnoreCaseFalse() throws Exception {
-        final String illegalTrue = "(?i)SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
         final DefaultConfiguration checkConfigTrue =
             createModuleConfig(RegexpCheck.class);
-        checkConfigTrue.addAttribute("format", illegalTrue);
+        checkConfigTrue.addAttribute("format", "(?i)SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(");
         checkConfigTrue.addAttribute("illegalPattern", "true");
         final String[] expectedTrue = {
-            "69: " + getCheckMessage(MSG_ILLEGAL_REGEXP, illegalTrue),
+            "69: " + getCheckMessage(MSG_ILLEGAL_REGEXP,
+                    "(?i)SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\("),
         };
         verify(checkConfigTrue, getPath("InputRegexpSemantic.java"), expectedTrue);
 
-        final String illegalFalse = "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(";
         final DefaultConfiguration checkConfigFalse =
             createModuleConfig(RegexpCheck.class);
-        checkConfigFalse.addAttribute("format", illegalFalse);
+        checkConfigFalse.addAttribute("format", "SYSTEM\\.(OUT)|(ERR)\\.PRINT(LN)?\\(");
         checkConfigFalse.addAttribute("illegalPattern", "true");
         final String[] expectedFalse = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfigFalse, getPath("InputRegexpSemantic.java"), expectedFalse);
