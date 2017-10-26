@@ -4,7 +4,7 @@
      * @param ast LITERAL_NEW ast.
      */
     private void processLiteralNew(DetailAST ast) {
-        if (ast.branchContains(TokenTypes.LCURLY)) {
+        if (ast.findFirstToken(TokenTypes.OBJBLOCK) != null) {
             final FieldFrame frame = new FieldFrame(currentFrame);
             currentFrame.addChild(frame);
             currentFrame = frame;

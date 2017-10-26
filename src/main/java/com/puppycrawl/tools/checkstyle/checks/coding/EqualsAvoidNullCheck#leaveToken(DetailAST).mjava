@@ -7,7 +7,7 @@
                 && astType != TokenTypes.SLIST
                 && astType != TokenTypes.LITERAL_NEW
                 || astType == TokenTypes.LITERAL_NEW
-                    && ast.branchContains(TokenTypes.LCURLY)) {
+                    && ast.findFirstToken(TokenTypes.OBJBLOCK) != null) {
             currentFrame = currentFrame.getParent();
         }
         else if (astType == TokenTypes.SLIST) {
