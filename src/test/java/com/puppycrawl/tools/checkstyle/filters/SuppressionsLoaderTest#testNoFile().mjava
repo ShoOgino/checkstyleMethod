@@ -3,6 +3,7 @@
         final String fn = getPath("InputSuppressionsLoaderNoFile.xml");
         try {
             SuppressionsLoader.loadSuppressions(fn);
+            fail("Exception is expected");
         }
         catch (CheckstyleException ex) {
             final String messageStart = "Unable to parse " + fn;

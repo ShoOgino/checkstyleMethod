@@ -3,6 +3,7 @@
         try {
             DetailNodeTreeStringPrinter.printFileAst(new File(getPath(
                     "InputDetailNodeTreeStringPrinterNoViableAltException.javadoc")));
+            Assert.fail("Exception is expected");
         }
         catch (IllegalArgumentException ex) {
             final String expected = (String) GET_PARSE_ERROR_MESSAGE.invoke(null,

@@ -4,13 +4,7 @@
             createModuleConfig(RequiredTokenIsEmptyIntArray.class);
         final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
 
-        try {
-            final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
-            verify(checkConfig, pathToEmptyFile, expected);
-        }
-        catch (CheckstyleException ignored) {
-            // unexpected
-            fail("CheckstyleException is NOT expected");
-        }
+        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+        verify(checkConfig, pathToEmptyFile, expected);
     }
 

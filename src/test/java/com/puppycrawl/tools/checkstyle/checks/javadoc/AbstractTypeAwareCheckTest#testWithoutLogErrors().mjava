@@ -8,6 +8,7 @@
         };
         try {
             verify(config, getPath("InputAbstractTypeAwareLoadErrors.java"), expected);
+            fail("Exception is expected");
         }
         catch (CheckstyleException ex) {
             final IllegalStateException cause = (IllegalStateException) ex.getCause();
