@@ -1,6 +1,8 @@
     @Test
     public void testBadFile() throws Exception {
-        final DefaultConfiguration checkConfig = createConfig(false);
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(FileTabCharacterCheck.class);
+        checkConfig.addAttribute("eachLine", "false");
         final String path = getPath("Claira");
         final String exceptionMessage = " (No such file or directory)";
         final LocalizedMessage localizedMessage = new LocalizedMessage(0,

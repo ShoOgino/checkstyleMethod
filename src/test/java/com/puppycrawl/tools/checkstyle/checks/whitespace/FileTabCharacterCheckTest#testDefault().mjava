@@ -1,6 +1,8 @@
     @Test
     public void testDefault() throws Exception {
-        final DefaultConfiguration checkConfig = createConfig(false);
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(FileTabCharacterCheck.class);
+        checkConfig.addAttribute("eachLine", "false");
         final String[] expected = {
             "19:25: " + getCheckMessage(MSG_FILE_CONTAINS_TAB),
         };

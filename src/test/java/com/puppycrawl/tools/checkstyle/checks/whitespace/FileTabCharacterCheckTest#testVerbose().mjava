@@ -1,6 +1,8 @@
     @Test
     public void testVerbose() throws Exception {
-        final DefaultConfiguration checkConfig = createConfig(true);
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(FileTabCharacterCheck.class);
+        checkConfig.addAttribute("eachLine", "true");
         final String[] expected = {
             "19:25: " + getCheckMessage(MSG_CONTAINS_TAB),
             "145:35: " + getCheckMessage(MSG_CONTAINS_TAB),
