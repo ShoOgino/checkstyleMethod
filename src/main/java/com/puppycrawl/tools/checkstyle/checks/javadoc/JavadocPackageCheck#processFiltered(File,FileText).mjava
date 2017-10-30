@@ -1,7 +1,14 @@
     @Override
-    protected void processFiltered(File file, FileText fileText) {
+    protected void processFiltered(File file, FileText fileText) throws CheckstyleException {
         // Check if already processed directory
-        final File dir = file.getParentFile();
+        final File dir;
+        try {
+            dir = file.getCanonicalFile().getParentFile();
+        }
+        catch (IOException ex) {
+            throw new CheckstyleException(
+                    "Exception while getting canonical path to file " + file.getPath(), ex);
+        }
         final boolean isDirChecked = !directoriesChecked.add(dir);
         if (!isDirChecked) {
             // Check for the preferred file.
