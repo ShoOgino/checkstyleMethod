@@ -13,19 +13,7 @@
         Object instance = null;
         // if the name is a simple class name, try to find it in maps at first
         if (!name.contains(PACKAGE_SEPARATOR)) {
-            // find the name in hardcode map
-            final String fullModuleName = NAME_TO_FULL_MODULE_NAME.get(name);
-            if (fullModuleName == null) {
-                final String fullCheckModuleName =
-                        NAME_TO_FULL_MODULE_NAME.get(name + CHECK_SUFFIX);
-                if (fullCheckModuleName != null) {
-                    instance = createObject(fullCheckModuleName);
-                }
-            }
-            else {
-                instance = createObject(fullModuleName);
-            }
-
+            instance = createFromStandardCheckSet(name);
             // find the name in third party map
             if (instance == null) {
                 if (thirdPartyNameToFullModuleNames == null) {
@@ -35,9 +23,12 @@
                 instance = createObjectFromMap(name, thirdPartyNameToFullModuleNames);
             }
         }
-
         if (instance == null) {
             instance = createObject(name);
+        }
+        if (instance == null
+                && moduleLoadOption == ModuleLoadOption.TRY_IN_ALL_REGISTERED_PACKAGES) {
+            instance = createModuleByTryInEachPackage(name);
         }
         if (instance == null) {
             String attemptedNames = null;

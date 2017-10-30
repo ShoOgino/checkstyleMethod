@@ -1,0 +1,22 @@
+    /**
+     * Create object from one of Checkstyle module names.
+     * @param name name of module.
+     * @return instance of module.
+     * @throws CheckstyleException if the class fails to instantiate or there are ambiguous classes.
+     */
+    private Object createFromStandardCheckSet(String name) throws CheckstyleException {
+        final String fullModuleName = NAME_TO_FULL_MODULE_NAME.get(name);
+        Object instance = null;
+        if (fullModuleName == null) {
+            final String fullCheckModuleName =
+                    NAME_TO_FULL_MODULE_NAME.get(name + CHECK_SUFFIX);
+            if (fullCheckModuleName != null) {
+                instance = createObject(fullCheckModuleName);
+            }
+        }
+        else {
+            instance = createObject(fullModuleName);
+        }
+        return instance;
+    }
+

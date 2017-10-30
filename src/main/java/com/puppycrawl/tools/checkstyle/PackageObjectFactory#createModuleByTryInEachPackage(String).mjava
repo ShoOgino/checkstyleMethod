@@ -1,0 +1,24 @@
+    /**
+     * Searching to class with given name (or name concatinated with &quot;Check&quot;) in existing
+     * packages. Returns instance if class found or, otherwise, null.
+     * @param name the name of a class.
+     * @return the {@code Object} created by loader.
+     * @throws CheckstyleException if an error occurs.
+     */
+    private Object createModuleByTryInEachPackage(String name) throws CheckstyleException {
+        final Set<String> possibleNames = packages.stream()
+                .map(packageName -> packageName + PACKAGE_SEPARATOR + name)
+                .collect(Collectors.toSet());
+        possibleNames.addAll(possibleNames.stream()
+                .map(possibleName -> possibleName + CHECK_SUFFIX)
+                .collect(Collectors.toSet()));
+        Object instance = null;
+        for (String possibleName : possibleNames) {
+            instance = createObject(possibleName);
+            if (instance != null) {
+                break;
+            }
+        }
+        return instance;
+    }
+

@@ -5,15 +5,6 @@
      *          core and custom modules
      */
     public PackageObjectFactory(Set<String> packageNames, ClassLoader moduleClassLoader) {
-        if (moduleClassLoader == null) {
-            throw new IllegalArgumentException(NULL_LOADER_MESSAGE);
-        }
-        if (packageNames.contains(null)) {
-            throw new IllegalArgumentException(NULL_PACKAGE_MESSAGE);
-        }
-
-        //create a copy of the given set, but retain ordering
-        packages = new LinkedHashSet<>(packageNames);
-        this.moduleClassLoader = moduleClassLoader;
+        this(packageNames, moduleClassLoader, ModuleLoadOption.SEARCH_REGISTERED_PACKAGES);
     }
 
