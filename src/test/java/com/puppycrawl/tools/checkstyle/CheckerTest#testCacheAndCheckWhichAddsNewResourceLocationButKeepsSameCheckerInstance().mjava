@@ -47,6 +47,9 @@
                 + secondExternalResourceLocation;
         check.setSecondExternalResourceLocation(secondExternalResourceLocation);
 
+        checker.addFileSetCheck(check);
+        checker.configure(checkerConfig);
+
         verify(checker, pathToEmptyFile, expected);
         final Properties cacheAfterSecondRun = new Properties();
         cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
