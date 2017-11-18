@@ -1,6 +1,8 @@
     @Test
     public void testLocalVariableName() throws Exception {
 
+        final Configuration checkConfig = getModuleConfig("LocalVariableName");
+        final String format = checkConfig.getAttribute("format");
         final String[] expected = {
             "27:13: " + getCheckMessage(checkConfig.getMessages(), MSG_KEY, "aA", format),
             "28:13: " + getCheckMessage(checkConfig.getMessages(), MSG_KEY, "a1_a", format),

@@ -1,6 +1,8 @@
     @Test
     public void testCatchParameterName() throws Exception {
         final String msgKey = "name.invalidPattern";
+        final Configuration checkConfig = getModuleConfig("CatchParameterName");
+        final String format = checkConfig.getAttribute("format");
 
         final String[] expected = {
             "47:28: " + getCheckMessage(checkConfig.getMessages(), msgKey, "iException", format),
