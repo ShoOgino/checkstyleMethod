@@ -1,6 +1,7 @@
         @Override
         public void visitToken(DetailAST ast) {
-            if (!ast.branchContains(TokenTypes.BLOCK_COMMENT_BEGIN)) {
+            if (ast.findFirstToken(TokenTypes.MODIFIERS).findFirstToken(
+                    TokenTypes.BLOCK_COMMENT_BEGIN) == null) {
                 log(ast, "Incorrect AST structure.");
             }
             final int childCount = ast.getChildCount();
