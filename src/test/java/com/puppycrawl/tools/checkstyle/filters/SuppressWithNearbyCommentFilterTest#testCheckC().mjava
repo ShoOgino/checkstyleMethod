@@ -4,8 +4,12 @@
             createModuleConfig(SuppressWithNearbyCommentFilter.class);
         filterConfig.addAttribute("checkC", "false");
         final String[] suppressed = {
-            "14:17: Name 'A1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-            "18:17: Name 'B1' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "14:17: "
+                + getCheckMessage(AbstractNameCheck.class,
+                    MSG_INVALID_PATTERN, "A1", "^[a-z][a-zA-Z0-9]*$"),
+            "18:17: "
+                + getCheckMessage(AbstractNameCheck.class,
+                    MSG_INVALID_PATTERN, "B1", "^[a-z][a-zA-Z0-9]*$"),
         };
         verifySuppressed(filterConfig, suppressed);
     }

@@ -5,9 +5,12 @@
         filterConfig.addAttribute("offCommentFormat", "IllegalCatchCheck OFF\\: (\\w+)");
         filterConfig.addAttribute("onCommentFormat", "IllegalCatchCheck ON\\: (\\w+)");
         filterConfig.addAttribute("checkFormat", "IllegalCatchCheck");
-        filterConfig.addAttribute("messageFormat", "^Catching '$1' is not allowed.*$");
+        filterConfig.addAttribute("messageFormat",
+                "^" + getCheckMessage(IllegalCatchCheck.class, IllegalCatchCheck.MSG_KEY, "$1")
+                        + "*$");
         final String[] suppressed = {
-            "78:11: Catching 'Exception' is not allowed.",
+            "78:11: "
+                + getCheckMessage(IllegalCatchCheck.class, IllegalCatchCheck.MSG_KEY, "Exception"),
         };
         verifySuppressed(filterConfig, suppressed);
     }

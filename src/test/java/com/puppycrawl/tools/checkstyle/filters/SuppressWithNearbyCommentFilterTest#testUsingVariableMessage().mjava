@@ -7,8 +7,12 @@
         filterConfig.addAttribute("messageFormat", "$1");
         filterConfig.addAttribute("influenceFormat", "-1");
         final String[] suppressed = {
-            "66:23: Catching 'Throwable' is not allowed.",
-            "73:11: Catching 'Exception' is not allowed.",
+            "66:23: "
+                + getCheckMessage(IllegalCatchCheck.class,
+                    IllegalCatchCheck.MSG_KEY, "Throwable"),
+            "73:11: "
+                + getCheckMessage(IllegalCatchCheck.class,
+                    IllegalCatchCheck.MSG_KEY, "Exception"),
         };
         verifySuppressed(filterConfig, suppressed);
     }

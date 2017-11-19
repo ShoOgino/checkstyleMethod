@@ -6,7 +6,9 @@
         filterConfig.addAttribute("checkFormat", "$1");
         filterConfig.addAttribute("influenceFormat", "1");
         final String[] suppressed = {
-            "24:17: Name 'C2' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
+            "24:17: "
+                + getCheckMessage(AbstractNameCheck.class,
+                    MSG_INVALID_PATTERN, "C2", "^[a-z][a-zA-Z0-9]*$"),
         };
         verifySuppressed(filterConfig, suppressed);
     }

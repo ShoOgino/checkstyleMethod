@@ -8,7 +8,9 @@
         filterConfig.addAttribute("onCommentFormat", "CS_ON");
         filterConfig.addAttribute("checkFormat", "ConstantNameCheck");
         final String[] suppressed = {
-            "39:30: Name 's' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.",
+            "39:30: "
+                + getCheckMessage(AbstractNameCheck.class,
+                    MSG_INVALID_PATTERN, "s", "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"),
         };
         verifySuppressed(filterConfig, suppressed);
     }

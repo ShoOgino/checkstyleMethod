@@ -4,8 +4,11 @@
             createModuleConfig(SuppressionCommentFilter.class);
         filterConfig.addAttribute("checkCPP", "false");
         final String[] suppressed = {
-            "16:17: Name 'J' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
-            "86:31: Catching 'Exception' is not allowed.",
+            "16:17: "
+                + getCheckMessage(AbstractNameCheck.class,
+                    MSG_INVALID_PATTERN, "J", "^[a-z][a-zA-Z0-9]*$"),
+            "86:31: "
+                + getCheckMessage(IllegalCatchCheck.class, IllegalCatchCheck.MSG_KEY, "Exception"),
         };
         verifySuppressed(filterConfig, suppressed);
     }
