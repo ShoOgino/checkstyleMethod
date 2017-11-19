@@ -1,8 +1,7 @@
-    private void verifySuppressed(Configuration aFilterConfig,
+    private void verifySuppressed(Configuration moduleConfig,
             String... aSuppressed)
             throws Exception {
-        verify(createChecker(aFilterConfig),
-               getPath("InputSuppressionCommentFilter.java"),
-               removeSuppressed(ALL_MESSAGES, aSuppressed));
+        verifySuppressed(moduleConfig, getPath("InputSuppressionCommentFilter.java"),
+               ALL_MESSAGES, aSuppressed);
     }
 

@@ -16,8 +16,7 @@
             "15:18: Name 'ID' must match pattern '^[a-z][a-zA-Z0-9]*$'.",
             };
 
-        verify(createChecker(filterConfig),
-            getPath("InputSuppressionCommentFilterSuppressById.java"),
-            removeSuppressed(expectedViolationMessages, suppressedViolationMessages));
+        verifySuppressed(filterConfig, getPath("InputSuppressionCommentFilterSuppressById.java"),
+                expectedViolationMessages, suppressedViolationMessages);
     }
 

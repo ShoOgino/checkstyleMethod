@@ -1,0 +1,25 @@
+    private void verifySuppressed(Configuration moduleConfig, String fileName,
+            String[] expectedViolations, String... suppressedViolations) throws Exception {
+        final DefaultConfiguration memberNameCheckConfig =
+                createModuleConfig(MemberNameCheck.class);
+        memberNameCheckConfig.addAttribute("id", "ignore");
+
+        final DefaultConfiguration constantNameCheckConfig =
+            createModuleConfig(ConstantNameCheck.class);
+        constantNameCheckConfig.addAttribute("id", null);
+
+        final DefaultConfiguration treewalkerConfig = createModuleConfig(TreeWalker.class);
+        treewalkerConfig.addChild(memberNameCheckConfig);
+        treewalkerConfig.addChild(constantNameCheckConfig);
+        treewalkerConfig.addChild(createModuleConfig(IllegalCatchCheck.class));
+
+        if (moduleConfig != null) {
+            treewalkerConfig.addChild(moduleConfig);
+        }
+
+        final DefaultConfiguration checkerConfig = createRootConfig(treewalkerConfig);
+
+        verify(checkerConfig, fileName,
+                removeSuppressed(expectedViolations, suppressedViolations));
+    }
+
