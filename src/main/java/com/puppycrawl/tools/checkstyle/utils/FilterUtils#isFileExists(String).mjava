@@ -15,8 +15,7 @@
             suppressionSourceExists = false;
         }
         finally {
-            final boolean closed = closeQuietlyWithResult(sourceInput);
-            suppressionSourceExists = suppressionSourceExists && closed;
+            suppressionSourceExists = closeQuietlyWithResult(sourceInput, suppressionSourceExists);
         }
         return suppressionSourceExists;
     }
