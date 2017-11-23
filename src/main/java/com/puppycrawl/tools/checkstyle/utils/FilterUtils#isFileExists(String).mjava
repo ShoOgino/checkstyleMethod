@@ -15,14 +15,8 @@
             suppressionSourceExists = false;
         }
         finally {
-            if (sourceInput != null) {
-                try {
-                    sourceInput.close();
-                }
-                catch (IOException ignored) {
-                    suppressionSourceExists = false;
-                }
-            }
+            final boolean closed = closeQuietlyWithResult(sourceInput);
+            suppressionSourceExists = suppressionSourceExists && closed;
         }
         return suppressionSourceExists;
     }

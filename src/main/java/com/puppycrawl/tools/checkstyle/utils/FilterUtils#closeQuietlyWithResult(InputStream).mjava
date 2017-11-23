@@ -1,0 +1,19 @@
+    /**
+     * Close input.
+     * This method is required till https://github.com/cobertura/cobertura/issues/170
+     * @param sourceInput stream to close
+     * @return result of close operation
+     */
+    private static boolean closeQuietlyWithResult(InputStream sourceInput) {
+        boolean closed = true;
+        if (sourceInput != null) {
+            try {
+                sourceInput.close();
+            }
+            catch (IOException ignored) {
+                closed = false;
+            }
+        }
+        return closed;
+    }
+
