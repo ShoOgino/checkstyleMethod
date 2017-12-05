@@ -1,9 +1,9 @@
     @Test
     public void testSupportedCharset() throws IOException {
         //check if reader finally closed
-        mockStatic(Closeables.class);
-        doNothing().when(Closeables.class);
-        Closeables.closeQuietly(any(Reader.class));
+        mockStatic(CommonUtils.class);
+        doNothing().when(CommonUtils.class);
+        CommonUtils.close(any(Reader.class));
 
         final String charsetName = StandardCharsets.ISO_8859_1.name();
         final FileText fileText = new FileText(new File(getPath("InputFileTextImportControl.xml")),
@@ -11,6 +11,6 @@
         assertEquals("Invalid charset name", charsetName, fileText.getCharset().name());
 
         verifyStatic(times(2));
-        Closeables.closeQuietly(any(Reader.class));
+        CommonUtils.close(any(Reader.class));
     }
 
