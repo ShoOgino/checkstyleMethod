@@ -1,0 +1,11 @@
+    @Test
+    public void testFinishLocalSetup() throws CheckstyleException {
+        final OutputStream infoStream = new ByteArrayOutputStream();
+        final DefaultLogger dl = new DefaultLogger(infoStream,
+                AutomaticBean.OutputStreamOptions.CLOSE);
+        dl.finishLocalSetup();
+        dl.auditStarted(null);
+        dl.auditFinished(null);
+        assertNotNull("instance should not be null", dl);
+    }
+
