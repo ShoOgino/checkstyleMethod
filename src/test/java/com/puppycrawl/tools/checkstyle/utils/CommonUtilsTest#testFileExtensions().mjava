@@ -5,6 +5,8 @@
         assertFalse("Invalid file extension",
             CommonUtils.matchesFileExtension(pdfFile, fileExtensions));
         assertTrue("Invalid file extension",
+            CommonUtils.matchesFileExtension(pdfFile));
+        assertTrue("Invalid file extension",
             CommonUtils.matchesFileExtension(pdfFile, (String[]) null));
         final File javaFile = new File("file.java");
         assertTrue("Invalid file extension",
@@ -12,5 +14,9 @@
         final File emptyExtensionFile = new File("file.");
         assertTrue("Invalid file extension",
             CommonUtils.matchesFileExtension(emptyExtensionFile, ""));
+        assertFalse("Invalid file extension",
+            CommonUtils.matchesFileExtension(pdfFile, ".noMatch"));
+        assertTrue("Invalid file extension",
+            CommonUtils.matchesFileExtension(pdfFile, ".pdf"));
     }
 

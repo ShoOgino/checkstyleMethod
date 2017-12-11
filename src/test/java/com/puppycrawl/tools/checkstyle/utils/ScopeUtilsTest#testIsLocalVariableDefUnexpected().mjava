@@ -2,5 +2,7 @@
     public void testIsLocalVariableDefUnexpected() {
         assertFalse("Should return false when passed is not variable def",
                 ScopeUtils.isLocalVariableDef(getNode(TokenTypes.LITERAL_CATCH)));
+        assertFalse("Should return false when passed is not variable def",
+                ScopeUtils.isLocalVariableDef(getNode(TokenTypes.COMMA, TokenTypes.PARAMETER_DEF)));
     }
 
