@@ -11,7 +11,8 @@
                 break;
             case TokenTypes.PARAMETER_DEF :
                 if (!CheckUtils.isReceiverParameter(ast)
-                        && !isLambdaParameter(ast)) {
+                        && !isLambdaParameter(ast)
+                        && ast.getParent().getType() != TokenTypes.LITERAL_CATCH) {
                     final DetailAST parameterIdent = ast.findFirstToken(TokenTypes.IDENT);
                     frame.addIdent(parameterIdent);
                 }
@@ -40,6 +41,12 @@
             case TokenTypes.CTOR_DEF :
                 final DetailAST ctorFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
                 frameStack.addFirst(new ConstructorFrame(frame, ctorFrameNameIdent));
+                break;
+            case TokenTypes.LITERAL_CATCH:
+                final AbstractFrame catchFrame = new CatchFrame(frame, ast);
+                catchFrame.addIdent(ast.findFirstToken(TokenTypes.PARAMETER_DEF).findFirstToken(
+                        TokenTypes.IDENT));
+                frameStack.addFirst(catchFrame);
                 break;
             case TokenTypes.LITERAL_NEW:
                 if (isAnonymousClassDef(ast)) {
