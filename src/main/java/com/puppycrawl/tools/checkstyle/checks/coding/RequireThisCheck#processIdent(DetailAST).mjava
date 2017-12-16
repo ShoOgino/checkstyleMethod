@@ -4,7 +4,12 @@
      * @param ast IDENT to check.
      */
     private void processIdent(DetailAST ast) {
-        final int parentType = ast.getParent().getType();
+        int parentType = ast.getParent().getType();
+        if (parentType == TokenTypes.EXPR
+                && ast.getParent().getParent().getParent().getType()
+                    == TokenTypes.ANNOTATION_FIELD_DEF) {
+            parentType = TokenTypes.ANNOTATION_FIELD_DEF;
+        }
         switch (parentType) {
             case TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR:
             case TokenTypes.ANNOTATION:
