@@ -1,9 +1,6 @@
     @Override
-    public void visitToken(DetailAST ast) {
+    public void leaveToken(DetailAST ast) {
         switch (ast.getType()) {
-            case TokenTypes.IDENT :
-                processIdent(ast);
-                break;
             case TokenTypes.CLASS_DEF :
             case TokenTypes.INTERFACE_DEF :
             case TokenTypes.ENUM_DEF :
@@ -11,7 +8,7 @@
             case TokenTypes.SLIST :
             case TokenTypes.METHOD_DEF :
             case TokenTypes.CTOR_DEF :
-                current.push(frames.get(ast));
+                current.pop();
                 break;
             default :
                 // do nothing

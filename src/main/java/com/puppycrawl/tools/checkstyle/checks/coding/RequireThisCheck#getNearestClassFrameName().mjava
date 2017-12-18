@@ -3,7 +3,7 @@
      * @return the name of the nearest parent ClassFrame.
      */
     private String getNearestClassFrameName() {
-        AbstractFrame frame = current;
+        AbstractFrame frame = current.peek();
         while (frame.getType() != FrameType.CLASS_FRAME) {
             frame = frame.getParent();
         }

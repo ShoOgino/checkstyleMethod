@@ -5,7 +5,7 @@
      * @return AbstractFrame containing declaration or null.
      */
     private AbstractFrame findClassFrame(DetailAST name, boolean lookForMethod) {
-        AbstractFrame frame = current;
+        AbstractFrame frame = current.peek();
 
         while (true) {
             frame = findFrame(frame, name, lookForMethod);
