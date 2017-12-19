@@ -6,7 +6,8 @@
     private boolean canBeReferencedFromStaticContext(DetailAST ident) {
         AbstractFrame variableDeclarationFrame = findFrame(ident, false);
         boolean staticInitializationBlock = false;
-        while (variableDeclarationFrame.getType() == FrameType.BLOCK_FRAME) {
+        while (variableDeclarationFrame.getType() == FrameType.BLOCK_FRAME
+                || variableDeclarationFrame.getType() == FrameType.FOR_FRAME) {
             final DetailAST blockFrameNameIdent = variableDeclarationFrame.getFrameNameIdent();
             final DetailAST definitionToken = blockFrameNameIdent.getParent();
             if (definitionToken.getType() == TokenTypes.STATIC_INIT) {
