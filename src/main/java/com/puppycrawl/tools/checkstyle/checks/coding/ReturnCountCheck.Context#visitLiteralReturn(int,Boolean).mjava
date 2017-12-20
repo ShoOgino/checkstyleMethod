@@ -1,0 +1,14 @@
+        /**
+         * Increase the number of return statements and set context return type.
+         * @param maxAssigned Maximum allowed number of return statements.
+         * @param voidReturn Identifies if context is void.
+         */
+        public void visitLiteralReturn(int maxAssigned, Boolean voidReturn) {
+            isVoidContext = voidReturn;
+            if (maxAllowed == null) {
+                maxAllowed = maxAssigned;
+            }
+
+            ++count;
+        }
+
