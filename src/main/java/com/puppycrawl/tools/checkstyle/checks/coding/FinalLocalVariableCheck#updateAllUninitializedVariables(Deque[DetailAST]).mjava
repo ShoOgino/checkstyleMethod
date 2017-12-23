@@ -1,13 +1,13 @@
     /**
      * Update current scope data uninitialized variable according to the whole scope data.
-     * @param prevScopeUnitializedVariableData variable for previous stack of uninitialized
+     * @param prevScopeUninitializedVariableData variable for previous stack of uninitialized
      *     variables
+     * @noinspection MethodParameterNamingConvention
      */
-    // -@cs[CyclomaticComplexity] Breaking apart will damage encapsulation.
     private void updateAllUninitializedVariables(
-            Deque<DetailAST> prevScopeUnitializedVariableData) {
+            Deque<DetailAST> prevScopeUninitializedVariableData) {
         // Check for only previous scope
-        updateUninitializedVariables(prevScopeUnitializedVariableData);
+        updateUninitializedVariables(prevScopeUninitializedVariableData);
         // Check for rest of the scope
         prevScopeUninitializedVariables.forEach(this::updateUninitializedVariables);
     }

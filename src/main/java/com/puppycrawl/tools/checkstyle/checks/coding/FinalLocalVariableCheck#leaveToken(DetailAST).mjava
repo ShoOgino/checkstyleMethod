@@ -10,7 +10,7 @@
             case TokenTypes.SLIST:
                 // -@cs[MoveVariableInsideIf] assignment value is modified later so it can't be
                 // moved
-                final Deque<DetailAST> prevScopeUnitializedVariableData =
+                final Deque<DetailAST> prevScopeUninitializedVariableData =
                     prevScopeUninitializedVariables.peek();
                 boolean containsBreak = false;
                 if (ast.getParent().getType() != TokenTypes.CASE_GROUP
@@ -22,7 +22,7 @@
                 }
                 final DetailAST parent = ast.getParent();
                 if (containsBreak || shouldUpdateUninitializedVariables(parent)) {
-                    updateAllUninitializedVariables(prevScopeUnitializedVariableData);
+                    updateAllUninitializedVariables(prevScopeUninitializedVariableData);
                 }
                 updateCurrentScopeAssignedVariables();
                 break;
