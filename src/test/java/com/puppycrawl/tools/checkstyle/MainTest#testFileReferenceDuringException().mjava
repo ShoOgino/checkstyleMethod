@@ -4,7 +4,7 @@
         exit.checkAssertionAfterwards(() -> {
             final String expectedExceptionMessage = auditStartMessage.getMessage() + EOL
                             + errorCounterOneMessage.getMessage() + EOL;
-            assertEquals("Unexpected ouput log", expectedExceptionMessage, systemOut.getLog());
+            assertEquals("Unexpected output log", expectedExceptionMessage, systemOut.getLog());
 
             final String exceptionFirstLine = "com.puppycrawl.tools.checkstyle.api."
                     + "CheckstyleException: Exception was thrown while processing "
@@ -14,7 +14,7 @@
                     systemErr.getLog().startsWith(exceptionFirstLine));
         });
 
-        // We put xml as source to cause parse excepion
+        // We put xml as source to cause parse exception
         Main.main("-c", getPath("InputMainConfig-classname.xml"),
                 getNonCompilablePath("InputMainIncorrectClass.java"));
     }

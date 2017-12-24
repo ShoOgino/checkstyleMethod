@@ -1,12 +1,12 @@
     @Test
     public void testGetTypeParameters() throws Exception {
-        final DetailAST parameterisedClassNode = getNodeFromFile(TokenTypes.CLASS_DEF);
+        final DetailAST parameterizedClassNode = getNodeFromFile(TokenTypes.CLASS_DEF);
         final DetailAST firstTypeParameter =
-                getNode(parameterisedClassNode, TokenTypes.TYPE_PARAMETER);
+                getNode(parameterizedClassNode, TokenTypes.TYPE_PARAMETER);
         final List<DetailAST> expected = Arrays.asList(firstTypeParameter,
                 firstTypeParameter.getNextSibling().getNextSibling());
 
         assertEquals("Invalid type parameters", expected,
-                CheckUtils.getTypeParameters(parameterisedClassNode));
+                CheckUtils.getTypeParameters(parameterizedClassNode));
     }
 

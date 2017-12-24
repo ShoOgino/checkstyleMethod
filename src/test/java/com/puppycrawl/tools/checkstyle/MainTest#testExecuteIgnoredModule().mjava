@@ -3,14 +3,14 @@
         exit.expectSystemExitWithStatus(-2);
         exit.checkAssertionAfterwards(() -> {
             final String expectedExceptionMessage = errorCounterOneMessage.getMessage() + EOL;
-            assertEquals("Unexpected ouput log", expectedExceptionMessage, systemOut.getLog());
+            assertEquals("Unexpected output log", expectedExceptionMessage, systemOut.getLog());
 
             final String cause = "com.puppycrawl.tools.checkstyle.api.CheckstyleException:"
                     + " cannot initialize module TreeWalker - ";
             assertTrue("Unexpected system error log", systemErr.getLog().startsWith(cause));
         });
 
-        Main.main("-c", getPath("InputMainConfig-non-existing-classname-ignore.xml"),
+        Main.main("-c", getPath("InputMainConfig-non-existent-classname-ignore.xml"),
                 "-executeIgnoredModules",
                 getPath("InputMain.java"));
     }

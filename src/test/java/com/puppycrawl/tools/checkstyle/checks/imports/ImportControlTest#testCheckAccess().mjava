@@ -1,18 +1,18 @@
     @Test
     public void testCheckAccess() {
-        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
+        assertEquals("Unexpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common",
                 "org.springframework.something"));
-        assertEquals("Unxpected access result", AccessResult.ALLOWED, icCommon
+        assertEquals("Unexpected access result", AccessResult.ALLOWED, icCommon
                 .checkAccess("com.kazgroup.courtlink.common",
                         "org.apache.commons.something"));
-        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
+        assertEquals("Unexpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common", "org.apache.commons"));
-        assertEquals("Unxpected access result", AccessResult.ALLOWED, icCommon.checkAccess(
+        assertEquals("Unexpected access result", AccessResult.ALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common", "org.hibernate.something"));
-        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
+        assertEquals("Unexpected access result", AccessResult.DISALLOWED, icCommon.checkAccess(
                 "com.kazgroup.courtlink.common", "com.badpackage.something"));
-        assertEquals("Unxpected access result", AccessResult.DISALLOWED, icRoot.checkAccess(
+        assertEquals("Unexpected access result", AccessResult.DISALLOWED, icRoot.checkAccess(
                 "com.kazgroup.courtlink", "org.hibernate.something"));
     }
 

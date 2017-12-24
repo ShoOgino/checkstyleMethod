@@ -5,13 +5,13 @@
         final DetailAST publicVariable = protectedVariable.getNextSibling();
         final DetailAST packageVariable = publicVariable.getNextSibling();
 
-        assertEquals("Invalid access modofier", AccessModifier.PRIVATE,
+        assertEquals("Invalid access modifier", AccessModifier.PRIVATE,
                 CheckUtils.getAccessModifierFromModifiersToken(privateVariable.getFirstChild()));
-        assertEquals("Invalid access modofier", AccessModifier.PROTECTED,
+        assertEquals("Invalid access modifier", AccessModifier.PROTECTED,
                 CheckUtils.getAccessModifierFromModifiersToken(protectedVariable.getFirstChild()));
-        assertEquals("Invalid access modofier", AccessModifier.PUBLIC,
+        assertEquals("Invalid access modifier", AccessModifier.PUBLIC,
                 CheckUtils.getAccessModifierFromModifiersToken(publicVariable.getFirstChild()));
-        assertEquals("Invalid access modofier", AccessModifier.PACKAGE,
+        assertEquals("Invalid access modifier", AccessModifier.PACKAGE,
                 CheckUtils.getAccessModifierFromModifiersToken(packageVariable.getFirstChild()));
     }
 
