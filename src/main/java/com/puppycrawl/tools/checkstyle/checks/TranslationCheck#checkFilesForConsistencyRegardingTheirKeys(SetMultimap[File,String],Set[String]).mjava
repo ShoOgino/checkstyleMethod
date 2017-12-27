@@ -7,6 +7,9 @@
     private void checkFilesForConsistencyRegardingTheirKeys(SetMultimap<File, String> fileKeys,
                                                             Set<String> keysThatMustExist) {
         for (File currentFile : fileKeys.keySet()) {
+            final MessageDispatcher dispatcher = getMessageDispatcher();
+            final String path = currentFile.getPath();
+            dispatcher.fireFileStarted(path);
             final Set<String> currentFileKeys = fileKeys.get(currentFile);
             final Set<String> missingKeys = keysThatMustExist.stream()
                 .filter(e -> !currentFileKeys.contains(e)).collect(Collectors.toSet());
@@ -15,9 +18,8 @@
                     log(0, MSG_KEY, key);
                 }
             }
-            final String path = currentFile.getPath();
             fireErrors(path);
-            getMessageDispatcher().fireFileFinished(path);
+            dispatcher.fireFileFinished(path);
         }
     }
 

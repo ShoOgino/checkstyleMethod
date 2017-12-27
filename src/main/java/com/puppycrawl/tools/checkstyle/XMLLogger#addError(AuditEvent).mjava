@@ -2,14 +2,13 @@
     public void addError(AuditEvent event) {
         if (event.getSeverityLevel() != SeverityLevel.IGNORE) {
             final String fileName = event.getFileName();
-            if (fileName == null) {
+            if (fileName == null || !fileMessages.containsKey(fileName)) {
                 synchronized (writerLock) {
                     writeFileError(event);
                 }
             }
             else {
-                final FileMessages messages = fileMessages.computeIfAbsent(
-                        fileName, name -> new FileMessages());
+                final FileMessages messages = fileMessages.get(fileName);
                 messages.addError(event);
             }
         }

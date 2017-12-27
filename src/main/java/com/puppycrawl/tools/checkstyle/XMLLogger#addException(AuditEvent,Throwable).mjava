@@ -1,14 +1,13 @@
     @Override
     public void addException(AuditEvent event, Throwable throwable) {
         final String fileName = event.getFileName();
-        if (fileName == null) {
+        if (fileName == null || !fileMessages.containsKey(fileName)) {
             synchronized (writerLock) {
                 writeException(throwable);
             }
         }
         else {
-            final FileMessages messages = fileMessages.computeIfAbsent(
-                    fileName, name -> new FileMessages());
+            final FileMessages messages = fileMessages.get(fileName);
             messages.addException(throwable);
         }
     }
