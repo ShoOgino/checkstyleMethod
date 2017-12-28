@@ -1,0 +1,14 @@
+    /**
+     * Returns the list of {@link Suppression} instances retrieved from the given {@link FileText}.
+     * @param fileText {@link FileText} instance.
+     * @return list of {@link Suppression} instances.
+     */
+    private List<Suppression> getSuppressions(FileText fileText) {
+        final List<Suppression> suppressions = new ArrayList<>();
+        for (int lineNo = 0; lineNo < fileText.size(); lineNo++) {
+            final Optional<Suppression> suppression = getSuppression(fileText, lineNo);
+            suppression.ifPresent(suppressions::add);
+        }
+        return suppressions;
+    }
+

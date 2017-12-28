@@ -1,0 +1,57 @@
+        /**
+         * Creates new suppression instance.
+         * @param text suppression text.
+         * @param lineNo suppression line number.
+         * @param columnNo suppression column number.
+         * @param suppressionType suppression type.
+         * @param filter the {@link SuppressWithPlainTextCommentFilter} with the context.
+         */
+        protected Suppression(
+            String text,
+            int lineNo,
+            int columnNo,
+            SuppressionType suppressionType,
+            SuppressWithPlainTextCommentFilter filter
+        ) {
+            this.text = text;
+            this.lineNo = lineNo;
+            this.columnNo = columnNo;
+            this.suppressionType = suppressionType;
+
+            //Expand regexp for check and message
+            //Does not intern Patterns with Utils.getPattern()
+            String format = "";
+            try {
+                if (this.suppressionType == SuppressionType.ON) {
+                    format = CommonUtils.fillTemplateWithStringsByRegexp(
+                            filter.checkFormat, text, filter.onCommentFormat);
+                    eventSourceRegexp = Pattern.compile(format);
+                    if (filter.messageFormat == null) {
+                        eventMessageRegexp = null;
+                    }
+                    else {
+                        format = CommonUtils.fillTemplateWithStringsByRegexp(
+                                filter.messageFormat, text, filter.onCommentFormat);
+                        eventMessageRegexp = Pattern.compile(format);
+                    }
+                }
+                else {
+                    format = CommonUtils.fillTemplateWithStringsByRegexp(
+                            filter.checkFormat, text, filter.offCommentFormat);
+                    eventSourceRegexp = Pattern.compile(format);
+                    if (filter.messageFormat == null) {
+                        eventMessageRegexp = null;
+                    }
+                    else {
+                        format = CommonUtils.fillTemplateWithStringsByRegexp(
+                                filter.messageFormat, text, filter.offCommentFormat);
+                        eventMessageRegexp = Pattern.compile(format);
+                    }
+                }
+            }
+            catch (final PatternSyntaxException ex) {
+                throw new IllegalArgumentException(
+                    "unable to parse expanded comment " + format, ex);
+            }
+        }
+

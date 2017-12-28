@@ -1,0 +1,14 @@
+    /**
+     * Returns {@link FileText} instance created based on the given file name.
+     * @param fileName the name of the file.
+     * @return {@link FileText} instance.
+     */
+    private static FileText getFileText(String fileName) {
+        try {
+            return new FileText(new File(fileName), StandardCharsets.UTF_8.name());
+        }
+        catch (IOException ex) {
+            throw new IllegalStateException("Cannot read source file: " + fileName, ex);
+        }
+    }
+

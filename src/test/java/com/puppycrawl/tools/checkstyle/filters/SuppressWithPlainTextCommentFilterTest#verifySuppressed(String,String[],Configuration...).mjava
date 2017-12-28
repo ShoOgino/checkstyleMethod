@@ -1,0 +1,12 @@
+    private void verifySuppressed(String fileNameWithExtension, String[] violationMessages,
+                                  Configuration... childConfigs) throws Exception {
+        final DefaultConfiguration checkerConfig = createRootConfig(null);
+
+        Arrays.stream(childConfigs).forEach(checkerConfig::addChild);
+
+        final String fileExtension = CommonUtils.getFileExtension(fileNameWithExtension);
+        checkerConfig.addAttribute("fileExtensions", fileExtension);
+
+        verify(checkerConfig, getPath(fileNameWithExtension), violationMessages);
+    }
+

@@ -1,0 +1,18 @@
+    /**
+     * Finds the nearest {@link Suppression} instance which can suppress
+     * the given {@link AuditEvent}. The nearest suppression is the suppression which scope
+     * is before the line and column of the event.
+     * @param suppressions {@link Suppression} instance.
+     * @param event {@link AuditEvent} instance.
+     * @return {@link Suppression} instance.
+     */
+    private static Suppression getNearestSuppression(List<Suppression> suppressions,
+                                                     AuditEvent event) {
+        return suppressions
+            .stream()
+            .filter(suppression -> suppression.isMatch(event))
+            .reduce((first, second) -> second)
+            .filter(suppression -> suppression.suppressionType != SuppressionType.ON)
+            .orElse(null);
+    }
+

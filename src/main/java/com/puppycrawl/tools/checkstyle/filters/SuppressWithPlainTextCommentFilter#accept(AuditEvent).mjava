@@ -1,0 +1,11 @@
+    @Override
+    public boolean accept(AuditEvent event) {
+        boolean accepted = true;
+        if (event.getLocalizedMessage() != null) {
+            final FileText fileText = getFileText(event.getFileName());
+            final List<Suppression> suppressions = getSuppressions(fileText);
+            accepted = getNearestSuppression(suppressions, event) == null;
+        }
+        return accepted;
+    }
+
