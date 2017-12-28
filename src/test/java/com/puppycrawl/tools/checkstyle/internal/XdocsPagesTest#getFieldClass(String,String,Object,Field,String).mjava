@@ -1,0 +1,42 @@
+    private static Class<?> getFieldClass(String fileName, String sectionName, Object instance,
+            Field field, String propertyName) throws Exception {
+        Class<?> result = null;
+
+        if (field != null) {
+            result = field.getType();
+        }
+        if (result == null) {
+            Assert.assertTrue(
+                    fileName + " section '" + sectionName + "' could not find field "
+                            + propertyName,
+                    PROPERTIES_ALLOWED_GET_TYPES_FROM_METHOD.contains(sectionName + "."
+                            + propertyName));
+
+            final PropertyDescriptor descriptor = PropertyUtils.getPropertyDescriptor(instance,
+                    propertyName);
+            result = descriptor.getPropertyType();
+        }
+        if (result == List.class || result == Set.class) {
+            final ParameterizedType type = (ParameterizedType) field.getGenericType();
+            final Class<?> parameterClass = (Class<?>) type.getActualTypeArguments()[0];
+
+            if (parameterClass == Integer.class) {
+                result = int[].class;
+            }
+            else if (parameterClass == String.class) {
+                result = String[].class;
+            }
+            else if (parameterClass == Pattern.class) {
+                result = Pattern[].class;
+            }
+            else {
+                Assert.fail("Unknown parameterized type: " + parameterClass.getSimpleName());
+            }
+        }
+        else if (result == BitSet.class) {
+            result = int[].class;
+        }
+
+        return result;
+    }
+

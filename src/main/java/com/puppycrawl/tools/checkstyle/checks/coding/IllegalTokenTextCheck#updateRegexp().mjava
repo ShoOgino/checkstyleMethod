@@ -1,8 +1,15 @@
     /**
-     * Updates the {@link #regexp} based on the values from {@link #format} and
-     * {@link #compileFlags}.
+     * Updates the {@link #format} based on the values from {@link #formatString} and
+     * {@link #ignoreCase}.
      */
     private void updateRegexp() {
-        regexp = CommonUtils.createPattern(format, compileFlags);
+        final int compileFlags;
+        if (ignoreCase) {
+            compileFlags = Pattern.CASE_INSENSITIVE;
+        }
+        else {
+            compileFlags = 0;
+        }
+        format = CommonUtils.createPattern(formatString, compileFlags);
     }
 

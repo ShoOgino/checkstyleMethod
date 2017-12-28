@@ -7,7 +7,7 @@
     private String getIllegalInstantiation(String className) {
         String fullClassName = null;
 
-        if (illegalClasses.contains(className)) {
+        if (classes.contains(className)) {
             fullClassName = className;
         }
         else {
@@ -20,7 +20,7 @@
                 pkgNameLen = pkgName.length();
             }
 
-            for (String illegal : illegalClasses) {
+            for (String illegal : classes) {
                 if (isStandardClass(className, illegal)
                         || isSamePackage(className, pkgNameLen, illegal)) {
                     fullClassName = illegal;

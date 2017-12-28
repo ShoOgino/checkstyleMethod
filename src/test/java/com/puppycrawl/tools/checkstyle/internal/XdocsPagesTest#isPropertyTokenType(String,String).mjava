@@ -1,0 +1,17 @@
+    /**
+     * Checks if the given property is takes token names as a type.
+     * @param sectionName The name of the section/module being worked on.
+     * @param propertyName The property name to work with.
+     * @return {@code true} if the property is takes token names as a type.
+     * @noinspection OverlyComplexBooleanExpression
+     */
+    private static boolean isPropertyTokenType(String sectionName, String propertyName) {
+        return "AtclauseOrder".equals(sectionName) && "target".equals(propertyName)
+            || "IllegalType".equals(sectionName) && "memberModifiers".equals(propertyName)
+            || "MagicNumber".equals(sectionName)
+                    && "constantWaiverParentToken".equals(propertyName)
+            || "MultipleStringLiterals".equals(sectionName)
+                    && "ignoreOccurrenceContext".equals(propertyName)
+            || "DescendantToken".equals(sectionName) && "limitedTokens".equals(propertyName);
+    }
+

@@ -1,0 +1,133 @@
+    /**
+     * Get's the name of the bean property's type for the class.
+     * @param sectionName The name of the section/module being worked on.
+     * @param fieldClass The bean property's type.
+     * @param instance The class instance to work with.
+     * @param propertyName The property name to work with.
+     * @return String form of property's type.
+     * @noinspection IfStatementWithTooManyBranches, OverlyComplexBooleanExpression
+     */
+    private static String getModulePropertyExpectedTypeName(String sectionName, Class<?> fieldClass,
+            Object instance, String propertyName) {
+        final String instanceName = instance.getClass().getSimpleName();
+        String result = null;
+
+        if (("SuppressionCommentFilter".equals(sectionName)
+                || "SuppressWithNearbyCommentFilter".equals(sectionName)
+                || "SuppressWithPlainTextCommentFilter".equals(sectionName))
+                    && ("checkFormat".equals(propertyName)
+                        || "messageFormat".equals(propertyName)
+                        || "influenceFormat".equals(propertyName))
+                || ("RegexpMultiline".equals(sectionName)
+                    || "RegexpSingleline".equals(sectionName)
+                    || "RegexpSinglelineJava".equals(sectionName))
+                    && "format".equals(propertyName)) {
+            // dynamic custom expression
+            result = "Regular Expression";
+        }
+        else if ("CustomImportOrder".equals(sectionName)
+                && "customImportOrderRules".equals(propertyName)) {
+            // specially separated list
+            result = "String";
+        }
+        else if (fieldClass == boolean.class) {
+            result = "Boolean";
+        }
+        else if (fieldClass == int.class) {
+            result = "Integer";
+        }
+        else if (fieldClass == int[].class) {
+            if (isPropertyTokenType(sectionName, propertyName)) {
+                result = "subset of tokens TokenTypes";
+            }
+            else {
+                result = "Integer Set";
+            }
+        }
+        else if (fieldClass == double[].class) {
+            result = "Number Set";
+        }
+        else if (fieldClass == String.class) {
+            result = "String";
+
+            if ("Checker".equals(sectionName) && "localeCountry".equals(propertyName)) {
+                result += " (either the empty string or an uppercase ISO 3166 2-letter code)";
+            }
+            else if ("Checker".equals(sectionName) && "localeLanguage".equals(propertyName)) {
+                result += " (either the empty string or a lowercase ISO 639 code)";
+            }
+        }
+        else if (fieldClass == String[].class) {
+            if (propertyName.endsWith("Tokens") || propertyName.endsWith("Token")
+                    || "AtclauseOrderCheck".equals(instanceName) && "target".equals(propertyName)
+                    || "MultipleStringLiteralsCheck".equals(instanceName)
+                            && "ignoreOccurrenceContext".equals(propertyName)) {
+                result = "subset of tokens TokenTypes";
+            }
+            else {
+                result = "String Set";
+            }
+        }
+        else if (fieldClass == URI.class) {
+            result = "URI";
+        }
+        else if (fieldClass == Pattern.class) {
+            result = "Regular Expression";
+        }
+        else if (fieldClass == Pattern[].class) {
+            result = "Regular Expressions";
+        }
+        else if (fieldClass == SeverityLevel.class) {
+            result = "Severity";
+        }
+        else if (fieldClass == Scope.class) {
+            result = "Scope";
+        }
+        else if (fieldClass == ElementStyle.class) {
+            result = "Element Style";
+        }
+        else if (fieldClass == ClosingParens.class) {
+            result = "Closing Parens";
+        }
+        else if (fieldClass == TrailingArrayComma.class) {
+            result = "Trailing Comma";
+        }
+        else if (fieldClass == PadOption.class) {
+            result = "Pad Policy";
+        }
+        else if (fieldClass == WrapOption.class) {
+            result = "Wrap Operator Policy";
+        }
+        else if (fieldClass == BlockOption.class) {
+            result = "Block Policy";
+        }
+        else if (fieldClass == LeftCurlyOption.class) {
+            result = "Left Curly Brace Policy";
+        }
+        else if (fieldClass == RightCurlyOption.class) {
+            result = "Right Curly Brace Policy";
+        }
+        else if (fieldClass == LineSeparatorOption.class) {
+            result = "Line Separator Policy";
+        }
+        else if (fieldClass == ImportOrderOption.class) {
+            result = "Import Order Policy";
+        }
+        else if (fieldClass == AccessModifier[].class) {
+            result = "Access Modifier Set";
+        }
+        else if ("PropertyCacheFile".equals(fieldClass.getSimpleName())) {
+            result = "File";
+        }
+        else {
+            Assert.fail("Unknown property type: " + fieldClass.getSimpleName());
+        }
+
+        if ("SuppressWarningsHolder".equals(instanceName)) {
+            result = result + " in a format of comma separated attribute=value entries. The "
+                    + "attribute is the fully qualified name of the Check and value is its alias.";
+        }
+
+        return result;
+    }
+
