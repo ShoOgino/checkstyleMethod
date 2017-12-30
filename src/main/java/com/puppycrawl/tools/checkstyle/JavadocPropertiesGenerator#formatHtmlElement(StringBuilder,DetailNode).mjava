@@ -1,0 +1,22 @@
+    /**
+     * Concatenates the HTML text from AST of a JavadocTokenTypes.HTML_ELEMENT.
+     * @param builder to append
+     * @param node to format
+     */
+    private static void formatHtmlElement(StringBuilder builder, DetailNode node) {
+        switch (node.getType()) {
+            case JavadocTokenTypes.START:
+            case JavadocTokenTypes.HTML_TAG_NAME:
+            case JavadocTokenTypes.END:
+            case JavadocTokenTypes.TEXT:
+            case JavadocTokenTypes.SLASH:
+                builder.append(node.getText());
+                break;
+            default:
+                for (DetailNode child : node.getChildren()) {
+                    formatHtmlElement(builder, child);
+                }
+                break;
+        }
+    }
+

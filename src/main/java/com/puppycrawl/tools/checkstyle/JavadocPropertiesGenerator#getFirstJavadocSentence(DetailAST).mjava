@@ -1,0 +1,29 @@
+    /**
+     * Extracts the first sentence as HTML formatted text from the comment of an DetailAST.
+     * The end of the sentence is determined by the symbol "period", "exclamation mark" or
+     * "question mark", followed by a space or the end of the text. Inline tags @code and @literal
+     * are converted to HTML code.
+     * @param ast to extract the first sentence
+     * @return the first sentence of the inner {@code TokenTypes.BLOCK_COMMENT_BEGIN} node
+     *      or {@code null} if the first sentence is absent or malformed (does not end with period)
+     * @throws CheckstyleException if a javadoc comment can not be parsed or an unsupported inline
+     *      tag found
+     */
+    private static String getFirstJavadocSentence(DetailAST ast) throws CheckstyleException {
+        String firstSentence = null;
+        for (DetailAST child = ast.getFirstChild(); child != null && firstSentence == null;
+                child = child.getNextSibling()) {
+            // If there is an annotation, the javadoc comment will be a child of it.
+            if (child.getType() == TokenTypes.ANNOTATION) {
+                firstSentence = getFirstJavadocSentence(child);
+            }
+            // Otherwise, the javadoc comment will be right here.
+            else if (child.getType() == TokenTypes.BLOCK_COMMENT_BEGIN
+                    && JavadocUtils.isJavadocComment(child)) {
+                final DetailNode tree = DetailNodeTreeStringPrinter.parseJavadocAsDetailNode(child);
+                firstSentence = getFirstJavadocSentence(tree);
+            }
+        }
+        return firstSentence;
+    }
+

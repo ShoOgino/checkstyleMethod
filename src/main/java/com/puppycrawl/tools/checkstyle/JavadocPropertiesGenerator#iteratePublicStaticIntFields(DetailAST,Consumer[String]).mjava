@@ -1,0 +1,21 @@
+    /**
+     * Walks over the type members and push the first javadoc sentence of every
+     * {@code public} {@code static} {@code int} field to the consumer.
+     * @param objBlock the OBJBLOCK of a class to iterate over its members
+     * @param consumer first javadoc sentence consumer
+     * @throws CheckstyleException if failed to parse a javadoc comment
+     */
+    private static void iteratePublicStaticIntFields(DetailAST objBlock, Consumer<String> consumer)
+            throws CheckstyleException {
+        for (DetailAST member = objBlock.getFirstChild(); member != null;
+                member = member.getNextSibling()) {
+            if (isPublicStaticFinalIntField(member)) {
+                final DetailAST modifiers = member.findFirstToken(TokenTypes.MODIFIERS);
+                final String firstJavadocSentence = getFirstJavadocSentence(modifiers);
+                if (firstJavadocSentence != null) {
+                    consumer.accept(getName(member) + "=" + firstJavadocSentence.trim());
+                }
+            }
+        }
+    }
+

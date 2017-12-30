@@ -1,0 +1,35 @@
+    /**
+     * Extracts the first sentence as HTML formatted text from a DetailNode.
+     * The end of the sentence is determined by the symbol "period", "exclamation mark" or
+     * "question mark", followed by a space or the end of the text. Inline tags @code and @literal
+     * are converted to HTML code.
+     * @param tree to extract the first sentence
+     * @return the first sentence of the node or {@code null} if the first sentence is absent or
+     *      malformed (does not end with any of the end-of-sentence markers)
+     * @throws CheckstyleException if an unsupported inline tag found
+     */
+    private static String getFirstJavadocSentence(DetailNode tree) throws CheckstyleException {
+        String firstSentence = null;
+        final StringBuilder builder = new StringBuilder(128);
+        for (DetailNode node : tree.getChildren()) {
+            if (node.getType() == JavadocTokenTypes.TEXT) {
+                final Matcher matcher = END_OF_SENTENCE_PATTERN.matcher(node.getText());
+                if (matcher.find()) {
+                    // Commit the sentence if an end-of-sentence marker is found.
+                    firstSentence = builder.append(matcher.group(1)).toString();
+                    break;
+                }
+                // Otherwise append the whole line and look for an end-of-sentence marker
+                // on the next line.
+                builder.append(node.getText());
+            }
+            else if (node.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG) {
+                formatInlineCodeTag(builder, node);
+            }
+            else if (node.getType() == JavadocTokenTypes.HTML_ELEMENT) {
+                formatHtmlElement(builder, node);
+            }
+        }
+        return firstSentence;
+    }
+

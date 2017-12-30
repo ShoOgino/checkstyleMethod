@@ -1,0 +1,36 @@
+    /**
+     * Converts inline code tag into HTML form.
+     * @param builder to append
+     * @param inlineTag to format
+     * @throws CheckstyleException if the inline javadoc tag is not a literal nor a code tag
+     */
+    private static void formatInlineCodeTag(StringBuilder builder, DetailNode inlineTag)
+            throws CheckstyleException {
+        boolean wrapWithCodeTag = false;
+        for (DetailNode node : inlineTag.getChildren()) {
+            switch (node.getType()) {
+                case JavadocTokenTypes.CODE_LITERAL:
+                    wrapWithCodeTag = true;
+                    break;
+                // The text to append.
+                case JavadocTokenTypes.TEXT:
+                    if (wrapWithCodeTag) {
+                        builder.append("<code>").append(node.getText()).append("</code>");
+                    }
+                    else {
+                        builder.append(node.getText());
+                    }
+                    break;
+                // Empty content tags.
+                case JavadocTokenTypes.LITERAL_LITERAL:
+                case JavadocTokenTypes.JAVADOC_INLINE_TAG_START:
+                case JavadocTokenTypes.JAVADOC_INLINE_TAG_END:
+                case JavadocTokenTypes.WS:
+                    break;
+                default:
+                    throw new CheckstyleException("Unsupported inline tag "
+                        + JavadocUtils.getTokenName(node.getType()));
+            }
+        }
+    }
+

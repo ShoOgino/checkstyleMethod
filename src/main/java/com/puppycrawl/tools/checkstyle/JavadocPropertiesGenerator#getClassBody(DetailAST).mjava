@@ -1,0 +1,17 @@
+    /**
+     * Finds the class body of the first class in the DetailAST.
+     * @param top AST to find the class body
+     * @return OBJBLOCK token if found; {@code null} otherwise
+     */
+    private static DetailAST getClassBody(DetailAST top) {
+        DetailAST ast = top;
+        while (ast != null && ast.getType() != TokenTypes.CLASS_DEF) {
+            ast = ast.getNextSibling();
+        }
+        DetailAST objBlock = null;
+        if (ast != null) {
+            objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
+        }
+        return objBlock;
+    }
+

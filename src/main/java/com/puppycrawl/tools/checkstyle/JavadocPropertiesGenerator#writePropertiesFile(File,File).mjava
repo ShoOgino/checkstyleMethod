@@ -1,0 +1,27 @@
+    /**
+     * Creates the .properties file from a .java file.
+     * @param inputFile .java file
+     * @param outputFile .properties file
+     * @throws CheckstyleException if a javadoc comment can not be parsed
+     */
+    private static void writePropertiesFile(File inputFile, File outputFile)
+            throws CheckstyleException {
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(outputFile, StandardCharsets.UTF_8.name());
+
+            final DetailAST top = JavaParser.parseFile(inputFile, JavaParser.Options.WITH_COMMENTS);
+            final DetailAST objBlock = getClassBody(top);
+            if (objBlock != null) {
+                iteratePublicStaticIntFields(objBlock, writer::println);
+            }
+        }
+        catch (IOException ex) {
+            throw new CheckstyleException("Failed to write javadoc properties of '" + inputFile
+                + "' to '" + outputFile + "'", ex);
+        }
+        finally {
+            CommonUtils.close(writer);
+        }
+    }
+
