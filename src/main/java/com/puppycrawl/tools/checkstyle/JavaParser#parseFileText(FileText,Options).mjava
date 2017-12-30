@@ -1,0 +1,17 @@
+    /**
+     * Parse a text and return the parse tree.
+     * @param text the text to parse
+     * @param options {@link Options} to control inclusion of comment nodes
+     * @return the root node of the parse tree
+     * @throws CheckstyleException if the text is not a valid Java source
+     */
+    public static DetailAST parseFileText(FileText text, Options options)
+            throws CheckstyleException {
+        final FileContents contents = new FileContents(text);
+        DetailAST ast = parse(contents);
+        if (options == Options.WITH_COMMENTS) {
+            ast = appendHiddenCommentNodes(ast);
+        }
+        return ast;
+    }
+

@@ -7,7 +7,7 @@
         final LocalizedMessage message = new LocalizedMessage(3, 0, TokenTypes.CLASS_DEF, "", "",
                 null, null, "777", getClass(), null);
         final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(null, "file1.java",
-                message, TestUtil.parseFile(file));
+                message, JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS));
 
         assertFalse("TreeWalker audit event should be rejected",
                 filter.accept(ev));

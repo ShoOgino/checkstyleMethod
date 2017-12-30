@@ -1,4 +1,5 @@
     private DetailAST getNodeFromFile(int type) throws Exception {
-        return getNode(parseFile(new File(getPath("InputCheckUtilsTest.java"))), type);
+        return getNode(JavaParser.parseFile(new File(getPath("InputCheckUtilsTest.java")),
+            JavaParser.Options.WITH_COMMENTS), type);
     }
 

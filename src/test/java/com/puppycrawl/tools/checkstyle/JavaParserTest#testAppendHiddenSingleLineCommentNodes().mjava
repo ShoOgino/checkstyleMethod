@@ -1,7 +1,8 @@
     @Test
     public void testAppendHiddenSingleLineCommentNodes() throws Exception {
         final DetailAST root =
-            TestUtil.parseFile(new File(getPath("InputTreeWalkerHiddenComments.java")));
+            JavaParser.parseFile(new File(getPath("InputJavaParserHiddenComments.java")),
+                JavaParser.Options.WITH_COMMENTS);
 
         final Optional<DetailAST> singleLineComment = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.SINGLE_LINE_COMMENT);

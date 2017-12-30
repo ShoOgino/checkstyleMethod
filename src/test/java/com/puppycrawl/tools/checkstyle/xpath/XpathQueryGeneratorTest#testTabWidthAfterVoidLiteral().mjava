@@ -3,7 +3,8 @@
         final File testFile = new File(getPath("InputXpathQueryGeneratorTabWidth.java"));
         final FileText testFileText = new FileText(testFile,
                 StandardCharsets.UTF_8.name());
-        final DetailAST detailAst = TestUtil.parseFile(testFile);
+        final DetailAST detailAst =
+                JavaParser.parseFile(testFile, JavaParser.Options.WITHOUT_COMMENTS);
         final int lineNumber = 8;
         final int columnNumber = 41;
         final int tabWidth = 8;

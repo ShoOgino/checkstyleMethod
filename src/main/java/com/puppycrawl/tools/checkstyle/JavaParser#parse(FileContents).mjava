@@ -1,32 +1,33 @@
     /**
      * Static helper method to parses a Java source file.
-     *
-     * @param contents
-     *                contains the contents of the file
+     * @param contents contains the contents of the file
      * @return the root of the AST
-     * @throws TokenStreamException
-     *                 if lexing failed
-     * @throws RecognitionException
-     *                 if parsing failed
+     * @throws CheckstyleException if the contents is not a valid Java source
      */
     public static DetailAST parse(FileContents contents)
-            throws RecognitionException, TokenStreamException {
+            throws CheckstyleException {
         final String fullText = contents.getText().getFullText().toString();
         final Reader reader = new StringReader(fullText);
         final GeneratedJavaLexer lexer = new GeneratedJavaLexer(reader);
         lexer.setCommentListener(contents);
         lexer.setTokenObjectClass("antlr.CommonHiddenStreamToken");
 
-        final TokenStreamHiddenTokenFilter filter =
-                new TokenStreamHiddenTokenFilter(lexer);
+        final TokenStreamHiddenTokenFilter filter = new TokenStreamHiddenTokenFilter(lexer);
         filter.hide(TokenTypes.SINGLE_LINE_COMMENT);
         filter.hide(TokenTypes.BLOCK_COMMENT_BEGIN);
 
-        final GeneratedJavaRecognizer parser =
-            new GeneratedJavaRecognizer(filter);
+        final GeneratedJavaRecognizer parser = new GeneratedJavaRecognizer(filter);
         parser.setFilename(contents.getFileName());
         parser.setASTNodeClass(DetailAST.class.getName());
-        parser.compilationUnit();
+        try {
+            parser.compilationUnit();
+        }
+        catch (RecognitionException | TokenStreamException ex) {
+            final String exceptionMsg = String.format(Locale.ROOT,
+                "%s occurred while parsing file %s.",
+                ex.getClass().getSimpleName(), contents.getFileName());
+            throw new CheckstyleException(exceptionMsg, ex);
+        }
 
         return (DetailAST) parser.getAST();
     }

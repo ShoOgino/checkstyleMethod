@@ -13,11 +13,11 @@
 
                 switch (parseMode) {
                     case PLAIN_JAVA:
-                        parseTree = parseFile(file);
+                        parseTree = JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS);
                         break;
                     case JAVA_WITH_COMMENTS:
                     case JAVA_WITH_JAVADOC_AND_COMMENTS:
-                        parseTree = parseFileWithComments(file);
+                        parseTree = JavaParser.parseFile(file, JavaParser.Options.WITH_COMMENTS);
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown mode: " + parseMode);
@@ -40,7 +40,7 @@
                 linesToPosition = ImmutableList.copyOf(linesToPositionTemp);
                 text = sb.toString();
             }
-            catch (IOException | ANTLRException ex) {
+            catch (IOException ex) {
                 final String exceptionMsg = String.format(Locale.ROOT,
                     "%s occurred while opening file %s.",
                     ex.getClass().getSimpleName(), file.getPath());

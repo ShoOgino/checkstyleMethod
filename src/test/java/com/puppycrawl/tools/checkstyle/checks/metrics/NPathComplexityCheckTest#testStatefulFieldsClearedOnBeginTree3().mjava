@@ -2,7 +2,8 @@
     public void testStatefulFieldsClearedOnBeginTree3() throws Exception {
         final NPathComplexityCheck check = new NPathComplexityCheck();
         final Optional<DetailAST> question = TestUtil.findTokenInAstByPredicate(
-            TestUtil.parseFile(new File(getPath("InputNPathComplexity.java"))),
+            JavaParser.parseFile(new File(getPath("InputNPathComplexity.java")),
+                JavaParser.Options.WITHOUT_COMMENTS),
             ast -> ast.getType() == TokenTypes.QUESTION);
 
         Assert.assertTrue("Ast should contain QUESTION", question.isPresent());

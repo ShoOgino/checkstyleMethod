@@ -1,6 +1,6 @@
     private RootNode getRootNode(String fileName) throws Exception {
         final File file = new File(getPath(fileName));
-        final DetailAST rootAst = TestUtil.parseFile(file);
+        final DetailAST rootAst = JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS);
         return new RootNode(rootAst);
     }
 

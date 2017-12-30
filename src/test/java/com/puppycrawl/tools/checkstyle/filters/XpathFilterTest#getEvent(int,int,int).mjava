@@ -4,6 +4,6 @@
                 new LocalizedMessage(line, column, tokenType, "", "", null, null, null,
                         getClass(), null);
         return new TreeWalkerAuditEvent(fileContents, file.getName(), message,
-                TestUtil.parseFile(file));
+                JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS));
     }
 

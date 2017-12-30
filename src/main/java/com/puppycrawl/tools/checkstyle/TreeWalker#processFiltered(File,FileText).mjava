@@ -1,45 +1,26 @@
     @Override
     protected void processFiltered(File file, FileText fileText) throws CheckstyleException {
         // check if already checked and passed the file
-        if (CommonUtils.matchesFileExtension(file, getFileExtensions())) {
-            final String msg = "%s occurred during the analysis of file %s.";
-            final String fileName = file.getPath();
-
-            try {
-                if (!ordinaryChecks.isEmpty()
-                        || !commentChecks.isEmpty()) {
-                    final FileContents contents = new FileContents(fileText);
-                    final DetailAST rootAST = parse(contents);
-
-                    if (!ordinaryChecks.isEmpty()) {
-                        walk(rootAST, contents, AstState.ORDINARY);
-                    }
-                    if (!commentChecks.isEmpty()) {
-                        final DetailAST astWithComments = appendHiddenCommentNodes(rootAST);
-
-                        walk(astWithComments, contents, AstState.WITH_COMMENTS);
-                    }
-                    if (filters.isEmpty()) {
-                        addMessages(messages);
-                    }
-                    else {
-                        final SortedSet<LocalizedMessage> filteredMessages =
-                            getFilteredMessages(fileName, contents, rootAST);
-                        addMessages(filteredMessages);
-                    }
-                    messages.clear();
-                }
+        if (CommonUtils.matchesFileExtension(file, getFileExtensions())
+                && (!ordinaryChecks.isEmpty() || !commentChecks.isEmpty())) {
+            final FileContents contents = new FileContents(fileText);
+            final DetailAST rootAST = JavaParser.parse(contents);
+            if (!ordinaryChecks.isEmpty()) {
+                walk(rootAST, contents, AstState.ORDINARY);
             }
-            catch (final TokenStreamRecognitionException tre) {
-                final String exceptionMsg = String.format(Locale.ROOT, msg,
-                        "TokenStreamRecognitionException", fileName);
-                throw new CheckstyleException(exceptionMsg, tre);
+            if (!commentChecks.isEmpty()) {
+                final DetailAST astWithComments = JavaParser.appendHiddenCommentNodes(rootAST);
+                walk(astWithComments, contents, AstState.WITH_COMMENTS);
             }
-            catch (RecognitionException | TokenStreamException ex) {
-                final String exceptionMsg = String.format(Locale.ROOT, msg,
-                        ex.getClass().getSimpleName(), fileName);
-                throw new CheckstyleException(exceptionMsg, ex);
+            if (filters.isEmpty()) {
+                addMessages(messages);
             }
+            else {
+                final SortedSet<LocalizedMessage> filteredMessages =
+                    getFilteredMessages(file.getPath(), contents, rootAST);
+                addMessages(filteredMessages);
+            }
+            messages.clear();
         }
     }
 
