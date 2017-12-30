@@ -3,8 +3,10 @@
         boolean accepted = true;
         if (event.getLocalizedMessage() != null) {
             final FileText fileText = getFileText(event.getFileName());
-            final List<Suppression> suppressions = getSuppressions(fileText);
-            accepted = getNearestSuppression(suppressions, event) == null;
+            if (fileText != null) {
+                final List<Suppression> suppressions = getSuppressions(fileText);
+                accepted = getNearestSuppression(suppressions, event) == null;
+            }
         }
         return accepted;
     }
