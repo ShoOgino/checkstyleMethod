@@ -11,7 +11,6 @@
         // exceptions.
         if (ast.getType() == TokenTypes.METHOD_DEF
                 && ast.getChildCount() == SETTER_GETTER_MAX_CHILDREN) {
-
             final DetailAST type = ast.findFirstToken(TokenTypes.TYPE);
             final String name = type.getNextSibling().getText();
             final boolean matchesSetterFormat = SETTER_PATTERN.matcher(name).matches();
