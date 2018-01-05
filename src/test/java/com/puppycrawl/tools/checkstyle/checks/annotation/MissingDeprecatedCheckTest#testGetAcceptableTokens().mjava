@@ -1,6 +1,8 @@
-    @Override
-    public int[] getRequiredTokens() {
-        return new int[] {
+    @Test
+    public void testGetAcceptableTokens() {
+        final MissingDeprecatedCheck missingDeprecatedCheck =
+                new MissingDeprecatedCheck();
+        final int[] expected = {
             TokenTypes.INTERFACE_DEF,
             TokenTypes.CLASS_DEF,
             TokenTypes.ANNOTATION_DEF,
@@ -11,5 +13,8 @@
             TokenTypes.ENUM_CONSTANT_DEF,
             TokenTypes.ANNOTATION_FIELD_DEF,
         };
+
+        assertArrayEquals("Default acceptable tokens are invalid",
+                expected, missingDeprecatedCheck.getAcceptableTokens());
     }
 
