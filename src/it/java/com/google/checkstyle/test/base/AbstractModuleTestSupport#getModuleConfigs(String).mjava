@@ -3,12 +3,10 @@
      * This implementation uses {@link AbstractModuleTestSupport#getConfiguration()} method inside.
      * @param moduleName module name.
      * @return {@link Configuration} instance for the given module name.
-     * @throws CheckstyleException if exception occurs during configuration loading.
      */
-    protected static List<Configuration> getModuleConfigs(String moduleName)
-            throws CheckstyleException {
+    protected static List<Configuration> getModuleConfigs(String moduleName) {
         final List<Configuration> result = new ArrayList<>();
-        for (Configuration currentConfig : getConfiguration().getChildren()) {
+        for (Configuration currentConfig : CONFIGURATION.getChildren()) {
             if ("TreeWalker".equals(currentConfig.getName())) {
                 for (Configuration moduleConfig : currentConfig.getChildren()) {
                     if (moduleName.equals(moduleConfig.getName())) {

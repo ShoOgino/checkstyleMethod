@@ -6,14 +6,10 @@
      */
     public final Checker createChecker(Configuration moduleConfig)
             throws Exception {
-        if (checkstyleModules == null) {
-            checkstyleModules = CheckUtil.getCheckstyleModules();
-        }
-
         final String name = moduleConfig.getName();
         ModuleCreationOption moduleCreationOption = ModuleCreationOption.IN_CHECKER;
 
-        for (Class<?> moduleClass : checkstyleModules) {
+        for (Class<?> moduleClass : CHECKSTYLE_MODULES) {
             if (moduleClass.getSimpleName().equals(name)
                     || moduleClass.getSimpleName().equals(name + "Check")) {
                 if (ModuleReflectionUtils.isCheckstyleTreeWalkerCheck(moduleClass)
