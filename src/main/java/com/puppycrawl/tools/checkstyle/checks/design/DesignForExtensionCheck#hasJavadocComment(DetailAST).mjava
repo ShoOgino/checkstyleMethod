@@ -4,7 +4,7 @@
      * @return true if a method has a javadoc comment.
      */
     private static boolean hasJavadocComment(DetailAST methodDef) {
-        final DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
-        return modifiers.branchContains(TokenTypes.BLOCK_COMMENT_BEGIN);
+        return hasJavadocCommentOnToken(methodDef, TokenTypes.MODIFIERS)
+                || hasJavadocCommentOnToken(methodDef, TokenTypes.TYPE);
     }
 
