@@ -14,12 +14,22 @@
         // ensure there is no conflicting options
         else if (cmdLine.hasOption(OPTION_T_NAME) || cmdLine.hasOption(OPTION_CAPITAL_T_NAME)
                 || cmdLine.hasOption(OPTION_J_NAME) || cmdLine.hasOption(OPTION_CAPITAL_J_NAME)) {
-            if (cmdLine.hasOption(OPTION_C_NAME) || cmdLine.hasOption(OPTION_P_NAME)
-                    || cmdLine.hasOption(OPTION_F_NAME) || cmdLine.hasOption(OPTION_O_NAME)) {
+            if (cmdLine.hasOption(OPTION_S_NAME) || cmdLine.hasOption(OPTION_C_NAME)
+                    || cmdLine.hasOption(OPTION_P_NAME) || cmdLine.hasOption(OPTION_F_NAME)
+                    || cmdLine.hasOption(OPTION_O_NAME)) {
                 result.add("Option '-t' cannot be used with other options.");
             }
             else if (filesToProcess.size() > 1) {
                 result.add("Printing AST is allowed for only one file.");
+            }
+        }
+        else if (cmdLine.hasOption(OPTION_S_NAME)) {
+            if (cmdLine.hasOption(OPTION_C_NAME) || cmdLine.hasOption(OPTION_P_NAME)
+                    || cmdLine.hasOption(OPTION_F_NAME) || cmdLine.hasOption(OPTION_O_NAME)) {
+                result.add("Option '-s' cannot be used with other options.");
+            }
+            else if (filesToProcess.size() > 1) {
+                result.add("Printing xpath suppressions is allowed for only one file.");
             }
         }
         // ensure a configuration file is specified

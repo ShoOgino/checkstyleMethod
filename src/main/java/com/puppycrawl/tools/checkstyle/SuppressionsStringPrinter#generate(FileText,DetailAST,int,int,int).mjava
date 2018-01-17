@@ -1,0 +1,19 @@
+    /**
+     * Creates {@code XpathQueryGenerator} instance and generates suppressions.
+     * @param fileText {@code FileText} object.
+     * @param detailAST {@code DetailAST} object.
+     * @param lineNumber line number.
+     * @param columnNumber column number.
+     * @param tabWidth length of the tab character.
+     * @return generated suppressions.
+     */
+    private static String generate(FileText fileText, DetailAST detailAST, int lineNumber,
+                                   int columnNumber, int tabWidth) {
+        final XpathQueryGenerator queryGenerator =
+                new XpathQueryGenerator(detailAST, lineNumber, columnNumber, fileText,
+                        tabWidth);
+        final List<String> suppressions = queryGenerator.generate();
+        return suppressions.stream().collect(Collectors.joining(LINE_SEPARATOR,
+                "", LINE_SEPARATOR));
+    }
+

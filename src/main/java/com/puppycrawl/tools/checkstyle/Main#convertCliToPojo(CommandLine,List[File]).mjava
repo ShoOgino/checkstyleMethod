@@ -13,6 +13,7 @@
         conf.outputLocation = cmdLine.getOptionValue(OPTION_O_NAME);
         conf.configLocation = cmdLine.getOptionValue(OPTION_C_NAME);
         conf.propertiesLocation = cmdLine.getOptionValue(OPTION_P_NAME);
+        conf.suppressionLineColumnNumber = cmdLine.getOptionValue(OPTION_S_NAME);
         conf.files = filesToProcess;
         conf.executeIgnoredModules = cmdLine.hasOption(OPTION_EXECUTE_IGNORED_MODULES_NAME);
         final String checkerThreadsNumber = cmdLine.getOptionValue(
@@ -21,6 +22,9 @@
         final String treeWalkerThreadsNumber = cmdLine.getOptionValue(
                 OPTION_CAPITAL_W_NAME, ONE_STRING_VALUE);
         conf.treeWalkerThreadsNumber = Integer.parseInt(treeWalkerThreadsNumber);
+        final String tabWidth =
+                cmdLine.getOptionValue(OPTION_TAB_WIDTH_NAME, DEFAULT_TAB_WIDTH);
+        conf.tabWidth = Integer.parseInt(tabWidth);
         return conf;
     }
 
