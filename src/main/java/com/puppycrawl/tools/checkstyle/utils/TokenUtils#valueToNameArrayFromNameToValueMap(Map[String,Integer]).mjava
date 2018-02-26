@@ -1,0 +1,23 @@
+    /**
+     * Creates an array of map keys for quick value-to-name lookup for the map.
+     * @param map source map
+     * @return array of map keys
+     */
+    public static String[] valueToNameArrayFromNameToValueMap(Map<String, Integer> map) {
+        String[] valueToNameArray = CommonUtils.EMPTY_STRING_ARRAY;
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            final int value = entry.getValue();
+            // JavadocTokenTypes.EOF has value '-1' and is handled explicitly.
+            if (value >= 0) {
+                if (value >= valueToNameArray.length) {
+                    final String[] temp = new String[value + 1];
+                    System.arraycopy(valueToNameArray, 0, temp, 0, valueToNameArray.length);
+                    valueToNameArray = temp;
+                }
+                valueToNameArray[value] = entry.getKey();
+            }
+        }
+        return valueToNameArray;
+    }
+
