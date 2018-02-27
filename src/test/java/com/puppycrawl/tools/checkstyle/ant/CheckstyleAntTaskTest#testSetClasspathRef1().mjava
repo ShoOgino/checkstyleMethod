@@ -9,7 +9,7 @@
         try {
             assertNotNull("Classpath should not be null",
                     Whitebox.getInternalState(antTask, "classpath"));
-            final Path classpath = (Path) Whitebox.getInternalState(antTask, "classpath");
+            final Path classpath = Whitebox.getInternalState(antTask, "classpath");
             classpath.list();
             fail("Exception is expected");
         }

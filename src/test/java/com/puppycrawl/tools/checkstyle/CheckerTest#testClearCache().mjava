@@ -15,8 +15,7 @@
         checker.process(Collections.singletonList(new File("dummy.java")));
         checker.clearCache();
         // invoke destroy to persist cache
-        final PropertyCacheFile cache =
-                (PropertyCacheFile) Whitebox.getInternalState(checker, "cacheFile");
+        final PropertyCacheFile cache = Whitebox.getInternalState(checker, "cacheFile");
         cache.persist();
 
         final Properties cacheAfterClear = new Properties();

@@ -1,5 +1,4 @@
     @Test
-    @SuppressWarnings("unchecked")
     public void testSetupChildListener() throws Exception {
         final Checker checker = new Checker();
         final PackageObjectFactory factory = new PackageObjectFactory(
@@ -10,8 +9,7 @@
             DebugAuditAdapter.class.getCanonicalName());
         checker.setupChild(config);
 
-        final List<AuditListener> listeners =
-            (List<AuditListener>) Whitebox.getInternalState(checker, "listeners");
+        final List<AuditListener> listeners = Whitebox.getInternalState(checker, "listeners");
         assertTrue("Invalid child listener class",
             listeners.get(listeners.size() - 1) instanceof DebugAuditAdapter);
     }

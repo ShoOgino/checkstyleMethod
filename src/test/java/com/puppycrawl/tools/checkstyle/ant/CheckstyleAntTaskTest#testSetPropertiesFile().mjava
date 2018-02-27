@@ -15,7 +15,7 @@
 
         assertEquals("Property is not set",
                 "ignore", TestRootModuleChecker.getProperty());
-        verifyStatic(times(1));
+        verifyStatic(Closeables.class, times(1));
         Closeables.closeQuietly(any(InputStream.class));
     }
 

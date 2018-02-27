@@ -14,7 +14,7 @@
         final InputStream inputStreamMock = mock(InputStream.class);
         when(classloader.getResource(resource)).thenReturn(url);
         when(mockUrlCon.getInputStream()).thenReturn(inputStreamMock);
-        when(inputStreamMock.read(anyObject(), anyInt(), anyInt())).thenReturn(-1);
+        when(inputStreamMock.read(any(), anyInt(), anyInt())).thenReturn(-1);
 
         final LocalizedMessage.Utf8Control control = new LocalizedMessage.Utf8Control();
         control.newBundle("com.puppycrawl.tools.checkstyle.checks.coding.messages",

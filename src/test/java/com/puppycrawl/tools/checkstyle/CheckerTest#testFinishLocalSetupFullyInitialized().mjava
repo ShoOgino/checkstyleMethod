@@ -11,7 +11,7 @@
         checker.setLocaleCountry("IT");
         checker.finishLocalSetup();
 
-        final Context context = (Context) Whitebox.getInternalState(checker, "childContext");
+        final Context context = Whitebox.getInternalState(checker, "childContext");
         assertEquals("Charset was different than expected",
                 System.getProperty("file.encoding", StandardCharsets.UTF_8.name()),
                 context.get("charset"));

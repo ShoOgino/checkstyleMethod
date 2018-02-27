@@ -22,7 +22,7 @@
                     ex.getCause() instanceof IllegalStateException);
         }
         finally {
-            verifyStatic(times(1));
+            verifyStatic(CommonUtils.class, times(1));
             final ArgumentCaptor<OutputStream> out =
                     ArgumentCaptor.forClass(OutputStream.class);
             CommonUtils.close(out.capture());

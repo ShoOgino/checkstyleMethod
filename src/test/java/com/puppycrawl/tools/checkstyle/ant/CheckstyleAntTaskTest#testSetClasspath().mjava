@@ -9,7 +9,7 @@
 
         assertNotNull("Classpath should not be null",
                 Whitebox.getInternalState(antTask, "classpath"));
-        final Path classpath = (Path) Whitebox.getInternalState(antTask, "classpath");
+        final Path classpath = Whitebox.getInternalState(antTask, "classpath");
         assertTrue("Classpath contain provided path", classpath.toString().contains(path1));
         assertTrue("Classpath contain provided path", classpath.toString().contains(path2));
     }

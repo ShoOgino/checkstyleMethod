@@ -19,7 +19,7 @@
                 getPath("InputNewlineAtEndOfFileLf.java"),
                 expected);
 
-        verifyStatic(times(1));
+        verifyStatic(Closeables.class, times(1));
         Closeables.close(any(RandomAccessFile.class), anyBoolean());
     }
 

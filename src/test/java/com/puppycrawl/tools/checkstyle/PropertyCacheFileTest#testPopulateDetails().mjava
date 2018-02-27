@@ -20,7 +20,7 @@
         assertNotNull("Config hash key should not be null",
                 cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
 
-        verifyStatic(times(2));
+        verifyStatic(Closeables.class, times(2));
         Closeables.closeQuietly(any(FileInputStream.class));
     }
 

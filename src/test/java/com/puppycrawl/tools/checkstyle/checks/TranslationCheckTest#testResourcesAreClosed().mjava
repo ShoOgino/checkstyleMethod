@@ -24,7 +24,7 @@
             propertyFiles,
             getPath(""),
             expected);
-        verifyStatic(times(2));
-        Closeables.closeQuietly(any(FileInputStream.class));
+        verifyStatic(Closeables.class, times(2));
+        Closeables.closeQuietly(any(InputStream.class));
     }
 

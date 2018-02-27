@@ -2,7 +2,7 @@
     public void testIoExceptionWhenLoadingHeader() throws Exception {
         final HeaderCheck check = PowerMockito.spy(new HeaderCheck());
         PowerMockito.doThrow(new IOException("expected exception")).when(check, "loadHeader",
-                anyObject());
+                any());
 
         try {
             check.setHeader("header");

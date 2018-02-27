@@ -14,7 +14,7 @@
                 .currentThread().getContextClassLoader(), "", imports));
 
         PowerMockito.doThrow(new NoClassDefFoundError("expected exception"))
-                .when(classResolver, "safeLoad", anyObject());
+                .when(classResolver, "safeLoad", any());
 
         final boolean result = classResolver.isLoadable("someClass");
         assertFalse("result should be false", result);

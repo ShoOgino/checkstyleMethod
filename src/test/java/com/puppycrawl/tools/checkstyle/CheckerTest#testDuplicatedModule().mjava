@@ -14,8 +14,7 @@
         checker.configure(root);
         // BriefUtLogger does not print the module name or id postfix,
         // so we need to set logger manually
-        final ByteArrayOutputStream out =
-                (ByteArrayOutputStream) Whitebox.getInternalState(this, "stream");
+        final ByteArrayOutputStream out = Whitebox.getInternalState(this, "stream");
         final DefaultLogger logger =
                 new DefaultLogger(out, true, out, false, new AuditEventDefaultFormatter());
         checker.addListener(logger);

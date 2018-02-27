@@ -10,7 +10,7 @@
                 charsetName);
         assertEquals("Invalid charset name", charsetName, fileText.getCharset().name());
 
-        verifyStatic(times(2));
+        verifyStatic(CommonUtils.class, times(2));
         CommonUtils.close(any(Reader.class));
     }
 

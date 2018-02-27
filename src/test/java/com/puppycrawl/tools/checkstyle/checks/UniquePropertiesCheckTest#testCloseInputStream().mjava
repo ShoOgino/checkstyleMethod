@@ -14,7 +14,7 @@
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputUniquePropertiesWithoutErrors.properties"), expected);
 
-        verifyStatic(times(1));
+        verifyStatic(Closeables.class, times(1));
         Closeables.closeQuietly(any(FileInputStream.class));
     }
 
