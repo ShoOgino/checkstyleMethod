@@ -17,6 +17,9 @@
                 indentLevel = new IndentLevel(container.getIndent(), getBasicOffset());
             }
         }
+        else if (getMainAst().getFirstChild().getType() == TokenTypes.LITERAL_NEW) {
+            indentLevel = super.getIndentImpl();
+        }
         else {
             // if our expression isn't first on the line, just use the start
             // of the line

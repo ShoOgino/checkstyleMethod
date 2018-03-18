@@ -1,11 +1,19 @@
     @Override
     public void checkIndentation() {
-        final DetailAST exprNode = getMainAst().getParent();
-        if (exprNode.getParent().getType() == TokenTypes.SLIST) {
-            final DetailAST methodName = getMainAst().getFirstChild();
-            checkExpressionSubtree(methodName, getIndent(), false, false);
+        DetailAST lparen = null;
+        if (getMainAst().getType() == TokenTypes.METHOD_CALL) {
+            final DetailAST exprNode = getMainAst().getParent();
+            if (exprNode.getParent().getType() == TokenTypes.SLIST) {
+                checkExpressionSubtree(getMainAst().getFirstChild(), getIndent(), false, false);
+                lparen = getMainAst();
+            }
+        }
+        else {
+            // TokenTypes.CTOR_CALL|TokenTypes.SUPER_CTOR_CALL
+            lparen = getMainAst().getFirstChild();
+        }
 
-            final DetailAST lparen = getMainAst();
+        if (lparen != null) {
             final DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
             checkLeftParen(lparen);
 
@@ -16,7 +24,7 @@
                     false, true);
 
                 checkRightParen(lparen, rparen);
-                checkWrappingIndentation(getMainAst(), getMethodCallLastNode(getMainAst()));
+                checkWrappingIndentation(getMainAst(), getCallLastNode(getMainAst()));
             }
         }
     }
