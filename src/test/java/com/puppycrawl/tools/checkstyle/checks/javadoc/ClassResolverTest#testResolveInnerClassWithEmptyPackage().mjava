@@ -7,9 +7,10 @@
 
         try {
             classResolver.resolve("Entry", "Map");
-            fail("Exception is expected");
+            fail("ClassNotFoundException is expected");
         }
         catch (ClassNotFoundException ex) {
+            // exception is expected
             assertEquals("Invalid exception message", "Entry", ex.getMessage());
         }
     }

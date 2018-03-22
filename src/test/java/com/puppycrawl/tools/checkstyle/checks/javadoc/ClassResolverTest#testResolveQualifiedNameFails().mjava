@@ -12,10 +12,10 @@
 
         try {
             classResolver.resolve("someClass", "");
-            fail("Exception expected");
+            fail("IllegalStateException is expected");
         }
         catch (IllegalStateException ex) {
-            // expected
+            // exception is expected
             final String expected = "expected exception";
             assertTrue("Invalid exception cause, should be: ClassNotFoundException",
                     ex.getCause() instanceof ClassNotFoundException);
