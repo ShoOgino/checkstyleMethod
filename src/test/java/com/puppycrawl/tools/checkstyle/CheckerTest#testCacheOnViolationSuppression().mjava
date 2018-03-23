@@ -16,7 +16,7 @@
 
         verify(checkerConfig, fileViolationPath, expected);
 
-        try (FileInputStream input = new FileInputStream(cacheFile)) {
+        try (InputStream input = Files.newInputStream(cacheFile.toPath())) {
             final Properties details = new Properties();
             details.load(input);
 

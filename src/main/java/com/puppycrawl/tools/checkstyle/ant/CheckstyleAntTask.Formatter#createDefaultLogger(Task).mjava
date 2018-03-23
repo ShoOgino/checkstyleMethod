@@ -16,7 +16,7 @@
                 );
             }
             else {
-                final FileOutputStream infoStream = new FileOutputStream(toFile);
+                final OutputStream infoStream = Files.newOutputStream(toFile.toPath());
                 defaultLogger =
                         new DefaultLogger(infoStream, AutomaticBean.OutputStreamOptions.CLOSE,
                                 infoStream, AutomaticBean.OutputStreamOptions.NONE);

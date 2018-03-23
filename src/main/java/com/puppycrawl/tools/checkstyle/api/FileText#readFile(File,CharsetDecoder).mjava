@@ -11,7 +11,7 @@
             throw new FileNotFoundException(inputFile.getPath() + " (No such file or directory)");
         }
         final StringBuilder buf = new StringBuilder(1024);
-        final FileInputStream stream = new FileInputStream(inputFile);
+        final InputStream stream = Files.newInputStream(inputFile.toPath());
         final Reader reader = new InputStreamReader(stream, decoder);
         try {
             final char[] chars = new char[READ_BUFFER_SIZE];

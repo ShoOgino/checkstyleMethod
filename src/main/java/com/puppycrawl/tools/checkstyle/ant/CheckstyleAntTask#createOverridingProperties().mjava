@@ -9,9 +9,9 @@
 
         // Load the properties file if specified
         if (properties != null) {
-            FileInputStream inStream = null;
+            InputStream inStream = null;
             try {
-                inStream = new FileInputStream(properties);
+                inStream = Files.newInputStream(properties.toPath());
                 returnValue.load(inStream);
             }
             catch (final IOException ex) {

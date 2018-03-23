@@ -2,8 +2,8 @@
     public void testLoadConfigurationDeprecated() throws Exception {
         final DefaultConfiguration config =
                 (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
-                        new FileInputStream(
-                            getPath("InputConfigurationLoaderModuleIgnoreSeverity.xml")),
+                        Files.newInputStream(Paths.get(
+                            getPath("InputConfigurationLoaderModuleIgnoreSeverity.xml"))),
                         new PropertiesExpander(new Properties()), true);
 
         final Configuration[] children = config.getChildren();

@@ -8,13 +8,13 @@
     public void testCloseInputStream() throws Exception {
         mockStatic(Closeables.class);
         doNothing().when(Closeables.class);
-        Closeables.closeQuietly(any(FileInputStream.class));
+        Closeables.closeQuietly(any(InputStream.class));
 
         final DefaultConfiguration checkConfig = createModuleConfig(UniquePropertiesCheck.class);
         final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputUniquePropertiesWithoutErrors.properties"), expected);
 
         verifyStatic(Closeables.class, times(1));
-        Closeables.closeQuietly(any(FileInputStream.class));
+        Closeables.closeQuietly(any(InputStream.class));
     }
 

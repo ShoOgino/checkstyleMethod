@@ -6,10 +6,11 @@
         // get the current config so if the file isn't found
         // the first time the hash will be added to output file
         configHash = getHashCodeBasedOnObjectContent(config);
-        if (new File(fileName).exists()) {
-            FileInputStream inStream = null;
+        final File file = new File(fileName);
+        if (file.exists()) {
+            InputStream inStream = null;
             try {
-                inStream = new FileInputStream(fileName);
+                inStream = Files.newInputStream(file.toPath());
                 details.load(inStream);
                 final String cachedConfigHash = details.getProperty(CONFIG_HASH_KEY);
                 if (!configHash.equals(cachedConfigHash)) {

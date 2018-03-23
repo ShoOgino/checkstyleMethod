@@ -3,8 +3,7 @@
         final DefaultConfiguration checkConfig =
                 createModuleConfig(ConstantNameCheck.class);
         final File file = temporaryFolder.newFile("file.pdf");
-        try (BufferedWriter writer = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8))) {
+        try (Writer writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
             final String content = "public class Main { public static final int k = 5 + 4; }";
             writer.write(content);
         }

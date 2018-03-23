@@ -7,8 +7,8 @@
      */
     protected Integer[] getLinesWithWarn(String fileName) throws IOException {
         final List<Integer> result = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileInputStream(fileName), StandardCharsets.UTF_8))) {
+        try (BufferedReader br = Files.newBufferedReader(
+                Paths.get(fileName), StandardCharsets.UTF_8)) {
             int lineNumber = 1;
             while (true) {
                 final String line = br.readLine();

@@ -7,7 +7,7 @@
         Set<String> keys = new HashSet<>();
         InputStream inStream = null;
         try {
-            inStream = new FileInputStream(file);
+            inStream = Files.newInputStream(file.toPath());
             final Properties translations = new Properties();
             translations.load(inStream);
             keys = translations.stringPropertyNames();

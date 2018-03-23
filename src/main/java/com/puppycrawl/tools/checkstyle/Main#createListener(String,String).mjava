@@ -4,12 +4,11 @@
      * @param format format of the audit listener
      * @param outputLocation the location of output
      * @return a fresh new {@code AuditListener}
-     * @exception FileNotFoundException when provided output location is not found
-     * @noinspection IOResourceOpenedButNotSafelyClosed
+     * @exception IOException when provided output location is not found
      */
     private static AuditListener createListener(String format,
                                                 String outputLocation)
-            throws FileNotFoundException {
+            throws IOException {
         // setup the output stream
         final OutputStream out;
         final AutomaticBean.OutputStreamOptions closeOutputStream;
@@ -18,7 +17,7 @@
             closeOutputStream = AutomaticBean.OutputStreamOptions.NONE;
         }
         else {
-            out = new FileOutputStream(outputLocation);
+            out = Files.newOutputStream(Paths.get(outputLocation));
             closeOutputStream = AutomaticBean.OutputStreamOptions.CLOSE;
         }
 

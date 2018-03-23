@@ -2,7 +2,7 @@
     public void testPopulateDetails() throws IOException {
         mockStatic(Closeables.class);
         doNothing().when(Closeables.class);
-        Closeables.closeQuietly(any(FileInputStream.class));
+        Closeables.closeQuietly(any(InputStream.class));
 
         final Configuration config = new DefaultConfiguration("myName");
         final PropertyCacheFile cache = new PropertyCacheFile(config,
@@ -21,6 +21,6 @@
                 cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
 
         verifyStatic(Closeables.class, times(2));
-        Closeables.closeQuietly(any(FileInputStream.class));
+        Closeables.closeQuietly(any(InputStream.class));
     }
 

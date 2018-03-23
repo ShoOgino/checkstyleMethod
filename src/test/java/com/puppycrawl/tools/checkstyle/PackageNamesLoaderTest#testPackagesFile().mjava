@@ -14,7 +14,7 @@
 
         final URLConnection mockConnection = Mockito.mock(URLConnection.class);
         when(mockConnection.getInputStream()).thenReturn(
-            new FileInputStream(getPath("InputPackageNamesLoaderFile.xml")));
+            Files.newInputStream(Paths.get(getPath("InputPackageNamesLoaderFile.xml"))));
 
         final URL url = getMockUrl(mockConnection);
 

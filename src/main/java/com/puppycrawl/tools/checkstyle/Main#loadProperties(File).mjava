@@ -10,9 +10,9 @@
             throws CheckstyleException {
         final Properties properties = new Properties();
 
-        FileInputStream fis = null;
+        InputStream fis = null;
         try {
-            fis = new FileInputStream(file);
+            fis = Files.newInputStream(file.toPath());
             properties.load(fis);
         }
         catch (final IOException ex) {
