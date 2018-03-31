@@ -1,0 +1,17 @@
+    /**
+     * Returns method or constructor name. For {@code foo(arg)} it is `foo`, for
+     *     {@code foo.bar(arg)} it is `bar` for {@code super(arg)} it is 'super'.
+     *
+     * @return TokenTypes.IDENT node for a method call, TokenTypes.SUPER_CTOR_CALL otherwise.
+     */
+    private DetailAST getMethodIdentAst() {
+        DetailAST ast = getMainAst();
+        if (ast.getType() != TokenTypes.SUPER_CTOR_CALL) {
+            ast = ast.getFirstChild();
+            if (ast.getType() == TokenTypes.DOT) {
+                ast = ast.getLastChild();
+            }
+        }
+        return ast;
+    }
+

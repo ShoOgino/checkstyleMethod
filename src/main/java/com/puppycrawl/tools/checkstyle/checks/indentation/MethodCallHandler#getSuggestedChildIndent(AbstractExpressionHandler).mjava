@@ -6,10 +6,9 @@
         //                new String[] {"method"}).toString());
         // will not have the right line num, so just get the child name
 
-        final DetailAST first = getMainAst().getFirstChild();
-        IndentLevel suggestedLevel = new IndentLevel(getLineStart(first));
-        if (!areOnSameLine(child.getMainAst().getFirstChild(),
-                           getMainAst().getFirstChild())) {
+        final DetailAST ident = getMethodIdentAst();
+        IndentLevel suggestedLevel = new IndentLevel(getLineStart(ident));
+        if (!areOnSameLine(child.getMainAst().getFirstChild(), ident)) {
             suggestedLevel = new IndentLevel(suggestedLevel,
                     getBasicOffset(),
                     getIndentCheck().getLineWrappingIndentation());
