@@ -7,7 +7,7 @@
         String superClassName = null;
         final DetailAST classExtend = classAst.findFirstToken(TokenTypes.EXTENDS_CLAUSE);
         if (classExtend != null) {
-            superClassName = extractQualifiedName(classExtend);
+            superClassName = extractQualifiedName(classExtend.getFirstChild());
         }
         return superClassName;
     }
