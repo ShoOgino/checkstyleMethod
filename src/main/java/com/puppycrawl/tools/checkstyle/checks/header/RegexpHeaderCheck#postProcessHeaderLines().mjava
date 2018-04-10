@@ -3,7 +3,12 @@
         final List<String> headerLines = getHeaderLines();
         for (String line : headerLines) {
             try {
-                headerRegexps.add(Pattern.compile(line));
+                if (line.isEmpty()) {
+                    headerRegexps.add(BLANK_LINE);
+                }
+                else {
+                    headerRegexps.add(Pattern.compile(line));
+                }
             }
             catch (final PatternSyntaxException ex) {
                 throw new IllegalArgumentException("line "
