@@ -3,12 +3,12 @@
      * type. Returns 0 for types other than float, double, int, and long.
      * @param text the string to be parsed.
      * @param type the token type of the text. Should be a constant of
-     * {@link TokenTypes}.
+     *     {@link TokenTypes}.
      * @return the double value represented by the string argument.
      */
     public static double parseDouble(String text, int type) {
         String txt = UNDERSCORE_PATTERN.matcher(text).replaceAll("");
-        double result = 0;
+        final double result;
         switch (type) {
             case TokenTypes.NUM_FLOAT:
             case TokenTypes.NUM_DOUBLE:
@@ -21,23 +21,18 @@
                     radix = BASE_16;
                     txt = txt.substring(2);
                 }
-                else if (txt.charAt(0) == '0') {
+                else if (txt.startsWith("0b") || txt.startsWith("0B")) {
+                    radix = BASE_2;
+                    txt = txt.substring(2);
+                }
+                else if (CommonUtils.startsWithChar(txt, '0')) {
                     radix = BASE_8;
                     txt = txt.substring(1);
                 }
-                if (CommonUtils.endsWithChar(txt, 'L') || CommonUtils.endsWithChar(txt, 'l')) {
-                    txt = txt.substring(0, txt.length() - 1);
-                }
-                if (!txt.isEmpty()) {
-                    if (type == TokenTypes.NUM_INT) {
-                        result = parseInt(txt, radix);
-                    }
-                    else {
-                        result = parseLong(txt, radix);
-                    }
-                }
+                result = parseNumber(txt, radix, type);
                 break;
             default:
+                result = Double.NaN;
                 break;
         }
         return result;
