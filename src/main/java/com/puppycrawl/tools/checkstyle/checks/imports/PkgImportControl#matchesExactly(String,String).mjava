@@ -1,0 +1,12 @@
+    @Override
+    protected boolean matchesExactly(String pkg, String fileName) {
+        final boolean result;
+        if (regex) {
+            result = patternForExactMatch.matcher(pkg).matches();
+        }
+        else {
+            result = fullPackageName.equals(pkg);
+        }
+        return result;
+    }
+

@@ -1,10 +1,10 @@
     /**
      * Loads the import control file from a file.
      * @param uri the uri of the file to load.
-     * @return the root {@link ImportControl} object.
+     * @return the root {@link PkgImportControl} object.
      * @throws CheckstyleException if an error occurs.
      */
-    public static ImportControl load(URI uri) throws CheckstyleException {
+    public static PkgImportControl load(URI uri) throws CheckstyleException {
         try (InputStream inputStream = uri.toURL().openStream()) {
             final InputSource source = new InputSource(inputStream);
             return load(source, uri);

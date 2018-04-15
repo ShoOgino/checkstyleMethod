@@ -1,0 +1,29 @@
+    /**
+     * Construct a sub-package node. The concatenation of regular expressions needs special care:
+     * see {@link #ensureSelfContainedRegex(String, boolean)} for more details.
+     * @param parent the parent package.
+     * @param subPackageName the name of the current sub-package.
+     * @param regex flags interpretation of name as regex pattern.
+     * @param strategyOnMismatch strategy in a case if matching allow/disallow rule was not found.
+     */
+    PkgImportControl(PkgImportControl parent, String subPackageName, boolean regex,
+            MismatchStrategy strategyOnMismatch) {
+        super(parent, strategyOnMismatch);
+        if (regex || parent.regex) {
+            // regex gets inherited
+            final String parentRegex = ensureSelfContainedRegex(parent.fullPackageName,
+                    parent.regex);
+            final String thisRegex = ensureSelfContainedRegex(subPackageName, regex);
+            fullPackageName = parentRegex + DOT_REGEX + thisRegex;
+            patternForPartialMatch = createPatternForPartialMatch(fullPackageName);
+            patternForExactMatch = createPatternForExactMatch(fullPackageName);
+            this.regex = true;
+        }
+        else {
+            fullPackageName = parent.fullPackageName + DOT + subPackageName;
+            patternForPartialMatch = null;
+            patternForExactMatch = null;
+            this.regex = false;
+        }
+    }
+

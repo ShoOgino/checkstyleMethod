@@ -7,7 +7,7 @@
                 }
                 else {
                     packageName = getPackageText(ast);
-                    currentImportControl = root.locateFinest(packageName);
+                    currentImportControl = root.locateFinest(packageName, fileName);
                     if (currentImportControl == null) {
                         log(ast, MSG_UNKNOWN_PKG);
                     }
@@ -15,8 +15,8 @@
             }
             else if (currentImportControl != null) {
                 final String importText = getImportText(ast);
-                final AccessResult access =
-                        currentImportControl.checkAccess(packageName, importText);
+                final AccessResult access = currentImportControl.checkAccess(packageName, fileName,
+                        importText);
                 if (access != AccessResult.ALLOWED) {
                     log(ast, MSG_DISALLOWED, importText);
                 }

@@ -1,0 +1,19 @@
+    @Override
+    public AbstractImportControl locateFinest(String forPkg, String forFileName) {
+        AbstractImportControl finestMatch = null;
+        // Check if we are a match.
+        if (matchesAtFront(forPkg)) {
+            // If there won't be match so I am the best there is.
+            finestMatch = this;
+            // Check if any of the children match.
+            for (AbstractImportControl child : children) {
+                final AbstractImportControl match = child.locateFinest(forPkg, forFileName);
+                if (match != null) {
+                    finestMatch = match;
+                    break;
+                }
+            }
+        }
+        return finestMatch;
+    }
+

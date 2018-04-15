@@ -4,13 +4,14 @@
      * found then calls its parent looking for a match. This will recurse
      * looking for match. If there is no clear result then
      * {@link AccessResult#UNKNOWN} is returned.
-     * @param forImport the import to check on.
      * @param inPkg the package doing the import.
+     * @param inFileName the file name doing the import.
+     * @param forImport the import to check on.
      * @return an {@link AccessResult}.
      */
-    public AccessResult checkAccess(String inPkg, String forImport) {
+    public AccessResult checkAccess(String inPkg, String inFileName, String forImport) {
         final AccessResult result;
-        final AccessResult returnValue = localCheckAccess(inPkg, forImport);
+        final AccessResult returnValue = localCheckAccess(inPkg, inFileName, forImport);
         if (returnValue != AccessResult.UNKNOWN) {
             result = returnValue;
         }
@@ -30,7 +31,7 @@
                 result = AccessResult.DISALLOWED;
             }
             else {
-                result = parent.checkAccess(inPkg, forImport);
+                result = parent.checkAccess(inPkg, inFileName, forImport);
             }
         }
         return result;

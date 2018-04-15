@@ -2,5 +2,12 @@
     public void beginTree(DetailAST rootAST) {
         currentImportControl = null;
         processCurrentFile = path.matcher(getFileContents().getFileName()).find();
+        fileName = getFileContents().getText().getFile().getName();
+
+        final int period = fileName.lastIndexOf('.');
+
+        if (period != -1) {
+            fileName = fileName.substring(0, period);
+        }
     }
 
