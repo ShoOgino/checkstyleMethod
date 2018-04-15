@@ -9,17 +9,12 @@
 
         // Load the properties file if specified
         if (properties != null) {
-            InputStream inStream = null;
-            try {
-                inStream = Files.newInputStream(properties.toPath());
+            try (InputStream inStream = Files.newInputStream(properties.toPath())) {
                 returnValue.load(inStream);
             }
             catch (final IOException ex) {
                 throw new BuildException("Error loading Properties file '"
                         + properties + "'", ex, getLocation());
-            }
-            finally {
-                Closeables.closeQuietly(inStream);
             }
         }
 

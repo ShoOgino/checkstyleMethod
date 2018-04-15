@@ -1,10 +1,5 @@
     @Test
     public final void testSetPropertiesFile() throws IOException {
-        //check if input stream finally closed
-        mockStatic(Closeables.class);
-        doNothing().when(Closeables.class);
-        Closeables.closeQuietly(any(InputStream.class));
-
         TestRootModuleChecker.reset();
 
         final CheckstyleAntTask antTask = getCheckstyleAntTask(CUSTOM_ROOT_CONFIG_FILE);
@@ -15,7 +10,5 @@
 
         assertEquals("Property is not set",
                 "ignore", TestRootModuleChecker.getProperty());
-        verifyStatic(Closeables.class, times(1));
-        Closeables.closeQuietly(any(InputStream.class));
     }
 

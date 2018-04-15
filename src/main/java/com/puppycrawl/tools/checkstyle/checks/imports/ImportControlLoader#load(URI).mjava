@@ -5,9 +5,7 @@
      * @throws CheckstyleException if an error occurs.
      */
     public static ImportControl load(URI uri) throws CheckstyleException {
-        InputStream inputStream = null;
-        try {
-            inputStream = uri.toURL().openStream();
+        try (InputStream inputStream = uri.toURL().openStream()) {
             final InputSource source = new InputSource(inputStream);
             return load(source, uri);
         }
@@ -16,9 +14,6 @@
         }
         catch (IOException ex) {
             throw new CheckstyleException("unable to find " + uri, ex);
-        }
-        finally {
-            closeStream(inputStream);
         }
     }
 

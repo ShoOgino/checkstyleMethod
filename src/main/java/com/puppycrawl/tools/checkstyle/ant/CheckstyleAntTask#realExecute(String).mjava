@@ -20,7 +20,9 @@
             processFiles(rootModule, warningCounter, checkstyleVersion);
         }
         finally {
-            destroyRootModule(rootModule);
+            if (rootModule != null) {
+                rootModule.destroy();
+            }
         }
     }
 

@@ -3,17 +3,12 @@
      */
     @Test
     public void testSetHeaderSimple() {
-        //check if reader finally closed
-        mockStatic(Closeables.class);
-        doNothing().when(Closeables.class);
-        Closeables.closeQuietly(any(Reader.class));
-
         final RegexpHeaderCheck instance = new RegexpHeaderCheck();
         // check valid header passes
         final String header = "abc.*";
         instance.setHeader(header);
-
-        verifyStatic(Closeables.class, times(2));
-        Closeables.closeQuietly(any(Reader.class));
+        final List<Pattern> headerRegexps = Whitebox.getInternalState(instance, "headerRegexps");
+        assertEquals("Expected one pattern", 1, headerRegexps.size());
+        assertEquals("Invalid header regexp", header, headerRegexps.get(0).pattern());
     }
 

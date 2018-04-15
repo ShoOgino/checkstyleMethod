@@ -10,19 +10,14 @@
             throws CheckstyleException {
         final Properties properties = new Properties();
 
-        InputStream fis = null;
-        try {
-            fis = Files.newInputStream(file.toPath());
-            properties.load(fis);
+        try (InputStream stream = Files.newInputStream(file.toPath())) {
+            properties.load(stream);
         }
         catch (final IOException ex) {
             final LocalizedMessage loadPropertiesExceptionMessage = new LocalizedMessage(0,
                     Definitions.CHECKSTYLE_BUNDLE, LOAD_PROPERTIES_EXCEPTION,
                     new String[] {file.getAbsolutePath()}, null, Main.class, null);
             throw new CheckstyleException(loadPropertiesExceptionMessage.getMessage(), ex);
-        }
-        finally {
-            Closeables.closeQuietly(fis);
         }
 
         return properties;

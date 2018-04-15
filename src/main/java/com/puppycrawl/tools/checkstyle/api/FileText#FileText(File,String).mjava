@@ -32,8 +32,7 @@
         // Use the BufferedReader to break down the lines as this
         // is about 30% faster than using the
         // LINE_TERMINATOR.split(fullText, -1) method
-        final BufferedReader reader = new BufferedReader(new StringReader(fullText));
-        try {
+        try (BufferedReader reader = new BufferedReader(new StringReader(fullText))) {
             final ArrayList<String> textLines = new ArrayList<>();
             while (true) {
                 final String line = reader.readLine();
@@ -43,9 +42,6 @@
                 textLines.add(line);
             }
             lines = textLines.toArray(new String[textLines.size()]);
-        }
-        finally {
-            CommonUtils.close(reader);
         }
     }
 

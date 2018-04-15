@@ -18,9 +18,9 @@
         final int errs = checker.process(theFiles);
 
         // process each of the lines
-        final ByteArrayInputStream inputStream =
+        try (ByteArrayInputStream inputStream =
                 new ByteArrayInputStream(stream.toByteArray());
-        try (LineNumberReader lnr = new LineNumberReader(
+            LineNumberReader lnr = new LineNumberReader(
                 new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             final List<String> actuals = lnr.lines().limit(expected.length)
                     .sorted().collect(Collectors.toList());

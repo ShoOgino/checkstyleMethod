@@ -12,8 +12,7 @@
         }
         final StringBuilder buf = new StringBuilder(1024);
         final InputStream stream = Files.newInputStream(inputFile.toPath());
-        final Reader reader = new InputStreamReader(stream, decoder);
-        try {
+        try (Reader reader = new InputStreamReader(stream, decoder)) {
             final char[] chars = new char[READ_BUFFER_SIZE];
             while (true) {
                 final int len = reader.read(chars);
@@ -22,9 +21,6 @@
                 }
                 buf.append(chars, 0, len);
             }
-        }
-        finally {
-            CommonUtils.close(reader);
         }
         return buf.toString();
     }

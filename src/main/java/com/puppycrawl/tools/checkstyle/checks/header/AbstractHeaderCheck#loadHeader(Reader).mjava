@@ -4,8 +4,7 @@
      * @throws IOException if
      */
     private void loadHeader(final Reader headerReader) throws IOException {
-        final LineNumberReader lnr = new LineNumberReader(headerReader);
-        try {
+        try (LineNumberReader lnr = new LineNumberReader(headerReader)) {
             String line;
             do {
                 line = lnr.readLine();
@@ -14,9 +13,6 @@
                 }
             } while (line != null);
             postProcessHeaderLines();
-        }
-        finally {
-            Closeables.closeQuietly(lnr);
         }
     }
 

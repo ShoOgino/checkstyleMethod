@@ -4,18 +4,13 @@
      */
     private void loadHeaderFile() throws CheckstyleException {
         checkHeaderNotInitialized();
-        Reader headerReader = null;
-        try {
-            headerReader = new InputStreamReader(new BufferedInputStream(
-                    headerFile.toURL().openStream()), charset);
+        try (Reader headerReader = new InputStreamReader(new BufferedInputStream(
+                    headerFile.toURL().openStream()), charset)) {
             loadHeader(headerReader);
         }
         catch (final IOException ex) {
             throw new CheckstyleException(
                     "unable to load header file " + headerFile, ex);
-        }
-        finally {
-            Closeables.closeQuietly(headerReader);
         }
     }
 

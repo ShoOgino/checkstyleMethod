@@ -4,18 +4,12 @@
      * @return true if suppression file exists, otherwise false
      */
     public static boolean isFileExists(String fileName) {
-        boolean suppressionSourceExists = true;
-        InputStream sourceInput = null;
-        try {
-            final URI uriByFilename = CommonUtils.getUriByFilename(fileName);
-            final URL url = uriByFilename.toURL();
-            sourceInput = url.openStream();
+        boolean suppressionSourceExists;
+        try (InputStream stream = CommonUtils.getUriByFilename(fileName).toURL().openStream()) {
+            suppressionSourceExists = true;
         }
         catch (CheckstyleException | IOException ignored) {
             suppressionSourceExists = false;
-        }
-        finally {
-            suppressionSourceExists = closeQuietlyWithResult(sourceInput, suppressionSourceExists);
         }
         return suppressionSourceExists;
     }
