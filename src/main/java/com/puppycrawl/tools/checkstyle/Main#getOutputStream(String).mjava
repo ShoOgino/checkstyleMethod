@@ -1,0 +1,18 @@
+    /**
+     * Create output stream or return System.out
+     * @param outputLocation output location
+     * @return output stream
+     * @throws IOException might happen
+     */
+    @SuppressWarnings("resource")
+    private static OutputStream getOutputStream(String outputLocation) throws IOException {
+        final OutputStream result;
+        if (outputLocation == null) {
+            result = System.out;
+        }
+        else {
+            result = Files.newOutputStream(Paths.get(outputLocation));
+        }
+        return result;
+    }
+
