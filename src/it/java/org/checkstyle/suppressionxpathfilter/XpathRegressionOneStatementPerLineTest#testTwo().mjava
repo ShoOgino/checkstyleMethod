@@ -1,0 +1,24 @@
+    @Test
+    public void testTwo() throws Exception {
+        final String checkName = OneStatementPerLineCheck.class.getSimpleName();
+        final File fileToProcess =
+                new File(getPath(checkName,
+                        "SuppressionXpathRegressionOneStatementPerLineTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(OneStatementPerLineCheck.class);
+
+        final String[] expectedViolation = {
+            "9:39: " + getCheckMessage(OneStatementPerLineCheck.class,
+                OneStatementPerLineCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionOneStatementPerLineTwo']/OBJBLOCK"
+                + "/METHOD_DEF[@text='foo5']/SLIST/LITERAL_FOR/SLIST/SEMI"
+        );
+
+        runVerifications(moduleConfig, checkName, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

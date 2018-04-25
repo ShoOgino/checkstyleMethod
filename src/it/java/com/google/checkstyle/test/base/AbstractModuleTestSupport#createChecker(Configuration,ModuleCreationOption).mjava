@@ -9,10 +9,13 @@
     protected final Checker createChecker(Configuration moduleConfig,
                                     ModuleCreationOption moduleCreationOption)
             throws Exception {
-        final DefaultConfiguration dc;
+        final Configuration dc;
 
         if (moduleCreationOption == ModuleCreationOption.IN_TREEWALKER) {
             dc = createTreeWalkerConfig(moduleConfig);
+        }
+        else if (ROOT_MODULE_NAME.equals(moduleConfig.getName())) {
+            dc = moduleConfig;
         }
         else {
             dc = createRootConfig(moduleConfig);

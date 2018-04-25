@@ -1,0 +1,12 @@
+    private ViolationPosition extractLineAndColumnNumber(String... expectedViolations) {
+        ViolationPosition violation = null;
+        final Matcher matcher =
+                LINE_COLUMN_NUMBER_REGEX.matcher(expectedViolations[0]);
+        if (matcher.find()) {
+            final int violationLineNumber = Integer.parseInt(matcher.group(1));
+            final int violationColumnNumber = Integer.parseInt(matcher.group(2));
+            violation = new ViolationPosition(violationLineNumber, violationColumnNumber);
+        }
+        return violation;
+    }
+

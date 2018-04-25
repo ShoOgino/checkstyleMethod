@@ -1,0 +1,25 @@
+    @Test
+    public void testTwo() throws Exception {
+        final String checkName = LeftCurlyCheck.class.getSimpleName();
+        final File fileToProcess =
+                new File(getPath(checkName,
+                        "SuppressionXpathRegressionLeftCurlyTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(LeftCurlyCheck.class);
+        moduleConfig.addAttribute("option", LeftCurlyOption.NL.toString());
+
+        final String[] expectedViolation = {
+            "3:53: " + getCheckMessage(LeftCurlyCheck.class,
+                LeftCurlyCheck.MSG_KEY_LINE_NEW, "{", 53),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionLeftCurlyTwo']/OBJBLOCK",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionLeftCurlyTwo']/OBJBLOCK/LCURLY"
+        );
+
+        runVerifications(moduleConfig, checkName, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

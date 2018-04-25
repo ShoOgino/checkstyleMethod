@@ -1,0 +1,10 @@
+    private DefaultConfiguration createSuppressionXpathFilter(String checkName,
+                                           List<String> xpathQueries) throws Exception {
+        final DefaultConfiguration suppressionXpathFilterConfig =
+                createModuleConfig(SuppressionXpathFilter.class);
+        suppressionXpathFilterConfig.addAttribute("file",
+                createSuppressionsXpathConfigFile(checkName, xpathQueries));
+
+        return suppressionXpathFilterConfig;
+    }
+

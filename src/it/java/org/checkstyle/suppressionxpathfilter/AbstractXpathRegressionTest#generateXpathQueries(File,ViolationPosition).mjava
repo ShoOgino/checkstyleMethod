@@ -1,0 +1,14 @@
+    private static List<String> generateXpathQueries(File fileToProcess,
+                                                     ViolationPosition position)
+            throws Exception {
+        final FileText fileText = new FileText(fileToProcess,
+                StandardCharsets.UTF_8.name());
+        final DetailAST rootAst = JavaParser.parseFile(fileToProcess,
+                JavaParser.Options.WITH_COMMENTS);
+        final XpathQueryGenerator queryGenerator = new XpathQueryGenerator(rootAst,
+                position.violationLineNumber, position.violationColumnNumber,
+                fileText, DEFAULT_TAB_WIDTH);
+
+        return queryGenerator.generate();
+    }
+

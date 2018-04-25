@@ -1,0 +1,25 @@
+    @Test
+    public void testTwo() throws Exception {
+        final String checkName = DefaultComesLastCheck.class.getSimpleName();
+        final File fileToProcess =
+                new File(getPath(checkName,
+                        "SuppressionXpathRegressionDefaultComesLastTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(DefaultComesLastCheck.class);
+        moduleConfig.addAttribute("skipIfLastAndSharedWithCase", "true");
+
+        final String[] expectedViolation = {
+            "15:13: " + getCheckMessage(DefaultComesLastCheck.class,
+                DefaultComesLastCheck.MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionDefaultComesLastTwo']/OBJBLOCK"
+                + "/METHOD_DEF[@text='test']/SLIST/LITERAL_SWITCH/CASE_GROUP/LITERAL_DEFAULT"
+        );
+
+        runVerifications(moduleConfig, checkName, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

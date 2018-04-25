@@ -1,0 +1,26 @@
+    private String createSuppressionsXpathConfigFile(String checkName,
+                                                     List<String> xpathQueries)
+            throws Exception {
+
+        final File suppressionsXpathConfigFile = temporaryFolder.newFile();
+        try (Writer bw = Files.newBufferedWriter(suppressionsXpathConfigFile.toPath(),
+                StandardCharsets.UTF_8)) {
+            bw.write("<?xml version=\"1.0\"?>\n");
+            bw.write("<!DOCTYPE suppressions PUBLIC\n");
+            bw.write("    \"-//Puppy Crawl//DTD Suppressions Xpath Experimental 1.2//EN\"\n");
+            bw.write("    \"http://checkstyle.sourceforge.net/dtds/");
+            bw.write("suppressions_1_2_xpath_experimental.dtd\">\n");
+            bw.write("<suppressions>\n");
+            bw.write("   <suppress-xpath\n");
+            bw.write("       checks=\"");
+            bw.write(checkName);
+            bw.write("\"\n");
+            bw.write("       query=\"");
+            bw.write(xpathQueries.stream().collect(Collectors.joining(DELIMITER)));
+            bw.write("\"/>\n");
+            bw.write("</suppressions>");
+        }
+
+        return suppressionsXpathConfigFile.getPath();
+    }
+

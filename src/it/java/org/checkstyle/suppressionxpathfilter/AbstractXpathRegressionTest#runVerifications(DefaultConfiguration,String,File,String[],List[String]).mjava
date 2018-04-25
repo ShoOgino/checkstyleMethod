@@ -1,0 +1,38 @@
+    /**
+     * Runs three verifications:
+     * First one executes checker with defined module configuration and compares output with
+     * expected violations.
+     * Second one generates xpath queries based on violation message and compares them with expected
+     * xpath queries.
+     * Third one constructs new configuration with {@code SuppressionXpathFilter} using generated
+     * xpath queries, executes checker and checks if no violation occurred.
+     * @param moduleConfig module configuration.
+     * @param checkName name of the check.
+     * @param fileToProcess input class file.
+     * @param expectedViolations expected violation messages.
+     * @param expectedXpathQueries expected generated xpath queries.
+     * @throws Exception if an error occurs
+     */
+    protected void runVerifications(DefaultConfiguration moduleConfig,
+                                  String checkName,
+                                  File fileToProcess,
+                                  String[] expectedViolations,
+                                  List<String> expectedXpathQueries) throws Exception {
+        final DefaultConfiguration checkerConfig =
+                createCheckerWithTreeWalkerModules(moduleConfig);
+
+        final ViolationPosition position =
+                extractLineAndColumnNumber(expectedViolations);
+        final List<String> generatedXpathQueries =
+                generateXpathQueries(fileToProcess, position);
+
+        final DefaultConfiguration checkerConfigWithXpath =
+                createCheckerWithTreeWalkerModules(moduleConfig,
+                        createSuppressionXpathFilter(checkName, generatedXpathQueries));
+
+        final Integer[] warnList = getLinesWithWarn(fileToProcess.getPath());
+        verify(checkerConfig, fileToProcess.getPath(), expectedViolations, warnList);
+        verifyXpathQueries(generatedXpathQueries, expectedXpathQueries);
+        verify(checkerConfigWithXpath, fileToProcess.getPath(), NO_VIOLATIONS);
+    }
+
