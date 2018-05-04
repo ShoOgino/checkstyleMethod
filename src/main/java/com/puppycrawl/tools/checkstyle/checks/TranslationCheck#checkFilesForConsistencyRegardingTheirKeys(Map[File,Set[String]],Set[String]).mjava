@@ -4,13 +4,13 @@
      * @param fileKeys a Map from translation files to their key sets.
      * @param keysThatMustExist the set of keys to compare with.
      */
-    private void checkFilesForConsistencyRegardingTheirKeys(SetMultimap<File, String> fileKeys,
+    private void checkFilesForConsistencyRegardingTheirKeys(Map<File, Set<String>> fileKeys,
                                                             Set<String> keysThatMustExist) {
-        for (File currentFile : fileKeys.keySet()) {
+        for (Entry<File, Set<String>> fileKey : fileKeys.entrySet()) {
             final MessageDispatcher dispatcher = getMessageDispatcher();
-            final String path = currentFile.getPath();
+            final String path = fileKey.getKey().getPath();
             dispatcher.fireFileStarted(path);
-            final Set<String> currentFileKeys = fileKeys.get(currentFile);
+            final Set<String> currentFileKeys = fileKey.getValue();
             final Set<String> missingKeys = keysThatMustExist.stream()
                 .filter(key -> !currentFileKeys.contains(key)).collect(Collectors.toSet());
             if (!missingKeys.isEmpty()) {

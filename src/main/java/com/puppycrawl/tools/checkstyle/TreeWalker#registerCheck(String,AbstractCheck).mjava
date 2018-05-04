@@ -6,7 +6,7 @@
      */
     private void registerCheck(String token, AbstractCheck check) throws CheckstyleException {
         if (check.isCommentNodesRequired()) {
-            tokenToCommentChecks.put(token, check);
+            tokenToCommentChecks.computeIfAbsent(token, empty -> new HashSet<>()).add(check);
         }
         else if (TokenUtils.isCommentType(token)) {
             final String message = String.format(Locale.ROOT, "Check '%s' waits for comment type "
@@ -15,7 +15,7 @@
             throw new CheckstyleException(message);
         }
         else {
-            tokenToOrdinaryChecks.put(token, check);
+            tokenToOrdinaryChecks.computeIfAbsent(token, empty -> new HashSet<>()).add(check);
         }
     }
 

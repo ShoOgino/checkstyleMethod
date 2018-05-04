@@ -9,12 +9,12 @@
                     ex.getLocalizedMessage());
         }
 
-        for (Entry<String> duplication : properties
+        for (Entry<String, AtomicInteger> duplication : properties
                 .getDuplicatedKeys().entrySet()) {
-            final String keyName = duplication.getElement();
+            final String keyName = duplication.getKey();
             final int lineNumber = getLineNumber(fileText, keyName);
             // Number of occurrences is number of duplications + 1
-            log(lineNumber, MSG_KEY, keyName, duplication.getCount() + 1);
+            log(lineNumber, MSG_KEY, keyName, duplication.getValue().get() + 1);
         }
     }
 

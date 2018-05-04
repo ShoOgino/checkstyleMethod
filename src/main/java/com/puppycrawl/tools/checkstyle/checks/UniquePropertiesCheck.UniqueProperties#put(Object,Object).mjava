@@ -7,7 +7,9 @@
             final Object oldValue = super.put(key, value);
             if (oldValue != null && key instanceof String) {
                 final String keyString = (String) key;
-                duplicatedKeys.add(keyString);
+
+                duplicatedKeys.computeIfAbsent(keyString, empty -> new AtomicInteger(0))
+                        .incrementAndGet();
             }
             return oldValue;
         }
