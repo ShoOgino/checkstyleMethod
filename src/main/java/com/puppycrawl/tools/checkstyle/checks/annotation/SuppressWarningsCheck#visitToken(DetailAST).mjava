@@ -21,8 +21,7 @@
             //rare case with empty array ex: @SuppressWarnings({})
             if (warning == null) {
                 //check to see if empty warnings are forbidden -- are by default
-                logMatch(warningHolder.getLineNo(),
-                    warningHolder.getColumnNo(), "");
+                logMatch(warningHolder, "");
             }
             else {
                 while (warning != null) {
@@ -33,8 +32,7 @@
                             case TokenTypes.STRING_LITERAL:
                                 final String warningText =
                                     removeQuotes(warning.getFirstChild().getText());
-                                logMatch(warning.getLineNo(),
-                                        warning.getColumnNo(), warningText);
+                                logMatch(warning, warningText);
                                 break;
                             // conditional case
                             // ex:
