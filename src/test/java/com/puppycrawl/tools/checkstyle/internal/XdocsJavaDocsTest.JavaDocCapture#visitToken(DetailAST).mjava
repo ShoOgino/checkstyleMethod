@@ -1,0 +1,35 @@
+        @Override
+        public void visitToken(DetailAST ast) {
+            if (JavadocUtils.isJavadocComment(ast)) {
+                final DetailAST node = getParent(ast);
+
+                switch (node.getType()) {
+                    case TokenTypes.CLASS_DEF:
+                        visitClass(ast);
+                        break;
+                    case TokenTypes.METHOD_DEF:
+                        visitMethod(ast, node);
+                        break;
+                    case TokenTypes.VARIABLE_DEF:
+                        final String propertyName = node.findFirstToken(TokenTypes.IDENT).getText();
+                        final String propertyDoc = CHECK_PROPERTY_DOC.get(propertyName);
+
+                        if (propertyDoc != null) {
+                            Assert.assertEquals(checkName + "'s class field-level JavaDoc for "
+                                    + propertyName, makeFirstUpper(propertyDoc),
+                                    getJavaDocText(ast));
+                        }
+                        break;
+                    case TokenTypes.CTOR_DEF:
+                    case TokenTypes.ENUM_DEF:
+                    case TokenTypes.ENUM_CONSTANT_DEF:
+                        // ignore
+                        break;
+                    default:
+                        Assert.fail("Unknown token '" + TokenUtils.getTokenName(node.getType())
+                                + "': " + ast.getLineNo());
+                        break;
+                }
+            }
+        }
+

@@ -1,0 +1,12 @@
+        private void visitClass(DetailAST ast) {
+            if (depth == 0) {
+                Assert.assertEquals(
+                        checkName + "'s class-level JavaDoc",
+                        CHECK_TEXT.get("Description") + CHECK_TEXT.get("Properties")
+                                + CHECK_TEXT.get("Examples") + " @since "
+                                + CHECK_TEXT.get("since"), getJavaDocText(ast));
+            }
+
+            depth++;
+        }
+

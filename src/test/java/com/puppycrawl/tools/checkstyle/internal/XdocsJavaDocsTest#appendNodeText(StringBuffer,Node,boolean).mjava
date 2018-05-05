@@ -1,0 +1,54 @@
+    // -@cs[CyclomaticComplexity] No simple way to split this apart.
+    private static void appendNodeText(StringBuffer result, Node node, boolean fixLinks) {
+        final String name = transformXmlToJavaDocName(node.getNodeName());
+        final boolean newLineOpenBefore = "p".equals(name) || "pre".equals(name)
+                || "ul".equals(name) || "li".equals(name);
+        final boolean newLineOpenAfter = newLineOpenBefore && !"ul".equals(name);
+        final boolean newLineClose = newLineOpenAfter || "ul".equals(name);
+        final boolean sanitize = "pre".equals(name);
+        final boolean changeToTag = "code".equals(name);
+
+        if (newLineOpenBefore) {
+            result.append(System.lineSeparator());
+        }
+        else if (shouldAppendSpace(result)) {
+            result.append(' ');
+        }
+
+        if (changeToTag) {
+            result.append("{@");
+            result.append(name);
+            result.append(' ');
+        }
+        else {
+            result.append('<');
+            result.append(name);
+            result.append(getAttributeText(name, node.getAttributes(), fixLinks));
+            result.append('>');
+        }
+
+        if (newLineOpenAfter) {
+            result.append(System.lineSeparator());
+        }
+
+        if (sanitize) {
+            result.append(sanitizeXml(node.getTextContent()));
+        }
+        else {
+            result.append(getNodeText(node, fixLinks));
+        }
+
+        if (newLineClose) {
+            result.append(System.lineSeparator());
+        }
+
+        if (changeToTag) {
+            result.append('}');
+        }
+        else {
+            result.append("</");
+            result.append(name);
+            result.append('>');
+        }
+    }
+

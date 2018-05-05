@@ -1,0 +1,28 @@
+    private static String getAttributeText(String nodeName, NamedNodeMap attributes,
+            boolean fixLinks) {
+        final StringBuilder result = new StringBuilder(20);
+
+        for (int i = 0; i < attributes.getLength(); i++) {
+            result.append(' ');
+
+            final Node attribute = attributes.item(i);
+            final String attrName = attribute.getNodeName();
+            final String attrValue;
+
+            if (fixLinks && "a".equals(nodeName) && "href".equals(attrName)
+                    && attribute.getNodeValue().startsWith("apidocs/")) {
+                attrValue = "http://checkstyle.sourceforge.net/" + attribute.getNodeValue();
+            }
+            else {
+                attrValue = attribute.getNodeValue();
+            }
+
+            result.append(attrName);
+            result.append("=\"");
+            result.append(attrValue);
+            result.append('"');
+        }
+
+        return result.toString();
+    }
+

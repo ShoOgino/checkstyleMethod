@@ -1,0 +1,27 @@
+    private static void examineCheckSubSection(Node subSection, String subSectionName) {
+        switch (subSectionName) {
+            case "Description":
+            case "Examples":
+                CHECK_TEXT.put(subSectionName, getNodeText(subSection, true).replace("\r", ""));
+                break;
+            case "Properties":
+                populateProperties(subSection);
+                CHECK_TEXT.put(subSectionName, createPropertiesText());
+                break;
+            case "Example of Usage":
+                break;
+            case "Error Messages":
+                break;
+            case "Package":
+                break;
+            case "Parent Module":
+                break;
+            case "Notes":
+                break;
+            case "Rule Description":
+                break;
+            default:
+                break;
+        }
+    }
+

@@ -1,0 +1,13 @@
+    private static void populateProperties(Node subSection) {
+        boolean skip = true;
+
+        for (Node row : XmlUtil.getChildrenElements(XmlUtil.getFirstChildElement(subSection))) {
+            if (skip) {
+                skip = false;
+                continue;
+            }
+
+            CHECK_PROPERTIES.add(new ArrayList<>(XmlUtil.getChildrenElements(row)));
+        }
+    }
+
