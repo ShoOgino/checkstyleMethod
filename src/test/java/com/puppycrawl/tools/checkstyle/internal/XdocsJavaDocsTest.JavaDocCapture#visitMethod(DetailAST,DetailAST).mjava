@@ -1,5 +1,5 @@
         private void visitMethod(DetailAST ast, DetailAST node) {
-            if (depth == 0 && CheckUtils.isSetterMethod(node)) {
+            if (depth == 0 && isSetterMethod(node)) {
                 final String propertyUpper = node.findFirstToken(TokenTypes.IDENT)
                         .getText().substring(3);
                 final String propertyName = makeFirstLower(propertyUpper);
@@ -10,7 +10,7 @@
 
                     Assert.assertEquals(checkName + "'s class method-level JavaDoc for "
                             + propertyName,
-                            "Setter to " + propertyDoc,
+                            "Setter to " + makeFirstLower(propertyDoc),
                             javaDoc.substring(0, javaDoc.indexOf(" @param")));
                 }
             }

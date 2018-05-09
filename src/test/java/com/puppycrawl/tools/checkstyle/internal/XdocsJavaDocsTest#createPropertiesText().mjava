@@ -6,7 +6,7 @@
         for (List<Node> property : CHECK_PROPERTIES) {
             final String propertyName = getNodeText(property.get(0), true);
 
-            result.append("\n<li>\nOption {@code ");
+            result.append("\n<li>\nProperty {@code ");
             result.append(propertyName);
             result.append("} - ");
 
@@ -19,11 +19,16 @@
                 result.append(" Default value is: ");
             }
             else {
-                result.append(" Default value is {@code ");
+                result.append(" Default value is ");
             }
 
             result.append(getNodeText(property.get(3), true));
-            result.append("}.\n</li>");
+
+            if (result.charAt(result.length() - 1) != '.') {
+                result.append('.');
+            }
+
+            result.append("\n</li>");
         }
 
         result.append("\n</ul>");
