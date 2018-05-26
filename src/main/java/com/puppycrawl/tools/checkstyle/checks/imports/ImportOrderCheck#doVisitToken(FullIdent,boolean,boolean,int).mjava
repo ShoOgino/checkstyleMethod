@@ -9,12 +9,10 @@
      */
     private void doVisitToken(FullIdent ident, boolean isStatic, boolean previous, int line) {
         final String name = ident.getText();
-        final boolean staticImportsIndependent =
-                option == ImportOrderOption.TOP || option == ImportOrderOption.BOTTOM;
-        final int groupIdx = getGroupNumber(isStatic && staticImportsIndependent, name);
+        final int groupIdx = getGroupNumber(isStatic && staticImportsApart, name);
 
         if (groupIdx > lastGroup) {
-            if (!beforeFirstImport && !isStatic && separated && line - lastImportLine < 2) {
+            if (!beforeFirstImport && line - lastImportLine < 2 && needSeparator(isStatic)) {
                 log(line, MSG_SEPARATION, name);
             }
         }
@@ -24,7 +22,7 @@
         else {
             log(line, MSG_ORDERING, name);
         }
-        if (isSeparatorInGroup(groupIdx, line)) {
+        if (isSeparatorInGroup(groupIdx, isStatic, line)) {
             log(line, MSG_SEPARATED_IN_GROUP, name);
         }
 

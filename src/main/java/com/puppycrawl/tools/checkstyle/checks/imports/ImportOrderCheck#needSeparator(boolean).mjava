@@ -1,0 +1,20 @@
+    /**
+     * Checks whether import groups should be separated.
+     * @param isStatic whether the token is static or not.
+     * @return true if imports groups should be separated.
+     */
+    private boolean needSeparator(boolean isStatic) {
+        final boolean typeImportSeparator = !isStatic && separated;
+        final boolean staticImportSeparator;
+        if (staticImportsApart) {
+            staticImportSeparator = isStatic && separatedStaticGroups;
+        }
+        else {
+            staticImportSeparator = isStatic && separated;
+        }
+        final boolean separatorBetween = isStatic != lastImportStatic
+            && (separated || separatedStaticGroups) && staticImportsApart;
+
+        return typeImportSeparator || staticImportSeparator || separatorBetween;
+    }
+

@@ -15,30 +15,14 @@
             isStatic = true;
         }
 
-        final boolean isStaticAndNotLastImport = isStatic && !lastImportStatic;
-        final boolean isLastImportAndNonStatic = lastImportStatic && !isStatic;
-
         // using set of IF instead of SWITCH to analyze Enum options to satisfy coverage.
         // https://github.com/checkstyle/checkstyle/issues/1387
-        if (option == ImportOrderOption.TOP) {
-            if (isLastImportAndNonStatic) {
-                lastGroup = Integer.MIN_VALUE;
-                lastImport = "";
-            }
+        if (option == ImportOrderOption.TOP || option == ImportOrderOption.ABOVE) {
+            final boolean isStaticAndNotLastImport = isStatic && !lastImportStatic;
             doVisitToken(ident, isStatic, isStaticAndNotLastImport, line);
         }
-        else if (option == ImportOrderOption.BOTTOM) {
-            if (isStaticAndNotLastImport) {
-                lastGroup = Integer.MIN_VALUE;
-                lastImport = "";
-            }
-            doVisitToken(ident, isStatic, isLastImportAndNonStatic, line);
-        }
-        else if (option == ImportOrderOption.ABOVE) {
-            // previous non-static but current is static
-            doVisitToken(ident, isStatic, isStaticAndNotLastImport, line);
-        }
-        else if (option == ImportOrderOption.UNDER) {
+        else if (option == ImportOrderOption.BOTTOM || option == ImportOrderOption.UNDER) {
+            final boolean isLastImportAndNonStatic = lastImportStatic && !isStatic;
             doVisitToken(ident, isStatic, isLastImportAndNonStatic, line);
         }
         else if (option == ImportOrderOption.INFLOW) {
