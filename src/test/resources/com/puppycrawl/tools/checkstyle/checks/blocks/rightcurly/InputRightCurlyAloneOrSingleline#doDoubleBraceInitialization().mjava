@@ -9,7 +9,7 @@
         Thread t = new Thread() {@Override public void run() {super.run();}};
         new Object() { @Override protected void finalize() { "".toString(); }  { int a = 5; }};
         new Object() { @Override protected void finalize() { "".toString(); }  int b = 10; };
-        new Object() { @Override protected void finalize() { "".toString(); }  { int c = 5; } int d = 8; };
+        new Object() { protected void finalize() { hashCode(); }  { int c = 5; } int d = 8; };
 
         java.util.Map<String, String> map2 = new java.util.LinkedHashMap<String, String>() {{
             put("Hello", "World");
