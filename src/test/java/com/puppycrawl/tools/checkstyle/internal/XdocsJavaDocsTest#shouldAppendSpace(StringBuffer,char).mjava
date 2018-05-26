@@ -1,4 +1,4 @@
-    private static boolean shouldAppendSpace(StringBuffer text) {
+    private static boolean shouldAppendSpace(StringBuffer text, char firstCharToAppend) {
         final boolean result;
 
         if (text.length() == 0) {
@@ -7,7 +7,7 @@
         else {
             final char last = text.charAt(text.length() - 1);
 
-            result = !Character.isWhitespace(last);
+            result = firstCharToAppend != ':' && !Character.isWhitespace(last);
         }
 
         return result;
