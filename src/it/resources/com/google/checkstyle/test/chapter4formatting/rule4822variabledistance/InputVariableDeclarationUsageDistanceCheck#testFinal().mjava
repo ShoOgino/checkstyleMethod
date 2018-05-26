@@ -1,15 +1,16 @@
 	public void testFinal() {
-		AuthUpdateTask authUpdateTask = null;
+		AuthUpdateTask task = null;
 		final long intervalMs = 30 * 60000L;
 		Object authCheckUrl = null, authInfo = null;
-        authUpdateTask = new AuthUpdateTask(authCheckUrl, authInfo, new IAuthListener() {
+        task = new AuthUpdateTask(authCheckUrl, authInfo, new IAuthListener() {
             @Override
             public void authTokenChanged(String cookie, String token) {
                 fireAuthTokenChanged(cookie, token);
             }
         });
 
-        Timer authUpdateTimer = new Timer("Auth Guard", true);
-        authUpdateTimer.schedule(authUpdateTask, intervalMs / 2, intervalMs); // DECLARATION OF VARIABLE 'intervalMs' SHOULD BE HERE (distance = 2)
+        Timer timer = new Timer("Auth Guard", true);
+        timer.schedule(task, intervalMs / 2, intervalMs); // DECLARATION OF VARIABLE 'intervalMs'
+		                                                  // SHOULD BE HERE (distance = 2)
 	}
 
