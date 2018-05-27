@@ -7,7 +7,7 @@
      *         'this' and null otherwise.
      */
     private AbstractFrame getFieldWithoutThis(DetailAST ast, int parentType) {
-        final boolean importOrPackage = ScopeUtils.getSurroundingScope(ast) == null;
+        final boolean importOrPackage = ScopeUtil.getSurroundingScope(ast) == null;
         final boolean methodNameInMethodCall = parentType == TokenTypes.DOT
                 && ast.getPreviousSibling() != null;
         final boolean typeName = parentType == TokenTypes.TYPE

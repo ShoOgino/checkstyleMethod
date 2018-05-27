@@ -6,14 +6,14 @@
     private boolean shouldCheck(final DetailAST ast) {
         final Scope customScope;
 
-        if (ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
+        if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
             customScope = Scope.PUBLIC;
         }
         else {
             final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
-            customScope = ScopeUtils.getScopeFromMods(mods);
+            customScope = ScopeUtil.getScopeFromMods(mods);
         }
-        final Scope surroundingScope = ScopeUtils.getSurroundingScope(ast);
+        final Scope surroundingScope = ScopeUtil.getSurroundingScope(ast);
 
         return customScope.isIn(scope)
             && (surroundingScope == null || surroundingScope.isIn(scope))

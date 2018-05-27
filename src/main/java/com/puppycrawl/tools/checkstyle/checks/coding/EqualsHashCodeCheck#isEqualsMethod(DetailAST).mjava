@@ -8,7 +8,7 @@
         final DetailAST modifiers = ast.getFirstChild();
         final DetailAST parameters = ast.findFirstToken(TokenTypes.PARAMETERS);
 
-        return CheckUtils.isEqualsMethod(ast)
+        return CheckUtil.isEqualsMethod(ast)
                 && modifiers.findFirstToken(TokenTypes.LITERAL_PUBLIC) != null
                 && isObjectParam(parameters.getFirstChild())
                 && (ast.findFirstToken(TokenTypes.SLIST) != null

@@ -13,12 +13,12 @@
 
         if (meth.getType() == TokenTypes.METHOD_DEF
                 || meth.getType() == TokenTypes.CTOR_DEF) {
-            if (ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
+            if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
                 accessModifier = AccessModifier.PUBLIC;
             }
             else {
                 final DetailAST modsToken = meth.findFirstToken(TokenTypes.MODIFIERS);
-                accessModifier = CheckUtils.getAccessModifierFromModifiersToken(modsToken);
+                accessModifier = CheckUtil.getAccessModifierFromModifiersToken(modsToken);
             }
         }
 

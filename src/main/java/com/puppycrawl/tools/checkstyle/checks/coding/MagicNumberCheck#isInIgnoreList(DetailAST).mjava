@@ -5,7 +5,7 @@
      * @return true if the number of ast is in the ignore list of this check.
      */
     private boolean isInIgnoreList(DetailAST ast) {
-        double value = CheckUtils.parseDouble(ast.getText(), ast.getType());
+        double value = CheckUtil.parseDouble(ast.getText(), ast.getType());
         final DetailAST parent = ast.getParent();
         if (parent.getType() == TokenTypes.UNARY_MINUS) {
             value = -1 * value;

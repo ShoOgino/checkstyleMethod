@@ -8,7 +8,7 @@
         final DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
         boolean hasIgnoredAnnotation = false;
         if (modifiers.findFirstToken(TokenTypes.ANNOTATION) != null) {
-            final Optional<DetailAST> annotation = TokenUtils.findFirstTokenByPredicate(modifiers,
+            final Optional<DetailAST> annotation = TokenUtil.findFirstTokenByPredicate(modifiers,
                 currentToken -> {
                     return currentToken.getType() == TokenTypes.ANNOTATION
                         && annotations.contains(getAnnotationName(currentToken));

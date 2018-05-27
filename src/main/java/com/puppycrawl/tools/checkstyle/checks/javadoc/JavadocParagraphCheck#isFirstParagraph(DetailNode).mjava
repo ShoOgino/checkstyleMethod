@@ -5,17 +5,17 @@
      */
     private static boolean isFirstParagraph(DetailNode paragraphTag) {
         boolean result = true;
-        DetailNode previousNode = JavadocUtils.getPreviousSibling(paragraphTag);
+        DetailNode previousNode = JavadocUtil.getPreviousSibling(paragraphTag);
         while (previousNode != null) {
             if (previousNode.getType() == JavadocTokenTypes.TEXT
-                    && !CommonUtils.isBlank(previousNode.getText())
+                    && !CommonUtil.isBlank(previousNode.getText())
                 || previousNode.getType() != JavadocTokenTypes.LEADING_ASTERISK
                     && previousNode.getType() != JavadocTokenTypes.NEWLINE
                     && previousNode.getType() != JavadocTokenTypes.TEXT) {
                 result = false;
                 break;
             }
-            previousNode = JavadocUtils.getPreviousSibling(previousNode);
+            previousNode = JavadocUtil.getPreviousSibling(previousNode);
         }
         return result;
     }

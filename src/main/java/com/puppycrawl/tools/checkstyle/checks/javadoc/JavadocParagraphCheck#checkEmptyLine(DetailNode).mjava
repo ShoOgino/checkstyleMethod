@@ -5,7 +5,7 @@
     private void checkEmptyLine(DetailNode newline) {
         final DetailNode nearestToken = getNearestNode(newline);
         if (!isLastEmptyLine(newline) && nearestToken.getType() == JavadocTokenTypes.TEXT
-                && !CommonUtils.isBlank(nearestToken.getText())) {
+                && !CommonUtil.isBlank(nearestToken.getText())) {
             log(newline.getLineNumber(), MSG_TAG_AFTER);
         }
     }

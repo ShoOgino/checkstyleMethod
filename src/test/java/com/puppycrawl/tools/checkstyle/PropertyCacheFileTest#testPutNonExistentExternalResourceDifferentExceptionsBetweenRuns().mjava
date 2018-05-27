@@ -16,11 +16,11 @@
             final Configuration config = new DefaultConfiguration("myConfig");
             final PropertyCacheFile cache = new PropertyCacheFile(config, cacheFile.getPath());
 
-            // We mock getUriByFilename method of CommonUtils to guarantee that it will
+            // We mock getUriByFilename method of CommonUtil to guarantee that it will
             // throw CheckstyleException with the specific content.
-            mockStatic(CommonUtils.class);
+            mockStatic(CommonUtil.class);
             final CheckstyleException mockException = new CheckstyleException("Exception #" + i);
-            when(CommonUtils.getUriByFilename(any(String.class)))
+            when(CommonUtil.getUriByFilename(any(String.class)))
                 .thenThrow(mockException);
 
             cache.load();

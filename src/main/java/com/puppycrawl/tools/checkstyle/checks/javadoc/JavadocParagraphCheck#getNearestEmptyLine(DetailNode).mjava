@@ -4,9 +4,9 @@
      * @return Some nearest empty line in javadoc.
      */
     private static DetailNode getNearestEmptyLine(DetailNode node) {
-        DetailNode newLine = JavadocUtils.getPreviousSibling(node);
+        DetailNode newLine = JavadocUtil.getPreviousSibling(node);
         while (newLine != null) {
-            final DetailNode previousSibling = JavadocUtils.getPreviousSibling(newLine);
+            final DetailNode previousSibling = JavadocUtil.getPreviousSibling(newLine);
             if (newLine.getType() == JavadocTokenTypes.NEWLINE && isEmptyLine(newLine)) {
                 break;
             }

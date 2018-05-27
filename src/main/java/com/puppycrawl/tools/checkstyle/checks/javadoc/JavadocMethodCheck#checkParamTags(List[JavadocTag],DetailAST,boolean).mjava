@@ -9,7 +9,7 @@
     private void checkParamTags(final List<JavadocTag> tags,
             final DetailAST parent, boolean reportExpectedTags) {
         final List<DetailAST> params = getParameters(parent);
-        final List<DetailAST> typeParams = CheckUtils
+        final List<DetailAST> typeParams = CheckUtil
                 .getTypeParameters(parent);
 
         // Loop over the tags, checking to see they exist in the params.
@@ -26,7 +26,7 @@
             final String arg1 = tag.getFirstArg();
             boolean found = removeMatchingParam(params, arg1);
 
-            if (CommonUtils.startsWithChar(arg1, '<') && CommonUtils.endsWithChar(arg1, '>')) {
+            if (CommonUtil.startsWithChar(arg1, '<') && CommonUtil.endsWithChar(arg1, '>')) {
                 found = searchMatchingTypeParameter(typeParams,
                         arg1.substring(1, arg1.length() - 1));
             }

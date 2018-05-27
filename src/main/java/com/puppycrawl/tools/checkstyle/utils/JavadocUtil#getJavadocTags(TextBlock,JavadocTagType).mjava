@@ -1,0 +1,48 @@
+    /**
+     * Gets validTags from a given piece of Javadoc.
+     * @param textBlock
+     *        the Javadoc comment to process.
+     * @param tagType
+     *        the type of validTags we're interested in
+     * @return all standalone validTags from the given javadoc.
+     */
+    public static JavadocTags getJavadocTags(TextBlock textBlock,
+            JavadocTagType tagType) {
+        final boolean getBlockTags = tagType == JavadocTagType.ALL
+                                         || tagType == JavadocTagType.BLOCK;
+        final boolean getInlineTags = tagType == JavadocTagType.ALL
+                                          || tagType == JavadocTagType.INLINE;
+
+        final List<TagInfo> tags = new ArrayList<>();
+
+        if (getBlockTags) {
+            tags.addAll(BlockTagUtil.extractBlockTags(textBlock.getText()));
+        }
+
+        if (getInlineTags) {
+            tags.addAll(InlineTagUtil.extractInlineTags(textBlock.getText()));
+        }
+
+        final List<JavadocTag> validTags = new ArrayList<>();
+        final List<InvalidJavadocTag> invalidTags = new ArrayList<>();
+
+        for (TagInfo tag : tags) {
+            final int col = tag.getPosition().getColumn();
+
+            // Add the starting line of the comment to the line number to get the actual line number
+            // in the source.
+            // Lines are one-indexed, so need a off-by-one correction.
+            final int line = textBlock.getStartLineNo() + tag.getPosition().getLine() - 1;
+
+            if (JavadocTagInfo.isValidName(tag.getName())) {
+                validTags.add(
+                    new JavadocTag(line, col, tag.getName(), tag.getValue()));
+            }
+            else {
+                invalidTags.add(new InvalidJavadocTag(line, col, tag.getName()));
+            }
+        }
+
+        return new JavadocTags(validTags, invalidTags);
+    }
+

@@ -5,15 +5,15 @@
      */
     private static boolean isLastEmptyLine(DetailNode newLine) {
         boolean result = true;
-        DetailNode nextNode = JavadocUtils.getNextSibling(newLine);
+        DetailNode nextNode = JavadocUtil.getNextSibling(newLine);
         while (nextNode != null && nextNode.getType() != JavadocTokenTypes.JAVADOC_TAG) {
             if (nextNode.getType() == JavadocTokenTypes.TEXT
-                    && !CommonUtils.isBlank(nextNode.getText())
+                    && !CommonUtil.isBlank(nextNode.getText())
                     || nextNode.getType() == JavadocTokenTypes.HTML_ELEMENT) {
                 result = false;
                 break;
             }
-            nextNode = JavadocUtils.getNextSibling(nextNode);
+            nextNode = JavadocUtil.getNextSibling(nextNode);
         }
         return result;
     }

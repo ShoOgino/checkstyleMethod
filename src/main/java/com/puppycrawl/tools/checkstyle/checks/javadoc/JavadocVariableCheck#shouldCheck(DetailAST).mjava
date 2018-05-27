@@ -5,15 +5,15 @@
      */
     private boolean shouldCheck(final DetailAST ast) {
         boolean result = false;
-        if (!ScopeUtils.isInCodeBlock(ast) && !isIgnored(ast)) {
+        if (!ScopeUtil.isInCodeBlock(ast) && !isIgnored(ast)) {
             Scope customScope = Scope.PUBLIC;
             if (ast.getType() != TokenTypes.ENUM_CONSTANT_DEF
-                    && !ScopeUtils.isInInterfaceOrAnnotationBlock(ast)) {
+                    && !ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
                 final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
-                customScope = ScopeUtils.getScopeFromMods(mods);
+                customScope = ScopeUtil.getScopeFromMods(mods);
             }
 
-            final Scope surroundingScope = ScopeUtils.getSurroundingScope(ast);
+            final Scope surroundingScope = ScopeUtil.getSurroundingScope(ast);
             result = customScope.isIn(scope) && surroundingScope.isIn(scope)
                 && (excludeScope == null
                     || !customScope.isIn(excludeScope)

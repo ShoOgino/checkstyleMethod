@@ -1,0 +1,42 @@
+    /**
+     * Parses the string argument as an integer or a long in the radix specified by
+     * the second argument. The characters in the string must all be digits of
+     * the specified radix.
+     * @param text the String containing the integer representation to be
+     *     parsed. Precondition: text contains a parsable int.
+     * @param radix the radix to be used while parsing text.
+     * @param type the token type of the text. Should be a constant of
+     *     {@link TokenTypes}.
+     * @return the number represented by the string argument in the specified radix.
+     */
+    private static double parseNumber(final String text, final int radix, final int type) {
+        String txt = text;
+        if (CommonUtil.endsWithChar(txt, 'L') || CommonUtil.endsWithChar(txt, 'l')) {
+            txt = txt.substring(0, txt.length() - 1);
+        }
+        final double result;
+        if (txt.isEmpty()) {
+            result = 0.0;
+        }
+        else {
+            final boolean negative = txt.charAt(0) == '-';
+            if (type == TokenTypes.NUM_INT) {
+                if (negative) {
+                    result = Integer.parseInt(txt, radix);
+                }
+                else {
+                    result = Integer.parseUnsignedInt(txt, radix);
+                }
+            }
+            else {
+                if (negative) {
+                    result = Long.parseLong(txt, radix);
+                }
+                else {
+                    result = Long.parseUnsignedLong(txt, radix);
+                }
+            }
+        }
+        return result;
+    }
+

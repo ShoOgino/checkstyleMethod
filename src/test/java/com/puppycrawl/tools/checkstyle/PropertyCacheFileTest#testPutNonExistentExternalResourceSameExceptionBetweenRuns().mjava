@@ -2,12 +2,12 @@
     public void testPutNonExistentExternalResourceSameExceptionBetweenRuns() throws Exception {
         final File cacheFile = temporaryFolder.newFile();
 
-        // We mock getUriByFilename method of CommonUtils to guarantee that it will
+        // We mock getUriByFilename method of CommonUtil to guarantee that it will
         // throw CheckstyleException with the specific content.
-        mockStatic(CommonUtils.class);
+        mockStatic(CommonUtil.class);
         final CheckstyleException mockException =
             new CheckstyleException("Cannot get URL for cache file " + cacheFile.getAbsolutePath());
-        when(CommonUtils.getUriByFilename(any(String.class)))
+        when(CommonUtil.getUriByFilename(any(String.class)))
             .thenThrow(mockException);
 
         // We invoke 'putExternalResources' twice to invalidate cache

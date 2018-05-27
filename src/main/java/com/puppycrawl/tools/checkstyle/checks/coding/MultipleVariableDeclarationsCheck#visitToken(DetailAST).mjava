@@ -12,7 +12,7 @@
 
             if (nextNode != null
                     && nextNode.getType() == TokenTypes.VARIABLE_DEF) {
-                final DetailAST firstNode = CheckUtils.getFirstNode(ast);
+                final DetailAST firstNode = CheckUtil.getFirstNode(ast);
                 if (isCommaSeparated) {
                     // Check if the multiple variable declarations are in a
                     // for loop initializer. If they are, then no warning
@@ -26,7 +26,7 @@
                 }
                 else {
                     final DetailAST lastNode = getLastNode(ast);
-                    final DetailAST firstNextNode = CheckUtils.getFirstNode(nextNode);
+                    final DetailAST firstNextNode = CheckUtil.getFirstNode(nextNode);
 
                     if (firstNextNode.getLineNo() == lastNode.getLineNo()) {
                         log(firstNode, MSG_MULTIPLE);

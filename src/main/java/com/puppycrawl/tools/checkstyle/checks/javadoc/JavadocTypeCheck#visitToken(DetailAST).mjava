@@ -9,7 +9,7 @@
             }
             else {
                 final List<JavadocTag> tags = getJavadocTags(textBlock);
-                if (ScopeUtils.isOuterMostType(ast)) {
+                if (ScopeUtil.isOuterMostType(ast)) {
                     // don't check author/version for inner classes
                     checkTag(lineNo, tags, JavadocTagInfo.AUTHOR.getName(),
                             authorFormat);
@@ -18,7 +18,7 @@
                 }
 
                 final List<String> typeParamNames =
-                    CheckUtils.getTypeParameterNames(ast);
+                    CheckUtil.getTypeParameterNames(ast);
 
                 if (!allowMissingParamTags) {
                     //Check type parameters that should exist, do

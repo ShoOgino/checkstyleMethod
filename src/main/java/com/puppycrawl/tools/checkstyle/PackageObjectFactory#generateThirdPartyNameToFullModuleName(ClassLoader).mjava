@@ -8,7 +8,7 @@
     private Map<String, Set<String>> generateThirdPartyNameToFullModuleName(ClassLoader loader) {
         Map<String, Set<String>> returnValue;
         try {
-            returnValue = ModuleReflectionUtils.getCheckstyleModules(packages, loader).stream()
+            returnValue = ModuleReflectionUtil.getCheckstyleModules(packages, loader).stream()
                     .collect(Collectors.toMap(
                         Class::getSimpleName,
                         cls -> Collections.singleton(cls.getCanonicalName()),

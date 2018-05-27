@@ -6,7 +6,7 @@
     private boolean isIgnorableMethod(DetailAST methodDef) {
         return shouldIgnoreMethod(methodDef.findFirstToken(TokenTypes.IDENT).getText())
             || ignoreOverriddenMethods
-               && (AnnotationUtility.containsAnnotation(methodDef, "Override")
-                  || AnnotationUtility.containsAnnotation(methodDef, "java.lang.Override"));
+               && (AnnotationUtil.containsAnnotation(methodDef, "Override")
+                  || AnnotationUtil.containsAnnotation(methodDef, "java.lang.Override"));
     }
 

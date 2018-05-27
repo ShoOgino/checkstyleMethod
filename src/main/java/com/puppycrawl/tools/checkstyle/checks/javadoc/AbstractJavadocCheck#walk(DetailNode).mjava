@@ -11,13 +11,13 @@
             if (waitsForProcessing) {
                 visitJavadocToken(curNode);
             }
-            DetailNode toVisit = JavadocUtils.getFirstChild(curNode);
+            DetailNode toVisit = JavadocUtil.getFirstChild(curNode);
             while (curNode != null && toVisit == null) {
                 if (waitsForProcessing) {
                     leaveJavadocToken(curNode);
                 }
 
-                toVisit = JavadocUtils.getNextSibling(curNode);
+                toVisit = JavadocUtil.getNextSibling(curNode);
                 if (toVisit == null) {
                     curNode = curNode.getParent();
                     if (curNode != null) {

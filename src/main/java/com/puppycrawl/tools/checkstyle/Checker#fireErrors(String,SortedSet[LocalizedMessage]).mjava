@@ -6,7 +6,7 @@
      */
     @Override
     public void fireErrors(String fileName, SortedSet<LocalizedMessage> errors) {
-        final String stripped = CommonUtils.relativizeAndNormalizePath(basedir, fileName);
+        final String stripped = CommonUtil.relativizeAndNormalizePath(basedir, fileName);
         boolean hasNonFilteredViolations = false;
         for (final LocalizedMessage element : errors) {
             final AuditEvent event = new AuditEvent(this, stripped, element);

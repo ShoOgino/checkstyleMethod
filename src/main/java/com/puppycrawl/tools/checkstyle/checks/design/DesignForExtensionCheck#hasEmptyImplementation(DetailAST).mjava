@@ -10,10 +10,10 @@
         final DetailAST methodImplCloseBrace = methodImplOpenBrace.getLastChild();
         final Predicate<DetailAST> predicate = currentNode -> {
             return currentNode != methodImplCloseBrace
-                && !TokenUtils.isCommentType(currentNode.getType());
+                && !TokenUtil.isCommentType(currentNode.getType());
         };
         final Optional<DetailAST> methodBody =
-            TokenUtils.findFirstTokenByPredicate(methodImplOpenBrace, predicate);
+            TokenUtil.findFirstTokenByPredicate(methodImplOpenBrace, predicate);
         if (methodBody.isPresent()) {
             hasEmptyBody = false;
         }

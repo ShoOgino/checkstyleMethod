@@ -4,9 +4,9 @@
      * @return true, if the paragraph tag is immediately followed by the text.
      */
     private static boolean isImmediatelyFollowedByText(DetailNode tag) {
-        final DetailNode nextSibling = JavadocUtils.getNextSibling(tag);
+        final DetailNode nextSibling = JavadocUtil.getNextSibling(tag);
         return nextSibling.getType() == JavadocTokenTypes.NEWLINE
                 || nextSibling.getType() == JavadocTokenTypes.EOF
-                || CommonUtils.startsWithChar(nextSibling.getText(), ' ');
+                || CommonUtil.startsWithChar(nextSibling.getText(), ' ');
     }
 

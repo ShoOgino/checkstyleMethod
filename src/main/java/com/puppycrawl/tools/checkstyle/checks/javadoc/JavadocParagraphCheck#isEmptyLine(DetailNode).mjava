@@ -5,12 +5,12 @@
      */
     private static boolean isEmptyLine(DetailNode newLine) {
         boolean result = false;
-        DetailNode previousSibling = JavadocUtils.getPreviousSibling(newLine);
+        DetailNode previousSibling = JavadocUtil.getPreviousSibling(newLine);
         if (previousSibling != null
                 && previousSibling.getParent().getType() == JavadocTokenTypes.JAVADOC) {
             if (previousSibling.getType() == JavadocTokenTypes.TEXT
-                    && CommonUtils.isBlank(previousSibling.getText())) {
-                previousSibling = JavadocUtils.getPreviousSibling(previousSibling);
+                    && CommonUtil.isBlank(previousSibling.getText())) {
+                previousSibling = JavadocUtil.getPreviousSibling(previousSibling);
             }
             result = previousSibling != null
                     && previousSibling.getType() == JavadocTokenTypes.LEADING_ASTERISK;

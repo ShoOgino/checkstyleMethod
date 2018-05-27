@@ -4,8 +4,8 @@
      * @return all standalone tags from the given javadoc.
      */
     private List<JavadocTag> getJavadocTags(TextBlock textBlock) {
-        final JavadocTags tags = JavadocUtils.getJavadocTags(textBlock,
-            JavadocUtils.JavadocTagType.BLOCK);
+        final JavadocTags tags = JavadocUtil.getJavadocTags(textBlock,
+            JavadocUtil.JavadocTagType.BLOCK);
         if (!allowUnknownTags) {
             for (final InvalidJavadocTag tag : tags.getInvalidTags()) {
                 log(tag.getLine(), tag.getCol(), MSG_UNKNOWN_TAG,

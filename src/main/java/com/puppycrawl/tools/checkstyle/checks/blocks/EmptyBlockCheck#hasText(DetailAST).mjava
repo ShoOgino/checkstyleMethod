@@ -23,7 +23,7 @@
             // Handle braces on the same line
             final String txt = lines[slistLineNo - 1]
                     .substring(slistColNo + 1, rcurlyColNo);
-            if (!CommonUtils.isBlank(txt)) {
+            if (!CommonUtil.isBlank(txt)) {
                 returnValue = true;
             }
         }
@@ -31,7 +31,7 @@
             final String firstLine = lines[slistLineNo - 1].substring(slistColNo + 1);
             final String lastLine = lines[rcurlyLineNo - 1].substring(0, rcurlyColNo);
             // check if all lines are also only whitespace
-            returnValue = !(CommonUtils.isBlank(firstLine) && CommonUtils.isBlank(lastLine))
+            returnValue = !(CommonUtil.isBlank(firstLine) && CommonUtil.isBlank(lastLine))
                     || !checkIsAllLinesAreWhitespace(lines, slistLineNo, rcurlyLineNo);
         }
         return returnValue;

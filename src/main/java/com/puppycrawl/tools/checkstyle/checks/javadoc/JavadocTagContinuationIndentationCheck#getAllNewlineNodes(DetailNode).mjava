@@ -5,12 +5,12 @@
      */
     private static List<DetailNode> getAllNewlineNodes(DetailNode descriptionNode) {
         final List<DetailNode> textNodes = new ArrayList<>();
-        DetailNode node = JavadocUtils.getFirstChild(descriptionNode);
-        while (JavadocUtils.getNextSibling(node) != null) {
+        DetailNode node = JavadocUtil.getFirstChild(descriptionNode);
+        while (JavadocUtil.getNextSibling(node) != null) {
             if (node.getType() == JavadocTokenTypes.NEWLINE) {
                 textNodes.add(node);
             }
-            node = JavadocUtils.getNextSibling(node);
+            node = JavadocUtil.getNextSibling(node);
         }
         return textNodes;
     }

@@ -23,7 +23,7 @@
                 isLambdaParameter = parent.getFirstChild().getText().equals(ast.getText());
             }
             else {
-                isLambdaParameter = TokenUtils.findFirstTokenByPredicate(lambdaParameters,
+                isLambdaParameter = TokenUtil.findFirstTokenByPredicate(lambdaParameters,
                     paramDef -> {
                         final DetailAST param = paramDef.findFirstToken(TokenTypes.IDENT);
                         return param != null && param.getText().equals(ast.getText());

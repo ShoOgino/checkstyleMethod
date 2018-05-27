@@ -5,9 +5,9 @@
     private void checkParam(final DetailAST param) {
         if (param.findFirstToken(TokenTypes.MODIFIERS).findFirstToken(TokenTypes.FINAL) == null
                 && !isIgnoredParam(param)
-                && !CheckUtils.isReceiverParameter(param)) {
+                && !CheckUtil.isReceiverParameter(param)) {
             final DetailAST paramName = param.findFirstToken(TokenTypes.IDENT);
-            final DetailAST firstNode = CheckUtils.getFirstNode(param);
+            final DetailAST firstNode = CheckUtil.getFirstNode(param);
             log(firstNode,
                 MSG_KEY, paramName.getText());
         }

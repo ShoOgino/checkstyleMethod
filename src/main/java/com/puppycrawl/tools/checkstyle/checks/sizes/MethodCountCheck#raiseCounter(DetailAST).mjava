@@ -6,7 +6,7 @@
     private void raiseCounter(DetailAST method) {
         final MethodCounter actualCounter = counters.peek();
         final DetailAST temp = method.findFirstToken(TokenTypes.MODIFIERS);
-        final Scope scope = ScopeUtils.getScopeFromMods(temp);
+        final Scope scope = ScopeUtil.getScopeFromMods(temp);
         actualCounter.increment(scope);
     }
 
