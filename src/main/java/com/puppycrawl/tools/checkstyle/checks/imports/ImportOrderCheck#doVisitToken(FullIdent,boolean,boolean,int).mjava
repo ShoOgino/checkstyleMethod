@@ -5,12 +5,11 @@
      * @param isStatic whether the token is static or not.
      * @param previous previous non-static but current is static (above), or
      *                  previous static but current is non-static (under).
+     * @param line the line of the current import.
      */
-    private void doVisitToken(FullIdent ident, boolean isStatic,
-            boolean previous) {
+    private void doVisitToken(FullIdent ident, boolean isStatic, boolean previous, int line) {
         final String name = ident.getText();
         final int groupIdx = getGroupNumber(name);
-        final int line = ident.getLineNo();
 
         if (groupIdx > lastGroup) {
             if (!beforeFirstImport && separated && line - lastImportLine < 2

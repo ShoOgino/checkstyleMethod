@@ -1,6 +1,7 @@
     // -@cs[CyclomaticComplexity] SWITCH was transformed into IF-ELSE.
     @Override
     public void visitToken(DetailAST ast) {
+        final int line = ast.getLineNo();
         final FullIdent ident;
         final boolean isStatic;
 
@@ -24,7 +25,7 @@
                 lastGroup = Integer.MIN_VALUE;
                 lastImport = "";
             }
-            doVisitToken(ident, isStatic, isStaticAndNotLastImport);
+            doVisitToken(ident, isStatic, isStaticAndNotLastImport, line);
 
             if (isStaticAndNotLastImport && !beforeFirstImport) {
                 log(ident.getLineNo(), MSG_ORDERING, ident.getText());
@@ -35,7 +36,7 @@
                 lastGroup = Integer.MIN_VALUE;
                 lastImport = "";
             }
-            doVisitToken(ident, isStatic, isLastImportAndNonStatic);
+            doVisitToken(ident, isStatic, isLastImportAndNonStatic, line);
 
             if (isLastImportAndNonStatic) {
                 log(ident.getLineNo(), MSG_ORDERING, ident.getText());
@@ -43,14 +44,14 @@
         }
         else if (option == ImportOrderOption.ABOVE) {
             // previous non-static but current is static
-            doVisitToken(ident, isStatic, isStaticAndNotLastImport);
+            doVisitToken(ident, isStatic, isStaticAndNotLastImport, line);
         }
         else if (option == ImportOrderOption.UNDER) {
-            doVisitToken(ident, isStatic, isLastImportAndNonStatic);
+            doVisitToken(ident, isStatic, isLastImportAndNonStatic, line);
         }
         else if (option == ImportOrderOption.INFLOW) {
             // "previous" argument is useless here
-            doVisitToken(ident, isStatic, true);
+            doVisitToken(ident, isStatic, true, line);
         }
         else {
             throw new IllegalStateException(
