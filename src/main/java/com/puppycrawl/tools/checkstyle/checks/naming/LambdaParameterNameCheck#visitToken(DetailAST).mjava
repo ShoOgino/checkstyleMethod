@@ -1,0 +1,17 @@
+    @Override
+    public void visitToken(DetailAST ast) {
+        final DetailAST parametersNode = ast.findFirstToken(TokenTypes.PARAMETERS);
+        if (parametersNode == null) {
+            super.visitToken(ast);
+        }
+        else {
+            for (DetailAST parameterDef = parametersNode.getFirstChild();
+                 parameterDef != null;
+                 parameterDef = parameterDef.getNextSibling()) {
+                if (parameterDef.getType() == TokenTypes.PARAMETER_DEF) {
+                    super.visitToken(parameterDef);
+                }
+            }
+        }
+    }
+

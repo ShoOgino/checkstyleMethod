@@ -1,0 +1,19 @@
+    @Test
+    public void testLambdaParameterName() throws Exception {
+        final Configuration config = getModuleConfig("LambdaParameterName");
+        final String format = config.getAttribute("format");
+
+        final String[] expected = {
+            "9:13: " + getCheckMessage(config.getMessages(), MSG_INVALID_PATTERN, "S", format),
+            "12:14: " + getCheckMessage(config.getMessages(), MSG_INVALID_PATTERN, "sT", format),
+            "14:65: " + getCheckMessage(config.getMessages(), MSG_INVALID_PATTERN, "sT1", format),
+            "14:70: " + getCheckMessage(config.getMessages(), MSG_INVALID_PATTERN, "sT2", format),
+            "17:21: " + getCheckMessage(config.getMessages(), MSG_INVALID_PATTERN, "_s", format),
+        };
+
+        final String filePath = getPath("InputLambdaParameterName.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(config, filePath, expected, warnList);
+    }
+
