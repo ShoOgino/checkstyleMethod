@@ -3,7 +3,8 @@
         model = new MainFrameModel();
         model.setParseMode(ParseMode.JAVA_WITH_JAVADOC_AND_COMMENTS);
         model.openFile(new File(getPath("InputCodeSelectorPresentation.java")));
-        tree = ((DetailAST) model.getParseTreeTableModel().getRoot()).getFirstChild();
+        tree = ((DetailAST) model.getParseTreeTableModel().getRoot())
+                .getFirstChild().getNextSibling();
         linesToPosition = ImmutableList.copyOf(convertLinesToPosition(model.getLinesToPosition()));
     }
 
