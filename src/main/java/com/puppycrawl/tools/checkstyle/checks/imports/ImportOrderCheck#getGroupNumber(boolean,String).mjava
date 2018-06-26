@@ -1,0 +1,27 @@
+    /**
+     * Finds out what group the specified import belongs to.
+     *
+     * @param isStatic whether the token is static or not.
+     * @param name the import name to find.
+     * @return group number for given import name.
+     */
+    private int getGroupNumber(boolean isStatic, String name) {
+        final Pattern[] patterns;
+        if (isStatic) {
+            patterns = staticGroups;
+        }
+        else {
+            patterns = groups;
+        }
+
+        int number = getGroupNumber(patterns, name);
+
+        if (isStatic && option == ImportOrderOption.BOTTOM) {
+            number += groups.length + 1;
+        }
+        else if (!isStatic && option == ImportOrderOption.TOP) {
+            number += staticGroups.length + 1;
+        }
+        return number;
+    }
+

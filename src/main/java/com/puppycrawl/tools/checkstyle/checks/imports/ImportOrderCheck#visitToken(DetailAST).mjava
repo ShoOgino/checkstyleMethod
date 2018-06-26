@@ -26,10 +26,6 @@
                 lastImport = "";
             }
             doVisitToken(ident, isStatic, isStaticAndNotLastImport, line);
-
-            if (isStaticAndNotLastImport && !beforeFirstImport) {
-                log(ident.getLineNo(), MSG_ORDERING, ident.getText());
-            }
         }
         else if (option == ImportOrderOption.BOTTOM) {
             if (isStaticAndNotLastImport) {
@@ -37,10 +33,6 @@
                 lastImport = "";
             }
             doVisitToken(ident, isStatic, isLastImportAndNonStatic, line);
-
-            if (isLastImportAndNonStatic) {
-                log(ident.getLineNo(), MSG_ORDERING, ident.getText());
-            }
         }
         else if (option == ImportOrderOption.ABOVE) {
             // previous non-static but current is static

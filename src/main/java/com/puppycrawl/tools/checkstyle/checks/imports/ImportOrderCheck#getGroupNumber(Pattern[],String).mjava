@@ -1,18 +1,19 @@
     /**
      * Finds out what group the specified import belongs to.
      *
+     * @param patterns groups to check.
      * @param name the import name to find.
      * @return group number for given import name.
      */
-    private int getGroupNumber(String name) {
-        int bestIndex = groups.length;
+    private static int getGroupNumber(Pattern[] patterns, String name) {
+        int bestIndex = patterns.length;
         int bestEnd = -1;
         int bestPos = Integer.MAX_VALUE;
 
         // find out what group this belongs in
-        // loop over groups and get index
-        for (int i = 0; i < groups.length; i++) {
-            final Matcher matcher = groups[i].matcher(name);
+        // loop over patterns and get index
+        for (int i = 0; i < patterns.length; i++) {
+            final Matcher matcher = patterns[i].matcher(name);
             if (matcher.find()) {
                 if (matcher.start() < bestPos) {
                     bestIndex = i;
@@ -25,7 +26,6 @@
                 }
             }
         }
-
         return bestIndex;
     }
 
