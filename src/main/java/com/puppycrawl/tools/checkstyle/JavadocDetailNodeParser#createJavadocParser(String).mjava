@@ -3,12 +3,9 @@
      * @param blockComment
      *        block comment content.
      * @return parse tree
-     * @noinspection deprecation
      */
     private JavadocParser createJavadocParser(String blockComment) {
-        final ANTLRInputStream input = new ANTLRInputStream(blockComment);
-
-        final JavadocLexer lexer = new JavadocLexer(input);
+        final JavadocLexer lexer = new JavadocLexer(CharStreams.fromString(blockComment));
 
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
 
