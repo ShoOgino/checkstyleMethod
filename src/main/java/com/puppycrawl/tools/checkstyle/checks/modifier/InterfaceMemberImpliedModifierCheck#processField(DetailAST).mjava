@@ -1,0 +1,20 @@
+    /**
+     * Check field in interface.
+     * @param ast the field AST
+     */
+    private void processField(DetailAST ast) {
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
+        if (violateImpliedPublicField
+                && modifiers.findFirstToken(TokenTypes.LITERAL_PUBLIC) == null) {
+            log(ast, MSG_KEY, PUBLIC_ACCESS_MODIFIER);
+        }
+        if (violateImpliedStaticField
+                && modifiers.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
+            log(ast, MSG_KEY, STATIC_KEYWORD);
+        }
+        if (violateImpliedFinalField
+                && modifiers.findFirstToken(TokenTypes.FINAL) == null) {
+            log(ast, MSG_KEY, FINAL_KEYWORD);
+        }
+    }
+
