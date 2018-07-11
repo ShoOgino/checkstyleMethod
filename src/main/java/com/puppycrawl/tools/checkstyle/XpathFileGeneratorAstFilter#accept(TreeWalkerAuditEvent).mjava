@@ -6,8 +6,7 @@
             final List<String> xpathQueries = xpathQueryGenerator.generate();
             if (!xpathQueries.isEmpty()) {
                 final String query = xpathQueries.stream().collect(Collectors.joining(DELIMITER));
-                EVENTS.add(event);
-                QUERIES.add(query);
+                MESSAGE_QUERY_MAP.put(event.getLocalizedMessage(), query);
             }
         }
         return true;

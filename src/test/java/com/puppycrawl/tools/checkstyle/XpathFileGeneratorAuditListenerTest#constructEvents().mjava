@@ -1,0 +1,21 @@
+    @BeforeClass
+    public static void constructEvents() throws Exception {
+        final TreeWalkerAuditEvent event1 = createTreeWalkerAuditEvent(
+                "InputXpathFileGeneratorAuditListener.java", FIRST_MESSAGE);
+
+        final TreeWalkerAuditEvent event2 = createTreeWalkerAuditEvent(
+                "InputXpathFileGeneratorAuditListener.java", SECOND_MESSAGE);
+
+        final TreeWalkerAuditEvent event3 = createTreeWalkerAuditEvent(
+                "InputXpathFileGeneratorAuditListener.java", THIRD_MESSAGE);
+
+        final TreeWalkerAuditEvent event4 = createTreeWalkerAuditEvent(
+                "InputXpathFileGeneratorAuditListener.java", FOURTH_MESSAGE);
+
+        final XpathFileGeneratorAstFilter astFilter = new XpathFileGeneratorAstFilter();
+        astFilter.accept(event1);
+        astFilter.accept(event2);
+        astFilter.accept(event3);
+        astFilter.accept(event4);
+    }
+
