@@ -37,12 +37,12 @@
                 break;
             case TokenTypes.LITERAL_ELSE:
                 startToken = ast;
-                final DetailAST candidate = ast.getFirstChild();
-                brace = null;
-
-                if (candidate.getType() == TokenTypes.SLIST) {
-                    brace = candidate;
-                }
+                brace = getBraceAsFirstChild(ast);
+                break;
+            case TokenTypes.LITERAL_CASE:
+            case TokenTypes.LITERAL_DEFAULT:
+                startToken = ast;
+                brace = getBraceAsFirstChild(ast.getNextSibling());
                 break;
             default:
                 // ATTENTION! We have default here, but we expect case TokenTypes.METHOD_DEF,
