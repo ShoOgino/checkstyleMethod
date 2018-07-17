@@ -1,13 +1,11 @@
     @Test
     public void testOne() throws Exception {
-        final String checkName = ImportControlCheck.class.getSimpleName();
         final File fileToProcess =
-                new File(getPath(checkName,
-                        "SuppressionXpathRegressionImportControlOne.java"));
+                new File(getPath("SuppressionXpathRegressionImportControlOne.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(ImportControlCheck.class);
-        moduleConfig.addAttribute("file", getPath(checkName,
+        moduleConfig.addAttribute("file", getPath(
                 "SuppressionXpathRegressionImportControlOne.xml"));
 
         final String[] expectedViolation = {

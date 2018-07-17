@@ -1,14 +1,12 @@
     @Test
     public void testFour() throws Exception {
-        final String checkName = ImportControlCheck.class.getSimpleName();
         final File fileToProcess =
-                new File(getPath(checkName,
-                        "SuppressionXpathRegressionImportControlFour.java"));
+                new File(getPath("SuppressionXpathRegressionImportControlFour.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(ImportControlCheck.class);
-        moduleConfig.addAttribute("file", getPath(checkName,
-                "SuppressionXpathRegressionImportControlFour.xml"));
+        moduleConfig.addAttribute("file",
+                getPath("SuppressionXpathRegressionImportControlFour.xml"));
 
         final String[] expectedViolation = {
             "4:1: " + getCheckMessage(ImportControlCheck.class,
