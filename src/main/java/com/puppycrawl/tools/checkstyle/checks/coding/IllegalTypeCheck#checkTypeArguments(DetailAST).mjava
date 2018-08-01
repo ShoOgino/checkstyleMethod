@@ -1,0 +1,23 @@
+    /**
+     * Checks the type arguments of the node.
+     * @param node node to check.
+     */
+    private void checkTypeArguments(final DetailAST node) {
+        DetailAST typeArguments = node.findFirstToken(TokenTypes.TYPE_ARGUMENTS);
+        if (typeArguments == null) {
+            typeArguments = node.getFirstChild().findFirstToken(TokenTypes.TYPE_ARGUMENTS);
+        }
+
+        if (typeArguments != null) {
+            final DetailAST typeArgument = typeArguments.findFirstToken(TokenTypes.TYPE_ARGUMENT);
+            checkType(typeArgument);
+            DetailAST sibling = typeArgument.getNextSibling();
+            while (sibling != null) {
+                if (sibling.getType() == TokenTypes.TYPE_ARGUMENT) {
+                    checkType(sibling);
+                }
+                sibling = sibling.getNextSibling();
+            }
+        }
+    }
+

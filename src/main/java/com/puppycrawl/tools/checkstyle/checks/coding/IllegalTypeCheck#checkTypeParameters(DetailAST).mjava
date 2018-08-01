@@ -1,0 +1,20 @@
+    /**
+     * Checks the type parameters of the node.
+     * @param node node to check.
+     */
+    private void checkTypeParameters(final DetailAST node) {
+        final DetailAST typeParameters = node.findFirstToken(TokenTypes.TYPE_PARAMETERS);
+        if (typeParameters != null) {
+            final DetailAST typeParameter =
+                    typeParameters.findFirstToken(TokenTypes.TYPE_PARAMETER);
+            checkType(typeParameter);
+            DetailAST sibling = typeParameter.getNextSibling();
+            while (sibling != null) {
+                if (sibling.getType() == TokenTypes.TYPE_PARAMETER) {
+                    checkType(sibling);
+                }
+                sibling = sibling.getNextSibling();
+            }
+        }
+    }
+

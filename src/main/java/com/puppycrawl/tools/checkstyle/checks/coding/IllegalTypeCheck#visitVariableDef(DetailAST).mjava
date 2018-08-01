@@ -3,6 +3,8 @@
      * @param variableDef variable to check.
      */
     private void visitVariableDef(DetailAST variableDef) {
-        checkClassName(variableDef);
+        if (isVerifiable(variableDef)) {
+            checkClassName(variableDef);
+        }
     }
 

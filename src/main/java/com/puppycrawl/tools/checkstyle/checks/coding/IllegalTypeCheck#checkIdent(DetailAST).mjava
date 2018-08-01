@@ -1,0 +1,11 @@
+    /**
+     * Checks the identifier of the given type.
+     * @param type node to check.
+     */
+    private void checkIdent(DetailAST type) {
+        final FullIdent ident = FullIdent.createFullIdentBelow(type);
+        if (isMatchingClassName(ident.getText())) {
+            log(ident.getDetailAst(), MSG_KEY, ident.getText());
+        }
+    }
+

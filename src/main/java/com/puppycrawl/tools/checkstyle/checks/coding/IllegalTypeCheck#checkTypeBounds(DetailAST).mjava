@@ -1,0 +1,15 @@
+    /**
+     * Checks the upper and lower bounds for the given type.
+     * @param type node to check.
+     */
+    private void checkTypeBounds(DetailAST type) {
+        final DetailAST upperBounds = type.findFirstToken(TokenTypes.TYPE_UPPER_BOUNDS);
+        if (upperBounds != null) {
+            checkType(upperBounds);
+        }
+        final DetailAST lowerBounds = type.findFirstToken(TokenTypes.TYPE_LOWER_BOUNDS);
+        if (lowerBounds != null) {
+            checkType(lowerBounds);
+        }
+    }
+
