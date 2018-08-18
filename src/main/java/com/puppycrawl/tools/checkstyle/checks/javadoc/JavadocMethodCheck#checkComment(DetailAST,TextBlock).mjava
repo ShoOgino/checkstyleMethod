@@ -18,7 +18,8 @@
                 while (!hasInheritDocTag && it.hasNext()) {
                     hasInheritDocTag = it.next().isInheritDocTag();
                 }
-                final boolean reportExpectedTags = !hasInheritDocTag && !hasAllowedAnnotations(ast);
+                final boolean reportExpectedTags = !hasInheritDocTag
+                    && !AnnotationUtil.containsAnnotation(ast, allowedAnnotations);
 
                 checkParamTags(tags, ast, reportExpectedTags);
                 checkThrowsTags(tags, getThrows(ast), reportExpectedTags);

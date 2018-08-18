@@ -7,6 +7,7 @@
      */
     private boolean isContentsAllowMissingJavadoc(DetailAST ast) {
         return (ast.getType() == TokenTypes.METHOD_DEF || ast.getType() == TokenTypes.CTOR_DEF)
-                && (getMethodsNumberOfLine(ast) <= minLineCount || hasAllowedAnnotations(ast));
+                && (getMethodsNumberOfLine(ast) <= minLineCount
+                    || AnnotationUtil.containsAnnotation(ast, allowedAnnotations));
     }
 

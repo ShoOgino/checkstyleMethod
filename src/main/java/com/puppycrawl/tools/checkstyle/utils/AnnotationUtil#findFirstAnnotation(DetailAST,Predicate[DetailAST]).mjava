@@ -1,0 +1,29 @@
+    /**
+     * Checks if the given AST is annotated with at least one annotation that
+     * matches the given predicate and returns the AST representing the first
+     * matching annotation.
+     *
+     * <p>
+     * This method will not look for imports or package
+     * statements to detect the passed in annotation.
+     * </p>
+     *
+     * @param ast the current node
+     * @param predicate The predicate which decides if an annotation matches
+     * @return the AST representing that annotation
+     */
+    private static DetailAST findFirstAnnotation(final DetailAST ast,
+                                                 Predicate<DetailAST> predicate) {
+        final DetailAST holder = getAnnotationHolder(ast);
+        DetailAST result = null;
+        for (DetailAST child = holder.getFirstChild();
+            child != null; child = child.getNextSibling()) {
+            if (child.getType() == TokenTypes.ANNOTATION && predicate.test(child)) {
+                result = child;
+                break;
+            }
+        }
+
+        return result;
+    }
+

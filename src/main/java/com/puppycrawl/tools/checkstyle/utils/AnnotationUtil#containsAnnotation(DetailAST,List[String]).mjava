@@ -1,0 +1,41 @@
+    /**
+     * Checks if the given AST element is annotated with any of the specified annotations.
+     *
+     * <p>
+     * This method accepts both simple and fully-qualified names,
+     * e.g. "Override" will match both java.lang.Override and Override.
+     * </p>
+     *
+     * @param ast The type or method definition.
+     * @param annotations A collection of annotations to look for.
+     * @return {@code true} if the given AST element is annotated with
+     *                      at least one of the specified annotations;
+     *                      {@code false} otherwise.
+     */
+    public static boolean containsAnnotation(DetailAST ast, List<String> annotations) {
+        if (ast == null) {
+            throw new IllegalArgumentException(THE_AST_IS_NULL);
+        }
+
+        if (annotations == null) {
+            throw new IllegalArgumentException("annotations cannot be null");
+        }
+
+        boolean result = false;
+
+        if (!annotations.isEmpty()) {
+            final DetailAST firstMatchingAnnotation = findFirstAnnotation(ast, annotationNode -> {
+                DetailAST identNode = annotationNode.findFirstToken(TokenTypes.IDENT);
+                if (identNode == null) {
+                    identNode = annotationNode.findFirstToken(TokenTypes.DOT)
+                            .findFirstToken(TokenTypes.IDENT);
+                }
+
+                return annotations.contains(identNode.getText());
+            });
+            result = firstMatchingAnnotation != null;
+        }
+
+        return result;
+    }
+
