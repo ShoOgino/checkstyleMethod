@@ -1,10 +1,11 @@
     @Test
-    public void testMinimum() throws Exception {
+    public void testMinimumWithCustomMessage() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(RegexpMultilineCheck.class);
         checkConfig.addAttribute("format", "\\r");
         checkConfig.addAttribute("minimum", "5");
+        checkConfig.addAttribute("message", "some message");
         final String[] expected = {
-            "1: " + getCheckMessage(MSG_REGEXP_MINIMUM, "5", "\\r"),
+            "1: some message",
         };
 
         final File file = temporaryFolder.newFile();
