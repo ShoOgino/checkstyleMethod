@@ -1,0 +1,65 @@
+        /**
+         * Validates the user-specified command line options.
+         * @param parseResult used to verify if the format option was specified on the command line
+         * @param filesToProcess the list of files whose style to check
+         * @return list of violations
+         */
+        // -@cs[CyclomaticComplexity] Breaking apart will damage encapsulation
+        private List<String> validateCli(ParseResult parseResult, List<File> filesToProcess) {
+            final List<String> result = new ArrayList<>();
+            final boolean hasConfigurationFile = configurationFile != null;
+            final boolean hasSuppressionLineColumnNumber = suppressionLineColumnNumber != null;
+
+            if (filesToProcess.isEmpty()) {
+                result.add("Files to process must be specified, found 0.");
+            }
+            // ensure there is no conflicting options
+            else if (printAst || printAstWithComments || printJavadocTree || printTreeWithJavadoc) {
+                if (suppressionLineColumnNumber != null || configurationFile != null
+                        || propertiesFile != null || outputPath != null
+                        || parseResult.hasMatchedOption(OUTPUT_FORMAT_OPTION)) {
+                    result.add("Option '-t' cannot be used with other options.");
+                }
+                else if (filesToProcess.size() > 1) {
+                    result.add("Printing AST is allowed for only one file.");
+                }
+            }
+            else if (hasSuppressionLineColumnNumber) {
+                if (configurationFile != null || propertiesFile != null
+                        || outputPath != null
+                        || parseResult.hasMatchedOption(OUTPUT_FORMAT_OPTION)) {
+                    result.add("Option '-s' cannot be used with other options.");
+                }
+                else if (filesToProcess.size() > 1) {
+                    result.add("Printing xpath suppressions is allowed for only one file.");
+                }
+            }
+            else if (hasConfigurationFile) {
+                try {
+                    // test location only
+                    CommonUtil.getUriByFilename(configurationFile);
+                }
+                catch (CheckstyleException ignored) {
+                    final String msg = "Could not find config XML file '%s'.";
+                    result.add(String.format(Locale.ROOT, msg, configurationFile));
+                }
+
+                // validate optional parameters
+                if (propertiesFile != null && !propertiesFile.exists()) {
+                    result.add(String.format(Locale.ROOT,
+                            "Could not find file '%s'.", propertiesFile));
+                }
+                if (checkerThreadsNumber < 1) {
+                    result.add("Checker threads number must be greater than zero");
+                }
+                if (treeWalkerThreadsNumber < 1) {
+                    result.add("TreeWalker threads number must be greater than zero");
+                }
+            }
+            else {
+                result.add("Must specify a config XML file.");
+            }
+
+            return result;
+        }
+

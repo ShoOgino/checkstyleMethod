@@ -2,18 +2,22 @@
      * TokenTypes.properties generator entry point.
      * @param args the command line arguments
      * @throws CheckstyleException if parser or lexer failed or if there is an IO problem
-     * @throws ParseException if the command line can not be passed
      **/
-    public static void main(String... args)
-            throws CheckstyleException, ParseException {
-        final CommandLine commandLine = parseCli(args);
-        if (commandLine.getArgList().size() == 1) {
-            final File inputFile = new File(commandLine.getArgList().get(0));
-            final File outputFile = new File(commandLine.getOptionValue(OPTION_DEST_FILE));
-            writePropertiesFile(inputFile, outputFile);
+    public static void main(String... args) throws CheckstyleException {
+        final CliOptions cliOptions = new CliOptions();
+        final CommandLine cmd = new CommandLine(cliOptions).setUsageHelpWidth(USAGE_HELP_WIDTH);
+        try {
+            final ParseResult parseResult = cmd.parseArgs(args);
+            if (parseResult.isUsageHelpRequested()) {
+                cmd.usage(System.out);
+            }
+            else {
+                writePropertiesFile(cliOptions);
+            }
         }
-        else {
-            printUsage();
+        catch (ParameterException ex) {
+            System.err.println(ex.getMessage());
+            ex.getCommandLine().usage(System.err);
         }
     }
 

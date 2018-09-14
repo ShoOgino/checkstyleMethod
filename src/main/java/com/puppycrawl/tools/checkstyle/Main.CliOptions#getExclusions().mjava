@@ -1,0 +1,12 @@
+        /**
+         * Gets the list of exclusions provided through the command line arguments.
+         * @return List of exclusion patterns.
+         */
+        private List<Pattern> getExclusions() {
+            final List<Pattern> result = new ArrayList<>();
+            exclude.forEach(file -> result.add(
+                    Pattern.compile("^" + Pattern.quote(file.getAbsolutePath()) + "$")));
+            result.addAll(excludeRegex);
+            return result;
+        }
+

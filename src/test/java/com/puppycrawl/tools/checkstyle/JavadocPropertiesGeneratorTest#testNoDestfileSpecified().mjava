@@ -1,14 +1,10 @@
     @Test
     public void testNoDestfileSpecified() throws Exception {
-        try {
-            JavadocPropertiesGenerator.main(getPath("InputMain.java"));
-            fail("Exception was expected");
-        }
-        catch (ParseException ex) {
-            assertTrue("Invalid error message",
-                ex.getMessage().contains("Missing required option: destfile"));
-        }
-        assertEquals("Unexpected error log", "", systemErr.getLog());
+        JavadocPropertiesGenerator.main(getPath("InputMain.java"));
+
+        final String expected = String.format(Locale.ROOT,
+                "Missing required option '--destfile=<outputFile>'%n") + USAGE;
+        assertEquals("Unexpected error log", expected, systemErr.getLog());
         assertEquals("Unexpected output log", "", systemOut.getLog());
     }
 

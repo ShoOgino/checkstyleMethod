@@ -1,0 +1,17 @@
+    /**
+     * This method creates in AuditListener an open stream for validation data, it must be
+     * closed by {@link RootModule} (default implementation is {@link Checker}) by calling
+     * {@link AuditListener#auditFinished(AuditEvent)}.
+     * @param format format of the audit listener
+     * @param outputLocation the location of output
+     * @return a fresh new {@code AuditListener}
+     * @exception IOException when provided output location is not found
+     */
+    private static AuditListener createListener(OutputFormat format, Path outputLocation)
+            throws IOException {
+        final OutputStream out = getOutputStream(outputLocation);
+        final AutomaticBean.OutputStreamOptions closeOutputStreamOption =
+                getOutputStreamOptions(outputLocation);
+        return format.createListener(out, closeOutputStreamOption);
+    }
+

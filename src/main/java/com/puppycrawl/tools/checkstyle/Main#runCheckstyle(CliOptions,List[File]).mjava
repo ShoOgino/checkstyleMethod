@@ -1,32 +1,33 @@
     /**
      * Executes required Checkstyle actions based on passed parameters.
-     * @param cliOptions
-     *        pojo object that contains all options
+     * @param options user-specified options
+     * @param filesToProcess the list of files whose style to check
      * @return number of violations of ERROR level
      * @throws IOException
      *         when output file could not be found
      * @throws CheckstyleException
      *         when properties file could not be loaded
+     * @noinspection UseOfSystemOutOrSystemErr
      */
-    private static int runCheckstyle(CliOptions cliOptions)
+    private static int runCheckstyle(CliOptions options, List<File> filesToProcess)
             throws CheckstyleException, IOException {
         // setup the properties
         final Properties props;
 
-        if (cliOptions.propertiesLocation == null) {
+        if (options.propertiesFile == null) {
             props = System.getProperties();
         }
         else {
-            props = loadProperties(new File(cliOptions.propertiesLocation));
+            props = loadProperties(options.propertiesFile);
         }
 
         // create a configuration
         final ThreadModeSettings multiThreadModeSettings =
-                new ThreadModeSettings(
-                        cliOptions.checkerThreadsNumber, cliOptions.treeWalkerThreadsNumber);
+                new ThreadModeSettings(options.checkerThreadsNumber,
+                        options.treeWalkerThreadsNumber);
 
         final ConfigurationLoader.IgnoredModulesOptions ignoredModulesOptions;
-        if (cliOptions.executeIgnoredModules) {
+        if (options.executeIgnoredModules) {
             ignoredModulesOptions = ConfigurationLoader.IgnoredModulesOptions.EXECUTE;
         }
         else {
@@ -34,7 +35,7 @@
         }
 
         final Configuration config = ConfigurationLoader.loadConfiguration(
-                cliOptions.configLocation, new PropertiesExpander(props),
+                options.configurationFile, new PropertiesExpander(props),
                 ignoredModulesOptions, multiThreadModeSettings);
 
         // create RootModule object and run it
@@ -44,15 +45,15 @@
 
         try {
             final AuditListener listener;
-            if (cliOptions.generateXpathSuppressionsFile) {
+            if (options.generateXpathSuppressionsFile) {
                 // create filter to print generated xpath suppressions file
                 final Configuration treeWalkerConfig = getTreeWalkerConfig(config);
                 if (treeWalkerConfig != null) {
                     final DefaultConfiguration moduleConfig =
                             new DefaultConfiguration(
                                     XpathFileGeneratorAstFilter.class.getName());
-                    moduleConfig.addAttribute(OPTION_TAB_WIDTH_NAME,
-                            Integer.toString(cliOptions.tabWidth));
+                    moduleConfig.addAttribute(CliOptions.ATTRIB_TAB_WIDTH_NAME,
+                            String.valueOf(options.tabWidth));
                     ((DefaultConfiguration) treeWalkerConfig).addChild(moduleConfig);
                 }
 
@@ -60,8 +61,7 @@
                         AutomaticBean.OutputStreamOptions.NONE);
             }
             else {
-                listener = createListener(cliOptions.format,
-                        cliOptions.outputLocation);
+                listener = createListener(options.format, options.outputPath);
             }
 
             rootModule.setModuleClassLoader(moduleClassLoader);
@@ -69,7 +69,7 @@
             rootModule.addListener(listener);
 
             // run RootModule
-            errorCounter = rootModule.process(cliOptions.files);
+            errorCounter = rootModule.process(filesToProcess);
         }
         finally {
             rootModule.destroy();

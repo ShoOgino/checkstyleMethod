@@ -1,0 +1,21 @@
+    /**
+     * Creates the .properties file from a .java file.
+     * @param options the user-specified options
+     * @throws CheckstyleException if a javadoc comment can not be parsed
+     */
+    private static void writePropertiesFile(CliOptions options) throws CheckstyleException {
+        try (PrintWriter writer = new PrintWriter(options.outputFile,
+                StandardCharsets.UTF_8.name())) {
+            final DetailAST top = JavaParser.parseFile(options.inputFile,
+                    JavaParser.Options.WITH_COMMENTS);
+            final DetailAST objBlock = getClassBody(top);
+            if (objBlock != null) {
+                iteratePublicStaticIntFields(objBlock, writer::println);
+            }
+        }
+        catch (IOException ex) {
+            throw new CheckstyleException("Failed to write javadoc properties of '"
+                    + options.inputFile + "' to '" + options.outputFile + "'", ex);
+        }
+    }
+

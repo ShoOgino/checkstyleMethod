@@ -1,12 +1,12 @@
     @Test
-    public void testVersionPrint()
+    public void testUsageHelpPrint()
             throws Exception {
         exit.checkAssertionAfterwards(() -> {
             assertEquals("Unexpected output log",
-                    "Checkstyle version: null" + System.lineSeparator(),
+                    USAGE,
                     systemOut.getLog());
             assertEquals("Unexpected system error log", "", systemErr.getLog());
         });
-        Main.main("-V");
+        Main.main("-h");
     }
 

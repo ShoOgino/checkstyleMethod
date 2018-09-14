@@ -1,17 +1,18 @@
     /**
      * Create output stream or return System.out
-     * @param outputLocation output location
+     * @param outputPath output location
      * @return output stream
      * @throws IOException might happen
+     * @noinspection UseOfSystemOutOrSystemErr
      */
     @SuppressWarnings("resource")
-    private static OutputStream getOutputStream(String outputLocation) throws IOException {
+    private static OutputStream getOutputStream(Path outputPath) throws IOException {
         final OutputStream result;
-        if (outputLocation == null) {
+        if (outputPath == null) {
             result = System.out;
         }
         else {
-            result = Files.newOutputStream(Paths.get(outputLocation));
+            result = Files.newOutputStream(outputPath);
         }
         return result;
     }

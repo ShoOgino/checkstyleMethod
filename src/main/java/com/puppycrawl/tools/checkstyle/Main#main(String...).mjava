@@ -3,50 +3,36 @@
      * is the number of errors found in all the files.
      * @param args the command line arguments.
      * @throws IOException if there is a problem with files access
-     * @noinspection CallToPrintStackTrace, CallToSystemExit
+     * @noinspection UseOfSystemOutOrSystemErr, CallToPrintStackTrace, CallToSystemExit
      **/
     public static void main(String... args) throws IOException {
-        int errorCounter = 0;
-        boolean cliViolations = false;
+
+        final CliOptions cliOptions = new CliOptions();
+        final CommandLine commandLine = new CommandLine(cliOptions);
+        commandLine.setUsageHelpWidth(CliOptions.HELP_WIDTH);
+        commandLine.setCaseInsensitiveEnumValuesAllowed(true);
+
         // provide proper exit code based on results.
-        final int exitWithCliViolation = -1;
         int exitStatus = 0;
-
+        int errorCounter = 0;
         try {
-            //parse CLI arguments
-            final CommandLine commandLine = parseCli(args);
-
-            // show version and exit if it is requested
-            if (commandLine.hasOption(OPTION_V_NAME)) {
-                System.out.println("Checkstyle version: "
-                        + Main.class.getPackage().getImplementationVersion());
-                exitStatus = 0;
+            final ParseResult parseResult = commandLine.parseArgs(args);
+            if (parseResult.isVersionHelpRequested()) {
+                System.out.println(getVersionString());
+            }
+            else if (parseResult.isUsageHelpRequested()) {
+                commandLine.usage(System.out);
             }
             else {
-                final List<File> filesToProcess = getFilesToProcess(getExclusions(commandLine),
-                        commandLine.getArgs());
-
-                // return error if something is wrong in arguments
-                final List<String> messages = validateCli(commandLine, filesToProcess);
-                cliViolations = !messages.isEmpty();
-                if (cliViolations) {
-                    exitStatus = exitWithCliViolation;
-                    errorCounter = 1;
-                    messages.forEach(System.out::println);
-                }
-                else {
-                    errorCounter = runCli(commandLine, filesToProcess);
-                    exitStatus = errorCounter;
-                }
+                exitStatus = execute(parseResult, cliOptions);
+                errorCounter = exitStatus;
             }
         }
-        catch (ParseException pex) {
-            // something wrong with arguments - print error and manual
-            cliViolations = true;
-            exitStatus = exitWithCliViolation;
-            errorCounter = 1;
-            System.out.println(pex.getMessage());
-            printUsage();
+        catch (ParameterException ex) {
+            exitStatus = EXIT_WITH_INVALID_USER_INPUT_CODE;
+            System.err.println(ex.getMessage());
+            System.err.println("Usage: checkstyle [OPTIONS]... FILES...");
+            System.err.println("Try 'checkstyle --help' for more information.");
         }
         catch (CheckstyleException ex) {
             exitStatus = EXIT_WITH_CHECKSTYLE_EXCEPTION_CODE;
@@ -55,14 +41,11 @@
         }
         finally {
             // return exit code base on validation of Checker
-            // two ifs exist till https://github.com/hcoles/pitest/issues/377
-            if (errorCounter != 0) {
-                if (!cliViolations) {
-                    final LocalizedMessage errorCounterMessage = new LocalizedMessage(1,
-                            Definitions.CHECKSTYLE_BUNDLE, ERROR_COUNTER,
-                            new String[] {String.valueOf(errorCounter)}, null, Main.class, null);
-                    System.out.println(errorCounterMessage.getMessage());
-                }
+            if (errorCounter > 0) {
+                final LocalizedMessage errorCounterMessage = new LocalizedMessage(1,
+                        Definitions.CHECKSTYLE_BUNDLE, ERROR_COUNTER,
+                        new String[] {String.valueOf(errorCounter)}, null, Main.class, null);
+                System.out.println(errorCounterMessage.getMessage());
             }
             if (exitStatus != 0) {
                 System.exit(exitStatus);

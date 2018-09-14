@@ -1,7 +1,8 @@
     @Test
     @SuppressWarnings("unchecked")
     public void testListFilesDirectoryWithNull() throws Exception {
-        final Method method = Main.class.getDeclaredMethod("listFiles", File.class, List.class);
+        final Class<?> optionsClass = Class.forName(Main.class.getName());
+        final Method method = optionsClass.getDeclaredMethod("listFiles", File.class, List.class);
         method.setAccessible(true);
 
         final File fileMock = mock(File.class);

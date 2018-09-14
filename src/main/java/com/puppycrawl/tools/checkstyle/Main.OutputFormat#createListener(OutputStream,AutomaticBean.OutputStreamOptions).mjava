@@ -1,0 +1,18 @@
+        /**
+         * Returns a new AuditListener for this OutputFormat.
+         * @param out the output stream
+         * @param options the output stream options
+         * @return a new AuditListener for this OutputFormat
+         */
+        public AuditListener createListener(OutputStream out,
+                                            AutomaticBean.OutputStreamOptions options) {
+            final AuditListener result;
+            if (this == XML) {
+                result = new XMLLogger(out, options);
+            }
+            else {
+                result = new DefaultLogger(out, options);
+            }
+            return result;
+        }
+
