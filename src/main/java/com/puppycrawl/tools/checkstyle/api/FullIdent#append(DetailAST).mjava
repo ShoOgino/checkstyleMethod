@@ -5,17 +5,8 @@
      */
     private void append(DetailAST ast) {
         elements.add(ast.getText());
-        if (lineNo == 0) {
-            lineNo = ast.getLineNo();
-        }
-        else if (ast.getLineNo() > 0) {
-            lineNo = Math.min(lineNo, ast.getLineNo());
-        }
-        if (columnNo == 0) {
-            columnNo = ast.getColumnNo();
-        }
-        else if (ast.getColumnNo() > 0) {
-            columnNo = Math.min(columnNo, ast.getColumnNo());
+        if (detailAst == null) {
+            detailAst = ast;
         }
     }
 
