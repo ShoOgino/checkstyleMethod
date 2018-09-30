@@ -1,0 +1,28 @@
+    /**
+     * Gets the abbreviation, where {@code beginIndex} and {@code endIndex} are
+     * inclusive indexes of a sequence of consecutive upper-case characters.
+     * <p>
+     * The character at {@code endIndex} is only included in the abbreviation if
+     * it is the last character in the string; otherwise it is usually the first
+     * capital in the next word.
+     * </p>
+     * <p>
+     * For example, {@code getAbbreviation("getXMLParser", 3, 6)} returns "XML"
+     * (not "XMLP"), and so does {@code getAbbreviation("parseXML", 5, 7)}.
+     * </p>
+     * @param str name
+     * @param beginIndex begin index
+     * @param endIndex end index
+     * @return the specified abbreviation
+     */
+    private static String getAbbreviation(String str, int beginIndex, int endIndex) {
+        final String result;
+        if (endIndex == str.length() - 1) {
+            result = str.substring(beginIndex);
+        }
+        else {
+            result = str.substring(beginIndex, endIndex);
+        }
+        return result;
+    }
+

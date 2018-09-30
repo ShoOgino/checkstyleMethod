@@ -23,7 +23,6 @@
                 abbrStarted = false;
 
                 final int endIndex = index - 1;
-                // -1 as a first capital is usually beginning of next word
                 result = getAbbreviationIfIllegal(str, beginIndex, endIndex);
                 if (result != null) {
                     break;
@@ -31,9 +30,9 @@
                 beginIndex = -1;
             }
         }
-        // if abbreviation at the end of name and it is not single character (example: scaleX)
-        if (abbrStarted && beginIndex != str.length() - 1) {
-            final int endIndex = str.length();
+        // if abbreviation at the end of name (example: scaleX)
+        if (abbrStarted) {
+            final int endIndex = str.length() - 1;
             result = getAbbreviationIfIllegal(str, beginIndex, endIndex);
         }
         return result;
