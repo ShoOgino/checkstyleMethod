@@ -1,0 +1,18 @@
+    /**
+     * Checks the super type and implemented interfaces of a given type.
+     * @param typeDef class or interface for check.
+     */
+    private void visitTypeDef(DetailAST typeDef) {
+        if (isVerifiable(typeDef)) {
+            checkTypeParameters(typeDef);
+            final DetailAST extendsClause = typeDef.findFirstToken(TokenTypes.EXTENDS_CLAUSE);
+            if (extendsClause != null) {
+                checkBaseTypes(extendsClause);
+            }
+            final DetailAST implementsClause = typeDef.findFirstToken(TokenTypes.IMPLEMENTS_CLAUSE);
+            if (implementsClause != null) {
+                checkBaseTypes(implementsClause);
+            }
+        }
+    }
+

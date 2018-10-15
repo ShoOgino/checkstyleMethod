@@ -1,0 +1,18 @@
+    /**
+     * Checks the {@code extends} or {@code implements} statement.
+     * @param clause DetailAST for either {@link TokenTypes#EXTENDS_CLAUSE} or
+     *               {@link TokenTypes#IMPLEMENTS_CLAUSE}
+     */
+    private void checkBaseTypes(DetailAST clause) {
+        DetailAST child = clause.getFirstChild();
+        while (child != null) {
+            if (child.getType() == TokenTypes.IDENT) {
+                checkIdent(child);
+            }
+            else if (child.getType() == TokenTypes.TYPE_ARGUMENTS) {
+                TokenUtil.forEachChild(child, TokenTypes.TYPE_ARGUMENT, this::checkType);
+            }
+            child = child.getNextSibling();
+        }
+    }
+

@@ -9,15 +9,7 @@
         }
 
         if (typeArguments != null) {
-            final DetailAST typeArgument = typeArguments.findFirstToken(TokenTypes.TYPE_ARGUMENT);
-            checkType(typeArgument);
-            DetailAST sibling = typeArgument.getNextSibling();
-            while (sibling != null) {
-                if (sibling.getType() == TokenTypes.TYPE_ARGUMENT) {
-                    checkType(sibling);
-                }
-                sibling = sibling.getNextSibling();
-            }
+            TokenUtil.forEachChild(typeArguments, TokenTypes.TYPE_ARGUMENT, this::checkType);
         }
     }
 

@@ -1,6 +1,10 @@
     @Override
     public void visitToken(DetailAST ast) {
         switch (ast.getType()) {
+            case TokenTypes.CLASS_DEF:
+            case TokenTypes.INTERFACE_DEF:
+                visitTypeDef(ast);
+                break;
             case TokenTypes.METHOD_CALL:
             case TokenTypes.METHOD_REF:
                 visitMethodCallOrRef(ast);
