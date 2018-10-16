@@ -1,5 +1,7 @@
     @Test
     public void testEqualsAndHashCode() {
-        EqualsVerifier.forClass(FilterSet.class).usingGetClass().verify();
+        final EqualsVerifierReport ev = EqualsVerifier.forClass(FilterSet.class).usingGetClass()
+                .report();
+        assertEquals("Error: " + ev.getMessage(), EqualsVerifierReport.SUCCESS, ev);
     }
 

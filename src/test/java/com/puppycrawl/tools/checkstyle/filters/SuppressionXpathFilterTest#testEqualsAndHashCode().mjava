@@ -1,10 +1,9 @@
     @Test
     public void testEqualsAndHashCode() {
-        EqualsVerifier
-                .forClass(SuppressionXpathFilter.class)
+        final EqualsVerifierReport ev = EqualsVerifier.forClass(SuppressionXpathFilter.class)
                 .usingGetClass()
                 .withIgnoredFields("file", "optional", "configuration")
-                .suppress(Warning.NONFINAL_FIELDS)
-                .verify();
+                .suppress(Warning.NONFINAL_FIELDS).report();
+        assertEquals("Error: " + ev.getMessage(), EqualsVerifierReport.SUCCESS, ev);
     }
 

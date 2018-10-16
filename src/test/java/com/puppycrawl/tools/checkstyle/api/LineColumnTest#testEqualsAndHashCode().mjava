@@ -1,5 +1,7 @@
     @Test
     public void testEqualsAndHashCode() {
-        EqualsVerifier.forClass(LineColumn.class).usingGetClass().verify();
+        final EqualsVerifierReport ev = EqualsVerifier.forClass(LineColumn.class).usingGetClass()
+                .report();
+        assertEquals("Error: " + ev.getMessage(), EqualsVerifierReport.SUCCESS, ev);
     }
 

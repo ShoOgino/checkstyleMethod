@@ -1,10 +1,11 @@
     @Test
     public void testEqualsAndHashCode() {
-        EqualsVerifier.forClass(SuppressElement.class)
+        final EqualsVerifierReport ev = EqualsVerifier.forClass(SuppressElement.class)
                 .usingGetClass()
                 .withIgnoredFields("fileRegexp", "checkRegexp", "messageRegexp", "columnFilter",
                         "lineFilter")
                 .suppress(Warning.NONFINAL_FIELDS)
-                .verify();
+                .report();
+        assertEquals("Error: " + ev.getMessage(), EqualsVerifierReport.SUCCESS, ev);
     }
 
