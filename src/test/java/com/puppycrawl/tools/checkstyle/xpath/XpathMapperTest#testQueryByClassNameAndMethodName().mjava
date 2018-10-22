@@ -1,7 +1,7 @@
     @Test
     public void testQueryByClassNameAndMethodName() throws Exception {
-        final String xpath = "/CLASS_DEF[@text='InputXpathMapperAst']//OBJBLOCK"
-                + "//METHOD_DEF[@text='getSomeMethod']";
+        final String xpath = "/CLASS_DEF[./IDENT[@text='InputXpathMapperAst']]//OBJBLOCK"
+                + "//METHOD_DEF[./IDENT[@text='getSomeMethod']]";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final DetailAST[] actual = convertToArray(getXpathItems(xpath, rootNode));
         final DetailAST expectedMethodDefNode = getSiblingByType(rootNode.getUnderlyingNode(),

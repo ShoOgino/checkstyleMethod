@@ -12,14 +12,14 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK"
-                + "/METHOD_DEF[@text='bad']",
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK/"
-                + "METHOD_DEF[@text='bad']/MODIFIERS",
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK/"
-                + "METHOD_DEF[@text='bad']/TYPE_PARAMETERS",
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK/"
-                + "METHOD_DEF[@text='bad']/TYPE_PARAMETERS/GENERIC_START"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
+                + "METHOD_DEF[./IDENT[@text='bad']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
+                + "METHOD_DEF[./IDENT[@text='bad']]/MODIFIERS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
+                + "METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
+                + "METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS/GENERIC_START"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

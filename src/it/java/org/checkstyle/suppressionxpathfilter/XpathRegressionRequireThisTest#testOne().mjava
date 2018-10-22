@@ -13,8 +13,9 @@
         };
 
         final List<String> expectedXpathQueries = Collections.singletonList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionRequireThisOne']/OBJBLOCK"
-                + "/METHOD_DEF[@text='changeAge']/SLIST/EXPR/ASSIGN[@text='age']/IDENT"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionRequireThisOne']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='changeAge']]/SLIST/EXPR/ASSIGN"
+                + "/IDENT[@text='age']"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

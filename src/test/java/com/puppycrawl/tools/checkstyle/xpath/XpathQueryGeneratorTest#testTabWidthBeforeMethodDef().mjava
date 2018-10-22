@@ -12,12 +12,12 @@
                 columnNumber, testFileText, tabWidth);
         final List<String> actual = queryGenerator.generate();
         final List<String> expected = Arrays.asList(
-                "/CLASS_DEF[@text='InputXpathQueryGeneratorTabWidth']/OBJBLOCK"
-                        + "/METHOD_DEF[@text='toString']",
-                "/CLASS_DEF[@text='InputXpathQueryGeneratorTabWidth']/OBJBLOCK"
-                        + "/METHOD_DEF[@text='toString']/MODIFIERS",
-                "/CLASS_DEF[@text='InputXpathQueryGeneratorTabWidth']/OBJBLOCK"
-                        + "/METHOD_DEF[@text='toString']/MODIFIERS/LITERAL_PUBLIC");
+                "/CLASS_DEF[./IDENT[@text='InputXpathQueryGeneratorTabWidth']]/OBJBLOCK"
+                    + "/METHOD_DEF[./IDENT[@text='toString']]",
+                "/CLASS_DEF[./IDENT[@text='InputXpathQueryGeneratorTabWidth']]/OBJBLOCK"
+                    + "/METHOD_DEF[./IDENT[@text='toString']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='InputXpathQueryGeneratorTabWidth']]/OBJBLOCK"
+                    + "/METHOD_DEF[./IDENT[@text='toString']]/MODIFIERS/LITERAL_PUBLIC");
         assertEquals("Generated queries do not match expected ones", expected, actual);
     }
 

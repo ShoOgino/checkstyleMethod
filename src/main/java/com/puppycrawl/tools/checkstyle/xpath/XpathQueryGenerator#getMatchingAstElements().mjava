@@ -5,16 +5,14 @@
     private List<DetailAST> getMatchingAstElements() {
         final List<DetailAST> result = new ArrayList<>();
         DetailAST curNode = rootAst;
-        while (curNode != null && curNode.getLineNo() <= lineNumber) {
+        while (curNode != null) {
             if (isMatchingByLineAndColumnAndTokenType(curNode)) {
                 result.add(curNode);
             }
             DetailAST toVisit = curNode.getFirstChild();
             while (curNode != null && toVisit == null) {
                 toVisit = curNode.getNextSibling();
-                if (toVisit == null) {
-                    curNode = curNode.getParent();
-                }
+                curNode = curNode.getParent();
             }
 
             curNode = toVisit;

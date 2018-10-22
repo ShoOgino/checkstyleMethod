@@ -1,0 +1,18 @@
+    @Test
+    public void testNoXpathQuery() throws Exception {
+        final LocalizedMessage message = new LocalizedMessage(10, 10, TokenTypes.LCURLY,
+                "messages.properties", null, null, SeverityLevel.ERROR, null, LeftCurlyCheck.class,
+                null);
+        final TreeWalkerAuditEvent event = createTreeWalkerAuditEvent(
+                "InputXpathFileGeneratorAstFilter.java", message);
+        final XpathFileGeneratorAstFilter filter = new XpathFileGeneratorAstFilter();
+
+        Assert.assertTrue("filter accepted", filter.accept(event));
+
+        final AuditEvent auditEvent = new AuditEvent(this,
+                getPath("InputXpathFileGeneratorAstFilter.java"), message);
+
+        Assert.assertNull("expected null",
+                XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent));
+    }
+

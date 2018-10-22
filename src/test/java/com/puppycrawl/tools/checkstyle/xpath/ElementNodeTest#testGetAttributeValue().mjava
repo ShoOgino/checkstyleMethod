@@ -1,0 +1,12 @@
+    @Test
+    public void testGetAttributeValue() {
+        final DetailAST detailAST = new DetailAST();
+        detailAST.setType(TokenTypes.IDENT);
+        detailAST.setText("HelloWorld");
+
+        final ElementNode elementNode = new ElementNode(rootNode, rootNode, detailAST);
+
+        assertEquals("Invalid text attribute", "HelloWorld",
+                elementNode.getAttributeValue(null, "text"));
+    }
+

@@ -1,0 +1,12 @@
+    @Test
+    public void testGetValue() {
+        assertEquals("Returned value differs from expected", "HELLO WORLD", getTextAttributeValue(
+                createDetailAST(TokenTypes.STRING_LITERAL, "\"HELLO WORLD\"")));
+        assertEquals("Returned value differs from expected", "123",
+                getTextAttributeValue(createDetailAST(TokenTypes.NUM_INT, "123")));
+        assertEquals("Returned value differs from expected", "HELLO WORLD",
+                getTextAttributeValue(createDetailAST(TokenTypes.IDENT, "HELLO WORLD")));
+        assertNotEquals("Returned value differs from expected", "HELLO WORLD",
+                getTextAttributeValue(createDetailAST(TokenTypes.STRING_LITERAL, "HELLO WORLD")));
+    }
+

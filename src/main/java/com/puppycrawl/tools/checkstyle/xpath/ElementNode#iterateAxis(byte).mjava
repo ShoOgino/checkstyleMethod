@@ -20,13 +20,8 @@
                 }
                 break;
             case AxisInfo.ATTRIBUTE:
-                if (attributes == null) {
-                    result = EmptyIterator.OfNodes.THE_INSTANCE;
-                }
-                else {
-                    try (AxisIterator iterator = new ArrayIterator.OfNodes(attributes)) {
-                        result = iterator;
-                    }
+                try (AxisIterator iterator = SingleNodeIterator.makeIterator(attributeNode)) {
+                    result = iterator;
                 }
                 break;
             case AxisInfo.CHILD:

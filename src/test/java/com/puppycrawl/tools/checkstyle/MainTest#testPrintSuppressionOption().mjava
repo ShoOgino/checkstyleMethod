@@ -1,8 +1,10 @@
     @Test
     public void testPrintSuppressionOption() throws Exception {
-        final String expected = "/CLASS_DEF[@text='InputMainSuppressionsStringPrinter']" + EOL
-                + "/CLASS_DEF[@text='InputMainSuppressionsStringPrinter']/MODIFIERS" + EOL
-                + "/CLASS_DEF[@text='InputMainSuppressionsStringPrinter']/LITERAL_CLASS" + EOL;
+        final String expected = "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]"
+                + EOL
+                + "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/MODIFIERS" + EOL
+                + "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/LITERAL_CLASS"
+                + EOL;
 
         exit.checkAssertionAfterwards(() -> {
             assertEquals("Unexpected output log",

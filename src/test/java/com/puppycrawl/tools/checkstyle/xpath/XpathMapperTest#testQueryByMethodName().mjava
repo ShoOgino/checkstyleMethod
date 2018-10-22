@@ -1,6 +1,6 @@
     @Test
     public void testQueryByMethodName() throws Exception {
-        final String xpath = "//METHOD_DEF[@text='getSomeMethod']";
+        final String xpath = "//METHOD_DEF[./IDENT[@text='getSomeMethod']]";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final DetailAST[] actual = convertToArray(getXpathItems(xpath, rootNode));
         final DetailAST expectedMethodDefNode = getSiblingByType(rootNode.getUnderlyingNode(),

@@ -12,12 +12,14 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartTwo']/OBJBLOCK"
-                + "/METHOD_DEF[@text='bad']/PARAMETERS/PARAMETER_DEF[@text='consumer']"
-                + "/TYPE[@text='Consumer']/TYPE_ARGUMENTS",
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartTwo']/OBJBLOCK"
-                + "/METHOD_DEF[@text='bad']/PARAMETERS/PARAMETER_DEF[@text='consumer']"
-                + "/TYPE[@text='Consumer']/TYPE_ARGUMENTS/GENERIC_START"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartTwo']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='bad']]/PARAMETERS"
+                + "/PARAMETER_DEF[./IDENT[@text='consumer']]"
+                + "/TYPE[./IDENT[@text='Consumer']]/TYPE_ARGUMENTS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartTwo']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='bad']]/PARAMETERS"
+                + "/PARAMETER_DEF[./IDENT[@text='consumer']]"
+                + "/TYPE[./IDENT[@text='Consumer']]/TYPE_ARGUMENTS/GENERIC_START"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

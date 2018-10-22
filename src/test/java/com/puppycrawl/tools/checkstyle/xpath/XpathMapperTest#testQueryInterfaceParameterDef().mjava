@@ -1,6 +1,6 @@
     @Test
     public void testQueryInterfaceParameterDef() throws Exception {
-        final String xpath = "//PARAMETER_DEF[@text='someVariable']/../..";
+        final String xpath = "//PARAMETER_DEF[./IDENT[@text='someVariable']]/../..";
         final RootNode interfaceRootNode = getRootNode("InputXpathMapperInterface.java");
         final DetailAST[] actual = convertToArray(getXpathItems(xpath, interfaceRootNode));
         final DetailAST expectedMethodDefNode = getSiblingByType(

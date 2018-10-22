@@ -1,7 +1,7 @@
     @Test
     public void testAttributeAnd() throws Exception {
-        final String xpath = "//METHOD_DEF[@text='callSomeMethod' and "
-                + "../..[@text='InputXpathMapperAst']]";
+        final String xpath = "//METHOD_DEF[./IDENT[@text='callSomeMethod'] and "
+                + "../..[./IDENT[@text='InputXpathMapperAst']]]";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final DetailAST[] actual = convertToArray(getXpathItems(xpath, rootNode));
         final DetailAST expectedClassDefNode = getSiblingByType(rootNode.getUnderlyingNode(),

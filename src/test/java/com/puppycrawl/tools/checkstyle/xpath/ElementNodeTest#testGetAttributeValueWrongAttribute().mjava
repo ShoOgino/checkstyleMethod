@@ -1,0 +1,11 @@
+    @Test
+    public void testGetAttributeValueWrongAttribute() {
+        final DetailAST detailAST = new DetailAST();
+        detailAST.setType(TokenTypes.IDENT);
+        detailAST.setText("HelloWorld");
+
+        final ElementNode elementNode = new ElementNode(rootNode, rootNode, detailAST);
+
+        assertNull("Must be null", elementNode.getAttributeValue(null, "somename"));
+    }
+

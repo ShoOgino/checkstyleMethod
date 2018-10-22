@@ -1,6 +1,6 @@
     @Test
     public void testQueryAllMethodDefinitionsInContext() throws Exception {
-        final String objectXpath = "/CLASS_DEF[@text='InputXpathMapperAst']//OBJBLOCK";
+        final String objectXpath = "/CLASS_DEF[./IDENT[@text='InputXpathMapperAst']]//OBJBLOCK";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final List<NodeInfo> objectNodes = getXpathItems(objectXpath, rootNode);
         assertEquals("Invalid number of nodes", 1, objectNodes.size());

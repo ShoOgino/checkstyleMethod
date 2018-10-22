@@ -1,0 +1,17 @@
+    /**
+     * Finds position of the ast element among siblings.
+     * @param ast {@code DetailAST} ast element
+     * @return position of the ast element
+     */
+    private static int findPositionAmongSiblings(DetailAST ast) {
+        DetailAST cur = ast;
+        int pos = 0;
+        while (cur != null) {
+            if (cur.getType() == ast.getType()) {
+                pos++;
+            }
+            cur = cur.getPreviousSibling();
+        }
+        return pos;
+    }
+

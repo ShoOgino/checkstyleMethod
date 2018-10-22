@@ -12,12 +12,15 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-                "/CLASS_DEF[@text='SuppressionXpathRegressionClassMemberImpliedModifierOne']"
-                        + "/OBJBLOCK/INTERFACE_DEF[@text='Foo']",
-                "/CLASS_DEF[@text='SuppressionXpathRegressionClassMemberImpliedModifierOne']"
-                        + "/OBJBLOCK/INTERFACE_DEF[@text='Foo']/MODIFIERS",
-                "/CLASS_DEF[@text='SuppressionXpathRegressionClassMemberImpliedModifierOne']"
-                        + "/OBJBLOCK/INTERFACE_DEF[@text='Foo']/MODIFIERS/LITERAL_PUBLIC"
+                "/CLASS_DEF[./IDENT["
+                        + "@text='SuppressionXpathRegressionClassMemberImpliedModifierOne']]"
+                        + "/OBJBLOCK/INTERFACE_DEF[./IDENT[@text='Foo']]",
+                "/CLASS_DEF[./IDENT["
+                        + "@text='SuppressionXpathRegressionClassMemberImpliedModifierOne']]"
+                        + "/OBJBLOCK/INTERFACE_DEF[./IDENT[@text='Foo']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT["
+                        + "@text='SuppressionXpathRegressionClassMemberImpliedModifierOne']]"
+                        + "/OBJBLOCK/INTERFACE_DEF[./IDENT[@text='Foo']]/MODIFIERS/LITERAL_PUBLIC"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

@@ -1,0 +1,10 @@
+    /**
+     * Returns child {@code DetailAst} element of the given root, which has text attribute.
+     * @param root {@code DetailAST} root ast
+     * @return child {@code DetailAst} element of the given root
+     */
+    private static DetailAST findChildWithTextAttribute(DetailAST root) {
+        return TokenUtil.findFirstTokenByPredicate(root,
+                XpathUtil::supportsTextAttribute).orElse(null);
+    }
+

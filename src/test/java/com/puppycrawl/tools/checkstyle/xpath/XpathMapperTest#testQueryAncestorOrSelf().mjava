@@ -1,6 +1,7 @@
     @Test
     public void testQueryAncestorOrSelf() throws Exception {
-        final String xpath = "//VARIABLE_DEF[@text='another']/ancestor-or-self::VARIABLE_DEF";
+        final String xpath = "//VARIABLE_DEF[./IDENT[@text='another']]"
+                + "/ancestor-or-self::VARIABLE_DEF";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final DetailAST[] actual = convertToArray(getXpathItems(xpath, rootNode));
         final DetailAST expectedVariableDefNode = getSiblingByType(rootNode.getUnderlyingNode(),

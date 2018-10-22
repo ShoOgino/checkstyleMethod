@@ -6,19 +6,19 @@
                 columnNumber, fileText, DEFAULT_TAB_WIDTH);
         final List<String> actual = queryGenerator.generate();
         final List<String> expected = Arrays.asList(
-            "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK"
-                    + "/METHOD_DEF[@text='saveUser']/PARAMETERS",
-            "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK"
-                    + "/METHOD_DEF[@text='saveUser']/PARAMETERS/PARAMETER_DEF[@text='name']",
-            "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK"
-                    + "/METHOD_DEF[@text='saveUser']/PARAMETERS/PARAMETER_DEF[@text='name']"
-                    + "/MODIFIERS",
-            "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK"
-                    + "/METHOD_DEF[@text='saveUser']/PARAMETERS/PARAMETER_DEF[@text='name']"
-                    + "/TYPE[@text='String']",
-            "/CLASS_DEF[@text='InputXpathQueryGenerator']/OBJBLOCK"
-                    + "/METHOD_DEF[@text='saveUser']/PARAMETERS/PARAMETER_DEF[@text='name']"
-                    + "/TYPE[@text='String']/IDENT");
+            "/CLASS_DEF[./IDENT[@text='InputXpathQueryGenerator']]/OBJBLOCK/METHOD_DEF["
+                + "./IDENT[@text='saveUser']]/PARAMETERS",
+            "/CLASS_DEF[./IDENT[@text='InputXpathQueryGenerator']]/OBJBLOCK/METHOD_DEF["
+                + "./IDENT[@text='saveUser']]/PARAMETERS/PARAMETER_DEF[./IDENT[@text='name']]",
+            "/CLASS_DEF[./IDENT[@text='InputXpathQueryGenerator']]/OBJBLOCK/METHOD_DEF["
+                + "./IDENT[@text='saveUser']]/PARAMETERS/PARAMETER_DEF[./IDENT[@text='name']]"
+                + "/MODIFIERS",
+            "/CLASS_DEF[./IDENT[@text='InputXpathQueryGenerator']]/OBJBLOCK/METHOD_DEF["
+                + "./IDENT[@text='saveUser']]/PARAMETERS/PARAMETER_DEF[./IDENT[@text='name']]"
+                + "/TYPE[./IDENT[@text='String']]",
+            "/CLASS_DEF[./IDENT[@text='InputXpathQueryGenerator']]/OBJBLOCK/METHOD_DEF["
+                + "./IDENT[@text='saveUser']]/PARAMETERS/PARAMETER_DEF[./IDENT[@text='name']]"
+                + "/TYPE/IDENT[@text='String']");
         assertEquals("Generated queries do not match expected ones", expected, actual);
     }
 

@@ -12,10 +12,11 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionExplicitOne']/OBJBLOCK"
-                + "/METHOD_DEF[@text='test']/SLIST/LITERAL_SWITCH/CASE_GROUP",
-            "/CLASS_DEF[@text='SuppressionXpathRegressionExplicitOne']/OBJBLOCK"
-                + "/METHOD_DEF[@text='test']/SLIST/LITERAL_SWITCH/CASE_GROUP/LITERAL_CASE"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionExplicitOne']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_SWITCH/CASE_GROUP["
+                + "./LITERAL_CASE/EXPR/NUM_INT[@text='2']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionExplicitOne']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_SWITCH/CASE_GROUP/LITERAL_CASE"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

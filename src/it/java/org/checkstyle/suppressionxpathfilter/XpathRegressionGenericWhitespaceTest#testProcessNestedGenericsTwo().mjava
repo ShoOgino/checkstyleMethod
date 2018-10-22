@@ -12,9 +12,11 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessNestedGenericsTwo']/OBJBLOCK"
-                + "/METHOD_DEF[@text='bad']/TYPE_PARAMETERS/TYPE_PARAMETER[@text='E']"
-                + "/TYPE_UPPER_BOUNDS[@text='Enum']/TYPE_ARGUMENTS/GENERIC_END"
+            "/CLASS_DEF[./IDENT["
+                + "@text='SuppressionXpathRegressionProcessNestedGenericsTwo']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS"
+                + "/TYPE_PARAMETER[./IDENT[@text='E']]"
+                + "/TYPE_UPPER_BOUNDS[./IDENT[@text='Enum']]/TYPE_ARGUMENTS/GENERIC_END"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

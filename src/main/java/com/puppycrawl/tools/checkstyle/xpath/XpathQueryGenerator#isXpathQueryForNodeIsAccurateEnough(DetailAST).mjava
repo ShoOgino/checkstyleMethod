@@ -1,0 +1,11 @@
+    /**
+     * Checks if ast element has all requirements to have unique xpath query.
+     * @param ast {@code DetailAST} ast element
+     * @return true if ast element will have unique xpath query, false otherwise
+     */
+    private static boolean isXpathQueryForNodeIsAccurateEnough(DetailAST ast) {
+        return !hasAtLeastOneSiblingWithSameTokenType(ast)
+                || XpathUtil.supportsTextAttribute(ast)
+                || findChildWithTextAttribute(ast) != null;
+    }
+

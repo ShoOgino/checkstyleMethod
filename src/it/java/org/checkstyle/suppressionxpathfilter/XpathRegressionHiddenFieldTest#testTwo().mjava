@@ -12,8 +12,9 @@
         };
 
         final List<String> expectedXpathQueries = Collections.singletonList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionExplicitTwo']/OBJBLOCK"
-                + "/METHOD_DEF[@text='method']/PARAMETERS/PARAMETER_DEF[@text='other']/IDENT"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionExplicitTwo']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='method']]/PARAMETERS/PARAMETER_DEF"
+                + "/IDENT[@text='other']"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

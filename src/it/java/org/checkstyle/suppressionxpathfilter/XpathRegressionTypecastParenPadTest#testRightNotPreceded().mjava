@@ -13,8 +13,9 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionTypecastParenPadRightNotPreceded']"
-                + "/OBJBLOCK/VARIABLE_DEF[@text='bad']/ASSIGN/EXPR/TYPECAST/RPAREN"
+            "/CLASS_DEF[./IDENT["
+                + "@text='SuppressionXpathRegressionTypecastParenPadRightNotPreceded']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='bad']]/ASSIGN/EXPR/TYPECAST/RPAREN"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

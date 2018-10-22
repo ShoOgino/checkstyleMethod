@@ -4,13 +4,18 @@
      * @return full xpath query for given ast element
      */
     private static String generateXpathQuery(DetailAST ast) {
-        String xpathQuery = getXpathQuery(null, ast);
-        if (!isUniqueAst(ast)) {
-            final DetailAST child = findChildWithIdent(ast);
-            if (child != null) {
-                xpathQuery += "[." + getXpathQuery(ast, child) + ']';
+        final StringBuilder xpathQueryBuilder = new StringBuilder(getXpathQuery(null, ast));
+        if (!isXpathQueryForNodeIsAccurateEnough(ast)) {
+            xpathQueryBuilder.append('[');
+            final DetailAST child = findChildWithTextAttributeRecursively(ast);
+            if (child == null) {
+                xpathQueryBuilder.append(findPositionAmongSiblings(ast));
             }
+            else {
+                xpathQueryBuilder.append('.').append(getXpathQuery(ast, child));
+            }
+            xpathQueryBuilder.append(']');
         }
-        return xpathQuery;
+        return xpathQueryBuilder.toString();
     }
 

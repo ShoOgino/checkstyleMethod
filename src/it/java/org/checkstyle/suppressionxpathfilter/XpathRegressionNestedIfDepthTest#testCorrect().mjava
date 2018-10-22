@@ -12,8 +12,9 @@
         };
 
         final List<String> expectedXpathQueries = Collections.singletonList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionNestedIfDepth']/OBJBLOCK"
-                + "/METHOD_DEF[@text='test']/SLIST/LITERAL_IF/SLIST/LITERAL_IF/SLIST/LITERAL_IF"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionNestedIfDepth']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_IF"
+                + "/SLIST/LITERAL_IF/SLIST/LITERAL_IF"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

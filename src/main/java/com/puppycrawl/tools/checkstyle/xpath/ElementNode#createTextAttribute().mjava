@@ -1,0 +1,14 @@
+    /**
+     * Checks if token type supports {@code @text} attribute,
+     * extracts its value, creates {@code AttributeNode} object and returns it.
+     * Value can be accessed using {@code @text} attribute.
+     */
+    private void createTextAttribute() {
+        AttributeNode attribute = null;
+        if (XpathUtil.supportsTextAttribute(detailAst)) {
+            attribute = new AttributeNode(TEXT_ATTRIBUTE_NAME,
+                    XpathUtil.getTextAttributeValue(detailAst));
+        }
+        attributeNode = attribute;
+    }
+

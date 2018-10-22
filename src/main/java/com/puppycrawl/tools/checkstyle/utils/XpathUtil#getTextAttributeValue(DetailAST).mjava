@@ -1,0 +1,14 @@
+    /**
+     * Returns content of the text attribute of the ast element.
+     *
+     * @param ast {@code DetailAst} element
+     * @return text attribute of the ast element
+     */
+    public static String getTextAttributeValue(DetailAST ast) {
+        String text = ast.getText();
+        if (ast.getType() == TokenTypes.STRING_LITERAL) {
+            text = text.substring(1, text.length() - 1);
+        }
+        return text;
+    }
+

@@ -12,8 +12,9 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessSingleGenericTwo']/OBJBLOCK"
-                + "/METHOD_DEF[@text='bad']/TYPE_PARAMETERS/GENERIC_END"
+            "/CLASS_DEF[./IDENT["
+                + "@text='SuppressionXpathRegressionProcessSingleGenericTwo']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS/GENERIC_END"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

@@ -1,0 +1,13 @@
+    @Test
+    public void testIterateAxisEmptyChildren() {
+        final DetailAST detailAST = new DetailAST();
+        detailAST.setType(TokenTypes.METHOD_DEF);
+        final ElementNode elementNode = new ElementNode(rootNode, null, detailAST);
+        try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.CHILD)) {
+            assertTrue("Invalid iterator", iterator instanceof EmptyIterator);
+        }
+        try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.DESCENDANT)) {
+            assertTrue("Invalid iterator", iterator instanceof EmptyIterator);
+        }
+    }
+

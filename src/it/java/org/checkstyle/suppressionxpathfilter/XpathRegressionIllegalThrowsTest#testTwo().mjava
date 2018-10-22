@@ -12,8 +12,9 @@
         };
 
         final List<String> expectedXpathQueries = Collections.singletonList(
-            "/CLASS_DEF[@text='SuppressionXpathRegressionIllegalThrowsTwo']/OBJBLOCK"
-                + "/METHOD_DEF[@text='methodTwo']/LITERAL_THROWS/DOT[@text='Error']"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIllegalThrowsTwo']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='methodTwo']]/LITERAL_THROWS"
+                + "/DOT[./IDENT[@text='Error']]"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,
