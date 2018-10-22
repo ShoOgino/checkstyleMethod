@@ -2,7 +2,7 @@
     public void testIdent() throws Exception {
         final String xpath = "/CLASS_DEF[@text='InputXpathMapperAst']/IDENT";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
-        final List<Item> nodes = getXpathItems(xpath, rootNode);
+        final List<NodeInfo> nodes = getXpathItems(xpath, rootNode);
         final DetailAST[] actual = convertToArray(nodes);
         final DetailAST expectedIdentNode = getSiblingByType(rootNode.getUnderlyingNode(),
                 TokenTypes.CLASS_DEF)
