@@ -2,13 +2,7 @@
     public void testRightCurlyIsAloneLambda() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
-        checkConfig.addAttribute("tokens", "LAMBDA");
-        final String[] expected = {
-            "14:74: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 74),
-            "17:49: " + getCheckMessage(MSG_KEY_LINE_NEW, "}", 49),
-            "35:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
-            "45:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
-        };
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputRightCurlyAloneLambda.java"), expected);
     }
 
