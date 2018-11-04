@@ -3,14 +3,12 @@
         if (!isInIgnoreOccurrenceContext(ast)) {
             final String currentString = ast.getText();
             if (ignoreStringsRegexp == null || !ignoreStringsRegexp.matcher(currentString).find()) {
-                List<StringInfo> hitList = stringMap.get(currentString);
+                List<DetailAST> hitList = stringMap.get(currentString);
                 if (hitList == null) {
                     hitList = new ArrayList<>();
                     stringMap.put(currentString, hitList);
                 }
-                final int line = ast.getLineNo();
-                final int col = ast.getColumnNo();
-                hitList.add(new StringInfo(line, col));
+                hitList.add(ast);
             }
         }
     }
