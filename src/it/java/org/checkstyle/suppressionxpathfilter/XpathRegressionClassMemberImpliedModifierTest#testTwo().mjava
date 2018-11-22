@@ -1,0 +1,26 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionClassMemberImpliedModifierTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(ClassMemberImpliedModifierCheck.class);
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(ClassMemberImpliedModifierCheck.class,
+                ClassMemberImpliedModifierCheck.MSG_KEY, "static", "null"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionClassMemberImpliedModifierTwo']"
+                    + "/OBJBLOCK/ENUM_DEF[@text='Count']",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionClassMemberImpliedModifierTwo']"
+                    + "/OBJBLOCK/ENUM_DEF[@text='Count']/MODIFIERS",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionClassMemberImpliedModifierTwo']"
+                    + "/OBJBLOCK/ENUM_DEF[@text='Count']/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
