@@ -10,7 +10,10 @@
             fsc.beginProcessing(charset);
         }
 
-        processFiles(files);
+        final List<File> targetFiles = files.stream()
+                .filter(file -> CommonUtil.matchesFileExtension(file, fileExtensions))
+                .collect(Collectors.toList());
+        processFiles(targetFiles);
 
         // Finish up
         // It may also log!!!
