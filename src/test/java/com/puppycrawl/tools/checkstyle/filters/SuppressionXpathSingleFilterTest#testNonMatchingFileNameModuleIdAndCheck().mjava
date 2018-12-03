@@ -1,0 +1,11 @@
+    @Test
+    public void testNonMatchingFileNameModuleIdAndCheck() throws Exception {
+        final String xpath = "NON_MATCHING_QUERY";
+        final SuppressionXpathSingleFilter filter =
+                createSuppressionXpathSingleFilter("InputSuppressionXpathSingleFilter",
+                        null, null, null, xpath);
+        final TreeWalkerAuditEvent ev = createEvent(3, 0,
+                TokenTypes.CLASS_DEF);
+        assertTrue("Event should be accepted", filter.accept(ev));
+    }
+

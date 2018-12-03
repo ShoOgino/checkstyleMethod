@@ -1,0 +1,9 @@
+    private TreeWalkerAuditEvent createEvent(int line, int column, int tokenType)
+            throws Exception {
+        final LocalizedMessage message =
+                new LocalizedMessage(line, column, tokenType, "", "", null, null, null,
+                        getClass(), null);
+        return new TreeWalkerAuditEvent(fileContents, file.getName(), message,
+                JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS));
+    }
+

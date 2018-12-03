@@ -6,28 +6,31 @@
      * @param moduleId the module id
      * @param query the xpath query
      */
-    public XpathFilter(String files, String checks,
-                       String message, String moduleId, String query) {
-        filePattern = files;
+    public XpathFilter(Pattern files, Pattern checks, Pattern message,
+                           String moduleId, String query) {
         if (files == null) {
+            filePattern = null;
             fileRegexp = null;
         }
         else {
-            fileRegexp = Pattern.compile(files);
+            filePattern = files.pattern();
+            fileRegexp = files;
         }
-        checkPattern = checks;
         if (checks == null) {
+            checkPattern = null;
             checkRegexp = null;
         }
         else {
-            checkRegexp = CommonUtil.createPattern(checks);
+            checkPattern = checks.pattern();
+            checkRegexp = checks;
         }
-        messagePattern = message;
         if (message == null) {
+            messagePattern = null;
             messageRegexp = null;
         }
         else {
-            messageRegexp = Pattern.compile(message);
+            messagePattern = message.pattern();
+            messageRegexp = message;
         }
         this.moduleId = moduleId;
         xpathQuery = query;
@@ -40,7 +43,7 @@
                 xpathExpression = xpathEvaluator.createExpression(xpathQuery);
             }
             catch (XPathException ex) {
-                throw new IllegalArgumentException("Unexpected xpath query: " + xpathQuery, ex);
+                throw new IllegalArgumentException("Incorrect xpath query: " + xpathQuery, ex);
             }
         }
     }

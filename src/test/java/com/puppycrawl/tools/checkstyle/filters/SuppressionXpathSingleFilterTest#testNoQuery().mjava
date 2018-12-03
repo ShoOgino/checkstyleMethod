@@ -1,0 +1,10 @@
+    @Test
+    public void testNoQuery() throws Exception {
+        final TreeWalkerAuditEvent event = createEvent(15, 8,
+                TokenTypes.VARIABLE_DEF);
+        final SuppressionXpathSingleFilter filter =
+                createSuppressionXpathSingleFilter("InputSuppressionXpathSingleFilter", "Test",
+                        null, null, null);
+        assertFalse("Event should be accepted", filter.accept(event));
+    }
+
