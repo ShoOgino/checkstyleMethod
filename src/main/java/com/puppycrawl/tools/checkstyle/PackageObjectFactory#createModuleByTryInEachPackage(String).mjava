@@ -6,12 +6,10 @@
      * @throws CheckstyleException if an error occurs.
      */
     private Object createModuleByTryInEachPackage(String name) throws CheckstyleException {
-        final Set<String> possibleNames = packages.stream()
-                .map(packageName -> packageName + PACKAGE_SEPARATOR + name)
-                .collect(Collectors.toSet());
-        possibleNames.addAll(possibleNames.stream()
-                .map(possibleName -> possibleName + CHECK_SUFFIX)
-                .collect(Collectors.toSet()));
+        final List<String> possibleNames = packages.stream()
+            .map(packageName -> packageName + PACKAGE_SEPARATOR + name)
+            .flatMap(className -> Stream.of(className, className + CHECK_SUFFIX))
+            .collect(Collectors.toList());
         Object instance = null;
         for (String possibleName : possibleNames) {
             instance = createObject(possibleName);

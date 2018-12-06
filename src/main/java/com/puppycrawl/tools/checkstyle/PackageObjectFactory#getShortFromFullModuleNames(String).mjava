@@ -4,16 +4,12 @@
      * @return simple check name.
      */
     public static String getShortFromFullModuleNames(String fullName) {
-        String result = fullName;
-        final Optional<Entry<String, String>> optional = NAME_TO_FULL_MODULE_NAME
+        return NAME_TO_FULL_MODULE_NAME
                 .entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().equals(fullName))
-                .findFirst();
-        if (optional.isPresent()) {
-            result = optional.get().getKey();
-        }
-
-        return result;
+                .map(Entry::getKey)
+                .findFirst()
+                .orElse(fullName);
     }
 

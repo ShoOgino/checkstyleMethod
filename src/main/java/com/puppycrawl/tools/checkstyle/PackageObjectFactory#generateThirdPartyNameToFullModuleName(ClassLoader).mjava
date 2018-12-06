@@ -9,17 +9,11 @@
         Map<String, Set<String>> returnValue;
         try {
             returnValue = ModuleReflectionUtil.getCheckstyleModules(packages, loader).stream()
-                    .collect(Collectors.toMap(
-                        Class::getSimpleName,
-                        cls -> Collections.singleton(cls.getCanonicalName()),
-                        (fullNames1, fullNames2) -> {
-                            final Set<String> mergedNames = new LinkedHashSet<>(fullNames1);
-                            mergedNames.addAll(fullNames2);
-                            return mergedNames;
-                        }));
+                .collect(Collectors.groupingBy(Class::getSimpleName,
+                    Collectors.mapping(Class::getCanonicalName, Collectors.toSet())));
         }
         catch (IOException ignore) {
-            returnValue = new HashMap<>();
+            returnValue = Collections.emptyMap();
         }
         return returnValue;
     }
