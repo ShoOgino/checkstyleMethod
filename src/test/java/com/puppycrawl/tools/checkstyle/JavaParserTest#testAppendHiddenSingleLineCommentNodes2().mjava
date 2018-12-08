@@ -1,7 +1,7 @@
     @Test
-    public void testAppendHiddenSingleLineCommentNodes() throws Exception {
+    public void testAppendHiddenSingleLineCommentNodes2() throws Exception {
         final DetailAST root =
-            JavaParser.parseFile(new File(getPath("InputJavaParserHiddenComments.java")),
+            JavaParser.parseFile(new File(getPath("InputJavaParserHiddenComments2.java")),
                 JavaParser.Options.WITH_COMMENTS);
 
         final Optional<DetailAST> singleLineComment = TestUtil.findTokenInAstByPredicate(root,
@@ -10,16 +10,16 @@
 
         final DetailAST comment = singleLineComment.get();
 
-        assertEquals("Unexpected line number", 13, comment.getLineNo());
-        assertEquals("Unexpected column number", 0, comment.getColumnNo());
+        assertEquals("Unexpected line number", 1, comment.getLineNo());
+        assertEquals("Unexpected column number", 4, comment.getColumnNo());
         assertEquals("Unexpected comment content", "//", comment.getText());
 
         final DetailAST commentContent = comment.getFirstChild();
 
         assertEquals("Unexpected token type", TokenTypes.COMMENT_CONTENT, commentContent.getType());
-        assertEquals("Unexpected line number", 13, commentContent.getLineNo());
-        assertEquals("Unexpected column number", 2, commentContent.getColumnNo());
+        assertEquals("Unexpected line number", 1, commentContent.getLineNo());
+        assertEquals("Unexpected column number", 6, commentContent.getColumnNo());
         assertTrue("Unexpected comment content",
-            commentContent.getText().startsWith(" inline comment"));
+            commentContent.getText().startsWith(" indented comment"));
     }
 

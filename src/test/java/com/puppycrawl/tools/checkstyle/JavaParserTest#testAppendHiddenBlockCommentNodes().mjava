@@ -9,8 +9,14 @@
 
         assertTrue("Block comment should be present", blockComment.isPresent());
 
-        final DetailAST commentContent = blockComment.get().getFirstChild();
-        final DetailAST commentEnd = blockComment.get().getLastChild();
+        final DetailAST comment = blockComment.get();
+
+        assertEquals("Unexpected line number", 3, comment.getLineNo());
+        assertEquals("Unexpected column number", 0, comment.getColumnNo());
+        assertEquals("Unexpected comment content", "/*", comment.getText());
+
+        final DetailAST commentContent = comment.getFirstChild();
+        final DetailAST commentEnd = comment.getLastChild();
 
         assertEquals("Unexpected line number", 3, commentContent.getLineNo());
         assertEquals("Unexpected column number", 2, commentContent.getColumnNo());

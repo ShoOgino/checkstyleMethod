@@ -1,0 +1,16 @@
+    @Test
+    public void testParseException() throws Exception {
+        final File input = new File(getNonCompilablePath("InputJavaParser.java"));
+        try {
+            JavaParser.parseFile(input, JavaParser.Options.WITH_COMMENTS);
+            Assert.fail("exception expected");
+        }
+        catch (CheckstyleException ex) {
+            Assert.assertSame("Invalid class",
+                    NoViableAltException.class, ex.getCause().getClass());
+            assertEquals("Invalid exception message",
+                    input.getAbsolutePath() + ":2:1: unexpected token: classD",
+                    ex.getCause().toString());
+        }
+    }
+
