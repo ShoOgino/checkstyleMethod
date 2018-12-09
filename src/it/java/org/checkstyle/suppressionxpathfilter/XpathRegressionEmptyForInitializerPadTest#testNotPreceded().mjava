@@ -1,0 +1,25 @@
+    @Test
+    public void testNotPreceded() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionEmptyForInitializerPadNotPreceded.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(EmptyForInitializerPadCheck.class);
+        moduleConfig.addAttribute("option", PadOption.SPACE.toString());
+
+        final String[] expectedViolation = {
+            "5:14: " + getCheckMessage(EmptyForInitializerPadCheck.class,
+                    EmptyForInitializerPadCheck.MSG_NOT_PRECEDED, ";"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionEmptyForInitializerPadNotPreceded']"
+                + "/OBJBLOCK/METHOD_DEF[@text='method']/SLIST/LITERAL_FOR/FOR_INIT",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionEmptyForInitializerPadNotPreceded']"
+                + "/OBJBLOCK/METHOD_DEF[@text='method']/SLIST/LITERAL_FOR/SEMI"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
