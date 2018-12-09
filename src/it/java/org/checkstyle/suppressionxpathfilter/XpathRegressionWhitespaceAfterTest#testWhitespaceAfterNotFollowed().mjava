@@ -1,0 +1,22 @@
+    @Test
+    public void testWhitespaceAfterNotFollowed() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionWhitespaceAfterNotFollowed.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(WhitespaceAfterCheck.class);
+
+        final String[] expectedViolation = {
+            "4:19: " + getCheckMessage(WhitespaceAfterCheck.class,
+                    WhitespaceAfterCheck.MSG_WS_NOT_FOLLOWED, ","),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionWhitespaceAfterNotFollowed']/OBJBLOCK"
+                + "/VARIABLE_DEF[@text='bad']/ASSIGN/ARRAY_INIT/COMMA"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

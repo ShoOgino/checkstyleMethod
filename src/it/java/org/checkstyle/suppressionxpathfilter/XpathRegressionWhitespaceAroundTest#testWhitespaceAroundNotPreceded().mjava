@@ -1,0 +1,22 @@
+    @Test
+    public void testWhitespaceAroundNotPreceded() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionWhitespaceAroundNotPreceded.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(WhitespaceAroundCheck.class);
+
+        final String[] expectedViolation = {
+            "4:12: " + getCheckMessage(WhitespaceAroundCheck.class,
+                    WhitespaceAroundCheck.MSG_WS_NOT_PRECEDED, "="),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionWhitespaceAroundNotPreceded']/OBJBLOCK"
+                + "/VARIABLE_DEF[@text='bad']/ASSIGN"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
