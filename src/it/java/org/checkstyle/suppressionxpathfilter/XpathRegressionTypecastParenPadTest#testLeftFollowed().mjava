@@ -1,0 +1,24 @@
+    @Test
+    public void testLeftFollowed() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionTypecastParenPadLeftFollowed.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(TypecastParenPadCheck.class);
+
+        final String[] expectedViolation = {
+            "4:18: " + getCheckMessage(TypecastParenPadCheck.class,
+                    AbstractParenPadCheck.MSG_WS_FOLLOWED, "("),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionTypecastParenPadLeftFollowed']"
+                + "/OBJBLOCK/VARIABLE_DEF[@text='bad']/ASSIGN/EXPR",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionTypecastParenPadLeftFollowed']"
+                + "/OBJBLOCK/VARIABLE_DEF[@text='bad']/ASSIGN/EXPR/TYPECAST"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

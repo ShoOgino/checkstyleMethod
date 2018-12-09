@@ -1,0 +1,22 @@
+    @Test
+    public void testRightPreceded() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionTypecastParenPadRightPreceded.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(TypecastParenPadCheck.class);
+
+        final String[] expectedViolation = {
+            "4:26: " + getCheckMessage(TypecastParenPadCheck.class,
+                    AbstractParenPadCheck.MSG_WS_PRECEDED, ")"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionTypecastParenPadRightPreceded']"
+                + "/OBJBLOCK/VARIABLE_DEF[@text='bad']/ASSIGN/EXPR/TYPECAST/RPAREN"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

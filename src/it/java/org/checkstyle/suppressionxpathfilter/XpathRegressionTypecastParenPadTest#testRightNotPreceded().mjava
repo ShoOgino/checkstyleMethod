@@ -1,0 +1,23 @@
+    @Test
+    public void testRightNotPreceded() throws Exception {
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionTypecastParenPadRightNotPreceded.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(TypecastParenPadCheck.class);
+        moduleConfig.addAttribute("option", PadOption.SPACE.toString());
+
+        final String[] expectedViolation = {
+            "4:26: " + getCheckMessage(TypecastParenPadCheck.class,
+                    AbstractParenPadCheck.MSG_WS_NOT_PRECEDED, ")"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionTypecastParenPadRightNotPreceded']"
+                + "/OBJBLOCK/VARIABLE_DEF[@text='bad']/ASSIGN/EXPR/TYPECAST/RPAREN"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
