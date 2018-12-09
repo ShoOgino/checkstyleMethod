@@ -1,0 +1,23 @@
+    @Test
+    public void testProcessNestedGenericsOne() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionProcessNestedGenericsOne.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(GenericWhitespaceCheck.class);
+
+        final String[] expectedViolation = {
+            "6:22: " + getCheckMessage(GenericWhitespaceCheck.class,
+                    GenericWhitespaceCheck.MSG_WS_NOT_PRECEDED, "&"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessNestedGenericsOne']/OBJBLOCK"
+                + "/METHOD_DEF[@text='bad']/TYPE_PARAMETERS/TYPE_PARAMETER[@text='E']"
+                + "/TYPE_UPPER_BOUNDS[@text='Enum']/TYPE_ARGUMENTS/GENERIC_END"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

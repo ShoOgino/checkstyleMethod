@@ -1,0 +1,28 @@
+    @Test
+    public void testProcessStartThree() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionProcessStartThree.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(GenericWhitespaceCheck.class);
+
+        final String[] expectedViolation = {
+            "6:5: " + getCheckMessage(GenericWhitespaceCheck.class,
+                    GenericWhitespaceCheck.MSG_WS_FOLLOWED, "<"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK"
+                + "/METHOD_DEF[@text='bad']",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK/"
+                + "METHOD_DEF[@text='bad']/MODIFIERS",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK/"
+                + "METHOD_DEF[@text='bad']/TYPE_PARAMETERS",
+            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessStartThree']/OBJBLOCK/"
+                + "METHOD_DEF[@text='bad']/TYPE_PARAMETERS/GENERIC_START"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

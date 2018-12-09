@@ -17,14 +17,14 @@
         if (indexOfAmp >= 1
             && containsWhitespaceBetween(after, indexOfAmp, line)) {
             if (indexOfAmp - after == 0) {
-                log(ast.getLineNo(), after, MSG_WS_NOT_PRECEDED, "&");
+                log(ast, MSG_WS_NOT_PRECEDED, "&");
             }
             else if (indexOfAmp - after != 1) {
-                log(ast.getLineNo(), after, MSG_WS_FOLLOWED, CLOSE_ANGLE_BRACKET);
+                log(ast, MSG_WS_FOLLOWED, CLOSE_ANGLE_BRACKET);
             }
         }
         else if (line.charAt(after) == ' ') {
-            log(ast.getLineNo(), after, MSG_WS_FOLLOWED, CLOSE_ANGLE_BRACKET);
+            log(ast, MSG_WS_FOLLOWED, CLOSE_ANGLE_BRACKET);
         }
     }
 

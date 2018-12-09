@@ -1,0 +1,23 @@
+    @Test
+    public void testProcessEnd() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionProcessEnd.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(GenericWhitespaceCheck.class);
+
+        final String[] expectedViolation = {
+            "6:22: " + getCheckMessage(GenericWhitespaceCheck.class,
+                    GenericWhitespaceCheck.MSG_WS_PRECEDED, ">"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[@text='SuppressionXpathRegressionProcessEnd']/OBJBLOCK"
+                + "/METHOD_DEF[@text='bad']/PARAMETERS/PARAMETER_DEF[@text='cls']"
+                + "/TYPE[@text='Class']/TYPE_ARGUMENTS/GENERIC_END"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

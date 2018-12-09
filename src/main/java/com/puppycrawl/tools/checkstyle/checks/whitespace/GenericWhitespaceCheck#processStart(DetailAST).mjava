@@ -22,19 +22,19 @@
                     || grandparent.getType() == TokenTypes.METHOD_DEF)) {
                 // Require whitespace
                 if (!Character.isWhitespace(line.charAt(before))) {
-                    log(ast.getLineNo(), before, MSG_WS_NOT_PRECEDED, OPEN_ANGLE_BRACKET);
+                    log(ast, MSG_WS_NOT_PRECEDED, OPEN_ANGLE_BRACKET);
                 }
             }
             // Whitespace not required
             else if (Character.isWhitespace(line.charAt(before))
                 && !containsWhitespaceBefore(before, line)) {
-                log(ast.getLineNo(), before, MSG_WS_PRECEDED, OPEN_ANGLE_BRACKET);
+                log(ast, MSG_WS_PRECEDED, OPEN_ANGLE_BRACKET);
             }
         }
 
         if (after < line.length()
                 && Character.isWhitespace(line.charAt(after))) {
-            log(ast.getLineNo(), after, MSG_WS_FOLLOWED, OPEN_ANGLE_BRACKET);
+            log(ast, MSG_WS_FOLLOWED, OPEN_ANGLE_BRACKET);
         }
     }
 
