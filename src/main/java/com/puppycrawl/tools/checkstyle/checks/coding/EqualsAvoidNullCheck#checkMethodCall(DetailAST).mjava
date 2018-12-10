@@ -8,8 +8,7 @@
             objCalledOn = objCalledOn.getLastChild();
         }
         final DetailAST expr = methodCall.findFirstToken(TokenTypes.ELIST).getFirstChild();
-        if (isObjectValid(objCalledOn)
-                && containsOneArgument(methodCall)
+        if (containsOneArgument(methodCall)
                 && containsAllSafeTokens(expr)
                 && isCalledOnStringFieldOrVariable(objCalledOn)) {
             final String methodName = methodCall.getFirstChild().getLastChild().getText();

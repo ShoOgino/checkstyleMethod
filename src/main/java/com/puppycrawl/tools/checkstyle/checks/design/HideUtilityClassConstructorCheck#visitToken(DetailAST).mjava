@@ -9,7 +9,6 @@
 
             final boolean hasDefaultCtor = details.isHasDefaultCtor();
             final boolean hasPublicCtor = details.isHasPublicCtor();
-            final boolean hasMethodOrField = details.isHasMethodOrField();
             final boolean hasNonStaticMethodOrField = details.isHasNonStaticMethodOrField();
             final boolean hasNonPrivateStaticMethodOrField =
                     details.isHasNonPrivateStaticMethodOrField();
@@ -21,7 +20,7 @@
             final boolean extendsJlo =
                 ast.findFirstToken(TokenTypes.EXTENDS_CLAUSE) == null;
 
-            final boolean isUtilClass = extendsJlo && hasMethodOrField
+            final boolean isUtilClass = extendsJlo
                 && !hasNonStaticMethodOrField && hasNonPrivateStaticMethodOrField;
 
             if (isUtilClass && hasAccessibleCtor && !hasStaticModifier) {

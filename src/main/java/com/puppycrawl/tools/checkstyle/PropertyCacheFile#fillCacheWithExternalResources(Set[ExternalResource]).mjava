@@ -4,8 +4,7 @@
      * @param externalResources a set of {@link ExternalResource}.
      */
     private void fillCacheWithExternalResources(Set<ExternalResource> externalResources) {
-        externalResources.stream()
-            .filter(resource -> !isResourceLocationInCache(resource.location))
+        externalResources
             .forEach(resource -> details.setProperty(resource.location, resource.contentHashSum));
     }
 

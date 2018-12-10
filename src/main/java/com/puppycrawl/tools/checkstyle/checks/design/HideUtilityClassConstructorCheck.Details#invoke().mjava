@@ -3,7 +3,6 @@
          */
         public void invoke() {
             final DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
-            hasMethodOrField = false;
             hasNonStaticMethodOrField = false;
             hasNonPrivateStaticMethodOrField = false;
             hasDefaultCtor = true;
@@ -14,7 +13,6 @@
                 final int type = child.getType();
                 if (type == TokenTypes.METHOD_DEF
                         || type == TokenTypes.VARIABLE_DEF) {
-                    hasMethodOrField = true;
                     final DetailAST modifiers =
                         child.findFirstToken(TokenTypes.MODIFIERS);
                     final boolean isStatic =
