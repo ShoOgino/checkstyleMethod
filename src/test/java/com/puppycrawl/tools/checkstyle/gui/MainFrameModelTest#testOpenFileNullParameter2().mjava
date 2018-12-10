@@ -1,0 +1,10 @@
+    @Test
+    public void testOpenFileNullParameter2() throws Exception {
+        model.openFile(null);
+
+        assertNull("Test is null", model.getText());
+        assertEquals("Title is expected value", "Checkstyle GUI", model.getTitle());
+        assertFalse("Reload action should be disabled", model.isReloadActionEnabled());
+        assertNull("Current file is null", model.getCurrentFile());
+    }
+
