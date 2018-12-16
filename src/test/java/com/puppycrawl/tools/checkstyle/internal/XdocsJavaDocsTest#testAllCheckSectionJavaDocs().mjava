@@ -1,8 +1,7 @@
     /**
      * Test contains asserts in callstack, but idea does not see them.
-     * @noinspection JUnitTestMethodWithNoAssertions, OverlyComplexBooleanExpression
+     * @noinspection JUnitTestMethodWithNoAssertions
      */
-    // -@cs[CyclomaticComplexity] needed until all suppressions are removed
     @Test
     public void testAllCheckSectionJavaDocs() throws Exception {
         final ModuleFactory moduleFactory = TestUtil.getPackageObjectFactory();
@@ -24,29 +23,8 @@
                 final String sectionName = section.getAttributes().getNamedItem("name")
                         .getNodeValue();
 
-                // -@cs[BooleanExpressionComplexity] needed until all suppressions are removed
                 if ("Content".equals(sectionName) || "Overview".equals(sectionName)
-                        // suppression list
-                        || !"AbbreviationAsWordInName".equals(sectionName)
-                                && !"AbstractClassName".equals(sectionName)
-                                && !"CatchParameterName".equals(sectionName)
-                                && !"ClassMemberImpliedModifier".equals(sectionName)
-                                && !"ClassTypeParameterName".equals(sectionName)
-                                && !"ConstantName".equals(sectionName)
-                                && !"InterfaceMemberImpliedModifier".equals(sectionName)
-                                && !"InterfaceTypeParameterName".equals(sectionName)
-                                && !"LambdaParameterName".equals(sectionName)
-                                && !"LocalFinalVariableName".equals(sectionName)
-                                && !"LocalVariableName".equals(sectionName)
-                                && !"MemberName".equals(sectionName)
-                                && !"MethodName".equals(sectionName)
-                                && !"MethodTypeParameterName".equals(sectionName)
-                                && !"PackageName".equals(sectionName)
-                                && !"ParameterName".equals(sectionName)
-                                && !"StaticVariableName".equals(sectionName)
-                                && !"TypeName".equals(sectionName)
-                                && !"AtclauseOrder".equals(sectionName)
-                ) {
+                        || Arrays.binarySearch(COMPATIBLE_CHECKS, sectionName) < 0) {
                     continue;
                 }
 

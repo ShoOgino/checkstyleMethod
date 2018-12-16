@@ -1,5 +1,5 @@
-        private void visitMethod(DetailAST ast, DetailAST node) {
-            if (depth == 0 && isSetterMethod(node)) {
+        private static void visitMethod(DetailAST ast, DetailAST node) {
+            if (ScopeUtil.isInScope(ast, Scope.PUBLIC) && isSetterMethod(node)) {
                 final String propertyUpper = node.findFirstToken(TokenTypes.IDENT)
                         .getText().substring(3);
                 final String propertyName = makeFirstLower(propertyUpper);

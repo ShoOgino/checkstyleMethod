@@ -1,10 +1,11 @@
     // -@cs[CyclomaticComplexity] No simple way to split this apart.
     private static void appendNodeText(StringBuffer result, Node node, boolean fixLinks) {
         final String name = transformXmlToJavaDocName(node.getNodeName());
-        final boolean newLineOpenBefore = "p".equals(name) || "pre".equals(name)
-                || "ul".equals(name) || "li".equals(name);
-        final boolean newLineOpenAfter = newLineOpenBefore && !"ul".equals(name);
-        final boolean newLineClose = newLineOpenAfter || "ul".equals(name);
+        final boolean list = "ol".equals(name) || "ul".equals(name);
+        final boolean newLineOpenBefore = list || "p".equals(name) || "pre".equals(name)
+                || "li".equals(name);
+        final boolean newLineOpenAfter = newLineOpenBefore && !list;
+        final boolean newLineClose = newLineOpenAfter || list;
         final boolean sanitize = "pre".equals(name);
         final boolean changeToTag = "code".equals(name);
 
