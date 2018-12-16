@@ -19,6 +19,8 @@
                     + "'SAME_PACKAGE(3)###UNSUPPORTED_RULE' in module";
             assertTrue("Invalid exception message, should start with: " + messageStart,
                 ex.getMessage().startsWith(messageStart));
+            assertEquals("Invalid exception message", "Unexpected rule: UNSUPPORTED_RULE", ex
+                    .getCause().getCause().getCause().getMessage());
         }
     }
 

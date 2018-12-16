@@ -18,6 +18,9 @@
                     + "'SAME_PACKAGE(INT_IS_REQUIRED_HERE)' in module";
             assertTrue("Invalid exception message, should start with: " + messageStart,
                 ex.getMessage().startsWith(messageStart));
+            assertEquals("Invalid exception message",
+                    "For input string: \"INT_IS_REQUIRED_HERE\"",
+                    ex.getCause().getCause().getCause().getMessage());
         }
     }
 

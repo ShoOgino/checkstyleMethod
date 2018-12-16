@@ -1,0 +1,8 @@
+    @Test
+    public void testResolveEntityDefault() throws Exception {
+        final Map<String, String> map = new HashMap<>();
+        map.put("predefined", "/google.xml");
+        final DummyLoader dummyLoader = new DummyLoader(map);
+        assertNull("Invalid entity", dummyLoader.resolveEntity("notPredefined", "BAD"));
+    }
+

@@ -12,6 +12,10 @@
                     + " - Cannot set property 'headerFile' to '' in module"
                     + " com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck",
                     ex.getMessage());
+            assertEquals("Invalid exception message",
+                    "property 'headerFile' is missing or invalid in module"
+                            + " com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck",
+                    ex.getCause().getCause().getCause().getMessage());
         }
     }
 

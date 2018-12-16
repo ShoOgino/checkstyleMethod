@@ -1,0 +1,11 @@
+    @Test
+    public void testReportJavadocComment2() {
+        final FileContents fileContents = new FileContents("filename", "  /** */   ");
+        fileContents.reportCComment(1, 2, 1, 6);
+        final TextBlock comment = fileContents.getJavadocBefore(2);
+
+        assertEquals("Invalid comment",
+                new Comment(new String[] {"/** *"}, 2, 1, 6).toString(),
+                comment.toString());
+    }
+

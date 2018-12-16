@@ -20,6 +20,9 @@
                     + "'SAME_PACKAGE(-1)' in module";
             assertTrue("Invalid exception message, should start with: " + messageStart,
                 ex.getMessage().startsWith(messageStart));
+            assertEquals("Invalid exception message",
+                    "SAME_PACKAGE rule parameter should be positive integer: SAME_PACKAGE(-1)",
+                        ex.getCause().getCause().getCause().getMessage());
         }
     }
 

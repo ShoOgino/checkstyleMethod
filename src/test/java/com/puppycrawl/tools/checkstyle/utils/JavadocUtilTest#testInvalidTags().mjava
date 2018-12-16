@@ -9,6 +9,12 @@
         final JavadocTags allTags =
             JavadocUtil.getJavadocTags(comment, JavadocUtil.JavadocTagType.ALL);
         assertEquals("Unexpected invalid tags size", 2, allTags.getInvalidTags().size());
+        assertTag("Unexpected invalid tag", new InvalidJavadocTag(1, 4, "fake"),
+                allTags.getInvalidTags().get(0));
+        assertTag("Unexpected invalid tag", new InvalidJavadocTag(2, 4, "bogus"),
+                allTags.getInvalidTags().get(1));
         assertEquals("Unexpected valid tags size", 1, allTags.getValidTags().size());
+        assertTag("Unexpected valid tag", new JavadocTag(3, 4, "link", "List valid"),
+                allTags.getValidTags().get(0));
     }
 
