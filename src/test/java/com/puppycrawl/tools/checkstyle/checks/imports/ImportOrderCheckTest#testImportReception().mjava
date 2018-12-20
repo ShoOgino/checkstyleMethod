@@ -4,9 +4,7 @@
                 createModuleConfig(ImportOrderCheck.class);
         checkConfig.addAttribute("separated", "true");
         checkConfig.addAttribute("groups", "java, javax");
-        final String[] expected = {
-            "6: " + getCheckMessage(MSG_ORDERING, "java.awt.event.ActionEvent"),
-        };
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputImportOrderRepetition.java"), expected);
     }
 

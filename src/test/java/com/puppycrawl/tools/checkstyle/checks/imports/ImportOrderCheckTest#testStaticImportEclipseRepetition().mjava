@@ -7,10 +7,7 @@
         checkConfig.addAttribute("groups", "java, org");
         checkConfig.addAttribute("sortStaticImportsAlphabetically", "true");
         checkConfig.addAttribute("useContainerOrderingForStatic", "true");
-        final String[] expected = {
-            "4: " + getCheckMessage(MSG_ORDERING,
-                "io.netty.handler.codec.http.HttpHeaders.Names.DATE"),
-        };
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig,
             getNonCompilablePath("InputImportOrderEclipseStaticRepetition.java"), expected);
     }
