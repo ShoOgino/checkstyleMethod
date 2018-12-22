@@ -1,0 +1,15 @@
+    /**
+     * Adds one or more acceptable indentation level.
+     * @param base class to add new indentations to.
+     * @param additions new acceptable indentation.
+     * @return New acceptable indentation level instance.
+     */
+    public static IndentLevel addAcceptable(IndentLevel base, int... additions) {
+        final IndentLevel result = new IndentLevel();
+        result.levels.or(base.levels);
+        for (int addition : additions) {
+            result.levels.set(addition);
+        }
+        return result;
+    }
+

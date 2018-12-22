@@ -1,6 +1,6 @@
     @Override
     protected IndentLevel getChildrenExpectedIndent() {
-        final IndentLevel expectedIndent =
+        IndentLevel expectedIndent =
             new IndentLevel(getIndent(), getIndentCheck().getArrayInitIndent(),
                     getIndentCheck().getLineWrappingIndentation());
 
@@ -9,8 +9,8 @@
         final int firstChildPos =
             getNextFirstNonBlankOnLineAfter(firstLine, lcurlyPos);
         if (firstChildPos >= 0) {
-            expectedIndent.addAcceptedIndent(firstChildPos);
-            expectedIndent.addAcceptedIndent(lcurlyPos + getLineWrappingIndentation());
+            expectedIndent = IndentLevel.addAcceptable(expectedIndent, firstChildPos, lcurlyPos
+                    + getLineWrappingIndentation());
         }
         return expectedIndent;
     }

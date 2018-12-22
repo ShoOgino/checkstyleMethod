@@ -1,7 +1,7 @@
     @Override
     protected IndentLevel curlyIndent() {
         final IndentLevel level = new IndentLevel(getIndent(), getBraceAdjustment());
-        level.addAcceptedIndent(level.getLastIndentLevel() + getLineWrappingIndentation());
-        return level;
+        return IndentLevel.addAcceptable(level, level.getLastIndentLevel()
+                + getLineWrappingIndentation());
     }
 
