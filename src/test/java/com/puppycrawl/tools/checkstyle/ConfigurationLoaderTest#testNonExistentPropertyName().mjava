@@ -7,9 +7,13 @@
         catch (CheckstyleException ex) {
             assertEquals("Invalid exception message",
                 "unable to parse configuration stream", ex.getMessage());
+            assertSame("Expected cause of type SAXException",
+                SAXException.class, ex.getCause().getClass());
+            assertSame("Expected cause of type CheckstyleException",
+                CheckstyleException.class, ex.getCause().getCause().getClass());
             assertEquals("Invalid exception cause message",
                 "Property ${nonexistent} has not been set",
-                    ex.getCause().getMessage());
+                ex.getCause().getCause().getMessage());
         }
     }
 
