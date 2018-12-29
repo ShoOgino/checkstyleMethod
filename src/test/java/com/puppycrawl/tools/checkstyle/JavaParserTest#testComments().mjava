@@ -1,0 +1,15 @@
+    @Test
+    public void testComments() throws Exception {
+        final DetailAST root =
+            JavaParser.parseFile(new File(getPath("InputJavaParserHiddenComments3.java")),
+                JavaParser.Options.WITH_COMMENTS);
+        final CountComments counter = new CountComments(root);
+
+        assertArrayEquals("Invalid line comments",
+                Arrays.asList("1,4", "6,4", "9,0").toArray(),
+                counter.lineComments.toArray());
+        assertArrayEquals("Invalid block comments",
+                Arrays.asList("5,4", "8,0").toArray(),
+                counter.blockComments.toArray());
+    }
+

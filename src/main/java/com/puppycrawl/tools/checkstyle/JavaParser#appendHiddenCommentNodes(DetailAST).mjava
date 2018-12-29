@@ -11,9 +11,7 @@
         DetailAST lastNode = root;
 
         while (curNode != null) {
-            if (isPositionGreater(curNode, lastNode)) {
-                lastNode = curNode;
-            }
+            lastNode = curNode;
 
             CommonHiddenStreamToken tokenBefore = curNode.getHiddenBefore();
             DetailAST currentSibling = curNode;
@@ -34,9 +32,7 @@
             DetailAST toVisit = curNode.getFirstChild();
             while (curNode != null && toVisit == null) {
                 toVisit = curNode.getNextSibling();
-                if (toVisit == null) {
-                    curNode = curNode.getParent();
-                }
+                curNode = curNode.getParent();
             }
             curNode = toVisit;
         }

@@ -1,0 +1,13 @@
+        private void forEachChild(DetailAST root) {
+            for (DetailAST ast = root; ast != null; ast = ast.getNextSibling()) {
+                if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+                    lineComments.add(ast.getLineNo() + "," + ast.getColumnNo());
+                }
+                else if (ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
+                    blockComments.add(ast.getLineNo() + "," + ast.getColumnNo());
+                }
+
+                forEachChild(ast.getFirstChild());
+            }
+        }
+

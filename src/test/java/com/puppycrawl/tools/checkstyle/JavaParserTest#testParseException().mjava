@@ -6,6 +6,11 @@
             Assert.fail("exception expected");
         }
         catch (CheckstyleException ex) {
+            assertEquals("Invalid exception message",
+                    CheckstyleException.class.getName()
+                            + ": NoViableAltException occurred while parsing file "
+                            + input.getAbsolutePath() + ".",
+                    ex.toString());
             Assert.assertSame("Invalid class",
                     NoViableAltException.class, ex.getCause().getClass());
             assertEquals("Invalid exception message",
