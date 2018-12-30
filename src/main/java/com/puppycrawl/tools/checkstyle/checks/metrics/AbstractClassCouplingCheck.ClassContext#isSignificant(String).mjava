@@ -4,16 +4,8 @@
          * @return true if we should count this class.
          */
         private boolean isSignificant(String candidateClassName) {
-            boolean result = !excludedClasses.contains(candidateClassName)
-                && !isFromExcludedPackage(candidateClassName);
-            if (result) {
-                for (Pattern pattern : excludeClassesRegexps) {
-                    if (pattern.matcher(candidateClassName).matches()) {
-                        result = false;
-                        break;
-                    }
-                }
-            }
-            return result;
+            return !excludedClasses.contains(candidateClassName)
+                && !isFromExcludedPackage(candidateClassName)
+                && !isExcludedClassRegexp(candidateClassName);
         }
 
