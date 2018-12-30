@@ -9,14 +9,13 @@
             final DetailAST paren = ast.getLastChild();
             final boolean parenExists = paren.getType() == TokenTypes.RPAREN;
 
-            if (closingParens == ClosingParens.ALWAYS
-                && !parenExists) {
-                log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
+            if (closingParens == ClosingParens.ALWAYS) {
+                if (!parenExists) {
+                    log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
+                }
             }
-            else if (closingParens == ClosingParens.NEVER
-                     && parenExists
+            else if (parenExists
                      && !ast.branchContains(TokenTypes.EXPR)
-                     && !ast.branchContains(TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR)
                      && !ast.branchContains(TokenTypes.ANNOTATION_ARRAY_INIT)) {
                 log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_PRESENT);
             }

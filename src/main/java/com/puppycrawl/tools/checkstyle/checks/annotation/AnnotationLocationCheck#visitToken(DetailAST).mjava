@@ -2,7 +2,7 @@
     public void visitToken(DetailAST ast) {
         final DetailAST modifiersNode = ast.findFirstToken(TokenTypes.MODIFIERS);
 
-        if (hasAnnotations(modifiersNode)) {
+        if (modifiersNode != null) {
             checkAnnotations(modifiersNode, getExpectedAnnotationIndentation(modifiersNode));
         }
     }

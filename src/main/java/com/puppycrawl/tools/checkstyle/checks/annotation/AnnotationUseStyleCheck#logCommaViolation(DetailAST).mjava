@@ -10,12 +10,12 @@
         //comma can be null if array is empty
         final DetailAST comma = rCurly.getPreviousSibling();
 
-        if (trailingArrayComma == TrailingArrayComma.ALWAYS
-            && (comma == null || comma.getType() != TokenTypes.COMMA)) {
-            log(rCurly, MSG_KEY_ANNOTATION_TRAILING_COMMA_MISSING);
+        if (trailingArrayComma == TrailingArrayComma.ALWAYS) {
+            if (comma == null || comma.getType() != TokenTypes.COMMA) {
+                log(rCurly, MSG_KEY_ANNOTATION_TRAILING_COMMA_MISSING);
+            }
         }
-        else if (trailingArrayComma == TrailingArrayComma.NEVER
-            && comma != null && comma.getType() == TokenTypes.COMMA) {
+        else if (comma != null && comma.getType() == TokenTypes.COMMA) {
             log(comma, MSG_KEY_ANNOTATION_TRAILING_COMMA_PRESENT);
         }
     }
