@@ -1,8 +1,7 @@
     @Override
     protected void processFiltered(File file, FileText fileText) throws CheckstyleException {
         // check if already checked and passed the file
-        if (CommonUtil.matchesFileExtension(file, getFileExtensions())
-                && (!ordinaryChecks.isEmpty() || !commentChecks.isEmpty())) {
+        if (!ordinaryChecks.isEmpty() || !commentChecks.isEmpty()) {
             final FileContents contents = new FileContents(fileText);
             final DetailAST rootAST = JavaParser.parse(contents);
             if (!ordinaryChecks.isEmpty()) {

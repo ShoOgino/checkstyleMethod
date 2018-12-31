@@ -4,16 +4,14 @@
      * @throws CheckstyleException when validation of default tokens fails
      */
     private static void validateDefaultTokens(AbstractCheck check) throws CheckstyleException {
-        if (check.getRequiredTokens().length != 0) {
-            final int[] defaultTokens = check.getDefaultTokens();
-            Arrays.sort(defaultTokens);
-            for (final int token : check.getRequiredTokens()) {
-                if (Arrays.binarySearch(defaultTokens, token) < 0) {
-                    final String message = String.format(Locale.ROOT, "Token \"%s\" from required "
-                            + "tokens was not found in default tokens list in check %s",
-                            token, check.getClass().getName());
-                    throw new CheckstyleException(message);
-                }
+        final int[] defaultTokens = check.getDefaultTokens();
+        Arrays.sort(defaultTokens);
+        for (final int token : check.getRequiredTokens()) {
+            if (Arrays.binarySearch(defaultTokens, token) < 0) {
+                final String message = String.format(Locale.ROOT, "Token \"%s\" from required "
+                        + "tokens was not found in default tokens list in check %s",
+                        token, check.getClass().getName());
+                throw new CheckstyleException(message);
             }
         }
     }

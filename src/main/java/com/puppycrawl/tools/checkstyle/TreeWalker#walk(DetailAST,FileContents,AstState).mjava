@@ -7,11 +7,7 @@
     private void walk(DetailAST ast, FileContents contents,
             AstState astState) {
         notifyBegin(ast, contents, astState);
-
-        // empty files are not flagged by javac, will yield ast == null
-        if (ast != null) {
-            processIter(ast, astState);
-        }
+        processIter(ast, astState);
         notifyEnd(ast, astState);
     }
 
