@@ -1,0 +1,8 @@
+    @Test
+    public void testQualifiedClassName() throws Exception {
+        final Method method = Whitebox.getMethod(FinalClassCheck.class, "getQualifiedClassName",
+                String.class, String.class, String.class);
+        Assert.assertEquals("unexpected result", "ClassName",
+                method.invoke(null, "", null, "ClassName"));
+    }
+

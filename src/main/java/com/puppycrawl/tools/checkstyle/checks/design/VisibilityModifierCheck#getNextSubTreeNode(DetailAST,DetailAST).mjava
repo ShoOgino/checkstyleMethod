@@ -12,13 +12,10 @@
         DetailAST toVisitAst = currentNode.getFirstChild();
         while (toVisitAst == null) {
             toVisitAst = currentNode.getNextSibling();
-            if (toVisitAst == null) {
-                if (currentNode.getParent().equals(subTreeRootAst)
-                         && currentNode.getParent().getColumnNo() == subTreeRootAst.getColumnNo()) {
-                    break;
-                }
-                currentNode = currentNode.getParent();
+            if (currentNode.getParent().getColumnNo() == subTreeRootAst.getColumnNo()) {
+                break;
             }
+            currentNode = currentNode.getParent();
         }
         return toVisitAst;
     }

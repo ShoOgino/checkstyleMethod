@@ -9,13 +9,14 @@
         while (toVisit != null) {
             toVisit = getNextSubTreeNode(toVisit, type);
             if (toVisit != null && toVisit.getType() == TokenTypes.IDENT) {
+                if (canonicalNameBuilder.length() > 0) {
+                    canonicalNameBuilder.append('.');
+                }
                 canonicalNameBuilder.append(toVisit.getText());
                 final DetailAST nextSubTreeNode = getNextSubTreeNode(toVisit, type);
-                if (nextSubTreeNode != null) {
-                    if (nextSubTreeNode.getType() == TokenTypes.TYPE_ARGUMENTS) {
-                        break;
-                    }
-                    canonicalNameBuilder.append('.');
+                if (nextSubTreeNode != null
+                        && nextSubTreeNode.getType() == TokenTypes.TYPE_ARGUMENTS) {
+                    break;
                 }
             }
         }
