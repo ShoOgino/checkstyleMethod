@@ -9,12 +9,12 @@
         check.configure(checkConfig);
         check.setMessageDispatcher(dispatcher);
 
-        final Method logIoException = check.getClass().getDeclaredMethod("logIoException",
-                IOException.class,
+        final Method logException = check.getClass().getDeclaredMethod("logException",
+                Exception.class,
                 File.class);
-        logIoException.setAccessible(true);
+        logException.setAccessible(true);
         final File file = new File("");
-        logIoException.invoke(check, new IOException("test exception"), file);
+        logException.invoke(check, new IOException("test exception"), file);
 
         Mockito.verify(dispatcher, times(1)).fireErrors(any(String.class), captor.capture());
         final String actual = captor.getValue().first().getMessage();

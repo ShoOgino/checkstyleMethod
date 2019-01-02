@@ -10,8 +10,10 @@
             translations.load(inStream);
             keys = translations.stringPropertyNames();
         }
-        catch (final IOException ex) {
-            logIoException(ex, file);
+        // -@cs[IllegalCatch] It is better to catch all exceptions since it can throw
+        // a runtime exception.
+        catch (final Exception ex) {
+            logException(ex, file);
         }
         return keys;
     }
