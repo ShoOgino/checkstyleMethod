@@ -13,10 +13,8 @@
             final Set<String> currentFileKeys = fileKey.getValue();
             final Set<String> missingKeys = keysThatMustExist.stream()
                 .filter(key -> !currentFileKeys.contains(key)).collect(Collectors.toSet());
-            if (!missingKeys.isEmpty()) {
-                for (Object key : missingKeys) {
-                    log(1, MSG_KEY, key);
-                }
+            for (Object key : missingKeys) {
+                log(1, MSG_KEY, key);
             }
             fireErrors(path);
             dispatcher.fireFileFinished(path);

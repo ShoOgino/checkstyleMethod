@@ -6,17 +6,21 @@
         //in checks running part. So I had to do it with reflection to improve coverage.
         final TranslationCheck check = new TranslationCheck();
         final DefaultConfiguration checkConfig = createModuleConfig(TranslationCheck.class);
+        final MessageDispatcher dispatcher = mock(MessageDispatcher.class);
         check.configure(checkConfig);
-        final Checker checker = createChecker(checkConfig);
-        final SeverityLevelCounter counter = new SeverityLevelCounter(SeverityLevel.ERROR);
-        checker.addListener(counter);
-        check.setMessageDispatcher(checker);
+        check.setMessageDispatcher(dispatcher);
 
         final Method loadKeys =
             check.getClass().getDeclaredMethod("getTranslationKeys", File.class);
         loadKeys.setAccessible(true);
         final Set<String> keys = (Set<String>) loadKeys.invoke(check, new File(".no.such.file"));
         assertTrue("Translation keys should be empty when File is not found", keys.isEmpty());
-        assertEquals("Invalid error count", 1, counter.getCount());
+
+        Mockito.verify(dispatcher, times(1)).fireErrors(any(String.class), captor.capture());
+        final String actual = captor.getValue().first().getMessage();
+        final LocalizedMessage localizedMessage = new LocalizedMessage(1,
+                Definitions.CHECKSTYLE_BUNDLE, "general.fileNotFound",
+                null, null, getClass(), null);
+        assertEquals("Invalid message", localizedMessage.getMessage(), actual);
     }
 
