@@ -10,8 +10,7 @@
      */
     private static boolean isSingleLineDoWhile(DetailAST literalDo) {
         boolean result = false;
-        if (literalDo.getParent().getType() == TokenTypes.SLIST
-                && literalDo.getFirstChild().getType() != TokenTypes.SLIST) {
+        if (literalDo.getParent().getType() == TokenTypes.SLIST) {
             final DetailAST block = literalDo.getFirstChild();
             result = block.getLineNo() == literalDo.getLineNo();
         }

@@ -6,11 +6,11 @@
             && ast.findFirstToken(TokenTypes.LITERAL_IF) != null) {
             isElseIf = true;
         }
-        final boolean isDefaultInAnnotation = isDefaultInAnnotation(ast);
+        final boolean isInAnnotationField = isInAnnotationField(ast);
         final boolean skipStatement = isSkipStatement(ast);
         final boolean skipEmptyLoopBody = allowEmptyLoopBody && isEmptyLoopBody(ast);
 
-        if (slistAST == null && !isElseIf && !isDefaultInAnnotation
+        if (slistAST == null && !isElseIf && !isInAnnotationField
                 && !skipStatement && !skipEmptyLoopBody) {
             log(ast.getLineNo(), MSG_KEY_NEED_BRACES, ast.getText());
         }

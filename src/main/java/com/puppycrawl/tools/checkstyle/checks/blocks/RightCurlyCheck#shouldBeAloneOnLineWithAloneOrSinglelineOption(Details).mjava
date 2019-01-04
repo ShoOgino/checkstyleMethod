@@ -5,8 +5,7 @@
      *         when ALONE_OR_SINGLELINE option is used.
      */
     private static boolean shouldBeAloneOnLineWithAloneOrSinglelineOption(Details details) {
-        return !isAloneOnLine(details)
-                && !isSingleLineBlock(details)
+        return isRightCurlyOnSameLineAsNextToken(details)
                 && !isAnonInnerClassInit(details.lcurly)
                 && !isEmptyBody(details.lcurly);
     }

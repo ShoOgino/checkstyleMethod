@@ -13,8 +13,7 @@
         if (literalFor.getLastChild().getType() == TokenTypes.EMPTY_STAT) {
             result = true;
         }
-        else if (literalFor.getParent().getType() == TokenTypes.SLIST
-                && literalFor.getLastChild().getType() != TokenTypes.SLIST) {
+        else if (literalFor.getParent().getType() == TokenTypes.SLIST) {
             result = literalFor.getLineNo() == literalFor.getLastChild().getLineNo();
         }
         return result;

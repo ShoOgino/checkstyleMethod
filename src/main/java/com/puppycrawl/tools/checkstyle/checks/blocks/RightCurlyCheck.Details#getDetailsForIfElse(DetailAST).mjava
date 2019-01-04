@@ -6,23 +6,14 @@
         private static Details getDetailsForIfElse(DetailAST ast) {
             boolean shouldCheckLastRcurly = false;
             final DetailAST lcurly;
-            DetailAST nextToken;
-            final int tokenType = ast.getType();
-            if (tokenType == TokenTypes.LITERAL_IF) {
-                nextToken = ast.findFirstToken(TokenTypes.LITERAL_ELSE);
-                if (nextToken == null) {
-                    shouldCheckLastRcurly = true;
-                    nextToken = getNextToken(ast);
-                    lcurly = ast.getLastChild();
-                }
-                else {
-                    lcurly = nextToken.getPreviousSibling();
-                }
-            }
-            else {
+            DetailAST nextToken = ast.findFirstToken(TokenTypes.LITERAL_ELSE);
+            if (nextToken == null) {
                 shouldCheckLastRcurly = true;
                 nextToken = getNextToken(ast);
-                lcurly = ast.getFirstChild();
+                lcurly = ast.getLastChild();
+            }
+            else {
+                lcurly = nextToken.getPreviousSibling();
             }
             DetailAST rcurly = null;
             if (lcurly.getType() == TokenTypes.SLIST) {

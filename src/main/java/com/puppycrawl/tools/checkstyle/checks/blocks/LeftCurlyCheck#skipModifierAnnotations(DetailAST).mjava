@@ -1,0 +1,24 @@
+    /**
+     * Skip all {@code TokenTypes.ANNOTATION}s to the first non-annotation.
+     * @param ast {@code DetailAST}.
+     * @return {@code DetailAST}.
+     */
+    private static DetailAST skipModifierAnnotations(DetailAST ast) {
+        DetailAST resultNode = ast;
+        final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
+
+        if (modifiers != null) {
+            final DetailAST lastAnnotation = findLastAnnotation(modifiers);
+
+            if (lastAnnotation != null) {
+                if (lastAnnotation.getNextSibling() == null) {
+                    resultNode = modifiers.getNextSibling();
+                }
+                else {
+                    resultNode = lastAnnotation.getNextSibling();
+                }
+            }
+        }
+        return resultNode;
+    }
+

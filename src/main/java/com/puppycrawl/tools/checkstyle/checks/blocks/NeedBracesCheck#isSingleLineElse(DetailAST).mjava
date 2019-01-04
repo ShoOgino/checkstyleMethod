@@ -9,11 +9,7 @@
      * @return true if current else statement is single-line statement.
      */
     private static boolean isSingleLineElse(DetailAST literalElse) {
-        boolean result = false;
         final DetailAST block = literalElse.getFirstChild();
-        if (block.getType() != TokenTypes.SLIST) {
-            result = literalElse.getLineNo() == block.getLineNo();
-        }
-        return result;
+        return literalElse.getLineNo() == block.getLineNo();
     }
 

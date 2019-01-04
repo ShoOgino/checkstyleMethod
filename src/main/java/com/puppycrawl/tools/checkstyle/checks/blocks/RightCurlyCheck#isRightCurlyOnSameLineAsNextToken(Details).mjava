@@ -1,0 +1,11 @@
+    /**
+     * Checks whether the right curly is on the same line as the next token.
+     * @param details for validation.
+     * @return true if right curly is on the same line as the next token.
+     */
+    private static boolean isRightCurlyOnSameLineAsNextToken(Details details) {
+        final DetailAST rcurly = details.rcurly;
+        final DetailAST nextToken = details.nextToken;
+        return rcurly.getLineNo() == nextToken.getLineNo();
+    }
+

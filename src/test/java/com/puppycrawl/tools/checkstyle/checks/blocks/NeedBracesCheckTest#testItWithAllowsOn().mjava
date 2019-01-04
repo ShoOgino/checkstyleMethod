@@ -1,18 +1,17 @@
     @Test
-    public void testIt() throws Exception {
+    public void testItWithAllowsOn() throws Exception {
         final DefaultConfiguration checkConfig =
             createModuleConfig(NeedBracesCheck.class);
+        checkConfig.addAttribute("allowSingleLineStatement", "true");
+        checkConfig.addAttribute("allowEmptyLoopBody", "true");
+        checkConfig.addAttribute("tokens", "LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, "
+            + "LITERAL_WHILE, LITERAL_CASE, LITERAL_DEFAULT, LAMBDA");
         final String[] expected = {
-            "29: " + getCheckMessage(MSG_KEY_NEED_BRACES, "do"),
-            "41: " + getCheckMessage(MSG_KEY_NEED_BRACES, "while"),
             "42: " + getCheckMessage(MSG_KEY_NEED_BRACES, "while"),
-            "44: " + getCheckMessage(MSG_KEY_NEED_BRACES, "while"),
             "45: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
-            "58: " + getCheckMessage(MSG_KEY_NEED_BRACES, "for"),
             "59: " + getCheckMessage(MSG_KEY_NEED_BRACES, "for"),
             "61: " + getCheckMessage(MSG_KEY_NEED_BRACES, "for"),
             "63: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
-            "82: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
             "83: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
             "85: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
             "87: " + getCheckMessage(MSG_KEY_NEED_BRACES, "else"),
@@ -26,6 +25,7 @@
             "106: " + getCheckMessage(MSG_KEY_NEED_BRACES, "do"),
             "107: " + getCheckMessage(MSG_KEY_NEED_BRACES, "if"),
             "108: " + getCheckMessage(MSG_KEY_NEED_BRACES, "for"),
+            "110: " + getCheckMessage(MSG_KEY_NEED_BRACES, "default"),
         };
         verify(checkConfig, getPath("InputNeedBraces.java"), expected);
     }

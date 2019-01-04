@@ -17,13 +17,11 @@
             result = true;
         }
         else {
-            final DetailAST block = slist.getFirstChild();
-            if (block.getType() != TokenTypes.SLIST) {
-                final DetailAST caseBreak = slist.findFirstToken(TokenTypes.LITERAL_BREAK);
-                if (caseBreak != null) {
-                    final boolean atOneLine = literalCase.getLineNo() == block.getLineNo();
-                    result = atOneLine && block.getLineNo() == caseBreak.getLineNo();
-                }
+            final DetailAST caseBreak = slist.findFirstToken(TokenTypes.LITERAL_BREAK);
+            if (caseBreak != null) {
+                final DetailAST block = slist.getFirstChild();
+                final boolean atOneLine = literalCase.getLineNo() == block.getLineNo();
+                result = atOneLine && block.getLineNo() == caseBreak.getLineNo();
             }
         }
         return result;
