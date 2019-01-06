@@ -8,13 +8,12 @@
         final int parentType = ast.getParent().getType();
         final boolean starImport = currentType == TokenTypes.STAR
                 && parentType == TokenTypes.DOT;
-        final boolean slistInsideCaseGroup = currentType == TokenTypes.SLIST
-                && parentType == TokenTypes.CASE_GROUP;
+        final boolean insideCaseGroup = parentType == TokenTypes.CASE_GROUP;
 
-        final boolean starImportOrSlistInsideCaseGroup = starImport || slistInsideCaseGroup;
+        final boolean starImportOrSlistInsideCaseGroup = starImport || insideCaseGroup;
         final boolean colonOfCaseOrDefaultOrForEach =
-                isColonOfCaseOrDefault(currentType, parentType)
-                        || isColonOfForEach(currentType, parentType);
+                isColonOfCaseOrDefault(parentType)
+                        || isColonOfForEach(parentType);
         final boolean emptyBlockOrType =
                 isEmptyBlock(ast, parentType)
                     || allowEmptyTypes && isEmptyType(ast);

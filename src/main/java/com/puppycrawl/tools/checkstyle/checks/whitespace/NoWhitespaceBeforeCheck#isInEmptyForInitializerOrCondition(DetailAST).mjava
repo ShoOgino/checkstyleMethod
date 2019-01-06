@@ -5,14 +5,12 @@
      */
     private static boolean isInEmptyForInitializerOrCondition(DetailAST semicolonAst) {
         boolean result = false;
-        if (semicolonAst.getType() == TokenTypes.SEMI) {
-            final DetailAST sibling = semicolonAst.getPreviousSibling();
-            if (sibling != null
-                    && (sibling.getType() == TokenTypes.FOR_INIT
-                            || sibling.getType() == TokenTypes.FOR_CONDITION)
-                    && sibling.getChildCount() == 0) {
-                result = true;
-            }
+        final DetailAST sibling = semicolonAst.getPreviousSibling();
+        if (sibling != null
+                && (sibling.getType() == TokenTypes.FOR_INIT
+                        || sibling.getType() == TokenTypes.FOR_CONDITION)
+                && sibling.getChildCount() == 0) {
+            result = true;
         }
         return result;
     }

@@ -9,14 +9,12 @@
     private boolean hasEmptyLine(int startLine, int endLine) {
         // Initial value is false - blank line not found
         boolean result = false;
-        if (startLine <= endLine) {
-            final FileContents fileContents = getFileContents();
-            for (int line = startLine; line <= endLine; line++) {
-                // Check, if the line is blank. Lines are numbered from 0, so subtract 1
-                if (fileContents.lineIsBlank(line - 1)) {
-                    result = true;
-                    break;
-                }
+        final FileContents fileContents = getFileContents();
+        for (int line = startLine; line <= endLine; line++) {
+            // Check, if the line is blank. Lines are numbered from 0, so subtract 1
+            if (fileContents.lineIsBlank(line - 1)) {
+                result = true;
+                break;
             }
         }
         return result;

@@ -4,10 +4,8 @@
      * @return true if policy is violated and warning should be raised; false otherwise
      */
     private boolean isViolatingEmptyLineBetweenFieldsPolicy(DetailAST detailAST) {
-        return allowNoEmptyLineBetweenFields
-                    && detailAST.getType() != TokenTypes.VARIABLE_DEF
-                    && detailAST.getType() != TokenTypes.RCURLY
-                || !allowNoEmptyLineBetweenFields
-                    && detailAST.getType() != TokenTypes.RCURLY;
+        return detailAST.getType() != TokenTypes.RCURLY
+                && (!allowNoEmptyLineBetweenFields
+                    || detailAST.getType() != TokenTypes.VARIABLE_DEF);
     }
 

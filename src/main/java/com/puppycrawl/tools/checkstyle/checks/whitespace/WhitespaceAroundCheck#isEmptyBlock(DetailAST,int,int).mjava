@@ -19,8 +19,7 @@
         if (type == TokenTypes.RCURLY) {
             final DetailAST parent = ast.getParent();
             final DetailAST grandParent = ast.getParent().getParent();
-            result = parentType == TokenTypes.SLIST
-                    && parent.getFirstChild().getType() == TokenTypes.RCURLY
+            result = parent.getFirstChild().getType() == TokenTypes.RCURLY
                     && grandParent.getType() == match;
         }
         else {

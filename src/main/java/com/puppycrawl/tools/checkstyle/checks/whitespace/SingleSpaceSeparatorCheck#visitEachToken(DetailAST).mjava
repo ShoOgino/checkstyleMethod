@@ -6,7 +6,7 @@
     private void visitEachToken(DetailAST node) {
         DetailAST sibling = node;
 
-        while (sibling != null) {
+        do {
             final int columnNo = sibling.getColumnNo() - 1;
 
             // in such expression: "j  =123", placed at the start of the string index of the second
@@ -24,6 +24,6 @@
             }
 
             sibling = sibling.getNextSibling();
-        }
+        } while (sibling != null);
     }
 

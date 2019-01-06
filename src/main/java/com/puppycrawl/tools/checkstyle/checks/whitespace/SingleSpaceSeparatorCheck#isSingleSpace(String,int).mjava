@@ -8,7 +8,6 @@
      *         not preceded by another space.
      */
     private static boolean isSingleSpace(String line, int columnNo) {
-        return !isPrecededByMultipleWhitespaces(line, columnNo)
-                && isSpace(line, columnNo);
+        return isSpace(line, columnNo) && !Character.isWhitespace(line.charAt(columnNo - 1));
     }
 
