@@ -14,6 +14,12 @@
             case TokenTypes.LITERAL_NEW:
                 processLiteralNew(ast);
                 break;
+            case TokenTypes.OBJBLOCK:
+                final int parentType = ast.getParent().getType();
+                if (parentType != TokenTypes.CLASS_DEF && parentType != TokenTypes.ENUM_DEF) {
+                    processFrame(ast);
+                }
+                break;
             default:
                 processFrame(ast);
         }

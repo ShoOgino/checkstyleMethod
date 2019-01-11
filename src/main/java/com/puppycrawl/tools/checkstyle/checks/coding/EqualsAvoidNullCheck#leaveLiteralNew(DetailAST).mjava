@@ -1,0 +1,12 @@
+    /**
+     * Determine whether LITERAL_NEW is an anonymous class definition and leave
+     * the frame it is in.
+     *
+     * @param ast LITERAL_NEW ast.
+     */
+    private void leaveLiteralNew(DetailAST ast) {
+        if (ast.findFirstToken(TokenTypes.OBJBLOCK) != null) {
+            currentFrame = currentFrame.getParent();
+        }
+    }
+

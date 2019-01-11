@@ -1,13 +1,10 @@
     /**
-     * Determine whether SLIST begins static or non-static block and add it as
+     * Determine whether SLIST begins a block, determined by braces, and add it as
      * a frame in this case.
      * @param ast SLIST ast.
      */
     private void processSlist(DetailAST ast) {
-        final int parentType = ast.getParent().getType();
-        if (parentType == TokenTypes.SLIST
-                || parentType == TokenTypes.STATIC_INIT
-                || parentType == TokenTypes.INSTANCE_INIT) {
+        if (LEFT_CURLY.equals(ast.getText())) {
             final FieldFrame frame = new FieldFrame(currentFrame);
             currentFrame.addChild(frame);
             currentFrame = frame;

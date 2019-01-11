@@ -3,6 +3,8 @@
          * @param field the ast of the field.
          */
         public void addField(DetailAST field) {
-            fields.add(field);
+            if (field.findFirstToken(TokenTypes.IDENT) != null) {
+                fields.add(field);
+            }
         }
 
