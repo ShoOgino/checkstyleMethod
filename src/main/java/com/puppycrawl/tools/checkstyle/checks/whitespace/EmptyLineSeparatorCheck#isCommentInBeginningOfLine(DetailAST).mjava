@@ -1,0 +1,16 @@
+    /**
+     * Check if token is comment, which starting in beginning of line.
+     * @param comment comment token for check.
+     * @return true, if token is comment, which starting in beginning of line.
+     */
+    private boolean isCommentInBeginningOfLine(DetailAST comment) {
+        // [comment.getLineNo() - 1] is the number of the previous line as the numbering starts
+        // from zero.
+        boolean result = false;
+        if (comment != null) {
+            final String lineWithComment = getLines()[comment.getLineNo() - 1].trim();
+            result = lineWithComment.startsWith("//") || lineWithComment.startsWith("/*");
+        }
+        return result;
+    }
+

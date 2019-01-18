@@ -1,0 +1,21 @@
+    /**
+     * Check if group of comments located right before token has more than one previous empty line.
+     * @param token DetailAST token
+     */
+    private void checkComments(DetailAST token) {
+        if (!allowMultipleEmptyLines) {
+            if (TOKEN_TYPES_WITHOUT_COMMENTS_TO_CHECK_INSIDE.contains(token.getType())) {
+                DetailAST previousNode = token.getPreviousSibling();
+                while (isCommentInBeginningOfLine(previousNode)) {
+                    if (hasEmptyLineBefore(previousNode) && isPrePreviousLineEmpty(previousNode)) {
+                        log(previousNode, MSG_MULTIPLE_LINES, previousNode.getText());
+                    }
+                    previousNode = previousNode.getPreviousSibling();
+                }
+            }
+            else {
+                checkCommentsInsideToken(token);
+            }
+        }
+    }
+

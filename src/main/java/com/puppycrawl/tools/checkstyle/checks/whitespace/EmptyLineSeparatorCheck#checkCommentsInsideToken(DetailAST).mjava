@@ -1,0 +1,30 @@
+    /**
+     * Check if group of comments located at the start of token has more than one previous empty
+     * line.
+     * @param token DetailAST token
+     */
+    private void checkCommentsInsideToken(DetailAST token) {
+        final List<DetailAST> childNodes = new LinkedList<>();
+        DetailAST childNode = token.getLastChild();
+        while (childNode != null) {
+            if (childNode.getType() == TokenTypes.MODIFIERS) {
+                for (DetailAST node = token.getFirstChild().getLastChild();
+                         node != null;
+                         node = node.getPreviousSibling()) {
+                    if (isCommentInBeginningOfLine(node)) {
+                        childNodes.add(node);
+                    }
+                }
+            }
+            else if (isCommentInBeginningOfLine(childNode)) {
+                childNodes.add(childNode);
+            }
+            childNode = childNode.getPreviousSibling();
+        }
+        for (DetailAST node : childNodes) {
+            if (hasEmptyLineBefore(node) && isPrePreviousLineEmpty(node)) {
+                log(node, MSG_MULTIPLE_LINES, node.getText());
+            }
+        }
+    }
+

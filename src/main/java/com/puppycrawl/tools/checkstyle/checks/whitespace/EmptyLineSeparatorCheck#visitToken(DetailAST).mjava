@@ -1,5 +1,6 @@
     @Override
     public void visitToken(DetailAST ast) {
+        checkComments(ast);
         if (hasMultipleLinesBefore(ast)) {
             log(ast.getLineNo(), MSG_MULTIPLE_LINES, ast.getText());
         }
