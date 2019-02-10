@@ -1,0 +1,10 @@
+    @Test
+    public void testExternalResource() throws Exception {
+        final HeaderCheck check = new HeaderCheck();
+        final URI uri = CommonUtil.getUriByFilename(getPath("InputHeaderjava.header"));
+        check.setHeaderFile(uri);
+        final Set<String> results = check.getExternalResourceLocations();
+        assertEquals("Invalid result size", 1, results.size());
+        assertEquals("Invalid resource location", uri.toString(), results.iterator().next());
+    }
+

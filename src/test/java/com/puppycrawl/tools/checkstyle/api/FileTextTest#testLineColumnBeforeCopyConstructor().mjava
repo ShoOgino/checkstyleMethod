@@ -5,6 +5,7 @@
                 charsetName);
         final LineColumn lineColumn = fileText.lineColumn(100);
         final FileText copy = new FileText(fileText);
+        assertNotNull("LineBreaks not copied", Whitebox.getInternalState(copy, "lineBreaks"));
         assertEquals("Invalid linecolumn", lineColumn, copy.lineColumn(100));
     }
 

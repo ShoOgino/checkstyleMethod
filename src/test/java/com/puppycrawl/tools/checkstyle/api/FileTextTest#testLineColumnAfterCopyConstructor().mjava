@@ -4,6 +4,7 @@
         final FileText fileText = new FileText(new File(getPath("InputFileTextImportControl.xml")),
                 charsetName);
         final FileText copy = new FileText(fileText);
+        assertNull("LineBreaks not null", Whitebox.getInternalState(copy, "lineBreaks"));
         final LineColumn lineColumn = copy.lineColumn(100);
         assertEquals("Invalid line", 3, lineColumn.getLine());
         if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("windows")) {
