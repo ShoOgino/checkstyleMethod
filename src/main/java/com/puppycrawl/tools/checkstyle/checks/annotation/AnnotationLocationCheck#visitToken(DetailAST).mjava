@@ -1,9 +1,6 @@
     @Override
     public void visitToken(DetailAST ast) {
         final DetailAST modifiersNode = ast.findFirstToken(TokenTypes.MODIFIERS);
-
-        if (modifiersNode != null) {
-            checkAnnotations(modifiersNode, getExpectedAnnotationIndentation(modifiersNode));
-        }
+        checkAnnotations(modifiersNode, getExpectedAnnotationIndentation(modifiersNode));
     }
 
