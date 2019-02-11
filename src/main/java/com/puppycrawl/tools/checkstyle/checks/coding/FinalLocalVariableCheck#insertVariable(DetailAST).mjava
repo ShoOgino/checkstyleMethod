@@ -5,7 +5,10 @@
     private void insertVariable(DetailAST ast) {
         final Map<String, FinalVariableCandidate> scope = scopeStack.peek().scope;
         final DetailAST astNode = ast.findFirstToken(TokenTypes.IDENT);
-        scope.put(astNode.getText(), new FinalVariableCandidate(astNode));
+        final FinalVariableCandidate candidate = new FinalVariableCandidate(astNode);
+        // for-each variables are implicitly assigned
+        candidate.assigned = ast.getParent().getType() == TokenTypes.FOR_EACH_CLAUSE;
+        scope.put(astNode.getText(), candidate);
         if (!isInitialized(astNode)) {
             scopeStack.peek().uninitializedVariables.add(astNode);
         }

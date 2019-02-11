@@ -6,6 +6,7 @@
         final Iterator<DetailAST> iterator = currentScopeAssignedVariables.peek().iterator();
         while (iterator.hasNext()) {
             final DetailAST assignedVariable = iterator.next();
+            boolean shouldRemove = false;
             for (DetailAST variable : scopeUninitializedVariableData) {
                 for (ScopeData scopeData : scopeStack) {
                     final FinalVariableCandidate candidate =
@@ -18,9 +19,12 @@
                             && isSameVariables(storedVariable, variable)
                             && isSameVariables(assignedVariable, variable)) {
                         scopeData.uninitializedVariables.push(variable);
-                        iterator.remove();
+                        shouldRemove = true;
                     }
                 }
+            }
+            if (shouldRemove) {
+                iterator.remove();
             }
         }
     }
