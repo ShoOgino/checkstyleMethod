@@ -1,6 +1,14 @@
+    /**
+     * This test requires reflection to insert an unsupported option in the check to cover the
+     * exception that gets thrown when a unsupported option is used. The field has a value by
+     * default and the setter for the property will throw it's own exception when an unsupported
+     * option is given, so there is no other way to cover this code.
+     *
+     * @throws Exception if there is an error.
+     */
     // -@cs[ForbidAnnotationElementValue] Will examine turkish failure
     @Test(expected = IllegalStateException.class)
-    public void testVisitTokenSwitchReflection() {
+    public void testVisitTokenSwitchReflection() throws Exception {
         // Create mock ast
         final DetailAST astImport = mockAST(TokenTypes.IMPORT, "import", "mockfile", 0, 0);
         final DetailAST astIdent = mockAST(TokenTypes.IDENT, "myTestImport", "mockfile", 0, 0);
@@ -10,10 +18,7 @@
 
         // Set unsupported option
         final ImportOrderCheck mock = new ImportOrderCheck();
-        final ImportOrderOption importOrderOptionMock = PowerMockito.mock(ImportOrderOption.class);
-        Whitebox.setInternalState(importOrderOptionMock, "name", "NEW_OPTION_FOR_UT");
-        Whitebox.setInternalState(importOrderOptionMock, "ordinal", 5);
-        Whitebox.setInternalState(mock, "option", importOrderOptionMock);
+        TestUtil.getClassDeclaredField(ImportOrderCheck.class, "option").set(mock, null);
 
         // expecting IllegalStateException
         mock.visitToken(astImport);
