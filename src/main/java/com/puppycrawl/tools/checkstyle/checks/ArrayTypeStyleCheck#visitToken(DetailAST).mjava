@@ -1,17 +1,18 @@
     @Override
     public void visitToken(DetailAST ast) {
         final DetailAST typeAST = ast.getParent();
-        if (typeAST.getType() == TokenTypes.TYPE
-                // Do not check method's return type.
-                // We have no alternatives here.
-                && typeAST.getParent().getType() != TokenTypes.METHOD_DEF) {
+        if (typeAST.getType() == TokenTypes.TYPE) {
             final DetailAST variableAST = typeAST.getNextSibling();
             if (variableAST != null) {
-                final boolean isJavaStyle =
-                    variableAST.getLineNo() > ast.getLineNo()
+                final boolean isMethod = typeAST.getParent().getType() == TokenTypes.METHOD_DEF;
+                final boolean isJavaStyle = variableAST.getLineNo() > ast.getLineNo()
                     || variableAST.getColumnNo() - ast.getColumnNo() > -1;
 
-                if (isJavaStyle != javaStyle) {
+                // force all methods to be Java style (see note in top Javadoc)
+                final boolean isMethodViolation = isMethod && !isJavaStyle;
+                final boolean isVariableViolation = !isMethod && isJavaStyle != javaStyle;
+
+                if (isMethodViolation || isVariableViolation) {
                     log(ast, MSG_KEY);
                 }
             }
