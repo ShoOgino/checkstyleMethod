@@ -10,7 +10,8 @@
         when(fileMock.isDirectory()).thenReturn(false);
         when(fileMock.isFile()).thenReturn(false);
 
-        final List<File> result = (List<File>) method.invoke(null, fileMock, null);
+        final List<File> result = (List<File>) method.invoke(null, fileMock,
+                new ArrayList<Pattern>());
         assertEquals("Invalid result size", 0, result.size());
     }
 
