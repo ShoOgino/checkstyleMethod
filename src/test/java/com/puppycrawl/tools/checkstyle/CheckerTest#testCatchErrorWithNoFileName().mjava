@@ -1,5 +1,5 @@
     @Test
-    public void testCatchErrorInProcessFilesMethod() throws Exception {
+    public void testCatchErrorWithNoFileName() throws Exception {
         // The idea of the test is to satisfy coverage rate.
         // An Error indicates serious problems that a reasonable application should not try to
         // catch, but due to issue https://github.com/checkstyle/checkstyle/issues/2285
@@ -11,7 +11,6 @@
             + " or has run out of resources necessary for it to continue operating.";
         final Error expectedError = new IOError(new InternalError(errorMessage));
         when(mock.lastModified()).thenThrow(expectedError);
-        when(mock.getAbsolutePath()).thenReturn("testFile");
         final Checker checker = new Checker();
         final List<File> filesToProcess = new ArrayList<>();
         filesToProcess.add(mock);

@@ -1,0 +1,26 @@
+    @Test
+    public void testExceptionWithNoFileName() {
+        // The idea of the test is to satisfy coverage rate.
+        // An Error indicates serious problems that a reasonable application should not try to
+        // catch, but due to issue https://github.com/checkstyle/checkstyle/issues/2285
+        // we catch errors in 'processFiles' method. Most such errors are abnormal conditions,
+        // that is why we use PowerMockito to reproduce them.
+        final File mock = PowerMockito.mock(File.class);
+        final String errorMessage = "Security Exception";
+        final Exception expectedError = new SecurityException(errorMessage);
+        when(mock.getAbsolutePath()).thenThrow(expectedError);
+        final Checker checker = new Checker();
+        final List<File> filesToProcess = new ArrayList<>();
+        filesToProcess.add(mock);
+        try {
+            checker.process(filesToProcess);
+            fail("IOError is expected!");
+        }
+        catch (CheckstyleException ex) {
+            assertThat("Error cause differs from SecurityException",
+                    ex.getCause(), instanceOf(SecurityException.class));
+            assertEquals("Error message is not expected",
+                    errorMessage, ex.getCause().getMessage());
+        }
+    }
+
