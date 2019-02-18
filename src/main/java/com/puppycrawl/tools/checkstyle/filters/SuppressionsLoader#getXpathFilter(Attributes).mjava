@@ -5,7 +5,7 @@
      * @return the xpath filter
      * @throws SAXException if an error occurs.
      */
-    private static XpathFilter getXpathFilter(Attributes attributes) throws SAXException {
+    private static XpathFilterElement getXpathFilter(Attributes attributes) throws SAXException {
         final String checks = attributes.getValue(ATTRIBUTE_NAME_CHECKS);
         final String modId = attributes.getValue(ATTRIBUTE_NAME_ID);
         final String message = attributes.getValue(ATTRIBUTE_NAME_MESSAGE);
@@ -13,11 +13,11 @@
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
             throw new SAXException("missing checks or id or message attribute for suppress-xpath");
         }
-        final XpathFilter filter;
+        final XpathFilterElement filter;
         try {
             final String files = attributes.getValue(ATTRIBUTE_NAME_FILES);
             final String xpathQuery = attributes.getValue(ATTRIBUTE_NAME_QUERY);
-            filter = new XpathFilter(files, checks, message, modId, xpathQuery);
+            filter = new XpathFilterElement(files, checks, message, modId, xpathQuery);
         }
         catch (final PatternSyntaxException ex) {
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature

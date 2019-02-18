@@ -1,0 +1,10 @@
+    @Test
+    public void testNonMatchingLineNumber() throws Exception {
+        final String xpath = "/CLASS_DEF[@text='InputXpathFilterElementSuppressByXpath']";
+        final XpathFilterElement filter = new XpathFilterElement(
+                "InputXpathFilterElementSuppressByXpath", "Test", null, null, xpath);
+        final TreeWalkerAuditEvent ev = getEvent(100, 0,
+                TokenTypes.CLASS_DEF);
+        assertTrue("Event should be accepted", filter.accept(ev));
+    }
+

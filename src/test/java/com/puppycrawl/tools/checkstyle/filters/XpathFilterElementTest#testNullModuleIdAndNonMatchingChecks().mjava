@@ -1,0 +1,10 @@
+    @Test
+    public void testNullModuleIdAndNonMatchingChecks() throws Exception {
+        final String xpath = "NON_MATCHING_QUERY";
+        final XpathFilterElement filter = new XpathFilterElement(
+                "InputXpathFilterElementSuppressByXpath", "NonMatchingRegexp", null, null, xpath);
+        final TreeWalkerAuditEvent ev = getEvent(3, 0,
+                TokenTypes.CLASS_DEF);
+        assertTrue("Event should be accepted", filter.accept(ev));
+    }
+

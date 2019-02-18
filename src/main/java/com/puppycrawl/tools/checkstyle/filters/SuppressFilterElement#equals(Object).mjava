@@ -1,0 +1,17 @@
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        final SuppressFilterElement suppressElement = (SuppressFilterElement) other;
+        return Objects.equals(filePattern, suppressElement.filePattern)
+                && Objects.equals(checkPattern, suppressElement.checkPattern)
+                && Objects.equals(messagePattern, suppressElement.messagePattern)
+                && Objects.equals(moduleId, suppressElement.moduleId)
+                && Objects.equals(linesCsv, suppressElement.linesCsv)
+                && Objects.equals(columnsCsv, suppressElement.columnsCsv);
+    }
+

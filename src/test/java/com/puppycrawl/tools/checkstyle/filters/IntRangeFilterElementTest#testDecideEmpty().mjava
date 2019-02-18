@@ -1,0 +1,10 @@
+    @Test
+    public void testDecideEmpty() {
+        final IntFilterElement filter = new IntRangeFilterElement(10, 0);
+        assertFalse("out", filter.accept(-1));
+        assertFalse("out", filter.accept(0));
+        assertFalse("out", filter.accept(5));
+        assertFalse("out", filter.accept(10));
+        assertFalse("out", filter.accept(11));
+    }
+

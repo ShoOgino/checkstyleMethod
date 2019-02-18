@@ -5,7 +5,8 @@
      * @return the suppress element
      * @throws SAXException if an error occurs.
      */
-    private static SuppressElement getSuppressElement(Attributes attributes) throws SAXException {
+    private static SuppressFilterElement getSuppressElement(Attributes attributes)
+            throws SAXException {
         final String checks = attributes.getValue(ATTRIBUTE_NAME_CHECKS);
         final String modId = attributes.getValue(ATTRIBUTE_NAME_ID);
         final String message = attributes.getValue(ATTRIBUTE_NAME_MESSAGE);
@@ -13,12 +14,12 @@
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
             throw new SAXException("missing checks or id or message attribute");
         }
-        final SuppressElement suppress;
+        final SuppressFilterElement suppress;
         try {
             final String files = attributes.getValue(ATTRIBUTE_NAME_FILES);
             final String lines = attributes.getValue(ATTRIBUTE_NAME_LINES);
             final String columns = attributes.getValue(ATTRIBUTE_NAME_COLUMNS);
-            suppress = new SuppressElement(files, checks, message, modId, lines, columns);
+            suppress = new SuppressFilterElement(files, checks, message, modId, lines, columns);
         }
         catch (final PatternSyntaxException ex) {
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature

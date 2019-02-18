@@ -5,12 +5,12 @@
                              Attributes attributes)
             throws SAXException {
         if ("suppress".equals(qName)) {
-            //add SuppressElement filter to the filter chain
-            final SuppressElement suppress = getSuppressElement(attributes);
+            //add SuppressFilterElement filter to the filter chain
+            final SuppressFilterElement suppress = getSuppressElement(attributes);
             filterChain.addFilter(suppress);
         }
         else if ("suppress-xpath".equals(qName)) {
-            final XpathFilter filter = getXpathFilter(attributes);
+            final XpathFilterElement filter = getXpathFilter(attributes);
             treeWalkerFilters.add(filter);
         }
     }

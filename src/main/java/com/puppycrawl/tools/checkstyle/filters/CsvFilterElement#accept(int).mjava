@@ -1,0 +1,17 @@
+    /**
+     * Determines whether an Integer matches a CSV integer value.
+     * @param intValue the Integer to check.
+     * @return true if intValue is an Integer that matches a CSV value.
+     */
+    @Override
+    public boolean accept(int intValue) {
+        boolean result = false;
+        for (IntFilterElement filter : getFilters()) {
+            if (filter.accept(intValue)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
