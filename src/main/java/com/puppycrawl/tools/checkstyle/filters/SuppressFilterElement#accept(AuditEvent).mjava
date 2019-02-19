@@ -1,7 +1,7 @@
     @Override
     public boolean accept(AuditEvent event) {
-        return isFileNameAndModuleNotMatching(event)
+        return !isFileNameAndModuleNameMatching(event)
                 || !isMessageNameMatching(event)
-                || isLineAndColumnMatch(event);
+                || !isLineAndColumnMatching(event);
     }
 
