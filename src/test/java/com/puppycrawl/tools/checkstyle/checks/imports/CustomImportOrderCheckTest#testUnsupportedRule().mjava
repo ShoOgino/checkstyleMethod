@@ -13,14 +13,15 @@
             fail("exception expected");
         }
         catch (CheckstyleException ex) {
-            final String messageStart =
+            assertEquals("Invalid exception message",
                 "cannot initialize module com.puppycrawl.tools.checkstyle.TreeWalker - "
-                    + "Cannot set property 'customImportOrderRules' to "
-                    + "'SAME_PACKAGE(3)###UNSUPPORTED_RULE' in module";
-            assertTrue("Invalid exception message, should start with: " + messageStart,
-                ex.getMessage().startsWith(messageStart));
+                        + "cannot initialize module com.puppycrawl.tools.checkstyle.checks"
+                        + ".imports.CustomImportOrderCheck - "
+                        + "Cannot set property 'customImportOrderRules' to "
+                        + "'SAME_PACKAGE(3)###UNSUPPORTED_RULE'",
+                ex.getMessage());
             assertEquals("Invalid exception message", "Unexpected rule: UNSUPPORTED_RULE", ex
-                    .getCause().getCause().getCause().getMessage());
+                    .getCause().getCause().getCause().getCause().getMessage());
         }
     }
 

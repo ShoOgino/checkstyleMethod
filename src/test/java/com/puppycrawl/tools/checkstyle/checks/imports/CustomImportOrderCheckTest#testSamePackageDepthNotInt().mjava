@@ -12,15 +12,16 @@
             fail("exception expected");
         }
         catch (CheckstyleException ex) {
-            final String messageStart =
+            assertEquals("Invalid exception message",
                 "cannot initialize module com.puppycrawl.tools.checkstyle.TreeWalker - "
-                    + "Cannot set property 'customImportOrderRules' to "
-                    + "'SAME_PACKAGE(INT_IS_REQUIRED_HERE)' in module";
-            assertTrue("Invalid exception message, should start with: " + messageStart,
-                ex.getMessage().startsWith(messageStart));
+                        + "cannot initialize module com.puppycrawl.tools.checkstyle.checks"
+                        + ".imports.CustomImportOrderCheck - "
+                        + "Cannot set property 'customImportOrderRules' to "
+                        + "'SAME_PACKAGE(INT_IS_REQUIRED_HERE)'",
+                ex.getMessage());
             assertEquals("Invalid exception message",
                     "For input string: \"INT_IS_REQUIRED_HERE\"",
-                    ex.getCause().getCause().getCause().getMessage());
+                    ex.getCause().getCause().getCause().getCause().getMessage());
         }
     }
 
