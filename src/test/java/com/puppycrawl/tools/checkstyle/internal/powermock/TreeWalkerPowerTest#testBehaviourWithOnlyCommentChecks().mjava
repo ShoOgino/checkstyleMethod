@@ -11,7 +11,7 @@
         final File file = temporaryFolder.newFile("file.java");
         final List<String> lines = new ArrayList<>();
         lines.add("class Test {}");
-        treeWalkerSpy.processFiltered(file, new FileText(file, lines));
+        Whitebox.invokeMethod(treeWalkerSpy, "processFiltered", file, new FileText(file, lines));
         verifyPrivate(treeWalkerSpy, times(1)).invoke("walk",
                 any(DetailAST.class), any(FileContents.class), any(classAstState));
         verifyPrivate(treeWalkerSpy, times(0)).invoke("getFilteredMessages",

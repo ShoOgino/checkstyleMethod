@@ -16,16 +16,16 @@
         antTask.execute();
 
         // then
-        final List<MessageLevelPair> loggedMessages = antTask.getLoggedMessages();
+        final List<String> loggedMessages = antTask.getLoggedMessages();
 
         assertEquals("Scanning path was not logged", 1, loggedMessages.stream().filter(
-            msg -> msg.getMsg().startsWith("1) Scanning path")).count());
+            msg -> msg.startsWith("1) Scanning path")).count());
 
         assertEquals("Scanning path was not logged", 1, loggedMessages.stream().filter(
-            msg -> msg.getMsg().startsWith("1) Adding 1 files from path")).count());
+            msg -> msg.startsWith("1) Adding 1 files from path")).count());
 
         assertEquals("Scanning empty was logged", 0, loggedMessages.stream().filter(
-            msg -> msg.getMsg().startsWith("2) Adding 0 files from path ")).count());
+            msg -> msg.startsWith("2) Adding 0 files from path ")).count());
 
         assertTrue("Checker is not processed",
                 TestRootModuleChecker.isProcessed());

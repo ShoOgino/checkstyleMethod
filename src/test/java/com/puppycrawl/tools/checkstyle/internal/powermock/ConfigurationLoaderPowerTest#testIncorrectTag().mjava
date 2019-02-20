@@ -18,6 +18,7 @@
                 String.class, Attributes.class, };
             final Method method = aClass.getDeclaredMethod("startElement", param);
 
+            method.setAccessible(true);
             method.invoke(obj, "", "", "hello", null);
 
             fail("Exception is expected");
