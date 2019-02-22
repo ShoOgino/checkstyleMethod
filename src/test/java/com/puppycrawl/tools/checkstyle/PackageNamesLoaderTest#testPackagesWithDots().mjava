@@ -1,0 +1,18 @@
+    @Test
+    public void testPackagesWithDots() throws Exception {
+        final Enumeration<URL> enumeration = Collections.enumeration(Collections.singleton(
+                new File(getPath("InputPackageNamesLoaderWithDots.xml")).toURI().toURL()));
+
+        final Set<String> actualPackageNames = PackageNamesLoader
+                .getPackageNames(new TestUrlsClassLoader(enumeration));
+        final String[] expectedPackageNames = {
+            "coding.",
+        };
+
+        assertEquals("Invalid package names length.", expectedPackageNames.length,
+            actualPackageNames.size());
+        final Set<String> checkstylePackagesSet =
+                new HashSet<>(Arrays.asList(expectedPackageNames));
+        assertEquals("Invalid names set.", checkstylePackagesSet, actualPackageNames);
+    }
+

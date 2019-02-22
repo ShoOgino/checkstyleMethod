@@ -1,0 +1,17 @@
+    private static void populateHolder(String checkName, int firstLine,
+                                                         int firstColumn, int lastLine,
+                                                         int lastColumn) throws Exception {
+        final Class<?> entry = Class
+                .forName("com.puppycrawl.tools.checkstyle.checks.SuppressWarningsHolder$Entry");
+        final Constructor<?> entryConstr = entry.getDeclaredConstructor(String.class, int.class,
+                int.class, int.class, int.class);
+        entryConstr.setAccessible(true);
+
+        final Object entryInstance = entryConstr.newInstance(checkName, firstLine,
+                firstColumn, lastLine, lastColumn);
+
+        final ThreadLocal<List<Object>> entries = Whitebox
+                .getInternalState(SuppressWarningsHolder.class, "ENTRIES");
+        entries.get().add(entryInstance);
+    }
+

@@ -1,0 +1,11 @@
+    @After
+    public void cleanUp() {
+        // clear cache that may have been set by tests
+
+        new SuppressWarningsHolder().beginTree(null);
+
+        final Map<String, String> map = Whitebox.getInternalState(SuppressWarningsHolder.class,
+                "CHECK_ALIAS_MAP");
+        map.clear();
+    }
+

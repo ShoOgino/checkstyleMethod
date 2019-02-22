@@ -1,0 +1,8 @@
+    @Test
+    public void testNoPackages() throws Exception {
+        final Set<String> actualPackageNames = PackageNamesLoader
+                .getPackageNames(new TestUrlsClassLoader(Collections.emptyEnumeration()));
+
+        assertEquals("Invalid package names length.", 0, actualPackageNames.size());
+    }
+

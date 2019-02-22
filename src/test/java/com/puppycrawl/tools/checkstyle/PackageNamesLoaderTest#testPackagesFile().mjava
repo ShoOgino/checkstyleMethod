@@ -1,27 +1,10 @@
-    /**
-     * Tests the loading of package names. This test needs mocking, because the package names would
-     * have to be placed in {@literal checkstyle_packages.xml}, but this will affect every test,
-     * which is undesired.
-     *
-     * @throws Exception if error occurs
-     */
     @Test
-    @SuppressWarnings("unchecked")
     public void testPackagesFile() throws Exception {
-        final URLConnection mockConnection = Mockito.mock(URLConnection.class);
-        when(mockConnection.getInputStream()).thenReturn(
-            Files.newInputStream(Paths.get(getPath("InputPackageNamesLoaderFile.xml"))));
+        final Enumeration<URL> enumeration = Collections.enumeration(Collections.singleton(
+                new File(getPath("InputPackageNamesLoaderFile.xml")).toURI().toURL()));
 
-        final URL url = getMockUrl(mockConnection);
-
-        final Enumeration<URL> enumeration = mock(Enumeration.class);
-        when(enumeration.hasMoreElements()).thenReturn(true).thenReturn(false);
-        when(enumeration.nextElement()).thenReturn(url);
-
-        final ClassLoader classLoader = mock(ClassLoader.class);
-        when(classLoader.getResources("checkstyle_packages.xml")).thenReturn(enumeration);
-
-        final Set<String> actualPackageNames = PackageNamesLoader.getPackageNames(classLoader);
+        final Set<String> actualPackageNames = PackageNamesLoader
+                .getPackageNames(new TestUrlsClassLoader(enumeration));
         final String[] expectedPackageNames = {
             "com.puppycrawl.tools.checkstyle",
             "com.puppycrawl.tools.checkstyle.checks",

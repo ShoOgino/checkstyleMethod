@@ -1,17 +1,17 @@
     @Test
     public void testBundleReloadUrlNotNullStreamNull() throws IOException {
-        final ClassLoader classloader = mock(ClassLoader.class);
-        final String resource =
-            "com/puppycrawl/tools/checkstyle/checks/coding/messages_en.properties";
-
-        final URL url = getMockUrl(null);
-        when(classloader.getResource(resource)).thenReturn(url);
+        final URL url = new URL("test", null, 0, "", new URLStreamHandler() {
+            @Override
+            protected URLConnection openConnection(URL u) {
+                return null;
+            }
+        });
 
         final LocalizedMessage.Utf8Control control = new LocalizedMessage.Utf8Control();
         final ResourceBundle bundle = control.newBundle(
                 "com.puppycrawl.tools.checkstyle.checks.coding.messages",
                 Locale.ENGLISH, "java.class",
-                classloader, true);
+                new TestUrlsClassLoader(url), true);
         assertNull("Bundle should be null when stream is null", bundle);
     }
 

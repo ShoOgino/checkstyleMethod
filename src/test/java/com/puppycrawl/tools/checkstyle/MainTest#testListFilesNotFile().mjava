@@ -1,0 +1,30 @@
+    /**
+     * Test doesn't need to be serialized.
+     * @noinspection SerializableInnerClassWithNonSerializableOuterClass
+     */
+    @Test
+    public void testListFilesNotFile() throws Exception {
+        final File fileMock = new File("") {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public boolean canRead() {
+                return true;
+            }
+
+            @Override
+            public boolean isDirectory() {
+                return false;
+            }
+
+            @Override
+            public boolean isFile() {
+                return false;
+            }
+        };
+
+        final List<File> result = Whitebox.invokeMethod(Main.class, "listFiles",
+                fileMock, new ArrayList<Pattern>());
+        assertEquals("Invalid result size", 0, result.size());
+    }
+

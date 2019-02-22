@@ -1,10 +1,7 @@
     @Test
-    public void testPackagesWithIoExceptionGetResources() throws Exception {
-        final ClassLoader classLoader = mock(ClassLoader.class);
-        when(classLoader.getResources("checkstyle_packages.xml")).thenThrow(IOException.class);
-
+    public void testPackagesWithIoExceptionGetResources() {
         try {
-            PackageNamesLoader.getPackageNames(classLoader);
+            PackageNamesLoader.getPackageNames(new TestIoExceptionClassLoader());
             fail("CheckstyleException is expected");
         }
         catch (CheckstyleException ex) {
