@@ -8,7 +8,7 @@
             throws SAXException, ParserConfigurationException {
         this.publicIdToResourceNameMap = new HashMap<>(publicIdToResourceNameMap);
         final SAXParserFactory factory = SAXParserFactory.newInstance();
-        FeaturesForVerySecureJavaInstallations.addFeaturesForVerySecureJavaInstallations(factory);
+        LoadExternalDtdFeatureProvider.setFeaturesBySystemProperty(factory);
         factory.setValidating(true);
         parser = factory.newSAXParser().getXMLReader();
         parser.setContentHandler(this);
