@@ -5,8 +5,8 @@
      * @param fileName the audited file
      */
     protected final void fireErrors(String fileName) {
-        final SortedSet<LocalizedMessage> errors = new TreeSet<>(MESSAGE_COLLECTOR.get());
-        MESSAGE_COLLECTOR.get().clear();
+        final SortedSet<LocalizedMessage> errors = new TreeSet<>(context.get().messages);
+        context.get().messages.clear();
         messageDispatcher.fireErrors(fileName, errors);
     }
 

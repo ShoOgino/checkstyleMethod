@@ -12,6 +12,7 @@
             new ArrayList<>(Arrays.asList("package com.puppycrawl.tools.checkstyle;", "",
                 "error public class InputTreeWalkerFileWithViolation {}"));
         final FileText fileText = new FileText(file, lines);
+        treeWalker.setFileContents(new FileContents(fileText));
         try {
             treeWalker.processFiltered(file, fileText);
             fail("Exception expected");

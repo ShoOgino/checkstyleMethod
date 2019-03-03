@@ -2,7 +2,7 @@
     protected void processFiltered(File file, FileText fileText) throws CheckstyleException {
         // check if already checked and passed the file
         if (!ordinaryChecks.isEmpty() || !commentChecks.isEmpty()) {
-            final FileContents contents = new FileContents(fileText);
+            final FileContents contents = getFileContents();
             final DetailAST rootAST = JavaParser.parse(contents);
             if (!ordinaryChecks.isEmpty()) {
                 walk(rootAST, contents, AstState.ORDINARY);

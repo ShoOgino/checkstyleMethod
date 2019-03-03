@@ -1,0 +1,13 @@
+        @Override
+        protected void processFiltered(File file, FileText fileText) {
+            int lineNumber = 0;
+            for (String line : getFileContents().getLines()) {
+                final int position = line.lastIndexOf('\t');
+                lineNumber++;
+
+                if (position != -1) {
+                    log(lineNumber, position + 1, "violation");
+                }
+            }
+        }
+

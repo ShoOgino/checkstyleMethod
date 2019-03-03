@@ -10,11 +10,8 @@
         assertEquals("Invalid message", "File should not be empty.",
             firstFileMessages.first().getMessage());
 
-        final Field field = AbstractFileSetCheck.class.getDeclaredField("MESSAGE_COLLECTOR");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
         final SortedSet<LocalizedMessage> internalMessages =
-                ((ThreadLocal<SortedSet<LocalizedMessage>>) field.get(null)).get();
+                check.getMessages();
         assertTrue("Internal message should be empty, but was not", internalMessages.isEmpty());
 
         final File secondFile = new File("inputAbstractFileSetCheck.txt");

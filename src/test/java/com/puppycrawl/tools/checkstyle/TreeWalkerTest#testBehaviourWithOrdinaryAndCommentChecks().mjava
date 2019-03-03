@@ -12,6 +12,7 @@
         final List<String> lines = new ArrayList<>();
         lines.add(" class a%$# {} ");
         final FileText fileText = new FileText(file, lines);
+        treeWalker.setFileContents(new FileContents(fileText));
 
         try {
             treeWalker.processFiltered(file, fileText);

@@ -1,9 +1,11 @@
     @Override
     public final void log(int lineNo, int colNo, String key,
             Object... args) {
-        MESSAGE_COLLECTOR.get().add(
+        final int col = 1 + CommonUtil.lengthExpandedTabs(
+                context.get().fileContents.getLine(lineNo - 1), colNo, tabWidth);
+        context.get().messages.add(
                 new LocalizedMessage(lineNo,
-                        colNo,
+                        col,
                         getMessageBundle(),
                         key,
                         args,

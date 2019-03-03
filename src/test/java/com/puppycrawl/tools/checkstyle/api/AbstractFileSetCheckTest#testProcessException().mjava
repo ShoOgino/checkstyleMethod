@@ -14,11 +14,8 @@
             assertEquals("Invalid exception message", "Test", ex.getMessage());
         }
 
-        final Field field = AbstractFileSetCheck.class.getDeclaredField("MESSAGE_COLLECTOR");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
         final SortedSet<LocalizedMessage> internalMessages =
-                ((ThreadLocal<SortedSet<LocalizedMessage>>) field.get(null)).get();
+                check.getMessages();
         assertEquals("Internal message should only have 1", 1, internalMessages.size());
 
         // again to prove only 1 violation exists
@@ -32,9 +29,8 @@
             assertEquals("Invalid exception message", "Test", ex.getMessage());
         }
 
-        @SuppressWarnings("unchecked")
         final SortedSet<LocalizedMessage> internalMessages2 =
-            ((ThreadLocal<SortedSet<LocalizedMessage>>) field.get(null)).get();
+            check.getMessages();
         assertEquals("Internal message should only have 1 again", 1, internalMessages2.size());
     }
 

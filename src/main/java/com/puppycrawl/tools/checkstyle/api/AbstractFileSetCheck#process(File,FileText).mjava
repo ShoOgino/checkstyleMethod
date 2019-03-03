@@ -1,7 +1,8 @@
     @Override
     public final SortedSet<LocalizedMessage> process(File file, FileText fileText)
             throws CheckstyleException {
-        final SortedSet<LocalizedMessage> messages = MESSAGE_COLLECTOR.get();
+        final SortedSet<LocalizedMessage> messages = context.get().messages;
+        context.get().fileContents = new FileContents(fileText);
         messages.clear();
         // Process only what interested in
         if (CommonUtil.matchesFileExtension(file, fileExtensions)) {

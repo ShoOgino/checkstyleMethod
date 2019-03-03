@@ -5,7 +5,7 @@
         try {
             final RegexpOnFilenameCheck check = new RegexpOnFilenameCheck();
             check.setFileNamePattern(Pattern.compile("BAD"));
-            check.process(file, null);
+            check.process(file, new FileText(file, Collections.emptyList()));
             fail("CheckstyleException expected");
         }
         catch (CheckstyleException ex) {
