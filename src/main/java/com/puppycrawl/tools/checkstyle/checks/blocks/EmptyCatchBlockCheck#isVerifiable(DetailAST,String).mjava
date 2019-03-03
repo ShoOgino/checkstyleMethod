@@ -7,10 +7,10 @@
      */
     private boolean isVerifiable(DetailAST emptyCatchAst, String commentContent) {
         final String variableName = getExceptionVariableName(emptyCatchAst);
-        final boolean isMatchingVariableName = variableNameRegexp
+        final boolean isMatchingVariableName = exceptionVariableName
                 .matcher(variableName).find();
         final boolean isMatchingCommentContent = !commentContent.isEmpty()
-                 && commentRegexp.matcher(commentContent).find();
+                 && commentFormat.matcher(commentContent).find();
         return !isMatchingVariableName && !isMatchingCommentContent;
     }
 
