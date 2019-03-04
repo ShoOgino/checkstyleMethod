@@ -11,9 +11,7 @@
         }
         else {
             final String className = getNodeClassNameWithoutContext(node);
-            final String typeName =
-                    CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, className);
-            tokenType = JavadocUtil.getTokenId(typeName);
+            tokenType = JavadocUtil.getTokenId(convertUpperCamelToUpperUnderscore(className));
         }
 
         return tokenType;

@@ -5,8 +5,8 @@
      */
     private static void flushAndCloseOutStream(OutputStream stream) throws IOException {
         if (stream != null) {
-            Flushables.flush(stream, false);
+            stream.flush();
+            stream.close();
         }
-        Closeables.close(stream, false);
     }
 

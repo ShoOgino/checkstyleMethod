@@ -1,0 +1,30 @@
+    /**
+     * Trims the given {@code text} of duplicate whitespaces.
+     * @param text The text to transform.
+     * @return The finalized form of the text.
+     */
+    private static String trimExcessWhitespaces(String text) {
+        final StringBuilder result = new StringBuilder(100);
+        boolean previousWhitespace = true;
+
+        for (char letter : text.toCharArray()) {
+            final char print;
+            if (Character.isWhitespace(letter)) {
+                if (previousWhitespace) {
+                    continue;
+                }
+
+                previousWhitespace = true;
+                print = ' ';
+            }
+            else {
+                previousWhitespace = false;
+                print = letter;
+            }
+
+            result.append(print);
+        }
+
+        return result.toString();
+    }
+

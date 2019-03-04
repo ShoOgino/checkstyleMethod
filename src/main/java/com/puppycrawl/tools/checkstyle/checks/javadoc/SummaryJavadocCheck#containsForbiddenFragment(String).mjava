@@ -4,9 +4,8 @@
      * @return true, if first sentence contains forbidden summary fragment.
      */
     private boolean containsForbiddenFragment(String firstSentence) {
-        String javadocText = JAVADOC_MULTILINE_TO_SINGLELINE_PATTERN
-                .matcher(firstSentence).replaceAll(" ");
-        javadocText = CharMatcher.whitespace().trimAndCollapseFrom(javadocText, ' ');
-        return forbiddenSummaryFragments.matcher(javadocText).find();
+        final String javadocText = JAVADOC_MULTILINE_TO_SINGLELINE_PATTERN
+                .matcher(firstSentence).replaceAll(" ").trim();
+        return forbiddenSummaryFragments.matcher(trimExcessWhitespaces(javadocText)).find();
     }
 

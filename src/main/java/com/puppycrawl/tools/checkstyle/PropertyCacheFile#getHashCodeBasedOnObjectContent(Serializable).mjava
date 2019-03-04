@@ -15,7 +15,7 @@
             final MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.update(outputStream.toByteArray());
 
-            return BaseEncoding.base16().upperCase().encode(digest.digest());
+            return new BigInteger(1, digest.digest()).toString(BASE_16).toUpperCase(Locale.ROOT);
         }
         catch (final IOException | NoSuchAlgorithmException ex) {
             // rethrow as unchecked exception

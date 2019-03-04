@@ -1,0 +1,19 @@
+    /**
+     * Converts the given {@code text} from camel case to all upper case with
+     * underscores separating each word.
+     * @param text The string to convert.
+     * @return The result of the conversion.
+     */
+    private static String convertUpperCamelToUpperUnderscore(String text) {
+        final StringBuilder result = new StringBuilder(20);
+        boolean first = true;
+        for (char letter : text.toCharArray()) {
+            if (!first && Character.isUpperCase(letter)) {
+                result.append('_');
+            }
+            result.append(Character.toUpperCase(letter));
+            first = false;
+        }
+        return result.toString();
+    }
+
