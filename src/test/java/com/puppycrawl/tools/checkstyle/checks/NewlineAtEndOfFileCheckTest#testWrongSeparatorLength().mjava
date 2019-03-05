@@ -13,14 +13,8 @@
             fail("Exception is expected");
         }
         catch (IOException ex) {
-            if (System.getProperty("os.name").toLowerCase(ENGLISH).startsWith("windows")) {
-                assertEquals("Error message is unexpected",
-                        "Unable to read 2 bytes, got 0", ex.getMessage());
-            }
-            else {
-                assertEquals("Error message is unexpected",
-                        "Unable to read 1 bytes, got 0", ex.getMessage());
-            }
+            assertEquals("Error message is unexpected",
+                    "Unable to read 1 bytes, got 0", ex.getMessage());
         }
     }
 
