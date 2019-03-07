@@ -7,8 +7,7 @@
      * the value of {@link AnnotationLocationCheck#allowSamelineParameterizedAnnotation};
      * 2) checks parameterless annotation location considering
      * the value of {@link AnnotationLocationCheck#allowSamelineSingleParameterlessAnnotation};
-     * 3) checks annotation location considering the elements
-     * of {@link AnnotationLocationCheck#SINGLELINE_ANNOTATION_PARENTS};
+     * 3) checks annotation location;
      * @param annotation annotation node.
      * @param hasParams whether an annotation has parameters.
      * @return true if the annotation has a correct location.
@@ -24,7 +23,6 @@
         }
         return allowSamelineMultipleAnnotations
             || allowingCondition && !hasNodeBefore(annotation)
-            || !allowingCondition && (!hasNodeBeside(annotation)
-            || isAllowedPosition(annotation, SINGLELINE_ANNOTATION_PARENTS));
+            || !hasNodeBeside(annotation);
     }
 
