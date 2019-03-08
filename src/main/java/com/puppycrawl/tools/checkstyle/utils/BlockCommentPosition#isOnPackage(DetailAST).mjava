@@ -5,6 +5,7 @@
      */
     public static boolean isOnPackage(DetailAST blockComment) {
         final DetailAST nextSibling = blockComment.getNextSibling();
-        return nextSibling != null && nextSibling.getType() == TokenTypes.PACKAGE_DEF;
+        return isOnTokenWithAnnotation(blockComment, TokenTypes.PACKAGE_DEF)
+                || nextSibling != null && nextSibling.getType() == TokenTypes.PACKAGE_DEF;
     }
 
