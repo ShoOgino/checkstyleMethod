@@ -3,9 +3,9 @@
             Foo foo = new Foo() {
                 /** test **/
                 private final long IGNORE = 666l + 666L; //warn
-                
+
                 private String notWarn = "666l"; //ok
-                
+
                 private long foo()
                 {
                     processUpperEll(66l); //warn
@@ -15,7 +15,7 @@
 
                     return 666l + 666L; //warn
                 }
-                
+
                 private void processUpperEll(long aLong) {
                     long bad = (4+5*7^66l/7+890) //warn
                             & (88l + 78 * 4); //warn
@@ -25,7 +25,7 @@
                         66L, //ok
                     };
                 }
-                
+
                 private void processUpperEll (String s, long aLong) {}
             };
         }
