@@ -2,11 +2,7 @@
     public void testInner() throws Exception {
         final DefaultConfiguration checkConfig =
             createModuleConfig(JavadocTypeCheck.class);
-        final String[] expected = {
-            "14: " + getCheckMessage(MSG_JAVADOC_MISSING),
-            "21: " + getCheckMessage(MSG_JAVADOC_MISSING),
-            "27: " + getCheckMessage(MSG_JAVADOC_MISSING),
-        };
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputJavadocTypeInner.java"), expected);
     }
 

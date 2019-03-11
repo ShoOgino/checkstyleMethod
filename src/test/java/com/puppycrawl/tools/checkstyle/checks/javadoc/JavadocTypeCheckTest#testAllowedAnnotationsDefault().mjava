@@ -3,10 +3,7 @@
         final DefaultConfiguration checkConfig =
             createModuleConfig(JavadocTypeCheck.class);
 
-        final String[] expected = {
-            "6: " + getCheckMessage(MSG_JAVADOC_MISSING),
-            "10: " + getCheckMessage(MSG_JAVADOC_MISSING),
-        };
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig,
             getNonCompilablePath("InputJavadocTypeAllowedAnnotations.java"),
             expected);

@@ -26,7 +26,11 @@
         treewalkerConfig.addChild(createModuleConfig(ParameterNumberCheck.class));
         treewalkerConfig.addChild(createModuleConfig(IllegalCatchCheck.class));
         treewalkerConfig.addChild(uncommentedMainCheckConfig);
-        treewalkerConfig.addChild(createModuleConfig(JavadocTypeCheck.class));
+
+        final DefaultConfiguration missingJavadocConfig =
+                createModuleConfig(MissingJavadocTypeCheck.class);
+        missingJavadocConfig.addAttribute("scope", "private");
+        treewalkerConfig.addChild(missingJavadocConfig);
 
         final DefaultConfiguration checkerConfig =
                 createRootConfig(treewalkerConfig);

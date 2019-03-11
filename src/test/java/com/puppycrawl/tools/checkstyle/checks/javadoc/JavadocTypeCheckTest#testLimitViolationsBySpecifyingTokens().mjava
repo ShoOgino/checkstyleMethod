@@ -3,9 +3,7 @@
         final DefaultConfiguration checkConfig =
             createModuleConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("tokens", "INTERFACE_DEF");
-        final String[] expected = {
-            "4: " + getCheckMessage(MSG_JAVADOC_MISSING),
-        };
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig,
                getPath("InputJavadocTypeNoJavadocOnInterface.java"),
                expected);

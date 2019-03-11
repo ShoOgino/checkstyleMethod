@@ -4,10 +4,7 @@
             final FileContents contents = getFileContents();
             final int lineNo = ast.getLineNo();
             final TextBlock textBlock = contents.getJavadocBefore(lineNo);
-            if (textBlock == null) {
-                log(lineNo, MSG_JAVADOC_MISSING);
-            }
-            else {
+            if (textBlock != null) {
                 final List<JavadocTag> tags = getJavadocTags(textBlock);
                 if (ScopeUtil.isOuterMostType(ast)) {
                     // don't check author/version for inner classes
