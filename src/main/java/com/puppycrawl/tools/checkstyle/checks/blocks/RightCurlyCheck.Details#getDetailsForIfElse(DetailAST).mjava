@@ -4,7 +4,7 @@
          * @return object containing all details to make a validation
          */
         private static Details getDetailsForIfElse(DetailAST ast) {
-            boolean shouldCheckLastRcurly = false;
+            final boolean shouldCheckLastRcurly;
             final DetailAST lcurly;
             DetailAST nextToken;
             final int tokenType = ast.getType();
@@ -16,6 +16,7 @@
                     lcurly = ast.getLastChild();
                 }
                 else {
+                    shouldCheckLastRcurly = false;
                     lcurly = nextToken.getPreviousSibling();
                 }
             }

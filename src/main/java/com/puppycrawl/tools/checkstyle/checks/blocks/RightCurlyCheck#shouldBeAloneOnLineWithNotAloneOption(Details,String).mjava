@@ -1,0 +1,13 @@
+    /**
+     * Whether right curly should be alone on line when ALONE_OR_SINGLELINE or SAME option is used.
+     * @param details details for validation.
+     * @param targetSrcLine A string with contents of rcurly's line
+     * @return true, if right curly should be alone on line
+     *         when ALONE_OR_SINGLELINE or SAME option is used.
+     */
+    private static boolean shouldBeAloneOnLineWithNotAloneOption(Details details,
+                                                                 String targetSrcLine) {
+        return shouldBeAloneOnLineWithAloneOption(details, targetSrcLine)
+                && !isSingleLineBlock(details);
+    }
+
