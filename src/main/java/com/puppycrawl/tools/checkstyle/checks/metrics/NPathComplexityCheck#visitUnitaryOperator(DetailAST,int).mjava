@@ -6,7 +6,7 @@
      */
     private void visitUnitaryOperator(DetailAST ast, int basicBranchingFactor) {
         final boolean isAfter = processingTokenEnd.isAfter(ast);
-        isAfterValues.push(isAfter);
+        afterValues.push(isAfter);
         if (!isAfter) {
             processingTokenEnd.setToken(getLastToken(ast));
             final int expressionValue = basicBranchingFactor + countConditionalOperators(ast);
