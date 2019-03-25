@@ -1,7 +1,7 @@
     @Test
     public void testUnexpectedChar() throws Exception {
-        // Encoding problems can occur in Windows
-        Assume.assumeFalse("Problems with encoding may occur", IS_WINDOWS);
+        // Encoding problems will occur if default encoding is not UTF-8
+        Assume.assumeTrue("Problems with encoding may occur", IS_UTF8);
 
         final DefaultConfiguration checkConfig =
             createModuleConfig(MemberNameCheck.class);
