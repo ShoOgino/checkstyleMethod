@@ -6,6 +6,7 @@
     private boolean isCheckedMethod(DetailAST ast) {
         final String methodName =
             ast.findFirstToken(TokenTypes.IDENT).getText();
-        return !ignoredMethodNames.contains(methodName);
+        return isVerifiable(ast) && !ignoredMethodNames.contains(methodName)
+                && !AnnotationUtil.containsAnnotation(ast, "Override");
     }
 

@@ -5,9 +5,7 @@
     private void visitParameterDef(DetailAST parameterDef) {
         final DetailAST grandParentAST = parameterDef.getParent().getParent();
 
-        if (grandParentAST.getType() == TokenTypes.METHOD_DEF
-            && isCheckedMethod(grandParentAST)
-            && isVerifiable(grandParentAST)) {
+        if (grandParentAST.getType() == TokenTypes.METHOD_DEF && isCheckedMethod(grandParentAST)) {
             checkClassName(parameterDef);
         }
     }
