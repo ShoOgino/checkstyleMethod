@@ -8,14 +8,14 @@
         // [ LITERAL_ELSE (with the elseStatement as a child) ]
 
         // don't bother if this is not if then else
-        final AST elseLiteral =
+        final DetailAST elseLiteral =
             ast.findFirstToken(TokenTypes.LITERAL_ELSE);
         if (elseLiteral != null) {
-            final AST elseStatement = elseLiteral.getFirstChild();
+            final DetailAST elseStatement = elseLiteral.getFirstChild();
 
             // skip '(' and ')'
-            final AST condition = ast.getFirstChild().getNextSibling();
-            final AST thenStatement = condition.getNextSibling().getNextSibling();
+            final DetailAST condition = ast.getFirstChild().getNextSibling();
+            final DetailAST thenStatement = condition.getNextSibling().getNextSibling();
 
             if (canReturnOnlyBooleanLiteral(thenStatement)
                 && canReturnOnlyBooleanLiteral(elseStatement)) {

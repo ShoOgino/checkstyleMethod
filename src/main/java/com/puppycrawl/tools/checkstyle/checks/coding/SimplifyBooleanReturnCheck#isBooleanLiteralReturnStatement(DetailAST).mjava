@@ -10,14 +10,14 @@
      * @param ast the syntax tree to check
      * @return if ast is a return statement with a boolean literal.
      */
-    private static boolean isBooleanLiteralReturnStatement(AST ast) {
+    private static boolean isBooleanLiteralReturnStatement(DetailAST ast) {
         boolean booleanReturnStatement = false;
 
         if (ast != null && ast.getType() == TokenTypes.LITERAL_RETURN) {
-            final AST expr = ast.getFirstChild();
+            final DetailAST expr = ast.getFirstChild();
 
             if (expr.getType() != TokenTypes.SEMI) {
-                final AST value = expr.getFirstChild();
+                final DetailAST value = expr.getFirstChild();
                 booleanReturnStatement = isBooleanLiteralType(value.getType());
             }
         }

@@ -6,8 +6,8 @@
      */
     private static boolean isHashCodeMethod(DetailAST ast) {
         final DetailAST modifiers = ast.getFirstChild();
-        final AST type = ast.findFirstToken(TokenTypes.TYPE);
-        final AST methodName = ast.findFirstToken(TokenTypes.IDENT);
+        final DetailAST type = ast.findFirstToken(TokenTypes.TYPE);
+        final DetailAST methodName = ast.findFirstToken(TokenTypes.IDENT);
         final DetailAST parameters = ast.findFirstToken(TokenTypes.PARAMETERS);
 
         return type.getFirstChild().getType() == TokenTypes.LITERAL_INT

@@ -5,7 +5,7 @@
      */
     private void postProcessLiteralNew(DetailAST newTokenAst) {
         final DetailAST typeNameAst = newTokenAst.getFirstChild();
-        final AST nameSibling = typeNameAst.getNextSibling();
+        final DetailAST nameSibling = typeNameAst.getNextSibling();
         if (nameSibling.getType() != TokenTypes.ARRAY_DECLARATOR) {
             // ast != "new Boolean[]"
             final FullIdent typeIdent = FullIdent.createFullIdent(typeNameAst);

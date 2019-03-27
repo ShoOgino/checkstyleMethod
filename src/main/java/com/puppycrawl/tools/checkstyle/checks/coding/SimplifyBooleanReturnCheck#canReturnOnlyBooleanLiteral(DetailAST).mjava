@@ -18,10 +18,10 @@
      * @param ast the syntax tree to check
      * @return if ast is a return statement with a boolean literal.
      */
-    private static boolean canReturnOnlyBooleanLiteral(AST ast) {
+    private static boolean canReturnOnlyBooleanLiteral(DetailAST ast) {
         boolean result = true;
         if (!isBooleanLiteralReturnStatement(ast)) {
-            final AST firstStatement = ast.getFirstChild();
+            final DetailAST firstStatement = ast.getFirstChild();
             result = isBooleanLiteralReturnStatement(firstStatement);
         }
         return result;

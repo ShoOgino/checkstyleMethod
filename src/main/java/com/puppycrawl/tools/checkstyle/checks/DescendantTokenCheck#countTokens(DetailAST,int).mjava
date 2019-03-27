@@ -3,7 +3,7 @@
      * @param ast the root token for descendants.
      * @param depth the maximum depth of the counted descendants.
      */
-    private void countTokens(AST ast, int depth) {
+    private void countTokens(DetailAST ast, int depth) {
         if (depth <= maximumDepth) {
             //update count
             if (depth >= minimumDepth) {
@@ -12,7 +12,7 @@
                     counts[type - 1]++;
                 }
             }
-            AST child = ast.getFirstChild();
+            DetailAST child = ast.getFirstChild();
             final int nextDepth = depth + 1;
             while (child != null) {
                 countTokens(child, nextDepth);
