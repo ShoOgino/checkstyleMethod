@@ -2,8 +2,8 @@
                                                     int parentTokenType) {
         final DetailAST ast = getNode(parentTokenType, TokenTypes.MODIFIERS, literal);
         ast.setText(scope);
-        final DetailAST ast2 = getNode(TokenTypes.OBJBLOCK);
-        ast.getParent().getParent().addChild(ast2);
+        final DetailAstImpl ast2 = getNode(TokenTypes.OBJBLOCK);
+        ((AST) ast.getParent().getParent()).addChild(ast2);
         return ast;
     }
 

@@ -1,0 +1,12 @@
+    @Override
+    public DetailAST findFirstToken(int type) {
+        DetailAST returnValue = null;
+        for (DetailAST ast = getFirstChild(); ast != null; ast = ast.getNextSibling()) {
+            if (ast.getType() == type) {
+                returnValue = ast;
+                break;
+            }
+        }
+        return returnValue;
+    }
+

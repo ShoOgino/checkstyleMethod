@@ -5,14 +5,14 @@
      * @return DetailAST with BLOCK_COMMENT type.
      */
     public static DetailAST createBlockCommentNode(Token token) {
-        final DetailAST blockComment = new DetailAST();
+        final DetailAstImpl blockComment = new DetailAstImpl();
         blockComment.initialize(TokenTypes.BLOCK_COMMENT_BEGIN, BLOCK_MULTIPLE_COMMENT_BEGIN);
 
         // column counting begins from 0
         blockComment.setColumnNo(token.getColumn() - 1);
         blockComment.setLineNo(token.getLine());
 
-        final DetailAST blockCommentContent = new DetailAST();
+        final DetailAstImpl blockCommentContent = new DetailAstImpl();
         blockCommentContent.setType(TokenTypes.COMMENT_CONTENT);
 
         // column counting begins from 0
@@ -21,7 +21,7 @@
         blockCommentContent.setLineNo(token.getLine());
         blockCommentContent.setText(token.getText());
 
-        final DetailAST blockCommentClose = new DetailAST();
+        final DetailAstImpl blockCommentClose = new DetailAstImpl();
         blockCommentClose.initialize(TokenTypes.BLOCK_COMMENT_END, BLOCK_MULTIPLE_COMMENT_END);
 
         final Map.Entry<Integer, Integer> linesColumns = countLinesColumns(

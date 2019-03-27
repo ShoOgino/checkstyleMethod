@@ -3,20 +3,5 @@
      * @param ast
      *        DetailAST object.
      */
-    public void addNextSibling(DetailAST ast) {
-        clearBranchTokenTypes();
-        clearChildCountCache(parent);
-        if (ast != null) {
-            //parent is set in setNextSibling
-            final DetailAST nextSibling = getNextSibling();
-
-            if (nextSibling != null) {
-                ast.setNextSibling(nextSibling);
-                nextSibling.previousSibling = ast;
-            }
-
-            ast.previousSibling = this;
-            setNextSibling(ast);
-        }
-    }
+    void addNextSibling(DetailAST ast);
 

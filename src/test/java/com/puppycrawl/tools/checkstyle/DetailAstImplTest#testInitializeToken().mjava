@@ -1,0 +1,17 @@
+    @Test
+    public void testInitializeToken() {
+        final CommonHiddenStreamToken token = new CommonHiddenStreamToken();
+        token.setText("test");
+        token.setType(1);
+        token.setLine(2);
+        token.setColumn(4);
+
+        final DetailAstImpl ast = new DetailAstImpl();
+        ast.initialize(token);
+
+        assertEquals("Invalid text", "test", ast.getText());
+        assertEquals("Invalid type", 1, ast.getType());
+        assertEquals("Invalid line number", 2, ast.getLineNo());
+        assertEquals("Invalid column number", 3, ast.getColumnNo());
+    }
+

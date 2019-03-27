@@ -1,0 +1,26 @@
+    @Test
+    public void testInsertSiblingBetween() throws Exception {
+        final DetailAstImpl root = new DetailAstImpl();
+        final DetailAstImpl firstLevelA = new DetailAstImpl();
+        final DetailAST firstLevelB = new DetailAstImpl();
+        final DetailAST firstLevelC = new DetailAstImpl();
+
+        assertEquals("Invalid child count", 0, root.getChildCount());
+
+        root.setFirstChild(firstLevelA);
+        final Method setParentMethod = getSetParentMethod();
+        setParentMethod.invoke(firstLevelA, root);
+
+        assertEquals("Invalid child count", 1, root.getChildCount());
+
+        firstLevelA.addNextSibling(firstLevelB);
+        setParentMethod.invoke(firstLevelB, root);
+
+        assertEquals("Invalid next sibling", firstLevelB, firstLevelA.getNextSibling());
+
+        firstLevelA.addNextSibling(firstLevelC);
+        setParentMethod.invoke(firstLevelC, root);
+
+        assertEquals("Invalid next sibling", firstLevelC, firstLevelA.getNextSibling());
+    }
+

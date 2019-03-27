@@ -1,0 +1,9 @@
+    @Override
+    public DetailAST getLastChild() {
+        DetailAST ast = getFirstChild();
+        while (ast != null && ast.getNextSibling() != null) {
+            ast = ast.getNextSibling();
+        }
+        return ast;
+    }
+

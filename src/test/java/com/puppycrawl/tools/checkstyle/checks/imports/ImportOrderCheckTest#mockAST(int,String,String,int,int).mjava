@@ -7,7 +7,7 @@
      * @param tokenColumn token position in a file (column)
      * @return AST node for the token
      */
-    private static DetailAST mockAST(final int tokenType, final String tokenText,
+    private static DetailAstImpl mockAST(final int tokenType, final String tokenText,
             final String tokenFileName, final int tokenRow, final int tokenColumn) {
         final CommonHiddenStreamToken tokenImportSemi = new CommonHiddenStreamToken();
         tokenImportSemi.setType(tokenType);
@@ -15,7 +15,7 @@
         tokenImportSemi.setLine(tokenRow);
         tokenImportSemi.setColumn(tokenColumn);
         tokenImportSemi.setFilename(tokenFileName);
-        final DetailAST astSemi = new DetailAST();
+        final DetailAstImpl astSemi = new DetailAstImpl();
         astSemi.initialize(tokenImportSemi);
         return astSemi;
     }

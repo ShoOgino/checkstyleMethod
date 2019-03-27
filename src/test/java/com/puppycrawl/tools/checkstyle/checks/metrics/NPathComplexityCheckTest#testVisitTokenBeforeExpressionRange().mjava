@@ -1,17 +1,17 @@
     @Test
     public void testVisitTokenBeforeExpressionRange() {
         // Create first ast
-        final DetailAST astIf = mockAST(TokenTypes.LITERAL_IF, "if", "mockfile", 2, 2);
-        final DetailAST astIfLeftParen = mockAST(TokenTypes.LPAREN, "(", "mockfile", 3, 3);
+        final DetailAstImpl astIf = mockAST(TokenTypes.LITERAL_IF, "if", "mockfile", 2, 2);
+        final DetailAstImpl astIfLeftParen = mockAST(TokenTypes.LPAREN, "(", "mockfile", 3, 3);
         astIf.addChild(astIfLeftParen);
-        final DetailAST astIfTrue =
+        final DetailAstImpl astIfTrue =
                 mockAST(TokenTypes.LITERAL_TRUE, "true", "mockfile", 3, 3);
         astIf.addChild(astIfTrue);
-        final DetailAST astIfRightParen = mockAST(TokenTypes.RPAREN, ")", "mockfile", 4, 4);
+        final DetailAstImpl astIfRightParen = mockAST(TokenTypes.RPAREN, ")", "mockfile", 4, 4);
         astIf.addChild(astIfRightParen);
         // Create ternary ast
-        final DetailAST astTernary = mockAST(TokenTypes.QUESTION, "?", "mockfile", 1, 1);
-        final DetailAST astTernaryTrue =
+        final DetailAstImpl astTernary = mockAST(TokenTypes.QUESTION, "?", "mockfile", 1, 1);
+        final DetailAstImpl astTernaryTrue =
                 mockAST(TokenTypes.LITERAL_TRUE, "true", "mockfile", 1, 2);
         astTernary.addChild(astTernaryTrue);
 

@@ -1,11 +1,11 @@
     @Test
     public void testIllegalState() {
-        final DetailAST init = new DetailAST();
+        final DetailAstImpl init = new DetailAstImpl();
         init.setType(TokenTypes.STATIC_INIT);
-        final DetailAST objBlock = new DetailAST();
+        final DetailAstImpl objBlock = new DetailAstImpl();
         objBlock.setType(TokenTypes.OBJBLOCK);
         objBlock.addChild(init);
-        final DetailAST interfaceAst = new DetailAST();
+        final DetailAstImpl interfaceAst = new DetailAstImpl();
         interfaceAst.setType(TokenTypes.INTERFACE_DEF);
         interfaceAst.addChild(objBlock);
         final InterfaceMemberImpliedModifierCheck check =

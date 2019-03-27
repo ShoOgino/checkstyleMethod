@@ -5,11 +5,11 @@
                 .getDeclaredMethod("getAnnotationTarget", DetailAST.class);
         getAnnotationTarget.setAccessible(true);
 
-        final DetailAST methodDef = new DetailAST();
+        final DetailAstImpl methodDef = new DetailAstImpl();
         methodDef.setType(TokenTypes.METHOD_DEF);
         methodDef.setText("Method Def");
 
-        final DetailAST parent = new DetailAST();
+        final DetailAstImpl parent = new DetailAstImpl();
         parent.setType(TokenTypes.ASSIGN);
         parent.setText("Parent ast");
         parent.addChild(methodDef);

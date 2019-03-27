@@ -4,7 +4,7 @@
      * @return DetailAST with SINGLE_LINE_COMMENT type
      */
     private static DetailAST createSlCommentNode(Token token) {
-        final DetailAST slComment = new DetailAST();
+        final DetailAstImpl slComment = new DetailAstImpl();
         slComment.setType(TokenTypes.SINGLE_LINE_COMMENT);
         slComment.setText("//");
 
@@ -12,7 +12,7 @@
         slComment.setColumnNo(token.getColumn() - 1);
         slComment.setLineNo(token.getLine());
 
-        final DetailAST slCommentContent = new DetailAST();
+        final DetailAstImpl slCommentContent = new DetailAstImpl();
         slCommentContent.setType(TokenTypes.COMMENT_CONTENT);
 
         // column counting begins from 0

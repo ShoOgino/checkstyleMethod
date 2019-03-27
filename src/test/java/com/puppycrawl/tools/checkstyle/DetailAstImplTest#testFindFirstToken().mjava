@@ -1,0 +1,20 @@
+    @Test
+    public void testFindFirstToken() {
+        final DetailAstImpl root = new DetailAstImpl();
+        final DetailAstImpl firstChild = new DetailAstImpl();
+        firstChild.setType(TokenTypes.IDENT);
+        final DetailAstImpl secondChild = new DetailAstImpl();
+        secondChild.setType(TokenTypes.EXPR);
+        final DetailAstImpl thirdChild = new DetailAstImpl();
+        thirdChild.setType(TokenTypes.IDENT);
+
+        root.addChild(firstChild);
+        root.addChild(secondChild);
+        root.addChild(thirdChild);
+
+        assertNull("Invalid result", firstChild.findFirstToken(TokenTypes.IDENT));
+        assertEquals("Invalid result", firstChild, root.findFirstToken(TokenTypes.IDENT));
+        assertEquals("Invalid result", secondChild, root.findFirstToken(TokenTypes.EXPR));
+        assertNull("Invalid result", root.findFirstToken(0));
+    }
+

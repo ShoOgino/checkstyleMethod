@@ -1,0 +1,12 @@
+    @Override
+    public void addChild(AST ast) {
+        clearBranchTokenTypes();
+        clearChildCountCache(this);
+        if (ast != null) {
+            final DetailAstImpl astImpl = (DetailAstImpl) ast;
+            astImpl.setParent(this);
+            astImpl.previousSibling = (DetailAstImpl) getLastChild();
+        }
+        super.addChild(ast);
+    }
+

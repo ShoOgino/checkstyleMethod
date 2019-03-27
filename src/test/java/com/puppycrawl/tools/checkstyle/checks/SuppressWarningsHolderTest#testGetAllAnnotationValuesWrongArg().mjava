@@ -5,16 +5,16 @@
                 .getDeclaredMethod("getAllAnnotationValues", DetailAST.class);
         getAllAnnotationValues.setAccessible(true);
 
-        final DetailAST methodDef = new DetailAST();
+        final DetailAstImpl methodDef = new DetailAstImpl();
         methodDef.setType(TokenTypes.METHOD_DEF);
         methodDef.setText("Method Def");
         methodDef.setLineNo(0);
         methodDef.setColumnNo(0);
 
-        final DetailAST lparen = new DetailAST();
+        final DetailAstImpl lparen = new DetailAstImpl();
         lparen.setType(TokenTypes.LPAREN);
 
-        final DetailAST parent = new DetailAST();
+        final DetailAstImpl parent = new DetailAstImpl();
         parent.addChild(lparen);
         parent.addChild(methodDef);
 

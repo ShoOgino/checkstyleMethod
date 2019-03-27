@@ -1,0 +1,17 @@
+    @Test
+    public void testInitialize() {
+        final DetailAstImpl ast = new DetailAstImpl();
+        ast.setText("test");
+        ast.setType(1);
+        ast.setLineNo(2);
+        ast.setColumnNo(3);
+
+        final DetailAstImpl copy = new DetailAstImpl();
+        copy.initialize(ast);
+
+        assertEquals("Invalid text", "test", copy.getText());
+        assertEquals("Invalid type", 1, copy.getType());
+        assertEquals("Invalid line number", 2, copy.getLineNo());
+        assertEquals("Invalid column number", 3, copy.getColumnNo());
+    }
+

@@ -1,0 +1,23 @@
+    @Test
+    public void testAddPreviousSibling() {
+        final DetailAST previousSibling = new DetailAstImpl();
+        final DetailAstImpl instance = new DetailAstImpl();
+        final DetailAstImpl parent = new DetailAstImpl();
+
+        parent.setFirstChild(instance);
+
+        instance.addPreviousSibling(previousSibling);
+
+        assertEquals("unexpected result", previousSibling, instance.getPreviousSibling());
+        assertEquals("unexpected result", previousSibling, parent.getFirstChild());
+
+        final DetailAST newPreviousSibling = new DetailAstImpl();
+
+        instance.addPreviousSibling(newPreviousSibling);
+
+        assertEquals("unexpected result", newPreviousSibling, instance.getPreviousSibling());
+        assertEquals("unexpected result", previousSibling, newPreviousSibling.getPreviousSibling());
+        assertEquals("unexpected result", newPreviousSibling, previousSibling.getNextSibling());
+        assertEquals("unexpected result", previousSibling, parent.getFirstChild());
+    }
+

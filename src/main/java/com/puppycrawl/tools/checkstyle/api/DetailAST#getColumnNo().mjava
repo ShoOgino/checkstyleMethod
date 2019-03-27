@@ -2,21 +2,5 @@
      * Gets column number.
      * @return the column number
      */
-    public int getColumnNo() {
-        int resultNo = -1;
-
-        if (columnNo == NOT_INITIALIZED) {
-            // an inner AST that has been initialized
-            // with initialize(String text)
-            resultNo = findColumnNo(getFirstChild());
-
-            if (resultNo == -1) {
-                resultNo = findColumnNo(getNextSibling());
-            }
-        }
-        if (resultNo == -1) {
-            resultNo = columnNo;
-        }
-        return resultNo;
-    }
+    int getColumnNo();
 

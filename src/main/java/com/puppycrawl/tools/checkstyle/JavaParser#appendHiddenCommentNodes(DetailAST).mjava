@@ -13,7 +13,8 @@
         while (curNode != null) {
             lastNode = curNode;
 
-            CommonHiddenStreamToken tokenBefore = curNode.getHiddenBefore();
+            CommonHiddenStreamToken tokenBefore = ((CommonASTWithHiddenTokens) curNode)
+                    .getHiddenBefore();
             DetailAST currentSibling = curNode;
             while (tokenBefore != null) {
                 final DetailAST newCommentNode =
@@ -37,7 +38,8 @@
             curNode = toVisit;
         }
         if (lastNode != null) {
-            CommonHiddenStreamToken tokenAfter = lastNode.getHiddenAfter();
+            CommonHiddenStreamToken tokenAfter = ((CommonASTWithHiddenTokens) lastNode)
+                    .getHiddenAfter();
             DetailAST currentSibling = lastNode;
             while (tokenAfter != null) {
                 final DetailAST newCommentNode =

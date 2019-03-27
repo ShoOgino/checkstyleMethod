@@ -1,0 +1,10 @@
+    @Override
+    public void setFirstChild(AST ast) {
+        clearBranchTokenTypes();
+        clearChildCountCache(this);
+        super.setFirstChild(ast);
+        if (ast != null) {
+            ((DetailAstImpl) ast).setParent(this);
+        }
+    }
+

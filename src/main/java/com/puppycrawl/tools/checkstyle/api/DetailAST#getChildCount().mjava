@@ -3,17 +3,5 @@
      * does not recurse down the tree.
      * @return the number of child nodes
      */
-    public int getChildCount() {
-        // lazy init
-        if (childCount == NOT_INITIALIZED) {
-            childCount = 0;
-            AST child = getFirstChild();
-
-            while (child != null) {
-                childCount += 1;
-                child = child.getNextSibling();
-            }
-        }
-        return childCount;
-    }
+    int getChildCount();
 

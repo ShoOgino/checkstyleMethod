@@ -11,11 +11,12 @@
             JavadocTagInfo.VALUE,
         };
         for (JavadocTagInfo tagInfo : tags) {
-            final DetailAST astParent = new DetailAST();
+            final DetailAstImpl astParent = new DetailAstImpl();
             astParent.setType(TokenTypes.LITERAL_CATCH);
 
-            final DetailAST ast = new DetailAST();
-            final Method setParent = ast.getClass().getDeclaredMethod("setParent", DetailAST.class);
+            final DetailAST ast = new DetailAstImpl();
+            final Method setParent = ast.getClass().getDeclaredMethod("setParent",
+                    DetailAstImpl.class);
             setParent.setAccessible(true);
             setParent.invoke(ast, astParent);
 

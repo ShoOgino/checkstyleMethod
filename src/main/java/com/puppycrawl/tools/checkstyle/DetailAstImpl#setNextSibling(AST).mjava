@@ -1,0 +1,13 @@
+    @Override
+    public void setNextSibling(AST ast) {
+        clearBranchTokenTypes();
+        clearChildCountCache(parent);
+        super.setNextSibling(ast);
+        if (ast != null && parent != null) {
+            ((DetailAstImpl) ast).setParent(parent);
+        }
+        if (ast != null) {
+            ((DetailAstImpl) ast).previousSibling = this;
+        }
+    }
+

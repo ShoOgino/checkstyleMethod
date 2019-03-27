@@ -8,7 +8,7 @@
             for (DetailAST member : instanceMembers) {
                 final DetailAST mods = member.getParent().findFirstToken(TokenTypes.MODIFIERS);
                 final boolean finalMod = mods.findFirstToken(TokenTypes.FINAL) != null;
-                if (finalMod && member.equals(instanceMember)) {
+                if (finalMod && isAstSimilar(member, instanceMember)) {
                     result = true;
                     break;
                 }

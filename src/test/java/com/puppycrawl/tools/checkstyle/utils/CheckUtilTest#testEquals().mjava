@@ -1,13 +1,13 @@
     @Test
     public void testEquals() {
-        final DetailAST litStatic = new DetailAST();
+        final DetailAstImpl litStatic = new DetailAstImpl();
         litStatic.setType(TokenTypes.LITERAL_STATIC);
 
-        final DetailAST modifiers = new DetailAST();
+        final DetailAstImpl modifiers = new DetailAstImpl();
         modifiers.setType(TokenTypes.MODIFIERS);
         modifiers.addChild(litStatic);
 
-        final DetailAST metDef = new DetailAST();
+        final DetailAstImpl metDef = new DetailAstImpl();
         metDef.setType(TokenTypes.METHOD_DEF);
         metDef.addChild(modifiers);
 
@@ -16,19 +16,19 @@
 
         metDef.removeChildren();
 
-        final DetailAST metName = new DetailAST();
+        final DetailAstImpl metName = new DetailAstImpl();
         metName.setType(TokenTypes.IDENT);
         metName.setText("equals");
         metDef.addChild(metName);
 
-        final DetailAST modifiers2 = new DetailAST();
+        final DetailAstImpl modifiers2 = new DetailAstImpl();
         modifiers2.setType(TokenTypes.MODIFIERS);
         metDef.addChild(modifiers2);
 
-        final DetailAST parameter1 = new DetailAST();
-        final DetailAST parameter2 = new DetailAST();
+        final DetailAstImpl parameter1 = new DetailAstImpl();
+        final DetailAstImpl parameter2 = new DetailAstImpl();
 
-        final DetailAST parameters = new DetailAST();
+        final DetailAstImpl parameters = new DetailAstImpl();
         parameters.setType(TokenTypes.PARAMETERS);
 
         parameters.addChild(parameter2);
