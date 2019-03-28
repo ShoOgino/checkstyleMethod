@@ -15,7 +15,7 @@
 
         boolean returnedVariable = false;
         for (DetailAST returnToken : returnsInsideBlock) {
-            returnedVariable = returnToken.findAll(ident).hasMoreNodes();
+            returnedVariable = isAstInside(returnToken, ident);
             if (returnedVariable) {
                 break;
             }
