@@ -5,7 +5,7 @@
      */
     public final void setExcludedPackages(String... excludedPackages) {
         final List<String> invalidIdentifiers = Arrays.stream(excludedPackages)
-            .filter(packageName -> !CommonUtil.isName(packageName))
+            .filter(excludedPackageName -> !CommonUtil.isName(excludedPackageName))
             .collect(Collectors.toList());
         if (!invalidIdentifiers.isEmpty()) {
             throw new IllegalArgumentException(

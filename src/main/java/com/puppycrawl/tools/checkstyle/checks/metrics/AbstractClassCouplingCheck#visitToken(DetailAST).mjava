@@ -5,7 +5,7 @@
                 visitPackageDef(ast);
                 break;
             case TokenTypes.IMPORT:
-                fileContext.registerImport(ast);
+                registerImport(ast);
                 break;
             case TokenTypes.CLASS_DEF:
             case TokenTypes.INTERFACE_DEF:
@@ -16,16 +16,16 @@
             case TokenTypes.EXTENDS_CLAUSE:
             case TokenTypes.IMPLEMENTS_CLAUSE:
             case TokenTypes.TYPE:
-                fileContext.visitType(ast);
+                visitType(ast);
                 break;
             case TokenTypes.LITERAL_NEW:
-                fileContext.visitLiteralNew(ast);
+                visitLiteralNew(ast);
                 break;
             case TokenTypes.LITERAL_THROWS:
-                fileContext.visitLiteralThrows(ast);
+                visitLiteralThrows(ast);
                 break;
             case TokenTypes.ANNOTATION:
-                fileContext.visitAnnotationType(ast);
+                visitAnnotationType(ast);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown type: " + ast);

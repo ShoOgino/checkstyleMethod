@@ -6,15 +6,16 @@
         private boolean isFromExcludedPackage(String candidateClassName) {
             String classNameWithPackage = candidateClassName;
             if (!candidateClassName.contains(DOT)) {
-                classNameWithPackage = parentContext.getClassNameWithPackage(candidateClassName)
+                classNameWithPackage = getClassNameWithPackage(candidateClassName)
                     .orElse("");
             }
             boolean isFromExcludedPackage = false;
             if (classNameWithPackage.contains(DOT)) {
                 final int lastDotIndex = classNameWithPackage.lastIndexOf(DOT);
-                final String packageName = classNameWithPackage.substring(0, lastDotIndex);
-                isFromExcludedPackage = packageName.startsWith("java.lang")
-                    || excludedPackages.contains(packageName);
+                final String candidatePackageName =
+                    classNameWithPackage.substring(0, lastDotIndex);
+                isFromExcludedPackage = candidatePackageName.startsWith("java.lang")
+                    || excludedPackages.contains(candidatePackageName);
             }
             return isFromExcludedPackage;
         }

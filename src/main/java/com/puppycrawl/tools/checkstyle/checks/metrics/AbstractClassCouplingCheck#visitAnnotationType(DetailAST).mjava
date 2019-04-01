@@ -1,0 +1,10 @@
+    /**
+     * Visit ANNOTATION literal and get its type to referenced classes of context.
+     * @param annotationAST Annotation ast.
+     */
+    private void visitAnnotationType(DetailAST annotationAST) {
+        final DetailAST children = annotationAST.getFirstChild();
+        final DetailAST type = children.getNextSibling();
+        classesContexts.peek().addReferencedClassName(type.getText());
+    }
+
