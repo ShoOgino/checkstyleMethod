@@ -2,16 +2,25 @@
     public void testAllStyleRules() throws Exception {
         for (Path path : XdocUtil.getXdocsStyleFilePaths(XdocUtil.getXdocsFilePaths())) {
             final String fileName = path.getFileName().toString();
+            final String styleName = fileName.substring(0, fileName.lastIndexOf('_'));
             final String input = new String(Files.readAllBytes(path), UTF_8);
             final Document document = XmlUtil.getRawXml(fileName, input, input);
             final NodeList sources = document.getElementsByTagName("tr");
-            Set<String> styleChecks = null;
 
-            if (path.toFile().getName().contains("google")) {
-                styleChecks = new HashSet<>(GOOGLE_MODULES);
-            }
-            else if (path.toFile().getName().contains("sun")) {
-                styleChecks = new HashSet<>();
+            final Set<String> styleChecks;
+            switch (styleName) {
+                case "google":
+                    styleChecks = new HashSet<>(GOOGLE_MODULES);
+                    break;
+
+                case "sun":
+                    styleChecks = new HashSet<>(SUN_MODULES);
+                    styleChecks.removeAll(IGNORED_SUN_MODULES);
+                    break;
+
+                default:
+                    Assert.fail("Missing modules list for style file '" + fileName + "'");
+                    styleChecks = null;
             }
 
             String lastRuleName = null;
@@ -36,7 +45,7 @@
                 }
 
                 validateStyleModules(XmlUtil.findChildElementsByTag(columns.get(2), "a"),
-                        XmlUtil.findChildElementsByTag(columns.get(3), "a"), styleChecks, fileName,
+                        XmlUtil.findChildElementsByTag(columns.get(3), "a"), styleChecks, styleName,
                         ruleName);
 
                 lastRuleName = ruleName;
