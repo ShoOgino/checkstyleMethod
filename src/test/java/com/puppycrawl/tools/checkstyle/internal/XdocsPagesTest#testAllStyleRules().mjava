@@ -15,6 +15,7 @@
             }
 
             String lastRuleName = null;
+            String[] lastRuleNumberParts = null;
 
             for (int position = 0; position < sources.getLength(); position++) {
                 final Node row = sources.item(position);
@@ -26,14 +27,8 @@
                 }
 
                 final String ruleName = columns.get(1).getTextContent().trim();
-
-                if (lastRuleName != null) {
-                    Assert.assertTrue(
-                            fileName + " rule '" + ruleName + "' is out of order compared to '"
-                                    + lastRuleName + "'",
-                            ruleName.toLowerCase(Locale.ENGLISH).compareTo(
-                                    lastRuleName.toLowerCase(Locale.ENGLISH)) >= 0);
-                }
+                lastRuleNumberParts = validateRuleNameOrder(
+                        fileName, lastRuleName, lastRuleNumberParts, ruleName);
 
                 if (!"--".equals(ruleName)) {
                     validateStyleAnchors(XmlUtil.findChildElementsByTag(columns.get(0), "a"),

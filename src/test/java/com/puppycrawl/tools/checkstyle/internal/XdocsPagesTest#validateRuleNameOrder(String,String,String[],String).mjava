@@ -1,0 +1,64 @@
+    private static String[] validateRuleNameOrder(String fileName, String lastRuleName,
+                                                  String[] lastRuleNumberParts, String ruleName) {
+        final String[] ruleNumberParts = ruleName.split(" ", 2)[0].split("\\.");
+
+        if (lastRuleName != null) {
+            final int ruleNumberPartsAmount = ruleNumberParts.length;
+            final int lastRuleNumberPartsAmount = lastRuleNumberParts.length;
+            final String outOfOrderReason = fileName + " rule '" + ruleName
+                    + "' is out of order compared to '" + lastRuleName + "'";
+            boolean lastRuleNumberPartWasEqual = false;
+            int partIndex;
+            for (partIndex = 0; partIndex < ruleNumberPartsAmount; partIndex++) {
+                if (lastRuleNumberPartsAmount <= partIndex) {
+                    // equal up to here and last rule has less parts,
+                    // thus order is correct, stop comparing
+                    break;
+                }
+
+                final String ruleNumberPart = ruleNumberParts[partIndex];
+                final String lastRuleNumberPart = lastRuleNumberParts[partIndex];
+                final boolean ruleNumberPartsAreNumeric = IntStream.concat(
+                        ruleNumberPart.chars(),
+                        lastRuleNumberPart.chars()
+                ).allMatch(Character::isDigit);
+
+                if (ruleNumberPartsAreNumeric) {
+                    final int numericRuleNumberPart = parseInt(ruleNumberPart);
+                    final int numericLastRuleNumberPart = parseInt(lastRuleNumberPart);
+                    Assert.assertThat(
+                            outOfOrderReason,
+                            numericRuleNumberPart < numericLastRuleNumberPart,
+                            describedAs("'%0' should not be less than '%1'",
+                                    is(false),
+                                    numericRuleNumberPart, numericLastRuleNumberPart));
+                }
+                else {
+                    Assert.assertThat(
+                            outOfOrderReason,
+                            ruleNumberPart.compareToIgnoreCase(lastRuleNumberPart) < 0,
+                            describedAs("'%0' should not be less than '%1'",
+                                    is(false),
+                                    ruleNumberPart, lastRuleNumberPart));
+                }
+                lastRuleNumberPartWasEqual = ruleNumberPart.equalsIgnoreCase(lastRuleNumberPart);
+                if (!lastRuleNumberPartWasEqual) {
+                    // number part is not equal but properly ordered,
+                    // thus order is correct, stop comparing
+                    break;
+                }
+            }
+            if (ruleNumberPartsAmount == partIndex && lastRuleNumberPartWasEqual) {
+                if (lastRuleNumberPartsAmount == partIndex) {
+                    Assert.fail(fileName + " rule '" + ruleName + "' and rule '"
+                            + lastRuleName + "' have the same rule number");
+                }
+                else {
+                    Assert.fail(outOfOrderReason);
+                }
+            }
+        }
+
+        return ruleNumberParts;
+    }
+
