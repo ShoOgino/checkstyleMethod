@@ -1,0 +1,10 @@
+    public DetailClass visit(DetailClass ast) {
+        final DetailClass openingBrace = ast.find(Tokens.ZERO);
+        DetailClass closingBrace = null;
+
+        if (openingBrace != null) {
+            closingBrace = openingBrace.find(Tokens.ONE);
+        }
+        return closingBrace;
+    }
+
