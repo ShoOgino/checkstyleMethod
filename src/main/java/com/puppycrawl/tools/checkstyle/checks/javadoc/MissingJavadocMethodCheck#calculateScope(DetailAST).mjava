@@ -1,0 +1,21 @@
+    /**
+     * Returns the scope for the method/constructor at the specified AST. If
+     * the method is in an interface or annotation block, the scope is assumed
+     * to be public.
+     *
+     * @param ast the token of the method/constructor
+     * @return the scope of the method/constructor
+     */
+    private static Scope calculateScope(final DetailAST ast) {
+        final Scope scope;
+
+        if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
+            scope = Scope.PUBLIC;
+        }
+        else {
+            final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
+            scope = ScopeUtil.getScopeFromMods(mods);
+        }
+        return scope;
+    }
+

@@ -5,12 +5,7 @@
             final FileContents contents = getFileContents();
             final TextBlock textBlock = contents.getJavadocBefore(ast.getLineNo());
 
-            if (textBlock == null) {
-                if (!isMissingJavadocAllowed(ast)) {
-                    log(ast, MSG_JAVADOC_MISSING);
-                }
-            }
-            else {
+            if (textBlock != null) {
                 checkComment(ast, textBlock);
             }
         }

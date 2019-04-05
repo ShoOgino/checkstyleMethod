@@ -1,0 +1,17 @@
+    /**
+     * Whether we should check this node.
+     *
+     * @param ast a given node.
+     * @param nodeScope the scope of the node.
+     * @return whether we should check a given node.
+     */
+    private boolean shouldCheck(final DetailAST ast, final Scope nodeScope) {
+        final Scope surroundingScope = ScopeUtil.getSurroundingScope(ast);
+
+        return (excludeScope == null
+                || nodeScope != excludeScope
+                && surroundingScope != excludeScope)
+            && nodeScope.isIn(scope)
+            && surroundingScope.isIn(scope);
+    }
+

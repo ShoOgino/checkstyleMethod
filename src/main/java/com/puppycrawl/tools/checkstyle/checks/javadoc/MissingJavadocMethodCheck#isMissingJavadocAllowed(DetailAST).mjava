@@ -1,0 +1,12 @@
+    /**
+     * Checks if a missing Javadoc is allowed by the check's configuration.
+     * @param ast the tree node for the method or constructor.
+     * @return True if this method or constructor doesn't need Javadoc.
+     */
+    private boolean isMissingJavadocAllowed(final DetailAST ast) {
+        return allowMissingPropertyJavadoc
+                && (CheckUtil.isSetterMethod(ast) || CheckUtil.isGetterMethod(ast))
+            || matchesSkipRegex(ast)
+            || isContentsAllowMissingJavadoc(ast);
+    }
+

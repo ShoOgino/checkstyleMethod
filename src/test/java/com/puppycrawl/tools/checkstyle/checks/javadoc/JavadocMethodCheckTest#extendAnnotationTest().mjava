@@ -3,9 +3,8 @@
         final DefaultConfiguration config = createModuleConfig(JavadocMethodCheck.class);
         config.addAttribute("allowedAnnotations", "MyAnnotation, Override");
         config.addAttribute("minLineCount", "2");
-        final String[] expected = {
-            "44:1: " + getCheckMessage(MSG_JAVADOC_MISSING),
-        };
+        config.addAttribute("ignoreMethodNamesRegex", "regexThatDoesNotMatch");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(config, getPath("InputJavadocMethodExtendAnnotation.java"), expected);
     }
 
