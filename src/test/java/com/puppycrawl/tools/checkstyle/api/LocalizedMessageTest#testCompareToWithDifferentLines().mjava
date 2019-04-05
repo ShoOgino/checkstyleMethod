@@ -1,0 +1,11 @@
+    @Test
+    public void testCompareToWithDifferentLines() {
+        final LocalizedMessage message1 = createSampleLocalizedMessageWithLine(1);
+        final LocalizedMessage message1a = createSampleLocalizedMessageWithLine(1);
+        final LocalizedMessage message2 = createSampleLocalizedMessageWithLine(2);
+
+        assertTrue("Invalid comparing result", message1.compareTo(message2) < 0);
+        assertTrue("Invalid comparing result", message2.compareTo(message1) > 0);
+        assertEquals("Invalid comparing result", 0, message1.compareTo(message1a));
+    }
+

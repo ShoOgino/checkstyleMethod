@@ -2,7 +2,7 @@
     public void testReportComment() {
         final FileContents fileContents = new FileContents(
                 new FileText(new File("filename"), Collections.singletonList("  //   ")));
-        fileContents.reportCComment(1, 2, 1, 2);
+        fileContents.reportBlockComment("type", 1, 2, 1, 2);
         final Map<Integer, List<TextBlock>> comments = fileContents.getCComments();
 
         assertEquals("Invalid comment",

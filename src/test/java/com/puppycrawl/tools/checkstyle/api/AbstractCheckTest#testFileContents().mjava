@@ -1,0 +1,26 @@
+    @Test
+    public void testFileContents() {
+        final AbstractCheck check = new AbstractCheck() {
+            @Override
+            public int[] getDefaultTokens() {
+                return CommonUtil.EMPTY_INT_ARRAY;
+            }
+
+            @Override
+            public int[] getAcceptableTokens() {
+                return getDefaultTokens();
+            }
+
+            @Override
+            public int[] getRequiredTokens() {
+                return getDefaultTokens();
+            }
+        };
+        final String[] lines = {"test"};
+        final FileContents fileContents = new FileContents("fileName", lines);
+        check.setFileContents(fileContents);
+
+        assertSame("Invalid file contents", fileContents, check.getFileContents());
+        assertArrayEquals("Invalid lines", lines, check.getLines());
+    }
+

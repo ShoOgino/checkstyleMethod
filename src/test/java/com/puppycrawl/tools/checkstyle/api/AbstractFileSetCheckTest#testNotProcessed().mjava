@@ -1,0 +1,13 @@
+    @Test
+    public void testNotProcessed() throws Exception {
+        final ExceptionFileSetCheck check = new ExceptionFileSetCheck();
+        check.setFileExtensions("java");
+        final File firstFile = new File("inputAbstractFileSetCheck.tmp");
+
+        check.process(firstFile, new FileText(firstFile, Collections.emptyList()));
+
+        final SortedSet<LocalizedMessage> internalMessages =
+                check.getMessages();
+        assertTrue("Internal message should be empty", internalMessages.isEmpty());
+    }
+

@@ -1,0 +1,10 @@
+    @Test
+    public void test() {
+        final AuditEvent event = new AuditEvent(getClass());
+
+        assertNull("invalid file name", event.getFileName());
+        assertNull("invalid localized message", event.getLocalizedMessage());
+        assertEquals("invalid source", getClass(), event.getSource());
+        assertEquals("invalid severity", SeverityLevel.INFO, event.getSeverityLevel());
+    }
+

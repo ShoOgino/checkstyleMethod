@@ -1,0 +1,24 @@
+    @Test
+    public void testAstLog() throws Exception {
+        final ViolationAstCheck check = new ViolationAstCheck();
+        check.configure(new DefaultConfiguration("check"));
+        final File file = new File("fileName");
+        final FileText theText = new FileText(file, Collections.singletonList("test123"));
+
+        check.setFileContents(new FileContents(theText));
+        check.clearMessages();
+
+        final DetailAST ast = new DetailAST();
+        ast.setLineNo(1);
+        ast.setColumnNo(4);
+        check.visitToken(ast);
+
+        final SortedSet<LocalizedMessage> internalMessages = check.getMessages();
+
+        assertEquals("Internal message should only have 1", 1, internalMessages.size());
+
+        final LocalizedMessage firstMessage = internalMessages.iterator().next();
+        assertEquals("expected line", 1, firstMessage.getLineNo());
+        assertEquals("expected column", 5, firstMessage.getColumnNo());
+    }
+

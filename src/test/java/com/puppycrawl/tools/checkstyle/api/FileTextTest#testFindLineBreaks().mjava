@@ -1,0 +1,14 @@
+    @Test
+    public void testFindLineBreaks() throws Exception {
+        final FileText fileText = new FileText(new File("fileName"), Arrays.asList("1", "2"));
+
+        assertArrayEquals("Invalid line breaks", new int[] {0, 2, 4},
+                Whitebox.invokeMethod(fileText, "findLineBreaks"));
+
+        final FileText fileText2 = new FileText(new File("fileName"), Arrays.asList("1", "2"));
+        Whitebox.setInternalState(fileText2, "fullText", "1\n2");
+
+        assertArrayEquals("Invalid line breaks", new int[] {0, 2, 3},
+                Whitebox.invokeMethod(fileText2, "findLineBreaks"));
+    }
+

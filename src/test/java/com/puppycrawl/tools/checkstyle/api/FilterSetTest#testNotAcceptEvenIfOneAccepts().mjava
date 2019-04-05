@@ -1,0 +1,8 @@
+    @Test
+    public void testNotAcceptEvenIfOneAccepts() {
+        final FilterSet filterSet = new FilterSet();
+        filterSet.addFilter(new DummyFilter(true));
+        filterSet.addFilter(new DummyFilter(false));
+        assertFalse("invalid accept response", filterSet.accept(null));
+    }
+

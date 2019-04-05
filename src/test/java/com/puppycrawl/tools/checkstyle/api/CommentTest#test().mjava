@@ -1,0 +1,15 @@
+    @Test
+    public void test() {
+        final String[] text = {"test"};
+        final Comment comment = new Comment(text, 1, 2, 3);
+
+        assertArrayEquals("invalid text", text, comment.getText());
+        assertEquals("invalid start line", 2, comment.getStartLineNo());
+        assertEquals("invalid end line", 2, comment.getEndLineNo());
+        assertEquals("invalid start column", 1, comment.getStartColNo());
+        assertEquals("invalid end column", 3, comment.getEndColNo());
+        assertEquals("invalid string",
+                "Comment[text=[test], startLineNo=2, endLineNo=2, startColNo=1, endColNo=3]",
+                comment.toString());
+    }
+

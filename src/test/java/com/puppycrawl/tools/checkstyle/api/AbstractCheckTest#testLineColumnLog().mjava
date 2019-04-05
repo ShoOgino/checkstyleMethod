@@ -1,0 +1,26 @@
+    @Test
+    public void testLineColumnLog() throws Exception {
+        final ViolationCheck check = new ViolationCheck();
+        check.configure(new DefaultConfiguration("check"));
+        final File file = new File("fileName");
+        final FileText theText = new FileText(file, Collections.singletonList("test123"));
+
+        check.setFileContents(new FileContents(theText));
+        check.clearMessages();
+        check.visitToken(null);
+
+        final SortedSet<LocalizedMessage> internalMessages = check.getMessages();
+
+        assertEquals("Internal message should only have 2", 2, internalMessages.size());
+
+        final Iterator<LocalizedMessage> iterator = internalMessages.iterator();
+
+        final LocalizedMessage firstMessage = iterator.next();
+        assertEquals("expected line", 1, firstMessage.getLineNo());
+        assertEquals("expected column", 0, firstMessage.getColumnNo());
+
+        final LocalizedMessage secondMessage = iterator.next();
+        assertEquals("expected line", 1, secondMessage.getLineNo());
+        assertEquals("expected column", 6, secondMessage.getColumnNo());
+    }
+
