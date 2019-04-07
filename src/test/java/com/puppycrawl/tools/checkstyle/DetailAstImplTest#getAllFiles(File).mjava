@@ -1,0 +1,22 @@
+    private static List<File> getAllFiles(File dir) {
+        final List<File> result = new ArrayList<>();
+
+        dir.listFiles(file -> {
+            if (file.isDirectory()) {
+                result.addAll(getAllFiles(file));
+            }
+            else if (file.getName().endsWith(".java")
+                    // fails with unexpected character
+                    && !file.getName().endsWith("InputGrammar.java")
+                    // comment only files, no root
+                    && !file.getName().endsWith("InputPackageDeclarationWithCommentOnly.java")
+                    && !file.getName().endsWith("InputSingleSpaceSeparatorEmpty.java")) {
+                result.add(file);
+            }
+
+            return false;
+        });
+
+        return result;
+    }
+

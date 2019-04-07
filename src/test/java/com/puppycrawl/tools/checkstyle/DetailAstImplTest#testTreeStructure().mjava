@@ -1,9 +1,16 @@
-    /**
-     * There are asserts in checkNode, but idea does not see them.
-     * @noinspection JUnitTestMethodWithNoAssertions
-     */
     @Test
     public void testTreeStructure() throws Exception {
-        checkDir(new File("src/test/resources/com/puppycrawl/tools/checkstyle"));
+        final List<File> files = getAllFiles(
+                new File("src/test/resources/com/puppycrawl/tools/checkstyle"));
+
+        for (File file : files) {
+            final String fileName = file.getCanonicalPath();
+            final DetailAST rootAST = JavaParser.parseFile(new File(fileName),
+                    JavaParser.Options.WITHOUT_COMMENTS);
+
+            assertNotNull("file must return a root node: " + fileName, rootAST);
+
+            assertTrue("tree is valid", checkTree(fileName, rootAST));
+        }
     }
 
