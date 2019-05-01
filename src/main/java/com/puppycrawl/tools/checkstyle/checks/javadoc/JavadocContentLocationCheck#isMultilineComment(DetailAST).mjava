@@ -1,0 +1,12 @@
+    /**
+     * Checks if a DetailAST of type {@code TokenTypes.BLOCK_COMMENT_BEGIN} span
+     * more than one line. The node always has at least one child of the type
+     * {@code TokenTypes.BLOCK_COMMENT_END}.
+     *
+     * @param node node to check
+     * @return {@code true} for multi-line comment nodes
+     */
+    private static boolean isMultilineComment(DetailAST node) {
+        return node.getLineNo() != node.getLastChild().getLineNo();
+    }
+
