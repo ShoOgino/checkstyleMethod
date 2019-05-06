@@ -1,0 +1,11 @@
+    @Test
+    public void testGetAcceptableTokens() {
+        final int[] expected = {
+            TokenTypes.BLOCK_COMMENT_BEGIN,
+        };
+        final InvalidJavadocPositionCheck check = new InvalidJavadocPositionCheck();
+        final int[] actual = check.getAcceptableTokens();
+
+        assertArrayEquals("Acceptable tokens differs from expected", expected, actual);
+    }
+
