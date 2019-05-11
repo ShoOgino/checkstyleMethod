@@ -11,15 +11,10 @@
             currentStatement = ast.getPreviousSibling();
         }
         if (isInLambda) {
-            int countOfSemiInCurrentLambda = countOfSemiInLambda.pop();
-            countOfSemiInCurrentLambda++;
-            countOfSemiInLambda.push(countOfSemiInCurrentLambda);
-            if (!inForHeader && countOfSemiInCurrentLambda > 1
-                    && isOnTheSameLine(currentStatement,
-                    lastStatementEnd, forStatementEnd,
-                    lambdaStatementEnd)) {
-                log(ast, MSG_KEY);
-            }
+            checkLambda(ast, currentStatement);
+        }
+        else if (isResource(ast.getParent())) {
+            checkResourceVariable(ast);
         }
         else if (!inForHeader && isOnTheSameLine(currentStatement, lastStatementEnd,
                 forStatementEnd, lambdaStatementEnd)) {

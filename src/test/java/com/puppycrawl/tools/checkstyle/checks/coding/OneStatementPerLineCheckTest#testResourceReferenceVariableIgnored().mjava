@@ -1,0 +1,15 @@
+    @Test
+    public void testResourceReferenceVariableIgnored() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(OneStatementPerLineCheck.class);
+        final String[] expected = {
+            "22:42: " + getCheckMessage(MSG_KEY),
+            "26:43: " + getCheckMessage(MSG_KEY),
+            "32:46: " + getCheckMessage(MSG_KEY),
+            "36:46: " + getCheckMessage(MSG_KEY),
+        };
+
+        verify(checkConfig,
+                getNonCompilablePath("InputOneStatementPerLineTryWithResources.java"),
+                expected);
+    }
+

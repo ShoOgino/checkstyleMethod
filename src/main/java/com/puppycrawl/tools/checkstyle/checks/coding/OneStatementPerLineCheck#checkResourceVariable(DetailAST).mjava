@@ -1,0 +1,11 @@
+    private void checkResourceVariable(DetailAST currentStatement) {
+        final DetailAST nextNode = currentStatement.getNextSibling();
+        if (currentStatement.getPreviousSibling().branchContains(TokenTypes.ASSIGN)) {
+            lastVariableResourceStatementEnd = currentStatement.getLineNo();
+        }
+        if (nextNode.branchContains(TokenTypes.ASSIGN)
+                && nextNode.getLineNo() == lastVariableResourceStatementEnd) {
+            log(currentStatement, MSG_KEY);
+        }
+    }
+
