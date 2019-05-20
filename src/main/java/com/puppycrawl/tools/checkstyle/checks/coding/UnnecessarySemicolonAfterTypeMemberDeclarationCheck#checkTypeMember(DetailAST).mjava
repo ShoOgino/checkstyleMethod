@@ -1,0 +1,11 @@
+    /**
+     * Checks if type member has unnecessary semicolon.
+     *
+     * @param ast type member
+     */
+    private void checkTypeMember(DetailAST ast) {
+        if (isSemicolon(ast.getNextSibling())) {
+            log(ast.getNextSibling(), MSG_SEMI);
+        }
+    }
+

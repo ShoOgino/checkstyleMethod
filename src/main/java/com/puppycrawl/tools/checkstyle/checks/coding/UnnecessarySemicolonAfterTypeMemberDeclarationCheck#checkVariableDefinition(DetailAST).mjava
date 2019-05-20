@@ -1,0 +1,11 @@
+    /**
+     * Checks if variable definition has unnecessary semicolon.
+     *
+     * @param variableDef variable definition
+     */
+    private void checkVariableDefinition(DetailAST variableDef) {
+        if (isSemicolon(variableDef.getLastChild()) && isSemicolon(variableDef.getNextSibling())) {
+            log(variableDef.getNextSibling(), MSG_SEMI);
+        }
+    }
+
