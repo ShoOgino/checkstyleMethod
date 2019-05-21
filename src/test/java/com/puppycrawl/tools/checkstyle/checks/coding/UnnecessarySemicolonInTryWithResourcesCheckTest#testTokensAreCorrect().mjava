@@ -1,0 +1,15 @@
+    @Test
+    public void testTokensAreCorrect() {
+        final UnnecessarySemicolonInTryWithResourcesCheck check =
+            new UnnecessarySemicolonInTryWithResourcesCheck();
+        final int[] expected = {
+            TokenTypes.RESOURCE_SPECIFICATION,
+        };
+        Assert.assertArrayEquals("Acceptable required tokens are invalid",
+            expected, check.getAcceptableTokens());
+        Assert.assertArrayEquals("Default required tokens are invalid",
+            expected, check.getDefaultTokens());
+        Assert.assertArrayEquals("Required required tokens are invalid",
+            expected, check.getRequiredTokens());
+    }
+
