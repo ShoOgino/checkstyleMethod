@@ -1,0 +1,15 @@
+    @Test
+    public void testTokensNotNull() {
+        final UnnecessarySemicolonInEnumerationCheck check =
+                new UnnecessarySemicolonInEnumerationCheck();
+        final int[] expected = {
+            TokenTypes.ENUM_DEF,
+        };
+        Assert.assertArrayEquals("Acceptable required tokens are invalid",
+            expected, check.getAcceptableTokens());
+        Assert.assertArrayEquals("Default required tokens are invalid",
+            expected, check.getDefaultTokens());
+        Assert.assertArrayEquals("Required required tokens are invalid",
+            expected, check.getRequiredTokens());
+    }
+
