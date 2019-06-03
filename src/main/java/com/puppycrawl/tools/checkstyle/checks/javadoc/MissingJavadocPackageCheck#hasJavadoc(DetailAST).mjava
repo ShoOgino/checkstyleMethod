@@ -1,0 +1,21 @@
+    /**
+     * Checks that there is javadoc before ast.
+     * Because of <a href="https://github.com/checkstyle/checkstyle/issues/4392">parser bug</a>
+     * parser can place javadoc comment either as previous sibling of package definition
+     * or (if there is annotation between package def and javadoc) inside package definition tree.
+     * So we should look for javadoc in both places.
+     *
+     * @param ast {@link TokenTypes#PACKAGE_DEF} token to check
+     * @return true if there is javadoc, false otherwise
+     */
+    private static boolean hasJavadoc(DetailAST ast) {
+        final boolean hasBefore = isJavadocComment(ast.getPreviousSibling());
+        // need to go 3 levels down the tree for annotation case
+        final boolean hasWithAnnotation = Optional.of(ast.getFirstChild())
+            .map(DetailAST::getFirstChild)
+            .map(DetailAST::getFirstChild)
+            .map(MissingJavadocPackageCheck::isJavadocComment)
+            .orElse(false);
+        return hasBefore || hasWithAnnotation;
+    }
+

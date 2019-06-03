@@ -1,0 +1,14 @@
+    @Test
+    public void testTokensAreCorrect() {
+        final MissingJavadocPackageCheck check = new MissingJavadocPackageCheck();
+        final int[] expected = {
+            TokenTypes.PACKAGE_DEF,
+        };
+        Assert.assertArrayEquals("Acceptable required tokens are invalid",
+            expected, check.getAcceptableTokens());
+        Assert.assertArrayEquals("Default required tokens are invalid",
+            expected, check.getDefaultTokens());
+        Assert.assertArrayEquals("Required required tokens are invalid",
+            expected, check.getRequiredTokens());
+    }
+
