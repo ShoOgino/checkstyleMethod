@@ -1,0 +1,18 @@
+    @Override
+    protected ModuleCreationOption findModuleCreationOption(String moduleName) {
+        ModuleCreationOption moduleCreationOption = ModuleCreationOption.IN_CHECKER;
+
+        for (Class<?> moduleClass : CHECKSTYLE_MODULES) {
+            if (moduleClass.getSimpleName().equals(moduleName)
+                    || moduleClass.getSimpleName().equals(moduleName + "Check")) {
+                if (ModuleReflectionUtil.isCheckstyleTreeWalkerCheck(moduleClass)
+                        || ModuleReflectionUtil.isTreeWalkerFilterModule(moduleClass)) {
+                    moduleCreationOption = ModuleCreationOption.IN_TREEWALKER;
+                }
+                break;
+            }
+        }
+
+        return moduleCreationOption;
+    }
+

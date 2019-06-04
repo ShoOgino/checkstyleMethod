@@ -11,6 +11,9 @@
         if (configs.size() == 1) {
             result = configs.get(0);
         }
+        else if (configs.isEmpty()) {
+            throw new IllegalStateException("no instances of the Module was found: " + moduleName);
+        }
         else if (moduleId == null) {
             throw new IllegalStateException("multiple instances of the same Module are detected");
         }
@@ -23,7 +26,8 @@
                     throw new IllegalStateException("problem to get ID attribute from " + conf, ex);
                 }
             })
-            .findFirst().orElseGet(null);
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("problem with module config"));
         }
 
         return result;

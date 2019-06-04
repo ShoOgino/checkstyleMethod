@@ -1,0 +1,13 @@
+    /**
+     * Creates {@link Checker} instance based on the given {@link Configuration} instance.
+     * @param moduleConfig {@link Configuration} instance.
+     * @return {@link Checker} instance based on the given {@link Configuration} instance.
+     * @throws Exception if an exception occurs during checker configuration.
+     */
+    protected final Checker createChecker(Configuration moduleConfig)
+            throws Exception {
+        final String name = moduleConfig.getName();
+
+        return createChecker(moduleConfig, findModuleCreationOption(name));
+    }
+
