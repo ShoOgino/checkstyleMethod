@@ -1,10 +1,10 @@
     private static void validatePropertySectionProperties(String fileName, String sectionName,
-            Node subSection, Object instance, Set<String> properties) throws Exception {
+            Node table, Object instance, Set<String> properties) throws Exception {
         boolean skip = true;
         boolean didJavadocTokens = false;
         boolean didTokens = false;
 
-        for (Node row : XmlUtil.getChildrenElements(XmlUtil.getFirstChildElement(subSection))) {
+        for (Node row : XmlUtil.getChildrenElements(table)) {
             final List<Node> columns = new ArrayList<>(XmlUtil.getChildrenElements(row));
 
             Assert.assertEquals(fileName + " section '" + sectionName
