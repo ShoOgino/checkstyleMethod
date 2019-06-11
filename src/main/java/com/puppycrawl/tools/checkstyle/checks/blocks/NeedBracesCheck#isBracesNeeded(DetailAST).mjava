@@ -1,0 +1,36 @@
+    /**
+     * Checks if token needs braces.
+     * Some tokens have additional conditions:
+     * <ul>
+     *     <li>{@link TokenTypes#LITERAL_FOR}</li>
+     *     <li>{@link TokenTypes#LITERAL_WHILE}</li>
+     *     <li>{@link TokenTypes#LITERAL_CASE}</li>
+     *     <li>{@link TokenTypes#LITERAL_DEFAULT}</li>
+     *     <li>{@link TokenTypes#LITERAL_ELSE}</li>
+     * </ul>
+     * For all others default value {@code true} is returned.
+     * @param ast token to check
+     * @return result of additional checks for specific token types,
+     * {@code true} if there is no additional checks for token
+     */
+    private boolean isBracesNeeded(DetailAST ast) {
+        final boolean result;
+        switch (ast.getType()) {
+            case TokenTypes.LITERAL_FOR:
+            case TokenTypes.LITERAL_WHILE:
+                result = !isEmptyLoopBodyAllowed(ast);
+                break;
+            case TokenTypes.LITERAL_CASE:
+            case TokenTypes.LITERAL_DEFAULT:
+                result = hasUnbracedStatements(ast);
+                break;
+            case TokenTypes.LITERAL_ELSE:
+                result = ast.findFirstToken(TokenTypes.LITERAL_IF) == null;
+                break;
+            default:
+                result = true;
+                break;
+        }
+        return result;
+    }
+

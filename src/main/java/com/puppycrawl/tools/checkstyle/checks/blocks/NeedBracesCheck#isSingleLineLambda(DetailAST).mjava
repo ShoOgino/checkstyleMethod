@@ -10,6 +10,6 @@
      */
     private static boolean isSingleLineLambda(DetailAST lambda) {
         final DetailAST block = lambda.getLastChild();
-        return lambda.getLineNo() == block.getLineNo();
+        return isOnSameLine(lambda, block);
     }
 

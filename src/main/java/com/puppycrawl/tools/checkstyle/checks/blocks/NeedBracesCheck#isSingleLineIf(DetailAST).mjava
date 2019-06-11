@@ -20,7 +20,7 @@
                 block = literalIfLastChild;
             }
             final DetailAST ifCondition = literalIf.findFirstToken(TokenTypes.EXPR);
-            result = ifCondition.getLineNo() == block.getLineNo();
+            result = isOnSameLine(ifCondition, block);
         }
         return result;
     }

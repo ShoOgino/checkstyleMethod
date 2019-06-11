@@ -12,7 +12,7 @@
         boolean result = false;
         if (literalDo.getParent().getType() == TokenTypes.SLIST) {
             final DetailAST block = literalDo.getFirstChild();
-            result = block.getLineNo() == literalDo.getLineNo();
+            result = isOnSameLine(block, literalDo);
         }
         return result;
     }

@@ -1,17 +1,7 @@
     @Override
     public void visitToken(DetailAST ast) {
-        final DetailAST slistAST = ast.findFirstToken(TokenTypes.SLIST);
-        boolean isElseIf = false;
-        if (ast.getType() == TokenTypes.LITERAL_ELSE
-            && ast.findFirstToken(TokenTypes.LITERAL_IF) != null) {
-            isElseIf = true;
-        }
-        final boolean isInAnnotationField = isInAnnotationField(ast);
-        final boolean skipStatement = isSkipStatement(ast);
-        final boolean skipEmptyLoopBody = allowEmptyLoopBody && isEmptyLoopBody(ast);
-
-        if (slistAST == null && !isElseIf && !isInAnnotationField
-                && !skipStatement && !skipEmptyLoopBody) {
+        final boolean hasNoSlist = ast.findFirstToken(TokenTypes.SLIST) == null;
+        if (hasNoSlist && !isSkipStatement(ast) && isBracesNeeded(ast)) {
             log(ast.getLineNo(), MSG_KEY_NEED_BRACES, ast.getText());
         }
     }
