@@ -4,7 +4,11 @@
             createModuleConfig(CustomImportOrderCheck.class);
 
         createChecker(checkConfig);
-        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        final String[] expected = {
+            "8: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.awt.Button"),
+            "20: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "com.puppycrawl.tools.*"),
+            "22: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "com.google.common.collect.*"),
+        };
         verify(checkConfig, getPath("InputCustomImportOrderDefault.java"), expected);
     }
 

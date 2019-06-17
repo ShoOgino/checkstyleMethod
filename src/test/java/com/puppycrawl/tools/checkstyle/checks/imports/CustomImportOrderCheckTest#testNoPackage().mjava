@@ -10,6 +10,9 @@
         createChecker(checkConfig);
         final String[] expected = {
             "5: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.util.*"),
+            "7: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.util.HashMap"),
+            "11: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "javax.net.ServerSocketFactory"),
+            "14: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "javax.net.SocketFactory"),
         };
         verify(checkConfig, getNonCompilablePath("InputCustomImportOrderNoPackage.java"),
             expected);

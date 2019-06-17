@@ -1,0 +1,30 @@
+    @Test
+    public void testInputCustomImportOrderEclipseDefaultPositive() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(CustomImportOrderCheck.class);
+        checkConfig.addAttribute("customImportOrderRules",
+                "STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"
+                    + "###SAME_PACKAGE(2)###STATIC");
+
+        checkConfig.addAttribute("standardPackageRegExp", "^java\\.");
+        checkConfig.addAttribute("specialImportsRegExp", "^javax\\.");
+        checkConfig.addAttribute("thirdPartyPackageRegExp", "^org\\.");
+        checkConfig.addAttribute("separateLineBetweenGroups", "true");
+        checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
+
+        createChecker(checkConfig);
+        final String[] expected = {
+            "9: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.awt.Button"),
+            "10: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.awt.Dialog"),
+            "11: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STD, "java.io.InputStream"),
+            "13: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SPECIAL, "javax.swing.JComponent"),
+            "14: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SPECIAL, "javax.swing.JTable"),
+            "16: " + getCheckMessage(MSG_NONGROUP_EXPECTED, THIRD, "org.junit.Test"),
+            "17: " + getCheckMessage(MSG_NONGROUP_EXPECTED, THIRD,
+                "org.powermock.api.mockito.PowerMockito"),
+            "21: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "sun.tools.java.ArrayType"),
+        };
+        verify(checkConfig,
+            getNonCompilablePath("InputCustomImportOrderEclipseDefaultPositive.java"), expected);
+    }
+
