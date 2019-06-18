@@ -1,0 +1,18 @@
+    /**
+     * Method returns the index number where the key is detected (starting at 0).
+     * To assure that we get the correct line it starts at the point
+     * of the last occurrence.
+     * Also the previousProp should be in file before propKey.
+     *
+     * @param startLineNo start searching at line
+     * @param fileText {@link FileText} object contains the lines to process
+     * @param previousProp key name found last iteration, works only if valid
+     * @param propKey key name to look for
+     * @return index number of first occurrence. If no key found in properties file, 0 is returned
+     */
+    private static int getLineNumber(int startLineNo, FileText fileText,
+                                     String previousProp, String propKey) {
+        final int indexOfPreviousProp = getIndex(startLineNo, fileText, previousProp);
+        return getIndex(indexOfPreviousProp, fileText, propKey);
+    }
+

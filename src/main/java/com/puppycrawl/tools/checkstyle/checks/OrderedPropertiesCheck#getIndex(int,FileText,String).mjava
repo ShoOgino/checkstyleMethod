@@ -1,0 +1,23 @@
+    /**
+     * Inner method to get the index number of the position of keyName.
+     *
+     * @param startLineNo start searching at line
+     * @param fileText {@link FileText} object contains the lines to process
+     * @param keyName key name to look for
+     * @return index number of first occurrence. If no key found in properties file, 0 is returned
+     */
+    private static int getIndex(int startLineNo, FileText fileText, String keyName) {
+        final Pattern keyPattern = getKeyPattern(keyName);
+        int indexNumber = 0;
+        final Matcher matcher = keyPattern.matcher("");
+        for (int index = startLineNo; index < fileText.size(); index++) {
+            final String line = fileText.get(index);
+            matcher.reset(line);
+            if (matcher.matches()) {
+                indexNumber = index;
+                break;
+            }
+        }
+        return indexNumber;
+    }
+

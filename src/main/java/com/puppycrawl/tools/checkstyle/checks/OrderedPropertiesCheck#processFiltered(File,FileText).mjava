@@ -1,0 +1,37 @@
+    /**
+     * Processes the file and check order.
+     * @param file the file to be processed
+     * @param fileText the contents of the file.
+     * @noinspection EnumerationCanBeIteration
+     */
+    @Override
+    protected void processFiltered(File file, FileText fileText) {
+        final SequencedProperties properties = new SequencedProperties();
+        try (InputStream inputStream = Files.newInputStream(file.toPath())) {
+            properties.load(inputStream);
+        }
+        catch (IOException | IllegalArgumentException ex) {
+            log(1, MSG_IO_EXCEPTION_KEY, file.getPath(), ex.getLocalizedMessage());
+        }
+
+        String previousProp = "";
+        int startLineNo = 0;
+
+        final Enumeration<Object> keys = properties.keys();
+
+        while (keys.hasMoreElements()) {
+
+            final String propKey = (String) keys.nextElement();
+
+            if (String.CASE_INSENSITIVE_ORDER.compare(previousProp, propKey) > 0) {
+
+                final int lineNo = getLineNumber(startLineNo, fileText, previousProp, propKey);
+                log(lineNo + 1, MSG_KEY, propKey, previousProp);
+                // start searching at position of the last reported validation
+                startLineNo = lineNo;
+            }
+
+            previousProp = propKey;
+        }
+    }
+

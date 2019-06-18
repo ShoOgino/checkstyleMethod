@@ -1,0 +1,17 @@
+        /**
+         * Puts the value into list by its key.
+         * @noinspection UseOfPropertiesAsHashtable
+         *
+         * @param key the hashtable key
+         * @param value the value
+         * @return the previous value of the specified key in this hashtable,
+         *      or null if it did not have one
+         * @throws NullPointerException - if the key or value is null
+         */
+        @Override
+        public synchronized Object put(Object key, Object value) {
+            keyList.add(key);
+
+            return super.put(key, value);
+        }
+
