@@ -1,0 +1,9 @@
+    /**
+     * Checks if ast is annotation element default value and should be checked.
+     * @param ast token to check
+     * @return true if element is skipped, false otherwise
+     */
+    private boolean shouldTestAnnotationDefaults(DetailAST ast) {
+        return !ignoreAnnotationElementDefaults || !isChildOf(ast, TokenTypes.LITERAL_DEFAULT);
+    }
+

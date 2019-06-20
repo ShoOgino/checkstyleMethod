@@ -1,0 +1,9 @@
+    /**
+     * Checks if ast is annotation argument and should be checked.
+     * @param ast token to check
+     * @return true if element is skipped, false otherwise
+     */
+    private boolean shouldTestAnnotationArgs(DetailAST ast) {
+        return !ignoreAnnotation || !isChildOf(ast, TokenTypes.ANNOTATION);
+    }
+

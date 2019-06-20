@@ -1,6 +1,7 @@
     @Override
     public void visitToken(DetailAST ast) {
-        if ((!ignoreAnnotation || !isChildOf(ast, TokenTypes.ANNOTATION))
+        if (shouldTestAnnotationArgs(ast)
+                && shouldTestAnnotationDefaults(ast)
                 && !isInIgnoreList(ast)
                 && (!ignoreHashCodeMethod || !isInHashCodeMethod(ast))) {
             final DetailAST constantDefAST = findContainingConstantDef(ast);
