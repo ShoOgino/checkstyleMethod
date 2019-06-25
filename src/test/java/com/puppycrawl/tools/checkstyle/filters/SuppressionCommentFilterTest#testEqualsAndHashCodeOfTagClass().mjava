@@ -1,6 +1,9 @@
     @Test
     public void testEqualsAndHashCodeOfTagClass() {
-        final EqualsVerifierReport ev = EqualsVerifier.forClass(SuppressionCommentFilter.Tag.class)
+        final SuppressionCommentFilter filter = new SuppressionCommentFilter();
+        final Object tag =
+                getTagsAfterExecution(filter, "filename", "//CHECKSTYLE:OFF").get(0);
+        final EqualsVerifierReport ev = EqualsVerifier.forClass(tag.getClass())
                 .usingGetClass().report();
         assertEquals("Error: " + ev.getMessage(), EqualsVerifierReport.SUCCESS, ev);
     }
