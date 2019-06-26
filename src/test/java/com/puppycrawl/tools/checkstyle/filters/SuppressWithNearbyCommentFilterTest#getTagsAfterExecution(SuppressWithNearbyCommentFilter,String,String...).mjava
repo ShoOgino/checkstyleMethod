@@ -1,0 +1,19 @@
+    /**
+     * Calls the filter with a minimal set of inputs and returns a list of
+     * {@link SuppressWithNearbyCommentFilter} internal type {@code Tag}.
+     * Our goal is 100% test coverage, for this we use white-box testing.
+     * So we need access to the implementation details. For this reason,
+     * it is necessary to use reflection to gain access to the inner field here.
+     *
+     * @return {@code Tag} list
+     */
+    private static List<?> getTagsAfterExecution(SuppressWithNearbyCommentFilter filter,
+            String filename, String... lines) {
+        final FileContents contents = new FileContents(filename, lines);
+        contents.reportSingleLineComment(1, 0);
+        final TreeWalkerAuditEvent dummyEvent = new TreeWalkerAuditEvent(contents, filename,
+                new LocalizedMessage(1, null, null, null, null, Object.class, null), null);
+        filter.accept(dummyEvent);
+        return Whitebox.getInternalState(filter, "tags");
+    }
+

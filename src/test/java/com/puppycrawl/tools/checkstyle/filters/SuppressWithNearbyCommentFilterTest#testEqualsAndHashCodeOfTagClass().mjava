@@ -1,7 +1,10 @@
     @Test
     public void testEqualsAndHashCodeOfTagClass() {
+        final SuppressWithNearbyCommentFilter filter = new SuppressWithNearbyCommentFilter();
+        final Object tag =
+                getTagsAfterExecution(filter, "filename", "//SUPPRESS CHECKSTYLE ignore").get(0);
         final EqualsVerifierReport ev = EqualsVerifier
-                .forClass(SuppressWithNearbyCommentFilter.Tag.class).usingGetClass().report();
+                .forClass(tag.getClass()).usingGetClass().report();
         assertEquals("Error: " + ev.getMessage(), EqualsVerifierReport.SUCCESS, ev);
     }
 
