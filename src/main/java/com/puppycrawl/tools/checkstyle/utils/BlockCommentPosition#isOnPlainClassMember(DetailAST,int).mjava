@@ -16,6 +16,7 @@
                     || parent.getType() == TokenTypes.TYPE_PARAMETERS)
                 && parent.getParent().getType() == memberType
                 // previous parent sibling is always TokenTypes.MODIFIERS
-                && parent.getPreviousSibling().getChildCount() == 0;
+                && parent.getPreviousSibling().getChildCount() == 0
+                && parent.getParent().getParent().getType() == TokenTypes.OBJBLOCK;
     }
 
