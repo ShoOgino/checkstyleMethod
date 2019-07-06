@@ -1,0 +1,17 @@
+    private void verifySuppressed(DefaultConfiguration config, String fileName, String id,
+            String... expectedViolations) throws Exception {
+        final DefaultConfiguration regexpConfig = createModuleConfig(RegexpSinglelineCheck.class);
+        regexpConfig.addAttribute("format", FORMAT);
+        regexpConfig.addAttribute("minimum", "0");
+        regexpConfig.addAttribute("maximum", "0");
+
+        if (id != null) {
+            regexpConfig.addAttribute("id", id);
+        }
+
+        final DefaultConfiguration checkerConfig = createRootConfig(regexpConfig);
+        checkerConfig.addChild(config);
+
+        verify(checkerConfig, fileName, expectedViolations);
+    }
+
