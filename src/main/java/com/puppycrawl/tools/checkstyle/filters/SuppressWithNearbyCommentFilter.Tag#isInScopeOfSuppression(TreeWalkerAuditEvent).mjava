@@ -1,0 +1,10 @@
+        /**
+         * Checks whether the {@link TreeWalkerAuditEvent} is in the scope of the suppression.
+         * @param event {@link TreeWalkerAuditEvent} instance.
+         * @return true if the {@link TreeWalkerAuditEvent} is in the scope of the suppression.
+         */
+        private boolean isInScopeOfSuppression(TreeWalkerAuditEvent event) {
+            final int line = event.getLine();
+            return line >= firstLine && line <= lastLine;
+        }
+

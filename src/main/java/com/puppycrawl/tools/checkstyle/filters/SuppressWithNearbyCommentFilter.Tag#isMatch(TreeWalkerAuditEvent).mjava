@@ -5,26 +5,8 @@
          * @return true if the source of event matches the text of this tag.
          */
         public boolean isMatch(TreeWalkerAuditEvent event) {
-            final int line = event.getLine();
-            boolean match = false;
-
-            if (line >= firstLine && line <= lastLine) {
-                final Matcher tagMatcher = tagCheckRegexp.matcher(event.getSourceName());
-
-                if (tagMatcher.find()) {
-                    match = true;
-                }
-                else if (tagMessageRegexp == null) {
-                    if (event.getModuleId() != null) {
-                        final Matcher idMatcher = tagCheckRegexp.matcher(event.getModuleId());
-                        match = idMatcher.find();
-                    }
-                }
-                else {
-                    final Matcher messageMatcher = tagMessageRegexp.matcher(event.getMessage());
-                    match = messageMatcher.find();
-                }
-            }
-            return match;
+            return isInScopeOfSuppression(event)
+                    && (isCheckMatch(event) || isIdMatch(event))
+                    && isMessageMatch(event);
         }
 
