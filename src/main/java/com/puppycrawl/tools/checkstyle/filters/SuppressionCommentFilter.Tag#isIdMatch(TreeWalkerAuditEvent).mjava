@@ -1,0 +1,14 @@
+        /**
+         * Checks whether the {@link TreeWalkerAuditEvent} module ID matches the ID format.
+         * @param event {@link TreeWalkerAuditEvent} instance.
+         * @return true if the {@link TreeWalkerAuditEvent} module ID matches the ID format.
+         */
+        private boolean isIdMatch(TreeWalkerAuditEvent event) {
+            boolean match = false;
+            if (event.getModuleId() != null) {
+                final Matcher idMatcher = tagCheckRegexp.matcher(event.getModuleId());
+                match = idMatcher.find();
+            }
+            return match;
+        }
+

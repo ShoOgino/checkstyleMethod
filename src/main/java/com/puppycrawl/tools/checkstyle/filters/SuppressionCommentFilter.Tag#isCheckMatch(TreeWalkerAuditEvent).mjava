@@ -1,0 +1,10 @@
+        /**
+         * Checks whether {@link TreeWalkerAuditEvent} source name matches the check format.
+         * @param event {@link TreeWalkerAuditEvent} instance.
+         * @return true if the {@link TreeWalkerAuditEvent} source name matches the check format.
+         */
+        private boolean isCheckMatch(TreeWalkerAuditEvent event) {
+            final Matcher checkMatcher = tagCheckRegexp.matcher(event.getSourceName());
+            return checkMatcher.find();
+        }
+

@@ -1,17 +1,15 @@
     @Test
-    public void testSuppressById() throws Exception {
+    public void testSuppressByIdAndMessage() throws Exception {
         final DefaultConfiguration filterConfig =
             createModuleConfig(SuppressionCommentFilter.class);
-        filterConfig.addAttribute("offCommentFormat", "CSOFF (\\w+) \\(\\w+\\)");
+        filterConfig.addAttribute("offCommentFormat", "CSOFF (\\w+) \\(allow (\\w+)\\)");
         filterConfig.addAttribute("onCommentFormat", "CSON (\\w+)");
         filterConfig.addAttribute("checkFormat", "$1");
+        filterConfig.addAttribute("messageFormat", "$2");
         final String[] suppressedViolationMessages = {
-            "6:17: "
+            "18:17: "
                 + getCheckMessage(AbstractNameCheck.class,
-                    MSG_INVALID_PATTERN, "A1", "^[a-z][a-zA-Z0-9]*$"),
-            "12:9: "
-                + getCheckMessage(AbstractNameCheck.class,
-                    MSG_INVALID_PATTERN, "line_length", "^[a-z][a-zA-Z0-9]*$"),
+                    MSG_INVALID_PATTERN, "DEF", "^[a-z][a-zA-Z0-9]*$"),
             };
         final String[] expectedViolationMessages = {
             "6:17: "
