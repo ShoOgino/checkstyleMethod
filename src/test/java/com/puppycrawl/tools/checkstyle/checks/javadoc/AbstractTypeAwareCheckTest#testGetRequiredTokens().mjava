@@ -1,0 +1,14 @@
+    @Test
+    public void testGetRequiredTokens() {
+        final int[] expected = {
+            TokenTypes.PACKAGE_DEF,
+            TokenTypes.IMPORT,
+            TokenTypes.CLASS_DEF,
+            TokenTypes.INTERFACE_DEF,
+            TokenTypes.ENUM_DEF,
+        };
+        final JavadocMethodCheck check = new JavadocMethodCheck();
+        final int[] actual = check.getRequiredTokens();
+        assertArrayEquals("Required tokens differ from expected", expected, actual);
+    }
+
