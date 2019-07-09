@@ -1,11 +1,12 @@
     @Test
     public void testResourceReferenceVariableIgnored() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(OneStatementPerLineCheck.class);
+        checkConfig.addAttribute("treatTryResourcesAsStatement", "true");
         final String[] expected = {
-            "22:42: " + getCheckMessage(MSG_KEY),
-            "26:43: " + getCheckMessage(MSG_KEY),
-            "32:46: " + getCheckMessage(MSG_KEY),
-            "36:46: " + getCheckMessage(MSG_KEY),
+            "25:42: " + getCheckMessage(MSG_KEY),
+            "29:43: " + getCheckMessage(MSG_KEY),
+            "35:46: " + getCheckMessage(MSG_KEY),
+            "39:46: " + getCheckMessage(MSG_KEY),
         };
 
         verify(checkConfig,
