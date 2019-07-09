@@ -1,8 +1,6 @@
     @Test
     public void testToStringOfTagClass() {
-        final SuppressionCommentFilter filter = new SuppressionCommentFilter();
-        final Object tag =
-                getTagsAfterExecution(filter, "filename", "//CHECKSTYLE:OFF").get(0);
+        final Object tag = getTagsAfterExecutionOnDefaultFilter("//CHECKSTYLE:OFF").get(0);
         assertEquals("Invalid toString result",
             "Tag[text='CHECKSTYLE:OFF', line=1, column=0, type=OFF,"
                     + " tagCheckRegexp=.*, tagMessageRegexp=null]", tag.toString());

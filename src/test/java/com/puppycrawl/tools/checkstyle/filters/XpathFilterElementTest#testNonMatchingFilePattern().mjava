@@ -1,7 +1,8 @@
     @Test
-    public void testNonMatchingFileRegexp() throws Exception {
+    public void testNonMatchingFilePattern() throws Exception {
+        final Pattern pattern = Pattern.compile("NonMatchingRegexp");
         final XpathFilterElement filter =
-                new XpathFilterElement("NonMatchingRegexp", "Test", null, null, null);
+                new XpathFilterElement(pattern, null, null, null, null);
         final TreeWalkerAuditEvent ev = getEvent(3, 0,
                 TokenTypes.CLASS_DEF);
         assertTrue("Event should be accepted", filter.accept(ev));

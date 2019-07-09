@@ -1,7 +1,11 @@
     @Test
     public void testAcceptNullLocalizedMessage() {
         final SuppressWithNearbyCommentFilter filter = new SuppressWithNearbyCommentFilter();
-        final TreeWalkerAuditEvent auditEvent = new TreeWalkerAuditEvent(null, null, null, null);
+        final FileContents contents =
+                new FileContents("filename", "//SUPPRESS CHECKSTYLE ignore");
+        contents.reportSingleLineComment(1, 0);
+        final TreeWalkerAuditEvent auditEvent =
+                new TreeWalkerAuditEvent(contents, null, null, null);
         assertTrue("Filter should accept null localized message", filter.accept(auditEvent));
     }
 

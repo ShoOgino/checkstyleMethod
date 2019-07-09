@@ -7,12 +7,17 @@
      *
      * @return {@code Tag} list
      */
-    private static List<?> getTagsAfterExecution(SuppressionCommentFilter filter,
+    private static List<Comparable<Object>> getTagsAfterExecution(SuppressionCommentFilter filter,
             String filename, String... lines) {
         final FileContents contents = new FileContents(filename, lines);
-        contents.reportSingleLineComment(1, 0);
+        for (int lineNo = 0; lineNo < lines.length; lineNo++) {
+            final int colNo = lines[lineNo].indexOf("//");
+            if (colNo >= 0) {
+                contents.reportSingleLineComment(lineNo + 1, colNo);
+            }
+        }
         final TreeWalkerAuditEvent dummyEvent = new TreeWalkerAuditEvent(contents, filename,
-                new LocalizedMessage(1, null, null, null, null, Object.class, null), null);
+                new LocalizedMessage(1, null, null, null, null, Object.class, ""), null);
         filter.accept(dummyEvent);
         return Whitebox.getInternalState(filter, "tags");
     }

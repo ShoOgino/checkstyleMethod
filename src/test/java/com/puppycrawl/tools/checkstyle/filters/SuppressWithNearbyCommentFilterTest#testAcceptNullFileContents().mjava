@@ -1,0 +1,9 @@
+    @Test
+    public void testAcceptNullFileContents() {
+        final SuppressWithNearbyCommentFilter filter = new SuppressWithNearbyCommentFilter();
+        final FileContents contents = null;
+        final TreeWalkerAuditEvent auditEvent = new TreeWalkerAuditEvent(contents, null,
+                new LocalizedMessage(1, null, null, null, null, Object.class, null), null);
+        assertTrue("Filter should accept audit event", filter.accept(auditEvent));
+    }
+
