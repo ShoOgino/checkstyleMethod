@@ -1,0 +1,15 @@
+    /**
+     * Get ast parent, ignoring token types from {@code skipTokens}.
+     *
+     * @param ast token to get parent
+     * @param skipTokens token types to skip
+     * @return first not ignored parent of ast
+     */
+    private static DetailAST getParent(DetailAST ast, int... skipTokens) {
+        DetailAST result = ast.getParent();
+        while (Arrays.binarySearch(skipTokens, result.getType()) > -1) {
+            result = result.getParent();
+        }
+        return result;
+    }
+

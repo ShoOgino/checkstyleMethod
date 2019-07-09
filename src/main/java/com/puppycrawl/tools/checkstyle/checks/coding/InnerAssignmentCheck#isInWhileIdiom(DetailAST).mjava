@@ -16,8 +16,10 @@
     private static boolean isInWhileIdiom(DetailAST ast) {
         boolean result = false;
         if (isComparison(ast.getParent())) {
-            result = isInContext(
-                    ast.getParent(), ALLOWED_ASSIGNMENT_IN_COMPARISON_CONTEXT);
+            result = isInContext(ast.getParent(),
+                ALLOWED_ASSIGNMENT_IN_COMPARISON_CONTEXT,
+                WHILE_IDIOM_IGNORED_PARENTS
+            );
         }
         return result;
     }
