@@ -12,10 +12,7 @@
         return classPath.getTopLevelClassesRecursive(packageName).stream()
                 .map(ClassPath.ClassInfo::load)
                 .filter(ModuleReflectionUtil::isCheckstyleModule)
-                .filter(cls -> !cls.getCanonicalName()
-                        .startsWith("com.puppycrawl.tools.checkstyle.internal.testmodules"))
-                .filter(cls -> !cls.getCanonicalName()
-                        .startsWith("com.puppycrawl.tools.checkstyle.packageobjectfactory"))
+                .filter(CheckUtil::isFromAllowedPackages)
                 .collect(Collectors.toSet());
     }
 

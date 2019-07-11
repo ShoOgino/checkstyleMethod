@@ -1,0 +1,14 @@
+    /**
+     * Looks for the last token in lambda.
+     *
+     * @param lambda token to check.
+     * @return last token in lambda
+     */
+    private static DetailAST getLastLambdaToken(DetailAST lambda) {
+        DetailAST node = lambda;
+        do {
+            node = node.getLastChild();
+        } while (node.getLastChild() != null);
+        return node;
+    }
+

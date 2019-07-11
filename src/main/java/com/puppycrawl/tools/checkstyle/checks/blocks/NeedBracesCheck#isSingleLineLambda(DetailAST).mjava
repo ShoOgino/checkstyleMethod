@@ -9,7 +9,7 @@
      * @return true if current lambda statement is single-line statement.
      */
     private static boolean isSingleLineLambda(DetailAST lambda) {
-        final DetailAST block = lambda.getLastChild();
-        return isOnSameLine(lambda, block);
+        final DetailAST lastLambdaToken = getLastLambdaToken(lambda);
+        return isOnSameLine(lambda, lastLambdaToken);
     }
 
