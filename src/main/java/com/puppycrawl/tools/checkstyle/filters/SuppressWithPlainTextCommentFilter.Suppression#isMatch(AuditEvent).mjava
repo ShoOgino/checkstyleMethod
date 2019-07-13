@@ -4,18 +4,8 @@
          * @return true if the suppression matches {@link AuditEvent}.
          */
         private boolean isMatch(AuditEvent event) {
-            boolean match = false;
-            if (isInScopeOfSuppression(event)) {
-                final Matcher sourceNameMatcher = eventSourceRegexp.matcher(event.getSourceName());
-                if (sourceNameMatcher.find()) {
-                    match = eventMessageRegexp == null
-                        || eventMessageRegexp.matcher(event.getMessage()).find();
-                }
-                else {
-                    match = event.getModuleId() != null
-                        && eventSourceRegexp.matcher(event.getModuleId()).find();
-                }
-            }
-            return match;
+            return isInScopeOfSuppression(event)
+                    && (isCheckMatch(event) || isIdMatch(event))
+                    && isMessageMatch(event);
         }
 

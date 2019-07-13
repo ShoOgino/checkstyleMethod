@@ -1,0 +1,14 @@
+        /**
+         * Checks whether the {@link AuditEvent} module ID matches the ID format.
+         * @param event {@link AuditEvent} instance.
+         * @return true if the {@link AuditEvent} module ID matches the ID format.
+         */
+        private boolean isIdMatch(AuditEvent event) {
+            boolean match = false;
+            if (event.getModuleId() != null) {
+                final Matcher idMatcher = eventSourceRegexp.matcher(event.getModuleId());
+                match = idMatcher.find();
+            }
+            return match;
+        }
+
