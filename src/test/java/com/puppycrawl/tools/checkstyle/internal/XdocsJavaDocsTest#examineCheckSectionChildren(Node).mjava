@@ -1,7 +1,7 @@
     private static void examineCheckSectionChildren(Node section) {
         for (Node subSection : XmlUtil.getChildrenElements(section)) {
             if (!"subsection".equals(subSection.getNodeName())) {
-                final String text = getNodeText(subSection, false);
+                final String text = getNodeText(subSection);
                 if (text.startsWith("Since Checkstyle")) {
                     CHECK_TEXT.put("since", text.substring(17));
                 }

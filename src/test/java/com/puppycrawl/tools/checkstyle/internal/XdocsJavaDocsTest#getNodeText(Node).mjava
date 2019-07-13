@@ -1,4 +1,4 @@
-    private static String getNodeText(Node node, boolean fixLinks) {
+    private static String getNodeText(Node node) {
         final StringBuilder result = new StringBuilder(20);
 
         for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
@@ -16,7 +16,7 @@
                 }
             }
             else {
-                appendNodeText(result, child, fixLinks);
+                appendNodeText(result, child);
             }
         }
 

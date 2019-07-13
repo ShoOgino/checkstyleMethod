@@ -1,5 +1,5 @@
     // -@cs[CyclomaticComplexity] No simple way to split this apart.
-    private static void appendNodeText(StringBuilder result, Node node, boolean fixLinks) {
+    private static void appendNodeText(StringBuilder result, Node node) {
         final String name = transformXmlToJavaDocName(node.getNodeName());
         final boolean list = "ol".equals(name) || "ul".equals(name);
         final boolean newLineOpenBefore = list || "p".equals(name) || "pre".equals(name)
@@ -24,7 +24,7 @@
         else {
             result.append('<');
             result.append(name);
-            result.append(getAttributeText(name, node.getAttributes(), fixLinks));
+            result.append(getAttributeText(name, node.getAttributes()));
             result.append('>');
         }
 
@@ -36,7 +36,7 @@
             result.append(sanitizeXml(node.getTextContent()));
         }
         else {
-            result.append(getNodeText(node, fixLinks));
+            result.append(getNodeText(node));
         }
 
         if (newLineClose) {
