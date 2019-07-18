@@ -7,6 +7,6 @@
         protected boolean isProperDefinition(DetailAST ident, DetailAST ast) {
             final String nameToFind = ident.getText();
             return nameToFind.equals(ast.getText())
-                && checkPosition(ast, ident);
+                && CheckUtil.isBeforeInSource(ast, ident);
         }
 

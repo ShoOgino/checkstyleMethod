@@ -1,0 +1,12 @@
+    /**
+     * Retrieves whether ast1 is located before ast2.
+     * @param ast1 the first node.
+     * @param ast2 the second node.
+     * @return true, if ast1 is located before ast2.
+     */
+    public static boolean isBeforeInSource(DetailAST ast1, DetailAST ast2) {
+        return ast1.getLineNo() < ast2.getLineNo()
+            || ast1.getLineNo() == ast2.getLineNo()
+                && ast1.getColumnNo() < ast2.getColumnNo();
+    }
+

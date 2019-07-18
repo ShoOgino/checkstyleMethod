@@ -8,9 +8,7 @@
         DetailAST child = node.getFirstChild();
         while (child != null) {
             final DetailAST newNode = getFirstNode(child);
-            if (newNode.getLineNo() < currentNode.getLineNo()
-                || newNode.getLineNo() == currentNode.getLineNo()
-                    && newNode.getColumnNo() < currentNode.getColumnNo()) {
+            if (isBeforeInSource(newNode, currentNode)) {
                 currentNode = newNode;
             }
             child = child.getNextSibling();
