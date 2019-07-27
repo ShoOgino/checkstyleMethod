@@ -1,0 +1,17 @@
+    /**
+     * The javadoc tokens that this check must be registered for. According to
+     * <a href="https://docs.oracle.com/en/java/javase/11/docs/specs/doc-comment-spec.html#block-tags">
+     * the specs</a> each block tag must appear at the beginning of a line, otherwise
+     * it will be interpreted as a plain text. This check looks for a block tag
+     * in the javadoc text, thus it needs the {@code TEXT} tokens.
+     *
+     * @return the javadoc token set this must be registered for.
+     * @see JavadocTokenTypes
+     */
+    @Override
+    public int[] getRequiredJavadocTokens() {
+        return new int[] {
+            JavadocTokenTypes.TEXT,
+        };
+    }
+

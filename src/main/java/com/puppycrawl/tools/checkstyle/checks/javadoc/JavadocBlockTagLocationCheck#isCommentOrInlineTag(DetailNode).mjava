@@ -1,0 +1,11 @@
+    /**
+     * Checks if the node can contain an unescaped block tag without violation.
+     *
+     * @param node to check
+     * @return {@code true} if node is {@code @code}, {@code @literal} or HTML comment.
+     */
+    private static boolean isCommentOrInlineTag(DetailNode node) {
+        return node.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG
+                || node.getType() == JavadocTokenTypes.HTML_COMMENT;
+    }
+
