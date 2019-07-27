@@ -14,35 +14,38 @@
             this.text = text;
             this.tagType = tagType;
 
+            final Pattern commentFormat;
+            if (this.tagType == TagType.ON) {
+                commentFormat = filter.onCommentFormat;
+            }
+            else {
+                commentFormat = filter.offCommentFormat;
+            }
+
             //Expand regexp for check and message
             //Does not intern Patterns with Utils.getPattern()
             String format = "";
             try {
-                if (this.tagType == TagType.ON) {
-                    format = CommonUtil.fillTemplateWithStringsByRegexp(
-                            filter.checkFormat, text, filter.onCommentFormat);
-                    tagCheckRegexp = Pattern.compile(format);
-                    if (filter.messageFormat == null) {
-                        tagMessageRegexp = null;
-                    }
-                    else {
-                        format = CommonUtil.fillTemplateWithStringsByRegexp(
-                                filter.messageFormat, text, filter.onCommentFormat);
-                        tagMessageRegexp = Pattern.compile(format);
-                    }
+                format = CommonUtil.fillTemplateWithStringsByRegexp(
+                        filter.checkFormat, text, commentFormat);
+                tagCheckRegexp = Pattern.compile(format);
+
+                if (filter.messageFormat == null) {
+                    tagMessageRegexp = null;
                 }
                 else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
-                            filter.checkFormat, text, filter.offCommentFormat);
-                    tagCheckRegexp = Pattern.compile(format);
-                    if (filter.messageFormat == null) {
-                        tagMessageRegexp = null;
-                    }
-                    else {
-                        format = CommonUtil.fillTemplateWithStringsByRegexp(
-                                filter.messageFormat, text, filter.offCommentFormat);
-                        tagMessageRegexp = Pattern.compile(format);
-                    }
+                            filter.messageFormat, text, commentFormat);
+                    tagMessageRegexp = Pattern.compile(format);
+                }
+
+                if (filter.idFormat == null) {
+                    tagIdRegexp = null;
+                }
+                else {
+                    format = CommonUtil.fillTemplateWithStringsByRegexp(
+                            filter.idFormat, text, commentFormat);
+                    tagIdRegexp = Pattern.compile(format);
                 }
             }
             catch (final PatternSyntaxException ex) {

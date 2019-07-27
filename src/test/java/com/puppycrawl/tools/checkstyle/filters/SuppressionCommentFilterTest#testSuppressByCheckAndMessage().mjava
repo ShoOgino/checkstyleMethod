@@ -1,10 +1,10 @@
     @Test
-    public void testSuppressByIdAndMessage() throws Exception {
+    public void testSuppressByCheckAndMessage() throws Exception {
         final DefaultConfiguration filterConfig =
             createModuleConfig(SuppressionCommentFilter.class);
         filterConfig.addAttribute("offCommentFormat", "CSOFF (\\w+) \\(allow (\\w+)\\)");
         filterConfig.addAttribute("onCommentFormat", "CSON (\\w+)");
-        filterConfig.addAttribute("idFormat", "$1");
+        filterConfig.addAttribute("checkFormat", "MemberNameCheck");
         filterConfig.addAttribute("messageFormat", "$2");
         final String[] suppressedViolationMessages = {
             "18:17: "
