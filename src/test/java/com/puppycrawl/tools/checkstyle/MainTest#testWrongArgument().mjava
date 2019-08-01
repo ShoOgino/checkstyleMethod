@@ -3,7 +3,7 @@
             throws Exception {
         exit.expectSystemExitWithStatus(-1);
         exit.checkAssertionAfterwards(() -> {
-            final String usage = "Unknown option: -w" + EOL
+            final String usage = "Unknown option: -q" + EOL
                     + SHORT_USAGE;
             assertEquals("Unexpected output log", "", systemOut.getLog());
             assertEquals("Unexpected system error log", usage, systemErr.getLog());
@@ -11,6 +11,6 @@
         // need to specify a file:
         // <files> is defined as a required positional param;
         // picocli verifies required parameters before checking unknown options
-        Main.main("-w", "file");
+        Main.main("-q", "file");
     }
 
