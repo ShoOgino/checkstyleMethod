@@ -1,0 +1,15 @@
+    @Override
+    public void visitJavadocToken(DetailNode ast) {
+        final DetailAST parentAst = getParent(getBlockCommentAst());
+
+        final boolean containsAnnotation =
+            AnnotationUtil.containsAnnotation(parentAst, DEPRECATED)
+            || AnnotationUtil.containsAnnotation(parentAst, FQ_DEPRECATED);
+
+        final boolean containsJavadocTag = containsDeprecatedTag(ast);
+
+        if (containsAnnotation ^ containsJavadocTag) {
+            log(parentAst.getLineNo(), MSG_KEY_ANNOTATION_MISSING_DEPRECATED);
+        }
+    }
+

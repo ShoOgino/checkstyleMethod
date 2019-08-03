@@ -1,0 +1,28 @@
+    /**
+     * Returns the parent node of the comment.
+     * @param commentBlock child node.
+     * @return parent node.
+     */
+    private static DetailAST getParent(DetailAST commentBlock) {
+        DetailAST result = commentBlock.getParent();
+
+        if (result == null) {
+            result = commentBlock.getNextSibling();
+        }
+
+        while (true) {
+            final int type = result.getType();
+            if (type == TokenTypes.TYPE || type == TokenTypes.MODIFIERS
+                    || type == TokenTypes.ANNOTATION || type == TokenTypes.ANNOTATIONS
+                    || type == TokenTypes.ARRAY_DECLARATOR || type == TokenTypes.TYPE_PARAMETERS
+                    || type == TokenTypes.DOT) {
+                result = result.getParent();
+            }
+            else {
+                break;
+            }
+        }
+
+        return result;
+    }
+
