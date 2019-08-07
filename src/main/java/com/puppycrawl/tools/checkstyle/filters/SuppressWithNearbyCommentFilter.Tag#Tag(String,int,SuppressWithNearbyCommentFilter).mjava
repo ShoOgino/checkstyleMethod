@@ -23,6 +23,14 @@
                             filter.messageFormat, text, filter.commentFormat);
                     tagMessageRegexp = Pattern.compile(format);
                 }
+                if (filter.idFormat == null) {
+                    tagIdRegexp = null;
+                }
+                else {
+                    format = CommonUtil.fillTemplateWithStringsByRegexp(
+                            filter.idFormat, text, filter.commentFormat);
+                    tagIdRegexp = Pattern.compile(format);
+                }
                 format = CommonUtil.fillTemplateWithStringsByRegexp(
                         filter.influenceFormat, text, filter.commentFormat);
 

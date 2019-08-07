@@ -1,16 +1,12 @@
     @Test
-    public void tesSuppressByIdAndMessage() throws Exception {
+    public void testSuppressByCheckAndNonMatchingId() throws Exception {
         final DefaultConfiguration filterConfig =
             createModuleConfig(SuppressWithNearbyCommentFilter.class);
-        filterConfig.addAttribute("commentFormat", "@cs-: (\\w+) \\(allow (\\w+)\\)");
-        filterConfig.addAttribute("idFormat", "$1");
-        filterConfig.addAttribute("messageFormat", "$2");
+        filterConfig.addAttribute("commentFormat", "@cs-: (\\w+) \\(\\w+\\)");
+        filterConfig.addAttribute("checkFormat", "MemberNameCheck");
+        filterConfig.addAttribute("idFormat", "emberNa");
         filterConfig.addAttribute("influenceFormat", "0");
-        final String[] suppressedViolationMessages = {
-            "15:17: "
-                + getCheckMessage(AbstractNameCheck.class,
-                    MSG_INVALID_PATTERN, "DEF", "^[a-z][a-zA-Z0-9]*$"),
-        };
+        final String[] suppressedViolationMessages = CommonUtil.EMPTY_STRING_ARRAY;
         final String[] expectedViolationMessages = {
             "5:17: "
                 + getCheckMessage(AbstractNameCheck.class,

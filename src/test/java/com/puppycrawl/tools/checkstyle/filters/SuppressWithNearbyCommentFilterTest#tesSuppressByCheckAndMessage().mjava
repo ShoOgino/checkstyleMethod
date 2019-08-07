@@ -1,9 +1,9 @@
     @Test
-    public void tesSuppressByIdAndMessage() throws Exception {
+    public void tesSuppressByCheckAndMessage() throws Exception {
         final DefaultConfiguration filterConfig =
             createModuleConfig(SuppressWithNearbyCommentFilter.class);
         filterConfig.addAttribute("commentFormat", "@cs-: (\\w+) \\(allow (\\w+)\\)");
-        filterConfig.addAttribute("idFormat", "$1");
+        filterConfig.addAttribute("checkFormat", "MemberNameCheck");
         filterConfig.addAttribute("messageFormat", "$2");
         filterConfig.addAttribute("influenceFormat", "0");
         final String[] suppressedViolationMessages = {

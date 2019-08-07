@@ -1,11 +1,12 @@
     @Test
-    public void testToStringOfTagClass() {
+    public void testToStringOfTagClassWithId() {
         final SuppressWithNearbyCommentFilter filter = new SuppressWithNearbyCommentFilter();
+        filter.setIdFormat(".*");
         final Object tag =
                 getTagsAfterExecution(filter, "filename", "//SUPPRESS CHECKSTYLE ignore").get(0);
         assertEquals("Invalid toString result",
             "Tag[text='SUPPRESS CHECKSTYLE ignore', firstLine=1, lastLine=1, "
-                    + "tagCheckRegexp=.*, tagMessageRegexp=null, tagIdRegexp=null]",
+                    + "tagCheckRegexp=.*, tagMessageRegexp=null, tagIdRegexp=.*]",
                     tag.toString());
     }
 
