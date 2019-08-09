@@ -1,8 +1,7 @@
     @Override
-    public void beginTree(DetailAST rootAST) {
-        final String[] lines = getLines();
-        for (int i = 0; i < lines.length; i++) {
-            final String line = lines[i];
+    protected void processFiltered(File file, FileText fileText) {
+        for (int i = 0; i < fileText.size(); i++) {
+            final String line = fileText.get(i);
             final int realLength = CommonUtil.lengthExpandedTabs(
                 line, line.length(), getTabWidth());
 
