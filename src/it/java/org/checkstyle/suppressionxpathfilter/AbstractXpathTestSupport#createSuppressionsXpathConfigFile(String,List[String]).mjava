@@ -1,9 +1,9 @@
     private String createSuppressionsXpathConfigFile(String checkName,
                                                      List<String> xpathQueries)
             throws Exception {
-
-        final File suppressionsXpathConfigFile = temporaryFolder.newFile();
-        try (Writer bw = Files.newBufferedWriter(suppressionsXpathConfigFile.toPath(),
+        final Path suppressionsXpathConfigPath =
+                Files.createTempFile(temporaryFolder, "", "");
+        try (Writer bw = Files.newBufferedWriter(suppressionsXpathConfigPath,
                 StandardCharsets.UTF_8)) {
             bw.write("<?xml version=\"1.0\"?>\n");
             bw.write("<!DOCTYPE suppressions PUBLIC\n");
@@ -22,6 +22,6 @@
             bw.write("</suppressions>");
         }
 
-        return suppressionsXpathConfigFile.getPath();
+        return suppressionsXpathConfigPath.toString();
     }
 

@@ -1,0 +1,17 @@
+    /**
+     * <p>
+     * Removes temporary folder with intermediate files.
+     * </p>
+     *
+     * @throws IOException if an IO error occurs
+     */
+    @AfterEach
+    public void removeTemporaryFolder() throws IOException {
+        try (DirectoryStream<Path> paths = Files.newDirectoryStream(temporaryFolder)) {
+            for (Path path : paths) {
+                Files.delete(path);
+            }
+        }
+        Files.delete(temporaryFolder);
+    }
+
