@@ -6,23 +6,11 @@
                 .getNextSibling().getFirstChild().getFirstChild();
         final JavadocDetailNodeParser parser = new JavadocDetailNodeParser();
         final JavadocDetailNodeParser.ParseStatus status = parser.parseJavadocAsDetailNode(ast);
-        final String actual = DetailNodeTreeStringPrinter.printTree(status.getTree(), "", "");
-        final String expected;
-
-        // line separators in the input file while running this test on Windows are different,
-        // so when we try to print tree, output also will have different line separators on windows
-        // and linux.
-        if (OS_NAME.startsWith("windows")) {
-            expected = new String(Files.readAllBytes(Paths.get(
-                    getPath("ExpectedJavadocDetailNodeParserWindows.txt"))),
-                    StandardCharsets.UTF_8);
-        }
-        else {
-            expected = new String(Files.readAllBytes(Paths.get(
-                    getPath("ExpectedJavadocDetailNodeParser.txt"))),
-                    StandardCharsets.UTF_8);
-        }
-
+        final String actual = toLfLineEnding(DetailNodeTreeStringPrinter.printTree(status.getTree(),
+                "", ""));
+        final String expected = toLfLineEnding(new String(Files.readAllBytes(Paths.get(
+                getPath("ExpectedJavadocDetailNodeParser.txt"))),
+                StandardCharsets.UTF_8));
         assertEquals("Invalid parse result", expected, actual);
     }
 

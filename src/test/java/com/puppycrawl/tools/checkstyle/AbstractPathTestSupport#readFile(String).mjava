@@ -6,8 +6,7 @@
      * @throws IOException if I/O exception occurs while reading
      */
     protected static String readFile(String filename) throws IOException {
-        return new String(Files.readAllBytes(
-                Paths.get(filename)), StandardCharsets.UTF_8)
-                .replaceAll(CRLF_REGEX, LF_REGEX);
+        return toLfLineEnding(new String(Files.readAllBytes(
+                Paths.get(filename)), StandardCharsets.UTF_8));
     }
 

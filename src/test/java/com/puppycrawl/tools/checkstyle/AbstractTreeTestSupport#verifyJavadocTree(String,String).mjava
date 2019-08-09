@@ -9,8 +9,8 @@
                                             String actualJavadocFilename) throws Exception {
         final String expectedContents = readFile(expectedTextPrintFilename);
 
-        final String actualContents = DetailNodeTreeStringPrinter.printFileAst(
-                new File(actualJavadocFilename)).replaceAll(CRLF_REGEX, LF_REGEX);
+        final String actualContents = toLfLineEnding(DetailNodeTreeStringPrinter.printFileAst(
+                new File(actualJavadocFilename)));
 
         assertEquals("Generated tree from the javadoc file should match the pre-defined tree",
                 expectedContents, actualContents);

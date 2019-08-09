@@ -9,8 +9,8 @@
                                                   String actualJavaFilename) throws Exception {
         final String expectedContents = readFile(expectedTextPrintFilename);
 
-        final String actualContents = AstTreeStringPrinter.printJavaAndJavadocTree(
-                new File(actualJavaFilename)).replaceAll(CRLF_REGEX, LF_REGEX);
+        final String actualContents = toLfLineEnding(AstTreeStringPrinter.printJavaAndJavadocTree(
+                new File(actualJavaFilename)));
 
         assertEquals("Generated AST from the java file should match the pre-defined AST",
                 expectedContents, actualContents);

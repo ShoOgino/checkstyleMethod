@@ -10,8 +10,8 @@
             throws Exception {
         final String expectedContents = readFile(expectedTextPrintFileName);
 
-        final String actualContents = AstTreeStringPrinter.printFileAst(
-                new File(actualJavaFileName), withComments).replaceAll(CRLF_REGEX, LF_REGEX);
+        final String actualContents = toLfLineEnding(AstTreeStringPrinter.printFileAst(
+                new File(actualJavaFileName), withComments));
 
         assertEquals("Generated AST from Java file should match pre-defined AST", expectedContents,
                 actualContents);

@@ -2,8 +2,10 @@
     public void testAllBlockComments() throws Exception {
         final DefaultConfiguration checkConfig =
                 createModuleConfig(BlockCommentListenerCheck.class);
+        final String path = getPath("InputFullOfBlockComments.java");
+        lineSeparator = CheckUtil.getLineSeparatorForFile(path, StandardCharsets.UTF_8);
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
-        verify(checkConfig, getPath("InputFullOfBlockComments.java"), expected);
+        verify(checkConfig, path, expected);
         Assert.assertTrue("All comments should be empty", ALL_COMMENTS.isEmpty());
     }
 
