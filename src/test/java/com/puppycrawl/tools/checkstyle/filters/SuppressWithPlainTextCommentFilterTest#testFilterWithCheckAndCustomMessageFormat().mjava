@@ -1,10 +1,10 @@
     @Test
-    public void testFilterWithIdAndCustomMessageFormat() throws Exception {
+    public void testFilterWithCheckAndCustomMessageFormat() throws Exception {
         final DefaultConfiguration filterCfg =
             createModuleConfig(SuppressWithPlainTextCommentFilter.class);
         filterCfg.addAttribute("offCommentFormat", "CHECKSTYLE stop (\\w+) (\\w+)");
         filterCfg.addAttribute("onCommentFormat", "CHECKSTYLE resume (\\w+) (\\w+)");
-        filterCfg.addAttribute("idFormat", "$1");
+        filterCfg.addAttribute("checkFormat", "RegexpSinglelineCheck");
         filterCfg.addAttribute("messageFormat", "$2");
 
         final DefaultConfiguration regexpCheckCfg = createModuleConfig(RegexpSinglelineCheck.class);

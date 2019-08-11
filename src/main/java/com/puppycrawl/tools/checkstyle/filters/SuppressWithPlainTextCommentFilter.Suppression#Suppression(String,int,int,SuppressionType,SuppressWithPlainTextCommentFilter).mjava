@@ -18,35 +18,36 @@
             this.columnNo = columnNo;
             this.suppressionType = suppressionType;
 
+            final Pattern commentFormat;
+            if (this.suppressionType == SuppressionType.ON) {
+                commentFormat = filter.onCommentFormat;
+            }
+            else {
+                commentFormat = filter.offCommentFormat;
+            }
+
             //Expand regexp for check and message
             //Does not intern Patterns with Utils.getPattern()
             String format = "";
             try {
-                if (this.suppressionType == SuppressionType.ON) {
-                    format = CommonUtil.fillTemplateWithStringsByRegexp(
-                            filter.checkFormat, text, filter.onCommentFormat);
-                    eventSourceRegexp = Pattern.compile(format);
-                    if (filter.messageFormat == null) {
-                        eventMessageRegexp = null;
-                    }
-                    else {
-                        format = CommonUtil.fillTemplateWithStringsByRegexp(
-                                filter.messageFormat, text, filter.onCommentFormat);
-                        eventMessageRegexp = Pattern.compile(format);
-                    }
+                format = CommonUtil.fillTemplateWithStringsByRegexp(
+                        filter.checkFormat, text, commentFormat);
+                eventSourceRegexp = Pattern.compile(format);
+                if (filter.messageFormat == null) {
+                    eventMessageRegexp = null;
                 }
                 else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
-                            filter.checkFormat, text, filter.offCommentFormat);
-                    eventSourceRegexp = Pattern.compile(format);
-                    if (filter.messageFormat == null) {
-                        eventMessageRegexp = null;
-                    }
-                    else {
-                        format = CommonUtil.fillTemplateWithStringsByRegexp(
-                                filter.messageFormat, text, filter.offCommentFormat);
-                        eventMessageRegexp = Pattern.compile(format);
-                    }
+                            filter.messageFormat, text, commentFormat);
+                    eventMessageRegexp = Pattern.compile(format);
+                }
+                if (filter.idFormat == null) {
+                    eventIdRegexp = null;
+                }
+                else {
+                    format = CommonUtil.fillTemplateWithStringsByRegexp(
+                            filter.idFormat, text, commentFormat);
+                    eventIdRegexp = Pattern.compile(format);
                 }
             }
             catch (final PatternSyntaxException ex) {
