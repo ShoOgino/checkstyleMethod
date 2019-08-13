@@ -1,0 +1,27 @@
+    @Test
+    public void testClassNameInner() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionAbstractClassNameInner.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AbstractClassNameCheck.class);
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(AbstractClassNameCheck.class,
+                AbstractClassNameCheck.MSG_ILLEGAL_ABSTRACT_CLASS_NAME,
+                    "MyClass", "^Abstract.+$"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAbstractClassNameInner']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='MyClass']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAbstractClassNameInner']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='MyClass']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAbstractClassNameInner']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='MyClass']]/MODIFIERS/ABSTRACT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
