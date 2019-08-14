@@ -20,9 +20,9 @@
             assertEquals("Unexpected output log", auditStartMessage.getMessage() + EOL
                     + "[ERROR] " + expectedPath + ":3:14: "
                     + invalidPatternMessageMain.getMessage() + " [TypeName]" + EOL
-                    + auditFinishMessage.getMessage() + EOL
-                    + errorCounterTwoMessage.getMessage() + EOL, systemOut.getLog());
-            assertEquals("Unexpected system error log", "", systemErr.getLog());
+                    + auditFinishMessage.getMessage() + EOL, systemOut.getLog());
+            assertEquals("Unexpected system error log",
+                    errorCounterTwoMessage.getMessage() + EOL, systemErr.getLog());
         });
         Main.main("-c",
                 getPath("InputMainConfig-classname2-error.xml"),
