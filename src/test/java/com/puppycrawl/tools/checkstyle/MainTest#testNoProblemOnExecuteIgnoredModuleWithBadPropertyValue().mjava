@@ -1,0 +1,11 @@
+    @Test
+    public void testNoProblemOnExecuteIgnoredModuleWithBadPropertyValue() throws Exception {
+        exit.checkAssertionAfterwards(() -> {
+            assertTrue("Unexpected system error log", systemErr.getLog().isEmpty());
+        });
+
+        Main.main("-c", getPath("InputMainConfig-TypeName-bad-value.xml"),
+                "",
+                getPath("InputMain.java"));
+    }
+
