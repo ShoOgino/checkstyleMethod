@@ -1,7 +1,7 @@
     @Test
     public void testProcessStartTwo() throws Exception {
-        final File fileToProcess =
-                new File(getPath("SuppressionXpathRegressionProcessStartTwo.java"));
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionGenericWhitespaceStartTwo.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(GenericWhitespaceCheck.class);
@@ -12,12 +12,12 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartTwo']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='bad']]/PARAMETERS"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionGenericWhitespaceStartTwo']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]/PARAMETERS"
                 + "/PARAMETER_DEF[./IDENT[@text='consumer']]"
                 + "/TYPE[./IDENT[@text='Consumer']]/TYPE_ARGUMENTS",
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartTwo']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='bad']]/PARAMETERS"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionGenericWhitespaceStartTwo']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]/PARAMETERS"
                 + "/PARAMETER_DEF[./IDENT[@text='consumer']]"
                 + "/TYPE[./IDENT[@text='Consumer']]/TYPE_ARGUMENTS/GENERIC_START"
         );

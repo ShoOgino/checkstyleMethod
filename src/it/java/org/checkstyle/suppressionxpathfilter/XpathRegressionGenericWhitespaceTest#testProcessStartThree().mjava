@@ -1,7 +1,7 @@
     @Test
     public void testProcessStartThree() throws Exception {
-        final File fileToProcess =
-                new File(getPath("SuppressionXpathRegressionProcessStartThree.java"));
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionGenericWhitespaceStartThree.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(GenericWhitespaceCheck.class);
@@ -12,14 +12,14 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
-                + "METHOD_DEF[./IDENT[@text='bad']]",
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
-                + "METHOD_DEF[./IDENT[@text='bad']]/MODIFIERS",
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
-                + "METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS",
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessStartThree']]/OBJBLOCK/"
-                + "METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS/GENERIC_START"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionGenericWhitespaceStartThree']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionGenericWhitespaceStartThree']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]/MODIFIERS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionGenericWhitespaceStartThree']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionGenericWhitespaceStartThree']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS/GENERIC_START"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

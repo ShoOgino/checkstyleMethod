@@ -1,0 +1,26 @@
+    @Test
+    public void validateIntegrationTestClassNames() throws Exception {
+        final Pattern pattern = Pattern.compile("^XpathRegression(.+)Test\\.java$");
+        try (DirectoryStream<Path> javaPaths = Files.newDirectoryStream(javaDir)) {
+            for (Path path : javaPaths) {
+                assertTrue(path + " is not a regular file", Files.isRegularFile(path));
+                final String filename = path.toFile().getName();
+                if (filename.startsWith("Abstract")) {
+                    continue;
+                }
+
+                final Matcher matcher = pattern.matcher(filename);
+                assertTrue("Invalid test file: " + filename + ", expected pattern: " + pattern,
+                        matcher.matches());
+
+                final String check = matcher.group(1);
+                assertTrue("Unknown check '" + check + "' in test file: " + filename,
+                        simpleCheckNames.contains(check));
+
+                assertFalse("Check '" + check + "' is now tested. Please update the todo list in"
+                        + " XpathRegressionTest.MISSING_CHECK_NAMES",
+                        MISSING_CHECK_NAMES.contains(check));
+            }
+        }
+    }
+

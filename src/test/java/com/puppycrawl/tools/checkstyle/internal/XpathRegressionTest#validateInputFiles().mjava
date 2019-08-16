@@ -1,0 +1,22 @@
+    @Test
+    public void validateInputFiles() throws Exception {
+        try (DirectoryStream<Path> dirs = Files.newDirectoryStream(inputDir)) {
+            for (Path dir : dirs) {
+                // input directory must be named in lower case
+                assertTrue(dir + " is not a directory", Files.isDirectory(dir));
+                final String dirName = dir.toFile().getName();
+                assertTrue("Invalid directory name: " + dirName,
+                        allowedDirectoryAndChecks.containsKey(dirName));
+
+                // input directory must be connected to an existing test
+                final String check = allowedDirectoryAndChecks.get(dirName);
+                final Path javaPath = javaDir.resolve("XpathRegression" + check + "Test.java");
+                assertTrue("Input directory '" + dir + "' is not connected to Java test case: "
+                        + javaPath, Files.exists(javaPath));
+
+                // input files should named correctly
+                validateInputDirectory(dir);
+            }
+        }
+    }
+

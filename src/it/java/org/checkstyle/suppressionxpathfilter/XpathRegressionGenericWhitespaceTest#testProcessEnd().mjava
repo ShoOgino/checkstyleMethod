@@ -1,7 +1,7 @@
     @Test
     public void testProcessEnd() throws Exception {
-        final File fileToProcess =
-                new File(getPath("SuppressionXpathRegressionProcessEnd.java"));
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionGenericWhitespaceEnd.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(GenericWhitespaceCheck.class);
@@ -12,8 +12,9 @@
         };
 
         final List<String> expectedXpathQueries = Collections.singletonList(
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionProcessEnd']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='bad']]/PARAMETERS/PARAMETER_DEF[./IDENT[@text='cls']]"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionGenericWhitespaceEnd']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='bad']]"
+                + "/PARAMETERS/PARAMETER_DEF[./IDENT[@text='cls']]"
                 + "/TYPE[./IDENT[@text='Class']]/TYPE_ARGUMENTS/GENERIC_END"
         );
 

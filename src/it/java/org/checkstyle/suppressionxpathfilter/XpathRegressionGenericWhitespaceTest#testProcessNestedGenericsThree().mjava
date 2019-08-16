@@ -1,7 +1,7 @@
     @Test
     public void testProcessNestedGenericsThree() throws Exception {
-        final File fileToProcess =
-                new File(getPath("SuppressionXpathRegressionProcessNestedGenericsThree.java"));
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionGenericWhitespaceNestedGenericsThree.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(GenericWhitespaceCheck.class);
@@ -13,8 +13,8 @@
 
         final List<String> expectedXpathQueries = Collections.singletonList(
             "/CLASS_DEF[./IDENT["
-                + "@text='SuppressionXpathRegressionProcessNestedGenericsThree']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS"
+                + "@text='SuppressionXpathRegressionGenericWhitespaceNestedGenericsThree']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS"
                 + "/TYPE_PARAMETER[./IDENT[@text='E']]"
                 + "/TYPE_UPPER_BOUNDS[./IDENT[@text='Enum']]/TYPE_ARGUMENTS/GENERIC_END"
         );

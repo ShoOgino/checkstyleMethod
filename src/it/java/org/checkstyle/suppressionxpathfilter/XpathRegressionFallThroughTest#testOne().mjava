@@ -1,7 +1,7 @@
     @Test
     public void testOne() throws Exception {
         final File fileToProcess =
-                new File(getPath("SuppressionXpathRegressionExplicitOne.java"));
+                new File(getPath("SuppressionXpathRegressionFallThroughOne.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(FallThroughCheck.class);
@@ -12,10 +12,10 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionExplicitOne']]/OBJBLOCK"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionFallThroughOne']]/OBJBLOCK"
                 + "/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_SWITCH/CASE_GROUP["
                 + "./LITERAL_CASE/EXPR/NUM_INT[@text='2']]",
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionExplicitOne']]/OBJBLOCK"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionFallThroughOne']]/OBJBLOCK"
                 + "/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_SWITCH/CASE_GROUP/LITERAL_CASE"
         );
 

@@ -1,7 +1,7 @@
     @Test
     public void testProcessSingleGenericTwo() throws Exception {
-        final File fileToProcess =
-                new File(getPath("SuppressionXpathRegressionProcessSingleGenericTwo.java"));
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionGenericWhitespaceSingleGenericTwo.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(GenericWhitespaceCheck.class);
@@ -13,8 +13,8 @@
 
         final List<String> expectedXpathQueries = Collections.singletonList(
             "/CLASS_DEF[./IDENT["
-                + "@text='SuppressionXpathRegressionProcessSingleGenericTwo']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS/GENERIC_END"
+                + "@text='SuppressionXpathRegressionGenericWhitespaceSingleGenericTwo']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='bad']]/TYPE_PARAMETERS/GENERIC_END"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,

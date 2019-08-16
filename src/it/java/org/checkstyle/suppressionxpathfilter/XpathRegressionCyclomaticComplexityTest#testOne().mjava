@@ -2,7 +2,7 @@
     public void testOne() throws Exception {
 
         final File fileToProcess =
-                new File(getPath("SuppressionXpathRegressionCyclomaticOne.java"));
+                new File(getPath("SuppressionXpathRegressionCyclomaticComplexityOne.java"));
 
         final DefaultConfiguration moduleConfig =
                 createModuleConfig(CyclomaticComplexityCheck.class);
@@ -14,12 +14,12 @@
         };
 
         final List<String> expectedXpathQueries = Arrays.asList(
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionCyclomaticOne']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='test']]",
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionCyclomaticOne']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS",
-            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionCyclomaticOne']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS/LITERAL_PUBLIC"
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionCyclomaticComplexityOne']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionCyclomaticComplexityOne']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionCyclomaticComplexityOne']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS/LITERAL_PUBLIC"
                 );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation,
