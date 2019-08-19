@@ -7,35 +7,15 @@
         if (!allowMultipleEmptyLinesInsideClassMembers) {
             processMultipleLinesInside(ast);
         }
-
+        if (ast.getType() == TokenTypes.PACKAGE_DEF) {
+            checkCommentInModifiers(ast);
+        }
         DetailAST nextToken = ast.getNextSibling();
         while (nextToken != null && isComment(nextToken)) {
             nextToken = nextToken.getNextSibling();
         }
         if (nextToken != null) {
-            final int astType = ast.getType();
-            switch (astType) {
-                case TokenTypes.VARIABLE_DEF:
-                    processVariableDef(ast, nextToken);
-                    break;
-                case TokenTypes.IMPORT:
-                case TokenTypes.STATIC_IMPORT:
-                    processImport(ast, nextToken);
-                    break;
-                case TokenTypes.PACKAGE_DEF:
-                    processPackage(ast, nextToken);
-                    break;
-                default:
-                    if (nextToken.getType() == TokenTypes.RCURLY) {
-                        if (hasNotAllowedTwoEmptyLinesBefore(nextToken)) {
-                            log(ast.getLineNo(), MSG_MULTIPLE_LINES_AFTER, ast.getText());
-                        }
-                    }
-                    else if (!hasEmptyLineAfter(ast)) {
-                        log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED,
-                            nextToken.getText());
-                    }
-            }
+            checkToken(ast, nextToken);
         }
     }
 

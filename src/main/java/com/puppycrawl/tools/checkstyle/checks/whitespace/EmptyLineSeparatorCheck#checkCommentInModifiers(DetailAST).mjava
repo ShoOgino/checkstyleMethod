@@ -1,0 +1,12 @@
+    /**
+     * Checks that packageDef token is separated from comment in modifiers.
+     *
+     * @param packageDef package def token
+     */
+    private void checkCommentInModifiers(DetailAST packageDef) {
+        final Optional<DetailAST> comment = findCommentUnder(packageDef);
+        if (comment.isPresent()) {
+            log(comment.get().getLineNo(), MSG_SHOULD_BE_SEPARATED, comment.get().getText());
+        }
+    }
+

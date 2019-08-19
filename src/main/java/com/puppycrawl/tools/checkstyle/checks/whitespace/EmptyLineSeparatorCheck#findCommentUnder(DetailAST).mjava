@@ -1,0 +1,14 @@
+    /**
+     * Finds comment in next sibling of given packageDef.
+     *
+     * @param packageDef token to check
+     * @return comment under the token
+     */
+    private static Optional<DetailAST> findCommentUnder(DetailAST packageDef) {
+        return Optional.ofNullable(packageDef.getNextSibling())
+            .map(sibling -> sibling.findFirstToken(TokenTypes.MODIFIERS))
+            .map(DetailAST::getFirstChild)
+            .filter(EmptyLineSeparatorCheck::isComment)
+            .filter(comment -> comment.getLineNo() == packageDef.getLineNo() + 1);
+    }
+

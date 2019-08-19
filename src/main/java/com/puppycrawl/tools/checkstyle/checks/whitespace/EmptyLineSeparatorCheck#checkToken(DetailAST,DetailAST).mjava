@@ -1,0 +1,32 @@
+    /**
+     * Checks that token and next token are separated.
+     *
+     * @param ast token to validate
+     * @param nextToken next sibling of the token
+     */
+    private void checkToken(DetailAST ast, DetailAST nextToken) {
+        final int astType = ast.getType();
+        switch (astType) {
+            case TokenTypes.VARIABLE_DEF:
+                processVariableDef(ast, nextToken);
+                break;
+            case TokenTypes.IMPORT:
+            case TokenTypes.STATIC_IMPORT:
+                processImport(ast, nextToken);
+                break;
+            case TokenTypes.PACKAGE_DEF:
+                processPackage(ast, nextToken);
+                break;
+            default:
+                if (nextToken.getType() == TokenTypes.RCURLY) {
+                    if (hasNotAllowedTwoEmptyLinesBefore(nextToken)) {
+                        log(ast.getLineNo(), MSG_MULTIPLE_LINES_AFTER, ast.getText());
+                    }
+                }
+                else if (!hasEmptyLineAfter(ast)) {
+                    log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED,
+                        nextToken.getText());
+                }
+        }
+    }
+

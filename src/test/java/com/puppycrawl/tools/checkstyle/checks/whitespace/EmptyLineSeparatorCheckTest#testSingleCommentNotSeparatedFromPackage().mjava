@@ -1,0 +1,11 @@
+    @Test
+    public void testSingleCommentNotSeparatedFromPackage() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
+        final String[] expected = {
+            "12: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "//"),
+        };
+        verify(checkConfig,
+            getPath("InputEmptyLineSeparatorSingleCommentUnderPackage.java"),
+            expected);
+    }
+
