@@ -1,0 +1,30 @@
+    @Test
+    public void testSwitchAllowInSwitchCaseFalse() throws Exception {
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionAvoidNestedBlocksSwitch1.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AvoidNestedBlocksCheck.class);
+
+        final String[] expectedViolation = {
+            "9:21: " + getCheckMessage(AvoidNestedBlocksCheck.class,
+                    AvoidNestedBlocksCheck.MSG_KEY_BLOCK_NESTED),
+            "16:13: " + getCheckMessage(AvoidNestedBlocksCheck.class,
+                    AvoidNestedBlocksCheck.MSG_KEY_BLOCK_NESTED),
+            "20:21: " + getCheckMessage(AvoidNestedBlocksCheck.class,
+                    AvoidNestedBlocksCheck.MSG_KEY_BLOCK_NESTED),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAvoidNestedBlocksSwitch1']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='s']]/SLIST/LITERAL_SWITCH"
+                        + "/CASE_GROUP/SLIST",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAvoidNestedBlocksSwitch1']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='s']]/SLIST/LITERAL_SWITCH"
+                        + "/CASE_GROUP/SLIST/SLIST"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

@@ -1,0 +1,22 @@
+    @Test
+    public void testEmpty() throws Exception {
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionAvoidNestedBlocksEmpty.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AvoidNestedBlocksCheck.class);
+
+        final String[] expectedViolation = {
+            "6:9: " + getCheckMessage(AvoidNestedBlocksCheck.class,
+                    AvoidNestedBlocksCheck.MSG_KEY_BLOCK_NESTED),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAvoidNestedBlocksEmpty']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='empty']]/SLIST/SLIST"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
