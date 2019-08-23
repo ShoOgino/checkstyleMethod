@@ -1,0 +1,13 @@
+        private static void visitField(DetailAST node, DetailAST parentNode) {
+            if (ScopeUtil.isInScope(parentNode, Scope.PUBLIC)) {
+                final String propertyName = parentNode.findFirstToken(TokenTypes.IDENT).getText();
+                final String propertyDoc = CHECK_PROPERTY_DOC.get(propertyName);
+
+                if (propertyDoc != null) {
+                    Assert.assertEquals(checkName + "'s class field-level JavaDoc for "
+                                    + propertyName, makeFirstUpper(propertyDoc),
+                            getJavaDocText(node));
+                }
+            }
+        }
+
