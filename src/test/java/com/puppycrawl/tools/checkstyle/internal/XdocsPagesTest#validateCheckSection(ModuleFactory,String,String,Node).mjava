@@ -31,8 +31,8 @@
                 validatePropertySection(fileName, sectionName, null, instance);
                 subSectionPos++;
             }
-            if (subSectionPos == 4 && !"Error Messages".equals(subSectionName)) {
-                validateErrorSection(fileName, sectionName, null, instance);
+            if (subSectionPos == 4 && !"Violation Messages".equals(subSectionName)) {
+                validateViolationSection(fileName, sectionName, null, instance);
                 subSectionPos++;
             }
 
@@ -48,7 +48,7 @@
                     validateUsageExample(fileName, sectionName, subSection);
                     break;
                 case 4:
-                    validateErrorSection(fileName, sectionName, subSection, instance);
+                    validateViolationSection(fileName, sectionName, subSection, instance);
                     break;
                 case 5:
                     validatePackageSection(fileName, sectionName, subSection, instance);
