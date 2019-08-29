@@ -1,30 +1,30 @@
     @Test
     public void testGenerateXpathSuppressionOptionTwo() throws Exception {
-        final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + EOL
-            + "<!DOCTYPE suppressions PUBLIC" + EOL
-            + "    \"-//Checkstyle//DTD SuppressionXpathFilter Experimental Configuration 1.2"
-            + "//EN\"" + EOL
-            + "    \"https://checkstyle.org/dtds/suppressions_1_2_xpath_experimental.dtd\">" + EOL
-            + "<suppressions>" + EOL
-            + "<suppress-xpath" + EOL
-            + "       files=\"InputMainGenerateXpathSuppressions.java\"" + EOL
-            + "       checks=\"ExplicitInitializationCheck\"" + EOL
-            + "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
-            + "/OBJBLOCK/VARIABLE_DEF/IDENT[@text='low']\"/>" + EOL
-            + "<suppress-xpath" + EOL
-            + "       files=\"InputMainGenerateXpathSuppressions.java\"" + EOL
-            + "       checks=\"IllegalThrowsCheck\"" + EOL
-            + "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
-            + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/LITERAL_THROWS"
-            + "/IDENT[@text='RuntimeException']\"/>" + EOL
-            + "<suppress-xpath" + EOL
-            + "       files=\"InputMainGenerateXpathSuppressions.java\"" + EOL
-            + "       checks=\"NestedForDepthCheck\"" + EOL
-            + "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
-            + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_FOR/SLIST"
-            + "/LITERAL_FOR/SLIST"
-            + "/LITERAL_FOR\"/>" + EOL
-            + "</suppressions>" + EOL;
+        final String expected = addEndOfLine(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+            "<!DOCTYPE suppressions PUBLIC",
+            "    \"-//Checkstyle//DTD SuppressionXpathFilter Experimental Configuration 1.2"
+                + "//EN\"",
+            "    \"https://checkstyle.org/dtds/suppressions_1_2_xpath_experimental.dtd\">",
+            "<suppressions>",
+            "<suppress-xpath",
+            "       files=\"InputMainGenerateXpathSuppressions.java\"",
+            "       checks=\"ExplicitInitializationCheck\"",
+            "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
+                + "/OBJBLOCK/VARIABLE_DEF/IDENT[@text='low']\"/>",
+            "<suppress-xpath",
+            "       files=\"InputMainGenerateXpathSuppressions.java\"",
+            "       checks=\"IllegalThrowsCheck\"",
+            "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/LITERAL_THROWS"
+                + "/IDENT[@text='RuntimeException']\"/>",
+            "<suppress-xpath",
+            "       files=\"InputMainGenerateXpathSuppressions.java\"",
+            "       checks=\"NestedForDepthCheck\"",
+            "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_FOR/SLIST"
+                + "/LITERAL_FOR/SLIST/LITERAL_FOR\"/>",
+            "</suppressions>");
 
         exit.checkAssertionAfterwards(() -> {
             assertEquals("Unexpected output log",

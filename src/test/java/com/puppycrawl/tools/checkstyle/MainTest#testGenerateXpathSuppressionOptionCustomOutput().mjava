@@ -1,23 +1,23 @@
     @Test
     public void testGenerateXpathSuppressionOptionCustomOutput() throws Exception {
-        final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + EOL
-                + "<!DOCTYPE suppressions PUBLIC" + EOL
-                + "    \"-//Checkstyle//DTD SuppressionXpathFilter Experimental Configuration 1.2"
-                + "//EN\"" + EOL
-                + "    \"https://checkstyle.org/dtds/suppressions_1_2_xpath_experimental.dtd\">"
-                + EOL
-                + "<suppressions>" + EOL
-                + "<suppress-xpath" + EOL
-                + "       files=\"InputMainGenerateXpathSuppressionsTabWidth.java\"" + EOL
-                + "       checks=\"ExplicitInitializationCheck\"" + EOL
-                + "       query=\"/CLASS_DEF[./IDENT["
-                + "@text='InputMainGenerateXpathSuppressionsTabWidth']]"
-                + "/OBJBLOCK/VARIABLE_DEF/IDENT[@text='low']\"/>" + EOL
-                + "</suppressions>" + EOL;
+        final String expected = addEndOfLine(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+                "<!DOCTYPE suppressions PUBLIC",
+                "    \"-//Checkstyle//DTD SuppressionXpathFilter Experimental Configuration 1.2"
+                    + "//EN\"",
+                "    \"https://checkstyle.org/dtds/suppressions_1_2_xpath_experimental.dtd\">",
+                "<suppressions>",
+                "<suppress-xpath",
+                "       files=\"InputMainGenerateXpathSuppressionsTabWidth.java\"",
+                "       checks=\"ExplicitInitializationCheck\"",
+                "       query=\"/CLASS_DEF[./IDENT["
+                    + "@text='InputMainGenerateXpathSuppressionsTabWidth']]"
+                    + "/OBJBLOCK/VARIABLE_DEF/IDENT[@text='low']\"/>",
+                "</suppressions>");
         final File file = temporaryFolder.newFile();
         exit.checkAssertionAfterwards(() -> {
             try (BufferedReader br = Files.newBufferedReader(file.toPath())) {
-                final String fileContent = br.lines().collect(Collectors.joining(EOL)) + EOL;
+                final String fileContent = br.lines().collect(Collectors.joining(EOL, "", EOL));
                 assertEquals("Unexpected output log",
                         expected, fileContent);
                 assertEquals("Unexpected system error log",

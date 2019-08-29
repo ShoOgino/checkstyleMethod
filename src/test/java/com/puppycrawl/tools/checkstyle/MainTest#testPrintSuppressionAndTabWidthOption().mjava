@@ -1,19 +1,18 @@
     @Test
     public void testPrintSuppressionAndTabWidthOption() throws Exception {
-        final String expected = "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]"
-                + "/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='getName']]/SLIST/VARIABLE_DEF[./IDENT[@text='var']]"
-                + EOL
-                + "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='getName']]/SLIST/VARIABLE_DEF[./IDENT[@text='var']]"
-                + "/MODIFIERS" + EOL
-                + "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='getName']]/SLIST/VARIABLE_DEF[./IDENT[@text='var']]"
-                + "/TYPE" + EOL
-                + "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/OBJBLOCK"
-                + "/METHOD_DEF[./IDENT[@text='getName']]/SLIST/VARIABLE_DEF[./IDENT[@text='var']]"
-                + "/TYPE/LITERAL_INT"
-                + EOL;
+        final String expected = addEndOfLine(
+            "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/OBJBLOCK"
+                    + "/METHOD_DEF[./IDENT[@text='getName']]"
+                    + "/SLIST/VARIABLE_DEF[./IDENT[@text='var']]",
+                "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/OBJBLOCK"
+                    + "/METHOD_DEF[./IDENT[@text='getName']]/SLIST"
+                    + "/VARIABLE_DEF[./IDENT[@text='var']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/OBJBLOCK"
+                    + "/METHOD_DEF[./IDENT[@text='getName']]/SLIST"
+                    + "/VARIABLE_DEF[./IDENT[@text='var']]/TYPE",
+                "/CLASS_DEF[./IDENT[@text='InputMainSuppressionsStringPrinter']]/OBJBLOCK"
+                    + "/METHOD_DEF[./IDENT[@text='getName']]/SLIST"
+                    + "/VARIABLE_DEF[./IDENT[@text='var']]/TYPE/LITERAL_INT");
 
         exit.checkAssertionAfterwards(() -> {
             assertEquals("Unexpected output log",
