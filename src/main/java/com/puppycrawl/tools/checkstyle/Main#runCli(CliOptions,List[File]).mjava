@@ -20,6 +20,10 @@
                     JavaParser.Options.WITHOUT_COMMENTS);
             System.out.print(stringAst);
         }
+        else if (Objects.nonNull(options.xpath)) {
+            final String branch = XpathUtil.printXpathBranch(options.xpath, filesToProcess.get(0));
+            System.out.print(branch);
+        }
         else if (options.printAstWithComments) {
             final File file = filesToProcess.get(0);
             final String stringAst = AstTreeStringPrinter.printFileAst(file,

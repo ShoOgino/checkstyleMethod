@@ -1,0 +1,15 @@
+    @Test
+    public void testPrintXpathCommentNode() throws Exception {
+        final String expected = addEndOfLine(
+            "CLASS_DEF -> CLASS_DEF [17:0]",
+            "`--OBJBLOCK -> OBJBLOCK [17:19]",
+            "    |--CTOR_DEF -> CTOR_DEF [19:4]",
+            "    |   |--BLOCK_COMMENT_BEGIN -> /* [18:4]");
+        exit.checkAssertionAfterwards(() -> {
+            Assert.assertThat("Unexpected output log", systemOut.getLog(), is(expected));
+            Assert.assertThat("Unexpected system error log", systemErr.getLog(), is(""));
+        });
+        Main.main("-b", "/CLASS_DEF//BLOCK_COMMENT_BEGIN",
+            getPath("InputMainXPath.java"));
+    }
+
