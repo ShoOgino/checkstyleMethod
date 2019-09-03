@@ -4,7 +4,7 @@
         checkConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
         checkConfig.addAttribute("tokens", "LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, "
             + "LITERAL_IF, LITERAL_ELSE, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, "
-            + "LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT");
+            + "LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT, ANNOTATION_DEF");
         final String[] expected = {
             "8:77: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 77),
             "11:65: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 65),
@@ -68,6 +68,14 @@
             "228:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
             "231:30: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 30),
             "234:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+            "237:38: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 38),
+            "239:56: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 56),
+            "242:24: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 24),
+            "252:29: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 29),
+            "254:40: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 40),
+            "258:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "261:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "263:61: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 61),
         };
         verify(checkConfig, getPath("InputRightCurlyAnnotations.java"), expected);
     }

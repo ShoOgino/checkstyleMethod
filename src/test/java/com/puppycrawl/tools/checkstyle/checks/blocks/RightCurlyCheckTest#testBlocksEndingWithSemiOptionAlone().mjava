@@ -2,7 +2,8 @@
     public void testBlocksEndingWithSemiOptionAlone() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
-        checkConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, CTOR_DEF");
+        checkConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, "
+                + "CTOR_DEF, ANNOTATION_DEF");
         final String[] expected = {
             "11:31: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 31),
             "14:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
@@ -10,6 +11,11 @@
             "19:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
             "22:30: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 30),
             "25:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+            "33:29: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 29),
+            "35:40: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 40),
+            "39:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "42:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "44:61: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 61),
         };
         verify(checkConfig, getPath("InputRightCurlyAloneBlocksWithSemi.java"), expected);
     }

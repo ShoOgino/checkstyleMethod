@@ -4,7 +4,7 @@
         checkConfig.addAttribute("option", RightCurlyOption.ALONE_OR_SINGLELINE.toString());
         checkConfig.addAttribute("tokens", "LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, "
             + "LITERAL_IF, LITERAL_ELSE, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, "
-            + "LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT");
+            + "LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT, ANNOTATION_DEF");
         final String[] expected = {
             "60:26: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 26),
             "74:42: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 42),
@@ -42,6 +42,7 @@
             "204:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
             "209:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
             "210:53: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 53),
+            "218:24: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 24),
         };
         verify(checkConfig, getPath("InputRightCurlyAloneOrSingleline.java"), expected);
     }
