@@ -1,15 +1,15 @@
     /**
-     * Checks whether a specified token type exist under token.
+     * Checks whether a javadoc comment exists under the token.
      *
      * @param token tree token.
-     * @param tokenType token type.
-     * @return true if a tokenType exists under token.
+     * @return true if a javadoc comment exists under the token.
      */
-    private static boolean branchContains(DetailAST token, int tokenType) {
+    private static boolean branchContainsJavadocComment(DetailAST token) {
         boolean result = false;
         DetailAST curNode = token;
         while (curNode != null) {
-            if (curNode.getType() == tokenType) {
+            if (curNode.getType() == TokenTypes.BLOCK_COMMENT_BEGIN
+                    && JavadocUtil.isJavadocComment(curNode)) {
                 result = true;
                 break;
             }
