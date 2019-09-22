@@ -20,7 +20,7 @@
                 final DetailAST newCommentNode =
                          createCommentAstFromToken(tokenBefore);
 
-                currentSibling.addPreviousSibling(newCommentNode);
+                ((DetailAstImpl) currentSibling).addPreviousSibling(newCommentNode);
 
                 if (currentSibling == result) {
                     result = newCommentNode;
@@ -45,7 +45,7 @@
                 final DetailAST newCommentNode =
                         createCommentAstFromToken(tokenAfter);
 
-                currentSibling.addNextSibling(newCommentNode);
+                ((DetailAstImpl) currentSibling).addNextSibling(newCommentNode);
 
                 currentSibling = newCommentNode;
                 tokenAfter = tokenAfter.getHiddenAfter();
