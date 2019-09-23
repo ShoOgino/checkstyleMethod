@@ -18,9 +18,10 @@
                 child = child.getNextSibling();
             }
         }
+        else {
+            argIsNotNull = arg.getType() == TokenTypes.STRING_LITERAL;
+        }
 
-        return argIsNotNull
-                || !arg.branchContains(TokenTypes.IDENT)
-                    && !arg.branchContains(TokenTypes.LITERAL_NULL);
+        return argIsNotNull;
     }
 

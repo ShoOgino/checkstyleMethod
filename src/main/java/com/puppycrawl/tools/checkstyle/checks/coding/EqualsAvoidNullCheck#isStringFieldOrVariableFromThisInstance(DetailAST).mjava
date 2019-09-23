@@ -4,12 +4,8 @@
      * @return true if the field or the variable from THIS instance is of String type.
      */
     private boolean isStringFieldOrVariableFromThisInstance(DetailAST objCalledOn) {
-        boolean result = false;
         final String name = objCalledOn.getText();
         final DetailAST field = getObjectFrame(currentFrame).findField(name);
-        if (field != null) {
-            result = STRING.equals(getFieldType(field));
-        }
-        return result;
+        return STRING.equals(getFieldType(field));
     }
 

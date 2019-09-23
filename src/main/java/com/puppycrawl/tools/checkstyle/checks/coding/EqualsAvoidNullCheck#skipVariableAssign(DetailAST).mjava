@@ -5,9 +5,12 @@
      */
     private static DetailAST skipVariableAssign(final DetailAST currentAST) {
         DetailAST result = currentAST;
-        if (currentAST.getType() == TokenTypes.ASSIGN
-                && currentAST.getFirstChild().getType() == TokenTypes.IDENT) {
-            result = currentAST.getFirstChild().getNextSibling();
+        while (result.getType() == TokenTypes.LPAREN) {
+            result = result.getNextSibling();
+        }
+        if (result.getType() == TokenTypes.ASSIGN
+                && result.getFirstChild().getType() == TokenTypes.IDENT) {
+            result = result.getFirstChild().getNextSibling();
         }
         return result;
     }
