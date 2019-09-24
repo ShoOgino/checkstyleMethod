@@ -2,8 +2,6 @@
     public void extendAnnotationTest() throws Exception {
         final DefaultConfiguration config = createModuleConfig(JavadocMethodCheck.class);
         config.addAttribute("allowedAnnotations", "MyAnnotation, Override");
-        config.addAttribute("minLineCount", "2");
-        config.addAttribute("ignoreMethodNamesRegex", "regexThatDoesNotMatch");
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(config, getPath("InputJavadocMethodExtendAnnotation.java"), expected);
     }
