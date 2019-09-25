@@ -4,7 +4,7 @@
                 new FileText(new File("filename"), Collections.singletonList("/* a */ /* b */ ")));
         fileContents.reportBlockComment("type", 1, 0, 1, 6);
         fileContents.reportBlockComment("type", 1, 8, 1, 14);
-        final Map<Integer, List<TextBlock>> comments = fileContents.getCComments();
+        final Map<Integer, List<TextBlock>> comments = fileContents.getBlockComments();
 
         assertEquals("Invalid comment", Arrays.asList(
             new Comment(new String[] {"/* a */"}, 0, 1, 6),

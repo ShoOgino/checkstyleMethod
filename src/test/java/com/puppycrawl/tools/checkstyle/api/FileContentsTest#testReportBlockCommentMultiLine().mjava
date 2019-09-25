@@ -3,7 +3,7 @@
         final FileContents fileContents = new FileContents(
                 new FileText(new File("filename"), Arrays.asList("/*", "c", "*/")));
         fileContents.reportBlockComment("type", 1, 0, 3, 1);
-        final Map<Integer, List<TextBlock>> comments = fileContents.getCComments();
+        final Map<Integer, List<TextBlock>> comments = fileContents.getBlockComments();
 
         assertEquals("Invalid comment", Collections.singletonList(
             new Comment(new String[] {"/*", "c", "*/"}, 0, 3, 1)

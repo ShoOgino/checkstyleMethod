@@ -1,6 +1,11 @@
     @Test
     public void testIsLineBlank() {
-        assertFalse("Invalid result", new FileContents("filename", "123").lineIsBlank(0));
-        assertTrue("Invalid result", new FileContents("filename", "").lineIsBlank(0));
+        assertFalse("Invalid result",
+                new FileContents(
+                        new FileText(new File("filename"), Collections.singletonList("123")))
+                                .lineIsBlank(0));
+        assertTrue("Invalid result",
+                new FileContents(new FileText(new File("filename"), Collections.singletonList("")))
+                        .lineIsBlank(0));
     }
 

@@ -9,7 +9,8 @@
      */
     private static List<Comparable<Object>> getTagsAfterExecution(SuppressionCommentFilter filter,
             String filename, String... lines) {
-        final FileContents contents = new FileContents(filename, lines);
+        final FileContents contents = new FileContents(
+                new FileText(new File(filename), Arrays.asList(lines)));
         for (int lineNo = 0; lineNo < lines.length; lineNo++) {
             final int colNo = lines[lineNo].indexOf("//");
             if (colNo >= 0) {

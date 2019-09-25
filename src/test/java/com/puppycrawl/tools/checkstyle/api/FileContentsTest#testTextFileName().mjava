@@ -1,6 +1,7 @@
     @Test
     public void testTextFileName() {
-        final FileContents fileContents = new FileContents("filename", "123", "456");
+        final FileContents fileContents = new FileContents(
+                new FileText(new File("filename"), Arrays.asList("123", "456")));
 
         assertEquals("Invalid file name", "filename", fileContents.getText().getFile().getName());
         assertArrayEquals("Invalid array", new String[] {"123", "456"}, fileContents.getLines());

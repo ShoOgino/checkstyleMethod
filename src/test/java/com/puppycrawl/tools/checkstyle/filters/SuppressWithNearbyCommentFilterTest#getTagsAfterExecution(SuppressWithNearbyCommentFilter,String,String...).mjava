@@ -9,7 +9,8 @@
      */
     private static List<?> getTagsAfterExecution(SuppressWithNearbyCommentFilter filter,
             String filename, String... lines) {
-        final FileContents contents = new FileContents(filename, lines);
+        final FileContents contents = new FileContents(
+                new FileText(new File(filename), Arrays.asList(lines)));
         contents.reportSingleLineComment(1, 0);
         final TreeWalkerAuditEvent dummyEvent = new TreeWalkerAuditEvent(contents, filename,
                 new LocalizedMessage(1, null, null, null, null, Object.class, null), null);

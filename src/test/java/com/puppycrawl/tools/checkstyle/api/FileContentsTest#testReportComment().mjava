@@ -3,7 +3,7 @@
         final FileContents fileContents = new FileContents(
                 new FileText(new File("filename"), Collections.singletonList("  //   ")));
         fileContents.reportBlockComment("type", 1, 2, 1, 2);
-        final Map<Integer, List<TextBlock>> comments = fileContents.getCComments();
+        final Map<Integer, List<TextBlock>> comments = fileContents.getBlockComments();
 
         assertEquals("Invalid comment",
                 new Comment(new String[] {"/"}, 2, 1, 2).toString(),
