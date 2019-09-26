@@ -1,6 +1,6 @@
     @Test
     public void testAuditFinishedWithoutFileFinished() throws Exception {
-        final XMLLogger logger = new XMLLogger(outStream, true);
+        final XMLLogger logger = new XMLLogger(outStream, OutputStreamOptions.CLOSE);
         logger.auditStarted(null);
         final AuditEvent fileStartedEvent = new AuditEvent(this, "Test.java");
         logger.fileStarted(fileStartedEvent);
