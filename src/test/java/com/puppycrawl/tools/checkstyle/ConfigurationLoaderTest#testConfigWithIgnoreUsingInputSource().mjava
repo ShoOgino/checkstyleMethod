@@ -4,7 +4,7 @@
                 (DefaultConfiguration) ConfigurationLoader.loadConfiguration(new InputSource(
                         new File(getPath("InputConfigurationLoaderModuleIgnoreSeverity.xml"))
                             .toURI().toString()),
-                        new PropertiesExpander(new Properties()), true);
+                        new PropertiesExpander(new Properties()), IgnoredModulesOptions.OMIT);
 
         final Configuration[] children = config.getChildren();
         assertEquals("Invalid children count", 0, children[0].getChildren().length);
