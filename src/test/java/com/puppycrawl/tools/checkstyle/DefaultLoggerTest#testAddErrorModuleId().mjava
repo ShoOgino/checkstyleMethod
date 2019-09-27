@@ -2,7 +2,8 @@
     public void testAddErrorModuleId() {
         final OutputStream infoStream = new ByteArrayOutputStream();
         final OutputStream errorStream = new ByteArrayOutputStream();
-        final DefaultLogger dl = new DefaultLogger(infoStream, true, errorStream, true);
+        final DefaultLogger dl = new DefaultLogger(infoStream, OutputStreamOptions.CLOSE,
+                errorStream, OutputStreamOptions.CLOSE);
         dl.finishLocalSetup();
         dl.auditStarted(null);
         dl.addError(new AuditEvent(this, "fileName", new LocalizedMessage(1, 2, "bundle", "key",

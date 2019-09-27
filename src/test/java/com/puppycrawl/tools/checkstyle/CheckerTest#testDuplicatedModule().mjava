@@ -15,8 +15,8 @@
         // BriefUtLogger does not print the module name or id postfix,
         // so we need to set logger manually
         final ByteArrayOutputStream out = Whitebox.getInternalState(this, "stream");
-        final DefaultLogger logger =
-                new DefaultLogger(out, true, out, false, new AuditEventDefaultFormatter());
+        final DefaultLogger logger = new DefaultLogger(out, OutputStreamOptions.CLOSE, out,
+                OutputStreamOptions.NONE, new AuditEventDefaultFormatter());
         checker.addListener(logger);
 
         final String path = temporaryFolder.newFile("file.java").getPath();
