@@ -33,17 +33,8 @@
         toString.setAccessible(true);
         final String result = (String) toString.invoke(regularClass);
         final String expected = "RegularClass[name=Token[blablabla(1x1)], in class='sur', check="
-                + methodCheck.hashCode() + "," + " loadable=true, class=null]";
+                + methodCheck.hashCode() + "]";
 
         assertEquals(expected, result, "Invalid toString result");
-
-        final Method setClazz = regularClass.getClass().getDeclaredMethod("setClazz", Class.class);
-        setClazz.setAccessible(true);
-        final Class<?> arg = null;
-        setClazz.invoke(regularClass, arg);
-
-        final Method getClazz = regularClass.getClass().getDeclaredMethod("getClazz");
-        getClazz.setAccessible(true);
-        assertNull(getClazz.invoke(regularClass), "Expected null");
     }
 

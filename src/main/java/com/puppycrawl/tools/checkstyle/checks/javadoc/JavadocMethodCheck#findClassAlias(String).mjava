@@ -4,12 +4,12 @@
      * @return ClassInfo for alias if it exists, null otherwise
      * @noinspection WeakerAccess
      */
-    private AbstractClassInfo findClassAlias(final String name) {
-        AbstractClassInfo classInfo = null;
-        final Iterator<Map<String, AbstractClassInfo>> iterator = currentTypeParams
+    private ClassInfo findClassAlias(final String name) {
+        ClassInfo classInfo = null;
+        final Iterator<Map<String, ClassInfo>> iterator = currentTypeParams
                 .descendingIterator();
         while (iterator.hasNext()) {
-            final Map<String, AbstractClassInfo> paramMap = iterator.next();
+            final Map<String, ClassInfo> paramMap = iterator.next();
             classInfo = paramMap.get(name);
             if (classInfo != null) {
                 break;

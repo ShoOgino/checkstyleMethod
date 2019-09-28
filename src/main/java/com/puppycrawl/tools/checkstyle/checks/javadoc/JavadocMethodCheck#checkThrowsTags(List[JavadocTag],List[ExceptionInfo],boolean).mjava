@@ -21,31 +21,15 @@
             tagIt.remove();
 
             // Loop looking for matching throw
-            final String documentedEx = tag.getFirstArg();
             final Token token = new Token(tag.getFirstArg(), tag.getLineNo(), tag
                     .getColumnNo());
-            final AbstractClassInfo documentedClassInfo = createClassInfo(token,
+            final ClassInfo documentedClassInfo = createClassInfo(token,
                     currentClassName);
-            final boolean found = foundThrows.contains(documentedEx)
-                    || isInThrows(throwsList, documentedClassInfo, foundThrows);
-
-            // Handle extra JavadocTag.
-            if (!found) {
-                boolean reqd = true;
-                if (allowUndeclaredRTE) {
-                    reqd = !isUnchecked(documentedClassInfo.getClazz());
-                }
-
-                if (reqd && validateThrows) {
-                    log(tag.getLineNo(), tag.getColumnNo(),
-                        MSG_UNUSED_TAG,
-                        JavadocTagInfo.THROWS.getText(), tag.getFirstArg());
-                }
-            }
+            processThrows(throwsList, documentedClassInfo, foundThrows);
         }
         // Now dump out all throws without tags :- unless
         // the user has chosen to suppress these problems
-        if (!allowMissingThrowsTags && reportExpectedTags) {
+        if (validateThrows && reportExpectedTags) {
             throwsList.stream().filter(exceptionInfo -> !exceptionInfo.isFound())
                 .forEach(exceptionInfo -> {
                     final Token token = exceptionInfo.getName();

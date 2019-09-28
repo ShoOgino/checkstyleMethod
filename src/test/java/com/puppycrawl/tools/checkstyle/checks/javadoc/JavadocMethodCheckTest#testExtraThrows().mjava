@@ -1,0 +1,11 @@
+    @Test
+    public void testExtraThrows() throws Exception {
+        final DefaultConfiguration config = createModuleConfig(JavadocMethodCheck.class);
+        config.addAttribute("validateThrows", "true");
+        final String[] expected = {
+            "39:56: " + getCheckMessage(MSG_EXPECTED_TAG, "@throws", "IllegalStateException"),
+
+        };
+        verify(config, getPath("InputJavadocMethodExtraThrows.java"), expected);
+    }
+

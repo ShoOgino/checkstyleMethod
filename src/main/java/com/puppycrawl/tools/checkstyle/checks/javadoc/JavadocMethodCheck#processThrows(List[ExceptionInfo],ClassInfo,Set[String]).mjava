@@ -1,0 +1,26 @@
+    /**
+     * Verifies that documented exception is in throws.
+     *
+     * @param throwsList list of throws
+     * @param documentedClassInfo documented exception class info
+     * @param foundThrows previously found throws
+     */
+    private static void processThrows(List<ExceptionInfo> throwsList,
+                                      ClassInfo documentedClassInfo, Set<String> foundThrows) {
+        ExceptionInfo foundException = null;
+
+        // First look for matches on the exception name
+        for (ExceptionInfo exceptionInfo : throwsList) {
+            if (isClassNamesSame(exceptionInfo.getName().getText(),
+                    documentedClassInfo.getName().getText())) {
+                foundException = exceptionInfo;
+                break;
+            }
+        }
+
+        if (foundException != null) {
+            foundException.setFound();
+            foundThrows.add(documentedClassInfo.getName().getText());
+        }
+    }
+

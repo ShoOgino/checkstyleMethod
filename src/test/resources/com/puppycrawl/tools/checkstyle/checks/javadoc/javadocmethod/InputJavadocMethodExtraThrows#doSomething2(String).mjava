@@ -1,0 +1,14 @@
+    /**
+     * declared exception in method signature is missed in javadoc // violation
+     * @param properties some value
+     * @throws java.lang.IllegalArgumentException when argument is wrong // ok
+     * @throws java.lang.NullPointerException indicates null was passed // ok
+     */
+    public void doSomething2(String properties) throws IllegalStateException {
+        if (properties.charAt(0) == 0) {
+            throw new IllegalArgumentException("cannot have char with code 0");
+        }
+        // here is NPE possible
+        properties.isEmpty();
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Extra throws in javadoc it is ok
+     * @param properties some value
+     * @throws java.lang.IllegalArgumentException when argument is wrong // ok
+     * @throws java.lang.NullPointerException indicates null was passed // ok
+     */
+    public void doSomething(String properties) throws IllegalArgumentException {
+        if (properties.charAt(0) == 0) {
+            throw new IllegalArgumentException("cannot have char with code 0");
+        }
+        // here is NPE possible
+        properties.isEmpty();
+    }
+
