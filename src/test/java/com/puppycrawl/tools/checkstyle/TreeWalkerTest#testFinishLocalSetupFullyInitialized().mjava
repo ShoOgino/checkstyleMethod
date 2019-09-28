@@ -8,8 +8,6 @@
         treeWalker.finishLocalSetup();
 
         final Context context = Whitebox.getInternalState(treeWalker, "childContext");
-        assertEquals("Classloader object differs from expected",
-                contextClassLoader, context.get("classLoader"));
         assertEquals("Severity differs from expected",
                 "error", context.get("severity"));
         assertEquals("Tab width differs from expected",

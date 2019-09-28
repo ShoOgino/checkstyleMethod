@@ -27,14 +27,6 @@
 
             rootModule = (RootModule) factory.createModule(configuration.getName());
             rootModule.setModuleClassLoader(moduleClassLoader);
-
-            if (rootModule instanceof Checker) {
-                final ClassLoader loader = new AntClassLoader(getProject(),
-                        classpath);
-
-                ((Checker) rootModule).setClassLoader(loader);
-            }
-
             rootModule.configure(configuration);
         }
         catch (final CheckstyleException ex) {
