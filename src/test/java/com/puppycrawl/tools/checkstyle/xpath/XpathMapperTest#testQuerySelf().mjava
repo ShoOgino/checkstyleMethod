@@ -3,7 +3,7 @@
         final String objectXpath = "/CLASS_DEF[./IDENT[@text='InputXpathMapperAst']]//OBJBLOCK";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final List<NodeInfo> objectNodes = getXpathItems(objectXpath, rootNode);
-        assertEquals("Invalid number of nodes", 1, objectNodes.size());
+        assertThat("Invalid number of nodes", objectNodes.size(), equalTo(1));
         final AbstractNode objNode = (AbstractNode) objectNodes.get(0);
         final String methodsXpath = "self::OBJBLOCK";
         final DetailAST[] actual = convertToArray(getXpathItems(methodsXpath, objNode));
@@ -11,6 +11,6 @@
                 TokenTypes.CLASS_DEF)
                 .findFirstToken(TokenTypes.OBJBLOCK);
         final DetailAST[] expected = {expectedObjBlockNode};
-        assertArrayEquals("Result nodes differ from expected", expected, actual);
+        assertThat("Result nodes differ from expected", actual, equalTo(expected));
     }
 

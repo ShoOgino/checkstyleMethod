@@ -4,7 +4,7 @@
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final List<NodeInfo> nodes = getXpathItems(xpath, rootNode);
         final ElementNode classDefNode = (ElementNode) nodes.get(0);
-        assertNull("Not existing attribute should have null value",
-                classDefNode.getAttributeValue("", "noneExistingAttribute"));
+        assertThat("Not existing attribute should have null value",
+                classDefNode.getAttributeValue("", "noneExistingAttribute"), nullValue());
     }
 

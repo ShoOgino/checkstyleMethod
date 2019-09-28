@@ -8,6 +8,6 @@
         final DetailAST expectedObjblockNode = expectedClassDefNode
                 .findFirstToken(TokenTypes.OBJBLOCK);
         final DetailAST[] expected = {expectedClassDefNode, expectedObjblockNode};
-        assertArrayEquals("Result nodes differ from expected", expected, actual);
+        assertThat("Result nodes differ from expected", actual, equalTo(expected));
     }
 

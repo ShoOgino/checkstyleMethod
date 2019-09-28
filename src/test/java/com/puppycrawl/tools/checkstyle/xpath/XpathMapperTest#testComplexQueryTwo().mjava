@@ -8,6 +8,6 @@
         final DetailAST expectedAnnotationsNode = expectedPackageDefNode
                 .findFirstToken(TokenTypes.ANNOTATIONS);
         final DetailAST[] expected = {expectedAnnotationsNode, expectedPackageDefNode};
-        assertArrayEquals("Result nodes differ from expected", expected, actual);
+        assertThat("Result nodes differ from expected", actual, equalTo(expected));
     }
 

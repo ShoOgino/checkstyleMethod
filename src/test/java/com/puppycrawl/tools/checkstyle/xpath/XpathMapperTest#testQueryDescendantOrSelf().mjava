@@ -9,6 +9,8 @@
                 .findFirstToken(TokenTypes.METHOD_DEF);
         final DetailAST[] expected = {expectedMethodDefNode,
             expectedMethodDefNode.getNextSibling()};
-        assertArrayEquals("Result nodes differ from expected", expected, actual);
+        assertThat("Result nodes differ from expected", actual, equalTo(expected));
+        assertThat("Invalid token type", actual[0].getType(), equalTo(TokenTypes.METHOD_DEF));
+        assertThat("Invalid token type", actual[1].getType(), equalTo(TokenTypes.METHOD_DEF));
     }
 

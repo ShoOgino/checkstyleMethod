@@ -8,7 +8,7 @@
                 TokenTypes.CLASS_DEF);
         final DetailAST[] expected = {expectedClassDefNode};
         final ElementNode classDefNode = (ElementNode) nodes.get(0);
-        assertEquals("Invalid number of nodes", "CLASS_DEF", classDefNode.getStringValue());
-        assertArrayEquals("Result nodes differ from expected", expected, actual);
+        assertThat("Invalid node name", classDefNode.getStringValue(), equalTo("CLASS_DEF"));
+        assertThat("Result nodes differ from expected", actual, equalTo(expected));
     }
 

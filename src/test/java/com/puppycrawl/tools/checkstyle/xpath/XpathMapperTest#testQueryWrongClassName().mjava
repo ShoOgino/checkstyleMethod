@@ -3,6 +3,7 @@
         final String xpath = "/CLASS_DEF[@text='WrongName']";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final List<NodeInfo> nodes = getXpathItems(xpath, rootNode);
-        assertTrue("Should return true, because no item matches xpath", nodes.isEmpty());
+        assertThat("Should return true, because no item matches xpath", nodes.isEmpty(),
+                equalTo(true));
     }
 

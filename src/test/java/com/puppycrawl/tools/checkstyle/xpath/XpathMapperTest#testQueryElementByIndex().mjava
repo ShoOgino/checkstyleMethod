@@ -3,7 +3,7 @@
         final String xpath = "(//VARIABLE_DEF)[1]";
         final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
         final DetailAST[] actual = convertToArray(getXpathItems(xpath, rootNode));
-        assertEquals("Invalid number of nodes", 1, actual.length);
+        assertThat("Invalid number of nodes", actual.length, equalTo(1));
         final DetailAST expectedVariableDefNode = getSiblingByType(rootNode.getUnderlyingNode(),
                 TokenTypes.CLASS_DEF)
                 .findFirstToken(TokenTypes.OBJBLOCK)
@@ -11,6 +11,6 @@
                 .findFirstToken(TokenTypes.SLIST)
                 .findFirstToken(TokenTypes.VARIABLE_DEF);
         final DetailAST[] expected = {expectedVariableDefNode};
-        assertArrayEquals("Result nodes differ from expected", expected, actual);
+        assertThat("Result nodes differ from expected", actual, equalTo(expected));
     }
 
