@@ -6,6 +6,7 @@
         checkConfig.addAttribute("separateLineBetweenGroups", "true");
         checkConfig.addAttribute("customImportOrderRules",
                 "SAME_PACKAGE(3)###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE###STATIC");
+        // violation at line 5 till https://github.com/checkstyle/checkstyle/issues/6680
         final String[] expected = {
             "5: " + getCheckMessage(MSG_LINE_SEPARATOR, "org.junit.*"),
         };
