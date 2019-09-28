@@ -1,13 +1,13 @@
     @Test
     public void testClassRegularClass() throws Exception {
         final Class<?> tokenType = Class.forName("com.puppycrawl.tools.checkstyle.checks.javadoc."
-                + "AbstractTypeAwareCheck$Token");
+                + "JavadocMethodCheck$Token");
 
         final Class<?> regularClassType = Class
                 .forName("com.puppycrawl.tools.checkstyle.checks.javadoc."
-                        + "AbstractTypeAwareCheck$RegularClass");
+                        + "JavadocMethodCheck$RegularClass");
         final Constructor<?> regularClassConstructor = regularClassType.getDeclaredConstructor(
-                tokenType, String.class, AbstractTypeAwareCheck.class);
+                tokenType, String.class, JavadocMethodCheck.class);
         regularClassConstructor.setAccessible(true);
 
         try {

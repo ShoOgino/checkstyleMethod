@@ -3,14 +3,10 @@
      * @param ident name of class which we try to load.
      * @param className name of surrounding class.
      * @return {@code Class} for a ident.
-     * @noinspection WeakerAccess
+     * @noinspection WeakerAccess, MethodOnlyUsedFromInnerClass
      */
     // -@cs[ForbidWildcardAsReturnType] The class is deprecated and will be removed soon.
-    protected final Class<?> tryLoadClass(Token ident, String className) {
-        final Class<?> clazz = resolveClass(ident.getText(), className);
-        if (clazz == null) {
-            logLoadError(ident);
-        }
-        return clazz;
+    private Class<?> tryLoadClass(Token ident, String className) {
+        return resolveClass(ident.getText(), className);
     }
 

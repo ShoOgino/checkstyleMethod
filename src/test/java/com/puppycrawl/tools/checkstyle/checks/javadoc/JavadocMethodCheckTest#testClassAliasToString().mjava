@@ -1,13 +1,13 @@
     @Test
     public void testClassAliasToString() throws Exception {
         final Class<?> tokenType = Class.forName("com.puppycrawl.tools.checkstyle.checks.javadoc."
-                + "AbstractTypeAwareCheck$Token");
+                + "JavadocMethodCheck$Token");
 
         final Class<?> regularClassType = Class
                 .forName("com.puppycrawl.tools.checkstyle.checks.javadoc."
-                        + "AbstractTypeAwareCheck$RegularClass");
+                        + "JavadocMethodCheck$RegularClass");
         final Constructor<?> regularClassConstructor = regularClassType.getDeclaredConstructor(
-                tokenType, String.class, AbstractTypeAwareCheck.class);
+                tokenType, String.class, JavadocMethodCheck.class);
         regularClassConstructor.setAccessible(true);
 
         final Constructor<?> tokenConstructor = tokenType.getDeclaredConstructor(String.class,
@@ -18,10 +18,10 @@
                 new JavadocMethodCheck());
 
         final Class<?> classAliasType = Class.forName(
-                "com.puppycrawl.tools.checkstyle.checks.javadoc.AbstractTypeAwareCheck$ClassAlias");
+                "com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck$ClassAlias");
         final Class<?> abstractTypeInfoType = Class
                 .forName("com.puppycrawl.tools.checkstyle.checks.javadoc."
-                        + "AbstractTypeAwareCheck$AbstractClassInfo");
+                        + "JavadocMethodCheck$AbstractClassInfo");
 
         final Constructor<?> classAliasConstructor = classAliasType
                 .getDeclaredConstructor(tokenType, abstractTypeInfoType);

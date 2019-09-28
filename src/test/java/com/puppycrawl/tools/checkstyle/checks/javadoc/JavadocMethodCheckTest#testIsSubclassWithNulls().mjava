@@ -1,7 +1,7 @@
     @Test
     public void testIsSubclassWithNulls() throws Exception {
         final JavadocMethodCheck check = new JavadocMethodCheck();
-        final Method method = check.getClass().getSuperclass()
+        final Method method = check.getClass()
                 .getDeclaredMethod("isSubclass", Class.class, Class.class);
         method.setAccessible(true);
         assertFalse("Should return false if at least one of the params is null",
