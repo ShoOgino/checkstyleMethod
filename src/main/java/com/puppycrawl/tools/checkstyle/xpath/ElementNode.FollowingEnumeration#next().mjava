@@ -1,0 +1,25 @@
+        /**
+         * Get the next item in the sequence.
+         * @return the next Item. If there are no more nodes, return null.
+         */
+        @Override
+        public NodeInfo next() {
+            NodeInfo result = null;
+            if (descendEnum != null) {
+                result = descendEnum.next();
+            }
+
+            if (result == null) {
+                descendEnum = null;
+                result = siblingEnum.next();
+                if (result == null) {
+                    siblingEnum = null;
+                }
+                else {
+                    descendEnum = new Navigator.DescendantEnumeration(result, true, false);
+                    result = next();
+                }
+            }
+            return result;
+        }
+

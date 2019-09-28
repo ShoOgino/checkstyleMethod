@@ -62,6 +62,22 @@
                     result = iterator;
                 }
                 break;
+            case AxisInfo.FOLLOWING_SIBLING:
+                result = getFollowingSiblingsIterator();
+                break;
+            case AxisInfo.PRECEDING_SIBLING:
+                result = getPrecedingSiblingsIterator();
+                break;
+            case AxisInfo.FOLLOWING:
+                try (AxisIterator iterator = new FollowingEnumeration(this)) {
+                    result = iterator;
+                }
+                break;
+            case AxisInfo.PRECEDING:
+                try (AxisIterator iterator = new Navigator.PrecedingEnumeration(this, true)) {
+                    result = iterator;
+                }
+                break;
             default:
                 throw throwUnsupportedOperationException();
         }

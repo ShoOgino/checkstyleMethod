@@ -1,0 +1,18 @@
+    /**
+     * Returns following sibling axis iterator.
+     * @return iterator
+     */
+    private AxisIterator getFollowingSiblingsIterator() {
+        final AxisIterator result;
+        if (indexAmongSiblings == parent.getChildren().size() - 1) {
+            result = EmptyIterator.OfNodes.THE_INSTANCE;
+        }
+        else {
+            try (AxisIterator iterator = new ArrayIterator.OfNodes(
+                    getFollowingSiblings().toArray(EMPTY_ABSTRACT_NODE_ARRAY))) {
+                result = iterator;
+            }
+        }
+        return result;
+    }
+

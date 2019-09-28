@@ -2,7 +2,7 @@
     public void testIterateAxisEmptyChildren() {
         final DetailAstImpl detailAST = new DetailAstImpl();
         detailAST.setType(TokenTypes.METHOD_DEF);
-        final ElementNode elementNode = new ElementNode(rootNode, null, detailAST);
+        final ElementNode elementNode = new ElementNode(rootNode, rootNode, detailAST);
         try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.CHILD)) {
             assertTrue("Invalid iterator", iterator instanceof EmptyIterator);
         }
