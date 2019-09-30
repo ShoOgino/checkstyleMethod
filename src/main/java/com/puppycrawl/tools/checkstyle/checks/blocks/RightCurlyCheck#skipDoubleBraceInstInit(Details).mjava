@@ -21,7 +21,6 @@
         final DetailAST tokenAfterNextToken = Details.getNextToken(details.nextToken);
         return rcurly.getParent().getParent().getType() == TokenTypes.INSTANCE_INIT
                 && details.nextToken.getType() == TokenTypes.RCURLY
-                && tokenAfterNextToken.getType() == TokenTypes.SEMI
                 && rcurly.getLineNo() != Details.getNextToken(tokenAfterNextToken).getLineNo();
 
     }

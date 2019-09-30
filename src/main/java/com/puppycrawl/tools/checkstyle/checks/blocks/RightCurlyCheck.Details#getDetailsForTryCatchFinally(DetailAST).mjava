@@ -4,7 +4,6 @@
          * @return object containing all details to make a validation
          */
         private static Details getDetailsForTryCatchFinally(DetailAST ast) {
-            final boolean shouldCheckLastRcurly;
             final DetailAST lcurly;
             DetailAST nextToken;
             final int tokenType = ast.getType();
@@ -16,31 +15,21 @@
                     lcurly = ast.getFirstChild();
                 }
                 nextToken = lcurly.getNextSibling();
-
-                if (nextToken == null) {
-                    shouldCheckLastRcurly = true;
-                    nextToken = getNextToken(ast);
-                }
-                else {
-                    shouldCheckLastRcurly = false;
-                }
-            }
-            else if (tokenType == TokenTypes.LITERAL_CATCH) {
-                nextToken = ast.getNextSibling();
-                lcurly = ast.getLastChild();
-                if (nextToken == null) {
-                    shouldCheckLastRcurly = true;
-                    nextToken = getNextToken(ast);
-                }
-                else {
-                    shouldCheckLastRcurly = false;
-                }
             }
             else {
+                nextToken = ast.getNextSibling();
+                lcurly = ast.getLastChild();
+            }
+
+            final boolean shouldCheckLastRcurly;
+            if (nextToken == null) {
                 shouldCheckLastRcurly = true;
                 nextToken = getNextToken(ast);
-                lcurly = ast.getFirstChild();
             }
+            else {
+                shouldCheckLastRcurly = false;
+            }
+
             final DetailAST rcurly = lcurly.getLastChild();
             return new Details(lcurly, rcurly, nextToken, shouldCheckLastRcurly);
         }
