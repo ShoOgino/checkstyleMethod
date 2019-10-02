@@ -4,9 +4,8 @@
      */
     private void traverseFieldFrameTree(FieldFrame frame) {
         for (FieldFrame child: frame.getChildren()) {
-            if (!child.getChildren().isEmpty()) {
-                traverseFieldFrameTree(child);
-            }
+            traverseFieldFrameTree(child);
+
             currentFrame = child;
             child.getMethodCalls().forEach(this::checkMethodCall);
         }

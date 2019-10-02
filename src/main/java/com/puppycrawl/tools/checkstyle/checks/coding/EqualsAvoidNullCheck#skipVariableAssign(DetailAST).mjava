@@ -8,8 +8,7 @@
         while (result.getType() == TokenTypes.LPAREN) {
             result = result.getNextSibling();
         }
-        if (result.getType() == TokenTypes.ASSIGN
-                && result.getFirstChild().getType() == TokenTypes.IDENT) {
+        if (result.getType() == TokenTypes.ASSIGN) {
             result = result.getFirstChild().getNextSibling();
         }
         return result;
