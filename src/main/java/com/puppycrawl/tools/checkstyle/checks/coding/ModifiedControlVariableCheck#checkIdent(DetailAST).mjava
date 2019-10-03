@@ -4,13 +4,11 @@
      */
     private void checkIdent(DetailAST ast) {
         final Deque<String> currentVariables = getCurrentVariables();
-        if (currentVariables != null && !currentVariables.isEmpty()) {
-            final DetailAST identAST = ast.getFirstChild();
+        final DetailAST identAST = ast.getFirstChild();
 
-            if (identAST != null && identAST.getType() == TokenTypes.IDENT
-                && getCurrentVariables().contains(identAST.getText())) {
-                log(ast, MSG_KEY, identAST.getText());
-            }
+        if (identAST != null && identAST.getType() == TokenTypes.IDENT
+            && currentVariables.contains(identAST.getText())) {
+            log(ast, MSG_KEY, identAST.getText());
         }
     }
 

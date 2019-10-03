@@ -13,9 +13,7 @@
                 return MUTATION_OPERATIONS.contains(iteratingExpressionAST.getType());
             }).forEach(iteratingExpressionAST -> {
                 final DetailAST oneVariableOperatorChild = iteratingExpressionAST.getFirstChild();
-                if (oneVariableOperatorChild.getType() == TokenTypes.IDENT) {
-                    iteratorVariables.add(oneVariableOperatorChild.getText());
-                }
+                iteratorVariables.add(oneVariableOperatorChild.getText());
             });
 
         return iteratorVariables;
