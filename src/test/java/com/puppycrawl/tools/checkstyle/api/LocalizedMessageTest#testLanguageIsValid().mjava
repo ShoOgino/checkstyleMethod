@@ -3,7 +3,10 @@
      */
     @Test
     public void testLanguageIsValid() {
-        assertThat("Invalid language",
-            Arrays.asList(Locale.getISOLanguages()), hasItem(DEFAULT_LOCALE.getLanguage()));
+        final String language = DEFAULT_LOCALE.getLanguage();
+        if (!language.isEmpty()) {
+            assertThat("Invalid language",
+                Arrays.asList(Locale.getISOLanguages()), hasItem(language));
+        }
     }
 

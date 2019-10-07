@@ -3,7 +3,10 @@
      */
     @Test
     public void testCountryIsValid() {
-        assertThat("Invalid country",
-            Arrays.asList(Locale.getISOCountries()), hasItem(DEFAULT_LOCALE.getCountry()));
+        final String country = DEFAULT_LOCALE.getCountry();
+        if (!country.isEmpty()) {
+            assertThat("Invalid country",
+                    Arrays.asList(Locale.getISOCountries()), hasItem(country));
+        }
     }
 

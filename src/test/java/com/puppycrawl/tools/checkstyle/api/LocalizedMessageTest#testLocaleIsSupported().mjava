@@ -4,7 +4,8 @@
      */
     @Test
     public void testLocaleIsSupported() {
-        if (!Locale.ENGLISH.getLanguage().equals(DEFAULT_LOCALE.getLanguage())) {
+        final String language = DEFAULT_LOCALE.getLanguage();
+        if (!language.isEmpty() && !Locale.ENGLISH.getLanguage().equals(language)) {
             final LocalizedMessage localizedMessage = createSampleLocalizedMessage();
             assertThat("Unsupported language: " + DEFAULT_LOCALE,
                     localizedMessage.getMessage(), not("Empty statement."));
