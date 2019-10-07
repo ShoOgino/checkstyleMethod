@@ -1,0 +1,12 @@
+    @Test
+    public void testNewTokensAloneOrSingleLine() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
+        checkConfig.addAttribute("option",
+                RightCurlyOption.ALONE_OR_SINGLELINE.toString());
+        checkConfig.addAttribute("tokens", "ENUM_DEF");
+        final String[] expected = {
+            "14:20: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 20),
+        };
+        verify(checkConfig, getPath("InputRightCurlyAloneOrSingleLineNewTokens.java"), expected);
+    }
+

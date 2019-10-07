@@ -1,6 +1,6 @@
         /**
          * Collects validation details for CLASS_DEF, METHOD DEF, CTOR_DEF, STATIC_INIT,
-         * INSTANCE_INIT and ANNOTATION_DEF.
+         * INSTANCE_INIT, ANNOTATION_DEF and ENUM_DEF.
          * @param ast a {@code DetailAST} value
          * @return an object containing all details to make a validation
          */
@@ -8,7 +8,7 @@
             DetailAST rcurly = null;
             final DetailAST lcurly;
             final int tokenType = ast.getType();
-            if (tokenType == TokenTypes.CLASS_DEF || tokenType == TokenTypes.ANNOTATION_DEF) {
+            if (isTokenWithNoChildSlist(tokenType)) {
                 final DetailAST child = ast.getLastChild();
                 lcurly = child.getFirstChild();
                 rcurly = child.getLastChild();

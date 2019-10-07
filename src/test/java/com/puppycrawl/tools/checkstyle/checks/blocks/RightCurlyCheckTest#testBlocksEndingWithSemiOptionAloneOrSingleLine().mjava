@@ -4,7 +4,7 @@
         checkConfig.addAttribute("option",
                 RightCurlyOption.ALONE_OR_SINGLELINE.toString());
         checkConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, "
-                + "CTOR_DEF, ANNOTATION_DEF");
+                + "CTOR_DEF, ANNOTATION_DEF, ENUM_DEF");
         final String[] expected = {
             "14:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
             "19:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
@@ -12,6 +12,9 @@
             "33:29: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 29),
             "39:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
             "42:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "49:20: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 20),
+            "55:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "58:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
         };
         verify(checkConfig,
                 getPath("InputRightCurlyAloneOrSingleLineBlocksWithSemi.java"), expected);
