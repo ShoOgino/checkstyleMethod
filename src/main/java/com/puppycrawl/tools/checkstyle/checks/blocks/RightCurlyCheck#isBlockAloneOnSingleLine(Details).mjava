@@ -1,9 +1,9 @@
     /**
-     * Checks whether block has a single-line format.
+     * Checks whether block has a single-line format and is alone on a line.
      * @param details for validation.
-     * @return true if block has single-line format.
+     * @return true if block has single-line format and is alone on a line.
      */
-    private static boolean isSingleLineBlock(Details details) {
+    private static boolean isBlockAloneOnSingleLine(Details details) {
         final DetailAST rcurly = details.rcurly;
         final DetailAST lcurly = details.lcurly;
         DetailAST nextToken = details.nextToken;
@@ -15,6 +15,7 @@
             nextToken = Details.getNextToken(doWhileSemi);
         }
         return rcurly.getLineNo() == lcurly.getLineNo()
-                && rcurly.getLineNo() != nextToken.getLineNo();
+                && (rcurly.getLineNo() != nextToken.getLineNo()
+                || isRightcurlyFollowedBySemicolon(details));
     }
 

@@ -1,0 +1,15 @@
+    @Test
+    public void testBlocksEndingWithSemiOptionAloneOrSingleLine() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
+        checkConfig.addAttribute("option",
+                RightCurlyOption.ALONE_OR_SINGLELINE.toString());
+        checkConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, CTOR_DEF");
+        final String[] expected = {
+            "14:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "19:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "25:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+        };
+        verify(checkConfig,
+                getPath("InputRightCurlyAloneOrSingleLineBlocksWithSemi.java"), expected);
+    }
+
