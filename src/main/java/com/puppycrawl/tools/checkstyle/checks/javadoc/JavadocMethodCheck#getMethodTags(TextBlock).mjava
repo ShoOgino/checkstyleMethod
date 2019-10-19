@@ -15,12 +15,12 @@
             currentLine++;
             final Matcher javadocArgMatcher =
                 MATCH_JAVADOC_ARG.matcher(lines[i]);
+            final Matcher javadocArgMissingDescriptionMatcher =
+                MATCH_JAVADOC_ARG_MISSING_DESCRIPTION.matcher(lines[i]);
             final Matcher javadocNoargMatcher =
                 MATCH_JAVADOC_NOARG.matcher(lines[i]);
             final Matcher noargCurlyMatcher =
                 MATCH_JAVADOC_NOARG_CURLY.matcher(lines[i]);
-            final Matcher argMultilineStart =
-                MATCH_JAVADOC_ARG_MULTILINE_START.matcher(lines[i]);
             final Matcher noargMultilineStart =
                 MATCH_JAVADOC_NOARG_MULTILINE_START.matcher(lines[i]);
 
@@ -29,6 +29,13 @@
                 tags.add(new JavadocTag(currentLine, col, javadocArgMatcher.group(1),
                         javadocArgMatcher.group(2)));
             }
+            else if (javadocArgMissingDescriptionMatcher.find()) {
+                final int col = calculateTagColumn(javadocArgMissingDescriptionMatcher, i,
+                    startColumnNumber);
+                tags.add(new JavadocTag(currentLine, col,
+                    javadocArgMissingDescriptionMatcher.group(1),
+                    javadocArgMissingDescriptionMatcher.group(2)));
+            }
             else if (javadocNoargMatcher.find()) {
                 final int col = calculateTagColumn(javadocNoargMatcher, i, startColumnNumber);
                 tags.add(new JavadocTag(currentLine, col, javadocNoargMatcher.group(1)));
@@ -36,10 +43,6 @@
             else if (noargCurlyMatcher.find()) {
                 final int col = calculateTagColumn(noargCurlyMatcher, i, startColumnNumber);
                 tags.add(new JavadocTag(currentLine, col, noargCurlyMatcher.group(1)));
-            }
-            else if (argMultilineStart.find()) {
-                final int col = calculateTagColumn(argMultilineStart, i, startColumnNumber);
-                tags.addAll(getMultilineArgTags(argMultilineStart, col, lines, i, currentLine));
             }
             else if (noargMultilineStart.find()) {
                 tags.addAll(getMultilineNoArgTags(noargMultilineStart, lines, i, currentLine));
