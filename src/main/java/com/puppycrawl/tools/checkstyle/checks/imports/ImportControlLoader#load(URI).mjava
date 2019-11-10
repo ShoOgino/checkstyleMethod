@@ -5,15 +5,6 @@
      * @throws CheckstyleException if an error occurs.
      */
     public static PkgImportControl load(URI uri) throws CheckstyleException {
-        try (InputStream inputStream = uri.toURL().openStream()) {
-            final InputSource source = new InputSource(inputStream);
-            return load(source, uri);
-        }
-        catch (MalformedURLException ex) {
-            throw new CheckstyleException("syntax error in url " + uri, ex);
-        }
-        catch (IOException ex) {
-            throw new CheckstyleException("unable to find " + uri, ex);
-        }
+        return loadUri(uri);
     }
 
