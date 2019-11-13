@@ -1,0 +1,29 @@
+    @Test
+    public void testDefault() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(NoEnumTrailingCommaCheck.class);
+        final String[] expected = {
+            "17:12: " + getCheckMessage(MSG_KEY),
+            "22:12: " + getCheckMessage(MSG_KEY),
+            "28:12: " + getCheckMessage(MSG_KEY),
+            "31:25: " + getCheckMessage(MSG_KEY),
+            "33:25: " + getCheckMessage(MSG_KEY),
+            "47:21: " + getCheckMessage(MSG_KEY),
+            "52:12: " + getCheckMessage(MSG_KEY),
+            "70:9: " + getCheckMessage(MSG_KEY),
+            "100:55: " + getCheckMessage(MSG_KEY),
+            "104:14: " + getCheckMessage(MSG_KEY),
+            "108:14: " + getCheckMessage(MSG_KEY),
+            "124:14: " + getCheckMessage(MSG_KEY),
+            "128:14: " + getCheckMessage(MSG_KEY),
+            "132:55: " + getCheckMessage(MSG_KEY),
+            "138:33: " + getCheckMessage(MSG_KEY),
+            "145:33: " + getCheckMessage(MSG_KEY),
+            "162:13: " + getCheckMessage(MSG_KEY),
+            "180:21: " + getCheckMessage(MSG_KEY),
+            "200:10: " + getCheckMessage(MSG_KEY),
+            "244:55: " + getCheckMessage(MSG_KEY),
+        };
+        verify(checkConfig, getPath("InputNoEnumTrailingComma.java"), expected);
+    }
+

@@ -1,0 +1,11 @@
+    @Override
+    public void visitToken(DetailAST detailAST) {
+        final DetailAST nextSibling = detailAST.getNextSibling();
+        if (nextSibling.getType() == TokenTypes.COMMA) {
+            final DetailAST nextToNextSibling = nextSibling.getNextSibling();
+            if (nextToNextSibling.getType() != TokenTypes.ENUM_CONSTANT_DEF) {
+                log(nextSibling, MSG_KEY);
+            }
+        }
+    }
+
