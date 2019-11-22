@@ -9,13 +9,8 @@
      * @return true if there is javadoc, false otherwise
      */
     private static boolean hasJavadoc(DetailAST ast) {
-        final boolean hasBefore = isJavadocComment(ast.getPreviousSibling());
-        // need to go 3 levels down the tree for annotation case
-        final boolean hasWithAnnotation = Optional.of(ast.getFirstChild())
-            .map(DetailAST::getFirstChild)
-            .map(DetailAST::getFirstChild)
-            .map(MissingJavadocPackageCheck::isJavadocComment)
-            .orElse(false);
-        return hasBefore || hasWithAnnotation;
+        final boolean hasJavadocBefore = ast.getPreviousSibling() != null
+            && isJavadoc(ast.getPreviousSibling());
+        return hasJavadocBefore || hasJavadocAboveAnnotation(ast);
     }
 
