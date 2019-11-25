@@ -10,8 +10,12 @@
 
         listener.auditFinished(null);
 
-        assertEquals("expected number of flushes", 1, out.flushCount);
-        assertEquals("expected number of closes", 1, out.closeCount);
+        assertWithMessage("Output stream flush count")
+                .that(out.flushCount)
+                .isEqualTo(TestUtil.adjustFlushCountForOutputStreamClose(1));
+        assertWithMessage("Output stream close count")
+                .that(out.closeCount)
+                .isEqualTo(1);
 
         final String actual = out.toString();
         assertEquals("Invalid suppressions file content", expected, actual);

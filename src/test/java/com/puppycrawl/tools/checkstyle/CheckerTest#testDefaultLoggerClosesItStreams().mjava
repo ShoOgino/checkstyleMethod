@@ -15,14 +15,18 @@
 
             verify(checker, tmpFile.getPath(), expected);
 
-            assertEquals("Close count was not expected",
-                    1, testInfoOutputStream.getCloseCount());
-            assertEquals("Flush count was not expected",
-                    3, testInfoOutputStream.getFlushCount());
-            assertEquals("Close count was not expected",
-                    1, testErrorOutputStream.getCloseCount());
-            assertEquals("Flush count was not expected",
-                    1, testErrorOutputStream.getFlushCount());
+            assertWithMessage("Output stream close count")
+                    .that(testInfoOutputStream.getCloseCount())
+                    .isEqualTo(1);
+            assertWithMessage("Output stream flush count")
+                    .that(testInfoOutputStream.getFlushCount())
+                    .isEqualTo(TestUtil.adjustFlushCountForOutputStreamClose(3));
+            assertWithMessage("Error stream close count")
+                    .that(testErrorOutputStream.getCloseCount())
+                    .isEqualTo(1);
+            assertWithMessage("Error stream flush count")
+                    .that(testErrorOutputStream.getFlushCount())
+                    .isEqualTo(TestUtil.adjustFlushCountForOutputStreamClose(1));
         }
     }
 

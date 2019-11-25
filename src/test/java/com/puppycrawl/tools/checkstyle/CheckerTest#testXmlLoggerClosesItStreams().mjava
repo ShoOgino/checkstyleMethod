@@ -12,10 +12,12 @@
 
             verify(checker, tmpFile.getPath(), tmpFile.getPath(), expected);
 
-            assertEquals("Close count was not expected",
-                    1, testInfoOutputStream.getCloseCount());
-            assertEquals("Flush count was not expected",
-                    0, testInfoOutputStream.getFlushCount());
+            assertWithMessage("Output stream close count")
+                    .that(testInfoOutputStream.getCloseCount())
+                    .isEqualTo(1);
+            assertWithMessage("Output stream flush count")
+                    .that(testInfoOutputStream.getFlushCount())
+                    .isEqualTo(TestUtil.adjustFlushCountForOutputStreamClose(0));
         }
     }
 

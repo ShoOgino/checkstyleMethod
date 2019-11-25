@@ -1,0 +1,20 @@
+    /**
+     * <p>
+     * Adjusts the expected number of flushes for tests that call {@link OutputStream#close} method.
+     * </p>
+     * <p>
+     * After <a href="https://bugs.openjdk.java.net/browse/JDK-8220477">JDK-8220477</a>
+     * there is one additional flush from {@code sun.nio.cs.StreamEncoder#implClose}.
+     * </p>
+     *
+     * @param flushCount flush count to adjust
+     * @return adjusted flush count
+     */
+    public static int adjustFlushCountForOutputStreamClose(int flushCount) {
+        int result = flushCount;
+        if (getJdkVersion() >= 13) {
+            ++result;
+        }
+        return result;
+    }
+

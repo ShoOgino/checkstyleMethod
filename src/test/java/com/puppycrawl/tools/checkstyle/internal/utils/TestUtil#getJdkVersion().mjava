@@ -1,0 +1,18 @@
+    /**
+     * <p>
+     * Returns the JDK version as a number that is easy to compare.
+     * </p>
+     * <p>
+     * For JDK "1.8" it will be 8; for JDK "11" it will be 11.
+     * </p>
+     *
+     * @return JDK version as integer
+     */
+    public static int getJdkVersion() {
+        String version = System.getProperty("java.specification.version");
+        if (version.startsWith("1.")) {
+            version = version.substring(2);
+        }
+        return Integer.parseInt(version);
+    }
+
