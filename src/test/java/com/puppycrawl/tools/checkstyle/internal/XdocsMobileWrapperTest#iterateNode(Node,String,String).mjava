@@ -1,0 +1,23 @@
+    private static void iterateNode(Node node, String fileName, String sectionName) {
+        for (Node child : XmlUtil.getChildrenElements(node)) {
+            if (NODES_TO_WRAP.contains(child.getNodeName())) {
+                final String wrapperMessage = fileName + "/" + sectionName + ": Tag '"
+                        + child.getNodeName() + "' in '" + node.getNodeName()
+                        + "' needs a wrapping <span> or <div> with the class 'wrapper'.";
+                Assert.assertTrue(wrapperMessage, "div".equals(node.getNodeName())
+                        || "span".equals(node.getNodeName()));
+                Assert.assertTrue(wrapperMessage, node.hasAttributes());
+                Assert.assertNotNull(wrapperMessage, node.getAttributes().getNamedItem("class"));
+                Assert.assertTrue(wrapperMessage,
+                        node.getAttributes().getNamedItem("class").getNodeValue()
+                                .contains("wrapper"));
+                if ("table".equals(child.getNodeName())) {
+                    iterateNode(child, fileName, sectionName);
+                }
+            }
+            else {
+                iterateNode(child, fileName, sectionName);
+            }
+        }
+    }
+

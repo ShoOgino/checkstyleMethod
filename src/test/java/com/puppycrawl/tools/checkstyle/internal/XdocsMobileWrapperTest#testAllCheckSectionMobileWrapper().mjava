@@ -1,0 +1,26 @@
+    @Test
+    public void testAllCheckSectionMobileWrapper() throws Exception {
+        for (Path path : XdocUtil.getXdocsConfigFilePaths(XdocUtil.getXdocsFilePaths())) {
+            final File file = path.toFile();
+            final String fileName = file.getName();
+
+            final String input = new String(Files.readAllBytes(path), UTF_8);
+            Assert.assertNotEquals(fileName + ": input file cannot be empty", "",
+                    input);
+            final Document document = XmlUtil.getRawXml(fileName, input, input);
+            final NodeList sources = document.getElementsByTagName("section");
+
+            for (int position = 0; position < sources.getLength(); position++) {
+                final Node section = sources.item(position);
+                final String sectionName = section.getAttributes().getNamedItem("name")
+                        .getNodeValue();
+
+                if ("Content".equals(sectionName) || "Overview".equals(sectionName)) {
+                    continue;
+                }
+
+                iterateNode(section, fileName, sectionName);
+            }
+        }
+    }
+

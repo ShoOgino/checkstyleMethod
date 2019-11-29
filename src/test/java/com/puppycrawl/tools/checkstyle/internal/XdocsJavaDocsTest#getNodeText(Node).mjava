@@ -16,7 +16,14 @@
                 }
             }
             else {
-                appendNodeText(result, child);
+                if (child.hasAttributes() && child.getAttributes().getNamedItem("class") != null
+                        && "wrapper".equals(child.getAttributes().getNamedItem("class")
+                        .getNodeValue())) {
+                    appendNodeText(result, XmlUtil.getFirstChildElement(child));
+                }
+                else {
+                    appendNodeText(result, child);
+                }
             }
         }
 
