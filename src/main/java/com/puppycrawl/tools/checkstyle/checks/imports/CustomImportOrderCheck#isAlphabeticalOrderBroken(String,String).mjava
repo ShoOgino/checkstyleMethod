@@ -1,0 +1,17 @@
+    /**
+     * Examine alphabetical order of imports.
+     *
+     * @param previousImport
+     *        previous import of current group.
+     * @param currentImport
+     *        current import.
+     * @return
+     *        true, if previous and current import are not in alphabetical order.
+     */
+    private boolean isAlphabeticalOrderBroken(String previousImport,
+                                              String currentImport) {
+        return sortImportsInGroupAlphabetically
+                && previousImport != null
+                && compareImports(currentImport, previousImport) < 0;
+    }
+

@@ -1,0 +1,18 @@
+    /**
+     * Examine empty lines between groups.
+     *
+     * @param previousImportObject
+     *        previous import in current group.
+     * @param currentImportObject
+     *        current import.
+     * @return
+     *        true, if current import NOT separated from previous import by empty line.
+     */
+    private boolean isEmptyLineMissed(ImportDetails previousImportObject,
+                                      ImportDetails currentImportObject) {
+        return separateLineBetweenGroups
+                && getCountOfEmptyLinesBetween(
+                     previousImportObject.getLineNumber(),
+                     currentImportObject.getLineNumber()) != 1;
+    }
+

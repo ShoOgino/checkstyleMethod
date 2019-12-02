@@ -1,8 +1,6 @@
     /** Examine the order of all the imports and log any violations. */
     private void finishImportList() {
-        final ImportDetails firstImport = importToGroupList.get(0);
-        String currentGroup = getImportGroup(firstImport.isStaticImport(),
-                firstImport.getImportFullPath());
+        String currentGroup = getFirstGroup();
         int currentGroupNumber = customImportOrderRules.indexOf(currentGroup);
         ImportDetails previousImportObjectFromCurrentGroup = null;
         String previousImportFromCurrentGroup = null;
@@ -12,16 +10,11 @@
             final String fullImportIdent = importObject.getImportFullPath();
 
             if (importGroup.equals(currentGroup)) {
-                if (previousImportObjectFromCurrentGroup != null
-                        && getCountOfEmptyLinesBetween(
-                            previousImportObjectFromCurrentGroup.getLineNumber(),
-                            // https://github.com/checkstyle/checkstyle/issues/7119
-                            importObject.getLineNumber()) > 1) {
+                if (isSeparatedByExtraEmptyLine(previousImportObjectFromCurrentGroup,
+                                                importObject)) {
                     log(importObject.getLineNumber(), MSG_LINE_SEPARATOR, fullImportIdent);
                 }
-                if (sortImportsInGroupAlphabetically
-                        && previousImportFromCurrentGroup != null
-                        && compareImports(fullImportIdent, previousImportFromCurrentGroup) < 0) {
+                if (isAlphabeticalOrderBroken(previousImportFromCurrentGroup, fullImportIdent)) {
                     log(importObject.getLineNumber(), MSG_LEX,
                             fullImportIdent, previousImportFromCurrentGroup);
                 }
@@ -35,10 +28,7 @@
                 if (customImportOrderRules.size() > currentGroupNumber + 1) {
                     final String nextGroup = getNextImportGroup(currentGroupNumber + 1);
                     if (importGroup.equals(nextGroup)) {
-                        if (separateLineBetweenGroups
-                                && getCountOfEmptyLinesBetween(
-                                    previousImportObjectFromCurrentGroup.getLineNumber(),
-                                    importObject.getLineNumber()) != 1) {
+                        if (isEmptyLineMissed(previousImportObjectFromCurrentGroup, importObject)) {
                             log(importObject.getLineNumber(), MSG_LINE_SEPARATOR, fullImportIdent);
                         }
                         currentGroup = nextGroup;

@@ -1,0 +1,18 @@
+    /**
+     * Examine that imports separated by more than one empty line.
+     *
+     * @param previousImportObject
+     *        previous import in current group.
+     * @param currentImportObject
+     *        current import.
+     * @return
+     *        true, if current import separated from previous by more that one empty line.
+     */
+    private boolean isSeparatedByExtraEmptyLine(ImportDetails previousImportObject,
+                                                ImportDetails currentImportObject) {
+        return previousImportObject != null
+                && getCountOfEmptyLinesBetween(
+                     previousImportObject.getLineNumber(),
+                     currentImportObject.getLineNumber()) > 1;
+    }
+
