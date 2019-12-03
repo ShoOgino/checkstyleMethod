@@ -3,13 +3,13 @@
         final AnnotationUseStyleCheck check = new AnnotationUseStyleCheck();
         try {
             check.setElementStyle("SHOULD_PRODUCE_ERROR");
-            Assert.fail("ConversionException is expected");
+            fail("ConversionException is expected");
         }
         catch (IllegalArgumentException ex) {
             final String messageStart = "unable to parse";
 
-            assertTrue("Invalid exception message, should start with: " + messageStart,
-                ex.getMessage().startsWith(messageStart));
+            assertTrue(ex.getMessage().startsWith(messageStart),
+                    "Invalid exception message, should start with: " + messageStart);
         }
     }
 
