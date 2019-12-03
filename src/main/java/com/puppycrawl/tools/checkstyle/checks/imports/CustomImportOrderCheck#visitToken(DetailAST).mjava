@@ -9,9 +9,10 @@
         else {
             final String importFullPath = getFullImportIdent(ast);
             final int lineNo = ast.getLineNo();
+            final int endLineNo = ast.getLastChild().getLineNo();
             final boolean isStatic = ast.getType() == TokenTypes.STATIC_IMPORT;
             importToGroupList.add(new ImportDetails(importFullPath,
-                    lineNo, getImportGroup(isStatic, importFullPath),
+                    lineNo, endLineNo, getImportGroup(isStatic, importFullPath),
                     isStatic));
         }
     }

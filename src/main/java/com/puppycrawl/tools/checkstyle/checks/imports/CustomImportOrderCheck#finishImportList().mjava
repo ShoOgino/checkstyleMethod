@@ -12,10 +12,11 @@
             if (importGroup.equals(currentGroup)) {
                 if (isSeparatedByExtraEmptyLine(previousImportObjectFromCurrentGroup,
                                                 importObject)) {
-                    log(importObject.getLineNumber(), MSG_SEPARATED_IN_GROUP, fullImportIdent);
+                    log(importObject.getStartLineNumber(), MSG_SEPARATED_IN_GROUP,
+                            fullImportIdent);
                 }
                 if (isAlphabeticalOrderBroken(previousImportFromCurrentGroup, fullImportIdent)) {
-                    log(importObject.getLineNumber(), MSG_LEX,
+                    log(importObject.getStartLineNumber(), MSG_LEX,
                             fullImportIdent, previousImportFromCurrentGroup);
                 }
                 else {
@@ -29,20 +30,21 @@
                     final String nextGroup = getNextImportGroup(currentGroupNumber + 1);
                     if (importGroup.equals(nextGroup)) {
                         if (isEmptyLineMissed(previousImportObjectFromCurrentGroup, importObject)) {
-                            log(importObject.getLineNumber(), MSG_LINE_SEPARATOR, fullImportIdent);
+                            log(importObject.getStartLineNumber(), MSG_LINE_SEPARATOR,
+                                    fullImportIdent);
                         }
                         currentGroup = nextGroup;
                         currentGroupNumber = customImportOrderRules.indexOf(nextGroup);
                         previousImportFromCurrentGroup = fullImportIdent;
                     }
                     else {
-                        logWrongImportGroupOrder(importObject.getLineNumber(),
+                        logWrongImportGroupOrder(importObject.getStartLineNumber(),
                                 importGroup, nextGroup, fullImportIdent);
                     }
                     previousImportObjectFromCurrentGroup = importObject;
                 }
                 else {
-                    logWrongImportGroupOrder(importObject.getLineNumber(),
+                    logWrongImportGroupOrder(importObject.getStartLineNumber(),
                             importGroup, currentGroup, fullImportIdent);
                 }
             }
