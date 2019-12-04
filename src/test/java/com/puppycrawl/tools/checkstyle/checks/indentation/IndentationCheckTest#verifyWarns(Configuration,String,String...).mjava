@@ -5,8 +5,7 @@
         final IndentComment[] linesWithWarn =
                         getLinesWithWarnAndCheckComments(filePath, tabWidth);
         verify(config, filePath, expected, linesWithWarn);
-        assertEquals("Expected warning count in UT does not match warn"
-                        + " comment count in input file", linesWithWarn.length,
-                        expected.length);
+        assertEquals(linesWithWarn.length, expected.length,
+            "Expected warning count in UT does not match warn comment count in input file");
     }
 

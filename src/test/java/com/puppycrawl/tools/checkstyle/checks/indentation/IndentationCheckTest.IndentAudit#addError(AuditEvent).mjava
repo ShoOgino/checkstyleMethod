@@ -18,7 +18,8 @@
                     "input expected warning #%d at line %d to report one of the following: %s"
                             + "but got instead: %d: %s",
                     position, comment.getLineNumber(), possibleExceptedMessages, line, message);
-            assertTrue(assertMessage, line == comment.getLineNumber()
-                    && Arrays.stream(comment.getExpectedMessages()).anyMatch(message::endsWith));
+            assertTrue(line == comment.getLineNumber()
+                    && Arrays.stream(comment.getExpectedMessages()).anyMatch(message::endsWith),
+                    assertMessage);
         }
 

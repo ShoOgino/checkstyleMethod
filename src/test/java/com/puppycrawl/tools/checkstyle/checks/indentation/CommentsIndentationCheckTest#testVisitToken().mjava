@@ -6,12 +6,11 @@
         methodDef.setText("methodStub");
         try {
             check.visitToken(methodDef);
-            Assert.fail("IllegalArgumentException should have been thrown!");
+            fail("IllegalArgumentException should have been thrown!");
         }
         catch (IllegalArgumentException ex) {
             final String msg = ex.getMessage();
-            Assert.assertEquals("Invalid exception message",
-                    "Unexpected token type: methodStub", msg);
+            assertEquals("Unexpected token type: methodStub", msg, "Invalid exception message");
         }
     }
 
