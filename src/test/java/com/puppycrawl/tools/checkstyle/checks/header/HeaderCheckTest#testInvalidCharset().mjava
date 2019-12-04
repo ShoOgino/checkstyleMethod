@@ -8,12 +8,12 @@
             fail("CheckstyleException is expected");
         }
         catch (CheckstyleException ex) {
-            assertEquals("Invalid exception message", "cannot initialize module"
+            assertEquals("cannot initialize module"
                     + " com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"
                     + " - Cannot set property 'charset' to 'XSO-8859-1'",
-                    ex.getMessage());
-            assertEquals("Invalid exception message", "unsupported charset: 'XSO-8859-1'",
-                    ex.getCause().getCause().getCause().getMessage());
+                    ex.getMessage(), "Invalid exception message");
+            assertEquals("unsupported charset: 'XSO-8859-1'",
+                    ex.getCause().getCause().getCause().getMessage(), "Invalid exception message");
         }
     }
 

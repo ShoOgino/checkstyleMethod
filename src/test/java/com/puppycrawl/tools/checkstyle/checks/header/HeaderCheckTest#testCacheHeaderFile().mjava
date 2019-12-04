@@ -4,7 +4,7 @@
         checkConfig.addAttribute("headerFile", getPath("InputHeaderjava.header"));
 
         final DefaultConfiguration checkerConfig = createRootConfig(checkConfig);
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
         final String[] expected = {
