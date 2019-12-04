@@ -1,9 +1,9 @@
     @Test
     public void testAcceptableTokensMakeSense() {
         final int expectedTokenTypesTotalNumber = 169;
-        Assert.assertEquals("Total number of TokenTypes has changed, acceptable tokens in"
-                + " IllegalTokenTextCheck need to be reconsidered.",
-            expectedTokenTypesTotalNumber, TokenUtil.getTokenTypesTotalNumber());
+        assertEquals(expectedTokenTypesTotalNumber, TokenUtil.getTokenTypesTotalNumber(),
+                "Total number of TokenTypes has changed, acceptable tokens in"
+                + " IllegalTokenTextCheck need to be reconsidered.");
 
         final IllegalTokenTextCheck check = new IllegalTokenTextCheck();
         final int[] allowedTokens = check.getAcceptableTokens();
@@ -18,9 +18,10 @@
             TokenTypes.CHAR_LITERAL
         );
         for (int tokenType : allowedTokens) {
-            Assert.assertTrue(TokenUtil.getTokenName(tokenType) + " should not be allowed"
+            assertTrue(tokenTypesWithMutableText.contains(tokenType),
+                TokenUtil.getTokenName(tokenType) + " should not be allowed"
                 + " in this check as its text is a constant (IllegalTokenCheck should be used for"
-                + " such cases).", tokenTypesWithMutableText.contains(tokenType));
+                + " such cases).");
         }
     }
 

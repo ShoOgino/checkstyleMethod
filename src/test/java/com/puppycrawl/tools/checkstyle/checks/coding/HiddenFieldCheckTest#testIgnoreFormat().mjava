@@ -5,8 +5,8 @@
         final DefaultConfiguration checkConfig =
             createModuleConfig(HiddenFieldCheck.class);
         checkConfig.addAttribute("ignoreFormat", "^i.*$");
-        Assert.assertNotNull("Ignore format should not be null",
-                checkConfig.getAttribute("ignoreFormat"));
+        assertNotNull(checkConfig.getAttribute("ignoreFormat"),
+                "Ignore format should not be null");
         final String[] expected = {
             "18:13: " + getCheckMessage(MSG_KEY, "hidden"),
             "21:33: " + getCheckMessage(MSG_KEY, "hidden"),

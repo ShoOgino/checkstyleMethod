@@ -13,9 +13,9 @@
         final Optional<DetailAST> classDef = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.CLASS_DEF);
 
-        assertTrue("Ast should contain CLASS_DEF", classDef.isPresent());
-        assertTrue("State is not cleared on beginTree",
+        assertTrue(classDef.isPresent(), "Ast should contain CLASS_DEF");
+        assertTrue(
                 TestUtil.isStatefulFieldClearedDuringBeginTree(check, classDef.get(), "frame",
-                        new CheckIfStatefulFieldCleared()));
+                        new CheckIfStatefulFieldCleared()), "State is not cleared on beginTree");
     }
 

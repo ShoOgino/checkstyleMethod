@@ -14,10 +14,10 @@
                 JavaParser.Options.WITHOUT_COMMENTS),
             ast -> ast.getType() == TokenTypes.METHOD_DEF);
 
-        assertTrue("Ast should contain METHOD_DEF", methodDef.isPresent());
-        assertTrue("State is not cleared on beginTree",
-            TestUtil.isStatefulFieldClearedDuringBeginTree(check, methodDef.get(),
-                "methodStack",
-                methodStack -> ((Collection<Set<String>>) methodStack).isEmpty()));
+        assertTrue(methodDef.isPresent(), "Ast should contain METHOD_DEF");
+        assertTrue(
+            TestUtil.isStatefulFieldClearedDuringBeginTree(check, methodDef.get(), "methodStack",
+                methodStack -> ((Collection<Set<String>>) methodStack).isEmpty()),
+                "State is not cleared on beginTree");
     }
 

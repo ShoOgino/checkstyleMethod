@@ -15,10 +15,11 @@
                 JavaParser.Options.WITHOUT_COMMENTS),
             ast -> ast.getType() == TokenTypes.OBJBLOCK);
 
-        assertTrue("Ast should contain METHOD_DEF", methodDef.isPresent());
-        assertTrue("State is not cleared on beginTree",
+        assertTrue(methodDef.isPresent(), "Ast should contain METHOD_DEF");
+        assertTrue(
             TestUtil.isStatefulFieldClearedDuringBeginTree(check, methodDef.get(),
                 "variableStack",
-                variableStack -> ((Collection<Set<String>>) variableStack).isEmpty()));
+                variableStack -> ((Collection<Set<String>>) variableStack).isEmpty()),
+                "State is not cleared on beginTree");
     }
 

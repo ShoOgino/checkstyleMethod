@@ -8,9 +8,10 @@
         constructor.setAccessible(true);
         final Object o = constructor.newInstance(null, ident);
 
-        Assert.assertEquals("expected ident token", ident,
-                TestUtil.getClassDeclaredMethod(cls, "getFrameNameIdent").invoke(o));
-        Assert.assertEquals("expected catch frame type", "CATCH_FRAME",
-                TestUtil.getClassDeclaredMethod(cls, "getType").invoke(o).toString());
+        final Object actual = TestUtil.getClassDeclaredMethod(cls, "getFrameNameIdent").invoke(o);
+        assertEquals(ident, actual, "expected ident token");
+        assertEquals("CATCH_FRAME",
+            TestUtil.getClassDeclaredMethod(cls, "getType").invoke(o).toString(),
+                "expected catch frame type");
     }
 

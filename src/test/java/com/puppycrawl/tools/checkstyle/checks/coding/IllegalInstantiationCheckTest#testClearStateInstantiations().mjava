@@ -15,10 +15,11 @@
         final Optional<DetailAST> literalNew = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.LITERAL_NEW);
 
-        Assert.assertTrue("Ast should contain LITERAL_NEW", literalNew.isPresent());
-        Assert.assertTrue("State is not cleared on beginTree",
-                TestUtil.isStatefulFieldClearedDuringBeginTree(check, literalNew.get(),
-                    "instantiations",
-                    instantiations -> ((Collection<DetailAST>) instantiations).isEmpty()));
+        assertTrue(literalNew.isPresent(), "Ast should contain LITERAL_NEW");
+        assertTrue(
+            TestUtil.isStatefulFieldClearedDuringBeginTree(check, literalNew.get(),
+                "instantiations",
+                instantiations -> ((Collection<DetailAST>) instantiations).isEmpty()),
+            "State is not cleared on beginTree");
     }
 

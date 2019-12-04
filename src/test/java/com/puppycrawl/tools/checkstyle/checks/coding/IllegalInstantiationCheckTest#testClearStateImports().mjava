@@ -14,9 +14,10 @@
         final Optional<DetailAST> importDef = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.IMPORT);
 
-        Assert.assertTrue("Ast should contain IMPORT_DEF", importDef.isPresent());
-        Assert.assertTrue("State is not cleared on beginTree",
-                TestUtil.isStatefulFieldClearedDuringBeginTree(check, importDef.get(), "imports",
-                    imports -> ((Collection<?>) imports).isEmpty()));
+        assertTrue(importDef.isPresent(), "Ast should contain IMPORT_DEF");
+        assertTrue(
+            TestUtil.isStatefulFieldClearedDuringBeginTree(check, importDef.get(), "imports",
+                imports -> ((Collection<?>) imports).isEmpty()),
+                "State is not cleared on beginTree");
     }
 
