@@ -12,10 +12,10 @@
             new InterfaceMemberImpliedModifierCheck();
         try {
             check.visitToken(init);
-            Assert.fail("IllegalStateException is expected");
+            fail("IllegalStateException is expected");
         }
         catch (IllegalStateException ex) {
-            assertEquals("Error message is unexpected", init.toString(), ex.getMessage());
+            assertEquals(init.toString(), ex.getMessage(), "Error message is unexpected");
         }
     }
 
