@@ -7,18 +7,19 @@
         treeWalkerConfig.addChild(checkConfig);
 
         final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
-        final String filePath = temporaryFolder.newFile("EmptyFile.java").getPath();
+        final String filePath = File.createTempFile("empty", ".java", temporaryFolder).getPath();
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
 
         verify(checkerConfig, filePath, expected);
         // One more time to use cache.
         verify(checkerConfig, filePath, expected);
 
-        assertTrue("External resource is not present in cache",
-                new String(Files.readAllBytes(cacheFile.toPath()),
-                        StandardCharsets.UTF_8).contains("InputImportControlOneRegExp.xml"));
+        final String contents = new String(Files.readAllBytes(cacheFile.toPath()),
+                StandardCharsets.UTF_8);
+        assertTrue(contents.contains("InputImportControlOneRegExp.xml"),
+                "External resource is not present in cache");
     }
 

@@ -6,10 +6,10 @@
         final PkgImportControl subpackages = new PkgImportControl(root, "foo|bar", true,
                 MismatchStrategy.DELEGATE_TO_PARENT);
         root.addChild(subpackages);
-        assertEquals("Invalid package", root, root.locateFinest("org.somewhere", "MyClass"));
-        assertEquals("Invalid package", subpackages,
-                root.locateFinest("org.somewhere.foo", "MyClass"));
-        assertEquals("Invalid package", subpackages,
-                root.locateFinest("org.somewhere.bar", "MyClass"));
+        assertEquals(root, root.locateFinest("org.somewhere", "MyClass"), "Invalid package");
+        assertEquals(subpackages,
+                root.locateFinest("org.somewhere.foo", "MyClass"), "Invalid package");
+        assertEquals(subpackages,
+                root.locateFinest("org.somewhere.bar", "MyClass"), "Invalid package");
     }
 

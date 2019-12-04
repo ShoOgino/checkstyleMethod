@@ -1,9 +1,11 @@
     @Test
     public void testRegExpChildLocateFinest() {
-        assertEquals("Unexpected response", icRootRegexpChild, icRootRegexpChild
-                .locateFinest("com.kazgroup.courtlink.domain", "MyClass"));
-        assertEquals("Unexpected response", icCommonRegexpChild, icRootRegexpChild
-                .locateFinest("com.kazgroup.courtlink.common.api", "MyClass"));
-        assertNull("Unexpected response", icRootRegexpChild.locateFinest("com", "MyClass"));
+        assertEquals(icRootRegexpChild,
+                icRootRegexpChild.locateFinest("com.kazgroup.courtlink.domain", "MyClass"),
+                "Unexpected response");
+        assertEquals(icCommonRegexpChild,
+                icRootRegexpChild.locateFinest("com.kazgroup.courtlink.common.api", "MyClass"),
+                "Unexpected response");
+        assertNull(icRootRegexpChild.locateFinest("com", "MyClass"), "Unexpected response");
     }
 
