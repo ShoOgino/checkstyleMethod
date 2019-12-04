@@ -1,11 +1,11 @@
     @Test
     public void testTokens() {
         final ClassDataAbstractionCouplingCheck check = new ClassDataAbstractionCouplingCheck();
-        assertNotNull("Required tokens should not be null", check.getRequiredTokens());
-        assertNotNull("Acceptable tokens should not be null", check.getAcceptableTokens());
-        assertArrayEquals("Invalid default tokens", check.getDefaultTokens(),
-                check.getAcceptableTokens());
-        assertArrayEquals("Invalid acceptable tokens", check.getDefaultTokens(),
-                check.getRequiredTokens());
+        assertNotNull(check.getRequiredTokens(), "Required tokens should not be null");
+        assertNotNull(check.getAcceptableTokens(), "Acceptable tokens should not be null");
+        assertArrayEquals(check.getDefaultTokens(),
+                check.getAcceptableTokens(), "Invalid default tokens");
+        assertArrayEquals(check.getDefaultTokens(),
+                check.getRequiredTokens(), "Invalid acceptable tokens");
     }
 

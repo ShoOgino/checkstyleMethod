@@ -21,12 +21,12 @@
         npathComplexityCheckObj.visitToken(astIf);
         final SortedSet<LocalizedMessage> messages1 = npathComplexityCheckObj.getMessages();
 
-        Assert.assertEquals("No exception messages expected", 0, messages1.size());
+        assertEquals(0, messages1.size(), "No exception messages expected");
 
         //visiting ternary, it lies before expressionSpatialRange
         npathComplexityCheckObj.visitToken(astTernary);
         final SortedSet<LocalizedMessage> messages2 = npathComplexityCheckObj.getMessages();
 
-        Assert.assertEquals("No exception messages expected", 0, messages2.size());
+        assertEquals(0, messages2.size(), "No exception messages expected");
     }
 

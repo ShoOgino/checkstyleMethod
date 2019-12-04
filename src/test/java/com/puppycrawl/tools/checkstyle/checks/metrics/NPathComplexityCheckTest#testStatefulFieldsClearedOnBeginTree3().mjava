@@ -6,9 +6,9 @@
                 JavaParser.Options.WITHOUT_COMMENTS),
             ast -> ast.getType() == TokenTypes.QUESTION);
 
-        Assert.assertTrue("Ast should contain QUESTION", question.isPresent());
+        assertTrue(question.isPresent(), "Ast should contain QUESTION");
 
-        Assert.assertTrue("State is not cleared on beginTree",
+        assertTrue(
             TestUtil.isStatefulFieldClearedDuringBeginTree(
                 check,
                 question.get(),
@@ -25,6 +25,6 @@
                     catch (IllegalAccessException | NoSuchFieldException ex) {
                         throw new IllegalStateException(ex);
                     }
-                }));
+                }), "State is not cleared on beginTree");
     }
 

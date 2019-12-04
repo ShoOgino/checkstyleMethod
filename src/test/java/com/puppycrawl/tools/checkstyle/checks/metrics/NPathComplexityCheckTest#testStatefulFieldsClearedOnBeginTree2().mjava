@@ -9,8 +9,9 @@
         ast.addChild(child);
 
         final NPathComplexityCheck check = new NPathComplexityCheck();
-        Assert.assertTrue("Stateful field is not cleared after beginTree",
+        assertTrue(
             TestUtil.isStatefulFieldClearedDuringBeginTree(check, ast, "afterValues",
-                isAfterValues -> ((Collection<Context>) isAfterValues).isEmpty()));
+                isAfterValues -> ((Collection<Context>) isAfterValues).isEmpty()),
+                "Stateful field is not cleared after beginTree");
     }
 

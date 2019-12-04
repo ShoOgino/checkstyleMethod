@@ -15,10 +15,11 @@
         final Optional<DetailAST> importAst = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.IMPORT);
 
-        Assert.assertTrue("Ast should contain IMPORT", importAst.isPresent());
-        Assert.assertTrue("State is not cleared on beginTree",
+        assertTrue(importAst.isPresent(), "Ast should contain IMPORT");
+        assertTrue(
                 TestUtil.isStatefulFieldClearedDuringBeginTree(check, importAst.get(),
                     "importedClassPackages",
-                    importedClssPackage -> ((Map<String, String>) importedClssPackage).isEmpty()));
+                    importedClssPackage -> ((Map<String, String>) importedClssPackage).isEmpty()),
+                    "State is not cleared on beginTree");
     }
 

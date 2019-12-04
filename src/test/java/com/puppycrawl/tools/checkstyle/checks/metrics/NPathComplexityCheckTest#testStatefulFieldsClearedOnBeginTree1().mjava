@@ -5,11 +5,13 @@
         ast.setType(TokenTypes.LITERAL_ELSE);
 
         final NPathComplexityCheck check = new NPathComplexityCheck();
-        Assert.assertTrue("Stateful field is not cleared after beginTree",
+        assertTrue(
             TestUtil.isStatefulFieldClearedDuringBeginTree(check, ast, "rangeValues",
-                rangeValues -> ((Collection<Context>) rangeValues).isEmpty()));
-        Assert.assertTrue("Stateful field is not cleared after beginTree",
+                rangeValues -> ((Collection<Context>) rangeValues).isEmpty()),
+                "Stateful field is not cleared after beginTree");
+        assertTrue(
             TestUtil.isStatefulFieldClearedDuringBeginTree(check, ast, "expressionValues",
-                expressionValues -> ((Collection<Context>) expressionValues).isEmpty()));
+                expressionValues -> ((Collection<Context>) expressionValues).isEmpty()),
+                "Stateful field is not cleared after beginTree");
     }
 
