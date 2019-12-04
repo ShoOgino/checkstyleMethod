@@ -20,17 +20,17 @@
         };
         for (int type: validTypes) {
             ast.setType(type);
-            assertTrue("Invalid ast type for current tag: " + ast.getType(),
-                    JavadocTagInfo.DEPRECATED.isValidOn(ast));
+            assertTrue(JavadocTagInfo.DEPRECATED.isValidOn(ast),
+                    "Invalid ast type for current tag: " + ast.getType());
         }
 
         astParent.setType(TokenTypes.SLIST);
         ast.setType(TokenTypes.VARIABLE_DEF);
-        assertFalse("Should return false when ast type is invalid for current tag",
-                JavadocTagInfo.DEPRECATED.isValidOn(ast));
+        assertFalse(JavadocTagInfo.DEPRECATED.isValidOn(ast),
+                "Should return false when ast type is invalid for current tag");
 
         ast.setType(TokenTypes.PARAMETER_DEF);
-        assertFalse("Should return false when ast type is invalid for current tag",
-                JavadocTagInfo.DEPRECATED.isValidOn(ast));
+        assertFalse(JavadocTagInfo.DEPRECATED.isValidOn(ast),
+                "Should return false when ast type is invalid for current tag");
     }
 

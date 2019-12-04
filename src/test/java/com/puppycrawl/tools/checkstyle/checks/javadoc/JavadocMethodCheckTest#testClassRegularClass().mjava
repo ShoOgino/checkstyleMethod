@@ -15,10 +15,10 @@
             fail("Exception is expected");
         }
         catch (InvocationTargetException ex) {
-            assertTrue("Invalid exception class, expected: IllegalArgumentException.class",
-                ex.getCause() instanceof IllegalArgumentException);
-            assertEquals("Invalid exception message",
-                "ClassInfo's name should be non-null", ex.getCause().getMessage());
+            assertTrue(ex.getCause() instanceof IllegalArgumentException,
+                    "Invalid exception class, expected: IllegalArgumentException.class");
+            assertEquals("ClassInfo's name should be non-null", ex.getCause().getMessage(),
+                    "Invalid exception message");
         }
 
         final Constructor<?> tokenConstructor = tokenType.getDeclaredConstructor(String.class,
@@ -35,7 +35,7 @@
         final String expected = "RegularClass[name=Token[blablabla(1x1)], in class='sur', check="
                 + methodCheck.hashCode() + "," + " loadable=true, class=null]";
 
-        assertEquals("Invalid toString result", expected, result);
+        assertEquals(expected, result, "Invalid toString result");
 
         final Method setClazz = regularClass.getClass().getDeclaredMethod("setClazz", Class.class);
         setClazz.setAccessible(true);
@@ -44,6 +44,6 @@
 
         final Method getClazz = regularClass.getClass().getDeclaredMethod("getClazz");
         getClazz.setAccessible(true);
-        assertNull("Expected null", getClazz.invoke(regularClass));
+        assertNull(getClazz.invoke(regularClass), "Expected null");
     }
 

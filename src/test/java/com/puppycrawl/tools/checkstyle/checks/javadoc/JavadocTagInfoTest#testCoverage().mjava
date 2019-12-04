@@ -1,17 +1,17 @@
     @Test
     public void testCoverage() {
-        assertEquals("Invalid type", JavadocTagInfo.Type.BLOCK, JavadocTagInfo.VERSION.getType());
+        assertEquals(JavadocTagInfo.Type.BLOCK, JavadocTagInfo.VERSION.getType(), "Invalid type");
 
-        assertEquals("Invalid toString result", "text [@version] name [version] type [BLOCK]",
-            JavadocTagInfo.VERSION.toString());
+        assertEquals("text [@version] name [version] type [BLOCK]",
+            JavadocTagInfo.VERSION.toString(), "Invalid toString result");
 
         try {
             JavadocTagInfo.fromName(null);
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid exception message",
-                    "the name is null", ex.getMessage());
+            assertEquals("the name is null", ex.getMessage(),
+                    "Invalid exception message");
         }
 
         try {
@@ -19,8 +19,8 @@
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid exception message",
-                    "the name [myname] is not a valid Javadoc tag name", ex.getMessage());
+            assertEquals("the name [myname] is not a valid Javadoc tag name", ex.getMessage(),
+                    "Invalid exception message");
         }
 
         try {
@@ -28,7 +28,7 @@
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid exception message", "the text is null", ex.getMessage());
+            assertEquals("the text is null", ex.getMessage(), "Invalid exception message");
         }
 
         try {
@@ -36,11 +36,12 @@
             fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid exception message",
-                    "the text [myname] is not a valid Javadoc tag text", ex.getMessage());
+            assertEquals(
+                    "the text [myname] is not a valid Javadoc tag text", ex.getMessage(),
+                    "Invalid exception message");
         }
 
-        assertEquals("Invalid fromText result",
-                JavadocTagInfo.VERSION, JavadocTagInfo.fromText("@version"));
+        assertEquals(JavadocTagInfo.VERSION, JavadocTagInfo.fromText("@version"),
+                "Invalid fromText result");
     }
 

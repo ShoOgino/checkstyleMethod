@@ -11,12 +11,12 @@
         };
         for (int type: validTypes) {
             ast.setType(type);
-            assertTrue("Invalid ast type for current tag: " + ast.getType(),
-                    JavadocTagInfo.AUTHOR.isValidOn(ast));
+            assertTrue(JavadocTagInfo.AUTHOR.isValidOn(ast),
+                    "Invalid ast type for current tag: " + ast.getType());
         }
 
         ast.setType(TokenTypes.LAMBDA);
-        assertFalse("Should return false when ast type is invalid for current tag",
-                JavadocTagInfo.AUTHOR.isValidOn(ast));
+        assertFalse(JavadocTagInfo.AUTHOR.isValidOn(ast),
+                "Should return false when ast type is invalid for current tag");
     }
 

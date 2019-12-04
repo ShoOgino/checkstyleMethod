@@ -1,5 +1,6 @@
     @Test
-    public void testCheckReuseAfterParseErrorWithFollowingAntlrErrorInTwoFiles() throws Exception {
+    public void testCheckReuseAfterParseErrorWithFollowingAntlrErrorInTwoFiles(Capturable errStream)
+            throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(TempCheck.class);
         final Map<String, List<String>> expectedMessages = new LinkedHashMap<>(2);
         expectedMessages.put(getPath("InputAbstractJavadocParsingErrors.java"), asList(
@@ -14,6 +15,6 @@
             new File(getPath("InputAbstractJavadocParsingErrors.java")),
             new File(getPath("InputAbstractJavadocInvalidAtSeeReference.java")), },
                 expectedMessages);
-        assertEquals("Error is unexpected", "", systemErr.getLog());
+        assertEquals("", errStream.getCapturedData(), "Error is unexpected");
     }
 

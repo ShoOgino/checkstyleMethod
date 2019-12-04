@@ -3,14 +3,14 @@
         final Set<String> imports = new HashSet<>();
         final ClassResolver classResolver = new ClassResolver(
                 Thread.currentThread().getContextClassLoader(), "java.util", imports);
-        assertNotNull("Class should be resolved", classResolver.resolve("List", ""));
+        assertNotNull(classResolver.resolve("List", ""), "Class should be resolved");
         try {
             classResolver.resolve("NoSuchClass", "");
             fail("ClassNotFoundException is expected");
         }
         catch (ClassNotFoundException ex) {
             // exception is expected
-            assertEquals("Invalid exception message", "NoSuchClass", ex.getMessage());
+            assertEquals("NoSuchClass", ex.getMessage(), "Invalid exception message");
         }
     }
 

@@ -17,11 +17,10 @@
             for (int i = 0; i < expected.length; i++) {
                 final String expectedResult = messageFileName + ":" + expected[i];
                 final String actual = lnr.readLine();
-                assertEquals("error message " + i, expectedResult, actual);
+                assertEquals(expectedResult, actual, "error message " + i);
             }
 
-            assertTrue("unexpected output: " + lnr.readLine(),
-                    expected.length >= errs);
+            assertTrue(expected.length >= errs, "unexpected output: " + lnr.readLine());
         }
         checker.destroy();
     }

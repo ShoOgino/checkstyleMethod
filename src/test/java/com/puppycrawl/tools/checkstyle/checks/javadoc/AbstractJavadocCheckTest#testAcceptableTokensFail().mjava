@@ -7,14 +7,14 @@
         try {
             final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
             verify(checkConfig, getPath("InputAbstractJavadocMain.java"), expected);
-            Assert.fail("CheckstyleException is expected");
+            fail("CheckstyleException is expected");
         }
         catch (IllegalStateException ex) {
             final String expected = "Javadoc Token "
                     + "\"RETURN_LITERAL\" was not found in "
                     + "Acceptable javadoc tokens list in check";
-            Assert.assertTrue("Invalid exception, should start with: " + expected,
-                    ex.getMessage().startsWith(expected));
+            assertTrue(ex.getMessage().startsWith(expected),
+                    "Invalid exception, should start with: " + expected);
         }
     }
 

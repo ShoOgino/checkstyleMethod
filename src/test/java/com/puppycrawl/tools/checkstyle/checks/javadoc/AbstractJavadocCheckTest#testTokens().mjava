@@ -13,16 +13,16 @@
             }
         };
 
-        Assert.assertNotNull("Default tokens should not be null", check.getDefaultTokens());
-        Assert.assertArrayEquals("Acceptable tokens should be equal to default",
-                check.getDefaultTokens(), check.getAcceptableTokens());
-        Assert.assertArrayEquals("Required tokens should be equal to default",
-                check.getDefaultTokens(), check.getRequiredTokens());
-        Assert.assertArrayEquals("Invalid default javadoc tokens",
-                defaultJavadocTokens, check.getDefaultJavadocTokens());
-        Assert.assertArrayEquals("Invalid acceptable javadoc tokens",
-                defaultJavadocTokens, check.getAcceptableJavadocTokens());
-        Assert.assertNotEquals("Invalid required javadoc tokens",
-                defaultJavadocTokens, check.getRequiredJavadocTokens());
+        assertNotNull(check.getDefaultTokens(), "Default tokens should not be null");
+        assertArrayEquals(check.getDefaultTokens(), check.getAcceptableTokens(),
+                "Acceptable tokens should be equal to default");
+        assertArrayEquals(check.getDefaultTokens(), check.getRequiredTokens(),
+                "Required tokens should be equal to default");
+        assertArrayEquals(defaultJavadocTokens, check.getDefaultJavadocTokens(),
+                "Invalid default javadoc tokens");
+        assertArrayEquals(defaultJavadocTokens, check.getAcceptableJavadocTokens(),
+                "Invalid acceptable javadoc tokens");
+        assertNotEquals(defaultJavadocTokens, check.getRequiredJavadocTokens(),
+                "Invalid required javadoc tokens");
     }
 
