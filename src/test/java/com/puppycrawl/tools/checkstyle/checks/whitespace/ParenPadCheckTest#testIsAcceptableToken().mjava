@@ -18,8 +18,8 @@
 
         for (int token : check.getAcceptableTokens()) {
             ast.setType(token);
-            assertTrue(message + TokenUtil.getTokenName(token),
-                    (boolean) method.invoke(check, ast));
+            assertTrue((boolean) method.invoke(check, ast),
+                    message + TokenUtil.getTokenName(token));
         }
     }
 
