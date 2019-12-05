@@ -1,0 +1,11 @@
+    /**
+     * Checks ast parent is in expression.
+     *
+     * @param ast token to check
+     * @return true if token is part of expression, false otherwise
+     */
+    private static boolean isInExpression(DetailAST ast) {
+        return TokenTypes.DOT == ast.getParent().getType()
+                || TokenTypes.METHOD_REF == ast.getParent().getType();
+    }
+

@@ -13,7 +13,7 @@
         final DetailAST prevSibling = ast.getPreviousSibling();
         if (variableDeclarationFrameType == FrameType.CLASS_FRAME
                 && !validateOnlyOverlapping
-                && (prevSibling == null || ast.getParent().getType() != TokenTypes.DOT)
+                && (prevSibling == null || !isInExpression(ast))
                 && canBeReferencedFromStaticContext(ast)) {
             frameWhereViolationIsFound = variableDeclarationFrame;
         }
