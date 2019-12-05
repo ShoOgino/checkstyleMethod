@@ -7,7 +7,7 @@
             "3: " + getCheckMessage(MSG_REGEXP_EXCEEDED, "\\r"),
         };
 
-        final File file = temporaryFolder.newFile();
+        final File file = File.createTempFile("junit", null, temporaryFolder);
         Files.write(file.toPath(),
                 "first line \r\n second line \n\r third line".getBytes(StandardCharsets.UTF_8));
 

@@ -8,7 +8,7 @@
             "1: " + getCheckMessage(MSG_STACKOVERFLOW),
         };
 
-        final File file = temporaryFolder.newFile();
+        final File file = File.createTempFile("junit", null, temporaryFolder);
         Files.write(file.toPath(), makeLargeXyString().toString().getBytes(StandardCharsets.UTF_8));
 
         verify(checkConfig, file.getPath(), expected);

@@ -8,7 +8,7 @@
             "1: some message",
         };
 
-        final File file = temporaryFolder.newFile();
+        final File file = File.createTempFile("junit", null, temporaryFolder);
         Files.write(file.toPath(), "".getBytes(StandardCharsets.UTF_8));
 
         verify(checkConfig, file.getPath(), expected);
