@@ -19,8 +19,8 @@
         for (int i = 0; i < expected.size(); i++) {
             final String line = expected.get(i);
             if (!line.startsWith("<checkstyle version") && !line.startsWith("<file")) {
-                assertEquals("Content of file with violations differs from expected",
-                        line, actual.get(i));
+                assertEquals(line, actual.get(i),
+                        "Content of file with violations differs from expected");
             }
         }
     }

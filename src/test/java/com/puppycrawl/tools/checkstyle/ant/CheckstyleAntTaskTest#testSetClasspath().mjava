@@ -8,8 +8,8 @@
         antTask.setClasspath(new Path(project, path2));
 
         final Path classpath = Whitebox.getInternalState(antTask, "classpath");
-        assertNotNull("Classpath should not be null", classpath);
-        assertTrue("Classpath contain provided path", classpath.toString().contains(path1));
-        assertTrue("Classpath contain provided path", classpath.toString().contains(path2));
+        assertNotNull(classpath, "Classpath should not be null");
+        assertTrue(classpath.toString().contains(path1), "Classpath contain provided path");
+        assertTrue(classpath.toString().contains(path2), "Classpath contain provided path");
     }
 

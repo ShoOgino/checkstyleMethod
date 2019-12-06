@@ -7,15 +7,15 @@
         antTask.setClasspathRef(new Reference(project, "idXX"));
 
         try {
-            assertNotNull("Classpath should not be null",
-                    Whitebox.getInternalState(antTask, "classpath"));
+            assertNotNull(Whitebox.getInternalState(antTask, "classpath"),
+                    "Classpath should not be null");
             final Path classpath = Whitebox.getInternalState(antTask, "classpath");
             classpath.list();
             fail("Exception is expected");
         }
         catch (BuildException ex) {
-            assertEquals("unexpected exception message",
-                    "Reference idXX not found.", ex.getMessage());
+            assertEquals("Reference idXX not found.", ex.getMessage(),
+                    "unexpected exception message");
         }
     }
 

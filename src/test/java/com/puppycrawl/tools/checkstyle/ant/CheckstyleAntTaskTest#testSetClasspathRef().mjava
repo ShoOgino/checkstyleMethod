@@ -3,7 +3,7 @@
         final CheckstyleAntTask antTask = new CheckstyleAntTask();
         antTask.setClasspathRef(new Reference(new Project(), "id"));
 
-        assertNotNull("Classpath should not be null",
-            Whitebox.getInternalState(antTask, "classpath"));
+        assertNotNull(Whitebox.getInternalState(antTask, "classpath"),
+                "Classpath should not be null");
     }
 
