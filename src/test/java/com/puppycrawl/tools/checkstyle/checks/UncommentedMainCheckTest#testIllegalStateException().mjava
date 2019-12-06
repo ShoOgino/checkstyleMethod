@@ -5,11 +5,10 @@
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.CTOR_DEF, "ctor"));
         try {
             check.visitToken(ast);
-            Assert.fail("IllegalStateException is expected");
+            fail("IllegalStateException is expected");
         }
         catch (IllegalStateException ex) {
-            assertEquals("Error message is unexpected",
-                    ast.toString(), ex.getMessage());
+            assertEquals(ast.toString(), ex.getMessage(), "Error message is unexpected");
         }
     }
 

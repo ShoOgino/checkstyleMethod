@@ -9,10 +9,11 @@
                     JavaParser.Options.WITHOUT_COMMENTS),
             ast -> ast.getType() == TokenTypes.ANNOTATION);
 
-        assertTrue("Ast should contain ANNOTATION", annotationDef.isPresent());
-        assertTrue("State is not cleared on beginTree",
+        assertTrue(annotationDef.isPresent(), "Ast should contain ANNOTATION");
+        assertTrue(
             TestUtil.isStatefulFieldClearedDuringBeginTree(check, annotationDef.get(),
                 "ENTRIES",
-                entries -> ((ThreadLocal<List<Object>>) entries).get().isEmpty()));
+                entries -> ((ThreadLocal<List<Object>>) entries).get().isEmpty()),
+                "State is not cleared on beginTree");
     }
 

@@ -11,13 +11,13 @@
 
         final Set<String> keys = Whitebox.invokeMethod(check, "getTranslationKeys",
                 new File(".no.such.file"));
-        assertTrue("Translation keys should be empty when File is not found", keys.isEmpty());
+        assertTrue(keys.isEmpty(), "Translation keys should be empty when File is not found");
 
-        assertEquals("expected number of errors to fire", 1, dispatcher.savedErrors.size());
+        assertEquals(1, dispatcher.savedErrors.size(), "expected number of errors to fire");
         final LocalizedMessage localizedMessage = new LocalizedMessage(1,
                 Definitions.CHECKSTYLE_BUNDLE, "general.fileNotFound",
                 null, null, getClass(), null);
-        assertEquals("Invalid message", localizedMessage.getMessage(),
-                dispatcher.savedErrors.iterator().next().getMessage());
+        assertEquals(localizedMessage.getMessage(),
+                dispatcher.savedErrors.iterator().next().getMessage(), "Invalid message");
     }
 

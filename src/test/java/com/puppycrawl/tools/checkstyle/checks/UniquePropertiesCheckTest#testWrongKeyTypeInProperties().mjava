@@ -11,10 +11,10 @@
         final Object result = method.invoke(uniqueProperties, 1, "value");
         final Map<Object, Object> table = new HashMap<>();
         final Object expected = table.put(1, "value");
-        assertEquals("Invalid result of put method", expected, result);
+        assertEquals(expected, result, "Invalid result of put method");
 
         final Object result2 = method.invoke(uniqueProperties, 1, "value");
         final Object expected2 = table.put(1, "value");
-        assertEquals("Value should be substituted", expected2, result2);
+        assertEquals(expected2, result2, "Value should be substituted");
     }
 

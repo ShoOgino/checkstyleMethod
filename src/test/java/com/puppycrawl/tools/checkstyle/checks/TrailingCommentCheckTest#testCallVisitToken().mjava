@@ -3,11 +3,11 @@
         final TrailingCommentCheck check = new TrailingCommentCheck();
         try {
             check.visitToken(new DetailAstImpl());
-            Assert.fail("IllegalStateException is expected");
+            fail("IllegalStateException is expected");
         }
         catch (IllegalStateException ex) {
-            assertEquals("Error message is unexpected",
-                    "visitToken() shouldn't be called.", ex.getMessage());
+            assertEquals("visitToken() shouldn't be called.", ex.getMessage(),
+                    "Error message is unexpected");
         }
     }
 

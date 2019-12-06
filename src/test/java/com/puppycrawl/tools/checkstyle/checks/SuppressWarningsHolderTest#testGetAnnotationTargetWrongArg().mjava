@@ -21,10 +21,10 @@
             fail("Exception expected");
         }
         catch (InvocationTargetException ex) {
-            assertTrue("Error type is unexpected",
-                    ex.getCause() instanceof IllegalArgumentException);
-            assertEquals("Error message is unexpected",
-                    "Unexpected container AST: Parent ast[0x0]", ex.getCause().getMessage());
+            assertTrue(ex.getCause() instanceof IllegalArgumentException,
+                    "Error type is unexpected");
+            assertEquals("Unexpected container AST: Parent ast[0x0]", ex.getCause().getMessage(),
+                    "Error message is unexpected");
         }
     }
 

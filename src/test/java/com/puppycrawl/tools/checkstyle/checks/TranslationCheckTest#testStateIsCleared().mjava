@@ -20,7 +20,7 @@
         final Field field = check.getClass().getDeclaredField("filesToProcess");
         field.setAccessible(true);
 
-        assertTrue("Stateful field is not cleared on beginProcessing",
-            ((Collection<File>) field.get(check)).isEmpty());
+        assertTrue(((Collection<File>) field.get(check)).isEmpty(),
+                "Stateful field is not cleared on beginProcessing");
     }
 

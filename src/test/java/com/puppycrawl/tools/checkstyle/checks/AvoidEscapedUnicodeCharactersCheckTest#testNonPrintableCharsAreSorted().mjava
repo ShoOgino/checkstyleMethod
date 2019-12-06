@@ -39,12 +39,12 @@
             if (!matcher.matches()) {
                 final String message = "Character '" + currentChar + "' (at position " + i
                         + ") doesn't match the pattern";
-                assertTrue(message, matcher.matches());
+                assertTrue(matcher.matches(), message);
             }
             if (lastChar != null) {
                 final String message = "Character '" + lastChar + "' should be after '"
                         + currentChar + "', position: " + i;
-                assertTrue(message, lastChar.compareTo(currentChar) < 0);
+                assertTrue(lastChar.compareTo(currentChar) < 0, message);
             }
             lastChar = currentChar;
         }
