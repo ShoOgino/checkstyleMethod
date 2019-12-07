@@ -11,16 +11,16 @@
 
         final SortedSet<LocalizedMessage> internalMessages = check.getMessages();
 
-        assertEquals("Internal message should only have 2", 2, internalMessages.size());
+        assertEquals(2, internalMessages.size(), "Internal message should only have 2");
 
         final Iterator<LocalizedMessage> iterator = internalMessages.iterator();
 
         final LocalizedMessage firstMessage = iterator.next();
-        assertEquals("expected line", 1, firstMessage.getLineNo());
-        assertEquals("expected column", 0, firstMessage.getColumnNo());
+        assertEquals(1, firstMessage.getLineNo(), "expected line");
+        assertEquals(0, firstMessage.getColumnNo(), "expected column");
 
         final LocalizedMessage secondMessage = iterator.next();
-        assertEquals("expected line", 1, secondMessage.getLineNo());
-        assertEquals("expected column", 6, secondMessage.getColumnNo());
+        assertEquals(1, secondMessage.getLineNo(), "expected line");
+        assertEquals(6, secondMessage.getColumnNo(), "expected column");
     }
 

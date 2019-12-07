@@ -6,6 +6,6 @@
         final DetailAST packageDefinitionNode = JavaParser.parse(new FileContents(testFileText));
         final DetailAST packageName = packageDefinitionNode.getFirstChild().getNextSibling();
         final FullIdent ident = FullIdent.createFullIdent(packageName);
-        Assert.assertEquals("Invalid full indent", "com[1x8]", ident.getDetailAst().toString());
+        assertEquals("com[1x8]", ident.getDetailAst().toString(), "Invalid full indent");
     }
 

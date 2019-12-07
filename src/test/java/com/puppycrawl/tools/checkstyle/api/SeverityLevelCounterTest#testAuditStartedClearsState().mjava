@@ -5,12 +5,12 @@
         final AuditEvent secondEvent = new AuditEvent(this, "BTest.java", null);
 
         counter.auditStarted(event);
-        assertEquals("Invalid severity level count", 0, counter.getCount());
+        assertEquals(0, counter.getCount(), "Invalid severity level count");
 
         counter.addException(event, new IllegalStateException("Test IllegalStateException"));
-        assertEquals("Invalid severity level count", 1, counter.getCount());
+        assertEquals(1, counter.getCount(), "Invalid severity level count");
 
         counter.auditStarted(secondEvent);
-        assertEquals("Invalid severity level count", 0, counter.getCount());
+        assertEquals(0, counter.getCount(), "Invalid severity level count");
     }
 

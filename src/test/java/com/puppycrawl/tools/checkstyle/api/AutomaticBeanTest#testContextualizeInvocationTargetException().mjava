@@ -9,10 +9,10 @@
         }
         catch (CheckstyleException ex) {
             final String expected = "Cannot set property ";
-            assertTrue("Invalid exception cause, should be: InvocationTargetException",
-                    ex.getCause() instanceof InvocationTargetException);
-            assertTrue("Invalid exception message, should start with: " + expected,
-                    ex.getMessage().startsWith(expected));
+            assertTrue(ex.getCause() instanceof InvocationTargetException,
+                    "Invalid exception cause, should be: InvocationTargetException");
+            assertTrue(ex.getMessage().startsWith(expected),
+                    "Invalid exception message, should start with: " + expected);
         }
     }
 

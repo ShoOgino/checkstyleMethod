@@ -1,7 +1,7 @@
     @Test
     public void testAddError() {
         final SeverityLevelCounter counter = new SeverityLevelCounter(SeverityLevel.ERROR);
-        assertEquals("Invalid severity level count", 0, counter.getCount());
+        assertEquals(0, counter.getCount(), "Invalid severity level count");
         // not counted
         counter.addError(new AuditEvent(this, "ATest.java", null));
         counter.addError(new AuditEvent(this, "ATest.java", new LocalizedMessage(1, 2, 0, null,
@@ -9,6 +9,6 @@
         // counted
         counter.addError(new AuditEvent(this, "ATest.java", new LocalizedMessage(1, 2, 0, null,
                 null, null, SeverityLevel.ERROR, null, null, null)));
-        assertEquals("Invalid severity level count", 1, counter.getCount());
+        assertEquals(1, counter.getCount(), "Invalid severity level count");
     }
 

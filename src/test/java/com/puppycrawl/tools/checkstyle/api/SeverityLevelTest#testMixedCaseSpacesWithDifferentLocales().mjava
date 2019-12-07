@@ -5,14 +5,14 @@
         try {
             for (Locale differentLocale : differentLocales) {
                 Locale.setDefault(differentLocale);
-                assertEquals("Invalid getInstance result",
-                        SeverityLevel.IGNORE, SeverityLevel.getInstance("IgnoRe "));
-                assertEquals("Invalid getInstance result",
-                        SeverityLevel.INFO, SeverityLevel.getInstance(" iNfo"));
-                assertEquals("Invalid getInstance result",
-                        SeverityLevel.WARNING, SeverityLevel.getInstance(" WarniNg"));
-                assertEquals("Invalid getInstance result",
-                        SeverityLevel.ERROR, SeverityLevel.getInstance("    ERROR "));
+                assertEquals(SeverityLevel.IGNORE, SeverityLevel.getInstance("IgnoRe "),
+                        "Invalid getInstance result");
+                assertEquals(SeverityLevel.INFO, SeverityLevel.getInstance(" iNfo"),
+                        "Invalid getInstance result");
+                assertEquals(SeverityLevel.WARNING, SeverityLevel.getInstance(" WarniNg"),
+                        "Invalid getInstance result");
+                assertEquals(SeverityLevel.ERROR, SeverityLevel.getInstance("    ERROR "),
+                        "Invalid getInstance result");
             }
         }
         finally {

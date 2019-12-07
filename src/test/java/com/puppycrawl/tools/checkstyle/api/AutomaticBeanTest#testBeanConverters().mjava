@@ -19,13 +19,13 @@
         config.addAttribute("accessModifiers", "public, private");
         bean.configure(config);
 
-        assertArrayEquals("invalid result", new String[] {"a", "b", "c"}, bean.strings);
-        assertEquals("invalid result", ".*", bean.pattern.pattern());
-        assertEquals("invalid result", SeverityLevel.ERROR, bean.severityLevel);
-        assertEquals("invalid result", Scope.PUBLIC, bean.scope);
-        assertEquals("invalid result", new URI("http://github.com"), bean.uri);
-        assertArrayEquals("invalid result",
+        assertArrayEquals(new String[] {"a", "b", "c"}, bean.strings, "invalid result");
+        assertEquals(".*", bean.pattern.pattern(), "invalid result");
+        assertEquals(SeverityLevel.ERROR, bean.severityLevel, "invalid result");
+        assertEquals(Scope.PUBLIC, bean.scope, "invalid result");
+        assertEquals(new URI("http://github.com"), bean.uri, "invalid result");
+        assertArrayEquals(
                 new AccessModifier[] {AccessModifier.PUBLIC, AccessModifier.PRIVATE},
-                bean.accessModifiers);
+                bean.accessModifiers, "invalid result");
     }
 

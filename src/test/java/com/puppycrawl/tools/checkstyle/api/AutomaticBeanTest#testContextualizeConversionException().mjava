@@ -9,10 +9,10 @@
         }
         catch (CheckstyleException ex) {
             final String expected = "illegal value ";
-            assertTrue("Invalid exception cause, should be: ConversionException",
-                    ex.getCause() instanceof ConversionException);
-            assertTrue("Invalid exception message, should start with: " + expected,
-                    ex.getMessage().startsWith(expected));
+            assertTrue(ex.getCause() instanceof ConversionException,
+                    "Invalid exception cause, should be: ConversionException");
+            assertTrue(ex.getMessage().startsWith(expected),
+                    "Invalid exception message, should start with: " + expected);
         }
     }
 

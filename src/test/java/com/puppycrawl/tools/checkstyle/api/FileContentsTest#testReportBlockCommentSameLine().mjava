@@ -6,9 +6,9 @@
         fileContents.reportBlockComment("type", 1, 8, 1, 14);
         final Map<Integer, List<TextBlock>> comments = fileContents.getBlockComments();
 
-        assertEquals("Invalid comment", Arrays.asList(
+        assertEquals(Arrays.asList(
             new Comment(new String[] {"/* a */"}, 0, 1, 6),
             new Comment(new String[] {"/* b */"}, 8, 1, 14)
-        ).toString(), comments.get(1).toString());
+        ).toString(), comments.get(1).toString(), "Invalid comment");
     }
 

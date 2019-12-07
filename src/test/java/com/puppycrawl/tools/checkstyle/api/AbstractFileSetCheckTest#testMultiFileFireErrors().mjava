@@ -7,20 +7,20 @@
 
         check.finishProcessing();
 
-        assertEquals("Invalid fileName reported", "fileName", dispatcher.name);
+        assertEquals("fileName", dispatcher.name, "Invalid fileName reported");
 
-        assertEquals("errors should only have 1", 1, dispatcher.errorList.size());
+        assertEquals(1, dispatcher.errorList.size(), "errors should only have 1");
 
         final LocalizedMessage message = dispatcher.errorList.iterator().next();
-        assertEquals("expected line", 1, message.getLineNo());
-        assertEquals("expected column", 0, message.getColumnNo());
+        assertEquals(1, message.getLineNo(), "expected line");
+        assertEquals(0, message.getColumnNo(), "expected column");
 
         // re-running erases previous errors
 
         check.finishProcessing();
 
-        assertEquals("errors should still have 1 after re-run", 1, dispatcher.errorList.size());
-        assertEquals("finishProcessing was called twice", 2,
-                MultiFileViolationFileSetCheck.finishProcessingCount);
+        assertEquals(1, dispatcher.errorList.size(), "errors should still have 1 after re-run");
+        assertEquals(2, MultiFileViolationFileSetCheck.finishProcessingCount,
+                "finishProcessing was called twice");
     }
 

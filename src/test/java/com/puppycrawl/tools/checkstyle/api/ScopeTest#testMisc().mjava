@@ -1,18 +1,18 @@
     @Test
     public void testMisc() {
         final Scope scope = Scope.getInstance("public");
-        assertNotNull("Scope must not be null", scope);
-        assertEquals("Invalid scope toString", "public", scope.toString());
-        assertEquals("Invalid scope name", "public", scope.getName());
+        assertNotNull(scope, "Scope must not be null");
+        assertEquals("public", scope.toString(), "Invalid scope toString");
+        assertEquals("public", scope.getName(), "Invalid scope name");
 
         try {
             Scope.getInstance("unknown");
             fail("exception expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid error message",
+            assertEquals(
                     "No enum constant com.puppycrawl.tools.checkstyle.api.Scope.UNKNOWN",
-                    ex.getMessage());
+                    ex.getMessage(), "Invalid error message");
         }
     }
 

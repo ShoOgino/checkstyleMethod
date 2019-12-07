@@ -8,7 +8,8 @@
         clangComments.put(1, Collections.singletonList(textBlock));
         clangComments.put(2, null);
 
-        assertTrue("Invalid results",
-                Whitebox.invokeMethod(fileContents, "hasIntersectionWithBlockComment", 1, 1, 1, 1));
+        assertTrue((Boolean) Whitebox.invokeMethod(fileContents,
+                "hasIntersectionWithBlockComment", 1, 1, 1, 1),
+            "Invalid results");
     }
 

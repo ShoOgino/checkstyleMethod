@@ -8,9 +8,9 @@
 
         final Comment cppComment = new Comment(new String[] {"23"}, 1, 1, 2);
         final Comment cComment = new Comment(new String[] {"2"}, 1, 1, 1);
-        assertEquals("Invalid cpp comment", cppComment.toString(),
-                fileContents.getSingleLineComments().get(1).toString());
-        assertEquals("Invalid c comment", cComment.toString(),
-                fileContents.getBlockComments().get(1).get(0).toString());
+        final String lineComment = fileContents.getSingleLineComments().get(1).toString();
+        assertEquals(cppComment.toString(), lineComment, "Invalid cpp comment");
+        final String blockComment = fileContents.getBlockComments().get(1).get(0).toString();
+        assertEquals(cComment.toString(), blockComment, "Invalid c comment");
     }
 

@@ -3,8 +3,8 @@
         final FileContents fileContents = new FileContents(
                 new FileText(new File("filename"), Arrays.asList("123", "456")));
 
-        assertEquals("Invalid file name", "filename", fileContents.getText().getFile().getName());
-        assertArrayEquals("Invalid array", new String[] {"123", "456"}, fileContents.getLines());
-        assertEquals("Invalid file name", "filename", fileContents.getFileName());
+        assertEquals("filename", fileContents.getText().getFile().getName(), "Invalid file name");
+        assertArrayEquals(new String[] {"123", "456"}, fileContents.getLines(), "Invalid array");
+        assertEquals("filename", fileContents.getFileName(), "Invalid file name");
     }
 

@@ -5,8 +5,8 @@
         fileContents.reportSingleLineComment(1, 2);
         final Map<Integer, TextBlock> cppComments = fileContents.getSingleLineComments();
 
-        assertEquals("Invalid comment",
+        assertEquals(
                 new Comment(new String[] {" //  "}, 2, 1, 6).toString(),
-                cppComments.get(1).toString());
+                cppComments.get(1).toString(), "Invalid comment");
     }
 

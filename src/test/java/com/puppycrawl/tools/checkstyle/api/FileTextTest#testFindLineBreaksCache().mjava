@@ -12,7 +12,7 @@
         // produces NPE if used
         Whitebox.setInternalState(fileText, "fullText", (Object) null);
 
-        assertArrayEquals("Invalid line breaks", lineBreaks,
-                Whitebox.invokeMethod(fileText, "findLineBreaks"));
+        assertArrayEquals(lineBreaks,
+                Whitebox.invokeMethod(fileText, "findLineBreaks"), "Invalid line breaks");
     }
 

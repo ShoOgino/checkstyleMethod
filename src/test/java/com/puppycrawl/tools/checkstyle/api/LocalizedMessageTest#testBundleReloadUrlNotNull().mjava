@@ -40,8 +40,8 @@
                 "com.puppycrawl.tools.checkstyle.checks.coding.messages", Locale.ENGLISH,
                 "java.class", new TestUrlsClassLoader(url), true);
 
-        assertNotNull("Bundle should not be null when stream is not null", bundle);
-        assertFalse("connection should not be using caches", urlConnection.getUseCaches());
-        assertTrue("connection should be closed", closed.get());
+        assertNotNull(bundle, "Bundle should not be null when stream is not null");
+        assertFalse(urlConnection.getUseCaches(), "connection should not be using caches");
+        assertTrue(closed.get(), "connection should be closed");
     }
 

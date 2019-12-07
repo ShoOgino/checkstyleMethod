@@ -7,8 +7,8 @@
         Whitebox.setInternalState(fileContents, "javadocComments", javadoc);
         final TextBlock javadocBefore = fileContents.getJavadocBefore(2);
 
-        assertEquals("Invalid before javadoc",
+        assertEquals(
                 new Comment(new String[] {"// "}, 2, 1, 2).toString(),
-                javadocBefore.toString());
+                javadocBefore.toString(), "Invalid before javadoc");
     }
 

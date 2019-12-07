@@ -7,18 +7,18 @@
         final SortedSet<LocalizedMessage> firstFileMessages =
             check.process(firstFile, new FileText(firstFile, Collections.emptyList()));
 
-        assertEquals("Invalid message", "File should not be empty.",
-            firstFileMessages.first().getMessage());
+        assertEquals("File should not be empty.",
+            firstFileMessages.first().getMessage(), "Invalid message");
 
         final SortedSet<LocalizedMessage> internalMessages =
                 check.getMessages();
-        assertTrue("Internal message should be empty, but was not", internalMessages.isEmpty());
+        assertTrue(internalMessages.isEmpty(), "Internal message should be empty, but was not");
 
         final File secondFile = new File("inputAbstractFileSetCheck.txt");
         final List<String> lines = Arrays.asList("key=value", "ext=tmp");
         final SortedSet<LocalizedMessage> secondFileMessages =
             check.process(secondFile, new FileText(secondFile, lines));
 
-        assertTrue("Message should be empty, but was not", secondFileMessages.isEmpty());
+        assertTrue(secondFileMessages.isEmpty(), "Message should be empty, but was not");
     }
 

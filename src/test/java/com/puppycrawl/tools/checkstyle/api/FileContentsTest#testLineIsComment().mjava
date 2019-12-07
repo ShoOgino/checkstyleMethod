@@ -1,12 +1,12 @@
     @Test
     public void testLineIsComment() {
-        assertFalse("Invalid result",
+        assertFalse(
                 new FileContents(
                         new FileText(new File("filename"), Collections.singletonList("123")))
-                                .lineIsComment(0));
-        assertTrue("Invalid result",
+                                .lineIsComment(0), "Invalid result");
+        assertTrue(
                 new FileContents(
                         new FileText(new File("filename"), Collections.singletonList(" // abc")))
-                                .lineIsComment(0));
+                                .lineIsComment(0), "Invalid result");
     }
 
