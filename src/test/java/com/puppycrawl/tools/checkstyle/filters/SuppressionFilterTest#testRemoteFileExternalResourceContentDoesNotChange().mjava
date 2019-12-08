@@ -25,10 +25,11 @@
             firstFilterConfig.addAttribute("file", urlForTest);
 
             final DefaultConfiguration firstCheckerConfig = createRootConfig(firstFilterConfig);
-            final File cacheFile = temporaryFolder.newFile();
+            final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
             firstCheckerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
-            final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+            final String pathToEmptyFile =
+                    File.createTempFile("file", ".java", temporaryFolder).getPath();
             final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
 
             verify(firstCheckerConfig, pathToEmptyFile, expected);

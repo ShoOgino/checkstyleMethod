@@ -12,8 +12,8 @@
                 TokenTypes.VARIABLE_DEF);
         final TreeWalkerAuditEvent eventThree = createEvent(15, 8,
                 TokenTypes.VARIABLE_DEF);
-        assertFalse("Event should be rejected", filter.accept(eventOne));
-        assertTrue("Event should be accepted", filter.accept(eventTwo));
-        assertFalse("Event should be rejected", filter.accept(eventThree));
+        assertFalse(filter.accept(eventOne), "Event should be rejected");
+        assertTrue(filter.accept(eventTwo), "Event should be accepted");
+        assertFalse(filter.accept(eventThree), "Event should be rejected");
     }
 

@@ -7,12 +7,12 @@
         }
         catch (CheckstyleException ex) {
             final String messageStart = "Unable to parse " + fn;
-            assertTrue("Exception message should start with: " + messageStart,
-                ex.getMessage().startsWith("Unable to parse " + fn));
-            assertTrue("Exception message should contain \"files\"",
-                ex.getMessage().contains("\"files\""));
-            assertTrue("Exception message should contain \"suppress\"",
-                ex.getMessage().contains("\"suppress\""));
+            assertTrue(ex.getMessage().startsWith("Unable to parse " + fn),
+                    "Exception message should start with: " + messageStart);
+            assertTrue(ex.getMessage().contains("\"files\""),
+                    "Exception message should contain \"files\"");
+            assertTrue(ex.getMessage().contains("\"suppress\""),
+                    "Exception message should contain \"suppress\"");
         }
     }
 

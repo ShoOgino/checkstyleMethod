@@ -6,7 +6,7 @@
         contents.reportSingleLineComment(1, 0);
         final TreeWalkerAuditEvent auditEvent =
                 new TreeWalkerAuditEvent(contents, null, null, null);
-        assertTrue("Filter should accept audit event", filter.accept(auditEvent));
-        assertNull("File name should not be null", auditEvent.getFileName());
+        assertTrue(filter.accept(auditEvent), "Filter should accept audit event");
+        assertNull(auditEvent.getFileName(), "File name should not be null");
     }
 

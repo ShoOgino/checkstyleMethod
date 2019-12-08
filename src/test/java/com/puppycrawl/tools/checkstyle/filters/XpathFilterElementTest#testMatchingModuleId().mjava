@@ -8,6 +8,6 @@
                         getClass(), null);
         final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(fileContents, file.getName(),
                 message, JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS));
-        assertFalse("Event should be rejected", filter.accept(ev));
+        assertFalse(filter.accept(ev), "Event should be rejected");
     }
 

@@ -13,10 +13,11 @@
                 getTagsAfterExecutionOnDefaultFilter("//CHECKSTYLE:ON");
         final Comparable<Object> tag4 = tags3.get(0);
 
-        assertTrue("Invalid comparing result", tag1.compareTo(tag2) < 0);
-        assertTrue("Invalid comparing result", tag2.compareTo(tag1) > 0);
-        assertTrue("Invalid comparing result", tag1.compareTo(tag3) < 0);
-        assertTrue("Invalid comparing result", tag3.compareTo(tag1) > 0);
-        assertEquals("Invalid comparing result", 0, tag1.compareTo(tag4));
+        assertTrue(tag1.compareTo(tag2) < 0, "Invalid comparing result");
+        assertTrue(tag2.compareTo(tag1) > 0, "Invalid comparing result");
+        assertTrue(tag1.compareTo(tag3) < 0, "Invalid comparing result");
+        assertTrue(tag3.compareTo(tag1) > 0, "Invalid comparing result");
+        final int actual = tag1.compareTo(tag4);
+        assertEquals(0, actual, "Invalid comparing result");
     }
 

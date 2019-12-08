@@ -3,8 +3,8 @@
         final boolean optional = false;
         final String fileName = getPath("InputSuppressionXpathFilterIdAndQuery.xml");
         final SuppressionXpathFilter filter = createSuppressionXpathFilter(fileName, optional);
-        assertEquals("Invalid external resource",
-                Collections.singleton(fileName),
-                filter.getExternalResourceLocations());
+        final Set<String> expected = Collections.singleton(fileName);
+        final Set<String> actual = filter.getExternalResourceLocations();
+        assertEquals(expected, actual, "Invalid external resource");
     }
 

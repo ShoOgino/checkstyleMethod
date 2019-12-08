@@ -5,7 +5,7 @@
         final SuppressionXpathFilter filter = createSuppressionXpathFilter(fileName, optional);
 
         final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(null, "AnyJava.java", null, null);
-        assertTrue("TreeWalker audit event on null file should be accepted, but was not",
-                filter.accept(ev));
+        assertTrue(filter.accept(ev),
+                "TreeWalker audit event on null file should be accepted, but was not");
     }
 

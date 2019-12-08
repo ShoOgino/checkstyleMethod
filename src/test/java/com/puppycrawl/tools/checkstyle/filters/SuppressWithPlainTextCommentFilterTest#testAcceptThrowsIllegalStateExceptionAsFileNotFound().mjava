@@ -12,14 +12,13 @@
             fail(IllegalStateException.class.getSimpleName() + " is expected");
         }
         catch (IllegalStateException ex) {
-            assertEquals("Invalid exception message",
-                "Cannot read source file: " + fileName, ex.getMessage());
+            assertEquals("Cannot read source file: " + fileName, ex.getMessage(),
+                    "Invalid exception message");
 
             final Throwable cause = ex.getCause();
-            assertTrue("Exception cause has invalid type",
-                cause instanceof FileNotFoundException);
-            assertEquals("Invalid exception message",
-                fileName + " (No such file or directory)", cause.getMessage());
+            assertTrue(cause instanceof FileNotFoundException, "Exception cause has invalid type");
+            assertEquals(fileName + " (No such file or directory)", cause.getMessage(),
+                    "Invalid exception message");
         }
     }
 
