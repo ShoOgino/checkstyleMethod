@@ -1,7 +1,7 @@
     @Test
     public void testSurroundingScopeOfNodeChildOfLiteralNewIsAnoninner() {
-        assertEquals("Invalid surrounding scope",
-                Scope.ANONINNER, ScopeUtil.getSurroundingScope(
-                getNode(TokenTypes.LITERAL_NEW, TokenTypes.IDENT)));
+        final Scope scope =
+                ScopeUtil.getSurroundingScope(getNode(TokenTypes.LITERAL_NEW, TokenTypes.IDENT));
+        assertEquals(Scope.ANONINNER, scope, "Invalid surrounding scope");
     }
 

@@ -9,16 +9,16 @@
         final List<JavadocTag> tags = JavadocUtil.getJavadocTags(
             comment, JavadocUtil.JavadocTagType.ALL).getValidTags();
 
-        assertEquals("Invalid tags size", 2, tags.size());
+        assertEquals(2, tags.size(), "Invalid tags size");
 
         final JavadocTag seeTag = tags.get(0);
-        assertEquals("Invalid tag name", JavadocTagInfo.SEE.getName(), seeTag.getTagName());
-        assertEquals("Invalid line number", 1, seeTag.getLineNo());
-        assertEquals("Invalid column number", 4, seeTag.getColumnNo());
+        assertEquals(JavadocTagInfo.SEE.getName(), seeTag.getTagName(), "Invalid tag name");
+        assertEquals(1, seeTag.getLineNo(), "Invalid line number");
+        assertEquals(4, seeTag.getColumnNo(), "Invalid column number");
 
         final JavadocTag linkTag = tags.get(1);
-        assertEquals("Invalid tag name", JavadocTagInfo.LINK.getName(), linkTag.getTagName());
-        assertEquals("Invalid line number", 2, linkTag.getLineNo());
-        assertEquals("Invalid column number", 10, linkTag.getColumnNo());
+        assertEquals(JavadocTagInfo.LINK.getName(), linkTag.getTagName(), "Invalid tag name");
+        assertEquals(2, linkTag.getLineNo(), "Invalid line number");
+        assertEquals(10, linkTag.getColumnNo(), "Invalid column number");
     }
 

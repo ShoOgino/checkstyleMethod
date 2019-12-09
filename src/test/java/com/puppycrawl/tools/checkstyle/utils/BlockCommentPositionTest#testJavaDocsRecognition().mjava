@@ -32,7 +32,7 @@
             final DetailAST ast = JavaParser.parseFile(new File(getPath(metadata.getFileName())),
                 JavaParser.Options.WITH_COMMENTS);
             final int matches = getJavadocsCount(ast, metadata.getAssertion());
-            assertEquals("Invalid javadoc count", metadata.getMatchesNum(), matches);
+            assertEquals(metadata.getMatchesNum(), matches, "Invalid javadoc count");
         }
     }
 

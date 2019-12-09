@@ -1,7 +1,6 @@
     @Test
     public void testExistingFile() throws Exception {
-        final File file = temporaryFolder.newFile();
-        assertTrue("Suppression file exists",
-                FilterUtil.isFileExists(file.getPath()));
+        final File file = File.createTempFile("junit", null, temporaryFolder);
+        assertTrue(FilterUtil.isFileExists(file.getPath()), "Suppression file exists");
     }
 

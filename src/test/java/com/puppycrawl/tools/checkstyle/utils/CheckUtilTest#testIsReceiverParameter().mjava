@@ -7,9 +7,9 @@
         final DetailAST simpleParameter =
                 receiverParameter.getNextSibling().getNextSibling();
 
-        assertTrue("Invalid result: parameter provided is receiver parameter",
-                CheckUtil.isReceiverParameter(receiverParameter));
-        assertFalse("Invalid result: parameter provided is not receiver parameter",
-                CheckUtil.isReceiverParameter(simpleParameter));
+        assertTrue(CheckUtil.isReceiverParameter(receiverParameter),
+                "Invalid result: parameter provided is receiver parameter");
+        assertFalse(CheckUtil.isReceiverParameter(simpleParameter),
+                "Invalid result: parameter provided is not receiver parameter");
     }
 

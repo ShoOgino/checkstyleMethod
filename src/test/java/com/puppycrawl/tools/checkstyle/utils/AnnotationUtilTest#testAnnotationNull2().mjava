@@ -2,11 +2,10 @@
     public void testAnnotationNull2() {
         try {
             AnnotationUtil.getAnnotation(new DetailAstImpl(), null);
-            Assert.fail("IllegalArgumentException is expected");
+            fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid exception message",
-                    "the annotation is null", ex.getMessage());
+            assertEquals("the annotation is null", ex.getMessage(), "Invalid exception message");
         }
     }
 

@@ -1,7 +1,7 @@
     @Test
     public void testPrintXpathNotComment() throws Exception {
         final String fileContent = "class Test { public void method() {int a = 5;}}";
-        final File file = tempFolder.newFile();
+        final File file = File.createTempFile("junit", null, tempFolder);
         Files.write(file.toPath(), fileContent.getBytes(StandardCharsets.UTF_8));
         final String expected = addEndOfLine(
             "CLASS_DEF -> CLASS_DEF [1:0]",

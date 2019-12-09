@@ -14,8 +14,9 @@
         astForTest.setFirstChild(child);
         final List<DetailAST> children = new ArrayList<>();
         TokenUtil.forEachChild(astForTest, TokenTypes.CLASS_DEF, children::add);
+        final DetailAST firstChild = children.get(0);
 
-        assertEquals("Must be one match", 1, children.size());
-        assertEquals("Mismatched child node", secondSibling, children.get(0));
+        assertEquals(1, children.size(), "Must be one match");
+        assertEquals(secondSibling, firstChild, "Mismatched child node");
     }
 

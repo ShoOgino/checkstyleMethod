@@ -2,11 +2,11 @@
     public void testAnnotationEmpty() {
         try {
             AnnotationUtil.getAnnotation(new DetailAstImpl(), "");
-            Assert.fail("IllegalArgumentException is expected");
+            fail("IllegalArgumentException is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid exception message",
-                    "the annotation is empty or spaces", ex.getMessage());
+            assertEquals("the annotation is empty or spaces", ex.getMessage(),
+                    "Invalid exception message");
         }
     }
 
