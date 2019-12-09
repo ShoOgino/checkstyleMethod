@@ -1,8 +1,8 @@
     @Test
     public void testChild() {
         final Object child = new ParseTreeTablePresentation(null).getChild(tree, 1);
-        Assert.assertTrue("Invalid child type", child instanceof DetailAST);
-        Assert.assertEquals("Invalid child token type",
-                TokenTypes.BLOCK_COMMENT_BEGIN, ((DetailAST) child).getType());
+        assertTrue(child instanceof DetailAST, "Invalid child type");
+        final int type = ((DetailAST) child).getType();
+        assertEquals(TokenTypes.BLOCK_COMMENT_BEGIN, type, "Invalid child token type");
     }
 

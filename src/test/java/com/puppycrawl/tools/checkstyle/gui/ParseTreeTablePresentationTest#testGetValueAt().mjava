@@ -17,9 +17,8 @@
             .getNextSibling()
             .getNextSibling();
 
-        Assert.assertNotNull("Expected a non-null identifier node here", node);
-        Assert.assertEquals("Expected identifier token",
-            TokenTypes.IDENT, node.getType());
+        assertNotNull(node, "Expected a non-null identifier node here");
+        assertEquals(TokenTypes.IDENT, node.getType(), "Expected identifier token");
 
         final ParseTreeTablePresentation parseTree = new ParseTreeTablePresentation(null);
         final Object treeModel = parseTree.getValueAt(node, 0);
@@ -28,18 +27,18 @@
         final int column = (int) parseTree.getValueAt(node, 3);
         final String text = (String) parseTree.getValueAt(node, 4);
 
-        Assert.assertEquals("Node should be an Identifier", "IDENT", type);
-        Assert.assertEquals("Class identifier should start on line 6", 6, line);
-        Assert.assertEquals("Class name should start from column 6", 6, column);
-        Assert.assertEquals("Wrong class name", "InputParseTreeTablePresentation", text);
-        Assert.assertNull("Root node should have null value", treeModel);
+        assertEquals("IDENT", type, "Node should be an Identifier");
+        assertEquals(6, line, "Class identifier should start on line 6");
+        assertEquals(6, column, "Class name should start from column 6");
+        assertEquals("InputParseTreeTablePresentation", text, "Wrong class name");
+        assertNull(treeModel, "Root node should have null value");
 
         try {
             parseTree.getValueAt(node, parseTree.getColumnCount());
-            Assert.fail("IllegalStateException expected");
+            fail("IllegalStateException expected");
         }
         catch (IllegalStateException ex) {
-            Assert.assertEquals("Invalid error message", "Unknown column", ex.getMessage());
+            assertEquals("Unknown column", ex.getMessage(), "Invalid error message");
         }
     }
 

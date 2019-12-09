@@ -4,12 +4,12 @@
         final ParseTreeTablePresentation parseTree = new ParseTreeTablePresentation(null);
         parseTree.setParseMode(ParseMode.JAVA_WITH_JAVADOC_AND_COMMENTS);
         final Object javadoc = parseTree.getChild(commentContentNode, 0);
-        Assert.assertTrue("Invalid child type", javadoc instanceof DetailNode);
-        Assert.assertEquals("Invalid child token type",
-                JavadocTokenTypes.JAVADOC, ((DetailNode) javadoc).getType());
+        assertTrue(javadoc instanceof DetailNode, "Invalid child type");
+        final int type = ((DetailNode) javadoc).getType();
+        assertEquals(JavadocTokenTypes.JAVADOC, type, "Invalid child token type");
         final Object javadocChild = parseTree.getChild(javadoc, 2);
-        Assert.assertTrue("Invalid child type", javadocChild instanceof DetailNode);
-        Assert.assertEquals("Invalid child token type",
-                JavadocTokenTypes.TEXT, ((DetailNode) javadocChild).getType());
+        assertTrue(javadocChild instanceof DetailNode, "Invalid child type");
+        final int childType = ((DetailNode) javadocChild).getType();
+        assertEquals(JavadocTokenTypes.TEXT, childType, "Invalid child token type");
     }
 
