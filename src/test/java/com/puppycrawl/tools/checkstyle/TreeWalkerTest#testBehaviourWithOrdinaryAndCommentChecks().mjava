@@ -8,7 +8,7 @@
         treeWalker.setModuleFactory(factory);
         treeWalker.setupChild(createModuleConfig(TypeNameCheck.class));
         treeWalker.setupChild(createModuleConfig(CommentsIndentationCheck.class));
-        final File file = temporaryFolder.newFile("file.java");
+        final File file = new File(temporaryFolder, "file.java");
         final List<String> lines = new ArrayList<>();
         lines.add(" class a%$# {} ");
         final FileText fileText = new FileText(file, lines);
@@ -21,8 +21,8 @@
         catch (CheckstyleException exception) {
             final String message =
                     "TokenStreamRecognitionException occurred while parsing file";
-            assertTrue("Error message is unexpected",
-                    exception.getMessage().contains(message));
+            assertTrue(exception.getMessage().contains(message),
+                    "Error message is unexpected");
         }
     }
 

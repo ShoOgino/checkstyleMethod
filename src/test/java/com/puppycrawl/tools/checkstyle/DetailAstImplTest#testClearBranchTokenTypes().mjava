@@ -25,9 +25,9 @@
             final BitSet branchTokenTypes = Whitebox.invokeMethod(parent, "getBranchTokenTypes");
             method.accept(null);
             final BitSet branchTokenTypes2 = Whitebox.invokeMethod(parent, "getBranchTokenTypes");
-            assertEquals("Branch token types are not equal", branchTokenTypes, branchTokenTypes2);
-            assertNotSame("Branch token types should not be the same",
-                    branchTokenTypes, branchTokenTypes2);
+            assertEquals(branchTokenTypes, branchTokenTypes2, "Branch token types are not equal");
+            assertNotSame(branchTokenTypes, branchTokenTypes2,
+                    "Branch token types should not be the same");
         }
     }
 

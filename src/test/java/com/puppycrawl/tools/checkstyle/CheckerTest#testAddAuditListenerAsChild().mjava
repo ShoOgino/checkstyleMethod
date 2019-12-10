@@ -17,6 +17,6 @@
         checker.setupChild(createModuleConfig(DebugAuditAdapter.class));
         // Let's try fire some events
         checker.process(Collections.singletonList(new File("dummy.java")));
-        assertTrue("Checker.fireAuditStarted() doesn't call listener", auditAdapter.wasCalled());
+        assertTrue(auditAdapter.wasCalled(), "Checker.fireAuditStarted() doesn't call listener");
     }
 

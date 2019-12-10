@@ -4,8 +4,8 @@
     @Test
     public void testCacheAndCheckWhichDoesNotImplementExternalResourceHolderInterface()
             throws Exception {
-        assertFalse("ExternalResourceHolder has changed his parent",
-                ExternalResourceHolder.class.isAssignableFrom(HiddenFieldCheck.class));
+        assertFalse(ExternalResourceHolder.class.isAssignableFrom(HiddenFieldCheck.class),
+                "ExternalResourceHolder has changed his parent");
         final DefaultConfiguration checkConfig = createModuleConfig(HiddenFieldCheck.class);
 
         final DefaultConfiguration treeWalkerConfig = createModuleConfig(TreeWalker.class);
@@ -14,22 +14,26 @@
         final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
         checkerConfig.addAttribute("charset", StandardCharsets.UTF_8.name());
 
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
-        final File tmpFile = temporaryFolder.newFile("file.java");
+        final File tmpFile = File.createTempFile("file", ".java", temporaryFolder);
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
 
         verify(checkerConfig, tmpFile.getPath(), expected);
         final Properties cacheAfterFirstRun = new Properties();
-        cacheAfterFirstRun.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cacheAfterFirstRun.load(reader);
+        }
 
         // one more time to reuse cache
         verify(checkerConfig, tmpFile.getPath(), expected);
         final Properties cacheAfterSecondRun = new Properties();
-        cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cacheAfterSecondRun.load(reader);
+        }
 
-        assertEquals("Cache from first run differs from second run cache",
-                cacheAfterFirstRun, cacheAfterSecondRun);
+        assertEquals(cacheAfterFirstRun, cacheAfterSecondRun,
+                "Cache from first run differs from second run cache");
     }
 

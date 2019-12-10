@@ -4,12 +4,12 @@
         final Node actualFirstChild = actual.getFirstChild();
 
         if (expectedFirstChild == null) {
-            Assert.assertNull("no children nodes should exist: " + path, actualFirstChild);
-            Assert.assertEquals("text should be the same: " + path, expected.getNodeValue(),
-                    actual.getNodeValue());
+            assertNull(actualFirstChild, "no children nodes should exist: " + path);
+            assertEquals(expected.getNodeValue(), actual.getNodeValue(),
+                    "text should be the same: " + path);
         }
         else {
-            Assert.assertNotNull("children nodes should exist: " + path, actualFirstChild);
+            assertNotNull(actualFirstChild, "children nodes should exist: " + path);
 
             if (ordered == null) {
                 Node actualChild = actualFirstChild;
@@ -21,14 +21,14 @@
                     actualChild = actualChild.getNextSibling();
                 }
 
-                Assert.assertNull("node have same number of children: " + path, actualChild);
+                assertNull(actualChild, "node have same number of children: " + path);
             }
             else {
                 final Set<Node> expectedChildren = XmlUtil.getChildrenElements(expected);
                 final Set<Node> actualChildren = XmlUtil.getChildrenElements(actual);
 
-                Assert.assertEquals("node have same number of children: " + path,
-                        expectedChildren.size(), actualChildren.size());
+                assertEquals(expectedChildren.size(), actualChildren.size(),
+                        "node have same number of children: " + path);
 
                 for (Node expectedChild : expectedChildren) {
                     Node foundChild = null;
@@ -40,8 +40,8 @@
                         }
                     }
 
-                    Assert.assertNotNull("node should exist: " + path + expectedChild.getNodeName()
-                            + "/", foundChild);
+                    assertNotNull(foundChild,
+                            "node should exist: " + path + expectedChild.getNodeName() + "/");
 
                     verifyXmlNode(expectedChild, foundChild, path, ordered);
                 }

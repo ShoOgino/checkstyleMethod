@@ -7,13 +7,14 @@
                 "InputXpathFileGeneratorAstFilter.java", message);
         final XpathFileGeneratorAstFilter filter = new XpathFileGeneratorAstFilter();
 
-        Assert.assertTrue("filter accepted", filter.accept(event));
+        assertTrue(filter.accept(event), "filter accepted");
 
         final AuditEvent auditEvent = new AuditEvent(this,
                 getPath("InputXpathFileGeneratorAstFilter.java"), message);
 
-        Assert.assertEquals("expected xpath",
+        assertEquals(
                 "/CLASS_DEF[./IDENT[@text='InputXpathFileGeneratorAstFilter']]/OBJBLOCK/LCURLY",
-                XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent));
+                XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent),
+                "expected xpath");
     }
 

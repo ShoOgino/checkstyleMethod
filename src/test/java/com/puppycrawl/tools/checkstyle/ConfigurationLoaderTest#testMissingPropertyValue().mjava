@@ -5,12 +5,12 @@
             fail("missing property value");
         }
         catch (CheckstyleException ex) {
-            assertTrue("Invalid exception message: " + ex.getMessage(),
-                    ex.getMessage().contains("\"value\""));
-            assertTrue("Invalid exception message: " + ex.getMessage(),
-                    ex.getMessage().contains("\"property\""));
-            assertTrue("Invalid exception message: " + ex.getMessage(),
-                    ex.getMessage().endsWith(":8:43"));
+            assertTrue(ex.getMessage().contains("\"value\""),
+                    "Invalid exception message: " + ex.getMessage());
+            assertTrue(ex.getMessage().contains("\"property\""),
+                    "Invalid exception message: " + ex.getMessage());
+            assertTrue(ex.getMessage().endsWith(":8:43"),
+                    "Invalid exception message: " + ex.getMessage());
         }
     }
 

@@ -9,7 +9,7 @@
 
         f2.resetFilter();
         checker.process(Collections.singletonList(new File("dummy.java")));
-        assertTrue("Checker.acceptFileStarted() doesn't call filter", f2.wasCalled());
-        assertFalse("Checker.acceptFileStarted() does call removed filter", filter.wasCalled());
+        assertTrue(f2.wasCalled(), "Checker.acceptFileStarted() doesn't call filter");
+        assertFalse(filter.wasCalled(), "Checker.acceptFileStarted() does call removed filter");
     }
 

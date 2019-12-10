@@ -15,10 +15,15 @@
 
         setParentMethod.invoke(firstLevelB, root);
 
-        assertEquals("Invalid child count", 0, firstLevelB.getChildCount(0));
-        assertEquals("Invalid child count", 0, firstLevelA.getChildCount(TokenTypes.EXPR));
-        assertEquals("Invalid child count", 1, root.getChildCount(TokenTypes.IDENT));
-        assertEquals("Invalid child count", 1, root.getChildCount(TokenTypes.EXPR));
-        assertEquals("Invalid child count", 0, root.getChildCount(0));
+        final int childCountLevelB = firstLevelB.getChildCount(0);
+        assertEquals(0, childCountLevelB, "Invalid child count");
+        final int childCountLevelA = firstLevelA.getChildCount(TokenTypes.EXPR);
+        assertEquals(0, childCountLevelA, "Invalid child count");
+        final int identTypeCount = root.getChildCount(TokenTypes.IDENT);
+        assertEquals(1, identTypeCount, "Invalid child count");
+        final int exprTypeCount = root.getChildCount(TokenTypes.EXPR);
+        assertEquals(1, exprTypeCount, "Invalid child count");
+        final int invalidTypeCount = root.getChildCount(0);
+        assertEquals(0, invalidTypeCount, "Invalid child count");
     }
 

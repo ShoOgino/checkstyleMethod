@@ -36,7 +36,9 @@
             cache.persist();
 
             final Properties cacheDetails = new Properties();
-            cacheDetails.load(Files.newBufferedReader(cacheFile.toPath()));
+            try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+                cacheDetails.load(reader);
+            }
 
             final int expectedNumberOfObjectsInCacheFile = 2;
             assertEquals("Unexpected number of objects in cache",

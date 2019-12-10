@@ -19,7 +19,7 @@
                 OutputStreamOptions.NONE, new AuditEventDefaultFormatter());
         checker.addListener(logger);
 
-        final String path = temporaryFolder.newFile("file.java").getPath();
+        final String path = File.createTempFile("file", ".java", temporaryFolder).getPath();
         final String violationMessage =
                 getCheckMessage(NewlineAtEndOfFileCheck.class, MSG_KEY_NO_NEWLINE_EOF);
         final String[] expected = {
@@ -45,10 +45,10 @@
 
             for (int i = 0; i < expected.length; i++) {
                 final String expectedResult = "[ERROR] " + path + ":" + expected[i];
-                assertEquals("error message " + i, expectedResult, actual.get(i));
+                assertEquals(expectedResult, actual.get(i), "error message " + i);
             }
 
-            assertEquals("unexpected output: " + lnr.readLine(), expected.length, errs);
+            assertEquals(expected.length, errs, "unexpected output: " + lnr.readLine());
         }
 
         checker.destroy();

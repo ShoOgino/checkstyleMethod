@@ -5,22 +5,22 @@
         final DetailAST firstLevelB = new DetailAstImpl();
         final DetailAST firstLevelC = new DetailAstImpl();
 
-        assertEquals("Invalid child count", 0, root.getChildCount());
+        assertEquals(0, root.getChildCount(), "Invalid child count");
 
         root.setFirstChild(firstLevelA);
         final Method setParentMethod = getSetParentMethod();
         setParentMethod.invoke(firstLevelA, root);
 
-        assertEquals("Invalid child count", 1, root.getChildCount());
+        assertEquals(1, root.getChildCount(), "Invalid child count");
 
         firstLevelA.addNextSibling(firstLevelB);
         setParentMethod.invoke(firstLevelB, root);
 
-        assertEquals("Invalid next sibling", firstLevelB, firstLevelA.getNextSibling());
+        assertEquals(firstLevelB, firstLevelA.getNextSibling(), "Invalid next sibling");
 
         firstLevelA.addNextSibling(firstLevelC);
         setParentMethod.invoke(firstLevelC, root);
 
-        assertEquals("Invalid next sibling", firstLevelC, firstLevelA.getNextSibling());
+        assertEquals(firstLevelC, firstLevelA.getNextSibling(), "Invalid next sibling");
     }
 

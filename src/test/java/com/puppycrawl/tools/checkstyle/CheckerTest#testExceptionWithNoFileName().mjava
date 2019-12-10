@@ -28,10 +28,10 @@
             fail("SecurityException is expected!");
         }
         catch (CheckstyleException ex) {
-            assertThat("Error cause differs from SecurityException",
-                    ex.getCause(), instanceOf(SecurityException.class));
-            assertEquals("Error message is not expected",
-                    errorMessage, ex.getCause().getMessage());
+            assertWithMessage("Error cause differs from SecurityException")
+                    .that(ex.getCause()).isInstanceOf(SecurityException.class);
+            assertEquals(errorMessage, ex.getCause().getMessage(),
+                    "Error message is not expected");
         }
     }
 

@@ -2,7 +2,7 @@
     public void testClearExistingCache() throws Exception {
         final DefaultConfiguration checkerConfig = createRootConfig(null);
         checkerConfig.addAttribute("charset", StandardCharsets.UTF_8.name());
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
         final Checker checker = new Checker();
@@ -15,29 +15,31 @@
         checker.destroy();
 
         final Properties cacheAfterClear = new Properties();
-        cacheAfterClear.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cacheAfterClear.load(reader);
+        }
 
-        assertEquals("Cache has unexpected size",
-                1, cacheAfterClear.size());
-        assertNotNull("Cache has null hash",
-                cacheAfterClear.getProperty(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals(1, cacheAfterClear.size(), "Cache has unexpected size");
+        assertNotNull(cacheAfterClear.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
+                "Cache has null hash");
 
-        final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+        final String pathToEmptyFile =
+                File.createTempFile("file", ".java", temporaryFolder).getPath();
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
 
         // file that should be audited is not in cache
         verify(checker, pathToEmptyFile, pathToEmptyFile, expected);
         final Properties cacheAfterSecondRun = new Properties();
-        cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cacheAfterSecondRun.load(reader);
+        }
 
-        assertNotNull("Cache has null path",
-                cacheAfterSecondRun.getProperty(pathToEmptyFile));
-        assertEquals("Cash have changed it hash",
-            cacheAfterClear.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
-            cacheAfterSecondRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY)
-        );
+        assertNotNull(cacheAfterSecondRun.getProperty(pathToEmptyFile), "Cache has null path");
+        final String cacheHash = cacheAfterSecondRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY);
+        assertEquals(cacheAfterClear.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
+                cacheHash, "Cash have changed it hash");
         final int expectedNumberOfObjectsInCacheAfterSecondRun = 2;
-        assertEquals("Cache has changed number of items",
-                expectedNumberOfObjectsInCacheAfterSecondRun, cacheAfterSecondRun.size());
+        assertEquals(expectedNumberOfObjectsInCacheAfterSecondRun, cacheAfterSecondRun.size(),
+                "Cache has changed number of items");
     }
 

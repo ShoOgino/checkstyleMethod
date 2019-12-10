@@ -5,11 +5,11 @@
                 JavaParser.Options.WITH_COMMENTS);
         final CountComments counter = new CountComments(root);
 
-        assertArrayEquals("Invalid line comments",
+        assertArrayEquals(
                 Arrays.asList("1,4", "6,4", "9,0").toArray(),
-                counter.lineComments.toArray());
-        assertArrayEquals("Invalid block comments",
+                counter.lineComments.toArray(), "Invalid line comments");
+        assertArrayEquals(
                 Arrays.asList("5,4", "8,0").toArray(),
-                counter.blockComments.toArray());
+                counter.blockComments.toArray(), "Invalid block comments");
     }
 

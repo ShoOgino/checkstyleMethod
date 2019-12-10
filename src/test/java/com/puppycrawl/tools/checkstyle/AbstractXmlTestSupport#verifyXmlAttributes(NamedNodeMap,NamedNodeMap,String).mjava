@@ -1,17 +1,17 @@
     private static void verifyXmlAttributes(NamedNodeMap expected, NamedNodeMap actual,
             String path) {
         if (expected == null) {
-            Assert.assertNull("no attributes should exist: " + path, actual);
+            assertNull(actual, "no attributes should exist: " + path);
         }
         else {
-            Assert.assertNotNull("attributes should exist: " + path, actual);
+            assertNotNull(actual, "attributes should exist: " + path);
 
             for (int i = 0; i < expected.getLength(); i++) {
                 verifyXmlAttribute(expected.item(i), actual.item(i), path);
             }
 
-            Assert.assertEquals("node have same number of attributes: " + path,
-                    expected.getLength(), actual.getLength());
+            assertEquals(expected.getLength(), actual.getLength(),
+                    "node have same number of attributes: " + path);
         }
     }
 

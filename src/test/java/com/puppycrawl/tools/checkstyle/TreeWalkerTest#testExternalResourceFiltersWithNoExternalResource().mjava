@@ -8,10 +8,10 @@
         treeWalkerConfig.addChild(filterConfig);
 
         final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
-        final String filePath = temporaryFolder.newFile("file.java").getPath();
+        final String filePath = File.createTempFile("file", ".java", temporaryFolder).getPath();
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
 
         verify(checkerConfig, filePath, expected);

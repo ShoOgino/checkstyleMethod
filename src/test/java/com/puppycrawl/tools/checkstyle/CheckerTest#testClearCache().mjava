@@ -4,7 +4,7 @@
                 createModuleConfig(DummyFileSetViolationCheck.class);
         final DefaultConfiguration checkerConfig = new DefaultConfiguration("myConfig");
         checkerConfig.addAttribute("charset", "UTF-8");
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
         checkerConfig.addChild(violationCheck);
         final Checker checker = new Checker();
@@ -19,9 +19,10 @@
         cache.persist();
 
         final Properties cacheAfterClear = new Properties();
-        cacheAfterClear.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cacheAfterClear.load(reader);
+        }
 
-        assertEquals("Cache has unexpected size",
-                1, cacheAfterClear.size());
+        assertEquals(1, cacheAfterClear.size(), "Cache has unexpected size");
     }
 

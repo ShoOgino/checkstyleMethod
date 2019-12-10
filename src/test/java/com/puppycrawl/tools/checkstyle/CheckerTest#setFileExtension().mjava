@@ -3,7 +3,7 @@
         final Checker checker = new Checker();
         checker.setFileExtensions(".test1", "test2");
         final String[] actual = Whitebox.getInternalState(checker, "fileExtensions");
-        assertArrayEquals("Extensions are not expected",
-                new String[] {".test1", ".test2"}, actual);
+        assertArrayEquals(new String[] {".test1", ".test2"}, actual,
+                "Extensions are not expected");
     }
 

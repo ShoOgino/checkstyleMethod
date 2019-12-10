@@ -2,7 +2,7 @@
     public void testProperFileExtension() throws Exception {
         final DefaultConfiguration checkConfig =
                 createModuleConfig(ConstantNameCheck.class);
-        final File file = temporaryFolder.newFile("file.java");
+        final File file = new File(temporaryFolder, "file.java");
         try (Writer writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
             final String content = "public class Main { public static final int k = 5 + 4; }";
             writer.write(content);

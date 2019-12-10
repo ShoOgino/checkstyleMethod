@@ -3,12 +3,12 @@
         try {
             final DefaultLogger logger = new DefaultLogger(new ByteArrayOutputStream(), null);
             // assert required to calm down eclipse's 'The allocated object is never used' violation
-            assertNotNull("Null instance", logger);
+            assertNotNull(logger, "Null instance");
             fail("Exception was expected");
         }
         catch (IllegalArgumentException exception) {
-            assertEquals("Invalid error message", "Parameter infoStreamOptions can not be null",
-                    exception.getMessage());
+            assertEquals("Parameter infoStreamOptions can not be null",
+                    exception.getMessage(), "Invalid error message");
         }
     }
 

@@ -12,9 +12,11 @@
         root.addChild(secondChild);
         root.addChild(thirdChild);
 
-        assertNull("Invalid result", firstChild.findFirstToken(TokenTypes.IDENT));
-        assertEquals("Invalid result", firstChild, root.findFirstToken(TokenTypes.IDENT));
-        assertEquals("Invalid result", secondChild, root.findFirstToken(TokenTypes.EXPR));
-        assertNull("Invalid result", root.findFirstToken(0));
+        assertNull(firstChild.findFirstToken(TokenTypes.IDENT), "Invalid result");
+        final DetailAST ident = root.findFirstToken(TokenTypes.IDENT);
+        assertEquals(firstChild, ident, "Invalid result");
+        final DetailAST expr = root.findFirstToken(TokenTypes.EXPR);
+        assertEquals(secondChild, expr, "Invalid result");
+        assertNull(root.findFirstToken(0), "Invalid result");
     }
 

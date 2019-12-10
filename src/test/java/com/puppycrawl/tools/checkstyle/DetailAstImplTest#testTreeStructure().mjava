@@ -8,9 +8,9 @@
             final DetailAST rootAST = JavaParser.parseFile(new File(fileName),
                     JavaParser.Options.WITHOUT_COMMENTS);
 
-            assertNotNull("file must return a root node: " + fileName, rootAST);
+            assertNotNull(rootAST, "file must return a root node: " + fileName);
 
-            assertTrue("tree is valid", checkTree(fileName, rootAST));
+            assertTrue(checkTree(fileName, rootAST), "tree is valid");
         }
     }
 

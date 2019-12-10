@@ -12,17 +12,14 @@
         checker.finishLocalSetup();
 
         final Context context = Whitebox.getInternalState(checker, "childContext");
-        assertEquals("Charset was different than expected",
-                System.getProperty("file.encoding", StandardCharsets.UTF_8.name()),
-                context.get("charset"));
-        assertEquals("Severity is set to unexpected value",
-                "error", context.get("severity"));
-        assertEquals("Basedir is set to unexpected value",
-                "testBaseDir", context.get("basedir"));
+        final String encoding = System.getProperty("file.encoding", StandardCharsets.UTF_8.name());
+        assertEquals(encoding, context.get("charset"), "Charset was different than expected");
+        assertEquals("error", context.get("severity"), "Severity is set to unexpected value");
+        assertEquals("testBaseDir", context.get("basedir"), "Basedir is set to unexpected value");
 
         final Field sLocale = LocalizedMessage.class.getDeclaredField("sLocale");
         sLocale.setAccessible(true);
         final Locale locale = (Locale) sLocale.get(null);
-        assertEquals("Locale is set to unexpected value", Locale.ITALY, locale);
+        assertEquals(Locale.ITALY, locale, "Locale is set to unexpected value");
     }
 

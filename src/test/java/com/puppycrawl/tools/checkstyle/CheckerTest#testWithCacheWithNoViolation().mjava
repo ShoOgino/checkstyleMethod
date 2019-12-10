@@ -6,11 +6,11 @@
         checker.setModuleFactory(factory);
         checker.configure(createModuleConfig(TranslationCheck.class));
 
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checker.setCacheFile(cacheFile.getPath());
 
         checker.setupChild(createModuleConfig(TranslationCheck.class));
-        final File tmpFile = temporaryFolder.newFile("file.java");
+        final File tmpFile = File.createTempFile("file", ".java", temporaryFolder);
         final List<File> files = new ArrayList<>(1);
         files.add(tmpFile);
         checker.process(files);
@@ -19,18 +19,18 @@
         checker.destroy();
 
         final Properties cache = new Properties();
-        cache.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cache.load(reader);
+        }
 
         // There should 2 objects in cache: processed file (file.java) and checker configuration.
         final int expectedNumberOfObjectsInCache = 2;
-        assertEquals("Cache has unexpected size",
-                expectedNumberOfObjectsInCache, cache.size());
+        assertEquals(expectedNumberOfObjectsInCache, cache.size(), "Cache has unexpected size");
 
         final String expectedConfigHash = "B8535A811CA90BE8B7A14D40BCA62B4FC2447B46";
-        assertEquals("Cache has unexpected hash",
-                expectedConfigHash, cache.getProperty(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals(expectedConfigHash, cache.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
+                "Cache has unexpected hash");
 
-        assertNotNull("Cache file has null path",
-                cache.getProperty(tmpFile.getPath()));
+        assertNotNull(cache.getProperty(tmpFile.getPath()), "Cache file has null path");
     }
 

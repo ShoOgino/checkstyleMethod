@@ -7,6 +7,6 @@
         final FileText fileText = new FileText(file, StandardCharsets.ISO_8859_1.name());
         treeWalker.processFiltered(file, fileText);
         final Collection<Checks> checks = Whitebox.getInternalState(treeWalker, "ordinaryChecks");
-        assertTrue("No checks -> No parsing", checks.isEmpty());
+        assertTrue(checks.isEmpty(), "No checks -> No parsing");
     }
 

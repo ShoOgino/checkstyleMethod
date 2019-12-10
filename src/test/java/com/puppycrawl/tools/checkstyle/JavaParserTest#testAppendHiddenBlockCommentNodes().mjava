@@ -7,20 +7,20 @@
         final Optional<DetailAST> blockComment = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN);
 
-        assertTrue("Block comment should be present", blockComment.isPresent());
+        assertTrue(blockComment.isPresent(), "Block comment should be present");
 
         final DetailAST comment = blockComment.get();
 
-        assertEquals("Unexpected line number", 3, comment.getLineNo());
-        assertEquals("Unexpected column number", 0, comment.getColumnNo());
-        assertEquals("Unexpected comment content", "/*", comment.getText());
+        assertEquals(3, comment.getLineNo(), "Unexpected line number");
+        assertEquals(0, comment.getColumnNo(), "Unexpected column number");
+        assertEquals("/*", comment.getText(), "Unexpected comment content");
 
         final DetailAST commentContent = comment.getFirstChild();
         final DetailAST commentEnd = comment.getLastChild();
 
-        assertEquals("Unexpected line number", 3, commentContent.getLineNo());
-        assertEquals("Unexpected column number", 2, commentContent.getColumnNo());
-        assertEquals("Unexpected line number", 9, commentEnd.getLineNo());
-        assertEquals("Unexpected column number", 1, commentEnd.getColumnNo());
+        assertEquals(3, commentContent.getLineNo(), "Unexpected line number");
+        assertEquals(2, commentContent.getColumnNo(), "Unexpected column number");
+        assertEquals(9, commentEnd.getLineNo(), "Unexpected line number");
+        assertEquals(1, commentEnd.getColumnNo(), "Unexpected column number");
     }
 

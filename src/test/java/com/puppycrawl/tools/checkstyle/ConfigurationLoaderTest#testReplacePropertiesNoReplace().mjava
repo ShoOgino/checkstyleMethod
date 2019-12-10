@@ -6,7 +6,7 @@
         for (String testValue : testValues) {
             final String value = (String) getReplacePropertiesMethod().invoke(
                 null, testValue, new PropertiesExpander(props), null);
-            assertEquals("\"" + testValue + "\"", value, testValue);
+            assertEquals(value, testValue, "\"" + testValue + "\"");
         }
     }
 

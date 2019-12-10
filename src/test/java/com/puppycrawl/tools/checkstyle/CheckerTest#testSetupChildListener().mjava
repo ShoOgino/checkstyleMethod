@@ -10,7 +10,7 @@
         checker.setupChild(config);
 
         final List<AuditListener> listeners = Whitebox.getInternalState(checker, "listeners");
-        assertTrue("Invalid child listener class",
-            listeners.get(listeners.size() - 1) instanceof DebugAuditAdapter);
+        assertTrue(listeners.get(listeners.size() - 1) instanceof DebugAuditAdapter,
+                "Invalid child listener class");
     }
 

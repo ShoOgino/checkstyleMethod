@@ -5,11 +5,11 @@
         final TreeWalkerAuditEvent event = new TreeWalkerAuditEvent(null, null, message, null);
         final XpathFileGeneratorAstFilter filter = new XpathFileGeneratorAstFilter();
 
-        Assert.assertTrue("filter accepted", filter.accept(event));
+        assertTrue(filter.accept(event), "filter accepted");
 
         final AuditEvent auditEvent = new AuditEvent(this, "Test.java", message);
 
-        Assert.assertNull("filter has no queries",
-                XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent));
+        assertNull(XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent),
+                "filter has no queries");
     }
 

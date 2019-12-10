@@ -16,8 +16,9 @@
 
         final XpathFileGeneratorAstFilter filter = new XpathFileGeneratorAstFilter();
 
-        Assert.assertTrue("State is not cleared on finishLocalSetup", TestUtil
+        assertTrue(TestUtil
                 .isStatefulFieldClearedDuringLocalSetup(filter, event, "MESSAGE_QUERY_MAP",
-                    variableStack -> ((Map<LocalizedMessage, String>) variableStack).isEmpty()));
+                    variableStack -> ((Map<LocalizedMessage, String>) variableStack).isEmpty()),
+                "State is not cleared on finishLocalSetup");
     }
 

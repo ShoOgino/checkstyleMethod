@@ -4,7 +4,7 @@
      */
     @Test
     public void testCatchErrorWithCache() throws Exception {
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
 
         final DefaultConfiguration checkerConfig = new DefaultConfiguration("configuration");
         checkerConfig.addAttribute("charset", StandardCharsets.UTF_8.name());
@@ -43,21 +43,21 @@
         }
         // -@cs[IllegalCatchExtended] Testing for catch Error is part of 100% coverage.
         catch (Error error) {
-            assertThat("Error cause differs from IOError",
-                    error.getCause(), instanceOf(IOError.class));
-            assertEquals("Error message is not expected",
-                    errorMessage, error.getCause().getCause().getMessage());
+            assertWithMessage("Error cause differs from IOError")
+                    .that(error.getCause()).isInstanceOf(IOError.class);
+            assertEquals(errorMessage, error.getCause().getCause().getMessage(),
+                    "Error message is not expected");
 
             // destroy is called by Main
             checker.destroy();
 
             final Properties cache = new Properties();
-            cache.load(Files.newBufferedReader(cacheFile.toPath()));
+            try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+                cache.load(reader);
+            }
 
-            assertEquals("Cache has unexpected size",
-                    1, cache.size());
-            assertNull("testFile is not in cache",
-                    cache.getProperty("testFile"));
+            assertEquals(1, cache.size(), "Cache has unexpected size");
+            assertNull(cache.getProperty("testFile"), "testFile is not in cache");
         }
     }
 

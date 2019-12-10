@@ -2,15 +2,17 @@
     public void testDefaultProperties() {
         final Properties properties = new Properties(System.getProperties());
         properties.setProperty("test", "checkstyle");
-        Assert.assertEquals("Invalid user.home property",
-                System.getProperty("user.home"), properties.getProperty("user.home"));
-        Assert.assertEquals("Invalid checkstyle property",
-                "checkstyle", properties.getProperty("test"));
+        final String propertiesUserHome = properties.getProperty("user.home");
+        assertEquals(System.getProperty("user.home"), propertiesUserHome,
+                "Invalid user.home property");
+        assertEquals("checkstyle", properties.getProperty("test"),
+                "Invalid checkstyle property");
 
         final PropertiesExpander expander = new PropertiesExpander(properties);
-        Assert.assertEquals("Invalid user.home property",
-                System.getProperty("user.home"), expander.resolve("user.home"));
-        Assert.assertEquals("Invalid checkstyle property",
-                "checkstyle", expander.resolve("test"));
+        final String expanderUserHome = expander.resolve("user.home");
+        assertEquals(System.getProperty("user.home"), expanderUserHome,
+                "Invalid user.home property");
+        assertEquals("checkstyle", expander.resolve("test"),
+                "Invalid checkstyle property");
     }
 

@@ -16,6 +16,6 @@
         checker.setModuleFactory(factory);
         checker.setupChild(createModuleConfig(TestBeforeExecutionFileFilter.class));
         checker.process(Collections.singletonList(new File("dummy.java")));
-        assertTrue("Checker.acceptFileStarted() doesn't call listener", fileFilter.wasCalled());
+        assertTrue(fileFilter.wasCalled(), "Checker.acceptFileStarted() doesn't call listener");
     }
 

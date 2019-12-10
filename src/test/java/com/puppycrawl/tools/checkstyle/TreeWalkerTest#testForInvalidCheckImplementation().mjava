@@ -1,7 +1,8 @@
     @Test
     public void testForInvalidCheckImplementation() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(BadJavaDocCheck.class);
-        final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+        final String pathToEmptyFile =
+                File.createTempFile("file", ".java", temporaryFolder).getPath();
 
         try {
             final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
@@ -9,8 +10,8 @@
             fail("Exception is expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue("Error message is unexpected",
-                    ex.getMessage().contains("isCommentNodesRequired"));
+            assertTrue(ex.getMessage().contains("isCommentNodesRequired"),
+                    "Error message is unexpected");
         }
     }
 

@@ -6,20 +6,20 @@
 
         final Optional<DetailAST> singleLineComment = TestUtil.findTokenInAstByPredicate(root,
             ast -> ast.getType() == TokenTypes.SINGLE_LINE_COMMENT);
-        assertTrue("Single line comment should be present", singleLineComment.isPresent());
+        assertTrue(singleLineComment.isPresent(), "Single line comment should be present");
 
         final DetailAST comment = singleLineComment.get();
 
-        assertEquals("Unexpected line number", 13, comment.getLineNo());
-        assertEquals("Unexpected column number", 0, comment.getColumnNo());
-        assertEquals("Unexpected comment content", "//", comment.getText());
+        assertEquals(13, comment.getLineNo(), "Unexpected line number");
+        assertEquals(0, comment.getColumnNo(), "Unexpected column number");
+        assertEquals("//", comment.getText(), "Unexpected comment content");
 
         final DetailAST commentContent = comment.getFirstChild();
 
-        assertEquals("Unexpected token type", TokenTypes.COMMENT_CONTENT, commentContent.getType());
-        assertEquals("Unexpected line number", 13, commentContent.getLineNo());
-        assertEquals("Unexpected column number", 2, commentContent.getColumnNo());
-        assertTrue("Unexpected comment content",
-            commentContent.getText().startsWith(" inline comment"));
+        assertEquals(TokenTypes.COMMENT_CONTENT, commentContent.getType(), "Unexpected token type");
+        assertEquals(13, commentContent.getLineNo(), "Unexpected line number");
+        assertEquals(2, commentContent.getColumnNo(), "Unexpected column number");
+        assertTrue(commentContent.getText().startsWith(" inline comment"),
+                "Unexpected comment content");
     }
 

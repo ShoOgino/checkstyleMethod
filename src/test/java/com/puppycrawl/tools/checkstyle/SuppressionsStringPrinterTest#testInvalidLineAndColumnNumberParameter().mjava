@@ -6,12 +6,11 @@
         try {
             SuppressionsStringPrinter.printSuppressions(input,
                     invalidLineAndColumnNumber, tabWidth);
-            Assert.fail("exception expected");
+            fail("exception expected");
         }
         catch (IllegalStateException ex) {
-            Assert.assertEquals("Invalid exception message",
-                    "abc-432 does not match valid format 'line:column'.",
-                    ex.getMessage());
+            assertEquals("abc-432 does not match valid format 'line:column'.",
+                    ex.getMessage(), "Invalid exception message");
         }
     }
 

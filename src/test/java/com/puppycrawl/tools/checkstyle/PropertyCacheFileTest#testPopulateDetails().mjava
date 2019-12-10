@@ -6,14 +6,14 @@
         cache.load();
 
         final String hash = cache.get(PropertyCacheFile.CONFIG_HASH_KEY);
-        assertNotNull("Config hash key should not be null", hash);
-        assertNull("Should return null if key is not in cache", cache.get("key"));
+        assertNotNull(hash, "Config hash key should not be null");
+        assertNull(cache.get("key"), "Should return null if key is not in cache");
 
         cache.load();
 
-        assertEquals("Invalid config hash key", hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
-        assertEquals("Invalid cache value", "value", cache.get("key"));
-        assertNotNull("Config hash key should not be null",
-                cache.get(PropertyCacheFile.CONFIG_HASH_KEY));
+        assertEquals(hash, cache.get(PropertyCacheFile.CONFIG_HASH_KEY), "Invalid config hash key");
+        assertEquals("value", cache.get("key"), "Invalid cache value");
+        assertNotNull(cache.get(PropertyCacheFile.CONFIG_HASH_KEY),
+                "Config hash key should not be null");
     }
 

@@ -18,8 +18,7 @@
         for (String[] testValue : testValues) {
             final String value = (String) getReplacePropertiesMethod().invoke(
                 null, testValue[0], new PropertiesExpander(props), null);
-            assertEquals("\"" + testValue[0] + "\"",
-                testValue[1], value);
+            assertEquals(testValue[1], value, "\"" + testValue[0] + "\"");
         }
     }
 

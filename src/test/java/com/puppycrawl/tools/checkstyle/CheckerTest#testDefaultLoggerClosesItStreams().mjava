@@ -10,7 +10,7 @@
             checker.addListener(new DefaultLogger(testInfoOutputStream,
                 OutputStreamOptions.CLOSE, testErrorOutputStream, OutputStreamOptions.CLOSE));
 
-            final File tmpFile = temporaryFolder.newFile("file.java");
+            final File tmpFile = File.createTempFile("file", ".java", temporaryFolder);
             final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
 
             verify(checker, tmpFile.getPath(), expected);

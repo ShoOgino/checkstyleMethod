@@ -4,7 +4,7 @@
         final DetailAstImpl modifiers = createToken(root, TokenTypes.MODIFIERS);
         createToken(modifiers, TokenTypes.LITERAL_PUBLIC);
 
-        assertTrue("invalid result", root.branchContains(TokenTypes.LITERAL_PUBLIC));
-        assertFalse("invalid result", root.branchContains(TokenTypes.OBJBLOCK));
+        assertTrue(root.branchContains(TokenTypes.LITERAL_PUBLIC), "invalid result");
+        assertFalse(root.branchContains(TokenTypes.OBJBLOCK), "invalid result");
     }
 

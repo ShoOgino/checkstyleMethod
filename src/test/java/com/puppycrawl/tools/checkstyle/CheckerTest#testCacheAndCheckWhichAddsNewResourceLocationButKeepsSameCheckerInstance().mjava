@@ -18,7 +18,7 @@
         check.setFirstExternalResourceLocation(firstExternalResourceLocation);
 
         final DefaultConfiguration checkerConfig = createRootConfig(null);
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
         checkerConfig.addAttribute("cacheFile", cacheFile.getPath());
 
         final Checker checker = new Checker();
@@ -28,16 +28,19 @@
         checker.configure(checkerConfig);
         checker.addListener(getBriefUtLogger());
 
-        final String pathToEmptyFile = temporaryFolder.newFile("file.java").getPath();
+        final String pathToEmptyFile =
+                File.createTempFile("file", ".java", temporaryFolder).getPath();
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
 
         verify(checker, pathToEmptyFile, expected);
         final Properties cacheAfterFirstRun = new Properties();
-        cacheAfterFirstRun.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cacheAfterFirstRun.load(reader);
+        }
 
         final int expectedNumberOfObjectsInCacheAfterFirstRun = 4;
-        assertEquals("Number of items in cache differs from expected",
-                expectedNumberOfObjectsInCacheAfterFirstRun, cacheAfterFirstRun.size());
+        assertEquals(expectedNumberOfObjectsInCacheAfterFirstRun, cacheAfterFirstRun.size(),
+                "Number of items in cache differs from expected");
 
         // Change a list of external resources which are used by the check
         final String secondExternalResourceLocation = "InputCheckerImportControlTwo.xml";
@@ -50,29 +53,27 @@
 
         verify(checker, pathToEmptyFile, expected);
         final Properties cacheAfterSecondRun = new Properties();
-        cacheAfterSecondRun.load(Files.newBufferedReader(cacheFile.toPath()));
+        try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+            cacheAfterSecondRun.load(reader);
+        }
 
-        assertEquals("Cache file has changed its path",
-            cacheAfterFirstRun.getProperty(pathToEmptyFile),
-            cacheAfterSecondRun.getProperty(pathToEmptyFile)
-        );
-        assertEquals(
-                "Cache has changed its hash",
-            cacheAfterFirstRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
-            cacheAfterSecondRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY)
-        );
-        assertEquals("Cache has changed its resource key",
-            cacheAfterFirstRun.getProperty(firstExternalResourceKey),
-            cacheAfterSecondRun.getProperty(firstExternalResourceKey)
-        );
-        assertNotNull("Cache has null as a resource key",
-                cacheAfterFirstRun.getProperty(firstExternalResourceKey));
+        final String cacheFilePath = cacheAfterSecondRun.getProperty(pathToEmptyFile);
+        assertEquals(cacheAfterFirstRun.getProperty(pathToEmptyFile),
+                cacheFilePath, "Cache file has changed its path");
+        final String cacheHash = cacheAfterSecondRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY);
+        assertEquals(cacheAfterFirstRun.getProperty(PropertyCacheFile.CONFIG_HASH_KEY),
+                cacheHash, "Cache has changed its hash");
+        final String resourceKey = cacheAfterSecondRun.getProperty(firstExternalResourceKey);
+        assertEquals(cacheAfterFirstRun.getProperty(firstExternalResourceKey),
+                resourceKey, "Cache has changed its resource key");
+        assertNotNull(cacheAfterFirstRun.getProperty(firstExternalResourceKey),
+                "Cache has null as a resource key");
         final int expectedNumberOfObjectsInCacheAfterSecondRun = 4;
-        assertEquals("Number of items in cache differs from expected",
-                expectedNumberOfObjectsInCacheAfterSecondRun, cacheAfterSecondRun.size());
-        assertNull("Cache has not null as a resource key",
-                cacheAfterFirstRun.getProperty(secondExternalResourceKey));
-        assertNotNull("Cache has null as a resource key",
-                cacheAfterSecondRun.getProperty(secondExternalResourceKey));
+        assertEquals(expectedNumberOfObjectsInCacheAfterSecondRun, cacheAfterSecondRun.size(),
+                "Number of items in cache differs from expected");
+        assertNull(cacheAfterFirstRun.getProperty(secondExternalResourceKey),
+                "Cache has not null as a resource key");
+        assertNotNull(cacheAfterSecondRun.getProperty(secondExternalResourceKey),
+                "Cache has null as a resource key");
     }
 

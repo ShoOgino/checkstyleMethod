@@ -7,12 +7,12 @@
                 "InputXpathFileGeneratorAstFilter.java", message);
         final XpathFileGeneratorAstFilter filter = new XpathFileGeneratorAstFilter();
 
-        Assert.assertTrue("filter accepted", filter.accept(event));
+        assertTrue(filter.accept(event), "filter accepted");
 
         final AuditEvent auditEvent = new AuditEvent(this,
                 getPath("InputXpathFileGeneratorAstFilter.java"), message);
 
-        Assert.assertNull("expected null",
-                XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent));
+        assertNull(XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent),
+                "expected null");
     }
 

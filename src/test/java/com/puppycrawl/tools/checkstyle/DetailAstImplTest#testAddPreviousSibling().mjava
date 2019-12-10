@@ -8,16 +8,16 @@
 
         instance.addPreviousSibling(previousSibling);
 
-        assertEquals("unexpected result", previousSibling, instance.getPreviousSibling());
-        assertEquals("unexpected result", previousSibling, parent.getFirstChild());
+        assertEquals(previousSibling, instance.getPreviousSibling(), "unexpected result");
+        assertEquals(previousSibling, parent.getFirstChild(), "unexpected result");
 
         final DetailAST newPreviousSibling = new DetailAstImpl();
 
         instance.addPreviousSibling(newPreviousSibling);
 
-        assertEquals("unexpected result", newPreviousSibling, instance.getPreviousSibling());
-        assertEquals("unexpected result", previousSibling, newPreviousSibling.getPreviousSibling());
-        assertEquals("unexpected result", newPreviousSibling, previousSibling.getNextSibling());
-        assertEquals("unexpected result", previousSibling, parent.getFirstChild());
+        assertEquals(newPreviousSibling, instance.getPreviousSibling(), "unexpected result");
+        assertEquals(previousSibling, newPreviousSibling.getPreviousSibling(), "unexpected result");
+        assertEquals(newPreviousSibling, previousSibling.getNextSibling(), "unexpected result");
+        assertEquals(previousSibling, parent.getFirstChild(), "unexpected result");
     }
 

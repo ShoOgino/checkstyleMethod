@@ -8,14 +8,15 @@
         final XpathFileGeneratorAstFilter filter = new XpathFileGeneratorAstFilter();
         filter.setTabWidth(6);
 
-        Assert.assertTrue("filter accepted", filter.accept(event));
+        assertTrue(filter.accept(event), "filter accepted");
 
         final AuditEvent auditEvent = new AuditEvent(this,
                 getPath("InputXpathFileGeneratorAstFilter.java"), message);
 
-        Assert.assertEquals("expected xpath",
+        assertEquals(
                 "/CLASS_DEF[./IDENT[@text='InputXpathFileGeneratorAstFilter']]/OBJBLOCK"
                         + "/METHOD_DEF[./IDENT[@text='tabMethod']]/SLIST/LITERAL_RETURN",
-                XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent));
+                XpathFileGeneratorAstFilter.findCorrespondingXpathQuery(auditEvent),
+                "expected xpath");
     }
 

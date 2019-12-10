@@ -5,12 +5,12 @@
         try {
             final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
             verify(createChecker(checkConfig, ModuleCreationOption.IN_TREEWALKER),
-                    temporaryFolder.newFile().getPath(), expected);
+                    File.createTempFile("junit", null, temporaryFolder).getPath(), expected);
             fail("CheckstyleException is expected");
         }
         catch (CheckstyleException exception) {
-            assertTrue("Error message is unexpected",
-                    exception.getMessage().contains("TreeWalker is not allowed as a parent of"));
+            assertTrue(exception.getMessage().contains("TreeWalker is not allowed as a parent of"),
+                    "Error message is unexpected");
         }
     }
 

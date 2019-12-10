@@ -6,7 +6,7 @@
 
         final Configuration configuration = ConfigurationLoader.loadConfiguration(fName,
                 new PropertiesExpander(props), ConfigurationLoader.IgnoredModulesOptions.OMIT);
-        assertEquals("Name is not expected", "Checker", configuration.getName());
+        assertEquals("Checker", configuration.getName(), "Name is not expected");
 
         final DefaultConfiguration configuration1 =
                 (DefaultConfiguration) ConfigurationLoader.loadConfiguration(
@@ -16,6 +16,7 @@
                         ConfigurationLoader.IgnoredModulesOptions.EXECUTE);
 
         final Configuration[] children = configuration1.getChildren();
-        assertEquals("Unexpected children size", 1, children[0].getChildren().length);
+        final int length = children[0].getChildren().length;
+        assertEquals(1, length, "Unexpected children size");
     }
 

@@ -6,7 +6,7 @@
         logger.auditStarted(null);
         logger.auditFinished(null);
 
-        assertEquals("Invalid close count", 0, outStream.getCloseCount());
+        assertEquals(0, outStream.getCloseCount(), "Invalid close count");
 
         outStream.close();
         verifyXml(getPath("ExpectedXMLLoggerEmpty.xml"), outStream);

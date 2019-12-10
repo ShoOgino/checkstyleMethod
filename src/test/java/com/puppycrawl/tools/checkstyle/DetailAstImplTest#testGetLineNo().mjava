@@ -2,25 +2,25 @@
     public void testGetLineNo() {
         final DetailAstImpl root1 = new DetailAstImpl();
         root1.setLineNo(1);
-        assertEquals("Invalid line number", 1, root1.getLineNo());
+        assertEquals(1, root1.getLineNo(), "Invalid line number");
 
         final DetailAstImpl root2 = new DetailAstImpl();
         final DetailAstImpl firstChild = new DetailAstImpl();
         firstChild.setLineNo(2);
         root2.setFirstChild(firstChild);
-        assertEquals("Invalid line number", 2, root2.getLineNo());
+        assertEquals(2, root2.getLineNo(), "Invalid line number");
 
         final DetailAstImpl root3 = new DetailAstImpl();
         final DetailAstImpl nextSibling = new DetailAstImpl();
         nextSibling.setLineNo(3);
         root3.setNextSibling(nextSibling);
-        assertEquals("Invalid line number", 3, root3.getLineNo());
+        assertEquals(3, root3.getLineNo(), "Invalid line number");
 
         final DetailAstImpl root4 = new DetailAstImpl();
         final DetailAstImpl comment = new DetailAstImpl();
         comment.setType(TokenTypes.SINGLE_LINE_COMMENT);
         comment.setLineNo(3);
         root4.setFirstChild(comment);
-        assertEquals("Invalid line number", Integer.MIN_VALUE, root4.getLineNo());
+        assertEquals(Integer.MIN_VALUE, root4.getLineNo(), "Invalid line number");
     }
 

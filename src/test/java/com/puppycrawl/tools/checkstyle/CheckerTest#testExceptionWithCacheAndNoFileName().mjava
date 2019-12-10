@@ -4,7 +4,7 @@
      */
     @Test
     public void testExceptionWithCacheAndNoFileName() throws Exception {
-        final File cacheFile = temporaryFolder.newFile();
+        final File cacheFile = File.createTempFile("junit", null, temporaryFolder);
 
         final DefaultConfiguration checkerConfig = new DefaultConfiguration("configuration");
         checkerConfig.addAttribute("charset", StandardCharsets.UTF_8.name());
@@ -36,19 +36,20 @@
             fail("SecurityException is expected!");
         }
         catch (CheckstyleException ex) {
-            assertThat("Error cause differs from SecurityException",
-                    ex.getCause(), instanceOf(SecurityException.class));
-            assertEquals("Error message is not expected",
-                    errorMessage, ex.getCause().getMessage());
+            assertWithMessage("Error cause differs from SecurityException")
+                    .that(ex.getCause()).isInstanceOf(SecurityException.class);
+            assertEquals(errorMessage, ex.getCause().getMessage(),
+                    "Error message is not expected");
 
             // destroy is called by Main
             checker.destroy();
 
             final Properties cache = new Properties();
-            cache.load(Files.newBufferedReader(cacheFile.toPath()));
+            try (BufferedReader reader = Files.newBufferedReader(cacheFile.toPath())) {
+                cache.load(reader);
+            }
 
-            assertEquals("Cache has unexpected size",
-                    1, cache.size());
+            assertEquals(1, cache.size(), "Cache has unexpected size");
         }
     }
 

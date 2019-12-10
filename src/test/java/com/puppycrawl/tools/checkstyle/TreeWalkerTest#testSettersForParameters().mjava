@@ -5,9 +5,9 @@
         treeWalker.setTabWidth(1);
         treeWalker.configure(config);
 
-        assertEquals("Invalid setter result", 1,
-                (int) Whitebox.getInternalState(treeWalker, "tabWidth"));
-        assertEquals("Invalid configuration", config,
-            Whitebox.getInternalState(treeWalker, "configuration"));
+        final int tabWidth = Whitebox.getInternalState(treeWalker, "tabWidth");
+        assertEquals(1, tabWidth, "Invalid setter result");
+        final Object configuration = Whitebox.getInternalState(treeWalker, "configuration");
+        assertEquals(config, configuration, "Invalid configuration");
     }
 

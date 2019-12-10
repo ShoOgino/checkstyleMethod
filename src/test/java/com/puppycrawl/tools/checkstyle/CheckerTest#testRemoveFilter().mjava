@@ -12,7 +12,7 @@
         messages.add(new LocalizedMessage(1, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
         checker.fireErrors("Some File Name", messages);
-        assertTrue("Checker.fireErrors() doesn't call filter", f2.wasCalled());
-        assertFalse("Checker.fireErrors() does call removed filter", filter.wasCalled());
+        assertTrue(f2.wasCalled(), "Checker.fireErrors() doesn't call filter");
+        assertFalse(filter.wasCalled(), "Checker.fireErrors() does call removed filter");
     }
 
