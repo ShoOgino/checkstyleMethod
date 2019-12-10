@@ -1,17 +1,15 @@
     private static void validatePropertySectionPropertyTokens(String fileName, String sectionName,
             AbstractCheck check, List<Node> columns) {
-        Assert.assertEquals(fileName + " section '" + sectionName
-                + "' should have the basic token description", "tokens to check", columns.get(1)
-                .getTextContent());
-        Assert.assertEquals(
-                fileName + " section '" + sectionName + "' should have all the acceptable tokens",
-                "subset of tokens "
-                        + CheckUtil.getTokenText(check.getAcceptableTokens(),
-                                check.getRequiredTokens()), columns.get(2).getTextContent()
-                        .replaceAll("\\s+", " ").trim());
-        Assert.assertEquals(fileName + " section '" + sectionName
-                + "' should have all the default tokens",
+        assertEquals("tokens to check", columns.get(1).getTextContent(),
+                fileName + " section '" + sectionName
+                        + "' should have the basic token description");
+        assertEquals("subset of tokens " + CheckUtil.getTokenText(check.getAcceptableTokens(),
+                check.getRequiredTokens()),
+                columns.get(2).getTextContent().replaceAll("\\s+", " ").trim(),
+                fileName + " section '" + sectionName + "' should have all the acceptable tokens");
+        assertEquals(
                 CheckUtil.getTokenText(check.getDefaultTokens(), check.getRequiredTokens()),
-                columns.get(3).getTextContent().replaceAll("\\s+", " ").trim());
+                columns.get(3).getTextContent().replaceAll("\\s+", " ").trim(),
+                fileName + " section '" + sectionName + "' should have all the default tokens");
     }
 

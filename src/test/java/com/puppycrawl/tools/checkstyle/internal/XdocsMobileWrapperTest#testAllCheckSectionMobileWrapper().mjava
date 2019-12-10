@@ -5,8 +5,7 @@
             final String fileName = file.getName();
 
             final String input = new String(Files.readAllBytes(path), UTF_8);
-            Assert.assertNotEquals(fileName + ": input file cannot be empty", "",
-                    input);
+            assertNotEquals("", input, fileName + ": input file cannot be empty");
             final Document document = XmlUtil.getRawXml(fileName, input, input);
             final NodeList sources = document.getElementsByTagName("section");
 

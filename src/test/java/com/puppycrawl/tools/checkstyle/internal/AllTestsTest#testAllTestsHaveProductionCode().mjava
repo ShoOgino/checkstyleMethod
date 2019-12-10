@@ -6,7 +6,7 @@
             grabAllFiles(allTests, filePath.toFile());
         });
 
-        Assert.assertTrue("found tests", !allTests.keySet().isEmpty());
+        assertFalse(allTests.keySet().isEmpty(), "found tests");
 
         walk(Paths.get("src/test/java"), filePath -> {
             verifyHasProductionFile(allTests, filePath.toFile());

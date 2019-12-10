@@ -8,10 +8,9 @@
                 if (propertyDoc != null) {
                     final String javaDoc = getJavaDocText(node);
 
-                    Assert.assertEquals(checkName + "'s class method-level JavaDoc for "
-                            + propertyName,
-                            "Setter to " + makeFirstLower(propertyDoc),
-                            javaDoc.substring(0, javaDoc.indexOf(" @param")));
+                    assertEquals("Setter to " + makeFirstLower(propertyDoc),
+                            javaDoc.substring(0, javaDoc.indexOf(" @param")),
+                            checkName + "'s class method-level JavaDoc for " + propertyName);
                 }
             }
         }

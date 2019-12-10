@@ -6,37 +6,33 @@
         fixCapturedProperties(sectionName, instance, clss, properties);
 
         if (subSection != null) {
-            Assert.assertTrue(fileName + " section '" + sectionName
-                    + "' should have no properties to show", !properties.isEmpty());
+            assertFalse(properties.isEmpty(), fileName + " section '" + sectionName
+                    + "' should have no properties to show");
 
             final Set<Node> nodes = XmlUtil.getChildrenElements(subSection);
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' subsection 'Properties' should have one child node",
-                1, nodes.size());
+            assertEquals(1, nodes.size(), fileName + " section '" + sectionName
+                    + "' subsection 'Properties' should have one child node");
 
             final Node div = nodes.iterator().next();
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' subsection 'Properties' has unexpected child node",
-                "div", div.getNodeName());
+            assertEquals("div", div.getNodeName(), fileName + " section '" + sectionName
+                        + "' subsection 'Properties' has unexpected child node");
             final String wrapperMessage = fileName + " section '" + sectionName
                     + "' subsection 'Properties' wrapping div for table needs the"
                     + " class 'wrapper'";
-            Assert.assertTrue(wrapperMessage, div.hasAttributes());
-            Assert.assertNotNull(wrapperMessage,
-                    div.getAttributes().getNamedItem("class").getNodeValue());
-            Assert.assertTrue(wrapperMessage,
-                    div.getAttributes().getNamedItem("class").getNodeValue().contains("wrapper"));
+            assertTrue(div.hasAttributes(), wrapperMessage);
+            assertNotNull(div.getAttributes().getNamedItem("class").getNodeValue(), wrapperMessage);
+            assertTrue(div.getAttributes().getNamedItem("class").getNodeValue().contains("wrapper"),
+                    wrapperMessage);
 
             final Node table = XmlUtil.getFirstChildElement(div);
-            Assert.assertEquals(fileName + " section '" + sectionName
-                            + "' subsection 'Properties' has unexpected child node",
-                    "table", table.getNodeName());
+            assertEquals("table", table.getNodeName(), fileName + " section '" + sectionName
+                    + "' subsection 'Properties' has unexpected child node");
 
             validatePropertySectionProperties(fileName, sectionName, table, instance,
                     properties);
         }
 
-        Assert.assertTrue(fileName + " section '" + sectionName + "' should show properties: "
-                + properties, properties.isEmpty());
+        assertTrue(properties.isEmpty(),
+                fileName + " section '" + sectionName + "' should show properties: " + properties);
     }
 

@@ -1,8 +1,8 @@
     private static void validateSinceDescriptionSection(String fileName, String sectionName,
             Node subSection) {
-        Assert.assertTrue(fileName + " section '" + sectionName
-                + "' should have a valid version at the start of the description like:\n"
-                + DESCRIPTION_VERSION.pattern(),
-                DESCRIPTION_VERSION.matcher(subSection.getTextContent().trim()).find());
+        assertTrue(DESCRIPTION_VERSION.matcher(subSection.getTextContent().trim()).find(),
+                fileName + " section '" + sectionName
+                        + "' should have a valid version at the start of the description like:\n"
+                        + DESCRIPTION_VERSION.pattern());
     }
 

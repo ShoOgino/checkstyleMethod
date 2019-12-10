@@ -17,8 +17,8 @@
                 final boolean skipFileNaming = shouldSkipInputFileNameCheck(path, fileName);
 
                 if (!skipFileNaming) {
-                    Assert.assertTrue("Resource must start with 'Input' or 'Expected': " + path,
-                            fileName.startsWith("Input") || fileName.startsWith("Expected"));
+                    assertTrue(fileName.startsWith("Input") || fileName.startsWith("Expected"),
+                            "Resource must start with 'Input' or 'Expected': " + path);
 
                     if (fileName.startsWith("Input")) {
                         fileName = fileName.substring(5);

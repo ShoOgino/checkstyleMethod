@@ -23,10 +23,10 @@
                 XmlUtil.getRawXml(fileName, code, unserializedSource);
 
                 // can't test ant structure, or old and outdated checks
-                Assert.assertTrue("Xml is invalid, old or has outdated structure",
-                        fileName.startsWith("anttask")
+                assertTrue(fileName.startsWith("anttask")
                         || fileName.startsWith("releasenotes")
-                        || isValidCheckstyleXml(fileName, code, unserializedSource));
+                        || isValidCheckstyleXml(fileName, code, unserializedSource),
+                        "Xml is invalid, old or has outdated structure");
             }
         }
     }

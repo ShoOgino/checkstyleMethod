@@ -7,37 +7,36 @@
         for (Node row : XmlUtil.getChildrenElements(table)) {
             final List<Node> columns = new ArrayList<>(XmlUtil.getChildrenElements(row));
 
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' should have the requested columns", 5, columns.size());
+            assertEquals(5, columns.size(), fileName + " section '" + sectionName
+                    + "' should have the requested columns");
 
             if (skip) {
-                Assert.assertEquals(fileName + " section '" + sectionName
-                        + "' should have the specific title", "name", columns.get(0)
-                        .getTextContent());
-                Assert.assertEquals(fileName + " section '" + sectionName
-                        + "' should have the specific title", "description", columns.get(1)
-                        .getTextContent());
-                Assert.assertEquals(fileName + " section '" + sectionName
-                        + "' should have the specific title", "type", columns.get(2)
-                        .getTextContent());
-                Assert.assertEquals(fileName + " section '" + sectionName
-                        + "' should have the specific title", "default value", columns.get(3)
-                        .getTextContent());
-                Assert.assertEquals(fileName + " section '" + sectionName
-                        + "' should have the specific title", "since", columns.get(4)
-                        .getTextContent());
+                assertEquals("name", columns.get(0).getTextContent(),
+                        fileName + " section '" + sectionName
+                                + "' should have the specific title");
+                assertEquals("description", columns.get(1).getTextContent(),
+                        fileName + " section '" + sectionName
+                                + "' should have the specific title");
+                assertEquals("type", columns.get(2).getTextContent(),
+                        fileName + " section '" + sectionName
+                                + "' should have the specific title");
+                assertEquals("default value", columns.get(3).getTextContent(),
+                        fileName + " section '" + sectionName
+                                + "' should have the specific title");
+                assertEquals("since", columns.get(4).getTextContent(),
+                        fileName + " section '" + sectionName
+                                + "' should have the specific title");
 
                 skip = false;
                 continue;
             }
 
-            Assert.assertFalse(fileName + " section '" + sectionName
-                    + "' should have token properties last", didTokens);
+            assertFalse(didTokens, fileName + " section '" + sectionName
+                    + "' should have token properties last");
 
             final String propertyName = columns.get(0).getTextContent();
-            Assert.assertTrue(fileName + " section '" + sectionName
-                    + "' should not contain the property: " + propertyName,
-                    properties.remove(propertyName));
+            assertTrue(properties.remove(propertyName), fileName + " section '" + sectionName
+                    + "' should not contain the property: " + propertyName);
 
             if ("tokens".equals(propertyName)) {
                 final AbstractCheck check = (AbstractCheck) instance;
@@ -50,20 +49,19 @@
                 didJavadocTokens = true;
             }
             else {
-                Assert.assertFalse(fileName + " section '" + sectionName
-                        + "' should have javadoc token properties next to last, before tokens",
-                        didJavadocTokens);
+                assertFalse(didJavadocTokens, fileName + " section '" + sectionName
+                            + "' should have javadoc token properties next to last, before tokens");
 
                 validatePropertySectionPropertyEx(fileName, sectionName, instance, columns,
                         propertyName);
             }
 
-            Assert.assertFalse(fileName + " section '" + sectionName
-                    + "' should have a version for " + propertyName, columns.get(4)
-                    .getTextContent().trim().isEmpty());
-            Assert.assertTrue(fileName + " section '" + sectionName
-                    + "' should have a valid version for " + propertyName,
-                    VERSION.matcher(columns.get(4).getTextContent().trim()).matches());
+            assertFalse(columns.get(4).getTextContent().trim().isEmpty(),
+                    fileName + " section '" + sectionName
+                            + "' should have a version for " + propertyName);
+            assertTrue(VERSION.matcher(columns.get(4).getTextContent().trim()).matches(),
+                    fileName + " section '" + sectionName
+                            + "' should have a valid version for " + propertyName);
         }
     }
 

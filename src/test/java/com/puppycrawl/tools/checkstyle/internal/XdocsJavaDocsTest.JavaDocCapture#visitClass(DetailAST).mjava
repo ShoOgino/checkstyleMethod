@@ -1,13 +1,12 @@
         private static void visitClass(DetailAST node) {
             if (ScopeUtil.isInScope(node, Scope.PUBLIC)) {
-                Assert.assertEquals(
-                        checkName + "'s class-level JavaDoc",
-                        CHECK_TEXT.get("Description")
-                                + CHECK_TEXT.computeIfAbsent("Rule Description", unused -> "")
-                                + CHECK_TEXT.computeIfAbsent("Notes", unused -> "")
-                                + CHECK_TEXT.computeIfAbsent("Properties", unused -> "")
-                                + CHECK_TEXT.get("Examples") + " @since "
-                                + CHECK_TEXT.get("since"), getJavaDocText(node));
+                assertEquals(CHECK_TEXT.get("Description")
+                        + CHECK_TEXT.computeIfAbsent("Rule Description", unused -> "")
+                        + CHECK_TEXT.computeIfAbsent("Notes", unused -> "")
+                        + CHECK_TEXT.computeIfAbsent("Properties", unused -> "")
+                        + CHECK_TEXT.get("Examples") + " @since "
+                        + CHECK_TEXT.get("since"), getJavaDocText(node),
+                        checkName + "'s class-level JavaDoc");
             }
         }
 

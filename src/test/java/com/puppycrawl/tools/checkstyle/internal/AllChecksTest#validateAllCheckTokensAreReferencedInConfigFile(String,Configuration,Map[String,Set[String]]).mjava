@@ -51,10 +51,10 @@
         }
 
         for (Entry<String, Set<String>> entry : checkTokens.entrySet()) {
-            Assert.assertEquals("'" + entry.getKey()
-                    + "' should have all acceptable tokens from check in " + configName
-                    + " config or specify an override to ignore the specific tokens",
-                    entry.getValue(), configCheckTokens.get(entry.getKey()));
+            final Set<String> actual = configCheckTokens.get(entry.getKey());
+            assertEquals(entry.getValue(), actual,
+                    "'" + entry.getKey() + "' should have all acceptable tokens from check in "
+                    + configName + " config or specify an override to ignore the specific tokens");
         }
     }
 

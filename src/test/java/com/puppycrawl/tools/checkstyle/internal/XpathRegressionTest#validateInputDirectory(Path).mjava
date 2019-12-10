@@ -7,12 +7,13 @@
                 final String filename = inputPath.toFile().getName();
                 if (filename.endsWith("java")) {
                     final Matcher matcher = pattern.matcher(filename);
-                    assertTrue("Invalid input file '" + inputPath + "', expected pattern:"
-                            + pattern, matcher.matches());
+                    assertTrue(matcher.matches(),
+                            "Invalid input file '" + inputPath + "', expected pattern:" + pattern);
 
                     final String remaining = matcher.group(1);
-                    assertTrue("Check name '" + check + "' should be included in input file: "
-                            + inputPath, remaining.startsWith(check));
+                    assertTrue(remaining.startsWith(check),
+                            "Check name '" + check + "' should be included in input file: "
+                            + inputPath);
                 }
             }
         }

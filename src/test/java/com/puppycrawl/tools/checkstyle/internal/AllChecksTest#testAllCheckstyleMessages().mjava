@@ -5,9 +5,10 @@
         // test validity of messages from modules
         for (Class<?> module : CheckUtil.getCheckstyleModules()) {
             for (Field message : CheckUtil.getCheckMessages(module)) {
-                Assert.assertEquals(module.getSimpleName() + "." + message.getName()
-                        + " should be 'public static final'", Modifier.PUBLIC | Modifier.STATIC
-                        | Modifier.FINAL, message.getModifiers());
+                assertEquals(Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL,
+                        message.getModifiers(),
+                        module.getSimpleName() + "." + message.getName()
+                                + " should be 'public static final'");
 
                 // below is required for package/private classes
                 if (!message.isAccessible()) {
@@ -30,8 +31,9 @@
                     continue;
                 }
 
-                Assert.assertTrue("property '" + key + "' isn't used by any check in package '"
-                        + entry.getKey() + "'", entry.getValue().contains(key.toString()));
+                assertTrue(entry.getValue().contains(key.toString()),
+                        "property '" + key + "' isn't used by any check in package '"
+                        + entry.getKey() + "'");
             }
         }
     }

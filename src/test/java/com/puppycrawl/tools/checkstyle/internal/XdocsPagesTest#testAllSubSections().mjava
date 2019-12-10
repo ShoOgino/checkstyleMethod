@@ -11,12 +11,11 @@
                 final Node subSection = subSections.item(position);
                 final Node name = subSection.getAttributes().getNamedItem("name");
 
-                Assert.assertNotNull("All sub-sections in '" + fileName + "' must have a name",
-                        name);
+                assertNotNull(name, "All sub-sections in '" + fileName + "' must have a name");
 
                 final Node id = subSection.getAttributes().getNamedItem("id");
 
-                Assert.assertNotNull("All sub-sections in '" + fileName + "' must have an id", id);
+                assertNotNull(id, "All sub-sections in '" + fileName + "' must have an id");
 
                 final String sectionName;
 
@@ -34,9 +33,9 @@
                 final String nameString = name.getNodeValue();
                 final String idString = id.getNodeValue();
 
-                Assert.assertEquals(fileName + " sub-section " + nameString + " for section "
-                        + sectionName + " must match",
-                        (sectionName + " " + nameString).replace(' ', '_'), idString);
+                assertEquals((sectionName + " " + nameString).replace(' ', '_'), idString,
+                        fileName + " sub-section " + nameString + " for section "
+                        + sectionName + " must match");
             }
         }
     }

@@ -2,8 +2,8 @@
         final String text = subSection.getTextContent().replace("Checkstyle Style", "")
                 .replace("Google Style", "").replace("Sun Style", "").trim();
 
-        Assert.assertTrue(fileName + " section '" + sectionName
-                + "' has unknown text in 'Example of Usage': " + text, text.isEmpty());
+        assertTrue(text.isEmpty(), fileName + " section '" + sectionName
+                + "' has unknown text in 'Example of Usage': " + text);
 
         boolean hasCheckstyle = false;
         boolean hasGoogle = false;
@@ -27,9 +27,9 @@
                         + "repo%3Acheckstyle%2Fcheckstyle+"
                         + sectionName;
 
-                Assert.assertTrue(fileName + " section '" + sectionName
-                        + "' should be in google_checks.xml or not reference 'Google Style'",
-                        GOOGLE_MODULES.contains(sectionName));
+                assertTrue(
+                        GOOGLE_MODULES.contains(sectionName), fileName + " section '" + sectionName
+                            + "' should be in google_checks.xml or not reference 'Google Style'");
             }
             else if ("Sun Style".equals(linkText)) {
                 hasSun = true;
@@ -38,22 +38,22 @@
                         + "repo%3Acheckstyle%2Fcheckstyle+"
                         + sectionName;
 
-                Assert.assertTrue(fileName + " section '" + sectionName
-                        + "' should be in sun_checks.xml or not reference 'Sun Style'",
-                        SUN_MODULES.contains(sectionName));
+                assertTrue(
+                        SUN_MODULES.contains(sectionName), fileName + " section '" + sectionName
+                                + "' should be in sun_checks.xml or not reference 'Sun Style'");
             }
 
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' should have matching url", expectedUrl, url);
+            assertEquals(expectedUrl, url, fileName + " section '" + sectionName
+                    + "' should have matching url");
         }
 
-        Assert.assertTrue(fileName + " section '" + sectionName
-                + "' should have a checkstyle section", hasCheckstyle);
-        Assert.assertTrue(fileName + " section '" + sectionName
-                + "' should have a google section since it is in it's config", hasGoogle
-                || !GOOGLE_MODULES.contains(sectionName));
-        Assert.assertTrue(fileName + " section '" + sectionName
-                + "' should have a sun section since it is in it's config",
-                hasSun || !SUN_MODULES.contains(sectionName));
+        assertTrue(hasCheckstyle, fileName + " section '" + sectionName
+                + "' should have a checkstyle section");
+        assertTrue(hasGoogle
+                || !GOOGLE_MODULES.contains(sectionName), fileName + " section '" + sectionName
+                        + "' should have a google section since it is in it's config");
+        assertTrue(hasSun || !SUN_MODULES.contains(sectionName),
+                fileName + " section '" + sectionName
+                        + "' should have a sun section since it is in it's config");
     }
 

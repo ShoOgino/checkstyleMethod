@@ -19,7 +19,7 @@
                     break;
 
                 default:
-                    Assert.fail("Missing modules list for style file '" + fileName + "'");
+                    fail("Missing modules list for style file '" + fileName + "'");
                     styleChecks = null;
             }
 
@@ -56,8 +56,8 @@
             styleChecks.remove("TreeWalker");
             styleChecks.remove("Checker");
 
-            Assert.assertTrue(fileName + " requires the following check(s) to appear: "
-                    + styleChecks, styleChecks.isEmpty());
+            assertTrue(styleChecks.isEmpty(),
+                    fileName + " requires the following check(s) to appear: " + styleChecks);
         }
     }
 

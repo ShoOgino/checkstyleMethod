@@ -4,9 +4,8 @@
                 final String propertyDoc = CHECK_PROPERTY_DOC.get(propertyName);
 
                 if (propertyDoc != null) {
-                    Assert.assertEquals(checkName + "'s class field-level JavaDoc for "
-                                    + propertyName, makeFirstUpper(propertyDoc),
-                            getJavaDocText(node));
+                    assertEquals(makeFirstUpper(propertyDoc), getJavaDocText(node),
+                            checkName + "'s class field-level JavaDoc for " + propertyName);
                 }
             }
         }

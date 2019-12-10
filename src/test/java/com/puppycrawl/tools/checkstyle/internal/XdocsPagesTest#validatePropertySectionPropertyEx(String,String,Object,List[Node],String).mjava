@@ -1,14 +1,14 @@
     private static void validatePropertySectionPropertyEx(String fileName, String sectionName,
             Object instance, List<Node> columns, String propertyName) throws Exception {
-        Assert.assertFalse(fileName + " section '" + sectionName
-                + "' should have a description for " + propertyName, columns.get(1)
-                .getTextContent().trim().isEmpty());
+        assertFalse(columns.get(1).getTextContent().trim().isEmpty(),
+                fileName + " section '" + sectionName
+                        + "' should have a description for " + propertyName);
 
         final String actualTypeName = columns.get(2).getTextContent().replace("\n", "")
                 .replace("\r", "").replaceAll(" +", " ").trim();
 
-        Assert.assertFalse(fileName + " section '" + sectionName + "' should have a type for "
-                + propertyName, actualTypeName.isEmpty());
+        assertFalse(actualTypeName.isEmpty(),
+                fileName + " section '" + sectionName + "' should have a type for " + propertyName);
 
         final Field field = getField(instance.getClass(), propertyName);
         final Class<?> fieldClss = getFieldClass(fileName, sectionName, instance, field,
@@ -19,17 +19,17 @@
         final String expectedValue = getModulePropertyExpectedValue(sectionName, propertyName,
                 field, fieldClss, instance);
 
-        Assert.assertEquals(fileName + " section '" + sectionName
-                + "' should have the type for " + propertyName, expectedTypeName,
-                actualTypeName);
+        assertEquals(expectedTypeName, actualTypeName,
+                fileName + " section '" + sectionName
+                        + "' should have the type for " + propertyName);
 
         if (expectedValue != null) {
             final String actualValue = columns.get(3).getTextContent().replace("\n", "")
                     .replace("\r", "").replaceAll(" +", " ").trim();
 
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' should have the value for " + propertyName, expectedValue,
-                    actualValue);
+            assertEquals(expectedValue, actualValue,
+                    fileName + " section '" + sectionName
+                            + "' should have the value for " + propertyName);
         }
     }
 

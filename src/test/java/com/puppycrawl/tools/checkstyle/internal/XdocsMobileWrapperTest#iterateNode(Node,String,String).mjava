@@ -4,13 +4,12 @@
                 final String wrapperMessage = fileName + "/" + sectionName + ": Tag '"
                         + child.getNodeName() + "' in '" + node.getNodeName()
                         + "' needs a wrapping <span> or <div> with the class 'wrapper'.";
-                Assert.assertTrue(wrapperMessage, "div".equals(node.getNodeName())
-                        || "span".equals(node.getNodeName()));
-                Assert.assertTrue(wrapperMessage, node.hasAttributes());
-                Assert.assertNotNull(wrapperMessage, node.getAttributes().getNamedItem("class"));
-                Assert.assertTrue(wrapperMessage,
-                        node.getAttributes().getNamedItem("class").getNodeValue()
-                                .contains("wrapper"));
+                assertTrue("div".equals(node.getNodeName())
+                        || "span".equals(node.getNodeName()), wrapperMessage);
+                assertTrue(node.hasAttributes(), wrapperMessage);
+                assertNotNull(node.getAttributes().getNamedItem("class"), wrapperMessage);
+                assertTrue(node.getAttributes().getNamedItem("class").getNodeValue()
+                                .contains("wrapper"), wrapperMessage);
 
                 if ("table".equals(child.getNodeName())) {
                     iterateNode(child, fileName, sectionName);
@@ -19,9 +18,8 @@
                     final String dataImageInlineMessage = fileName + "/" + sectionName + ": img "
                             + "needs the additional class inline if it should be displayed inline "
                             + "or block if scrolling in mobile view should be enabled.";
-                    Assert.assertTrue(dataImageInlineMessage,
-                            node.getAttributes().getNamedItem("class").getNodeValue()
-                                    .matches(".*(block|inline).*"));
+                    assertTrue(node.getAttributes().getNamedItem("class").getNodeValue()
+                                    .matches(".*(block|inline).*"), dataImageInlineMessage);
                 }
             }
             else {

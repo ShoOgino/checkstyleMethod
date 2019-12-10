@@ -26,16 +26,14 @@
                 if (ruleNumberPartsAreNumeric) {
                     final int numericRuleNumberPart = parseInt(ruleNumberPart);
                     final int numericLastRuleNumberPart = parseInt(lastRuleNumberPart);
-                    Assert.assertThat(
-                            outOfOrderReason,
+                    assertThat(outOfOrderReason,
                             numericRuleNumberPart < numericLastRuleNumberPart,
                             describedAs("'%0' should not be less than '%1'",
                                     is(false),
                                     numericRuleNumberPart, numericLastRuleNumberPart));
                 }
                 else {
-                    Assert.assertThat(
-                            outOfOrderReason,
+                    assertThat(outOfOrderReason,
                             ruleNumberPart.compareToIgnoreCase(lastRuleNumberPart) < 0,
                             describedAs("'%0' should not be less than '%1'",
                                     is(false),
@@ -50,11 +48,11 @@
             }
             if (ruleNumberPartsAmount == partIndex && lastRuleNumberPartWasEqual) {
                 if (lastRuleNumberPartsAmount == partIndex) {
-                    Assert.fail(fileName + " rule '" + ruleName + "' and rule '"
+                    fail(fileName + " rule '" + ruleName + "' and rule '"
                             + lastRuleName + "' have the same rule number");
                 }
                 else {
-                    Assert.fail(outOfOrderReason);
+                    fail(outOfOrderReason);
                 }
             }
         }

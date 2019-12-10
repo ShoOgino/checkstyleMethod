@@ -1,7 +1,7 @@
     private static void validatePackageSection(String fileName, String sectionName,
             Node subSection, Object instance) {
-        Assert.assertEquals(fileName + " section '" + sectionName
-                + "' should have matching package", instance.getClass().getPackage().getName(),
-                subSection.getTextContent().trim());
+        assertEquals(instance.getClass().getPackage().getName(),
+                subSection.getTextContent().trim(), fileName + " section '" + sectionName
+                        + "' should have matching package");
     }
 

@@ -20,19 +20,18 @@
                         .getNodeValue();
 
                 if ("Content".equals(sectionName) || "Overview".equals(sectionName)) {
-                    Assert.assertNull(fileName + " section '" + sectionName + "' should be first",
-                            lastSectionName);
+                    assertNull(lastSectionName,
+                            fileName + " section '" + sectionName + "' should be first");
                     continue;
                 }
 
-                Assert.assertTrue(fileName + " section '" + sectionName
-                        + "' shouldn't end with 'Check'", !sectionName.endsWith("Check"));
+                assertFalse(sectionName.endsWith("Check"),
+                        fileName + " section '" + sectionName + "' shouldn't end with 'Check'");
                 if (lastSectionName != null) {
-                    Assert.assertTrue(
+                    assertTrue(sectionName.toLowerCase(Locale.ENGLISH).compareTo(
+                            lastSectionName.toLowerCase(Locale.ENGLISH)) >= 0,
                             fileName + " section '" + sectionName
-                                    + "' is out of order compared to '" + lastSectionName + "'",
-                            sectionName.toLowerCase(Locale.ENGLISH).compareTo(
-                                    lastSectionName.toLowerCase(Locale.ENGLISH)) >= 0);
+                                + "' is out of order compared to '" + lastSectionName + "'");
                 }
 
                 validateCheckSection(moduleFactory, fileName, sectionName, section);

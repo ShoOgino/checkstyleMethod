@@ -27,13 +27,14 @@
         }
 
         if (subSection == null) {
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' should have the expected error keys", "", expectedText.toString());
+            assertEquals("", expectedText.toString(), fileName + " section '" + sectionName
+                    + "' should have the expected error keys");
         }
         else {
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' should have the expected error keys", expectedText.toString().trim(),
-                    subSection.getTextContent().replaceAll("\n\\s+", "\n").trim());
+            assertEquals(expectedText.toString().trim(),
+                    subSection.getTextContent().replaceAll("\n\\s+", "\n").trim(),
+                    fileName + " section '" + sectionName
+                            + "' should have the expected error keys");
 
             for (Node node : XmlUtil.findChildElementsByTag(subSection, "a")) {
                 final String url = node.getAttributes().getNamedItem("href").getTextContent();
@@ -51,8 +52,8 @@
                             + linkText + "%22";
                 }
 
-                Assert.assertEquals(fileName + " section '" + sectionName
-                        + "' should have matching url for '" + linkText + "'", expectedUrl, url);
+                assertEquals(expectedUrl, url, fileName + " section '" + sectionName
+                        + "' should have matching url for '" + linkText + "'");
             }
         }
     }

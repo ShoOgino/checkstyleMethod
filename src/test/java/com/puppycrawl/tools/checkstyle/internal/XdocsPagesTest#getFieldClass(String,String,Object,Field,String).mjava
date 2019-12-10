@@ -6,11 +6,11 @@
             result = field.getType();
         }
         if (result == null) {
-            Assert.assertTrue(
-                    fileName + " section '" + sectionName + "' could not find field "
-                            + propertyName,
+            assertTrue(
                     PROPERTIES_ALLOWED_GET_TYPES_FROM_METHOD.contains(sectionName + "."
-                            + propertyName));
+                            + propertyName),
+                    fileName + " section '" + sectionName + "' could not find field "
+                            + propertyName);
 
             final PropertyDescriptor descriptor = PropertyUtils.getPropertyDescriptor(instance,
                     propertyName);
@@ -30,7 +30,7 @@
                 result = Pattern[].class;
             }
             else {
-                Assert.fail("Unknown parameterized type: " + parameterClass.getSimpleName());
+                fail("Unknown parameterized type: " + parameterClass.getSimpleName());
             }
         }
         else if (result == BitSet.class) {

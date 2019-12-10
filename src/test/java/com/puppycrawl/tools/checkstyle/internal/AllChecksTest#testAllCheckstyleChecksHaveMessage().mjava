@@ -3,9 +3,8 @@
         for (Class<?> module : CheckUtil.getCheckstyleChecks()) {
             final String name = module.getSimpleName();
 
-            Assert.assertFalse(name
-                    + " should have at least one 'MSG_*' field for error messages", CheckUtil
-                    .getCheckMessages(module).isEmpty());
+            assertFalse(CheckUtil.getCheckMessages(module).isEmpty(),
+                    name + " should have at least one 'MSG_*' field for error messages");
         }
     }
 

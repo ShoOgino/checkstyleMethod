@@ -36,9 +36,8 @@
                 subSectionPos++;
             }
 
-            Assert.assertEquals(fileName + " section '" + sectionName
-                    + "' should be in order", getSubSectionName(subSectionPos),
-                    subSectionName);
+            assertEquals(getSubSectionName(subSectionPos), subSectionName,
+                    fileName + " section '" + sectionName + "' should be in order");
 
             switch (subSectionPos) {
                 case 1:
@@ -66,12 +65,12 @@
         }
 
         if ("Checker".equals(sectionName)) {
-            Assert.assertTrue(fileName + " section '" + sectionName
-                    + "' should contain up to 'Package' sub-section", subSectionPos >= 6);
+            assertTrue(subSectionPos >= 6, fileName + " section '" + sectionName
+                    + "' should contain up to 'Package' sub-section");
         }
         else {
-            Assert.assertTrue(fileName + " section '" + sectionName
-                    + "' should contain up to 'Parent' sub-section", subSectionPos >= 7);
+            assertTrue(subSectionPos >= 7, fileName + " section '" + sectionName
+                    + "' should contain up to 'Parent' sub-section");
         }
     }
 

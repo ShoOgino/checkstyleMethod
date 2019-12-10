@@ -11,8 +11,8 @@
             if ("a".equals(nodeName) && "href".equals(attrName)) {
                 String value = attribute.getNodeValue();
 
-                assertNotEquals("links starting with '#' aren't supported: " + value,
-                        '#', value.charAt(0));
+                assertNotEquals('#', value.charAt(0),
+                        "links starting with '#' aren't supported: " + value);
 
                 if (value.contains("://")) {
                     attrValue = value;
