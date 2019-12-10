@@ -7,10 +7,10 @@
         detailAST.addChild(childAst);
         final ElementNode elementNode = new ElementNode(rootNode, rootNode, detailAST);
         try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.CHILD)) {
-            assertTrue("Invalid iterator", iterator instanceof ArrayIterator);
+            assertTrue(iterator instanceof ArrayIterator, "Invalid iterator");
         }
         try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.DESCENDANT)) {
-            assertTrue("Invalid iterator", iterator instanceof Navigator.DescendantEnumeration);
+            assertTrue(iterator instanceof Navigator.DescendantEnumeration, "Invalid iterator");
         }
     }
 

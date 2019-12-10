@@ -10,10 +10,10 @@
 
         final AbstractNode elementNode = parentNode.getChildren().get(0);
         try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.FOLLOWING_SIBLING)) {
-            assertTrue("Invalid iterator", iterator instanceof EmptyIterator);
+            assertTrue(iterator instanceof EmptyIterator, "Invalid iterator");
         }
         try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.PRECEDING_SIBLING)) {
-            assertTrue("Invalid iterator", iterator instanceof EmptyIterator);
+            assertTrue(iterator instanceof EmptyIterator, "Invalid iterator");
         }
     }
 

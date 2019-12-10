@@ -4,10 +4,10 @@
         detailAST.setType(TokenTypes.METHOD_DEF);
         final ElementNode elementNode = new ElementNode(rootNode, rootNode, detailAST);
         try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.CHILD)) {
-            assertTrue("Invalid iterator", iterator instanceof EmptyIterator);
+            assertTrue(iterator instanceof EmptyIterator, "Invalid iterator");
         }
         try (AxisIterator iterator = elementNode.iterateAxis(AxisInfo.DESCENDANT)) {
-            assertTrue("Invalid iterator", iterator instanceof EmptyIterator);
+            assertTrue(iterator instanceof EmptyIterator, "Invalid iterator");
         }
     }
 

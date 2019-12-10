@@ -2,11 +2,10 @@
     public void testXpath() throws Exception {
         final String xpath = "/";
         final List<NodeInfo> nodes = getXpathItems(xpath, rootNode);
-        assertEquals("Invalid number of nodes", 1, nodes.size());
-        assertTrue("Should return true, because selected node is RootNode",
-                nodes.get(0) instanceof RootNode);
-        assertEquals("Result node should have same reference as expected",
-                nodes.get(0),
-                rootNode);
+        assertEquals(1, nodes.size(), "Invalid number of nodes");
+        final NodeInfo firstNode = nodes.get(0);
+        assertTrue(firstNode instanceof RootNode,
+                "Should return true, because selected node is RootNode");
+        assertEquals(firstNode, rootNode, "Result node should have same reference as expected");
     }
 
