@@ -1,0 +1,22 @@
+    @Test
+    public void testCustomSimpleRootModule(@SysErr Capturable systemErr) {
+        TestRootModuleChecker.reset();
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-custom-simple-root-module.xml"),
+                getPath("InputMain.java"));
+        });
+        final String checkstylePackage = "com.puppycrawl.tools.checkstyle.";
+        final LocalizedMessage unableToInstantiateExceptionMessage = new LocalizedMessage(1,
+                Definitions.CHECKSTYLE_BUNDLE,
+                "PackageObjectFactory.unableToInstantiateExceptionMessage",
+                new String[] {"TestRootModuleChecker", checkstylePackage
+                        + "TestRootModuleChecker, "
+                        + "TestRootModuleCheckerCheck, " + checkstylePackage
+                        + "TestRootModuleCheckerCheck"},
+                null, getClass(), null);
+        assertTrue(systemErr.getCapturedData().startsWith(checkstylePackage
+                + "api.CheckstyleException: " + unableToInstantiateExceptionMessage.getMessage()),
+                "Unexpected system error log");
+        assertFalse(TestRootModuleChecker.isProcessed(), "Invalid checker state");
+    }
+

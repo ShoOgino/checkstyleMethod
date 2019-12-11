@@ -1,0 +1,36 @@
+    @Test
+    public void testGenerateXpathSuppressionOptionTwo(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        final String expected = addEndOfLine(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+            "<!DOCTYPE suppressions PUBLIC",
+            "    \"-//Checkstyle//DTD SuppressionXpathFilter Experimental Configuration 1.2"
+                + "//EN\"",
+            "    \"https://checkstyle.org/dtds/suppressions_1_2_xpath_experimental.dtd\">",
+            "<suppressions>",
+            "<suppress-xpath",
+            "       files=\"InputMainGenerateXpathSuppressions.java\"",
+            "       checks=\"ExplicitInitializationCheck\"",
+            "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
+                + "/OBJBLOCK/VARIABLE_DEF/IDENT[@text='low']\"/>",
+            "<suppress-xpath",
+            "       files=\"InputMainGenerateXpathSuppressions.java\"",
+            "       checks=\"IllegalThrowsCheck\"",
+            "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/LITERAL_THROWS"
+                + "/IDENT[@text='RuntimeException']\"/>",
+            "<suppress-xpath",
+            "       files=\"InputMainGenerateXpathSuppressions.java\"",
+            "       checks=\"NestedForDepthCheck\"",
+            "       query=\"/CLASS_DEF[./IDENT[@text='InputMainGenerateXpathSuppressions']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_FOR/SLIST"
+                + "/LITERAL_FOR/SLIST/LITERAL_FOR\"/>",
+            "</suppressions>");
+
+        Main.main("-c", getPath("InputMainConfig-xpath-suppressions.xml"),
+                "--generate-xpath-suppression",
+                getPath("InputMainGenerateXpathSuppressions.java"));
+        assertEquals(expected, systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

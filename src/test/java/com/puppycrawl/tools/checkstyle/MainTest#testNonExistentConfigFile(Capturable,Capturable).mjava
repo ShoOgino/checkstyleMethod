@@ -1,0 +1,13 @@
+    @Test
+    public void testNonExistentConfigFile(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-c", "src/main/resources/non_existent_config.xml",
+                    getPath("InputMain.java"));
+        });
+        assertEquals(addEndOfLine("Could not find config XML file "
+                    + "'src/main/resources/non_existent_config.xml'."),
+                systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

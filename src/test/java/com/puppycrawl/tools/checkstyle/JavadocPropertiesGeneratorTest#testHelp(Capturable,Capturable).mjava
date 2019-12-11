@@ -1,0 +1,8 @@
+    @Test
+    public void testHelp(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws Exception {
+        JavadocPropertiesGenerator.main("-h");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected error log");
+        assertEquals(USAGE, systemOut.getCapturedData(), "Unexpected output log");
+    }
+

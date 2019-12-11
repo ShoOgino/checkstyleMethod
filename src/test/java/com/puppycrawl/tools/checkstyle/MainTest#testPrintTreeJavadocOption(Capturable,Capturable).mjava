@@ -1,0 +1,13 @@
+    @Test
+    public void testPrintTreeJavadocOption(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws Exception {
+        final String expected = new String(Files.readAllBytes(Paths.get(
+            getPath("InputMainExpectedInputJavadocComment.txt"))), StandardCharsets.UTF_8)
+            .replaceAll("\\\\r\\\\n", "\\\\n").replaceAll("\r\n", "\n");
+
+        Main.main("-j", getPath("InputMainJavadocComment.javadoc"));
+        assertEquals(expected, systemOut.getCapturedData().replaceAll("\\\\r\\\\n", "\\\\n")
+                        .replaceAll("\r\n", "\n"), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

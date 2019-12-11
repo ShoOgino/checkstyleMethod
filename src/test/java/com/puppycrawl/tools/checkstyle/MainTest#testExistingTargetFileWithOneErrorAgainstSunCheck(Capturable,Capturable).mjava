@@ -1,0 +1,22 @@
+    @Test
+    public void testExistingTargetFileWithOneErrorAgainstSunCheck(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws Exception {
+        assertExitWithStatus(1, () -> {
+            invokeMain("-c", "/sun_checks.xml", getPath("InputMain1.java"));
+        });
+        final LocalizedMessage errorCounterTwoMessage = new LocalizedMessage(1,
+                Definitions.CHECKSTYLE_BUNDLE, Main.ERROR_COUNTER,
+                new String[] {String.valueOf(1)}, null, getClass(), null);
+        final LocalizedMessage message = new LocalizedMessage(1,
+                "com.puppycrawl.tools.checkstyle.checks.javadoc.messages",
+                "javadoc.packageInfo", new String[] {},
+                null, getClass(), null);
+        final String expectedPath = getFilePath("InputMain1.java");
+        assertEquals(addEndOfLine(auditStartMessage.getMessage(),
+                "[ERROR] " + expectedPath + ":1: " + message.getMessage() + " [JavadocPackage]",
+                auditFinishMessage.getMessage()),
+                systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals(addEndOfLine(errorCounterTwoMessage.getMessage()),
+                systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

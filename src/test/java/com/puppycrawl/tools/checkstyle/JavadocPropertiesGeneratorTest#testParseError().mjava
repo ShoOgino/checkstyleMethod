@@ -7,13 +7,13 @@
             fail("Exception was expected");
         }
         catch (CheckstyleException ex) {
-            assertTrue("Invalid error message",
-                ex.getMessage().contains("InputJavadocPropertiesGeneratorParseError.java"));
+            assertTrue(ex.getMessage().contains("InputJavadocPropertiesGeneratorParseError.java"),
+                    "Invalid error message");
 
             final Throwable cause = ex.getCause().getCause();
-            assertTrue("Invalid error message", cause instanceof MismatchedTokenException);
-            assertTrue("Invalid error message",
-                cause.getMessage().contains("expecting RCURLY, found '!'"));
+            assertTrue(cause instanceof MismatchedTokenException, "Invalid error message");
+            assertTrue(cause.getMessage().contains("expecting RCURLY, found '!'"),
+                    "Invalid error message");
         }
     }
 

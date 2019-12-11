@@ -1,0 +1,14 @@
+    @Test
+    public void testPrintFullTreeOption(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws IOException {
+        final String expected = new String(Files.readAllBytes(Paths.get(
+            getPath("InputMainExpectedInputAstTreeStringPrinterJavadoc.txt"))),
+            StandardCharsets.UTF_8).replaceAll("\\\\r\\\\n", "\\\\n")
+                .replaceAll("\r\n", "\n");
+
+        Main.main("-J", getPath("InputMainAstTreeStringPrinterJavadoc.java"));
+        assertEquals(expected, systemOut.getCapturedData().replaceAll("\\\\r\\\\n", "\\\\n")
+                        .replaceAll("\r\n", "\n"), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

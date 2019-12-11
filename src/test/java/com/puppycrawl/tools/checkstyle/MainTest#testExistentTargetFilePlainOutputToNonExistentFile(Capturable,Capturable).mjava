@@ -1,0 +1,9 @@
+    @Test
+    public void testExistentTargetFilePlainOutputToNonExistentFile(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        Main.main("-c", getPath("InputMainConfig-classname.xml"), "-f", "plain",
+                "-o", temporaryFolder + "/output.txt", getPath("InputMain.java"));
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

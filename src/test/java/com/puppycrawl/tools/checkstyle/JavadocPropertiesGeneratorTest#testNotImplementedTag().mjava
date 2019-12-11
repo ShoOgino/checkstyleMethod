@@ -7,9 +7,10 @@
             fail("Exception was expected");
         }
         catch (CheckstyleException ex) {
-            assertEquals("Invalid error message", "Unsupported inline tag LINK_LITERAL",
-                ex.getMessage());
+            assertEquals("Unsupported inline tag LINK_LITERAL",
+                ex.getMessage(), "Invalid error message");
         }
-        assertEquals("File '" + DESTFILE + "' must be empty", 0, FileUtils.sizeOf(DESTFILE));
+        final long size = FileUtils.sizeOf(DESTFILE);
+        assertEquals(0, size, "File '" + DESTFILE + "' must be empty");
     }
 

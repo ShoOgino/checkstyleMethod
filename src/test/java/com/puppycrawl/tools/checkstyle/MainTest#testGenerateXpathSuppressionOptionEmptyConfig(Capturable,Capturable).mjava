@@ -1,0 +1,11 @@
+    @Test
+    public void testGenerateXpathSuppressionOptionEmptyConfig(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        final String expected = "";
+
+        Main.main("-c", getPath("InputMainConfig-empty.xml"), "--generate-xpath-suppression",
+                getPath("InputMainComplexityOverflow.java"));
+        assertEquals(expected, systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

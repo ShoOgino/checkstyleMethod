@@ -1,16 +1,18 @@
     @Test
-    public void testModuleNameInMultiThreadMode() throws Exception {
+    public void testModuleNameInMultiThreadMode() {
         TestRootModuleChecker.reset();
 
         try {
-            Main.main("-C", "4", "-W", "4", "-c", getPath("InputMainConfig-multi-thread-mode.xml"),
-                getPath("InputMain.java"));
+            assertExitWithStatus(-1, () -> {
+                invokeMain("-C", "4", "-W", "4", "-c",
+                        getPath("InputMainConfig-multi-thread-mode.xml"),
+                        getPath("InputMain.java"));
+            });
             fail("An exception is expected");
         }
         catch (IllegalArgumentException ex) {
-            assertEquals("Invalid error message",
-                    "Multi thread mode for Checker module is not implemented",
-                ex.getMessage());
+            assertEquals("Multi thread mode for Checker module is not implemented",
+                ex.getMessage(), "Invalid error message");
         }
     }
 

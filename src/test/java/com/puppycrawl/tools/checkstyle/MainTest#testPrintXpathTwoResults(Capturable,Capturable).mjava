@@ -1,0 +1,17 @@
+    @Test
+    public void testPrintXpathTwoResults(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws IOException {
+        final String expected = addEndOfLine(
+            "CLASS_DEF -> CLASS_DEF [12:0]",
+            "`--OBJBLOCK -> OBJBLOCK [12:10]",
+            "    |--METHOD_DEF -> METHOD_DEF [13:4]",
+            "---------",
+            "CLASS_DEF -> CLASS_DEF [12:0]",
+            "`--OBJBLOCK -> OBJBLOCK [12:10]",
+            "    |--METHOD_DEF -> METHOD_DEF [14:4]");
+        Main.main("--branch-matching-xpath", "/CLASS_DEF[./IDENT[@text='Two']]//METHOD_DEF",
+                getPath("InputMainXPath.java"));
+        assertThat("Unexpected output log", systemOut.getCapturedData(), is(expected));
+        assertThat("Unexpected system error log", systemErr.getCapturedData(), is(""));
+    }
+

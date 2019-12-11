@@ -1,0 +1,9 @@
+    @Test
+    public void testNotClass(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws Exception {
+        JavadocPropertiesGenerator.main("--destfile", DESTFILE.getAbsolutePath(),
+            getPath("InputJavadocPropertiesGeneratorNotClass.java"));
+        assertEquals("", systemErr.getCapturedData(), "Unexpected error log");
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+    }
+

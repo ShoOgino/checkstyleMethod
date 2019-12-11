@@ -1,0 +1,13 @@
+    @Test
+    public void testPrintXpathCommentNode(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        final String expected = addEndOfLine(
+            "CLASS_DEF -> CLASS_DEF [17:0]",
+            "`--OBJBLOCK -> OBJBLOCK [17:19]",
+            "    |--CTOR_DEF -> CTOR_DEF [19:4]",
+            "    |   |--BLOCK_COMMENT_BEGIN -> /* [18:4]");
+        Main.main("-b", "/CLASS_DEF//BLOCK_COMMENT_BEGIN", getPath("InputMainXPath.java"));
+        assertThat("Unexpected output log", systemOut.getCapturedData(), is(expected));
+        assertThat("Unexpected system error log", systemErr.getCapturedData(), is(""));
+    }
+

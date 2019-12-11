@@ -1,0 +1,33 @@
+    @Test
+    public void testExistingDirectoryWithViolations(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        // we just reference there all violations
+        final String[][] outputValues = {
+                {"InputMainComplexityOverflow", "1", "172"},
+        };
+
+        final int allowedLength = 170;
+        final String msgKey = "maxLen.file";
+        final String bundle = "com.puppycrawl.tools.checkstyle.checks.sizes.messages";
+
+        Main.main("-c", getPath("InputMainConfig-filelength.xml"),
+                getPath(""));
+        final String expectedPath = getFilePath("") + File.separator;
+        final StringBuilder sb = new StringBuilder(28);
+        sb.append(auditStartMessage.getMessage())
+                .append(EOL);
+        final String format = "[WARN] " + expectedPath + outputValues[0][0] + ".java:"
+                + outputValues[0][1] + ": ";
+        for (String[] outputValue : outputValues) {
+            final String localizedMessage = new LocalizedMessage(1, bundle,
+                    msgKey, new Integer[] {Integer.valueOf(outputValue[2]), allowedLength},
+                    null, getClass(), null).getMessage();
+            final String line = format + localizedMessage + " [FileLength]";
+            sb.append(line).append(EOL);
+        }
+        sb.append(auditFinishMessage.getMessage())
+                .append(EOL);
+        assertEquals(sb.toString(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

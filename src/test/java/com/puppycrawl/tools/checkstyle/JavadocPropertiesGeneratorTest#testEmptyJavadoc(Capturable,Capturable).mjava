@@ -1,0 +1,11 @@
+    @Test
+    public void testEmptyJavadoc(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws Exception {
+        JavadocPropertiesGenerator.main(getPath("InputJavadocPropertiesGeneratorEmptyJavadoc.java"),
+            "--destfile", DESTFILE.getAbsolutePath());
+        assertEquals("", systemErr.getCapturedData(), "Unexpected error log");
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+        final long size = FileUtils.sizeOf(DESTFILE);
+        assertEquals(0, size, "File '" + DESTFILE + "' must be empty");
+    }
+

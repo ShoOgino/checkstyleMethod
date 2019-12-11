@@ -1,0 +1,12 @@
+    @Test
+    public void testNonExistentOutputFormat(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-c", "/google_checks.xml", "-f", "xmlp", getPath("InputMain.java"));
+        });
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("Invalid value for option '-f': expected one of [XML, PLAIN]"
+                    + " (case-insensitive) but was 'xmlp'" + EOL + SHORT_USAGE,
+                systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

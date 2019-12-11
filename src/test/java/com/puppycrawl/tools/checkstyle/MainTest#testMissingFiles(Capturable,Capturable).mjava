@@ -1,0 +1,8 @@
+    @Test
+    public void testMissingFiles(@SysErr Capturable systemErr, @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, MainTest::invokeMain);
+        final String usage = "Missing required parameter: <files>" + EOL + SHORT_USAGE;
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals(usage, systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

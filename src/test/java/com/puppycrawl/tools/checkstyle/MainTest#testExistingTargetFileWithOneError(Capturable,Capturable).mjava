@@ -1,0 +1,31 @@
+    /**
+     * Similar test to {@link #testExistingTargetFileWithError}, but for PIT mutation tests:
+     * this test fails if the boundary condition is changed from {@code if (exitStatus > 0)}
+     * to {@code if (exitStatus > 1)}.
+     * @throws Exception should not throw anything
+     */
+    @Test
+    public void testExistingTargetFileWithOneError(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws Exception {
+        assertExitWithStatus(1, () -> {
+            invokeMain("-c", getPath("InputMainConfig-classname2-error.xml"),
+                    getPath("InputMain1.java"));
+        });
+        final LocalizedMessage errorCounterTwoMessage = new LocalizedMessage(1,
+                Definitions.CHECKSTYLE_BUNDLE, Main.ERROR_COUNTER,
+                new String[] {String.valueOf(1)}, null, getClass(), null);
+        final LocalizedMessage invalidPatternMessageMain = new LocalizedMessage(1,
+                "com.puppycrawl.tools.checkstyle.checks.naming.messages",
+                "name.invalidPattern", new String[] {"InputMain1", "^[a-z0-9]*$"},
+                null, getClass(), null);
+        final String expectedPath = getFilePath("InputMain1.java");
+        assertEquals(
+                addEndOfLine(auditStartMessage.getMessage(),
+                    "[ERROR] " + expectedPath + ":3:14: "
+                        + invalidPatternMessageMain.getMessage() + " [TypeName]",
+                    auditFinishMessage.getMessage()),
+                systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals(addEndOfLine(errorCounterTwoMessage.getMessage()),
+                systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

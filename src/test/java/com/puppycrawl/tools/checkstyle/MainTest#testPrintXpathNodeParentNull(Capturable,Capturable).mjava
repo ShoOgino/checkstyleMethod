@@ -1,0 +1,9 @@
+    @Test
+    public void testPrintXpathNodeParentNull(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        final String expected = addEndOfLine("PACKAGE_DEF -> package [1:0]");
+        Main.main("-b", "/PACKAGE_DEF", getPath("InputMainXPath.java"));
+        assertThat("Unexpected output log", systemOut.getCapturedData(), is(expected));
+        assertThat("Unexpected system error log", systemErr.getCapturedData(), is(""));
+    }
+

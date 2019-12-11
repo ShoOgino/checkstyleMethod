@@ -1,0 +1,13 @@
+    @Test
+    public void testExistingIncorrectChildrenInConfigFile(@SysErr Capturable systemErr) {
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-incorrectChildren.xml"),
+                    getPath("InputMain.java"));
+        });
+        final String errorOutput = "com.puppycrawl.tools.checkstyle.api."
+                + "CheckstyleException: cannot initialize module RegexpSingleline"
+                + " - RegexpSingleline is not allowed as a child in RegexpSingleline";
+        assertTrue(systemErr.getCapturedData().startsWith(errorOutput),
+                "Unexpected system error log");
+    }
+

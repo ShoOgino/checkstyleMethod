@@ -1,0 +1,12 @@
+    @Test
+    public void testExistingTargetFilePlainOutputToFile(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws Exception {
+        final String outputFile =
+                File.createTempFile("file", ".output", temporaryFolder).getCanonicalPath();
+        assertTrue(new File(outputFile).exists(), "File must exist");
+        Main.main("-c", getPath("InputMainConfig-classname.xml"), "-f", "plain",
+                "-o", outputFile, getPath("InputMain.java"));
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

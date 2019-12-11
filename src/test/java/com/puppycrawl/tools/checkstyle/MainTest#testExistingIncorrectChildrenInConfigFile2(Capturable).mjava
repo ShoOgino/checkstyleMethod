@@ -1,0 +1,14 @@
+    @Test
+    public void testExistingIncorrectChildrenInConfigFile2(@SysErr Capturable systemErr) {
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-incorrectChildren2.xml"),
+                    getPath("InputMain.java"));
+        });
+        final String errorOutput = "com.puppycrawl.tools.checkstyle.api."
+                + "CheckstyleException: cannot initialize module TreeWalker - "
+                + "cannot initialize module JavadocMethod - "
+                + "JavadocVariable is not allowed as a child in JavadocMethod";
+        assertTrue(systemErr.getCapturedData().startsWith(errorOutput),
+                "Unexpected system error log");
+    }
+

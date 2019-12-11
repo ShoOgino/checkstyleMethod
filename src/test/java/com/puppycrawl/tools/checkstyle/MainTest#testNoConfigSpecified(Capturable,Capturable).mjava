@@ -1,0 +1,8 @@
+    @Test
+    public void testNoConfigSpecified(@SysErr Capturable systemErr, @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> invokeMain(getPath("InputMain.java")));
+        assertEquals("Must specify a config XML file." + System.lineSeparator(),
+                systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

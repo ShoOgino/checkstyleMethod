@@ -1,0 +1,16 @@
+    @Test
+    public void testExistingTargetFileXmlOutput(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        Main.main("-c", getPath("InputMainConfig-classname.xml"), "-f", "xml",
+                getPath("InputMain.java"));
+        final String expectedPath = getFilePath("InputMain.java");
+        final String version = Main.class.getPackage().getImplementationVersion();
+        assertEquals(addEndOfLine(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+                "<checkstyle version=\"" + version + "\">",
+                "<file name=\"" + expectedPath + "\">",
+                "</file>",
+                "</checkstyle>"), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

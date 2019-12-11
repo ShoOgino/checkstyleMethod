@@ -1,0 +1,11 @@
+    @Test
+    public void testPrintSuppressionConflictingOptionsTvsP(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-p", getPath("InputMainMycheckstyle.properties"), "-s", "2:4", getPath(""));
+        });
+        assertEquals("Option '-s' cannot be used with other options."
+                + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

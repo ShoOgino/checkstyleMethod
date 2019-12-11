@@ -1,0 +1,11 @@
+    @Test
+    public void testConflictingOptionsTvsO(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        final String outputPath = new File(temporaryFolder, "file.output").getCanonicalPath();
+
+        assertExitWithStatus(-1, () -> invokeMain("-o", outputPath, "-t", getPath("")));
+        assertEquals("Option '-t' cannot be used with other options."
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

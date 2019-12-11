@@ -1,0 +1,13 @@
+    @Test
+    public void testCustomRootModule(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws IOException {
+        TestRootModuleChecker.reset();
+
+        Main.main("-c", getPath("InputMainConfig-custom-root-module.xml"),
+                getPath("InputMain.java"));
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+        assertTrue(TestRootModuleChecker.isProcessed(), "Invalid Checker state");
+        assertTrue(TestRootModuleChecker.isDestroyed(), "RootModule should be destroyed");
+    }
+

@@ -1,0 +1,8 @@
+    @Test
+    public void testUsageHelpPrint(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws IOException {
+        Main.main("-h");
+        assertEquals(USAGE, systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

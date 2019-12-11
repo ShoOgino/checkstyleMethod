@@ -10,8 +10,8 @@
             fail("Exception was expected");
         }
         catch (InvocationTargetException ex) {
-            assertTrue("Invalid error cause",
-                    ex.getCause() instanceof CheckstyleException);
+            assertTrue(
+                    ex.getCause() instanceof CheckstyleException, "Invalid error cause");
             // We do separate validation for message as in Windows
             // disk drive letter appear in message,
             // so we skip that drive letter for compatibility issues
@@ -27,8 +27,8 @@
                     causeMessage.substring(causeMessage.lastIndexOf(' '))
                     .equals(localizedMessage
                             .substring(localizedMessage.lastIndexOf(' ')));
-            assertTrue("Invalid error message", samePrefix || sameSuffix);
-            assertTrue("Invalid error message", causeMessage.contains(".'"));
+            assertTrue(samePrefix || sameSuffix, "Invalid error message");
+            assertTrue(causeMessage.contains(".'"), "Invalid error message");
         }
     }
 

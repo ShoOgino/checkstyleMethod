@@ -1,0 +1,12 @@
+    @Test
+    public void testExistingTargetFilePlainOutputNonexistentProperties(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-c", getPath("InputMainConfig-classname-prop.xml"),
+                    "-p", "nonexistent.properties", getPath("InputMain.java"));
+        });
+        assertEquals("Could not find file 'nonexistent.properties'."
+                + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

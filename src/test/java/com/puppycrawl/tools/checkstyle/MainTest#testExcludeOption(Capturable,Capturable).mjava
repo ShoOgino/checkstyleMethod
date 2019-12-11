@@ -1,0 +1,12 @@
+    @Test
+    public void testExcludeOption(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws IOException {
+        final String filePath = getFilePath("");
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-c", "/google_checks.xml", filePath, "-e", filePath);
+        });
+        assertEquals("Files to process must be specified, found 0."
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

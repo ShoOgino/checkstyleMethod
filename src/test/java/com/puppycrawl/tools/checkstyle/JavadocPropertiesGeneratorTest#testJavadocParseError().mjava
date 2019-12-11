@@ -7,9 +7,11 @@
             fail("Exception was expected");
         }
         catch (IllegalArgumentException ex) {
-            assertTrue("Invalid error message", ex.getMessage().contains(
-                "mismatched input '<EOF>' expecting JAVADOC_INLINE_TAG_END"));
+            assertTrue(ex.getMessage()
+                            .contains("mismatched input '<EOF>' expecting JAVADOC_INLINE_TAG_END"),
+                    "Invalid error message");
         }
-        assertEquals("File '" + DESTFILE + "' must be empty", 0, FileUtils.sizeOf(DESTFILE));
+        final long size = FileUtils.sizeOf(DESTFILE);
+        assertEquals(0, size, "File '" + DESTFILE + "' must be empty");
     }
 

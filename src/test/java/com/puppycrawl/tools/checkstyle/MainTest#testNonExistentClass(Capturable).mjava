@@ -1,0 +1,11 @@
+    @Test
+    public void testNonExistentClass(@SysErr Capturable systemErr) {
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-non-existent-classname.xml"),
+                    getPath("InputMain.java"));
+        });
+        final String cause = "com.puppycrawl.tools.checkstyle.api.CheckstyleException:"
+                + " cannot initialize module TreeWalker - ";
+        assertTrue(systemErr.getCapturedData().startsWith(cause), "Unexpected system error log");
+    }
+

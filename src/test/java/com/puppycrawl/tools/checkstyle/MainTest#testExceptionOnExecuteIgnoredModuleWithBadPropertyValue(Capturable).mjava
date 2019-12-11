@@ -1,0 +1,15 @@
+    @Test
+    public void testExceptionOnExecuteIgnoredModuleWithBadPropertyValue(
+            @SysErr Capturable systemErr) {
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-TypeName-bad-value.xml"),
+                    "--executeIgnoredModules", getPath("InputMain.java"));
+        });
+        final String cause = "com.puppycrawl.tools.checkstyle.api.CheckstyleException:"
+                + " cannot initialize module TreeWalker - ";
+        final String causeDetail = "it is not a boolean";
+        assertTrue(systemErr.getCapturedData().startsWith(cause), "Unexpected system error log");
+        assertTrue(systemErr.getCapturedData().contains(causeDetail),
+                "Unexpected system error log");
+    }
+

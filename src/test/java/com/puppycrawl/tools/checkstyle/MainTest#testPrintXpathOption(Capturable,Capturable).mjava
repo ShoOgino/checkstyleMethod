@@ -1,0 +1,16 @@
+    @Test
+    public void testPrintXpathOption(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws IOException {
+        final String expected = addEndOfLine(
+            "CLASS_DEF -> CLASS_DEF [3:0]",
+            "`--OBJBLOCK -> OBJBLOCK [3:28]",
+            "    |--METHOD_DEF -> METHOD_DEF [4:4]",
+            "    |   `--SLIST -> { [4:20]",
+            "    |       |--VARIABLE_DEF -> VARIABLE_DEF [5:8]",
+            "    |       |   |--IDENT -> a [5:12]");
+        Main.main("-b", "/CLASS_DEF//METHOD_DEF[./IDENT[@text='methodOne']]//VARIABLE_DEF/IDENT",
+                getPath("InputMainXPath.java"));
+        assertThat("Unexpected output log", systemOut.getCapturedData(), is(expected));
+        assertThat("Unexpected system error log", systemErr.getCapturedData(), is(""));
+    }
+

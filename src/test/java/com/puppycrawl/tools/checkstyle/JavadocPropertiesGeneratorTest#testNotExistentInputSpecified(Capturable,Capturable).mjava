@@ -1,0 +1,22 @@
+    @Test
+    public void testNotExistentInputSpecified(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        try {
+            JavadocPropertiesGenerator.main(
+                "--destfile", DESTFILE.getAbsolutePath(), "NotExistent.java");
+            fail("Exception was expected");
+        }
+        catch (CheckstyleException ex) {
+            assertEquals(
+                    "Failed to write javadoc properties of 'NotExistent.java' to '"
+                    + DESTFILE.getAbsolutePath() + "'",
+                ex.getMessage(), "Invalid error message");
+
+            final Throwable cause = ex.getCause();
+            assertTrue(cause instanceof FileNotFoundException, "Invalid error message");
+            assertTrue(cause.getMessage().contains("NotExistent.java"), "Invalid error message");
+        }
+        assertEquals("", systemErr.getCapturedData(), "Unexpected error log");
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+    }
+

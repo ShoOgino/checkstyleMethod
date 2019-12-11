@@ -1,0 +1,12 @@
+    @Test
+    public void testZeroTreeWalkerThreadsNumber(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-W", "0", "-c", "/google_checks.xml", getPath("InputMain.java"));
+        });
+        assertEquals(
+                "TreeWalker threads number must be greater than zero"
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

@@ -1,0 +1,11 @@
+    @Test
+    public void testExistingIncorrectConfigFile(@SysErr Capturable systemErr) {
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-Incorrect.xml"), getPath("InputMain.java"));
+        });
+        final String errorOutput = "com.puppycrawl.tools.checkstyle.api."
+            + "CheckstyleException: unable to parse configuration stream - ";
+        assertTrue(systemErr.getCapturedData().startsWith(errorOutput),
+                "Unexpected system error log");
+    }
+

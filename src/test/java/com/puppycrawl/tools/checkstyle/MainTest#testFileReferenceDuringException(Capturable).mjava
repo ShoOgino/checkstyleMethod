@@ -1,0 +1,14 @@
+    @Test
+    public void testFileReferenceDuringException(@SysErr Capturable systemErr) {
+        // We put xml as source to cause parse exception
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-classname.xml"),
+                    getNonCompilablePath("InputMainIncorrectClass.java"));
+        });
+        final String exceptionFirstLine = addEndOfLine("com.puppycrawl.tools.checkstyle.api."
+                + "CheckstyleException: Exception was thrown while processing "
+                + new File(getNonCompilablePath("InputMainIncorrectClass.java")).getPath());
+        assertTrue(systemErr.getCapturedData().startsWith(exceptionFirstLine),
+                "Unexpected system error log");
+    }
+

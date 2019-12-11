@@ -1,0 +1,14 @@
+    @Test
+    public void testPrintXpathInvalidXpath(@SysErr Capturable systemErr) throws Exception {
+        final String invalidXpath = "\\/CLASS_DEF[./IDENT[@text='Two']]//METHOD_DEF";
+        final String filePath = getFilePath("InputMainXPath.java");
+        assertExitWithStatus(-2, () -> {
+            invokeMain("--branch-matching-xpath", invalidXpath, filePath);
+        });
+        final String exceptionFirstLine = addEndOfLine("com.puppycrawl.tools.checkstyle.api."
+            + "CheckstyleException: Error during evaluation for xpath: " + invalidXpath
+            + ", file: " + filePath);
+        assertThat("Unexpected system error log",
+            systemErr.getCapturedData().startsWith(exceptionFirstLine), is(true));
+    }
+

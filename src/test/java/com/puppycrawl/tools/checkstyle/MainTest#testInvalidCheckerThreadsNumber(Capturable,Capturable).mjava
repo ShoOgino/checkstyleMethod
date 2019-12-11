@@ -1,0 +1,11 @@
+    @Test
+    public void testInvalidCheckerThreadsNumber(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-C", "invalid", "-c", "/google_checks.xml", getPath("InputMain.java"));
+        });
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("Invalid value for option '--checker-threads-number': 'invalid' is not an int"
+                + EOL + SHORT_USAGE, systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

@@ -1,0 +1,22 @@
+    @Test
+    public void testInvalidDestinationSpecified(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws Exception {
+        try {
+            // Passing a folder name will cause the FileNotFoundException.
+            JavadocPropertiesGenerator.main("--destfile", "..",
+                getPath("InputJavadocPropertiesGeneratorCorrect.java"));
+            fail("Exception was expected");
+        }
+        catch (CheckstyleException ex) {
+            final String expectedError = "Failed to write javadoc properties of '"
+                + getPath("InputJavadocPropertiesGeneratorCorrect.java") + "' to '..'";
+            assertEquals(expectedError, ex.getMessage(), "Invalid error message");
+
+            final Throwable cause = ex.getCause();
+            assertTrue(cause instanceof FileNotFoundException, "Invalid error message");
+            assertTrue(cause.getMessage().contains(".."), "Invalid error message");
+        }
+        assertEquals("", systemErr.getCapturedData(), "Unexpected error log");
+        assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
+    }
+

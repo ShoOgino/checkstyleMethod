@@ -1,0 +1,11 @@
+    @Test
+    public void testPrintSuppressionConflictingOptionsTvsC(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-c", "/google_checks.xml", getPath(""), "-s", "2:4");
+        });
+        assertEquals("Option '-s' cannot be used with other options."
+                + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

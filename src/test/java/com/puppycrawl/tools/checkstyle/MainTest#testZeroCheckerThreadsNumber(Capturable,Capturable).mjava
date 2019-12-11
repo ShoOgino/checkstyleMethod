@@ -1,0 +1,11 @@
+    @Test
+    public void testZeroCheckerThreadsNumber(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-C", "0", "-c", "/google_checks.xml", getPath("InputMain.java"));
+        });
+        assertEquals("Checker threads number must be greater than zero"
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

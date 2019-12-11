@@ -1,0 +1,9 @@
+    @Test
+    public void testConflictingOptionsTvsF(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> invokeMain("-f", "plain", "-t", getPath("")));
+        assertEquals("Option '-t' cannot be used with other options."
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

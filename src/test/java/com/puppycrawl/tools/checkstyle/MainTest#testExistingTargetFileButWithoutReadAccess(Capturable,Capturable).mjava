@@ -1,0 +1,18 @@
+    @Test
+    public void testExistingTargetFileButWithoutReadAccess(
+            @SysErr Capturable systemErr, @SysOut Capturable systemOut) throws IOException {
+        final File file = File.createTempFile(
+                "testExistingTargetFileButWithoutReadAccess", null, temporaryFolder);
+        // skip execution if file is still readable, it is possible on some windows machines
+        // see https://github.com/checkstyle/checkstyle/issues/7032 for details
+        assumeTrue(file.setReadable(false), "file is still readable");
+
+        final String canonicalPath = file.getCanonicalPath();
+        assertExitWithStatus(-1, () -> {
+            invokeMain("-c", "/google_checks.xml", canonicalPath);
+        });
+        assertEquals("Files to process must be specified, found 0."
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

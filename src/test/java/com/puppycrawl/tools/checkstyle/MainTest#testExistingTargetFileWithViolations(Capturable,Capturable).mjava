@@ -1,0 +1,26 @@
+    @Test
+    public void testExistingTargetFileWithViolations(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        Main.main("-c", getPath("InputMainConfig-classname2.xml"), getPath("InputMain.java"));
+        final LocalizedMessage invalidPatternMessageMain = new LocalizedMessage(1,
+                "com.puppycrawl.tools.checkstyle.checks.naming.messages",
+                "name.invalidPattern", new String[] {"InputMain", "^[a-z0-9]*$"},
+                null, getClass(), null);
+        final LocalizedMessage invalidPatternMessageMainInner = new LocalizedMessage(1,
+                "com.puppycrawl.tools.checkstyle.checks.naming.messages",
+                "name.invalidPattern", new String[] {"InputMainInner", "^[a-z0-9]*$"},
+                null, getClass(), null);
+        final String expectedPath = getFilePath("InputMain.java");
+        assertEquals(
+                addEndOfLine(auditStartMessage.getMessage(),
+                    "[WARN] " + expectedPath + ":3:14: "
+                        + invalidPatternMessageMain.getMessage()
+                        + " [TypeName]",
+                    "[WARN] " + expectedPath + ":5:7: "
+                        + invalidPatternMessageMainInner.getMessage()
+                        + " [TypeName]",
+                    auditFinishMessage.getMessage()),
+                systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

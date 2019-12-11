@@ -1,0 +1,9 @@
+    @Test
+    public void testVersionPrint(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
+            throws IOException {
+        Main.main("-V");
+        assertEquals("Checkstyle version: null" + System.lineSeparator(),
+                systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

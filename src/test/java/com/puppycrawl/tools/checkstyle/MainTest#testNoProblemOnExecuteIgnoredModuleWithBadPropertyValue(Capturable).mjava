@@ -1,0 +1,8 @@
+    @Test
+    public void testNoProblemOnExecuteIgnoredModuleWithBadPropertyValue(
+            @SysErr Capturable systemErr) throws IOException {
+        Main.main("-c", getPath("InputMainConfig-TypeName-bad-value.xml"),
+                    "", getPath("InputMain.java"));
+        assertTrue(systemErr.getCapturedData().isEmpty(), "Unexpected system error log");
+    }
+

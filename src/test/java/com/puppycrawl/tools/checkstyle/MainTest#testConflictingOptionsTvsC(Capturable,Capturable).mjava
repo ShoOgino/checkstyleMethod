@@ -1,0 +1,9 @@
+    @Test
+    public void testConflictingOptionsTvsC(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> invokeMain("-c", "/google_checks.xml", "-t", getPath("")));
+        assertEquals("Option '-t' cannot be used with other options."
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

@@ -1,0 +1,9 @@
+    @Test
+    public void testPrintTreeOnMoreThanOneFile(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> invokeMain("-t", getPath("")));
+        assertEquals("Printing AST is allowed for only one file."
+            + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

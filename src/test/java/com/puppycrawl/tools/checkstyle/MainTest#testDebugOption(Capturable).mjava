@@ -1,0 +1,6 @@
+    @Test
+    public void testDebugOption(@SysErr Capturable systemErr) throws IOException {
+        Main.main("-c", "/google_checks.xml", getPath("InputMain.java"), "-d");
+        assertNotEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

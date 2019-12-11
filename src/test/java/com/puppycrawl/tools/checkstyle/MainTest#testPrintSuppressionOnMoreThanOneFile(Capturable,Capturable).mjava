@@ -1,0 +1,9 @@
+    @Test
+    public void testPrintSuppressionOnMoreThanOneFile(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-1, () -> invokeMain("-s", "2:4", getPath(""), getPath("")));
+        assertEquals("Printing xpath suppressions is allowed for only one file."
+                + System.lineSeparator(), systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+

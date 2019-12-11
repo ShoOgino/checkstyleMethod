@@ -1,0 +1,10 @@
+    @Test
+    public void testExistingTargetFilePlainOutputProperties(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        Main.main("-c", getPath("InputMainConfig-classname-prop.xml"),
+                "-p", getPath("InputMainMycheckstyle.properties"), getPath("InputMain.java"));
+        assertEquals(addEndOfLine(auditStartMessage.getMessage(), auditFinishMessage.getMessage()),
+                systemOut.getCapturedData(), "Unexpected output log");
+        assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");
+    }
+
