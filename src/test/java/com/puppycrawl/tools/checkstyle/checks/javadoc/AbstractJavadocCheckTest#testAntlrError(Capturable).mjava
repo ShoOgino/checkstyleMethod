@@ -1,11 +1,12 @@
     @Test
-    public void testAntlrError(Capturable errStream) throws Exception {
+    public void testAntlrError(@SysErr Capturable systemErr) throws Exception {
+        systemErr.capture();
         final DefaultConfiguration checkConfig = createModuleConfig(TempCheck.class);
         final String[] expected = {
             "4: " + getCheckMessage(MSG_JAVADOC_PARSE_RULE_ERROR, 78,
                     "mismatched input '(' expecting <EOF>", "JAVADOC"),
         };
         verify(checkConfig, getPath("InputAbstractJavadocInvalidAtSeeReference.java"), expected);
-        assertEquals("", errStream.getCapturedData(), "Error is unexpected");
+        assertEquals("", systemErr.getCapturedData(), "Error is unexpected");
     }
 
