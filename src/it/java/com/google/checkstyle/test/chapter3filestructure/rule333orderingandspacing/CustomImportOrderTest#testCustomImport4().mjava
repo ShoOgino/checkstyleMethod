@@ -1,0 +1,16 @@
+    @Test
+    public void testCustomImport4() throws Exception {
+        final String[] expected = {
+            "7: " + getCheckMessage(clazz, MSG_SEPARATED_IN_GROUP,
+                "javax.swing.WindowConstants.*"),
+            "15: " + getCheckMessage(clazz, MSG_SEPARATED_IN_GROUP,
+                "java.util.StringTokenizer"),
+        };
+
+        final Configuration checkConfig = getModuleConfig("CustomImportOrder");
+        final String filePath = getPath("InputCustomImportOrder4.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
