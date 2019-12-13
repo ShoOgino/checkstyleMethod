@@ -1,0 +1,11 @@
+    @Test
+    public void testViolationsByGoogleAndSuppressions(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws Exception {
+        System.setProperty("org.checkstyle.google.suppressionfilter.config",
+                getPath("InputMainViolationsForGoogleSuppressions.xml"));
+        Main.main("-c", "/google_checks.xml",
+                getPath("InputMainViolationsForGoogle.java"));
+        assertThat("Unexpected output log", systemOut.getCapturedData(), is(noViolationsOutput));
+        assertThat("Unexpected system error log", systemErr.getCapturedData(), is(""));
+    }
+
