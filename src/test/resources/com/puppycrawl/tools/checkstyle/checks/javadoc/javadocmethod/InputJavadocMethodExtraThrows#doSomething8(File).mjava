@@ -1,0 +1,14 @@
+    /**
+     * Actual exception thrown is child class of class that is declared in throws.
+     * It is limitation of checkstyle (as checkstyle does not know type hierarchy).
+     * Javadoc is valid not declaring {@link FileNotFoundException}
+     * BUT checkstyle can not distinguish relationship between exceptions.
+     * @param file some file
+     * @throws IOException if some problem
+     */
+    public void doSomething8(File file) throws IOException {
+        if (file == null) {
+            throw new FileNotFoundException();
+        }
+    }
+

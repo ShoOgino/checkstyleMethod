@@ -1,0 +1,24 @@
+    /**
+     * Get ExceptionInfo for all exceptions that throws in method code by 'throw new'.
+     * @param methodAst method DetailAST object where to find exceptions
+     * @return list of ExceptionInfo
+     */
+    private List<ExceptionInfo> getThrowed(DetailAST methodAst) {
+        final List<ExceptionInfo> returnValue = new ArrayList<>();
+        final DetailAST blockAst = methodAst.findFirstToken(TokenTypes.SLIST);
+        if (blockAst != null) {
+            final List<DetailAST> throwLiterals = findTokensInAstByType(blockAst,
+                    TokenTypes.LITERAL_THROW);
+            for (DetailAST throwAst : throwLiterals) {
+                final DetailAST newAst = throwAst.getFirstChild().getFirstChild();
+                if (newAst.getType() == TokenTypes.LITERAL_NEW) {
+                    final FullIdent ident = FullIdent.createFullIdent(newAst.getFirstChild());
+                    final ExceptionInfo exceptionInfo = new ExceptionInfo(
+                            createClassInfo(new Token(ident), currentClassName));
+                    returnValue.add(exceptionInfo);
+                }
+            }
+        }
+        return returnValue;
+    }
+

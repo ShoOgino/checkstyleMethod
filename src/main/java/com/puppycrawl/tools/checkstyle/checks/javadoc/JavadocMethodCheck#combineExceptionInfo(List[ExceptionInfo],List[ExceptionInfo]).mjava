@@ -1,0 +1,17 @@
+    /**
+     * Combine ExceptionInfo lists together by matching names.
+     * @param list1 list of ExceptionInfo
+     * @param list2 list of ExceptionInfo
+     * @return combined list of ExceptionInfo
+     */
+    private static List<ExceptionInfo> combineExceptionInfo(List<ExceptionInfo> list1,
+                                                     List<ExceptionInfo> list2) {
+        final List<ExceptionInfo> result = new ArrayList<>(list1);
+        for (ExceptionInfo expectionInfo : list2) {
+            if (result.stream().noneMatch(item -> isExceptionInfoSame(item, expectionInfo))) {
+                result.add(expectionInfo);
+            }
+        }
+        return result;
+    }
+

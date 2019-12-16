@@ -22,7 +22,9 @@
                     && !AnnotationUtil.containsAnnotation(ast, allowedAnnotations);
 
                 checkParamTags(tags, ast, reportExpectedTags);
-                checkThrowsTags(tags, getThrows(ast), reportExpectedTags);
+                final List<ExceptionInfo> throwed =
+                        combineExceptionInfo(getThrows(ast), getThrowed(ast));
+                checkThrowsTags(tags, throwed, reportExpectedTags);
                 if (CheckUtil.isNonVoidMethod(ast)) {
                     checkReturnTag(tags, ast.getLineNo(), reportExpectedTags);
                 }

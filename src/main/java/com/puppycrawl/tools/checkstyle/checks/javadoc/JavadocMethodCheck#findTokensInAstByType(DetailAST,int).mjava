@@ -1,0 +1,28 @@
+    /**
+     * Finds node of specified type among root children, siblings, siblings children
+     * on any deep level.
+     * @param root    DetailAST
+     * @param astType value of TokenType
+     * @return {@link Optional} of {@link DetailAST} node which matches the predicate.
+     */
+    public static List<DetailAST> findTokensInAstByType(DetailAST root, int astType) {
+        final List<DetailAST> result = new ArrayList<>();
+        DetailAST curNode = root;
+        while (curNode != null) {
+            DetailAST toVisit = curNode.getFirstChild();
+            while (curNode != null && toVisit == null) {
+                toVisit = curNode.getNextSibling();
+                curNode = curNode.getParent();
+                if (curNode == root) {
+                    toVisit = null;
+                    break;
+                }
+            }
+            curNode = toVisit;
+            if (curNode != null && curNode.getType() == astType) {
+                result.add(curNode);
+            }
+        }
+        return result;
+    }
+

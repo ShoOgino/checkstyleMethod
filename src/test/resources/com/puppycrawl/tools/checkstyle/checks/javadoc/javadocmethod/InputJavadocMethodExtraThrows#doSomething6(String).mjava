@@ -1,0 +1,12 @@
+    /**
+     * expicitly throwed is declared in javadoc // ok
+     * @param properties some value
+     * @throws IllegalArgumentException when argument is wrong // ok
+     */
+    public void doSomething6(String properties) {
+        // here is NPE possible
+        if (properties.charAt(0) == 0) {
+            throw new java.lang.IllegalArgumentException("cannot have char with code 0");
+        }
+    }
+
