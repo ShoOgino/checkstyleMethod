@@ -1,0 +1,15 @@
+    @Test
+    public void testTokens() {
+        final AvoidNoArgumentSuperConstructorCallCheck check =
+            new AvoidNoArgumentSuperConstructorCallCheck();
+        final int[] expected = {
+            TokenTypes.SUPER_CTOR_CALL,
+        };
+        assertArrayEquals(expected, check.getAcceptableTokens(),
+            "Acceptable required tokens are invalid");
+        assertArrayEquals(expected, check.getDefaultTokens(),
+            "Default required tokens are invalid");
+        assertArrayEquals(expected, check.getRequiredTokens(),
+            "Required required tokens are invalid");
+    }
+
