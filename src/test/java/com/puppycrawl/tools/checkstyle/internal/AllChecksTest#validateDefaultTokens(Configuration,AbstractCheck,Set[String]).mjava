@@ -1,0 +1,12 @@
+    private static void validateDefaultTokens(Configuration checkConfig, AbstractCheck check,
+                                              Set<String> configTokens) {
+        if (Arrays.equals(check.getDefaultTokens(), check.getRequiredTokens())) {
+            configTokens.addAll(
+                    CheckUtil.getTokenNameSet(check.getDefaultTokens()));
+        }
+        else {
+            fail("All default tokens should be used in config for "
+                    + checkConfig.getName());
+        }
+    }
+

@@ -1,5 +1,6 @@
     private static void validateAllCheckTokensAreReferencedInConfigFile(String configName,
-            Configuration configuration, Map<String, Set<String>> tokensToIgnore) throws Exception {
+            Configuration configuration, Map<String, Set<String>> tokensToIgnore,
+            boolean defaultTokensMustBeExplicit) throws Exception {
         final ModuleFactory moduleFactory = TestUtil.getPackageObjectFactory();
         final Set<Configuration> configChecks = ConfigurationUtil.getChecks(configuration);
 
@@ -45,7 +46,12 @@
                 }
                 catch (CheckstyleException ex) {
                     // no tokens defined, so it is using default
-                    configTokens.addAll(CheckUtil.getTokenNameSet(check.getDefaultTokens()));
+                    if (defaultTokensMustBeExplicit) {
+                        validateDefaultTokens(checkConfig, check, configTokens);
+                    }
+                    else {
+                        configTokens.addAll(CheckUtil.getTokenNameSet(check.getDefaultTokens()));
+                    }
                 }
             }
         }
