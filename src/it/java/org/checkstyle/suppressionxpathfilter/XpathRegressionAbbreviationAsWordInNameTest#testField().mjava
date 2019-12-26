@@ -1,0 +1,23 @@
+    @Test
+    public void testField() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAbbreviationAsWordInNameField.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AbbreviationAsWordInNameCheck.class);
+
+        final String[] expectedViolation = {
+            "5:9: " + getCheckMessage(AbbreviationAsWordInNameCheck.class,
+                AbbreviationAsWordInNameCheck.MSG_KEY, "FIELD", 4),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT["
+                    + "@text='SuppressionXpathRegressionAbbreviationAsWordInNameField']]"
+                    + "/OBJBLOCK/VARIABLE_DEF/IDENT[@text='FIELD']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

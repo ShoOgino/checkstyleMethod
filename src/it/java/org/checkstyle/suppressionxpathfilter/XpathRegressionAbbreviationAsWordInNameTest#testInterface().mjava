@@ -1,0 +1,23 @@
+    @Test
+    public void testInterface() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAbbreviationAsWordInNameInterface.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AbbreviationAsWordInNameCheck.class);
+
+        final String[] expectedViolation = {
+            "5:15: " + getCheckMessage(AbbreviationAsWordInNameCheck.class,
+                AbbreviationAsWordInNameCheck.MSG_KEY, "INTERFACE", 4),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT["
+                    + "@text='SuppressionXpathRegressionAbbreviationAsWordInNameInterface']]"
+                    + "/OBJBLOCK/INTERFACE_DEF/IDENT[@text='INTERFACE']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

@@ -1,0 +1,24 @@
+    @Test
+    public void testParameter() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAbbreviationAsWordInNameParameter.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AbbreviationAsWordInNameCheck.class);
+
+        final String[] expectedViolation = {
+            "5:21: " + getCheckMessage(AbbreviationAsWordInNameCheck.class,
+                AbbreviationAsWordInNameCheck.MSG_KEY, "PARAMETER", 4),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/INTERFACE_DEF[./IDENT["
+                    + "@text='SuppressionXpathRegressionAbbreviationAsWordInNameParameter']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='method']]"
+                    + "/PARAMETERS/PARAMETER_DEF/IDENT[@text='PARAMETER']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
