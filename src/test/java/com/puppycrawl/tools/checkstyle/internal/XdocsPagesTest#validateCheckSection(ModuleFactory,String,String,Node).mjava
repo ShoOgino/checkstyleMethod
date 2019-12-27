@@ -40,6 +40,9 @@
                     fileName + " section '" + sectionName + "' should be in order");
 
             switch (subSectionPos) {
+                case 0:
+                    validateDescriptionSection(fileName, sectionName, subSection);
+                    break;
                 case 1:
                     validatePropertySection(fileName, sectionName, subSection, instance);
                     break;
@@ -55,7 +58,6 @@
                 case 6:
                     validateParentSection(fileName, sectionName, subSection);
                     break;
-                case 0:
                 case 2:
                 default:
                     break;

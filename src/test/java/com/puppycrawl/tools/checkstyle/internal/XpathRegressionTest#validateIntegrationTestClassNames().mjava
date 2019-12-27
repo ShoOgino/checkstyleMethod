@@ -1,5 +1,6 @@
     @Test
     public void validateIntegrationTestClassNames() throws Exception {
+        final Set<String> compatibleChecks = new HashSet<>();
         final Pattern pattern = Pattern.compile("^XpathRegression(.+)Test\\.java$");
         try (DirectoryStream<Path> javaPaths = Files.newDirectoryStream(javaDir)) {
             for (Path path : javaPaths) {
@@ -20,7 +21,23 @@
                 assertFalse(MISSING_CHECK_NAMES.contains(check),
                         "Check '" + check + "' is now tested. Please update the todo list in"
                                 + " XpathRegressionTest.MISSING_CHECK_NAMES");
+                assertFalse(INCOMPATIBLE_CHECK_NAMES.contains(check),
+                        "Check '" + check + "' is now compatible with SuppressionXpathFilter."
+                                + " Please update the todo list in"
+                                + " XpathRegressionTest.INCOMPATIBLE_CHECK_NAMES");
+                compatibleChecks.add(check);
             }
         }
+
+        // Ensure that all lists are up to date
+        final Set<String> allChecks = new HashSet<>(simpleCheckNames);
+        allChecks.removeAll(INCOMPATIBLE_JAVADOC_CHECK_NAMES);
+        allChecks.removeAll(INCOMPATIBLE_CHECK_NAMES);
+        allChecks.removeAll(MISSING_CHECK_NAMES);
+        allChecks.removeAll(compatibleChecks);
+
+        assertTrue(allChecks.isEmpty(), "XpathRegressionTest is missing for ["
+                + String.join(", ", allChecks)
+                + "]. Please add them to src/it/java/org/checkstyle/suppressionxpathfilter");
     }
 

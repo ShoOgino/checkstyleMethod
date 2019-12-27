@@ -1,0 +1,12 @@
+    private static void validateListOfSuppressionXpathFilterIncompatibleChecks(Node subSection) {
+        assertWithMessage(
+            "Incompatible check list should match XpathRegressionTest.INCOMPATIBLE_CHECK_NAMES")
+            .that(getListById(subSection, "SuppressionXpathFilter_IncompatibleChecks"))
+            .isEqualTo(XpathRegressionTest.INCOMPATIBLE_CHECK_NAMES);
+
+        assertWithMessage(
+            "Javadoc check list should match XpathRegressionTest.INCOMPATIBLE_JAVADOC_CHECK_NAMES")
+            .that(getListById(subSection, "SuppressionXpathFilter_JavadocChecks"))
+            .isEqualTo(XpathRegressionTest.INCOMPATIBLE_JAVADOC_CHECK_NAMES);
+    }
+

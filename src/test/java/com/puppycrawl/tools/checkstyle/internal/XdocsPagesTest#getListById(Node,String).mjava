@@ -1,0 +1,12 @@
+    private static Set<String> getListById(Node subSection, String id) {
+        Set<String> result = null;
+        final Node node = XmlUtil.findChildElementById(subSection, id);
+        if (node != null) {
+            result = XmlUtil.getChildrenElements(node)
+                    .stream()
+                    .map(Node::getTextContent)
+                    .collect(Collectors.toSet());
+        }
+        return result;
+    }
+
