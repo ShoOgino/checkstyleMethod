@@ -1,7 +1,6 @@
     @Test
     public void testCheckReuseAfterParseErrorWithFollowingAntlrErrorInTwoFiles(
             @SysErr Capturable systemErr) throws Exception {
-        systemErr.capture();
         final DefaultConfiguration checkConfig = createModuleConfig(TempCheck.class);
         final Map<String, List<String>> expectedMessages = new LinkedHashMap<>(2);
         expectedMessages.put(getPath("InputAbstractJavadocParsingErrors.java"), asList(
