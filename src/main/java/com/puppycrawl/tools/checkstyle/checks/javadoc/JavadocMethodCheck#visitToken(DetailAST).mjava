@@ -1,9 +1,6 @@
     @Override
     public final void visitToken(DetailAST ast) {
-        if (ast.getType() == TokenTypes.IMPORT) {
-            processImport(ast);
-        }
-        else if (ast.getType() == TokenTypes.CLASS_DEF
+        if (ast.getType() == TokenTypes.CLASS_DEF
                  || ast.getType() == TokenTypes.INTERFACE_DEF
                  || ast.getType() == TokenTypes.ENUM_DEF) {
             processClass(ast);
