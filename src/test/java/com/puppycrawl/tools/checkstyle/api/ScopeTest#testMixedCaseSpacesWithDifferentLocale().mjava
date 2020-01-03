@@ -1,0 +1,11 @@
+    @DefaultLocale(language = "tr", country = "TR")
+    @Test
+    public void testMixedCaseSpacesWithDifferentLocale() {
+        assertEquals(Scope.NOTHING, Scope.getInstance("NothinG "), "Invalid scope");
+        assertEquals(Scope.PUBLIC, Scope.getInstance(" PuBlic"), "Invalid scope");
+        assertEquals(Scope.PROTECTED, Scope.getInstance(" ProteCted"), "Invalid scope");
+        assertEquals(Scope.PACKAGE, Scope.getInstance("    PackAge "), "Invalid scope");
+        assertEquals(Scope.PRIVATE, Scope.getInstance("privaTe   "), "Invalid scope");
+        assertEquals(Scope.ANONINNER, Scope.getInstance("AnonInner"), "Invalid scope");
+    }
+
