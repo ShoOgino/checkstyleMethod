@@ -1,0 +1,23 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionAvoidDoubleBraceInitialization.java"));
+
+        final DefaultConfiguration moduleConfig = createModuleConfig(clazz);
+
+        final String[] expectedViolation = {
+            "6:41: " + getCheckMessage(clazz, AvoidDoubleBraceInitializationCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAvoidDoubleBraceInitialization']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='list']]/ASSIGN/EXPR/"
+                + "LITERAL_NEW[./IDENT[@text='ArrayList']]/OBJBLOCK",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAvoidDoubleBraceInitialization']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='list']]/ASSIGN/EXPR/"
+                + "LITERAL_NEW[./IDENT[@text='ArrayList']]/OBJBLOCK/LCURLY"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

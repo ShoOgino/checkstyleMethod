@@ -1,0 +1,23 @@
+    @Test
+    public void testDefault() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(AvoidDoubleBraceInitializationCheck.class);
+        final String[] expected = {
+            "11:53: " + getCheckMessage(MSG_KEY),
+            "16:40: " + getCheckMessage(MSG_KEY),
+            "25:40: " + getCheckMessage(MSG_KEY),
+            "31:40: " + getCheckMessage(MSG_KEY),
+            "36:40: " + getCheckMessage(MSG_KEY),
+            "42:40: " + getCheckMessage(MSG_KEY),
+            "47:40: " + getCheckMessage(MSG_KEY),
+            "53:40: " + getCheckMessage(MSG_KEY),
+            "58:40: " + getCheckMessage(MSG_KEY),
+            "66:41: " + getCheckMessage(MSG_KEY),
+            "69:33: " + getCheckMessage(MSG_KEY),
+            "73:33: " + getCheckMessage(MSG_KEY),
+            "74:33: " + getCheckMessage(MSG_KEY),
+        };
+        verify(checkConfig, getPath("InputAvoidDoubleBraceInitialization.java"),
+            expected);
+    }
+
