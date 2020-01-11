@@ -1,0 +1,19 @@
+    private static Map<String, String> readSummaries() throws Exception {
+        final String fileName = AVAILABLE_CHECKS_PATH.getFileName().toString();
+        final String input = new String(Files.readAllBytes(AVAILABLE_CHECKS_PATH), UTF_8);
+        final Document document = XmlUtil.getRawXml(fileName, input, input);
+        final NodeList rows = document.getElementsByTagName("tr");
+        final Map<String, String> result = new HashMap<>();
+
+        for (int position = 0; position < rows.getLength(); position++) {
+            final Node row = rows.item(position);
+            final Iterator<Node> cells = XmlUtil.findChildElementsByTag(row, "td").iterator();
+            final String name = XmlUtil.sanitizeXml(cells.next().getTextContent());
+            final String summary = XmlUtil.sanitizeXml(cells.next().getTextContent());
+
+            result.put(name, summary);
+        }
+
+        return result;
+    }
+

@@ -1,0 +1,41 @@
+    @Test
+    public void testAllChecksPageInSyncWithChecksSummaries() throws Exception {
+        final Pattern endOfSentence = Pattern.compile("(.*?\\.)\\s", Pattern.DOTALL);
+        final Map<String, String> summaries = readSummaries();
+
+        for (Path path : XdocUtil.getXdocsConfigFilePaths(XdocUtil.getXdocsFilePaths())) {
+            final String fileName = path.getFileName().toString();
+            if ("config_reporting.xml".equals(fileName)
+                    || "config_filefilters.xml".equals(fileName)
+                    || "config_filters.xml".equals(fileName)) {
+                continue;
+            }
+
+            final String input = new String(Files.readAllBytes(path), UTF_8);
+            final Document document = XmlUtil.getRawXml(fileName, input, input);
+            final NodeList sources = document.getElementsByTagName("subsection");
+
+            for (int position = 0; position < sources.getLength(); position++) {
+                final Node section = sources.item(position);
+                final String sectionName = XmlUtil.getNameAttributeOfNode(section);
+                if (!"Description".equals(sectionName)) {
+                    continue;
+                }
+
+                final String checkName = XmlUtil.getNameAttributeOfNode(section.getParentNode());
+                final Matcher matcher = endOfSentence.matcher(section.getTextContent());
+                assertWithMessage(
+                    "The first sentence of the \"Description\" subsection for the check "
+                        + checkName + " in the file \"" + fileName + "\" should end with a period")
+                    .that(matcher.find());
+                final String firstSentence = XmlUtil.sanitizeXml(matcher.group(1));
+                assertWithMessage("The summary for check " + checkName
+                        + " in the file \"" + AVAILABLE_CHECKS_PATH + "\""
+                        + " should match the first sentence of the \"Description\" subsection"
+                        + " for this check in the file \"" + fileName + "\"")
+                    .that(summaries.get(checkName))
+                    .isEqualTo(firstSentence);
+            }
+        }
+    }
+
