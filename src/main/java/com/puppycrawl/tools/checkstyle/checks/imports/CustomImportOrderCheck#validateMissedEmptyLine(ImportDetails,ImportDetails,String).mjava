@@ -1,0 +1,13 @@
+    /**
+     * Log violation if empty line is missed.
+     * @param previousImport previous import from current group.
+     * @param importObject current import.
+     * @param fullImportIdent full import identifier.
+     */
+    private void validateMissedEmptyLine(ImportDetails previousImport,
+                                         ImportDetails importObject, String fullImportIdent) {
+        if (isEmptyLineMissed(previousImport, importObject)) {
+            log(importObject.getStartLineNumber(), MSG_LINE_SEPARATOR, fullImportIdent);
+        }
+    }
+

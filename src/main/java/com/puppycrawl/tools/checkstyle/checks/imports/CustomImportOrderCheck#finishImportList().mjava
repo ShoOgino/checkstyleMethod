@@ -10,11 +10,8 @@
             final String fullImportIdent = importObject.getImportFullPath();
 
             if (importGroup.equals(currentGroup)) {
-                if (isSeparatedByExtraEmptyLine(previousImportObjectFromCurrentGroup,
-                                                importObject)) {
-                    log(importObject.getStartLineNumber(), MSG_SEPARATED_IN_GROUP,
-                            fullImportIdent);
-                }
+                validateExtraEmptyLine(previousImportObjectFromCurrentGroup,
+                        importObject, fullImportIdent);
                 if (isAlphabeticalOrderBroken(previousImportFromCurrentGroup, fullImportIdent)) {
                     log(importObject.getStartLineNumber(), MSG_LEX,
                             fullImportIdent, previousImportFromCurrentGroup);
@@ -29,10 +26,8 @@
                 if (customImportOrderRules.size() > currentGroupNumber + 1) {
                     final String nextGroup = getNextImportGroup(currentGroupNumber + 1);
                     if (importGroup.equals(nextGroup)) {
-                        if (isEmptyLineMissed(previousImportObjectFromCurrentGroup, importObject)) {
-                            log(importObject.getStartLineNumber(), MSG_LINE_SEPARATOR,
-                                    fullImportIdent);
-                        }
+                        validateMissedEmptyLine(previousImportObjectFromCurrentGroup,
+                                importObject, fullImportIdent);
                         currentGroup = nextGroup;
                         currentGroupNumber = customImportOrderRules.indexOf(nextGroup);
                         previousImportFromCurrentGroup = fullImportIdent;

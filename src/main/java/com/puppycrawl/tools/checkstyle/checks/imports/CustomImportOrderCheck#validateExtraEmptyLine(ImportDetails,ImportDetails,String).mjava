@@ -1,0 +1,13 @@
+    /**
+     * Log violation if extra empty line is present.
+     * @param previousImport previous import from current group.
+     * @param importObject current import.
+     * @param fullImportIdent full import identifier.
+     */
+    private void validateExtraEmptyLine(ImportDetails previousImport,
+                                        ImportDetails importObject, String fullImportIdent) {
+        if (isSeparatedByExtraEmptyLine(previousImport, importObject)) {
+            log(importObject.getStartLineNumber(), MSG_SEPARATED_IN_GROUP, fullImportIdent);
+        }
+    }
+
