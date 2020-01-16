@@ -6,12 +6,8 @@
      */
     private static void serialize(Serializable object,
                                   OutputStream outputStream) throws IOException {
-        final ObjectOutputStream oos = new ObjectOutputStream(outputStream);
-        try {
+        try (ObjectOutputStream oos = new ObjectOutputStream(outputStream)) {
             oos.writeObject(object);
-        }
-        finally {
-            flushAndCloseOutStream(oos);
         }
     }
 
