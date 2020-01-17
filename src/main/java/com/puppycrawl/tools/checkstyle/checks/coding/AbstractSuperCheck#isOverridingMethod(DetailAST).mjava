@@ -1,6 +1,6 @@
     /**
      * Determines whether an AST is a method definition for this check,
-     * with 0 parameters.
+     * without any parameters.
      * @param ast the method definition AST.
      * @return true if the method of ast is a method for this check.
      */
@@ -16,7 +16,7 @@
             if (getMethodName().equals(name)
                     && modifiersAST.findFirstToken(TokenTypes.LITERAL_NATIVE) == null) {
                 final DetailAST params = ast.findFirstToken(TokenTypes.PARAMETERS);
-                overridingMethod = params.getChildCount() == 0;
+                overridingMethod = !params.hasChildren();
             }
         }
         return overridingMethod;

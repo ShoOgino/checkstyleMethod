@@ -9,7 +9,7 @@
             int parentTokenType, int nextTokenType) {
         return blockComment.getParent() != null
                 && blockComment.getParent().getType() == parentTokenType
-                && getPrevSiblingSkipComments(blockComment).getChildCount() == 0
+                && !getPrevSiblingSkipComments(blockComment).hasChildren()
                 && getNextSiblingSkipComments(blockComment).getType() == nextTokenType;
     }
 

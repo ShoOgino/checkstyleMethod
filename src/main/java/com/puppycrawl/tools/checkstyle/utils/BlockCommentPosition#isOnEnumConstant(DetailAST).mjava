@@ -4,14 +4,20 @@
      * @return true if node is before enum constant
      */
     public static boolean isOnEnumConstant(DetailAST blockComment) {
-        final boolean isOnPlainConst = blockComment.getParent() != null
-                && blockComment.getParent().getType() == TokenTypes.ENUM_CONSTANT_DEF
-                && getPrevSiblingSkipComments(blockComment).getType() == TokenTypes.ANNOTATIONS
-                && getPrevSiblingSkipComments(blockComment).getChildCount() == 0;
-        final boolean isOnConstWithAnnotation = !isOnPlainConst && blockComment.getParent() != null
-                && blockComment.getParent().getType() == TokenTypes.ANNOTATION
-                && blockComment.getParent().getParent().getParent().getType()
-                    == TokenTypes.ENUM_CONSTANT_DEF;
-        return isOnPlainConst || isOnConstWithAnnotation;
+        final DetailAST parent = blockComment.getParent();
+        boolean result = false;
+        if (parent != null) {
+            if (parent.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
+                final DetailAST prevSibling = getPrevSiblingSkipComments(blockComment);
+                if (prevSibling.getType() == TokenTypes.ANNOTATIONS && !prevSibling.hasChildren()) {
+                    result = true;
+                }
+            }
+            else if (parent.getType() == TokenTypes.ANNOTATION
+                    && parent.getParent().getParent().getType() == TokenTypes.ENUM_CONSTANT_DEF) {
+                result = true;
+            }
+        }
+        return result;
     }
 

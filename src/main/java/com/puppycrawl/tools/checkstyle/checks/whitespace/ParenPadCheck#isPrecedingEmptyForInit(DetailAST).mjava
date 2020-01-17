@@ -10,7 +10,7 @@
         if (parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null) {
             final DetailAST forIterator =
                     parent.findFirstToken(TokenTypes.FOR_INIT);
-            result = forIterator.getChildCount() == 0;
+            result = !forIterator.hasChildren();
         }
         return result;
     }

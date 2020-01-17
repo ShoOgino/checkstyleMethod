@@ -5,12 +5,11 @@
     private void findSelectionPositions(DetailAST ast) {
         selectionStart = lines2position.get(ast.getLineNo()) + ast.getColumnNo();
 
-        if (ast.getChildCount() == 0
-                && TokenUtil.getTokenName(ast.getType()).equals(ast.getText())) {
-            selectionEnd = selectionStart;
+        if (ast.hasChildren() || !TokenUtil.getTokenName(ast.getType()).equals(ast.getText())) {
+            selectionEnd = findLastPosition(ast);
         }
         else {
-            selectionEnd = findLastPosition(ast);
+            selectionEnd = selectionStart;
         }
     }
 
