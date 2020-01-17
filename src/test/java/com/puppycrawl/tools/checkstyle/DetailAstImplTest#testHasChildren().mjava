@@ -1,0 +1,16 @@
+    @Test
+    public void testHasChildren() throws Exception {
+        final DetailAstImpl root = new DetailAstImpl();
+        final DetailAstImpl child = new DetailAstImpl();
+
+        root.setFirstChild(child);
+        getSetParentMethod().invoke(child, root);
+
+        assertWithMessage("Root node should have children")
+                .that(root.hasChildren())
+                .isTrue();
+        assertWithMessage("Child node should have no children")
+                .that(child.hasChildren())
+                .isFalse();
+    }
+
