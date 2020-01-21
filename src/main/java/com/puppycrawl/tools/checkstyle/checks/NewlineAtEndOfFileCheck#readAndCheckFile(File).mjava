@@ -7,7 +7,11 @@
     private void readAndCheckFile(File file) throws IOException {
         // Cannot use lines as the line separators have been removed!
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
-            if (!endsWithNewline(randomAccessFile)) {
+            if (lineSeparator == LineSeparatorOption.LF
+                    && endsWithNewline(randomAccessFile, LineSeparatorOption.CRLF)) {
+                log(1, MSG_KEY_WRONG_ENDING, file.getPath());
+            }
+            else if (!endsWithNewline(randomAccessFile, lineSeparator)) {
                 log(1, MSG_KEY_NO_NEWLINE_EOF, file.getPath());
             }
         }

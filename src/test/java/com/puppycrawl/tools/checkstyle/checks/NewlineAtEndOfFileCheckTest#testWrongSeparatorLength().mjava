@@ -2,7 +2,8 @@
     public void testWrongSeparatorLength() throws Exception {
         try (RandomAccessFile file =
                      new ReadZeroRandomAccessFile(getPath("InputNewlineAtEndOfFileLf.java"), "r")) {
-            Whitebox.invokeMethod(new NewlineAtEndOfFileCheck(), "endsWithNewline", file);
+            Whitebox.invokeMethod(new NewlineAtEndOfFileCheck(), "endsWithNewline", file,
+                LineSeparatorOption.LF);
             fail("Exception is expected");
         }
         catch (IOException ex) {
