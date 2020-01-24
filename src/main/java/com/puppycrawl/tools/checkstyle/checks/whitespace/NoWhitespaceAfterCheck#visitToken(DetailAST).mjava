@@ -2,8 +2,7 @@
     public void visitToken(DetailAST ast) {
         final DetailAST whitespaceFollowedAst = getWhitespaceFollowedNode(ast);
 
-        if (whitespaceFollowedAst.getNextSibling() == null
-                || whitespaceFollowedAst.getNextSibling().getType() != TokenTypes.ANNOTATIONS) {
+        if (shouldCheckWhitespaceAfter(whitespaceFollowedAst)) {
             final int whitespaceColumnNo = getPositionAfter(whitespaceFollowedAst);
             final int whitespaceLineNo = whitespaceFollowedAst.getLineNo();
 
