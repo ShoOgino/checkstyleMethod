@@ -2,8 +2,7 @@
     public void visitToken(DetailAST ast) {
         final DetailAST parent = ast.getParent();
         if (parent.getType() == TokenTypes.SLIST
-                && (!allowInSwitchCase
-                    || parent.getNumberOfChildren() != 1)) {
+                && (!allowInSwitchCase || hasSiblings(ast))) {
             log(ast, MSG_KEY_BLOCK_NESTED);
         }
     }
