@@ -9,7 +9,7 @@
         final DetailAST ident = getMethodIdentAst();
         final DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
         IndentLevel suggestedLevel = new IndentLevel(getLineStart(ident));
-        if (!areOnSameLine(child.getMainAst().getFirstChild(), ident)) {
+        if (!TokenUtil.areOnSameLine(child.getMainAst().getFirstChild(), ident)) {
             suggestedLevel = new IndentLevel(suggestedLevel,
                     getBasicOffset(),
                     getIndentCheck().getLineWrappingIndentation());

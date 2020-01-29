@@ -6,6 +6,6 @@
      */
     private static boolean isSingleLineJavadoc(DetailAST blockCommentStart) {
         final DetailAST blockCommentEnd = blockCommentStart.getLastChild();
-        return blockCommentStart.getLineNo() == blockCommentEnd.getLineNo();
+        return TokenUtil.areOnSameLine(blockCommentStart, blockCommentEnd);
     }
 

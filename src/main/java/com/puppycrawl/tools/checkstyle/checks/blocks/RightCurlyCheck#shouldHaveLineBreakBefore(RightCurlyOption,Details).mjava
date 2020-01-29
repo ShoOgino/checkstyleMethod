@@ -8,6 +8,6 @@
                                                      Details details) {
         return bracePolicy == RightCurlyOption.SAME
                 && !hasLineBreakBefore(details.rcurly)
-                && details.lcurly.getLineNo() != details.rcurly.getLineNo();
+                && !TokenUtil.areOnSameLine(details.lcurly, details.rcurly);
     }
 

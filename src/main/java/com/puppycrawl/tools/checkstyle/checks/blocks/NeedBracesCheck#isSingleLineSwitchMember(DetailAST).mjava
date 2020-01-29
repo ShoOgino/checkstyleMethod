@@ -16,7 +16,7 @@
         return Optional.of(ast)
                 .map(DetailAST::getNextSibling)
                 .map(DetailAST::getLastChild)
-                .map(lastToken -> isOnSameLine(ast, lastToken))
+                .map(lastToken -> TokenUtil.areOnSameLine(ast, lastToken))
                 .orElse(true);
     }
 

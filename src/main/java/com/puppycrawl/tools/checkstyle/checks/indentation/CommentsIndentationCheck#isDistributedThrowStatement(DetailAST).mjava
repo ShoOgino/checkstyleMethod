@@ -9,7 +9,7 @@
                 && commentPreviousSibling.getType() == TokenTypes.LITERAL_THROW) {
             final DetailAST firstChild = commentPreviousSibling.getFirstChild();
             final DetailAST nextSibling = firstChild.getNextSibling();
-            if (nextSibling.getLineNo() != commentPreviousSibling.getLineNo()) {
+            if (!TokenUtil.areOnSameLine(nextSibling, commentPreviousSibling)) {
                 isDistributed = true;
             }
         }

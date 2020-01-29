@@ -28,7 +28,7 @@
                     final DetailAST lastNode = getLastNode(ast);
                     final DetailAST firstNextNode = CheckUtil.getFirstNode(nextNode);
 
-                    if (firstNextNode.getLineNo() == lastNode.getLineNo()) {
+                    if (TokenUtil.areOnSameLine(firstNextNode, lastNode)) {
                         log(firstNode, MSG_MULTIPLE);
                     }
                 }

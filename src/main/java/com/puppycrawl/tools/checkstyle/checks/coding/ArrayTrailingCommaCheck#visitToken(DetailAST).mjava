@@ -4,8 +4,8 @@
         final DetailAST previousSibling = rcurly.getPreviousSibling();
 
         if (arrayInit.getChildCount() != 1
-                && rcurly.getLineNo() != previousSibling.getLineNo()
-                && arrayInit.getLineNo() != previousSibling.getLineNo()
+                && !TokenUtil.areOnSameLine(rcurly, previousSibling)
+                && !TokenUtil.areOnSameLine(arrayInit, previousSibling)
                 && previousSibling.getType() != TokenTypes.COMMA) {
             log(rcurly.getLineNo(), MSG_KEY);
         }

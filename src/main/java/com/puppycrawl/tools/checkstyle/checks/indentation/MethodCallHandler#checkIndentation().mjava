@@ -17,7 +17,7 @@
             final DetailAST rparen = getMainAst().findFirstToken(TokenTypes.RPAREN);
             checkLeftParen(lparen);
 
-            if (rparen.getLineNo() != lparen.getLineNo()) {
+            if (!TokenUtil.areOnSameLine(rparen, lparen)) {
                 checkExpressionSubtree(
                     getMainAst().findFirstToken(TokenTypes.ELIST),
                     new IndentLevel(getIndent(), getBasicOffset()),

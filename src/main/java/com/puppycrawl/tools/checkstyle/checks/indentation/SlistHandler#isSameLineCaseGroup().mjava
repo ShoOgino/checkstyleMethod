@@ -5,6 +5,6 @@
     private boolean isSameLineCaseGroup() {
         final DetailAST parentNode = getMainAst().getParent();
         return parentNode.getType() == TokenTypes.CASE_GROUP
-            && getMainAst().getLineNo() == parentNode.getLineNo();
+            && TokenUtil.areOnSameLine(getMainAst(), parentNode);
     }
 

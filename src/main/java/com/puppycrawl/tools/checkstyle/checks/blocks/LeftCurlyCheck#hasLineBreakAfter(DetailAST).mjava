@@ -18,6 +18,6 @@
         }
         return nextToken == null
                 || nextToken.getType() == TokenTypes.RCURLY
-                || leftCurly.getLineNo() != nextToken.getLineNo();
+                || !TokenUtil.areOnSameLine(leftCurly, nextToken);
     }
 

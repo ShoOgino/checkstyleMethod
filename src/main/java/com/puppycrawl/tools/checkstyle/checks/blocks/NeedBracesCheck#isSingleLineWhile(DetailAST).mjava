@@ -12,7 +12,7 @@
         boolean result = false;
         if (literalWhile.getParent().getType() == TokenTypes.SLIST) {
             final DetailAST block = literalWhile.getLastChild().getPreviousSibling();
-            result = isOnSameLine(literalWhile, block);
+            result = TokenUtil.areOnSameLine(literalWhile, block);
         }
         return result;
     }

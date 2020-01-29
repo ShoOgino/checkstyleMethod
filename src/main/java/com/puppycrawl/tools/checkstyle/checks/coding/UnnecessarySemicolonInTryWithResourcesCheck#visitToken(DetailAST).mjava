@@ -4,7 +4,7 @@
         final DetailAST tokenBeforeCloseParen = closingParen.getPreviousSibling();
         if (tokenBeforeCloseParen.getType() == TokenTypes.SEMI
             && (!allowWhenNoBraceAfterSemicolon
-                || closingParen.getLineNo() == tokenBeforeCloseParen.getLineNo())) {
+                || TokenUtil.areOnSameLine(closingParen, tokenBeforeCloseParen))) {
             log(tokenBeforeCloseParen, MSG_SEMI);
         }
     }

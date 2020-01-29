@@ -12,7 +12,7 @@
         else {
             final DetailAST lcurly = slist.getLastChild();
             // indentation checked as part of LITERAL IF check
-            if (lcurly.getLineNo() != getMainAst().getLineNo()) {
+            if (!TokenUtil.areOnSameLine(lcurly, getMainAst())) {
                 super.checkTopLevelToken();
             }
         }

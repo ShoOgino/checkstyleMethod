@@ -14,8 +14,8 @@
             final DetailAST doWhileSemi = nextToken.getParent().getLastChild();
             nextToken = Details.getNextToken(doWhileSemi);
         }
-        return rcurly.getLineNo() == lcurly.getLineNo()
-                && (rcurly.getLineNo() != nextToken.getLineNo()
+        return TokenUtil.areOnSameLine(rcurly, lcurly)
+                && (!TokenUtil.areOnSameLine(rcurly, nextToken)
                 || isRightcurlyFollowedBySemicolon(details));
     }
 

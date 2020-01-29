@@ -26,7 +26,7 @@
                     || node.getType() == TokenTypes.AT
                     && (parentNode.getParent().getType() == TokenTypes.MODIFIERS
                         || parentNode.getParent().getType() == TokenTypes.ANNOTATIONS)
-                    || node.getLineNo() == atNode.getLineNo()) {
+                    || TokenUtil.areOnSameLine(node, atNode)) {
                 logWarningMessage(node, firstNodeIndent);
             }
             else {

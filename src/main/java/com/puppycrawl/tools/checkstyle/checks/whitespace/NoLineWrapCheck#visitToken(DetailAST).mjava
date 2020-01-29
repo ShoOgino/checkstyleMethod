@@ -1,6 +1,6 @@
     @Override
     public void visitToken(DetailAST ast) {
-        if (ast.getLineNo() != ast.getLastChild().getLineNo()) {
+        if (!TokenUtil.areOnSameLine(ast, ast.getLastChild())) {
             log(ast.getLineNo(), MSG_KEY, ast.getText());
         }
     }

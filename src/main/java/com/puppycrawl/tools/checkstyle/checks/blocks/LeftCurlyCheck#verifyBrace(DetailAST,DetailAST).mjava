@@ -19,7 +19,7 @@
             else if (option == LeftCurlyOption.EOL) {
                 validateEol(brace, braceLine);
             }
-            else if (startToken.getLineNo() != brace.getLineNo()) {
+            else if (!TokenUtil.areOnSameLine(startToken, brace)) {
                 validateNewLinePosition(brace, startToken, braceLine);
             }
         }

@@ -16,6 +16,6 @@
      */
     private static boolean areMethodsChained(DetailAST ast1, DetailAST ast2) {
         final DetailAST rparen = ast1.findFirstToken(TokenTypes.RPAREN);
-        return rparen.getLineNo() == ast2.getLineNo();
+        return TokenUtil.areOnSameLine(rparen, ast2);
     }
 

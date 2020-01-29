@@ -23,7 +23,7 @@
                         currentToken = currentToken.getNextSibling();
                     }
                 }
-                if (previousSibling.getLineNo() != currentToken.getLineNo()) {
+                if (!TokenUtil.areOnSameLine(previousSibling, currentToken)) {
                     isDistributed = true;
                 }
             }

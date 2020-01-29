@@ -10,7 +10,7 @@
         }
         else {
             final DetailAST prevSibling = ast.getPreviousSibling();
-            multiline = prevSibling.getLineNo() != ast.getLineNo()
+            multiline = !TokenUtil.areOnSameLine(prevSibling, ast)
                     && ast.getParent() != null;
         }
         return multiline;

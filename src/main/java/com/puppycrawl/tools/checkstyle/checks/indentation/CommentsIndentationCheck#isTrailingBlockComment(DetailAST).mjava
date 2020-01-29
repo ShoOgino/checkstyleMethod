@@ -14,6 +14,6 @@
         final int commentColumnNo = blockComment.getColumnNo();
         final DetailAST nextSibling = blockComment.getNextSibling();
         return !CommonUtil.hasWhitespaceBefore(commentColumnNo, commentLine)
-            || nextSibling != null && nextSibling.getLineNo() == blockComment.getLineNo();
+            || nextSibling != null && TokenUtil.areOnSameLine(nextSibling, blockComment);
     }
 
