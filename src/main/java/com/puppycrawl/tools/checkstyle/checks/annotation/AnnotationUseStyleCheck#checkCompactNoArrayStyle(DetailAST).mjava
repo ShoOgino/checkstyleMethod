@@ -7,13 +7,13 @@
         final DetailAST arrayInit =
             annotation.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
 
-        //in compact style with one value
+        // in compact style with one value
         if (arrayInit != null
             && arrayInit.getChildCount(TokenTypes.EXPR) == 1) {
             log(annotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
                 ElementStyle.COMPACT_NO_ARRAY);
         }
-        //in expanded style with pairs
+        // in expanded style with pairs
         else {
             DetailAST ast = annotation.getFirstChild();
             while (ast != null) {

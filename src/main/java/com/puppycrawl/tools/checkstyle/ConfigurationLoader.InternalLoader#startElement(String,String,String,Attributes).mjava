@@ -5,7 +5,7 @@
                                  Attributes attributes)
                 throws SAXException {
             if (qName.equals(MODULE)) {
-                //create configuration
+                // create configuration
                 final String originalName = attributes.getValue(NAME);
                 final String name = threadModeSettings.resolveName(originalName);
                 final DefaultConfiguration conf =
@@ -15,7 +15,7 @@
                     configuration = conf;
                 }
 
-                //add configuration to it's parent
+                // add configuration to it's parent
                 if (!configStack.isEmpty()) {
                     final DefaultConfiguration top =
                         configStack.peek();
@@ -25,7 +25,7 @@
                 configStack.push(conf);
             }
             else if (qName.equals(PROPERTY)) {
-                //extract value and name
+                // extract value and name
                 final String value;
                 try {
                     value = replaceProperties(attributes.getValue(VALUE),
@@ -37,17 +37,17 @@
                 }
                 final String name = attributes.getValue(NAME);
 
-                //add to attributes of configuration
+                // add to attributes of configuration
                 final DefaultConfiguration top =
                     configStack.peek();
                 top.addAttribute(name, value);
             }
             else if (qName.equals(MESSAGE)) {
-                //extract key and value
+                // extract key and value
                 final String key = attributes.getValue(KEY);
                 final String value = attributes.getValue(VALUE);
 
-                //add to messages of configuration
+                // add to messages of configuration
                 final DefaultConfiguration top = configStack.peek();
                 top.addMessage(key, value);
             }

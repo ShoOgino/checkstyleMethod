@@ -6,7 +6,7 @@
     private static boolean isFollowsEmptyForIterator(DetailAST ast) {
         boolean result = false;
         final DetailAST parent = ast.getParent();
-        //Only traditional for statements are examined, not for-each statements
+        // Only traditional for statements are examined, not for-each statements
         if (parent.findFirstToken(TokenTypes.FOR_EACH_CLAUSE) == null) {
             final DetailAST forIterator =
                 parent.findFirstToken(TokenTypes.FOR_ITERATOR);

@@ -1,11 +1,11 @@
     @Override
     public void visitToken(DetailAST ast) {
         if (!ast.hasChildren()) {
-            //empty for iterator. test pad after semi.
+            // empty for iterator. test pad after semi.
             final DetailAST semi = ast.getPreviousSibling();
             final String line = getLines()[semi.getLineNo() - 1];
             final int after = semi.getColumnNo() + 1;
-            //don't check if at end of line
+            // don't check if at end of line
             if (after < line.length()) {
                 if (option == PadOption.NOSPACE
                     && Character.isWhitespace(line.charAt(after))) {

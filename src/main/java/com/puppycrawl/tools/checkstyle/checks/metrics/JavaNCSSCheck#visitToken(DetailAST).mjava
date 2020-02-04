@@ -7,13 +7,13 @@
             || tokenType == TokenTypes.CTOR_DEF
             || tokenType == TokenTypes.STATIC_INIT
             || tokenType == TokenTypes.INSTANCE_INIT) {
-            //add a counter for this class/method
+            // add a counter for this class/method
             counters.push(new Counter());
         }
 
-        //check if token is countable
+        // check if token is countable
         if (isCountable(ast)) {
-            //increment the stacked counters
+            // increment the stacked counters
             counters.forEach(Counter::increment);
         }
     }
