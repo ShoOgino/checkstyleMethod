@@ -1,0 +1,12 @@
+    /**
+     * Checks if generic is before constructor invocation.
+     * @param ast ast
+     * @return true if generic before a constructor invocation
+     */
+    private static boolean isGenericBeforeCtor(DetailAST ast) {
+        final DetailAST parent = ast.getParent();
+        return parent.getParent().getType() == TokenTypes.LITERAL_NEW
+                && (parent.getNextSibling().getType() == TokenTypes.IDENT
+                    || parent.getNextSibling().getType() == TokenTypes.DOT);
+    }
+

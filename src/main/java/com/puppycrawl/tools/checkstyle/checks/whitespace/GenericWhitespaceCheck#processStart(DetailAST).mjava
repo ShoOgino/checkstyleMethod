@@ -18,7 +18,8 @@
             final DetailAST parent = ast.getParent();
             final DetailAST grandparent = parent.getParent();
             if (grandparent.getType() == TokenTypes.CTOR_DEF
-                    || grandparent.getType() == TokenTypes.METHOD_DEF) {
+                    || grandparent.getType() == TokenTypes.METHOD_DEF
+                    || isGenericBeforeCtor(ast)) {
                 // Require whitespace
                 if (!Character.isWhitespace(line.charAt(before))) {
                     log(ast, MSG_WS_NOT_PRECEDED, OPEN_ANGLE_BRACKET);
