@@ -1,0 +1,20 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionEmptyCatchBlock1.java"));
+
+        final DefaultConfiguration moduleConfig = createModuleConfig(clazz);
+
+        final String[] expectedViolation = {
+            "8:38: " + getCheckMessage(clazz, EmptyCatchBlockCheck.MSG_KEY_CATCH_BLOCK_EMPTY),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionEmptyCatchBlock1']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='main']]"
+                + "/SLIST/LITERAL_TRY/LITERAL_CATCH/SLIST"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
