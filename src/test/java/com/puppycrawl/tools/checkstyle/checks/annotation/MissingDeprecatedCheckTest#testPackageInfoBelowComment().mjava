@@ -1,0 +1,9 @@
+    @Test
+    public void testPackageInfoBelowComment() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(MissingDeprecatedCheck.class);
+
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig, getPath("InputMissingDeprecatedSingleComment.java"), expected);
+    }
+
