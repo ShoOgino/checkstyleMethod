@@ -12,10 +12,7 @@
 
         while (true) {
             final int type = result.getType();
-            if (type == TokenTypes.TYPE || type == TokenTypes.MODIFIERS
-                    || type == TokenTypes.ANNOTATION || type == TokenTypes.ANNOTATIONS
-                    || type == TokenTypes.ARRAY_DECLARATOR || type == TokenTypes.TYPE_PARAMETERS
-                    || type == TokenTypes.DOT) {
+            if (TYPES_HASH_SET.contains(type)) {
                 result = result.getParent();
             }
             else {
