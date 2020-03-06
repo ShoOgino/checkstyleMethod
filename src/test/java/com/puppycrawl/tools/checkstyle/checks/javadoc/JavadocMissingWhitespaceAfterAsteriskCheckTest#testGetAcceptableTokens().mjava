@@ -1,0 +1,12 @@
+    @Test
+    public void testGetAcceptableTokens() {
+        final JavadocMissingWhitespaceAfterAsteriskCheck checkObj =
+                new JavadocMissingWhitespaceAfterAsteriskCheck();
+        final int[] expected = {
+            JavadocTokenTypes.JAVADOC,
+            JavadocTokenTypes.LEADING_ASTERISK,
+        };
+        assertArrayEquals(expected, checkObj.getAcceptableJavadocTokens(),
+                "Default tokens are invalid");
+    }
+
