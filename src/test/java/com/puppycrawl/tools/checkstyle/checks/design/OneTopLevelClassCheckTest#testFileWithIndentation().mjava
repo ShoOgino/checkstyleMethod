@@ -1,0 +1,12 @@
+    @Test
+    public void testFileWithIndentation() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(OneTopLevelClassCheck.class);
+        final String[] expected = {
+            "7:2: " + getCheckMessage(MSG_KEY, "ViolatingIndentedClass1"),
+            "11:5: " + getCheckMessage(MSG_KEY, "ViolatingIndentedClass2"),
+            "15:1: " + getCheckMessage(MSG_KEY, "ViolatingNonIndentedInterface"),
+        };
+        verify(checkConfig, getPath("InputOneTopLevelClassIndentation.java"), expected);
+    }
+

@@ -1,0 +1,10 @@
+    @Test
+    public void testFileWithMultipleSameLine() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(OneTopLevelClassCheck.class);
+        final String[] expected = {
+            "3:47: " + getCheckMessage(MSG_KEY, "ViolatingSecondType"),
+        };
+        verify(checkConfig, getPath("InputOneTopLevelClassSameLine.java"), expected);
+    }
+
