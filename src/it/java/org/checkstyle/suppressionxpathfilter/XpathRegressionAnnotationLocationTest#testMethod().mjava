@@ -1,0 +1,33 @@
+    @Test
+    public void testMethod() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationLocationMethod.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationLocationCheck.class);
+        moduleConfig.addAttribute("tokens", "METHOD_DEF");
+
+        final String[] expectedViolation = {
+            "4:6: " + getCheckMessage(AnnotationLocationCheck.class,
+                    AnnotationLocationCheck.MSG_KEY_ANNOTATION_LOCATION_ALONE,
+                    "MethodAnnotation"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationMethod']]/"
+                        + "OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationMethod']]/"
+                        + "OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationMethod']]/"
+                        + "OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]/MODIFIERS/"
+                        + "ANNOTATION[./IDENT[@text='MethodAnnotation']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationMethod']]/"
+                        + "OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]/MODIFIERS/"
+                        + "ANNOTATION[./IDENT[@text='MethodAnnotation']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+
+    }
+

@@ -1,0 +1,29 @@
+    @Test
+    public void testInterface() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationLocationInterface.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationLocationCheck.class);
+
+        final String[] expectedViolation = {
+            "7:1: " + getCheckMessage(AnnotationLocationCheck.class,
+             AnnotationLocationCheck.MSG_KEY_ANNOTATION_LOCATION_ALONE,
+                    "InterfaceAnnotation"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/INTERFACE_DEF[./IDENT[@text='SuppressionXpathRegression"
+                    + "AnnotationLocationInterface']]",
+            "/INTERFACE_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationInterface'"
+                        + "]]/MODIFIERS",
+            "/INTERFACE_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationInterface']]"
+                    + "/MODIFIERS/ANNOTATION[./IDENT[@text='InterfaceAnnotation']]",
+            "/INTERFACE_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationInterface']]"
+                    + "/MODIFIERS/ANNOTATION[./IDENT[@text='InterfaceAnnotation']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

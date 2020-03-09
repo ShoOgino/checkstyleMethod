@@ -1,0 +1,41 @@
+    @Test
+    public void testConstructor() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationLocationCTOR.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationLocationCheck.class);
+        moduleConfig.addAttribute("tokens", "CTOR_DEF");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(AnnotationLocationCheck.class,
+                    AnnotationLocationCheck.MSG_KEY_ANNOTATION_LOCATION_ALONE,
+                    "CTORAnnotation"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]/OBJBLOCK/CTOR_DEF"
+                        + "[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]/OBJBLOCK/CTOR_DEF"
+                        + "[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]/OBJBLOCK/CTOR_DEF"
+                        + "[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]/"
+                        + "MODIFIERS/ANNOTATION[./IDENT[@text='CTORAnnotation']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]/OBJBLOCK/CTOR_DEF"
+                        + "[./IDENT[@text='SuppressionXpathRegression"
+                        + "AnnotationLocationCTOR']]/"
+                        + "MODIFIERS/ANNOTATION[./IDENT[@text='CTORAnnotation']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+
+    }
+

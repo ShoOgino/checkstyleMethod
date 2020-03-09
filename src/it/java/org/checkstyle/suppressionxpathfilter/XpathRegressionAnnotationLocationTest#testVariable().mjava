@@ -1,0 +1,33 @@
+    @Test
+    public void testVariable() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationLocationVariable.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationLocationCheck.class);
+        moduleConfig.addAttribute("tokens", "VARIABLE_DEF");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(AnnotationLocationCheck.class,
+                    AnnotationLocationCheck.MSG_KEY_ANNOTATION_LOCATION_ALONE,
+                    "VariableAnnotation"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationVariable']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='b']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationVariable']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='b']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationVariable']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='b']]/MODIFIERS/"
+                        + "ANNOTATION[./IDENT[@text='VariableAnnotation']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationVariable']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='b']]/MODIFIERS/"
+                        + "ANNOTATION[./IDENT[@text='VariableAnnotation']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+
+    }
+

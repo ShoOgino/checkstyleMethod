@@ -1,0 +1,27 @@
+    @Test
+    public void testClass() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationLocationClass.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationLocationCheck.class);
+
+        final String[] expectedViolation = {
+            "6:1: " + getCheckMessage(AnnotationLocationCheck.class,
+                    AnnotationLocationCheck.MSG_KEY_ANNOTATION_LOCATION_ALONE, "ClassAnnotation"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationClass']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationClass']]"
+                        + "/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationClass']]/"
+                        + "MODIFIERS/ANNOTATION[./IDENT[@text='ClassAnnotation']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationLocationClass']]/"
+                        + "MODIFIERS/ANNOTATION[./IDENT[@text='ClassAnnotation']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
