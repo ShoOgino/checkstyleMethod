@@ -1,0 +1,31 @@
+    @Test
+    public void testInheritDocInvalid2() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionMissingOverrideInheritDocInvalid2.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MissingOverrideCheck.class);
+
+        final String[] expectedViolation = {
+            "7:5: " + getCheckMessage(MissingOverrideCheck.class,
+                MissingOverrideCheck.MSG_KEY_TAG_NOT_VALID_ON, "{@inheritDoc}"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT"
+                        + "[@text='SuppressionXpathRegressionMissingOverrideInheritDocInvalid2']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]",
+                "/CLASS_DEF[./IDENT"
+                        + "[@text='SuppressionXpathRegressionMissingOverrideInheritDocInvalid2']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT"
+                        + "[@text='SuppressionXpathRegressionMissingOverrideInheritDocInvalid2']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS/LITERAL_PUBLIC"
+
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+
+    }
+

@@ -1,0 +1,35 @@
+    @Test
+    public void testAnonymous() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionMissingOverrideAnonymous.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MissingOverrideCheck.class);
+
+        final String[] expectedViolation = {
+            "8:9: " + getCheckMessage(MissingOverrideCheck.class,
+                MissingOverrideCheck.MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT"
+                        + "[@text='SuppressionXpathRegressionMissingOverrideAnonymous']]"
+                        + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='r']]/ASSIGN/EXPR/"
+                        + "LITERAL_NEW[./IDENT[@text='Runnable']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='run']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingOverrideAnonymous']]"
+                        + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='r']]/ASSIGN/EXPR/"
+                        + "LITERAL_NEW[./IDENT[@text='Runnable']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='run']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingOverrideAnonymous']]"
+                        + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='r']]/ASSIGN/EXPR/"
+                        + "LITERAL_NEW[./IDENT[@text='Runnable']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='run']]/MODIFIERS/LITERAL_PUBLIC"
+
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+
+    }
+

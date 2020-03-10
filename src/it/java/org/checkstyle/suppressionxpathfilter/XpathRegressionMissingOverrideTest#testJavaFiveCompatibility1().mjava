@@ -1,0 +1,29 @@
+    @Test
+    public void testJavaFiveCompatibility1() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionMissingOverrideClass.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MissingOverrideCheck.class);
+        moduleConfig.addAttribute("javaFiveCompatibility", "true");
+
+        final String[] expectedViolation = {
+            "7:5: " + getCheckMessage(MissingOverrideCheck.class,
+                    MissingOverrideCheck.MSG_KEY_ANNOTATION_MISSING_OVERRIDE),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingOverrideClass']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='equals']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingOverrideClass']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='equals']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingOverrideClass']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='equals']]/MODIFIERS/LITERAL_PUBLIC"
+
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+
+    }
+
