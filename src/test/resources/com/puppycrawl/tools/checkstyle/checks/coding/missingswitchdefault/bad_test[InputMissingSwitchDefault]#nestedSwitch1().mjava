@@ -1,0 +1,13 @@
+    public void nestedSwitch1() {
+        int i = 1;
+        switch (i) {
+            case 1: i++; break;
+            case 2: i--; break;
+            default:
+                switch (i++) { // violation
+                    case 2: i++; break;
+                    case 3: i--; break;
+            }
+        }
+    }
+
