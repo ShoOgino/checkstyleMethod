@@ -1,0 +1,11 @@
+    /**
+     * Checks if an AST node is a type definition.
+     * @param node AST node to check.
+     * @return true if the node is a type (class, enum, interface) definition.
+     */
+    private static boolean isTypeDef(DetailAST node) {
+        return node.getType() == TokenTypes.CLASS_DEF
+                || node.getType() == TokenTypes.ENUM_DEF
+                || node.getType() == TokenTypes.INTERFACE_DEF;
+    }
+

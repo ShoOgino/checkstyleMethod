@@ -1,23 +1,34 @@
     @Override
     public void beginTree(DetailAST rootAST) {
-        publicTypeFound = false;
-        lineNumberTypeMap.clear();
-
         DetailAST currentNode = rootAST;
+        boolean publicTypeFound = false;
+        DetailAST firstType = null;
+
         while (currentNode != null) {
-            if (currentNode.getType() == TokenTypes.CLASS_DEF
-                    || currentNode.getType() == TokenTypes.ENUM_DEF
-                    || currentNode.getType() == TokenTypes.INTERFACE_DEF) {
+            if (isTypeDef(currentNode)) {
                 if (isPublic(currentNode)) {
+                    // log the first type later
                     publicTypeFound = true;
                 }
-                else {
+                if (firstType == null) {
+                    // first type is set aside
+                    firstType = currentNode;
+                }
+                else if (!isPublic(currentNode)) {
+                    // extra non-public type, log immediately
                     final String typeName = currentNode
-                            .findFirstToken(TokenTypes.IDENT).getText();
-                    lineNumberTypeMap.put(currentNode, typeName);
+                        .findFirstToken(TokenTypes.IDENT).getText();
+                    log(currentNode, MSG_KEY, typeName);
                 }
             }
             currentNode = currentNode.getNextSibling();
+        }
+
+        // if there was a public type and first type is non-public, log it
+        if (publicTypeFound && !isPublic(firstType)) {
+            final String typeName = firstType
+                .findFirstToken(TokenTypes.IDENT).getText();
+            log(firstType, MSG_KEY, typeName);
         }
     }
 
