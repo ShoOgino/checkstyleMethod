@@ -1,0 +1,16 @@
+    @Test
+    public void testMissingCtorClassOnOneLine() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MissingCtorCheck.class);
+
+        final String[] expected = {
+            "3:1: " + getCheckMessage(MSG_KEY),
+            "3:34: " + getCheckMessage(MSG_KEY),
+            "3:49: " + getCheckMessage(MSG_KEY),
+        };
+
+        verify(checkConfig,
+                getPath("InputMissingCtor2.java"),
+                expected);
+    }
+
