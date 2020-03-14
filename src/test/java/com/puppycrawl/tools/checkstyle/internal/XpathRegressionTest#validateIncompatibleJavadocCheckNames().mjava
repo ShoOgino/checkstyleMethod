@@ -1,9 +1,12 @@
     @Test
     public void validateIncompatibleJavadocCheckNames() throws IOException {
+        // subclasses of AbstractJavadocCheck
         final Set<Class<?>> abstractJavadocCheckNames = CheckUtil.getCheckstyleChecks()
                 .stream()
                 .filter(AbstractJavadocCheck.class::isAssignableFrom)
                 .collect(Collectors.toSet());
+        // add the extra checks
+        abstractJavadocCheckNames.addAll(REGEXP_JAVADOC_CHECKS);
         assertWithMessage("INCOMPATIBLE_JAVADOC_CHECK_NAMES should contains all descendants "
                     + "of AbstractJavadocCheck")
             .that(CheckUtil.getSimpleNames(abstractJavadocCheckNames))
