@@ -1,0 +1,20 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(getPath(
+            "SuppressionXpathRegressionAvoidStaticImport2.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(CLASS);
+
+        final String[] expectedViolation = {
+            "3:27: " + getCheckMessage(CLASS,
+                AvoidStaticImportCheck.MSG_KEY, "java.io.File.createTempFile"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/STATIC_IMPORT/DOT[./IDENT[@text='createTempFile']]"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
