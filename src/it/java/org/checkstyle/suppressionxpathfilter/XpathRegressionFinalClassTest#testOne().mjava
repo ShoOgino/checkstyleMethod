@@ -1,0 +1,26 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionFinalClass1.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(FinalClassCheck.class);
+
+        final String[] expectedViolation = {
+            "3:1: " + getCheckMessage(FinalClassCheck.class,
+                    FinalClassCheck.MSG_KEY, "SuppressionXpathRegressionFinalClass1"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT["
+                        + "@text='SuppressionXpathRegressionFinalClass1']]",
+                "/CLASS_DEF[./IDENT["
+                        + "@text='SuppressionXpathRegressionFinalClass1']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT["
+                        + "@text='SuppressionXpathRegressionFinalClass1']]/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
