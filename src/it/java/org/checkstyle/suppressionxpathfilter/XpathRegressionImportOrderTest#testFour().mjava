@@ -1,0 +1,22 @@
+    @Test
+    public void testFour() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionImportOrderFour.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(ImportOrderCheck.class);
+        moduleConfig.addAttribute("option", "inflow");
+
+        final String[] expectedViolation = {
+            "5:1: " + getCheckMessage(ImportOrderCheck.class,
+                        ImportOrderCheck.MSG_ORDERING, "java.lang.Math.PI"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/STATIC_IMPORT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

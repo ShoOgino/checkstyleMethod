@@ -1,7 +1,6 @@
     // -@cs[CyclomaticComplexity] SWITCH was transformed into IF-ELSE.
     @Override
     public void visitToken(DetailAST ast) {
-        final int line = ast.getLineNo();
         final FullIdent ident;
         final boolean isStatic;
 
@@ -19,15 +18,15 @@
         // https://github.com/checkstyle/checkstyle/issues/1387
         if (option == ImportOrderOption.TOP || option == ImportOrderOption.ABOVE) {
             final boolean isStaticAndNotLastImport = isStatic && !lastImportStatic;
-            doVisitToken(ident, isStatic, isStaticAndNotLastImport, line);
+            doVisitToken(ident, isStatic, isStaticAndNotLastImport, ast);
         }
         else if (option == ImportOrderOption.BOTTOM || option == ImportOrderOption.UNDER) {
             final boolean isLastImportAndNonStatic = lastImportStatic && !isStatic;
-            doVisitToken(ident, isStatic, isLastImportAndNonStatic, line);
+            doVisitToken(ident, isStatic, isLastImportAndNonStatic, ast);
         }
         else if (option == ImportOrderOption.INFLOW) {
             // "previous" argument is useless here
-            doVisitToken(ident, isStatic, true, line);
+            doVisitToken(ident, isStatic, true, ast);
         }
         else {
             throw new IllegalStateException(

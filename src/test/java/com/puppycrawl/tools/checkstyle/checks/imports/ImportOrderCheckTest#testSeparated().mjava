@@ -5,9 +5,9 @@
         checkConfig.addAttribute("separated", "true");
         checkConfig.addAttribute("ordered", "false");
         final String[] expected = {
-            "9: " + getCheckMessage(MSG_SEPARATION, "javax.swing.JComponent"),
-            "11: " + getCheckMessage(MSG_SEPARATION, "java.io.File"),
-            "16: " + getCheckMessage(MSG_ORDERING, "javax.swing.WindowConstants.*"),
+            "9:1: " + getCheckMessage(MSG_SEPARATION, "javax.swing.JComponent"),
+            "11:1: " + getCheckMessage(MSG_SEPARATION, "java.io.File"),
+            "16:1: " + getCheckMessage(MSG_ORDERING, "javax.swing.WindowConstants.*"),
         };
 
         verify(checkConfig, getNonCompilablePath("InputImportOrder.java"), expected);

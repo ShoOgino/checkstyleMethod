@@ -5,9 +5,9 @@
         checkConfig.addAttribute("option", "top");
         checkConfig.addAttribute("groups", "org, java");
         final String[] expected = {
-            "6: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "org.*"),
-            "8: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.util.Set"),
-            "9: " + getCheckMessage(MSG_ORDERING, "org.junit.Test"),
+            "6:1: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "org.*"),
+            "8:1: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.util.Set"),
+            "9:1: " + getCheckMessage(MSG_ORDERING, "org.junit.Test"),
         };
         verify(checkConfig, getPath("InputImportOrderStaticOnDemandGroupOrder.java"), expected);
     }

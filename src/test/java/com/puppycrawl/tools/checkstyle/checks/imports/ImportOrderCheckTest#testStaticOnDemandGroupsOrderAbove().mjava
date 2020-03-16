@@ -6,10 +6,10 @@
         checkConfig.addAttribute("groups", "org, java");
         checkConfig.addAttribute("sortStaticImportsAlphabetically", "true");
         final String[] expected = {
-            "5: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.util.Set"),
-            "7: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.lang.Math.*"),
-            "7: " + getCheckMessage(MSG_ORDERING, "java.lang.Math.*"),
-            "8: " + getCheckMessage(MSG_ORDERING, "org.antlr.v4.runtime.CommonToken.*"),
+            "5:1: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.util.Set"),
+            "7:1: " + getCheckMessage(MSG_SEPARATED_IN_GROUP, "java.lang.Math.*"),
+            "7:1: " + getCheckMessage(MSG_ORDERING, "java.lang.Math.*"),
+            "8:1: " + getCheckMessage(MSG_ORDERING, "org.antlr.v4.runtime.CommonToken.*"),
         };
         verify(checkConfig, getPath("InputImportOrderStaticOnDemandGroupOrderBottom.java"),
             expected);

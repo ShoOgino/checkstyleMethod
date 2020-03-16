@@ -7,10 +7,10 @@
         checkConfig.addAttribute("option", "top");
         checkConfig.addAttribute("sortStaticImportsAlphabetically", "true");
         final String[] expected = {
-            "4: " + getCheckMessage(MSG_ORDERING,
+            "4:1: " + getCheckMessage(MSG_ORDERING,
                 "javax.xml.transform.TransformerFactory.newInstance"),
-            "5: " + getCheckMessage(MSG_ORDERING, "java.lang.Math.cos"),
-            "6: " + getCheckMessage(MSG_ORDERING, "java.lang.Math.abs"),
+            "5:1: " + getCheckMessage(MSG_ORDERING, "java.lang.Math.cos"),
+            "6:1: " + getCheckMessage(MSG_ORDERING, "java.lang.Math.abs"),
         };
 
         verify(checkConfig, getPath("InputImportOrderSortStaticImportsAlphabetically.java"),

@@ -5,25 +5,27 @@
      * @param isStatic whether the token is static or not.
      * @param previous previous non-static but current is static (above), or
      *                  previous static but current is non-static (under).
-     * @param line the line of the current import.
+     * @param ast node of the AST.
      */
-    private void doVisitToken(FullIdent ident, boolean isStatic, boolean previous, int line) {
+    private void doVisitToken(FullIdent ident, boolean isStatic, boolean previous, DetailAST ast) {
         final String name = ident.getText();
         final int groupIdx = getGroupNumber(isStatic && staticImportsApart, name);
 
         if (groupIdx > lastGroup) {
-            if (!beforeFirstImport && line - lastImportLine < 2 && needSeparator(isStatic)) {
-                log(line, MSG_SEPARATION, name);
+            if (!beforeFirstImport
+                && ast.getLineNo() - lastImportLine < 2
+                && needSeparator(isStatic)) {
+                log(ast, MSG_SEPARATION, name);
             }
         }
         else if (groupIdx == lastGroup) {
-            doVisitTokenInSameGroup(isStatic, previous, name, line);
+            doVisitTokenInSameGroup(isStatic, previous, name, ast);
         }
         else {
-            log(line, MSG_ORDERING, name);
+            log(ast, MSG_ORDERING, name);
         }
-        if (isSeparatorInGroup(groupIdx, isStatic, line)) {
-            log(line, MSG_SEPARATED_IN_GROUP, name);
+        if (isSeparatorInGroup(groupIdx, isStatic, ast.getLineNo())) {
+            log(ast, MSG_SEPARATED_IN_GROUP, name);
         }
 
         lastGroup = groupIdx;
