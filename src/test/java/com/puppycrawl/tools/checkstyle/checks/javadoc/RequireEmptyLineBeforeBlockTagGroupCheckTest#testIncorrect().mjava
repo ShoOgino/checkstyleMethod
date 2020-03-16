@@ -1,0 +1,15 @@
+    @Test
+    public void testIncorrect() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RequireEmptyLineBeforeBlockTagGroupCheck.class);
+        final String[] expected = {
+            "8: " + getCheckMessage(MSG_JAVADOC_TAG_LINE_BEFORE, "@since"),
+            "14: " + getCheckMessage(MSG_JAVADOC_TAG_LINE_BEFORE, "@param"),
+            "22: " + getCheckMessage(MSG_JAVADOC_TAG_LINE_BEFORE, "@param"),
+            "29: " + getCheckMessage(MSG_JAVADOC_TAG_LINE_BEFORE, "@return"),
+        };
+        verify(checkConfig,
+                getPath("InputRequireEmptyLineBeforeBlockTagGroupIncorrect.java"),
+                expected);
+    }
+

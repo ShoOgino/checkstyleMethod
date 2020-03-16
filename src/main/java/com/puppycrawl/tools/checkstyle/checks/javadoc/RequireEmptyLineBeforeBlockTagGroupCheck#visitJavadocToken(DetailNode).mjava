@@ -1,0 +1,18 @@
+    /**
+     * Logs when there is no empty line before the tag.
+     *
+     * @param tagNode the at tag node to check for an empty space before it.
+     */
+    @Override
+    public void visitJavadocToken(DetailNode tagNode) {
+        // No need to filter token because overridden getDefaultJavadocTokens ensures that we only
+        // receive JAVADOC_TAG DetailNode.
+        if (!isAnotherTagBefore(tagNode)
+                && !isOnlyTagInWholeJavadoc(tagNode)
+                && hasInsufficientConsecutiveNewlines(tagNode)) {
+            log(tagNode.getLineNumber(),
+                    MSG_JAVADOC_TAG_LINE_BEFORE,
+                    tagNode.getChildren()[0].getText());
+        }
+    }
+

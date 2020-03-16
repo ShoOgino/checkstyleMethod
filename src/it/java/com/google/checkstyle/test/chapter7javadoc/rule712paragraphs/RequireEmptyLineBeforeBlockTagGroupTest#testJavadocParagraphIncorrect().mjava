@@ -1,0 +1,17 @@
+    @Test
+    public void testJavadocParagraphIncorrect() throws Exception {
+        final String[] expected = {
+            "5: " + getTagCheckMessage("@since"),
+            "11: " + getTagCheckMessage("@param"),
+            "19: " + getTagCheckMessage("@param"),
+        };
+
+        final Configuration checkConfig = getModuleConfig(
+                "RequireEmptyLineBeforeBlockTagGroup");
+        final String filePath = getPath(
+                "InputIncorrectRequireEmptyLineBeforeBlockTagGroupCheck.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

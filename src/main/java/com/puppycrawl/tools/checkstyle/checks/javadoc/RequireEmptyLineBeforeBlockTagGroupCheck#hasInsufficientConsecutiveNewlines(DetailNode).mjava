@@ -1,0 +1,27 @@
+    /**
+     * Returns true when there are not enough empty lines before the provided tagNode.
+     *
+     * <p>Iterates through the previous siblings of the tagNode looking for empty lines until
+     * there are no more siblings or it hits something other than asterisk, whitespace or newline.
+     * If it finds at least one empty line, return true. Return false otherwise.</p>
+     *
+     * @param tagNode the tagNode to check if there are sufficient empty lines before it.
+     * @return true if there are not enough empty lines before the tagNode.
+     */
+    private static boolean hasInsufficientConsecutiveNewlines(DetailNode tagNode) {
+        int count = 0;
+        DetailNode currentNode = JavadocUtil.getPreviousSibling(tagNode);
+        while (count <= 1
+                && currentNode != null
+                && (currentNode.getType() == JavadocTokenTypes.NEWLINE
+                    || currentNode.getType() == JavadocTokenTypes.WS
+                    || currentNode.getType() == JavadocTokenTypes.LEADING_ASTERISK)) {
+            if (currentNode.getType() == JavadocTokenTypes.NEWLINE) {
+                count++;
+            }
+            currentNode = JavadocUtil.getPreviousSibling(currentNode);
+        }
+
+        return count <= 1;
+    }
+

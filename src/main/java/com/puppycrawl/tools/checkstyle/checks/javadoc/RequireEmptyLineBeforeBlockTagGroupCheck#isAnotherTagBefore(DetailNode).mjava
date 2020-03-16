@@ -1,0 +1,19 @@
+    /**
+     * Returns true when there is a javadoc tag before the provided tagNode.
+     *
+     * @param tagNode the javadoc tag node, to look for more tags before it.
+     * @return true when there is a javadoc tag before the provided tagNode.
+     */
+    private static boolean isAnotherTagBefore(DetailNode tagNode) {
+        boolean found = false;
+        DetailNode currentNode = JavadocUtil.getPreviousSibling(tagNode);
+        while (currentNode != null) {
+            if (currentNode.getType() == JavadocTokenTypes.JAVADOC_TAG) {
+                found = true;
+                break;
+            }
+            currentNode = JavadocUtil.getPreviousSibling(currentNode);
+        }
+        return found;
+    }
+

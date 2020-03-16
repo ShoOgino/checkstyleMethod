@@ -1,0 +1,44 @@
+    /**
+     * Returns true when there are is only whitespace and asterisks before the provided tagNode.
+     * When javadoc has only a javadoc tag like {@literal @} in it, the JAVADOC_TAG in a JAVADOC
+     * detail node will always have 2 or 3 siblings before it. The parse tree looks like:
+     * <pre>
+     * JAVADOC[3x0]
+     * |--NEWLINE[3x0] : [\n]
+     * |--LEADING_ASTERISK[4x0] : [ *]
+     * |--WS[4x2] : [ ]
+     * |--JAVADOC_TAG[4x3] : [@param T The bar.\n ]
+     * </pre>
+     * Or it can also look like:
+     * <pre>
+     * JAVADOC[3x0]
+     * |--NEWLINE[3x0] : [\n]
+     * |--LEADING_ASTERISK[4x0] : [ *]
+     * |--JAVADOC_TAG[4x3] : [@param T The bar.\n ]
+     * </pre>
+     * We do not include the variation
+     * <pre>
+     *  /**&#64;param noSpace there is no space here
+     * </pre>
+     * which results in the tree
+     * <pre>
+     * JAVADOC[3x0]
+     * |--JAVADOC_TAG[4x3] : [@param noSpace there is no space here\n ]
+     * </pre>
+     * because this one is invalid. We must recommend placing a blank line to separate &#64;param
+     * from the first javadoc asterisks.
+     *
+     * @param tagNode the at tag node to check if there is nothing before it.
+     * @return true if there no text before the tagNode.
+     */
+    private static boolean isOnlyTagInWholeJavadoc(DetailNode tagNode) {
+        final List<Integer> previousNodeTypes = new ArrayList<>();
+        DetailNode currentNode = JavadocUtil.getPreviousSibling(tagNode);
+        while (currentNode != null) {
+            previousNodeTypes.add(currentNode.getType());
+            currentNode = JavadocUtil.getPreviousSibling(currentNode);
+        }
+        return ONLY_TAG_VARIATION_1.equals(previousNodeTypes)
+                || ONLY_TAG_VARIATION_2.equals(previousNodeTypes);
+    }
+

@@ -1,0 +1,13 @@
+    @Test
+    public void testJavadocParagraphCorrect() throws Exception {
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        final Configuration checkConfig = getModuleConfig(
+                "RequireEmptyLineBeforeBlockTagGroup");
+        final String filePath = getPath(
+                "InputCorrectRequireEmptyLineBeforeBlockTagGroupCheck.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
