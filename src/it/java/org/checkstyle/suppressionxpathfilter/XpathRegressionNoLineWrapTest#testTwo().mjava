@@ -1,0 +1,32 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionNoLineWrap2.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(NoLineWrapCheck.class);
+        moduleConfig.addAttribute("tokens", "METHOD_DEF");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(NoLineWrapCheck.class,
+                    NoLineWrapCheck.MSG_KEY, "METHOD_DEF"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionNoLineWrap2']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test2']]",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionNoLineWrap2']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test2']]"
+                    + "/MODIFIERS",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionNoLineWrap2']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test2']]"
+                    + "/MODIFIERS/LITERAL_PUBLIC"
+
+                );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

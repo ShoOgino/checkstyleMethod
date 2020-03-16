@@ -1,0 +1,21 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionNoLineWrap1.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(NoLineWrapCheck.class);
+
+        final String[] expectedViolation = {
+            "1:1: " + getCheckMessage(NoLineWrapCheck.class,
+                    NoLineWrapCheck.MSG_KEY, "package"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/PACKAGE_DEF"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
