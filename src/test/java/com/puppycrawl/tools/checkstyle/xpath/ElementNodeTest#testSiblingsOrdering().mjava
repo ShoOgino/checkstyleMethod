@@ -1,0 +1,20 @@
+    @Test
+    public void testSiblingsOrdering() {
+        final DetailAstImpl detailAst1 = new DetailAstImpl();
+        detailAst1.setType(TokenTypes.VARIABLE_DEF);
+
+        final DetailAstImpl detailAst2 = new DetailAstImpl();
+        detailAst2.setType(TokenTypes.NUM_INT);
+
+        final DetailAstImpl parentAST = new DetailAstImpl();
+        parentAST.setType(TokenTypes.METHOD_DEF);
+        parentAST.addChild(detailAst1);
+        parentAST.addChild(detailAst2);
+
+        final AbstractNode parentNode = new ElementNode(rootNode, rootNode, parentAST);
+        final List<AbstractNode> children = parentNode.getChildren();
+
+        assertEquals(-1, children.get(0).compareOrder(children.get(1)), "Incorrect ordering value");
+        assertEquals(1, children.get(1).compareOrder(children.get(0)), "Incorrect ordering value");
+    }
+

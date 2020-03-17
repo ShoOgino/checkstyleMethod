@@ -1,0 +1,22 @@
+    @Test
+    public void testNodeOrdering() throws Exception {
+        final String xpath = "//METHOD_DEF/SLIST/*";
+        final RootNode rootNode = getRootNode("InputXpathMapperAst.java");
+        final List<NodeInfo> nodes = getXpathItems(xpath, rootNode);
+        for (int i = 1; i < nodes.size(); i++) {
+            final NodeInfo curr = nodes.get(i);
+            final NodeInfo prev = nodes.get(i - 1);
+
+            if (curr.getLineNumber() == prev.getLineNumber()) {
+                assertWithMessage("Column number is not in document order")
+                    .that(curr.getColumnNumber())
+                    .isGreaterThan(prev.getColumnNumber());
+            }
+            else {
+                assertWithMessage("Line number is not in document order")
+                    .that(curr.getLineNumber())
+                    .isGreaterThan(prev.getLineNumber());
+            }
+        }
+    }
+

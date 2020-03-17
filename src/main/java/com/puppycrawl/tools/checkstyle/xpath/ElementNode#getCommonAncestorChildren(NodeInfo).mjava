@@ -1,0 +1,16 @@
+    /**
+     * Finds the ancestors of the children whose parent is their common ancestor.
+     * @param other another {@code NodeInfo} object
+     * @return {@code ElementNode} immediate children(also ancestors of the given children) of the
+     *         common ancestor
+     */
+    private ElementNode[] getCommonAncestorChildren(NodeInfo other) {
+        NodeInfo child1 = this;
+        NodeInfo child2 = other;
+        while (!child1.getParent().equals(child2.getParent())) {
+            child1 = child1.getParent();
+            child2 = child2.getParent();
+        }
+        return new ElementNode[] {(ElementNode) child1, (ElementNode) child2};
+    }
+

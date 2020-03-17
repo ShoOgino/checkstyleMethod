@@ -1,0 +1,15 @@
+    @Test
+    public void testParentChildOrdering() {
+        final DetailAstImpl detailAST = new DetailAstImpl();
+        detailAST.setType(TokenTypes.VARIABLE_DEF);
+
+        final DetailAstImpl parentAST = new DetailAstImpl();
+        parentAST.setFirstChild(detailAST);
+        parentAST.setType(TokenTypes.METHOD_DEF);
+
+        final AbstractNode parentNode = new ElementNode(rootNode, rootNode, parentAST);
+        final AbstractNode childNode = new ElementNode(rootNode, parentNode, detailAST);
+        assertEquals(-1, parentNode.compareOrder(childNode), "Incorrect ordering value");
+        assertEquals(1, childNode.compareOrder(parentNode), "Incorrect ordering value");
+    }
+
