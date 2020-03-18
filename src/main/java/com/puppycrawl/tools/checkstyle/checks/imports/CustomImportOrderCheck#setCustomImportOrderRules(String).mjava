@@ -1,12 +1,15 @@
     /**
-     * Setter to specify list of order declaration customizing by user.
+     * Setter to specify format of order declaration customizing by user.
      * @param inputCustomImportOrder
      *        user value.
      */
     public final void setCustomImportOrderRules(final String inputCustomImportOrder) {
-        for (String currentState : GROUP_SEPARATOR_PATTERN.split(inputCustomImportOrder)) {
-            addRulesToList(currentState);
+        if (!customImportOrderRules.equals(inputCustomImportOrder)) {
+            for (String currentState : GROUP_SEPARATOR_PATTERN.split(inputCustomImportOrder)) {
+                addRulesToList(currentState);
+            }
+            customOrderRules.add(NON_GROUP_RULE_GROUP);
         }
-        customImportOrderRules.add(NON_GROUP_RULE_GROUP);
+        customImportOrderRules = inputCustomImportOrder;
     }
 

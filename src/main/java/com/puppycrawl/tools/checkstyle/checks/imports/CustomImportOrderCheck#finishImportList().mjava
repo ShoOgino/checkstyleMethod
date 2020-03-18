@@ -1,7 +1,7 @@
     /** Examine the order of all the imports and log any violations. */
     private void finishImportList() {
         String currentGroup = getFirstGroup();
-        int currentGroupNumber = customImportOrderRules.indexOf(currentGroup);
+        int currentGroupNumber = customOrderRules.indexOf(currentGroup);
         ImportDetails previousImportObjectFromCurrentGroup = null;
         String previousImportFromCurrentGroup = null;
 
@@ -23,13 +23,13 @@
             }
             else {
                 // not the last group, last one is always NON_GROUP
-                if (customImportOrderRules.size() > currentGroupNumber + 1) {
+                if (customOrderRules.size() > currentGroupNumber + 1) {
                     final String nextGroup = getNextImportGroup(currentGroupNumber + 1);
                     if (importGroup.equals(nextGroup)) {
                         validateMissedEmptyLine(previousImportObjectFromCurrentGroup,
                                 importObject, fullImportIdent);
                         currentGroup = nextGroup;
-                        currentGroupNumber = customImportOrderRules.indexOf(nextGroup);
+                        currentGroupNumber = customOrderRules.indexOf(nextGroup);
                         previousImportFromCurrentGroup = fullImportIdent;
                     }
                     else {

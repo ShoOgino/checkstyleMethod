@@ -10,7 +10,7 @@
                 || THIRD_PARTY_PACKAGE_RULE_GROUP.equals(ruleStr)
                 || STANDARD_JAVA_PACKAGE_RULE_GROUP.equals(ruleStr)
                 || SPECIAL_IMPORTS_RULE_GROUP.equals(ruleStr)) {
-            customImportOrderRules.add(ruleStr);
+            customOrderRules.add(ruleStr);
         }
         else if (ruleStr.startsWith(SAME_PACKAGE_RULE_GROUP)) {
             final String rule = ruleStr.substring(ruleStr.indexOf('(') + 1,
@@ -20,7 +20,7 @@
                 throw new IllegalArgumentException(
                         "SAME_PACKAGE rule parameter should be positive integer: " + ruleStr);
             }
-            customImportOrderRules.add(SAME_PACKAGE_RULE_GROUP);
+            customOrderRules.add(SAME_PACKAGE_RULE_GROUP);
         }
         else {
             throw new IllegalStateException("Unexpected rule: " + ruleStr);
