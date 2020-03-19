@@ -1,0 +1,23 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionJavadocContentLocationOne.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(JavadocContentLocationCheck.class);
+
+        final String[] expectedViolation = {
+            "5:5: " + getCheckMessage(JavadocContentLocationCheck.class,
+                    JavadocContentLocationCheck.MSG_JAVADOC_CONTENT_SECOND_LINE),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/INTERFACE_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocContentLocationOne']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/TYPE/BLOCK_COMMENT_BEGIN"
+
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
