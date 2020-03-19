@@ -1,0 +1,15 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(getPath(
+            "SuppressionXpathRegressionUnnecessarySemicolonAfterOuterTypeDeclaration.java"));
+        final DefaultConfiguration moduleConfig = createModuleConfig(CLASS);
+        final String[] expectedViolation = {
+            "5:2: " + getCheckMessage(CLASS,
+                UnnecessarySemicolonAfterOuterTypeDeclarationCheck.MSG_SEMI),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList("/SEMI");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

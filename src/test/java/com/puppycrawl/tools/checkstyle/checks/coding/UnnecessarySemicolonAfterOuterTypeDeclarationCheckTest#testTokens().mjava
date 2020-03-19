@@ -1,0 +1,18 @@
+    @Test
+    public void testTokens() {
+        final UnnecessarySemicolonAfterOuterTypeDeclarationCheck check =
+            new UnnecessarySemicolonAfterOuterTypeDeclarationCheck();
+        final int[] expected = {
+            TokenTypes.CLASS_DEF,
+            TokenTypes.INTERFACE_DEF,
+            TokenTypes.ENUM_DEF,
+            TokenTypes.ANNOTATION_DEF,
+        };
+        assertArrayEquals(expected, check.getAcceptableTokens(),
+                "Acceptable required tokens are invalid");
+        assertArrayEquals(expected, check.getDefaultTokens(),
+                "Default required tokens are invalid");
+        assertArrayEquals(CommonUtil.EMPTY_INT_ARRAY, check.getRequiredTokens(),
+                "Required required tokens are invalid");
+    }
+

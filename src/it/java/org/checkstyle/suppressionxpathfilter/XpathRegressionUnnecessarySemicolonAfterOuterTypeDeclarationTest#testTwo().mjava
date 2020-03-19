@@ -1,0 +1,16 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(getPath(
+            "SuppressionXpathRegressionUnnecessarySemicolonAfterOuterTypeDeclarationInnerTypes"
+                    + ".java"));
+        final DefaultConfiguration moduleConfig = createModuleConfig(CLASS);
+        final String[] expectedViolation = {
+            "21:2: " + getCheckMessage(CLASS,
+                UnnecessarySemicolonAfterOuterTypeDeclarationCheck.MSG_SEMI),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList("/SEMI");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
