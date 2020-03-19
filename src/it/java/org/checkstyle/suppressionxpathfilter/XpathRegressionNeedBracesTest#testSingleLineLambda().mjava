@@ -1,0 +1,23 @@
+    @Test
+    public void testSingleLineLambda() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionNeedBracesSingleLineLambda.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(NeedBracesCheck.class);
+        moduleConfig.addAttribute("tokens", "LAMBDA");
+        moduleConfig.addAttribute("allowSingleLineStatement", "true");
+
+        final String[] expectedViolation = {
+            "4:29: " + getCheckMessage(NeedBracesCheck.class, MSG_KEY_NEED_BRACES, "->"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionNeedBracesSingleLineLambda']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='r3']]/ASSIGN/LAMBDA"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
