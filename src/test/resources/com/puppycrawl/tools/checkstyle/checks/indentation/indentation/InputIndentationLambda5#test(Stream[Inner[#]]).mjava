@@ -1,0 +1,7 @@
+	public void test(Stream<Inner<?>> stream) { //indent:3 exp:3
+		stream //indent:6 exp:6
+				.filter(ps -> ps instanceof Inner) //indent:12 exp:12
+				.map(ps -> ((Inner<?>) ps).getPropertyNames()) //indent:12 exp:12
+				.forEach(System.out::println); //indent:12 exp:12
+	} //indent:3 exp:3
+

@@ -19,7 +19,7 @@
         // If the start of the lambda is the first element on the line;
         // assume line wrapping with respect to its parent.
         final DetailAST firstChild = getMainAst().getFirstChild();
-        if (getLineStart(firstChild) == firstChild.getColumnNo()) {
+        if (getLineStart(firstChild) == expandedTabsColumnNo(firstChild)) {
             level = new IndentLevel(level, getIndentCheck().getLineWrappingIndentation());
         }
 

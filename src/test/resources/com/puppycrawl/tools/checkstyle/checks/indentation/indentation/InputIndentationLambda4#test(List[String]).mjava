@@ -1,0 +1,9 @@
+	// see https://github.com/checkstyle/checkstyle/issues/5969 //indent:4 exp:4
+	List<Integer> test(List<String> input) { //indent:4 exp:4
+		return input.stream() //indent:8 exp:8
+				.flatMap(in -> Arrays.stream(in.split(""))) //indent:16 exp:16
+				// only 2 char parameter has violation //indent:16 exp:16
+				.map(Integer::valueOf) //indent:16 exp:16
+				.collect(Collectors.toList()); //indent:16 exp:16
+	} //indent:4 exp:4
+

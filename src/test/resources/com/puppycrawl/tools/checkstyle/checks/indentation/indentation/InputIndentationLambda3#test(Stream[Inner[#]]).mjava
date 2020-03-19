@@ -1,0 +1,10 @@
+	// see https://github.com/checkstyle/checkstyle/issues/7675 //indent:4 exp:4
+	public void test(Stream<Inner<?>> stream) { //indent:4 exp:4
+		stream //indent:8 exp:8
+.sorted() //indent:0 exp:0
+.filter(ps -> ps instanceof Inner) //indent:0 exp:0
+				.map(ps -> ((Inner<?>) ps).getPropertyNames()) //indent:16 exp:16
+				// This line above originally breaks //indent:16 exp:16
+				.forEach(System.out::println); //indent:16 exp:16
+	} //indent:4 exp:4
+
