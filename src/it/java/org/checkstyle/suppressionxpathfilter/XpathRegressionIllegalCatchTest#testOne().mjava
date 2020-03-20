@@ -1,0 +1,23 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionIllegalCatchOne.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalCatchCheck.class);
+
+        final String[] expectedViolation = {
+            "6:11: " + getCheckMessage(IllegalCatchCheck.class,
+                IllegalCatchCheck.MSG_KEY, "RuntimeException"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIllegalCatchOne']]/OBJBLOCK"
+                + "/METHOD_DEF[./IDENT[@text='fun']]/SLIST"
+                + "/LITERAL_TRY/LITERAL_CATCH"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
