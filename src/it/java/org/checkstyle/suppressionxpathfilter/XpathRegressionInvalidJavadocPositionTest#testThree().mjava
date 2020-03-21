@@ -1,0 +1,22 @@
+    @Test
+    public void testThree() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionInvalidJavadocPositionThree.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(InvalidJavadocPositionCheck.class);
+
+        final String[] expectedViolation = {
+            "6:5: " + getCheckMessage(InvalidJavadocPositionCheck.class,
+                InvalidJavadocPositionCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionInvalidJavadocPositionThree']]"
+                + "/OBJBLOCK/BLOCK_COMMENT_BEGIN"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
