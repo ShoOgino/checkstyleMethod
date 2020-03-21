@@ -1,0 +1,35 @@
+    @Test
+    public void testCaseIndent() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionIndentationTestThree.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IndentationCheck.class);
+        moduleConfig.addAttribute("arrayInitIndent", "4");
+        moduleConfig.addAttribute("basicOffset", "4");
+        moduleConfig.addAttribute("braceAdjustment", "0");
+        moduleConfig.addAttribute("caseIndent", "4");
+        moduleConfig.addAttribute("forceStrictCondition", "false");
+        moduleConfig.addAttribute("lineWrappingIndentation", "4");
+        moduleConfig.addAttribute("tabWidth", "4");
+        moduleConfig.addAttribute("throwsIndent", "4");
+
+        final String[] expectedViolation = {
+            "7:9: " + getCheckMessage(IndentationCheck.class,
+                    IndentationCheck.MSG_CHILD_ERROR, "case", 8, 12),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestThree']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_SWITCH/"
+                    + "CASE_GROUP",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestThree']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/SLIST/LITERAL_SWITCH/"
+                    + "CASE_GROUP/LITERAL_CASE"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

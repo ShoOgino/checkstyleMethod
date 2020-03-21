@@ -1,26 +1,26 @@
     /**
-     * Find the set of lines for a given subtree.
+     * Find the set of abstract syntax tree for a given subtree.
      *
-     * @param lines          the set of lines to add to
+     * @param astSet         the set of ast to add
      * @param tree           the subtree to examine
      * @param allowNesting   whether or not to allow nested subtrees
      */
-    protected final void findSubtreeLines(LineSet lines, DetailAST tree,
+    protected final void findSubtreeAst(DetailAstSet astSet, DetailAST tree,
         boolean allowNesting) {
         if (!indentCheck.getHandlerFactory().isHandledType(tree.getType())) {
             final int lineNum = tree.getLineNo();
-            final Integer colNum = lines.getStartColumn(lineNum);
+            final Integer colNum = astSet.getStartColumn(lineNum);
 
             final int thisLineColumn = expandedTabsColumnNo(tree);
             if (colNum == null || thisLineColumn < colNum) {
-                lines.addLineAndCol(lineNum, thisLineColumn);
+                astSet.addAst(tree);
             }
 
             // check children
             for (DetailAST node = tree.getFirstChild();
                 node != null;
                 node = node.getNextSibling()) {
-                findSubtreeLines(lines, node, allowNesting);
+                findSubtreeAst(astSet, node, allowNesting);
             }
         }
     }

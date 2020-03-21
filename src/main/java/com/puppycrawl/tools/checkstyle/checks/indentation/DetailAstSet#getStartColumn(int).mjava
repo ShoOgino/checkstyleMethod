@@ -1,0 +1,17 @@
+    /**
+     * Get starting column number for the ast.
+     *
+     * @param lineNum the line number as key
+     * @return start column for ast
+     */
+    public Integer getStartColumn(int lineNum) {
+        Integer startColumn = null;
+        final DetailAST ast = getAst(lineNum);
+
+        if (ast != null) {
+            startColumn = expandedTabsColumnNo(ast);
+        }
+
+        return startColumn;
+    }
+

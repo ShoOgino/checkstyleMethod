@@ -1,26 +1,32 @@
     /**
      * Check the indentation for a set of lines.
      *
-     * @param lines              the set of lines to check
+     * @param astSet             the set of abstract syntax tree to check
      * @param indentLevel        the indentation level
      * @param firstLineMatches   whether or not the first line has to match
      * @param firstLine          first line of whole expression
+     * @param allowNesting       whether or not subtree nesting is allowed
      */
-    private void checkLinesIndent(LineSet lines,
+    private void checkLinesIndent(DetailAstSet astSet,
                                   IndentLevel indentLevel,
                                   boolean firstLineMatches,
-                                  int firstLine) {
-        if (!lines.isEmpty()) {
+                                  int firstLine,
+                                  boolean allowNesting) {
+        if (!astSet.isEmpty()) {
             // check first line
-            final int startLine = lines.firstLine();
-            final int endLine = lines.lastLine();
-            final int startCol = lines.firstLineCol();
+            final DetailAST startLineAst = astSet.firstLine();
+            final int endLine = astSet.lastLine();
+            int startCol = expandedTabsColumnNo(astSet.firstLine());
 
             final int realStartCol =
-                getLineStart(indentCheck.getLine(startLine - 1));
+                getLineStart(indentCheck.getLine(startLineAst.getLineNo() - 1));
+
+            if (firstLineMatches && !allowNesting) {
+                startCol = realStartCol;
+            }
 
             if (realStartCol == startCol) {
-                checkLineIndent(startLine, startCol, indentLevel,
+                checkLineIndent(startLineAst, indentLevel,
                     firstLineMatches);
             }
 
@@ -37,14 +43,14 @@
             }
 
             // check following lines
-            for (int i = startLine + 1; i <= endLine; i++) {
-                final Integer col = lines.getStartColumn(i);
+            for (int i = startLineAst.getLineNo() + 1; i <= endLine; i++) {
+                final Integer col = astSet.getStartColumn(i);
                 // startCol could be null if this line didn't have an
                 // expression that was required to be checked (it could be
                 // checked by a child expression)
 
                 if (col != null) {
-                    checkLineIndent(i, col, theLevel, false);
+                    checkLineIndent(astSet.getAst(i), theLevel, false);
                 }
             }
         }

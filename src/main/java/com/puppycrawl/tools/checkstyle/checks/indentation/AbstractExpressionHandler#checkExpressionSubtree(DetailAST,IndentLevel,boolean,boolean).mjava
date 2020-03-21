@@ -12,14 +12,14 @@
         boolean firstLineMatches,
         boolean allowNesting
     ) {
-        final LineSet subtreeLines = new LineSet();
-        final int firstLine = getFirstLine(Integer.MAX_VALUE, tree);
+        final DetailAstSet subtreeAst = new DetailAstSet(indentCheck);
+        final int firstLine = getFirstLine(tree);
         if (firstLineMatches && !allowNesting) {
-            subtreeLines.addLineAndCol(firstLine,
-                getLineStart(indentCheck.getLine(firstLine - 1)));
+            final DetailAST firstAst = getFirstAst(tree, tree);
+            subtreeAst.addAst(firstAst);
         }
-        findSubtreeLines(subtreeLines, tree, allowNesting);
+        findSubtreeAst(subtreeAst, tree, allowNesting);
 
-        checkLinesIndent(subtreeLines, indentLevel, firstLineMatches, firstLine);
+        checkLinesIndent(subtreeAst, indentLevel, firstLineMatches, firstLine, allowNesting);
     }
 

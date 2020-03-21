@@ -1,0 +1,31 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionIndentationTestOne.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IndentationCheck.class);
+
+        final String[] expectedViolation = {
+            "4:1: " + getCheckMessage(IndentationCheck.class,
+                    IndentationCheck.MSG_ERROR, "method def modifier", 0, 4),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestOne']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='wrongIntend']]",
+
+             "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestOne']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='wrongIntend']]/MODIFIERS",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestOne']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='wrongIntend']]/TYPE",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestOne']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='wrongIntend']]/TYPE/LITERAL_VOID"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

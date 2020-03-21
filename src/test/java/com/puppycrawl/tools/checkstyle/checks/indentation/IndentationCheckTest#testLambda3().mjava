@@ -5,15 +5,15 @@
         checkConfig.addAttribute("basicOffset", "4");
         checkConfig.addAttribute("lineWrappingIndentation", "8");
         final String[] expected = {
-            "15: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
-            "23: " + getCheckMessage(MSG_ERROR_MULTI, "lambda arguments", 20, "12, 16"),
-            "29: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
-            "30: " + getCheckMessage(MSG_CHILD_ERROR, "block", 12, 16),
-            "31: " + getCheckMessage(MSG_ERROR, "block rcurly", 8, 12),
-            "43: " + getCheckMessage(MSG_ERROR, "lambda arguments", 20, 16),
-            "65: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
-            "67: " + getCheckMessage(MSG_ERROR, "lambda", 28, 24),
-            "87: " + getCheckMessage(MSG_ERROR, "method def rcurly", 12, 8),
+            "15:13: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
+            "23:21: " + getCheckMessage(MSG_ERROR_MULTI, "lambda arguments", 20, "12, 16"),
+            "29:13: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
+            "30:13: " + getCheckMessage(MSG_CHILD_ERROR, "block", 12, 16),
+            "31:9: " + getCheckMessage(MSG_ERROR, "block rcurly", 8, 12),
+            "43:21: " + getCheckMessage(MSG_ERROR, "lambda arguments", 20, 16),
+            "65:13: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 12, 8),
+            "67:29: " + getCheckMessage(MSG_ERROR, "lambda", 28, 24),
+            "87:13: " + getCheckMessage(MSG_ERROR, "method def rcurly", 12, 8),
         };
         verifyWarns(checkConfig, getPath("InputIndentationLambda3.java"), expected);
     }

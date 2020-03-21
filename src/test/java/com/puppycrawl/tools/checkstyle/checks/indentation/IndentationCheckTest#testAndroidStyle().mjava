@@ -10,15 +10,15 @@
         checkConfig.addAttribute("tabWidth", "4");
         checkConfig.addAttribute("throwsIndent", "8");
         final String[] expected = {
-            "42: " + getCheckMessage(MSG_ERROR, "extends", 3, 8),
-            "44: " + getCheckMessage(MSG_ERROR, "member def type", 3, 4),
-            "47: " + getCheckMessage(MSG_ERROR, "foo", 8, 12),
-            "50: " + getCheckMessage(MSG_ERROR, "int", 8, 12),
-            "53: " + getCheckMessage(MSG_ERROR, "true", 13, 16),
-            "56: " + getCheckMessage(MSG_ERROR, "+", 16, 20),
-            "57: " + getCheckMessage(MSG_ERROR, "if", 8, 12),
-            "60: " + getCheckMessage(MSG_ERROR, "if rcurly", 11, 12),
-            "62: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 7, 8),
+            "42:4: " + getCheckMessage(MSG_ERROR, "extends", 3, 8),
+            "44:4: " + getCheckMessage(MSG_ERROR, "member def type", 3, 4),
+            "47:9: " + getCheckMessage(MSG_ERROR, "foo", 8, 12),
+            "50:9: " + getCheckMessage(MSG_ERROR, "int", 8, 12),
+            "53:14: " + getCheckMessage(MSG_ERROR, "true", 13, 16),
+            "56:17: " + getCheckMessage(MSG_ERROR, "+", 16, 20),
+            "57:9: " + getCheckMessage(MSG_ERROR, "if", 8, 12),
+            "60:12: " + getCheckMessage(MSG_ERROR, "if rcurly", 11, 12),
+            "62:8: " + getCheckMessage(MSG_CHILD_ERROR, "method def", 7, 8),
         };
         verifyWarns(checkConfig, getPath("InputIndentationAndroidStyle.java"), expected);
     }

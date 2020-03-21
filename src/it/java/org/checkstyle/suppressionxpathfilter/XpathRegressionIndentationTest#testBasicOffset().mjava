@@ -1,0 +1,39 @@
+    @Test
+    public void testBasicOffset() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionIndentationTestTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IndentationCheck.class);
+        moduleConfig.addAttribute("arrayInitIndent", "4");
+        moduleConfig.addAttribute("basicOffset", "10");
+        moduleConfig.addAttribute("braceAdjustment", "0");
+        moduleConfig.addAttribute("caseIndent", "4");
+        moduleConfig.addAttribute("forceStrictCondition", "false");
+        moduleConfig.addAttribute("lineWrappingIndentation", "4");
+        moduleConfig.addAttribute("tabWidth", "4");
+        moduleConfig.addAttribute("throwsIndent", "4");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(IndentationCheck.class,
+                    IndentationCheck.MSG_ERROR, "method def modifier", 4, 10),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestTwo']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestTwo']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestTwo']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/TYPE",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionIndentationTestTwo']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/TYPE/LITERAL_VOID"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

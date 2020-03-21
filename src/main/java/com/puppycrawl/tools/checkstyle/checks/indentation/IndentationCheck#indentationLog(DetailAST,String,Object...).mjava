@@ -1,0 +1,16 @@
+    /**
+     * Log a violation message.
+     *
+     * @param  ast the ast for which error to be logged
+     * @param key the message that describes the violation
+     * @param args the details of the message
+     *
+     * @see java.text.MessageFormat
+     */
+    public void indentationLog(DetailAST ast, String key, Object... args) {
+        if (!incorrectIndentationLines.contains(ast.getLineNo())) {
+            incorrectIndentationLines.add(ast.getLineNo());
+            log(ast, key, args);
+        }
+    }
+
