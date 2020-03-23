@@ -1,0 +1,21 @@
+    @Test
+    public void testNoJavadoc() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "nojavadoc/package-info.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MissingJavadocPackageCheck.class);
+
+        final String[] expectedViolation = {
+            "1:1: " + getCheckMessage(MissingJavadocPackageCheck.class,
+                MissingJavadocPackageCheck.MSG_PKG_JAVADOC_MISSING),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/PACKAGE_DEF"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
