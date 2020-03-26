@@ -1,0 +1,29 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionInterfaceIsType2.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(InterfaceIsTypeCheck.class);
+
+        moduleConfig.addAttribute("allowMarkerInterfaces", "false");
+
+        final String[] expectedViolation = {
+            "3:1: " + getCheckMessage(InterfaceIsTypeCheck.class,
+                    InterfaceIsTypeCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/INTERFACE_DEF[./IDENT["
+                    + "@text='SuppressionXpathRegressionInterfaceIsType2']]",
+                "/INTERFACE_DEF[./IDENT["
+                    + "@text='SuppressionXpathRegressionInterfaceIsType2']]/MODIFIERS",
+                "/INTERFACE_DEF[./IDENT["
+                    + "@text='SuppressionXpathRegressionInterfaceIsType2']]"
+                    + "/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
