@@ -1,0 +1,28 @@
+    @Test
+    public void testFour() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionMethodCount3.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(MethodCountCheck.class);
+        moduleConfig.addAttribute("maxProtected", "1");
+
+        final String[] expectedViolation = {
+            "3:1: " + getCheckMessage(MethodCountCheck.class,
+                MethodCountCheck.MSG_PROTECTED_METHODS, 2, 1),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMethodCount3']]",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMethodCount3']]"
+                    + "/MODIFIERS",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMethodCount3']]"
+                    + "/LITERAL_CLASS"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
