@@ -1,0 +1,13 @@
+        /**
+         * Creates pattern to use by DetectorOptions instance.
+         * @param formatValue the format to use.
+         * @return Pattern object.
+         */
+        private Pattern createPattern(String formatValue) {
+            int options = compileFlags;
+            if (ignoreCase) {
+                options |= Pattern.CASE_INSENSITIVE;
+            }
+            return Pattern.compile(formatValue, options);
+        }
+
