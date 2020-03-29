@@ -1,0 +1,11 @@
+    @Test
+    public void testWhitespaceAfterGood() throws Exception {
+        final String[] expected = {
+        };
+        final Configuration checkConfig = getModuleConfig("WhitespaceAfter");
+        final String filePath = getPath("InputWhitespaceAfterGood.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+

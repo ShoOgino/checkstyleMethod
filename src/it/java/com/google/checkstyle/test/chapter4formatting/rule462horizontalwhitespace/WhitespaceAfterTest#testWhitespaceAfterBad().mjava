@@ -1,0 +1,28 @@
+    @Test
+    public void testWhitespaceAfterBad() throws Exception {
+        final Class<WhitespaceAfterCheck> clazz = WhitespaceAfterCheck.class;
+        final String message = "ws.notFollowed";
+
+        final String[] expected = {
+            "4:29: " + getCheckMessage(clazz, message, ","),
+            "5:9: " + getCheckMessage(clazz, message, "for"),
+            "5:20: " + getCheckMessage(clazz, message, ","),
+            "5:24: " + getCheckMessage(clazz, message, ";"),
+            "5:28: " + getCheckMessage(clazz, message, ";"),
+            "5:32: " + getCheckMessage(clazz, message, ","),
+            "6:9: " + getCheckMessage(clazz, message, "while"),
+            "7:20: " + getCheckMessage(clazz, message, ","),
+            "9:9: " + getCheckMessage(clazz, message, "do"),
+            "11:10: " + getCheckMessage(clazz, message, "while"),
+            "13:35: " + getCheckMessage(clazz, message, ","),
+            "14:9: " + getCheckMessage(clazz, message, "if"),
+            "14:18: " + getCheckMessage(clazz, message, "typecast"),
+            "17:9: " + getCheckMessage(clazz, message, "else"),
+        };
+        final Configuration checkConfig = getModuleConfig("WhitespaceAfter");
+        final String filePath = getPath("InputWhitespaceAfterBad.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(checkConfig, filePath, expected, warnList);
+    }
+
