@@ -24,8 +24,9 @@
                         + "' should have the type for " + propertyName);
 
         if (expectedValue != null) {
-            final String actualValue = columns.get(3).getTextContent().replace("\n", "")
-                    .replace("\r", "").replaceAll(" +", " ").trim();
+            final String actualValue = columns.get(3).getTextContent().trim()
+                    .replaceAll("\\s+", " ")
+                    .replaceAll("\\s,", ",");
 
             assertEquals(expectedValue, actualValue,
                     fileName + " section '" + sectionName
