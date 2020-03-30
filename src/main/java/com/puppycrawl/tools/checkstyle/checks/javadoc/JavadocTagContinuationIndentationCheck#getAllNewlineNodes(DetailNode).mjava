@@ -8,7 +8,7 @@
         final List<DetailNode> textNodes = new ArrayList<>();
         DetailNode node = JavadocUtil.getFirstChild(descriptionNode);
         while (JavadocUtil.getNextSibling(node) != null) {
-            if (node.getType() == JavadocTokenTypes.NEWLINE) {
+            if (node.getType() == JavadocTokenTypes.LEADING_ASTERISK) {
                 textNodes.add(node);
             }
             node = JavadocUtil.getNextSibling(node);

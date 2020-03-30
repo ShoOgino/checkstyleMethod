@@ -3,9 +3,8 @@
         if (!isInlineDescription(ast)) {
             final List<DetailNode> textNodes = getAllNewlineNodes(ast);
             for (DetailNode newlineNode : textNodes) {
-                final DetailNode textNode = JavadocUtil.getNextSibling(JavadocUtil
-                        .getNextSibling(newlineNode));
-                if (textNode != null && textNode.getType() == JavadocTokenTypes.TEXT) {
+                final DetailNode textNode = JavadocUtil.getNextSibling(newlineNode);
+                if (textNode.getType() == JavadocTokenTypes.TEXT) {
                     final String text = textNode.getText();
                     if (!CommonUtil.isBlank(text.trim())
                             && (text.length() <= offset
