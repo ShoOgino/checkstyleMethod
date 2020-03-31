@@ -1,0 +1,50 @@
+    @Test
+    public void testTypeAndVariablesAndMethodNamesWithIgnoresNonStaticFinal() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(AbbreviationAsWordInNameCheck.class);
+        checkConfig.addAttribute("allowedAbbreviationLength", "4");
+        checkConfig.addAttribute("allowedAbbreviations", "MARAZMATIC,VARIABLE");
+        checkConfig.addAttribute("ignoreStatic", "true");
+        checkConfig.addAttribute("ignoreFinal", "true");
+        checkConfig.addAttribute("ignoreStaticFinal", "false");
+        checkConfig.addAttribute("tokens", "CLASS_DEF"
+            + ",VARIABLE_DEF"
+            + ",METHOD_DEF,ENUM_DEF,ENUM_CONSTANT_DEF"
+            + ",PARAMETER_DEF,INTERFACE_DEF,ANNOTATION_DEF");
+        checkConfig.addAttribute("ignoreOverriddenMethods", "true");
+        final int expectedCapitalCount = 5;
+
+        final String[] expected = {
+            "24:20: " + getWarningMessage("AbstractCLASSName", expectedCapitalCount),
+            "44:15: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
+            "49:15: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
+            "50:25: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
+            "70:20: "
+                + getWarningMessage("serialNUMBER", expectedCapitalCount), // not in ignore list
+            "73:34: " // no ignore for static final
+                + getWarningMessage("s3erialNUMBER", expectedCapitalCount),
+            "78:16: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "84:23: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "90:22: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "96:29: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "119:16: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "123:23: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "127:22: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "131:29: "
+                + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "134:17: " + getWarningMessage("InnerClassOneVIOLATION", expectedCapitalCount),
+            "138:18: " + getWarningMessage("InnerClassTwoVIOLATION", expectedCapitalCount),
+            "142:24: " + getWarningMessage("InnerClassThreeVIOLATION", expectedCapitalCount),
+        };
+
+        verify(checkConfig, getPath(
+                "InputAbbreviationAsWordInNameIgnoreNonStaticFinal.java"), expected);
+    }
+

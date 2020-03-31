@@ -6,6 +6,7 @@
         checkConfig.addAttribute("allowedAbbreviations", "NUMBER,MARAZMATIC,VARIABLE");
         checkConfig.addAttribute("ignoreStatic", "false");
         checkConfig.addAttribute("ignoreFinal", "false");
+        checkConfig.addAttribute("ignoreStaticFinal", "false");
         checkConfig.addAttribute("tokens", "CLASS_DEF"
             + ",VARIABLE_DEF"
             + ",METHOD_DEF,ENUM_DEF,ENUM_CONSTANT_DEF"
@@ -14,15 +15,18 @@
         final int expectedCapitalCount = 6;
 
         final String[] expected = {
-            "32:11: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
-            "37:11: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
-            "38:21: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
-            "66:16: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
-            "72:23: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
-            "78:22: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
-            "84:29: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "44:15: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
+            "49:15: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
+            "50:25: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
+            "78:16: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "84:23: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "90:22: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "96:29: " + getWarningMessage("VALUEEEE", expectedCapitalCount),
+            "134:17: " + getWarningMessage("InnerClassOneVIOLATION", expectedCapitalCount),
+            "138:18: " + getWarningMessage("InnerClassTwoVIOLATION", expectedCapitalCount),
+            "142:24: " + getWarningMessage("InnerClassThreeVIOLATION", expectedCapitalCount),
         };
 
-        verify(checkConfig, getPath("InputAbbreviationAsWordInNameType.java"), expected);
+        verify(checkConfig, getPath("InputAbbreviationAsWordInNameNoIgnore.java"), expected);
     }
 

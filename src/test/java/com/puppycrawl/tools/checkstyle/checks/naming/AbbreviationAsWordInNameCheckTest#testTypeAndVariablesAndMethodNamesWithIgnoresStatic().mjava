@@ -2,23 +2,30 @@
     public void testTypeAndVariablesAndMethodNamesWithIgnoresStatic() throws Exception {
         final DefaultConfiguration checkConfig =
             createModuleConfig(AbbreviationAsWordInNameCheck.class);
-        checkConfig.addAttribute("allowedAbbreviationLength", "5");
+        checkConfig.addAttribute("allowedAbbreviationLength", "4");
         checkConfig.addAttribute("allowedAbbreviations", "MARAZMATIC,VARIABLE");
         checkConfig.addAttribute("ignoreStatic", "true");
         checkConfig.addAttribute("ignoreFinal", "false");
+        checkConfig.addAttribute("ignoreStaticFinal", "true");
         checkConfig.addAttribute("tokens", "CLASS_DEF"
             + ",VARIABLE_DEF"
             + ",METHOD_DEF,ENUM_DEF,ENUM_CONSTANT_DEF"
             + ",PARAMETER_DEF,INTERFACE_DEF,ANNOTATION_DEF");
         checkConfig.addAttribute("ignoreOverriddenMethods", "true");
-        final int expectedCapitalCount = 6;
+        final int expectedCapitalCount = 5;
 
         final String[] expected = {
-            "32:11: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
-            "37:11: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
-            "38:21: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
+            "24:20: " + getWarningMessage("AbstractCLASSName", expectedCapitalCount),
+            "44:15: " + getWarningMessage("AbstractINNERRClass", expectedCapitalCount),
+            "49:15: " + getWarningMessage("WellNamedFACTORY", expectedCapitalCount),
+            "50:25: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
+            "70:20: "
+                + getWarningMessage("serialNUMBER", expectedCapitalCount), // not in ignore list
+            "71:26: "
+                + getWarningMessage("s1erialNUMBER", expectedCapitalCount), // no ignore for final
         };
 
-        verify(checkConfig, getPath("InputAbbreviationAsWordInNameType.java"), expected);
+        verify(checkConfig, getPath(
+                "InputAbbreviationAsWordInNameIgnoreStatic.java"), expected);
     }
 

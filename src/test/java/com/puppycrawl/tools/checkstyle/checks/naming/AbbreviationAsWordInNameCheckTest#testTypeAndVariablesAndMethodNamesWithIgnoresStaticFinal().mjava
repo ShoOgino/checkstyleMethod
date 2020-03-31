@@ -1,11 +1,11 @@
     @Test
-    public void testTypeAndVariablesAndMethodNamesWithIgnoresFinal() throws Exception {
+    public void testTypeAndVariablesAndMethodNamesWithIgnoresStaticFinal() throws Exception {
         final DefaultConfiguration checkConfig =
             createModuleConfig(AbbreviationAsWordInNameCheck.class);
         checkConfig.addAttribute("allowedAbbreviationLength", "4");
         checkConfig.addAttribute("allowedAbbreviations", "MARAZMATIC,VARIABLE");
         checkConfig.addAttribute("ignoreStatic", "false");
-        checkConfig.addAttribute("ignoreFinal", "true");
+        checkConfig.addAttribute("ignoreFinal", "false");
         checkConfig.addAttribute("ignoreStaticFinal", "true");
         checkConfig.addAttribute("tokens", "CLASS_DEF"
             + ",VARIABLE_DEF"
@@ -21,11 +21,13 @@
             "50:25: " + getWarningMessage("marazmaticMETHODName", expectedCapitalCount),
             "70:20: "
                 + getWarningMessage("serialNUMBER", expectedCapitalCount), // not in ignore list
+            "71:26: "
+                + getWarningMessage("s1erialNUMBER", expectedCapitalCount), // no ignore for final
             "72:28: "
                 + getWarningMessage("s2erialNUMBER", expectedCapitalCount), // no ignore for static
         };
 
         verify(checkConfig, getPath(
-                "InputAbbreviationAsWordInNameIgnoreFinal.java"), expected);
+                "InputAbbreviationAsWordInNameIgnoreStaticFinal.java"), expected);
     }
 
