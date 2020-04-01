@@ -1,0 +1,31 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationUseStyleTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationUseStyleCheck.class);
+
+        moduleConfig.addAttribute("closingParens", "ALWAYS");
+        moduleConfig.addAttribute("elementStyle", "ignore");
+        moduleConfig.addAttribute("trailingArrayComma", "ignore");
+
+        final String[] expectedViolation = {
+            "3:1: " + getCheckMessage(AnnotationUseStyleCheck.class,
+                    AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_PARENS_MISSING),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleTwo']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleTwo']]"
+                        + "/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleTwo']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='Deprecated']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleTwo']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='Deprecated']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

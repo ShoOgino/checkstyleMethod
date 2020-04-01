@@ -1,0 +1,32 @@
+    @Test
+    public void testFive() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationUseStyleFive.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationUseStyleCheck.class);
+
+        moduleConfig.addAttribute("closingParens", "ignore");
+        moduleConfig.addAttribute("elementStyle", "COMPACT");
+        moduleConfig.addAttribute("trailingArrayComma", "ignore");
+
+        final String[] expectedViolation = {
+            "3:1: " + getCheckMessage(AnnotationUseStyleCheck.class,
+                    AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_INCORRECT_STYLE,
+                    "COMPACT"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleFive']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleFive']]"
+                         + "/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleFive']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='SuppressWarnings']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleFive']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='SuppressWarnings']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

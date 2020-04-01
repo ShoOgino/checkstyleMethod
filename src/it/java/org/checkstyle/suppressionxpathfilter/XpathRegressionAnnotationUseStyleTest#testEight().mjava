@@ -1,0 +1,27 @@
+    @Test
+    public void testEight() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationUseStyleEight.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationUseStyleCheck.class);
+
+        moduleConfig.addAttribute("closingParens", "ignore");
+        moduleConfig.addAttribute("elementStyle", "ignore");
+        moduleConfig.addAttribute("trailingArrayComma", "NEVER");
+
+        final String[] expectedViolation = {
+            "3:31: " + getCheckMessage(AnnotationUseStyleCheck.class,
+                    AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_TRAILING_COMMA_PRESENT),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleEight']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='SuppressWarnings']]"
+                        + "/ANNOTATION_ARRAY_INIT/COMMA"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

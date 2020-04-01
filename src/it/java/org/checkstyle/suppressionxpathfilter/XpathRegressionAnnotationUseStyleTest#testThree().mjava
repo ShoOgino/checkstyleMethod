@@ -1,0 +1,33 @@
+    @Test
+    public void testThree() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationUseStyleThree.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationUseStyleCheck.class);
+
+        moduleConfig.addAttribute("trailingArrayComma", "ignore");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(AnnotationUseStyleCheck.class,
+                    AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_INCORRECT_STYLE,
+                    "COMPACT_NO_ARRAY"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleThree']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleThree']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleThree']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]/MODIFIERS"
+                        + "/ANNOTATION[./IDENT[@text='SuppressWarnings']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleThree']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]/MODIFIERS"
+                        + "/ANNOTATION[./IDENT[@text='SuppressWarnings']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

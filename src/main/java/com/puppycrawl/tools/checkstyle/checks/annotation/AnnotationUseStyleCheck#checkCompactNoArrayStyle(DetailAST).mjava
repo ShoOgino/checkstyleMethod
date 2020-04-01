@@ -10,7 +10,7 @@
         // in compact style with one value
         if (arrayInit != null
             && arrayInit.getChildCount(TokenTypes.EXPR) == 1) {
-            log(annotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
+            log(annotation, MSG_KEY_ANNOTATION_INCORRECT_STYLE,
                 ElementStyle.COMPACT_NO_ARRAY);
         }
         // in expanded style with pairs
@@ -21,7 +21,7 @@
                     ast.findFirstToken(TokenTypes.ANNOTATION_ARRAY_INIT);
                 if (nestedArrayInit != null
                     && nestedArrayInit.getChildCount(TokenTypes.EXPR) == 1) {
-                    log(annotation.getLineNo(), MSG_KEY_ANNOTATION_INCORRECT_STYLE,
+                    log(annotation, MSG_KEY_ANNOTATION_INCORRECT_STYLE,
                         ElementStyle.COMPACT_NO_ARRAY);
                 }
                 ast = ast.getNextSibling();

@@ -1,0 +1,25 @@
+    @Test
+    public void testSeven() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationUseStyleSeven.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationUseStyleCheck.class);
+
+        final String[] expectedViolation = {
+            "4:1: " + getCheckMessage(AnnotationUseStyleCheck.class,
+                    AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_INCORRECT_STYLE,
+                    "COMPACT_NO_ARRAY"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleSeven']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='SuppressWarnings']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleSeven']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='SuppressWarnings']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

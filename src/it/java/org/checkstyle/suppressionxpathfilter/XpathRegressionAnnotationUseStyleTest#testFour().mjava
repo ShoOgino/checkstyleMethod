@@ -1,0 +1,27 @@
+    @Test
+    public void testFour() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionAnnotationUseStyleFour.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AnnotationUseStyleCheck.class);
+
+        moduleConfig.addAttribute("closingParens", "ignore");
+        moduleConfig.addAttribute("elementStyle", "ignore");
+        moduleConfig.addAttribute("trailingArrayComma", "ALWAYS");
+
+        final String[] expectedViolation = {
+            "3:20: " + getCheckMessage(AnnotationUseStyleCheck.class,
+                    AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_TRAILING_COMMA_MISSING),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionAnnotationUseStyleFour']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='SuppressWarnings']]"
+                        + "/ANNOTATION_ARRAY_INIT/RCURLY"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

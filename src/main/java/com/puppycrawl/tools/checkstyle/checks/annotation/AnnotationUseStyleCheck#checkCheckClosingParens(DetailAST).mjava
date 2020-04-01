@@ -10,11 +10,11 @@
 
             if (closingParens == ClosingParens.ALWAYS) {
                 if (paren.getType() != TokenTypes.RPAREN) {
-                    log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_MISSING);
+                    log(ast, MSG_KEY_ANNOTATION_PARENS_MISSING);
                 }
             }
             else if (paren.getPreviousSibling().getType() == TokenTypes.LPAREN) {
-                log(ast.getLineNo(), MSG_KEY_ANNOTATION_PARENS_PRESENT);
+                log(ast, MSG_KEY_ANNOTATION_PARENS_PRESENT);
             }
         }
     }
