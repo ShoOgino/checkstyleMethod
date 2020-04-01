@@ -4,7 +4,7 @@
      * @param methodAst method DetailAST object where to find exceptions
      * @return list of ExceptionInfo
      */
-    private List<ExceptionInfo> getThrowed(DetailAST methodAst) {
+    private static List<ExceptionInfo> getThrowed(DetailAST methodAst) {
         final List<ExceptionInfo> returnValue = new ArrayList<>();
         final DetailAST blockAst = methodAst.findFirstToken(TokenTypes.SLIST);
         if (blockAst != null) {
@@ -16,7 +16,7 @@
                     if (newAst.getType() == TokenTypes.LITERAL_NEW) {
                         final FullIdent ident = FullIdent.createFullIdent(newAst.getFirstChild());
                         final ExceptionInfo exceptionInfo = new ExceptionInfo(
-                                createClassInfo(new Token(ident), currentClassName));
+                                new ClassInfo(new Token(ident)));
                         returnValue.add(exceptionInfo);
                     }
                 }

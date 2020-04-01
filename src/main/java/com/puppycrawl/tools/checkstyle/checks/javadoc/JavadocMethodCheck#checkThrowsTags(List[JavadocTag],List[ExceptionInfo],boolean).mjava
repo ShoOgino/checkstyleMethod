@@ -23,8 +23,7 @@
             // Loop looking for matching throw
             final Token token = new Token(tag.getFirstArg(), tag.getLineNo(), tag
                     .getColumnNo());
-            final ClassInfo documentedClassInfo = createClassInfo(token,
-                    currentClassName);
+            final ClassInfo documentedClassInfo = new ClassInfo(token);
             processThrows(throwsList, documentedClassInfo, foundThrows);
         }
         // Now dump out all throws without tags :- unless

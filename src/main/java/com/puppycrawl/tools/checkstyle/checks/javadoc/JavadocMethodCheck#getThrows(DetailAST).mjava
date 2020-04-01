@@ -4,7 +4,7 @@
      * @param ast the method node.
      * @return the list of exception nodes for ast.
      */
-    private List<ExceptionInfo> getThrows(DetailAST ast) {
+    private static List<ExceptionInfo> getThrows(DetailAST ast) {
         final List<ExceptionInfo> returnValue = new ArrayList<>();
         final DetailAST throwsAST = ast
                 .findFirstToken(TokenTypes.LITERAL_THROWS);
@@ -15,7 +15,7 @@
                         || child.getType() == TokenTypes.DOT) {
                     final FullIdent ident = FullIdent.createFullIdent(child);
                     final ExceptionInfo exceptionInfo = new ExceptionInfo(
-                            createClassInfo(new Token(ident), currentClassName));
+                            new ClassInfo(new Token(ident)));
                     returnValue.add(exceptionInfo);
                 }
                 child = child.getNextSibling();
