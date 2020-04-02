@@ -1,0 +1,23 @@
+    @Test
+    public void test2() throws Exception {
+        final File fileToProcess =
+                new File(getNonCompilablePath("SuppressionXpathRegression2.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(PackageDeclarationCheck.class);
+
+        final String[] expectedViolation = {
+            "3:1: " + getCheckMessage(PackageDeclarationCheck.class,
+                    PackageDeclarationCheck.MSG_KEY_MISSING),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegression2']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegression2']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegression2']]/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
