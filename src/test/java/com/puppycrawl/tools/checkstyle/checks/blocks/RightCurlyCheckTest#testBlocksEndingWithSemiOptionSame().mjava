@@ -3,7 +3,7 @@
         final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.SAME.toString());
         checkConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, "
-                + "CTOR_DEF, ANNOTATION_DEF, ENUM_DEF");
+                + "CTOR_DEF, ANNOTATION_DEF, ENUM_DEF, INTERFACE_DEF");
         final String[] expected = {
             "14:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
             "19:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
@@ -14,6 +14,10 @@
             "49:20: " + getCheckMessage(MSG_KEY_LINE_BREAK_BEFORE, "}", 20),
             "55:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
             "58:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
+            "63:30: " + getCheckMessage(MSG_KEY_LINE_BREAK_BEFORE, "}", 30),
+            "72:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+            "72:11: " + getCheckMessage(MSG_KEY_LINE_BREAK_BEFORE, "}", 11),
+            "76:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
         };
         verify(checkConfig, getPath("InputRightCurlySameBlocksWithSemi.java"), expected);
     }

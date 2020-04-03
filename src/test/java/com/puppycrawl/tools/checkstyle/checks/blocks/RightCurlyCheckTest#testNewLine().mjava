@@ -3,7 +3,7 @@
         final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.ALONE.toString());
         checkConfig.addAttribute("tokens", "CLASS_DEF, METHOD_DEF, CTOR_DEF, "
-                + "ANNOTATION_DEF, ENUM_DEF");
+                + "ANNOTATION_DEF, ENUM_DEF, INTERFACE_DEF");
         final String[] expected = {
             "86:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
             "111:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
@@ -15,7 +15,12 @@
             "144:37: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 37),
             "149:45: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 45),
             "152:20: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 20),
+            "154:28: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 28),
             "197:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+            "202:30: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 30),
+            "205:39: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 39),
+            "211:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
+            "211:10: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 10),
         };
         verify(checkConfig, getPath("InputRightCurlyLeft.java"), expected);
     }
