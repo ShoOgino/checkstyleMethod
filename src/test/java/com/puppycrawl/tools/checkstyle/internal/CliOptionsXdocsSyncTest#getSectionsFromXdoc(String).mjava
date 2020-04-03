@@ -1,0 +1,7 @@
+    private static NodeList getSectionsFromXdoc(String xdocPath) throws Exception {
+        final Path path = Paths.get(xdocPath);
+        final String input = new String(Files.readAllBytes(path), UTF_8);
+        final Document document = XmlUtil.getRawXml(path.getFileName().toString(), input, input);
+        return document.getElementsByTagName("section");
+    }
+

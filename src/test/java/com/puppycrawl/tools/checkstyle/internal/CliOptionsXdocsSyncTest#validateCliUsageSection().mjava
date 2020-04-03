@@ -1,0 +1,28 @@
+    @Test
+    public void validateCliUsageSection() throws Exception {
+        final NodeList sections = getSectionsFromXdoc("src/xdocs/cmdline.xml.vm");
+        final Node usageSource = XmlUtil.getFirstChildElement(sections.item(2));
+        final String usageText = XmlUtil.getFirstChildElement(usageSource).getTextContent();
+
+        final Set<String> shortParamsXdoc = getParameters(usageText, "-[a-zA-CE-X]\\b");
+        final Set<String> longParamsXdoc = getParameters(usageText, "-(-\\w+)+");
+
+        final Class<?> cliOptions = Class.forName("com.puppycrawl.tools.checkstyle"
+                + ".Main$CliOptions");
+        final CommandLine commandLine = new CommandLine(cliOptions);
+        final Set<String> shortParamsMain = commandLine.getCommandSpec().options()
+                        .stream()
+                        .map(OptionSpec::shortestName)
+                        .collect(Collectors.toSet());
+        final Set<String> longParamsMain = commandLine.getCommandSpec().options()
+                        .stream()
+                        .map(OptionSpec::longestName)
+                        .filter(names -> names.length() != 2)
+                        .collect(Collectors.toSet());
+
+        assertEquals("Short parameters in Main.java and cmdline"
+                        + ".xml.vm should match", shortParamsXdoc, shortParamsMain);
+        assertEquals("Long parameters in Main.java and cmdline"
+                        + ".xml.vm should match", longParamsXdoc, longParamsMain);
+    }
+

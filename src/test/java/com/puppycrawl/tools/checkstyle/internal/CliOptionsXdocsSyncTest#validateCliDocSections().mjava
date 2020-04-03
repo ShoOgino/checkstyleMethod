@@ -1,0 +1,35 @@
+    @Test
+    public void validateCliDocSections() throws Exception {
+        final Map<String, String> cmdDesc = new HashMap<>();
+
+        final NodeList sections = getSectionsFromXdoc("src/xdocs/cmdline.xml.vm");
+        final Set<String> cmdOptions = getListById(sections.item(2), "CLI_Options");
+        for (String option : cmdOptions) {
+            final String text = option.trim().replaceAll("\\s+", " ");
+            cmdDesc.put(text.substring(0, 2), text.substring(text.indexOf(" - ") + 3));
+        }
+
+        final Class<?> cliOptions = Class.forName("com.puppycrawl.tools.checkstyle"
+                + ".Main$CliOptions");
+        final CommandLine commandLine = new CommandLine(cliOptions);
+        final List<OptionSpec> optionSpecList = commandLine.getCommandSpec().options();
+
+        for (OptionSpec opt : optionSpecList) {
+            final String option = opt.names()[0];
+            if ("-h".equals(option) || "-V".equals(option)) {
+                cmdDesc.remove(option);
+                continue;
+            }
+            final String descXdoc = cmdDesc.get(option);
+            final String descMain = opt.description()[0];
+            assertWithMessage("CLI Option: " + option + " present in "
+                    + "Main.java but not documented in cmdline.xml.vm")
+                    .that(descXdoc).isNotNull();
+            assertEquals("CLI options descriptions in xdoc: "
+                    + " should match that of in Main.java", descXdoc, descMain);
+            cmdDesc.remove(option);
+        }
+        assertTrue("CLI Options: " + cmdDesc + " present in "
+                + "cmdline.xml.vm, not documented in Main.java", cmdDesc.isEmpty());
+    }
+

@@ -1,0 +1,10 @@
+    private static Set<String> getParameters(String text, String regex) {
+        final Set<String> result = new HashSet<>();
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) {
+            result.add(matcher.group());
+        }
+        return result;
+    }
+
