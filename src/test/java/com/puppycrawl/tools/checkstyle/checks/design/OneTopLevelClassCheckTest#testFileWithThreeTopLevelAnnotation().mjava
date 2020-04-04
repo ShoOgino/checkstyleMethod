@@ -1,0 +1,11 @@
+    @Test
+    public void testFileWithThreeTopLevelAnnotation() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(OneTopLevelClassCheck.class);
+        final String[] expected = {
+            "9:1: " + getCheckMessage(MSG_KEY, "InputOneTopLevelClassAnnotation2A"),
+            "14:1: " + getCheckMessage(MSG_KEY, "InputOneTopLevelClassAnnotation2B"),
+        };
+        verify(checkConfig, getPath("InputOneTopLevelClassAnnotation2.java"), expected);
+    }
+
