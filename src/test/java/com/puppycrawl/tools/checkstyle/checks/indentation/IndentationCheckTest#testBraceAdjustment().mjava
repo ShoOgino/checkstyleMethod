@@ -11,7 +11,11 @@
         checkConfig.addAttribute("tabWidth", "4");
         checkConfig.addAttribute("throwsIndent", "4");
         final String[] expected = {
-            "28:9: " + getCheckMessage(MSG_ERROR, "if rcurly", 8, 10),
+            "24:9: " + getCheckMessage(MSG_CHILD_ERROR, "ctor def", 8, 10),
+            "25:9: " + getCheckMessage(MSG_ERROR, "if", 8, 10),
+            "26:11: " + getCheckMessage(MSG_ERROR, "if lcurly", 10, 12),
+            "27:13: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "if", 12, "14, 16"),
+            "28:9: " + getCheckMessage(MSG_ERROR, "if rcurly", 8, 12),
         };
         verifyWarns(checkConfig, getPath("InputIndentationBraceAdjustment.java"), expected);
     }

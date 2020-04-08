@@ -1,0 +1,26 @@
+  public static void test() { //indent:2 exp:2
+    Test myTest = Test.ONE; //indent:4 exp:4
+    switch (myTest) { //indent:4 exp:4
+      case ONE: //indent:6 exp:6
+        { //indent:8 exp:8
+          System.out.println("One"); //indent:10 exp:10
+          break; //indent:10 exp:10
+        } //indent:8 exp:8
+      case TWO: //indent:6 exp:6
+        { //indent:8 exp:8
+          System.out.println("Two"); //indent:10 exp:10
+          break; //indent:10 exp:10
+        } //indent:8 exp:8
+      case THREE: //indent:6 exp:6
+      { //indent:6 exp:8 warn
+          System.out.println("Three"); //indent:10 exp:10
+          break; //indent:10 exp:10
+          } //indent:10 exp:8 warn
+      case FOUR: { //indent:6 exp:6
+        System.out.println("FOur with different brace style"); //indent:8 exp:8
+      } //indent:6 exp:6
+      default: //indent:6 exp:6
+        throw new RuntimeException("Unexpected value"); //indent:8 exp:8
+    } //indent:4 exp:4
+  } //indent:2 exp:2
+

@@ -4,6 +4,13 @@
      * @return the curly brace indentation level
      */
     protected IndentLevel curlyIndent() {
-        return new IndentLevel(getIndent(), getBraceAdjustment());
+        final DetailAST lcurly = getLeftCurly();
+        IndentLevel expIndentLevel = new IndentLevel(getIndent(), getBraceAdjustment());
+        if (!isOnStartOfLine(lcurly)
+            || lcurly.getParent().getType() == TokenTypes.INSTANCE_INIT) {
+            expIndentLevel = new IndentLevel(getIndent(), 0);
+        }
+
+        return expIndentLevel;
     }
 

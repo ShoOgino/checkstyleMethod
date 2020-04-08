@@ -1,0 +1,24 @@
+    @Test
+    public void testAlternativeGoogleStyleSwitchCaseAndEnums()
+            throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "2");
+        checkConfig.addAttribute("braceAdjustment", "2");
+        checkConfig.addAttribute("caseIndent", "2");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
+        final String fileName = getPath("InputIndentationSwitchCasesAndEnums.java");
+        final String[] expected = {
+            "18:7: " + getCheckMessage(MSG_CHILD_ERROR, "block", 6, 4),
+            "35:7: " + getCheckMessage(MSG_ERROR, "block lcurly", 6, 8),
+            "38:11: " + getCheckMessage(MSG_ERROR, "block rcurly", 10, 8),
+            "54:5: " + getCheckMessage(MSG_ERROR, "block lcurly", 4, 2),
+            "55:3: " + getCheckMessage(MSG_CHILD_ERROR, "block", 2, 4),
+        };
+        verifyWarns(checkConfig, fileName, expected);
+    }
+

@@ -19,6 +19,10 @@
                         + getLineWrappingIndent());
             }
         }
+        if (hasCurlies() && isOnStartOfLine(getLeftCurly())) {
+            indentLevel = IndentLevel.addAcceptable(indentLevel,
+                    curlyIndent().getFirstIndentLevel() + getBasicOffset());
+        }
         return indentLevel;
     }
 
