@@ -1,12 +1,12 @@
     /**
      * Verifies that a type definition has a required tag.
      *
-     * @param lineNo the line number for the type definition.
+     * @param ast the AST node for the type definition.
      * @param tags tags from the Javadoc comment for the type definition.
      * @param tagName the required tag name.
      * @param formatPattern regexp for the tag value.
      */
-    private void checkTag(int lineNo, List<JavadocTag> tags, String tagName,
+    private void checkTag(DetailAST ast, List<JavadocTag> tags, String tagName,
                           Pattern formatPattern) {
         if (formatPattern != null) {
             boolean hasTag = false;
@@ -16,12 +16,12 @@
                 if (tag.getTagName().equals(tagName)) {
                     hasTag = true;
                     if (!formatPattern.matcher(tag.getFirstArg()).find()) {
-                        log(lineNo, MSG_TAG_FORMAT, tagPrefix + tagName, formatPattern.pattern());
+                        log(ast, MSG_TAG_FORMAT, tagPrefix + tagName, formatPattern.pattern());
                     }
                 }
             }
             if (!hasTag) {
-                log(lineNo, MSG_MISSING_TAG, tagPrefix + tagName);
+                log(ast, MSG_MISSING_TAG, tagPrefix + tagName);
             }
         }
     }

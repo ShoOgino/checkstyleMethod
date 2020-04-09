@@ -1,0 +1,26 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionJavadocTypeTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(JavadocTypeCheck.class);
+
+        moduleConfig.addAttribute("authorFormat", "foo");
+
+        final String[] expectedViolation = {
+            "7:1: " + getCheckMessage(JavadocTypeCheck.class,
+                MSG_TAG_FORMAT, "@author", "foo"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocTypeTwo']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocTypeTwo']]"
+                        + "/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocTypeTwo']]"
+                        + "/MODIFIERS/LITERAL_PUBLIC");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

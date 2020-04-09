@@ -2,11 +2,11 @@
      * Verifies that a type definition has the specified param tag for
      * the specified type parameter name.
      *
-     * @param lineNo the line number for the type definition.
+     * @param ast the AST node for the type definition.
      * @param tags tags from the Javadoc comment for the type definition.
      * @param typeParamName the name of the type parameter
      */
-    private void checkTypeParamTag(final int lineNo,
+    private void checkTypeParamTag(final DetailAST ast,
             final List<JavadocTag> tags, final String typeParamName) {
         boolean found = false;
         for (int i = tags.size() - 1; i >= 0; i--) {
@@ -19,7 +19,7 @@
             }
         }
         if (!found) {
-            log(lineNo, MSG_MISSING_TAG, JavadocTagInfo.PARAM.getText()
+            log(ast, MSG_MISSING_TAG, JavadocTagInfo.PARAM.getText()
                 + " " + OPEN_ANGLE_BRACKET + typeParamName + CLOSE_ANGLE_BRACKET);
         }
     }

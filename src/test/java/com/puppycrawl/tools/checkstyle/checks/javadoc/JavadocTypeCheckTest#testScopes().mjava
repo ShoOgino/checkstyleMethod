@@ -3,8 +3,8 @@
         final DefaultConfiguration checkConfig =
             createModuleConfig(JavadocTypeCheck.class);
         final String[] expected = {
-            "4: " + getCheckMessage(MSG_MISSING_TAG, "@param <T>"),
-            "123: " + getCheckMessage(MSG_MISSING_TAG, "@param <T>"),
+            "4:1: " + getCheckMessage(MSG_MISSING_TAG, "@param <T>"),
+            "123:5: " + getCheckMessage(MSG_MISSING_TAG, "@param <T>"),
         };
         verify(checkConfig,
                getPath("InputJavadocTypeNoJavadoc.java"),

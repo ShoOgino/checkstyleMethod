@@ -5,9 +5,9 @@
             createModuleConfig(JavadocTypeCheck.class);
         checkConfig.addAttribute("versionFormat", "^\\p{Digit}+\\.\\p{Digit}+$");
         final String[] expected = {
-            "22: " + getCheckMessage(MSG_MISSING_TAG, "@version"),
-            "58: " + getCheckMessage(MSG_MISSING_TAG, "@version"),
-            "94: " + getCheckMessage(MSG_MISSING_TAG, "@version"),
+            "22:1: " + getCheckMessage(MSG_MISSING_TAG, "@version"),
+            "58:1: " + getCheckMessage(MSG_MISSING_TAG, "@version"),
+            "94:1: " + getCheckMessage(MSG_MISSING_TAG, "@version"),
         };
         verify(checkConfig, getPath("InputJavadocTypeJavadoc.java"), expected);
     }
