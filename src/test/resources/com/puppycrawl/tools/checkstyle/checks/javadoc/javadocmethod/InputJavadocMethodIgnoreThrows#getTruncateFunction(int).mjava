@@ -1,0 +1,15 @@
+    /**
+     * Ignore everything inside lambda.
+     *
+     * @param maxLength Max length
+     * @return A function to truncate string
+     */
+    private static Function<String, String> getTruncateFunction(int maxLength) {
+        return s -> {
+            if (s == null) {
+                throw new IllegalArgumentException("Cannot truncate null"); // ok, inside lambda
+            }
+            return s.length() > maxLength ? s.substring(0, maxLength) : s;
+        };
+    }
+

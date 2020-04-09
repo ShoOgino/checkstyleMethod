@@ -1,0 +1,16 @@
+    /**
+     * However, rethrowing the same exception (without creating a new one)
+     * will not be treated as a violation.
+     *
+     * @param o An input
+     */
+    private static void catchAndRethrowSame(Object o) {
+        try {
+            if (o == null) {
+                throw new IllegalArgumentException("null"); // ok, try
+            }
+        } catch (IllegalArgumentException ex) {
+            throw ex; // no violation
+        }
+    }
+

@@ -1,0 +1,18 @@
+    /**
+     * It is not possible to tell the exact type of the exception
+     * unless 'throw new' is used.
+     *
+     * @param o An input
+     * @param i Another input
+     */
+    private static void catchAndRethrowDifferent(Object o, int i) {
+        try {
+            float x = 1 / i; // ArithmeticException when i = 0
+        } catch (RuntimeException ex) {
+            if (o == null) {
+                ex = new NullPointerException("");
+            }
+            throw ex; // no violation
+        }
+    }
+

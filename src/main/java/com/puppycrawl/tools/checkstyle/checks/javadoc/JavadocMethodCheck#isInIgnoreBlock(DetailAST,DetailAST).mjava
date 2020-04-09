@@ -1,0 +1,30 @@
+    /**
+     * Checks if a 'throw' usage is contained within a block that should be ignored.
+     * Such blocks consist of try (with catch) blocks, local classes, anonymous classes,
+     * and lambda expressions. Note that a try block without catch is not considered.
+     * @param methodBodyAst DetailAST node representing the method body
+     * @param throwAst DetailAST node representing the 'throw' literal
+     * @return true if throwAst is inside a block that should be ignored
+     */
+    private static boolean isInIgnoreBlock(DetailAST methodBodyAst, DetailAST throwAst) {
+        DetailAST ancestor = throwAst.getParent();
+        while (ancestor != methodBodyAst) {
+            if (ancestor.getType() == TokenTypes.LITERAL_TRY
+                    && ancestor.findFirstToken(TokenTypes.LITERAL_CATCH) != null
+                    || ancestor.getType() == TokenTypes.LAMBDA
+                    || ancestor.getType() == TokenTypes.OBJBLOCK) {
+                // throw is inside a try block, and there is a catch block,
+                // or throw is inside a lambda expression/anonymous class/local class
+                break;
+            }
+            if (ancestor.getType() == TokenTypes.LITERAL_CATCH
+                    || ancestor.getType() == TokenTypes.LITERAL_FINALLY) {
+                // if the throw is inside a catch or finally block,
+                // skip the immediate ancestor (try token)
+                ancestor = ancestor.getParent();
+            }
+            ancestor = ancestor.getParent();
+        }
+        return ancestor != methodBodyAst;
+    }
+

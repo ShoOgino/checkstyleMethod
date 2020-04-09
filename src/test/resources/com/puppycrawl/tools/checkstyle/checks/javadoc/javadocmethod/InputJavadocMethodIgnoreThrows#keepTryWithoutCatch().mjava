@@ -1,0 +1,11 @@
+    /**
+     * However, do not ignore try block without catch.
+     */
+    private static void keepTryWithoutCatch() {
+        try (Scanner sc = new Scanner(System.in)) {
+            if (sc.nextInt() <= 0) {
+                throw new IllegalArgumentException(""); // violation, not caught and no @param
+            }
+        }
+    }
+

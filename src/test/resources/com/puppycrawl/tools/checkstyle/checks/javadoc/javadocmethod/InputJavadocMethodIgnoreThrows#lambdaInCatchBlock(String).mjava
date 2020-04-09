@@ -1,0 +1,23 @@
+    /**
+     * Catch block is not ignored, but lambda is still ignored.
+     *
+     * @param s a string
+     * @return a function
+     */
+    Function<String, Integer> lambdaInCatchBlock(String s) {
+        try {
+            int value = Integer.parseInt(s);
+            if (value <= 0) {
+                throw new NumberFormatException(value + " is negative/zero"); // ok, try
+            }
+            return x -> value;
+        } catch (NumberFormatException ex) {
+            if (s.length() == 1) {
+                throw new IllegalArgumentException("Invalid number", ex); // violation, catch
+            }
+            return x -> {
+                throw new UnsupportedOperationException(""); // ok, inside lambda
+            };
+        }
+    }
+

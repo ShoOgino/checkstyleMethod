@@ -1,0 +1,21 @@
+    /**
+     * Try-with-resources should also be ignored if there is a catch block.
+     *
+     * @param input file to read
+     */
+    private static void ignoreTryWithResources(String input) {
+        try (BufferedReader in = new BufferedReader(new FileReader(input))) {
+            String s = in.readLine();
+            System.out.println(s);
+            if (s.length() == 0) {
+                // false negative, unable to tell what was caught
+                throw new IllegalArgumentException("empty input"); // no violation
+            }
+            else {
+                throw new IOException(); // ok, exception was caught
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file");
+        }
+    }
+

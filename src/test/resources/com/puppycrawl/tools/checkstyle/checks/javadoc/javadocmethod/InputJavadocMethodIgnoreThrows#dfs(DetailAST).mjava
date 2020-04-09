@@ -1,0 +1,22 @@
+    /**
+     * Local inner classes should be ignored.
+     *
+     * @param ast input
+     */
+    void dfs(DetailAST ast) {
+        class DFS {
+            void neverCalled() {
+                throw new IllegalStateException(""); // ok, inside local class
+            }
+
+            void dfs(DetailAST ast) {
+                if (ast != null) {
+                    dfs(ast.getFirstChild());
+                    System.out.println(ast);
+                    dfs(ast.getNextSibling());
+                }
+            }
+        }
+        new DFS().dfs(ast);
+    }
+
