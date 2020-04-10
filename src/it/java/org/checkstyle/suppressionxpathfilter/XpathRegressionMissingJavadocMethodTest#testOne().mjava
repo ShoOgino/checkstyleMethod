@@ -1,0 +1,34 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionMissingJavadocMethod1.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(MissingJavadocMethodCheck.class);
+        moduleConfig.addAttribute("tokens", "CTOR_DEF");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(MissingJavadocMethodCheck.class,
+                MissingJavadocMethodCheck.MSG_JAVADOC_MISSING),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod1']]"
+                    + "/OBJBLOCK/CTOR_DEF[."
+                    + "/IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod1']]",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod1']]"
+                    + "/OBJBLOCK/CTOR_DEF[."
+                    + "/IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod1']]"
+                    + "/MODIFIERS",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod1']]"
+                    + "/OBJBLOCK/CTOR_DEF[."
+                    + "/IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod1']]"
+                    + "/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

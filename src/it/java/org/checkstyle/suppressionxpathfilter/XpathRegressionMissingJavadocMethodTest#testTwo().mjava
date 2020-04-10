@@ -1,0 +1,31 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionMissingJavadocMethod2.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(MissingJavadocMethodCheck.class);
+        moduleConfig.addAttribute("tokens", "METHOD_DEF");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(MissingJavadocMethodCheck.class,
+                MissingJavadocMethodCheck.MSG_JAVADOC_MISSING),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod2']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod2']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                    + "/MODIFIERS",
+
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocMethod2']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                    + "/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
