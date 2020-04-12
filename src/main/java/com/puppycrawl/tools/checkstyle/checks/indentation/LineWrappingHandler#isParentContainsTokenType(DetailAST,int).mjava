@@ -1,0 +1,11 @@
+    private static boolean isParentContainsTokenType(final DetailAST node, int type) {
+        boolean returnValue = false;
+        for (DetailAST ast = node.getParent(); ast != null; ast = ast.getParent()) {
+            if (ast.getType() == type) {
+                returnValue = true;
+                break;
+            }
+        }
+        return returnValue;
+    }
+

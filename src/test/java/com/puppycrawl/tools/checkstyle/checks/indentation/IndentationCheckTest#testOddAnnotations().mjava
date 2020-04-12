@@ -1,0 +1,21 @@
+    @Test
+    public void testOddAnnotations()
+            throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+
+        checkConfig.addAttribute("arrayInitIndent", "3");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("forceStrictCondition", "true");
+        checkConfig.addAttribute("lineWrappingIndentation", "9");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
+        final String fileName = getPath("InputIndentationOddLineWrappingAndArrayInit.java");
+        final String[] expected = {
+            "25:17: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "annotation array initialization",
+                    16, "11, 17, 47, 54"),
+        };
+        verifyWarns(checkConfig, fileName, expected);
+    }
+
