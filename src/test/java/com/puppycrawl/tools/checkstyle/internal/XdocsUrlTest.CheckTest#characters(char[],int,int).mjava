@@ -1,0 +1,11 @@
+        @Override
+        public void characters(char[] ch, int start, int length) {
+            if (currentTag != null && singleCheckNameList != null && currentTag.equals(NODE_NAME)) {
+                final String currentValue = new String(ch, start, length).trim();
+                if (!currentValue.isEmpty() && !"\n".equals(currentValue)) {
+                    singleCheckNameList.add(currentValue);
+                }
+                currentTag = null;
+            }
+        }
+

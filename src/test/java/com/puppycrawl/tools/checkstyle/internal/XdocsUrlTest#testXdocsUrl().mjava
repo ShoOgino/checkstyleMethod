@@ -1,0 +1,44 @@
+    @Test
+    public void testXdocsUrl() throws Exception {
+        final SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+        final SAXParser parser = parserFactory.newSAXParser();
+        final CheckTest checkHandler = new CheckTest();
+        try (InputStream input = Files.newInputStream(AVAILABLE_CHECKS_PATH)) {
+            parser.parse(input, checkHandler);
+        }
+        final Map<String, List<String>> checksNamesMap = getXdocsMap();
+        for (List<String> sub : checkHandler.checkNamesList) {
+            final String moduleName = sub.get(0);
+            final String checkNameInAttribute = sub.get(1);
+            final String checkNameInText = sub.get(2);
+            final String checkNameInconsistentErrorMsg = String.format(Locale.ROOT,
+                    "Check with name '%s' in attribute "
+                            + "is not consistent with check name in text in file '%s'",
+                    checkNameInAttribute, AVAILABLE_CHECKS_PATH);
+            assertWithMessage(checkNameInconsistentErrorMsg)
+                    .that(checkNameInText).matches(checkNameInAttribute);
+            final String checkNameModuleErrorMsg = String.format(Locale.ROOT,
+                    "Check with name '%s' is not in '%s' module",
+                    checkNameInAttribute, moduleName);
+            if (checkNameInAttribute.equals(COMMENTS_INDENTATION)
+                    || checkNameInAttribute.equals(INDENTATION)) {
+                assertWithMessage(checkNameModuleErrorMsg).that(moduleName).matches(MISC);
+            }
+            else if (checkNameInAttribute.equals(SUPPRESS_WARNINGS_HOLDER)) {
+                assertWithMessage(checkNameModuleErrorMsg).that(moduleName).matches(ANNOTATION);
+            }
+            else {
+                final List<String> moduleFileNames = checksNamesMap.get(moduleName);
+                final String moduleNameErrorMsg = String.format(Locale.ROOT,
+                        "module name: '%s' does not exist in '%s'", moduleName, PACKAGE_NAME);
+                assertWithMessage(moduleNameErrorMsg).that(moduleFileNames).isNotNull();
+                boolean match = false;
+                final String checkNameWithSuffix = checkNameInAttribute + SUFFIX_CHECK;
+                if (moduleFileNames.contains(checkNameWithSuffix)) {
+                    match = true;
+                }
+                assertWithMessage(checkNameModuleErrorMsg).that(match).isTrue();
+            }
+        }
+    }
+
