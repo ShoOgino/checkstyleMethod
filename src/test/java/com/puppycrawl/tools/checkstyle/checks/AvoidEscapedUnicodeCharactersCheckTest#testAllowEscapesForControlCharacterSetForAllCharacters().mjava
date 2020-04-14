@@ -9,7 +9,7 @@
         final String[] expected = IntStream.rangeClosed(0, 0xffff)
                 .parallel()
                 .filter(val -> !isControlCharacter(val))
-                .mapToObj(msg -> indexOfStartLineInInputFile + msg + ": " + message)
+                .mapToObj(msg -> indexOfStartLineInInputFile + msg + ":54: " + message)
                 .toArray(String[]::new);
         verify(checkConfig,
                 getPath("InputAvoidEscapedUnicodeCharactersAllEscapedUnicodeCharacters.java"),

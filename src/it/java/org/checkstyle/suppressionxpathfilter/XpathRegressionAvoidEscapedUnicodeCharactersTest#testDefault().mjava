@@ -1,0 +1,27 @@
+    @Test
+    public void testDefault() throws Exception {
+        final File fileToProcess = new File(getPath(
+            "SuppressionXpathRegressionAvoidEscapedUnicodeCharactersDefault.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AvoidEscapedUnicodeCharactersCheck.class);
+
+        final String[] expectedViolation = {
+            "4:34: " + getCheckMessage(AvoidEscapedUnicodeCharactersCheck.class, MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionAvoidEscapedUnicodeCharactersDefault']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='unitAbbrev2']]"
+                + "/ASSIGN/EXPR[./STRING_LITERAL[@text='\\u03bcs']]",
+            "/CLASS_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionAvoidEscapedUnicodeCharactersDefault']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='unitAbbrev2']]"
+                + "/ASSIGN/EXPR/STRING_LITERAL[@text='\\u03bcs']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

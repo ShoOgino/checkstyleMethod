@@ -1,0 +1,30 @@
+    @Test
+    public void testTailComment() throws Exception {
+        final File fileToProcess = new File(getPath(
+            "SuppressionXpathRegressionAvoidEscapedUnicodeCharactersTailComment.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(AvoidEscapedUnicodeCharactersCheck.class);
+        moduleConfig.addAttribute("allowByTailComment", "true");
+
+        final String[] expectedViolation = {
+            "4:45: " + getCheckMessage(AvoidEscapedUnicodeCharactersCheck.class, MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[."
+                + "/IDENT[@text="
+                    + "'SuppressionXpathRegressionAvoidEscapedUnicodeCharactersTailComment']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='unitAbbrev9']]"
+                + "/ASSIGN/EXPR[./STRING_LITERAL[@text='\\u03bcs']]",
+            "/CLASS_DEF[."
+                + "/IDENT[@text="
+                    + "'SuppressionXpathRegressionAvoidEscapedUnicodeCharactersTailComment']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='unitAbbrev9']]"
+                + "/ASSIGN/EXPR/STRING_LITERAL[@text='\\u03bcs']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
