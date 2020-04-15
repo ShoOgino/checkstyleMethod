@@ -1,0 +1,33 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionInterfaceMemberImpliedModifier1.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(InterfaceMemberImpliedModifierCheck.class);
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(InterfaceMemberImpliedModifierCheck.class,
+                InterfaceMemberImpliedModifierCheck.MSG_KEY, "final"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/INTERFACE_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionInterfaceMemberImpliedModifier1']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='str']]",
+
+            "/INTERFACE_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionInterfaceMemberImpliedModifier1']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='str']]"
+                + "/MODIFIERS",
+
+            "/INTERFACE_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionInterfaceMemberImpliedModifier1']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='str']]"
+                + "/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

@@ -1,0 +1,33 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionInterfaceMemberImpliedModifier2.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(InterfaceMemberImpliedModifierCheck.class);
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(InterfaceMemberImpliedModifierCheck.class,
+                InterfaceMemberImpliedModifierCheck.MSG_KEY, "public"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/INTERFACE_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionInterfaceMemberImpliedModifier2']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='setData']]",
+
+            "/INTERFACE_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionInterfaceMemberImpliedModifier2']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='setData']]"
+                + "/MODIFIERS",
+
+            "/INTERFACE_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionInterfaceMemberImpliedModifier2']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='setData']]"
+                + "/MODIFIERS/ABSTRACT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
