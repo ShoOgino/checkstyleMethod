@@ -1,0 +1,19 @@
+    /**
+     * Checks whether this node is the end of a Javadoc comment,
+     * optionally preceded by blank text.
+     *
+     * @param detailNode the node to process
+     * @return {@code true} if the node is {@link JavadocTokenTypes#EOF}
+     */
+    private static boolean isLastLine(DetailNode detailNode) {
+        final DetailNode node;
+        if (detailNode.getType() == JavadocTokenTypes.TEXT
+                && CommonUtil.isBlank(detailNode.getText())) {
+            node = getNextNode(detailNode);
+        }
+        else {
+            node = detailNode;
+        }
+        return node.getType() == JavadocTokenTypes.EOF;
+    }
+

@@ -1,0 +1,16 @@
+    @Override
+    public void visitJavadocToken(DetailNode detailNode) {
+        DetailNode nextSibling = getNextNode(detailNode);
+
+        // Till https://github.com/checkstyle/checkstyle/issues/9005
+        // Due to bug in the Javadoc parser there may be phantom description nodes.
+        while (TokenUtil.isOfType(nextSibling.getType(),
+                JavadocTokenTypes.DESCRIPTION, JavadocTokenTypes.WS)) {
+            nextSibling = getNextNode(nextSibling);
+        }
+
+        if (!isLeadingAsterisk(nextSibling) && !isLastLine(nextSibling)) {
+            log(nextSibling.getLineNumber(), MSG_MISSING_ASTERISK);
+        }
+    }
+

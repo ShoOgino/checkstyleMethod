@@ -1,0 +1,21 @@
+    @Test
+    public void testIncorrect() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(JavadocMissingLeadingAsteriskCheck.class);
+        final String[] expected = {
+            "9: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "14: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "21: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "27: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "31: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "32: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "37: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "42: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "49: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "58: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "59: " + getCheckMessage(MSG_MISSING_ASTERISK),
+            "60: " + getCheckMessage(MSG_MISSING_ASTERISK),
+        };
+        verify(checkConfig, getPath("InputJavadocMissingLeadingAsteriskIncorrect.java"), expected);
+    }
+
