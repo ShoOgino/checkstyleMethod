@@ -1,20 +1,20 @@
     @Override
     public void visitToken(DetailAST ast) {
         switch (ast.getType()) {
-            case TokenTypes.IDENT :
+            case TokenTypes.IDENT:
                 processIdent(ast);
                 break;
-            case TokenTypes.CLASS_DEF :
-            case TokenTypes.INTERFACE_DEF :
-            case TokenTypes.ENUM_DEF :
-            case TokenTypes.ANNOTATION_DEF :
-            case TokenTypes.SLIST :
-            case TokenTypes.METHOD_DEF :
-            case TokenTypes.CTOR_DEF :
-            case TokenTypes.LITERAL_FOR :
+            case TokenTypes.CLASS_DEF:
+            case TokenTypes.INTERFACE_DEF:
+            case TokenTypes.ENUM_DEF:
+            case TokenTypes.ANNOTATION_DEF:
+            case TokenTypes.SLIST:
+            case TokenTypes.METHOD_DEF:
+            case TokenTypes.CTOR_DEF:
+            case TokenTypes.LITERAL_FOR:
                 current.push(frames.get(ast));
                 break;
-            default :
+            default:
                 // do nothing
         }
     }
