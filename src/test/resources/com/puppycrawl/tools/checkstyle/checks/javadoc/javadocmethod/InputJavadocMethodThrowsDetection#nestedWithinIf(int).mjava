@@ -1,0 +1,16 @@
+    /**
+     * Example raised in issue 8117.
+     *
+     * @param x some input for control flow statements
+     * @return 0 if there were no problems
+     */
+    int nestedWithinIf(int x) {
+        if (x > 0) {
+            throw new UnsupportedOperationException(""); // violation
+        }
+        if (x < 0) {
+            throw new IllegalArgumentException(""); // violation
+        }
+        return 0;
+    }
+

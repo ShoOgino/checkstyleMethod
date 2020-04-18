@@ -1,0 +1,16 @@
+    /**
+     * Some regression cases have comments in front.
+     *
+     * @param x some input for control flow statements
+     */
+    void nestedWithinIfLeadingComment(int x) {
+        if (x > 0) {
+            // some comment in front
+            throw new UnsupportedOperationException(""); // violation
+        }
+        if (x < 0) {
+            // some comment in front
+            throw new IllegalArgumentException(""); // violation
+        }
+    }
+
