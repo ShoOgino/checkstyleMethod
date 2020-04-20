@@ -1,0 +1,27 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionUnnecessaryParentheses2.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(UnnecessaryParenthesesCheck.class);
+
+        final String[] expectedViolation = {
+            "5:13: " + getCheckMessage(UnnecessaryParenthesesCheck.class,
+                UnnecessaryParenthesesCheck.MSG_EXPR),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses2']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                + "/SLIST/LITERAL_IF/EXPR",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses2']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                + "/SLIST/LITERAL_IF/EXPR/LPAREN"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

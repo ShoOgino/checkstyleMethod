@@ -1,0 +1,27 @@
+    @Test
+    public void testSeven() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionUnnecessaryParentheses7.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(UnnecessaryParenthesesCheck.class);
+
+        final String[] expectedViolation = {
+            "5:16: " + getCheckMessage(UnnecessaryParenthesesCheck.class,
+                UnnecessaryParenthesesCheck.MSG_RETURN),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses7']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                + "/SLIST/LITERAL_RETURN/EXPR",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses7']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                + "/SLIST/LITERAL_RETURN/EXPR/LPAREN"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

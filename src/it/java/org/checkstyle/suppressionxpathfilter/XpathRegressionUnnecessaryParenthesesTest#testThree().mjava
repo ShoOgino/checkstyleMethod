@@ -1,0 +1,23 @@
+    @Test
+    public void testThree() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionUnnecessaryParentheses3.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(UnnecessaryParenthesesCheck.class);
+
+        final String[] expectedViolation = {
+            "7:35: " + getCheckMessage(UnnecessaryParenthesesCheck.class,
+                UnnecessaryParenthesesCheck.MSG_LAMBDA),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses3']]"
+                + "/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='predicate']]"
+                + "/ASSIGN/LAMBDA"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

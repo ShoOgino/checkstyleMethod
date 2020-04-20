@@ -1,0 +1,29 @@
+    @Test
+    public void testEight() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionUnnecessaryParentheses8.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(UnnecessaryParenthesesCheck.class);
+
+        final String[] expectedViolation = {
+            "5:17: " + getCheckMessage(UnnecessaryParenthesesCheck.class,
+                UnnecessaryParenthesesCheck.MSG_ASSIGN),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses8']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                + "/SLIST/VARIABLE_DEF[./IDENT[@text='c']]"
+                + "/ASSIGN/EXPR",
+
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses8']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                + "/SLIST/VARIABLE_DEF[./IDENT[@text='c']]"
+                + "/ASSIGN/EXPR/LPAREN"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

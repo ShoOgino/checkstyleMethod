@@ -1,0 +1,24 @@
+    @Test
+    public void testSix() throws Exception {
+        final File fileToProcess = new File(
+            getPath("SuppressionXpathRegressionUnnecessaryParentheses6.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(UnnecessaryParenthesesCheck.class);
+
+        final String[] expectedViolation = {
+            "5:18: " + getCheckMessage(UnnecessaryParenthesesCheck.class,
+                UnnecessaryParenthesesCheck.MSG_LITERAL, "10"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionUnnecessaryParentheses6']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                + "/SLIST/VARIABLE_DEF[./IDENT[@text='a']]"
+                + "/ASSIGN/EXPR/PLUS/NUM_INT[@text='10']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
