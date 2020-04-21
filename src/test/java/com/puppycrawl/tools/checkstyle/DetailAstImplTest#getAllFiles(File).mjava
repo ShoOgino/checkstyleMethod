@@ -6,11 +6,7 @@
                 result.addAll(getAllFiles(file));
             }
             else if (file.getName().endsWith(".java")
-                    // fails with unexpected character
-                    && !file.getName().endsWith("InputGrammar.java")
-                    // comment only files, no root
-                    && !file.getName().endsWith("InputPackageDeclarationWithCommentOnly.java")
-                    && !file.getName().endsWith("InputSingleSpaceSeparatorEmpty.java")) {
+                    && !NO_ROOT_FILES.contains(file.getName())) {
                 result.add(file);
             }
 
