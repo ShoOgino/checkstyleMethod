@@ -18,7 +18,7 @@
      */
     private void handleCommentInEmptyCodeBlock(DetailAST comment, DetailAST nextStmt) {
         if (comment.getColumnNo() < nextStmt.getColumnNo()) {
-            log(comment.getLineNo(), getMessageKey(comment), nextStmt.getLineNo(),
+            log(comment, getMessageKey(comment), nextStmt.getLineNo(),
                 comment.getColumnNo(), nextStmt.getColumnNo());
         }
     }

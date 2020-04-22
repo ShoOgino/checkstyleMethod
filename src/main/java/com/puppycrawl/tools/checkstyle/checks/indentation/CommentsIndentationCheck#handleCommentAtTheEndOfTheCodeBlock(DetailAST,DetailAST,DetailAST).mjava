@@ -22,7 +22,7 @@
                     || prevStmt.getType() == TokenTypes.CASE_GROUP
                     || prevStmt.getType() == TokenTypes.LITERAL_DEFAULT) {
                 if (comment.getColumnNo() < nextStmt.getColumnNo()) {
-                    log(comment.getLineNo(), getMessageKey(comment), nextStmt.getLineNo(),
+                    log(comment, getMessageKey(comment), nextStmt.getLineNo(),
                         comment.getColumnNo(), nextStmt.getColumnNo());
                 }
             }
@@ -33,7 +33,7 @@
             }
             else if (!areSameLevelIndented(comment, prevStmt, prevStmt)) {
                 final int prevStmtLineNo = prevStmt.getLineNo();
-                log(comment.getLineNo(), getMessageKey(comment), prevStmtLineNo,
+                log(comment, getMessageKey(comment), prevStmtLineNo,
                         comment.getColumnNo(), getLineStart(prevStmtLineNo));
             }
         }

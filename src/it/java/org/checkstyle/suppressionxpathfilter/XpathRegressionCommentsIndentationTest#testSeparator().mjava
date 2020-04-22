@@ -1,0 +1,24 @@
+    @Test
+    public void testSeparator() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionCommentsIndentation"
+                                        + "Separator.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(CommentsIndentationCheck.class);
+
+        final String[] expectedViolation = {
+            "8:13: " + getCheckMessage(CommentsIndentationCheck.class,
+                "comments.indentation.single", 10, 12, 4),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT"
+                + "[@text='SuppressionXpathRegressionCommentsIndentationSeparator']]"
+                + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]/MODIFIERS/SINGLE_LINE_COMMENT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
