@@ -1,0 +1,14 @@
+    @Test
+    public void testIsOfTypeTrue() {
+        final int type = TokenTypes.LITERAL_CATCH;
+        final DetailAstImpl astForTest = new DetailAstImpl();
+        astForTest.setType(type);
+        final boolean result1 = TokenUtil.isOfType(type, TokenTypes.LITERAL_FOR,
+                                TokenTypes.LITERAL_IF, TokenTypes.LITERAL_CATCH);
+        final boolean result2 = TokenUtil.isOfType(astForTest, TokenTypes.LITERAL_FOR,
+                                TokenTypes.LITERAL_IF, TokenTypes.LITERAL_CATCH);
+
+        assertTrue(result1, "Token type did not match");
+        assertTrue(result2, "Token type did not match");
+    }
+

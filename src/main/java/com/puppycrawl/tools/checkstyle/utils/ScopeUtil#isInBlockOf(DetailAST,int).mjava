@@ -12,11 +12,11 @@
         for (DetailAST token = node.getParent();
              token != null && !returnValue;
              token = token.getParent()) {
-            final int type = token.getType();
-            if (type == tokenType) {
+            if (token.getType() == tokenType) {
                 returnValue = true;
             }
-            else if (type == TokenTypes.LITERAL_NEW || TokenUtil.isTypeDeclaration(type)) {
+            else if (token.getType() == TokenTypes.LITERAL_NEW
+                    || TokenUtil.isTypeDeclaration(token.getType())) {
                 break;
             }
         }
