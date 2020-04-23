@@ -1,9 +1,12 @@
         /**
-         * Get import end line number.
-         *
-         * @return import end line.
+         * Get import end line number from ast.
+         * <p>
+         * <b>Note:</b> It can be different from <b>startLineNumber</b> when import statement span
+         * multiple lines.
+         * </p>
+         * @return import end line from ast.
          */
         public int getEndLineNumber() {
-            return endLineNumber;
+            return importAST.getLastChild().getLineNo();
         }
 

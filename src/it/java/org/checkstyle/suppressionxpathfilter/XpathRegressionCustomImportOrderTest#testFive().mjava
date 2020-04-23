@@ -1,0 +1,23 @@
+    @Test
+    public void testFive() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionCustomImportOrderFive.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(CustomImportOrderCheck.class);
+        moduleConfig.addAttribute("customImportOrderRules", "STATIC###STANDARD_JAVA_PACKAGE");
+
+        final String[] expectedViolation = {
+            "7:1: " + getCheckMessage(CustomImportOrderCheck.class,
+                        CustomImportOrderCheck.MSG_NONGROUP_EXPECTED, "STATIC",
+                        "java.lang.Math.PI"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/STATIC_IMPORT[./DOT/IDENT[@text='PI']]"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

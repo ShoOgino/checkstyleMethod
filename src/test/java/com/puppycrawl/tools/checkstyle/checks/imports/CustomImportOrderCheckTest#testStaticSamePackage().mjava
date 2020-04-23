@@ -7,15 +7,18 @@
                 "STATIC###SAME_PACKAGE(3)");
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
-            "5: " + getCheckMessage(MSG_LEX, "java.util.*", "java.util.StringTokenizer"),
-            "6: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.*"),
-            "7: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC, "java.awt.Button.ABORT"),
-            "8: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC, "javax.swing.WindowConstants.*"),
-            "9: " + getCheckMessage(MSG_LEX, "com.puppycrawl.tools.*", "java.util.StringTokenizer"),
-            "10: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME,
+            "5:1: " + getCheckMessage(MSG_LEX, "java.util.*", "java.util.StringTokenizer"),
+            "6:1: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME, "java.util.concurrent.*"),
+            "7:1: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC, "java.awt.Button.ABORT"),
+            "8:1: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC,
+                "javax.swing.WindowConstants.*"),
+            "9:1: " + getCheckMessage(MSG_LEX, "com.puppycrawl.tools.*",
+                "java.util.StringTokenizer"),
+            "10:1: " + getCheckMessage(MSG_NONGROUP_EXPECTED, SAME,
                 "java.util.concurrent.AbstractExecutorService"),
-            "11: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC, "java.io.File.createTempFile"),
-            "12: " + getCheckMessage(MSG_LEX, "com.*", "java.util.StringTokenizer"),
+            "11:1: " + getCheckMessage(MSG_NONGROUP_EXPECTED, STATIC,
+                "java.io.File.createTempFile"),
+            "12:1: " + getCheckMessage(MSG_LEX, "com.*", "java.util.StringTokenizer"),
         };
 
         verify(checkConfig, getNonCompilablePath("InputCustomImportOrderSamePackage.java"),

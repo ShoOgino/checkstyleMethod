@@ -13,7 +13,7 @@
                 validateExtraEmptyLine(previousImportObjectFromCurrentGroup,
                         importObject, fullImportIdent);
                 if (isAlphabeticalOrderBroken(previousImportFromCurrentGroup, fullImportIdent)) {
-                    log(importObject.getStartLineNumber(), MSG_LEX,
+                    log(importObject.getImportAST(), MSG_LEX,
                             fullImportIdent, previousImportFromCurrentGroup);
                 }
                 else {
@@ -33,13 +33,13 @@
                         previousImportFromCurrentGroup = fullImportIdent;
                     }
                     else {
-                        logWrongImportGroupOrder(importObject.getStartLineNumber(),
+                        logWrongImportGroupOrder(importObject.getImportAST(),
                                 importGroup, nextGroup, fullImportIdent);
                     }
                     previousImportObjectFromCurrentGroup = importObject;
                 }
                 else {
-                    logWrongImportGroupOrder(importObject.getStartLineNumber(),
+                    logWrongImportGroupOrder(importObject.getImportAST(),
                             importGroup, currentGroup, fullImportIdent);
                 }
             }

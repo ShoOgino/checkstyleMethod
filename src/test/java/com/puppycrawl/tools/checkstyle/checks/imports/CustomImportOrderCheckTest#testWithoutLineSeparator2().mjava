@@ -7,9 +7,9 @@
                 "STATIC###STANDARD_JAVA_PACKAGE");
         checkConfig.addAttribute("sortImportsInGroupAlphabetically", "true");
         final String[] expected = {
-            "4: " + getCheckMessage(MSG_LEX, "java.io.File.createTempFile",
+            "4:1: " + getCheckMessage(MSG_LEX, "java.io.File.createTempFile",
                 "javax.swing.WindowConstants.*"),
-            "8: " + getCheckMessage(MSG_LEX, "com.*", "com.puppycrawl.tools.*"),
+            "8:1: " + getCheckMessage(MSG_LEX, "com.*", "com.puppycrawl.tools.*"),
         };
 
         verify(checkConfig, getPath("InputCustomImportOrder_NoSeparator.java"), expected);
