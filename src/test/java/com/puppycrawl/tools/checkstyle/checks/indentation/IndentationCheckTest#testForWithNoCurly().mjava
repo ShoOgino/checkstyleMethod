@@ -1,0 +1,26 @@
+    @Test
+    public void testForWithNoCurly()
+            throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
+        final String fileName = getPath("InputIndentationForWithoutCurly.java");
+        final String[] expected = {
+            "21:1: " + getCheckMessage(MSG_CHILD_ERROR, "for", 0, 12),
+            "26:5: " + getCheckMessage(MSG_ERROR, "for", 4, 8),
+            "27:9: " + getCheckMessage(MSG_CHILD_ERROR, "for", 8, 12),
+            "32:9: " + getCheckMessage(MSG_ERROR, "for", 8, 12),
+            "33:9: " + getCheckMessage(MSG_CHILD_ERROR, "for", 8, 16),
+            "37:9: " + getCheckMessage(MSG_CHILD_ERROR, "for", 8, 16),
+
+        };
+        verifyWarns(checkConfig, fileName, expected);
+    }
+

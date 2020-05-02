@@ -1,0 +1,22 @@
+    @Test
+    public void testDoWhileWithoutCurly()
+            throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+
+        checkConfig.addAttribute("arrayInitIndent", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("caseIndent", "4");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
+        final String fileName = getPath("InputIndentationDoWhile.java");
+        final String[] expected = {
+            "23:9: " + getCheckMessage(MSG_CHILD_ERROR, "do..while", 8, 12),
+            "30:5: " + getCheckMessage(MSG_ERROR, "do..while while", 4, 8),
+            "33:13: " + getCheckMessage(MSG_ERROR, "do..while while", 12, 8),
+        };
+        verifyWarns(checkConfig, fileName, expected);
+    }
+

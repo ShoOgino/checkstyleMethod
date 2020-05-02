@@ -1,0 +1,19 @@
+    void test() { //indent:4 exp:4
+        int a = 9; //indent:8 exp:8
+        do//indent:8 exp:8
+            expression();//indent:12 exp:12
+        while (a < 11);//indent:8 exp:8
+        do//indent:8 exp:8
+        expression();//indent:8 exp:12 warn
+        while (a < 11);//indent:8 exp:8
+        do//indent:8 exp:8
+                    expression();//indent:20 exp:20
+        while (a < 11);//indent:8 exp:8
+        do//indent:8 exp:8
+            expression();//indent:12 exp:12
+    while (a < 11);//indent:4 exp:8 warn
+        do//indent:8 exp:8
+            expression();//indent:12 exp:12
+            while (a < 11);//indent:12 exp:8 warn
+    } //indent:4 exp:4
+
