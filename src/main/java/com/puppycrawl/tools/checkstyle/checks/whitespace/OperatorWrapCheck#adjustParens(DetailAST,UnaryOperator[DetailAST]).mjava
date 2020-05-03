@@ -1,0 +1,32 @@
+    /**
+     * Finds matching parentheses among siblings. If the given node is not
+     * {@link TokenTypes#LPAREN} nor {@link TokenTypes#RPAREN}, the method adjusts nothing.
+     * This method is for handling case like {@code
+     *   (condition && (condition
+     *     || condition2 || condition3) && condition4
+     *     && condition3)
+     * }
+     *
+     * @param node the node to adjust
+     * @param step the node transformer, should be {@link DetailAST#getPreviousSibling}
+     *             or {@link DetailAST#getNextSibling}
+     * @return adjusted node
+     */
+    private static DetailAST adjustParens(DetailAST node, UnaryOperator<DetailAST> step) {
+        DetailAST result = node;
+        int accumulator = 0;
+        while (true) {
+            if (result.getType() == TokenTypes.LPAREN) {
+                accumulator--;
+            }
+            else if (result.getType() == TokenTypes.RPAREN) {
+                accumulator++;
+            }
+            if (accumulator == 0) {
+                break;
+            }
+            result = step.apply(result);
+        }
+        return result;
+    }
+

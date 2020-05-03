@@ -1,0 +1,10 @@
+    /**
+     * Checks whether operator violates {@link WrapOption#EOL} mode.
+     *
+     * @param ast the DetailAst of an operator
+     * @return {@code true} if mode does not match
+     */
+    private static boolean isEndOfLineModeViolation(DetailAST ast) {
+        return !TokenUtil.areOnSameLine(ast, getLeftNode(ast));
+    }
+

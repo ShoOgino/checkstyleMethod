@@ -1,0 +1,11 @@
+    /**
+     * Checks if a node is {@link TokenTypes#COLON} from a label, switch case of default.
+     *
+     * @param node the node to check
+     * @return {@code true} if node matches
+     */
+    private static boolean isColonFromLabel(DetailAST node) {
+        return TokenUtil.isOfType(node.getParent(), TokenTypes.LABELED_STAT,
+            TokenTypes.LITERAL_CASE, TokenTypes.LITERAL_DEFAULT);
+    }
+

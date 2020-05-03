@@ -1,0 +1,21 @@
+    /**
+     * Filters some false tokens that this check should ignore.
+     *
+     * @param node the node to check
+     * @return {@code true} for all nodes this check should validate
+     */
+    private static boolean isTargetNode(DetailAST node) {
+        final boolean result;
+        if (node.getType() == TokenTypes.COLON) {
+            result = !isColonFromLabel(node);
+        }
+        else if (node.getType() == TokenTypes.STAR) {
+            // Unlike the import statement, the multiply operator always has children
+            result = node.hasChildren();
+        }
+        else {
+            result = true;
+        }
+        return result;
+    }
+

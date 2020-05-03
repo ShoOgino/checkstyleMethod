@@ -1,0 +1,11 @@
+    /**
+     * Checks whether operator violates {@link WrapOption#NL} mode.
+     *
+     * @param ast the DetailAst of an operator
+     * @return {@code true} if mode does not match
+     */
+    private static boolean isNewLineModeViolation(DetailAST ast) {
+        return TokenUtil.areOnSameLine(ast, getLeftNode(ast))
+                && !TokenUtil.areOnSameLine(ast, getRightNode(ast));
+    }
+

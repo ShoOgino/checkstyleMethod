@@ -1,0 +1,10 @@
+    /**
+     * Checks if a node is {@link TokenTypes#ASSIGN} to a variable or resource.
+     *
+     * @param node the node to check
+     * @return {@code true} if node matches
+     */
+    private static boolean isAssignToVariable(DetailAST node) {
+        return TokenUtil.isOfType(node.getParent(), TokenTypes.VARIABLE_DEF, TokenTypes.RESOURCE);
+    }
+

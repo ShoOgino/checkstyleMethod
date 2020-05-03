@@ -1,0 +1,26 @@
+    public InputOperatorWrapEol() throws IOException {
+        label: try (Reader r = // ok
+                 null) {
+        }
+        try (Reader r
+                 = null) { // violation
+        }
+        int x = (1 < 2) ? // ok
+                false ? "".substring(0,
+                        0).length()
+                    : false // violation
+                    ? 2 : 3 : 4; // violation
+
+        for (int value : // ok
+                new int[0]) {}
+        for (int value
+                : new int[0]) {} // violation
+
+        int[] a1 = // ok
+                {};
+        int[] a2
+                = {}; // violation
+        int[] a3 = { // ok
+        };
+    }
+

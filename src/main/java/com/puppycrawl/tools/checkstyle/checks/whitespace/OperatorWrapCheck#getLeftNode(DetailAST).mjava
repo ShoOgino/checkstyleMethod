@@ -1,0 +1,22 @@
+    /**
+     * Returns the left neighbour of a binary operator. This is the rightmost
+     * grandchild of the left child or sibling. For the assign operator the return value is
+     * the variable name.
+     *
+     * @param node the binary operator
+     * @return nearest node from left
+     */
+    private static DetailAST getLeftNode(DetailAST node) {
+        DetailAST result;
+        if (node.getFirstChild() == null || isAssignToVariable(node)) {
+            result = node.getPreviousSibling();
+        }
+        else {
+            result = adjustParens(node.getFirstChild(), DetailAST::getNextSibling);
+        }
+        while (result.getLastChild() != null) {
+            result = result.getLastChild();
+        }
+        return result;
+    }
+
