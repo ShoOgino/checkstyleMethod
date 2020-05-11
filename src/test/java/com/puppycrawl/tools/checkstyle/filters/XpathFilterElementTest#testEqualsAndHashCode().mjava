@@ -8,6 +8,8 @@
                 .usingGetClass()
                 .withIgnoredFields("fileRegexp", "checkRegexp", "messageRegexp", "xpathExpression")
                 .report();
-        assertEquals(EqualsVerifierReport.SUCCESS, ev, "Error: " + ev.getMessage());
+        assertWithMessage("Error: " + ev.getMessage())
+                .that(ev.isSuccessful())
+                .isTrue();
     }
 

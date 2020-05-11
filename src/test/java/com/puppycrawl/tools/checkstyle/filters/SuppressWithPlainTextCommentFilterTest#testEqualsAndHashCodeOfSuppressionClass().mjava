@@ -10,6 +10,8 @@
         final EqualsVerifierReport ev = EqualsVerifier
                 .forClass(suppressionClass).usingGetClass()
                 .report();
-        assertEquals(EqualsVerifierReport.SUCCESS, ev, "Error: " + ev.getMessage());
+        assertWithMessage("Error: " + ev.getMessage())
+                .that(ev.isSuccessful())
+                .isTrue();
     }
 
