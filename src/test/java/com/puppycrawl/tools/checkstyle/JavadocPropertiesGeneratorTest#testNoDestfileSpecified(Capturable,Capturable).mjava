@@ -4,7 +4,7 @@
         JavadocPropertiesGenerator.main(getPath("InputMain.java"));
 
         final String expected = String.format(Locale.ROOT,
-                "Missing required option '--destfile=<outputFile>'%n") + USAGE;
+                "Missing required option: '--destfile=<outputFile>'%n") + USAGE;
         assertEquals(expected, systemErr.getCapturedData(), "Unexpected error log");
         assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
     }
