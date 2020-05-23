@@ -1,9 +1,9 @@
     @Test
     public void testWrongHtmlTagOrder() throws Exception {
+        final File file = new File(
+                getPath("InputDetailNodeTreeStringPrinterWrongHtmlTagOrder.javadoc"));
         try {
-            DetailNodeTreeStringPrinter.printFileAst(new File(getPath(
-                    "InputDetailNodeTreeStringPrinterWrongHtmlTagOrder.javadoc"
-            )));
+            DetailNodeTreeStringPrinter.printFileAst(file);
             fail("Exception is expected");
         }
         catch (IllegalArgumentException ex) {

@@ -1,8 +1,9 @@
     @Test
     public void testNoViableAltException() throws Exception {
+        final File file = new File(
+                getPath("InputDetailNodeTreeStringPrinterNoViableAltException.javadoc"));
         try {
-            DetailNodeTreeStringPrinter.printFileAst(new File(getPath(
-                    "InputDetailNodeTreeStringPrinterNoViableAltException.javadoc")));
+            DetailNodeTreeStringPrinter.printFileAst(file);
             fail("Exception is expected");
         }
         catch (IllegalArgumentException ex) {

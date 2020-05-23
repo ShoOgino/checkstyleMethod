@@ -1,9 +1,10 @@
     @Test
     public void testUnescapedJavaCodeWithGenericsInJavadoc() throws Exception {
+        final File file = new File(
+                getPath("InputDetailNodeTreeStringPrinter"
+                        + "UnescapedJavaCodeWithGenericsInJavadoc.javadoc"));
         try {
-            DetailNodeTreeStringPrinter.printFileAst(new File(
-                    getPath("InputDetailNodeTreeStringPrinter"
-                            + "UnescapedJavaCodeWithGenericsInJavadoc.javadoc")));
+            DetailNodeTreeStringPrinter.printFileAst(file);
             fail("Exception is expected");
         }
         catch (IllegalArgumentException ex) {

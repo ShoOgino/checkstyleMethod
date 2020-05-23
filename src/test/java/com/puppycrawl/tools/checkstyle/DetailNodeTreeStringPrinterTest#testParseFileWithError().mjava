@@ -1,8 +1,9 @@
     @Test
     public void testParseFileWithError() throws Exception {
+        final File file = new File(
+                getPath("InputDetailNodeTreeStringPrinterJavadocWithError.javadoc"));
         try {
-            DetailNodeTreeStringPrinter.printFileAst(
-                    new File(getPath("InputDetailNodeTreeStringPrinterJavadocWithError.javadoc")));
+            DetailNodeTreeStringPrinter.printFileAst(file);
             fail("Javadoc parser didn't fail on missing end tag");
         }
         catch (IllegalArgumentException ex) {

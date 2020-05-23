@@ -6,10 +6,10 @@
         antTask.setClasspath(new Path(project, "firstPath"));
         antTask.setClasspathRef(new Reference(project, "idXX"));
 
+        assertNotNull(Whitebox.getInternalState(antTask, "classpath"),
+                "Classpath should not be null");
+        final Path classpath = Whitebox.getInternalState(antTask, "classpath");
         try {
-            assertNotNull(Whitebox.getInternalState(antTask, "classpath"),
-                    "Classpath should not be null");
-            final Path classpath = Whitebox.getInternalState(antTask, "classpath");
             classpath.list();
             fail("Exception is expected");
         }
