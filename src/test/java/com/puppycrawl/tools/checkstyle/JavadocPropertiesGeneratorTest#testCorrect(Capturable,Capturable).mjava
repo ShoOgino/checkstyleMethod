@@ -10,7 +10,7 @@
             + "DEPRECATED_LITERAL='@deprecated' literal in @deprecated Javadoc tag?" + EOL;
 
         JavadocPropertiesGenerator.main(getPath("InputJavadocPropertiesGeneratorCorrect.java"),
-            "--destfile", DESTFILE.getAbsolutePath());
+            "--destfile", DESTFILE_ABSOLUTE_PATH);
         assertEquals("", systemErr.getCapturedData(), "Unexpected error log");
         assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
         final String fileContent = FileUtils.readFileToString(DESTFILE, StandardCharsets.UTF_8);

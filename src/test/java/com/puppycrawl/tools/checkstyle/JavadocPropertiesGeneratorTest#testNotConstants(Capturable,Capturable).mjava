@@ -2,7 +2,7 @@
     public void testNotConstants(@SysErr Capturable systemErr, @SysOut Capturable systemOut)
             throws Exception {
         JavadocPropertiesGenerator.main(getPath("InputJavadocPropertiesGeneratorNotConstants.java"),
-            "--destfile", DESTFILE.getAbsolutePath());
+            "--destfile", DESTFILE_ABSOLUTE_PATH);
         assertEquals("", systemErr.getCapturedData(), "Unexpected error log");
         assertEquals("", systemOut.getCapturedData(), "Unexpected output log");
         final long size = FileUtils.sizeOf(DESTFILE);

@@ -3,13 +3,13 @@
             @SysOut Capturable systemOut) {
         try {
             JavadocPropertiesGenerator.main(
-                "--destfile", DESTFILE.getAbsolutePath(), "NotExistent.java");
+                "--destfile", DESTFILE_ABSOLUTE_PATH, "NotExistent.java");
             fail("Exception was expected");
         }
         catch (CheckstyleException ex) {
             assertEquals(
                     "Failed to write javadoc properties of 'NotExistent.java' to '"
-                    + DESTFILE.getAbsolutePath() + "'",
+                    + DESTFILE_ABSOLUTE_PATH + "'",
                 ex.getMessage(), "Invalid error message");
 
             final Throwable cause = ex.getCause();
