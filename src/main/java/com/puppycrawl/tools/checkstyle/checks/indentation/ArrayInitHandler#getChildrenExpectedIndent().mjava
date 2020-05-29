@@ -8,7 +8,8 @@
         final int lcurlyPos = expandedTabsColumnNo(getLeftCurly());
         final int firstChildPos =
             getNextFirstNonBlankOnLineAfter(firstLine, lcurlyPos);
-        if (firstChildPos >= 0) {
+
+        if (firstChildPos != NOT_EXIST) {
             expectedIndent = IndentLevel.addAcceptable(expectedIndent, firstChildPos, lcurlyPos
                     + getLineWrappingIndentation());
         }
