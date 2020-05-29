@@ -1,0 +1,15 @@
+    @Test
+    public void testPublicMethods() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(
+                MissingJavadocMethodCheck.class);
+        final String[] expected = {
+            "9:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "11:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "15:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "18:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "22:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+        };
+        verify(checkConfig, getPath("InputMissingJavadocMethodPublicMethods.java"), expected);
+
+    }
+
