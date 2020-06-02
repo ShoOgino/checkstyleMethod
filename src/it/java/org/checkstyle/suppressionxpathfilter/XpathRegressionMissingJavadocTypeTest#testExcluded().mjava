@@ -1,0 +1,29 @@
+    @Test
+    public void testExcluded() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionMissingJavadocTypeExcluded.java"
+        ));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MissingJavadocTypeCheck.class);
+        moduleConfig.addAttribute("scope", "private");
+        moduleConfig.addAttribute("excludeScope", "package");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(MissingJavadocTypeCheck.class,
+                    MissingJavadocTypeCheck.MSG_JAVADOC_MISSING,
+                    "ExcludedMissingJavadocType"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocTypeExcluded']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='Test']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocTypeExcluded']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='Test']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMissingJavadocTypeExcluded']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='Test']]/MODIFIERS/LITERAL_PRIVATE"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

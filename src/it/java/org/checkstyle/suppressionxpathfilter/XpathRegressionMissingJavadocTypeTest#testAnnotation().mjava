@@ -1,0 +1,36 @@
+    @Test
+    public void testAnnotation() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionMissingJavadocTypeAnnotation.java"
+        ));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MissingJavadocTypeCheck.class);
+        moduleConfig.addAttribute("skipAnnotations", "TestAnnotation");
+
+        final String[] expectedViolation = {
+            "5:5: " + getCheckMessage(MissingJavadocTypeCheck.class,
+                    MissingJavadocTypeCheck.MSG_JAVADOC_MISSING,
+                    "AnnotationMissingJavadocType"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text="
+                        + "'SuppressionXpathRegressionMissingJavadocTypeAnnotation']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='innerClass']]",
+                "/CLASS_DEF[./IDENT[@text="
+                        + "'SuppressionXpathRegressionMissingJavadocTypeAnnotation']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='innerClass']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text="
+                        + "'SuppressionXpathRegressionMissingJavadocTypeAnnotation']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='innerClass']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='TestAnnotation2']]",
+                "/CLASS_DEF[./IDENT[@text="
+                        + "'SuppressionXpathRegressionMissingJavadocTypeAnnotation']]"
+                        + "/OBJBLOCK/CLASS_DEF[./IDENT[@text='innerClass']]"
+                        + "/MODIFIERS/ANNOTATION[./IDENT[@text='TestAnnotation2']]/AT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

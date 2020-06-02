@@ -1,0 +1,30 @@
+    @Test
+    public void testToken() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionMissingJavadocTypeToken.java"
+        ));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MissingJavadocTypeCheck.class);
+        moduleConfig.addAttribute("tokens", "INTERFACE_DEF");
+
+        final String[] expectedViolation = {
+            "3:1: " + getCheckMessage(MissingJavadocTypeCheck.class,
+                    MissingJavadocTypeCheck.MSG_JAVADOC_MISSING,
+                    "TokenMissingJavadocType"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/INTERFACE_DEF[./IDENT[@text="
+                        + "'SuppressionXpathRegressionMissingJavadocTypeToken']]",
+                "/INTERFACE_DEF[./IDENT[@text="
+                        + "'SuppressionXpathRegressionMissingJavadocTypeToken']]"
+                        + "/MODIFIERS",
+                "/INTERFACE_DEF[./IDENT[@text="
+                        + "'SuppressionXpathRegressionMissingJavadocTypeToken']]"
+                        + "/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+
