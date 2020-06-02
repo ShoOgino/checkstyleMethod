@@ -8,15 +8,15 @@
         if (ast.getLineNo() > 1 && !hasEmptyLineBefore(ast)) {
             if (getFileContents().getFileName().endsWith("package-info.java")) {
                 if (!ast.getFirstChild().hasChildren() && !isPrecededByJavadoc(ast)) {
-                    log(ast.getLineNo(), MSG_SHOULD_BE_SEPARATED, ast.getText());
+                    log(ast, MSG_SHOULD_BE_SEPARATED, ast.getText());
                 }
             }
             else {
-                log(ast.getLineNo(), MSG_SHOULD_BE_SEPARATED, ast.getText());
+                log(ast, MSG_SHOULD_BE_SEPARATED, ast.getText());
             }
         }
         if (!hasEmptyLineAfter(ast)) {
-            log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED, nextToken.getText());
+            log(nextToken, MSG_SHOULD_BE_SEPARATED, nextToken.getText());
         }
     }
 

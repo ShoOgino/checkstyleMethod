@@ -1,0 +1,22 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(
+                getPath("SuppressionXpathRegressionEmptyLineSeparator2.java")
+        );
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(EmptyLineSeparatorCheck.class);
+        moduleConfig.addAttribute("allowMultipleEmptyLines", "false");
+
+        final String[] expectedViolation = {
+            "6:1: " + getCheckMessage(EmptyLineSeparatorCheck.class,
+                    EmptyLineSeparatorCheck.MSG_MULTIPLE_LINES, "package"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/PACKAGE_DEF"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);
+    }
+

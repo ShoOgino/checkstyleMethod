@@ -20,11 +20,11 @@
             default:
                 if (nextToken.getType() == TokenTypes.RCURLY) {
                     if (hasNotAllowedTwoEmptyLinesBefore(nextToken)) {
-                        log(ast.getLineNo(), MSG_MULTIPLE_LINES_AFTER, ast.getText());
+                        log(ast, MSG_MULTIPLE_LINES_AFTER, ast.getText());
                     }
                 }
                 else if (!hasEmptyLineAfter(ast)) {
-                    log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED,
+                    log(nextToken, MSG_SHOULD_BE_SEPARATED,
                         nextToken.getText());
                 }
         }

@@ -7,7 +7,7 @@
     private void processVariableDef(DetailAST ast, DetailAST nextToken) {
         if (isTypeField(ast) && !hasEmptyLineAfter(ast)
                 && isViolatingEmptyLineBetweenFieldsPolicy(nextToken)) {
-            log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED,
+            log(nextToken, MSG_SHOULD_BE_SEPARATED,
                     nextToken.getText());
         }
     }
