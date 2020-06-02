@@ -1,0 +1,22 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionJavadocMethodTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(JavadocMethodCheck.class);
+
+        final String[] expectedViolation = {
+            "13:31: " + getCheckMessage(JavadocMethodCheck.class, MSG_EXPECTED_TAG,
+                    "@param", "x"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocMethodTwo']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='checkParam']]/PARAMETERS"
+                        + "/PARAMETER_DEF/IDENT[@text='x']");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

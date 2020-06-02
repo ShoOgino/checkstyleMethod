@@ -14,10 +14,8 @@
                 if (!isInIgnoreBlock(blockAst, throwAst)) {
                     final DetailAST newAst = throwAst.getFirstChild().getFirstChild();
                     if (newAst.getType() == TokenTypes.LITERAL_NEW) {
-                        final FullIdent ident = FullIdent.createFullIdent(newAst.getFirstChild());
-                        final ExceptionInfo exceptionInfo = new ExceptionInfo(
-                                new ClassInfo(new Token(ident)));
-                        returnValue.add(exceptionInfo);
+                        final DetailAST child = newAst.getFirstChild();
+                        returnValue.add(getExceptionInfo(child));
                     }
                 }
             }

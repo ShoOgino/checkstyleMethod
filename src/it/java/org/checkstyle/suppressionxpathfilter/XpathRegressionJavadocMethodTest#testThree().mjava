@@ -1,0 +1,25 @@
+    @Test
+    public void testThree() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionJavadocMethodThree.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(JavadocMethodCheck.class);
+
+        final String[] expectedViolation = {
+            "14:13: " + getCheckMessage(JavadocMethodCheck.class, MSG_EXPECTED_TAG,
+                    "@param", "<T>"),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocMethodThree']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='checkTypeParam']]/TYPE_PARAMETERS"
+                        + "/TYPE_PARAMETER[./IDENT[@text='T']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocMethodThree']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='checkTypeParam']]/TYPE_PARAMETERS"
+                        + "/TYPE_PARAMETER/IDENT[@text='T']");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

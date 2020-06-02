@@ -1,0 +1,25 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionJavadocMethodOne.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(JavadocMethodCheck.class);
+
+        final String[] expectedViolation = {
+            "14:5: " + getCheckMessage(JavadocMethodCheck.class, MSG_INVALID_INHERIT_DOC),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocMethodOne']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='uninheritableMethod']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocMethodOne']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='uninheritableMethod']]/MODIFIERS",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocMethodOne']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='uninheritableMethod']]/MODIFIERS"
+                        + "/LITERAL_PRIVATE");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Get node where class name of exception starts.
+     *
+     * @param ast DetailAST object where to find exceptions node;
+     * @return exception node where class name starts
+     */
+    private static DetailAST getFirstClassNameNode(DetailAST ast) {
+        DetailAST startNode = ast;
+        while (startNode.getType() == TokenTypes.DOT) {
+            startNode = startNode.getFirstChild();
+        }
+        return startNode;
+    }
+

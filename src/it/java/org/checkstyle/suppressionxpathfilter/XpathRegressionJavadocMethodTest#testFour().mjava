@@ -1,0 +1,24 @@
+    @Test
+    public void testFour() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionJavadocMethodFour.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(JavadocMethodCheck.class);
+
+        moduleConfig.addAttribute("validateThrows", "true");
+
+        final String[] expectedViolation = {
+            "12:30: " + getCheckMessage(JavadocMethodCheck.class, MSG_EXPECTED_TAG,
+                    "@throws", "Exception"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionJavadocMethodFour']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo']]"
+                        + "/LITERAL_THROWS/IDENT[@text='Exception']");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

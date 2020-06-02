@@ -1,0 +1,13 @@
+    /**
+     * Get ExceptionInfo instance.
+     *
+     * @param ast DetailAST object where to find exceptions node;
+     * @return ExceptionInfo
+     */
+    private static ExceptionInfo getExceptionInfo(DetailAST ast) {
+        final FullIdent ident = FullIdent.createFullIdent(ast);
+        final DetailAST firstClassNameNode = getFirstClassNameNode(ast);
+        return new ExceptionInfo(firstClassNameNode,
+                new ClassInfo(new Token(ident)));
+    }
+
