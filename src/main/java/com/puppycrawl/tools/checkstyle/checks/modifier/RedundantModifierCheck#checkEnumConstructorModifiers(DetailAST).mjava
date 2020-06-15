@@ -5,10 +5,8 @@
      */
     private void checkEnumConstructorModifiers(DetailAST ast) {
         final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
-        final DetailAST modifier = getFirstModifierAst(modifiers);
-
-        if (modifier != null) {
-            log(modifier, MSG_KEY, modifier.getText());
-        }
+        TokenUtil.findFirstTokenByPredicate(
+            modifiers, mod -> mod.getType() != TokenTypes.ANNOTATION
+        ).ifPresent(modifier -> log(modifier, MSG_KEY, modifier.getText()));
     }
 

@@ -5,12 +5,8 @@
      */
     private void processAbstractMethodParameters(DetailAST ast) {
         final DetailAST parameters = ast.findFirstToken(TokenTypes.PARAMETERS);
-
-        for (DetailAST child = parameters.getFirstChild(); child != null; child = child
-                .getNextSibling()) {
-            if (child.getType() == TokenTypes.PARAMETER_DEF) {
-                checkForRedundantModifier(child, TokenTypes.FINAL);
-            }
-        }
+        TokenUtil.forEachChild(parameters, TokenTypes.PARAMETER_DEF, paramDef -> {
+            checkForRedundantModifier(paramDef, TokenTypes.FINAL);
+        });
     }
 

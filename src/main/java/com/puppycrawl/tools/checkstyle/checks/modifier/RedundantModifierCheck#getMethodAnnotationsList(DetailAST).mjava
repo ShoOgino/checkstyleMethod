@@ -7,13 +7,7 @@
     private static List<DetailAST> getMethodAnnotationsList(DetailAST methodDef) {
         final List<DetailAST> annotationsList = new ArrayList<>();
         final DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
-        DetailAST modifier = modifiers.getFirstChild();
-        while (modifier != null) {
-            if (modifier.getType() == TokenTypes.ANNOTATION) {
-                annotationsList.add(modifier);
-            }
-            modifier = modifier.getNextSibling();
-        }
+        TokenUtil.forEachChild(modifiers, TokenTypes.ANNOTATION, annotationsList::add);
         return annotationsList;
     }
 
