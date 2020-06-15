@@ -1,0 +1,17 @@
+    /**
+     * Generate Xpath.
+     */
+    private void generateXpath() {
+        if (tree.getLastSelectedPathComponent() instanceof DetailAST) {
+            final DetailAST ast = (DetailAST) tree.getLastSelectedPathComponent();
+            final int beginPos = 4;
+            String xpath = XpathQueryGenerator.generateXpathQuery(ast);
+            final int length = xpath.length();
+            xpath = xpath.substring(beginPos, length);
+            xpathEditor.setText(xpath);
+        }
+        else {
+            xpathEditor.setText("Xpath is not supported yet for javadoc nodes");
+        }
+    }
+
