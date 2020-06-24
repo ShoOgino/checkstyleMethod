@@ -4,11 +4,11 @@
      *
      * @param ast the annotation token
      */
-    private void checkCheckClosingParens(final DetailAST ast) {
-        if (closingParens != ClosingParens.IGNORE) {
+    private void checkCheckClosingParensOption(final DetailAST ast) {
+        if (closingParens != ClosingParensOption.IGNORE) {
             final DetailAST paren = ast.getLastChild();
 
-            if (closingParens == ClosingParens.ALWAYS) {
+            if (closingParens == ClosingParensOption.ALWAYS) {
                 if (paren.getType() != TokenTypes.RPAREN) {
                     log(ast, MSG_KEY_ANNOTATION_PARENS_MISSING);
                 }
