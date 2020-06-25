@@ -8,7 +8,7 @@
         bean.setSeverityLevel(null);
         bean.setScope(null);
         bean.setUri(null);
-        bean.setAccessModifiers(AccessModifier.PACKAGE);
+        bean.setAccessModifiers(AccessModifierOption.PACKAGE);
 
         final DefaultConfiguration config = new DefaultConfiguration("bean");
         config.addAttribute("strings", "a, b, c");
@@ -24,8 +24,8 @@
         assertEquals(SeverityLevel.ERROR, bean.severityLevel, "invalid result");
         assertEquals(Scope.PUBLIC, bean.scope, "invalid result");
         assertEquals(new URI("http://github.com"), bean.uri, "invalid result");
-        assertArrayEquals(
-                new AccessModifier[] {AccessModifier.PUBLIC, AccessModifier.PRIVATE},
-                bean.accessModifiers, "invalid result");
+        assertArrayEquals(new AccessModifierOption[] {AccessModifierOption.PUBLIC,
+            AccessModifierOption.PRIVATE}, bean.accessModifiers,
+                "invalid result");
     }
 

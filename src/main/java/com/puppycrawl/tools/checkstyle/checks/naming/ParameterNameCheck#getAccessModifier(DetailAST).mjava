@@ -6,11 +6,11 @@
      * @param ast the token of the method/constructor.
      * @return the access modifier of the method/constructor.
      */
-    private static AccessModifier getAccessModifier(final DetailAST ast) {
-        final AccessModifier accessModifier;
+    private static AccessModifierOption getAccessModifier(final DetailAST ast) {
+        final AccessModifierOption accessModifier;
 
         if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
-            accessModifier = AccessModifier.PUBLIC;
+            accessModifier = AccessModifierOption.PUBLIC;
         }
         else {
             final DetailAST params = ast.getParent();
