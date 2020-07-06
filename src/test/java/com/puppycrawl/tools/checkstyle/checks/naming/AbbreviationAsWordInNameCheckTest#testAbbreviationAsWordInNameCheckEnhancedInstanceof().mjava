@@ -1,0 +1,21 @@
+    @Test
+    public void testAbbreviationAsWordInNameCheckEnhancedInstanceof()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(AbbreviationAsWordInNameCheck.class);
+
+        final int expectedCapitalCount = 4;
+
+        final String[] expected = {
+            "11:36: " + getWarningMessage("STRING", expectedCapitalCount),
+            "11:70: " + getWarningMessage("INTEGER", expectedCapitalCount),
+            "20:41: " + getWarningMessage("ssSTRING", expectedCapitalCount),
+            "24:35: " + getWarningMessage("XMLHTTP", expectedCapitalCount),
+        };
+
+        verify(checkConfig,
+                getNonCompilablePath(
+                        "InputAbbreviationAsWordInNameCheckEnhancedInstanceof.java"),
+                expected);
+    }
+
