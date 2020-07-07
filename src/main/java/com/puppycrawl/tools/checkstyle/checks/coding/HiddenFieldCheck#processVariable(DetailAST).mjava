@@ -9,7 +9,8 @@
         if (!ScopeUtil.isInInterfaceOrAnnotationBlock(ast)
             && !CheckUtil.isReceiverParameter(ast)
             && (ScopeUtil.isLocalVariableDef(ast)
-                || ast.getType() == TokenTypes.PARAMETER_DEF)) {
+                || ast.getType() == TokenTypes.PARAMETER_DEF
+                || ast.getType() == TokenTypes.PATTERN_VARIABLE_DEF)) {
             // local variable or parameter. Does it shadow a field?
             final DetailAST nameAST = ast.findFirstToken(TokenTypes.IDENT);
             final String name = nameAST.getText();

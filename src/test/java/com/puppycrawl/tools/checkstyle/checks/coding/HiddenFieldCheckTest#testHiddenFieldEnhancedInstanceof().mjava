@@ -1,0 +1,14 @@
+    @Test
+    public void testHiddenFieldEnhancedInstanceof() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(HiddenFieldCheck.class);
+        checkConfig.addAttribute("tokens", "PATTERN_VARIABLE_DEF");
+
+        final String[] expected = {
+            "22:39: " + getCheckMessage(MSG_KEY, "price"),
+            "33:35: " + getCheckMessage(MSG_KEY, "hiddenStaticField"),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputHiddenFieldEnhancedInstanceof.java"), expected);
+    }
+
