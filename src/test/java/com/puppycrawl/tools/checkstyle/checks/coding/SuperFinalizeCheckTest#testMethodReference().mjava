@@ -1,0 +1,10 @@
+    @Test
+    public void testMethodReference() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(SuperFinalizeCheck.class);
+        final String[] expected = {
+            "18:20: " + getCheckMessage(MSG_KEY, "finalize", "super.finalize"),
+        };
+        verify(checkConfig, getPath("InputSuperFinalizeMethodReference.java"), expected);
+    }
+

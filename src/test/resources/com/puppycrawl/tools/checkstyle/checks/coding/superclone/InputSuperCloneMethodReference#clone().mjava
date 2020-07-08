@@ -1,0 +1,10 @@
+    public Object clone() { // ok
+        CheckedSupplier<Object, CloneNotSupportedException> r = super::clone;
+        CheckedSupplier<Object, CloneNotSupportedException> r1 = super::getClass;
+        try {
+            return r.get();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
+
