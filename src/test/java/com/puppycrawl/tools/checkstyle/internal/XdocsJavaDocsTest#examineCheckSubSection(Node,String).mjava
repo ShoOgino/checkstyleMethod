@@ -11,9 +11,14 @@
                 CHECK_TEXT.put(subSectionName, createPropertiesText());
                 break;
             case "Example of Usage":
-            case "Error Messages":
+            case "Violation Messages":
+                CHECK_TEXT.put(subSectionName,
+                        createViolationMessagesText(getViolationMessages(subSection)));
+                break;
             case "Package":
             case "Parent Module":
+                CHECK_TEXT.put(subSectionName, createParentText(subSection));
+                break;
             default:
                 break;
         }
