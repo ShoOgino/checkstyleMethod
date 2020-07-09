@@ -1,0 +1,55 @@
+    private static String createPropertiesText() {
+        final StringBuilder result = new StringBuilder(100);
+
+        result.append("\n<ul>");
+
+        for (List<Node> property : CHECK_PROPERTIES) {
+            final String propertyName = getNodeText(property.get(0));
+
+            result.append("\n<li>\nProperty {@code ");
+            result.append(propertyName);
+            result.append("} - ");
+
+            final String temp = getNodeText(property.get(1));
+
+            result.append(temp);
+            CHECK_PROPERTY_DOC.put(propertyName, temp);
+
+            if (MODIFIED_JAVADOC_FILES.contains(checkName)) {
+                String typeText = "int[]";
+                if (!property.get(2).getTextContent().contains("subset of tokens")) {
+                    final Node typeNode;
+                    if (property.get(2).getFirstChild().getFirstChild() == null) {
+                        typeNode = property.get(2).getFirstChild().getNextSibling();
+                    }
+                    else {
+                        typeNode = property.get(2).getFirstChild().getFirstChild();
+                    }
+                    final String typeName = typeNode.getTextContent().trim();
+                    typeText = FULLY_QUALIFIED_CLASS_NAMES.get(typeName).getTypeName();
+                }
+                result.append(" Type is {@code ").append(typeText).append("}.");
+
+            }
+
+            if (propertyName.endsWith("token") || propertyName.endsWith("tokens")) {
+                result.append(" Default value is: ");
+            }
+            else {
+                result.append(" Default value is ");
+            }
+
+            result.append(getNodeText(property.get(3)));
+
+            if (result.charAt(result.length() - 1) != '.') {
+                result.append('.');
+            }
+
+            result.append("\n</li>");
+        }
+
+        result.append("\n</ul>");
+
+        return result.toString();
+    }
+

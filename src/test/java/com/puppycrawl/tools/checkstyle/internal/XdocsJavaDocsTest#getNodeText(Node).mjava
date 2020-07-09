@@ -1,0 +1,32 @@
+    private static String getNodeText(Node node) {
+        final StringBuilder result = new StringBuilder(20);
+
+        for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child.getNodeType() == Node.TEXT_NODE) {
+                for (String temp : child.getTextContent().split("\n")) {
+                    final String text = temp.trim();
+
+                    if (!text.isEmpty()) {
+                        if (shouldAppendSpace(result, text.charAt(0))) {
+                            result.append(' ');
+                        }
+
+                        result.append(text);
+                    }
+                }
+            }
+            else {
+                if (child.hasAttributes() && child.getAttributes().getNamedItem("class") != null
+                        && "wrapper".equals(child.getAttributes().getNamedItem("class")
+                        .getNodeValue())) {
+                    appendNodeText(result, XmlUtil.getFirstChildElement(child));
+                }
+                else {
+                    appendNodeText(result, child);
+                }
+            }
+        }
+
+        return result.toString();
+    }
+

@@ -1,0 +1,28 @@
+        @Override
+        public void visitToken(DetailAST ast) {
+            if (JavadocUtil.isJavadocComment(ast)) {
+                final DetailAST parentNode = getParent(ast);
+
+                switch (parentNode.getType()) {
+                    case TokenTypes.CLASS_DEF:
+                        visitClass(ast);
+                        break;
+                    case TokenTypes.METHOD_DEF:
+                        visitMethod(ast, parentNode);
+                        break;
+                    case TokenTypes.VARIABLE_DEF:
+                        visitField(ast, parentNode);
+                        break;
+                    case TokenTypes.CTOR_DEF:
+                    case TokenTypes.ENUM_DEF:
+                    case TokenTypes.ENUM_CONSTANT_DEF:
+                        // ignore
+                        break;
+                    default:
+                        fail("Unknown token '" + TokenUtil.getTokenName(parentNode.getType())
+                                + "': " + ast.getLineNo());
+                        break;
+                }
+            }
+        }
+

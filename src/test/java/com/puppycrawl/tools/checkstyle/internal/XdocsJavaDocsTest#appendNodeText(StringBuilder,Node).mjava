@@ -1,0 +1,55 @@
+    // -@cs[CyclomaticComplexity] No simple way to split this apart.
+    private static void appendNodeText(StringBuilder result, Node node) {
+        final String name = transformXmlToJavaDocName(node.getNodeName());
+        final boolean list = "ol".equals(name) || "ul".equals(name);
+        final boolean newLineOpenBefore = list || "p".equals(name) || "pre".equals(name)
+                || "li".equals(name);
+        final boolean newLineOpenAfter = newLineOpenBefore && !list;
+        final boolean newLineClose = newLineOpenAfter || list;
+        final boolean sanitize = "pre".equals(name);
+        final boolean changeToTag = "code".equals(name);
+
+        if (newLineOpenBefore) {
+            result.append('\n');
+        }
+        else if (shouldAppendSpace(result, '<')) {
+            result.append(' ');
+        }
+
+        if (changeToTag) {
+            result.append("{@");
+            result.append(name);
+            result.append(' ');
+        }
+        else {
+            result.append('<');
+            result.append(name);
+            result.append(getAttributeText(name, node.getAttributes()));
+            result.append('>');
+        }
+
+        if (newLineOpenAfter) {
+            result.append('\n');
+        }
+
+        if (sanitize) {
+            result.append(XmlUtil.sanitizeXml(node.getTextContent()));
+        }
+        else {
+            result.append(getNodeText(node));
+        }
+
+        if (newLineClose) {
+            result.append('\n');
+        }
+
+        if (changeToTag) {
+            result.append('}');
+        }
+        else {
+            result.append("</");
+            result.append(name);
+            result.append('>');
+        }
+    }
+

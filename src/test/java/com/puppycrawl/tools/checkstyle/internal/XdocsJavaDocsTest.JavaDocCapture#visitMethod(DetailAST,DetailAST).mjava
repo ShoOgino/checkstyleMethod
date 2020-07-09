@@ -1,0 +1,17 @@
+        private static void visitMethod(DetailAST node, DetailAST parentNode) {
+            if (ScopeUtil.isInScope(node, Scope.PUBLIC) && isSetterMethod(parentNode)) {
+                final String propertyUpper = parentNode.findFirstToken(TokenTypes.IDENT)
+                        .getText().substring(3);
+                final String propertyName = makeFirstLower(propertyUpper);
+                final String propertyDoc = CHECK_PROPERTY_DOC.get(propertyName);
+
+                if (propertyDoc != null) {
+                    final String javaDoc = getJavaDocText(node);
+
+                    assertEquals("Setter to " + makeFirstLower(propertyDoc),
+                            javaDoc.substring(0, javaDoc.indexOf(" @param")),
+                            checkName + "'s class method-level JavaDoc for " + propertyName);
+                }
+            }
+        }
+

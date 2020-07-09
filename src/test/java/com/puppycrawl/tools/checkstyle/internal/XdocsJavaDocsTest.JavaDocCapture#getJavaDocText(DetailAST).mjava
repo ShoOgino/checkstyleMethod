@@ -1,0 +1,18 @@
+        private static String getJavaDocText(DetailAST node) {
+            final String text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<document>\n"
+                    + node.getFirstChild().getText().replaceAll("(^|\\r?\\n)\\s*\\* ?", "\n")
+                            .replaceAll("\\n@noinspection.*\\r?\\n", "\n")
+                            .trim() + "\n</document>";
+            String result = null;
+
+            try {
+                result = getNodeText(XmlUtil.getRawXml(checkName, text, text).getFirstChild())
+                        .replace("\r", "");
+            }
+            catch (ParserConfigurationException ex) {
+                fail("Exception: " + ex.getClass() + " - " + ex.getMessage());
+            }
+
+            return result;
+        }
+

@@ -1,0 +1,9 @@
+    private static List<String> getViolationMessages(Node subsection) {
+        final Node child = XmlUtil.getFirstChildElement(subsection);
+        final List<String> violationMessages = new ArrayList<>();
+        for (Node row : XmlUtil.getChildrenElements(child)) {
+            violationMessages.add(row.getTextContent().trim());
+        }
+        return violationMessages;
+    }
+
