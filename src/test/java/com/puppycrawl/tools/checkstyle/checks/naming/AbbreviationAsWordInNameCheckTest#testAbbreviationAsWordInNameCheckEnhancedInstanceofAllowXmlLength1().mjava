@@ -1,21 +1,25 @@
     @Test
-    public void testAbbreviationAsWordInNameCheckEnhancedInstanceof()
+    public void testAbbreviationAsWordInNameCheckEnhancedInstanceofAllowXmlLength1()
             throws Exception {
         final DefaultConfiguration checkConfig =
                 createModuleConfig(AbbreviationAsWordInNameCheck.class);
+        checkConfig.addAttribute("allowedAbbreviations", "XML");
+        checkConfig.addAttribute("allowedAbbreviationLength", "1");
 
-        final int expectedCapitalCount = 4;
+        final int expectedCapitalCount = 2;
 
         final String[] expected = {
             "19:36: " + getWarningMessage("STRING", expectedCapitalCount),
             "20:43: " + getWarningMessage("INTEGER", expectedCapitalCount),
+            "28:39: " + getWarningMessage("aTXT", expectedCapitalCount),
             "29:41: " + getWarningMessage("ssSTRING", expectedCapitalCount),
             "32:35: " + getWarningMessage("XMLHTTP", expectedCapitalCount),
         };
 
         verify(checkConfig,
                 getNonCompilablePath(
-                        "InputAbbreviationAsWordInNameCheckEnhancedInstanceof.java"),
+                        "InputAbbreviationAsWordInNameCheckEnhanced"
+                                + "InstanceofAllowXmlLength1.java"),
                 expected);
     }
 
