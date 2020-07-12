@@ -1,9 +1,8 @@
         private static void visitClass(DetailAST node) {
-            String parentText = "";
-            String violationMessagesText = "";
-            if (MODIFIED_JAVADOC_FILES.contains(checkName)) {
-                parentText = CHECK_TEXT.get("Parent Module");
-                violationMessagesText = CHECK_TEXT.get("Violation Messages");
+            String violationMessagesText = CHECK_TEXT.get("Violation Messages");
+
+            if (checkName.endsWith("Filter") || "SuppressWarningsHolder".equals(checkName)) {
+                violationMessagesText = "";
             }
 
             if (ScopeUtil.isInScope(node, Scope.PUBLIC)) {
@@ -12,7 +11,7 @@
                         + CHECK_TEXT.computeIfAbsent("Notes", unused -> "")
                         + CHECK_TEXT.computeIfAbsent("Properties", unused -> "")
                         + CHECK_TEXT.get("Examples")
-                        + parentText
+                        + CHECK_TEXT.get("Parent Module")
                         + violationMessagesText + " @since "
                         + CHECK_TEXT.get("since"), getJavaDocText(node),
                         checkName + "'s class-level JavaDoc");
