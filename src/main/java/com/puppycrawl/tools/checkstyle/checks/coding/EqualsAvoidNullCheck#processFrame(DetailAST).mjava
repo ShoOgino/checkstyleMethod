@@ -7,9 +7,8 @@
     private void processFrame(DetailAST ast) {
         final FieldFrame frame = new FieldFrame(currentFrame);
         final int astType = ast.getType();
-        if (astType == TokenTypes.CLASS_DEF
-                || astType == TokenTypes.ENUM_DEF) {
-            frame.setClassOrEnumOrEnumConstDef(true);
+        if (astTypeIsClassOrEnumOrRecordDef(astType)) {
+            frame.setClassOrEnumOrRecordDef(true);
             frame.setFrameName(ast.findFirstToken(TokenTypes.IDENT).getText());
         }
         currentFrame.addChild(frame);

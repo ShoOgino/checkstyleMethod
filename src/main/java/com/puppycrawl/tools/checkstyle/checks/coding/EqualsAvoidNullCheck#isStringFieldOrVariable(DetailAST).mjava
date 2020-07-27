@@ -11,7 +11,7 @@
         while (frame != null) {
             final DetailAST field = frame.findField(name);
             if (field != null
-                    && (frame.isClassOrEnumOrEnumConstDef()
+                    && (frame.isClassOrEnumOrRecordDef()
                             || checkLineNo(field, objCalledOn))) {
                 result = STRING.equals(getFieldType(field));
                 break;

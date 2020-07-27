@@ -4,6 +4,7 @@
             case TokenTypes.VARIABLE_DEF:
             case TokenTypes.PARAMETER_DEF:
             case TokenTypes.PATTERN_VARIABLE_DEF:
+            case TokenTypes.RECORD_COMPONENT_DEF:
                 currentFrame.addField(ast);
                 break;
             case TokenTypes.METHOD_CALL:
@@ -17,7 +18,7 @@
                 break;
             case TokenTypes.OBJBLOCK:
                 final int parentType = ast.getParent().getType();
-                if (parentType != TokenTypes.CLASS_DEF && parentType != TokenTypes.ENUM_DEF) {
+                if (!astTypeIsClassOrEnumOrRecordDef(parentType)) {
                     processFrame(ast);
                 }
                 break;

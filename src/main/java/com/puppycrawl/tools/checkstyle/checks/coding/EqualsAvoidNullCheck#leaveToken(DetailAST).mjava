@@ -1,23 +1,27 @@
     @Override
     public void leaveToken(DetailAST ast) {
-        final int astType = ast.getType();
-        if (astType == TokenTypes.SLIST) {
-            leaveSlist(ast);
-        }
-        else if (astType == TokenTypes.LITERAL_NEW) {
-            leaveLiteralNew(ast);
-        }
-        else if (astType == TokenTypes.OBJBLOCK) {
-            final int parentType = ast.getParent().getType();
-            if (parentType != TokenTypes.CLASS_DEF && parentType != TokenTypes.ENUM_DEF) {
+        switch (ast.getType()) {
+            case TokenTypes.SLIST:
+                leaveSlist(ast);
+                break;
+            case TokenTypes.LITERAL_NEW:
+                leaveLiteralNew(ast);
+                break;
+            case TokenTypes.OBJBLOCK:
+                final int parentType = ast.getParent().getType();
+                if (!astTypeIsClassOrEnumOrRecordDef(parentType)) {
+                    currentFrame = currentFrame.getParent();
+                }
+                break;
+            case TokenTypes.VARIABLE_DEF:
+            case TokenTypes.PARAMETER_DEF:
+            case TokenTypes.RECORD_COMPONENT_DEF:
+            case TokenTypes.METHOD_CALL:
+            case TokenTypes.PATTERN_VARIABLE_DEF:
+                break;
+            default:
                 currentFrame = currentFrame.getParent();
-            }
-        }
-        else if (astType != TokenTypes.VARIABLE_DEF
-                && astType != TokenTypes.PARAMETER_DEF
-                && astType != TokenTypes.METHOD_CALL
-                && astType != TokenTypes.PATTERN_VARIABLE_DEF) {
-            currentFrame = currentFrame.getParent();
+                break;
         }
     }
 
