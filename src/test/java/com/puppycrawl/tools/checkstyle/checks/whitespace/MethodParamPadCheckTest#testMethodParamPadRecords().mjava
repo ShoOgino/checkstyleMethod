@@ -1,0 +1,20 @@
+    @Test
+    public void testMethodParamPadRecords() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(MethodParamPadCheck.class);
+        checkConfig.addAttribute("allowLineBreaks", "true");
+        final String[] expected = {
+            "14:25: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "15:34: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "26:26: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "27:23: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "32:26: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "33:33: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "39:26: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "40:18: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "46:34: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+            "52:34: " + getCheckMessage(MSG_WS_PRECEDED, "("),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputMethodParamPadRecords.java"), expected);
+    }
+
