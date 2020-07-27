@@ -1,0 +1,12 @@
+    @Test
+    public void testRecordsAndCompactCtors() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(UnusedImportsCheck.class);
+        final String[] expected = {
+            "12:8: " + getCheckMessage(MSG_KEY, "javax.swing.JToolBar"),
+            "13:8: " + getCheckMessage(MSG_KEY, "javax.swing.JToggleButton"),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputUnusedImportsRecordsAndCompactCtors.java"),
+                expected);
+    }
+
