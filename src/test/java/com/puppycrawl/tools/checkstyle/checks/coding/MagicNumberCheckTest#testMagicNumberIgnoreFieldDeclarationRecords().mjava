@@ -1,0 +1,17 @@
+    @Test
+    public void testMagicNumberIgnoreFieldDeclarationRecords()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MagicNumberCheck.class);
+        checkConfig.addAttribute("ignoreFieldDeclaration", "true");
+        final String[] expected = {
+            "14:11: " + getCheckMessage(MSG_KEY, "6"),
+            "20:29: " + getCheckMessage(MSG_KEY, "8"),
+            "24:29: " + getCheckMessage(MSG_KEY, "8"),
+            "28:20: " + getCheckMessage(MSG_KEY, "10"),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputMagicNumberIgnoreFieldDeclarationRecords.java"),
+                expected);
+    }
+
