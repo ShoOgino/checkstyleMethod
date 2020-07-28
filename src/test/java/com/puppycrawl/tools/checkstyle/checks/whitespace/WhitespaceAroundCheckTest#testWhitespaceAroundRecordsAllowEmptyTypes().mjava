@@ -1,0 +1,11 @@
+    @Test
+    public void testWhitespaceAroundRecordsAllowEmptyTypes()
+            throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(WhitespaceAroundCheck.class);
+        checkConfig.addAttribute("allowEmptyTypes", "true");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        verify(checkConfig,
+                getNonCompilablePath("InputWhitespaceAroundRecordsAllowEmptyTypes.java"),
+                expected);
+    }
+
