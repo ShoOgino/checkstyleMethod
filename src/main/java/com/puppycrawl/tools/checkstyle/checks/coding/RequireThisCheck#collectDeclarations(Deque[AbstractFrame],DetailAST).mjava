@@ -11,6 +11,10 @@
             case TokenTypes.VARIABLE_DEF:
                 collectVariableDeclarations(ast, frame);
                 break;
+            case TokenTypes.RECORD_COMPONENT_DEF:
+                final DetailAST componentIdent = ast.findFirstToken(TokenTypes.IDENT);
+                ((ClassFrame) frame).addInstanceMember(componentIdent);
+                break;
             case TokenTypes.PARAMETER_DEF:
                 if (!CheckUtil.isReceiverParameter(ast)
                         && !isLambdaParameter(ast)
@@ -23,6 +27,7 @@
             case TokenTypes.INTERFACE_DEF:
             case TokenTypes.ENUM_DEF:
             case TokenTypes.ANNOTATION_DEF:
+            case TokenTypes.RECORD_DEF:
                 final DetailAST classFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
                 frameStack.addFirst(new ClassFrame(frame, classFrameNameIdent));
                 break;
@@ -41,6 +46,7 @@
                 frameStack.addFirst(new MethodFrame(frame, methodFrameNameIdent));
                 break;
             case TokenTypes.CTOR_DEF:
+            case TokenTypes.COMPACT_CTOR_DEF:
                 final DetailAST ctorFrameNameIdent = ast.findFirstToken(TokenTypes.IDENT);
                 frameStack.addFirst(new ConstructorFrame(frame, ctorFrameNameIdent));
                 break;

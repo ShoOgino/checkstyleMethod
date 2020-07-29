@@ -1,0 +1,20 @@
+    @Test
+    public void testRecordsAndCompactCtors() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(RequireThisCheck.class);
+        checkConfig.addAttribute("checkFields", "false");
+        checkConfig.addAttribute("validateOnlyOverlapping", "false");
+        final String[] expected = {
+            "15:13: " + getCheckMessage(MSG_METHOD, "method1", ""),
+            "16:13: " + getCheckMessage(MSG_METHOD, "method2", ""),
+            "17:13: " + getCheckMessage(MSG_METHOD, "method3", ""),
+            "27:13: " + getCheckMessage(MSG_METHOD, "method1", ""),
+            "53:13: " + getCheckMessage(MSG_METHOD, "method1", ""),
+            "54:13: " + getCheckMessage(MSG_METHOD, "method2", ""),
+            "55:13: " + getCheckMessage(MSG_METHOD, "method3", ""),
+            "65:13: " + getCheckMessage(MSG_METHOD, "method1", ""),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputRequireThisRecordsAndCompactCtors.java"),
+                expected);
+    }
+

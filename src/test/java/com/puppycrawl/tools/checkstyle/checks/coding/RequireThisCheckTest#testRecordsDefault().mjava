@@ -1,0 +1,11 @@
+    @Test
+    public void testRecordsDefault() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(RequireThisCheck.class);
+        final String[] expected = {
+            "23:9: " + getCheckMessage(MSG_VARIABLE, "x", ""),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputRequireThisRecordDefault.java"),
+                expected);
+    }
+
