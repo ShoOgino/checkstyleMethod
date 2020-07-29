@@ -1,0 +1,8 @@
+    @Test
+    public void testImpossibleExceptionsTextBlockLexer() throws Exception {
+        AssertGenTextBlockLexer.verifyFail("mSTD_ESC", '\\', '*', (char) 0xFFFF);
+        AssertGenTextBlockLexer.verifyFail("mONE_DOUBLE_QUOTE", '"', '"');
+        AssertGenTextBlockLexer.verifyFail("mNEWLINE", '*');
+        AssertGenTextBlockLexer.verifyFail("mTEXT_BLOCK_CONTENT", (char) 0xFFFF);
+    }
+

@@ -1,0 +1,16 @@
+    @Test
+    public void testImpossibleValidTextBlockLexer() throws Exception {
+        AssertGenTextBlockLexer.verifyPass("mSTD_ESC", '\\', '\\', 'n');
+        AssertGenTextBlockLexer.verifyPass("mNEWLINE", '\r', '\n');
+        AssertGenTextBlockLexer.verifyPass("mNEWLINE", '\r', '1');
+        AssertGenTextBlockLexer.verifyPass("mTEXT_BLOCK_CONTENT", '\\', (char) 0xFFFF);
+        AssertGenTextBlockLexer.verifyPass("mTEXT_BLOCK_CONTENT", '\r', (char) 0xFFFF);
+        AssertGenTextBlockLexer.verifyPass("mONE_DOUBLE_QUOTE", '"', 'a');
+        AssertGenTextBlockLexer.verifyPass("mTWO_DOUBLE_QUOTES", '"', '"', 'a');
+        AssertGenTextBlockLexer.verifyPass("mONE_DOUBLE_QUOTE", '"', '\r', '\r');
+        AssertGenTextBlockLexer
+                .verifyPass("mTWO_DOUBLE_QUOTES", '"', '"', '\r', '\r');
+        AssertGenTextBlockLexer
+                .verifyPass("mTEXT_BLOCK_LITERAL_END", '"', '"', '"', (char) 0xFFFF);
+    }
+

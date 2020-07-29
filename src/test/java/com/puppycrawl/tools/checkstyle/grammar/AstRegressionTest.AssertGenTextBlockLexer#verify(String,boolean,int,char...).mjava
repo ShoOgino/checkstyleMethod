@@ -1,0 +1,39 @@
+        private static void verify(String methodName, boolean expectPass, int guessing,
+                                   char... laResults) throws Exception {
+            final AssertGenTextBlockLexer instance =
+                    new AssertGenTextBlockLexer();
+            instance.laPosition = 0;
+            instance.laResults = laResults.clone();
+            instance.inputState.guessing = guessing;
+
+            final Method method = GeneratedTextBlockLexer.class.getDeclaredMethod(methodName,
+                    boolean.class);
+            boolean exception;
+
+            try {
+                method.invoke(instance, true);
+                exception = false;
+            }
+            catch (InvocationTargetException ex) {
+                if (expectPass) {
+                    throw ex;
+                }
+
+                final Class<?> clss = ex.getTargetException().getClass();
+                if (clss != NoViableAltForCharException.class
+                        && clss != SemanticException.class) {
+                    throw ex;
+                }
+                exception = true;
+            }
+
+            if (expectPass) {
+                assertFalse(exception, "Call to GeneratedTextBlockLexer." + methodName
+                        + " resulted in an exception");
+            }
+            else {
+                assertTrue(exception, "Call to GeneratedTextBlockLexer." + methodName
+                        + " did not result in an exception");
+            }
+        }
+

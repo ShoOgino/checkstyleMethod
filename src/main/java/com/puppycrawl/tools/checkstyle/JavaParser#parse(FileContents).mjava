@@ -11,13 +11,26 @@
         final Reader reader = new StringReader(fullText);
         final GeneratedJavaLexer lexer = new GeneratedJavaLexer(reader);
         lexer.setCommentListener(contents);
-        lexer.setTokenObjectClass("antlr.CommonHiddenStreamToken");
+
+        final GeneratedTextBlockLexer textBlockLexer =
+                new GeneratedTextBlockLexer(lexer.getInputState());
+
+        final String tokenObjectClass = "antlr.CommonHiddenStreamToken";
+        lexer.setTokenObjectClass(tokenObjectClass);
+        textBlockLexer.setTokenObjectClass(tokenObjectClass);
 
         final TokenStreamHiddenTokenFilter filter = new TokenStreamHiddenTokenFilter(lexer);
         filter.hide(TokenTypes.SINGLE_LINE_COMMENT);
         filter.hide(TokenTypes.BLOCK_COMMENT_BEGIN);
 
-        final GeneratedJavaRecognizer parser = new GeneratedJavaRecognizer(filter) {
+        final TokenStreamSelector selector = new TokenStreamSelector();
+        lexer.selector = selector;
+        textBlockLexer.selector = selector;
+        selector.addInputStream(filter, "filter");
+        selector.addInputStream(textBlockLexer, "textBlockLexer");
+        selector.select(filter);
+
+        final GeneratedJavaRecognizer parser = new GeneratedJavaRecognizer(selector) {
             @Override
             public void reportError(RecognitionException ex) {
                 throw new IllegalStateException(ex);
