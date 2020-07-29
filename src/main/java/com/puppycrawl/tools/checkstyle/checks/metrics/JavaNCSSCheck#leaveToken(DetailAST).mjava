@@ -1,10 +1,8 @@
     @Override
     public void leaveToken(DetailAST ast) {
         final int tokenType = ast.getType();
-        if (tokenType == TokenTypes.METHOD_DEF
-            || tokenType == TokenTypes.CTOR_DEF
-            || tokenType == TokenTypes.STATIC_INIT
-            || tokenType == TokenTypes.INSTANCE_INIT) {
+
+        if (isMethodOrCtorOrInitDefinition(tokenType)) {
             // pop counter from the stack
             final Counter counter = counters.pop();
 
@@ -20,6 +18,15 @@
             final int count = counter.getCount();
             if (count > classMaximum) {
                 log(ast, MSG_CLASS, count, classMaximum);
+            }
+        }
+        else if (tokenType == TokenTypes.RECORD_DEF) {
+            // pop counter from the stack
+            final Counter counter = counters.pop();
+
+            final int count = counter.getCount();
+            if (count > recordMaximum) {
+                log(ast, MSG_RECORD, count, recordMaximum);
             }
         }
     }
