@@ -1,0 +1,18 @@
+    @Test
+    public void testNpathComplexityRecords() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(NPathComplexityCheck.class);
+        checkConfig.addAttribute("max", "1");
+
+        final int max = 1;
+
+        final String[] expected = {
+            "11:5: " + getCheckMessage(MSG_KEY, 3, max),
+            "21:9: " + getCheckMessage(MSG_KEY, 2, max),
+            "26:21: " + getCheckMessage(MSG_KEY, 2, max),
+            "40:9: " + getCheckMessage(MSG_KEY, 3, max),
+        };
+
+        verify(checkConfig,
+                getNonCompilablePath("InputNPathComplexityRecords.java"), expected);
+    }
+
