@@ -1,0 +1,11 @@
+    @Test
+    public void testOuterTypeFilenameRecords() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(OuterTypeFilenameCheck.class);
+
+        final String[] expected = {
+            "6:1: " + getCheckMessage(MSG_KEY),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputOuterTypeFilenameRecord.java"), expected);
+    }
+
