@@ -1,0 +1,16 @@
+    @Test
+    public void testWithRecords() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(OuterTypeNumberCheck.class);
+        checkConfig.addAttribute("max", "1");
+
+        final int max = 1;
+
+        final String[] expected = {
+            "2:1: " + getCheckMessage(MSG_KEY, 2, max),
+        };
+
+        verify(checkConfig,
+                getNonCompilablePath("InputOuterTypeNumberRecords.java"), expected);
+    }
+
