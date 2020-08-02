@@ -1,0 +1,28 @@
+    /**
+     * Search node by Xpath.
+     *
+     * @param root {@code DetailAST} root ast element
+     * @param xpath {@code String} xpath query
+     * @param nodes {@code Deque<DetailAST>} stack of nodes in selection path
+     * @return {@code boolean} node found or not
+     */
+    private static boolean search(DetailAST root, String xpath, Deque<DetailAST> nodes) {
+        boolean result = false;
+        if (xpath.equals(XpathQueryGenerator.generateXpathQuery(root))) {
+            nodes.push(root);
+            result = true;
+        }
+        else {
+            DetailAST child = root.getFirstChild();
+            while (child != null) {
+                if (search(child, xpath, nodes)) {
+                    nodes.push(root);
+                    result = true;
+                    break;
+                }
+                child = child.getNextSibling();
+            }
+        }
+        return result;
+    }
+

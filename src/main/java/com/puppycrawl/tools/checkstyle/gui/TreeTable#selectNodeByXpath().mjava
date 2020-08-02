@@ -1,0 +1,28 @@
+    /**
+     * Select Node by Xpath.
+     */
+    public void selectNodeByXpath() {
+        final DetailAST rootAST = (DetailAST) tree.getModel().getRoot();
+        if (rootAST.hasChildren()) {
+            final String xpath = "/EOF" + xpathEditor.getText();
+            final Deque<DetailAST> nodes = new ArrayDeque<>();
+            if (search(rootAST, xpath, nodes)) {
+                TreePath path = new TreePath(nodes.pop());
+                while (!nodes.isEmpty()) {
+                    path = path.pathByAddingChild(nodes.pop());
+                    if (!tree.isExpanded(path)) {
+                        tree.expandPath(path);
+                    }
+                    tree.setSelectionPath(path);
+                    makeCodeSelection();
+                }
+            }
+            else {
+                xpathEditor.setText(xpathEditor.getText() + "\n^ wrong xpath query");
+            }
+        }
+        else {
+            xpathEditor.setText("No file Opened");
+        }
+    }
+
