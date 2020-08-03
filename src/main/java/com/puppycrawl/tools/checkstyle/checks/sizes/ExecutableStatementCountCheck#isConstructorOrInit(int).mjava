@@ -1,0 +1,13 @@
+    /**
+     * Check if token type is a ctor (compact or canonical) or instance/ static initializer.
+     *
+     * @param tokenType type of token we are checking
+     * @return true if token type is constructor or initializer
+     */
+    private static boolean isConstructorOrInit(int tokenType) {
+        return tokenType == TokenTypes.CTOR_DEF
+                || tokenType == TokenTypes.INSTANCE_INIT
+                || tokenType == TokenTypes.STATIC_INIT
+                || tokenType == TokenTypes.COMPACT_CTOR_DEF;
+    }
+
