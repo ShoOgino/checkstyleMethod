@@ -1,0 +1,23 @@
+    @Test
+    public void testParenPadCheckRecords() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(ParenPadCheck.class);
+
+        final String[] expected = {
+            "17:21: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "17:23: " + getCheckMessage(MSG_WS_PRECEDED, ")"),
+            "19:18: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "19:26: " + getCheckMessage(MSG_WS_PRECEDED, ")"),
+            "22:16: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "28:16: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "31:31: " + getCheckMessage(MSG_WS_PRECEDED, ")"),
+            "37:19: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "48:21: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "49:21: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "49:51: " + getCheckMessage(MSG_WS_PRECEDED, ")"),
+            "50:21: " + getCheckMessage(MSG_WS_FOLLOWED, "("),
+            "51:52: " + getCheckMessage(MSG_WS_PRECEDED, ")"),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputParenPadCheckRecords.java"), expected);
+    }
+

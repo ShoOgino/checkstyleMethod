@@ -1,0 +1,23 @@
+    @Test
+    public void testParenPadCheckRecordsWithSpace() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(ParenPadCheck.class);
+        checkConfig.addAttribute("option", PadOption.SPACE.toString());
+
+        final String[] expected = {
+            "22:19: " + getCheckMessage(MSG_WS_NOT_PRECEDED, ")"),
+            "28:19: " + getCheckMessage(MSG_WS_NOT_PRECEDED, ")"),
+            "31:24: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "("),
+            "32:19: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "("),
+            "32:25: " + getCheckMessage(MSG_WS_NOT_PRECEDED, ")"),
+            "37:22: " + getCheckMessage(MSG_WS_NOT_PRECEDED, ")"),
+            "39:24: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "("),
+            "39:26: " + getCheckMessage(MSG_WS_NOT_PRECEDED, ")"),
+            "48:31: " + getCheckMessage(MSG_WS_NOT_PRECEDED, ")"),
+            "50:38: " + getCheckMessage(MSG_WS_NOT_PRECEDED, ")"),
+            "51:21: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "("),
+            "52:21: " + getCheckMessage(MSG_WS_NOT_FOLLOWED, "("),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputParenPadCheckRecordsSpace.java"), expected);
+    }
+
