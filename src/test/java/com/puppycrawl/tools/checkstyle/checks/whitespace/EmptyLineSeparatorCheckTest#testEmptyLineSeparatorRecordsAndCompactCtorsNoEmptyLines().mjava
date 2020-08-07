@@ -1,0 +1,17 @@
+    @Test
+    public void testEmptyLineSeparatorRecordsAndCompactCtorsNoEmptyLines() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
+        checkConfig.addAttribute("allowMultipleEmptyLinesInsideClassMembers", "false");
+
+        final String[] expected = {
+            "2:1: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "package"),
+            "16: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "22: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+        };
+
+        verify(checkConfig,
+                getNonCompilablePath(
+                        "InputEmptyLineSeparatorRecordsAndCompactCtorsNoEmptyLines.java"),
+                expected);
+    }
+
