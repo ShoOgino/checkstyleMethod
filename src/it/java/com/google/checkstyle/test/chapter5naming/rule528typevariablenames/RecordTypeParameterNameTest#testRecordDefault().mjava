@@ -1,0 +1,18 @@
+    @Test
+    public void testRecordDefault() throws Exception {
+        final Configuration configuration = getModuleConfig("RecordTypeParameterName");
+        final String format = configuration.getAttribute("format");
+        final Map<String, String> messages = configuration.getMessages();
+
+        final String[] expected = {
+            "13:44: " + getCheckMessage(messages, MSG_KEY, "t", format),
+            "20:15: " + getCheckMessage(messages, MSG_KEY, "foo", format),
+            "35:25: " + getCheckMessage(messages, MSG_KEY, "foo", format),
+        };
+
+        final String filePath = getNonCompilablePath("InputRecordTypeParameterName.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(configuration, filePath, expected, warnList);
+    }
+

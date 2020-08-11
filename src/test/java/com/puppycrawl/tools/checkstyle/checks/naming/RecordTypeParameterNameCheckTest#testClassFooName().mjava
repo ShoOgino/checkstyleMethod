@@ -1,0 +1,18 @@
+    @Test
+    public void testClassFooName()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RecordTypeParameterNameCheck.class);
+        checkConfig.addAttribute("format", "^foo$");
+
+        final String pattern = "^foo$";
+
+        final String[] expected = {
+            "13:47: " + getCheckMessage(MSG_INVALID_PATTERN, "T", pattern),
+            "20:15: " + getCheckMessage(MSG_INVALID_PATTERN, "T", pattern),
+            "41:19: " + getCheckMessage(MSG_INVALID_PATTERN, "T", pattern),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputRecordTypeParameterNameFoo.java"), expected);
+    }
+

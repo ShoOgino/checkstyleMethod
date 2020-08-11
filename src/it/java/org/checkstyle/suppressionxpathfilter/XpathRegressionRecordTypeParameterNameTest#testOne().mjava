@@ -1,0 +1,26 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(getNonCompilablePath(
+                "SuppressionXpathRegressionRecordTypeParameterName1.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(RecordTypeParameterNameCheck.class);
+
+        final String pattern = "^[A-Z]$";
+
+        final String[] expectedViolation = {
+            "7:15: " + getCheckMessage(RecordTypeParameterNameCheck.class,
+                    AbstractNameCheck.MSG_INVALID_PATTERN, "foo", pattern),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/RECORD_DEF[./IDENT[@text='Other']]/"
+                    + "TYPE_PARAMETERS/TYPE_PARAMETER[./IDENT[@text='foo']]",
+            "/RECORD_DEF[./IDENT[@text='Other']]/TYPE_PARAMETERS/"
+                    + "TYPE_PARAMETER/IDENT[@text='foo']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
