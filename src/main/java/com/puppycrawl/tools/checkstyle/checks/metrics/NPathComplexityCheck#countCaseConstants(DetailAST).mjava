@@ -1,0 +1,16 @@
+    /**
+     * Counts number of case constants (EXPR) tokens in a switch labeled rule.
+     *
+     * @param ast switch rule token.
+     * @return number of case constant (EXPR) tokens.
+     */
+    private static int countCaseConstants(DetailAST ast) {
+        final AtomicInteger counter = new AtomicInteger();
+        final DetailAST literalCase = ast.getFirstChild();
+
+        TokenUtil.forEachChild(literalCase,
+            TokenTypes.EXPR, node -> counter.getAndIncrement());
+
+        return counter.get();
+    }
+

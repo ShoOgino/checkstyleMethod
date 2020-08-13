@@ -19,6 +19,11 @@
                 branchVisited = true;
                 pushValue(caseNumber);
                 break;
+            case TokenTypes.SWITCH_RULE:
+                final int caseConstantNumber = countCaseConstants(ast);
+                branchVisited = true;
+                pushValue(caseConstantNumber);
+                break;
             case TokenTypes.LITERAL_ELSE:
                 branchVisited = true;
                 if (currentRangeValue.equals(BigInteger.ZERO)) {

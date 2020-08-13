@@ -1,0 +1,19 @@
+    @Test
+    public void testNpathComplexitySwitchExpression() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(NPathComplexityCheck.class);
+        checkConfig.addAttribute("max", "1");
+
+        final int max = 1;
+
+        final String[] expected = {
+            "8:5: " + getCheckMessage(MSG_KEY, 5, max),
+            "25:5: " + getCheckMessage(MSG_KEY, 5, max),
+            "40:5: " + getCheckMessage(MSG_KEY, 6, max),
+            "56:5: " + getCheckMessage(MSG_KEY, 6, max),
+            };
+
+        verify(checkConfig,
+            getNonCompilablePath("InputNPathComplexityCheckSwitchExpression.java"),
+            expected);
+    }
+
