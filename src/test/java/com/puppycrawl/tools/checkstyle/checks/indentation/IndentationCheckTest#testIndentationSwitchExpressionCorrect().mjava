@@ -1,0 +1,10 @@
+    @Test
+    public void testIndentationSwitchExpressionCorrect() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        verifyWarns(checkConfig,
+            getNonCompilablePath("InputIndentationCheckSwitchExpressionCorrect.java"),
+            expected);
+    }
+
