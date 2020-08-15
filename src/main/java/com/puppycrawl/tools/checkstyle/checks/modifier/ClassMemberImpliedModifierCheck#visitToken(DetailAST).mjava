@@ -1,6 +1,6 @@
     @Override
     public void visitToken(DetailAST ast) {
-        if (ScopeUtil.isInClassBlock(ast) || ScopeUtil.isInEnumBlock(ast)) {
+        if (isInTypeBlock(ast)) {
             final DetailAST modifiers = ast.findFirstToken(TokenTypes.MODIFIERS);
             switch (ast.getType()) {
                 case TokenTypes.ENUM_DEF:
@@ -11,6 +11,12 @@
                     break;
                 case TokenTypes.INTERFACE_DEF:
                     if (violateImpliedStaticOnNestedInterface
+                            && modifiers.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
+                        log(ast, MSG_KEY, STATIC_KEYWORD);
+                    }
+                    break;
+                case TokenTypes.RECORD_DEF:
+                    if (violateImpliedStaticOnNestedRecord
                             && modifiers.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
                         log(ast, MSG_KEY, STATIC_KEYWORD);
                     }

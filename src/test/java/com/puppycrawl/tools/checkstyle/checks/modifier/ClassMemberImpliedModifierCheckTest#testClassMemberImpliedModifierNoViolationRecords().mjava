@@ -1,0 +1,17 @@
+    @Test
+    public void testClassMemberImpliedModifierNoViolationRecords() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(ClassMemberImpliedModifierCheck.class);
+        checkConfig.addAttribute("violateImpliedStaticOnNestedRecord", "false");
+        final String[] expected = {
+            "11:5: " + getCheckMessage(MSG_KEY, "static"),
+            "15:5: " + getCheckMessage(MSG_KEY, "static"),
+            "28:9: " + getCheckMessage(MSG_KEY, "static"),
+            "32:9: " + getCheckMessage(MSG_KEY, "static"),
+        };
+        verify(checkConfig,
+                getNonCompilablePath(
+                        "InputClassMemberImpliedModifierNoViolationRecords.java"),
+                expected);
+    }
+

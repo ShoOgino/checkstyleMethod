@@ -1,0 +1,17 @@
+    @Test
+    public void testClassMemberImpliedModifierRecords() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(ClassMemberImpliedModifierCheck.class);
+        final String[] expected = {
+            "11:5: " + getCheckMessage(MSG_KEY, "static"),
+            "15:5: " + getCheckMessage(MSG_KEY, "static"),
+            "19:5: " + getCheckMessage(MSG_KEY, "static"),
+            "24:9: " + getCheckMessage(MSG_KEY, "static"),
+            "28:9: " + getCheckMessage(MSG_KEY, "static"),
+            "32:9: " + getCheckMessage(MSG_KEY, "static"),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputClassMemberImpliedModifierRecords.java"),
+                expected);
+    }
+
