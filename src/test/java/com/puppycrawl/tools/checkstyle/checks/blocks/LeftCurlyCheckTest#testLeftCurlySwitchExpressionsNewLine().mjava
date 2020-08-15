@@ -1,0 +1,17 @@
+    @Test
+    public void testLeftCurlySwitchExpressionsNewLine() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(LeftCurlyCheck.class);
+        checkConfig.addAttribute("option", LeftCurlyOption.NL.toString());
+
+        final String[] expected = {
+            "14:58: " + getCheckMessage(MSG_KEY_LINE_NEW, "{", 58),
+            "15:25: " + getCheckMessage(MSG_KEY_LINE_NEW, "{", 25),
+            "40:25: " + getCheckMessage(MSG_KEY_LINE_NEW, "{", 25),
+            "51:23: " + getCheckMessage(MSG_KEY_LINE_NEW, "{", 23),
+
+            };
+        verify(checkConfig,
+            getNonCompilablePath("InputLeftCurlyCheckSwitchExpressionsNewLine.java"),
+            expected);
+    }
+
