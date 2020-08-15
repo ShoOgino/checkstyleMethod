@@ -1,0 +1,13 @@
+    @Test
+    public void testDefaultComesLastSwitchExpressions() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(DefaultComesLastCheck.class);
+        final String[] expected = {
+            "13:13: " + getCheckMessage(MSG_KEY),
+            "29:13: " + getCheckMessage(MSG_KEY),
+            "43:13: " + getCheckMessage(MSG_KEY),
+            };
+        verify(checkConfig,
+            getNonCompilablePath("InputDefaultComesLastSwitchExpressions.java"),
+            expected);
+    }
+

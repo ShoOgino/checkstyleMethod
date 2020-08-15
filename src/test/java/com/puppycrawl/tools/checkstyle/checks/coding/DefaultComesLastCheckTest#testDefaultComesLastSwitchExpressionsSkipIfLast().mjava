@@ -1,0 +1,14 @@
+    @Test
+    public void testDefaultComesLastSwitchExpressionsSkipIfLast() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(DefaultComesLastCheck.class);
+        checkConfig.addAttribute("skipIfLastAndSharedWithCase", "true");
+
+        final String[] expected = {
+            "29:13: " + getCheckMessage(MSG_KEY),
+            "43:13: " + getCheckMessage(MSG_KEY),
+            };
+        verify(checkConfig,
+            getNonCompilablePath("InputDefaultComesLastSwitchExpressions.java"),
+            expected);
+    }
+
