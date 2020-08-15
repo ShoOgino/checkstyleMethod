@@ -7,6 +7,7 @@
      *     <li>{@link TokenTypes#LITERAL_CASE}</li>
      *     <li>{@link TokenTypes#LITERAL_DEFAULT}</li>
      *     <li>{@link TokenTypes#LITERAL_ELSE}</li>
+     *     <li>{@link TokenTypes#LAMBDA}</li>
      * </ul>
      * For all others default value {@code true} is returned.
      *
@@ -23,10 +24,14 @@
                 break;
             case TokenTypes.LITERAL_CASE:
             case TokenTypes.LITERAL_DEFAULT:
-                result = hasUnbracedStatements(ast);
+                result = hasUnbracedStatements(ast)
+                    && !isSwitchLabeledExpression(ast);
                 break;
             case TokenTypes.LITERAL_ELSE:
                 result = ast.findFirstToken(TokenTypes.LITERAL_IF) == null;
+                break;
+            case TokenTypes.LAMBDA:
+                result = !isInSwitchRule(ast);
                 break;
             default:
                 result = true;

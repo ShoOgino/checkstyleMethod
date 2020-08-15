@@ -1,0 +1,20 @@
+    /**
+     * Checks if switch member in switch rule (case or default statement) is
+     * single-line statement, e.g.:
+     * <p>
+     * {@code
+     * case 1 -> System.out.println("case one");
+     * case 2 -> System.out.println("case two");
+     * default -> System.out.println("default");
+     * }
+     * </p>
+     *
+     * @param ast {@link TokenTypes#LITERAL_CASE case statement} or
+     *            {@link TokenTypes#LITERAL_DEFAULT default statement}.
+     * @return true if current switch label is single-line statement.
+     */
+    private static boolean isSingleLineSwitchRule(DetailAST ast) {
+        final DetailAST lastSibling = ast.getParent().getLastChild();
+        return TokenUtil.areOnSameLine(ast, lastSibling);
+    }
+

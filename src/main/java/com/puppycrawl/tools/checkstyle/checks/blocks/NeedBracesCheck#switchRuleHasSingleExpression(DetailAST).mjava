@@ -1,0 +1,12 @@
+    /**
+     * Checks if current switch labeled expression contains only a single expression.
+     *
+     * @param switchRule {@link TokenTypes#SWITCH_RULE}.
+     * @return true if current switch rule has a single expression.
+     */
+    private static boolean switchRuleHasSingleExpression(DetailAST switchRule) {
+        final DetailAST possibleExpression = switchRule.findFirstToken(TokenTypes.EXPR);
+        return possibleExpression != null
+                && possibleExpression.getFirstChild().getFirstChild() == null;
+    }
+

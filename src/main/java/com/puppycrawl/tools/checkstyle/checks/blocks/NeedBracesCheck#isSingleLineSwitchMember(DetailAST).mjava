@@ -1,23 +1,19 @@
     /**
-     * Checks if switch member (case or default statement) is single-line statement, e.g.:
-     * <p>
-     * {@code
-     * case 1: doSomeStuff(); break;
-     * case 2: doSomeStuff(); break;
-     * case 3: ;
-     * default: doSomeStuff();break;
-     * }
-     * </p>
+     * Checks if switch member (case or default statement) in a switch rule or
+     * case group is on a single line.
      *
-     * @param ast {@link TokenTypes#LITERAL_CASE case statement} or
+     * @param statement {@link TokenTypes#LITERAL_CASE case statement} or
      * {@link TokenTypes#LITERAL_DEFAULT default statement}.
      * @return true if current switch member is single-line statement.
      */
-    private static boolean isSingleLineSwitchMember(DetailAST ast) {
-        return Optional.of(ast)
-                .map(DetailAST::getNextSibling)
-                .map(DetailAST::getLastChild)
-                .map(lastToken -> TokenUtil.areOnSameLine(ast, lastToken))
-                .orElse(true);
+    private static boolean isSingleLineSwitchMember(DetailAST statement) {
+        final boolean result;
+        if (isInSwitchRule(statement)) {
+            result = isSingleLineSwitchRule(statement);
+        }
+        else {
+            result = isSingleLineCaseGroup(statement);
+        }
+        return result;
     }
 

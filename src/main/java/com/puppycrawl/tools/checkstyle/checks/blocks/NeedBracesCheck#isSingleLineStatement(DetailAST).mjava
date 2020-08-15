@@ -31,7 +31,8 @@
                 result = isSingleLineWhile(statement);
                 break;
             case TokenTypes.LAMBDA:
-                result = isSingleLineLambda(statement);
+                result = !isInSwitchRule(statement)
+                    && isSingleLineLambda(statement);
                 break;
             case TokenTypes.LITERAL_CASE:
             case TokenTypes.LITERAL_DEFAULT:

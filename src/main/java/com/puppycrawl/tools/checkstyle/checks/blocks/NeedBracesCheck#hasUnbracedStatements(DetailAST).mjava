@@ -6,8 +6,17 @@
      */
     private static boolean hasUnbracedStatements(DetailAST ast) {
         final DetailAST nextSibling = ast.getNextSibling();
-        return nextSibling != null
+        boolean result = false;
+
+        if (isInSwitchRule(ast)) {
+            final DetailAST parent = ast.getParent();
+            result = parent.getLastChild().getType() != TokenTypes.SLIST;
+        }
+        else if (nextSibling != null
             && nextSibling.getType() == TokenTypes.SLIST
-            && nextSibling.getFirstChild().getType() != TokenTypes.SLIST;
+            && nextSibling.getFirstChild().getType() != TokenTypes.SLIST) {
+            result = true;
+        }
+        return result;
     }
 

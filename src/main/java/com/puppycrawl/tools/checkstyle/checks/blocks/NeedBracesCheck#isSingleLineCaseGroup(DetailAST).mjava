@@ -1,0 +1,25 @@
+    /**
+     * Checks if switch member in case group (case or default statement)
+     * is single-line statement, e.g.:
+     * <p>
+     * {@code
+     * case 1: System.out.println("case one"); break;
+     * case 2: System.out.println("case two"); break;
+     * case 3: ;
+     * default: System.out.println("default"); break;
+     * }
+     * </p>
+     *
+     *
+     * @param ast {@link TokenTypes#LITERAL_CASE case statement} or
+     * {@link TokenTypes#LITERAL_DEFAULT default statement}.
+     * @return true if current switch member is single-line statement.
+     */
+    private static boolean isSingleLineCaseGroup(DetailAST ast) {
+        return Optional.of(ast)
+            .map(DetailAST::getNextSibling)
+            .map(DetailAST::getLastChild)
+            .map(lastToken -> TokenUtil.areOnSameLine(ast, lastToken))
+            .orElse(true);
+    }
+

@@ -1,0 +1,15 @@
+    /**
+     * Checks if current ast's parent is a switch rule, e.g.:
+     * <p>
+     * {@code
+     * case 1 ->  monthString = "January";
+     * }
+     * </p>
+     *
+     * @param ast the ast to check.
+     * @return true if current ast belongs to a switch rule.
+     */
+    private static boolean isInSwitchRule(DetailAST ast) {
+        return ast.getParent().getType() == TokenTypes.SWITCH_RULE;
+    }
+

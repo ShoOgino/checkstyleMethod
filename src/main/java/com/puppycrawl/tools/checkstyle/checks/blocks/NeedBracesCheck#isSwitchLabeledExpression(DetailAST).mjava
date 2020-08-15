@@ -1,0 +1,17 @@
+    /**
+     * Checks if current expression is a switch labeled expression. If so,
+     * braces are not allowed e.g.:
+     * <p>
+     * {@code
+     * case 1 -> 4;
+     * }
+     * </p>
+     *
+     * @param ast the ast to check
+     * @return true if current expression is a switch labeled expression.
+     */
+    private static boolean isSwitchLabeledExpression(DetailAST ast) {
+        final DetailAST parent = ast.getParent();
+        return switchRuleHasSingleExpression(parent);
+    }
+
