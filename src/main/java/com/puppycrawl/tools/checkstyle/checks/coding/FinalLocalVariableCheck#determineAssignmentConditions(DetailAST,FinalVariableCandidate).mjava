@@ -7,8 +7,12 @@
     private static void determineAssignmentConditions(DetailAST ident,
                                                       FinalVariableCandidate candidate) {
         if (candidate.assigned) {
-            if (!isInSpecificCodeBlock(ident, TokenTypes.LITERAL_ELSE)
-                    && !isInSpecificCodeBlock(ident, TokenTypes.CASE_GROUP)) {
+            final int[] blockTypes = {
+                TokenTypes.LITERAL_ELSE,
+                TokenTypes.CASE_GROUP,
+                TokenTypes.SWITCH_RULE,
+            };
+            if (!isInSpecificCodeBlocks(ident, blockTypes)) {
                 candidate.alreadyAssigned = true;
             }
         }

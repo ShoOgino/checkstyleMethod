@@ -52,6 +52,14 @@
             case TokenTypes.LITERAL_BREAK:
                 scopeStack.peek().containsBreak = true;
                 break;
+            case TokenTypes.EXPR:
+                // Switch labeled expression has no slist
+                if (ast.getParent().getType() == TokenTypes.SWITCH_RULE
+                    && ast.getParent().getParent().findFirstToken(TokenTypes.SWITCH_RULE)
+                        == ast.getParent()) {
+                    storePrevScopeUninitializedVariableData();
+                }
+                break;
             default:
                 throw new IllegalStateException("Incorrect token type");
         }

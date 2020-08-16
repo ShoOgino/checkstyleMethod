@@ -1,6 +1,7 @@
     @Override
     public void leaveToken(DetailAST ast) {
         Map<String, FinalVariableCandidate> scope = null;
+        final Deque<DetailAST> prevScopeUninitializedVariableData;
         switch (ast.getType()) {
             case TokenTypes.OBJBLOCK:
             case TokenTypes.CTOR_DEF:
@@ -8,11 +9,17 @@
             case TokenTypes.LITERAL_FOR:
                 scope = scopeStack.pop().scope;
                 break;
+            case TokenTypes.EXPR:
+                // Switch labeled expression has no slist
+                if (ast.getParent().getType() == TokenTypes.SWITCH_RULE) {
+                    prevScopeUninitializedVariableData = prevScopeUninitializedVariables.peek();
+                    if (shouldUpdateUninitializedVariables(ast.getParent())) {
+                        updateAllUninitializedVariables(prevScopeUninitializedVariableData);
+                    }
+                }
+                break;
             case TokenTypes.SLIST:
-                // -@cs[MoveVariableInsideIf] assignment value is modified later so it can't be
-                // moved
-                final Deque<DetailAST> prevScopeUninitializedVariableData =
-                    prevScopeUninitializedVariables.peek();
+                prevScopeUninitializedVariableData = prevScopeUninitializedVariables.peek();
                 boolean containsBreak = false;
                 if (ast.getParent().getType() != TokenTypes.CASE_GROUP
                     || findLastChildWhichContainsSpecifiedToken(ast.getParent().getParent(),

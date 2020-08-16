@@ -1,0 +1,21 @@
+    /**
+     * Checks whether the scope of a node is restricted to a specific code blocks.
+     *
+     * @param node node.
+     * @param blockTypes int array of all block types to check.
+     * @return true if the scope of a node is restricted to specific code block types.
+     */
+    private static boolean isInSpecificCodeBlocks(DetailAST node, int... blockTypes) {
+        boolean returnValue = false;
+        for (int blockType : blockTypes) {
+            for (DetailAST token = node.getParent(); token != null; token = token.getParent()) {
+                final int type = token.getType();
+                if (type == blockType) {
+                    returnValue = true;
+                    break;
+                }
+            }
+        }
+        return returnValue;
+    }
+
