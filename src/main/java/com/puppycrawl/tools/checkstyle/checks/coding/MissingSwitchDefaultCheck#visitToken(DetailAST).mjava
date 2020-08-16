@@ -1,8 +1,8 @@
     @Override
     public void visitToken(DetailAST ast) {
-        final DetailAST firstCaseGroupAst = ast.findFirstToken(TokenTypes.CASE_GROUP);
+        final DetailAST firstSwitchMemberAst = findFirstSwitchMember(ast);
 
-        if (!containsDefaultSwitch(firstCaseGroupAst)) {
+        if (!containsDefaultSwitch(firstSwitchMemberAst)) {
             log(ast, MSG_KEY);
         }
     }
