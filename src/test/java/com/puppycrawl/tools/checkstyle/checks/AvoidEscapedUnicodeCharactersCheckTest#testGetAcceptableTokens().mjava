@@ -2,7 +2,11 @@
     public void testGetAcceptableTokens() {
         final AvoidEscapedUnicodeCharactersCheck check = new AvoidEscapedUnicodeCharactersCheck();
         final int[] actual = check.getAcceptableTokens();
-        final int[] expected = {TokenTypes.STRING_LITERAL, TokenTypes.CHAR_LITERAL };
+        final int[] expected = {
+            TokenTypes.STRING_LITERAL,
+            TokenTypes.CHAR_LITERAL,
+            TokenTypes.TEXT_BLOCK_CONTENT,
+        };
         assertArrayEquals(expected, actual, "Acceptable tokens differ from expected");
     }
 
