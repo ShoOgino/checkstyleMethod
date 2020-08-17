@@ -1,0 +1,20 @@
+    @Test
+    public void testIllegalTokenTextTextBlocksQuotes() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(IllegalTokenTextCheck.class);
+        checkConfig.addAttribute("tokens", "STRING_LITERAL, TEXT_BLOCK_CONTENT");
+        checkConfig.addAttribute("format", "\"");
+
+        final String[] expected = {
+            "13:28: " + getCheckMessage(MSG_KEY, "\""),
+            "14:33: " + getCheckMessage(MSG_KEY, "\""),
+            "16:32: " + getCheckMessage(MSG_KEY, "\""),
+            "18:36: " + getCheckMessage(MSG_KEY, "\""),
+            "28:37: " + getCheckMessage(MSG_KEY, "\""),
+            "33:37: " + getCheckMessage(MSG_KEY, "\""),
+            "39:42: " + getCheckMessage(MSG_KEY, "\""),
+            };
+        verify(checkConfig,
+            getNonCompilablePath("InputIllegalTokenTextTextBlocksQuotes.java"), expected);
+    }
+
