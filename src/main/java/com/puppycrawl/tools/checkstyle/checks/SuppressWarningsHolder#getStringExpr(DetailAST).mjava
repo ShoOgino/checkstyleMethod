@@ -22,6 +22,10 @@
             case TokenTypes.DOT:
                 expr = firstChild.getLastChild().getText();
                 break;
+            case TokenTypes.TEXT_BLOCK_LITERAL_BEGIN:
+                final String textBlockContent = firstChild.getFirstChild().getText();
+                expr = getContentWithoutPrecedingWhitespace(textBlockContent);
+                break;
             default:
                 // annotations with complex expressions cannot suppress warnings
         }

@@ -1,0 +1,12 @@
+    /**
+     * Remove preceding newline and whitespace from the content of a text block.
+     *
+     * @param textBlockContent the actual text in a text block.
+     * @return content of text block with preceding whitespace and newline removed.
+     */
+    private static String getContentWithoutPrecedingWhitespace(String textBlockContent) {
+        final String contentWithNoPrecedingNewline =
+            NEWLINE.matcher(textBlockContent).replaceAll("");
+        return WHITESPACE.matcher(contentWithNoPrecedingNewline).replaceAll("");
+    }
+
