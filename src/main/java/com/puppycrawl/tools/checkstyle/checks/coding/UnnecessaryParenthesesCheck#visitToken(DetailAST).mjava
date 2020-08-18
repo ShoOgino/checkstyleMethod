@@ -22,6 +22,15 @@
                     log(ast, MSG_STRING,
                         chopString(ast.getText()));
                 }
+                else if (type == TokenTypes.TEXT_BLOCK_LITERAL_BEGIN) {
+                    // Strip newline control characters to keep message as single line, add
+                    // quotes to make string consistent with STRING_LITERAL
+                    final String logString = QUOTE
+                        + NEWLINE.matcher(
+                            ast.getFirstChild().getText()).replaceAll("\\\\n")
+                        + QUOTE;
+                    log(ast, MSG_STRING, chopString(logString));
+                }
                 else {
                     log(ast, MSG_LITERAL, ast.getText());
                 }
