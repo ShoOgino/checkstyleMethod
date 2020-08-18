@@ -1,0 +1,19 @@
+    /**
+     * Method to find the index of the first non-whitespace character in a string.
+     *
+     * @param value the string to find the first index of a non-whitespace character for.
+     * @return the index of the first non-whitespace character.
+     */
+    public static int indexOfNonWhitespace(String value) {
+        final int length = value.length();
+        int left = 0;
+        while (left < length) {
+            final int codePointAt = value.codePointAt(left);
+            if (!Character.isWhitespace(codePointAt)) {
+                break;
+            }
+            left += Character.charCount(codePointAt);
+        }
+        return left;
+    }
+

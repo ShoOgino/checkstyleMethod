@@ -1,0 +1,22 @@
+    /**
+     * Strip initial newline and preceding whitespace on each line from text block content.
+     * In order to be consistent with how javac handles this task, we have modeled this
+     * implementation after the code from:
+     * github.com/openjdk/jdk14u/blob/master/src/java.base/share/classes/java/lang/String.java
+     *
+     * @param textBlockContent the actual content of the text block.
+     * @return string consistent with javac representation.
+     */
+    public static String stripIndentAndInitialNewLineFromTextBlock(String textBlockContent) {
+        final String contentWithInitialNewLineRemoved =
+            ALL_NEW_LINES.matcher(textBlockContent).replaceFirst("");
+        final List<String> lines =
+            Arrays.asList(ALL_NEW_LINES.split(contentWithInitialNewLineRemoved));
+        final int indent = getSmallestIndent(lines);
+        final String suffix = "";
+
+        return lines.stream()
+                .map(line -> stripIndentAndTrailingWhitespaceFromLine(line, indent))
+                .collect(Collectors.joining(System.lineSeparator(), suffix, suffix));
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Helper method for stripIndentAndInitialNewLineFromTextBlock, to determine the smallest
+     * indent in a text block string literal.
+     *
+     * @param lines list of actual text block content, split by line.
+     * @return number of spaces representing the smallest indent in this text block.
+     */
+    private static int getSmallestIndent(List<String> lines) {
+        return lines.stream()
+            .mapToInt(CommonUtil::indexOfNonWhitespace)
+            .min()
+            .orElse(0);
+    }
+

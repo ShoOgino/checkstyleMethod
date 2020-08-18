@@ -6,15 +6,7 @@
      * @return true if the arg is blank.
      */
     public static boolean isBlank(String value) {
-        boolean result = true;
-        if (value != null && !value.isEmpty()) {
-            for (int i = 0; i < value.length(); i++) {
-                if (!Character.isWhitespace(value.charAt(i))) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        return result;
+        return Objects.isNull(value)
+                || indexOfNonWhitespace(value) >= value.length();
     }
 
