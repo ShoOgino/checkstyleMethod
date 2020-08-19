@@ -1,0 +1,21 @@
+    private static List<ModulePropertyDetails> createProperties(Element properties) {
+        final List<ModulePropertyDetails> result = new ArrayList<>();
+        final NodeList propertyList = properties.getElementsByTagName("property");
+        for (int i = 0; i < propertyList.getLength(); i++) {
+            final ModulePropertyDetails propertyDetails = new ModulePropertyDetails();
+            final Element prop = (Element) propertyList.item(i);
+            propertyDetails.setName(getAttributeValue(prop, "name"));
+            propertyDetails.setType(getAttributeValue(prop, "type"));
+            if (prop.hasAttribute("default-value")) {
+                propertyDetails.setDefaultValue(getAttributeValue(prop, "default-value"));
+            }
+            if (prop.hasAttribute("validation-type")) {
+                propertyDetails.setValidationType(getAttributeValue(prop, "validation-type"));
+            }
+            propertyDetails.setDescription(getDirectChildsByTag(prop, "description")
+                    .get(0).getFirstChild().getNodeValue());
+            result.add(propertyDetails);
+        }
+        return result;
+    }
+

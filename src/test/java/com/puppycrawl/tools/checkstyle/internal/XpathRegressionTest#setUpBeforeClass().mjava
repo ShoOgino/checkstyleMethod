@@ -5,5 +5,12 @@
         allowedDirectoryAndChecks = simpleCheckNames
                 .stream()
                 .collect(Collectors.toMap(id -> id.toLowerCase(Locale.ENGLISH), id -> id));
+
+        internalModules = Definitions.INTERNAL_MODULES.stream()
+            .map(moduleName -> {
+                final String[] packageTokens = moduleName.split("\\.");
+                return packageTokens[packageTokens.length - 1];
+            })
+            .collect(Collectors.toSet());
     }
 

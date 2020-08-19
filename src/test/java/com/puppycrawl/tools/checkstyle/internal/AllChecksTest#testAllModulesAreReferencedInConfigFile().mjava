@@ -3,6 +3,7 @@
         final Set<String> modulesReferencedInConfig = CheckUtil.getConfigCheckStyleModules();
         final Set<String> moduleNames = CheckUtil.getSimpleNames(CheckUtil.getCheckstyleModules());
 
+        moduleNames.removeAll(INTERNAL_MODULES);
         moduleNames.stream().filter(check -> !modulesReferencedInConfig.contains(check))
             .forEach(check -> {
                 final String errorMessage = String.format(Locale.ROOT,

@@ -1,0 +1,12 @@
+    /**
+     * Checks whether the paragraph node corresponds to the example section.
+     *
+     * @param ast javadoc paragraph node
+     * @return true if the section matches the example section marker
+     */
+    private static boolean isExamplesText(DetailNode ast) {
+        final Optional<DetailNode> resultNode = getFirstChildOfType(ast, JavadocTokenTypes.TEXT, 0);
+        return resultNode.isPresent()
+                && EXAMPLES_TAG.matcher(resultNode.get().getText()).matches();
+    }
+

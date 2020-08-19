@@ -1,0 +1,17 @@
+    /**
+     * Get tag text from property data.
+     *
+     * @param nodeLi javadoc li item node
+     * @param propertyMeta property javadoc node
+     * @return property metadata text
+     */
+    private static String getTagTextFromProperty(DetailNode nodeLi, DetailNode propertyMeta) {
+        final Optional<DetailNode> tagNodeOpt = getFirstChildOfType(nodeLi,
+                JavadocTokenTypes.JAVADOC_INLINE_TAG, propertyMeta.getIndex() + 1);
+        DetailNode tagNode = null;
+        if (tagNodeOpt.isPresent()) {
+            tagNode = tagNodeOpt.get();
+        }
+        return getTextFromTag(tagNode);
+    }
+

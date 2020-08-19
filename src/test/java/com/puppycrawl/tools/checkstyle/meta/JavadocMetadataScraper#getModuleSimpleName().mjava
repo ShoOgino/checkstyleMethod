@@ -1,0 +1,12 @@
+    /**
+     * Extract simple file name from the whole file path name.
+     *
+     * @return simple module name
+     */
+    private String getModuleSimpleName() {
+        final String fullFileName = getFileContents().getFileName();
+        final String[] pathTokens = FILE_SEPARATOR_PATTERN.split(fullFileName);
+        final String fileName = pathTokens[pathTokens.length - 1];
+        return fileName.substring(0, fileName.length() - 5);
+    }
+

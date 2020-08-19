@@ -7,9 +7,12 @@
                 .collect(Collectors.toSet());
         // add the extra checks
         abstractJavadocCheckNames.addAll(REGEXP_JAVADOC_CHECKS);
+        final Set<String> abstractJavadocCheckSimpleNames =
+                CheckUtil.getSimpleNames(abstractJavadocCheckNames);
+        abstractJavadocCheckSimpleNames.removeAll(internalModules);
         assertWithMessage("INCOMPATIBLE_JAVADOC_CHECK_NAMES should contains all descendants "
                     + "of AbstractJavadocCheck")
-            .that(CheckUtil.getSimpleNames(abstractJavadocCheckNames))
+            .that(abstractJavadocCheckSimpleNames)
             .isEqualTo(INCOMPATIBLE_JAVADOC_CHECK_NAMES);
     }
 

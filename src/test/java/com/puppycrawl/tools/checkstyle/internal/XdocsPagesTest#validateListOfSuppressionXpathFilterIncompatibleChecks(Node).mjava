@@ -3,10 +3,11 @@
             "Incompatible check list should match XpathRegressionTest.INCOMPATIBLE_CHECK_NAMES")
             .that(getListById(subSection, "SuppressionXpathFilter_IncompatibleChecks"))
             .isEqualTo(XpathRegressionTest.INCOMPATIBLE_CHECK_NAMES);
-
+        final Set<String> suppressionXpathFilterJavadocChecks = getListById(subSection,
+                "SuppressionXpathFilter_JavadocChecks");
         assertWithMessage(
             "Javadoc check list should match XpathRegressionTest.INCOMPATIBLE_JAVADOC_CHECK_NAMES")
-            .that(getListById(subSection, "SuppressionXpathFilter_JavadocChecks"))
+            .that(suppressionXpathFilterJavadocChecks)
             .isEqualTo(XpathRegressionTest.INCOMPATIBLE_JAVADOC_CHECK_NAMES);
     }
 

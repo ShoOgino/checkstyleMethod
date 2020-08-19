@@ -1,0 +1,15 @@
+    private static List<String> getListContentByAttribute(Element element, String listParent,
+                                                         String listOption, String attribute) {
+        final List<Element> children = getDirectChildsByTag(element, listParent);
+        List<String> result = null;
+        if (!children.isEmpty()) {
+            final NodeList nodeList = children.get(0).getElementsByTagName(listOption);
+            final List<String> listContent = new ArrayList<>();
+            for (int j = 0; j < nodeList.getLength(); j++) {
+                listContent.add(getAttributeValue((Element) nodeList.item(j), attribute));
+            }
+            result = listContent;
+        }
+        return result;
+    }
+

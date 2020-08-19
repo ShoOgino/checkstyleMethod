@@ -1,0 +1,14 @@
+    /**
+     * Get first child of parent node matching the provided pattern.
+     *
+     * @param node parent node
+     * @param pattern pattern to match against
+     * @return the first child node matching the condition
+     */
+    private static Optional<DetailNode> getFirstChildOfMatchingText(DetailNode node,
+                                                                    Pattern pattern) {
+        return Arrays.stream(node.getChildren())
+                .filter(child -> pattern.matcher(child.getText()).matches())
+                .findFirst();
+    }
+

@@ -1,0 +1,21 @@
+    /**
+     * Create the description text with starting index as 0 and ending index would be the first
+     * valid non zero index amongst in the order of {@code propertySectionStartIdx},
+     * {@code exampleSectionStartIdx} and {@code parentSectionStartIdx}.
+     *
+     * @return description text
+     */
+    private String getDescriptionText() {
+        final int descriptionEndIdx;
+        if (propertySectionStartIdx > -1) {
+            descriptionEndIdx = propertySectionStartIdx;
+        }
+        else if (exampleSectionStartIdx > -1) {
+            descriptionEndIdx = exampleSectionStartIdx;
+        }
+        else {
+            descriptionEndIdx = parentSectionStartIdx;
+        }
+        return constructSubTreeText(rootNode, 0, descriptionEndIdx - 1);
+    }
+

@@ -1,0 +1,17 @@
+    /**
+     * Check if the current javadoc block comment AST corresponds to the top-level class as we
+     * only want to scrape top-level class javadoc.
+     *
+     * @return true if the current AST corresponds to top level class
+     */
+    public boolean isTopLevelClassJavadoc() {
+        final DetailAST parent = getParent(getBlockCommentAst());
+        final Optional<DetailAST> className = TokenUtil
+                .findFirstTokenByPredicate(parent, child -> {
+                    return parent.getType() == TokenTypes.CLASS_DEF
+                            && child.getType() == TokenTypes.IDENT;
+                });
+        return className.isPresent()
+                && getModuleSimpleName().equals(className.get().getText());
+    }
+

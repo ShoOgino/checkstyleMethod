@@ -1,0 +1,13 @@
+    /**
+     * Checks whether the list item node is part of a property list.
+     *
+     * @param nodeLi {@code JavadocTokenType.LI} node
+     * @return true if the node is part of a property list
+     */
+    private static boolean isPropertyList(DetailNode nodeLi) {
+        final Optional<DetailNode> firstTextChildToken =
+                getFirstChildOfType(nodeLi, JavadocTokenTypes.TEXT, 0);
+        return firstTextChildToken.isPresent()
+                && PROPERTY_TAG.matcher(firstTextChildToken.get().getText()).matches();
+    }
+

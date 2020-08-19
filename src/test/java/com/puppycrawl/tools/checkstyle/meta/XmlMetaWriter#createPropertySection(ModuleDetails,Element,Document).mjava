@@ -1,0 +1,26 @@
+    private static void createPropertySection(ModuleDetails moduleDetails, Element checkModule,
+                                              Document doc) {
+        if (!moduleDetails.getProperties().isEmpty()) {
+            final Element properties = doc.createElement("properties");
+            checkModule.appendChild(properties);
+            for (ModulePropertyDetails modulePropertyDetails : moduleDetails.getProperties()) {
+                final Element property = doc.createElement("property");
+                properties.appendChild(property);
+                property.setAttribute("name", modulePropertyDetails.getName());
+                property.setAttribute("type", modulePropertyDetails.getType());
+                if (modulePropertyDetails.getDefaultValue() != null) {
+                    property.setAttribute("default-value",
+                            modulePropertyDetails.getDefaultValue());
+                }
+                if (modulePropertyDetails.getValidationType() != null) {
+                    property.setAttribute("validation-type",
+                            modulePropertyDetails.getValidationType());
+                }
+                final Element propertyDesc = doc.createElement("description");
+                propertyDesc.appendChild(doc.createCDATASection(
+                        modulePropertyDetails.getDescription()));
+                property.appendChild(propertyDesc);
+            }
+        }
+    }
+

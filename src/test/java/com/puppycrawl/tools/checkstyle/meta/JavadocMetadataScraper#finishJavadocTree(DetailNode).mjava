@@ -1,0 +1,14 @@
+    @Override
+    public void finishJavadocTree(DetailNode rootAst) {
+        moduleDetails.setDescription(getDescriptionText());
+        if (isTopLevelClassJavadoc()) {
+            try {
+                XmlMetaWriter.write(moduleDetails);
+            }
+            catch (TransformerException | ParserConfigurationException ex) {
+                throw new IllegalStateException("Failed to write metadata into XML file for "
+                        + "module: " + getModuleSimpleName(), ex);
+            }
+        }
+    }
+

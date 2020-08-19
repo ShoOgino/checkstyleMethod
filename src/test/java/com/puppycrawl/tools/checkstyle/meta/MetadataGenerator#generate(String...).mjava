@@ -1,0 +1,22 @@
+    /**
+     * Generate metadata from the module source files available in the input argument path.
+     *
+     * @param args arguments
+     * @throws IOException ioException
+     * @throws CheckstyleException checkstyleException
+     */
+    public static void generate(String... args) throws IOException, CheckstyleException {
+        final Checker checker = new Checker();
+        checker.setModuleClassLoader(Checker.class.getClassLoader());
+        final DefaultConfiguration scraperCheckConfig =
+                        new DefaultConfiguration(JavadocMetadataScraper.class.getName());
+        final DefaultConfiguration defaultConfiguration = new DefaultConfiguration("configuration");
+        final DefaultConfiguration treeWalkerConfig =
+                new DefaultConfiguration(TreeWalker.class.getName());
+        defaultConfiguration.addAttribute("charset", StandardCharsets.UTF_8.name());
+        defaultConfiguration.addChild(treeWalkerConfig);
+        treeWalkerConfig.addChild(scraperCheckConfig);
+        checker.configure(defaultConfiguration);
+        dumpMetadata(checker, args[0]);
+    }
+

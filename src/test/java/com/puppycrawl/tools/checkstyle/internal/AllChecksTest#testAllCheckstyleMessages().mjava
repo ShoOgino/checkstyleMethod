@@ -15,7 +15,9 @@
                     message.setAccessible(true);
                 }
 
-                verifyCheckstyleMessage(usedMessages, module, message);
+                if (!INTERNAL_MODULES.contains(module.getSimpleName())) {
+                    verifyCheckstyleMessage(usedMessages, module, message);
+                }
             }
         }
 

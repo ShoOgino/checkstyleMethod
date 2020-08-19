@@ -1,0 +1,16 @@
+    @Override
+    public void visitJavadocToken(DetailNode ast) {
+        if (toScan) {
+            scrapeContent(ast);
+        }
+
+        if (ast.getType() == JavadocTokenTypes.JAVADOC
+            && getParent(getBlockCommentAst()).getType() == TokenTypes.CLASS_DEF) {
+            rootNode = ast;
+            toScan = true;
+        }
+        else if (ast.getType() == JavadocTokenTypes.SINCE_LITERAL) {
+            toScan = false;
+        }
+    }
+

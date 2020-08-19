@@ -1,0 +1,21 @@
+    /**
+     * Returns parent node, removing modifier/annotation nodes.
+     *
+     * @param commentBlock child node.
+     * @return parent node.
+     */
+    private static DetailAST getParent(DetailAST commentBlock) {
+        final DetailAST parentNode = commentBlock.getParent();
+        DetailAST result = null;
+        if (parentNode != null) {
+            result = parentNode;
+            if (result.getType() == TokenTypes.ANNOTATION) {
+                result = parentNode.getParent().getParent();
+            }
+            else if (result.getType() == TokenTypes.MODIFIERS) {
+                result = parentNode.getParent();
+            }
+        }
+        return result;
+    }
+

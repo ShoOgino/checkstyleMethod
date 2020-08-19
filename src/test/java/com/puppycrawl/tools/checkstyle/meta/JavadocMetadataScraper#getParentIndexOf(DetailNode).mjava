@@ -1,0 +1,15 @@
+    /**
+     * Traverse parents until we reach the root node (@code{JavadocTokenTypes.JAVADOC})
+     * child and return its index.
+     *
+     * @param node subtree child node
+     * @return root node child index
+     */
+    private static int getParentIndexOf(DetailNode node) {
+        DetailNode currNode = node;
+        while (currNode.getParent().getIndex() != -1) {
+            currNode = currNode.getParent();
+        }
+        return currNode.getIndex();
+    }
+

@@ -1,0 +1,22 @@
+    @Override
+    public void beginJavadocTree(DetailNode rootAst) {
+        if (isTopLevelClassJavadoc()) {
+            moduleDetails = new ModuleDetails();
+            currentStatus = ScrapeStatus.DESCRIPTION;
+            toScan = false;
+            descriptionText = "";
+            propertySectionStartIdx = -1;
+            exampleSectionStartIdx = -1;
+            parentSectionStartIdx = -1;
+
+            final String filePath = getFileContents().getFileName();
+            String moduleName = getModuleSimpleName();
+            if (moduleName.contains("Check")) {
+                moduleName = moduleName.substring(0, moduleName.indexOf("Check"));
+            }
+            moduleDetails.setName(moduleName);
+            moduleDetails.setFullQualifiedName(getPackageName(filePath));
+            moduleDetails.setModuleType(getModuleType());
+        }
+    }
+

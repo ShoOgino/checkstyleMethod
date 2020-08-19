@@ -7,7 +7,8 @@
         // these are documented on non-'config_' pages
         checkstyleModulesNames.remove("TreeWalker");
         checkstyleModulesNames.remove("Checker");
-
+        // temporarily hosted in test folder
+        checkstyleModulesNames.removeAll(INTERNAL_MODULES);
         checkstyleModulesNames.stream()
             .filter(moduleName -> !modulesNamesWhichHaveXdocs.contains(moduleName))
             .forEach(moduleName -> {
