@@ -1,3 +1,11 @@
+    /**
+     * We cannot reduce the number of branches in this switch statement,
+     * since many tokens require specific methods to find the first left
+     * curly.
+     *
+     * @param ast the token to process
+     * @noinspection SwitchStatementWithTooManyBranches
+     */
     @Override
     public void visitToken(DetailAST ast) {
         final DetailAST startToken;
@@ -6,6 +14,7 @@
         switch (ast.getType()) {
             case TokenTypes.CTOR_DEF:
             case TokenTypes.METHOD_DEF:
+            case TokenTypes.COMPACT_CTOR_DEF:
                 startToken = skipModifierAnnotations(ast);
                 brace = ast.findFirstToken(TokenTypes.SLIST);
                 break;
@@ -14,6 +23,7 @@
             case TokenTypes.ANNOTATION_DEF:
             case TokenTypes.ENUM_DEF:
             case TokenTypes.ENUM_CONSTANT_DEF:
+            case TokenTypes.RECORD_DEF:
                 startToken = skipModifierAnnotations(ast);
                 final DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
                 brace = objBlock;

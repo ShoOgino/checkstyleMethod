@@ -1,0 +1,16 @@
+    @Test
+    public void testLeftCurlyRecordsAndCompactCtors() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(LeftCurlyCheck.class);
+        checkConfig.addAttribute("option", LeftCurlyOption.NLOW.toString());
+        final String[] expected = {
+            "18:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{", 5),
+            "20:9: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{", 9),
+            "30:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{", 5),
+            "32:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{", 5),
+            "39:9: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{", 9),
+            "52:5: " + getCheckMessage(MSG_KEY_LINE_PREVIOUS, "{", 5),
+            };
+        verify(checkConfig,
+            getNonCompilablePath("InputLeftCurlyRecordsAndCompactCtors.java"), expected);
+    }
+
