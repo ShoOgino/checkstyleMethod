@@ -1,0 +1,13 @@
+    @Test
+    public void testClassFanOutComplexityRecords() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(ClassFanOutComplexityCheck.class);
+        checkConfig.addAttribute("max", "2");
+        final String[] expected = {
+            "25:1: " + getCheckMessage(MSG_KEY, 4, 2),
+            "46:1: " + getCheckMessage(MSG_KEY, 4, 2),
+            };
+        verify(checkConfig,
+            getNonCompilablePath("InputClassFanOutComplexityRecords.java"), expected);
+    }
+
