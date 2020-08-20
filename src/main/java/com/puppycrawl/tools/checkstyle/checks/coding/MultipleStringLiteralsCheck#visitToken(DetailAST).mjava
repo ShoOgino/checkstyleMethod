@@ -1,8 +1,18 @@
     @Override
     public void visitToken(DetailAST ast) {
         if (!isInIgnoreOccurrenceContext(ast)) {
-            final String currentString = ast.getText();
-            if (ignoreStringsRegexp == null || !ignoreStringsRegexp.matcher(currentString).find()) {
+            final String currentString;
+            if (ast.getType() == TokenTypes.TEXT_BLOCK_CONTENT) {
+                final String strippedString =
+                    CheckUtil.stripIndentAndInitialNewLineFromTextBlock(ast.getText());
+                // We need to add quotes here to be consistent with STRING_LITERAL text.
+                currentString = QUOTE + strippedString + QUOTE;
+            }
+            else {
+                currentString = ast.getText();
+            }
+            if (ignoreStringsRegexp == null
+                    || !ignoreStringsRegexp.matcher(currentString).find()) {
                 stringMap.computeIfAbsent(currentString, key -> new ArrayList<>()).add(ast);
             }
         }
