@@ -1,0 +1,12 @@
+    /**
+     * Helper method for getFirstNodeInsideSwitchBlock to return the first CASE_GROUP or
+     * SWITCH_RULE ast.
+     *
+     * @param block the switch block to check.
+     * @return DetailAST of the first CASE_GROUP or SWITCH_RULE.
+     */
+    private static DetailAST getFirstCaseGroupOrSwitchRule(DetailAST block) {
+        return Optional.ofNullable(block.findFirstToken(TokenTypes.CASE_GROUP))
+            .orElse(block.findFirstToken(TokenTypes.SWITCH_RULE));
+    }
+
