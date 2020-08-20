@@ -1,0 +1,15 @@
+    @Test
+    public void testJavadocTypeRecords() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(JavadocTypeCheck.class);
+        checkConfig.addAttribute("authorFormat", "ABC");
+        final String[] expected = {
+            "22:1: " + getCheckMessage(MSG_MISSING_TAG, "@author"),
+            "31:1: " + getCheckMessage(MSG_MISSING_TAG, "@author"),
+            "40:1: " + getCheckMessage(MSG_MISSING_TAG, "@author"),
+            "53:1: " + getCheckMessage(MSG_TAG_FORMAT, "@author", "ABC"),
+            "63:1: " + getCheckMessage(MSG_MISSING_TAG, "@author"),
+            };
+        verify(checkConfig, getNonCompilablePath("InputJavadocTypeRecords.java"), expected);
+    }
+
