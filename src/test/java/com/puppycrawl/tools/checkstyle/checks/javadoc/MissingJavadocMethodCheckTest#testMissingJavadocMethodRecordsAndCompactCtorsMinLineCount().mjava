@@ -1,0 +1,13 @@
+    @Test
+    public void testMissingJavadocMethodRecordsAndCompactCtorsMinLineCount() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(
+            MissingJavadocMethodCheck.class);
+        checkConfig.addAttribute("minLineCount", "2");
+
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig,
+            getNonCompilablePath("InputMissingJavadocMethodRecordsAndCtorsMinLineCount.java"),
+            expected);
+    }
+

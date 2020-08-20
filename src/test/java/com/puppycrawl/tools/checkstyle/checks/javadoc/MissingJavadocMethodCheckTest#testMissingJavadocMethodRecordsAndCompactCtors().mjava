@@ -1,0 +1,16 @@
+    @Test
+    public void testMissingJavadocMethodRecordsAndCompactCtors() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(
+            MissingJavadocMethodCheck.class);
+        final String[] expected = {
+            "19:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "24:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "28:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "35:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "41:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "45:5: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            };
+        verify(checkConfig,
+            getNonCompilablePath("InputMissingJavadocMethodRecordsAndCtors.java"), expected);
+    }
+
