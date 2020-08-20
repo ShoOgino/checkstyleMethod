@@ -1,0 +1,12 @@
+    /**
+     * Node is on compact constructor, note that we don't need to check for a plain
+     * token here, since a compact constructor must be public.
+     *
+     * @param blockComment DetailAST
+     * @return true if node is before compact constructor
+     */
+    public static boolean isOnCompactConstructor(DetailAST blockComment) {
+        return isOnTokenWithModifiers(blockComment, TokenTypes.COMPACT_CTOR_DEF)
+                || isOnTokenWithAnnotation(blockComment, TokenTypes.COMPACT_CTOR_DEF);
+    }
+
