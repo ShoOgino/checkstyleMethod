@@ -2,7 +2,8 @@
     public final void leaveToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.CLASS_DEF
             || ast.getType() == TokenTypes.INTERFACE_DEF
-            || ast.getType() == TokenTypes.ENUM_DEF) {
+            || ast.getType() == TokenTypes.ENUM_DEF
+            || ast.getType() == TokenTypes.RECORD_DEF) {
             // perhaps it was inner class
             final int dotIdx = currentClassName.lastIndexOf('$');
             currentClassName = currentClassName.substring(0, dotIdx);

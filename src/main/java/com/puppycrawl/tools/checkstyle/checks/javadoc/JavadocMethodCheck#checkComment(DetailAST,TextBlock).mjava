@@ -21,13 +21,17 @@
                 final boolean reportExpectedTags = !hasInheritDocTag
                     && !AnnotationUtil.containsAnnotation(ast, allowedAnnotations);
 
-                checkParamTags(tags, ast, reportExpectedTags);
+                // COMPACT_CTOR_DEF has no parameters
+                if (ast.getType() != TokenTypes.COMPACT_CTOR_DEF) {
+                    checkParamTags(tags, ast, reportExpectedTags);
+                }
                 final List<ExceptionInfo> throwed =
-                        combineExceptionInfo(getThrows(ast), getThrowed(ast));
+                    combineExceptionInfo(getThrows(ast), getThrowed(ast));
                 checkThrowsTags(tags, throwed, reportExpectedTags);
                 if (CheckUtil.isNonVoidMethod(ast)) {
                     checkReturnTag(tags, ast.getLineNo(), reportExpectedTags);
                 }
+
             }
 
             // Dump out all unused tags
