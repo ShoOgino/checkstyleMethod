@@ -17,7 +17,8 @@
                         && typeMods.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
         final String frameName;
 
-        if (type == TokenTypes.CLASS_DEF || type == TokenTypes.ENUM_DEF) {
+        if (type == TokenTypes.CLASS_DEF
+                || type == TokenTypes.ENUM_DEF) {
             frameName = ast.findFirstToken(TokenTypes.IDENT).getText();
         }
         else {
@@ -45,6 +46,17 @@
                 }
                 child = child.getNextSibling();
             }
+        }
+        if (ast.getType() == TokenTypes.RECORD_DEF) {
+            final DetailAST recordComponents =
+                ast.findFirstToken(TokenTypes.RECORD_COMPONENTS);
+
+            // For each record component definition, we will add it to this frame.
+            TokenUtil.forEachChild(recordComponents,
+                TokenTypes.RECORD_COMPONENT_DEF, node -> {
+                    final String name = node.findFirstToken(TokenTypes.IDENT).getText();
+                    newFrame.addInstanceField(name);
+                });
         }
         // push container
         frame = newFrame;
