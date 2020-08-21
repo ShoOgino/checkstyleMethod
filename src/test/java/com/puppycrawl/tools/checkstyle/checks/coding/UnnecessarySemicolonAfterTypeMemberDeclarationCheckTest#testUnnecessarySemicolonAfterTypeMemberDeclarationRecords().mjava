@@ -1,0 +1,20 @@
+    @Test
+    public void testUnnecessarySemicolonAfterTypeMemberDeclarationRecords() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(UnnecessarySemicolonAfterTypeMemberDeclarationCheck.class);
+
+        final String[] expected = {
+            "9:5: " + getCheckMessage(MSG_SEMI),
+            "13:5: " + getCheckMessage(MSG_SEMI),
+            "17:5: " + getCheckMessage(MSG_SEMI),
+            "22:5: " + getCheckMessage(MSG_SEMI),
+            "28:5: " + getCheckMessage(MSG_SEMI),
+            "33:5: " + getCheckMessage(MSG_SEMI),
+            "35:5: " + getCheckMessage(MSG_SEMI),
+            };
+
+        verify(checkConfig,
+            getNonCompilablePath("InputUnnecessarySemicolonAfterTypeMemberDeclarationRecords.java"),
+            expected);
+    }
+
