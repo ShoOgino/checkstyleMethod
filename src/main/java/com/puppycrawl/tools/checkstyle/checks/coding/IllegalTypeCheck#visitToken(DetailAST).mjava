@@ -3,6 +3,7 @@
         switch (ast.getType()) {
             case TokenTypes.CLASS_DEF:
             case TokenTypes.INTERFACE_DEF:
+            case TokenTypes.RECORD_DEF:
                 visitTypeDef(ast);
                 break;
             case TokenTypes.METHOD_CALL:
@@ -15,6 +16,7 @@
             case TokenTypes.VARIABLE_DEF:
             case TokenTypes.ANNOTATION_FIELD_DEF:
             case TokenTypes.PATTERN_VARIABLE_DEF:
+            case TokenTypes.RECORD_COMPONENT_DEF:
                 visitVariableDef(ast);
                 break;
             case TokenTypes.PARAMETER_DEF:
