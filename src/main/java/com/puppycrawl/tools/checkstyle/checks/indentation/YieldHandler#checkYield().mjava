@@ -1,0 +1,11 @@
+    /**
+     * Check the indentation of the yield keyword.
+     */
+    private void checkYield() {
+        final DetailAST yield = getMainAst();
+        final int columnNo = expandedTabsColumnNo(yield);
+        if (isOnStartOfLine(yield) && !getIndent().isAcceptable(columnNo)) {
+            logError(yield, "", columnNo);
+        }
+    }
+
