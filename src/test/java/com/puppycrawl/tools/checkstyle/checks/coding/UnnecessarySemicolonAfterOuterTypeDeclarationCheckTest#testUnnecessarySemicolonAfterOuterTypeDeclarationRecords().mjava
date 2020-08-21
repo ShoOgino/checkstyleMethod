@@ -1,0 +1,15 @@
+    @Test
+    public void testUnnecessarySemicolonAfterOuterTypeDeclarationRecords() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(UnnecessarySemicolonAfterOuterTypeDeclarationCheck.class);
+
+        final String[] expected = {
+            "14:2: " + getCheckMessage(MSG_SEMI),
+            "20:2: " + getCheckMessage(MSG_SEMI),
+            };
+
+        verify(checkConfig,
+            getNonCompilablePath("InputUnnecessarySemicolonAfterOuterTypeDeclarationRecords.java"),
+            expected);
+    }
+
