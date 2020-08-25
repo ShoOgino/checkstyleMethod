@@ -1,0 +1,29 @@
+    @Test
+    public void testRecordComponentNumberMax1() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RecordComponentNumberCheck.class);
+        checkConfig.addAttribute("max", "1");
+
+        final int max = 1;
+
+        final String[] expected = {
+            "25:5: " + getCheckMessage(MSG_KEY, 2, max),
+            "29:5: " + getCheckMessage(MSG_KEY, 3, max),
+            "33:5: " + getCheckMessage(MSG_KEY, 5, max),
+            "49:5: " + getCheckMessage(MSG_KEY, 7, max),
+            "54:5: " + getCheckMessage(MSG_KEY, 14, max),
+            "63:9: " + getCheckMessage(MSG_KEY, 3, max),
+            "67:9: " + getCheckMessage(MSG_KEY, 14, max),
+            "73:13: " + getCheckMessage(MSG_KEY, 14, max),
+            "79:17: " + getCheckMessage(MSG_KEY, 6, max),
+            "93:5: " + getCheckMessage(MSG_KEY, 4, max),
+            "97:5: " + getCheckMessage(MSG_KEY, 15, max),
+            "107:5: " + getCheckMessage(MSG_KEY, 3, max),
+            "111:5: " + getCheckMessage(MSG_KEY, 6, max),
+            "122:5: " + getCheckMessage(MSG_KEY, 2, max),
+        };
+
+        verify(checkConfig,
+                getNonCompilablePath("InputRecordComponentNumberMax1.java"), expected);
+    }
+

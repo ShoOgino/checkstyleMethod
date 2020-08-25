@@ -1,0 +1,16 @@
+    @Test
+    public void testRecordComponentNumberTopLevel1() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RecordComponentNumberCheck.class);
+
+        final int max = 8;
+
+        final String[] expected = {
+            "8:1: " + getCheckMessage(MSG_KEY, 15, max),
+        };
+
+        verify(checkConfig,
+                getNonCompilablePath("InputRecordComponentNumberTopLevel1.java"),
+                expected);
+    }
+

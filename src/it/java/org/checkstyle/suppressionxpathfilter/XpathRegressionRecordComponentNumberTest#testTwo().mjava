@@ -1,0 +1,29 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(getNonCompilablePath(
+                "SuppressionXpathRecordComponentNumber2.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(RecordComponentNumberCheck.class);
+        moduleConfig.addAttribute("max", "1");
+
+        final String[] expectedViolation = {
+            "9:5: " + getCheckMessage(RecordComponentNumberCheck.class,
+                    RecordComponentNumberCheck.MSG_KEY,
+                    2, 1),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRecordComponentNumber2']]"
+                    + "/OBJBLOCK/RECORD_DEF[./IDENT[@text='MyRecord']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRecordComponentNumber2']]"
+                    + "/OBJBLOCK/RECORD_DEF[./IDENT[@text='MyRecord']]/MODIFIERS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRecordComponentNumber2']]"
+                    + "/OBJBLOCK/RECORD_DEF[./IDENT[@text='MyRecord']]/MODIFIERS"
+                    + "/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

@@ -1,0 +1,18 @@
+    @Test
+    public void testRecordComponentNumberPrivateModifier() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(RecordComponentNumberCheck.class);
+        checkConfig.addAttribute("accessModifiers", "private");
+
+        final int max = 8;
+
+        final String[] expected = {
+            "67:9: " + getCheckMessage(MSG_KEY, 14, max),
+            "73:13: " + getCheckMessage(MSG_KEY, 14, max),
+            "119:5: " + getCheckMessage(MSG_KEY, 15, max),
+        };
+
+        verify(checkConfig,
+            getNonCompilablePath("InputRecordComponentNumberPrivateModifier.java"), expected);
+    }
+

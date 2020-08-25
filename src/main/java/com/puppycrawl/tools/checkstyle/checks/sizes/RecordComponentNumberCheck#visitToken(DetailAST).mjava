@@ -1,0 +1,18 @@
+    @Override
+    public void visitToken(DetailAST ast) {
+        final DetailAST modifiers =
+            ast.findFirstToken(TokenTypes.MODIFIERS);
+        final AccessModifierOption accessModifier =
+            CheckUtil.getAccessModifierFromModifiersToken(modifiers);
+
+        if (matchAccessModifiers(accessModifier)) {
+            final DetailAST recordComponents =
+                ast.findFirstToken(TokenTypes.RECORD_COMPONENTS);
+            final int componentCount = countComponents(recordComponents);
+
+            if (componentCount > max) {
+                log(ast, MSG_KEY, componentCount, max);
+            }
+        }
+    }
+

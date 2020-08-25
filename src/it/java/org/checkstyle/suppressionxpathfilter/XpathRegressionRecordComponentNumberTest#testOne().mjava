@@ -1,0 +1,26 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(getNonCompilablePath(
+                "SuppressionXpathRecordComponentNumber1.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(RecordComponentNumberCheck.class);
+
+        final String[] expectedViolation = {
+            "8:1: " + getCheckMessage(RecordComponentNumberCheck.class,
+                    RecordComponentNumberCheck.MSG_KEY,
+                    15, 8),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/RECORD_DEF[./IDENT[@text='SuppressionXpathRecordComponentNumber1']]",
+            "/RECORD_DEF[./IDENT[@text='SuppressionXpathRecordComponentNumber1']]"
+                    + "/MODIFIERS",
+            "/RECORD_DEF[./IDENT[@text='SuppressionXpathRecordComponentNumber1']]"
+                    + "/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

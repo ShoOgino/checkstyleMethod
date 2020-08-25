@@ -1,0 +1,14 @@
+    /**
+     * Method to count the number of record components in this record definition.
+     *
+     * @param recordComponents the ast to check
+     * @return the number of record components in this record definition
+     */
+    private static int countComponents(DetailAST recordComponents) {
+        final AtomicInteger count = new AtomicInteger(0);
+        TokenUtil.forEachChild(recordComponents,
+            TokenTypes.RECORD_COMPONENT_DEF,
+            node -> count.getAndIncrement());
+        return count.get();
+    }
+

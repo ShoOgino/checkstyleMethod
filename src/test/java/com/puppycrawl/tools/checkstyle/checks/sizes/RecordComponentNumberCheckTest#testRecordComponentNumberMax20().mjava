@@ -1,0 +1,11 @@
+    @Test
+    public void testRecordComponentNumberMax20() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RecordComponentNumberCheck.class);
+        checkConfig.addAttribute("max", "20");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig,
+                getNonCompilablePath("InputRecordComponentNumberMax20.java"), expected);
+    }
+
