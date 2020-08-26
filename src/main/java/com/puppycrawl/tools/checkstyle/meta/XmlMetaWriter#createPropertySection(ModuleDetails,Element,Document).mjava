@@ -1,0 +1,33 @@
+    /**
+     * Create the property section of the module detail object.
+     *
+     * @param moduleDetails module details
+     * @param checkModule root doc element
+     * @param doc document object
+     */
+    private static void createPropertySection(ModuleDetails moduleDetails, Element checkModule,
+                                              Document doc) {
+        if (!moduleDetails.getProperties().isEmpty()) {
+            final Element properties = doc.createElement("properties");
+            checkModule.appendChild(properties);
+            for (ModulePropertyDetails modulePropertyDetails : moduleDetails.getProperties()) {
+                final Element property = doc.createElement("property");
+                properties.appendChild(property);
+                property.setAttribute(XML_TAG_NAME, modulePropertyDetails.getName());
+                property.setAttribute("type", modulePropertyDetails.getType());
+                if (modulePropertyDetails.getDefaultValue() != null) {
+                    property.setAttribute("default-value",
+                            modulePropertyDetails.getDefaultValue());
+                }
+                if (modulePropertyDetails.getValidationType() != null) {
+                    property.setAttribute("validation-type",
+                            modulePropertyDetails.getValidationType());
+                }
+                final Element propertyDesc = doc.createElement(XML_TAG_DESCRIPTION);
+                propertyDesc.appendChild(doc.createCDATASection(
+                        modulePropertyDetails.getDescription()));
+                property.appendChild(propertyDesc);
+            }
+        }
+    }
+

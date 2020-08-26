@@ -1,0 +1,44 @@
+    /**
+     * Performs a DFS of the subtree with a node as the root and constructs the text of that
+     * tree, ignoring JavadocToken texts.
+     *
+     * @param node root node of subtree
+     * @param childLeftLimit the left index of root children from where to scan
+     * @param childRightLimit the right index of root children till where to scan
+     * @return constructed text of subtree
+     */
+    private static String constructSubTreeText(DetailNode node, int childLeftLimit,
+                                               int childRightLimit) {
+        final StringBuilder result = new StringBuilder(1024);
+        DetailNode detailNode = node;
+
+        final Deque<DetailNode> stack = new ArrayDeque<>();
+        stack.addFirst(detailNode);
+        final Set<DetailNode> visited = new HashSet<>();
+        while (!stack.isEmpty()) {
+            detailNode = stack.getFirst();
+            stack.removeFirst();
+
+            if (!visited.contains(detailNode)) {
+                final String childText = detailNode.getText();
+                if (detailNode.getType() != JavadocTokenTypes.LEADING_ASTERISK
+                        && !TOKEN_TEXT_PATTERN.matcher(childText).matches()) {
+                    result.insert(0, detailNode.getText());
+                }
+                visited.add(detailNode);
+            }
+
+            for (DetailNode child : detailNode.getChildren()) {
+                if (child.getParent().equals(node)
+                        && (child.getIndex() < childLeftLimit
+                        || child.getIndex() > childRightLimit)) {
+                    continue;
+                }
+                if (!visited.contains(child)) {
+                    stack.addFirst(child);
+                }
+            }
+        }
+        return result.toString().trim();
+    }
+

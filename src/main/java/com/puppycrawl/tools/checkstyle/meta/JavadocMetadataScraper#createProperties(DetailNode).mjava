@@ -1,0 +1,49 @@
+    /**
+     * Create the modulePropertyDetails content.
+     *
+     * @param nodeLi list item javadoc node
+     * @return modulePropertyDetail object for the corresponding property
+     */
+    private static ModulePropertyDetails createProperties(DetailNode nodeLi) {
+        final ModulePropertyDetails modulePropertyDetails = new ModulePropertyDetails();
+
+        final Optional<DetailNode> propertyNameNode = getFirstChildOfType(nodeLi,
+                JavadocTokenTypes.JAVADOC_INLINE_TAG, 0);
+        if (propertyNameNode.isPresent()) {
+            final DetailNode propertyNameTag = propertyNameNode.get();
+
+            final Optional<DetailNode> propertyTypeNode =
+                    getFirstChildOfMatchingText(nodeLi, TYPE_TAG);
+            if (propertyTypeNode.isPresent()) {
+                final DetailNode propertyType = propertyTypeNode.get();
+                final String propertyDesc = DESC_CLEAN.matcher(
+                        constructSubTreeText(nodeLi, propertyNameTag.getIndex() + 1,
+                                propertyType.getIndex() - 1))
+                        .replaceAll(Matcher.quoteReplacement(""));
+
+                modulePropertyDetails.setDescription(propertyDesc.trim());
+            }
+
+            modulePropertyDetails.setName(getTextFromTag(propertyNameTag));
+        }
+
+        final Optional<DetailNode> typeNode = getFirstChildOfMatchingText(nodeLi, TYPE_TAG);
+        if (typeNode.isPresent()) {
+            modulePropertyDetails.setType(getTagTextFromProperty(nodeLi, typeNode.get()));
+        }
+
+        final Optional<DetailNode> validationTypeNodeOpt = getFirstChildOfMatchingText(nodeLi,
+                VALIDATION_TYPE_TAG);
+        if (validationTypeNodeOpt.isPresent()) {
+            final DetailNode validationTypeNode = validationTypeNodeOpt.get();
+            modulePropertyDetails.setValidationType(getTagTextFromProperty(nodeLi,
+                    validationTypeNode));
+        }
+
+        final String defaultValue = getPropertyDefaultText(nodeLi);
+        if (!PROPERTIES_TO_NOT_WRITE.contains(defaultValue)) {
+            modulePropertyDetails.setDefaultValue(defaultValue);
+        }
+        return modulePropertyDetails;
+    }
+

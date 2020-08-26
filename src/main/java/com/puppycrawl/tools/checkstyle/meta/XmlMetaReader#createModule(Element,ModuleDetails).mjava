@@ -1,0 +1,28 @@
+    /**
+     * Create the module detail object from XML metadata.
+     *
+     * @param mod root XML document element
+     * @param moduleDetails module detail object, which is to be updated
+     * @return module detail object containing all metadata
+     */
+    private static ModuleDetails createModule(Element mod, ModuleDetails moduleDetails) {
+        moduleDetails.setName(getAttributeValue(mod, XML_TAG_NAME));
+        moduleDetails.setFullQualifiedName(getAttributeValue(mod, "fully-qualified-name"));
+        moduleDetails.setParent(getAttributeValue(mod, "parent"));
+        moduleDetails.setDescription(getDirectChildsByTag(mod, XML_TAG_DESCRIPTION).get(0)
+                .getFirstChild().getNodeValue());
+        final List<Element> properties = getDirectChildsByTag(mod, "properties");
+        if (!properties.isEmpty()) {
+            final List<ModulePropertyDetails> modulePropertyDetailsList =
+                    createProperties(properties.get(0));
+            moduleDetails.addToProperties(modulePropertyDetailsList);
+        }
+        final List<String> messageKeys =
+                getListContentByAttribute(mod,
+                        "message-keys", "message-key", "key");
+        if (messageKeys != null) {
+            moduleDetails.addToViolationMessages(messageKeys);
+        }
+        return moduleDetails;
+    }
+
