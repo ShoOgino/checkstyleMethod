@@ -1,0 +1,24 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(getNonCompilablePath(
+            "SuppressionXpathRegressionIllegalIdentifierNameTestOne.java"));
+
+        final DefaultConfiguration moduleConfig =
+            createModuleConfig(IllegalIdentifierNameCheck.class);
+
+        final String format = "(?i)^(?!(record|yield|var|permits|sealed|_)$).+$";
+
+        final String[] expectedViolation = {
+            "10:20: " + getCheckMessage(IllegalIdentifierNameCheck.class,
+                AbstractNameCheck.MSG_INVALID_PATTERN, "yield", format),
+            };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/RECORD_DEF[./IDENT[@text='SuppressionXpathRegressionIllegalIdentifierNameTestOne'"
+                + "]]/RECORD_COMPONENTS/RECORD_COMPONENT_DEF/IDENT[@text='yield']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+            expectedXpathQueries);
+    }
+

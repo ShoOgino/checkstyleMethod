@@ -1,0 +1,25 @@
+    @Test
+    public void testIllegalIdentifierNameDefault() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(IllegalIdentifierNameCheck.class);
+
+        final String format = "(?i)^(?!(record|yield|var|permits|sealed|_)$).+$";
+
+        final String[] expected = {
+            "15:25: " + getCheckMessage(MSG_INVALID_PATTERN, "record", format),
+            "16:24: " + getCheckMessage(MSG_INVALID_PATTERN, "record", format),
+            "22:13: " + getCheckMessage(MSG_INVALID_PATTERN, "yield", format),
+            "24:21: " + getCheckMessage(MSG_INVALID_PATTERN, "yield", format),
+            "39:9: " + getCheckMessage(MSG_INVALID_PATTERN, "yield", format),
+            "51:13: " + getCheckMessage(MSG_INVALID_PATTERN, "var", format),
+            "53:13: " + getCheckMessage(MSG_INVALID_PATTERN, "record", format),
+            "55:16: " + getCheckMessage(MSG_INVALID_PATTERN, "yield", format),
+            "57:16: " + getCheckMessage(MSG_INVALID_PATTERN, "Record", format),
+            "58:25: " + getCheckMessage(MSG_INVALID_PATTERN, "record", format),
+            "68:37: " + getCheckMessage(MSG_INVALID_PATTERN, "record", format),
+            "68:52: " + getCheckMessage(MSG_INVALID_PATTERN, "yield", format),
+            "68:69: " + getCheckMessage(MSG_INVALID_PATTERN, "var", format),
+            };
+        verify(checkConfig, getNonCompilablePath("InputIllegalIdentifierName.java"), expected);
+    }
+

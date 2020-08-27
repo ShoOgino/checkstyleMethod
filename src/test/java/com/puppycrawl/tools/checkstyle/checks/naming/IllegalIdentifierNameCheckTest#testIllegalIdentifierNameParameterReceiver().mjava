@@ -1,0 +1,12 @@
+    @Test
+    public void testIllegalIdentifierNameParameterReceiver() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(IllegalIdentifierNameCheck.class);
+
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig,
+            getNonCompilablePath("InputIllegalIdentifierNameParameterReceiver.java"),
+            expected);
+    }
+

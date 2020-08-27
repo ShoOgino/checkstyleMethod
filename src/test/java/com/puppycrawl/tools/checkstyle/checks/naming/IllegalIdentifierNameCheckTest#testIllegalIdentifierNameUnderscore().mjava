@@ -1,0 +1,12 @@
+    @Test
+    public void testIllegalIdentifierNameUnderscore() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(IllegalIdentifierNameCheck.class);
+        final String format = "(?i)^(?!(record|yield|var|permits|sealed|_)$).+$";
+
+        final String[] expected = {
+            "11:12: " + getCheckMessage(MSG_INVALID_PATTERN, "_", format),
+            };
+        verify(checkConfig, getPath("InputIllegalIdentifierNameUnderscore.java"), expected);
+    }
+
