@@ -2,12 +2,17 @@
     public void finishJavadocTree(DetailNode rootAst) {
         moduleDetails.setDescription(getDescriptionText());
         if (isTopLevelClassJavadoc()) {
-            try {
-                XmlMetaWriter.write(moduleDetails);
+            if (getFileContents().getFileName().contains("test")) {
+                MODULE_DETAILS_STORE.put(moduleDetails.getFullQualifiedName(), moduleDetails);
             }
-            catch (TransformerException | ParserConfigurationException ex) {
-                throw new IllegalStateException("Failed to write metadata into XML file for "
-                        + "module: " + getModuleSimpleName(), ex);
+            else {
+                try {
+                    XmlMetaWriter.write(moduleDetails);
+                }
+                catch (TransformerException | ParserConfigurationException ex) {
+                    throw new IllegalStateException("Failed to write metadata into XML file for "
+                            + "module: " + getModuleSimpleName(), ex);
+                }
             }
         }
     }

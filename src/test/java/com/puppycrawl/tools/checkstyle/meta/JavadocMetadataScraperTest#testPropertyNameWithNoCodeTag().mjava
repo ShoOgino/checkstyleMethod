@@ -1,0 +1,9 @@
+    @Test
+    public void testPropertyNameWithNoCodeTag() {
+        final String testCheck = "custom.InputJavadocMetadataScraperPropertyWithNoCodeTagCheck";
+        final ModuleDetails testCheckMeta = moduleDetailsStore.get(CHECK_PACKAGE_BASE + testCheck);
+
+        assertNull(testCheckMeta.getProperties().get(0).getName(),
+                "Check with no property name {@code } tag should have null property name");
+    }
+
