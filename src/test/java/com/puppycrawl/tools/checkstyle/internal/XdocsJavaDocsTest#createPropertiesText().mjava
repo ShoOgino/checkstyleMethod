@@ -32,11 +32,9 @@
             }
             result.append(" Type is {@code ").append(typeText).append("}.");
 
-            if (isPropertyTokenType) {
-                result.append(" Validation type is {@code tokenSet}.");
-            }
-            else if (PATTERN_EXCEPTIONS.contains(checkName + " - " + propertyName)) {
-                result.append(" Validation type is {@code java.util.regex.Pattern}.");
+            final String validationType = getValidationType(isPropertyTokenType, propertyName);
+            if (validationType != null) {
+                result.append(validationType);
             }
 
             if (propertyName.endsWith("token") || propertyName.endsWith("tokens")) {

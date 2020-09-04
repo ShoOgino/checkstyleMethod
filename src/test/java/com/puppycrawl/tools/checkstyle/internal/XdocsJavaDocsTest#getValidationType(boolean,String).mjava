@@ -1,0 +1,14 @@
+    private static String getValidationType(boolean isPropertyTokenType, String propertyName) {
+        String result = null;
+        if (NON_BASE_TOKEN_PROPERTIES.contains(checkName + " - " + propertyName)) {
+            result = " Validation type is {@code tokenTypesSet}.";
+        }
+        else if (PATTERN_EXCEPTIONS.contains(checkName + " - " + propertyName)) {
+            result = " Validation type is {@code java.util.regex.Pattern}.";
+        }
+        else if (isPropertyTokenType) {
+            result = " Validation type is {@code tokenSet}.";
+        }
+        return result;
+    }
+
