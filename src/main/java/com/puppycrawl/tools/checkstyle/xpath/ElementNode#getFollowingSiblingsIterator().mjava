@@ -1,18 +1,22 @@
     /**
      * Returns following sibling axis iterator.
      *
+     * <p>Reason of suppression for resource, IOResourceOpenedButNotSafelyClosed:
+     * {@link AxisIterator} implements {@link java.io.Closeable} interface,
+     * but none of the subclasses of the {@link AxisIterator}
+     * class has non-empty {@code close()} method.
+     *
      * @return iterator
+     * @noinspection resource, IOResourceOpenedButNotSafelyClosed
      */
     private AxisIterator getFollowingSiblingsIterator() {
         final AxisIterator result;
         if (indexAmongSiblings == parent.getChildren().size() - 1) {
-            result = EmptyIterator.OfNodes.THE_INSTANCE;
+            result = EmptyIterator.ofNodes();
         }
         else {
-            try (AxisIterator iterator = new ArrayIterator.OfNodes(
-                    getFollowingSiblings().toArray(EMPTY_ABSTRACT_NODE_ARRAY))) {
-                result = iterator;
-            }
+            result = new ArrayIterator.OfNodes(
+                    getFollowingSiblings().toArray(EMPTY_ABSTRACT_NODE_ARRAY));
         }
         return result;
     }

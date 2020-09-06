@@ -1,6 +1,6 @@
     @Test
     public void testEqualsAndHashCode() throws Exception {
-        final XPathEvaluator xpathEvaluator = new XPathEvaluator();
+        final XPathEvaluator xpathEvaluator = new XPathEvaluator(Configuration.newConfiguration());
         final EqualsVerifierReport ev = EqualsVerifier.forClass(XpathFilterElement.class)
             .withPrefabValues(XPathExpression.class,
                 xpathEvaluator.createExpression("//METHOD_DEF"),

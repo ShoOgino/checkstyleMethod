@@ -1,0 +1,15 @@
+    @Test
+    public void testRootWithNullDetailAst() {
+        final RootNode emptyRootNode = new RootNode(null);
+        assertFalse(emptyRootNode.hasChildNodes(), "Empty node should not have children");
+
+        try (AxisIterator iterator = emptyRootNode.iterateAxis(AxisInfo.DESCENDANT)) {
+            assertEquals(EmptyIterator.ofNodes(), iterator,
+                    "Result iterator does not match expected");
+        }
+        try (AxisIterator iterator = emptyRootNode.iterateAxis(AxisInfo.CHILD)) {
+            assertEquals(EmptyIterator.ofNodes(), iterator,
+                    "Result iterator does not match expected");
+        }
+    }
+
