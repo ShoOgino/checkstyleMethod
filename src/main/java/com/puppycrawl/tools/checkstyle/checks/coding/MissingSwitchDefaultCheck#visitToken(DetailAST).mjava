@@ -2,7 +2,7 @@
     public void visitToken(DetailAST ast) {
         final DetailAST firstSwitchMemberAst = findFirstSwitchMember(ast);
 
-        if (!containsDefaultSwitch(firstSwitchMemberAst)) {
+        if (!containsDefaultSwitch(firstSwitchMemberAst) && !isSwitchExpression(ast)) {
             log(ast, MSG_KEY);
         }
     }
