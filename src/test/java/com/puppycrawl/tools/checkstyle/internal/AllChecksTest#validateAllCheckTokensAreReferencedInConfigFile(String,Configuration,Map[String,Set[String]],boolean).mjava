@@ -20,6 +20,10 @@
 
             if (instance instanceof AbstractCheck) {
                 final AbstractCheck check = (AbstractCheck) instance;
+                if (isAllTokensAcceptable(check)) {
+                    // we can not have in our config test for all tokens
+                    continue;
+                }
 
                 Set<String> configTokens = configCheckTokens.get(checkName);
 
