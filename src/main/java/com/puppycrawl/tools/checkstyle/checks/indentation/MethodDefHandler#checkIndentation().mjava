@@ -3,7 +3,9 @@
         checkModifiers();
         checkThrows();
 
-        checkWrappingIndentation(getMainAst(), getMethodDefParamRightParen(getMainAst()));
+        if (getMethodDefParamRightParen(getMainAst()) != null) {
+            checkWrappingIndentation(getMainAst(), getMethodDefParamRightParen(getMainAst()));
+        }
         // abstract method def -- no body
         if (getLeftCurly() != null) {
             super.checkIndentation();
