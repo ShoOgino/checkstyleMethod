@@ -1,0 +1,29 @@
+    @Test
+    public void testLambdaTrueForceStrictCondition() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("forceStrictCondition", "true");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        final String[] expected = {
+            "23:17: " + getCheckMessage(MSG_ERROR, "(", 16, 12),
+            "24:17: " + getCheckMessage(MSG_ERROR, "->", 16, 12),
+            "26:27: " + getCheckMessage(MSG_ERROR, "\"SECOND_ARG\"", 26, 12),
+            "27:26: " + getCheckMessage(MSG_ERROR, "(", 25, 12),
+            "30:17: " + getCheckMessage(MSG_ERROR, "(", 16, 12),
+            "31:21: " + getCheckMessage(MSG_ERROR, "if", 20, 16),
+            "32:25: " + getCheckMessage(MSG_CHILD_ERROR, "if", 24, 20),
+            "33:21: " + getCheckMessage(MSG_ERROR, "if rcurly", 20, 16),
+            "34:25: " + getCheckMessage(MSG_CHILD_ERROR, "else", 24, 20),
+            "35:21: " + getCheckMessage(MSG_ERROR, "else rcurly", 20, 16),
+            "36:17: " + getCheckMessage(MSG_ERROR, "block rcurly", 16, 12),
+            "39:17: " + getCheckMessage(MSG_ERROR, "(", 16, 12),
+            "40:17: " + getCheckMessage(MSG_ERROR, "->", 16, 12),
+            "41:21: " + getCheckMessage(MSG_ERROR, "if", 20, 16),
+            "44:1: " + getCheckMessage(MSG_ERROR, "block rcurly", 0, 12),
+        };
+
+        verifyWarns(checkConfig, getPath("InputIndentationLambda7.java"), expected);
+    }
+

@@ -1,0 +1,19 @@
+    @Test
+    public void testLambdaFalseForceStrictCondition() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("basicOffset", "4");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "0");
+        final String[] expected = {
+            "34:5: " + getCheckMessage(MSG_ERROR, "(", 4, 8),
+            "35:5: " + getCheckMessage(MSG_CHILD_ERROR, "method call", 4, 12),
+            "36:5: " + getCheckMessage(MSG_ERROR, "(", 4, 8),
+            "47:5: " + getCheckMessage(MSG_ERROR_MULTI, "block rcurly", 4, "8, 16"),
+            "73:5: " + getCheckMessage(MSG_ERROR, "->", 4, 8),
+        };
+
+        verifyWarns(checkConfig, getPath("InputIndentationLambda6.java"), expected);
+    }
+

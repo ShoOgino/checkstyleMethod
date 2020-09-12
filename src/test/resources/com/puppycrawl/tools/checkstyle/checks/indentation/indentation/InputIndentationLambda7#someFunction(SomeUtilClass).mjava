@@ -1,0 +1,26 @@
+    public static void someFunction(SomeUtilClass util) { //indent:4 exp:4
+        util.myLambdaUtil("FIRST_ARG", //indent:8 exp:8
+                (string) //indent:16 exp:12 warn
+                -> //indent:16 exp:12 warn
+            System.out.println(string.trim()), //indent:12 exp:12
+                          "SECOND_ARG", //indent:26 exp:12 warn
+                         () -> "WHAT WHAT!"); //indent:25 exp:12 warn
+
+        Function<String, String> someFunction1 = //indent:8 exp:8
+                (string) -> { //indent:16 exp:12 warn
+                    if (string.contains("abc")) { //indent:20 exp:16 warn
+                        return "SWEET!"; //indent:24 exp:20 warn
+                    } else{ //indent:20 exp:16 warn
+                        return "COOL!"; //indent:24 exp:20 warn
+                    } //indent:20 exp:16 warn
+                }; //indent:16 exp:12 warn
+
+        Function<String, String> someFunction2 = //indent:8 exp:8
+                (string) //indent:16 exp:12 warn
+                -> { //indent:16 exp:12 warn
+                    if (string.contains("abc")) //indent:20 exp:16 warn
+                    System.out.println("done"); //indent:20 exp:20
+                return "SWEET!"; //indent:16 exp:16
+}; //indent:0 exp:12 warn
+    } //indent:4 exp:4
+

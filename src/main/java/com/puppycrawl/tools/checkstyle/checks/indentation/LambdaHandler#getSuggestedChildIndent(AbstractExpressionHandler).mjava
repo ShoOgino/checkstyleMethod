@@ -1,5 +1,11 @@
     @Override
     public IndentLevel getSuggestedChildIndent(AbstractExpressionHandler child) {
-        return getIndent();
+        IndentLevel childIndent = getIndent();
+        if (isLambdaCorrectlyIndented) {
+            childIndent = IndentLevel.addAcceptable(childIndent, getLineStart(getMainAst()),
+                    getLineStart(getMainAst().getFirstChild()));
+        }
+
+        return childIndent;
     }
 

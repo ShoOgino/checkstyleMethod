@@ -1,0 +1,13 @@
+    @Test
+    public void testLambdaOddConditions() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("basicOffset", "3");
+        checkConfig.addAttribute("braceAdjustment", "0");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "7");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        verifyWarns(checkConfig, getPath("InputIndentationLambda8.java"), expected);
+    }
+

@@ -3,20 +3,27 @@
         // If the argument list is the first element on the line
         final DetailAST firstChild = getMainAst().getFirstChild();
         final DetailAST parent = getMainAst().getParent();
+
         if (parent.getType() != TokenTypes.SWITCH_RULE
                 && getLineStart(firstChild) == expandedTabsColumnNo(firstChild)) {
+            final int firstChildColumnNo = expandedTabsColumnNo(firstChild);
             final IndentLevel level = getIndent();
-            if (!level.isAcceptable(expandedTabsColumnNo(firstChild))) {
-                logError(firstChild, "arguments", expandedTabsColumnNo(firstChild), level);
+
+            if (isNonAcceptableIndent(firstChildColumnNo, level)) {
+                isLambdaCorrectlyIndented = false;
+                logError(firstChild, "arguments", firstChildColumnNo, level);
             }
         }
 
         // If the "->" is the first element on the line, assume line wrapping.
-        if (getLineStart(getMainAst()) == expandedTabsColumnNo(getMainAst())) {
+        final int mainAstColumnNo = expandedTabsColumnNo(getMainAst());
+        if (mainAstColumnNo == getLineStart(getMainAst())) {
             final IndentLevel level =
                 new IndentLevel(getIndent(), getIndentCheck().getLineWrappingIndentation());
-            if (!level.isAcceptable(expandedTabsColumnNo(getMainAst()))) {
-                logError(getMainAst(), "", expandedTabsColumnNo(getMainAst()), level);
+
+            if (isNonAcceptableIndent(mainAstColumnNo, level)) {
+                isLambdaCorrectlyIndented = false;
+                logError(getMainAst(), "", mainAstColumnNo, level);
             }
         }
     }
