@@ -18,11 +18,10 @@
                     CheckUtil.getTypeParameterNames(ast);
 
                 if (!allowMissingParamTags) {
-                    // Check type parameters that should exist, do
-                    for (final String typeParamName : typeParamNames) {
-                        checkTypeParamTag(
-                            ast, tags, typeParamName);
-                    }
+
+                    typeParamNames.forEach(typeParamName -> {
+                        checkTypeParamTag(ast, tags, typeParamName);
+                    });
                 }
 
                 checkUnusedTypeParamTags(tags, typeParamNames);
