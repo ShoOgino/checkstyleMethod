@@ -1,0 +1,30 @@
+    /**
+     * Checks for unused param tags for type parameters and record components.
+     *
+     * @param tags tags from the Javadoc comment for the type definition.
+     * @param typeParamNames names of type parameters
+     * @param recordComponentNames list of record component names in this definition
+     */
+    private void checkUnusedParamTags(
+        List<JavadocTag> tags,
+        List<String> typeParamNames,
+        List<String> recordComponentNames) {
+
+        for (final JavadocTag tag: tags) {
+            if (tag.isParamTag()) {
+                final String paramName = extractParamNameFromTag(tag);
+                final boolean found = typeParamNames.contains(paramName)
+                        || recordComponentNames.contains(paramName);
+
+                if (!found) {
+                    final String actualParamName =
+                        TYPE_NAME_IN_JAVADOC_TAG_SPLITTER.split(tag.getFirstArg())[0];
+                    log(tag.getLineNo(), tag.getColumnNo(),
+                        MSG_UNUSED_TAG,
+                        JavadocTagInfo.PARAM.getText(), actualParamName);
+                }
+            }
+        }
+
+    }
+

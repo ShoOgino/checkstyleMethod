@@ -16,15 +16,21 @@
 
                 final List<String> typeParamNames =
                     CheckUtil.getTypeParameterNames(ast);
+                final List<String> recordComponentNames =
+                    getRecordComponentNames(ast);
 
                 if (!allowMissingParamTags) {
 
                     typeParamNames.forEach(typeParamName -> {
                         checkTypeParamTag(ast, tags, typeParamName);
                     });
+
+                    recordComponentNames.forEach(componentName -> {
+                        checkComponentParamTag(ast, tags, componentName);
+                    });
                 }
 
-                checkUnusedTypeParamTags(tags, typeParamNames);
+                checkUnusedParamTags(tags, typeParamNames, recordComponentNames);
             }
         }
     }
