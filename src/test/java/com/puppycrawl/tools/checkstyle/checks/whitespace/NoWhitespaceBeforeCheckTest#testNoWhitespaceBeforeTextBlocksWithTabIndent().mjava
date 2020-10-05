@@ -1,0 +1,10 @@
+    @Test
+    public void testNoWhitespaceBeforeTextBlocksWithTabIndent() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(NoWhitespaceBeforeCheck.class);
+
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        verify(checkConfig,
+            getNonCompilablePath("InputNoWhitespaceBeforeTextBlocksTabIndent.java"), expected);
+    }
+
