@@ -1,0 +1,12 @@
+    @Override
+    public IndentLevel getSuggestedChildIndent(AbstractExpressionHandler child) {
+        final int offset;
+        if (TokenUtil.isOfType(child.getMainAst(), TokenTypes.OBJBLOCK)) {
+            offset = getBasicOffset();
+        }
+        else {
+            offset = getLineWrappingIndent();
+        }
+        return new IndentLevel(getIndent(), offset);
+    }
+

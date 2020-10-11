@@ -1,11 +1,22 @@
     @Override
     public void checkIndentation() {
-        final DetailAST type = getMainAst().getFirstChild();
-        if (type != null) {
-            checkExpressionSubtree(type, getIndent(), false, false);
+        // if new is on the line start and it is not the part of assignment.
+        if (isOnStartOfLine(mainAst)
+                && !isNewKeywordFollowedByAssign()) {
+            final int columnNo = expandedTabsColumnNo(mainAst);
+            final IndentLevel level = getIndentImpl();
+
+            if (columnNo < level.getFirstIndentLevel()) {
+                logError(mainAst, "", columnNo, level);
+            }
         }
 
-        final DetailAST lparen = getMainAst().findFirstToken(TokenTypes.LPAREN);
+        final DetailAST firstChild = mainAst.getFirstChild();
+        if (firstChild != null) {
+            checkExpressionSubtree(firstChild, getIndent(), false, false);
+        }
+
+        final DetailAST lparen = mainAst.findFirstToken(TokenTypes.LPAREN);
         checkLeftParen(lparen);
     }
 

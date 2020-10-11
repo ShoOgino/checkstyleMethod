@@ -1,14 +1,19 @@
     @Override
     protected IndentLevel getIndentImpl() {
-        final IndentLevel result;
+        IndentLevel result;
         // if our expression isn't first on the line, just use the start
         // of the line
-        if (getLineStart(getMainAst()) == getMainAst().getColumnNo()) {
+        if (getLineStart(mainAst) == mainAst.getColumnNo()) {
             result = super.getIndentImpl();
+
+            if (isNewKeywordFollowedByAssign()) {
+                result = new IndentLevel(result, getLineWrappingIndent());
+            }
         }
         else {
-            result = new IndentLevel(getLineStart(getMainAst()));
+            result = new IndentLevel(getLineStart(mainAst));
         }
+
         return result;
     }
 

@@ -10,7 +10,14 @@
         checkConfig.addAttribute("lineWrappingIndentation", "4");
         checkConfig.addAttribute("tabWidth", "4");
         checkConfig.addAttribute("throwsIndent", "4");
-        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        final String[] expected = {
+            "33:9: " + getCheckMessage(MSG_ERROR_MULTI, "operator new", 8, "10, 12"),
+            "40:9: " + getCheckMessage(MSG_ERROR_MULTI, "operator new", 8, "10, 12"),
+            "90:11: " + getCheckMessage(MSG_ERROR_MULTI, "operator new", 10, "12, 14"),
+            "97:13: " + getCheckMessage(MSG_ERROR_MULTI, "operator new", 12, "14, 16"),
+            "119:13: " + getCheckMessage(MSG_ERROR_MULTI, "operator new", 12, "14, 16"),
+            "126:15: " + getCheckMessage(MSG_ERROR_MULTI, "operator new", 14, "16, 18"),
+        };
         verifyWarns(checkConfig, getPath("InputIndentationCorrectIfAndParameter.java"), expected);
     }
 
