@@ -7,6 +7,7 @@
     private static boolean isEmptyTag(DetailNode tagNode) {
         final DetailNode tagDescription =
                 JavadocUtil.findFirstToken(tagNode, JavadocTokenTypes.DESCRIPTION);
-        return tagDescription == null;
+        return tagDescription == null
+            || hasOnlyEmptyText(tagDescription);
     }
 
