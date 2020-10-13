@@ -1,0 +1,18 @@
+    /**
+     * Get meta file name from full file name.
+     *
+     * @param file file to process
+     * @return meta file name
+     */
+    private static String getMetaFileName(Path file) {
+        final String fileName = file.getFileName().toString();
+        final int lengthToOmit;
+        if (fileName.contains("Check")) {
+            lengthToOmit = "Check.xml".length();
+        }
+        else {
+            lengthToOmit = ".xml".length();
+        }
+        return fileName.substring(0, fileName.length() - lengthToOmit);
+    }
+

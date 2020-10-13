@@ -27,16 +27,8 @@
             "InputTranslationCheckFireErrors_de.properties",
                 Collections.singletonList(line + secondErrorMessage)));
 
-        verifyXml(getPath("ExpectedTranslationLog.xml"), out, (expected, actual) -> {
-            // order is not always maintained here for an unknown reason.
-            // File names can appear in different orders depending on the OS and VM.
-            // This ensures we pick up the correct file based on its name and the
-            // number of children it has.
-            return !"file".equals(expected.getNodeName())
-                    || XmlUtil.getNameAttributeOfNode(expected)
-                        .equals(XmlUtil.getNameAttributeOfNode(actual))
-                    && XmlUtil.getChildrenElements(expected).size() == XmlUtil
-                            .getChildrenElements(actual).size();
-        }, firstErrorMessage, secondErrorMessage);
+        verifyXml(getPath("ExpectedTranslationLog.xml"), out,
+            TranslationCheckTest::isFilenamesEqual,
+            firstErrorMessage, secondErrorMessage);
     }
 

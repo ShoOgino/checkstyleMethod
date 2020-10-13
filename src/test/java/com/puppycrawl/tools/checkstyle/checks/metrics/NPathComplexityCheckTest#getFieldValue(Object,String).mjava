@@ -1,0 +1,12 @@
+    /**
+     * Get int value of provided field in object.
+     *
+     * @param object object to get field from
+     * @param fieldName field name
+     * @return int value of field
+     */
+    private static Integer getFieldValue(Object object, String fieldName)
+            throws IllegalAccessException, NoSuchFieldException {
+        return (Integer) TestUtil.getClassDeclaredField(object.getClass(), fieldName).get(object);
+    }
+
