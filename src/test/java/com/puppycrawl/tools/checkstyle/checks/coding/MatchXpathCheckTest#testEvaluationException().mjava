@@ -1,0 +1,20 @@
+    @Test
+    public void testEvaluationException() {
+        final MatchXpathCheck matchXpathCheck = new MatchXpathCheck();
+        matchXpathCheck.setQuery("count(*) div 0");
+
+        final DetailAstImpl detailAST = new DetailAstImpl();
+        detailAST.setType(TokenTypes.CLASS_DEF);
+        detailAST.setText("Class Def");
+        detailAST.setLineNo(0);
+        detailAST.setColumnNo(0);
+
+        try {
+            matchXpathCheck.beginTree(detailAST);
+            fail("Exception was expected");
+        }
+        catch (IllegalStateException ignored) {
+            // it is OK
+        }
+    }
+

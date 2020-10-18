@@ -1,0 +1,10 @@
+    @Test
+    public void testCheckWithImplicitEmptyQuery()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        checkConfig.addAttribute("query", "");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputMatchXpath.java"), expected);
+    }
+

@@ -1,0 +1,19 @@
+    /**
+     * Setter to specify Xpath query.
+     *
+     * @param query Xpath query.
+     */
+    public void setQuery(String query) {
+        this.query = query;
+        if (!query.isEmpty()) {
+            try {
+                final XPathEvaluator xpathEvaluator =
+                        new XPathEvaluator(Configuration.newConfiguration());
+                xpathExpression = xpathEvaluator.createExpression(query);
+            }
+            catch (XPathException ex) {
+                throw new IllegalStateException("Creating Xpath expression failed: " + query, ex);
+            }
+        }
+    }
+

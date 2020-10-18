@@ -1,0 +1,16 @@
+    @Test
+    public void testImitateIllegalThrowsCheck()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        checkConfig.addAttribute("query", "//LITERAL_THROWS[./IDENT[@text='Throwable' or "
+                + "@text='RuntimeException' or ends-with(@text, 'Error')]]");
+        checkConfig.addMessage("matchxpath.match", "Illegal throws statement");
+        final String[] expected = {
+            "9:25: Illegal throws statement",
+            "11:25: Illegal throws statement",
+            "12:25: Illegal throws statement",
+        };
+        verify(checkConfig, getPath("InputMatchXpathIllegalThrows.java"), expected);
+    }
+

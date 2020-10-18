@@ -1,0 +1,13 @@
+    @Test
+    public void testInvalidQuery() {
+        final MatchXpathCheck matchXpathCheck = new MatchXpathCheck();
+
+        try {
+            matchXpathCheck.setQuery("!@#%^");
+            fail("Exception was expected");
+        }
+        catch (IllegalStateException ignored) {
+            // it is OK
+        }
+    }
+

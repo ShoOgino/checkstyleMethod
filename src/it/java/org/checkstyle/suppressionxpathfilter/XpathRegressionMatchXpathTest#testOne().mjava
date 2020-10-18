@@ -1,0 +1,26 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathOne.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        moduleConfig.addAttribute("query", "//METHOD_DEF[./IDENT[@text='test']]");
+
+        final String[] expectedViolation = {
+            "4:5: " + getCheckMessage(MatchXpathCheck.class, MatchXpathCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathOne']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathOne']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathOne']]"
+                    + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='test']]/MODIFIERS/LITERAL_PUBLIC"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

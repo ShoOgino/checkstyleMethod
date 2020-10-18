@@ -1,0 +1,15 @@
+    private List<DetailAST> findMatchingNodesByXpathQuery(DetailAST rootAST) {
+        try {
+            final RootNode rootNode = new RootNode(rootAST);
+            final XPathDynamicContext xpathDynamicContext =
+                    xpathExpression.createDynamicContext(rootNode);
+            final List<Item> matchingItems = xpathExpression.evaluate(xpathDynamicContext);
+            return matchingItems.stream()
+                    .map(item -> ((AbstractNode) item).getUnderlyingNode())
+                    .collect(Collectors.toList());
+        }
+        catch (XPathException ex) {
+            throw new IllegalStateException("Evaluation of Xpath query failed: " + query, ex);
+        }
+    }
+

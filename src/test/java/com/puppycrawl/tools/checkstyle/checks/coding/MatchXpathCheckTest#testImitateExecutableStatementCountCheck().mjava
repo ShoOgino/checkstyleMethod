@@ -1,0 +1,14 @@
+    @Test
+    public void testImitateExecutableStatementCountCheck()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        checkConfig.addAttribute("query", "//METHOD_DEF[count(./SLIST/*) > 2]");
+        checkConfig.addMessage("matchxpath.match", "Executable number of statements "
+                + "exceed threshold");
+        final String[] expected = {
+            "21:5: Executable number of statements exceed threshold",
+        };
+        verify(checkConfig, getPath("InputMatchXpathExecutableStatementCount.java"), expected);
+    }
+

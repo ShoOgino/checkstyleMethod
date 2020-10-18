@@ -1,0 +1,11 @@
+    @Test
+    public void testCheckWithNoMatchingMethodName()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        checkConfig.addAttribute("query", "//METHOD_DEF[./IDENT[@text='wrongName' or "
+                + "@text='nonExistingMethod']]");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputMatchXpath.java"), expected);
+    }
+

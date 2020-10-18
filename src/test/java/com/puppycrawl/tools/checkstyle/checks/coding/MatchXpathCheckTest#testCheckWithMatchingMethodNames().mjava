@@ -1,0 +1,13 @@
+    @Test
+    public void testCheckWithMatchingMethodNames()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(MatchXpathCheck.class);
+        checkConfig.addAttribute("query", "//METHOD_DEF[./IDENT[@text='test' or @text='foo']]");
+        final String[] expected = {
+            "8:5: " + getCheckMessage(MatchXpathCheck.MSG_KEY),
+            "10:5: " + getCheckMessage(MatchXpathCheck.MSG_KEY),
+        };
+        verify(checkConfig, getPath("InputMatchXpath.java"), expected);
+    }
+

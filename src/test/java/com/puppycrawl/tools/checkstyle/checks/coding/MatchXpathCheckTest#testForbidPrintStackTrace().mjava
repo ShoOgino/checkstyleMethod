@@ -1,0 +1,14 @@
+    @Test
+    public void testForbidPrintStackTrace()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        checkConfig.addAttribute("query", "//LITERAL_CATCH"
+                + "//METHOD_CALL[.//IDENT[@text = 'printStackTrace']]/..");
+        checkConfig.addMessage("matchxpath.match", "printStackTrace() method calls are forbidden");
+        final String[] expected = {
+            "14:27: printStackTrace() method calls are forbidden",
+        };
+        verify(checkConfig, getPath("InputMatchXpathForbidPrintStackTrace.java"), expected);
+    }
+

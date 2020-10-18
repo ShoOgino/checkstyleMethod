@@ -1,0 +1,24 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathTwo.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        moduleConfig.addAttribute("query", "//LITERAL_THROWS[./IDENT[@text='Throwable' or "
+                + "@text='RuntimeException' or ends-with(@text, 'Error')]]");
+
+        final String[] expectedViolation = {
+            "4:25: " + getCheckMessage(MatchXpathCheck.class, MatchXpathCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathTwo']]"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='func1']]"
+                        + "/LITERAL_THROWS[./IDENT[@text='RuntimeException']]"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

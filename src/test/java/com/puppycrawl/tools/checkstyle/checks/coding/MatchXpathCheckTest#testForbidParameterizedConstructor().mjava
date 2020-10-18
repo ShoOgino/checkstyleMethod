@@ -1,0 +1,15 @@
+    @Test
+    public void testForbidParameterizedConstructor()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(MatchXpathCheck.class);
+        checkConfig.addAttribute("query", "//CTOR_DEF[count(./PARAMETERS/*) > 0]");
+        checkConfig.addMessage("matchxpath.match", "Parameterized constructors are not allowed");
+        final String[] expected = {
+            "9:5: Parameterized constructors are not allowed",
+            "11:5: Parameterized constructors are not allowed",
+        };
+        verify(checkConfig, getPath("InputMatchXpathForbidParameterizedConstructor.java"),
+                expected);
+    }
+
