@@ -1,0 +1,10 @@
+    @Test
+    public void testClassFanOutComplexityIgnoreVar() throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(ClassFanOutComplexityCheck.class);
+        checkConfig.addAttribute("max", "0");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        verify(checkConfig,
+            getNonCompilablePath("InputClassFanOutComplexityVar.java"), expected);
+    }
+
