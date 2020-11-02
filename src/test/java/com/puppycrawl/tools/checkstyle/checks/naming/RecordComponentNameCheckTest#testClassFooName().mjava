@@ -1,0 +1,19 @@
+    @Test
+    public void testClassFooName()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RecordComponentNameCheck.class);
+        checkConfig.addAttribute("format", "^[a-z0-9]+$");
+
+        final String pattern = "^[a-z0-9]+$";
+
+        final String[] expected = {
+            "15:36: " + getCheckMessage(MSG_INVALID_PATTERN, "value_123", pattern),
+            "16:15: " + getCheckMessage(MSG_INVALID_PATTERN, "Values", pattern),
+            "19:37: " + getCheckMessage(MSG_INVALID_PATTERN, "V", pattern),
+            "20:9: " + getCheckMessage(MSG_INVALID_PATTERN, "$age", pattern),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputRecordComponentNameLowercase.java"), expected);
+    }
+

@@ -1,0 +1,25 @@
+    @Test
+    public void testTwo() throws Exception {
+        final File fileToProcess = new File(getNonCompilablePath(
+                "SuppressionXpathRecordComponentName2.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(RecordComponentNameCheck.class);
+        moduleConfig.addAttribute("format", "^_[a-z][a-zA-Z0-9]*$");
+
+        final String[] expectedViolation = {
+            "9:32: " + getCheckMessage(RecordComponentNameCheck.class,
+                AbstractNameCheck.MSG_INVALID_PATTERN,
+                    "otherValue", "^_[a-z][a-zA-Z0-9]*$"),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRecordComponentName2']]/OBJBLOCK"
+                + "/RECORD_DEF[./IDENT[@text='MyRecord']]"
+                + "/RECORD_COMPONENTS/RECORD_COMPONENT_DEF/IDENT[@text='otherValue']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

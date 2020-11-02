@@ -1,0 +1,18 @@
+    @Test
+    public void testRecordDefault()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(RecordComponentNameCheck.class);
+
+        final String pattern = "^[a-z][a-zA-Z0-9]*$";
+
+        final String[] expected = {
+            "14:34: " + getCheckMessage(MSG_INVALID_PATTERN, "value_123", pattern),
+            "15:15: " + getCheckMessage(MSG_INVALID_PATTERN, "Values", pattern),
+            "18:35: " + getCheckMessage(MSG_INVALID_PATTERN, "_value123", pattern),
+            "19:9: " + getCheckMessage(MSG_INVALID_PATTERN, "$age", pattern),
+        };
+        verify(checkConfig,
+                getNonCompilablePath("InputRecordComponentNameDefault.java"), expected);
+    }
+

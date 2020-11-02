@@ -1,0 +1,16 @@
+    @Test
+    public void testGeneralParameterName() throws Exception {
+        final Configuration config = getModuleConfig("RecordComponentName");
+        final String format = config.getAttribute("format");
+        final Map<String, String> messages = config.getMessages();
+        final String[] expected = {
+            "8:47: " + getCheckMessage(messages, MSG_KEY, "_componentName", format),
+            "12:40: " + getCheckMessage(messages, MSG_KEY, "Capital", format),
+        };
+
+        final String filePath = getNonCompilablePath("InputRecordComponentName.java");
+
+        final Integer[] warnList = getLinesWithWarn(filePath);
+        verify(config, filePath, expected, warnList);
+    }
+
