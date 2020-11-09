@@ -28,7 +28,8 @@
             default:
                 if (checkFields) {
                     final AbstractFrame frame = getFieldWithoutThis(ast, parentType);
-                    if (frame != null) {
+                    final boolean canUseThis = !isInCompactConstructor(ast);
+                    if (frame != null && canUseThis) {
                         logViolation(MSG_VARIABLE, ast, frame);
                     }
                 }
