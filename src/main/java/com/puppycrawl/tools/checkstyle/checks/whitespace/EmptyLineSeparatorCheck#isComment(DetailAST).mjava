@@ -5,7 +5,7 @@
      * @return true, if given ast is comment.
      */
     private static boolean isComment(DetailAST ast) {
-        return ast.getType() == TokenTypes.SINGLE_LINE_COMMENT
-                   || ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN;
+        return TokenUtil.isOfType(ast,
+            TokenTypes.SINGLE_LINE_COMMENT, TokenTypes.BLOCK_COMMENT_BEGIN);
     }
 

@@ -5,8 +5,8 @@
      * @param nextToken next token
      */
     private void processImport(DetailAST ast, DetailAST nextToken) {
-        if (nextToken.getType() != TokenTypes.IMPORT
-                && nextToken.getType() != TokenTypes.STATIC_IMPORT && !hasEmptyLineAfter(ast)) {
+        if (!TokenUtil.isOfType(nextToken, TokenTypes.IMPORT, TokenTypes.STATIC_IMPORT)
+            && !hasEmptyLineAfter(ast)) {
             log(nextToken, MSG_SHOULD_BE_SEPARATED, nextToken.getText());
         }
     }

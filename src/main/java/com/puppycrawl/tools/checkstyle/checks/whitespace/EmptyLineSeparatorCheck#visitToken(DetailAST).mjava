@@ -11,7 +11,7 @@
             checkCommentInModifiers(ast);
         }
         DetailAST nextToken = ast.getNextSibling();
-        while (nextToken != null && isComment(nextToken)) {
+        while (isComment(nextToken)) {
             nextToken = nextToken.getNextSibling();
         }
         if (nextToken != null) {
