@@ -1,10 +1,17 @@
     /**
-     * Tests whether the given AST is used in the "assignment in while" idiom.
+     * Tests whether the given AST is used in the "assignment in loop" idiom.
      * <pre>
      * String line;
      * while ((line = bufferedReader.readLine()) != null) {
-     *    // process the line
+     *   // process the line
      * }
+     * for (;(line = bufferedReader.readLine()) != null;) {
+     *   // process the line
+     * }
+     * do {
+     *   // process the line
+     * }
+     * while ((line = bufferedReader.readLine()) != null);
      * </pre>
      * Assignment inside a condition is not a problem here, as the assignment is surrounded by an
      * extra pair of parentheses. The comparison is {@code != null} and there is no chance that
@@ -13,12 +20,12 @@
      * @param ast assignment AST
      * @return whether the context of the assignment AST indicates the idiom
      */
-    private static boolean isInWhileIdiom(DetailAST ast) {
+    private static boolean isInLoopIdiom(DetailAST ast) {
         boolean result = false;
         if (isComparison(ast.getParent())) {
             result = isInContext(ast.getParent(),
                 ALLOWED_ASSIGNMENT_IN_COMPARISON_CONTEXT,
-                WHILE_IDIOM_IGNORED_PARENTS
+                LOOP_IDIOM_IGNORED_PARENTS
             );
         }
         return result;
