@@ -7,10 +7,6 @@
     private static String getViolationMessages(DetailNode nodeLi) {
         final Optional<DetailNode> resultNode = getFirstChildOfType(nodeLi,
                 JavadocTokenTypes.JAVADOC_INLINE_TAG, 0);
-        String result = "";
-        if (resultNode.isPresent()) {
-            result = getTextFromTag(resultNode.get());
-        }
-        return result;
+        return resultNode.map(JavadocMetadataScraper::getTextFromTag).orElse("");
     }
 

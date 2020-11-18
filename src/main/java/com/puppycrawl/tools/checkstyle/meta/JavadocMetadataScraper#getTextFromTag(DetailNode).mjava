@@ -5,15 +5,6 @@
      * @return text contained by the tag
      */
     private static String getTextFromTag(DetailNode nodeTag) {
-        String result = "";
-        if (nodeTag != null) {
-            final Optional<DetailNode> resultNode = getFirstChildOfType(
-                    nodeTag, JavadocTokenTypes.TEXT, 0);
-            if (resultNode.isPresent()) {
-                result = QUOTE_PATTERN
-                        .matcher(resultNode.get().getText().trim()).replaceAll("");
-            }
-        }
-        return result;
+        return Optional.ofNullable(nodeTag).map(JavadocMetadataScraper::getText).orElse("");
     }
 
