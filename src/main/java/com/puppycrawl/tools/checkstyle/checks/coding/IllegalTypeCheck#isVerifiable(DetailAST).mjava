@@ -7,7 +7,7 @@
      */
     private boolean isVerifiable(DetailAST methodOrVariableDef) {
         boolean result = true;
-        if (memberModifiers != null) {
+        if (!memberModifiers.isEmpty()) {
             final DetailAST modifiersAst = methodOrVariableDef
                     .findFirstToken(TokenTypes.MODIFIERS);
             result = isContainVerifiableType(modifiersAst);

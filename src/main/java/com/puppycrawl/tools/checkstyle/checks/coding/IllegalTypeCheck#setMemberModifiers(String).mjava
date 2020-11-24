@@ -6,10 +6,10 @@
      * @param modifiers String contains modifiers.
      */
     public void setMemberModifiers(String modifiers) {
-        final List<Integer> modifiersList = new ArrayList<>();
-        for (String modifier : modifiers.split(",")) {
-            modifiersList.add(TokenUtil.getTokenId(modifier.trim()));
-        }
-        memberModifiers = modifiersList;
+        memberModifiers = Stream.of(modifiers.split(","))
+            .map(String::trim)
+            .filter(token -> !token.isEmpty())
+            .map(TokenUtil::getTokenId)
+            .collect(Collectors.toList());
     }
 
