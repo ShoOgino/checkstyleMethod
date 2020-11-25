@@ -1,7 +1,9 @@
     @Test
     public void testGetRequiredTokens() {
         final TrailingCommentCheck checkObj = new TrailingCommentCheck();
-        assertArrayEquals(CommonUtil.EMPTY_INT_ARRAY, checkObj.getRequiredTokens(),
+        final int[] expected = {TokenTypes.SINGLE_LINE_COMMENT,
+            TokenTypes.BLOCK_COMMENT_BEGIN, };
+        assertArrayEquals(expected, checkObj.getRequiredTokens(),
                 "Required tokens array is not empty");
     }
 

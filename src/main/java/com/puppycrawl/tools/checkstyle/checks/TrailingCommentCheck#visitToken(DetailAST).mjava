@@ -1,5 +1,9 @@
     @Override
     public void visitToken(DetailAST ast) {
-        throw new IllegalStateException("visitToken() shouldn't be called.");
+        final int lineNo = ast.getLineNo();
+        if (illegalLines.get(lineNo) != null
+                && illegalLines.get(lineNo).equals(ast.getColumnNo())) {
+            log(ast, MSG_KEY);
+        }
     }
 

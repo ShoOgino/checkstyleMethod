@@ -2,14 +2,14 @@
     public void testDefaults() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(TrailingCommentCheck.class);
         final String[] expected = {
-            "4: " + getCheckMessage(MSG_KEY),
-            "7: " + getCheckMessage(MSG_KEY),
-            "8: " + getCheckMessage(MSG_KEY),
-            "18: " + getCheckMessage(MSG_KEY),
-            "19: " + getCheckMessage(MSG_KEY),
-            "29: " + getCheckMessage(MSG_KEY),
-            "30: " + getCheckMessage(MSG_KEY),
-            "31: " + getCheckMessage(MSG_KEY),
+            "4:12: " + getCheckMessage(MSG_KEY),
+            "7:12: " + getCheckMessage(MSG_KEY),
+            "8:22: " + getCheckMessage(MSG_KEY),
+            "18:19: " + getCheckMessage(MSG_KEY),
+            "19:21: " + getCheckMessage(MSG_KEY),
+            "29:50: " + getCheckMessage(MSG_KEY),
+            "30:51: " + getCheckMessage(MSG_KEY),
+            "31:31: " + getCheckMessage(MSG_KEY),
         };
         verify(checkConfig, getPath("InputTrailingComment.java"), expected);
     }

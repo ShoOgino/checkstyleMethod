@@ -1,0 +1,22 @@
+    @Test
+    public void testOne() throws Exception {
+        final File fileToProcess = new File(getPath(
+                "SuppressionXpathRegressionTrailingComment1.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(TrailingCommentCheck.class);
+
+        final String[] expectedViolation = {
+            "4:12: " + getCheckMessage(TrailingCommentCheck.class,
+                        TrailingCommentCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionTrailingComment1']]"
+                        + "/OBJBLOCK/SINGLE_LINE_COMMENT"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
