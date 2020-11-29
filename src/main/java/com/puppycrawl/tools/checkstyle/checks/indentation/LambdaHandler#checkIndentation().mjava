@@ -1,11 +1,14 @@
     @Override
     public void checkIndentation() {
-        // If the argument list is the first element on the line
-        final DetailAST firstChild = getMainAst().getFirstChild();
-        final DetailAST parent = getMainAst().getParent();
+        final DetailAST mainAst = getMainAst();
+        final DetailAST firstChild = mainAst.getFirstChild();
 
-        if (parent.getType() != TokenTypes.SWITCH_RULE
-                && getLineStart(firstChild) == expandedTabsColumnNo(firstChild)) {
+        // If the "->" has no children, it is a switch
+        // rule lambda (i.e. 'case ONE -> 1;')
+        final boolean isSwitchRuleLambda = firstChild == null;
+
+        if (!isSwitchRuleLambda
+            && getLineStart(firstChild) == expandedTabsColumnNo(firstChild)) {
             final int firstChildColumnNo = expandedTabsColumnNo(firstChild);
             final IndentLevel level = getIndent();
 
@@ -16,15 +19,10 @@
         }
 
         // If the "->" is the first element on the line, assume line wrapping.
-        final int mainAstColumnNo = expandedTabsColumnNo(getMainAst());
-        if (mainAstColumnNo == getLineStart(getMainAst())) {
-            final IndentLevel level =
-                new IndentLevel(getIndent(), getIndentCheck().getLineWrappingIndentation());
-
-            if (isNonAcceptableIndent(mainAstColumnNo, level)) {
-                isLambdaCorrectlyIndented = false;
-                logError(getMainAst(), "", mainAstColumnNo, level);
-            }
+        final int mainAstColumnNo = expandedTabsColumnNo(mainAst);
+        final boolean isLineWrappedLambda = mainAstColumnNo == getLineStart(mainAst);
+        if (isLineWrappedLambda) {
+            checkLineWrappedLambda(isSwitchRuleLambda, mainAstColumnNo);
         }
     }
 

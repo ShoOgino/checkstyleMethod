@@ -1,0 +1,14 @@
+    @Test
+    public void testIndentationSwitchExpressionNewLine() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        final String[] expected = {
+            "30:13: " + getCheckMessage(MSG_ERROR, "lambda", 12, 16),
+            "32:13: " + getCheckMessage(MSG_ERROR, "lambda", 12, 16),
+        };
+
+        verifyWarns(checkConfig,
+            getNonCompilablePath("InputIndentationCheckSwitchExpressionNewLine.java"),
+            expected);
+    }
+
