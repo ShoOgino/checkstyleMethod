@@ -4,13 +4,13 @@
      * @param token tree token.
      * @return true if a javadoc comment exists under the token.
      */
-    private static boolean branchContainsJavadocComment(DetailAST token) {
+    private boolean branchContainsJavadocComment(DetailAST token) {
         boolean result = false;
         DetailAST curNode = token;
         while (curNode != null) {
             if (curNode.getType() == TokenTypes.BLOCK_COMMENT_BEGIN
                     && JavadocUtil.isJavadocComment(curNode)) {
-                result = true;
+                result = hasValidJavadocComment(curNode);
                 break;
             }
 

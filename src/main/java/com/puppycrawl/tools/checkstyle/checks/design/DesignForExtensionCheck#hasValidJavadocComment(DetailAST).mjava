@@ -1,0 +1,17 @@
+    /**
+     * Checks whether a javadoc contains the specified comment pattern that denotes
+     * a method as designed for extension.
+     *
+     * @param detailAST the ast we are checking for possible extension
+     * @return true if the javadoc of this ast contains the required comment pattern
+     */
+    private boolean hasValidJavadocComment(DetailAST detailAST) {
+        final String javadocString =
+            JavadocUtil.getBlockCommentContent(detailAST);
+
+        final Matcher requiredJavadocPhraseMatcher =
+            requiredJavadocPhrase.matcher(javadocString);
+
+        return requiredJavadocPhraseMatcher.find();
+    }
+
