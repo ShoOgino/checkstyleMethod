@@ -6,7 +6,7 @@
      */
     private boolean isUnusedImport(String imprt) {
         final Matcher javaLangPackageMatcher = JAVA_LANG_PACKAGE_PATTERN.matcher(imprt);
-        return !referenced.contains(CommonUtil.baseClassName(imprt))
+        return !currentFrame.isReferencedType(CommonUtil.baseClassName(imprt))
             || javaLangPackageMatcher.matches();
     }
 

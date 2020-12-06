@@ -8,7 +8,7 @@
         final int lineNo = ast.getLineNo();
         final TextBlock textBlock = contents.getJavadocBefore(lineNo);
         if (textBlock != null) {
-            referenced.addAll(collectReferencesFromJavadoc(textBlock));
+            currentFrame.addReferencedTypes(collectReferencesFromJavadoc(textBlock));
         }
     }
 

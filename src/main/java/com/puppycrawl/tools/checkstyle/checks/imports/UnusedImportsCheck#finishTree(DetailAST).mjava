@@ -1,5 +1,6 @@
     @Override
     public void finishTree(DetailAST rootAST) {
+        currentFrame.finish();
         // loop over all the imports to see if referenced.
         imports.stream()
             .filter(imprt -> isUnusedImport(imprt.getText()))

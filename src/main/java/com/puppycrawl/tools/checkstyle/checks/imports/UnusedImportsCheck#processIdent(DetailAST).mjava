@@ -6,11 +6,12 @@
     private void processIdent(DetailAST ast) {
         final DetailAST parent = ast.getParent();
         final int parentType = parent.getType();
-        if (parentType != TokenTypes.DOT
-            && parentType != TokenTypes.METHOD_DEF
-            || parentType == TokenTypes.DOT
-                && ast.getNextSibling() != null) {
-            referenced.add(ast.getText());
+        if (TokenUtil.isTypeDeclaration(parentType)) {
+            currentFrame.addDeclaredType(ast.getText());
+        }
+        else if (parentType != TokenTypes.DOT && parentType != TokenTypes.METHOD_DEF
+                || parentType == TokenTypes.DOT && ast.getNextSibling() != null) {
+            currentFrame.addReferencedType(ast.getText());
         }
     }
 

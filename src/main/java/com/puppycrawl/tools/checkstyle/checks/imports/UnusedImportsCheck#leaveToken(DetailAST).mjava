@@ -1,0 +1,7 @@
+    @Override
+    public void leaveToken(DetailAST ast) {
+        if (TokenUtil.isOfType(ast, TokenTypes.OBJBLOCK, TokenTypes.SLIST)) {
+            currentFrame = currentFrame.pop();
+        }
+    }
+
