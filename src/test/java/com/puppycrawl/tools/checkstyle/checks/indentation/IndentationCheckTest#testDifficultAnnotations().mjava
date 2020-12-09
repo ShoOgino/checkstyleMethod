@@ -11,9 +11,12 @@
         checkConfig.addAttribute("tabWidth", "4");
         checkConfig.addAttribute("throwsIndent", "4");
         final String[] expected = {
-            "40:1: " + getCheckMessage(MSG_CHILD_ERROR, "annotation array initialization", 0, 4),
-            "41:1: " + getCheckMessage(MSG_CHILD_ERROR, "annotation array initialization", 0, 4),
-            "50:7: " + getCheckMessage(MSG_CHILD_ERROR, "annotation array initialization", 6, 8),
+            "40:1: " + getCheckMessage(MSG_CHILD_ERROR_MULTI,
+                    "annotation array initialization", 0, "4, 23, 25"),
+            "41:1: " + getCheckMessage(MSG_CHILD_ERROR_MULTI,
+                    "annotation array initialization", 0, "4, 23, 25"),
+            "50:7: " + getCheckMessage(MSG_CHILD_ERROR_MULTI,
+                    "annotation array initialization", 6, "8, 27, 29"),
         };
         verifyWarns(checkConfig, getPath("InputIndentationDifficultAnnotations.java"), expected);
     }

@@ -12,7 +12,11 @@
         checkConfig.addAttribute("tabWidth", "4");
         checkConfig.addAttribute("throwsIndent", "4");
         final String fileName = getPath("InputIndentationZeroArrayInit.java");
-        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+
+        final String[] expected = {
+            "22:12: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "annotation array initialization",
+                    11, "8, 12, 35, 37"),
+        };
         verifyWarns(checkConfig, fileName, expected);
     }
 

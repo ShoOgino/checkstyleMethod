@@ -11,15 +11,20 @@
         checkConfig.addAttribute("tabWidth", "8");
         checkConfig.addAttribute("throwsIndent", "4");
         final String[] expected = {
-            "17:1: " + getCheckMessage(MSG_CHILD_ERROR, "annotation array initialization", 0, 4),
+
+            "17:1: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "annotation array initialization", 0,
+                "4, 6, 34, 36"),
+            "22:14: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "annotation array initialization",
+                    13, "4, 6, 34, 36"),
             "23:3: " + getCheckMessage(MSG_ERROR_MULTI,
                     "annotation array initialization rcurly", 2, "0, 4"),
-            "35:7: " + getCheckMessage(MSG_CHILD_ERROR, "annotation array initialization", 6, 8),
+            "35:7: " + getCheckMessage(MSG_CHILD_ERROR_MULTI, "annotation array initialization", 6,
+                "8, 10, 31, 33"),
             "36:3: " + getCheckMessage(MSG_ERROR_MULTI,
                     "annotation array initialization rcurly", 2, "4, 8"),
 
-            "52:6: " + getCheckMessage(MSG_CHILD_ERROR,
-                    "annotation array initialization", 5, 6),
+            "52:6: " + getCheckMessage(MSG_CHILD_ERROR_MULTI,
+                    "annotation array initialization", 5, "6, 8, 10"),
             "54:6: " + getCheckMessage(MSG_ERROR_MULTI,
                     "annotation array initialization rcurly", 5, "2, 6"),
         };
