@@ -1,0 +1,17 @@
+    /**
+     * The function checks if the new keyword is a child of chained method calls,
+     * it checks if the new is directly followed by equal operator or return operator.
+     *
+     * @return true if the new it is chained method calls and new keyword is directly followed
+     *         by assign or return
+     */
+    private boolean doesChainedMethodNeedsLineWrapping() {
+        DetailAST ast = mainAst.getParent();
+
+        while (TokenUtil.isOfType(ast, TokenTypes.DOT, TokenTypes.METHOD_CALL, TokenTypes.EXPR)) {
+            ast = ast.getParent();
+        }
+
+        return TokenUtil.isOfType(ast, TokenTypes.ASSIGN, TokenTypes.LITERAL_RETURN);
+    }
+

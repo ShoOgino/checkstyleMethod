@@ -51,7 +51,7 @@
             if (currentType == TokenTypes.RPAREN) {
                 logWarningMessage(node, firstNodeIndent);
             }
-            else if (currentType != TokenTypes.RCURLY && currentType != TokenTypes.ARRAY_INIT) {
+            else if (!TokenUtil.isOfType(currentType, IGNORED_LIST)) {
                 logWarningMessage(node, currentIndent);
             }
         }

@@ -1,0 +1,23 @@
+    @Test
+    public void testChainedMethodCalling() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+
+        checkConfig.addAttribute("arrayInitIndent", "2");
+        checkConfig.addAttribute("basicOffset", "2");
+        checkConfig.addAttribute("braceAdjustment", "2");
+        checkConfig.addAttribute("caseIndent", "2");
+        checkConfig.addAttribute("forceStrictCondition", "false");
+        checkConfig.addAttribute("lineWrappingIndentation", "4");
+        checkConfig.addAttribute("tabWidth", "4");
+        checkConfig.addAttribute("throwsIndent", "4");
+        final String fileName = getPath("InputIndentationChainedMethodCalls.java");
+        final String[] expected = {
+            "32:5: " + getCheckMessage(IndentationCheck.class,
+                MSG_CHILD_ERROR, "method call", 4, 8),
+            "37:5: " + getCheckMessage(IndentationCheck.class, MSG_ERROR, ".", 4, 8),
+            "38:5: " + getCheckMessage(IndentationCheck.class, MSG_ERROR, ".", 4, 8),
+            "41:5: " + getCheckMessage(IndentationCheck.class, MSG_ERROR, "new", 4, 8),
+        };
+        verifyWarns(checkConfig, fileName, expected);
+    }
+
