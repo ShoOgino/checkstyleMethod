@@ -1,0 +1,12 @@
+    @Test
+    public void testGetDepth() {
+        final UnsupportedOperationException exception =
+            assertThrows(UnsupportedOperationException.class, () -> {
+                attributeNode.getDepth();
+            });
+        assertWithMessage("Invalid exception message")
+            .that(exception)
+            .hasMessageThat()
+                .isEqualTo("Operation is not supported");
+    }
+

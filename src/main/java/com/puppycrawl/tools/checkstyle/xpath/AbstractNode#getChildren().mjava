@@ -4,6 +4,9 @@
      * @return children list
      */
     protected List<AbstractNode> getChildren() {
+        if (children == null) {
+            children = createChildren();
+        }
         return Collections.unmodifiableList(children);
     }
 

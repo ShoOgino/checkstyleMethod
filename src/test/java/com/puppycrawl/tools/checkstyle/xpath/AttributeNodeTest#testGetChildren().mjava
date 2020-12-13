@@ -1,0 +1,12 @@
+    @Test
+    public void testGetChildren() {
+        final UnsupportedOperationException exception =
+            assertThrows(UnsupportedOperationException.class, () -> {
+                attributeNode.getChildren();
+            });
+        assertWithMessage("Invalid exception message")
+            .that(exception)
+            .hasMessageThat()
+            .isEqualTo("Operation is not supported");
+    }
+

@@ -1,0 +1,13 @@
+    @Test
+    public void testGetAttributeCached() {
+        final DetailAstImpl detailAST = new DetailAstImpl();
+        detailAST.setType(TokenTypes.IDENT);
+        detailAST.setText("HelloWorld");
+
+        final ElementNode elementNode = new ElementNode(rootNode, rootNode, detailAST, 1, 0);
+        try (AxisIterator first = elementNode.iterateAxis(AxisInfo.ATTRIBUTE);
+             AxisIterator second = elementNode.iterateAxis(AxisInfo.ATTRIBUTE)) {
+            assertSame(first.next(), second.next(), "Expected same attribute node");
+        }
+    }
+

@@ -4,16 +4,16 @@
      * @param root {@code Node} root of the tree
      * @param parent {@code Node} parent of the current node
      * @param detailAst reference to {@code DetailAST}
+     * @param depth the current node depth in the hierarchy
+     * @param indexAmongSiblings the current node index among the parent children nodes
      */
-    public ElementNode(AbstractNode root, AbstractNode parent, DetailAST detailAst) {
+    public ElementNode(AbstractNode root, AbstractNode parent, DetailAST detailAst,
+            int depth, int indexAmongSiblings) {
         super(root.getTreeInfo());
         this.parent = parent;
         this.root = root;
         this.detailAst = detailAst;
-        text = TokenUtil.getTokenName(detailAst.getType());
-        indexAmongSiblings = parent.getChildren().size();
-        setDepth(parent.getDepth() + 1);
-        createTextAttribute();
-        createChildren();
+        this.depth = depth;
+        this.indexAmongSiblings = indexAmongSiblings;
     }
 

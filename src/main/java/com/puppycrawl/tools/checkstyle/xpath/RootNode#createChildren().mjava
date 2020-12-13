@@ -1,13 +1,11 @@
     /**
      * Iterates siblings of the current node and
      * recursively creates new Xpath-nodes.
+     *
+     * @return children list
      */
-    private void createChildren() {
-        DetailAST currentChild = detailAst;
-        while (currentChild != null) {
-            final ElementNode child = new ElementNode(this, this, currentChild);
-            addChild(child);
-            currentChild = currentChild.getNextSibling();
-        }
+    @Override
+    protected List<AbstractNode> createChildren() {
+        return XpathUtil.createChildren(this, this, detailAst);
     }
 

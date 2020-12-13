@@ -10,12 +10,9 @@
     public String getAttributeValue(String namespace, String localPart) {
         final String result;
         if (TEXT_ATTRIBUTE_NAME.equals(localPart)) {
-            if (attributeNode == null) {
-                result = null;
-            }
-            else {
-                result = attributeNode.getStringValue();
-            }
+            result = Optional.ofNullable(getAttributeNode())
+                .map(AttributeNode::getStringValue)
+                .orElse(null);
         }
         else {
             result = null;
