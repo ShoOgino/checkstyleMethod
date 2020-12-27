@@ -1,0 +1,22 @@
+    /**
+     * Walks up the hierarchy until a common ancestor is found.
+     * Then compares topmost sibling nodes.
+     *
+     * @param first {@code NodeInfo} to compare
+     * @param second {@code NodeInfo} to compare
+     * @return the value {@code 0} if {@code first == second};
+     *         a value less than {@code 0} if {@code first} should be first;
+     *         a value greater than {@code 0} if {@code second} should be first.
+     */
+    private static int compareCommonAncestorChildrenOrder(NodeInfo first, NodeInfo second) {
+        NodeInfo child1 = first;
+        NodeInfo child2 = second;
+        while (!child1.getParent().equals(child2.getParent())) {
+            child1 = child1.getParent();
+            child2 = child2.getParent();
+        }
+        final int index1 = ((ElementNode) child1).indexAmongSiblings;
+        final int index2 = ((ElementNode) child2).indexAmongSiblings;
+        return Integer.compare(index1, index2);
+    }
+

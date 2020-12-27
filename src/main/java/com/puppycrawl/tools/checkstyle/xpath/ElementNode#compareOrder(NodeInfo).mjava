@@ -8,10 +8,9 @@
     public int compareOrder(NodeInfo other) {
         int result = 0;
         if (other instanceof AbstractNode) {
-            result = depth - ((AbstractNode) other).getDepth();
+            result = Integer.compare(depth, ((AbstractNode) other).getDepth());
             if (result == 0) {
-                final ElementNode[] children = getCommonAncestorChildren(other);
-                result = children[0].indexAmongSiblings - children[1].indexAmongSiblings;
+                result = compareCommonAncestorChildrenOrder(this, other);
             }
         }
         return result;
