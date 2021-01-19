@@ -1,0 +1,12 @@
+    @Test
+    public void testGetUriByFilenameFindsRelativeResourceOnClasspathPrefix() throws Exception {
+        final String filename = CommonUtil.CLASSPATH_URL_PROTOCOL
+            + getPackageLocation() + "/InputCommonUtilTest_empty_checks.xml";
+        final URI uri = CommonUtil.getUriByFilename(filename);
+
+        final Properties properties = System.getProperties();
+        final Configuration config = ConfigurationLoader.loadConfiguration(uri.toString(),
+            new PropertiesExpander(properties));
+        assertEquals("Checker", config.getName(), "Unexpected config name!");
+    }
+
