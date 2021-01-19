@@ -2,44 +2,14 @@
      * Resolve the specified filename to a URI.
      *
      * @param filename name of the file
-     * @return resolved header file URI
+     * @return resolved file URI
      * @throws CheckstyleException on failure
      */
     public static URI getUriByFilename(String filename) throws CheckstyleException {
-        // figure out if this is a File or a URL
-        URI uri;
-        try {
-            final URL url = new URL(filename);
-            uri = url.toURI();
-        }
-        catch (final URISyntaxException | MalformedURLException ignored) {
-            uri = null;
-        }
+        URI uri = getWebOrFileProtocolUri(filename);
 
         if (uri == null) {
-            final File file = new File(filename);
-            if (file.exists()) {
-                uri = file.toURI();
-            }
-            else {
-                // check to see if the file is in the classpath
-                try {
-                    final URL configUrl;
-                    if (filename.charAt(0) == '/') {
-                        configUrl = CommonUtil.class.getResource(filename);
-                    }
-                    else {
-                        configUrl = ClassLoader.getSystemResource(filename);
-                    }
-                    if (configUrl == null) {
-                        throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + filename);
-                    }
-                    uri = configUrl.toURI();
-                }
-                catch (final URISyntaxException ex) {
-                    throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + filename, ex);
-                }
-            }
+            uri = getFilepathOrClasspathUri(filename);
         }
 
         return uri;

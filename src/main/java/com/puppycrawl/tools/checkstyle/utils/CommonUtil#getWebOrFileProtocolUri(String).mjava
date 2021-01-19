@@ -1,0 +1,19 @@
+    /**
+     * Resolves the specified filename containing 'http', 'https', 'ftp',
+     * and 'file' protocols (or any RFC 2396 compliant URL) to a URI.
+     *
+     * @param filename name of the file
+     * @return resolved file URI or null if URL is malformed or non-existent
+     */
+    public static URI getWebOrFileProtocolUri(String filename) {
+        URI uri;
+        try {
+            final URL url = new URL(filename);
+            uri = url.toURI();
+        }
+        catch (final URISyntaxException | MalformedURLException ignored) {
+            uri = null;
+        }
+        return uri;
+    }
+
