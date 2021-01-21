@@ -8,7 +8,8 @@
     public static int getTokenId(String name) {
         final Integer id = TOKEN_NAME_TO_VALUE.get(name);
         if (id == null) {
-            throw new IllegalArgumentException(TOKEN_NAME_EXCEPTION_PREFIX + name);
+            throw new IllegalArgumentException(
+                String.format(Locale.ROOT, TOKEN_NAME_EXCEPTION_FORMAT, name));
         }
         return id;
     }
