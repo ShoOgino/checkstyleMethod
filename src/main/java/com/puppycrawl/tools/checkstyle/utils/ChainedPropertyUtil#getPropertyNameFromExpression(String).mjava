@@ -1,0 +1,13 @@
+    /**
+     * Gets an unresolved property name from a property variable expression
+     * by stripping the preceding '${' and trailing '}'.
+     *
+     * @param variableExpression the full property variable expression
+     * @return property name
+     */
+    private static String getPropertyNameFromExpression(String variableExpression) {
+        final int propertyStartIndex = variableExpression.lastIndexOf('{') + 1;
+        final int propertyEndIndex = variableExpression.lastIndexOf('}');
+        return variableExpression.substring(propertyStartIndex, propertyEndIndex);
+    }
+

@@ -1,0 +1,17 @@
+    @Test
+    public void testPropertyFileWithPropertyChainingUndefinedProperty(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) {
+        assertExitWithStatus(-2, () -> {
+            invokeMain("-c", getPath("InputMainConfig-classname-prop.xml"),
+                "-p", getPath("InputMainPropertyChainingUndefinedProperty.properties"),
+                getPath("InputMain.java"));
+        });
+
+        assertWithMessage("Invalid error message")
+            .that(systemErr.getCapturedData())
+            .contains(ChainedPropertyUtil.UNDEFINED_PROPERTY_MESSAGE);
+        assertWithMessage("Unexpected output log")
+            .that(systemOut.getCapturedData())
+            .isEqualTo("");
+    }
+

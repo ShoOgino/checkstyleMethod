@@ -1,0 +1,30 @@
+    @Test
+    public void testPropertyChaining() throws Exception {
+        final File propertiesFile =
+            new File(getPath("InputChainedPropertyUtil.properties"));
+        final Properties properties = loadProperties(propertiesFile);
+        final Properties resolvedProperties =
+            ChainedPropertyUtil.getResolvedProperties(properties);
+        final PropertiesExpander expander = new PropertiesExpander(resolvedProperties);
+        final String message = "Unexpected property resolution.";
+
+        assertWithMessage(message)
+            .that(expander.resolve("basedir"))
+            .isEqualTo("/home");
+        assertWithMessage(message)
+            .that(expander.resolve("checkstyle.dir"))
+            .isEqualTo("/home/checkstyle");
+        assertWithMessage(message)
+            .that(expander.resolve("config.dir"))
+            .isEqualTo("/home/checkstyle/configs");
+        assertWithMessage(message)
+            .that(expander.resolve("checkstyle.suppressions.file"))
+            .isEqualTo("/home/checkstyle/configs/suppressions.xml");
+        assertWithMessage(message)
+            .that(expander.resolve("checkstyle.dir"))
+            .isEqualTo("/home/checkstyle");
+        assertWithMessage(message)
+            .that(expander.resolve("str"))
+            .isEqualTo("value");
+    }
+

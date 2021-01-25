@@ -1,0 +1,15 @@
+    @Test
+    public void testPropertyFileWithPropertyChaining(@SysErr Capturable systemErr,
+            @SysOut Capturable systemOut) throws IOException {
+        Main.main("-c", getPath("InputMainConfig-classname-prop.xml"),
+            "-p", getPath("InputMainPropertyChaining.properties"), getPath("InputMain.java"));
+
+        assertWithMessage("Unexpected output log")
+            .that(systemOut.getCapturedData())
+            .isEqualTo(addEndOfLine(auditStartMessage.getMessage(),
+                auditFinishMessage.getMessage()));
+        assertWithMessage("Unexpected system error log")
+            .that(systemErr.getCapturedData())
+            .isEqualTo("");
+    }
+

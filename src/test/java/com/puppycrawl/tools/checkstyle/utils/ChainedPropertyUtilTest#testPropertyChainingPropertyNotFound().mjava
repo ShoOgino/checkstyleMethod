@@ -1,0 +1,19 @@
+    @Test
+    public void testPropertyChainingPropertyNotFound() throws Exception {
+        final File propertiesFile =
+            new File(getPath("InputChainedPropertyUtilUndefinedProperty.properties"));
+        final Properties properties = loadProperties(propertiesFile);
+        final String expected =
+            ChainedPropertyUtil.UNDEFINED_PROPERTY_MESSAGE + "[property.not.found]";
+        final String message = "Undefined property reference expected.";
+
+        final CheckstyleException exception =
+            assertThrows(CheckstyleException.class,
+                () -> ChainedPropertyUtil.getResolvedProperties(properties));
+
+        assertWithMessage(message)
+            .that(exception)
+            .hasMessageThat()
+            .isEqualTo(expected);
+    }
+
