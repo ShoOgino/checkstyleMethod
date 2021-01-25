@@ -1,0 +1,11 @@
+    @Test
+    public void testMetadataFileGenerationDefaultValueMissing() {
+        final CheckstyleException exc = assertThrows(CheckstyleException.class, () -> {
+            MetadataGeneratorUtil.generate(invalidMetadataPackage
+                + "/InputJavadocMetadataScraperPropertyMissingDefaultValueCheck.java");
+        });
+        assertThat(exc.getCause()).isInstanceOf(MetadataGenerationException.class);
+        assertThat(exc.getCause().getMessage()).isEqualTo(
+            "Default value for property 'missingDefaultValue' is missing");
+    }
+

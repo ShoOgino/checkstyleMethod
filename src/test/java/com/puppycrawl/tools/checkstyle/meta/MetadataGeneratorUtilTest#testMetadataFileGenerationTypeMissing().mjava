@@ -1,0 +1,11 @@
+    @Test
+    public void testMetadataFileGenerationTypeMissing() {
+        final CheckstyleException exc = assertThrows(CheckstyleException.class, () -> {
+            MetadataGeneratorUtil.generate(invalidMetadataPackage
+                + "/InputJavadocMetadataScraperPropertyMissingTypeCheck.java");
+        });
+        assertThat(exc.getCause()).isInstanceOf(MetadataGenerationException.class);
+        assertThat(exc.getCause().getMessage()).isEqualTo(
+            "Type for property 'missingType' is missing");
+    }
+

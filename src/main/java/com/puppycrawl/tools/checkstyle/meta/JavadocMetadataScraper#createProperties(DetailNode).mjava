@@ -11,38 +11,41 @@
                 JavadocTokenTypes.JAVADOC_INLINE_TAG, 0);
         if (propertyNameNode.isPresent()) {
             final DetailNode propertyNameTag = propertyNameNode.get();
+            final String propertyName = getTextFromTag(propertyNameTag);
 
-            final Optional<DetailNode> propertyTypeNode =
-                    getFirstChildOfMatchingText(nodeLi, TYPE_TAG);
-            if (propertyTypeNode.isPresent()) {
-                final DetailNode propertyType = propertyTypeNode.get();
-                final String propertyDesc = DESC_CLEAN.matcher(
-                        constructSubTreeText(nodeLi, propertyNameTag.getIndex() + 1,
-                                propertyType.getIndex() - 1))
-                        .replaceAll(Matcher.quoteReplacement(""));
+            final DetailNode propertyType = getFirstChildOfMatchingText(nodeLi, TYPE_TAG)
+                .orElseThrow(() -> {
+                    return new MetadataGenerationException(String.format(
+                        Locale.ROOT, PROP_TYPE_MISSING, propertyName)
+                    );
+                });
+            final String propertyDesc = DESC_CLEAN.matcher(
+                    constructSubTreeText(nodeLi, propertyNameTag.getIndex() + 1,
+                            propertyType.getIndex() - 1))
+                    .replaceAll(Matcher.quoteReplacement(""));
 
-                modulePropertyDetails.setDescription(propertyDesc.trim());
+            modulePropertyDetails.setDescription(propertyDesc.trim());
+            modulePropertyDetails.setName(propertyName);
+            modulePropertyDetails.setType(getTagTextFromProperty(nodeLi, propertyType));
+
+            final Optional<DetailNode> validationTypeNodeOpt = getFirstChildOfMatchingText(nodeLi,
+                VALIDATION_TYPE_TAG);
+            if (validationTypeNodeOpt.isPresent()) {
+                final DetailNode validationTypeNode = validationTypeNodeOpt.get();
+                modulePropertyDetails.setValidationType(getTagTextFromProperty(nodeLi,
+                    validationTypeNode));
             }
 
-            modulePropertyDetails.setName(getTextFromTag(propertyNameTag));
-        }
-
-        final Optional<DetailNode> typeNode = getFirstChildOfMatchingText(nodeLi, TYPE_TAG);
-        if (typeNode.isPresent()) {
-            modulePropertyDetails.setType(getTagTextFromProperty(nodeLi, typeNode.get()));
-        }
-
-        final Optional<DetailNode> validationTypeNodeOpt = getFirstChildOfMatchingText(nodeLi,
-                VALIDATION_TYPE_TAG);
-        if (validationTypeNodeOpt.isPresent()) {
-            final DetailNode validationTypeNode = validationTypeNodeOpt.get();
-            modulePropertyDetails.setValidationType(getTagTextFromProperty(nodeLi,
-                    validationTypeNode));
-        }
-
-        final String defaultValue = getPropertyDefaultText(nodeLi);
-        if (!PROPERTIES_TO_NOT_WRITE.contains(defaultValue)) {
-            modulePropertyDetails.setDefaultValue(defaultValue);
+            final String defaultValue = getFirstChildOfMatchingText(nodeLi, DEFAULT_VALUE_TAG)
+                .map(defaultValueNode -> getPropertyDefaultText(nodeLi, defaultValueNode))
+                .orElseThrow(() -> {
+                    return new MetadataGenerationException(String.format(
+                        Locale.ROOT, PROP_DEFAULT_VALUE_MISSING, propertyName)
+                    );
+                });
+            if (!PROPERTIES_TO_NOT_WRITE.contains(defaultValue)) {
+                modulePropertyDetails.setDefaultValue(defaultValue);
+            }
         }
         return modulePropertyDetails;
     }
