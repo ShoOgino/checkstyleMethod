@@ -5,17 +5,8 @@
      * @return parent text
      */
     private static String getParentText(DetailNode nodeParagraph) {
-        String result = null;
-        final Optional<DetailNode> resultNode = getFirstChildOfType(nodeParagraph,
-                JavadocTokenTypes.TEXT, 0);
-        if (resultNode.isPresent()
-                && PARENT_TAG.matcher(resultNode.get().getText()).matches()) {
-            final Optional<DetailNode> childNode = getFirstChildOfType(nodeParagraph,
-                    JavadocTokenTypes.JAVADOC_INLINE_TAG, 0);
-            if (childNode.isPresent()) {
-                result = getTextFromTag(childNode.get());
-            }
-        }
-        return result;
+        return getFirstChildOfType(nodeParagraph, JavadocTokenTypes.JAVADOC_INLINE_TAG, 0)
+                .map(JavadocMetadataScraper::getTextFromTag)
+                .orElse(null);
     }
 

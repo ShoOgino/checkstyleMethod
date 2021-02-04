@@ -6,9 +6,6 @@
      * @return true if paragraph node contains the violation message keys text
      */
     private static boolean isViolationMessagesText(DetailNode nodeParagraph) {
-        final Optional<DetailNode> resultNode = getFirstChildOfType(nodeParagraph,
-                JavadocTokenTypes.TEXT, 0);
-        return resultNode.isPresent()
-                && VIOLATION_MESSAGES_TAG.matcher(resultNode.get().getText()).matches();
+        return isChildNodeTextMatches(nodeParagraph, VIOLATION_MESSAGES_TAG);
     }
 

@@ -5,9 +5,6 @@
      * @return true if the node is part of a property list
      */
     private static boolean isPropertyList(DetailNode nodeLi) {
-        final Optional<DetailNode> firstTextChildToken =
-                getFirstChildOfType(nodeLi, JavadocTokenTypes.TEXT, 0);
-        return firstTextChildToken.isPresent()
-                && PROPERTY_TAG.matcher(firstTextChildToken.get().getText()).matches();
+        return isChildNodeTextMatches(nodeLi, PROPERTY_TAG);
     }
 

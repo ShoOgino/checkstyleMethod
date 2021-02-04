@@ -1,0 +1,27 @@
+    @Test
+    public void testReadXmlMetaCheckWithProperties() throws Exception {
+        final String path = getPath("InputXmlMetaReaderCheckWithProps.xml");
+        try (InputStream is = Files.newInputStream(Paths.get(path))) {
+            final ModuleDetails result = XmlMetaReader.read(is, ModuleType.CHECK);
+            checkModuleProps(result, ModuleType.CHECK, "Some description for check",
+                "com.puppycrawl.tools.checkstyle.checks.misc.InputCheck",
+                "com.puppycrawl.tools.checkstyle.TreeWalker");
+            assertThat(result.getName()).isEqualTo("InputCheck");
+            final List<String> violationMessageKeys = result.getViolationMessageKeys();
+            assertThat(violationMessageKeys.size()).isEqualTo(1);
+            assertThat(violationMessageKeys.get(0)).isEqualTo("test.key");
+            final List<ModulePropertyDetails> props = result.getProperties();
+            assertThat(props.size()).isEqualTo(2);
+            final ModulePropertyDetails prop1 = props.get(0);
+            checkProperty(prop1, "propertyOne", "java.lang.String",
+                "propertyOneDefaultValue",
+                "Property wrapped\n            description.");
+            assertThat(prop1.getValidationType()).isNull();
+
+            final ModulePropertyDetails prop2 = props.get(1);
+            checkProperty(prop2, "propertyTwo", "java.lang.String[]",
+                "", "Property two desc");
+            assertThat(prop2.getValidationType()).isEqualTo("tokenTypesSet");
+        }
+    }
+

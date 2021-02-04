@@ -6,20 +6,16 @@
      * @return default property text
      */
     private static String getPropertyDefaultText(DetailNode nodeLi, DetailNode defaultValueNode) {
-        final Optional<DetailNode> propertyDefaultValueTagNode = getFirstChildOfType(nodeLi,
+        final Optional<DetailNode> propertyDefaultValueTag = getFirstChildOfType(nodeLi,
                 JavadocTokenTypes.JAVADOC_INLINE_TAG, defaultValueNode.getIndex() + 1);
-        DetailNode propertyDefaultValueTag = null;
-        if (propertyDefaultValueTagNode.isPresent()) {
-            propertyDefaultValueTag = propertyDefaultValueTagNode.get();
-        }
         final String result;
-        if (propertyDefaultValueTag == null) {
+        if (propertyDefaultValueTag.isPresent()) {
+            result = getTextFromTag(propertyDefaultValueTag.get());
+        }
+        else {
             final String tokenText = constructSubTreeText(nodeLi,
                     defaultValueNode.getIndex(), nodeLi.getChildren().length);
             result = cleanDefaultTokensText(tokenText);
-        }
-        else {
-            result = getTextFromTag(propertyDefaultValueTag);
         }
         return result;
     }

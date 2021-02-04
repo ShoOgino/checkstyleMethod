@@ -1,0 +1,18 @@
+    @Test
+    public void testReadXmlMetaCheckNoProperties() throws Exception {
+        final String path = getPath("InputXmlMetaReaderCheckNoProps.xml");
+        try (InputStream is = Files.newInputStream(Paths.get(path))) {
+            final ModuleDetails result = XmlMetaReader.read(is, ModuleType.CHECK);
+            checkModuleProps(result, ModuleType.CHECK,
+                "Some description for check with no properties",
+                "com.puppycrawl.tools.checkstyle.checks.misc.InputCheckNoProps",
+                "com.puppycrawl.tools.checkstyle.TreeWalker");
+            assertThat(result.getName()).isEqualTo("InputCheckNoProps");
+            final List<String> violationMessageKeys = result.getViolationMessageKeys();
+            assertThat(violationMessageKeys.size()).isEqualTo(2);
+            assertThat(violationMessageKeys.get(0)).isEqualTo("test.key1");
+            assertThat(violationMessageKeys.get(1)).isEqualTo("test.key2");
+            assertThat(result.getProperties().isEmpty()).isTrue();
+        }
+    }
+

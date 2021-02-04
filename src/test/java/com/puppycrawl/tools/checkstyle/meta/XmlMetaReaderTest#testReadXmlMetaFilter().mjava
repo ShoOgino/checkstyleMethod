@@ -1,0 +1,19 @@
+    @Test
+    public void testReadXmlMetaFilter() throws Exception {
+        final String path = getPath("InputXmlMetaReaderFilter.xml");
+        try (InputStream is = Files.newInputStream(Paths.get(path))) {
+            final ModuleDetails result = XmlMetaReader.read(is, ModuleType.FILTER);
+            checkModuleProps(result, ModuleType.FILTER, "Description for filter",
+                "com.puppycrawl.tools.checkstyle.filters.SomeFilter",
+                "com.puppycrawl.tools.checkstyle.TreeWalker");
+            assertThat(result.getName()).isEqualTo("SomeFilter");
+            assertThat(result.getViolationMessageKeys().isEmpty()).isTrue();
+            final List<ModulePropertyDetails> props = result.getProperties();
+            assertThat(props.size()).isEqualTo(1);
+            final ModulePropertyDetails prop1 = props.get(0);
+            checkProperty(prop1, "propertyOne", "java.util.regex.Pattern",
+                "propertyDefaultValue", "Property description.");
+            assertThat(prop1.getValidationType()).isNull();
+        }
+    }
+
