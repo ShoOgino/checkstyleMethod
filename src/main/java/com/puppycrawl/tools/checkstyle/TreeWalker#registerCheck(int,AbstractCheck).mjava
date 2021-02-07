@@ -6,6 +6,18 @@
      * @throws CheckstyleException if Check is misconfigured
      */
     private void registerCheck(int tokenId, AbstractCheck check) throws CheckstyleException {
-        registerCheck(TokenUtil.getTokenName(tokenId), check);
+        if (check.isCommentNodesRequired()) {
+            tokenToCommentChecks.computeIfAbsent(tokenId, empty -> new HashSet<>()).add(check);
+        }
+        else if (TokenUtil.isCommentType(tokenId)) {
+            final String message = String.format(Locale.ROOT, "Check '%s' waits for comment type "
+                    + "token ('%s') and should override 'isCommentNodesRequired()' "
+                    + "method to return 'true'", check.getClass().getName(),
+                    TokenUtil.getTokenName(tokenId));
+            throw new CheckstyleException(message);
+        }
+        else {
+            tokenToOrdinaryChecks.computeIfAbsent(tokenId, empty -> new HashSet<>()).add(check);
+        }
     }
 
