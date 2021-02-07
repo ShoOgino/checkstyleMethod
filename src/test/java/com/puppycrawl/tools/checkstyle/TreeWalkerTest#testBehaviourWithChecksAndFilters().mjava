@@ -10,8 +10,6 @@
 
         final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
 
-        final File file = new File(getPath("InputTreeWalkerSuppressionCommentFilter.java"));
-
         final String[] expected = {
             "9:17: " + getCheckMessage(MemberNameCheck.class, "name.invalidPattern", "P",
                     "^[a-z][a-zA-Z0-9]*$"),
@@ -20,7 +18,7 @@
         };
 
         verify(checkerConfig,
-                file.getPath(),
+                getPath("InputTreeWalkerSuppressionCommentFilter.java"),
                 expected);
     }
 

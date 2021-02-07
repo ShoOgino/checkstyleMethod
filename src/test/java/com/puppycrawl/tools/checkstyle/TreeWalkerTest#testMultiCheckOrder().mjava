@@ -1,0 +1,17 @@
+    @Test
+    public void testMultiCheckOrder() throws Exception {
+        final DefaultConfiguration treeWalkerConfig = createModuleConfig(TreeWalker.class);
+        treeWalkerConfig.addChild(createModuleConfig(WhitespaceAroundCheck.class));
+        treeWalkerConfig.addChild(createModuleConfig(WhitespaceAfterCheck.class));
+
+        final DefaultConfiguration checkerConfig = createRootConfig(treeWalkerConfig);
+
+        final String[] expected = {
+            "6:9: " + getCheckMessage(WhitespaceAfterCheck.class, "ws.notFollowed", "if"),
+        };
+
+        verify(checkerConfig,
+                getPath("InputTreeWalkerMultiCheckOrder.java"),
+                expected);
+    }
+

@@ -1,0 +1,14 @@
+    /**
+     * Creates a new {@link SortedSet} with a deterministic order based on the
+     * Check's name before the default ordering.
+     *
+     * @return The new {@link SortedSet}.
+     */
+    private static SortedSet<AbstractCheck> createNewCheckSortedSet() {
+        return new TreeSet<>(
+                Comparator.<AbstractCheck, String>comparing(check -> check.getClass().getName())
+                        .thenComparing(AbstractCheck::getId,
+                                Comparator.nullsLast(Comparator.naturalOrder()))
+                        .thenComparing(AbstractCheck::hashCode));
+    }
+
