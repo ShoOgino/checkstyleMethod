@@ -4,20 +4,26 @@
      * @param ast the AST node to get the child of
      * @return get target of annotation
      */
-    private static DetailAST getAnnotationTarget(DetailAST ast) {
-        final DetailAST targetAST;
+    private static Optional<DetailAST> getAnnotationTarget(DetailAST ast) {
+        final Optional<DetailAST> result;
         final DetailAST parentAST = ast.getParent();
         switch (parentAST.getType()) {
             case TokenTypes.MODIFIERS:
             case TokenTypes.ANNOTATIONS:
             case TokenTypes.ANNOTATION:
             case TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR:
-                targetAST = parentAST.getParent();
+                result = Optional.of(parentAST.getParent());
+                break;
+            case TokenTypes.LITERAL_DEFAULT:
+                result = Optional.empty();
+                break;
+            case TokenTypes.ANNOTATION_ARRAY_INIT:
+                result = getAnnotationTarget(parentAST);
                 break;
             default:
                 // unexpected container type
                 throw new IllegalArgumentException("Unexpected container AST: " + parentAST);
         }
-        return targetAST;
+        return result;
     }
 
