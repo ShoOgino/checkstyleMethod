@@ -1,0 +1,11 @@
+    @Override
+    protected List<File> scanFileSets() {
+        final File mock = PowerMockito.mock(File.class);
+        // Assume that I/O error is happened when we try to invoke 'lastModified()' method.
+        final Exception expectedError = new RuntimeException("");
+        when(mock.lastModified()).thenThrow(expectedError);
+        final List<File> list = new ArrayList<>();
+        list.add(mock);
+        return list;
+    }
+
