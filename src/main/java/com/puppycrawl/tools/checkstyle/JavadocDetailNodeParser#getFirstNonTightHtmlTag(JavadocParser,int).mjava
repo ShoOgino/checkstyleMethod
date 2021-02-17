@@ -6,9 +6,11 @@
      * or the ones which are supposed to log violation for non-tight javadocs can utilize that.
      *
      * @param javadocParser The ANTLR recognizer instance which has been used to parse the javadoc
+     * @param javadocLineOffset The line number of beginning of the Javadoc comment
      * @return First non-tight HTML tag if one exists; null otherwise
      */
-    private Token getFirstNonTightHtmlTag(JavadocParser javadocParser) {
+    private static Token getFirstNonTightHtmlTag(JavadocParser javadocParser,
+            int javadocLineOffset) {
         final CommonToken offendingToken;
         final ParserRuleContext nonTightTagStartContext = javadocParser.nonTightTagStartContext;
         if (nonTightTagStartContext == null) {
@@ -18,7 +20,7 @@
             final Token token = ((TerminalNode) nonTightTagStartContext.getChild(1))
                     .getSymbol();
             offendingToken = new CommonToken(token);
-            offendingToken.setLine(offendingToken.getLine() + errorListener.offset);
+            offendingToken.setLine(offendingToken.getLine() + javadocLineOffset);
         }
         return offendingToken;
     }

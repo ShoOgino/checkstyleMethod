@@ -3,9 +3,11 @@
      *
      * @param blockComment
      *        block comment content.
+     * @param errorListener custom error listener
      * @return parse tree
      */
-    private JavadocParser createJavadocParser(String blockComment) {
+    private static JavadocParser createJavadocParser(String blockComment,
+            DescriptiveErrorListener errorListener) {
         final JavadocLexer lexer = new JavadocLexer(CharStreams.fromString(blockComment));
 
         final CommonTokenStream tokens = new CommonTokenStream(lexer);

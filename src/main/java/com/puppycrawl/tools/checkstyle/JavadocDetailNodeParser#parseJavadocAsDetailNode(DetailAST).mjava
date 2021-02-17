@@ -13,7 +13,7 @@
         // Use a new error listener each time to be able to use
         // one check instance for multiple files to be checked
         // without getting side effects.
-        errorListener = new DescriptiveErrorListener();
+        final DescriptiveErrorListener errorListener = new DescriptiveErrorListener();
 
         // Log messages should have line number in scope of file,
         // not in scope of Javadoc comment.
@@ -23,7 +23,7 @@
         final ParseStatus result = new ParseStatus();
 
         try {
-            final JavadocParser javadocParser = createJavadocParser(javadocComment);
+            final JavadocParser javadocParser = createJavadocParser(javadocComment, errorListener);
 
             final ParseTree javadocParseTree = javadocParser.javadoc();
 
@@ -33,7 +33,8 @@
                         javadocCommentAst.getColumnNo()
                                 + JAVADOC_START.length());
             result.setTree(tree);
-            result.firstNonTightHtmlTag = getFirstNonTightHtmlTag(javadocParser);
+            result.firstNonTightHtmlTag = getFirstNonTightHtmlTag(javadocParser,
+                    errorListener.offset);
         }
         catch (ParseCancellationException | IllegalArgumentException ex) {
             ParseErrorMessage parseErrorMessage = null;
