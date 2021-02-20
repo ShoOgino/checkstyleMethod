@@ -6,9 +6,9 @@
         checkConfig.addAttribute("illegalClasses", "java.sql.Connection");
         final String[] expected = {
             "11:1: " + getCheckMessage(MSG_KEY, "java.sql.Connection"),
-            "15:1: " + getCheckMessage(MSG_KEY, "sun.applet.*"),
-            "28:1: " + getCheckMessage(MSG_KEY, "sun.*"),
+            "15:1: " + getCheckMessage(MSG_KEY, "sun.misc.*"),
+            "28:1: " + getCheckMessage(MSG_KEY, "sun.reflect.*"),
         };
-        verify(checkConfig, getNonCompilablePath("InputIllegalImportDefault.java"), expected);
+        verify(checkConfig, getPath("InputIllegalImportDefault.java"), expected);
     }
 

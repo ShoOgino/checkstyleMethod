@@ -4,9 +4,9 @@
         final DefaultConfiguration checkConfig =
             createModuleConfig(IllegalImportCheck.class);
         final String[] expected = {
-            "15:1: " + getCheckMessage(MSG_KEY, "sun.applet.*"),
-            "28:1: " + getCheckMessage(MSG_KEY, "sun.*"),
+            "15:1: " + getCheckMessage(MSG_KEY, "sun.misc.*"),
+            "28:1: " + getCheckMessage(MSG_KEY, "sun.reflect.*"),
         };
-        verify(checkConfig, getNonCompilablePath("InputIllegalImportDefault.java"), expected);
+        verify(checkConfig, getPath("InputIllegalImportDefault.java"), expected);
     }
 
