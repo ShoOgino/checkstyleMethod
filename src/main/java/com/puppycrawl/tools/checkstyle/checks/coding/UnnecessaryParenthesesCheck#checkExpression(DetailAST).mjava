@@ -1,0 +1,25 @@
+    /**
+     * Checks whether an expression is surrounded by parentheses.
+     *
+     * @param ast the {@code DetailAST} to check if it is surrounded by
+     *        parentheses.
+     */
+    private void checkExpression(DetailAST ast) {
+        // If 'parentToSkip' == 'ast', then we've already logged a
+        // warning about an immediate child node in visitToken, so we don't
+        // need to log another one here.
+        if (parentToSkip != ast && isExprSurrounded(ast)) {
+            if (assignDepth >= 1) {
+                log(ast, MSG_ASSIGN);
+            }
+            else if (ast.getParent().getType() == TokenTypes.LITERAL_RETURN) {
+                log(ast, MSG_RETURN);
+            }
+            else {
+                log(ast, MSG_EXPR);
+            }
+        }
+
+        parentToSkip = null;
+    }
+

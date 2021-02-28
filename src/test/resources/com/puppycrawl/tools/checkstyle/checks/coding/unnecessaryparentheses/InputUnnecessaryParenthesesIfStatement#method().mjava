@@ -1,0 +1,57 @@
+    private void method() {
+        int x, y, z;
+        x = 0;
+        y = 0;
+
+        z = (x < y) ? x : y; // ok
+
+        if ((x < y)           // violation, unnecessary parenthesis
+                && (x > z)) { // violation, unnecessary parenthesis
+            return;
+        }
+
+        if (((x < y)           // violation, unnecessary parenthesis
+                && (x > z))) { // violation, unnecessary parenthesis
+            return;
+        }
+
+        if (!(x <= y)          // ok
+                || (x >= z)) { // violation, unnecessary parenthesis
+            return;
+        }
+
+        if ((x == y)           // violation, unnecessary parenthesis
+                || (x != z)) { // violation, unnecessary parenthesis
+            return;
+        }
+
+        if ((                       // violation, unnecessary parenthesis
+                (x == y)            // violation, unnecessary parenthesis
+                        || (x != z) // violation, unnecessary parenthesis
+        )) {
+            return;
+        }
+
+        if ((Integer.valueOf(x) instanceof Integer) // violation, unnecessary parenthesis
+                || Integer.valueOf(y) instanceof Integer) { // ok
+            return;
+        }
+        if (x == ((y<z) ? y : z) &&
+            ((x>y && y>z)                  // violation, unnecessary parenthesis before 'x>y'
+                    || (!(x<z) && y>z))) { // violation, unnecessary parenthesis before '!'
+            return;
+        }
+        if ((x >= 0 && y <= 9)            // violation, unnecessary parenthesis
+                 || (z >= 5 && y <= 5)    // violation, unnecessary parenthesis
+                 || (z >= 3 && x <= 7)) { // violation, unnecessary parenthesis
+            return;
+        }
+        if(x>= 0 && (x<=8 || y<=11) && y>=8) { // ok
+            return;
+        }
+        if((y>=11 && x<=5)            // violation, unnecessary parenthesis
+                || (x<=12 && y>=8)) { // violation, unnecessary parenthesis
+            return;
+        }
+    }
+

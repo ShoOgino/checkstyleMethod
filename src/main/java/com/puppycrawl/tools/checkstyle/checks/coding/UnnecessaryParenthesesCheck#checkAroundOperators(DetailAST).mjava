@@ -1,0 +1,18 @@
+    /**
+     * Checks if conditional, relational, unary and postfix operators
+     * in expressions are surrounded by parentheses.
+     *
+     * @param ast the {@code DetailAST} to check if it is surrounded by
+     *        parentheses.
+     * @return {@code true} if the expression is surrounded by
+     *         parentheses.
+     */
+    private static boolean checkAroundOperators(DetailAST ast) {
+        final int type = ast.getType();
+        final DetailAST parent = ast.getParent();
+        return (TokenUtil.isOfType(type, CONDITIONALS_AND_RELATIONAL)
+                    || TokenUtil.isOfType(type, UNARY_AND_POSTFIX))
+                && TokenUtil.isOfType(parent.getType(), CONDITIONALS_AND_RELATIONAL)
+                && isSurrounded(ast);
+    }
+

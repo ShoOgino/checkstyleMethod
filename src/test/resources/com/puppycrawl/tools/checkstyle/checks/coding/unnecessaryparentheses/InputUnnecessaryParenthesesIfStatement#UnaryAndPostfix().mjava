@@ -1,0 +1,17 @@
+    private void UnaryAndPostfix() {
+        boolean x = true;
+        boolean y = true;
+        int a = 25;
+        if ((++a) >= 54 && x) { // violation, unnecessary parenthesis around '++a'
+            return;
+        }
+        if ((~a) > -27            // violation, unnecessary parenthesis around '~a'
+                 && (a-- < 30)) { // violation, unnecessary parenthesis
+            return;
+        }
+        if ((-a) != -27 // violation, unnecessary parenthesis around '-a'
+                 && x) {
+            return;
+        }
+    }
+
