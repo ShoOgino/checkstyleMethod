@@ -5,18 +5,20 @@
      * @return true if block has single-line format and is alone on a line.
      */
     private static boolean isBlockAloneOnSingleLine(Details details) {
-        final DetailAST rcurly = details.rcurly;
-        final DetailAST lcurly = details.lcurly;
         DetailAST nextToken = details.nextToken;
-        while (nextToken.getType() == TokenTypes.LITERAL_ELSE) {
-            nextToken = Details.getNextToken(nextToken);
+        if (nextToken != null) {
+            while (nextToken.getType() == TokenTypes.LITERAL_ELSE) {
+                nextToken = Details.getNextToken(nextToken);
+            }
+
+            if (nextToken.getType() == TokenTypes.DO_WHILE) {
+                final DetailAST doWhileSemi = nextToken.getParent().getLastChild();
+                nextToken = Details.getNextToken(doWhileSemi);
+            }
         }
-        if (nextToken.getType() == TokenTypes.DO_WHILE) {
-            final DetailAST doWhileSemi = nextToken.getParent().getLastChild();
-            nextToken = Details.getNextToken(doWhileSemi);
-        }
-        return TokenUtil.areOnSameLine(rcurly, lcurly)
-                && (!TokenUtil.areOnSameLine(rcurly, nextToken)
+
+        return TokenUtil.areOnSameLine(details.lcurly, details.rcurly)
+            && (nextToken == null || !TokenUtil.areOnSameLine(details.rcurly, nextToken)
                 || isRightcurlyFollowedBySemicolon(details));
     }
 

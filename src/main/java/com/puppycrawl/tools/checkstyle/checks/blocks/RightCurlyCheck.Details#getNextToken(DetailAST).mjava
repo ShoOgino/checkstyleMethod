@@ -11,14 +11,6 @@
                 next = parent.getNextSibling();
                 parent = parent.getParent();
             }
-            if (next == null) {
-                // a DetailAST object with DetailAST#NOT_INITIALIZED for line and column numbers
-                // that no 'actual' DetailAST objects can have.
-                next = new DetailAstImpl();
-            }
-            else {
-                next = CheckUtil.getFirstNode(next);
-            }
             return next;
         }
 

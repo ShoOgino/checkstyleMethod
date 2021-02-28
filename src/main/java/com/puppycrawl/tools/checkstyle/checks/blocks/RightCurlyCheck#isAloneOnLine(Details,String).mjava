@@ -8,7 +8,9 @@
     private static boolean isAloneOnLine(Details details, String targetSrcLine) {
         final DetailAST rcurly = details.rcurly;
         final DetailAST nextToken = details.nextToken;
-        return (!TokenUtil.areOnSameLine(rcurly, nextToken) || skipDoubleBraceInstInit(details))
-                && CommonUtil.hasWhitespaceBefore(details.rcurly.getColumnNo(), targetSrcLine);
+        return (nextToken == null || !TokenUtil.areOnSameLine(rcurly, nextToken)
+            || skipDoubleBraceInstInit(details))
+            && CommonUtil.hasWhitespaceBefore(details.rcurly.getColumnNo(),
+               targetSrcLine);
     }
 

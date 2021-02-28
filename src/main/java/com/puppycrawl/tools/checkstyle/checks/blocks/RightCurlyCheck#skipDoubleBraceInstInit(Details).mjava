@@ -17,10 +17,15 @@
      * @return if the double brace initialization rcurly should be skipped over by the check
      */
     private static boolean skipDoubleBraceInstInit(Details details) {
-        final DetailAST rcurly = details.rcurly;
+        boolean skipDoubleBraceInstInit = false;
         final DetailAST tokenAfterNextToken = Details.getNextToken(details.nextToken);
-        return rcurly.getParent().getParent().getType() == TokenTypes.INSTANCE_INIT
-                && details.nextToken.getType() == TokenTypes.RCURLY
-                && rcurly.getLineNo() != Details.getNextToken(tokenAfterNextToken).getLineNo();
+        if (tokenAfterNextToken != null) {
+            final DetailAST rcurly = details.rcurly;
+            skipDoubleBraceInstInit = rcurly.getParent().getParent()
+                    .getType() == TokenTypes.INSTANCE_INIT
+                    && details.nextToken.getType() == TokenTypes.RCURLY
+                    && !TokenUtil.areOnSameLine(rcurly, Details.getNextToken(tokenAfterNextToken));
+        }
+        return skipDoubleBraceInstInit;
     }
 
