@@ -1,8 +1,7 @@
     /**
      * Create block comment from token.
      *
-     * @param token
-     *        Token object.
+     * @param token Token object.
      * @return DetailAST with BLOCK_COMMENT type.
      */
     public static DetailAST createBlockCommentNode(Token token) {
@@ -26,7 +25,7 @@
         blockCommentClose.initialize(TokenTypes.BLOCK_COMMENT_END, BLOCK_MULTIPLE_COMMENT_END);
 
         final Map.Entry<Integer, Integer> linesColumns = countLinesColumns(
-                token.getText(), token.getLine(), token.getColumn());
+            token.getText(), token.getLine(), token.getColumn());
         blockCommentClose.setLineNo(linesColumns.getKey());
         blockCommentClose.setColumnNo(linesColumns.getValue());
 
