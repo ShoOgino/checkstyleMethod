@@ -1,0 +1,27 @@
+    @Test
+    public void testEncodedLessChar() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathEncodedLessChar.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalTokenCheck.class);
+        moduleConfig.addAttribute("tokens", "CHAR_LITERAL");
+
+        final String[] expectedViolationsForLess = {
+            "4:21: " + getCheckMessage(IllegalTokenCheck.class, IllegalTokenCheck.MSG_KEY,
+                    "'<'"),
+        };
+
+        final List<String> expectedXpathQueriesForLess = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedLessChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='lessChar']]/ASSIGN/EXPR"
+                        + "[./CHAR_LITERAL[@text='&apos;&apos;&lt;&apos;&apos;']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedLessChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='lessChar']]/ASSIGN/EXPR/"
+                        + "CHAR_LITERAL[@text='&apos;&apos;&lt;&apos;&apos;']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolationsForLess,
+                expectedXpathQueriesForLess);
+    }
+

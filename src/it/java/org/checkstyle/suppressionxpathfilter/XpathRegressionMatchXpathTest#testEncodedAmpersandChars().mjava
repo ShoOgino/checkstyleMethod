@@ -1,0 +1,27 @@
+    @Test
+    public void testEncodedAmpersandChars() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathEncodedAmpChar.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalTokenCheck.class);
+        moduleConfig.addAttribute("tokens", "CHAR_LITERAL");
+
+        final String[] expectedViolationForAmpersand = {
+            "4:20: " + getCheckMessage(IllegalTokenCheck.class, IllegalTokenCheck.MSG_KEY,
+                    "'&'"),
+        };
+
+        final List<String> expectedXpathQueriesForAmpersand = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedAmpChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='ampChar']]/ASSIGN/EXPR"
+                        + "[./CHAR_LITERAL[@text='&apos;&apos;&amp;&apos;&apos;']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedAmpChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='ampChar']]/ASSIGN/EXPR"
+                        + "/CHAR_LITERAL[@text='&apos;&apos;&amp;&apos;&apos;']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolationForAmpersand,
+                expectedXpathQueriesForAmpersand);
+    }
+

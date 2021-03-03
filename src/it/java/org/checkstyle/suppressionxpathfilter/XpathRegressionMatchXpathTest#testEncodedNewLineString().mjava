@@ -1,0 +1,27 @@
+    @Test
+    public void testEncodedNewLineString() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathEncodedNewLineString.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalTokenCheck.class);
+        moduleConfig.addAttribute("tokens", "STRING_LITERAL");
+
+        final String[] expectedViolation = {
+            "4:26: " + getCheckMessage(IllegalTokenCheck.class, IllegalTokenCheck.MSG_KEY,
+                    "\"testFive\\n\""),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedNewLineString']]/"
+                    + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='newLineChar']]/ASSIGN/EXPR"
+                    + "[./STRING_LITERAL[@text='testFive\\n']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedNewLineString']]/"
+                    + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='newLineChar']]/ASSIGN/EXPR"
+                    + "/STRING_LITERAL[@text='testFive\\n']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

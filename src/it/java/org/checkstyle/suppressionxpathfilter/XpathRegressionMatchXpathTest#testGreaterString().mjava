@@ -1,0 +1,27 @@
+    @Test
+    public void testGreaterString() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathEncodedGreaterString.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalTokenCheck.class);
+        moduleConfig.addAttribute("tokens", "STRING_LITERAL");
+
+        final String[] expectedViolation = {
+            "4:26: " + getCheckMessage(IllegalTokenCheck.class, IllegalTokenCheck.MSG_KEY,
+                    "\">testFour\""),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedGreaterString']]/"
+                    + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='greaterChar']]/ASSIGN/EXPR"
+                    + "[./STRING_LITERAL[@text='&gt;testFour']]",
+            "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedGreaterString']]/"
+                    + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='greaterChar']]/ASSIGN/EXPR"
+                    + "/STRING_LITERAL[@text='&gt;testFour']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+

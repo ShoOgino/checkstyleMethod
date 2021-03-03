@@ -14,7 +14,7 @@
                     .append(TokenUtil.getTokenName(cur.getType()));
             if (XpathUtil.supportsTextAttribute(cur)) {
                 curNodeQueryBuilder.append("[@text='")
-                        .append(XpathUtil.getTextAttributeValue(cur))
+                        .append(encode(XpathUtil.getTextAttributeValue(cur)))
                         .append("']");
             }
             else {

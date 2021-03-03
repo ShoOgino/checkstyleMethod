@@ -1,0 +1,29 @@
+    @Test
+    public void testEncodedGreaterChar() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathEncodedGreaterChar.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalTokenCheck.class);
+        moduleConfig.addAttribute("tokens", "CHAR_LITERAL");
+
+        final String[] expectedViolationsForGreater = {
+            "4:24: " + getCheckMessage(IllegalTokenCheck.class, IllegalTokenCheck.MSG_KEY,
+                    "'>'"),
+        };
+
+        final List<String> expectedXpathQueriesForGreater = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncoded"
+                        + "GreaterChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='greaterChar']]/ASSIGN/EXPR"
+                        + "[./CHAR_LITERAL[@text='&apos;&apos;&gt;&apos;&apos;']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncoded"
+                        + "GreaterChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='greaterChar']]/ASSIGN/EXPR/"
+                        + "CHAR_LITERAL[@text='&apos;&apos;&gt;&apos;&apos;']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolationsForGreater,
+                expectedXpathQueriesForGreater);
+    }
+

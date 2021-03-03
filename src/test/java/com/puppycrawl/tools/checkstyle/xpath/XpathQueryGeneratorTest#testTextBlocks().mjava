@@ -1,0 +1,24 @@
+    @Test
+    public void testTextBlocks() throws Exception {
+        final File testFile = new File(getNonCompilablePath(
+                "InputXpathQueryGeneratorTextBlock.java"));
+        final FileText testFileText = new FileText(testFile,
+                StandardCharsets.UTF_8.name());
+        final DetailAST detailAst =
+                JavaParser.parseFile(testFile, JavaParser.Options.WITHOUT_COMMENTS);
+        final int tabWidth = 8;
+
+        final int lineNumberOne = 6;
+        final int columnNumberOne = 25;
+        final XpathQueryGenerator queryGeneratorOne = new XpathQueryGenerator(detailAst,
+                lineNumberOne, columnNumberOne, testFileText, tabWidth);
+        final List<String> actualTestOne = queryGeneratorOne.generate();
+        final List<String> expectedTestOne = Collections.singletonList(
+            "/CLASS_DEF[./IDENT[@text='InputXpathQueryGeneratorTextBlock']]/OBJBLOCK/"
+                    + "VARIABLE_DEF[./IDENT[@text='testOne']]/ASSIGN/EXPR/"
+                    + "TEXT_BLOCK_LITERAL_BEGIN/TEXT_BLOCK_CONTENT"
+            );
+        assertEquals(expectedTestOne, actualTestOne,
+                "Generated queries do not match expected ones");
+    }
+

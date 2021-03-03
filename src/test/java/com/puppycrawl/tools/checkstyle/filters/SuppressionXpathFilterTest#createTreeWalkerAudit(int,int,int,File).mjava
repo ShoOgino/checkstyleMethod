@@ -1,0 +1,9 @@
+    private static TreeWalkerAuditEvent createTreeWalkerAudit(int lineNo, int columnNo,
+                                                              int tokenTypes, File file)
+            throws IOException, CheckstyleException {
+        final LocalizedMessage message = new LocalizedMessage(lineNo, columnNo, tokenTypes, "", "",
+                null, null, "777", SuppressionXpathFilterTest.class, null);
+        return new TreeWalkerAuditEvent(null, "Test.java", message,
+                JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS));
+    }
+

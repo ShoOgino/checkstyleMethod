@@ -1,0 +1,26 @@
+    /**
+     * Escape &lt;, &gt;, &amp;, &#39; and &quot; as their entities.
+     * Custom method for Xpath generation to maintain compatibility
+     * with Saxon and encoding outside Ascii range characters.
+     *
+     * <p>According to Saxon documentation in http://saxon.sourceforge.net/saxon7.1/expressions.html
+     * From Saxon 7.1, string delimiters can be doubled within the string to represent
+     * the delimiter itself: for example select='"He said, ""Go!"""'.
+     *
+     * <p>Guava cannot as Guava encoding does not meet our requirements like
+     * double encoding for apos, removed slashes which are basic requirements
+     * for Saxon to decode.
+     *
+     * @param value the value to escape.
+     * @return the escaped value if necessary.
+     */
+    private static String encode(String value) {
+        final StringBuilder sb = new StringBuilder(256);
+        value.codePoints().forEach(
+            chr -> {
+                sb.append(encodeCharacter(Character.toChars(chr)[0]));
+            }
+        );
+        return sb.toString();
+    }
+

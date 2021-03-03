@@ -1,0 +1,23 @@
+    @Test
+    public void testFalseEncodeChar() throws Exception {
+        final boolean optional = false;
+        final SuppressionXpathFilter filter = createSuppressionXpathFilter(
+                getPath("InputSuppressionXpathFilterEscapeChar.xml"), optional);
+        final File file = new File(getPath("InputSuppressionXpathFilterEscapeChar.java"));
+
+        assertFalse(filter.accept(createTreeWalkerAudit(8, 13, TokenTypes.CHAR_LITERAL, file)),
+                "TreeWalker audit event should be rejected");
+
+        assertFalse(filter.accept(createTreeWalkerAudit(10, 13, TokenTypes.CHAR_LITERAL, file)),
+                "TreeWalker audit event should be rejected");
+
+        assertFalse(filter.accept(createTreeWalkerAudit(12, 13, TokenTypes.CHAR_LITERAL, file)),
+                "TreeWalker audit event should be rejected");
+
+        assertFalse(filter.accept(createTreeWalkerAudit(14, 13, TokenTypes.CHAR_LITERAL, file)),
+                "TreeWalker audit event should be rejected");
+
+        assertFalse(filter.accept(createTreeWalkerAudit(16, 13, TokenTypes.CHAR_LITERAL, file)),
+                "TreeWalker audit event should be rejected");
+    }
+

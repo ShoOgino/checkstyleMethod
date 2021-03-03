@@ -1,0 +1,27 @@
+    @Test
+    public void testEncodedQuoteChar() throws Exception {
+        final File fileToProcess =
+                new File(getPath("SuppressionXpathRegressionMatchXpathEncodedQuotChar.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalTokenCheck.class);
+        moduleConfig.addAttribute("tokens", "CHAR_LITERAL");
+
+        final String[] expectedViolationsForQuote = {
+            "4:21: " + getCheckMessage(IllegalTokenCheck.class, IllegalTokenCheck.MSG_KEY,
+                    "'\\\"'"),
+        };
+
+        final List<String> expectedXpathQueriesForQuote = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedQuotChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='quotChar']]/ASSIGN/EXPR"
+                        + "[./CHAR_LITERAL[@text='&apos;&apos;\\&quot;&apos;&apos;']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedQuotChar']]/"
+                        + "OBJBLOCK/VARIABLE_DEF[./IDENT[@text='quotChar']]/ASSIGN/EXPR/"
+                        + "CHAR_LITERAL[@text='&apos;&apos;\\&quot;&apos;&apos;']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolationsForQuote,
+                expectedXpathQueriesForQuote);
+    }
+

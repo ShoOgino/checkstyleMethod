@@ -1,0 +1,32 @@
+    /**
+     * Encodes escape character for Xpath. Escape characters need '&amp;' before but it also
+     * requires XML 1.1 until https://github.com/checkstyle/checkstyle/issues/5168.
+     *
+     * @param chr Character to check.
+     * @return String, Encoded string.
+     */
+    private static String encodeCharacter(char chr) {
+        final String encode;
+        switch (chr) {
+            case '<':
+                encode = "&lt;";
+                break;
+            case '>':
+                encode = "&gt;";
+                break;
+            case '\'':
+                encode = "&apos;&apos;";
+                break;
+            case '\"':
+                encode = "&quot;";
+                break;
+            case '&':
+                encode = "&amp;";
+                break;
+            default:
+                encode = String.valueOf(chr);
+                break;
+        }
+        return encode;
+    }
+

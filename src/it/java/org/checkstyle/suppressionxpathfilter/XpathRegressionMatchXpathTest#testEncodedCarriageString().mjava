@@ -1,0 +1,27 @@
+    @Test
+    public void testEncodedCarriageString() throws Exception {
+        final File fileToProcess =
+            new File(getPath("SuppressionXpathRegressionMatchXpathEncodedCarriageString.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(IllegalTokenCheck.class);
+        moduleConfig.addAttribute("tokens", "STRING_LITERAL");
+
+        final String[] expectedViolation = {
+            "4:27: " + getCheckMessage(IllegalTokenCheck.class, IllegalTokenCheck.MSG_KEY,
+                    "\"carriageCharAtEnd\\r\""),
+        };
+
+        final List<String> expectedXpathQueries = Arrays.asList(
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedCarriage"
+                        + "String']]/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='carriageChar']]/ASSIGN"
+                        + "/EXPR[./STRING_LITERAL[@text='carriageCharAtEnd\\r']]",
+                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionMatchXpathEncodedCarriage"
+                        + "String']]/OBJBLOCK/VARIABLE_DEF[./IDENT[@text='carriageChar']]/ASSIGN"
+                        + "/EXPR/STRING_LITERAL[@text='carriageCharAtEnd\\r']"
+        );
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
