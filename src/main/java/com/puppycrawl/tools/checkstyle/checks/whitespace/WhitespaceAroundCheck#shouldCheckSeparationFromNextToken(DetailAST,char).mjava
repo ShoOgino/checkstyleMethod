@@ -8,9 +8,10 @@
      * @return true if it should be checked if next token is separated by whitespace,
      *      false otherwise.
      */
-    private static boolean shouldCheckSeparationFromNextToken(DetailAST ast, char nextChar) {
-        return !(ast.getType() == TokenTypes.LITERAL_RETURN
-                    && ast.getFirstChild().getType() == TokenTypes.SEMI)
+    private boolean shouldCheckSeparationFromNextToken(DetailAST ast, char nextChar) {
+        return !isEmptyCtorBlockCheckedFromSlist(ast)
+                && !(ast.getType() == TokenTypes.LITERAL_RETURN
+                && ast.getFirstChild().getType() == TokenTypes.SEMI)
                 && ast.getType() != TokenTypes.ARRAY_INIT
                 && !isAnonymousInnerClassEnd(ast.getType(), nextChar)
                 && !isPartOfDoubleBraceInitializerForNextToken(ast);

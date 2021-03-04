@@ -1,0 +1,15 @@
+    /**
+     * Test if the given {@code DetailAST} is a part of an allowed
+     * empty constructor checked from SLIST token.
+     *
+     * @param ast the {@code DetailAST} to test.
+     * @return {@code true} if {@code ast} makes up part of an
+     *          empty constructor block.
+     */
+    private boolean isEmptyCtorBlockCheckedFromSlist(DetailAST ast) {
+        return allowEmptyConstructors
+                && (ast.getParent().getType() == TokenTypes.CTOR_DEF
+                        || ast.getParent().getType() == TokenTypes.COMPACT_CTOR_DEF)
+                && ast.getFirstChild().getType() == TokenTypes.RCURLY;
+    }
+
