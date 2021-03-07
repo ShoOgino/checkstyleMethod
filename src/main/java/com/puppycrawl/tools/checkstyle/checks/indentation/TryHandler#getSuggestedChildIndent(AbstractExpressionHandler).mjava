@@ -3,7 +3,8 @@
         final IndentLevel result;
         if (child instanceof CatchHandler
             || child instanceof FinallyHandler
-            || child instanceof NewHandler) {
+            || child instanceof NewHandler
+                && isTryBlocksResourceSpecification(child)) {
             result = getIndent();
         }
         else {
