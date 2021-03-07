@@ -8,6 +8,8 @@
     public static void write(ModuleDetails moduleDetails) throws TransformerException,
             ParserConfigurationException {
         final DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        dbFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        dbFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
         final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         final Document doc = dBuilder.newDocument();
 
