@@ -6,19 +6,10 @@
      *         checks and filters.
      */
     private Set<String> getExternalResourceLocations() {
-        final Set<String> externalResources = new HashSet<>();
-        fileSetChecks.stream().filter(check -> check instanceof ExternalResourceHolder)
-            .forEach(check -> {
-                final Set<String> locations =
-                    ((ExternalResourceHolder) check).getExternalResourceLocations();
-                externalResources.addAll(locations);
-            });
-        filters.getFilters().stream().filter(filter -> filter instanceof ExternalResourceHolder)
-            .forEach(filter -> {
-                final Set<String> locations =
-                    ((ExternalResourceHolder) filter).getExternalResourceLocations();
-                externalResources.addAll(locations);
-            });
-        return externalResources;
+        return Stream.concat(fileSetChecks.stream(), filters.getFilters().stream())
+            .filter(ExternalResourceHolder.class::isInstance)
+            .map(ExternalResourceHolder.class::cast)
+            .flatMap(resource -> resource.getExternalResourceLocations().stream())
+            .collect(Collectors.toSet());
     }
 
