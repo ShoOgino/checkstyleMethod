@@ -29,6 +29,17 @@
                 }
                 break;
 
+            case TokenTypes.LITERAL_NEW:
+                if (ast.getFirstChild() != null
+                        && ast.getLastChild().getType() == TokenTypes.OBJBLOCK) {
+                    for (ClassDesc classDesc : classes) {
+                        if (doesNameOfClassMatchAnonymousInnerClassName(ast, classDesc)) {
+                            classDesc.registerAnonymousInnerClass();
+                        }
+                    }
+                }
+                break;
+
             default:
                 throw new IllegalStateException(ast.toString());
         }

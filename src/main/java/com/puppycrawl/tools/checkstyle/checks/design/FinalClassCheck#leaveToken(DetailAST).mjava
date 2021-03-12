@@ -3,7 +3,8 @@
         if (ast.getType() == TokenTypes.CLASS_DEF) {
             final ClassDesc desc = classes.pop();
             if (desc.isWithPrivateCtor()
-                && !desc.isDeclaredAsAbstract()
+                && !(desc.isDeclaredAsAbstract()
+                    || desc.isWithAnonymousInnerClass())
                 && !desc.isDeclaredAsFinal()
                 && !desc.isWithNonPrivateCtor()
                 && !desc.isWithNestedSubclass()

@@ -1,0 +1,14 @@
+    /**
+     * Check if class name matches with anonymous inner class name.
+     *
+     * @param ast current ast.
+     * @param classDesc class to match.
+     * @return true if current class name matches anonymous inner
+     *         class name.
+     */
+    private static boolean doesNameOfClassMatchAnonymousInnerClassName(DetailAST ast,
+                                                               ClassDesc classDesc) {
+        final String[] className = classDesc.getQualifiedName().split("\\.");
+        return ast.getFirstChild().getText().equals(className[className.length - 1]);
+    }
+

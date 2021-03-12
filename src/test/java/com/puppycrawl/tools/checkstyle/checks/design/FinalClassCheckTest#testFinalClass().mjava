@@ -3,9 +3,11 @@
         final DefaultConfiguration checkConfig =
             createModuleConfig(FinalClassCheck.class);
         final String[] expected = {
-            "7:1: " + getCheckMessage(MSG_KEY, "InputFinalClass"),
-            "15:4: " + getCheckMessage(MSG_KEY, "test4"),
-            "113:5: " + getCheckMessage(MSG_KEY, "someinnerClass"),
+            "9:1: " + getCheckMessage(MSG_KEY, "InputFinalClass"),
+            "17:4: " + getCheckMessage(MSG_KEY, "test4"),
+            "115:5: " + getCheckMessage(MSG_KEY, "someinnerClass"),
+            "149:1: " + getCheckMessage(MSG_KEY, "TestNewKeyword"),
+            "182:5: " + getCheckMessage(MSG_KEY, "NestedClass"),
         };
         verify(checkConfig, getPath("InputFinalClass.java"), expected);
     }
