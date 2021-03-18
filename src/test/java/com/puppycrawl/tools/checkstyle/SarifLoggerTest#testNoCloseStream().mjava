@@ -1,0 +1,14 @@
+    @Test
+    public void testNoCloseStream() throws IOException {
+        final SarifLogger logger = new SarifLogger(outStream,
+                AutomaticBean.OutputStreamOptions.NONE);
+        logger.auditStarted(null);
+        logger.auditFinished(null);
+
+        assertEquals(0, outStream.getCloseCount(), "Invalid close count");
+        assertEquals(1, outStream.getFlushCount(), "Invalid flush count");
+
+        outStream.close();
+        verifyContent(getPath("ExpectedSarifLoggerEmpty.sarif"), outStream);
+    }
+

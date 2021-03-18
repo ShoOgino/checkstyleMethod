@@ -1,0 +1,8 @@
+    @Test
+    public void testSarifOutputFormatCreateListener() throws IOException {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final AuditListener listener = Main.OutputFormat.SARIF.createListener(out,
+                AutomaticBean.OutputStreamOptions.CLOSE);
+        assertTrue(listener instanceof SarifLogger, "listener is SarifLogger");
+    }
+

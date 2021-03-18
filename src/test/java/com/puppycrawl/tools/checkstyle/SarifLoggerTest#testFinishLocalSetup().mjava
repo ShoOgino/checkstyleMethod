@@ -1,0 +1,10 @@
+    @Test
+    public void testFinishLocalSetup() throws IOException {
+        final SarifLogger logger = new SarifLogger(outStream,
+                AutomaticBean.OutputStreamOptions.CLOSE);
+        logger.finishLocalSetup();
+        logger.auditStarted(null);
+        logger.auditFinished(null);
+        assertNotNull(logger, "instance should not be null");
+    }
+

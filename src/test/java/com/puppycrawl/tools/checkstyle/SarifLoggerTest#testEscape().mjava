@@ -1,0 +1,23 @@
+    @Test
+    public void testEscape() {
+        final String[][] encodings = {
+            {"\"", "\\\""},
+            {"\\", "\\\\"},
+            {"\b", "\\b"},
+            {"\f", "\\f"},
+            {"\n", "\\n"},
+            {"\r", "\\r"},
+            {"\t", "\\t"},
+            {"/", "\\/"},
+            {"\u0010", "\\u0010"},
+            {"\u001E", "\\u001E"},
+            {"\u001F", "\\u001F"},
+            {" ", " "},
+            {"bar1234", "bar1234"},
+        };
+        for (String[] encoding : encodings) {
+            final String encoded = SarifLogger.escape(encoding[0]);
+            assertEquals(encoding[1], encoded, "\"" + encoding[0] + "\"");
+        }
+    }
+

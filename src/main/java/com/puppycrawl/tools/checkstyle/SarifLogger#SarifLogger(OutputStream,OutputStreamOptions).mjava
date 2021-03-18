@@ -1,0 +1,27 @@
+    /**
+     * Creates a new {@code SarifLogger} instance.
+     *
+     * @param outputStream where to log audit events
+     * @param outputStreamOptions if {@code CLOSE} that should be closed in auditFinished()
+     * @throws IllegalArgumentException if outputStreamOptions is null
+     * @throws IOException if there is reading errors.
+     */
+    public SarifLogger(
+        OutputStream outputStream,
+        OutputStreamOptions outputStreamOptions) throws IOException {
+        if (outputStreamOptions == null) {
+            throw new IllegalArgumentException("Parameter outputStreamOptions can not be null");
+        }
+        writer = new PrintWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+        closeStream = outputStreamOptions == OutputStreamOptions.CLOSE;
+        report = readResource("/com/puppycrawl/tools/checkstyle/sarif/SarifReport.template");
+        resultLineColumn =
+            readResource("/com/puppycrawl/tools/checkstyle/sarif/ResultLineColumn.template");
+        resultLineOnly =
+            readResource("/com/puppycrawl/tools/checkstyle/sarif/ResultLineOnly.template");
+        resultFileOnly =
+            readResource("/com/puppycrawl/tools/checkstyle/sarif/ResultFileOnly.template");
+        resultErrorOnly =
+            readResource("/com/puppycrawl/tools/checkstyle/sarif/ResultErrorOnly.template");
+    }
+

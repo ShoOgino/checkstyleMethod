@@ -1,0 +1,13 @@
+    @Test
+    public void testReadResourceWithInvalidName() {
+        try {
+            SarifLogger.readResource("random");
+            fail("Exception expected");
+        }
+        catch (IOException exception) {
+            assertEquals("Cannot find the resource random",
+                exception.getMessage(),
+                "Exception message must match");
+        }
+    }
+

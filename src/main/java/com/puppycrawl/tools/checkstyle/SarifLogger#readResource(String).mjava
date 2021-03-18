@@ -1,0 +1,23 @@
+    /**
+     * Read string from given resource.
+     *
+     * @param name name of the desired resource
+     * @return the string content from the give resource
+     * @throws IOException if there is reading errors
+     */
+    public static String readResource(String name) throws IOException {
+        try (InputStream inputStream = SarifLogger.class.getResourceAsStream(name);
+             ByteArrayOutputStream result = new ByteArrayOutputStream()) {
+            if (inputStream == null) {
+                throw new IOException("Cannot find the resource " + name);
+            }
+            final byte[] buffer = new byte[BUFFER_SIZE];
+            int length = inputStream.read(buffer);
+            while (length != -1) {
+                result.write(buffer, 0, length);
+                length = inputStream.read(buffer);
+            }
+            return result.toString(StandardCharsets.UTF_8.name());
+        }
+    }
+

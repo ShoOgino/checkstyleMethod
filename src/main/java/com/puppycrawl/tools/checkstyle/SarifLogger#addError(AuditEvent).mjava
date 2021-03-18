@@ -1,0 +1,29 @@
+    /**
+     * {@inheritDoc}
+     * Following idea suppressions are false positives
+     *
+     * @noinspection DynamicRegexReplaceableByCompiledPattern
+     */
+    @Override
+    public void addError(AuditEvent event) {
+        if (event.getColumn() > 0) {
+            results.add(resultLineColumn
+                .replace(SEVERITY_LEVEL_PLACEHOLDER, renderSeverityLevel(event.getSeverityLevel()))
+                .replace(URI_PLACEHOLDER, event.getFileName())
+                .replace(COLUMN_PLACEHOLDER, Integer.toString(event.getColumn()))
+                .replace(LINE_PLACEHOLDER, Integer.toString(event.getLine()))
+                .replace(MESSAGE_PLACEHOLDER, escape(event.getMessage()))
+                .replace(RULE_ID_PLACEHOLDER, event.getViolation().getKey())
+            );
+        }
+        else {
+            results.add(resultLineOnly
+                .replace(SEVERITY_LEVEL_PLACEHOLDER, renderSeverityLevel(event.getSeverityLevel()))
+                .replace(URI_PLACEHOLDER, event.getFileName())
+                .replace(LINE_PLACEHOLDER, Integer.toString(event.getLine()))
+                .replace(MESSAGE_PLACEHOLDER, escape(event.getMessage()))
+                .replace(RULE_ID_PLACEHOLDER, event.getViolation().getKey())
+            );
+        }
+    }
+

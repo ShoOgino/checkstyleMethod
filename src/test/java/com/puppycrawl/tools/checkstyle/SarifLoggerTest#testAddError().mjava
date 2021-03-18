@@ -1,0 +1,17 @@
+    @Test
+    public void testAddError() throws IOException {
+        final SarifLogger logger = new SarifLogger(outStream,
+                AutomaticBean.OutputStreamOptions.CLOSE);
+        logger.auditStarted(null);
+        final Violation violation =
+                new Violation(1, 1,
+                        "messages.properties", "ruleId", null, SeverityLevel.ERROR, null,
+                        getClass(), "found an error");
+        final AuditEvent ev = new AuditEvent(this, "Test.java", violation);
+        logger.fileStarted(ev);
+        logger.addError(ev);
+        logger.fileFinished(ev);
+        logger.auditFinished(null);
+        verifyContent(getPath("ExpectedSarifLoggerSingleError.sarif"), outStream);
+    }
+

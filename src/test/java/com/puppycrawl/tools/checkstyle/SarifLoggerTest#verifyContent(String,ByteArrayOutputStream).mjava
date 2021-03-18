@@ -1,0 +1,9 @@
+    private static void verifyContent(
+            String expectedOutputFile,
+            ByteArrayOutputStream actualOutputStream) throws IOException {
+        final String expectedContent = readFile(expectedOutputFile);
+        final String actualContent = toLfLineEnding(new String(actualOutputStream.toByteArray(),
+                StandardCharsets.UTF_8));
+        assertEquals(expectedContent, actualContent, "sarif content should match");
+    }
+

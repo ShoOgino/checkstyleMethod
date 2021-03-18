@@ -1,0 +1,21 @@
+    /**
+     * {@inheritDoc}
+     * Following idea suppressions are false positives
+     *
+     * @noinspection DynamicRegexReplaceableByCompiledPattern
+     */
+    @Override
+    public void auditFinished(AuditEvent event) {
+        final String version = SarifLogger.class.getPackage().getImplementationVersion();
+        final String rendered = report
+            .replace(VERSION_PLACEHOLDER, String.valueOf(version))
+            .replace(RESULTS_PLACEHOLDER, String.join(",\n", results));
+        writer.print(rendered);
+        if (closeStream) {
+            writer.close();
+        }
+        else {
+            writer.flush();
+        }
+    }
+

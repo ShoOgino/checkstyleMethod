@@ -4,12 +4,17 @@
          * @param out the output stream
          * @param options the output stream options
          * @return a new AuditListener for this OutputFormat
+         * @throws IOException if there is any IO exception during logger initialization
          */
-        public AuditListener createListener(OutputStream out,
-                                            AutomaticBean.OutputStreamOptions options) {
+        public AuditListener createListener(
+            OutputStream out,
+            AutomaticBean.OutputStreamOptions options) throws IOException {
             final AuditListener result;
             if (this == XML) {
                 result = new XMLLogger(out, options);
+            }
+            else if (this == SARIF) {
+                result = new SarifLogger(out, options);
             }
             else {
                 result = new DefaultLogger(out, options);

@@ -1,0 +1,17 @@
+    /**
+     * Escape the character between 0x00 to 0x1F in JSON.
+     *
+     * @param chr the character to be escaped.
+     * @return the escaped string.
+     */
+    private static String escapeUnicode1F(char chr) {
+        final StringBuilder stringBuilder = new StringBuilder(UNICODE_LENGTH + 1);
+        stringBuilder.append("\\u");
+        final String hexString = Integer.toHexString(chr);
+        for (int i = 0; i < UNICODE_LENGTH - hexString.length(); i++) {
+            stringBuilder.append('0');
+        }
+        stringBuilder.append(hexString.toUpperCase(Locale.US));
+        return stringBuilder.toString();
+    }
+
