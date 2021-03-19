@@ -1,0 +1,17 @@
+    /**
+     * Checks if single line comment is legal.
+     *
+     * @param ast Detail ast element to be checked.
+     */
+    private void checkSingleLineComment(DetailAST ast) {
+        final int lineNo = ast.getLineNo();
+        final String comment = ast.getFirstChild().getText();
+        final String line = getLines()[lineNo - 1];
+        final String lineBefore = line.substring(0, ast.getColumnNo());
+
+        if (!format.matcher(lineBefore).find()
+                && !isLegalSingleLineComment(comment)) {
+            log(ast, MSG_KEY);
+        }
+    }
+

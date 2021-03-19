@@ -1,9 +1,10 @@
     @Override
     public void visitToken(DetailAST ast) {
-        final int lineNo = ast.getLineNo();
-        if (illegalLines.get(lineNo) != null
-                && illegalLines.get(lineNo).equals(ast.getColumnNo())) {
-            log(ast, MSG_KEY);
+        if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+            checkSingleLineComment(ast);
+        }
+        else {
+            checkBlockComment(ast);
         }
     }
 

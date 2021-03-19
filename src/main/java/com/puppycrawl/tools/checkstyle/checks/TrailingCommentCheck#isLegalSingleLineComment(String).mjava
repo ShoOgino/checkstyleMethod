@@ -1,0 +1,20 @@
+    /**
+     * Checks if given single line comment is legal (single-line and matches to the
+     * pattern).
+     *
+     * @param comment comment to check.
+     * @return true if the comment if legal.
+     */
+    private boolean isLegalSingleLineComment(String comment) {
+        final boolean legal;
+        if (legalComment == null) {
+            legal = false;
+        }
+        else {
+            // remove chars which start comment
+            final String commentText = comment.substring(1).trim();
+            legal = legalComment.matcher(commentText).find();
+        }
+        return legal;
+    }
+

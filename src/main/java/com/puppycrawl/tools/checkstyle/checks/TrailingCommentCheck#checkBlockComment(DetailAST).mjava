@@ -1,0 +1,26 @@
+    /**
+     * Method to check if block comment is in correct format.
+     *
+     * @param ast Detail ast element to be checked.
+     */
+    private void checkBlockComment(DetailAST ast) {
+        final int lineNo = ast.getLineNo();
+        final String comment = ast.getFirstChild().getText();
+        String line = getLines()[lineNo - 1];
+
+        if (line.length() > ast.getLastChild().getColumnNo() + 1) {
+            line = line.substring(ast.getLastChild().getColumnNo() + 2);
+        }
+
+        line = FORMAT_LINE.matcher(line).replaceAll("");
+
+        final String lineBefore = getLines()[lineNo - 1].substring(0, ast.getColumnNo());
+
+        // do not check comment which doesn't end line
+        if ((ast.getLineNo() != ast.getLastChild().getLineNo() || CommonUtil.isBlank(line))
+                && !format.matcher(lineBefore).find()
+                && !isLegalBlockComment(ast, comment)) {
+            log(ast, MSG_KEY);
+        }
+    }
+

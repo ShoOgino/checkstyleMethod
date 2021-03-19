@@ -1,0 +1,22 @@
+    /**
+     * Checks if block comment is legal and matches to the pattern.
+     *
+     * @param ast Detail ast element to be checked.
+     * @param comment comment to check.
+     * @return true if the comment if legal.
+     */
+    private boolean isLegalBlockComment(DetailAST ast, String comment) {
+        final boolean legal;
+
+        // multi-line comment can not be legal
+        if (legalComment == null
+                || !TokenUtil.areOnSameLine(ast.getFirstChild(), ast.getLastChild())) {
+            legal = false;
+        }
+        else {
+            final String commentText = comment.trim();
+            legal = legalComment.matcher(commentText).find();
+        }
+        return legal;
+    }
+
