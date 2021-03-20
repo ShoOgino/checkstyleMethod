@@ -1,0 +1,13 @@
+    @Test
+    public void testCustomSunPackageWithRegexp()
+            throws Exception {
+        final DefaultConfiguration checkConfig =
+            createModuleConfig(IllegalImportCheck.class);
+        checkConfig.addAttribute("regexp", "true");
+        checkConfig.addAttribute("illegalPkgs", "sun.reflect");
+        final String[] expected = {
+            "8:1: " + getCheckMessage(MSG_KEY, "sun.reflect.*"),
+        };
+        verify(checkConfig, getNonCompilablePath("InputIllegalImportDefault.java"), expected);
+    }
+
