@@ -1,0 +1,6 @@
+    private RootNode getRootNodeForNonCompilable(String fileName) throws Exception {
+        final File file = new File(getNonCompilablePath(fileName));
+        final DetailAST rootAst = JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS);
+        return new RootNode(rootAst);
+    }
+

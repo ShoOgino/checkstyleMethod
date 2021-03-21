@@ -1,7 +1,7 @@
     @Test
-    public void testTextBlocks() throws Exception {
+    public void testTextBlocksWithNewCrlf() throws Exception {
         final File testFile = new File(getNonCompilablePath(
-                "InputXpathQueryGeneratorTextBlock.java"));
+                "InputXpathQueryGeneratorTextBlockCrlf.java"));
         final FileText testFileText = new FileText(testFile,
                 StandardCharsets.UTF_8.name());
         final DetailAST detailAst =
@@ -14,11 +14,12 @@
                 lineNumber, columnNumber, testFileText, tabWidth);
         final List<String> actual = queryGenerator.generate();
         final List<String> expected = Collections.singletonList(
-            "/CLASS_DEF[./IDENT[@text='InputXpathQueryGeneratorTextBlock']]/OBJBLOCK/"
-                    + "VARIABLE_DEF[./IDENT[@text='testOne']]/ASSIGN/EXPR/"
-                    + "TEXT_BLOCK_LITERAL_BEGIN/TEXT_BLOCK_CONTENT[@text='\\n        "
-                    + "&amp;1line\\n        &gt;2line\\n        &lt;3line\\n        ']"
-            );
+                "/CLASS_DEF[./IDENT[@text='InputXpathQueryGeneratorTextBlockCrlf']]/OBJBLOCK/"
+                        + "VARIABLE_DEF[./IDENT[@text='testOne']]/ASSIGN/EXPR/"
+                        + "TEXT_BLOCK_LITERAL_BEGIN/TEXT_BLOCK_CONTENT[@text='\\r\\n        "
+                        + "&amp;1line\\r\\n\\r\\n        &gt;2line\\r\\n        &lt;3line\\r\\n"
+                        + "        ']"
+        );
         assertWithMessage("Generated queries do not match expected ones")
                 .that(expected).isEqualTo(actual);
     }
