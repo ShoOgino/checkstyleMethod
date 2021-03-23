@@ -3,7 +3,10 @@
     public void testRelaxedJavadoc() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
         checkConfig.addAttribute("scope", Scope.PROTECTED.getName());
-        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
-        verify(checkConfig, getPath("InputJavadocMethodPublicOnly.java"), expected);
+        final String[] expected = {
+            "79:41: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
+            "84:37: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
+        };
+        verify(checkConfig, getPath("InputJavadocMethodProtectedScopeJavadoc.java"), expected);
     }
 

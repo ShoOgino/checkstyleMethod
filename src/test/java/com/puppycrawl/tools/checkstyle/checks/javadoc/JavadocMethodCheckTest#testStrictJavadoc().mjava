@@ -2,7 +2,11 @@
     public void testStrictJavadoc() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
         final String[] expected = {
-            "94:32: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
+            "72:29: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
+            "77:22: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
+            "82:41: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
+            "87:37: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
+            "97:32: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
         };
         verify(checkConfig, getPath("InputJavadocMethodPublicOnly.java"), expected);
     }

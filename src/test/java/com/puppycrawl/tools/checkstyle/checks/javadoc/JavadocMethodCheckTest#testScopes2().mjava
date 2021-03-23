@@ -3,9 +3,9 @@
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
         checkConfig.addAttribute("scope", Scope.PROTECTED.getName());
         final String[] expected = {
-            "15: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),
-            "17: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),
+            "19: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),
+            "21: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),
         };
-        verify(checkConfig, getPath("InputJavadocMethodNoJavadoc.java"), expected);
+        verify(checkConfig, getPath("InputJavadocMethodNoJavadocProtectedScope.java"), expected);
     }
 
