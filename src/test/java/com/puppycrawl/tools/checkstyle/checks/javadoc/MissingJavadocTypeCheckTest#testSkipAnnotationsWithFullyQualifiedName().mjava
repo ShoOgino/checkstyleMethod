@@ -5,15 +5,15 @@
         checkConfig.addAttribute("scope", "PRIVATE");
         checkConfig.addAttribute(
             "skipAnnotations",
-            "com.puppycrawl.tools.checkstyle.checks.javadoc.javadoctype.ThisIsOk");
+            "com.puppycrawl.tools.checkstyle.checks.javadoc.javadoctype.ThisIsOk2");
 
         final String[] expected = {
-            "5:1: " + getCheckMessage(MSG_JAVADOC_MISSING),
             "9:1: " + getCheckMessage(MSG_JAVADOC_MISSING),
             "13:1: " + getCheckMessage(MSG_JAVADOC_MISSING),
+            "17:1: " + getCheckMessage(MSG_JAVADOC_MISSING),
         };
         verify(checkConfig,
-                getPath("InputMissingJavadocTypeSkipAnnotations.java"),
+                getPath("InputMissingJavadocTypeSkipAnnotations2.java"),
                 expected);
     }
 
