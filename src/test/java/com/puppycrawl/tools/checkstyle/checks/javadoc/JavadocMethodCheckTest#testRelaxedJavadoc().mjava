@@ -2,7 +2,7 @@
     @Test
     public void testRelaxedJavadoc() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("scope", Scope.PROTECTED.getName());
+        checkConfig.addAttribute("accessModifiers", "public, protected");
         final String[] expected = {
             "79:41: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),
             "84:37: " + getCheckMessage(MSG_EXPECTED_TAG, "@param", "aA"),

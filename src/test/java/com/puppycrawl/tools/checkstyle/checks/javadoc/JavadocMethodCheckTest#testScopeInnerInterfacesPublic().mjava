@@ -1,7 +1,7 @@
     @Test
     public void testScopeInnerInterfacesPublic() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("scope", Scope.PUBLIC.getName());
+        checkConfig.addAttribute("accessModifiers", "public");
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputJavadocMethodScopeInnerInterfaces.java"), expected);
     }

@@ -5,8 +5,7 @@
      *             IMPORT tokens.
      */
     private void processAST(DetailAST ast) {
-        final Scope theScope = calculateScope(ast);
-        if (shouldCheck(ast, theScope)) {
+        if (shouldCheck(ast)) {
             final FileContents contents = getFileContents();
             final TextBlock textBlock = contents.getJavadocBefore(ast.getLineNo());
 

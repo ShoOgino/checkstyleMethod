@@ -1,11 +1,13 @@
     @Override
     protected boolean mustCheckName(DetailAST ast) {
         boolean checkName = true;
+        final DetailAST parent = ast.getParent();
         if (ignoreOverridden && isOverriddenMethod(ast)
-                || ast.getParent().getType() == TokenTypes.LITERAL_CATCH
-                || ast.getParent().getParent().getType() == TokenTypes.LAMBDA
+                || parent.getType() == TokenTypes.LITERAL_CATCH
+                || parent.getParent().getType() == TokenTypes.LAMBDA
                 || CheckUtil.isReceiverParameter(ast)
-                || !matchAccessModifiers(getAccessModifier(ast))) {
+                || !matchAccessModifiers(
+                        CheckUtil.getAccessModifierFromModifiersToken(parent.getParent()))) {
             checkName = false;
         }
         return checkName;

@@ -1,0 +1,17 @@
+    /**
+     * Whether we should check this node.
+     *
+     * @param ast a given node.
+     * @return whether we should check a given node.
+     */
+    private boolean shouldCheck(final DetailAST ast) {
+        final AccessModifierOption surroundingAccessModifier = CheckUtil
+                .getSurroundingAccessModifier(ast);
+        final AccessModifierOption accessModifier = CheckUtil
+                .getAccessModifierFromModifiersToken(ast);
+        return surroundingAccessModifier != null
+                && Arrays.stream(accessModifiers)
+                        .anyMatch(modifier -> modifier == surroundingAccessModifier)
+                && Arrays.stream(accessModifiers).anyMatch(modifier -> modifier == accessModifier);
+    }
+

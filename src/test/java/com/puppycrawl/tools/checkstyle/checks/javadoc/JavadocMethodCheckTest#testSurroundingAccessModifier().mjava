@@ -1,0 +1,8 @@
+    @Test
+    public void testSurroundingAccessModifier() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
+        checkConfig.addAttribute("accessModifiers", "private");
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        verify(checkConfig, getPath("InputJavadocMethodSurroundingAccessModifier.java"), expected);
+    }
+

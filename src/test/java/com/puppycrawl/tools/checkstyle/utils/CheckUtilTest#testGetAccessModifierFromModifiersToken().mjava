@@ -1,23 +1,30 @@
     @Test
     public void testGetAccessModifierFromModifiersToken() throws Exception {
+        final DetailAST interfaceDef = getNodeFromFile(TokenTypes.INTERFACE_DEF);
+        final AccessModifierOption modifierInterface = CheckUtil
+                .getAccessModifierFromModifiersToken(interfaceDef
+                        .findFirstToken(TokenTypes.OBJBLOCK)
+                        .findFirstToken(TokenTypes.METHOD_DEF));
+        assertEquals(AccessModifierOption.PUBLIC, modifierInterface, "Invalid access modifier");
+
         final DetailAST privateVariable = getNodeFromFile(TokenTypes.VARIABLE_DEF);
         final AccessModifierOption modifierPrivate =
-                CheckUtil.getAccessModifierFromModifiersToken(privateVariable.getFirstChild());
+                CheckUtil.getAccessModifierFromModifiersToken(privateVariable);
         assertEquals(AccessModifierOption.PRIVATE, modifierPrivate, "Invalid access modifier");
 
         final DetailAST protectedVariable = privateVariable.getNextSibling();
         final AccessModifierOption modifierProtected =
-                CheckUtil.getAccessModifierFromModifiersToken(protectedVariable.getFirstChild());
+                CheckUtil.getAccessModifierFromModifiersToken(protectedVariable);
         assertEquals(AccessModifierOption.PROTECTED, modifierProtected, "Invalid access modifier");
 
         final DetailAST publicVariable = protectedVariable.getNextSibling();
         final AccessModifierOption modifierPublic =
-                CheckUtil.getAccessModifierFromModifiersToken(publicVariable.getFirstChild());
+                CheckUtil.getAccessModifierFromModifiersToken(publicVariable);
         assertEquals(AccessModifierOption.PUBLIC, modifierPublic, "Invalid access modifier");
 
         final DetailAST packageVariable = publicVariable.getNextSibling();
         final AccessModifierOption modifierPackage =
-                CheckUtil.getAccessModifierFromModifiersToken(packageVariable.getFirstChild());
+                CheckUtil.getAccessModifierFromModifiersToken(packageVariable);
         assertEquals(AccessModifierOption.PACKAGE, modifierPackage, "Invalid access modifier");
     }
 

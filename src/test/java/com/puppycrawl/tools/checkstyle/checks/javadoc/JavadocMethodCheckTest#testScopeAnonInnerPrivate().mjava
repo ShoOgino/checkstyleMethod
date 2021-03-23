@@ -1,8 +1,8 @@
     @Test
     public void testScopeAnonInnerPrivate() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("scope", Scope.PRIVATE.getName());
+        checkConfig.addAttribute("accessModifiers", "public, protected, package, private");
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
-        verify(checkConfig, getPath("InputJavadocMethodScopeAnonInnerPrivate.java"), expected);
+        verify(checkConfig, getPath("InputJavadocMethodScopeAnonInner.java"), expected);
     }
 

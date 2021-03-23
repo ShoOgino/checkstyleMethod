@@ -1,8 +1,7 @@
     @Test
     public void testExcludeScope() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("scope", Scope.PRIVATE.getName());
-        checkConfig.addAttribute("excludeScope", Scope.PROTECTED.getName());
+        checkConfig.addAttribute("accessModifiers", "private, package, public");
         final String[] expected = {
             "20: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),
             "24: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),

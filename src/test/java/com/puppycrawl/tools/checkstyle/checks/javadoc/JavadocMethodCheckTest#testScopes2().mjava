@@ -1,7 +1,7 @@
     @Test
     public void testScopes2() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(JavadocMethodCheck.class);
-        checkConfig.addAttribute("scope", Scope.PROTECTED.getName());
+        checkConfig.addAttribute("accessModifiers", "public, protected");
         final String[] expected = {
             "19: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),
             "21: " + getCheckMessage(MSG_UNUSED_TAG_GENERAL),
