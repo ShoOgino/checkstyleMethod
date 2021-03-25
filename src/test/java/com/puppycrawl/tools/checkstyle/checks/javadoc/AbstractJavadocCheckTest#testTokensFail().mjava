@@ -1,0 +1,23 @@
+    @Test
+    public void testTokensFail() {
+        final int[] defaultJavadocTokens = {JavadocTokenTypes.JAVADOC,
+            JavadocTokenTypes.AREA_HTML_TAG_NAME,
+            JavadocTokenTypes.PARAGRAPH,
+            JavadocTokenTypes.HR_TAG,
+            JavadocTokenTypes.RETURN_LITERAL,
+            JavadocTokenTypes.BR_TAG};
+        final AbstractJavadocCheck check = new AbstractJavadocCheck() {
+            @Override
+            public void visitJavadocToken(DetailNode ast) {
+                // no code necessary
+            }
+
+            @Override
+            public int[] getDefaultJavadocTokens() {
+                return defaultJavadocTokens;
+            }
+        };
+        check.setJavadocTokens("RETURN_LITERAL");
+        assertDoesNotThrow(check::init);
+    }
+
