@@ -1,12 +1,11 @@
     @Test
-    public void testRegularExError()
-            throws Exception {
+    public void testRegularExError() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(WriteTagCheck.class);
         checkConfig.addAttribute("tag", "@author");
         checkConfig.addAttribute("tagFormat", "ABC");
         final String[] expected = {
-            "10: " + getCheckMessage(MSG_TAG_FORMAT, "@author", "ABC"),
+            "11: " + getCheckMessage(MSG_TAG_FORMAT, "@author", "ABC"),
         };
-        verify(checkConfig, getPath("InputWriteTag.java"), expected);
+        verify(checkConfig, getPath("InputWriteTagExpressionError.java"), expected);
     }
 

@@ -4,9 +4,9 @@
         checkConfig.addAttribute("tag", "@doubletag");
         checkConfig.addAttribute("tagFormat", "\\S");
         final String[] expected = {
-            "12: " + getCheckMessage(MSG_WRITE_TAG, "@doubletag", "first text"),
-            "13: " + getCheckMessage(MSG_WRITE_TAG, "@doubletag", "second text"),
+            "13: " + getCheckMessage(MSG_WRITE_TAG, "@doubletag", "first text  // violation"),
+            "14: " + getCheckMessage(MSG_WRITE_TAG, "@doubletag", "second text  // violation"),
         };
-        verify(checkConfig, getPath("InputWriteTag.java"), expected);
+        verify(checkConfig, getPath("InputWriteTagDoubleTag.java"), expected);
     }
 

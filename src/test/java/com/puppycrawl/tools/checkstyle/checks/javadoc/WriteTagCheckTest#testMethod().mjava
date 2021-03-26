@@ -7,9 +7,10 @@
             "INTERFACE_DEF, CLASS_DEF, METHOD_DEF, CTOR_DEF");
         checkConfig.addAttribute("severity", "ignore");
         final String[] expected = {
-            "19: " + getCheckMessage(MSG_WRITE_TAG, "@todo", "Add a constructor comment"),
-            "30: " + getCheckMessage(MSG_WRITE_TAG, "@todo", "Add a comment"),
+            "22: " + getCheckMessage(MSG_WRITE_TAG, "@todo",
+                    "Add a constructor comment  // violation"),
+            "33: " + getCheckMessage(MSG_WRITE_TAG, "@todo", "Add a comment  // violation"),
         };
-        verify(checkConfig, getPath("InputWriteTag.java"), expected);
+        verify(checkConfig, getPath("InputWriteTagMethod.java"), expected);
     }
 

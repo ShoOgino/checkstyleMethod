@@ -4,9 +4,9 @@
         checkConfig.addAttribute("tag", "@incomplete");
         checkConfig.addAttribute("tagFormat", "\\S");
         final String[] expected = {
-            "11: " + getCheckMessage(MSG_WRITE_TAG, "@incomplete",
-                "This class needs more code..."),
+            "12: " + getCheckMessage(MSG_WRITE_TAG, "@incomplete",
+                "This class needs more code... // violation"),
         };
-        verify(checkConfig, getPath("InputWriteTag.java"), expected);
+        verify(checkConfig, getPath("InputWriteTagIncomplete.java"), expected);
     }
 
