@@ -4,8 +4,8 @@
                 MissingJavadocMethodCheck.class);
         checkConfig.addAttribute("scope", Scope.PUBLIC.getName());
         final String[] expected = {
+            "42:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
             "43:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
-            "44:9: " + getCheckMessage(MSG_JAVADOC_MISSING),
         };
         verify(checkConfig, getPath("InputMissingJavadocMethodScopeInnerInterfaces.java"),
                 expected);
