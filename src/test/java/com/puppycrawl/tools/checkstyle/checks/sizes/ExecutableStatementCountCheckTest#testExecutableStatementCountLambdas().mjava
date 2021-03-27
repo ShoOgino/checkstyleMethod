@@ -1,0 +1,19 @@
+    @Test
+    public void testExecutableStatementCountLambdas() throws Exception {
+        final DefaultConfiguration checkConfig =
+                createModuleConfig(ExecutableStatementCountCheck.class);
+        checkConfig.addAttribute("max", "1");
+        checkConfig.addAttribute("tokens", "LAMBDA");
+
+        final int max = 1;
+
+        final String[] expected = {
+            "13:22: " + getCheckMessage(MSG_KEY, 6, max),
+            "22:22: " + getCheckMessage(MSG_KEY, 2, max),
+            "23:26: " + getCheckMessage(MSG_KEY, 2, max),
+            "27:26: " + getCheckMessage(MSG_KEY, 4, max),
+        };
+
+        verify(checkConfig, getPath("InputExecutableStatementCountLambdas.java"), expected);
+    }
+

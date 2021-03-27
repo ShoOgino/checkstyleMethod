@@ -4,19 +4,13 @@
      * @param ast the token representing the statement list.
      */
     private void visitSlist(DetailAST ast) {
-        if (context.getAST() != null) {
-            // find member AST for the statement list
-            final DetailAST contextAST = context.getAST();
-            DetailAST parent = ast.getParent();
-            int type = parent.getType();
-            while (type != TokenTypes.METHOD_DEF
-                && !isConstructorOrInit(type)) {
-                parent = parent.getParent();
-                type = parent.getType();
-            }
-            if (parent == contextAST) {
-                context.addCount(ast.getChildCount() / 2);
-            }
+        final DetailAST contextAST = context.getAST();
+        DetailAST parent = ast.getParent();
+        while (parent != null && !isContainerNode(parent)) {
+            parent = parent.getParent();
+        }
+        if (parent == contextAST) {
+            context.addCount(ast.getChildCount() / 2);
         }
     }
 
