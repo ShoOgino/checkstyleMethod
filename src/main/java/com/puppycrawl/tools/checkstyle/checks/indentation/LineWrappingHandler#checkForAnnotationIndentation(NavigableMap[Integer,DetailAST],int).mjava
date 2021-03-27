@@ -1,0 +1,26 @@
+    /**
+     * Checks for annotation indentation.
+     *
+     * @param firstNodesOnLines the nodes which are present in the beginning of each line.
+     * @param indentLevel line wrapping indentation.
+     */
+    public void checkForAnnotationIndentation(
+            NavigableMap<Integer, DetailAST> firstNodesOnLines, int indentLevel) {
+        final DetailAST firstLineNode = firstNodesOnLines.get(firstNodesOnLines.firstKey());
+        DetailAST node = firstLineNode.getParent();
+        while (node != null) {
+            if (node.getType() == TokenTypes.ANNOTATION) {
+                final DetailAST atNode = node.getFirstChild();
+                final NavigableMap<Integer, DetailAST> annotationLines =
+                        firstNodesOnLines.subMap(
+                                node.getLineNo(),
+                                true,
+                                getNextNodeLine(firstNodesOnLines, node),
+                                true
+                        );
+                checkAnnotationIndentation(atNode, annotationLines, indentLevel);
+            }
+            node = node.getNextSibling();
+        }
+    }
+

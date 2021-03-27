@@ -1,0 +1,14 @@
+    @Test
+    public void testIndentationMethodParenthesisOnNewLine() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(IndentationCheck.class);
+        checkConfig.addAttribute("tabWidth", "4");
+        final String[] expected = {
+            "13:9: " + getCheckMessage(MSG_ERROR, "method def rparen", 8, 4),
+            "18:9: " + getCheckMessage(MSG_ERROR, "method def rparen", 8, 4),
+        };
+
+        verifyWarns(checkConfig,
+                getPath("InputIndentationCheckMethodParenOnNewLine.java"),
+                expected);
+    }
+

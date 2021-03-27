@@ -1,0 +1,11 @@
+    /**
+     * Checks whether the method lparen starts from a new line or not.
+     *
+     * @param node the node for which to check.
+     * @return true if method lparen starts from a new line.
+     */
+    public static boolean checkForMethodLparenNewLine(DetailAST node) {
+        final int parentType = node.getParent().getType();
+        return parentType == TokenTypes.METHOD_DEF && node.getType() == TokenTypes.LPAREN;
+    }
+
