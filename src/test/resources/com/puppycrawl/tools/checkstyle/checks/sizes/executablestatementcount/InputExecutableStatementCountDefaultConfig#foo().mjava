@@ -1,0 +1,13 @@
+    public void foo() { // ok
+        while (true) {
+            Runnable runnable = new Runnable() { // ok
+                public void run() {
+                    while (true) {
+                    }
+                }
+            };
+
+            new Thread(runnable).start();
+        }
+    }
+
