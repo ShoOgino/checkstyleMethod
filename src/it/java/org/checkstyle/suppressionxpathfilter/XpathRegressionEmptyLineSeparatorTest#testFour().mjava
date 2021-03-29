@@ -9,21 +9,13 @@
         moduleConfig.addAttribute("allowMultipleEmptyLines", "false");
 
         final String[] expectedViolation = {
-            "12:5: " + getCheckMessage(EmptyLineSeparatorCheck.class,
-                    EmptyLineSeparatorCheck.MSG_MULTIPLE_LINES_AFTER, "METHOD_DEF"),
+            "12:25: " + getCheckMessage(EmptyLineSeparatorCheck.class,
+                    EmptyLineSeparatorCheck.MSG_MULTIPLE_LINES_AFTER, "}"),
         };
 
-        final List<String> expectedXpathQueries = Arrays.asList(
+        final List<String> expectedXpathQueries = Collections.singletonList(
                 "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionEmptyLineSeparator4']]"
-                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]",
-
-                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionEmptyLineSeparator4']]"
-                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]"
-                        + "/MODIFIERS",
-
-                "/CLASS_DEF[./IDENT[@text='SuppressionXpathRegressionEmptyLineSeparator4']]"
-                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]"
-                        + "/MODIFIERS/LITERAL_PUBLIC"
+                        + "/OBJBLOCK/METHOD_DEF[./IDENT[@text='foo1']]/SLIST/RCURLY"
         );
 
         runVerifications(moduleConfig, fileToProcess, expectedViolation, expectedXpathQueries);

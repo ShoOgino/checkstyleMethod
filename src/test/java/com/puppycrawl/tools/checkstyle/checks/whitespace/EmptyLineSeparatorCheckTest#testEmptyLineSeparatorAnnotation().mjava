@@ -1,0 +1,12 @@
+    @Test
+    public void testEmptyLineSeparatorAnnotation() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
+        checkConfig.addAttribute("allowMultipleEmptyLines", "false");
+        final String[] expected = {
+            "10:22: " + getCheckMessage(MSG_MULTIPLE_LINES_AFTER, "}"),
+        };
+        verify(checkConfig,
+                getPath("InputEmptyLineSeparatorAnnotations.java"),
+                expected);
+    }
+

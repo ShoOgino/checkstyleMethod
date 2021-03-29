@@ -3,10 +3,12 @@
         final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
         checkConfig.addAttribute("allowMultipleEmptyLinesInsideClassMembers", "false");
         final String[] expected = {
-            "11: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
-            "16: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
-            "22: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
-            "31: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "13:30: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "18:5: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "24:67: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "33:48: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "43:21: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+
         };
         verify(checkConfig,
                 getPath("InputEmptyLineSeparatorPreviousLineEmptiness.java"), expected);

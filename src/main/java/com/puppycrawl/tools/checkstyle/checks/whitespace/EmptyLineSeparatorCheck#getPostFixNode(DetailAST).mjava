@@ -1,0 +1,20 @@
+    /**
+     * Gets postfix Node from AST if present.
+     *
+     * @param ast the AST used to get postfix Node.
+     * @return Optional postfix node.
+     */
+    private static Optional<DetailAST> getPostFixNode(DetailAST ast) {
+        Optional<DetailAST> result = Optional.empty();
+        if (ast.getType() == TokenTypes.EXPR
+            // EXPR always has at least one child
+            && ast.getFirstChild().getType() == TokenTypes.METHOD_CALL) {
+            // METHOD CALL always has at two least child
+            final DetailAST node = ast.getFirstChild().getFirstChild();
+            if (node.getType() == TokenTypes.DOT) {
+                result = Optional.of(node);
+            }
+        }
+        return result;
+    }
+

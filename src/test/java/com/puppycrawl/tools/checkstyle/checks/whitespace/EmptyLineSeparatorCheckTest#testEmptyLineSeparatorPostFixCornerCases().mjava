@@ -1,0 +1,14 @@
+    @Test
+    public void testEmptyLineSeparatorPostFixCornerCases() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
+        checkConfig.addAttribute("allowMultipleEmptyLinesInsideClassMembers", "false");
+        final String[] expected = {
+            "10:19: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "24:29: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "35:29: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+        };
+        verify(checkConfig,
+                getPath("InputEmptyLineSeparatorPostFixCornerCases.java"),
+                expected);
+    }
+

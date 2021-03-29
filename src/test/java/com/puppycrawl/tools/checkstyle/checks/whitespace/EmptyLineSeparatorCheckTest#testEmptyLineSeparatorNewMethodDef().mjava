@@ -1,0 +1,13 @@
+    @Test
+    public void testEmptyLineSeparatorNewMethodDef() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
+        checkConfig.addAttribute("allowMultipleEmptyLinesInsideClassMembers", "false");
+        final String[] expected = {
+            "21:34: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+            "30:26: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+        };
+        verify(checkConfig,
+                getPath("InputEmptyLineSeparatorNewMethodDef.java"),
+                expected);
+    }
+

@@ -9,10 +9,8 @@
         if (isClassMemberBlock(astType)) {
             final List<Integer> emptyLines = getEmptyLines(ast);
             final List<Integer> emptyLinesToLog = getEmptyLinesToLog(emptyLines);
-
             for (Integer lineNo : emptyLinesToLog) {
-                // Checkstyle counts line numbers from 0 but IDE from 1
-                log(lineNo + 1, MSG_MULTIPLE_LINES_INSIDE);
+                log(getLastElementBeforeEmptyLines(ast, lineNo), MSG_MULTIPLE_LINES_INSIDE);
             }
         }
     }

@@ -1,0 +1,12 @@
+    @Test
+    public void testEmptyLineSeparatorEmptyLinesInsideClassMembersRecursive() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
+        checkConfig.addAttribute("allowMultipleEmptyLinesInsideClassMembers", "false");
+        final String[] expected = {
+            "19:15: " + getCheckMessage(MSG_MULTIPLE_LINES_INSIDE),
+        };
+        verify(checkConfig,
+                getPath("InputEmptyLineSeparatorRecursive.java"),
+                expected);
+    }
+
