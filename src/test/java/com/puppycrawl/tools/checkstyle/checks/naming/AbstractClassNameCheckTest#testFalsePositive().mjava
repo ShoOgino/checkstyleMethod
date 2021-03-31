@@ -1,9 +1,16 @@
     @Test
     public void testFalsePositive() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(AbstractClassNameCheck.class);
-
+        final String pattern = "^Abstract.+$";
         final String[] expected = {
-            "9:5: " + getCheckMessage(MSG_NO_ABSTRACT_CLASS_MODIFIER, "AbstractClass"),
+            "6:1: "
+                + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME,
+                        "InputAbstractClassNameFormerFalsePositive",
+                pattern),
+            "13:5: " + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME, "NonAbstractInnerClassFP",
+                pattern),
+            "21:1: " + getCheckMessage(MSG_NO_ABSTRACT_CLASS_MODIFIER, "AbstractClassNameFP"),
+            "25:5: " + getCheckMessage(MSG_NO_ABSTRACT_CLASS_MODIFIER, "AbstractInnerClassFP"),
         };
 
         verify(checkConfig, getPath("InputAbstractClassNameFormerFalsePositive.java"), expected);

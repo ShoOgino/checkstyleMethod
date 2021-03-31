@@ -7,14 +7,15 @@
         checkConfig.addAttribute("format", "^NonAbstract.+$");
 
         final String[] expected = {
-            "3:1: " + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME, "InputAbstractClassName",
+            "6:1: "
+                + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME, "InputAbstractClassNameCustom",
                 "^NonAbstract.+$"),
-            "9:1: " + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME, "AbstractClassOther",
+            "12:1: " + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME, "AbstractClassOtherCustom",
                 "^NonAbstract.+$"),
-            "21:1: " + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME, "AbstractClassName2",
+            "24:1: " + getCheckMessage(MSG_ILLEGAL_ABSTRACT_CLASS_NAME, "AbstractClassName2Custom",
                 "^NonAbstract.+$"),
         };
 
-        verify(checkConfig, getPath("InputAbstractClassName.java"), expected);
+        verify(checkConfig, getPath("InputAbstractClassNameCustom.java"), expected);
     }
 
