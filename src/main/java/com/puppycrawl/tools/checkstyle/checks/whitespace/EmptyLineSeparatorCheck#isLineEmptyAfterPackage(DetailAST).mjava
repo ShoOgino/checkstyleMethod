@@ -1,0 +1,16 @@
+    /**
+     * Checks if there is another element at next line of package declaration.
+     *
+     * @param ast Package ast.
+     * @return true, if there is an element.
+     */
+    private static boolean isLineEmptyAfterPackage(DetailAST ast) {
+        DetailAST nextElement = ast.getNextSibling();
+        final int lastChildLineNo = ast.getLastChild().getLineNo();
+        while (nextElement.getLineNo() < lastChildLineNo + 1
+                && nextElement.getNextSibling() != null) {
+            nextElement = nextElement.getNextSibling();
+        }
+        return nextElement.getLineNo() == lastChildLineNo + 1;
+    }
+

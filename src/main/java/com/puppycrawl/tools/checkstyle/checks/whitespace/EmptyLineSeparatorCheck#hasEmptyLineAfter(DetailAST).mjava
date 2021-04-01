@@ -10,7 +10,7 @@
             lastToken = token.getLastChild();
         }
         DetailAST nextToken = token.getNextSibling();
-        if (isComment(nextToken)) {
+        if (TokenUtil.isCommentType(nextToken.getType())) {
             nextToken = nextToken.getNextSibling();
         }
         // Start of the next token

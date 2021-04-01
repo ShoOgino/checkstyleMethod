@@ -1,0 +1,12 @@
+    @Test
+    public void testPackageImportsClassInSingleLine() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(EmptyLineSeparatorCheck.class);
+        final String[] expected = {
+            "1:79: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "import"),
+            "1:101: " + getCheckMessage(MSG_SHOULD_BE_SEPARATED, "CLASS_DEF"),
+        };
+        verify(checkConfig,
+                getPath("InputEmptyLineSeparatorPackageImportClassInOneLine.java"),
+                expected);
+    }
+

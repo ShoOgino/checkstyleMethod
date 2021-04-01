@@ -15,7 +15,11 @@
                 log(ast, MSG_SHOULD_BE_SEPARATED, ast.getText());
             }
         }
-        if (!hasEmptyLineAfter(ast)) {
+        if (isLineEmptyAfterPackage(ast)) {
+            final DetailAST elementAst = getViolationAstForPackage(ast);
+            log(elementAst, MSG_SHOULD_BE_SEPARATED, elementAst.getText());
+        }
+        else if (!hasEmptyLineAfter(ast)) {
             log(nextToken, MSG_SHOULD_BE_SEPARATED, nextToken.getText());
         }
     }

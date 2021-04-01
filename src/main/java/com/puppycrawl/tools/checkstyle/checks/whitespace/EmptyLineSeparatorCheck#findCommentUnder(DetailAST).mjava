@@ -8,7 +8,7 @@
         return Optional.ofNullable(packageDef.getNextSibling())
             .map(sibling -> sibling.findFirstToken(TokenTypes.MODIFIERS))
             .map(DetailAST::getFirstChild)
-            .filter(EmptyLineSeparatorCheck::isComment)
+            .filter(token -> TokenUtil.isCommentType(token.getType()))
             .filter(comment -> comment.getLineNo() == packageDef.getLineNo() + 1);
     }
 
