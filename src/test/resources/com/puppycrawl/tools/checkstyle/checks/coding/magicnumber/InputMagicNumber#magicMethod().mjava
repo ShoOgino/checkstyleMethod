@@ -1,5 +1,5 @@
     public void magicMethod() {
-        //constants, ignore
+
         final int INT_CONST = 101_000;
         final long LONG_CONST1 = 100_000L;
         final long LONG_CONST2 = 100l;
@@ -9,7 +9,7 @@
         final double DOUBLE_CONST2 = 1.5d;
         final double DOUBLE_CONST3 = 1.5;
 
-        //ignore by default
+
         int int_var1 = 1;
         int int_var2 = (2);
         long long_var1 = 0L;
@@ -29,38 +29,38 @@
 
         if (1.0 < 2.0);
 
-        //magic numbers
-        int int_magic1 = 3_000;
-        double double_magic1 = 1.5_0;
-        int int_magic2 = (3 + 4);
 
-        int_array = new int[3];
+        int int_magic1 = 3_000; // violation
+        double double_magic1 = 1.5_0; // violation
+        int int_magic2 = (3 + 4);  // violation
 
-        int_magic1 += 3;
-        double_magic1 *= 1.5;
+        int_array = new int[3];  // violation
 
-        for (int j = 3; j < 5; j += 3) {
+        int_magic1 += 3;   // violation
+        double_magic1 *= 1.5; // violation
+
+        for (int j = 3; j < 5; j += 3) {  // violation
             int_magic1++;
         }
 
-        if (int_magic1 < 3) {
-            int_magic1 = int_magic1 + 3;
+        if (int_magic1 < 3) { // violation
+            int_magic1 = int_magic1 + 3; // violation
         }
 
-        //octal
+
         int octalVar0 = 00;
-        int octalVar8 = 010;
-        int octalVar9 = 011;
+        int octalVar8 = 010;  // violation
+        int octalVar9 = 011;  // violation
 
-        long longOctalVar8 = 0_10L;
-        long longOctalVar9 = 011l;
+        long longOctalVar8 = 0_10L; // violation
+        long longOctalVar9 = 011l;  // violation
 
-        //hex
+
         int hexVar0 = 0x0;
-        int hexVar16 = 0x10;
-        int hexVar17 = 0X011;
+        int hexVar16 = 0x10;  // violation
+        int hexVar17 = 0X011; // violation
         long longHexVar0 = 0x0L;
-        long longHexVar16 = 0x10L;
-        long longHexVar17 = 0X11l;
+        long longHexVar16 = 0x10L; // violation
+        long longHexVar17 = 0X11l; // violation
     }
 
