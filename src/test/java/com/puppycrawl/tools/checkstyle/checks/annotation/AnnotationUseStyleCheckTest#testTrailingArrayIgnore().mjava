@@ -1,6 +1,3 @@
-    /**
-     * Test that annotation parens are always present.
-     */
     @Test
     public void testTrailingArrayIgnore() throws Exception {
         final DefaultConfiguration checkConfig = createModuleConfig(AnnotationUseStyleCheck.class);
@@ -12,6 +9,7 @@
             "33:9: " + getCheckMessage(MSG_KEY_ANNOTATION_INCORRECT_STYLE, "COMPACT_NO_ARRAY"),
         };
 
-        verify(checkConfig, getPath("InputAnnotationUseStyleWithTrailingComma.java"), expected);
+        verify(checkConfig,
+                getPath("InputAnnotationUseStyleWithTrailingCommaIgnore.java"), expected);
     }
 

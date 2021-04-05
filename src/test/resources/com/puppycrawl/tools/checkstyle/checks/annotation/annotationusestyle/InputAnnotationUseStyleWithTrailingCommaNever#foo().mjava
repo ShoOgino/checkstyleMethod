@@ -1,0 +1,18 @@
+    @SuppressWarnings({"common",}) // violation
+    public void foo() {
+
+
+        @SuppressWarnings({"common","foo",}) // violation
+        Object o = new Object() {
+
+            @SuppressWarnings(value={"common",}) // violation
+            public String toString() {
+
+                @SuppressWarnings(value={"leo","herbie",}) // violation
+                final String pooches = "leo.herbie";
+
+                return pooches;
+            }
+        };
+    }
+
