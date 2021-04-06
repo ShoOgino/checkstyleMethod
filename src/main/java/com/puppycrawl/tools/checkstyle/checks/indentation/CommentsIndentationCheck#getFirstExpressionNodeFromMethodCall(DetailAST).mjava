@@ -1,0 +1,11 @@
+    /**
+     * Returns the first EXPR DetailAST child from parent of comment.
+     *
+     * @param methodCall methodCall DetailAst from which node to be extracted.
+     * @return first EXPR DetailAST child from parent of comment.
+     */
+    private static DetailAST getFirstExpressionNodeFromMethodCall(DetailAST methodCall) {
+        // Method call always has ELIST
+        return methodCall.findFirstToken(TokenTypes.ELIST);
+    }
+

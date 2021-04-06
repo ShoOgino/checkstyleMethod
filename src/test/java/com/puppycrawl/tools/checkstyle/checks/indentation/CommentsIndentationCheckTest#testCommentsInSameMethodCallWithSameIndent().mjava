@@ -1,0 +1,12 @@
+    @Test
+    public void testCommentsInSameMethodCallWithSameIndent() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(CommentsIndentationCheck.class);
+        final String[] expected = {
+            "19:7: " + getCheckMessage(MSG_KEY_SINGLE, 20, 6, 4),
+            "26:11: " + getCheckMessage(MSG_KEY_SINGLE, 27, 10, 4),
+        };
+        verify(checkConfig,
+                getPath("InputCommentsIndentationWithInMethodCallWithSameIndent.java"),
+                expected);
+    }
+

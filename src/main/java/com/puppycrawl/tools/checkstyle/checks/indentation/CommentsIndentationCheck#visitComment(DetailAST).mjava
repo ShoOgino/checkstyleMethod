@@ -28,7 +28,8 @@
             else if (isCommentAtTheEndOfTheCodeBlock(nextStmt)) {
                 handleCommentAtTheEndOfTheCodeBlock(prevStmt, comment, nextStmt);
             }
-            else if (nextStmt != null && !areSameLevelIndented(comment, nextStmt, nextStmt)) {
+            else if (nextStmt != null && !areSameLevelIndented(comment, nextStmt, nextStmt)
+                    && !areInSameMethodCallWithSameIndent(comment)) {
                 log(comment, getMessageKey(comment), nextStmt.getLineNo(),
                     comment.getColumnNo(), nextStmt.getColumnNo());
             }

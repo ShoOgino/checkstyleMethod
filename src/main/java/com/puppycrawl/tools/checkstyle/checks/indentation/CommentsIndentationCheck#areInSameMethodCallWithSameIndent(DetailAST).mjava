@@ -1,0 +1,25 @@
+    /**
+     * Checks if the comment is inside a method call with same indentation of
+     * first expression. e.g:
+     * <p>
+     * {@code
+     * private final boolean myList = someMethod(
+     *     // Some comment here
+     *     s1,
+     *     s2,
+     *     s3
+     *     // ok
+     * );
+     * }
+     * </p>
+     *
+     * @param comment comment to check.
+     * @return true, if comment is inside inside a method call with same indentation.
+     */
+    private static boolean areInSameMethodCallWithSameIndent(DetailAST comment) {
+        return comment.getParent() != null
+                && comment.getParent().getType() == TokenTypes.METHOD_CALL
+                && comment.getColumnNo()
+                     == getFirstExpressionNodeFromMethodCall(comment.getParent()).getColumnNo();
+    }
+
