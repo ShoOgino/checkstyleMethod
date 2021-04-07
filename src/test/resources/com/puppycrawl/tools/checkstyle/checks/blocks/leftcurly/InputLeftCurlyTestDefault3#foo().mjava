@@ -1,0 +1,61 @@
+    /** @see test method **/
+    int foo() throws InterruptedException
+    { // violation
+        int x = 1;
+        int a = 2;
+        while (true)
+        { // violation
+            try
+            { // violation
+                if (x > 0)
+                { // violation
+                    break;
+                }
+                else if (x < 0) { // ok
+                    ;
+                }
+                else
+                { // violation
+                    break;
+                }
+                switch (a)
+                { // violation
+                case 0:
+                    break;
+                default:
+                    break;
+                }
+            }
+            catch (Exception e)
+            { // violation
+                break;
+            }
+            finally
+            { // violation
+                break;
+            }
+        }
+
+        synchronized (this)
+        { // violation
+            do
+            { // violation
+                x = 2;
+            } while (x == 2);
+        }
+
+        this.wait(666
+                 ); // Bizarre, but legal
+
+        for (int k = 0; k < 1; k++)
+        { // violation
+            String innerBlockVariable = "";
+        }
+
+        // test input for bug reported by Joe Comuzzi
+        if (System.currentTimeMillis() > 1000)
+            return 1;
+        else
+            return 2;
+    }
+
