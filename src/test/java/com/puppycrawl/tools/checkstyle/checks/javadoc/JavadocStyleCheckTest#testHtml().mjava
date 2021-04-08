@@ -4,23 +4,25 @@
         checkConfig.addAttribute("checkFirstSentence", "false");
         checkConfig.addAttribute("checkHtml", "true");
         final String[] expected = {
-            "63:11: " + getCheckMessage(MSG_UNCLOSED_HTML,
-                "<b>This guy is missing end of bold tag"),
-            "66:7: " + getCheckMessage(MSG_EXTRA_HTML, "</td>Extra tag shouldn't be here"),
-            "67:49: " + getCheckMessage(MSG_EXTRA_HTML, "</style>"),
-            "68:19: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code>dummy."),
-            "75:23: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail"),
-            "82:31: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail"),
-            "89:31: " + getCheckMessage(MSG_EXTRA_HTML, "</code>"),
-            "90: " + getCheckMessage(MSG_INCOMPLETE_TAG, "    * should fail <"),
-            "109:39: " + getCheckMessage(MSG_EXTRA_HTML, "</img>"),
-            "186:8: " + getCheckMessage(MSG_UNCLOSED_HTML, "<blockquote>"),
-            "335:33: " + getCheckMessage(MSG_EXTRA_HTML, "</string>"),
-            "361:37: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code>"),
-            "378:15: " + getCheckMessage(MSG_UNCLOSED_HTML,
-                "<b>Note:<b> it's unterminated tag.</p>"),
+            "46:11: " + getCheckMessage(MSG_UNCLOSED_HTML,
+                "<b>This guy is missing end of bold tag // violation"),
+            "49:7: " + getCheckMessage(MSG_EXTRA_HTML, "</td>Extra tag "
+                    + "shouldn't be here // violation"),
+            "50:49: " + getCheckMessage(MSG_EXTRA_HTML, "</style> // violation"),
+            "51:19: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code>dummy. // violation"),
+            "56:23: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail // violation"),
+            "61:31: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail // violation"),
+            "66:31: " + getCheckMessage(MSG_EXTRA_HTML, "</code> // violation "
+                    + "and line below, too"),
+            "67: " + getCheckMessage(MSG_INCOMPLETE_TAG, "    * should fail <"),
+            "82:39: " + getCheckMessage(MSG_EXTRA_HTML, "</img> // violation"),
+            "151:8: " + getCheckMessage(MSG_UNCLOSED_HTML, "<blockquote> // violation"),
+            "283:21: " + getCheckMessage(MSG_EXTRA_HTML, "</string> // violation"),
+            "304:33: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code> // violation"),
+            "321:11: " + getCheckMessage(MSG_UNCLOSED_HTML,
+                "<b>Note:<b> it's unterminated tag.</p> // violation"),
         };
 
-        verify(checkConfig, getPath("InputJavadocStyle.java"), expected);
+        verify(checkConfig, getPath("InputJavadocStyle4.java"), expected);
     }
 

@@ -8,21 +8,22 @@
         checkConfig.addAttribute("checkEmptyJavadoc", "true");
         checkConfig.addAttribute("scope", "protected");
         final String[] expected = {
-            "74: " + getCheckMessage(MSG_NO_PERIOD),
-            "75:23: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail"),
-            "88: " + getCheckMessage(MSG_NO_PERIOD),
-            "89:31: " + getCheckMessage(MSG_EXTRA_HTML, "</code>"),
-            "90: " + getCheckMessage(MSG_INCOMPLETE_TAG, "    * should fail <"),
-            "205: " + getCheckMessage(MSG_EMPTY),
-            "211: " + getCheckMessage(MSG_EMPTY),
-            "230: " + getCheckMessage(MSG_EMPTY),
-            "238: " + getCheckMessage(MSG_NO_PERIOD),
-            "335:33: " + getCheckMessage(MSG_EXTRA_HTML, "</string>"),
-            "382: " + getCheckMessage(MSG_NO_PERIOD),
-            "386: " + getCheckMessage(MSG_NO_PERIOD),
-            "418: " + getCheckMessage(MSG_NO_PERIOD),
+            "57: " + getCheckMessage(MSG_NO_PERIOD),
+            "58:23: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail // violation"),
+            "67: " + getCheckMessage(MSG_NO_PERIOD),
+            "68:31: " + getCheckMessage(MSG_EXTRA_HTML, "</code> // violation "
+                    + "and line below, too"),
+            "69: " + getCheckMessage(MSG_INCOMPLETE_TAG, "    * should fail <"),
+            "168: " + getCheckMessage(MSG_EMPTY),
+            "172: " + getCheckMessage(MSG_EMPTY),
+            "186: " + getCheckMessage(MSG_EMPTY),
+            "191: " + getCheckMessage(MSG_NO_PERIOD),
+            "285:21: " + getCheckMessage(MSG_EXTRA_HTML, "</string> // violation"),
+            "327: " + getCheckMessage(MSG_NO_PERIOD),
+            "331: " + getCheckMessage(MSG_NO_PERIOD),
+            "363: " + getCheckMessage(MSG_NO_PERIOD),
         };
 
-        verify(checkConfig, getPath("InputJavadocStyle.java"), expected);
+        verify(checkConfig, getPath("InputJavadocStyle6.java"), expected);
     }
 

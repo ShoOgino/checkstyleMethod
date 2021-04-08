@@ -6,26 +6,27 @@
         checkConfig.addAttribute("scope", "private");
         checkConfig.addAttribute("excludeScope", "protected");
         final String[] expected = {
-            "20: " + getCheckMessage(MSG_NO_PERIOD),
-            "53: " + getCheckMessage(MSG_NO_PERIOD),
-            "63:11: " + getCheckMessage(MSG_UNCLOSED_HTML,
-                "<b>This guy is missing end of bold tag"),
-            "66:7: " + getCheckMessage(MSG_EXTRA_HTML, "</td>Extra tag shouldn't be here"),
-            "67:49: " + getCheckMessage(MSG_EXTRA_HTML, "</style>"),
-            "68:19: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code>dummy."),
-            "81: " + getCheckMessage(MSG_NO_PERIOD),
-            "82:31: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail"),
-            "109:39: " + getCheckMessage(MSG_EXTRA_HTML, "</img>"),
-            "186:8: " + getCheckMessage(MSG_UNCLOSED_HTML, "<blockquote>"),
-            "193: " + getCheckMessage(MSG_NO_PERIOD),
-            "361:37: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code>"),
-            "372: " + getCheckMessage(MSG_NO_PERIOD),
-            "378:15: " + getCheckMessage(MSG_UNCLOSED_HTML,
-                "<b>Note:<b> it's unterminated tag.</p>"),
-            "393: " + getCheckMessage(MSG_NO_PERIOD),
-            "405: " + getCheckMessage(MSG_NO_PERIOD),
+            "13: " + getCheckMessage(MSG_NO_PERIOD),
+            "38: " + getCheckMessage(MSG_NO_PERIOD),
+            "46:11: " + getCheckMessage(MSG_UNCLOSED_HTML,
+                "<b>This guy is missing end of bold tag // violation"),
+            "49:7: " + getCheckMessage(MSG_EXTRA_HTML, "</td>Extra tag "
+                    + "shouldn't be here // violation"),
+            "50:49: " + getCheckMessage(MSG_EXTRA_HTML, "</style> // violation"),
+            "51:19: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code>dummy. // violation"),
+            "60: " + getCheckMessage(MSG_NO_PERIOD),
+            "61:31: " + getCheckMessage(MSG_UNCLOSED_HTML, "<b>should fail // violation"),
+            "82:39: " + getCheckMessage(MSG_EXTRA_HTML, "</img> // violation"),
+            "151:8: " + getCheckMessage(MSG_UNCLOSED_HTML, "<blockquote> // violation"),
+            "156: " + getCheckMessage(MSG_NO_PERIOD),
+            "304:33: " + getCheckMessage(MSG_UNCLOSED_HTML, "<code> // violation"),
+            "315: " + getCheckMessage(MSG_NO_PERIOD),
+            "321:11: " + getCheckMessage(MSG_UNCLOSED_HTML,
+                "<b>Note:<b> it's unterminated tag.</p> // violation"),
+            "336: " + getCheckMessage(MSG_NO_PERIOD),
+            "348: " + getCheckMessage(MSG_NO_PERIOD),
         };
 
-        verify(checkConfig, getPath("InputJavadocStyle.java"), expected);
+        verify(checkConfig, getPath("InputJavadocStyle9.java"), expected);
     }
 

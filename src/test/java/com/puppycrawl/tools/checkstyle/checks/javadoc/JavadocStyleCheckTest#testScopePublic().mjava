@@ -8,18 +8,19 @@
         checkConfig.addAttribute("checkEmptyJavadoc", "true");
         checkConfig.addAttribute("scope", "public");
         final String[] expected = {
-            "88: " + getCheckMessage(MSG_NO_PERIOD),
-            "89:31: " + getCheckMessage(MSG_EXTRA_HTML, "</code>"),
-            "90: " + getCheckMessage(MSG_INCOMPLETE_TAG, "    * should fail <"),
-            "205: " + getCheckMessage(MSG_EMPTY),
-            "230: " + getCheckMessage(MSG_EMPTY),
-            "238: " + getCheckMessage(MSG_NO_PERIOD),
-            "335:33: " + getCheckMessage(MSG_EXTRA_HTML, "</string>"),
-            "382: " + getCheckMessage(MSG_NO_PERIOD),
-            "386: " + getCheckMessage(MSG_NO_PERIOD),
-            "418: " + getCheckMessage(MSG_NO_PERIOD),
+            "67: " + getCheckMessage(MSG_NO_PERIOD),
+            "68:31: " + getCheckMessage(MSG_EXTRA_HTML, "</code> // violation "
+                    + "and line below, too"),
+            "69: " + getCheckMessage(MSG_INCOMPLETE_TAG, "    * should fail <"),
+            "167: " + getCheckMessage(MSG_EMPTY),
+            "185: " + getCheckMessage(MSG_EMPTY),
+            "190: " + getCheckMessage(MSG_NO_PERIOD),
+            "284:21: " + getCheckMessage(MSG_EXTRA_HTML, "</string> // violation"),
+            "326: " + getCheckMessage(MSG_NO_PERIOD),
+            "330: " + getCheckMessage(MSG_NO_PERIOD),
+            "362: " + getCheckMessage(MSG_NO_PERIOD),
         };
 
-        verify(checkConfig, getPath("InputJavadocStyle.java"), expected);
+        verify(checkConfig, getPath("InputJavadocStyle5.java"), expected);
     }
 
