@@ -1,0 +1,9 @@
+    @Test
+    public void testDecideViolation() {
+        final Violation violation =
+            new Violation(1, 0, "", "", null, null, getClass(), null);
+        final AuditEvent ev = new AuditEvent(this, "ATest.java", violation);
+        // deny because there are matches on file and check names
+        assertFalse(filter.accept(ev), "Names match");
+    }
+

@@ -1,0 +1,24 @@
+    /**
+     * Returns filtered set of {@link Violation}.
+     *
+     * @param fileName path to the file
+     * @param fileContents the contents of the file
+     * @param rootAST root AST element {@link DetailAST} of the file
+     * @return filtered set of violations
+     */
+    private SortedSet<Violation> getFilteredViolations(
+            String fileName, FileContents fileContents, DetailAST rootAST) {
+        final SortedSet<Violation> result = new TreeSet<>(violations);
+        for (Violation element : violations) {
+            final TreeWalkerAuditEvent event =
+                    new TreeWalkerAuditEvent(fileContents, fileName, element, rootAST);
+            for (TreeWalkerFilter filter : filters) {
+                if (!filter.accept(event)) {
+                    result.remove(element);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+

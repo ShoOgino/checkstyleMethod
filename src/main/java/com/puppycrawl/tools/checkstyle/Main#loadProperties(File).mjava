@@ -15,10 +15,10 @@
             properties.load(stream);
         }
         catch (final IOException ex) {
-            final LocalizedMessage loadPropertiesExceptionMessage = new LocalizedMessage(1,
+            final Violation loadPropertiesExceptionMessage = new Violation(1,
                     Definitions.CHECKSTYLE_BUNDLE, LOAD_PROPERTIES_EXCEPTION,
                     new String[] {file.getAbsolutePath()}, null, Main.class, null);
-            throw new CheckstyleException(loadPropertiesExceptionMessage.getMessage(), ex);
+            throw new CheckstyleException(loadPropertiesExceptionMessage.getViolation(), ex);
         }
 
         return ChainedPropertyUtil.getResolvedProperties(properties);

@@ -1,0 +1,30 @@
+    /**
+     * Gets the translated violation.
+     *
+     * @return the translated violation
+     */
+    public String getViolation() {
+        String violation = getCustomViolation();
+
+        if (violation == null) {
+            try {
+                // Important to use the default class loader, and not the one in
+                // the GlobalProperties object. This is because the class loader in
+                // the GlobalProperties is specified by the user for resolving
+                // custom classes.
+                final ResourceBundle resourceBundle = getBundle(bundle);
+                final String pattern = resourceBundle.getString(key);
+                final MessageFormat formatter = new MessageFormat(pattern, Locale.ROOT);
+                violation = formatter.format(args);
+            }
+            catch (final MissingResourceException ignored) {
+                // If the Check author didn't provide i18n resource bundles
+                // and logs audit event violations directly, this will return
+                // the author's original violation
+                final MessageFormat formatter = new MessageFormat(key, Locale.ROOT);
+                violation = formatter.format(args);
+            }
+        }
+        return violation;
+    }
+

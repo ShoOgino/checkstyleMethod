@@ -1,0 +1,24 @@
+    /**
+     * Creates a new {@code Violation} instance. The column number
+     * defaults to 0.
+     *
+     * @param lineNo line number associated with the violation
+     * @param bundle name of a resource bundle that contains audit event violations
+     * @param key the key to locate the translation
+     * @param args arguments for the translation
+     * @param moduleId the id of the module the violation is associated with
+     * @param sourceClass the name of the source for the violation
+     * @param customMessage optional custom violation overriding the default
+     */
+    public Violation(
+        int lineNo,
+        String bundle,
+        String key,
+        Object[] args,
+        String moduleId,
+        Class<?> sourceClass,
+        String customMessage) {
+        this(lineNo, 0, bundle, key, args, DEFAULT_SEVERITY, moduleId,
+                sourceClass, customMessage);
+    }
+

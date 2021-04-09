@@ -1,0 +1,11 @@
+    @Test
+    public void testCompareToWithDifferentModuleId() {
+        final Violation message1 = createSampleViolationWithId("module1");
+        final Violation message2 = createSampleViolationWithId("module2");
+        final Violation messageNull = createSampleViolationWithId(null);
+
+        assertTrue(message1.compareTo(messageNull) > 0, "Invalid comparing result");
+        assertTrue(messageNull.compareTo(message1) < 0, "Invalid comparing result");
+        assertTrue(message1.compareTo(message2) < 0, "Invalid comparing result");
+    }
+

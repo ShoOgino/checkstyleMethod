@@ -4,10 +4,10 @@
         final XpathFileGeneratorAuditListener logger =
                 new XpathFileGeneratorAuditListener(out, AutomaticBean.OutputStreamOptions.CLOSE);
         logger.auditStarted(null);
-        final LocalizedMessage message =
-                new LocalizedMessage(1, 1,
+        final Violation violation =
+                new Violation(1, 1,
                         "messages.properties", null, null, null, getClass(), null);
-        final AuditEvent ev = new AuditEvent(this, "Test.java", message);
+        final AuditEvent ev = new AuditEvent(this, "Test.java", violation);
 
         try {
             logger.addException(ev, null);

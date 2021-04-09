@@ -6,7 +6,7 @@
                 getPath("InputMain.java"));
         });
         final String checkstylePackage = "com.puppycrawl.tools.checkstyle.";
-        final LocalizedMessage unableToInstantiateExceptionMessage = new LocalizedMessage(1,
+        final Violation unableToInstantiateExceptionMessage = new Violation(1,
                 Definitions.CHECKSTYLE_BUNDLE,
                 "PackageObjectFactory.unableToInstantiateExceptionMessage",
                 new String[] {"TestRootModuleChecker", checkstylePackage
@@ -15,7 +15,7 @@
                         + "TestRootModuleCheckerCheck"},
                 null, getClass(), null);
         assertTrue(systemErr.getCapturedData().startsWith(checkstylePackage
-                + "api.CheckstyleException: " + unableToInstantiateExceptionMessage.getMessage()),
+                + "api.CheckstyleException: " + unableToInstantiateExceptionMessage.getViolation()),
                 "Unexpected system error log");
         assertFalse(TestRootModuleChecker.isProcessed(), "Invalid checker state");
     }

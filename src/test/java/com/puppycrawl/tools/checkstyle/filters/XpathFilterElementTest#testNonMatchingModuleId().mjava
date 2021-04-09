@@ -2,8 +2,8 @@
     public void testNonMatchingModuleId() throws Exception {
         final XpathFilterElement filter = new XpathFilterElement(
                 "InputXpathFilterElementSuppressByXpath", "Test", null, "id19", null);
-        final LocalizedMessage message =
-                new LocalizedMessage(3, 0, TokenTypes.CLASS_DEF, "", "", null, null, "id20",
+        final Violation message =
+                new Violation(3, 0, TokenTypes.CLASS_DEF, "", "", null, null, "id20",
                         getClass(), null);
         final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(fileContents, file.getName(),
                 message, JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS));

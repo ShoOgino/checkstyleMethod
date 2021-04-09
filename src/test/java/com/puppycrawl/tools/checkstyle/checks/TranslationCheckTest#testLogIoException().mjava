@@ -13,10 +13,10 @@
         Whitebox.invokeMethod(check, "logException", exception, new File(""));
 
         assertEquals(1, dispatcher.savedErrors.size(), "expected number of errors to fire");
-        final LocalizedMessage localizedMessage = new LocalizedMessage(1,
+        final Violation violation = new Violation(1,
                 Definitions.CHECKSTYLE_BUNDLE, "general.exception",
                 new String[] {exception.getMessage()}, null, getClass(), null);
-        assertEquals(localizedMessage.getMessage(),
-                dispatcher.savedErrors.iterator().next().getMessage(), "Invalid message");
+        assertEquals(violation.getViolation(),
+                dispatcher.savedErrors.iterator().next().getViolation(), "Invalid violation");
     }
 

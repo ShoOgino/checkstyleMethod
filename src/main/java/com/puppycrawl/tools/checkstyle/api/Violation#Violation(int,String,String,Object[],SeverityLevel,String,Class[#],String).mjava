@@ -1,0 +1,26 @@
+    /**
+     * Creates a new {@code Violation} instance.
+     *
+     * @param lineNo line number associated with the violation
+     * @param bundle resource bundle name
+     * @param key the key to locate the translation
+     * @param args arguments for the translation
+     * @param severityLevel severity level for the violation
+     * @param moduleId the id of the module the violation is associated with
+     * @param sourceClass the source class for the violation
+     * @param customMessage optional custom violation overriding the default
+     * @noinspection ConstructorWithTooManyParameters
+     */
+    // -@cs[ParameterNumber] Class is immutable, we need that amount of arguments.
+    public Violation(int lineNo,
+                            String bundle,
+                            String key,
+                            Object[] args,
+                            SeverityLevel severityLevel,
+                            String moduleId,
+                            Class<?> sourceClass,
+                            String customMessage) {
+        this(lineNo, 0, bundle, key, args, severityLevel, moduleId,
+                sourceClass, customMessage);
+    }
+

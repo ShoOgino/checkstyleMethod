@@ -15,9 +15,9 @@
             assertEquals("Test", ex.getMessage(), "Invalid exception message");
         }
 
-        final SortedSet<LocalizedMessage> internalMessages =
-                check.getMessages();
-        assertEquals(1, internalMessages.size(), "Internal message should only have 1");
+        final SortedSet<Violation> internalViolations =
+                check.getViolations();
+        assertEquals(1, internalViolations.size(), "Internal violation should only have 1");
 
         // again to prove only 1 violation exists
         final File secondFile = new File("inputAbstractFileSetCheck.tmp");
@@ -31,8 +31,8 @@
             assertEquals("Test", ex.getMessage(), "Invalid exception message");
         }
 
-        final SortedSet<LocalizedMessage> internalMessages2 =
-            check.getMessages();
-        assertEquals(1, internalMessages2.size(), "Internal message should only have 1 again");
+        final SortedSet<Violation> internalViolations2 =
+            check.getViolations();
+        assertEquals(1, internalViolations2.size(), "Internal violation should only have 1 again");
     }
 

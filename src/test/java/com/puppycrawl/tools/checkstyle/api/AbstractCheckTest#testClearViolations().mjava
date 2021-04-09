@@ -1,0 +1,10 @@
+    @Test
+    public void testClearViolations() {
+        final AbstractCheck check = new DummyAbstractCheck();
+
+        check.log(1, "key", "args");
+        assertEquals(1, check.getViolations().size(), "Invalid violation size");
+        check.clearViolations();
+        assertEquals(0, check.getViolations().size(), "Invalid violation size");
+    }
+

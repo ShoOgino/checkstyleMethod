@@ -1,0 +1,13 @@
+    @Test
+    public void testTokenType() {
+        final Violation violation1 = new Violation(1, 1, TokenTypes.CLASS_DEF,
+                "messages.properties", "key", null, SeverityLevel.ERROR, null,
+                getClass(), null);
+        final Violation violation2 = new Violation(1, 1, TokenTypes.OBJBLOCK,
+                "messages.properties", "key", EMPTY_OBJECT_ARRAY, SeverityLevel.ERROR, null,
+                getClass(), null);
+
+        assertEquals(TokenTypes.CLASS_DEF, violation1.getTokenType(), "Invalid token type");
+        assertEquals(TokenTypes.OBJBLOCK, violation2.getTokenType(), "Invalid token type");
+    }
+

@@ -18,8 +18,8 @@
                 getPath("InputOrderedProperties2EmptyValue.properties");
         final File file = new File(fileName);
         final FileText fileText = new FileText(file, Collections.emptyList());
-        final SortedSet<LocalizedMessage> messages = check.process(file, fileText);
+        final SortedSet<Violation> violations = check.process(file, fileText);
 
-        assertEquals(1, messages.size(), "Wrong messages count: " + messages.size());
+        assertEquals(1, violations.size(), "Wrong violations count: " + violations.size());
     }
 

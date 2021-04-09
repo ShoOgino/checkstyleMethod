@@ -25,10 +25,10 @@
         assertTrue(auditAdapter.wasEventPassed(), "Checker.fireFileFinished() doesn't pass event");
 
         auditAdapter.resetListener();
-        final SortedSet<LocalizedMessage> messages = new TreeSet<>();
-        messages.add(new LocalizedMessage(1, 0, "a Bundle", "message.key",
+        final SortedSet<Violation> violations = new TreeSet<>();
+        violations.add(new Violation(1, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
-        checker.fireErrors("Some File Name", messages);
+        checker.fireErrors("Some File Name", violations);
         assertTrue(auditAdapter.wasCalled(), "Checker.fireErrors() doesn't call listener");
         assertTrue(auditAdapter.wasEventPassed(), "Checker.fireErrors() doesn't pass event");
     }

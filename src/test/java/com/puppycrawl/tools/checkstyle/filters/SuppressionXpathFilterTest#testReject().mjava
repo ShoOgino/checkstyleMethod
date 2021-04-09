@@ -4,7 +4,7 @@
         final SuppressionXpathFilter filter = createSuppressionXpathFilter(
                         getPath("InputSuppressionXpathFilterIdAndQuery.xml"), optional);
         final File file = new File(getPath("InputSuppressionXpathFilter.java"));
-        final LocalizedMessage message = new LocalizedMessage(3, 0, TokenTypes.CLASS_DEF, "", "",
+        final Violation message = new Violation(3, 0, TokenTypes.CLASS_DEF, "", "",
                 null, null, "777", getClass(), null);
         final TreeWalkerAuditEvent ev = new TreeWalkerAuditEvent(null, "file1.java",
                 message, JavaParser.parseFile(file, JavaParser.Options.WITHOUT_COMMENTS));

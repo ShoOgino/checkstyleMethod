@@ -19,14 +19,14 @@
 
         // visiting first ast, set expressionSpatialRange to [2,2 - 4,4]
         npathComplexityCheckObj.visitToken(astIf);
-        final SortedSet<LocalizedMessage> messages1 = npathComplexityCheckObj.getMessages();
+        final SortedSet<Violation> violations1 = npathComplexityCheckObj.getViolations();
 
-        assertEquals(0, messages1.size(), "No exception messages expected");
+        assertEquals(0, violations1.size(), "No exception violations expected");
 
         // visiting ternary, it lies before expressionSpatialRange
         npathComplexityCheckObj.visitToken(astTernary);
-        final SortedSet<LocalizedMessage> messages2 = npathComplexityCheckObj.getMessages();
+        final SortedSet<Violation> violations2 = npathComplexityCheckObj.getViolations();
 
-        assertEquals(0, messages2.size(), "No exception messages expected");
+        assertEquals(0, violations2.size(), "No exception violations expected");
     }
 

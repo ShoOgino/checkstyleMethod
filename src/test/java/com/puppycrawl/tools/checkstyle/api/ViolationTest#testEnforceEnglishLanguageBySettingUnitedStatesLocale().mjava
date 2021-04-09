@@ -1,0 +1,9 @@
+    @DefaultLocale("fr")
+    @Test
+    public void testEnforceEnglishLanguageBySettingUnitedStatesLocale() {
+        Violation.setLocale(Locale.US);
+        final Violation violation = createSampleViolation();
+
+        assertEquals("Empty statement.", violation.getViolation(), "Invalid violation");
+    }
+

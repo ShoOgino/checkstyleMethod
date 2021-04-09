@@ -3,8 +3,8 @@
             Object... args) {
         final int col = 1 + CommonUtil.lengthExpandedTabs(
                 context.get().fileContents.getLine(lineNo - 1), colNo, tabWidth);
-        context.get().messages.add(
-                new LocalizedMessage(lineNo,
+        context.get().violations.add(
+                new Violation(lineNo,
                         col,
                         getMessageBundle(),
                         key,

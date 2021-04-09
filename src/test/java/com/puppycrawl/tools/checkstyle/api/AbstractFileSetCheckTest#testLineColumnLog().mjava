@@ -5,12 +5,12 @@
         final File file = new File(getPath("InputAbstractFileSetLineColumn.txt"));
         final FileText theText = new FileText(file.getAbsoluteFile(),
                 StandardCharsets.UTF_8.name());
-        final SortedSet<LocalizedMessage> internalMessages = check.process(file, theText);
+        final SortedSet<Violation> internalViolations = check.process(file, theText);
 
-        assertEquals(1, internalMessages.size(), "Internal message should only have 1");
+        assertEquals(1, internalViolations.size(), "Internal violation should only have 1");
 
-        final LocalizedMessage message = internalMessages.iterator().next();
-        assertEquals(1, message.getLineNo(), "expected line");
-        assertEquals(6, message.getColumnNo(), "expected column");
+        final Violation violation = internalViolations.iterator().next();
+        assertEquals(1, violation.getLineNo(), "expected line");
+        assertEquals(6, violation.getColumnNo(), "expected column");
     }
 

@@ -1,0 +1,15 @@
+    /**
+     * Returns the formatted custom violation if one is configured.
+     *
+     * @return the formatted custom violation or {@code null}
+     *          if there is no custom violation
+     */
+    private String getCustomViolation() {
+        String violation = null;
+        if (customMessage != null) {
+            final MessageFormat formatter = new MessageFormat(customMessage, Locale.ROOT);
+            violation = formatter.format(args);
+        }
+        return violation;
+    }
+

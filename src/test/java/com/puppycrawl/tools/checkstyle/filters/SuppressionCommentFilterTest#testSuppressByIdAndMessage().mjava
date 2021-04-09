@@ -6,12 +6,12 @@
         filterConfig.addAttribute("onCommentFormat", "CSON (\\w+)");
         filterConfig.addAttribute("idFormat", "$1");
         filterConfig.addAttribute("messageFormat", "$2");
-        final String[] suppressedViolationMessages = {
+        final String[] suppressedViolation = {
             "18:17: "
                 + getCheckMessage(AbstractNameCheck.class,
                     MSG_INVALID_PATTERN, "DEF", "^[a-z][a-zA-Z0-9]*$"),
             };
-        final String[] expectedViolationMessages = {
+        final String[] expectedViolation = {
             "6:17: "
                 + getCheckMessage(AbstractNameCheck.class,
                     MSG_INVALID_PATTERN, "A1", "^[a-z][a-zA-Z0-9]*$"),
@@ -33,6 +33,6 @@
             };
 
         verifySuppressed(filterConfig, getPath("InputSuppressionCommentFilterSuppressById.java"),
-                expectedViolationMessages, suppressedViolationMessages);
+                expectedViolation, suppressedViolation);
     }
 

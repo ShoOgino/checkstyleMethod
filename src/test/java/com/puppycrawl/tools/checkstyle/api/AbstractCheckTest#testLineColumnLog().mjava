@@ -6,21 +6,21 @@
         final FileText theText = new FileText(file, Collections.singletonList("test123"));
 
         check.setFileContents(new FileContents(theText));
-        check.clearMessages();
+        check.clearViolations();
         check.visitToken(null);
 
-        final SortedSet<LocalizedMessage> internalMessages = check.getMessages();
+        final SortedSet<Violation> internalViolations = check.getViolations();
 
-        assertEquals(2, internalMessages.size(), "Internal message should only have 2");
+        assertEquals(2, internalViolations.size(), "Internal violation should only have 2");
 
-        final Iterator<LocalizedMessage> iterator = internalMessages.iterator();
+        final Iterator<Violation> iterator = internalViolations.iterator();
 
-        final LocalizedMessage firstMessage = iterator.next();
-        assertEquals(1, firstMessage.getLineNo(), "expected line");
-        assertEquals(0, firstMessage.getColumnNo(), "expected column");
+        final Violation firstViolation = iterator.next();
+        assertEquals(1, firstViolation.getLineNo(), "expected line");
+        assertEquals(0, firstViolation.getColumnNo(), "expected column");
 
-        final LocalizedMessage secondMessage = iterator.next();
-        assertEquals(1, secondMessage.getLineNo(), "expected line");
-        assertEquals(6, secondMessage.getColumnNo(), "expected column");
+        final Violation secondViolation = iterator.next();
+        assertEquals(1, secondViolation.getLineNo(), "expected line");
+        assertEquals(6, secondViolation.getColumnNo(), "expected column");
     }
 

@@ -1,0 +1,8 @@
+    @Test
+    public void testAcceptNullViolation() {
+        final SuppressWithPlainTextCommentFilter filter = new SuppressWithPlainTextCommentFilter();
+        final AuditEvent auditEvent = new AuditEvent(this);
+        assertTrue(filter.accept(auditEvent), "Filter should accept audit event");
+        assertNull(auditEvent.getFileName(), "File name should not be null");
+    }
+

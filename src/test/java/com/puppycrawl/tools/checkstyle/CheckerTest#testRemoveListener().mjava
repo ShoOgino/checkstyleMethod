@@ -32,10 +32,10 @@
                 "Checker.fireFileFinished() does call removed listener");
 
         aa2.resetListener();
-        final SortedSet<LocalizedMessage> messages = new TreeSet<>();
-        messages.add(new LocalizedMessage(1, 0, "a Bundle", "message.key",
+        final SortedSet<Violation> violations = new TreeSet<>();
+        violations.add(new Violation(1, 0, "a Bundle", "message.key",
                 new Object[] {"arg"}, null, getClass(), null));
-        checker.fireErrors("Some File Name", messages);
+        checker.fireErrors("Some File Name", violations);
         assertTrue(aa2.wasCalled(), "Checker.fireErrors() doesn't call listener");
         assertFalse(auditAdapter.wasCalled(), "Checker.fireErrors() does call removed listener");
     }

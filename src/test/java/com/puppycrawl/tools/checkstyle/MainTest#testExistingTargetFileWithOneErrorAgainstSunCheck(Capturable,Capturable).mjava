@@ -4,19 +4,19 @@
         assertExitWithStatus(1, () -> {
             invokeMain("-c", "/sun_checks.xml", getPath("InputMain1.java"));
         });
-        final LocalizedMessage errorCounterTwoMessage = new LocalizedMessage(1,
+        final Violation errorCounterTwoMessage = new Violation(1,
                 Definitions.CHECKSTYLE_BUNDLE, Main.ERROR_COUNTER,
                 new String[] {String.valueOf(1)}, null, getClass(), null);
-        final LocalizedMessage message = new LocalizedMessage(1,
+        final Violation message = new Violation(1,
                 "com.puppycrawl.tools.checkstyle.checks.javadoc.messages",
                 "javadoc.packageInfo", new String[] {},
                 null, getClass(), null);
         final String expectedPath = getFilePath("InputMain1.java");
-        assertEquals(addEndOfLine(auditStartMessage.getMessage(),
-                "[ERROR] " + expectedPath + ":1: " + message.getMessage() + " [JavadocPackage]",
-                auditFinishMessage.getMessage()),
+        assertEquals(addEndOfLine(auditStartMessage.getViolation(),
+                "[ERROR] " + expectedPath + ":1: " + message.getViolation() + " [JavadocPackage]",
+                auditFinishMessage.getViolation()),
                 systemOut.getCapturedData(), "Unexpected output log");
-        assertEquals(addEndOfLine(errorCounterTwoMessage.getMessage()),
+        assertEquals(addEndOfLine(errorCounterTwoMessage.getViolation()),
                 systemErr.getCapturedData(), "Unexpected system error log");
     }
 

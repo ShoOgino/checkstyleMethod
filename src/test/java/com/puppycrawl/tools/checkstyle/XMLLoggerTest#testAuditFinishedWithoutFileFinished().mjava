@@ -5,15 +5,15 @@
         final AuditEvent fileStartedEvent = new AuditEvent(this, "Test.java");
         logger.fileStarted(fileStartedEvent);
 
-        final LocalizedMessage message =
-                new LocalizedMessage(1, 1,
+        final Violation violation =
+                new Violation(1, 1,
                         "messages.properties", "key", null, SeverityLevel.ERROR, null,
                         getClass(), null);
-        final AuditEvent errorEvent = new AuditEvent(this, "Test.java", message);
+        final AuditEvent errorEvent = new AuditEvent(this, "Test.java", violation);
         logger.addError(errorEvent);
 
         logger.fileFinished(errorEvent);
         logger.auditFinished(null);
-        verifyXml(getPath("ExpectedXMLLoggerError.xml"), outStream, message.getMessage());
+        verifyXml(getPath("ExpectedXMLLoggerError.xml"), outStream, violation.getViolation());
     }
 

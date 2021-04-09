@@ -1,8 +1,8 @@
     @Test
     public void testDecideByFileNameAndModuleMatchingModuleNull() {
-        final LocalizedMessage message =
-                new LocalizedMessage(10, 10, "", "", null, "MyModule", getClass(), null);
-        final AuditEvent ev = new AuditEvent(this, "ATest.java", message);
+        final Violation violation =
+                new Violation(10, 10, "", "", null, "MyModule", getClass(), null);
+        final AuditEvent ev = new AuditEvent(this, "ATest.java", violation);
         assertFalse(filter.accept(ev), "Filter should not accept invalid event");
     }
 

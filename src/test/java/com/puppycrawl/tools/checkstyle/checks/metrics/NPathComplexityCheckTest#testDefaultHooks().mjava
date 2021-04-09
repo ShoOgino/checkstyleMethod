@@ -5,13 +5,13 @@
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.INTERFACE_DEF, "interface"));
 
         npathComplexityCheckObj.visitToken(ast);
-        final SortedSet<LocalizedMessage> messages1 = npathComplexityCheckObj.getMessages();
+        final SortedSet<Violation> violations1 = npathComplexityCheckObj.getViolations();
 
-        assertEquals(0, messages1.size(), "No exception messages expected");
+        assertEquals(0, violations1.size(), "No exception violations expected");
 
         npathComplexityCheckObj.leaveToken(ast);
-        final SortedSet<LocalizedMessage> messages2 = npathComplexityCheckObj.getMessages();
+        final SortedSet<Violation> violations2 = npathComplexityCheckObj.getViolations();
 
-        assertEquals(0, messages2.size(), "No exception messages expected");
+        assertEquals(0, violations2.size(), "No exception violations expected");
     }
 

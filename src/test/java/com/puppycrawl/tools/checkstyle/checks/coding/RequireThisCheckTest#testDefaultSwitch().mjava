@@ -6,8 +6,8 @@
         ast.initialize(new CommonHiddenStreamToken(TokenTypes.ENUM, "ENUM"));
 
         check.visitToken(ast);
-        final SortedSet<LocalizedMessage> messages = check.getMessages();
+        final SortedSet<Violation> violations = check.getViolations();
 
-        assertEquals(0, messages.size(), "No exception messages expected");
+        assertEquals(0, violations.size(), "No exception violations expected");
     }
 

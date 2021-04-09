@@ -6,10 +6,10 @@
             fail("Exception is expected");
         }
         catch (CheckstyleException ex) {
-            final LocalizedMessage exceptionMessage = new LocalizedMessage(1,
+            final Violation exceptionMessage = new Violation(1,
                     Definitions.CHECKSTYLE_BUNDLE, UNABLE_TO_INSTANTIATE_EXCEPTION_MESSAGE,
                     new String[] {name, null}, null, factory.getClass(), null);
-            assertEquals(exceptionMessage.getMessage(), ex.getMessage(),
+            assertEquals(exceptionMessage.getViolation(), ex.getMessage(),
                     "Invalid exception message");
         }
     }

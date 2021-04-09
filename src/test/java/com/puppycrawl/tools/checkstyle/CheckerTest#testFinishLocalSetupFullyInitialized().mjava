@@ -17,7 +17,7 @@
         assertEquals("error", context.get("severity"), "Severity is set to unexpected value");
         assertEquals("testBaseDir", context.get("basedir"), "Basedir is set to unexpected value");
 
-        final Field sLocale = LocalizedMessage.class.getDeclaredField("sLocale");
+        final Field sLocale = Violation.class.getDeclaredField("sLocale");
         sLocale.setAccessible(true);
         final Locale locale = (Locale) sLocale.get(null);
         assertEquals(Locale.ITALY, locale, "Locale is set to unexpected value");

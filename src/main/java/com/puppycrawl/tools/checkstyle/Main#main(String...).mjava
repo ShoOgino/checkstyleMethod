@@ -43,12 +43,12 @@
         finally {
             // return exit code base on validation of Checker
             if (errorCounter > 0) {
-                final LocalizedMessage errorCounterMessage = new LocalizedMessage(1,
+                final Violation errorCounterViolation = new Violation(1,
                         Definitions.CHECKSTYLE_BUNDLE, ERROR_COUNTER,
                         new String[] {String.valueOf(errorCounter)}, null, Main.class, null);
                 // print error count statistic to error output stream,
                 // output stream might be used by validation report content
-                System.err.println(errorCounterMessage.getMessage());
+                System.err.println(errorCounterViolation.getViolation());
             }
             if (exitStatus != 0) {
                 System.exit(exitStatus);

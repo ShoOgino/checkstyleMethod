@@ -14,18 +14,18 @@
                 getPath(""));
         final String expectedPath = getFilePath("") + File.separator;
         final StringBuilder sb = new StringBuilder(28);
-        sb.append(auditStartMessage.getMessage())
+        sb.append(auditStartMessage.getViolation())
                 .append(EOL);
         final String format = "[WARN] " + expectedPath + outputValues[0][0] + ".java:"
                 + outputValues[0][1] + ": ";
         for (String[] outputValue : outputValues) {
-            final String localizedMessage = new LocalizedMessage(1, bundle,
+            final String violation = new Violation(1, bundle,
                     msgKey, new Integer[] {Integer.valueOf(outputValue[2]), allowedLength},
-                    null, getClass(), null).getMessage();
-            final String line = format + localizedMessage + " [FileLength]";
+                    null, getClass(), null).getViolation();
+            final String line = format + violation + " [FileLength]";
             sb.append(line).append(EOL);
         }
-        sb.append(auditFinishMessage.getMessage())
+        sb.append(auditFinishMessage.getViolation())
                 .append(EOL);
         assertEquals(sb.toString(), systemOut.getCapturedData(), "Unexpected output log");
         assertEquals("", systemErr.getCapturedData(), "Unexpected system error log");

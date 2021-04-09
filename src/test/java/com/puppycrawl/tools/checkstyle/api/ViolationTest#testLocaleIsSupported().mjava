@@ -1,0 +1,14 @@
+    /**
+     * Verifies that if the language is specified explicitly (and it is not English),
+     * the violation does not use the default value.
+     */
+    @Test
+    public void testLocaleIsSupported() {
+        final String language = DEFAULT_LOCALE.getLanguage();
+        if (!language.isEmpty() && !Locale.ENGLISH.getLanguage().equals(language)) {
+            final Violation violation = createSampleViolation();
+            assertThat("Unsupported language: " + DEFAULT_LOCALE,
+                    violation.getViolation(), not("Empty statement."));
+        }
+    }
+

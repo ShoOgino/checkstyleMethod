@@ -15,15 +15,15 @@
             args = new String[] {exception.getMessage()};
             key = "general.exception";
         }
-        final LocalizedMessage message =
-            new LocalizedMessage(
+        final Violation message =
+            new Violation(
                 0,
                 Definitions.CHECKSTYLE_BUNDLE,
                 key,
                 args,
                 getId(),
                 getClass(), null);
-        final SortedSet<LocalizedMessage> messages = new TreeSet<>();
+        final SortedSet<Violation> messages = new TreeSet<>();
         messages.add(message);
         getMessageDispatcher().fireErrors(file.getPath(), messages);
         log.debug("Exception occurred.", exception);

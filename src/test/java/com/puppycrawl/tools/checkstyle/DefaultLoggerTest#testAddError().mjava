@@ -7,13 +7,13 @@
                 AutomaticBean.OutputStreamOptions.CLOSE);
         dl.finishLocalSetup();
         dl.auditStarted(null);
-        dl.addError(new AuditEvent(this, "fileName", new LocalizedMessage(1, 2, "bundle", "key",
-                null, null, getClass(), "customMessage")));
+        dl.addError(new AuditEvent(this, "fileName", new Violation(1, 2, "bundle", "key",
+                null, null, getClass(), "customViolation")));
         dl.auditFinished(null);
-        assertEquals(auditStartMessage.getMessage() + System.lineSeparator()
-                + auditFinishMessage.getMessage() + System.lineSeparator(), infoStream.toString(),
+        assertEquals(auditStartMessage.getViolation() + System.lineSeparator()
+                + auditFinishMessage.getViolation() + System.lineSeparator(), infoStream.toString(),
                 "expected output");
-        assertEquals("[ERROR] fileName:1:2: customMessage [DefaultLoggerTest]"
+        assertEquals("[ERROR] fileName:1:2: customViolation [DefaultLoggerTest]"
                 + System.lineSeparator(), errorStream.toString(), "expected output");
     }
 

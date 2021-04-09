@@ -1,15 +1,15 @@
     @Test
     public void testCustomMessage() throws Exception {
         final DefaultConfiguration config = createModuleConfig(emptyCheck.getClass());
-        config.addMessage("msgKey", "This is a custom message.");
+        config.addMessage("msgKey", "This is a custom violation.");
         emptyCheck.configure(config);
 
         emptyCheck.log(1, "msgKey");
 
-        final SortedSet<LocalizedMessage> messages = emptyCheck.getMessages();
+        final SortedSet<Violation> messages = emptyCheck.getViolations();
 
         assertEquals(1, messages.size(), "Amount of messages differs from expected");
-        assertEquals("This is a custom message.", messages.first().getMessage(),
-                "Message differs from expected");
+        assertEquals("This is a custom violation.", messages.first().getViolation(),
+                "violation differs from expected");
     }
 

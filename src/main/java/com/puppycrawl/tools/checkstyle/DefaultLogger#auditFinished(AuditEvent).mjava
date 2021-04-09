@@ -1,9 +1,9 @@
     @Override
     public void auditFinished(AuditEvent event) {
-        final LocalizedMessage auditFinishMessage = new LocalizedMessage(1,
+        final Violation auditFinishMessage = new Violation(1,
             Definitions.CHECKSTYLE_BUNDLE, AUDIT_FINISHED_MESSAGE, null, null,
-            LocalizedMessage.class, null);
-        infoWriter.println(auditFinishMessage.getMessage());
+            Violation.class, null);
+        infoWriter.println(auditFinishMessage.getViolation());
         closeStreams();
     }
 

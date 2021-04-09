@@ -6,8 +6,8 @@
 
         assertWithMessage("Unexpected output log")
             .that(systemOut.getCapturedData())
-            .isEqualTo(addEndOfLine(auditStartMessage.getMessage(),
-                auditFinishMessage.getMessage()));
+            .isEqualTo(addEndOfLine(auditStartMessage.getViolation(),
+                auditFinishMessage.getViolation()));
         assertWithMessage("Unexpected system error log")
             .that(systemErr.getCapturedData())
             .isEqualTo("");
