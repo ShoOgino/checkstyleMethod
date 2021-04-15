@@ -1,0 +1,8 @@
+    @Test
+    public void testModifierOrderSealedAndNonSealedNoViolation() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(ModifierOrderCheck.class);
+        final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
+        verify(checkConfig,
+            getNonCompilablePath("InputModifierOrderSealedAndNonSealedNoViolation.java"), expected);
+    }
+
