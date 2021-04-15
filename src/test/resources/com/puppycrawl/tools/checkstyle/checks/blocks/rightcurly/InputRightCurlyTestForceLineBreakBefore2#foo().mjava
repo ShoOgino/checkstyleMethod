@@ -1,0 +1,37 @@
+    /** @see test method **/
+    int foo() throws InterruptedException
+    {
+        int x = 1;
+        int a = 2;
+        while (true)
+        {
+            try
+            {
+                if (x > 0)
+                {
+                    break;
+                } else if (x < 0) {
+                    ;
+                } else { break; }
+                switch (a)
+                {
+                case 0:
+                    break;
+                default:
+                    break;
+                }
+            } catch (Exception e) { break; } finally { break; }
+        }
+
+        synchronized (this) { do { x = 2; } while (x == 2); } // ok
+
+        synchronized (this) {
+            do {} while (x == 2); // ok
+        }
+
+        for (int k = 0; k < 1; k++) { String innerBlockVariable = ""; } // ok
+
+        for (int k = 0; k < 1; k++) {} // ok
+                return a;
+    }
+
