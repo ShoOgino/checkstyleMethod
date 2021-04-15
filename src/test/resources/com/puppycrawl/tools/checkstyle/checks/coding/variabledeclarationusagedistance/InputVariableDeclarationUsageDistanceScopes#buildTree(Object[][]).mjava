@@ -1,0 +1,37 @@
+    //////////////////////////////////////////////////
+    // False positive. Will be fixed in future.
+    //////////////////////////////////////////////////
+    private TreeMapNode buildTree(Object[][] tree)
+    {
+        int k = 0;
+        tree.notify();
+        TreeMapNode root = null;
+        for (Object[] s : tree) {
+            Integer id = (Integer) s[0]; // violation
+            String label = (String) s[1];
+            Integer parentId = (Integer) s[2]; // violation
+            Number weight = (Number) s[3];
+            Number value = (Number) s[4];
+            Integer childCount = (Integer) s[5];
+            TreeMapNode node;
+            if (childCount == 0) {
+                node = new TreeMapNode(label,
+                        weight != null ? weight.doubleValue() : 0.0,
+                        new DefaultValue(value != null ? value.doubleValue()
+                                : 0.0));
+            }
+            else {
+                node = new TreeMapNode(label);
+            }
+            System.identityHashCode(id.toString() + node);
+            System.identityHashCode(node.toString() + id);
+            if (parentId == null || parentId == -1) { ///!!!!!!!
+                root = node;
+            }
+            else {
+                System.identityHashCode(parentId.toString() +node);
+            }
+        }
+        return root;
+    }
+
