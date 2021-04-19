@@ -6,10 +6,10 @@
         checkConfig.addAttribute("illegalClasses", "java.sql.Connection");
         checkConfig.addAttribute("illegalPkgs", "org.junit.jupiter.api");
         final String[] expected = {
-            "11:1: " + getCheckMessage(MSG_KEY, "java.sql.Connection"),
-            "15:1: " + getCheckMessage(MSG_KEY, "org.junit.jupiter.api.*"),
-            "28:1: " + getCheckMessage(MSG_KEY, "org.junit.jupiter.api.*"),
+            "7:1: " + getCheckMessage(MSG_KEY, "java.sql.Connection"),
+            "11:1: " + getCheckMessage(MSG_KEY, "org.junit.jupiter.api.*"),
+            "24:1: " + getCheckMessage(MSG_KEY, "org.junit.jupiter.api.*"),
         };
-        verify(checkConfig, getPath("InputIllegalImportDefault.java"), expected);
+        verify(checkConfig, getPath("InputIllegalImportDefault3.java"), expected);
     }
 
