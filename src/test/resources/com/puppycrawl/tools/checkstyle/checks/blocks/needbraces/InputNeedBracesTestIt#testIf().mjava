@@ -1,0 +1,46 @@
+    /** Test if constructs **/
+    public void testIf()
+    {
+        // Valid
+        if (condition()) {
+            testIf();
+        }
+        else if (condition()) {
+            testIf();
+        }
+        else {
+            testIf();
+        }
+
+        // Invalid
+        if (condition()); // violation
+        if (condition()) // violation
+            testIf();
+        if (condition()) // violation
+            testIf();
+        else // violation
+            testIf();
+        if (condition()) // violation
+            testIf();
+        else {
+            testIf();
+        }
+        if (condition()) {
+            testIf();
+        }
+        else // violation
+            testIf();
+        if (condition()) // violation
+            if (condition()) // violation
+                testIf();
+
+        if (condition()) // violation
+            while (condition()) testWhile(); // violation
+        if (condition()) // violation
+            do testDoWhile(); while (condition()); // violation
+        if (condition()) // violation
+            for (int i = 0; i < 1; i++) testFor(); // violation
+        int a = 0;
+        switch (a) {default: {}}
+    }
+
