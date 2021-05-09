@@ -1,0 +1,22 @@
+    @Test
+    public void testCovariantEqualsInRecord() throws Exception {
+        final File fileToProcess =
+                new File(getNonCompilablePath(
+                        "SuppressionXpathRegressionCovariantEqualsInRecord.java"));
+
+        final DefaultConfiguration moduleConfig =
+                createModuleConfig(CovariantEqualsCheck.class);
+
+        final String[] expectedViolation = {
+            "7:20: " + getCheckMessage(CovariantEqualsCheck.class,
+                        CovariantEqualsCheck.MSG_KEY),
+        };
+
+        final List<String> expectedXpathQueries = Collections.singletonList("/RECORD_DEF"
+                + "[./IDENT[@text='SuppressionXpathRegressionCovariantEqualsInRecord']]"
+                        + "/OBJBLOCK/METHOD_DEF/IDENT[@text='equals']");
+
+        runVerifications(moduleConfig, fileToProcess, expectedViolation,
+                expectedXpathQueries);
+    }
+
