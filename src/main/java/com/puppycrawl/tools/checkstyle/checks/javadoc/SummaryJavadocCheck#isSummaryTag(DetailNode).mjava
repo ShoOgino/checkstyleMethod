@@ -1,0 +1,16 @@
+    /**
+     * Checks if the first tag inside ast is summary tag.
+     *
+     * @param javadoc root node.
+     * @return {@code true} if first tag is summary tag.
+     */
+    private static boolean isSummaryTag(DetailNode javadoc) {
+        final DetailNode[] child = javadoc.getChildren();
+
+        // Checking size of ast is not required, since ast contains
+        // children of Inline Tag, as at least 2 children will be present which are
+        // RCURLY and LCURLY.
+        return child[1].getType() == JavadocTokenTypes.CUSTOM_NAME
+                && SUMMARY_TEXT.equals(child[1].getText());
+    }
+

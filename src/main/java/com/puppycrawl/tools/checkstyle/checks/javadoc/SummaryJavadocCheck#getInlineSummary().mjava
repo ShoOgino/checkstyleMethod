@@ -1,0 +1,18 @@
+    /**
+     * Gets entire content of summary tag.
+     *
+     * @return summary sentence of javadoc root node.
+     */
+    private String getInlineSummary() {
+        final DetailAST blockCommentAst = getBlockCommentAst();
+        final String javadocText = blockCommentAst.getFirstChild().getText();
+        final Matcher matcher = SUMMARY_PATTERN.matcher(javadocText);
+        String comment = "";
+        if (matcher.find()) {
+            comment = matcher.group(1);
+        }
+        comment = JAVADOC_MULTILINE_TO_SINGLELINE_PATTERN.matcher(comment)
+                .replaceAll("");
+        return comment;
+    }
+

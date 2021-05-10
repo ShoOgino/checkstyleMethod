@@ -1,0 +1,12 @@
+    @Test
+    public void testHtmlFormatSummary() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(SummaryJavadocCheck.class);
+        final String[] expected = {
+            "13: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "28: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "33: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+        };
+
+        verify(checkConfig, getPath("InputSummaryJavadocHtmlFormat.java"), expected);
+    }
+

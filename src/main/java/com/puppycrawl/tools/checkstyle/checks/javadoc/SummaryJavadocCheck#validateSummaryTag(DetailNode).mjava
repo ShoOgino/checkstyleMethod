@@ -1,0 +1,21 @@
+    /**
+     * Checks the inline summary (if present) for {@code period} at end and forbidden fragments.
+     *
+     * @param ast javadoc root node.
+     */
+    private void validateSummaryTag(DetailNode ast) {
+        final String inlineSummary = getInlineSummary();
+        final String summaryVisible = getVisibleContent(inlineSummary);
+        if (summaryVisible.isEmpty()) {
+            log(ast.getLineNumber(), MSG_SUMMARY_JAVADOC_MISSING);
+        }
+        else if (!period.isEmpty()) {
+            if (isPeriodAtEnd(summaryVisible, period)) {
+                log(ast.getLineNumber(), MSG_SUMMARY_MISSING_PERIOD);
+            }
+            else if (containsForbiddenFragment(inlineSummary)) {
+                log(ast.getLineNumber(), MSG_SUMMARY_JAVADOC);
+            }
+        }
+    }
+

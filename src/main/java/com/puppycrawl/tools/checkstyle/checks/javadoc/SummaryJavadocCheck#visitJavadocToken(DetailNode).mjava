@@ -1,6 +1,9 @@
     @Override
     public void visitJavadocToken(DetailNode ast) {
-        if (!startsWithInheritDoc(ast)) {
+        if (containsSummaryTag(ast)) {
+            validateSummaryTag(ast);
+        }
+        else if (!startsWithInheritDoc(ast)) {
             final String summaryDoc = getSummarySentence(ast);
             if (summaryDoc.isEmpty()) {
                 log(ast.getLineNumber(), MSG_SUMMARY_JAVADOC_MISSING);

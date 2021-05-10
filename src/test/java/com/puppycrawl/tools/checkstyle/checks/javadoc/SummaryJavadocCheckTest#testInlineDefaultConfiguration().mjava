@@ -1,0 +1,24 @@
+    @Test
+    public void testInlineDefaultConfiguration() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(SummaryJavadocCheck.class);
+        createChecker(checkConfig);
+        final String[] expected = {
+            "13: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "18: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "23: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "33: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "38: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "51: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "56: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "113: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "118: " + getCheckMessage(MSG_SUMMARY_FIRST_SENTENCE),
+            "123: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "134: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+            "152: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "157: " + getCheckMessage(MSG_SUMMARY_JAVADOC_MISSING),
+            "177: " + getCheckMessage(MSG_SUMMARY_MISSING_PERIOD),
+        };
+
+        verify(checkConfig, getPath("InputSummaryJavadocInlineDefault.java"), expected);
+    }
+

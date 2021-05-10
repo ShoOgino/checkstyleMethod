@@ -1,0 +1,11 @@
+    /**
+     * Checks if summary tag present.
+     *
+     * @param javadoc javadoc root node.
+     * @return {@code true} if first sentence contains @summary tag.
+     */
+    private static boolean containsSummaryTag(DetailNode javadoc) {
+        final DetailNode node = getFirstInlineTag(javadoc);
+        return node != null && isSummaryTag(node);
+    }
+
